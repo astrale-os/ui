@@ -1,0 +1,11 @@
+export const MENU_BAR_HEIGHT = 34
+export const WINDOW_HEADER_HEIGHT = 40
+export const DOCK_WIDTH = 68
+export const DOCK_ICON_SIZE = 52
+export const TASKBAR_HEIGHT = 56
+export const WINDOW_MIN_WIDTH = 400
+export const WINDOW_MIN_HEIGHT = 300
+export const SNAP_THRESHOLD = 50
+export const WINDOW_BORDER_RADIUS = 12
+export const PANEL_BORDER_RADIUS = 16
+export const DROPDOWN_BORDER_RADIUS = 12

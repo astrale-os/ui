@@ -1,0 +1,25 @@
+{
+  "name": "@astrale-os/ui-styles",
+  "version": "1.0.0",
+  "description": "Astrale UI Styles - CSS variables, glass effects, and base styles",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/astrale-os/ui.git",
+    "directory": "styles"
+  },
+  "type": "module",
+  "main": "./src/index.css",
+  "exports": {
+    ".": "./src/index.css",
+    "./base": "./src/base.css",
+    "./glass": "./src/glass.css",
+    "./macos-buttons": "./src/macos-buttons.css"
+  },
+  "files": [
+    "src"
+  ],
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
+  }
+}

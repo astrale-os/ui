@@ -1,0 +1,6 @@
+{
+  "extends": "@astrale/typescript-config/library",
+  "compilerOptions": {
+    "lib": ["ES2022", "DOM", "DOM.Iterable"]
+  }
+}
