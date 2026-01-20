@@ -2,6 +2,9 @@
   "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
   "release-type": "node",
   "packages": {
+    "ui": {
+      "component": "ui"
+    },
     "styles": {
       "component": "ui-styles"
     },

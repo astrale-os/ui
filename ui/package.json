@@ -1,0 +1,84 @@
+{
+  "name": "@astrale-os/ui",
+  "version": "1.0.0",
+  "description": "Astrale Design System - All-in-one package for UI styles, utilities, and constants",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/astrale-os/ui.git",
+    "directory": "ui"
+  },
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "import": "./src/index.ts"
+    },
+    "./styles": "./styles.css",
+    "./constants": {
+      "types": "./src/constants.ts",
+      "import": "./src/constants.ts"
+    },
+    "./constants/layout": {
+      "types": "../constants/src/layout.ts",
+      "import": "../constants/src/layout.ts"
+    },
+    "./constants/colors": {
+      "types": "../constants/src/colors.ts",
+      "import": "../constants/src/colors.ts"
+    },
+    "./preset": {
+      "types": "../preset/src/index.ts",
+      "import": "../preset/src/index.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "src",
+    "styles.css"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist *.tsbuildinfo",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@astrale-os/ui-constants": "workspace:*",
+    "@astrale-os/ui-preset": "workspace:*",
+    "@astrale-os/ui-styles": "workspace:*",
+    "@astrale-os/ui-utils": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  },
+  "peerDependencies": {
+    "tailwindcss": "^4.0.0"
+  },
+  "peerDependenciesMeta": {
+    "tailwindcss": {
+      "optional": true
+    }
+  },
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js"
+      },
+      "./styles": "./styles.css",
+      "./constants": {
+        "types": "./dist/constants.d.ts",
+        "import": "./dist/constants.js"
+      },
+      "./preset": {
+        "types": "./dist/preset.d.ts",
+        "import": "./dist/preset.js"
+      }
+    }
+  }
+}

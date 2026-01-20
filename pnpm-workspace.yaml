@@ -1,4 +1,5 @@
 packages:
+  - 'ui'
   - 'styles'
   - 'preset'
   - 'utils'
