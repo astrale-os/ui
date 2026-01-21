@@ -4,12 +4,12 @@ Astrale Design System - Shared UI styles, utilities, and constants for Astrale a
 
 ## Packages
 
-| Package | Description |
-|---------|-------------|
-| `@astrale-os/ui-styles` | CSS variables, glass effects, and base styles |
-| `@astrale-os/ui-preset` | Tailwind CSS preset with theme configuration |
-| `@astrale-os/ui-utils` | Utility functions (`cn` for class merging) |
-| `@astrale-os/ui-constants` | Layout values and design tokens |
+| Package                    | Description                                   |
+| -------------------------- | --------------------------------------------- |
+| `@astrale-os/ui-styles`    | CSS variables, glass effects, and base styles |
+| `@astrale-os/ui-preset`    | Tailwind CSS preset with theme configuration  |
+| `@astrale-os/ui-utils`     | Utility functions (`cn` for class merging)    |
+| `@astrale-os/ui-constants` | Layout values and design tokens               |
 
 ## Installation
 
@@ -79,15 +79,15 @@ import { MACOS_COLORS, GLASS_COLORS } from '@astrale-os/ui-constants/colors'
 
 The styles package provides ready-to-use glassmorphism classes:
 
-| Class | Use Case |
-|-------|----------|
-| `.glass-window` | Window backgrounds with heavy blur |
-| `.glass-header` | Title bar with gradient |
-| `.glass-panel` | Side panels and dropdowns |
-| `.glass-taskbar` | Bottom taskbar |
-| `.glass-dock` | Dock container |
-| `.glass-card` | Cards with subtle blur |
-| `.glass-dropdown` | Dropdown menus |
+| Class             | Use Case                           |
+| ----------------- | ---------------------------------- |
+| `.glass-window`   | Window backgrounds with heavy blur |
+| `.glass-header`   | Title bar with gradient            |
+| `.glass-panel`    | Side panels and dropdowns          |
+| `.glass-taskbar`  | Bottom taskbar                     |
+| `.glass-dock`     | Dock container                     |
+| `.glass-card`     | Cards with subtle blur             |
+| `.glass-dropdown` | Dropdown menus                     |
 
 ## macOS Window Buttons
 
