@@ -41,7 +41,8 @@
   "scripts": {
     "build": "tsc",
     "clean": "rm -rf dist *.tsbuildinfo",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "preinstall": "node .check-workspace.cjs"
   },
   "dependencies": {
     "@astrale-os/ui-constants": "workspace:*",

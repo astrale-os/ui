@@ -23,7 +23,8 @@
   "scripts": {
     "build": "tsc",
     "clean": "rm -rf dist *.tsbuildinfo",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "preinstall": "node .check-workspace.cjs"
   },
   "peerDependencies": {
     "tailwindcss": "^4.0.0"
