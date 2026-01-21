@@ -31,6 +31,30 @@
     "./preset": {
       "types": "../preset/src/index.ts",
       "import": "../preset/src/index.ts"
+    },
+    "./components": {
+      "types": "../components/src/index.ts",
+      "import": "../components/src/index.ts"
+    },
+    "./button": {
+      "types": "../components/src/button.tsx",
+      "import": "../components/src/button.tsx"
+    },
+    "./input": {
+      "types": "../components/src/input.tsx",
+      "import": "../components/src/input.tsx"
+    },
+    "./card": {
+      "types": "../components/src/card.tsx",
+      "import": "../components/src/card.tsx"
+    },
+    "./badge": {
+      "types": "../components/src/badge.tsx",
+      "import": "../components/src/badge.tsx"
+    },
+    "./select": {
+      "types": "../components/src/select.tsx",
+      "import": "../components/src/select.tsx"
     }
   },
   "files": [
@@ -45,21 +69,21 @@
     "preinstall": "node .check-workspace.cjs"
   },
   "dependencies": {
+    "@astrale-os/ui-components": "workspace:*",
     "@astrale-os/ui-constants": "workspace:*",
     "@astrale-os/ui-preset": "workspace:*",
     "@astrale-os/ui-styles": "workspace:*",
     "@astrale-os/ui-utils": "workspace:*"
   },
   "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
     "typescript": "^5.8.3"
   },
   "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0",
     "tailwindcss": "^4.0.0"
-  },
-  "peerDependenciesMeta": {
-    "tailwindcss": {
-      "optional": true
-    }
   },
   "publishConfig": {
     "access": "restricted",

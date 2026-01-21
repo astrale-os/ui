@@ -4,3 +4,4 @@ packages:
   - 'preset'
   - 'utils'
   - 'constants'
+  - 'components'
