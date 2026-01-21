@@ -1,6 +1,6 @@
 {
   "name": "@astrale-os/ui",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Astrale Design System - All-in-one package for UI styles, utilities, and constants",
   "repository": {
     "type": "git",

@@ -1,7 +1,7 @@
 {
   "name": "@astrale-os/ui-workspace",
   "private": true,
-  "version": "1.0.0",
+  "version": "0.1.0",
   "type": "module",
   "packageManager": "pnpm@10.28.0",
   "engines": {
