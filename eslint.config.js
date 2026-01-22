@@ -1,3 +1,6 @@
-import config from '@astrale/eslint-config'
+import { createConfig } from '@astrale/eslint-config'
 
-export default config
+export default createConfig({
+  tsconfigRootDir: import.meta.dirname,
+  ignorePatterns: ['**/dist/**', '**/node_modules/**'],
+})
