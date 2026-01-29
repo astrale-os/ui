@@ -1,0 +1,4 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "@astrale-os/ui-styles";
+@source "./**/*.tsx";
