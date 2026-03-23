@@ -7,6 +7,10 @@
     "url": "https://github.com/astrale-os/ui.git",
     "directory": "preset"
   },
+  "files": [
+    "dist",
+    "src"
+  ],
   "type": "module",
   "main": "./src/index.ts",
   "types": "./src/index.ts",
@@ -16,33 +20,30 @@
       "import": "./src/index.ts"
     }
   },
-  "files": [
-    "dist",
-    "src"
-  ],
-  "scripts": {
-    "build": "tsc",
-    "clean": "rm -rf dist *.tsbuildinfo",
-    "typecheck": "tsc --noEmit",
-    "preinstall": "node .check-workspace.cjs"
-  },
-  "peerDependencies": {
-    "tailwindcss": "^4.0.0"
-  },
-  "devDependencies": {
-    "tailwindcss": "^4.0.6",
-    "typescript": "~5.9.3"
-  },
   "publishConfig": {
     "access": "restricted",
-    "registry": "https://npm.pkg.github.com",
-    "main": "./dist/index.js",
-    "types": "./dist/index.d.ts",
     "exports": {
       ".": {
         "types": "./dist/index.d.ts",
         "import": "./dist/index.js"
       }
-    }
+    },
+    "main": "./dist/index.js",
+    "registry": "https://npm.pkg.github.com",
+    "types": "./dist/index.d.ts"
+  },
+  "scripts": {
+    "build": "tsgo",
+    "clean": "rm -rf dist *.tsbuildinfo",
+    "typecheck": "tsgo --noEmit",
+    "preinstall": "node .check-workspace.cjs"
+  },
+  "devDependencies": {
+    "@typescript/native-preview": "latest",
+    "tailwindcss": "^4.0.6",
+    "typescript": "~6.0.1-rc"
+  },
+  "peerDependencies": {
+    "tailwindcss": "^4.0.0"
   }
 }

@@ -7,6 +7,11 @@
     "url": "https://github.com/astrale-os/ui.git",
     "directory": "ui"
   },
+  "files": [
+    "dist",
+    "src",
+    "styles.css"
+  ],
   "type": "module",
   "main": "./src/index.ts",
   "types": "./src/index.ts",
@@ -57,39 +62,8 @@
       "import": "../components/src/select.tsx"
     }
   },
-  "files": [
-    "dist",
-    "src",
-    "styles.css"
-  ],
-  "scripts": {
-    "build": "tsc",
-    "clean": "rm -rf dist *.tsbuildinfo",
-    "typecheck": "tsc --noEmit",
-    "preinstall": "node .check-workspace.cjs"
-  },
-  "dependencies": {
-    "@astrale-os/ui-components": "workspace:*",
-    "@astrale-os/ui-constants": "workspace:*",
-    "@astrale-os/ui-preset": "workspace:*",
-    "@astrale-os/ui-styles": "workspace:*",
-    "@astrale-os/ui-utils": "workspace:*"
-  },
-  "devDependencies": {
-    "@types/react": "^19.0.0",
-    "@types/react-dom": "^19.0.0",
-    "typescript": "~5.9.3"
-  },
-  "peerDependencies": {
-    "react": "^18.0.0 || ^19.0.0",
-    "react-dom": "^18.0.0 || ^19.0.0",
-    "tailwindcss": "^4.0.0"
-  },
   "publishConfig": {
     "access": "restricted",
-    "registry": "https://npm.pkg.github.com",
-    "main": "./dist/index.js",
-    "types": "./dist/index.d.ts",
     "exports": {
       ".": {
         "types": "./dist/index.d.ts",
@@ -104,6 +78,33 @@
         "types": "./dist/preset.d.ts",
         "import": "./dist/preset.js"
       }
-    }
+    },
+    "main": "./dist/index.js",
+    "registry": "https://npm.pkg.github.com",
+    "types": "./dist/index.d.ts"
+  },
+  "scripts": {
+    "build": "tsgo",
+    "clean": "rm -rf dist *.tsbuildinfo",
+    "typecheck": "tsgo --noEmit",
+    "preinstall": "node .check-workspace.cjs"
+  },
+  "dependencies": {
+    "@astrale-os/ui-components": "workspace:*",
+    "@astrale-os/ui-constants": "workspace:*",
+    "@astrale-os/ui-preset": "workspace:*",
+    "@astrale-os/ui-styles": "workspace:*",
+    "@astrale-os/ui-utils": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@typescript/native-preview": "latest",
+    "typescript": "~6.0.1-rc"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0",
+    "tailwindcss": "^4.0.0"
   }
 }

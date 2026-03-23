@@ -7,6 +7,9 @@
     "url": "https://github.com/astrale-os/ui.git",
     "directory": "styles"
   },
+  "files": [
+    "src"
+  ],
   "type": "module",
   "main": "./src/index.css",
   "exports": {
@@ -15,9 +18,6 @@
     "./glass": "./src/glass.css",
     "./macos-buttons": "./src/macos-buttons.css"
   },
-  "files": [
-    "src"
-  ],
   "publishConfig": {
     "access": "restricted",
     "registry": "https://npm.pkg.github.com"
