@@ -1,10 +1,10 @@
 'use client'
 
-import * as React from 'react'
+import { cn } from '@astrale-os/ui-utils'
 import { ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
+import * as React from 'react'
 import { DayPicker, getDefaultClassNames, type DayButton } from 'react-day-picker'
 
-import { cn } from '@astrale-os/ui-utils'
 import { Button, buttonVariants } from './button'
 
 function Calendar({

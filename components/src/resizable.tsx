@@ -1,8 +1,7 @@
-import * as React from 'react'
-import { GripVerticalIcon } from 'lucide-react'
-import { Group, Panel, Separator } from 'react-resizable-panels'
-
 import { cn } from '@astrale-os/ui-utils'
+import { GripVerticalIcon } from 'lucide-react'
+import * as React from 'react'
+import { Group, Panel, Separator } from 'react-resizable-panels'
 
 function ResizablePanelGroup({ className, ...props }: React.ComponentProps<typeof Group>) {
   return (

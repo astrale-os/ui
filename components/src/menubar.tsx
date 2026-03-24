@@ -1,8 +1,7 @@
-import * as React from 'react'
+import { cn } from '@astrale-os/ui-utils'
 import * as MenubarPrimitive from '@radix-ui/react-menubar'
 import { CheckIcon, ChevronRightIcon, CircleIcon } from 'lucide-react'
-
-import { cn } from '@astrale-os/ui-utils'
+import * as React from 'react'
 
 function Menubar({ className, ...props }: React.ComponentProps<typeof MenubarPrimitive.Root>) {
   return (

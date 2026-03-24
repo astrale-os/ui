@@ -1,8 +1,10 @@
 'use client'
 
-import * as React from 'react'
 import type * as LabelPrimitive from '@radix-ui/react-label'
+
+import { cn } from '@astrale-os/ui-utils'
 import { Slot } from '@radix-ui/react-slot'
+import * as React from 'react'
 import {
   Controller,
   FormProvider,
@@ -13,7 +15,6 @@ import {
   type FieldValues,
 } from 'react-hook-form'
 
-import { cn } from '@astrale-os/ui-utils'
 import { Label } from './label'
 
 const Form = FormProvider

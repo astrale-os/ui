@@ -1,10 +1,9 @@
 'use client'
 
-import * as React from 'react'
+import { cn } from '@astrale-os/ui-utils'
 import * as TabsPrimitive from '@radix-ui/react-tabs'
 import { cva, type VariantProps } from 'class-variance-authority'
-
-import { cn } from '@astrale-os/ui-utils'
+import * as React from 'react'
 
 function Tabs({
   className,

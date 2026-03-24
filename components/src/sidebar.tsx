@@ -1,13 +1,13 @@
 'use client'
 
-import * as React from 'react'
+import { cn } from '@astrale-os/ui-utils'
 import { Slot } from '@radix-ui/react-slot'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { PanelLeftIcon } from 'lucide-react'
+import * as React from 'react'
 
-import { cn } from '@astrale-os/ui-utils'
-import { useIsMobile } from './hooks/use-mobile'
 import { Button } from './button'
+import { useIsMobile } from './hooks/use-mobile'
 import { Input } from './input'
 import { Separator } from './separator'
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from './sheet'

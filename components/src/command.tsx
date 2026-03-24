@@ -1,8 +1,8 @@
-import * as React from 'react'
+import { cn } from '@astrale-os/ui-utils'
 import { Command as CommandPrimitive } from 'cmdk'
 import { SearchIcon } from 'lucide-react'
+import * as React from 'react'
 
-import { cn } from '@astrale-os/ui-utils'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from './dialog'
 
 function Command({ className, ...props }: React.ComponentProps<typeof CommandPrimitive>) {

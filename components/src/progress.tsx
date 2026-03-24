@@ -1,7 +1,6 @@
-import * as React from 'react'
-import * as ProgressPrimitive from '@radix-ui/react-progress'
-
 import { cn } from '@astrale-os/ui-utils'
+import * as ProgressPrimitive from '@radix-ui/react-progress'
+import * as React from 'react'
 
 function Progress({
   className,

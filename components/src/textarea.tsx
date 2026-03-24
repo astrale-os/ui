@@ -1,6 +1,5 @@
-import * as React from 'react'
-
 import { cn } from '@astrale-os/ui-utils'
+import * as React from 'react'
 
 function Textarea({ className, ...props }: React.ComponentProps<'textarea'>) {
   return (

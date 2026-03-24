@@ -1,7 +1,7 @@
-import * as React from 'react'
-import * as AlertDialogPrimitive from '@radix-ui/react-alert-dialog'
-
 import { cn } from '@astrale-os/ui-utils'
+import * as AlertDialogPrimitive from '@radix-ui/react-alert-dialog'
+import * as React from 'react'
+
 import { Button } from './button'
 
 function AlertDialog({ ...props }: React.ComponentProps<typeof AlertDialogPrimitive.Root>) {
