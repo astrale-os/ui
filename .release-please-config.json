@@ -16,6 +16,9 @@
     },
     "constants": {
       "component": "ui-constants"
+    },
+    "components": {
+      "component": "ui-components"
     }
   },
   "changelog-sections": [
