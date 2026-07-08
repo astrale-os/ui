@@ -1,6 +1,6 @@
 {
   "name": "@astrale-os/ui-constants",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Astrale UI constants - Layout values and design tokens",
   "repository": {
     "type": "git",
