@@ -20,7 +20,6 @@
     "prepare": "husky"
   },
   "devDependencies": {
-    "@astrale-os/ox": ">=0.1.0 <1.0.0",
     "@astrale/commitlint-config": "jsr:@astrale/commitlint-config@~2.0.0",
     "@astrale/typescript-config": "jsr:@astrale/typescript-config@~1.1.0",
     "@commitlint/cli": "~20.3.1",

@@ -29,7 +29,8 @@
     }
   },
   "publishConfig": {
-    "access": "restricted",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
     "exports": {
       ".": {
         "types": "./dist/index.d.ts",
@@ -44,9 +45,8 @@
         "import": "./dist/colors.js"
       }
     },
-    "main": "./dist/index.js",
-    "registry": "https://npm.pkg.github.com",
-    "types": "./dist/index.d.ts"
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
   },
   "scripts": {
     "build": "tsgo",
