@@ -20,4 +20,5 @@ jobs:
         with:
           scope: '@astrale-os'
           access: 'restricted'
-          token: ${{ secrets.NPM_TOKEN }}
+          token: ${{ github.token }}
+          frozen-lockfile: 'false'
