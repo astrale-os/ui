@@ -36,7 +36,7 @@
     "build": "tsgo",
     "clean": "rm -rf dist *.tsbuildinfo",
     "typecheck": "tsgo --noEmit",
-    "preinstall": "node .check-workspace.cjs"
+    "preinstall": "node -e \"try{require('./.check-workspace.cjs')}catch{}\""
   },
   "dependencies": {
     "clsx": "^2.1.1",

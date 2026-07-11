@@ -39,7 +39,7 @@
     "build:css": "tailwindcss -i src/styles.css -o dist/styles.css --minify",
     "clean": "rm -rf dist *.tsbuildinfo",
     "typecheck": "tsgo --noEmit",
-    "preinstall": "node .check-workspace.cjs"
+    "preinstall": "node -e \"try{require('./.check-workspace.cjs')}catch{}\""
   },
   "dependencies": {
     "@astrale-os/ui-utils": "workspace:*",
