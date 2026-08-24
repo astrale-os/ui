@@ -5,6 +5,7 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -16,10 +17,15 @@ permissions:
 jobs:
   ci:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [24, 26]
     steps:
       - uses: actions/checkout@v7
       - uses: astrale-os/config/.github/actions/ci@2e1bc75459014f38323b57213949b9f9dd530054
         with:
+          node-version: ${{ matrix.node-version }}
           frozen-lockfile: 'true'
 
   commitlint:

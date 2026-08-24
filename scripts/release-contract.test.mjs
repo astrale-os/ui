@@ -19,6 +19,9 @@ test('pins frozen CI and release workflows to the qualified Config revision', as
   }
 
   assert.match(ci, /frozen-lockfile: 'true'/u)
+  assert.match(ci, /^\s{2}workflow_dispatch:\s*$/mu)
+  assert.match(ci, /matrix:\s*\n\s+node-version:\s*\[24, 26\]/u)
+  assert.match(ci, /node-version:\s*\$\{\{ matrix\.node-version \}\}/u)
   assert.match(ci, /PR_TITLE: \$\{\{ github\.event\.pull_request\.title \}\}/u)
   assert.match(ci, /printf '%s\\n' "\$PR_TITLE" \| pnpm commitlint/u)
   assert.match(publish, /actions\/publish\/packages@/u)
@@ -26,6 +29,14 @@ test('pins frozen CI and release workflows to the qualified Config revision', as
   assert.match(publish, /dirs: 'constants utils styles preset components ui'/u)
   assert.match(publish, /github-token: \$\{\{ github\.token \}\}/u)
   assert.match(publish, /build-command: pnpm build/u)
+  assert.match(
+    release,
+    /id:\s*release\s*\n\s+uses:\s*astrale-os\/config\/\.github\/actions\/release@/u,
+  )
+  assert.match(release, /release_prs:\s*\$\{\{ steps\.release\.outputs\.prs \}\}/u)
+  assert.match(release, /actions:\s*write/u)
+  assert.match(release, /gh workflow run ci\.yml/u)
+  assert.match(release, /gh run watch/u)
 })
 
 test('keeps every published package private to GitHub Packages and linked to this repository', async () => {
