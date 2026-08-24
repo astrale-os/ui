@@ -1,6 +1,6 @@
 {
   "name": "@astrale-os/ui-components",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Astrale UI Components - React components built on Shadcn patterns",
   "repository": {
     "type": "git",

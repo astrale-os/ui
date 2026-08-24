@@ -1,8 +1,8 @@
 {
-  "ui": "0.2.0",
+  "ui": "0.2.1",
   "styles": "1.1.0",
-  "preset": "1.1.0",
-  "utils": "1.1.0",
-  "constants": "1.1.0",
-  "components": "0.3.0"
+  "preset": "1.1.1",
+  "utils": "1.1.1",
+  "constants": "1.1.1",
+  "components": "0.3.1"
 }
