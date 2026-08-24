@@ -12,30 +12,25 @@ concurrency:
 
 permissions:
   contents: read
-  packages: read
 
 jobs:
   ci:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: astrale-os/config/.github/actions/ci@main
+      - uses: actions/checkout@v7
+      - uses: astrale-os/config/.github/actions/ci@2e1bc75459014f38323b57213949b9f9dd530054
         with:
-          registry-url: https://npm.pkg.github.com
-          scope: '@astrale-os'
-          token: ${{ github.token }}
-          frozen-lockfile: 'false'
+          frozen-lockfile: 'true'
 
   commitlint:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
     steps:
-      - uses: actions/checkout@v4
-      - uses: astrale-os/config/.github/actions/setup@main
+      - uses: actions/checkout@v7
+      - uses: astrale-os/config/.github/actions/setup@2e1bc75459014f38323b57213949b9f9dd530054
         with:
-          registry-url: https://npm.pkg.github.com
-          scope: '@astrale-os'
-          token: ${{ github.token }}
-          frozen-lockfile: 'false'
+          frozen-lockfile: 'true'
       - name: Validate PR title
-        run: echo "${{ github.event.pull_request.title }}" | pnpm commitlint
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: printf '%s\n' "$PR_TITLE" | pnpm commitlint

@@ -1,6 +1,10 @@
 {
   "extends": "@astrale/typescript-config/library",
   "compilerOptions": {
-    "lib": ["ES2022", "DOM", "DOM.Iterable"]
+    "declarationMap": false,
+    "inlineSourceMap": false,
+    "inlineSources": false,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "sourceMap": false
   }
 }

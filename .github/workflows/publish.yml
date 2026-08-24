@@ -15,10 +15,9 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: astrale-os/config/.github/actions/publish/npm@main
+      - uses: actions/checkout@v7
+      - uses: astrale-os/config/.github/actions/publish/packages@2e1bc75459014f38323b57213949b9f9dd530054
         with:
-          scope: '@astrale-os'
-          access: 'restricted'
-          token: ${{ github.token }}
-          frozen-lockfile: 'false'
+          dirs: 'constants utils styles preset components ui'
+          github-token: ${{ github.token }}
+          build-command: pnpm build
