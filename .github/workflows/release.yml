@@ -10,14 +10,46 @@ concurrency:
   cancel-in-progress: false
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
 
 jobs:
   release:
+    permissions:
+      contents: write
+      pull-requests: write
     runs-on: ubuntu-latest
+    outputs:
+      releases_created: ${{ steps.release.outputs.releases_created }}
+      prs_created: ${{ steps.release.outputs.prs_created }}
+      release_prs: ${{ steps.release.outputs.prs }}
     steps:
       - uses: actions/checkout@v7
-      - uses: astrale-os/config/.github/actions/release@2e1bc75459014f38323b57213949b9f9dd530054
+      - id: release
+        uses: astrale-os/config/.github/actions/release@2e1bc75459014f38323b57213949b9f9dd530054
         with:
           token: ${{ github.token }}
+
+  qualify:
+    needs: release
+    if: needs.release.outputs.releases_created != 'true' && needs.release.outputs.prs_created == 'true'
+    permissions:
+      actions: write
+      checks: read
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        release_pr: ${{ fromJSON(needs.release.outputs.release_prs) }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Qualify the generated release PR revision
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_PR_HEAD: ${{ matrix.release_pr.headBranchName }}
+        run: |
+          run_url="$(gh workflow run ci.yml --repo "$GITHUB_REPOSITORY" --ref "$RELEASE_PR_HEAD")"
+          run_id="${run_url##*/}"
+          case "$run_id" in
+            ''|*[!0-9]*) echo "workflow dispatch did not return an exact run id" >&2; exit 1 ;;
+          esac
+          gh run watch "$run_id" --repo "$GITHUB_REPOSITORY" --compact --exit-status
