@@ -17,7 +17,7 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: astrale-os/config/.github/actions/release@main
+      - uses: actions/checkout@v7
+      - uses: astrale-os/config/.github/actions/release@2e1bc75459014f38323b57213949b9f9dd530054
         with:
           token: ${{ github.token }}

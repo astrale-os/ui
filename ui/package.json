@@ -84,9 +84,9 @@
     "registry": "https://npm.pkg.github.com"
   },
   "scripts": {
-    "build": "tsgo",
+    "build": "tsc",
     "clean": "rm -rf dist *.tsbuildinfo",
-    "typecheck": "tsgo --noEmit",
+    "typecheck": "tsc --noEmit",
     "preinstall": "node -e \"try{require('./.check-workspace.cjs')}catch{}\""
   },
   "dependencies": {
@@ -99,8 +99,7 @@
   "devDependencies": {
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
-    "@typescript/native-preview": "latest",
-    "typescript": "~6.0.1-rc"
+    "typescript": "7.0.2"
   },
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0",
