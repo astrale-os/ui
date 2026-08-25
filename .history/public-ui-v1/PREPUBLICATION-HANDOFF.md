@@ -8,7 +8,7 @@ Date: 2026-08-26. This is the stopping point before any package publication or v
 | --- | --- | --- |
 | UI | `d460f711c05e4f14f1467c7992e3193e0ceb913a` | `b5cb9b6fe7710e7a8bc1978776bb49270e8eac62` |
 | CLI | `634843cdcaeb34fa4a9a338a58be2a5d4578a31a` | `2da8ff20f3af72bb1d72af6bde295a77ea33b807` |
-| SDK | `f556359668bd821a75f94db87116751b32aa6c90` | `c9036f708dc042e29701719a707743c2a8be704e` |
+| SDK | `5bc5e528a5368f80942b406bfd772a36a286c289` | `c20ee0adecddac1cc36dba006b66a8daf1380d52` |
 | GUI | `ba1b2c9afd1fa9ed97de525c176a8ee9580a93de` | `2ef24d60421d29f408f4bdd1baccea7a26bf55a2` |
 | Admin | `f0a4cb4e95488132d41d1ce88bd632d61ef8940e` | `cc0818a7c75abfc27d2f178eb6c788d31bfadf3a` |
 | Domains | `ec0a16a46a08a3a2118ca1490a4f7e71239d62eb` | `f846a1ce6bafeb286f78278238772d7648260f5f` |
