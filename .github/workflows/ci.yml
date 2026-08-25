@@ -38,9 +38,9 @@ jobs:
         with:
           node-version: 26
           frozen-lockfile: 'true'
+      - run: pnpm build
       - run: pnpm test:components
       - run: pnpm test:registry-behavior
-      - run: pnpm build
       - run: pnpm registry:build
       - run: git diff --exit-code -- registry/registry.json registry/public/r
       - run: pnpm package:qualify
@@ -81,7 +81,7 @@ jobs:
           path: artifacts/security/**
 
   dependency-review:
-    if: github.event_name == 'pull_request'
+    if: github.event_name == 'pull_request' && github.event.repository.private == false
     runs-on: ubuntu-latest
     permissions:
       contents: read

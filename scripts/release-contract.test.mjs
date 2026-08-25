@@ -31,6 +31,10 @@ test('pins supported CI and release workflow dependencies', async () => {
   assert.match(ci, /pnpm catalog:test/u)
   assert.match(ci, /pnpm test:security/u)
   assert.match(ci, /pnpm audit --prod --audit-level high/u)
+  assert.match(
+    ci,
+    /dependency-review:\s*\n\s+if: github\.event_name == 'pull_request' && github\.event\.repository\.private == false/u,
+  )
   assert.match(ci, /actions\/dependency-review-action@[0-9a-f]{40}/u)
   assert.match(ci, /github\/codeql-action\/(?:init|analyze)@[0-9a-f]{40}/u)
 })
