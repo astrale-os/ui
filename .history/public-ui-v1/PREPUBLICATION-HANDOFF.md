@@ -7,7 +7,7 @@ Date: 2026-08-26. This is the stopping point before any package publication or v
 | Owner | Baseline `origin/main` | Qualified local commit |
 | --- | --- | --- |
 | UI | `d460f711c05e4f14f1467c7992e3193e0ceb913a` | `a0dd612be4b04c40d829769b07598555474b998d` |
-| CLI | `634843cdcaeb34fa4a9a338a58be2a5d4578a31a` | `2e0ea704eabff7647b821d522c6241f48f0f99b6` |
+| CLI | `634843cdcaeb34fa4a9a338a58be2a5d4578a31a` | `2da8ff20f3af72bb1d72af6bde295a77ea33b807` |
 | SDK | `f556359668bd821a75f94db87116751b32aa6c90` | `c9036f708dc042e29701719a707743c2a8be704e` |
 | GUI | `ba1b2c9afd1fa9ed97de525c176a8ee9580a93de` | `2ef24d60421d29f408f4bdd1baccea7a26bf55a2` |
 | Admin | `9bb7cc4d545b6aa4db822de75394ba720feaafd3` | `22de8763e8a8b51fb8de92f41f277b4adbf60d58` |
