@@ -42,6 +42,7 @@ test('the workspace has one public runtime package with a flat supported API', a
   const workspace = await readFile('pnpm-workspace.yaml', 'utf8')
 
   assert.equal(root.private, true)
+  assert.match(root.scripts.check, /^pnpm build && /u)
   assert.equal(manifest.name, '@astrale-os/ui')
   assert.equal(manifest.private, undefined)
   assert.equal(manifest.license, 'MIT')
