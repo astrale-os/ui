@@ -9,7 +9,7 @@
       "title": "Astrale Base",
       "description": "The pinned Base UI and Nova foundation for Astrale UI consumers.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "meta": {
         "base": "base",
@@ -31,7 +31,7 @@
       "title": "Block · Application Shell · Compact Command",
       "description": "Astrale block/application-shell/compact-command; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -51,7 +51,7 @@
       "title": "Block · Application Shell · Responsive Workspace",
       "description": "Astrale block/application-shell/responsive-workspace; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -71,7 +71,7 @@
       "title": "Block · Application Shell · Sidebar Header",
       "description": "Astrale block/application-shell/sidebar-header; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -91,7 +91,7 @@
       "title": "Block · Authentication · Recovery",
       "description": "Astrale block/authentication/recovery; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -111,7 +111,7 @@
       "title": "Block · Authentication · Sign In Card",
       "description": "Astrale block/authentication/sign-in-card; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -131,7 +131,7 @@
       "title": "Block · Authentication · Sign Up Card",
       "description": "Astrale block/authentication/sign-up-card; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -151,7 +151,7 @@
       "title": "Block · Authentication · Verification",
       "description": "Astrale block/authentication/verification; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -171,7 +171,7 @@
       "title": "Block · Communication · Composer",
       "description": "Astrale block/communication/composer; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -191,7 +191,7 @@
       "title": "Block · Communication · Conversation",
       "description": "Astrale block/communication/conversation; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -211,7 +211,7 @@
       "title": "Block · Communication · Inbox",
       "description": "Astrale block/communication/inbox; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -231,7 +231,7 @@
       "title": "Block · Dashboard · Analytics",
       "description": "Astrale block/dashboard/analytics; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -251,7 +251,7 @@
       "title": "Block · Dashboard · Operations",
       "description": "Astrale block/dashboard/operations; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -271,7 +271,7 @@
       "title": "Block · Dashboard · Overview",
       "description": "Astrale block/dashboard/overview; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -291,7 +291,7 @@
       "title": "Block · Data Management · Collection Browser",
       "description": "Astrale block/data-management/collection-browser; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -311,7 +311,7 @@
       "title": "Block · Data Management · Details Panel",
       "description": "Astrale block/data-management/details-panel; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -331,7 +331,7 @@
       "title": "Block · Data Management · Editor",
       "description": "Astrale block/data-management/editor; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -351,7 +351,7 @@
       "title": "Block · Onboarding · Empty First Value",
       "description": "Astrale block/onboarding/empty-first-value; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -371,7 +371,7 @@
       "title": "Block · Onboarding · Multi Step",
       "description": "Astrale block/onboarding/multi-step; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -391,7 +391,7 @@
       "title": "Block · Onboarding · Welcome",
       "description": "Astrale block/onboarding/welcome; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -411,7 +411,7 @@
       "title": "Block · Settings · Appearance",
       "description": "Astrale block/settings/appearance; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -431,7 +431,7 @@
       "title": "Block · Settings · Notifications",
       "description": "Astrale block/settings/notifications; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -451,7 +451,7 @@
       "title": "Block · Settings · Profile",
       "description": "Astrale block/settings/profile; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -471,7 +471,7 @@
       "title": "Block · Settings · Team",
       "description": "Astrale block/settings/team; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -491,7 +491,7 @@
       "title": "Pattern · Calendar · Range Basic",
       "description": "Astrale pattern/calendar/range-basic; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -511,7 +511,7 @@
       "title": "Pattern · Calendar · Single Basic",
       "description": "Astrale pattern/calendar/single-basic; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -531,7 +531,7 @@
       "title": "Pattern · Carousel · Horizontal Controlled",
       "description": "Astrale pattern/carousel/horizontal-controlled; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -551,7 +551,7 @@
       "title": "Pattern · Carousel · Vertical Controlled",
       "description": "Astrale pattern/carousel/vertical-controlled; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -571,7 +571,7 @@
       "title": "Pattern · Chart · Bar Basic",
       "description": "Astrale pattern/chart/bar-basic; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -591,7 +591,7 @@
       "title": "Pattern · Chart · Line Basic",
       "description": "Astrale pattern/chart/line-basic; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -611,7 +611,7 @@
       "title": "Pattern · Combobox · Multiple",
       "description": "Astrale pattern/combobox/multiple; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -631,7 +631,7 @@
       "title": "Pattern · Combobox · Single Basic",
       "description": "Astrale pattern/combobox/single-basic; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -651,7 +651,7 @@
       "title": "Pattern · Command Palette · Controlled",
       "description": "Astrale pattern/command-palette/controlled; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -671,7 +671,7 @@
       "title": "Pattern · Command Palette · Dialog Basic",
       "description": "Astrale pattern/command-palette/dialog-basic; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -691,7 +691,7 @@
       "title": "Pattern · Data Table · Basic",
       "description": "Astrale pattern/data-table/basic; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -711,7 +711,7 @@
       "title": "Pattern · Data Table · Server Controlled",
       "description": "Astrale pattern/data-table/server-controlled; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -731,7 +731,7 @@
       "title": "Pattern · Date Picker · Range",
       "description": "Astrale pattern/date-picker/range; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -751,7 +751,7 @@
       "title": "Pattern · Date Picker · Single",
       "description": "Astrale pattern/date-picker/single; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -771,7 +771,7 @@
       "title": "Pattern · Form · Native",
       "description": "Astrale pattern/form/native; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -791,7 +791,7 @@
       "title": "Pattern · Form · Wizard Controlled",
       "description": "Astrale pattern/form/wizard-controlled; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -811,7 +811,7 @@
       "title": "Pattern · Message · Bubble Basic",
       "description": "Astrale pattern/message/bubble-basic; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -831,7 +831,7 @@
       "title": "Pattern · Message · Thread",
       "description": "Astrale pattern/message/thread; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -851,7 +851,7 @@
       "title": "Pattern · Questionnaire · Multi Step",
       "description": "Astrale pattern/questionnaire/multi-step; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -871,7 +871,7 @@
       "title": "Pattern · Questionnaire · Single Page",
       "description": "Astrale pattern/questionnaire/single-page; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -891,7 +891,7 @@
       "title": "Pattern · Sidebar · Application",
       "description": "Astrale pattern/sidebar/application; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -911,7 +911,7 @@
       "title": "Pattern · Sidebar · Mobile Controlled",
       "description": "Astrale pattern/sidebar/mobile-controlled; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -931,7 +931,7 @@
       "title": "Pattern · Toast · Basic Provider",
       "description": "Astrale pattern/toast/basic-provider; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -951,7 +951,7 @@
       "title": "Pattern · Toast · Controlled Queue",
       "description": "Astrale pattern/toast/controlled-queue; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -971,7 +971,7 @@
       "title": "Pattern · Typography · Article",
       "description": "Astrale pattern/typography/article; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {
@@ -991,7 +991,7 @@
       "title": "Pattern · Typography · Dense Data",
       "description": "Astrale pattern/typography/dense-data; controlled application responsibilities are injected through props.",
       "dependencies": [
-        "@astrale-os/ui@^0.3.0"
+        "@astrale-os/ui@^0.3.0-beta.0"
       ],
       "files": [
         {

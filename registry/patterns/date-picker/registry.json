@@ -8,7 +8,7 @@
       "type": "registry:block",
       "title": "Pattern · Date Picker · Range",
       "description": "Astrale pattern/date-picker/range; controlled application responsibilities are injected through props.",
-      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
       "files": [
         {
           "path": "range.tsx",
@@ -26,7 +26,7 @@
       "type": "registry:block",
       "title": "Pattern · Date Picker · Single",
       "description": "Astrale pattern/date-picker/single; controlled application responsibilities are injected through props.",
-      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
       "files": [
         {
           "path": "single.tsx",

@@ -70,7 +70,7 @@ test('every registry item is independently bounded, controlled, and safe to inst
     assert.match(item.name, /^(?:pattern|block)-[a-z0-9-]+$/u)
     assert.match(item.meta.canonicalAddress, /^(?:pattern|block)\/[a-z0-9-]+\/[a-z0-9-/]+$/u)
     assert.equal(item.files.length, 1)
-    assert.deepEqual(item.dependencies, ['@astrale-os/ui@^0.3.0'])
+    assert.deepEqual(item.dependencies, ['@astrale-os/ui@^0.3.0-beta.0'])
 
     const file = item.files[0]
     assert.match(file.path, /^[a-z0-9-]+\.tsx$/u)

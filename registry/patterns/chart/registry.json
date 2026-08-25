@@ -8,7 +8,7 @@
       "type": "registry:block",
       "title": "Pattern · Chart · Bar Basic",
       "description": "Astrale pattern/chart/bar-basic; controlled application responsibilities are injected through props.",
-      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
       "files": [
         {
           "path": "bar-basic.tsx",
@@ -26,7 +26,7 @@
       "type": "registry:block",
       "title": "Pattern · Chart · Line Basic",
       "description": "Astrale pattern/chart/line-basic; controlled application responsibilities are injected through props.",
-      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
       "files": [
         {
           "path": "line-basic.tsx",

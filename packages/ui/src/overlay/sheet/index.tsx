@@ -42,6 +42,10 @@ function SheetContent({
   portalProps,
   overlayProps,
   closeProps,
+  closeIcon = <XIcon />,
+  closeIconProps,
+  closeLabel = 'Close',
+  closeLabelProps,
   ...props
 }: SheetPrimitive.Popup.Props & {
   side?: 'top' | 'right' | 'bottom' | 'left'
@@ -49,6 +53,10 @@ function SheetContent({
   portalProps?: SheetPrimitive.Portal.Props
   overlayProps?: SheetPrimitive.Backdrop.Props
   closeProps?: SheetPrimitive.Close.Props
+  closeIcon?: React.ReactNode
+  closeIconProps?: React.ComponentProps<'span'>
+  closeLabel?: React.ReactNode
+  closeLabelProps?: React.ComponentProps<'span'>
 }) {
   return (
     <SheetPortal {...portalProps}>
@@ -69,8 +77,21 @@ function SheetContent({
             render={<Button variant="ghost" className="absolute top-3 right-3" size="icon-sm" />}
             {...closeProps}
           >
-            <XIcon />
-            <span className="sr-only">Close</span>
+            <span
+              {...closeIconProps}
+              data-slot="sheet-close-icon"
+              aria-hidden="true"
+              className={cn('contents', closeIconProps?.className)}
+            >
+              {closeIcon}
+            </span>
+            <span
+              {...closeLabelProps}
+              data-slot="sheet-close-label"
+              className={cn('sr-only', closeLabelProps?.className)}
+            >
+              {closeLabel}
+            </span>
           </SheetPrimitive.Close>
         )}
       </SheetPrimitive.Popup>

@@ -43,12 +43,20 @@ function DialogContent({
   portalProps,
   overlayProps,
   closeProps,
+  closeIcon = <XIcon />,
+  closeIconProps,
+  closeLabel = 'Close',
+  closeLabelProps,
   ...props
 }: DialogPrimitive.Popup.Props & {
   showCloseButton?: boolean
   portalProps?: DialogPrimitive.Portal.Props
   overlayProps?: DialogPrimitive.Backdrop.Props
   closeProps?: DialogPrimitive.Close.Props
+  closeIcon?: React.ReactNode
+  closeIconProps?: React.ComponentProps<'span'>
+  closeLabel?: React.ReactNode
+  closeLabelProps?: React.ComponentProps<'span'>
 }) {
   return (
     <DialogPortal {...portalProps}>
@@ -68,8 +76,21 @@ function DialogContent({
             render={<Button variant="ghost" className="absolute top-2 right-2" size="icon-sm" />}
             {...closeProps}
           >
-            <XIcon />
-            <span className="sr-only">Close</span>
+            <span
+              {...closeIconProps}
+              data-slot="dialog-close-icon"
+              aria-hidden="true"
+              className={cn('contents', closeIconProps?.className)}
+            >
+              {closeIcon}
+            </span>
+            <span
+              {...closeLabelProps}
+              data-slot="dialog-close-label"
+              className={cn('sr-only', closeLabelProps?.className)}
+            >
+              {closeLabel}
+            </span>
           </DialogPrimitive.Close>
         )}
       </DialogPrimitive.Popup>

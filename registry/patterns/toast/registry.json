@@ -8,7 +8,7 @@
       "type": "registry:block",
       "title": "Pattern · Toast · Basic Provider",
       "description": "Astrale pattern/toast/basic-provider; controlled application responsibilities are injected through props.",
-      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
       "files": [
         {
           "path": "basic-provider.tsx",
@@ -26,7 +26,7 @@
       "type": "registry:block",
       "title": "Pattern · Toast · Controlled Queue",
       "description": "Astrale pattern/toast/controlled-queue; controlled application responsibilities are injected through props.",
-      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
       "files": [
         {
           "path": "controlled-queue.tsx",

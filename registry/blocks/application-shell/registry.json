@@ -8,7 +8,7 @@
       "type": "registry:block",
       "title": "Block · Application Shell · Compact Command",
       "description": "Astrale block/application-shell/compact-command; controlled application responsibilities are injected through props.",
-      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
       "files": [
         {
           "path": "compact-command.tsx",
@@ -26,7 +26,7 @@
       "type": "registry:block",
       "title": "Block · Application Shell · Responsive Workspace",
       "description": "Astrale block/application-shell/responsive-workspace; controlled application responsibilities are injected through props.",
-      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
       "files": [
         {
           "path": "responsive-workspace.tsx",
@@ -44,7 +44,7 @@
       "type": "registry:block",
       "title": "Block · Application Shell · Sidebar Header",
       "description": "Astrale block/application-shell/sidebar-header; controlled application responsibilities are injected through props.",
-      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
       "files": [
         {
           "path": "sidebar-header.tsx",

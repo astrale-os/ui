@@ -8,7 +8,7 @@
       "type": "registry:block",
       "title": "Block · Authentication · Recovery",
       "description": "Astrale block/authentication/recovery; controlled application responsibilities are injected through props.",
-      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
       "files": [
         {
           "path": "recovery.tsx",
@@ -26,7 +26,7 @@
       "type": "registry:block",
       "title": "Block · Authentication · Sign In Card",
       "description": "Astrale block/authentication/sign-in-card; controlled application responsibilities are injected through props.",
-      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
       "files": [
         {
           "path": "sign-in-card.tsx",
@@ -44,7 +44,7 @@
       "type": "registry:block",
       "title": "Block · Authentication · Sign Up Card",
       "description": "Astrale block/authentication/sign-up-card; controlled application responsibilities are injected through props.",
-      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
       "files": [
         {
           "path": "sign-up-card.tsx",
@@ -62,7 +62,7 @@
       "type": "registry:block",
       "title": "Block · Authentication · Verification",
       "description": "Astrale block/authentication/verification; controlled application responsibilities are injected through props.",
-      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
       "files": [
         {
           "path": "verification.tsx",

@@ -1,4 +1,4 @@
-import { cleanup, render, screen } from '@testing-library/react'
+import { cleanup, render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { afterEach, describe, expect, test } from 'vitest'
 
@@ -11,8 +11,10 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from './disclosure/accordion/index.js'
+import { createToastManager, Toaster } from './feedback/toast/index.js'
 import { Checkbox } from './input/checkbox/index.js'
 import { Input } from './input/input/index.js'
+import { NativeSelect } from './input/native-select/index.js'
 import { Select, SelectTrigger, SelectValue } from './input/select/index.js'
 import { Switch } from './input/switch/index.js'
 import {
@@ -95,6 +97,14 @@ describe('runtime owners', () => {
             <SelectValue />
           </SelectTrigger>
         </Select>
+        <NativeSelect
+          aria-label="Environment"
+          className="host-native-select"
+          wrapperProps={{ className: 'host-native-wrapper' }}
+          icon={<span data-testid="host-native-icon">Open</span>}
+        >
+          <option value="production">Production</option>
+        </NativeSelect>
       </>,
     )
 
@@ -105,6 +115,11 @@ describe('runtime owners', () => {
     expect(tableContainer).toHaveClass('host-table-container')
     expect(tableContainer).toHaveStyle({ maxWidth: '320px' })
     expect(screen.getByTestId('host-select-icon')).toBeInTheDocument()
+    expect(screen.getByRole('combobox', { name: 'Environment' })).toHaveClass('host-native-select')
+    expect(container.querySelector('[data-slot="native-select-wrapper"]')).toHaveClass(
+      'host-native-wrapper',
+    )
+    expect(screen.getByTestId('host-native-icon')).toBeInTheDocument()
   })
 
   test('accordion and tabs preserve composite keyboard contracts', async () => {
@@ -113,7 +128,9 @@ describe('runtime owners', () => {
       <>
         <Accordion>
           <AccordionItem value="details">
-            <AccordionTrigger>Details</AccordionTrigger>
+            <AccordionTrigger collapsedIconProps={{ className: 'host-collapsed-icon' }}>
+              Details
+            </AccordionTrigger>
             <AccordionContent>Visible details</AccordionContent>
           </AccordionItem>
         </Accordion>
@@ -130,6 +147,9 @@ describe('runtime owners', () => {
 
     await user.click(screen.getByRole('button', { name: 'Details' }))
     expect(screen.getByText('Visible details')).toBeVisible()
+    expect(document.querySelector('[data-slot="accordion-trigger-icon"]')).toHaveClass(
+      'host-collapsed-icon',
+    )
 
     const firstTab = screen.getByRole('tab', { name: 'One' })
     firstTab.focus()
@@ -173,7 +193,10 @@ describe('runtime owners', () => {
     render(
       <Dialog>
         <DialogTrigger render={<Button />}>Open settings</DialogTrigger>
-        <DialogContent>
+        <DialogContent
+          closeIcon={<span data-testid="host-close-icon">×</span>}
+          closeLabel="Dismiss settings"
+        >
           <DialogTitle>Settings</DialogTitle>
           <DialogDescription>Configure the workspace.</DialogDescription>
           <Button>Save</Button>
@@ -186,8 +209,30 @@ describe('runtime owners', () => {
     expect(screen.getByRole('dialog', { name: 'Settings' })).toHaveAccessibleDescription(
       'Configure the workspace.',
     )
+    expect(screen.getByRole('button', { name: 'Dismiss settings' })).toContainElement(
+      screen.getByTestId('host-close-icon'),
+    )
     await user.keyboard('{Escape}')
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
     expect(trigger).toHaveFocus()
+  })
+
+  test('toast convenience methods retain Base live-region behavior and open viewport placement', async () => {
+    const manager = createToastManager()
+    render(<Toaster toastManager={manager} position="top-center" />)
+
+    manager.error('Unable to save', { description: 'Try the operation again.' })
+
+    const toastRoot = await waitFor(() => {
+      const root = document.querySelector<HTMLElement>('[data-slot="toast"]')
+      expect(root).not.toBeNull()
+      return root!
+    })
+    expect(within(toastRoot).getByText('Unable to save')).toBeVisible()
+    expect(within(toastRoot).getByText('Try the operation again.')).toBeVisible()
+    expect(document.querySelector('[data-slot="toast-viewport"]')).toHaveAttribute(
+      'data-position',
+      'top-center',
+    )
   })
 })

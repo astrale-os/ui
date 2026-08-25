@@ -31,11 +31,15 @@ function AccordionTrigger({
   headerProps,
   collapsedIcon = <ChevronDownIcon />,
   expandedIcon = <ChevronUpIcon />,
+  collapsedIconProps,
+  expandedIconProps,
   ...props
 }: AccordionPrimitive.Trigger.Props & {
   headerProps?: AccordionPrimitive.Header.Props
   collapsedIcon?: ReactNode
   expandedIcon?: ReactNode
+  collapsedIconProps?: ComponentProps<'span'>
+  expandedIconProps?: ComponentProps<'span'>
 }) {
   const { className: headerClassName, ...headerRest } = headerProps ?? {}
   return (
@@ -54,14 +58,22 @@ function AccordionTrigger({
       >
         {children}
         <span
+          {...collapsedIconProps}
           data-slot="accordion-trigger-icon"
-          className="pointer-events-none ml-auto size-4 shrink-0 group-aria-expanded/accordion-trigger:hidden"
+          className={cn(
+            'pointer-events-none ml-auto size-4 shrink-0 group-aria-expanded/accordion-trigger:hidden',
+            collapsedIconProps?.className,
+          )}
         >
           {collapsedIcon}
         </span>
         <span
+          {...expandedIconProps}
           data-slot="accordion-trigger-icon-expanded"
-          className="pointer-events-none ml-auto hidden size-4 shrink-0 group-aria-expanded/accordion-trigger:inline"
+          className={cn(
+            'pointer-events-none ml-auto hidden size-4 shrink-0 group-aria-expanded/accordion-trigger:inline',
+            expandedIconProps?.className,
+          )}
         >
           {expandedIcon}
         </span>

@@ -17,7 +17,12 @@ function RadioGroup({ className, ...props }: RadioGroupPrimitive.Props) {
 
 function RadioGroupItem({
   className,
-  indicator = <span className="size-2 rounded-full bg-primary-foreground" />,
+  indicator = (
+    <span
+      data-slot="radio-group-indicator-mark"
+      className="size-2 rounded-full bg-primary-foreground"
+    />
+  ),
   indicatorProps,
   ...props
 }: RadioPrimitive.Root.Props & {

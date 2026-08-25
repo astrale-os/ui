@@ -186,8 +186,15 @@ function FieldError({
     }
 
     return (
-      <ul className="ml-4 flex list-disc flex-col gap-1">
-        {uniqueErrors.map((error, index) => error?.message && <li key={index}>{error.message}</li>)}
+      <ul data-slot="field-error-list" className="ml-4 flex list-disc flex-col gap-1">
+        {uniqueErrors.map(
+          (error, index) =>
+            error?.message && (
+              <li data-slot="field-error-item" key={index}>
+                {error.message}
+              </li>
+            ),
+        )}
       </ul>
     )
   }, [children, errors])

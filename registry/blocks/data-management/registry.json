@@ -8,7 +8,7 @@
       "type": "registry:block",
       "title": "Block · Data Management · Collection Browser",
       "description": "Astrale block/data-management/collection-browser; controlled application responsibilities are injected through props.",
-      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
       "files": [
         {
           "path": "collection-browser.tsx",
@@ -26,7 +26,7 @@
       "type": "registry:block",
       "title": "Block · Data Management · Details Panel",
       "description": "Astrale block/data-management/details-panel; controlled application responsibilities are injected through props.",
-      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
       "files": [
         {
           "path": "details-panel.tsx",
@@ -44,7 +44,7 @@
       "type": "registry:block",
       "title": "Block · Data Management · Editor",
       "description": "Astrale block/data-management/editor; controlled application responsibilities are injected through props.",
-      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
       "files": [
         {
           "path": "editor.tsx",

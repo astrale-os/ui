@@ -6,6 +6,7 @@ function controlIcon(paths: ReactNode) {
   return function ControlIcon({ children, ...props }: ControlIconProps) {
     return (
       <svg
+        data-slot="control-icon"
         aria-hidden="true"
         fill="none"
         focusable="false"

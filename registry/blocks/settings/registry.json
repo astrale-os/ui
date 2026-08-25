@@ -8,7 +8,7 @@
       "type": "registry:block",
       "title": "Block · Settings · Appearance",
       "description": "Astrale block/settings/appearance; controlled application responsibilities are injected through props.",
-      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
       "files": [
         {
           "path": "appearance.tsx",
@@ -26,7 +26,7 @@
       "type": "registry:block",
       "title": "Block · Settings · Notifications",
       "description": "Astrale block/settings/notifications; controlled application responsibilities are injected through props.",
-      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
       "files": [
         {
           "path": "notifications.tsx",
@@ -44,7 +44,7 @@
       "type": "registry:block",
       "title": "Block · Settings · Profile",
       "description": "Astrale block/settings/profile; controlled application responsibilities are injected through props.",
-      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
       "files": [
         {
           "path": "profile.tsx",
@@ -62,7 +62,7 @@
       "type": "registry:block",
       "title": "Block · Settings · Team",
       "description": "Astrale block/settings/team; controlled application responsibilities are injected through props.",
-      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
       "files": [
         {
           "path": "team.tsx",

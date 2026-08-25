@@ -8,7 +8,7 @@
       "type": "registry:block",
       "title": "Pattern · Form · Native",
       "description": "Astrale pattern/form/native; controlled application responsibilities are injected through props.",
-      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
       "files": [
         {
           "path": "native.tsx",
@@ -26,7 +26,7 @@
       "type": "registry:block",
       "title": "Pattern · Form · Wizard Controlled",
       "description": "Astrale pattern/form/wizard-controlled; controlled application responsibilities are injected through props.",
-      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
       "files": [
         {
           "path": "wizard-controlled.tsx",

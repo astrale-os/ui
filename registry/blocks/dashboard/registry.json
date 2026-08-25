@@ -8,7 +8,7 @@
       "type": "registry:block",
       "title": "Block · Dashboard · Analytics",
       "description": "Astrale block/dashboard/analytics; controlled application responsibilities are injected through props.",
-      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
       "files": [
         {
           "path": "analytics.tsx",
@@ -26,7 +26,7 @@
       "type": "registry:block",
       "title": "Block · Dashboard · Operations",
       "description": "Astrale block/dashboard/operations; controlled application responsibilities are injected through props.",
-      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
       "files": [
         {
           "path": "operations.tsx",
@@ -44,7 +44,7 @@
       "type": "registry:block",
       "title": "Block · Dashboard · Overview",
       "description": "Astrale block/dashboard/overview; controlled application responsibilities are injected through props.",
-      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
       "files": [
         {
           "path": "overview.tsx",

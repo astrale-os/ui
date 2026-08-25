@@ -15,7 +15,50 @@ import {
   XIcon,
 } from '#ui/icon'
 
-const toast = ToastPrimitive.createToastManager()
+type ToastPosition =
+  | 'top-left'
+  | 'top-center'
+  | 'top-right'
+  | 'bottom-left'
+  | 'bottom-center'
+  | 'bottom-right'
+
+const toastPositionClasses: Record<ToastPosition, string> = {
+  'top-left': 'top-4 bottom-auto sm:right-auto sm:left-4',
+  'top-center': 'top-4 bottom-auto sm:right-1/2 sm:left-auto sm:translate-x-1/2',
+  'top-right': 'top-4 bottom-auto sm:right-4 sm:left-auto',
+  'bottom-left': 'bottom-4 sm:right-auto sm:left-4',
+  'bottom-center': 'bottom-4 sm:right-1/2 sm:left-auto sm:translate-x-1/2',
+  'bottom-right': 'bottom-4 sm:right-4 sm:left-auto',
+}
+
+type BaseToastManager = ReturnType<typeof ToastPrimitive.createToastManager>
+type ToastOptions = Omit<Parameters<BaseToastManager['add']>[0], 'type' | 'title'>
+type AstraleToastManager = BaseToastManager & {
+  success: (title: ReactNode, options?: ToastOptions) => string
+  error: (title: ReactNode, options?: ToastOptions) => string
+  info: (title: ReactNode, options?: ToastOptions) => string
+  warning: (title: ReactNode, options?: ToastOptions) => string
+  loading: (title: ReactNode, options?: ToastOptions) => string
+}
+
+function createToastManager(): AstraleToastManager {
+  const manager = ToastPrimitive.createToastManager()
+  return Object.assign(manager, {
+    success: (title: ReactNode, options?: ToastOptions) =>
+      manager.add({ ...options, title, type: 'success' }),
+    error: (title: ReactNode, options?: ToastOptions) =>
+      manager.add({ ...options, title, type: 'error', priority: options?.priority ?? 'high' }),
+    info: (title: ReactNode, options?: ToastOptions) =>
+      manager.add({ ...options, title, type: 'info' }),
+    warning: (title: ReactNode, options?: ToastOptions) =>
+      manager.add({ ...options, title, type: 'warning' }),
+    loading: (title: ReactNode, options?: ToastOptions) =>
+      manager.add({ ...options, title, type: 'loading', timeout: options?.timeout ?? 0 }),
+  })
+}
+
+const toast = createToastManager()
 
 function ToastProvider(props: ToastPrimitive.Provider.Props) {
   return <ToastPrimitive.Provider {...props} />
@@ -25,12 +68,18 @@ function ToastPortal(props: ToastPrimitive.Portal.Props) {
   return <ToastPrimitive.Portal data-slot="toast-portal" {...props} />
 }
 
-function ToastViewport({ className, ...props }: ToastPrimitive.Viewport.Props) {
+function ToastViewport({
+  className,
+  position = 'bottom-right',
+  ...props
+}: ToastPrimitive.Viewport.Props & { position?: ToastPosition }) {
   return (
     <ToastPrimitive.Viewport
       data-slot="toast-viewport"
+      data-position={position}
       className={cn(
-        'pointer-events-none fixed inset-x-4 bottom-4 z-50 mx-auto w-auto max-w-sm outline-none sm:right-4 sm:left-auto sm:mx-0 sm:w-full',
+        'pointer-events-none fixed inset-x-4 z-50 mx-auto w-auto max-w-sm outline-none sm:mx-0 sm:w-full',
+        toastPositionClasses[position],
         className,
       )}
       {...props}
@@ -193,6 +242,7 @@ type ToasterProps = ToastPrimitive.Provider.Props & {
   portalProps?: ToastPrimitive.Portal.Props
   viewportProps?: ToastPrimitive.Viewport.Props
   renderToast?: (toastItem: ToastObject) => ReactNode
+  position?: ToastPosition
 }
 
 function Toaster({
@@ -201,13 +251,14 @@ function Toaster({
   portalProps,
   viewportProps,
   renderToast,
+  position,
   ...props
 }: ToasterProps) {
   return (
     <ToastProvider toastManager={toastManager} {...props}>
       {children}
       <ToastPortal {...portalProps}>
-        <ToastViewport {...viewportProps}>
+        <ToastViewport position={position} {...viewportProps}>
           <ToastList renderToast={renderToast} />
         </ToastViewport>
       </ToastPortal>
@@ -215,7 +266,6 @@ function Toaster({
   )
 }
 
-const createToastManager = ToastPrimitive.createToastManager
 const useToastManager = ToastPrimitive.useToastManager
 
 export {
@@ -235,3 +285,4 @@ export {
   useToastManager,
 }
 export type { ToasterProps, ToastObject }
+export type { AstraleToastManager, ToastOptions, ToastPosition }

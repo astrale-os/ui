@@ -4,7 +4,7 @@
   "title": "Block · Application Shell · Compact Command",
   "description": "Astrale block/application-shell/compact-command; controlled application responsibilities are injected through props.",
   "dependencies": [
-    "@astrale-os/ui@^0.3.0"
+    "@astrale-os/ui@^0.3.0-beta.0"
   ],
   "files": [
     {

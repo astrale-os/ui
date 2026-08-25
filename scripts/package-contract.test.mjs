@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict'
+import { spawnSync } from 'node:child_process'
 import { readFile, readdir } from 'node:fs/promises'
 import path from 'node:path'
 import test from 'node:test'
@@ -114,6 +115,50 @@ test('production source follows semantic owners and contains no hidden applicati
   assert.doesNotMatch(source, /(?:Dock|Taskbar|WindowManager|macOS)/u)
 })
 
+test('every runtime-owned intrinsic visual part has a stable slot', async () => {
+  const files = (await walk(`${packageRoot}/src`)).filter(
+    (file) => file.endsWith('.tsx') && !file.endsWith('.test.tsx'),
+  )
+  const missing = []
+  const visualTags = new Set([
+    'a',
+    'button',
+    'div',
+    'fieldset',
+    'form',
+    'input',
+    'label',
+    'li',
+    'nav',
+    'ol',
+    'option',
+    'select',
+    'span',
+    'svg',
+    'table',
+    'tbody',
+    'td',
+    'textarea',
+    'tfoot',
+    'th',
+    'thead',
+    'tr',
+    'ul',
+  ])
+
+  for (const file of files) {
+    const source = await readFile(file, 'utf8')
+    for (const match of source.matchAll(/<([a-z][a-z0-9-]*)\b([^<>]*?)\/?\s*>/gsu)) {
+      if (!visualTags.has(match[1])) continue
+      if (/\bdata-slot\s*=/u.test(match[2])) continue
+      const line = source.slice(0, match.index).split('\n').length
+      missing.push(`${file}:${line} <${match[1]}>`)
+    }
+  }
+
+  assert.deepEqual(missing, [])
+})
+
 test('theme has an opt-in reset and all public presets own the same character vocabulary', async () => {
   const theme = await readFile(`${packageRoot}/src/theme/theme.css`, 'utf8')
   assert.doesNotMatch(theme, /tailwindcss\/preflight/u)
@@ -139,4 +184,11 @@ test('theme has an opt-in reset and all public presets own the same character vo
     assert.match(preset, /\.dark/u)
   }
   assert.equal(new Set(presets).size, presets.length)
+})
+
+test('upstream intake ledger is closed and content-addressed to current owners', () => {
+  const result = spawnSync(process.execPath, ['scripts/refresh-upstream-ledger.mjs', '--check'], {
+    encoding: 'utf8',
+  })
+  assert.equal(result.status, 0, result.stderr || result.stdout)
 })

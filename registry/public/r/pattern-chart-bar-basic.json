@@ -4,7 +4,7 @@
   "title": "Pattern · Chart · Bar Basic",
   "description": "Astrale pattern/chart/bar-basic; controlled application responsibilities are injected through props.",
   "dependencies": [
-    "@astrale-os/ui@^0.3.0"
+    "@astrale-os/ui@^0.3.0-beta.0"
   ],
   "files": [
     {

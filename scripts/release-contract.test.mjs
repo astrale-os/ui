@@ -26,7 +26,12 @@ test('pins supported CI and release workflow dependencies', async () => {
   assert.match(ci, /matrix:\s*\n\s+node-version:\s*\[24, 26\]/u)
   assert.match(ci, /frozen-lockfile: 'true'/u)
   assert.match(ci, /pnpm package:qualify/u)
+  assert.match(ci, /pnpm registry:qualify/u)
   assert.match(ci, /pnpm catalog:test/u)
+  assert.match(ci, /pnpm test:security/u)
+  assert.match(ci, /pnpm audit --prod --audit-level high/u)
+  assert.match(ci, /actions\/dependency-review-action@[0-9a-f]{40}/u)
+  assert.match(ci, /github\/codeql-action\/(?:init|analyze)@[0-9a-f]{40}/u)
 })
 
 test('publishes exactly one public npm package from an admitted tag using OIDC', async () => {

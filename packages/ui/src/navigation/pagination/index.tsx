@@ -67,7 +67,9 @@ function PaginationPrevious({
       {...props}
     >
       <ChevronLeftIcon data-icon="inline-start" />
-      <span className="hidden sm:block">{text}</span>
+      <span data-slot="pagination-previous-label" className="hidden sm:block">
+        {text}
+      </span>
     </PaginationLink>
   )
 }
@@ -84,7 +86,9 @@ function PaginationNext({
       className={cn('pr-1.5!', className)}
       {...props}
     >
-      <span className="hidden sm:block">{text}</span>
+      <span data-slot="pagination-next-label" className="hidden sm:block">
+        {text}
+      </span>
       <ChevronRightIcon data-icon="inline-end" />
     </PaginationLink>
   )
@@ -102,7 +106,9 @@ function PaginationEllipsis({ className, ...props }: React.ComponentProps<'span'
       {...props}
     >
       <MoreHorizontalIcon />
-      <span className="sr-only">More pages</span>
+      <span data-slot="pagination-ellipsis-label" className="sr-only">
+        More pages
+      </span>
     </span>
   )
 }

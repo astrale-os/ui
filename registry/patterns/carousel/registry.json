@@ -8,7 +8,7 @@
       "type": "registry:block",
       "title": "Pattern · Carousel · Horizontal Controlled",
       "description": "Astrale pattern/carousel/horizontal-controlled; controlled application responsibilities are injected through props.",
-      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
       "files": [
         {
           "path": "horizontal-controlled.tsx",
@@ -26,7 +26,7 @@
       "type": "registry:block",
       "title": "Pattern · Carousel · Vertical Controlled",
       "description": "Astrale pattern/carousel/vertical-controlled; controlled application responsibilities are injected through props.",
-      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
       "files": [
         {
           "path": "vertical-controlled.tsx",

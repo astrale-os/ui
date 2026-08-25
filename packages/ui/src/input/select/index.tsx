@@ -54,7 +54,7 @@ function SelectTrigger({
       <SelectPrimitive.Icon
         data-slot="select-icon"
         {...iconProps}
-        render={iconProps?.render ?? <span />}
+        render={iconProps?.render ?? <span data-slot="select-icon" />}
         className={cn('pointer-events-none size-4 text-muted-foreground', iconProps?.className)}
       >
         {icon}
@@ -163,7 +163,10 @@ function SelectItem({
         data-slot="select-item-indicator"
         render={
           indicatorProps?.render ?? (
-            <span className="pointer-events-none absolute right-2 flex size-4 items-center justify-center" />
+            <span
+              data-slot="select-item-indicator"
+              className="pointer-events-none absolute right-2 flex size-4 items-center justify-center"
+            />
           )
         }
       >

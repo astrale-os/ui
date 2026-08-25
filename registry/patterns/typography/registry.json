@@ -8,7 +8,7 @@
       "type": "registry:block",
       "title": "Pattern · Typography · Article",
       "description": "Astrale pattern/typography/article; controlled application responsibilities are injected through props.",
-      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
       "files": [
         {
           "path": "article.tsx",
@@ -26,7 +26,7 @@
       "type": "registry:block",
       "title": "Pattern · Typography · Dense Data",
       "description": "Astrale pattern/typography/dense-data; controlled application responsibilities are injected through props.",
-      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
       "files": [
         {
           "path": "dense-data.tsx",
