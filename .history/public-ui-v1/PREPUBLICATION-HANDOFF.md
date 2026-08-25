@@ -1,20 +1,20 @@
 # Pre-publication handoff
 
-Date: 2026-08-25. This is the stopping point before any public-state mutation.
+Date: 2026-08-26. This is the stopping point before any package publication or visibility change.
 
 ## Exact qualified cohort
 
 | Owner | Baseline `origin/main` | Qualified local commit |
 | --- | --- | --- |
-| UI | `d460f711c05e4f14f1467c7992e3193e0ceb913a` | `facc3f19641b2c373d20065076011fbe7c72acf7` |
-| CLI | `d8aa9d902c99513e34389d65a9a1aaa496083086` | `9f871091841f088aeeb2cf42df4453a9ea924dff` |
+| UI | `d460f711c05e4f14f1467c7992e3193e0ceb913a` | `a0dd612be4b04c40d829769b07598555474b998d` |
+| CLI | `634843cdcaeb34fa4a9a338a58be2a5d4578a31a` | `2e0ea704eabff7647b821d522c6241f48f0f99b6` |
 | SDK | `f556359668bd821a75f94db87116751b32aa6c90` | `c9036f708dc042e29701719a707743c2a8be704e` |
 | GUI | `ba1b2c9afd1fa9ed97de525c176a8ee9580a93de` | `2ef24d60421d29f408f4bdd1baccea7a26bf55a2` |
 | Admin | `9bb7cc4d545b6aa4db822de75394ba720feaafd3` | `22de8763e8a8b51fb8de92f41f277b4adbf60d58` |
 | Domains | `cd667d111da05b76c599ce60ba7d741994a40abb` | `a5c51e982c93b6fbc9c9d412eec40f808bc51da8` |
 
-Primary checkouts were not edited. Nothing was pushed or published and repository visibility was
-not changed.
+Primary checkouts were not edited. The qualified branches and linked pull requests were pushed;
+nothing was published and repository visibility was not changed.
 
 ## Current package identity
 
