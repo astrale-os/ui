@@ -72,9 +72,11 @@ jobs:
           pnpm audit --prod --audit-level high --json > artifacts/security/audit.json
           pnpm licenses list --prod --json > artifacts/security/licenses.json
       - uses: github/codeql-action/init@db488ddef3bf6cb639b32c2e9a7c0a7ea8271d28 # v4.37.8
+        if: github.event.repository.private == false
         with:
           languages: javascript-typescript
       - uses: github/codeql-action/analyze@db488ddef3bf6cb639b32c2e9a7c0a7ea8271d28 # v4.37.8
+        if: github.event.repository.private == false
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         if: always()
         with:

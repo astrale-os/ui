@@ -41,6 +41,14 @@ test('pins supported CI and release workflow dependencies', async () => {
   )
   assert.match(ci, /actions\/dependency-review-action@[0-9a-f]{40}/u)
   assert.match(ci, /github\/codeql-action\/(?:init|analyze)@[0-9a-f]{40}/u)
+  assert.equal(
+    [
+      ...ci.matchAll(
+        /uses: github\/codeql-action\/(?:init|analyze)@[0-9a-f]{40}[^\n]*\n\s+if: github\.event\.repository\.private == false/gu,
+      ),
+    ].length,
+    2,
+  )
 })
 
 test('publishes exactly one public npm package from the Release Please commit using OIDC', async () => {
