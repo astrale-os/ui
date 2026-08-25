@@ -1,5 +1,11 @@
 # Qualification record
 
+> Current exact revisions, artifact identity, expanded package/registry/security evidence, consumer
+> results, and remaining public gates are recorded in
+> [PREPUBLICATION-HANDOFF.md](./PREPUBLICATION-HANDOFF.md). The baseline narrative below is retained
+> as migration history; where measurements or repository heads differ, the handoff is the
+> authoritative later observation.
+
 Date: 2026-08-25.
 
 ## Revisions and worktrees

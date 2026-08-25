@@ -1,5 +1,14 @@
 # Consumer census
 
+## Qualified implementation update
+
+The authoritative post-migration cohort is recorded in
+[PREPUBLICATION-HANDOFF.md](./PREPUBLICATION-HANDOFF.md): GUI `2ef24d6` has no legacy imports and
+qualifies against packed public paths; Admin `6dfb012` and Domains `a5c51e9` remove the final stale
+routing allowances; SDK `79a09d7` proves the zero-weight boundary; and CLI `47ae876` owns the
+on-demand journey. No public npm lockfile claim is made before publication. The table below is kept
+as the pre-implementation census that motivated those commits.
+
 Snapshot: 2026-08-25. Each repository head was refreshed before this census.
 
 | Repository | Exact `origin/main` | Live legacy files | Ownership and cutover |

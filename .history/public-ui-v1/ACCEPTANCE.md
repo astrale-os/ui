@@ -3,6 +3,11 @@
 All unchecked criteria are target obligations. A check requires exact revision evidence recorded in
 the migration ledger; prose agreement is not evidence.
 
+The exact pre-publication cohort and locally passed subset are now recorded in
+[PREPUBLICATION-HANDOFF.md](./PREPUBLICATION-HANDOFF.md). This checklist intentionally remains the
+stable-release contract: local tarball evidence does not check public npm, provenance, remote CI,
+branch protection, post-public generator/consumer, or manual assistive-technology obligations.
+
 ## A. Repository and ownership
 
 - [ ] The repository is public only after the license, notice, secret/history, contribution,

@@ -85,6 +85,8 @@ checkout was dirty and behind `origin/main`; it was not modified.
 - [CONSUMER-CENSUS.md](./CONSUMER-CENSUS.md) owns the refreshed live-consumer inventory and public
   npm cutover gate.
 - [QUALIFICATION.md](./QUALIFICATION.md) records the exact local proof and remaining external gaps.
+- [PREPUBLICATION-HANDOFF.md](./PREPUBLICATION-HANDOFF.md) records the final local cohort, artifact
+  identity, evidence limits, and human-gated public bootstrap sequence.
 
 ## Status vocabulary
 
