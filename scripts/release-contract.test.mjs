@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 import { access, readFile } from 'node:fs/promises'
 import test from 'node:test'
 
-const configSha = '2e1bc75459014f38323b57213949b9f9dd530054'
+const configSha = 'c02d9486144144dff268910469870345b683e8b3'
 
 test('pins supported CI and release workflow dependencies', async () => {
   const [ci, release, publish] = await Promise.all(
@@ -16,7 +16,7 @@ test('pins supported CI and release workflow dependencies', async () => {
     for (const reference of actionReferences) {
       assert.match(reference, /^(?:\.\/|[^@\s]+@[0-9a-f]{40})$/u)
     }
-    assert.doesNotMatch(workflow, /NPM_TOKEN|NODE_AUTH_TOKEN|secrets\.[A-Z_]*TOKEN/u)
+    assert.doesNotMatch(workflow, /NPM_TOKEN|NODE_AUTH_TOKEN|secrets\./u)
   }
   const configRefs = [
     ...[ci, release, publish].join('\n').matchAll(/astrale-os\/config\/.+@([0-9a-f]{40})/gu),
@@ -35,22 +35,63 @@ test('pins supported CI and release workflow dependencies', async () => {
   assert.match(ci, /github\/codeql-action\/(?:init|analyze)@[0-9a-f]{40}/u)
 })
 
-test('publishes exactly one public npm package from an admitted tag using OIDC', async () => {
-  const publish = await readFile('.github/workflows/publish.yml', 'utf8')
+test('publishes exactly one public npm package from the Release Please commit using OIDC', async () => {
+  const [release, publish] = await Promise.all([
+    readFile('.github/workflows/release.yml', 'utf8'),
+    readFile('.github/workflows/publish.yml', 'utf8'),
+  ])
   const manifest = JSON.parse(await readFile('packages/ui/package.json', 'utf8'))
+  const rootManifest = JSON.parse(await readFile('package.json', 'utf8'))
   const releaseConfig = JSON.parse(await readFile('.release-please-config.json', 'utf8'))
   const releaseManifest = JSON.parse(await readFile('.release-please-manifest.json', 'utf8'))
 
-  assert.match(publish, /tags:\s*\['v\*'\]/u)
-  assert.doesNotMatch(publish, /workflow_dispatch/u)
+  assert.match(release, /needs\.release\.outputs\.created == 'true'/u)
+  assert.match(release, /ref:\s*\$\{\{ github\.sha \}\}/u)
+  assert.match(release, /PUBLISH_SHA:\s*\$\{\{ github\.sha \}\}/u)
+  assert.match(release, /publish_tag="v\$\{publish_version\}"/u)
+  assert.match(release, /gh workflow run publish\.yml/u)
+  assert.match(release, /-f expected-sha="\$PUBLISH_SHA"/u)
+  assert.match(release, /-f expected-version="\$publish_version"/u)
+  assert.match(release, /--ref "\$publish_tag"/u)
+  assert.match(release, /gh run watch "\$run_id"/u)
+  assert.match(publish, /workflow_dispatch/u)
+  assert.doesNotMatch(publish, /push:\s*\n\s+tags:/u)
   assert.match(publish, /id-token:\s*write/u)
+  assert.match(publish, /permissions:\s*\n\s+contents:\s*read\s*\n\s+id-token:\s*write/u)
+  assert.doesNotMatch(publish, /npm-token:/u)
   assert.match(publish, /environment:\s*npm/u)
+  assert.match(publish, /ref:\s*\$\{\{ inputs\.expected-sha \}\}/u)
+  assert.match(publish, /fetch-depth:\s*0/u)
+  assert.match(publish, /persist-credentials:\s*'false'/u)
   assert.match(publish, /git rev-parse/u)
-  assert.match(publish, /tarball="artifacts\/package\/astrale-os-ui-/u)
-  assert.match(publish, /npm publish "\$tarball" --access public --provenance/u)
-  assert.doesNotMatch(publish, /working-directory:\s*packages\/ui/u)
+  assert.match(publish, /refs\/tags\/v\$\{EXPECTED_VERSION\}/u)
+  assert.match(publish, /git merge-base --is-ancestor/u)
+  assert.match(
+    publish,
+    /gh api "repos\/\$\{GITHUB_REPOSITORY\}\/releases\/tags\/v\$\{EXPECTED_VERSION\}"/u,
+  )
+  assert.match(publish, /publish\/packages@c02d9486144144dff268910469870345b683e8b3/u)
+  assert.match(publish, /dirs:\s*packages\/ui/u)
+  assert.match(publish, /mirror-public-packages:\s*'false'/u)
+  assert.match(
+    publish,
+    /build-command:\s*pnpm exec playwright install --with-deps chromium && pnpm qualify/u,
+  )
+  assert.match(publish, /prerelease-tag:\s*auto/u)
+  assert.match(publish, /run:\s*pnpm qualify:publication/u)
+  assert.match(publish, /actions\/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a/u)
+  assert.match(publish, /mirror:\s*\n\s+needs:\s*publish/u)
+  assert.match(publish, /packages:\s*write/u)
+  assert.match(publish, /publish\/mirror-npm-to-github@c02d9486144144dff268910469870345b683e8b3/u)
+  assert.match(publish, /repository:\s*astrale-os\/ui/u)
   assert.deepEqual(Object.keys(releaseConfig.packages), ['packages/ui'])
   assert.deepEqual(Object.keys(releaseManifest), ['packages/ui'])
+  assert.equal(releaseConfig.versioning, 'prerelease')
+  assert.equal(releaseConfig.prerelease, true)
+  assert.equal(releaseConfig['prerelease-type'], 'beta')
+  assert.equal(releaseConfig['always-update'], true)
+  assert.match(manifest.version, /^\d+\.\d+\.\d+-beta\.\d+$/u)
+  assert.equal(rootManifest.scripts['qualify:publication'], 'node scripts/qualify-publication.mjs')
   assert.equal(manifest.name, '@astrale-os/ui')
   assert.equal(manifest.publishConfig.registry, 'https://registry.npmjs.org')
   assert.equal(manifest.publishConfig.access, 'public')

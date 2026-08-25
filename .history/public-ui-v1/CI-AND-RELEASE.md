@@ -104,8 +104,9 @@ whose required checks are queued, skipped, cancelled, or stale.
 
 1. runs on `main` and optional manual recovery;
 2. creates/updates the Release Please PR or exact GitHub release;
-3. when a release is created, extracts exact tag and target SHA from Release Please output;
-4. dispatches `publish.yml` with both values and the tag ref;
+3. when a release is created, derives the exact manifest version, `v<version>` tag, and released
+   `main` SHA;
+4. dispatches the `publish.yml` definition from that immutable tag with the exact version and SHA;
 5. captures the dispatched run ID and waits for its terminal result; and
 6. never treats dispatch acceptance as publication success.
 
@@ -121,20 +122,23 @@ Required properties:
 
 - GitHub-hosted Ubuntu runner;
 - `contents: read` and `id-token: write`, with all other permissions absent unless justified;
-- manual workflow dispatch inputs for exact `tag` and 40-character `sha` from `release.yml`;
+- manual recovery inputs for the exact beta version and 40-character released `main` SHA from
+  `release.yml`;
 - reviewed immutable action revisions and `persist-credentials: false` after checkout;
-- supported Node 24 and npm 11.5.1 or newer;
+- repository-pinned Node 26 and npm 11.5.1 or newer;
 - public `registry.npmjs.org` configuration and no `.npmrc` Astrale scope redirect;
 - no `NPM_TOKEN`, automation write token, GitHub Packages publication, or token fallback;
-- frozen install and complete `pnpm qualify` before pack;
-- exact check that tag, input SHA, checkout SHA, manifest version, release version, and npm target
-  agree;
-- one `pnpm pack` output whose file list and integrity are recorded before publish;
-- `npm publish <exact-tarball> --access public` with a prerelease dist-tag when appropriate;
+- frozen install and complete `pnpm qualify` on the exact released SHA before pack;
+- exact check that the immutable tag, GitHub release, `main` ancestry, input SHA, checkout SHA,
+  manifest version, release version, and npm target agree;
+- one shared publisher that packs the qualified package, derives `beta` from prerelease versions,
+  publishes with OIDC, and verifies the immutable version plus channel tag;
 - bounded retry only for independently classified transient registry observation after publish, not
   for source/test/authentication failure; and
-- post-publish `npm view`, integrity/provenance metadata, and fresh exact-version installs retained
-  as evidence.
+- post-publish `npm view`, exact public tarball/integrity, verified SLSA provenance bound to the tag,
+  workflow, and commit, plus anonymous isolated npm/pnpm lock and import proof retained as evidence.
+- only after public npm proof succeeds, a separate job mirrors the exact public package to the
+  repository-owned private GitHub Packages namespace; the mirror is never a publication fallback.
 
 According to the current
 [npm trusted-publishing documentation](https://docs.npmjs.com/trusted-publishers/), publishing from
@@ -162,7 +166,7 @@ The package does not yet exist on public npm, so the final bootstrap is delibera
    - environment: the ratified release environment, if any; and
    - allowed action: `npm publish`.
 6. Publish the next prerelease through OIDC and verify automatic provenance.
-7. Only then disallow token publishing and revoke the bootstrap credential.
+7. Retain the OIDC-only workflow contract and revoke the bootstrap credential.
 
 The first manual bootstrap is a one-time exception, not an alternate release workflow.
 

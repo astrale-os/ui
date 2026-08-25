@@ -79,6 +79,17 @@ try {
   assert.ok(tarballName, 'pnpm pack must emit one tarball')
   const tarball = path.join(artifactDirectory, tarballName)
   const tarballContent = await readFile(tarball)
+  const repeatPackDirectory = path.join(temporary, 'repeat-pack')
+  await mkdir(repeatPackDirectory)
+  run('pnpm', ['--filter', '@astrale-os/ui', 'pack', '--pack-destination', repeatPackDirectory])
+  const repeatTarballName = (await readdir(repeatPackDirectory)).find((name) =>
+    name.endsWith('.tgz'),
+  )
+  assert.ok(repeatTarballName, 'repeat pnpm pack must emit one tarball')
+  const repeatTarballContent = await readFile(path.join(repeatPackDirectory, repeatTarballName))
+  const tarballSha256 = createHash('sha256').update(tarballContent).digest('hex')
+  const repeatPackSha256 = createHash('sha256').update(repeatTarballContent).digest('hex')
+  assert.equal(repeatPackSha256, tarballSha256, 'repeated package packs must be byte-identical')
   const entries = run('tar', ['-tzf', tarball]).split('\n')
   assert.ok(entries.includes('package/package.json'))
   assert.ok(entries.includes('package/dist/index.js'))
@@ -286,7 +297,8 @@ try {
   const report = {
     package: '@astrale-os/ui',
     version: packedManifest.version,
-    tarballSha256: createHash('sha256').update(tarballContent).digest('hex'),
+    tarballSha256,
+    repeatPackSha256,
     tarballIntegrity: 'sha512-' + createHash('sha512').update(tarballContent).digest('base64'),
     tarballBytes: (await stat(tarball)).size,
     unpackedBytes: await size(path.join(extracted, 'package')),

@@ -31,6 +31,7 @@
     "catalog:build": "pnpm --filter @astrale-os/ui-catalog build",
     "catalog:test": "pnpm --filter @astrale-os/ui-catalog test:e2e",
     "package:qualify": "node scripts/qualify-package.mjs",
+    "qualify:publication": "node scripts/qualify-publication.mjs",
     "check": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test:contracts && pnpm registry:check && pnpm catalog:typecheck",
     "qualify": "pnpm check && pnpm test:components && pnpm test:registry-behavior && pnpm test:security && pnpm build && pnpm registry:build && pnpm package:qualify && pnpm registry:qualify && pnpm catalog:build && pnpm catalog:test",
     "prepare": "husky"
