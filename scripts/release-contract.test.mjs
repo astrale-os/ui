@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 import { readFile } from 'node:fs/promises'
 import test from 'node:test'
 
-const configSha = '2e1bc75459014f38323b57213949b9f9dd530054'
+const configSha = 'e0a84a92c9da33aa9046847ca2d32e785a06ec75'
 const packageDirectories = ['constants', 'utils', 'styles', 'preset', 'components', 'ui']
 
 test('pins frozen CI and release workflows to the qualified Config revision', async () => {
@@ -79,6 +79,7 @@ test('tracks a strict seven-day lock and local workspace linking policy', async 
   ])
 
   assert.match(workspace, /^linkWorkspacePackages: true$/mu)
+  assert.match(workspace, /^strictPeerDependencies: true$/mu)
   assert.match(workspace, /^minimumReleaseAge: 10080$/mu)
   assert.match(workspace, /^minimumReleaseAgeStrict: true$/mu)
   assert.match(workspace, /^minimumReleaseAgeIgnoreMissingTime: false$/mu)

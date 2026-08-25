@@ -25,7 +25,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - id: release
-        uses: astrale-os/config/.github/actions/release@2e1bc75459014f38323b57213949b9f9dd530054
+        uses: astrale-os/config/.github/actions/release@e0a84a92c9da33aa9046847ca2d32e785a06ec75
         with:
           token: ${{ github.token }}
 

@@ -7,6 +7,7 @@ packages:
   - 'components'
 
 linkWorkspacePackages: true
+strictPeerDependencies: true
 
 # Block packages released < 7 days ago (10080 minutes) — supply-chain hardening.
 minimumReleaseAge: 10080

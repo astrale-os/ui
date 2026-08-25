@@ -23,7 +23,7 @@ jobs:
         node-version: [24, 26]
     steps:
       - uses: actions/checkout@v7
-      - uses: astrale-os/config/.github/actions/ci@2e1bc75459014f38323b57213949b9f9dd530054
+      - uses: astrale-os/config/.github/actions/ci@e0a84a92c9da33aa9046847ca2d32e785a06ec75
         with:
           node-version: ${{ matrix.node-version }}
           frozen-lockfile: 'true'
@@ -33,7 +33,7 @@ jobs:
     if: github.event_name == 'pull_request'
     steps:
       - uses: actions/checkout@v7
-      - uses: astrale-os/config/.github/actions/setup@2e1bc75459014f38323b57213949b9f9dd530054
+      - uses: astrale-os/config/.github/actions/setup@e0a84a92c9da33aa9046847ca2d32e785a06ec75
         with:
           frozen-lockfile: 'true'
       - name: Validate PR title
