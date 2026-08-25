@@ -29,7 +29,7 @@ The runtime intake was created with exact `shadcn@4.18.0`, `base=base`, `style=n
 
 `pnpm qualify` passed in the UI worktree. It covered:
 
-- formatting, lint, workspace typechecks, 15 repository contract tests, and 5 registry contract
+- formatting, lint, workspace typechecks, 22 repository contract tests, and 5 registry contract
   tests;
 - 9 representative Base-backed runtime behavior tests and 4 installed registry
   behavior/customization tests;

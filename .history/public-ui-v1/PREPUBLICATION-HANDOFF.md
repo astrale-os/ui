@@ -6,7 +6,7 @@ Date: 2026-08-25. This is the stopping point before any public-state mutation.
 
 | Owner | Baseline `origin/main` | Qualified local commit |
 | --- | --- | --- |
-| UI | `d460f711c05e4f14f1467c7992e3193e0ceb913a` | `762fd2acd4d92f91858746c0fa80517e426f05e0` |
+| UI | `d460f711c05e4f14f1467c7992e3193e0ceb913a` | `facc3f19641b2c373d20065076011fbe7c72acf7` |
 | CLI | `d8aa9d902c99513e34389d65a9a1aaa496083086` | `9f871091841f088aeeb2cf42df4453a9ea924dff` |
 | SDK | `f556359668bd821a75f94db87116751b32aa6c90` | `c9036f708dc042e29701719a707743c2a8be704e` |
 | GUI | `ba1b2c9afd1fa9ed97de525c176a8ee9580a93de` | `2ef24d60421d29f408f4bdd1baccea7a26bf55a2` |
@@ -37,7 +37,7 @@ sha512-MUPJEk9UMztUZu1hHUugG5HbxEonZjUf5SZLqYoEXarkyM4ZRA7e3njhcAnepcgFXix3S1Ocn
 
 ## Passed evidence
 
-- UI `pnpm qualify`: formatting, lint, strict types, 15 repository/release contracts, 5 registry
+- UI `pnpm qualify`: formatting, lint, strict types, 22 repository/release contracts, 5 registry
   contracts, 9 runtime tests, 4 registry behavior/customization tests, ESM/declarations, npm/pnpm
   pack parity, Node all-subpath imports, strict TypeScript, Vite, SSR, Button/Dialog bundle
   exclusion, and no source maps.
@@ -86,8 +86,11 @@ Bun binary is materialized and linted under the same admission boundary consumer
    installs.
 5. Configure npm trusted publishing for organization `astrale-os`, repository `ui`, workflow
    `publish.yml`, environment `npm`, action `npm publish`.
-6. Publish the next prerelease through OIDC and verify automatic provenance before removing the
-   bootstrap credential.
+6. Merge the next Release Please beta PR. `release.yml` dispatches the `publish.yml` definition from
+   the immutable release tag and waits for its exact version/SHA workflow. It reruns full
+   qualification, derives the npm `beta` tag, verifies immutable metadata/integrity and SLSA
+   provenance, and qualifies anonymous npm/pnpm locks and imports before the bootstrap credential
+   is removed. A dependent job then mirrors that qualified npm package to GitHub Packages.
 7. Rebase and qualify each consumer commit, replace local-tarball evidence with public npm evidence,
    and rerun the closed census.
 8. Only then enable `create-astrale-domain --ui astrale|none`; the Astrale variant must pass public
