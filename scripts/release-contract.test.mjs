@@ -33,6 +33,10 @@ test('pins supported CI and release workflow dependencies', async () => {
   assert.match(ci, /pnpm audit --prod --audit-level high/u)
   assert.match(
     ci,
+    /security:\s*[\s\S]*?permissions:\s*\n\s+actions:\s*read\s*\n\s+contents:\s*read\s*\n\s+security-events:\s*write/u,
+  )
+  assert.match(
+    ci,
     /dependency-review:\s*\n\s+if: github\.event_name == 'pull_request' && github\.event\.repository\.private == false/u,
   )
   assert.match(ci, /actions\/dependency-review-action@[0-9a-f]{40}/u)
