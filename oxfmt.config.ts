@@ -17,6 +17,9 @@ export default defineConfig({
     '**/*.md',
     '**/*.gen.ts',
     '**/*.gen.tsx',
+    'registry/public/**',
+    'catalog/test-results/**',
+    'catalog/playwright-report/**',
   ],
   sortImports: {
     groups: [

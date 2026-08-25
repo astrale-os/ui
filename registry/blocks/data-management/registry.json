@@ -1,0 +1,61 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-blocks-data-management",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "block-data-management-collection-browser",
+      "type": "registry:block",
+      "title": "Block · Data Management · Collection Browser",
+      "description": "Astrale block/data-management/collection-browser; controlled application responsibilities are injected through props.",
+      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "files": [
+        {
+          "path": "collection-browser.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/block/data-management/collection-browser.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "block/data-management/collection-browser",
+        "ownership": "consumer-source"
+      }
+    },
+    {
+      "name": "block-data-management-details-panel",
+      "type": "registry:block",
+      "title": "Block · Data Management · Details Panel",
+      "description": "Astrale block/data-management/details-panel; controlled application responsibilities are injected through props.",
+      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "files": [
+        {
+          "path": "details-panel.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/block/data-management/details-panel.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "block/data-management/details-panel",
+        "ownership": "consumer-source"
+      }
+    },
+    {
+      "name": "block-data-management-editor",
+      "type": "registry:block",
+      "title": "Block · Data Management · Editor",
+      "description": "Astrale block/data-management/editor; controlled application responsibilities are injected through props.",
+      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "files": [
+        {
+          "path": "editor.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/block/data-management/editor.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "block/data-management/editor",
+        "ownership": "consumer-source"
+      }
+    }
+  ]
+}

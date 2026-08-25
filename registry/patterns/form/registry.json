@@ -1,0 +1,43 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-patterns-form",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "pattern-form-native",
+      "type": "registry:block",
+      "title": "Pattern · Form · Native",
+      "description": "Astrale pattern/form/native; controlled application responsibilities are injected through props.",
+      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "files": [
+        {
+          "path": "native.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/form/native.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/form/native",
+        "ownership": "consumer-source"
+      }
+    },
+    {
+      "name": "pattern-form-wizard-controlled",
+      "type": "registry:block",
+      "title": "Pattern · Form · Wizard Controlled",
+      "description": "Astrale pattern/form/wizard-controlled; controlled application responsibilities are injected through props.",
+      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "files": [
+        {
+          "path": "wizard-controlled.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/form/wizard-controlled.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/form/wizard-controlled",
+        "ownership": "consumer-source"
+      }
+    }
+  ]
+}

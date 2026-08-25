@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pattern-toast-basic-provider",
+  "title": "Pattern · Toast · Basic Provider",
+  "description": "Astrale pattern/toast/basic-provider; controlled application responsibilities are injected through props.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0"
+  ],
+  "files": [
+    {
+      "path": "registry/patterns/toast/basic-provider.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\nimport { cn } from '@astrale-os/ui/class-name'\nexport type ToastNotice = { id: string; message: string }\nexport function ToastRegion({\n  className,\n  style,\n  notices,\n  onDismiss,\n}: {\n  className?: string\n  style?: React.CSSProperties\n  notices: readonly ToastNotice[]\n  onDismiss(id: string): void\n}) {\n  return (\n    <aside\n      data-slot=\"pattern-toast-basic-provider\"\n      style={style}\n      aria-label=\"Notifications\"\n      aria-live=\"polite\"\n      className={cn('fixed bottom-4 right-4 grid gap-2', className)}\n    >\n      {notices.map((notice) => (\n        <div\n          data-slot=\"patterns-toast-basic-provider-div\"\n          key={notice.id}\n          role=\"status\"\n          className=\"flex gap-3 rounded-xl border bg-popover p-3 shadow-lg\"\n        >\n          <span data-slot=\"patterns-toast-basic-provider-span\">{notice.message}</span>\n          <Button size=\"sm\" variant=\"ghost\" onClick={() => onDismiss(notice.id)}>\n            Dismiss\n          </Button>\n        </div>\n      ))}\n    </aside>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "components/astrale/pattern/toast/basic-provider.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "pattern/toast/basic-provider",
+    "ownership": "consumer-source"
+  },
+  "type": "registry:block"
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pattern-carousel-horizontal-controlled",
+  "title": "Pattern · Carousel · Horizontal Controlled",
+  "description": "Astrale pattern/carousel/horizontal-controlled; controlled application responsibilities are injected through props.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0"
+  ],
+  "files": [
+    {
+      "path": "registry/patterns/carousel/horizontal-controlled.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\n\nexport type CarouselItem = { id: string; content: React.ReactNode }\nexport type HorizontalCarouselProps = {\n  items: readonly CarouselItem[]\n  active: number\n  onActiveChange(index: number): void\n}\nexport function HorizontalCarousel({\n  className,\n  style,\n  items,\n  active,\n  onActiveChange,\n}: HorizontalCarouselProps & { className?: string; style?: React.CSSProperties }) {\n  const select = (index: number) => onActiveChange(Math.max(0, Math.min(items.length - 1, index)))\n  return (\n    <section\n      data-slot=\"pattern-carousel-horizontal-controlled\"\n      style={style}\n      aria-roledescription=\"carousel\"\n      aria-label=\"Featured content\"\n      className={className}\n    >\n      <div data-slot=\"patterns-carousel-horizontal-controlled-div\" aria-live=\"polite\">\n        {items.map((item, index) => (\n          <article\n            data-slot=\"patterns-carousel-horizontal-controlled-article\"\n            key={item.id}\n            aria-roledescription=\"slide\"\n            aria-label={`${index + 1} of ${items.length}`}\n            hidden={index !== active}\n          >\n            {item.content}\n          </article>\n        ))}\n      </div>\n      <div data-slot=\"patterns-carousel-horizontal-controlled-div\" className=\"mt-3 flex gap-2\">\n        <Button\n          type=\"button\"\n          variant=\"outline\"\n          disabled={active === 0}\n          onClick={() => select(active - 1)}\n        >\n          Previous\n        </Button>\n        <Button\n          type=\"button\"\n          variant=\"outline\"\n          disabled={active >= items.length - 1}\n          onClick={() => select(active + 1)}\n        >\n          Next\n        </Button>\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "components/astrale/pattern/carousel/horizontal-controlled.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "pattern/carousel/horizontal-controlled",
+    "ownership": "consumer-source"
+  },
+  "type": "registry:block"
+}

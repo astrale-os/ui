@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "block-settings-notifications",
+  "title": "Block · Settings · Notifications",
+  "description": "Astrale block/settings/notifications; controlled application responsibilities are injected through props.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0"
+  ],
+  "files": [
+    {
+      "path": "registry/blocks/settings/notifications.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\nimport { cn } from '@astrale-os/ui/class-name'\nimport { Switch } from '@astrale-os/ui/switch'\nexport function NotificationSettings({\n  className,\n  style,\n  values,\n  saving,\n  error,\n  onToggle,\n  onSave,\n}: {\n  className?: string\n  style?: React.CSSProperties\n\n  values: Readonly<Record<string, string | boolean>>\n  saving?: boolean\n  error?: string\n  onToggle(id: string, value: boolean): void\n  onSave(): void\n}) {\n  return (\n    <form\n      data-slot=\"block-settings-notifications\"\n      style={style}\n      className={cn('grid max-w-2xl gap-5', className)}\n      onSubmit={(event) => {\n        event.preventDefault()\n        onSave()\n      }}\n    >\n      <header data-slot=\"blocks-settings-notifications-header\">\n        <h1 data-slot=\"blocks-settings-notifications-h1\" className=\"font-heading text-3xl\">\n          Notifications\n        </h1>\n      </header>\n      <label\n        data-slot=\"blocks-settings-notifications-label\"\n        className=\"flex items-center justify-between\"\n      >\n        Email notifications\n        <Switch\n          checked={Boolean(values['email'])}\n          onCheckedChange={(value) => onToggle('email', value)}\n        />\n      </label>\n      <label\n        data-slot=\"blocks-settings-notifications-label\"\n        className=\"flex items-center justify-between\"\n      >\n        Product updates\n        <Switch\n          checked={Boolean(values['product'])}\n          onCheckedChange={(value) => onToggle('product', value)}\n        />\n      </label>\n      {error && (\n        <p data-slot=\"blocks-settings-notifications-p\" role=\"alert\">\n          {error}\n        </p>\n      )}\n      <Button type=\"submit\" disabled={saving}>\n        {saving ? 'Saving…' : 'Save changes'}\n      </Button>\n    </form>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "components/astrale/block/settings/notifications.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "block/settings/notifications",
+    "ownership": "consumer-source"
+  },
+  "type": "registry:block"
+}

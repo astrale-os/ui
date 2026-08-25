@@ -3,7 +3,10 @@ node_modules
 
 # Build outputs
 dist
+artifacts
 *.tsbuildinfo
+catalog/test-results
+catalog/playwright-report
 
 # Test coverage
 coverage

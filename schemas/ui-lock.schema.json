@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.astrale.ai/ui/lock/1",
+  "title": "AstraleUiLock",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "package", "registry", "tooling", "preset", "items"],
+  "properties": {
+    "$schema": { "type": "string", "format": "uri-reference" },
+    "version": { "const": 1 },
+    "package": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version"],
+      "properties": {
+        "name": { "const": "@astrale-os/ui" },
+        "version": { "type": "string", "minLength": 1 }
+      }
+    },
+    "registry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["repository", "ref", "commit"],
+      "properties": {
+        "repository": { "const": "astrale-os/ui" },
+        "ref": { "type": "string", "minLength": 1 },
+        "commit": { "type": "string", "pattern": "^[0-9a-f]{40}$" }
+      }
+    },
+    "tooling": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["shadcn"],
+      "properties": { "shadcn": { "type": "string", "minLength": 1 } }
+    },
+    "preset": { "enum": ["astrale", "compact", "expressive"] },
+    "items": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["address", "sourceDigest", "files"],
+        "properties": {
+          "address": { "type": "string", "minLength": 1 },
+          "sourceDigest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+          "files": {
+            "type": "object",
+            "additionalProperties": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+          }
+        }
+      }
+    }
+  }
+}

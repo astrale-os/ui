@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "block-communication-conversation",
+  "title": "Block · Communication · Conversation",
+  "description": "Astrale block/communication/conversation; controlled application responsibilities are injected through props.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0"
+  ],
+  "files": [
+    {
+      "path": "registry/blocks/communication/conversation.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\nexport function ConversationBlock({\n  className,\n  style,\n  title,\n  messages,\n  loading,\n  error,\n  onRetry,\n}: {\n  className?: string\n  style?: React.CSSProperties\n\n  title: string\n  messages: readonly { id: string; author: string; body: React.ReactNode }[]\n  loading?: boolean\n  error?: string\n  onRetry(): void\n}) {\n  return (\n    <section\n      data-slot=\"block-communication-conversation\"\n      style={style}\n      aria-busy={loading}\n      className={className}\n    >\n      <header data-slot=\"blocks-communication-conversation-header\" className=\"border-b pb-3\">\n        <h2 data-slot=\"blocks-communication-conversation-h2\" className=\"font-heading text-2xl\">\n          {title}\n        </h2>\n      </header>\n      {error && (\n        <div data-slot=\"blocks-communication-conversation-div\" role=\"alert\" className=\"my-4\">\n          <p data-slot=\"blocks-communication-conversation-p\">{error}</p>\n          <Button onClick={onRetry}>Retry</Button>\n        </div>\n      )}\n      <ol data-slot=\"blocks-communication-conversation-ol\" className=\"grid gap-4 py-4\">\n        {messages.map((message) => (\n          <li data-slot=\"blocks-communication-conversation-li\" key={message.id}>\n            <article\n              data-slot=\"blocks-communication-conversation-article\"\n              className=\"rounded-xl border p-4\"\n            >\n              <strong data-slot=\"blocks-communication-conversation-strong\">{message.author}</strong>\n              <div data-slot=\"blocks-communication-conversation-div\">{message.body}</div>\n            </article>\n          </li>\n        ))}\n      </ol>\n    </section>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "components/astrale/block/communication/conversation.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "block/communication/conversation",
+    "ownership": "consumer-source"
+  },
+  "type": "registry:block"
+}

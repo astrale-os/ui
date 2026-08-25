@@ -1,0 +1,43 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-patterns-toast",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "pattern-toast-basic-provider",
+      "type": "registry:block",
+      "title": "Pattern · Toast · Basic Provider",
+      "description": "Astrale pattern/toast/basic-provider; controlled application responsibilities are injected through props.",
+      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "files": [
+        {
+          "path": "basic-provider.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/toast/basic-provider.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/toast/basic-provider",
+        "ownership": "consumer-source"
+      }
+    },
+    {
+      "name": "pattern-toast-controlled-queue",
+      "type": "registry:block",
+      "title": "Pattern · Toast · Controlled Queue",
+      "description": "Astrale pattern/toast/controlled-queue; controlled application responsibilities are injected through props.",
+      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "files": [
+        {
+          "path": "controlled-queue.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/toast/controlled-queue.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/toast/controlled-queue",
+        "ownership": "consumer-source"
+      }
+    }
+  ]
+}

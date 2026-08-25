@@ -1,0 +1,43 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-patterns-carousel",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "pattern-carousel-horizontal-controlled",
+      "type": "registry:block",
+      "title": "Pattern · Carousel · Horizontal Controlled",
+      "description": "Astrale pattern/carousel/horizontal-controlled; controlled application responsibilities are injected through props.",
+      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "files": [
+        {
+          "path": "horizontal-controlled.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/carousel/horizontal-controlled.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/carousel/horizontal-controlled",
+        "ownership": "consumer-source"
+      }
+    },
+    {
+      "name": "pattern-carousel-vertical-controlled",
+      "type": "registry:block",
+      "title": "Pattern · Carousel · Vertical Controlled",
+      "description": "Astrale pattern/carousel/vertical-controlled; controlled application responsibilities are injected through props.",
+      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "files": [
+        {
+          "path": "vertical-controlled.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/carousel/vertical-controlled.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/carousel/vertical-controlled",
+        "ownership": "consumer-source"
+      }
+    }
+  ]
+}

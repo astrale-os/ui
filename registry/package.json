@@ -1,0 +1,14 @@
+{
+  "name": "@astrale-os/ui-registry-workspace",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@astrale-os/ui": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "19.2.3",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  }
+}

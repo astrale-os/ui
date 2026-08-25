@@ -1,10 +1,7 @@
 packages:
-  - 'ui'
-  - 'styles'
-  - 'preset'
-  - 'utils'
-  - 'constants'
-  - 'components'
+  - 'packages/*'
+  - 'registry'
+  - 'catalog'
 
 linkWorkspacePackages: true
 

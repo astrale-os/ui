@@ -1,0 +1,27 @@
+id	status	decision	rationale	owner_or_gate
+UI-D001	locked	Publish exactly one runtime package named @astrale-os/ui	One supported package vocabulary without forcing high-level source compositions into npm runtime dependencies	package-cutover
+UI-D002	locked	Distribute patterns and blocks from the same public repository registry	Keeps one Astrale UI product while source ownership and dependency cost remain per installed item	registry
+UI-D003	locked	Do not publish ui-patterns or ui-blocks runtime packages in V1	No evidence yet requires independent version or dependency lifecycles	public-api
+UI-D004	locked	Use semantic internal families and flat public subpaths	Ownership remains clear without leaking directory taxonomy to consumers	package-layout
+UI-D005	locked	Do not use a generic primitives directory	The name does not establish a semantic owner or dependency direction	package-layout
+UI-D006	superseded	Keep Radix as the V1 behavioral substrate but outside theme and brand contracts	Superseded before public release by UI-D025 after Base UI became the shadcn default	component-intake
+UI-D007	locked	Treat theme presets as CSS token and stable-slot overrides	A preset can change complete visual character without a React provider or component fork	theme
+UI-D008	locked	Keep reset.css opt-in and exclude Tailwind preflight from theme.css	Embedding resets in a library stylesheet mutates the host application globally	css-contract
+UI-D009	locked	Move calendar carousel chart combobox form sidebar toast and documentation compositions to pattern families	They are dependency-rich or composition-shaped and require multiple variants	registry
+UI-D010	locked	Absorb attachment bubble marker message and message-scroller into the message pattern family	They form one conversation responsibility rather than five unrelated package owners	registry
+UI-D011	locked	Make blocks controlled compositions with no hidden I/O auth routing or persistence	Blocks remain off-the-shelf without taking application ownership	registry
+UI-D012	locked	Expose astrale ui as a top-level CLI group	It is the coherent Astrale discovery and installation journey requested by consumers	cli
+UI-D013	locked	Delegate registry transformation to an exact shadcn CLI invoked on demand	Avoids reimplementing registry semantics and adds no shadcn dependency to the installed Astrale CLI	cli
+UI-D014	locked	Add no UI dependency peer export or facade to @astrale-os/sdk	UI selection is an application/tooling concern and the SDK install must remain byte-for-byte unaffected	sdk
+UI-D015	locked	Integrate generated React projects through an explicit UI scaffold choice after public package qualification	Generated apps may depend on UI without coupling SDK runtime or non-React variants	generator
+UI-D016	locked	Use public GitHub source-registry addresses pinned to an immutable release tag in V1	Avoids a new registry service while retaining one-SHA source consistency	registry-release
+UI-D017	locked	Generate built registry JSON only as validation and release evidence	The source registry remains the single registry authority	registry-release
+UI-D018	locked	Use a clean cutover from all six private packages	Private legacy packages do not justify permanent public compatibility debt	migration
+UI-D019	locked	Use Release Please as the sole version authority for the collapsed package	One package must have one version tag changelog and publication decision	release
+UI-D020	locked	Publish every automated release through GitHub Actions trusted publishing with provenance	A single human-gated first-package bootstrap is allowed because npm requires the package to exist before trust can be configured; no token fallback is allowed in CI	publish
+UI-D021	blocked	Ratify the repository and package license before ingesting the final upstream snapshot	README says MIT while manifests and repository contain no license; this is a legal owner decision	maintainer-legal
+UI-D022	candidate	Choose the initial named preset set after the catalog proves each preset across every component state	Names are illustrative until visual and accessibility evidence prevents shallow preset aliases	visual-gate
+UI-D023	candidate	Set install tarball CSS and representative bundle budgets from the first lean qualified baseline	Unmeasured aspirational byte limits are false authority	performance-baseline
+UI-D024	locked	Own only minimal semantic control glyphs and expose explicit icon slots	Avoids a general icon-library runtime dependency while keeping product icon character replaceable	package-api
+UI-D025	locked	Use Base UI 1.7 through the pinned Base/Nova shadcn intake as the internal behavioral substrate	The public contract is not released yet and Base UI now provides the recommended broader open-part foundation	component-intake
+UI-D026	locked	Require public class style render and part-level override access across runtime patterns and blocks	Base UI philosophy must survive Astrale wrappers and installed source must be host-customizable	customization

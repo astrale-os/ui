@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pattern-questionnaire-single-page",
+  "title": "Pattern · Questionnaire · Single Page",
+  "description": "Astrale pattern/questionnaire/single-page; controlled application responsibilities are injected through props.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0"
+  ],
+  "files": [
+    {
+      "path": "registry/patterns/questionnaire/single-page.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\nimport { Input } from '@astrale-os/ui/input'\nexport function QuestionnaireSinglePage({\n  className,\n  style,\n  questions,\n  answers,\n  errors,\n  onAnswer,\n  onSubmit,\n}: {\n  className?: string\n  style?: React.CSSProperties\n\n  questions: readonly { id: string; label: string; required?: boolean }[]\n  answers: Readonly<Record<string, string>>\n  errors?: Readonly<Record<string, string>>\n  onAnswer(id: string, value: string): void\n  onSubmit(): void\n}) {\n  return (\n    <form\n      data-slot=\"pattern-questionnaire-single-page\"\n      className={className}\n      style={style}\n      onSubmit={(event) => {\n        event.preventDefault()\n        onSubmit()\n      }}\n    >\n      {questions.map((question) => {\n        const errorId = `${question.id}-error`\n        return (\n          <label\n            data-slot=\"patterns-questionnaire-single-page-label\"\n            key={question.id}\n            className=\"grid gap-1\"\n          >\n            {question.label}\n            <Input\n              required={question.required}\n              value={answers[question.id] ?? ''}\n              aria-invalid={Boolean(errors?.[question.id])}\n              aria-describedby={errors?.[question.id] ? errorId : undefined}\n              onChange={(event) => onAnswer(question.id, event.currentTarget.value)}\n            />\n            {errors?.[question.id] && (\n              <span data-slot=\"patterns-questionnaire-single-page-span\" id={errorId} role=\"alert\">\n                {errors[question.id]}\n              </span>\n            )}\n          </label>\n        )\n      })}\n      <Button type=\"submit\">Submit answers</Button>\n    </form>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "components/astrale/pattern/questionnaire/single-page.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "pattern/questionnaire/single-page",
+    "ownership": "consumer-source"
+  },
+  "type": "registry:block"
+}

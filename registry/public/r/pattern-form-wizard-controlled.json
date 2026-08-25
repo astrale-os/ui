@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pattern-form-wizard-controlled",
+  "title": "Pattern · Form · Wizard Controlled",
+  "description": "Astrale pattern/form/wizard-controlled; controlled application responsibilities are injected through props.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0"
+  ],
+  "files": [
+    {
+      "path": "registry/patterns/form/wizard-controlled.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\nexport function FormWizardControlled({\n  className,\n  style,\n  step,\n  steps,\n  canContinue = true,\n  onStepChange,\n  onSubmit,\n}: {\n  className?: string\n  style?: React.CSSProperties\n\n  step: number\n  steps: readonly { id: string; title: string; content: React.ReactNode }[]\n  canContinue?: boolean\n  onStepChange(step: number): void\n  onSubmit(): void\n}) {\n  const current = steps[step]\n  return (\n    <form\n      data-slot=\"pattern-form-wizard-controlled\"\n      className={className}\n      style={style}\n      onSubmit={(event) => {\n        event.preventDefault()\n        if (step === steps.length - 1) onSubmit()\n        else onStepChange(step + 1)\n      }}\n    >\n      <ol\n        data-slot=\"patterns-form-wizard-controlled-ol\"\n        aria-label=\"Progress\"\n        className=\"flex gap-2\"\n      >\n        {steps.map((item, index) => (\n          <li\n            data-slot=\"patterns-form-wizard-controlled-li\"\n            key={item.id}\n            aria-current={index === step ? 'step' : undefined}\n          >\n            {index + 1}. {item.title}\n          </li>\n        ))}\n      </ol>\n      <section\n        data-slot=\"patterns-form-wizard-controlled-section\"\n        aria-labelledby={`step-${current?.id}`}\n      >\n        <h2 data-slot=\"patterns-form-wizard-controlled-h2\" id={`step-${current?.id}`}>\n          {current?.title}\n        </h2>\n        {current?.content}\n      </section>\n      <div data-slot=\"patterns-form-wizard-controlled-div\" className=\"flex gap-2\">\n        <Button type=\"button\" disabled={step === 0} onClick={() => onStepChange(step - 1)}>\n          Back\n        </Button>\n        <Button type=\"submit\" disabled={!canContinue}>\n          {step === steps.length - 1 ? 'Finish' : 'Continue'}\n        </Button>\n      </div>\n    </form>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "components/astrale/pattern/form/wizard-controlled.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "pattern/form/wizard-controlled",
+    "ownership": "consumer-source"
+  },
+  "type": "registry:block"
+}

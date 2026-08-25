@@ -1,0 +1,43 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-patterns-sidebar",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "pattern-sidebar-application",
+      "type": "registry:block",
+      "title": "Pattern · Sidebar · Application",
+      "description": "Astrale pattern/sidebar/application; controlled application responsibilities are injected through props.",
+      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "files": [
+        {
+          "path": "application.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/sidebar/application.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/sidebar/application",
+        "ownership": "consumer-source"
+      }
+    },
+    {
+      "name": "pattern-sidebar-mobile-controlled",
+      "type": "registry:block",
+      "title": "Pattern · Sidebar · Mobile Controlled",
+      "description": "Astrale pattern/sidebar/mobile-controlled; controlled application responsibilities are injected through props.",
+      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "files": [
+        {
+          "path": "mobile-controlled.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/sidebar/mobile-controlled.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/sidebar/mobile-controlled",
+        "ownership": "consumer-source"
+      }
+    }
+  ]
+}

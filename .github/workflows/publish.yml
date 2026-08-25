@@ -2,22 +2,32 @@ name: Publish
 
 on:
   push:
-    branches: [main]
-    paths:
-      - '.release-please-manifest.json'
-  workflow_dispatch:
+    tags: ['v*']
 
 permissions:
   contents: read
-  packages: write
+  id-token: write
 
 jobs:
   publish:
+    environment: npm
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
-      - uses: astrale-os/config/.github/actions/publish/packages@2e1bc75459014f38323b57213949b9f9dd530054
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
-          dirs: 'constants utils styles preset components ui'
-          github-token: ${{ github.token }}
-          build-command: pnpm build
+          fetch-depth: 0
+      - uses: astrale-os/config/.github/actions/setup@2e1bc75459014f38323b57213949b9f9dd530054
+        with:
+          node-version: 26
+          frozen-lockfile: 'true'
+      - name: Admit exact release tag
+        run: |
+          test "$(git rev-parse "${GITHUB_REF_NAME}^{commit}")" = "$GITHUB_SHA"
+          test "v$(node -p "require('./packages/ui/package.json').version")" = "$GITHUB_REF_NAME"
+      - run: pnpm qualify
+      - run: git diff --exit-code -- registry/registry.json registry/public/r
+      - name: Publish public package with trusted provenance
+        run: |
+          tarball="artifacts/package/astrale-os-ui-$(node -p "require('./packages/ui/package.json').version").tgz"
+          test -f "$tarball"
+          npm publish "$tarball" --access public --provenance

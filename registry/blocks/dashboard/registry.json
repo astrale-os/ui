@@ -1,0 +1,61 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-blocks-dashboard",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "block-dashboard-analytics",
+      "type": "registry:block",
+      "title": "Block · Dashboard · Analytics",
+      "description": "Astrale block/dashboard/analytics; controlled application responsibilities are injected through props.",
+      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "files": [
+        {
+          "path": "analytics.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/block/dashboard/analytics.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "block/dashboard/analytics",
+        "ownership": "consumer-source"
+      }
+    },
+    {
+      "name": "block-dashboard-operations",
+      "type": "registry:block",
+      "title": "Block · Dashboard · Operations",
+      "description": "Astrale block/dashboard/operations; controlled application responsibilities are injected through props.",
+      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "files": [
+        {
+          "path": "operations.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/block/dashboard/operations.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "block/dashboard/operations",
+        "ownership": "consumer-source"
+      }
+    },
+    {
+      "name": "block-dashboard-overview",
+      "type": "registry:block",
+      "title": "Block · Dashboard · Overview",
+      "description": "Astrale block/dashboard/overview; controlled application responsibilities are injected through props.",
+      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "files": [
+        {
+          "path": "overview.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/block/dashboard/overview.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "block/dashboard/overview",
+        "ownership": "consumer-source"
+      }
+    }
+  ]
+}

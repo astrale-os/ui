@@ -1,0 +1,61 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-blocks-onboarding",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "block-onboarding-empty-first-value",
+      "type": "registry:block",
+      "title": "Block · Onboarding · Empty First Value",
+      "description": "Astrale block/onboarding/empty-first-value; controlled application responsibilities are injected through props.",
+      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "files": [
+        {
+          "path": "empty-first-value.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/block/onboarding/empty-first-value.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "block/onboarding/empty-first-value",
+        "ownership": "consumer-source"
+      }
+    },
+    {
+      "name": "block-onboarding-multi-step",
+      "type": "registry:block",
+      "title": "Block · Onboarding · Multi Step",
+      "description": "Astrale block/onboarding/multi-step; controlled application responsibilities are injected through props.",
+      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "files": [
+        {
+          "path": "multi-step.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/block/onboarding/multi-step.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "block/onboarding/multi-step",
+        "ownership": "consumer-source"
+      }
+    },
+    {
+      "name": "block-onboarding-welcome",
+      "type": "registry:block",
+      "title": "Block · Onboarding · Welcome",
+      "description": "Astrale block/onboarding/welcome; controlled application responsibilities are injected through props.",
+      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "files": [
+        {
+          "path": "welcome.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/block/onboarding/welcome.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "block/onboarding/welcome",
+        "ownership": "consumer-source"
+      }
+    }
+  ]
+}

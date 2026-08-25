@@ -1,0 +1,43 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-patterns-chart",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "pattern-chart-bar-basic",
+      "type": "registry:block",
+      "title": "Pattern · Chart · Bar Basic",
+      "description": "Astrale pattern/chart/bar-basic; controlled application responsibilities are injected through props.",
+      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "files": [
+        {
+          "path": "bar-basic.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/chart/bar-basic.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/chart/bar-basic",
+        "ownership": "consumer-source"
+      }
+    },
+    {
+      "name": "pattern-chart-line-basic",
+      "type": "registry:block",
+      "title": "Pattern · Chart · Line Basic",
+      "description": "Astrale pattern/chart/line-basic; controlled application responsibilities are injected through props.",
+      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "files": [
+        {
+          "path": "line-basic.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/chart/line-basic.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/chart/line-basic",
+        "ownership": "consumer-source"
+      }
+    }
+  ]
+}

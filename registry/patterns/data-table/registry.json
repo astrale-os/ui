@@ -1,0 +1,43 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-patterns-data-table",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "pattern-data-table-basic",
+      "type": "registry:block",
+      "title": "Pattern · Data Table · Basic",
+      "description": "Astrale pattern/data-table/basic; controlled application responsibilities are injected through props.",
+      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "files": [
+        {
+          "path": "basic.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/data-table/basic.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/data-table/basic",
+        "ownership": "consumer-source"
+      }
+    },
+    {
+      "name": "pattern-data-table-server-controlled",
+      "type": "registry:block",
+      "title": "Pattern · Data Table · Server Controlled",
+      "description": "Astrale pattern/data-table/server-controlled; controlled application responsibilities are injected through props.",
+      "dependencies": ["@astrale-os/ui@^0.3.0"],
+      "files": [
+        {
+          "path": "server-controlled.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/data-table/server-controlled.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/data-table/server-controlled",
+        "ownership": "consumer-source"
+      }
+    }
+  ]
+}

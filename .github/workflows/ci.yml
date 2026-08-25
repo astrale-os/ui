@@ -15,24 +15,65 @@ permissions:
   contents: read
 
 jobs:
-  ci:
+  contracts:
+    name: Contracts (Node ${{ matrix.node-version }})
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         node-version: [24, 26]
     steps:
-      - uses: actions/checkout@v7
-      - uses: astrale-os/config/.github/actions/ci@2e1bc75459014f38323b57213949b9f9dd530054
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: astrale-os/config/.github/actions/setup@2e1bc75459014f38323b57213949b9f9dd530054
         with:
           node-version: ${{ matrix.node-version }}
           frozen-lockfile: 'true'
+      - run: pnpm check
+
+  package-and-registry:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: astrale-os/config/.github/actions/setup@2e1bc75459014f38323b57213949b9f9dd530054
+        with:
+          node-version: 26
+          frozen-lockfile: 'true'
+      - run: pnpm test:components
+      - run: pnpm build
+      - run: pnpm registry:build
+      - run: git diff --exit-code -- registry/registry.json registry/public/r
+      - run: pnpm package:qualify
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: public-package-and-registry
+          path: |
+            artifacts/package/**
+            registry/public/r/**
+
+  catalog:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: astrale-os/config/.github/actions/setup@2e1bc75459014f38323b57213949b9f9dd530054
+        with:
+          node-version: 26
+          frozen-lockfile: 'true'
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm catalog:build
+      - run: pnpm catalog:test
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        if: always()
+        with:
+          name: catalog-browser-evidence
+          path: |
+            catalog/playwright-report/**
+            catalog/test-results/**
 
   commitlint:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - uses: astrale-os/config/.github/actions/setup@2e1bc75459014f38323b57213949b9f9dd530054
         with:
           frozen-lockfile: 'true'

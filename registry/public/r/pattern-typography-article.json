@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pattern-typography-article",
+  "title": "Pattern · Typography · Article",
+  "description": "Astrale pattern/typography/article; controlled application responsibilities are injected through props.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0"
+  ],
+  "files": [
+    {
+      "path": "registry/patterns/typography/article.tsx",
+      "content": "import { cn } from '@astrale-os/ui/class-name'\nexport function TypographyArticle({\n  className,\n  style,\n  title,\n  byline,\n  children,\n}: {\n  className?: string\n  style?: React.CSSProperties\n\n  title: string\n  byline?: React.ReactNode\n  children: React.ReactNode\n}) {\n  return (\n    <article\n      data-slot=\"pattern-typography-article\"\n      style={style}\n      className={cn('mx-auto max-w-[68ch] text-base leading-7', className)}\n    >\n      <header data-slot=\"patterns-typography-article-header\" className=\"mb-8 border-b pb-5\">\n        <h1\n          data-slot=\"patterns-typography-article-h1\"\n          className=\"font-heading text-4xl leading-tight tracking-tight\"\n        >\n          {title}\n        </h1>\n        {byline && (\n          <div data-slot=\"patterns-typography-article-div\" className=\"mt-2 text-muted-foreground\">\n            {byline}\n          </div>\n        )}\n      </header>\n      <div\n        data-slot=\"patterns-typography-article-div\"\n        className=\"space-y-5 [&_h2]:font-heading [&_h2]:text-2xl [&_a]:underline\"\n      >\n        {children}\n      </div>\n    </article>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "components/astrale/pattern/typography/article.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "pattern/typography/article",
+    "ownership": "consumer-source"
+  },
+  "type": "registry:block"
+}
