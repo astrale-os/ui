@@ -52,7 +52,7 @@ jobs:
           dirs: packages/ui
           mirror-public-packages: 'false'
           install-command: pnpm install --frozen-lockfile
-          build-command: pnpm exec playwright install --with-deps chromium && pnpm qualify
+          build-command: pnpm --filter @astrale-os/ui-catalog exec playwright install --with-deps chromium && pnpm qualify
           prerelease-tag: auto
       - name: Qualify exact public npm publication
         env:

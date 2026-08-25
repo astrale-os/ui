@@ -101,7 +101,7 @@ jobs:
           node-version: 26
           frozen-lockfile: 'true'
       - run: pnpm build
-      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm --filter @astrale-os/ui-catalog exec playwright install --with-deps chromium
       - run: pnpm catalog:build
       - run: pnpm catalog:test
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7

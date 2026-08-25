@@ -79,7 +79,7 @@ test('publishes exactly one public npm package from the Release Please commit us
   assert.match(publish, /mirror-public-packages:\s*'false'/u)
   assert.match(
     publish,
-    /build-command:\s*pnpm exec playwright install --with-deps chromium && pnpm qualify/u,
+    /build-command:\s*pnpm --filter @astrale-os\/ui-catalog exec playwright install --with-deps chromium && pnpm qualify/u,
   )
   assert.match(publish, /prerelease-tag:\s*auto/u)
   assert.match(publish, /run:\s*pnpm qualify:publication/u)
