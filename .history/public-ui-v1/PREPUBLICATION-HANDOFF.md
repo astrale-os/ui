@@ -10,8 +10,8 @@ Date: 2026-08-26. This is the stopping point before any package publication or v
 | CLI | `634843cdcaeb34fa4a9a338a58be2a5d4578a31a` | `2da8ff20f3af72bb1d72af6bde295a77ea33b807` |
 | SDK | `f556359668bd821a75f94db87116751b32aa6c90` | `c9036f708dc042e29701719a707743c2a8be704e` |
 | GUI | `ba1b2c9afd1fa9ed97de525c176a8ee9580a93de` | `2ef24d60421d29f408f4bdd1baccea7a26bf55a2` |
-| Admin | `9bb7cc4d545b6aa4db822de75394ba720feaafd3` | `22de8763e8a8b51fb8de92f41f277b4adbf60d58` |
-| Domains | `cd667d111da05b76c599ce60ba7d741994a40abb` | `a5c51e982c93b6fbc9c9d412eec40f808bc51da8` |
+| Admin | `f0a4cb4e95488132d41d1ce88bd632d61ef8940e` | `cc0818a7c75abfc27d2f178eb6c788d31bfadf3a` |
+| Domains | `ec0a16a46a08a3a2118ca1490a4f7e71239d62eb` | `f846a1ce6bafeb286f78278238772d7648260f5f` |
 
 Primary checkouts were not edited. The qualified branches and linked pull requests were pushed;
 nothing was published and repository visibility was not changed.
@@ -62,8 +62,9 @@ sha512-MUPJEk9UMztUZu1hHUugG5HbxEonZjUf5SZLqYoEXarkyM4ZRA7e3njhcAnepcgFXix3S1Ocn
 - GUI: root build, 38 tests, format/lint; Electron typecheck/build/lint and 113 tests. Remaining root
   type/purity failures are existing Kernel cohort and application-capability issues, not UI errors.
 - Admin and Domains: current main had no live legacy UI consumer; stale `allowBuilds` routing entries
-  are removed by the commits above. Admin was rebased onto its newer host-provisioning main and
-  passes format/lint with only its existing warnings.
+  are removed by the commits above. Both were rebased onto current main. Admin passes format, lint,
+  full workspace types, 391 package tests, and its three release-boundary tests; Domains passes
+  format, lint, full workspace types, and all 130 package tests.
 
 The local all-item registry fixture preinstalls the exact qualified tarball and suppresses only each
 served item's npm dependency operation because `@astrale-os/ui` does not yet exist on public npm.
