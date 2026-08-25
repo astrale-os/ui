@@ -14,7 +14,7 @@ their relevant parts; installed patterns and blocks belong to the host applicati
 
 ## Install
 
-After the first public npm release:
+After the Public UI V1 beta release:
 
 ```bash
 pnpm add @astrale-os/ui

@@ -85,24 +85,24 @@ Astrale UI, Base UI, Radix, or shadcn dependencies.
 
 ## External gates
 
-Live preflight on 2026-08-25 established:
+Live preflight refreshed on 2026-08-26 established:
 
 - `astrale-os/ui` is still a private GitHub repository;
-- an isolated public-only lookup of `@astrale-os/ui` at `registry.npmjs.org` returns `404`; and
-- the workspace-scoped npm configuration resolves a separate GitHub Packages lineage through
-  `0.2.1`; that private-registry metadata is not evidence that the public npm name exists.
+- public npm contains `@astrale-os/ui` versions `0.1.0`, `0.2.0`, and `0.2.1`, with only
+  `latest -> 0.2.1`; and
+- no `0.3.0-beta.0` or public `beta` tag exists yet.
 
-Because npm requires a package to exist before its trusted publisher can be configured, the first
-public prerelease is the one human-gated bootstrap exception documented in `CI-AND-RELEASE.md`.
-Every automated publication after bootstrap remains OIDC-only.
+The package can therefore receive its trusted-publisher configuration before Public UI V1. The V1
+beta has no manual publish exception: publication remains OIDC-only and the qualified public npm
+artifact is mirrored to private GitHub Packages only afterward.
 
 The following are not claimed complete:
 
 1. repository visibility and governance review;
-2. first public prerelease bootstrap, then npm trusted-publisher configuration;
+2. npm trusted-publisher configuration, then the first Public UI V1 beta release;
 3. public npm observation of the exact artifact/provenance;
 4. GUI/Admin/Domains lockfile-correct legacy consumer cutover; and
 5. public-package generated React qualification and later stable assistive-technology matrix.
 
-Consumer migration is deliberately after first publication: `CONSUMER-CENSUS.md` explains why a
+Consumer migration is deliberately after the V1 beta publication: `CONSUMER-CENSUS.md` explains why a
 temporary tarball locator or manually authored lockfile would be false proof.

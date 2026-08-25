@@ -178,7 +178,7 @@ Gate:
 - local `pnpm qualify` covers the same supported semantics as CI;
 - workflow contract tests reject private registry/token/multi-package regressions;
 - exact release tarball can be produced reproducibly; and
-- only repository visibility, first public npm publish, and trusted-publisher configuration remain.
+- only repository visibility, trusted-publisher configuration, and the first V1 beta release remain.
 
 ## Work package 9 — Review and closure
 

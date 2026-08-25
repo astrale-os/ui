@@ -277,13 +277,12 @@ Specific high-risk proofs:
       trusted current npm version, and contains no npm write token fallback.
 - [ ] Publish checks out and verifies the exact release tag/SHA, installs frozen dependencies,
       qualifies, packs once, and publishes that exact archive.
-- [ ] The first manual public prerelease occurs only after every technical gate is green and the user
-      receives exact SHA/tarball/integrity evidence.
+- [ ] The first Public UI V1 prerelease occurs only through the trusted workflow after every
+      technical gate is green and the user receives exact SHA/tarball/integrity evidence.
 - [ ] The user configures npm trusted publishing for `astrale-os/ui`, repository `ui`, workflow
       `publish.yml`, and the ratified allowed action/environment.
-- [ ] A later prerelease proves OIDC publication and automatic provenance before stable.
-- [ ] Traditional automation token publishing is disabled and bootstrap credentials are revoked
-      only after OIDC succeeds.
+- [ ] The V1 beta proves OIDC publication and automatic provenance before stable.
+- [ ] Traditional automation token publishing remains disabled; no bootstrap credential is created.
 - [ ] Public npm version, dist-tags, integrity, provenance, repository, license, README, GitHub tag,
       and source SHA agree.
 - [ ] Independent clean npm and pnpm consumers install by exact version and dist-tag, import package

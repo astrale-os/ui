@@ -4,10 +4,10 @@
 
 The authoritative post-migration cohort is recorded in
 [PREPUBLICATION-HANDOFF.md](./PREPUBLICATION-HANDOFF.md): GUI `2ef24d6` has no legacy imports and
-qualifies against packed public paths; Admin `6dfb012` and Domains `a5c51e9` remove the final stale
-routing allowances; SDK `79a09d7` proves the zero-weight boundary; and CLI `47ae876` owns the
-on-demand journey. No public npm lockfile claim is made before publication. The table below is kept
-as the pre-implementation census that motivated those commits.
+qualifies against packed public paths; Admin `cc0818a` and Domains `f846a1c` remove the final stale
+routing allowances; SDK `c20ee0a` proves the zero-weight boundary; and CLI `2da8ff2` owns the
+on-demand journey. No Public UI V1 npm lockfile claim is made before the V1 beta publication. The
+table below is kept as the pre-implementation census that motivated those commits.
 
 Snapshot: 2026-08-25. Each repository head was refreshed before this census.
 
@@ -22,15 +22,16 @@ Snapshot: 2026-08-25. Each repository head was refreshed before this census.
 The census excludes historical snapshots, generated worktrees, and archived debug copies. Those are
 evidence, not supported package consumers.
 
-## Publication boundary
+## Public UI V1 publication boundary
 
-The first public npm publication is a real gate, not paperwork. A supported consumer PR must commit
-a lockfile whose `@astrale-os/ui` resolution and integrity come from the public npm registry. A
+The first Public UI V1 beta publication is a real gate, not paperwork. Legacy `0.2.1` availability
+does not satisfy it. A supported consumer PR must commit a lockfile whose `@astrale-os/ui` V1 beta
+resolution and integrity come from the public npm registry. A
 workspace link, temporary tarball locator, private GitHub Packages route, or manually authored lock
 entry would not prove that topology and must not be merged.
 
-Before publication, this repository proves the package using the exact produced tarball in a clean
-external fixture. After publication:
+Before the V1 beta publication, this repository proves the package using the exact produced tarball
+in a clean external fixture. After publication:
 
 1. migrate GUI against the published exact version and qualify its full supported suite;
 2. migrate Admin and remove its UI source-scanning/private-registry exceptions;

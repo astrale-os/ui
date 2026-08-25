@@ -86,7 +86,7 @@ checkout was dirty and behind `origin/main`; it was not modified.
   npm cutover gate.
 - [QUALIFICATION.md](./QUALIFICATION.md) records the exact local proof and remaining external gaps.
 - [PREPUBLICATION-HANDOFF.md](./PREPUBLICATION-HANDOFF.md) records the final local cohort, artifact
-  identity, evidence limits, and human-gated public bootstrap sequence.
+  identity, evidence limits, and trusted V1 beta release sequence.
 
 ## Status vocabulary
 

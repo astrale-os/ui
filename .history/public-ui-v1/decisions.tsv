@@ -18,7 +18,7 @@ UI-D016	locked	Use public GitHub source-registry addresses pinned to an immutabl
 UI-D017	locked	Generate built registry JSON only as validation and release evidence	The source registry remains the single registry authority	registry-release
 UI-D018	locked	Use a clean cutover from all six private packages	Private legacy packages do not justify permanent public compatibility debt	migration
 UI-D019	locked	Use Release Please as the sole version authority for the collapsed package	One package must have one version tag changelog and publication decision	release
-UI-D020	locked	Publish every automated release through GitHub Actions trusted publishing with provenance	A single human-gated first-package bootstrap is allowed because npm requires the package to exist before trust can be configured; no token fallback is allowed in CI	publish
+UI-D020	locked	Publish every automated release through GitHub Actions trusted publishing with provenance	The public package already exists, so Public UI V1 has no manual bootstrap exception and no token fallback is allowed in CI	publish
 UI-D021	blocked	Ratify the repository and package license before ingesting the final upstream snapshot	README says MIT while manifests and repository contain no license; this is a legal owner decision	maintainer-legal
 UI-D022	candidate	Choose the initial named preset set after the catalog proves each preset across every component state	Names are illustrative until visual and accessibility evidence prevents shallow preset aliases	visual-gate
 UI-D023	candidate	Set install tarball CSS and representative bundle budgets from the first lean qualified baseline	Unmeasured aspirational byte limits are false authority	performance-baseline

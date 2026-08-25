@@ -12,7 +12,7 @@ Work:
 - ratify one exact repository/package license and add `LICENSE`, manifest license, README terms,
   contribution/security policy, and third-party notice policy;
 - approve making `astrale-os/ui` public before relying on its GitHub source registry;
-- lock the first public prerelease version and tag convention;
+- lock the first Public UI V1 prerelease version and tag convention;
 - confirm `@astrale-os/ui` ownership in the public npm `@astrale-os` scope; and
 - preserve the exact legacy baseline and consumer census.
 
@@ -196,34 +196,35 @@ Exit:
 - release PR and exact release revision both complete the supported qualification graph;
 - publish job has `id-token: write`, no npm write token, GitHub-hosted runner, current supported npm,
   and public registry configuration;
-- workflow contract tests reject GitHub Packages or manual token fallback; and
-- the only remaining blocker is npm's first-package/trusted-publisher bootstrap.
+- workflow contract tests reject GitHub Packages as a source or manual token fallback; and
+- the only remaining publication blocker is trusted-publisher and repository-visibility setup.
 
-## Phase 9 — Public prerelease bootstrap
+## Phase 9 — Trusted Public UI V1 prerelease
 
 Status: `not-started-user-gate`
 
 This is the first point at which the user is asked to act.
 
+Public npm already contains the legacy `@astrale-os/ui` lineage through `0.2.1`, so no manual
+package bootstrap is required or allowed.
+
 1. Present the exact qualified SHA, tarball name, integrity, manifest, file list, dependency census,
-   accepted CI run, and proposed prerelease command.
-2. Ask the user to perform or explicitly authorize the first public `@astrale-os/ui` prerelease.
-   This bootstrap is the sole manual publish exception because the npm package settings needed to
-   configure a trusted publisher do not exist until the package exists.
-3. Observe the exact prerelease on public npm and install it in isolated pnpm and npm consumers with
-   no GitHub Packages configuration.
-4. Ask the user to configure the npm trusted publisher for organization `astrale-os`, repository
+   accepted CI run, and proposed Release Please beta lifecycle.
+2. Ask the user to configure the npm trusted publisher for organization `astrale-os`, repository
    `ui`, workflow filename `publish.yml`, and allowed action `npm publish` (plus the chosen GitHub
    environment if one was ratified).
-5. Verify `publish.yml` with the next prerelease through OIDC and automatic provenance.
-6. Restrict token publishing and revoke the bootstrap token only after OIDC succeeds.
+3. Complete the governance/history review, expose the repository, merge the implementation PR, and
+   merge the resulting Release Please beta PR.
+4. Observe the exact prerelease on public npm and install it in isolated pnpm and npm consumers with
+   no GitHub Packages configuration.
+5. Verify OIDC provenance and the dependent private GitHub Packages mirror; keep legacy `latest`
+   unchanged.
 
 Exit:
 
-- both the first public tarball and a later OIDC-published tarball install and execute from clean
-  consumers;
+- the first Public UI V1 beta installs and executes from clean consumers;
 - package page, provenance, repository, license, readme, exports, registry tag, and source SHA agree;
-- no long-lived automation token remains; and
+- no publishing token or manual bootstrap credential was introduced; and
 - post-publish observations are retained rather than inferred from workflow dispatch.
 
 ## Phase 10 — Stable release

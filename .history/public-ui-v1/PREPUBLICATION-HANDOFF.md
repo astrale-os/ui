@@ -16,7 +16,7 @@ Date: 2026-08-26. This is the stopping point before any package publication or v
 Primary checkouts were not edited. The qualified branches and linked pull requests were pushed;
 nothing was published and repository visibility was not changed.
 
-## Current package identity
+## Candidate V1 package identity
 
 ```text
 @astrale-os/ui@0.3.0-beta.0
@@ -24,6 +24,9 @@ artifacts/package/astrale-os-ui-0.3.0-beta.0.tgz
 sha256 e0f79d1039860fe1ef1914fe4625a1b75a6aa5585c2c6e073a1ba8ce6e47f2e8
 sha512-MUPJEk9UMztUZu1hHUugG5HbxEonZjUf5SZLqYoEXarkyM4ZRA7e3njhcAnepcgFXix3S1Ocni7fp+gNT6trZQ==
 ```
+
+Public npm already contains the legacy versions `0.1.0`, `0.2.0`, and `0.2.1`; on 2026-08-26 the
+only observed dist-tag was `latest -> 0.2.1`. Neither `0.3.0-beta.0` nor a `beta` tag exists yet.
 
 | Measurement | Value |
 | --- | ---: |
@@ -67,9 +70,9 @@ sha512-MUPJEk9UMztUZu1hHUugG5HbxEonZjUf5SZLqYoEXarkyM4ZRA7e3njhcAnepcgFXix3S1Ocn
   format, lint, full workspace types, and all 130 package tests.
 
 The local all-item registry fixture preinstalls the exact qualified tarball and suppresses only each
-served item's npm dependency operation because `@astrale-os/ui` does not yet exist on public npm.
-The committed item dependency is `@astrale-os/ui@^0.3.0-beta.0`; public dependency installation is
-explicitly a post-bootstrap proof.
+served item's npm dependency operation because the requested V1 beta does not yet exist on public
+npm. The committed item dependency is `@astrale-os/ui@^0.3.0-beta.0`; public dependency
+installation is explicitly a post-V1-beta proof.
 
 The generated-project SDK qualifier exercises the scaffold's explicit `allowBuilds` and
 `trustedDependencies` policy rather than disabling lifecycle scripts, so its exact project-local
@@ -77,25 +80,22 @@ Bun binary is materialized and linted under the same admission boundary consumer
 
 ## Maintainer actions
 
-1. Ratify MIT plus `THIRD-PARTY-NOTICES.md`, complete governance/history review, and make
-   `astrale-os/ui` public.
-2. Reproduce/merge the exact UI implementation revision and require the CI jobs in `ci.yml`.
-3. Publish `0.3.0-beta.0` once from the exact tarball above under the `beta` dist-tag. This is the
-   one bootstrap exception because npm trusted publishing cannot be configured before the package
-   exists.
-4. Verify public metadata, integrity, repository, license, README, tag, and independent npm/pnpm
-   installs.
-5. Configure npm trusted publishing for organization `astrale-os`, repository `ui`, workflow
-   `publish.yml`, environment `npm`, action `npm publish`.
-6. Merge the next Release Please beta PR. `release.yml` dispatches the `publish.yml` definition from
+1. Ratify MIT plus `THIRD-PARTY-NOTICES.md`, complete governance/history review, make
+   `astrale-os/ui` public, and configure npm trusted publishing for organization `astrale-os`,
+   repository `ui`, workflow `publish.yml`, environment `npm`, action `npm publish`.
+2. Merge the exact UI implementation revision and require the CI jobs in `ci.yml`.
+3. Merge the resulting Release Please beta PR. `release.yml` dispatches the `publish.yml` definition from
    the immutable release tag and waits for its exact version/SHA workflow. It reruns full
    qualification, derives the npm `beta` tag, verifies immutable metadata/integrity and SLSA
-   provenance, and qualifies anonymous npm/pnpm locks and imports before the bootstrap credential
-   is removed. A dependent job then mirrors that qualified npm package to GitHub Packages.
-7. Rebase and qualify each consumer commit, replace local-tarball evidence with public npm evidence,
+   provenance, and qualifies anonymous npm/pnpm locks and imports. A dependent job then mirrors that
+   qualified npm package to private GitHub Packages. No maintainer runs `npm publish`.
+4. Verify public metadata, integrity, repository, license, README, tag, provenance, mirror, and
+   independent npm/pnpm installs. Keep legacy `latest -> 0.2.1` unchanged.
+5. Rebase and qualify each consumer commit, replace local-tarball evidence with public npm evidence,
    and rerun the closed census.
-8. Only then enable `create-astrale-domain --ui astrale|none`; the Astrale variant must pass public
+6. Only then enable `create-astrale-domain --ui astrale|none`; the Astrale variant must pass public
    install, `astrale ui doctor`, typecheck, test, build, and pack.
 
-No local source, tarball, registry, or browser result is presented as public npm, provenance, remote
-CI, branch-protection, or stable assistive-technology evidence.
+No local source, tarball, registry, or browser result is presented as the V1 public npm artifact,
+provenance, branch-protection, or stable assistive-technology evidence. Remote PR CI is reported
+separately from the existing legacy public npm lineage.

@@ -1,8 +1,8 @@
 # Execution goal
 
 Deliver Public UI V1 as a complete, qualified cutover on exact revisions, pausing only where the
-external first-publication gate must create the public registry artifact needed by downstream
-lockfiles.
+maintainer must expose the repository, configure npm trusted publishing, and merge the release that
+creates the V1 public registry artifact needed by downstream lockfiles.
 
 ## Required outcome
 
@@ -31,19 +31,19 @@ The repository must provide:
 Pre-publication source completion requires all implementation-owned criteria in
 [ACCEPTANCE.md](./ACCEPTANCE.md) that do not depend on a public artifact to pass on the exact
 reviewed revisions, every material test-review finding to be resolved, and every UI-repository
-legacy package/import/workflow reference to be removed or classified as historical. After the
-bootstrap, execution resumes with public-package observation, real consumer lockfiles, and the
+legacy package/import/workflow reference to be removed or classified as historical. After the V1
+beta release, execution resumes with public-package observation, real consumer lockfiles, and the
 generated-React journey before the overall goal is complete.
 
 The following remain external and are not silently performed:
 
 - changing the GitHub repository from private to public;
-- the first public npm publish;
 - configuring npm's trusted publisher; and
+- merging the first Public UI V1 Release Please beta PR; and
 - assigning the stable `latest` tag.
 
 At that boundary, hand the user the exact revision, tarball, integrity, dependency/size census, CI
-configuration, remaining external steps, and the first-prerelease command. Do not call the work
+configuration, remaining external steps, and the first-V1-beta release action. Do not call the work
 published or live before those observations exist.
 
 ## Non-goals

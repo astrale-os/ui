@@ -147,28 +147,27 @@ configured workflow filename. Trusted publishing creates automatic provenance fo
 from a public repository. These are external admission facts and must be verified again when
 implementation begins, not assumed indefinitely from this 2026-08-25 design.
 
-## First public package bootstrap
+## Public UI V1 beta handoff
 
-The package does not yet exist on public npm, so the final bootstrap is deliberately human-gated:
+Public npm already contains the legacy `@astrale-os/ui` lineage (`0.1.0`, `0.2.0`, and `0.2.1`,
+with only `latest -> 0.2.1` observed on 2026-08-26). Public UI V1 therefore has no manual publish or
+token bootstrap exception:
 
-1. Finish every pre-publication source, package, registry, CLI, CI, security, and public-repository
-   gate. Public-registry consumer lockfiles remain sequenced after this bootstrap.
-2. Produce the exact prerelease tarball once in the accepted workflow environment and hand the user
-   SHA, version, file list, integrity, audit, license, and accepted CI evidence.
-3. Ask the user to make or explicitly authorize the first public prerelease publish. Do not publish
-   earlier and do not use a stable `latest` tag.
-4. Independently observe and install that exact public version.
-5. Ask the user to configure npm package settings:
+1. Finish every source, package, registry, CLI, CI, security, governance, and public-repository gate.
+2. Hand the user the exact V1 beta SHA, version, file list, integrity, audit, license, and accepted CI
+   evidence.
+3. Ask the user to configure npm package settings before the release:
    - provider: GitHub Actions;
    - organization: `astrale-os`;
    - repository: `ui`;
    - workflow filename: `publish.yml`;
    - environment: the ratified release environment, if any; and
    - allowed action: `npm publish`.
-6. Publish the next prerelease through OIDC and verify automatic provenance.
-7. Retain the OIDC-only workflow contract and revoke the bootstrap credential.
-
-The first manual bootstrap is a one-time exception, not an alternate release workflow.
+4. Merge the implementation and then the Release Please beta PR. The release workflow dispatches
+   the immutable tag's `publish.yml`; no maintainer runs `npm publish`.
+5. Independently observe the exact `beta` version, integrity, provenance, repository metadata, and
+   anonymous npm/pnpm installs, then verify its dependent private GitHub Packages mirror.
+6. Keep the legacy `latest -> 0.2.1` tag unchanged until the stable acceptance gate is complete.
 
 ## Publication evidence levels
 
