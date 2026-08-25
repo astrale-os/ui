@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pattern-combobox-multiple",
+  "title": "Pattern · Combobox · Multiple",
+  "description": "Astrale pattern/combobox/multiple; controlled application responsibilities are injected through props.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "registry/patterns/combobox/multiple.tsx",
+      "content": "import { Checkbox } from '@astrale-os/ui/checkbox'\nimport { Input } from '@astrale-os/ui/input'\nexport function ComboboxMultiple({\n  className,\n  style,\n  options,\n  query,\n  values,\n  onQueryChange,\n  onValuesChange,\n}: {\n  className?: string\n  style?: React.CSSProperties\n\n  options: readonly { id: string; label: string }[]\n  query: string\n  values: readonly string[]\n  onQueryChange(value: string): void\n  onValuesChange(values: readonly string[]): void\n}) {\n  const toggle = (id: string) =>\n    onValuesChange(values.includes(id) ? values.filter((value) => value !== id) : [...values, id])\n  return (\n    <fieldset data-slot=\"pattern-combobox-multiple\" style={style} className={className}>\n      <legend data-slot=\"patterns-combobox-multiple-legend\">Choose options</legend>\n      <Input\n        aria-label=\"Filter options\"\n        value={query}\n        onChange={(event) => onQueryChange(event.currentTarget.value)}\n      />\n      {options\n        .filter((option) => option.label.toLowerCase().includes(query.toLowerCase()))\n        .map((option) => (\n          <label\n            data-slot=\"patterns-combobox-multiple-label\"\n            key={option.id}\n            className=\"flex items-center gap-2\"\n          >\n            <Checkbox\n              checked={values.includes(option.id)}\n              onCheckedChange={() => toggle(option.id)}\n            />\n            {option.label}\n          </label>\n        ))}\n    </fieldset>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "components/astrale/pattern/combobox/multiple.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "pattern/combobox/multiple",
+    "ownership": "consumer-source"
+  },
+  "type": "registry:block"
+}

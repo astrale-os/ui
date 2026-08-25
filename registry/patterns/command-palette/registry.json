@@ -1,0 +1,43 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-patterns-command-palette",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "pattern-command-palette-controlled",
+      "type": "registry:block",
+      "title": "Pattern · Command Palette · Controlled",
+      "description": "Astrale pattern/command-palette/controlled; controlled application responsibilities are injected through props.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "controlled.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/command-palette/controlled.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/command-palette/controlled",
+        "ownership": "consumer-source"
+      }
+    },
+    {
+      "name": "pattern-command-palette-dialog-basic",
+      "type": "registry:block",
+      "title": "Pattern · Command Palette · Dialog Basic",
+      "description": "Astrale pattern/command-palette/dialog-basic; controlled application responsibilities are injected through props.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "dialog-basic.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/command-palette/dialog-basic.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/command-palette/dialog-basic",
+        "ownership": "consumer-source"
+      }
+    }
+  ]
+}

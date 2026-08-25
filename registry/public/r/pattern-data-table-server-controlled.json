@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pattern-data-table-server-controlled",
+  "title": "Pattern · Data Table · Server Controlled",
+  "description": "Astrale pattern/data-table/server-controlled; controlled application responsibilities are injected through props.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "registry/patterns/data-table/server-controlled.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\nexport function DataTableServerControlled<Row extends { id: string }>({\n  className,\n  style,\n  rows,\n  columns,\n  page,\n  pageCount,\n  loading,\n  onPageChange,\n}: {\n  className?: string\n  style?: React.CSSProperties\n\n  rows: readonly Row[]\n  columns: readonly { key: keyof Row; label: string }[]\n  page: number\n  pageCount: number\n  loading?: boolean\n  onPageChange(page: number): void\n}) {\n  return (\n    <section\n      data-slot=\"pattern-data-table-server-controlled\"\n      style={style}\n      aria-busy={loading}\n      className={className}\n    >\n      <table data-slot=\"patterns-data-table-server-controlled-table\">\n        <thead data-slot=\"patterns-data-table-server-controlled-thead\">\n          <tr data-slot=\"patterns-data-table-server-controlled-tr\">\n            {columns.map((column) => (\n              <th data-slot=\"patterns-data-table-server-controlled-th\" key={String(column.key)}>\n                {column.label}\n              </th>\n            ))}\n          </tr>\n        </thead>\n        <tbody data-slot=\"patterns-data-table-server-controlled-tbody\">\n          {rows.map((row) => (\n            <tr data-slot=\"patterns-data-table-server-controlled-tr\" key={row.id}>\n              {columns.map((column) => (\n                <td data-slot=\"patterns-data-table-server-controlled-td\" key={String(column.key)}>\n                  {String(row[column.key] ?? '')}\n                </td>\n              ))}\n            </tr>\n          ))}\n        </tbody>\n      </table>\n      <nav\n        data-slot=\"patterns-data-table-server-controlled-nav\"\n        aria-label=\"Table pages\"\n        className=\"flex items-center gap-2\"\n      >\n        <Button disabled={page <= 1 || loading} onClick={() => onPageChange(page - 1)}>\n          Previous\n        </Button>\n        <span data-slot=\"patterns-data-table-server-controlled-span\">\n          Page {page} of {pageCount}\n        </span>\n        <Button disabled={page >= pageCount || loading} onClick={() => onPageChange(page + 1)}>\n          Next\n        </Button>\n      </nav>\n    </section>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "components/astrale/pattern/data-table/server-controlled.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "pattern/data-table/server-controlled",
+    "ownership": "consumer-source"
+  },
+  "type": "registry:block"
+}

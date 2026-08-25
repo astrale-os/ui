@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pattern-sidebar-application",
+  "title": "Pattern · Sidebar · Application",
+  "description": "Astrale pattern/sidebar/application; controlled application responsibilities are injected through props.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "registry/patterns/sidebar/application.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\nexport type SidebarRoute = { id: string; label: string }\nexport function ApplicationSidebar({\n  className,\n  style,\n  routes,\n  current,\n  collapsed,\n  onNavigate,\n  onCollapsedChange,\n}: {\n  className?: string\n  style?: React.CSSProperties\n\n  routes: readonly SidebarRoute[]\n  current: string\n  collapsed: boolean\n  onNavigate(id: string): void\n  onCollapsedChange(collapsed: boolean): void\n}) {\n  return (\n    <aside\n      data-slot=\"pattern-sidebar-application\"\n      style={style}\n      aria-label=\"Application navigation\"\n      data-collapsed={collapsed}\n      className={className}\n    >\n      <Button\n        variant=\"ghost\"\n        aria-expanded={!collapsed}\n        onClick={() => onCollapsedChange(!collapsed)}\n      >\n        {collapsed ? 'Expand navigation' : 'Collapse navigation'}\n      </Button>\n      <nav data-slot=\"patterns-sidebar-application-nav\">\n        {routes.map((route) => (\n          <Button\n            key={route.id}\n            variant={route.id === current ? 'secondary' : 'ghost'}\n            aria-current={route.id === current ? 'page' : undefined}\n            onClick={() => onNavigate(route.id)}\n          >\n            {collapsed ? route.label.slice(0, 1) : route.label}\n          </Button>\n        ))}\n      </nav>\n    </aside>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "components/astrale/pattern/sidebar/application.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "pattern/sidebar/application",
+    "ownership": "consumer-source"
+  },
+  "type": "registry:block"
+}

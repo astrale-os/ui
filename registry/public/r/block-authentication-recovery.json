@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "block-authentication-recovery",
+  "title": "Block · Authentication · Recovery",
+  "description": "Astrale block/authentication/recovery; controlled application responsibilities are injected through props.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "registry/blocks/authentication/recovery.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\nimport {\n  Card,\n  CardContent,\n  CardDescription,\n  CardFooter,\n  CardHeader,\n  CardTitle,\n} from '@astrale-os/ui/card'\nimport { cn } from '@astrale-os/ui/class-name'\nimport { Input } from '@astrale-os/ui/input'\nimport { useId } from 'react'\nexport function RecoveryCard({\n  className,\n  style,\n  values,\n  error,\n  submitting,\n  onChange,\n  onSubmit,\n}: {\n  className?: string\n  style?: React.CSSProperties\n\n  values: Readonly<Record<string, string>>\n  error?: string\n  submitting?: boolean\n  onChange(field: string, value: string): void\n  onSubmit(): void\n}) {\n  const formId = useId()\n  return (\n    <Card\n      data-slot=\"block-authentication-recovery\"\n      style={style}\n      className={cn('mx-auto max-w-md', className)}\n    >\n      <CardHeader>\n        <CardTitle>Recover access</CardTitle>\n        <CardDescription>We will send recovery instructions if the account exists.</CardDescription>\n      </CardHeader>\n      <CardContent>\n        <form\n          data-slot=\"blocks-authentication-recovery-form\"\n          id={formId}\n          className=\"grid gap-4\"\n          onSubmit={(event) => {\n            event.preventDefault()\n            onSubmit()\n          }}\n        >\n          <label data-slot=\"blocks-authentication-recovery-label\">\n            Email\n            <Input\n              name=\"email\"\n              type=\"email\"\n              value={values['email'] ?? ''}\n              required\n              aria-invalid={Boolean(error)}\n              onChange={(event) => onChange('email', event.currentTarget.value)}\n            />\n          </label>\n          {error && (\n            <p data-slot=\"blocks-authentication-recovery-p\" role=\"alert\">\n              {error}\n            </p>\n          )}\n        </form>\n      </CardContent>\n      <CardFooter>\n        <Button form={formId} type=\"submit\" disabled={submitting}>\n          {submitting ? 'Working…' : 'Recover access'}\n        </Button>\n      </CardFooter>\n    </Card>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "components/astrale/block/authentication/recovery.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "block/authentication/recovery",
+    "ownership": "consumer-source"
+  },
+  "type": "registry:block"
+}

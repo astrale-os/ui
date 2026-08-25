@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pattern-typography-dense-data",
+  "title": "Pattern · Typography · Dense Data",
+  "description": "Astrale pattern/typography/dense-data; controlled application responsibilities are injected through props.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "registry/patterns/typography/dense-data.tsx",
+      "content": "import { cn } from '@astrale-os/ui/class-name'\nexport function TypographyDenseData({\n  className,\n  style,\n  title,\n  summary,\n  children,\n}: {\n  className?: string\n  style?: React.CSSProperties\n\n  title: string\n  summary?: string\n  children: React.ReactNode\n}) {\n  return (\n    <section\n      data-slot=\"pattern-typography-dense-data\"\n      style={style}\n      className={cn('font-mono text-xs tabular-nums', className)}\n    >\n      <header\n        data-slot=\"patterns-typography-dense-data-header\"\n        className=\"mb-3 flex items-end justify-between gap-4\"\n      >\n        <h2\n          data-slot=\"patterns-typography-dense-data-h2\"\n          className=\"font-sans text-lg font-semibold\"\n        >\n          {title}\n        </h2>\n        {summary && (\n          <p data-slot=\"patterns-typography-dense-data-p\" className=\"text-muted-foreground\">\n            {summary}\n          </p>\n        )}\n      </header>\n      <div data-slot=\"patterns-typography-dense-data-div\" className=\"overflow-auto leading-5\">\n        {children}\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "components/astrale/pattern/typography/dense-data.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "pattern/typography/dense-data",
+    "ownership": "consumer-source"
+  },
+  "type": "registry:block"
+}

@@ -15,25 +15,112 @@ permissions:
   contents: read
 
 jobs:
-  ci:
+  contracts:
+    name: Contracts (Node ${{ matrix.node-version }})
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         node-version: [24, 26]
     steps:
-      - uses: actions/checkout@v7
-      - uses: astrale-os/config/.github/actions/ci@2e1bc75459014f38323b57213949b9f9dd530054
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: astrale-os/config/.github/actions/setup@c02d9486144144dff268910469870345b683e8b3
         with:
           node-version: ${{ matrix.node-version }}
           frozen-lockfile: 'true'
+      - run: pnpm check
+
+  package-and-registry:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: astrale-os/config/.github/actions/setup@c02d9486144144dff268910469870345b683e8b3
+        with:
+          node-version: 26
+          frozen-lockfile: 'true'
+      - run: pnpm build
+      - run: pnpm test:components
+      - run: pnpm test:registry-behavior
+      - run: pnpm registry:build
+      - run: git diff --exit-code -- registry/registry.json registry/public/r
+      - run: pnpm package:qualify
+      - run: pnpm registry:qualify
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: public-package-and-registry
+          path: |
+            artifacts/package/**
+            artifacts/registry/**
+            registry/public/r/**
+
+  security:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: astrale-os/config/.github/actions/setup@c02d9486144144dff268910469870345b683e8b3
+        with:
+          node-version: 24
+          frozen-lockfile: 'true'
+      - run: pnpm test:security
+      - name: Production dependency audit
+        run: |
+          mkdir -p artifacts/security
+          pnpm audit --prod --audit-level high --json > artifacts/security/audit.json
+          pnpm licenses list --prod --json > artifacts/security/licenses.json
+      - uses: github/codeql-action/init@db488ddef3bf6cb639b32c2e9a7c0a7ea8271d28 # v4.37.8
+        if: github.event.repository.private == false
+        with:
+          languages: javascript-typescript
+      - uses: github/codeql-action/analyze@db488ddef3bf6cb639b32c2e9a7c0a7ea8271d28 # v4.37.8
+        if: github.event.repository.private == false
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        if: always()
+        with:
+          name: security-evidence
+          path: artifacts/security/**
+
+  dependency-review:
+    if: github.event_name == 'pull_request' && github.event.repository.private == false
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294 # v5.0.0
+        with:
+          fail-on-severity: high
+          allow-licenses: Apache-2.0, BSD-2-Clause, BSD-3-Clause, ISC, MIT
+
+  catalog:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: astrale-os/config/.github/actions/setup@c02d9486144144dff268910469870345b683e8b3
+        with:
+          node-version: 26
+          frozen-lockfile: 'true'
+      - run: pnpm build
+      - run: pnpm --filter @astrale-os/ui-catalog exec playwright install --with-deps chromium
+      - run: pnpm catalog:build
+      - run: pnpm catalog:test
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        if: always()
+        with:
+          name: catalog-browser-evidence
+          path: |
+            catalog/playwright-report/**
+            catalog/test-results/**
 
   commitlint:
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
     steps:
-      - uses: actions/checkout@v7
-      - uses: astrale-os/config/.github/actions/setup@2e1bc75459014f38323b57213949b9f9dd530054
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: astrale-os/config/.github/actions/setup@c02d9486144144dff268910469870345b683e8b3
         with:
           frozen-lockfile: 'true'
       - name: Validate PR title

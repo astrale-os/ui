@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "astrale-base",
+  "title": "Astrale Base",
+  "description": "The pinned Base UI and Nova foundation for Astrale UI consumers.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "meta": {
+    "base": "base",
+    "style": "nova",
+    "ownership": "package-runtime"
+  },
+  "type": "registry:base",
+  "config": {
+    "style": "base-nova",
+    "rsc": false,
+    "tsx": true,
+    "tailwind": {
+      "baseColor": "neutral"
+    }
+  }
+}

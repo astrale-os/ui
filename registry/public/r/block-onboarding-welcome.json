@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "block-onboarding-welcome",
+  "title": "Block · Onboarding · Welcome",
+  "description": "Astrale block/onboarding/welcome; controlled application responsibilities are injected through props.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "registry/blocks/onboarding/welcome.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\nimport { cn } from '@astrale-os/ui/class-name'\nexport function OnboardingWelcome({\n  className,\n  style,\n  name,\n  description,\n  onBegin,\n  onSkip,\n}: {\n  className?: string\n  style?: React.CSSProperties\n\n  name: string\n  description: string\n  onBegin(): void\n  onSkip?(): void\n}) {\n  return (\n    <main\n      data-slot=\"block-onboarding-welcome\"\n      style={style}\n      className={cn('mx-auto flex min-h-[70vh] max-w-2xl flex-col justify-center', className)}\n    >\n      <p\n        data-slot=\"blocks-onboarding-welcome-p\"\n        className=\"text-sm uppercase tracking-widest text-muted-foreground\"\n      >\n        Welcome to\n      </p>\n      <h1 data-slot=\"blocks-onboarding-welcome-h1\" className=\"font-heading text-5xl\">\n        {name}\n      </h1>\n      <p data-slot=\"blocks-onboarding-welcome-p\" className=\"mt-4 text-lg text-muted-foreground\">\n        {description}\n      </p>\n      <div data-slot=\"blocks-onboarding-welcome-div\" className=\"mt-8 flex gap-2\">\n        <Button onClick={onBegin}>Get started</Button>\n        {onSkip && (\n          <Button variant=\"ghost\" onClick={onSkip}>\n            Skip for now\n          </Button>\n        )}\n      </div>\n    </main>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "components/astrale/block/onboarding/welcome.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "block/onboarding/welcome",
+    "ownership": "consumer-source"
+  },
+  "type": "registry:block"
+}

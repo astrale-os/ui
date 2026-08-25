@@ -1,24 +1,15 @@
 {
   "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
   "release-type": "node",
+  "versioning": "prerelease",
+  "prerelease": true,
+  "prerelease-type": "beta",
+  "always-update": true,
+  "include-component-in-tag": false,
   "packages": {
-    "ui": {
-      "component": "ui"
-    },
-    "styles": {
-      "component": "ui-styles"
-    },
-    "preset": {
-      "component": "ui-preset"
-    },
-    "utils": {
-      "component": "ui-utils"
-    },
-    "constants": {
-      "component": "ui-constants"
-    },
-    "components": {
-      "component": "ui-components"
+    "packages/ui": {
+      "component": "ui",
+      "package-name": "@astrale-os/ui"
     }
   },
   "changelog-sections": [
