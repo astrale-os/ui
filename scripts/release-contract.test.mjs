@@ -27,6 +27,7 @@ test('pins supported CI and release workflow dependencies', async () => {
   assert.match(ci, /frozen-lockfile: 'true'/u)
   assert.match(ci, /pnpm package:qualify/u)
   assert.match(ci, /pnpm registry:qualify/u)
+  assert.match(ci, /pnpm test:registry-behavior/u)
   assert.match(ci, /pnpm catalog:test/u)
   assert.match(ci, /pnpm test:security/u)
   assert.match(ci, /pnpm audit --prod --audit-level high/u)

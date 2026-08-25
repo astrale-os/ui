@@ -18,6 +18,7 @@
     "test": "pnpm run test:contracts && pnpm run test:components",
     "test:contracts": "node --test scripts/*.test.mjs",
     "test:components": "pnpm --filter @astrale-os/ui test",
+    "test:registry-behavior": "pnpm --filter @astrale-os/ui-registry-workspace test",
     "test:security": "node scripts/security-policy.mjs",
     "registry:typecheck": "tsc -p registry/tsconfig.json",
     "registry:index": "node scripts/build-registry-index.mjs",
@@ -31,7 +32,7 @@
     "catalog:test": "pnpm --filter @astrale-os/ui-catalog test:e2e",
     "package:qualify": "node scripts/qualify-package.mjs",
     "check": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test:contracts && pnpm registry:check && pnpm catalog:typecheck",
-    "qualify": "pnpm check && pnpm test:components && pnpm test:security && pnpm build && pnpm registry:build && pnpm package:qualify && pnpm registry:qualify && pnpm catalog:build && pnpm catalog:test",
+    "qualify": "pnpm check && pnpm test:components && pnpm test:registry-behavior && pnpm test:security && pnpm build && pnpm registry:build && pnpm package:qualify && pnpm registry:qualify && pnpm catalog:build && pnpm catalog:test",
     "prepare": "husky"
   },
   "devDependencies": {

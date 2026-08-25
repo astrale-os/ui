@@ -39,6 +39,7 @@ jobs:
           node-version: 26
           frozen-lockfile: 'true'
       - run: pnpm test:components
+      - run: pnpm test:registry-behavior
       - run: pnpm build
       - run: pnpm registry:build
       - run: git diff --exit-code -- registry/registry.json registry/public/r

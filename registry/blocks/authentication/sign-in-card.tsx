@@ -29,6 +29,7 @@ export function SignInCard({
   onSubmit(): void
 }) {
   const formId = useId()
+  const errorId = useId()
   return (
     <Card
       data-slot="block-authentication-sign-in-card"
@@ -57,6 +58,7 @@ export function SignInCard({
               value={values['email'] ?? ''}
               required
               aria-invalid={Boolean(error)}
+              aria-describedby={error ? errorId : undefined}
               onChange={(event) => onChange('email', event.currentTarget.value)}
             />
           </label>
@@ -68,11 +70,12 @@ export function SignInCard({
               value={values['password'] ?? ''}
               required
               aria-invalid={Boolean(error)}
+              aria-describedby={error ? errorId : undefined}
               onChange={(event) => onChange('password', event.currentTarget.value)}
             />
           </label>
           {error && (
-            <p data-slot="blocks-authentication-sign-in-card-p" role="alert">
+            <p data-slot="blocks-authentication-sign-in-card-p" id={errorId} role="alert">
               {error}
             </p>
           )}

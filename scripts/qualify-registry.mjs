@@ -256,6 +256,18 @@ try {
       deterministicFiles: builtFiles.length,
       dependencyProof: 'preinstalled-qualified-tarball',
       registryDigest: digest(await readFile(path.join(registryRoot, 'registry.json'))),
+      builtDigest: digest(
+        Buffer.concat(
+          await Promise.all(
+            builtFiles.map(async (file) =>
+              Buffer.concat([
+                Buffer.from(file + '\0'),
+                await readFile(path.join(publicRoot, file)),
+              ]),
+            ),
+          ),
+        ),
+      ),
     }
     await writeFile(
       path.join(artifactDirectory, 'qualification.json'),
