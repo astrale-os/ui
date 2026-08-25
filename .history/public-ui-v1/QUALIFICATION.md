@@ -29,9 +29,10 @@ The runtime intake was created with exact `shadcn@4.18.0`, `base=base`, `style=n
 
 `pnpm qualify` passed in the UI worktree. It covered:
 
-- formatting, lint, workspace typechecks, 13 repository contract tests, and 5 registry contract
+- formatting, lint, workspace typechecks, 15 repository contract tests, and 5 registry contract
   tests;
-- 8 representative Base-backed runtime behavior tests;
+- 9 representative Base-backed runtime behavior tests and 4 installed registry
+  behavior/customization tests;
 - emitted ESM/declarations and no source maps;
 - official shadcn build of one `registry:base`, 26 patterns, and 23 blocks from the include-based
   source registry;
@@ -57,21 +58,30 @@ the package archive.
 
 ## CLI proof
 
-Focused CLI proof passed:
+Focused CLI proof passed with 37 tests and the existing intentional workspace-skill mirror skip:
 
 - format, lint, production/test/Studio typechecks;
-- 14 UI service tests;
-- 14 program/help tests plus the existing intentional workspace-skill mirror skip;
+- strict content-bearing built-item admission and one-SHA source resolution;
+- semantic read-only diff classification for upstream, modified, deleted, and unchanged files;
+- one JSON document per command, stable redacted errors, and non-interactive no-prompt behavior;
 - exact runner construction for pnpm/npm/yarn/Bun;
 - one-SHA include resolution, dry-run immutability, rollback, successful lock advancement, local
   edit detection, and preset application; and
 - unchanged installed dependency boundary: UI, React, Base UI, Tailwind, and shadcn are invoked or
   read on demand and are not CLI manifest dependencies.
 
-The complete pre-existing CLI suite was also attempted. Its UI tests passed; three unrelated
-`instance-status` tests failed because the environment refused Bun's ephemeral port `0` binding
-with `EADDRINUSE`. A serial rerun produced the same environment failure. This is retained as a full
-suite harness gap rather than classified as a UI or CLI product regression.
+The complete CLI `pnpm package:check` also passed: 814 tests passed, one intentional workspace-skill
+mirror test was skipped, and build, public exports, dependency closure, and package checks were
+green.
+
+## SDK proof
+
+Complete SDK `pnpm qualify` passed across the SDK, both adapters, and the generator. It included
+543 SDK tests, 1 Node-server test, 34 package/release script tests, 193 Cloudflare-adapter tests, 47
+Astrale-adapter tests, 13 scaffold tests, package-surface and pack checks, and physical generated
+React, custom/headless, and none projects. The generated-project qualifier uses the scaffold's
+explicit trusted-build policy, then runs lint, typecheck, test, build, and pack without acquiring
+Astrale UI, Base UI, Radix, or shadcn dependencies.
 
 ## External gates
 

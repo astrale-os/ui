@@ -6,11 +6,11 @@ Date: 2026-08-25. This is the stopping point before any public-state mutation.
 
 | Owner | Baseline `origin/main` | Qualified local commit |
 | --- | --- | --- |
-| UI | `d460f711c05e4f14f1467c7992e3193e0ceb913a` | `9d6c2156a1a09864cef6812df0ca780bc07dc6c9` |
-| CLI | `d8aa9d902c99513e34389d65a9a1aaa496083086` | `47ae87600f902a1d33f618bdd048928711b311ec` |
-| SDK | `ebe288517215fc61e9086266e70ed347f00b32cf` | `79a09d7f38d62a44f4a2882565446b50f70f0fc6` |
+| UI | `d460f711c05e4f14f1467c7992e3193e0ceb913a` | `762fd2acd4d92f91858746c0fa80517e426f05e0` |
+| CLI | `d8aa9d902c99513e34389d65a9a1aaa496083086` | `9f871091841f088aeeb2cf42df4453a9ea924dff` |
+| SDK | `f556359668bd821a75f94db87116751b32aa6c90` | `c9036f708dc042e29701719a707743c2a8be704e` |
 | GUI | `ba1b2c9afd1fa9ed97de525c176a8ee9580a93de` | `2ef24d60421d29f408f4bdd1baccea7a26bf55a2` |
-| Admin | `e63e2d4248493779f4469153af86efd21ac63565` | `6dfb012047f931cb4707fd72a741f91e5ceceac4` |
+| Admin | `9bb7cc4d545b6aa4db822de75394ba720feaafd3` | `22de8763e8a8b51fb8de92f41f277b4adbf60d58` |
 | Domains | `cd667d111da05b76c599ce60ba7d741994a40abb` | `a5c51e982c93b6fbc9c9d412eec40f808bc51da8` |
 
 Primary checkouts were not edited. Nothing was pushed or published and repository visibility was
@@ -38,32 +38,41 @@ sha512-MUPJEk9UMztUZu1hHUugG5HbxEonZjUf5SZLqYoEXarkyM4ZRA7e3njhcAnepcgFXix3S1Ocn
 ## Passed evidence
 
 - UI `pnpm qualify`: formatting, lint, strict types, 15 repository/release contracts, 5 registry
-  contracts, 9 runtime tests, ESM/declarations, npm/pnpm pack parity, Node all-subpath imports,
-  strict TypeScript, Vite, SSR, Button/Dialog bundle exclusion, and no source maps.
+  contracts, 9 runtime tests, 4 registry behavior/customization tests, ESM/declarations, npm/pnpm
+  pack parity, Node all-subpath imports, strict TypeScript, Vite, SSR, Button/Dialog bundle
+  exclusion, and no source maps.
 - Registry: exact `shadcn@4.18.0`, Base/Nova, 26 patterns, 23 blocks, 51 deterministic built JSON
   files, and physical installation/typecheck of all 49 items in a fresh project with spaces in its
-  path. The current npm production audit reports no known vulnerability.
+  path. The source registry digest is
+  `b435b82d5bc3cea9f1b9ff8e1ddd8d43b13fb9900a7ef2ee810a63d76169c7c4`; the built collection
+  digest is
+  `d09c75d0a417e527f8dd3fcef91f46b051934d8d9c0e91de9c412e0b714988b8`. The current npm
+  production audit reports no known vulnerability.
 - Catalog: four desktop/mobile Chromium journeys across Astrale/compact/expressive, light/dark,
   reduced motion and keyboard behavior with no critical/serious axe finding.
-- CLI: format/lint/types/build/dependency boundary, 17 UI service tests and 14 program/help tests
-  pass; one workspace mirror test is intentionally skipped.
-- SDK/generator: 13 scaffold tests, typecheck, and 15 release/boundary tests prove the SDK,
-  scaffolder, React output, and custom/headless variants do not acquire Astrale UI dependencies.
+- CLI: complete `pnpm package:check` passed with 814 tests and one intentional workspace mirror
+  skip. The focused UI/program layer passed 37 tests and the same skip, including strict built-item
+  admission, semantic read-only diff, stable JSON/errors, dry-run targets, and non-interactive
+  behavior.
+- SDK/generator: complete `pnpm qualify` passed. That includes 543 SDK tests, 1 Node-server test,
+  34 package/release script tests, 193 Cloudflare-adapter tests, 47 Astrale-adapter tests, 13
+  scaffold tests, all package-surface/pack checks, and physical generated-project qualification for
+  React, custom/headless, and none. The SDK and every generated variant remain free of Astrale UI,
+  Base UI, Radix, and shadcn dependencies; custom/headless and none also remain React-free.
 - GUI: root build, 38 tests, format/lint; Electron typecheck/build/lint and 113 tests. Remaining root
   type/purity failures are existing Kernel cohort and application-capability issues, not UI errors.
 - Admin and Domains: current main had no live legacy UI consumer; stale `allowBuilds` routing entries
-  are removed by the commits above.
+  are removed by the commits above. Admin was rebased onto its newer host-provisioning main and
+  passes format/lint with only its existing warnings.
 
 The local all-item registry fixture preinstalls the exact qualified tarball and suppresses only each
 served item's npm dependency operation because `@astrale-os/ui` does not yet exist on public npm.
 The committed item dependency is `@astrale-os/ui@^0.3.0-beta.0`; public dependency installation is
 explicitly a post-bootstrap proof.
 
-The full generated-project SDK pressure script reached and passed the new UI-boundary assertion,
-then hit an existing harness defect: it installs with `--ignore-scripts`, so generated `pnpm lint`
-cannot run the Bun binary whose postinstall was skipped. The focused generator boundary remains
-green. Likewise, the broader CLI suite's known Bun port-0 `EADDRINUSE` cases remain separate from
-the green UI tests.
+The generated-project SDK qualifier exercises the scaffold's explicit `allowBuilds` and
+`trustedDependencies` policy rather than disabling lifecycle scripts, so its exact project-local
+Bun binary is materialized and linted under the same admission boundary consumers receive.
 
 ## Maintainer actions
 
