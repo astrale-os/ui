@@ -3,7 +3,7 @@
 import { Drawer as DrawerPrimitive } from '@base-ui/react/drawer'
 import * as React from 'react'
 
-import { cn } from '#ui/class-name'
+import { cn } from '#astrale-ui/class-name'
 
 type DrawerContextProps = {
   hasSnapPoints: boolean

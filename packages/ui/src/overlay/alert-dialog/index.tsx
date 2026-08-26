@@ -1,8 +1,8 @@
 import { AlertDialog as AlertDialogPrimitive } from '@base-ui/react/alert-dialog'
 import * as React from 'react'
 
-import { Button } from '#ui/action/button'
-import { cn } from '#ui/class-name'
+import { Button } from '#astrale-ui/action/button'
+import { cn } from '#astrale-ui/class-name'
 
 function AlertDialog({ ...props }: AlertDialogPrimitive.Root.Props) {
   return <AlertDialogPrimitive.Root data-slot="alert-dialog" {...props} />

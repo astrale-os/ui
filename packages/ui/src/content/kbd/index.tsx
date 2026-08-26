@@ -1,4 +1,4 @@
-import { cn } from '#ui/class-name'
+import { cn } from '#astrale-ui/class-name'
 
 function Kbd({ className, ...props }: React.ComponentProps<'kbd'>) {
   return (

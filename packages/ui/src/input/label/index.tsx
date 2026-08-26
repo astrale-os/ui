@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 
-import { cn } from '#ui/class-name'
+import { cn } from '#astrale-ui/class-name'
 
 function Label({ className, ...props }: React.ComponentProps<'label'>) {
   return (

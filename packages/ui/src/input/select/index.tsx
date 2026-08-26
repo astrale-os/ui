@@ -3,8 +3,8 @@
 import { Select as SelectPrimitive } from '@base-ui/react/select'
 import * as React from 'react'
 
-import { cn } from '#ui/class-name'
-import { ChevronDownIcon, CheckIcon, ChevronUpIcon } from '#ui/icon'
+import { cn } from '#astrale-ui/class-name'
+import { ChevronDownIcon, CheckIcon, ChevronUpIcon } from '#astrale-ui/icon'
 
 const Select = SelectPrimitive.Root
 

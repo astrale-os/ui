@@ -2,8 +2,8 @@ import type { ComponentProps, ReactNode } from 'react'
 
 import { Accordion as AccordionPrimitive } from '@base-ui/react/accordion'
 
-import { cn } from '#ui/class-name'
-import { ChevronDownIcon, ChevronUpIcon } from '#ui/icon'
+import { cn } from '#astrale-ui/class-name'
+import { ChevronDownIcon, ChevronUpIcon } from '#astrale-ui/icon'
 
 function Accordion({ className, ...props }: AccordionPrimitive.Root.Props) {
   return (

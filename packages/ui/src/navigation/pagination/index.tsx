@@ -1,8 +1,8 @@
 import * as React from 'react'
 
-import { Button } from '#ui/action/button'
-import { cn } from '#ui/class-name'
-import { ChevronLeftIcon, ChevronRightIcon, MoreHorizontalIcon } from '#ui/icon'
+import { Button } from '#astrale-ui/action/button'
+import { cn } from '#astrale-ui/class-name'
+import { ChevronLeftIcon, ChevronRightIcon, MoreHorizontalIcon } from '#astrale-ui/icon'
 
 function Pagination({ className, ...props }: React.ComponentProps<'nav'>) {
   return (
