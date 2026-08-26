@@ -15,7 +15,7 @@ Local source qualification on 2026-08-26:
   independently installable registry items.
 - Independent critic and gap-finder reviews closed with no remaining high- or medium-value test
   defect after adversarial CSS admission and late local-theme rollback proofs were added.
-- The companion CLI source suite passed 875 tests with one intentional mirror skip. A built CLI
+- The companion CLI source suite passed 876 tests with one intentional mirror skip. A built CLI
   then installed the real `atelier.css` playground export into an isolated React fixture, activated
   `@import '../components/astrale/theme/atelier.css';`, and reported every `astrale ui doctor
   --project <fixture>` check healthy.
@@ -29,9 +29,11 @@ Remote delivery on 2026-08-26:
 - A fresh published-consumer run exposed shadcn alias remapping of released theme targets. CLI PR
   `#180` made released themes install their admitted embedded CSS directly, passed the same remote
   matrix, and merged as `3d987c1825d46f0bd33dcc7b6858c2f1823cfda0`.
-- Release PR `#21` published `@astrale-os/ui@0.3.0-beta.4` through trusted npm publishing and
-  mirrored it to GitHub Packages. Release PR `#181` published `@astrale-os/cli@1.0.0-beta.22` and
-  completed the Linux/macOS x64/arm64 standalone release matrix.
+- Release PR `#21` published the initial `@astrale-os/ui@0.3.0-beta.4` through trusted npm
+  publishing. UI PR `#24` then closed an asynchronous import-input page error as
+  `1fe5563a508421428927e82b55da2f3f3cd00ec8`; release PR `#25` published the final UI beta.5.
+  Both UI releases were mirrored to GitHub Packages. Release PR `#181` published
+  `@astrale-os/cli@1.0.0-beta.22` and completed the Linux/macOS x64/arm64 standalone matrix.
 - In a fresh external React project, the published CLI beta.22 initialized the published UI
   beta.4, discovered all three released themes, installed `theme/atelier`, activated its relative
   host CSS import, recorded exact source/file digests, and returned every `ui doctor` check healthy.
