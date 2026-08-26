@@ -1,4 +1,4 @@
-import { cn } from '#ui/class-name'
+import { cn } from '#astrale-ui/class-name'
 
 function Skeleton({ className, ...props }: React.ComponentProps<'div'>) {
   return (

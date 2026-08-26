@@ -1,9 +1,9 @@
 import { cva, type VariantProps } from 'class-variance-authority'
 import { useMemo } from 'react'
 
-import { cn } from '#ui/class-name'
-import { Separator } from '#ui/content/separator'
-import { Label } from '#ui/input/label'
+import { cn } from '#astrale-ui/class-name'
+import { Separator } from '#astrale-ui/content/separator'
+import { Label } from '#astrale-ui/input/label'
 
 function FieldSet({ className, ...props }: React.ComponentProps<'fieldset'>) {
   return (

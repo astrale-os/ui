@@ -1,5 +1,5 @@
-import { cn } from '#ui/class-name'
-import { Loader2Icon } from '#ui/icon'
+import { cn } from '#astrale-ui/class-name'
+import { Loader2Icon } from '#astrale-ui/icon'
 
 function Spinner({ className, ...props }: React.ComponentProps<'svg'>) {
   return (

@@ -1,8 +1,8 @@
 import { OTPInput, OTPInputContext } from 'input-otp'
 import * as React from 'react'
 
-import { cn } from '#ui/class-name'
-import { MinusIcon } from '#ui/icon'
+import { cn } from '#astrale-ui/class-name'
+import { MinusIcon } from '#astrale-ui/icon'
 
 function InputOTP({
   className,

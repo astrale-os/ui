@@ -4,8 +4,8 @@ import type { ReactNode } from 'react'
 
 import { Checkbox as CheckboxPrimitive } from '@base-ui/react/checkbox'
 
-import { cn } from '#ui/class-name'
-import { CheckIcon } from '#ui/icon'
+import { cn } from '#astrale-ui/class-name'
+import { CheckIcon } from '#astrale-ui/icon'
 
 function Checkbox({
   className,

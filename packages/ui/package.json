@@ -29,9 +29,9 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "imports": {
-    "#ui/class-name": "./dist/class-name.js",
-    "#ui/icon": "./dist/icon/index.js",
-    "#ui/*": "./dist/*/index.js"
+    "#astrale-ui/class-name": "./dist/class-name.js",
+    "#astrale-ui/icon": "./dist/icon/index.js",
+    "#astrale-ui/*": "./dist/*/index.js"
   },
   "exports": {
     ".": {

@@ -3,8 +3,8 @@ import { ToggleGroup as ToggleGroupPrimitive } from '@base-ui/react/toggle-group
 import { type VariantProps } from 'class-variance-authority'
 import * as React from 'react'
 
-import { toggleVariants } from '#ui/action/toggle'
-import { cn } from '#ui/class-name'
+import { toggleVariants } from '#astrale-ui/action/toggle'
+import { cn } from '#astrale-ui/class-name'
 
 const ToggleGroupContext = React.createContext<
   VariantProps<typeof toggleVariants> & {

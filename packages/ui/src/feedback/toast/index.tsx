@@ -4,8 +4,8 @@ import type { CSSProperties, ReactNode } from 'react'
 
 import { Toast as ToastPrimitive } from '@base-ui/react/toast'
 
-import { Button } from '#ui/action/button'
-import { cn } from '#ui/class-name'
+import { Button } from '#astrale-ui/action/button'
+import { cn } from '#astrale-ui/class-name'
 import {
   CircleCheckIcon,
   InfoIcon,
@@ -13,7 +13,7 @@ import {
   OctagonXIcon,
   TriangleAlertIcon,
   XIcon,
-} from '#ui/icon'
+} from '#astrale-ui/icon'
 
 type ToastPosition =
   | 'top-left'
