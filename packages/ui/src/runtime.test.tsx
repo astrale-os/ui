@@ -160,6 +160,20 @@ describe('runtime owners', () => {
     expect(screen.getByRole('tabpanel')).toHaveTextContent('Second panel')
   })
 
+  test('tabs own their root layout from the admitted orientation', () => {
+    render(
+      <>
+        <Tabs data-testid="horizontal-tabs" />
+        <Tabs data-testid="vertical-tabs" orientation="vertical" />
+      </>,
+    )
+
+    expect(screen.getByTestId('horizontal-tabs')).toHaveAttribute('data-orientation', 'horizontal')
+    expect(screen.getByTestId('horizontal-tabs')).toHaveClass('flex-col')
+    expect(screen.getByTestId('vertical-tabs')).toHaveAttribute('data-orientation', 'vertical')
+    expect(screen.getByTestId('vertical-tabs')).toHaveClass('flex-row')
+  })
+
   test('command filtering and keyboard activation are owned by Base UI', async () => {
     const user = userEvent.setup()
     let selected = ''
