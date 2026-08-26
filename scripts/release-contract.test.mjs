@@ -101,13 +101,23 @@ test('publishes exactly one public npm package from the Release Please commit us
   assert.match(publish, /packages:\s*write/u)
   assert.match(publish, /publish\/mirror-npm-to-github@c02d9486144144dff268910469870345b683e8b3/u)
   assert.match(publish, /repository:\s*astrale-os\/ui/u)
-  assert.deepEqual(Object.keys(releaseConfig.packages), ['packages/ui'])
-  assert.deepEqual(Object.keys(releaseManifest), ['packages/ui'])
+  assert.deepEqual(Object.keys(releaseConfig.packages), ['.'])
+  assert.deepEqual(Object.keys(releaseManifest), ['.'])
+  assert.equal(releaseConfig.packages['.']['changelog-path'], 'packages/ui/CHANGELOG.md')
+  assert.deepEqual(releaseConfig.packages['.']['extra-files'], [
+    {
+      type: 'json',
+      path: 'packages/ui/package.json',
+      jsonpath: '$.version',
+    },
+  ])
   assert.equal(releaseConfig.versioning, 'prerelease')
   assert.equal(releaseConfig.prerelease, true)
   assert.equal(releaseConfig['prerelease-type'], 'beta')
   assert.equal(releaseConfig['always-update'], true)
   assert.match(manifest.version, /^\d+\.\d+\.\d+-beta\.\d+$/u)
+  assert.equal(rootManifest.version, manifest.version)
+  assert.equal(releaseManifest['.'], manifest.version)
   assert.equal(rootManifest.scripts['qualify:publication'], 'node scripts/qualify-publication.mjs')
   assert.equal(manifest.name, '@astrale-os/ui')
   assert.equal(manifest.publishConfig.registry, 'https://registry.npmjs.org')
