@@ -20,5 +20,18 @@ Local source qualification on 2026-08-26:
   `@import '../components/astrale/theme/atelier.css';`, and reported every `astrale ui doctor
   --project <fixture>` check healthy.
 
-Remote CI, exact merge revisions, and release publication remain delivery evidence rather than
-source-qualification evidence and are recorded only after the PRs land.
+Remote delivery on 2026-08-26:
+
+- UI PR `#22` passed contracts on Node 24/26, package/registry, playground, security, dependency
+  review, commitlint, and CodeQL before merging as `5b1d0606924e9cc9d6683db150ab45ccf34fc771`.
+- CLI PR `#179` passed Node 22/24/26, Studio browser smoke, and CodeQL before merging as
+  `d8c7f6d0f63b08cf4363690709b6e2f2f5211c31`.
+- A fresh published-consumer run exposed shadcn alias remapping of released theme targets. CLI PR
+  `#180` made released themes install their admitted embedded CSS directly, passed the same remote
+  matrix, and merged as `3d987c1825d46f0bd33dcc7b6858c2f1823cfda0`.
+- Release PR `#21` published `@astrale-os/ui@0.3.0-beta.4` through trusted npm publishing and
+  mirrored it to GitHub Packages. Release PR `#181` published `@astrale-os/cli@1.0.0-beta.22` and
+  completed the Linux/macOS x64/arm64 standalone release matrix.
+- In a fresh external React project, the published CLI beta.22 initialized the published UI
+  beta.4, discovered all three released themes, installed `theme/atelier`, activated its relative
+  host CSS import, recorded exact source/file digests, and returned every `ui doctor` check healthy.
