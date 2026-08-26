@@ -226,9 +226,6 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from './catalog-components'
-import { registryComponents } from './inventory'
-
-const registryComponentNames = new Set<string>(registryComponents)
 
 function Specimen({ name, children }: { name: string; children: React.ReactNode }) {
   return (
@@ -241,9 +238,6 @@ function Specimen({ name, children }: { name: string; children: React.ReactNode 
     >
       <CardHeader>
         <CardTitle>{name}</CardTitle>
-        <CardDescription>
-          {registryComponentNames.has(name) ? `component/${name}` : `@astrale-os/ui/${name}`}
-        </CardDescription>
       </CardHeader>
       <CardContent className="specimen-content">{children}</CardContent>
     </Card>
@@ -266,6 +260,10 @@ const questionnaireItems = [
 function ActionInputSpecimens() {
   const [switchValue, setSwitchValue] = useState(true)
   const [radio, setRadio] = useState('safe')
+  const [calendarDate, setCalendarDate] = useState<Date | undefined>(new Date(2026, 7, 26))
+  const [sliderValue, setSliderValue] = useState([62])
+  const [selectValue, setSelectValue] = useState('production')
+  const [otp, setOtp] = useState('')
   return (
     <section id="actions-inputs" className="specimen-section" aria-labelledby="actions-title">
       <div className="section-heading">
@@ -303,14 +301,14 @@ function ActionInputSpecimens() {
           </ToggleGroup>
         </Specimen>
         <Specimen name="input">
-          <Input aria-label="Domain path" value="/:observatory.astrale.ai" readOnly />
+          <Input aria-label="Domain path" defaultValue="/:observatory.astrale.ai" />
         </Specimen>
         <Specimen name="input-group">
           <InputGroup>
             <InputGroupAddon>
               <InputGroupText>astrale://</InputGroupText>
             </InputGroupAddon>
-            <InputGroupInput aria-label="Graph path" value="domains/observatory" readOnly />
+            <InputGroupInput aria-label="Graph path" defaultValue="domains/observatory" />
             <InputGroupAddon align="inline-end">
               <InputGroupButton>Copy</InputGroupButton>
             </InputGroupAddon>
@@ -348,12 +346,21 @@ function ActionInputSpecimens() {
             <FieldLabel>Retention</FieldLabel>
             <Label>
               Retention
-              <Slider value={[62]} />
+              <Slider
+                value={sliderValue}
+                onValueChange={(value) => setSliderValue(value as number[])}
+              />
             </Label>
           </Field>
         </Specimen>
         <Specimen name="select">
-          <Select items={selectItems} value="production">
+          <Select
+            items={selectItems}
+            value={selectValue}
+            onValueChange={(value) => {
+              if (value) setSelectValue(value)
+            }}
+          >
             <SelectTrigger aria-label="Environment">
               <SelectValue />
             </SelectTrigger>
@@ -375,7 +382,7 @@ function ActionInputSpecimens() {
           </NativeSelect>
         </Specimen>
         <Specimen name="input-otp">
-          <InputOTP maxLength={6} value="421907" readOnly aria-label="Verification code">
+          <InputOTP maxLength={6} value={otp} onChange={setOtp} aria-label="Verification code">
             <InputOTPGroup>
               {[0, 1, 2].map((index) => (
                 <InputOTPSlot index={index} key={index} />
@@ -393,17 +400,17 @@ function ActionInputSpecimens() {
           <FieldGroup>
             <Field>
               <FieldLabel htmlFor="field-name">Domain label</FieldLabel>
-              <Input id="field-name" value="Observatory" readOnly />
+              <Input id="field-name" defaultValue="Observatory" />
               <FieldDescription>Visible to every authorized operator.</FieldDescription>
             </Field>
           </FieldGroup>
         </Specimen>
         <Specimen name="label">
           <Label htmlFor="plain-label">Explicit native relationship</Label>
-          <Input id="plain-label" value="kernel.Identity" readOnly />
+          <Input id="plain-label" defaultValue="kernel.Identity" />
         </Specimen>
         <Specimen name="calendar">
-          <Calendar mode="single" selected={new Date(2026, 7, 26)} />
+          <Calendar mode="single" selected={calendarDate} onSelect={setCalendarDate} />
         </Specimen>
         <Specimen name="combobox">
           <Combobox items={selectItems} defaultValue={selectItems[0]}>
@@ -486,7 +493,7 @@ function ContentFeedbackSpecimens() {
           </div>
         </Specimen>
         <Specimen name="card">
-          <Card size="sm">
+          <Card size="sm" className="w-full">
             <CardHeader>
               <CardTitle>Domain revision</CardTitle>
               <CardDescription>sha256:62d081…</CardDescription>
@@ -494,6 +501,7 @@ function ContentFeedbackSpecimens() {
                 <Badge>Current</Badge>
               </CardAction>
             </CardHeader>
+            <CardContent>Ready for deployment.</CardContent>
             <CardFooter>Committed 12 seconds ago</CardFooter>
           </Card>
         </Specimen>
@@ -675,6 +683,8 @@ function ContentFeedbackSpecimens() {
 }
 
 function NavigationLayoutSpecimens() {
+  const [page, setPage] = useState(1)
+
   const [open, setOpen] = useState(false)
   return (
     <section id="navigation-layout" className="specimen-section" aria-labelledby="navigation-title">
@@ -741,12 +751,28 @@ function NavigationLayoutSpecimens() {
           <Pagination>
             <PaginationContent>
               <PaginationItem>
-                <PaginationLink href="#" isActive>
+                <PaginationLink
+                  href="#"
+                  isActive={page === 1}
+                  onClick={(event) => {
+                    event.preventDefault()
+                    setPage(1)
+                  }}
+                >
                   1
                 </PaginationLink>
               </PaginationItem>
               <PaginationItem>
-                <PaginationLink href="#">2</PaginationLink>
+                <PaginationLink
+                  href="#"
+                  isActive={page === 2}
+                  onClick={(event) => {
+                    event.preventDefault()
+                    setPage(2)
+                  }}
+                >
+                  2
+                </PaginationLink>
               </PaginationItem>
               <PaginationItem>
                 <PaginationEllipsis />

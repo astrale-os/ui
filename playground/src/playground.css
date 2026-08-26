@@ -260,6 +260,11 @@ textarea {
   box-shadow: var(--ui-shadow-panel);
 }
 
+body:has(.theme-drawer-popup) [data-slot='drawer-overlay'] {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
 .theme-drawer-header {
   align-items: flex-end;
   border-bottom: 1px solid var(--ui-border);

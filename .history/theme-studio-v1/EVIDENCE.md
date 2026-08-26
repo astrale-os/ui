@@ -1,5 +1,26 @@
 # Qualification evidence
 
+Interactive catalog repair on 2026-08-26, from UI `origin/main`
+`121a5b1cee581df3ef9ab4a19d1fe80849cbd2c1`:
+
+- Catalog inputs, Select, Slider, OTP, Calendar, Carousel, and Pagination now own live specimen
+  state. Pagination prevents its demonstration link from navigating and proves that both the URL
+  and scroll position remain unchanged while the active page changes.
+- Component cards no longer repeat their package or registry address below the component name. The
+  nested Card specimen uses the complete upstream anatomy and fills its available specimen width.
+- The theme customizer remains an exact public Astrale Drawer composition. Playground-only CSS
+  disables its backdrop blur while retaining the upstream Drawer source byte-for-byte modulo the
+  already admitted import and formatting adaptations.
+- The browser suite proves the repaired behavior on desktop and mobile, including exact input
+  values, active selection/value state, carousel movement, pagination isolation, card sizing,
+  subtitle absence, and computed `backdrop-filter: none`. A test-review pass also reproduced and
+  removed a transition-timing race from the settled-state accessibility scan.
+- Final `pnpm qualify` passed 32 contract tests, 11 runtime tests, 5 registry behavior tests, the
+  security policy over 399 tracked files, deterministic package and 64-item registry consumers,
+  the production playground build, and all 14 desktop/mobile browser journeys. The deterministic
+  package is 59,331 bytes with SHA-256
+  `9b20cbc8682f9690f712586e6b4960791a8147f23cc6da24585de23939096335`.
+
 Theme customizer drawer qualification on 2026-08-26:
 
 - The playground catalog now owns the full viewport while the theme customizer opens through the

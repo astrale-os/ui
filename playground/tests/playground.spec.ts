@@ -41,6 +41,16 @@ test('playground renders every public runtime owner and complete registry invent
     scrollWidth: document.documentElement.scrollWidth,
   }))
   expect(viewport.scrollWidth).toBeLessThanOrEqual(viewport.innerWidth)
+  await expect(page.getByText('@astrale-os/ui/toggle', { exact: true })).toHaveCount(0)
+  await expect(page.getByText('component/calendar', { exact: true })).toHaveCount(0)
+  const cardSpecimen = page.locator('[data-component="card"]')
+  const cardWidths = await cardSpecimen.evaluate((element) => ({
+    specimen: element.getBoundingClientRect().width,
+    card: element
+      .querySelector(':scope > [data-slot="card-content"] > [data-slot="card"]')
+      ?.getBoundingClientRect().width,
+  }))
+  expect(cardWidths.card).toBeGreaterThan(cardWidths.specimen * 0.8)
   const chartLine = page.locator('[data-component="chart"] path.recharts-line-curve').first()
   await expect(chartLine).toBeVisible()
   await expect
@@ -57,6 +67,13 @@ test('playground renders every public runtime owner and complete registry invent
 
   await openThemeCustomizer(page)
   await expect(page.locator('[data-slot="theme-studio"]')).toBeVisible()
+  await expect
+    .poll(() =>
+      page
+        .locator('[data-slot="drawer-overlay"]')
+        .evaluate((element) => getComputedStyle(element).backdropFilter),
+    )
+    .toBe('none')
   const importWidth = await page
     .getByLabel('Import theme document')
     .evaluate((element) => element.getBoundingClientRect().width)
@@ -75,6 +92,54 @@ test('playground renders every public runtime owner and complete registry invent
   expect(registryItems).toEqual(registry.items.map((item) => item.name).sort())
   expect(new Set(registryItems).size).toBe(registry.items.length)
   await expect(page.locator('[data-registry-item="theme-observatory"]')).toBeVisible()
+})
+
+test('catalog specimens own their interaction without navigating the playground', async ({
+  page,
+}) => {
+  await page.goto('/')
+
+  const domainPath = page.getByRole('textbox', { name: 'Domain path' })
+  await domainPath.fill('/:journal.astrale.ai')
+  await expect(domainPath).toHaveValue('/:journal.astrale.ai')
+  const graphPath = page.getByRole('textbox', { name: 'Graph path' })
+  await graphPath.fill('domains/journal')
+  await expect(graphPath).toHaveValue('domains/journal')
+
+  const select = page.locator('[data-component="select"]')
+  await select.getByRole('combobox', { name: 'Environment' }).click()
+  await page.getByRole('option', { name: 'Staging' }).click()
+  await expect(select.getByRole('combobox', { name: 'Environment' })).toContainText('Staging')
+
+  const slider = page.getByRole('slider', { name: 'Retention' })
+  await expect(slider).toHaveAttribute('aria-valuenow', '62')
+  await slider.press('ArrowRight')
+  await expect(slider).toHaveAttribute('aria-valuenow', '63')
+
+  const otp = page.getByRole('textbox', { name: 'Verification code' })
+  await otp.fill('805214')
+  await expect(otp).toHaveValue('805214')
+
+  await page.getByRole('button', { name: 'Thursday, August 27th, 2026' }).click()
+  await expect(
+    page.getByRole('gridcell', { name: /Thursday, August 27th, 2026/u }),
+  ).toHaveAttribute('aria-selected', 'true')
+
+  const carousel = page.getByRole('region', { name: 'Component families' })
+  const previous = carousel.getByRole('button', { name: 'Previous slide' })
+  await expect(previous).toBeDisabled()
+  await carousel.getByRole('button', { name: 'Next slide' }).click()
+  await expect(previous).toBeEnabled()
+
+  const pagination = page.locator('[data-component="pagination"]')
+  await pagination.scrollIntoViewIfNeeded()
+  const before = await page.evaluate(() => ({ href: location.href, scrollY }))
+  await pagination.getByRole('button', { name: '2' }).click()
+  await expect(pagination.getByRole('button', { name: '2' })).toHaveAttribute(
+    'aria-current',
+    'page',
+  )
+  await expect.poll(() => page.evaluate(() => ({ href: location.href, scrollY }))).toEqual(before)
 })
 
 test('theme editing, mode, history, saving, import, and export remain live', async ({
@@ -385,6 +450,10 @@ test('all starter modes have no serious automated accessibility violations', asy
   expect(accordionDurations).toEqual(
     accordionDurations.map(() => ({ animation: '0s', transition: '0s' })),
   )
+  await page.addStyleTag({
+    content:
+      '*, *::before, *::after { transition-delay: 0s !important; transition-duration: 0s !important; }',
+  })
   const starters = {
     Atelier: { slug: 'atelier', light: 'oklch(0.52 0.2 28)', dark: 'oklch(0.72 0.19 32)' },
     Observatory: {
