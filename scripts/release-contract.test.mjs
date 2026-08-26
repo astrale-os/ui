@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict'
+import { execFileSync } from 'node:child_process'
 import { access, readFile } from 'node:fs/promises'
 import test from 'node:test'
 
@@ -113,6 +114,26 @@ test('publishes exactly one public npm package from the Release Please commit us
   assert.equal(manifest.publishConfig.access, 'public')
 })
 
+test('declares one credential-free public registry policy for local package operations', async () => {
+  const npmrc = await readFile('.npmrc', 'utf8')
+  const configuration = npmrc
+    .split('\n')
+    .map((line) => line.trim())
+    .filter((line) => line && !line.startsWith('#'))
+  assert.deepEqual(configuration, [
+    '@jsr:registry=https://npm.jsr.io',
+    'registry=https://registry.npmjs.org',
+    '@astrale-os:registry=https://registry.npmjs.org',
+  ])
+  assert.doesNotMatch(npmrc, /(?:npm\.pkg\.github\.com|authToken|always-auth|\$\{)/iu)
+  assert.deepEqual(
+    execFileSync('git', ['ls-files', '.npmrc', '**/.npmrc'], { encoding: 'utf8' })
+      .trim()
+      .split('\n'),
+    ['.npmrc'],
+  )
+})
+
 test('removes all legacy publishable package manifests', async () => {
   for (const directory of ['constants', 'utils', 'styles', 'preset', 'components', 'ui']) {
     assert.equal(
@@ -139,6 +160,22 @@ test('tracks the strict lock policy and pinned repository toolchain', async () =
   assert.match(workspace, /^trustLockfile: false$/mu)
   assert.doesNotMatch(workspace, /^overrides:/mu)
   assert.match(lock, /^lockfileVersion:/mu)
+  assert.doesNotMatch(lock, /npm\.pkg\.github\.com/u)
+  const locatorValues = [...lock.matchAll(/^\s+(?:specifier|version|tarball):\s+([^\s]+)$/gmu)].map(
+    (match) => match[1].replace(/^['"]|['"]$/gu, ''),
+  )
+  assert.deepEqual(
+    locatorValues.filter((value) => value.startsWith('file:')),
+    [],
+  )
+  assert.deepEqual(
+    locatorValues.filter((value) => value.startsWith('link:')),
+    ['link:../packages/ui', 'link:../packages/ui'],
+  )
+  const tarballs = [...lock.matchAll(/\btarball: ([^\s},]+)/gu)].map((match) => match[1])
+  assert.equal(tarballs.length, 2)
+  assert.deepEqual([...new Set(tarballs.map((value) => new URL(value).protocol))], ['https:'])
+  assert.deepEqual([...new Set(tarballs.map((value) => new URL(value).hostname))], ['npm.jsr.io'])
   assert.equal(root.devDependencies.oxfmt, '0.63.0')
   assert.equal(root.devDependencies.oxlint, '1.78.0')
 })
