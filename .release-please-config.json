@@ -7,9 +7,18 @@
   "always-update": true,
   "include-component-in-tag": false,
   "packages": {
-    "packages/ui": {
+    ".": {
       "component": "ui",
-      "package-name": "@astrale-os/ui"
+      "package-name": "@astrale-os/ui",
+      "exclude-paths": [".history", ".release"],
+      "changelog-path": "packages/ui/CHANGELOG.md",
+      "extra-files": [
+        {
+          "type": "json",
+          "path": "packages/ui/package.json",
+          "jsonpath": "$.version"
+        }
+      ]
     }
   },
   "changelog-sections": [

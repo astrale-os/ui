@@ -1,6 +1,6 @@
 {
   "name": "@astrale-os/ui-workspace",
-  "version": "0.3.0-beta.0",
+  "version": "0.3.0-beta.3",
   "private": true,
   "repository": {
     "type": "git",
@@ -16,7 +16,7 @@
     "format": "pnpm exec oxfmt --write .",
     "format:check": "pnpm exec oxfmt --check .",
     "test": "pnpm run test:contracts && pnpm run test:components",
-    "test:contracts": "node --test scripts/*.test.mjs",
+    "test:contracts": "node --test scripts/*.test.mjs .release/*.test.mjs",
     "test:components": "pnpm --filter @astrale-os/ui test",
     "test:registry-behavior": "pnpm --filter @astrale-os/ui-registry-workspace test",
     "test:security": "node scripts/security-policy.mjs",
