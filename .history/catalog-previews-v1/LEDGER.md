@@ -79,6 +79,7 @@ This table tracks review-sized groups only. Item-level truth must come from `cat
 | CP-G05 | closed | One preview failure can invalidate the shared render surface           | catalog/isolation   | Scene-local module and render failure proofs                  |
 | CP-G06 | closed | Preview source/example provenance is not a first-class admission rule  | upstream/catalog    | Generated pinned source map and exact runtime admission       |
 | CP-G07 | closed | Browser tests are hand-authored against the current centralized layout | playground/tests    | Path-derived 112-scene desktop/mobile matrix                  |
+| CP-G08 | in-progress | One continuous overview makes components, patterns, and blocks hard to navigate | playground/catalog | Three derived URL-backed kind tabs plus complete browser regression |
 
 ## Defects encountered during implementation
 
@@ -89,6 +90,7 @@ Add rows; never repair product source inside a preview.
 | CP-B01 | closed | External preview add/remove did not invalidate Vite glob | playground/Vite | File watcher invalidates descriptor module and reloads | Live add/remove probe without server restart |
 | CP-B02 | closed | Failed ESM imports cannot retry in the same document | catalog/error contract | Module failures offer reload; render failures retry locally | Unit and browser failure proofs |
 | CP-B03 | closed | Preview classes changed published `theme.css` through automatic scanning | package/theme build | `source(none)` plus explicit runtime source root | Exact baseline comparison; only dead `.visible` utility removed |
+| CP-B04 | closed | Generic child `max-width: 100%` overrode sourced block constraints such as `max-w-2xl` | playground canvas | Remove the high-specificity maximum; viewport canvas owns width and centering only | Live computed-style probe: Team 672px and Sign-in 448px, both centered |
 
 ## Evidence log
 

@@ -87,12 +87,24 @@ textarea {
   border-bottom: 1px solid var(--ui-border);
   background: color-mix(in oklab, var(--ui-background) 92%, transparent);
   padding: 0.75rem clamp(1rem, 5vw, 5rem);
+  padding-right: 11rem;
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
 }
 
 .catalog-search {
+  margin-left: auto;
   width: min(28rem, 100%);
+}
+
+.catalog-panel {
+  min-width: 0;
+}
+
+.preview-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 .section-heading h2 {
@@ -187,7 +199,7 @@ textarea {
 }
 
 .specimen-content > * {
-  max-width: 100%;
+  min-width: 0;
 }
 
 .preview-placeholder {
@@ -205,6 +217,11 @@ textarea {
 
 .preview-card--viewport .specimen-content {
   min-height: 18rem;
+  align-items: center;
+}
+
+.preview-card--viewport .specimen-content > * {
+  width: 100%;
 }
 
 .specimen-content > [data-slot='input'],
@@ -427,6 +444,9 @@ body:has(.theme-drawer-popup) [data-slot='drawer-overlay'] {
     align-items: stretch;
     flex-direction: column;
     padding-right: 9.5rem;
+  }
+  .catalog-search {
+    margin-left: 0;
   }
 }
 

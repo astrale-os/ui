@@ -13,6 +13,7 @@ const buttonChunk = Object.entries(manifest).find(([source]) =>
 )?.[1].file
 
 test('production chunks stay isolated, load near the viewport once, and preserve scroll geometry', async ({
+  browser,
   page,
 }) => {
   test.setTimeout(60_000)
@@ -35,6 +36,12 @@ test('production chunks stay isolated, load near the viewport once, and preserve
   page.on('request', (request) => requests.push(new URL(request.url()).pathname.slice(1)))
 
   await page.goto('/')
+  const catalogSections = page.getByLabel('Catalog sections')
+  await catalogSections.getByRole('tab', { name: 'Blocks' }).click()
+  await expect(catalogSections.getByRole('tab', { name: 'Blocks' })).toHaveAttribute(
+    'aria-selected',
+    'true',
+  )
   const distant = page.locator('[data-preview-address="block/settings/team"]')
   await expect(distant).toHaveAttribute('data-preview-status', 'idle')
   expect(requests).not.toContain(teamChunk)
@@ -70,16 +77,25 @@ test('production chunks stay isolated, load near the viewport once, and preserve
   await expect.poll(() => page.evaluate(() => scrollY)).toBeCloseTo(loadingScroll, 0)
   const readyHeight = await distant.evaluate((element) => element.getBoundingClientRect().height)
   expect(Math.abs(readyHeight - loadingGeometry.height)).toBeLessThan(64)
-  await page.locator('[data-preview-address="component/button"]').scrollIntoViewIfNeeded()
+  await page
+    .locator('[data-preview-address="block/application-shell/compact-command"]')
+    .scrollIntoViewIfNeeded()
   await distant.scrollIntoViewIfNeeded()
   expect(requests.filter((request) => request === teamChunk)).toHaveLength(1)
 
-  requests.length = 0
-  await page.goto('/?preview=component%2Fbutton%23default')
-  await expect(page.locator('[data-preview-address="component/button"]')).toHaveAttribute(
+  const isolatedContext = await browser.newContext()
+  const isolatedPage = await isolatedContext.newPage()
+  const isolatedRequests: string[] = []
+  isolatedPage.on('request', (request) =>
+    isolatedRequests.push(new URL(request.url()).pathname.slice(1)),
+  )
+  const origin = new URL(page.url()).origin
+  await isolatedPage.goto(`${origin}/?preview=component%2Fbutton%23default`)
+  await expect(isolatedPage.locator('[data-preview-address="component/button"]')).toHaveAttribute(
     'data-preview-status',
     'ready',
   )
-  expect(requests).toContain(buttonChunk)
-  expect(requests).not.toContain(teamChunk)
+  expect(isolatedRequests).toContain(buttonChunk)
+  expect(isolatedRequests).not.toContain(teamChunk)
+  await isolatedContext.close()
 })

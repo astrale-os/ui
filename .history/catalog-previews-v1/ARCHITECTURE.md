@@ -207,13 +207,29 @@ canvases. Its threshold is tuned from browser evidence, not copied as a magic pi
 
 ## Catalog presentation
 
-The overview renders one canonical preview per item. A family view renders every item and its named
-scenes. An isolated address renders one scene at full available width for blocks, debugging, and
-stable browser qualification.
+The sticky catalog header exposes three URL-backed tabs: Components, Patterns, and Blocks. The
+overview for the active kind renders one canonical preview per item. Component families use the
+intentional authoring order Actions & inputs, Content & feedback, Menus & overlays, Navigation &
+layout, then Registry components; pattern and block families sort by their stable family names. A
+family view renders every item and its named scenes. An isolated address renders one scene at full
+available width for blocks, debugging, and stable browser qualification.
 
 Navigation uses native URL state and anchors; V1 does not add a router. Search, family selection, and
 direct preview identity are linkable without allowing specimen links or pagination examples to
-navigate the playground accidentally.
+navigate the playground accidentally. Before an in-playground navigation, the current history entry
+records its scroll position and nearest semantic anchor. The Back control calls native history when
+there is an in-playground parent; browser Back follows the same path. Restoration reapplies the
+anchor's viewport offset after React renders, which remains stable when lazy scenes above it change
+document height. A directly loaded family or preview falls back to its owning top-level kind rather
+than leaving the playground.
+
+Each non-isolated card exposes a small eye action with an accessible `View <title> preview` name.
+The overview derives the total scene count for that exact address and renders a subtle Badge only
+when the count exceeds one; a single canonical scene never advertises a misleading count.
+
+The generic `viewport` canvas stretches its immediate preview owner to the available width and
+centers it. It must not set a child `max-width`: sourced block constraints such as `max-w-md` and
+`max-w-2xl` remain authoritative while unconstrained application shells use the full canvas.
 
 The shadcn/studio Alert gallery is a useful presentation reference for compact variations: many
 small scenes can share a responsive grid. Astrale does not force that grid onto charts, calendars,
