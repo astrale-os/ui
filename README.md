@@ -5,12 +5,14 @@ Astrale UI is one public React package plus an owned shadcn-compatible source re
 - `@astrale-os/ui` provides accessible runtime components and semantic theme contracts.
 - `pattern/*` registry items provide reusable controlled interaction and presentation source.
 - `block/*` registry items provide complete, off-the-shelf feature-region source.
+- `theme/*` registry items provide portable light/dark character source that projects to CSS.
 - `astrale ui` initializes projects and installs source from one immutable release snapshot.
 
 Base UI is the internal behavioral engine and Nova is the pinned shadcn style profile. Neither is
 part of Astrale's public API. Runtime components preserve stable `data-slot` anatomy and expose
-their relevant parts; installed patterns and blocks belong to the host application and expose root
-`className`, `style`, controlled state, and injected actions.
+their relevant parts; installed patterns, blocks, and themes belong to the host application.
+Compositions expose root `className`, `style`, controlled state, and injected actions; themes expose
+the complete semantic token vocabulary in editable CSS.
 
 ## Install
 
@@ -47,7 +49,15 @@ Install consumer-owned compositions without adding them to the runtime package:
 astrale ui list chart
 astrale ui list line-basic --json
 astrale ui add pattern/chart/line-basic block/dashboard/overview
+astrale ui add theme/observatory
 astrale ui doctor
+```
+
+The playground can also export a custom theme as JSON plus CSS. Install the exported CSS from the
+project root with one command:
+
+```bash
+astrale ui add ./my-theme.css
 ```
 
 Ordinary add never overwrites local edits. The project lock records the exact npm version, Git tag,
@@ -70,7 +80,9 @@ packages/ui/                 one public runtime package
 registry/
   patterns/<family>/         multiple controlled variants per family
   blocks/<family>/           complete application-region compositions
-catalog/                     private visual, keyboard, and accessibility proof
+  themes/                    portable documents and generated consumer-owned CSS
+playground/                  complete living catalog and theme-authoring workbench
+tooling/theme-document/      portable admission and deterministic CSS projection
 .history/public-ui-v1/       migration goal, decisions, defects, and acceptance ledgers
 ```
 
@@ -85,8 +97,9 @@ pnpm check
 pnpm qualify
 ```
 
-`pnpm qualify` covers contracts, component behavior, the source registry, a clean packed-package
-consumer and tree-shaking budget, the catalog build, and Chromium accessibility/interaction tests.
+`pnpm qualify` covers contracts, component behavior, portable themes, the source registry, a clean
+packed-package consumer and tree-shaking budget, the playground build, and Chromium
+accessibility/interaction tests.
 
 Releases are managed as one Release Please package and one `v<version>` tag. The publish workflow
 admits the exact tag and package version, reruns qualification, then publishes publicly to npm using

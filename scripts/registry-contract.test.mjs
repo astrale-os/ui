@@ -42,9 +42,9 @@ test('registry aggregation explicitly owns every family and exact item once', as
   const root = JSON.parse(await readFile(rootPath, 'utf8'))
   const publicRoot = JSON.parse(await readFile(publicRootPath, 'utf8'))
   assert.equal(source.shadcn, '4.18.0')
-  assert.equal(source.includes.length, 20)
+  assert.equal(source.includes.length, 21)
   assert.equal(new Set(source.includes).size, source.includes.length)
-  assert.equal(publicRoot.include.length, 21)
+  assert.equal(publicRoot.include.length, 22)
   assert.equal(publicRoot.include[0], 'registry/base/registry.json')
   assert.deepEqual(
     publicRoot.include.slice(1).sort(),
@@ -52,7 +52,7 @@ test('registry aggregation explicitly owns every family and exact item once', as
   )
 
   const familyItems = await readFamilyItems()
-  assert.equal(root.items.length, 49)
+  assert.equal(root.items.length, 52)
   assert.deepEqual(
     root.items.map((item) => item.name).sort(),
     familyItems.map((item) => item.name).sort(),
@@ -67,19 +67,38 @@ test('registry aggregation explicitly owns every family and exact item once', as
 test('every registry item is independently bounded, controlled, and safe to install', async () => {
   const items = await readFamilyItems()
   for (const item of items) {
-    assert.match(item.name, /^(?:pattern|block)-[a-z0-9-]+$/u)
-    assert.match(item.meta.canonicalAddress, /^(?:pattern|block)\/[a-z0-9-]+\/[a-z0-9-/]+$/u)
+    const isTheme = item.meta.canonicalAddress.startsWith('theme/')
+    assert.match(item.name, /^(?:pattern|block|theme)-[a-z0-9-]+$/u)
+    assert.match(
+      item.meta.canonicalAddress,
+      /^(?:(?:pattern|block)\/[a-z0-9-]+\/[a-z0-9-/]+|theme\/[a-z0-9-]+)$/u,
+    )
+    assert.equal(item.type, isTheme ? 'registry:theme' : 'registry:block')
     assert.equal(item.files.length, 1)
     assert.deepEqual(item.dependencies, ['@astrale-os/ui@^0.3.0-beta.0'])
 
     const file = item.files[0]
-    assert.match(file.path, /^[a-z0-9-]+\.tsx$/u)
-    assert.match(file.target, /^components\/astrale\/(?:pattern|block)\//u)
+    assert.match(file.path, isTheme ? /^[a-z0-9-]+\.css$/u : /^[a-z0-9-]+\.tsx$/u)
+    assert.match(
+      file.target,
+      isTheme ? /^components\/astrale\/theme\//u : /^components\/astrale\/(?:pattern|block)\//u,
+    )
     assertSafeRelative(file.path)
     assertSafeRelative(file.target)
     await stat(item.declaredPath)
 
     const itemSource = await readFile(item.declaredPath, 'utf8')
+    if (isTheme) {
+      assert.match(itemSource, /Consumer-owned after installation/u)
+      assert.match(
+        itemSource,
+        new RegExp(`\\[data-ui-theme=['"]${item.meta.canonicalAddress.slice(6)}['"]\\]`),
+      )
+      assert.match(itemSource, /--ui-primary:/u)
+      assert.match(itemSource, /--ui-font-heading:/u)
+      assert.match(itemSource, /--ui-motion-standard:/u)
+      continue
+    }
     const imports = importSpecifiers(itemSource)
     assert.equal(
       imports.every(
@@ -169,6 +188,9 @@ test('registry inventory covers all locked V1 families and block compositions', 
       [...addresses].filter((address) => address.startsWith(`pattern/${family}/`)).length >= 2,
       family,
     )
+  }
+  for (const required of ['theme/atelier', 'theme/observatory', 'theme/terminal']) {
+    assert.ok(addresses.has(required), required)
   }
   for (const required of [
     'block/application-shell/sidebar-header',

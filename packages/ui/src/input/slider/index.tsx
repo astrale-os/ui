@@ -21,19 +21,31 @@ function Slider({
 }) {
   const _values = Array.isArray(value)
     ? value
-    : Array.isArray(defaultValue)
-      ? defaultValue
-      : [min, max]
+    : value !== undefined
+      ? [value]
+      : Array.isArray(defaultValue)
+        ? defaultValue
+        : defaultValue !== undefined
+          ? [defaultValue]
+          : [min]
+  const valueProps =
+    value !== undefined
+      ? { value }
+      : defaultValue !== undefined
+        ? { defaultValue }
+        : { defaultValue: min }
   const { className: controlClassName, ...controlRest } = controlProps ?? {}
   const { className: trackClassName, ...trackRest } = trackProps ?? {}
   const { className: indicatorClassName, ...indicatorRest } = indicatorProps ?? {}
 
   return (
     <SliderPrimitive.Root
-      className={cn('data-horizontal:w-full data-vertical:h-full', className)}
+      className={cn(
+        'data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full',
+        className,
+      )}
       data-slot="slider"
-      defaultValue={defaultValue}
-      value={value}
+      {...valueProps}
       min={min}
       max={max}
       thumbAlignment="edge"
@@ -42,7 +54,7 @@ function Slider({
       <SliderPrimitive.Control
         data-slot="slider-control"
         className={cn(
-          'relative flex w-full touch-none items-center select-none data-disabled:opacity-50 data-vertical:h-full data-vertical:min-h-40 data-vertical:w-auto data-vertical:flex-col',
+          'relative flex w-full touch-none items-center select-none data-disabled:opacity-50 data-[orientation=vertical]:h-full data-[orientation=vertical]:min-h-40 data-[orientation=vertical]:w-auto data-[orientation=vertical]:flex-col',
           controlClassName,
         )}
         {...controlRest}
@@ -50,7 +62,7 @@ function Slider({
         <SliderPrimitive.Track
           data-slot="slider-track"
           className={cn(
-            'relative grow overflow-hidden rounded-full bg-muted select-none data-horizontal:h-1 data-horizontal:w-full data-vertical:h-full data-vertical:w-1',
+            'relative grow overflow-hidden rounded-full bg-muted select-none data-[orientation=horizontal]:h-1 data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-1',
             trackClassName,
           )}
           {...trackRest}
@@ -58,7 +70,7 @@ function Slider({
           <SliderPrimitive.Indicator
             data-slot="slider-range"
             className={cn(
-              'bg-primary select-none data-horizontal:h-full data-vertical:w-full',
+              'bg-primary select-none data-[orientation=horizontal]:h-full data-[orientation=vertical]:w-full',
               indicatorClassName,
             )}
             {...indicatorRest}
@@ -70,6 +82,15 @@ function Slider({
           const { className: thumbClassName, ...thumbRest } = resolvedThumbProps ?? {}
           return (
             <SliderPrimitive.Thumb
+              aria-label={
+                thumbRest['aria-label'] ??
+                (typeof props['aria-label'] === 'string'
+                  ? _values.length === 1
+                    ? props['aria-label']
+                    : `${props['aria-label']} ${index + 1}`
+                  : undefined)
+              }
+              aria-labelledby={thumbRest['aria-labelledby'] ?? props['aria-labelledby']}
               data-slot="slider-thumb"
               key={index}
               className={cn(

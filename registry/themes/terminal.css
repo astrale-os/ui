@@ -1,0 +1,82 @@
+/* Generated from terminal.astrale-theme.json. Consumer-owned after installation. */
+:root,
+[data-ui-preset='terminal'],
+[data-ui-theme='terminal'] {
+  color-scheme: light;
+  --ui-background: oklch(0.972 0.004 220);
+  --ui-foreground: oklch(0.16 0.015 220);
+  --ui-card: oklch(0.992 0.002 220);
+  --ui-card-foreground: oklch(0.16 0.015 220);
+  --ui-popover: oklch(0.995 0.002 220);
+  --ui-popover-foreground: oklch(0.16 0.015 220);
+  --ui-primary: oklch(0.43 0.12 205);
+  --ui-primary-foreground: oklch(0.98 0 0);
+  --ui-secondary: oklch(0.9 0.012 220);
+  --ui-secondary-foreground: oklch(0.16 0.015 220);
+  --ui-muted: oklch(0.92 0.008 220);
+  --ui-muted-foreground: oklch(0.44 0.025 220);
+  --ui-accent: oklch(0.86 0.08 95);
+  --ui-accent-foreground: oklch(0.19 0.02 220);
+  --ui-destructive: oklch(0.45 0.19 28);
+  --ui-destructive-foreground: oklch(0.98 0 0);
+  --ui-border: oklch(0.78 0.018 220);
+  --ui-input: oklch(0.8 0.018 220);
+  --ui-ring: oklch(0.52 0.12 205);
+  --ui-chart-1: oklch(0.52 0.15 205);
+  --ui-chart-2: oklch(0.62 0.14 150);
+  --ui-chart-3: oklch(0.68 0.16 85);
+  --ui-chart-4: oklch(0.58 0.17 25);
+  --ui-chart-5: oklch(0.5 0.12 285);
+  --ui-radius: 0.25rem;
+  --ui-radius-panel: 0.35rem;
+  --ui-control-height: 2rem;
+  --ui-control-height-sm: 1.75rem;
+  --ui-control-height-lg: 2.25rem;
+  --ui-font-body: 'IBM Plex Sans Condensed', 'Arial Narrow', ui-sans-serif, sans-serif;
+  --ui-font-heading: 'IBM Plex Mono', 'SFMono-Regular', ui-monospace, monospace;
+  --ui-shadow-control: none;
+  --ui-shadow-panel: 0 1px 0 oklch(0.16 0.015 220 / 0.16);
+  --ui-motion-fast: 80ms;
+  --ui-motion-standard: 120ms;
+}
+
+:root.dark,
+[data-ui-preset='terminal'].dark,
+[data-ui-theme='terminal'].dark {
+  color-scheme: dark;
+  --ui-background: oklch(0.13 0.015 220);
+  --ui-foreground: oklch(0.98 0.006 200);
+  --ui-card: oklch(0.17 0.018 220);
+  --ui-card-foreground: oklch(0.98 0.006 200);
+  --ui-popover: oklch(0.17 0.018 220);
+  --ui-popover-foreground: oklch(0.98 0.006 200);
+  --ui-primary: oklch(0.72 0.14 195);
+  --ui-primary-foreground: oklch(0.12 0.015 220);
+  --ui-secondary: oklch(0.23 0.018 220);
+  --ui-secondary-foreground: oklch(0.98 0.006 200);
+  --ui-muted: oklch(0.21 0.016 220);
+  --ui-muted-foreground: oklch(0.76 0.02 205);
+  --ui-accent: oklch(0.42 0.09 95);
+  --ui-accent-foreground: oklch(0.95 0.01 95);
+  --ui-destructive: oklch(0.8 0.15 28);
+  --ui-destructive-foreground: oklch(0.98 0 0);
+  --ui-border: oklch(0.32 0.02 220);
+  --ui-input: oklch(0.3 0.02 220);
+  --ui-ring: oklch(0.67 0.13 195);
+  --ui-chart-1: oklch(0.68 0.14 195);
+  --ui-chart-2: oklch(0.68 0.13 150);
+  --ui-chart-3: oklch(0.73 0.15 85);
+  --ui-chart-4: oklch(0.7 0.15 25);
+  --ui-chart-5: oklch(0.65 0.12 285);
+  --ui-radius: 0.25rem;
+  --ui-radius-panel: 0.35rem;
+  --ui-control-height: 2rem;
+  --ui-control-height-sm: 1.75rem;
+  --ui-control-height-lg: 2.25rem;
+  --ui-font-body: 'IBM Plex Sans Condensed', 'Arial Narrow', ui-sans-serif, sans-serif;
+  --ui-font-heading: 'IBM Plex Mono', 'SFMono-Regular', ui-monospace, monospace;
+  --ui-shadow-control: none;
+  --ui-shadow-panel: 0 1px 0 oklch(0.16 0.015 220 / 0.16);
+  --ui-motion-fast: 80ms;
+  --ui-motion-standard: 120ms;
+}

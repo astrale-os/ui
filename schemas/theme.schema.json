@@ -1,0 +1,182 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/astrale-os/ui/main/schemas/theme.schema.json",
+  "title": "Astrale portable theme",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "$schema",
+    "version",
+    "name",
+    "label",
+    "description",
+    "appearance",
+    "typography",
+    "geometry",
+    "density",
+    "effects",
+    "motion"
+  ],
+  "properties": {
+    "$schema": {
+      "const": "https://raw.githubusercontent.com/astrale-os/ui/main/schemas/theme.schema.json"
+    },
+    "version": { "const": 1 },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+    },
+    "label": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80,
+      "pattern": "^[^{}<>\\\\\\n\\r]+$"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 240,
+      "pattern": "^[^{}<>\\\\\\n\\r]*$"
+    },
+    "appearance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["light", "dark"],
+      "properties": {
+        "light": { "$ref": "#/$defs/mode" },
+        "dark": { "$ref": "#/$defs/mode" }
+      }
+    },
+    "typography": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["body", "heading"],
+      "properties": {
+        "body": { "$ref": "#/$defs/font" },
+        "heading": { "$ref": "#/$defs/font" }
+      }
+    },
+    "geometry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["radius", "panelRadius"],
+      "properties": {
+        "radius": { "$ref": "#/$defs/length" },
+        "panelRadius": { "$ref": "#/$defs/length" }
+      }
+    },
+    "density": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["control", "controlSmall", "controlLarge"],
+      "properties": {
+        "control": { "$ref": "#/$defs/length" },
+        "controlSmall": { "$ref": "#/$defs/length" },
+        "controlLarge": { "$ref": "#/$defs/length" }
+      }
+    },
+    "effects": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["controlShadow", "panelShadow"],
+      "properties": {
+        "controlShadow": { "$ref": "#/$defs/cssValue" },
+        "panelShadow": { "$ref": "#/$defs/cssValue" }
+      }
+    },
+    "motion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fast", "standard"],
+      "properties": {
+        "fast": { "$ref": "#/$defs/duration" },
+        "standard": { "$ref": "#/$defs/duration" }
+      }
+    }
+  },
+  "$defs": {
+    "color": {
+      "type": "string",
+      "minLength": 4,
+      "maxLength": 120,
+      "pattern": "^(?!.*\\/\\*)(?!.*\\*\\/)(?:(?:oklch|rgb|rgba|hsl|hsla)\\(\\s*[+-]?(?:[0-9]|\\.)[0-9+.%degarturn,/\\s-]*\\)|#[0-9A-Fa-f]{3,8})$"
+    },
+    "mode": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "background",
+        "foreground",
+        "card",
+        "cardForeground",
+        "popover",
+        "popoverForeground",
+        "primary",
+        "primaryForeground",
+        "secondary",
+        "secondaryForeground",
+        "muted",
+        "mutedForeground",
+        "accent",
+        "accentForeground",
+        "destructive",
+        "destructiveForeground",
+        "border",
+        "input",
+        "ring",
+        "chart1",
+        "chart2",
+        "chart3",
+        "chart4",
+        "chart5"
+      ],
+      "properties": {
+        "background": { "$ref": "#/$defs/color" },
+        "foreground": { "$ref": "#/$defs/color" },
+        "card": { "$ref": "#/$defs/color" },
+        "cardForeground": { "$ref": "#/$defs/color" },
+        "popover": { "$ref": "#/$defs/color" },
+        "popoverForeground": { "$ref": "#/$defs/color" },
+        "primary": { "$ref": "#/$defs/color" },
+        "primaryForeground": { "$ref": "#/$defs/color" },
+        "secondary": { "$ref": "#/$defs/color" },
+        "secondaryForeground": { "$ref": "#/$defs/color" },
+        "muted": { "$ref": "#/$defs/color" },
+        "mutedForeground": { "$ref": "#/$defs/color" },
+        "accent": { "$ref": "#/$defs/color" },
+        "accentForeground": { "$ref": "#/$defs/color" },
+        "destructive": { "$ref": "#/$defs/color" },
+        "destructiveForeground": { "$ref": "#/$defs/color" },
+        "border": { "$ref": "#/$defs/color" },
+        "input": { "$ref": "#/$defs/color" },
+        "ring": { "$ref": "#/$defs/color" },
+        "chart1": { "$ref": "#/$defs/color" },
+        "chart2": { "$ref": "#/$defs/color" },
+        "chart3": { "$ref": "#/$defs/color" },
+        "chart4": { "$ref": "#/$defs/color" },
+        "chart5": { "$ref": "#/$defs/color" }
+      }
+    },
+    "font": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 240,
+      "pattern": "^(?!.*\\/\\*)(?!.*\\*\\/)[^{};\\\\\\n\\r]{1,240}$"
+    },
+    "length": {
+      "type": "string",
+      "pattern": "^(?:0|[0-9]+(?:\\.[0-9]+)?(?:px|rem|em))$"
+    },
+    "duration": {
+      "type": "string",
+      "pattern": "^(?:0|[0-9]+(?:\\.[0-9]+)?m?s)$"
+    },
+    "cssValue": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 240,
+      "pattern": "^(?!.*\\/\\*)(?!.*\\*\\/)(?:none|(?:inset\\s+)?-?(?:0|[0-9]+(?:\\.[0-9]+)?(?:px|rem|em))(?:\\s|$)[^{};\\\\]+)$"
+    }
+  }
+}

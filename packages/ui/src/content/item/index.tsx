@@ -6,7 +6,9 @@ import * as React from 'react'
 import { cn } from '#astrale-ui/class-name'
 import { Separator } from '#astrale-ui/content/separator'
 
-function ItemGroup({ className, ...props }: React.ComponentProps<'div'>) {
+const ItemGroupContext = React.createContext(false)
+
+function ItemGroup({ className, children, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
       role="list"
@@ -16,7 +18,9 @@ function ItemGroup({ className, ...props }: React.ComponentProps<'div'>) {
         className,
       )}
       {...props}
-    />
+    >
+      <ItemGroupContext.Provider value>{children}</ItemGroupContext.Provider>
+    </div>
   )
 }
 
@@ -60,10 +64,12 @@ function Item({
   render,
   ...props
 }: useRender.ComponentProps<'div'> & VariantProps<typeof itemVariants>) {
+  const grouped = React.useContext(ItemGroupContext)
   return useRender({
     defaultTagName: 'div',
     props: mergeProps<'div'>(
       {
+        role: grouped ? 'listitem' : undefined,
         className: cn(itemVariants({ variant, size, className })),
       },
       props,
