@@ -11,7 +11,7 @@ import { ComboboxSingleBasic } from '../patterns/combobox/single-basic.js'
 afterEach(cleanup)
 
 describe('owned registry compositions', () => {
-  test('chart has a preset-backed default while retaining host token control', () => {
+  test('chart preserves its upstream token expression and accepts host class and token control', () => {
     const { rerender } = render(
       <ChartLineBasic
         data={[

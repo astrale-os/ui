@@ -18,28 +18,17 @@ function HoverCardContent({
   sideOffset = 4,
   align = 'center',
   alignOffset = 4,
-  portalProps,
-  positionerProps,
   ...props
 }: PreviewCardPrimitive.Popup.Props &
-  Pick<PreviewCardPrimitive.Positioner.Props, 'align' | 'alignOffset' | 'side' | 'sideOffset'> & {
-    portalProps?: PreviewCardPrimitive.Portal.Props
-    positionerProps?: Omit<
-      PreviewCardPrimitive.Positioner.Props,
-      'align' | 'alignOffset' | 'side' | 'sideOffset'
-    >
-  }) {
-  const { className: positionerClassName, ...positionerRest } = positionerProps ?? {}
+  Pick<PreviewCardPrimitive.Positioner.Props, 'align' | 'alignOffset' | 'side' | 'sideOffset'>) {
   return (
-    <PreviewCardPrimitive.Portal data-slot="hover-card-portal" {...portalProps}>
+    <PreviewCardPrimitive.Portal data-slot="hover-card-portal">
       <PreviewCardPrimitive.Positioner
-        data-slot="hover-card-positioner"
         align={align}
         alignOffset={alignOffset}
         side={side}
         sideOffset={sideOffset}
-        className={cn('isolate z-50', positionerClassName)}
-        {...positionerRest}
+        className="isolate z-50"
       >
         <PreviewCardPrimitive.Popup
           data-slot="hover-card-content"

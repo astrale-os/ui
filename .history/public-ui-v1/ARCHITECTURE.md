@@ -188,8 +188,9 @@ Rules:
    unpinned same-repository `registryDependencies`.
 5. Catalog and tests may consume public package and registry surfaces; production code never imports
    catalog or test helpers.
-6. No package component depends on a pattern, block, application router, network client, form
-   library, chart library, date library, toast library, or desktop-shell policy.
+6. No package component depends on a pattern, block, application router, network client, or
+   desktop-shell policy. Exact upstream dependencies remain with their runtime source or installable
+   `component/*` registry item and are measured in their owning consumer topology.
 
 ## Public package surface
 
@@ -218,13 +219,13 @@ Package laws:
 - package root and subpaths contain no source-only workspace references;
 - `sideEffects` is false except for explicit CSS files;
 - importing one subpath does not evaluate unrelated component modules;
-- high-level optional libraries never appear in the runtime dependency closure; and
+- external libraries appear only when required by an exact owned upstream source and remain
+  tree-shakeable through flat subpaths; and
 - the tarball contains the public build, CSS, README, license, and notices only.
 
-The package does not install a general-purpose icon library. It owns only the few semantic control
-glyphs required for component behavior, styled through current color and theme metrics. Components
-with product-visible icons expose explicit icon/indicator slots accepting component objects. They do
-not accept string keys, consult a global icon registry, or make an icon provider mandatory.
+The package retains the upstream icon imports exactly. Intake never substitutes an icon, changes its
+classes, or invents an icon-provider contract. Product-specific icon changes require a later explicit
+Astrale revision rather than hidden intake normalization.
 
 The root barrel is supported convenience, not the only performance path. Bundle tests must prove a
 button-only application excludes overlay, chart, calendar, carousel, form, and block code.
@@ -238,8 +239,8 @@ The theme system has four independent layers:
    character.
 3. `presets/*.css` override the full character vocabulary: color, typography, density, geometry,
    radius, border, shadow, motion, focus, and component-specific semantic variables.
-4. `reset.css` is a separately imported reset. No package stylesheet silently installs Tailwind
-   preflight or changes arbitrary host elements.
+4. `reset.css` is a separately imported reset containing the exact pinned Tailwind Preflight plus
+   Astrale's documented host defaults. `theme.css` never imports it implicitly.
 
 Every component exposes stable `data-slot` anatomy and state attributes. Presets may style those
 slots, but component behavior and accessibility remain invariant. Light/dark uses an explicit

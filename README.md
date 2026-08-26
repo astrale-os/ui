@@ -3,6 +3,7 @@
 Astrale UI is one public React package plus an owned shadcn-compatible source registry.
 
 - `@astrale-os/ui` provides accessible runtime components and semantic theme contracts.
+- `component/*` registry items provide exact dependency-heavy or app-owned component source.
 - `pattern/*` registry items provide reusable controlled interaction and presentation source.
 - `block/*` registry items provide complete, off-the-shelf feature-region source.
 - `theme/*` registry items provide portable light/dark character source that projects to CSS.
@@ -30,7 +31,7 @@ Import the semantic theme and one character preset:
 @import '@astrale-os/ui/presets/astrale.css';
 ```
 
-The reset is deliberately opt-in:
+The exact pinned Tailwind Preflight is deliberately opt-in through the reset:
 
 ```css
 @import '@astrale-os/ui/reset.css';
@@ -48,8 +49,10 @@ Install consumer-owned compositions without adding them to the runtime package:
 ```bash
 astrale ui list chart
 astrale ui list line-basic --json
+astrale ui add component/chart component/sidebar
 astrale ui add pattern/chart/line-basic block/dashboard/overview
 astrale ui add theme/observatory
+astrale ui add @ss-components/input-02
 astrale ui doctor
 ```
 
@@ -78,6 +81,7 @@ packages/ui/                 one public runtime package
   src/overlay/               dialogs, sheets, popovers
   src/theme/                 reset, semantic theme, character presets
 registry/
+  components/                 exact installable component source
   patterns/<family>/         multiple controlled variants per family
   blocks/<family>/           complete application-region compositions
   themes/                    portable documents and generated consumer-owned CSS
@@ -100,6 +104,10 @@ pnpm qualify
 
 `pnpm playground:dev` resolves runtime components, theme CSS, and presets directly to their source
 owners, so library edits update through Vite HMR without a package rebuild.
+
+The current provider census and exact source proofs live under `tooling/upstream/providers/`.
+Shadcn is an intake provider rather than a permanent public API; provider addresses such as
+`@ss-components/input-02` fit the same crosswalk and provenance contract.
 
 `pnpm qualify` covers contracts, component behavior, portable themes, the source registry, a clean
 packed-package consumer and tree-shaking budget, the playground build, and Chromium

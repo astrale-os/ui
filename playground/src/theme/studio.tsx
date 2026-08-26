@@ -127,16 +127,22 @@ function download(name: string, type: string, source: string) {
 async function copy(source: string, message: string) {
   try {
     await navigator.clipboard.writeText(source)
-    toast.success(message)
+    toast.add({ title: message, type: 'success' })
   } catch (error) {
-    toast.error('Copy failed', {
+    toast.add({
+      title: 'Copy failed',
       description: error instanceof Error ? error.message : String(error),
+      type: 'error',
     })
   }
 }
 
 function selectItems(values: string[]) {
   return values.map((value) => ({ label: value.split(',')[0]!.replaceAll("'", ''), value }))
+}
+
+function firstSliderValue(value: number | readonly number[]) {
+  return typeof value === 'number' ? value : value[0]!
 }
 
 function DraftInput({
@@ -160,8 +166,10 @@ function DraftInput({
           onCommit(draft)
         } catch (error) {
           setDraft(value)
-          toast.error('Theme value rejected', {
+          toast.add({
+            title: 'Theme value rejected',
             description: error instanceof Error ? error.message : String(error),
+            type: 'error',
           })
         }
       }}
@@ -190,8 +198,10 @@ function DraftTextarea({
           onCommit(draft)
         } catch (error) {
           setDraft(value)
-          toast.error('Theme value rejected', {
+          toast.add({
+            title: 'Theme value rejected',
             description: error instanceof Error ? error.message : String(error),
+            type: 'error',
           })
         }
       }}
@@ -255,10 +265,12 @@ export function ThemeStudio({
     if (!file) return
     try {
       const theme = workspace.importText(await file.text())
-      toast.success(`${theme.label} imported`)
+      toast.add({ title: `${theme.label} imported`, type: 'success' })
     } catch (error) {
-      toast.error('Theme import rejected', {
+      toast.add({
+        title: 'Theme import rejected',
         description: error instanceof Error ? error.message : String(error),
+        type: 'error',
       })
     } finally {
       input.value = ''
@@ -350,10 +362,15 @@ export function ThemeStudio({
               onClick={() => {
                 try {
                   const theme = workspace.save()
-                  toast.success(`${theme.label} saved in this browser`)
+                  toast.add({
+                    title: `${theme.label} saved in this browser`,
+                    type: 'success',
+                  })
                 } catch (error) {
-                  toast.error('Theme save failed', {
+                  toast.add({
+                    title: 'Theme save failed',
                     description: error instanceof Error ? error.message : String(error),
+                    type: 'error',
                   })
                 }
               }}
@@ -478,45 +495,60 @@ export function ThemeStudio({
           <TabsContent value="other">
             <FieldGroup className="theme-tab-panel">
               <Field>
-                <FieldLabel>Corner radius</FieldLabel>
-                <Slider
-                  value={Number.parseFloat(workspace.theme.geometry.radius)}
-                  min={0}
-                  max={1.5}
-                  step={0.05}
-                  onValueChange={(value) =>
-                    workspace.setValue('geometry', 'radius', `${Number(value).toFixed(2)}rem`)
-                  }
-                  aria-label="Corner radius"
-                />
+                <FieldLabel>
+                  Corner radius
+                  <Slider
+                    value={[Number.parseFloat(workspace.theme.geometry.radius)]}
+                    min={0}
+                    max={1.5}
+                    step={0.05}
+                    onValueChange={(value) =>
+                      workspace.setValue(
+                        'geometry',
+                        'radius',
+                        `${firstSliderValue(value).toFixed(2)}rem`,
+                      )
+                    }
+                  />
+                </FieldLabel>
                 <FieldDescription>{workspace.theme.geometry.radius}</FieldDescription>
               </Field>
               <Field>
-                <FieldLabel>Panel radius</FieldLabel>
-                <Slider
-                  value={Number.parseFloat(workspace.theme.geometry.panelRadius)}
-                  min={0}
-                  max={2}
-                  step={0.05}
-                  onValueChange={(value) =>
-                    workspace.setValue('geometry', 'panelRadius', `${Number(value).toFixed(2)}rem`)
-                  }
-                  aria-label="Panel radius"
-                />
+                <FieldLabel>
+                  Panel radius
+                  <Slider
+                    value={[Number.parseFloat(workspace.theme.geometry.panelRadius)]}
+                    min={0}
+                    max={2}
+                    step={0.05}
+                    onValueChange={(value) =>
+                      workspace.setValue(
+                        'geometry',
+                        'panelRadius',
+                        `${firstSliderValue(value).toFixed(2)}rem`,
+                      )
+                    }
+                  />
+                </FieldLabel>
                 <FieldDescription>{workspace.theme.geometry.panelRadius}</FieldDescription>
               </Field>
               <Field>
-                <FieldLabel>Control height</FieldLabel>
-                <Slider
-                  value={Number.parseFloat(workspace.theme.density.control)}
-                  min={1.75}
-                  max={3}
-                  step={0.05}
-                  onValueChange={(value) =>
-                    workspace.setValue('density', 'control', `${Number(value).toFixed(2)}rem`)
-                  }
-                  aria-label="Control height"
-                />
+                <FieldLabel>
+                  Control height
+                  <Slider
+                    value={[Number.parseFloat(workspace.theme.density.control)]}
+                    min={1.75}
+                    max={3}
+                    step={0.05}
+                    onValueChange={(value) =>
+                      workspace.setValue(
+                        'density',
+                        'control',
+                        `${firstSliderValue(value).toFixed(2)}rem`,
+                      )
+                    }
+                  />
+                </FieldLabel>
                 <FieldDescription>{workspace.theme.density.control}</FieldDescription>
               </Field>
               <Field>
@@ -528,17 +560,18 @@ export function ThemeStudio({
                 />
               </Field>
               <Field>
-                <FieldLabel>Motion speed</FieldLabel>
-                <Slider
-                  value={Number.parseFloat(workspace.theme.motion.standard)}
-                  min={0}
-                  max={500}
-                  step={10}
-                  onValueChange={(value) =>
-                    workspace.setValue('motion', 'standard', `${Number(value)}ms`)
-                  }
-                  aria-label="Motion speed"
-                />
+                <FieldLabel>
+                  Motion speed
+                  <Slider
+                    value={[Number.parseFloat(workspace.theme.motion.standard)]}
+                    min={0}
+                    max={500}
+                    step={10}
+                    onValueChange={(value) =>
+                      workspace.setValue('motion', 'standard', `${firstSliderValue(value)}ms`)
+                    }
+                  />
+                </FieldLabel>
                 <FieldDescription>{workspace.theme.motion.standard}</FieldDescription>
               </Field>
             </FieldGroup>

@@ -15,7 +15,7 @@
       "uniqueItems": true,
       "items": {
         "type": "string",
-        "pattern": "^\\./(?:(?:patterns|blocks)/[a-z0-9-]+|themes)/registry\\.json$"
+        "pattern": "^\\./(?:(?:patterns|blocks)/[a-z0-9-]+|components|themes)/registry\\.json$"
       }
     }
   }

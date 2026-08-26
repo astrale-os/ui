@@ -1,0 +1,14 @@
+{
+  "provider": "tailwindcss",
+  "retrievedAt": "2026-08-26",
+  "version": "4.3.3",
+  "styles": [
+    {
+      "address": "tailwindcss/preflight.css",
+      "source": "tooling/upstream/providers/tailwindcss/4.3.3/preflight.css",
+      "sourceDigest": "sha256:ace8310eed6dc5568a56fc16e1d695cf58da7528d81d66d81649e93cce644df6",
+      "implementation": "packages/ui/src/theme/preflight.css",
+      "adaptation": "verbatim"
+    }
+  ]
+}

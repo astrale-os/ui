@@ -1,0 +1,4 @@
+@import '@astrale-os/ui/theme.css';
+
+@source './**/*.{ts,tsx}';
+@source '../../registry/**/*.{ts,tsx}';

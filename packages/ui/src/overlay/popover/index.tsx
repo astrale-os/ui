@@ -17,28 +17,17 @@ function PopoverContent({
   alignOffset = 0,
   side = 'bottom',
   sideOffset = 4,
-  portalProps,
-  positionerProps,
   ...props
 }: PopoverPrimitive.Popup.Props &
-  Pick<PopoverPrimitive.Positioner.Props, 'align' | 'alignOffset' | 'side' | 'sideOffset'> & {
-    portalProps?: PopoverPrimitive.Portal.Props
-    positionerProps?: Omit<
-      PopoverPrimitive.Positioner.Props,
-      'align' | 'alignOffset' | 'side' | 'sideOffset'
-    >
-  }) {
-  const { className: positionerClassName, ...positionerRest } = positionerProps ?? {}
+  Pick<PopoverPrimitive.Positioner.Props, 'align' | 'alignOffset' | 'side' | 'sideOffset'>) {
   return (
-    <PopoverPrimitive.Portal data-slot="popover-portal" {...portalProps}>
+    <PopoverPrimitive.Portal>
       <PopoverPrimitive.Positioner
-        data-slot="popover-positioner"
         align={align}
         alignOffset={alignOffset}
         side={side}
         sideOffset={sideOffset}
-        className={cn('isolate z-50', positionerClassName)}
-        {...positionerRest}
+        className="isolate z-50"
       >
         <PopoverPrimitive.Popup
           data-slot="popover-content"

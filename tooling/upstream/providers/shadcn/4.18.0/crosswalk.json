@@ -1,0 +1,4486 @@
+{
+  "$schema": "../../../../../schemas/upstream-crosswalk.schema.json",
+  "provider": "@shadcn",
+  "snapshot": {
+    "tool": "shadcn",
+    "version": "4.18.0",
+    "profile": {
+      "base": "base",
+      "style": "nova",
+      "resolvedStyle": "base-nova"
+    },
+    "retrievedAt": "2026-08-26"
+  },
+  "items": [
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/index",
+      "name": "index",
+      "upstreamType": "registry:style",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/style",
+      "name": "style",
+      "upstreamType": "registry:style",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/accordion",
+      "name": "accordion",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/accordion",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/accordion.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/alert",
+      "name": "alert",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/alert",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/alert.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/alert-dialog",
+      "name": "alert-dialog",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/alert-dialog",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/alert-dialog.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/aspect-ratio",
+      "name": "aspect-ratio",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/aspect-ratio",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/aspect-ratio.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/avatar",
+      "name": "avatar",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/avatar",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/avatar.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/badge",
+      "name": "badge",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/badge",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/badge.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/breadcrumb",
+      "name": "breadcrumb",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/breadcrumb",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/breadcrumb.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/button",
+      "name": "button",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/button",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/button.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/button-group",
+      "name": "button-group",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/button-group",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/button-group.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/calendar",
+      "name": "calendar",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-registry-component",
+      "owner": "component/calendar",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/calendar.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/card",
+      "name": "card",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/card",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/card.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/carousel",
+      "name": "carousel",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-registry-component",
+      "owner": "component/carousel",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/carousel.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart",
+      "name": "chart",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-registry-component",
+      "owner": "component/chart",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/chart.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/checkbox",
+      "name": "checkbox",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/checkbox",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/checkbox.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/collapsible",
+      "name": "collapsible",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/collapsible",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/collapsible.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/combobox",
+      "name": "combobox",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-registry-component",
+      "owner": "component/combobox",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/combobox.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/command",
+      "name": "command",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/command",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/command.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/context-menu",
+      "name": "context-menu",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/context-menu",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/context-menu.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/dialog",
+      "name": "dialog",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/dialog",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/dialog.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/drawer",
+      "name": "drawer",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/drawer",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/drawer.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/dropdown-menu",
+      "name": "dropdown-menu",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/dropdown-menu",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/dropdown-menu.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/empty",
+      "name": "empty",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/empty",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/empty.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/field",
+      "name": "field",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/field",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/field.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/form",
+      "name": "form",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "no-files-for-profile"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/hover-card",
+      "name": "hover-card",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/hover-card",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/hover-card.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/input",
+      "name": "input",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/input",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/input.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/input-group",
+      "name": "input-group",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/input-group",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/input-group.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/input-otp",
+      "name": "input-otp",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/input-otp",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/input-otp.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/item",
+      "name": "item",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/item",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/item.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/label",
+      "name": "label",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/label",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/label.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/menubar",
+      "name": "menubar",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/menubar",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/menubar.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/navigation-menu",
+      "name": "navigation-menu",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/navigation-menu",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/navigation-menu.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/pagination",
+      "name": "pagination",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/pagination",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/pagination.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/popover",
+      "name": "popover",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/popover",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/popover.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/progress",
+      "name": "progress",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/progress",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/progress.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/radio-group",
+      "name": "radio-group",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/radio-group",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/radio-group.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/resizable",
+      "name": "resizable",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/resizable",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/resizable.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/scroll-area",
+      "name": "scroll-area",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/scroll-area",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/scroll-area.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/select",
+      "name": "select",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/select",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/select.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/separator",
+      "name": "separator",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/separator",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/separator.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/sheet",
+      "name": "sheet",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/sheet",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/sheet.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/sidebar",
+      "name": "sidebar",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-registry-component",
+      "owner": "component/sidebar",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/sidebar.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/skeleton",
+      "name": "skeleton",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/skeleton",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/skeleton.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/slider",
+      "name": "slider",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/slider",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/slider.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/sonner",
+      "name": "sonner",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-registry-component",
+      "owner": "component/sonner",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/sonner.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/spinner",
+      "name": "spinner",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/spinner",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/spinner.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/switch",
+      "name": "switch",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/switch",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/switch.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/table",
+      "name": "table",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/table",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/table.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/tabs",
+      "name": "tabs",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/tabs",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/tabs.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/textarea",
+      "name": "textarea",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/textarea",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/textarea.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/toggle",
+      "name": "toggle",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/toggle",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/toggle.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/toggle-group",
+      "name": "toggle-group",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/toggle-group",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/toggle-group.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/tooltip",
+      "name": "tooltip",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/tooltip",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/tooltip.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/kbd",
+      "name": "kbd",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/kbd",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/kbd.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/native-select",
+      "name": "native-select",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/native-select",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/native-select.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/direction",
+      "name": "direction",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/direction",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/direction.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/attachment",
+      "name": "attachment",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-registry-component",
+      "owner": "component/attachment",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/attachment.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/bubble",
+      "name": "bubble",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-registry-component",
+      "owner": "component/bubble",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/bubble.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/marker",
+      "name": "marker",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-registry-component",
+      "owner": "component/marker",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/marker.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/message",
+      "name": "message",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-registry-component",
+      "owner": "component/message",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/message.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/message-scroller",
+      "name": "message-scroller",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-registry-component",
+      "owner": "component/message-scroller",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/message-scroller.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/dashboard-01",
+      "name": "dashboard-01",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/sidebar-01",
+      "name": "sidebar-01",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/sidebar-02",
+      "name": "sidebar-02",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/sidebar-03",
+      "name": "sidebar-03",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/sidebar-04",
+      "name": "sidebar-04",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/sidebar-05",
+      "name": "sidebar-05",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/sidebar-06",
+      "name": "sidebar-06",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/sidebar-07",
+      "name": "sidebar-07",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/sidebar-08",
+      "name": "sidebar-08",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/sidebar-09",
+      "name": "sidebar-09",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/sidebar-10",
+      "name": "sidebar-10",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/sidebar-11",
+      "name": "sidebar-11",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/sidebar-12",
+      "name": "sidebar-12",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/sidebar-13",
+      "name": "sidebar-13",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/sidebar-14",
+      "name": "sidebar-14",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/sidebar-15",
+      "name": "sidebar-15",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/sidebar-16",
+      "name": "sidebar-16",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/login-01",
+      "name": "login-01",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/login-02",
+      "name": "login-02",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/login-03",
+      "name": "login-03",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/login-04",
+      "name": "login-04",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/login-05",
+      "name": "login-05",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/signup-01",
+      "name": "signup-01",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/signup-02",
+      "name": "signup-02",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/signup-03",
+      "name": "signup-03",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/signup-04",
+      "name": "signup-04",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/signup-05",
+      "name": "signup-05",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-area-axes",
+      "name": "chart-area-axes",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-area-default",
+      "name": "chart-area-default",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-area-gradient",
+      "name": "chart-area-gradient",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-area-icons",
+      "name": "chart-area-icons",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-area-interactive",
+      "name": "chart-area-interactive",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-area-legend",
+      "name": "chart-area-legend",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-area-linear",
+      "name": "chart-area-linear",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-area-stacked-expand",
+      "name": "chart-area-stacked-expand",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-area-stacked",
+      "name": "chart-area-stacked",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-area-step",
+      "name": "chart-area-step",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-bar-active",
+      "name": "chart-bar-active",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-bar-default",
+      "name": "chart-bar-default",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-bar-horizontal",
+      "name": "chart-bar-horizontal",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-bar-interactive",
+      "name": "chart-bar-interactive",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-bar-label-custom",
+      "name": "chart-bar-label-custom",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-bar-label",
+      "name": "chart-bar-label",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-bar-mixed",
+      "name": "chart-bar-mixed",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-bar-multiple",
+      "name": "chart-bar-multiple",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-bar-negative",
+      "name": "chart-bar-negative",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-bar-stacked",
+      "name": "chart-bar-stacked",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-line-default",
+      "name": "chart-line-default",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-line-dots-colors",
+      "name": "chart-line-dots-colors",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-line-dots-custom",
+      "name": "chart-line-dots-custom",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-line-dots",
+      "name": "chart-line-dots",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-line-interactive",
+      "name": "chart-line-interactive",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-line-label-custom",
+      "name": "chart-line-label-custom",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-line-label",
+      "name": "chart-line-label",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-line-linear",
+      "name": "chart-line-linear",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-line-multiple",
+      "name": "chart-line-multiple",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-line-step",
+      "name": "chart-line-step",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-pie-donut-active",
+      "name": "chart-pie-donut-active",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-pie-donut-text",
+      "name": "chart-pie-donut-text",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-pie-donut",
+      "name": "chart-pie-donut",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-pie-interactive",
+      "name": "chart-pie-interactive",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-pie-label-custom",
+      "name": "chart-pie-label-custom",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-pie-label-list",
+      "name": "chart-pie-label-list",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-pie-label",
+      "name": "chart-pie-label",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-pie-legend",
+      "name": "chart-pie-legend",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-pie-separator-none",
+      "name": "chart-pie-separator-none",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-pie-simple",
+      "name": "chart-pie-simple",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-pie-stacked",
+      "name": "chart-pie-stacked",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-radar-default",
+      "name": "chart-radar-default",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-radar-dots",
+      "name": "chart-radar-dots",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-radar-grid-circle-fill",
+      "name": "chart-radar-grid-circle-fill",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-radar-grid-circle-no-lines",
+      "name": "chart-radar-grid-circle-no-lines",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-radar-grid-circle",
+      "name": "chart-radar-grid-circle",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-radar-grid-custom",
+      "name": "chart-radar-grid-custom",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-radar-grid-fill",
+      "name": "chart-radar-grid-fill",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-radar-grid-none",
+      "name": "chart-radar-grid-none",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-radar-icons",
+      "name": "chart-radar-icons",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-radar-label-custom",
+      "name": "chart-radar-label-custom",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-radar-legend",
+      "name": "chart-radar-legend",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-radar-lines-only",
+      "name": "chart-radar-lines-only",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-radar-multiple",
+      "name": "chart-radar-multiple",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-radar-radius",
+      "name": "chart-radar-radius",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-radial-grid",
+      "name": "chart-radial-grid",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-radial-label",
+      "name": "chart-radial-label",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-radial-shape",
+      "name": "chart-radial-shape",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-radial-simple",
+      "name": "chart-radial-simple",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-radial-stacked",
+      "name": "chart-radial-stacked",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-radial-text",
+      "name": "chart-radial-text",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-tooltip-default",
+      "name": "chart-tooltip-default",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-tooltip-indicator-line",
+      "name": "chart-tooltip-indicator-line",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-tooltip-indicator-none",
+      "name": "chart-tooltip-indicator-none",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-tooltip-label-none",
+      "name": "chart-tooltip-label-none",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-tooltip-label-custom",
+      "name": "chart-tooltip-label-custom",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-tooltip-label-formatter",
+      "name": "chart-tooltip-label-formatter",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-tooltip-formatter",
+      "name": "chart-tooltip-formatter",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-tooltip-icons",
+      "name": "chart-tooltip-icons",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-tooltip-advanced",
+      "name": "chart-tooltip-advanced",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/utils",
+      "name": "utils",
+      "upstreamType": "registry:lib",
+      "astraleKind": "headless",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/use-mobile",
+      "name": "use-mobile",
+      "upstreamType": "registry:hook",
+      "astraleKind": "headless",
+      "disposition": "owned-registry-component",
+      "owner": "registry/components/sidebar/use-mobile.ts",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/hooks/use-mobile.ts"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/theme-stone",
+      "name": "theme-stone",
+      "upstreamType": "registry:theme",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/theme-zinc",
+      "name": "theme-zinc",
+      "upstreamType": "registry:theme",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/theme-neutral",
+      "name": "theme-neutral",
+      "upstreamType": "registry:theme",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/theme-gray",
+      "name": "theme-gray",
+      "upstreamType": "registry:theme",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/theme-slate",
+      "name": "theme-slate",
+      "upstreamType": "registry:theme",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/accordion-demo",
+      "name": "accordion-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/alert-demo",
+      "name": "alert-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/alert-destructive",
+      "name": "alert-destructive",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/alert-dialog-demo",
+      "name": "alert-dialog-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/aspect-ratio-demo",
+      "name": "aspect-ratio-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/avatar-demo",
+      "name": "avatar-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/badge-demo",
+      "name": "badge-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/badge-destructive",
+      "name": "badge-destructive",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/badge-outline",
+      "name": "badge-outline",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/badge-secondary",
+      "name": "badge-secondary",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/breadcrumb-demo",
+      "name": "breadcrumb-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/breadcrumb-separator",
+      "name": "breadcrumb-separator",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/breadcrumb-dropdown",
+      "name": "breadcrumb-dropdown",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/breadcrumb-ellipsis",
+      "name": "breadcrumb-ellipsis",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/breadcrumb-link",
+      "name": "breadcrumb-link",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/breadcrumb-responsive",
+      "name": "breadcrumb-responsive",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/button-demo",
+      "name": "button-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/button-default",
+      "name": "button-default",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/button-secondary",
+      "name": "button-secondary",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/button-destructive",
+      "name": "button-destructive",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/button-outline",
+      "name": "button-outline",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/button-ghost",
+      "name": "button-ghost",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/button-link",
+      "name": "button-link",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/button-with-icon",
+      "name": "button-with-icon",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/button-loading",
+      "name": "button-loading",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/button-icon",
+      "name": "button-icon",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/button-as-child",
+      "name": "button-as-child",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/button-rounded",
+      "name": "button-rounded",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/button-size",
+      "name": "button-size",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/button-group-demo",
+      "name": "button-group-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/button-group-nested",
+      "name": "button-group-nested",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/button-group-size",
+      "name": "button-group-size",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/button-group-separator",
+      "name": "button-group-separator",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/button-group-split",
+      "name": "button-group-split",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/button-group-input",
+      "name": "button-group-input",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/button-group-dropdown",
+      "name": "button-group-dropdown",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/button-group-select",
+      "name": "button-group-select",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/button-group-popover",
+      "name": "button-group-popover",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/button-group-input-group",
+      "name": "button-group-input-group",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/button-group-orientation",
+      "name": "button-group-orientation",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/calendar-demo",
+      "name": "calendar-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/card-demo",
+      "name": "card-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/card-with-form",
+      "name": "card-with-form",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/carousel-demo",
+      "name": "carousel-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/carousel-size",
+      "name": "carousel-size",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/carousel-spacing",
+      "name": "carousel-spacing",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/carousel-orientation",
+      "name": "carousel-orientation",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/carousel-api",
+      "name": "carousel-api",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/carousel-plugin",
+      "name": "carousel-plugin",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/checkbox-demo",
+      "name": "checkbox-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/checkbox-disabled",
+      "name": "checkbox-disabled",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/checkbox-with-text",
+      "name": "checkbox-with-text",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/collapsible-demo",
+      "name": "collapsible-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/combobox-demo",
+      "name": "combobox-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/combobox-dropdown-menu",
+      "name": "combobox-dropdown-menu",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/combobox-popover",
+      "name": "combobox-popover",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/combobox-responsive",
+      "name": "combobox-responsive",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/command-demo",
+      "name": "command-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/command-dialog",
+      "name": "command-dialog",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/context-menu-demo",
+      "name": "context-menu-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/data-table-demo",
+      "name": "data-table-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/date-picker-demo",
+      "name": "date-picker-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/date-picker-with-presets",
+      "name": "date-picker-with-presets",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/date-picker-with-range",
+      "name": "date-picker-with-range",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/dialog-demo",
+      "name": "dialog-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/dialog-close-button",
+      "name": "dialog-close-button",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/drawer-demo",
+      "name": "drawer-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/empty-demo",
+      "name": "empty-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/empty-icon",
+      "name": "empty-icon",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/empty-avatar",
+      "name": "empty-avatar",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/empty-avatar-group",
+      "name": "empty-avatar-group",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/empty-input-group",
+      "name": "empty-input-group",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/empty-outline",
+      "name": "empty-outline",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/empty-background",
+      "name": "empty-background",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/field-demo",
+      "name": "field-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/field-input",
+      "name": "field-input",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/field-textarea",
+      "name": "field-textarea",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/field-fieldset",
+      "name": "field-fieldset",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/field-radio",
+      "name": "field-radio",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/field-checkbox",
+      "name": "field-checkbox",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/field-switch",
+      "name": "field-switch",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/field-slider",
+      "name": "field-slider",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/field-select",
+      "name": "field-select",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/field-choice-card",
+      "name": "field-choice-card",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/field-group",
+      "name": "field-group",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/field-responsive",
+      "name": "field-responsive",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/form-next-demo",
+      "name": "form-next-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/form-next-complex",
+      "name": "form-next-complex",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/form-rhf-demo",
+      "name": "form-rhf-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/form-rhf-input",
+      "name": "form-rhf-input",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/form-rhf-select",
+      "name": "form-rhf-select",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/form-rhf-checkbox",
+      "name": "form-rhf-checkbox",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/form-rhf-switch",
+      "name": "form-rhf-switch",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/form-rhf-textarea",
+      "name": "form-rhf-textarea",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/form-rhf-radiogroup",
+      "name": "form-rhf-radiogroup",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/form-rhf-array",
+      "name": "form-rhf-array",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/form-rhf-complex",
+      "name": "form-rhf-complex",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/form-rhf-password",
+      "name": "form-rhf-password",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/form-tanstack-demo",
+      "name": "form-tanstack-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/form-tanstack-input",
+      "name": "form-tanstack-input",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/form-tanstack-textarea",
+      "name": "form-tanstack-textarea",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/form-tanstack-select",
+      "name": "form-tanstack-select",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/form-tanstack-checkbox",
+      "name": "form-tanstack-checkbox",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/form-tanstack-switch",
+      "name": "form-tanstack-switch",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/form-tanstack-radiogroup",
+      "name": "form-tanstack-radiogroup",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/form-tanstack-array",
+      "name": "form-tanstack-array",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/form-tanstack-complex",
+      "name": "form-tanstack-complex",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/form-formisch-demo",
+      "name": "form-formisch-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/form-formisch-input",
+      "name": "form-formisch-input",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/form-formisch-textarea",
+      "name": "form-formisch-textarea",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/form-formisch-select",
+      "name": "form-formisch-select",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/form-formisch-checkbox",
+      "name": "form-formisch-checkbox",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/form-formisch-radiogroup",
+      "name": "form-formisch-radiogroup",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/form-formisch-switch",
+      "name": "form-formisch-switch",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/form-formisch-array",
+      "name": "form-formisch-array",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/form-formisch-complex",
+      "name": "form-formisch-complex",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/drawer-dialog",
+      "name": "drawer-dialog",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/dropdown-menu-demo",
+      "name": "dropdown-menu-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/dropdown-menu-checkboxes",
+      "name": "dropdown-menu-checkboxes",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/dropdown-menu-radio-group",
+      "name": "dropdown-menu-radio-group",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/dropdown-menu-dialog",
+      "name": "dropdown-menu-dialog",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/hover-card-demo",
+      "name": "hover-card-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/input-demo",
+      "name": "input-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/input-disabled",
+      "name": "input-disabled",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/input-file",
+      "name": "input-file",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/input-with-button",
+      "name": "input-with-button",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/input-with-label",
+      "name": "input-with-label",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/input-with-text",
+      "name": "input-with-text",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/input-group-demo",
+      "name": "input-group-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/input-group-label",
+      "name": "input-group-label",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/input-group-text",
+      "name": "input-group-text",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/input-group-tooltip",
+      "name": "input-group-tooltip",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/input-group-button",
+      "name": "input-group-button",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/input-group-button-group",
+      "name": "input-group-button-group",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/input-group-dropdown",
+      "name": "input-group-dropdown",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/input-group-spinner",
+      "name": "input-group-spinner",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/input-group-textarea",
+      "name": "input-group-textarea",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/input-group-icon",
+      "name": "input-group-icon",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/input-group-custom",
+      "name": "input-group-custom",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/input-otp-demo",
+      "name": "input-otp-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/input-otp-pattern",
+      "name": "input-otp-pattern",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/input-otp-separator",
+      "name": "input-otp-separator",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/input-otp-controlled",
+      "name": "input-otp-controlled",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/item-demo",
+      "name": "item-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/item-size",
+      "name": "item-size",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/item-variant",
+      "name": "item-variant",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/item-icon",
+      "name": "item-icon",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/item-image",
+      "name": "item-image",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/item-avatar",
+      "name": "item-avatar",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/item-group",
+      "name": "item-group",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/item-header",
+      "name": "item-header",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/item-dropdown",
+      "name": "item-dropdown",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/item-link",
+      "name": "item-link",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/kbd-demo",
+      "name": "kbd-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/kbd-tooltip",
+      "name": "kbd-tooltip",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/kbd-input-group",
+      "name": "kbd-input-group",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/kbd-button",
+      "name": "kbd-button",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/kbd-group",
+      "name": "kbd-group",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/label-demo",
+      "name": "label-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/menubar-demo",
+      "name": "menubar-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/navigation-menu-demo",
+      "name": "navigation-menu-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/native-select-demo",
+      "name": "native-select-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/native-select-groups",
+      "name": "native-select-groups",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/native-select-disabled",
+      "name": "native-select-disabled",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/native-select-invalid",
+      "name": "native-select-invalid",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/pagination-demo",
+      "name": "pagination-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/popover-demo",
+      "name": "popover-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/progress-demo",
+      "name": "progress-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/radio-group-demo",
+      "name": "radio-group-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/resizable-demo",
+      "name": "resizable-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/resizable-demo-with-handle",
+      "name": "resizable-demo-with-handle",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/resizable-vertical",
+      "name": "resizable-vertical",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/resizable-handle",
+      "name": "resizable-handle",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/scroll-area-demo",
+      "name": "scroll-area-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/scroll-area-horizontal-demo",
+      "name": "scroll-area-horizontal-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/select-demo",
+      "name": "select-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/select-scrollable",
+      "name": "select-scrollable",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/separator-demo",
+      "name": "separator-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/sheet-demo",
+      "name": "sheet-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/sheet-side",
+      "name": "sheet-side",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/skeleton-demo",
+      "name": "skeleton-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/skeleton-card",
+      "name": "skeleton-card",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/slider-demo",
+      "name": "slider-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/sonner-demo",
+      "name": "sonner-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/sonner-types",
+      "name": "sonner-types",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/spinner-demo",
+      "name": "spinner-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/spinner-basic",
+      "name": "spinner-basic",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/spinner-button",
+      "name": "spinner-button",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/spinner-badge",
+      "name": "spinner-badge",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/spinner-input-group",
+      "name": "spinner-input-group",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/spinner-empty",
+      "name": "spinner-empty",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/spinner-color",
+      "name": "spinner-color",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/spinner-custom",
+      "name": "spinner-custom",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/spinner-size",
+      "name": "spinner-size",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/spinner-item",
+      "name": "spinner-item",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/switch-demo",
+      "name": "switch-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/table-demo",
+      "name": "table-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/tabs-demo",
+      "name": "tabs-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/textarea-demo",
+      "name": "textarea-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/textarea-disabled",
+      "name": "textarea-disabled",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/textarea-with-button",
+      "name": "textarea-with-button",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/textarea-with-label",
+      "name": "textarea-with-label",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/textarea-with-text",
+      "name": "textarea-with-text",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/toggle-group-demo",
+      "name": "toggle-group-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/toggle-group-disabled",
+      "name": "toggle-group-disabled",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/toggle-group-lg",
+      "name": "toggle-group-lg",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/toggle-group-outline",
+      "name": "toggle-group-outline",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/toggle-group-sm",
+      "name": "toggle-group-sm",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/toggle-group-single",
+      "name": "toggle-group-single",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/toggle-group-spacing",
+      "name": "toggle-group-spacing",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/toggle-demo",
+      "name": "toggle-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/toggle-disabled",
+      "name": "toggle-disabled",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/toggle-lg",
+      "name": "toggle-lg",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/toggle-outline",
+      "name": "toggle-outline",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/toggle-sm",
+      "name": "toggle-sm",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/toggle-with-text",
+      "name": "toggle-with-text",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/tooltip-demo",
+      "name": "tooltip-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/typography-blockquote",
+      "name": "typography-blockquote",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/typography-demo",
+      "name": "typography-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/typography-h1",
+      "name": "typography-h1",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/typography-h2",
+      "name": "typography-h2",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/typography-h3",
+      "name": "typography-h3",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/typography-h4",
+      "name": "typography-h4",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/typography-inline-code",
+      "name": "typography-inline-code",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/typography-large",
+      "name": "typography-large",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/typography-lead",
+      "name": "typography-lead",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/typography-list",
+      "name": "typography-list",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/typography-muted",
+      "name": "typography-muted",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/typography-p",
+      "name": "typography-p",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/typography-small",
+      "name": "typography-small",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/typography-table",
+      "name": "typography-table",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/mode-toggle",
+      "name": "mode-toggle",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-bar-demo",
+      "name": "chart-bar-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-bar-demo-grid",
+      "name": "chart-bar-demo-grid",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-bar-demo-axis",
+      "name": "chart-bar-demo-axis",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-bar-demo-tooltip",
+      "name": "chart-bar-demo-tooltip",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-bar-demo-legend",
+      "name": "chart-bar-demo-legend",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-tooltip-demo",
+      "name": "chart-tooltip-demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/calendar-hijri",
+      "name": "calendar-hijri",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/sidebar-demo",
+      "name": "sidebar-demo",
+      "upstreamType": "registry:internal",
+      "astraleKind": "internal",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/sidebar-header",
+      "name": "sidebar-header",
+      "upstreamType": "registry:internal",
+      "astraleKind": "internal",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/sidebar-footer",
+      "name": "sidebar-footer",
+      "upstreamType": "registry:internal",
+      "astraleKind": "internal",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/sidebar-group",
+      "name": "sidebar-group",
+      "upstreamType": "registry:internal",
+      "astraleKind": "internal",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/sidebar-group-collapsible",
+      "name": "sidebar-group-collapsible",
+      "upstreamType": "registry:internal",
+      "astraleKind": "internal",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/sidebar-group-action",
+      "name": "sidebar-group-action",
+      "upstreamType": "registry:internal",
+      "astraleKind": "internal",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/sidebar-menu",
+      "name": "sidebar-menu",
+      "upstreamType": "registry:internal",
+      "astraleKind": "internal",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/sidebar-menu-action",
+      "name": "sidebar-menu-action",
+      "upstreamType": "registry:internal",
+      "astraleKind": "internal",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/sidebar-menu-sub",
+      "name": "sidebar-menu-sub",
+      "upstreamType": "registry:internal",
+      "astraleKind": "internal",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/sidebar-menu-collapsible",
+      "name": "sidebar-menu-collapsible",
+      "upstreamType": "registry:internal",
+      "astraleKind": "internal",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/sidebar-menu-badge",
+      "name": "sidebar-menu-badge",
+      "upstreamType": "registry:internal",
+      "astraleKind": "internal",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/sidebar-rsc",
+      "name": "sidebar-rsc",
+      "upstreamType": "registry:internal",
+      "astraleKind": "internal",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/sidebar-controlled",
+      "name": "sidebar-controlled",
+      "upstreamType": "registry:internal",
+      "astraleKind": "internal",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-geist",
+      "name": "font-geist",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-inter",
+      "name": "font-inter",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-noto-sans",
+      "name": "font-noto-sans",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-nunito-sans",
+      "name": "font-nunito-sans",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-figtree",
+      "name": "font-figtree",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-roboto",
+      "name": "font-roboto",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-raleway",
+      "name": "font-raleway",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-dm-sans",
+      "name": "font-dm-sans",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-public-sans",
+      "name": "font-public-sans",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-outfit",
+      "name": "font-outfit",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-oxanium",
+      "name": "font-oxanium",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-manrope",
+      "name": "font-manrope",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-space-grotesk",
+      "name": "font-space-grotesk",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-montserrat",
+      "name": "font-montserrat",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-ibm-plex-sans",
+      "name": "font-ibm-plex-sans",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-source-sans-3",
+      "name": "font-source-sans-3",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-instrument-sans",
+      "name": "font-instrument-sans",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-jetbrains-mono",
+      "name": "font-jetbrains-mono",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-geist-mono",
+      "name": "font-geist-mono",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-noto-serif",
+      "name": "font-noto-serif",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-roboto-slab",
+      "name": "font-roboto-slab",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-merriweather",
+      "name": "font-merriweather",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-lora",
+      "name": "font-lora",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-playfair-display",
+      "name": "font-playfair-display",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-eb-garamond",
+      "name": "font-eb-garamond",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-instrument-serif",
+      "name": "font-instrument-serif",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-heading-geist",
+      "name": "font-heading-geist",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-heading-inter",
+      "name": "font-heading-inter",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-heading-noto-sans",
+      "name": "font-heading-noto-sans",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-heading-nunito-sans",
+      "name": "font-heading-nunito-sans",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-heading-figtree",
+      "name": "font-heading-figtree",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-heading-roboto",
+      "name": "font-heading-roboto",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-heading-raleway",
+      "name": "font-heading-raleway",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-heading-dm-sans",
+      "name": "font-heading-dm-sans",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-heading-public-sans",
+      "name": "font-heading-public-sans",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-heading-outfit",
+      "name": "font-heading-outfit",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-heading-oxanium",
+      "name": "font-heading-oxanium",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-heading-manrope",
+      "name": "font-heading-manrope",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-heading-space-grotesk",
+      "name": "font-heading-space-grotesk",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-heading-montserrat",
+      "name": "font-heading-montserrat",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-heading-ibm-plex-sans",
+      "name": "font-heading-ibm-plex-sans",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-heading-source-sans-3",
+      "name": "font-heading-source-sans-3",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-heading-instrument-sans",
+      "name": "font-heading-instrument-sans",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-heading-jetbrains-mono",
+      "name": "font-heading-jetbrains-mono",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-heading-geist-mono",
+      "name": "font-heading-geist-mono",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-heading-noto-serif",
+      "name": "font-heading-noto-serif",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-heading-roboto-slab",
+      "name": "font-heading-roboto-slab",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-heading-merriweather",
+      "name": "font-heading-merriweather",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-heading-lora",
+      "name": "font-heading-lora",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-heading-playfair-display",
+      "name": "font-heading-playfair-display",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-heading-eb-garamond",
+      "name": "font-heading-eb-garamond",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/font-heading-instrument-serif",
+      "name": "font-heading-instrument-serif",
+      "upstreamType": "registry:font",
+      "astraleKind": "theme-asset",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/toast",
+      "name": "toast",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-runtime",
+      "owner": "@astrale-os/ui/toast",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/toast.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/questionnaire",
+      "name": "questionnaire",
+      "upstreamType": "registry:ui",
+      "astraleKind": "component",
+      "disposition": "owned-registry-component",
+      "owner": "component/questionnaire",
+      "proof": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/questionnaire.tsx"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/accordion-example",
+      "name": "accordion-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/alert-example",
+      "name": "alert-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/alert-dialog-example",
+      "name": "alert-dialog-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/aspect-ratio-example",
+      "name": "aspect-ratio-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/avatar-example",
+      "name": "avatar-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/badge-example",
+      "name": "badge-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/breadcrumb-example",
+      "name": "breadcrumb-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/button-example",
+      "name": "button-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/button-group-example",
+      "name": "button-group-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/calendar-example",
+      "name": "calendar-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/card-example",
+      "name": "card-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/carousel-example",
+      "name": "carousel-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart-example",
+      "name": "chart-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/checkbox-example",
+      "name": "checkbox-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/collapsible-example",
+      "name": "collapsible-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/combobox-example",
+      "name": "combobox-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/command-example",
+      "name": "command-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/context-menu-example",
+      "name": "context-menu-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/dialog-example",
+      "name": "dialog-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/drawer-example",
+      "name": "drawer-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/dropdown-menu-example",
+      "name": "dropdown-menu-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/empty-example",
+      "name": "empty-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/field-example",
+      "name": "field-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/hover-card-example",
+      "name": "hover-card-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/input-example",
+      "name": "input-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/input-group-example",
+      "name": "input-group-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/input-otp-example",
+      "name": "input-otp-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/item-example",
+      "name": "item-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/kbd-example",
+      "name": "kbd-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/label-example",
+      "name": "label-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/menubar-example",
+      "name": "menubar-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/native-select-example",
+      "name": "native-select-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/navigation-menu-example",
+      "name": "navigation-menu-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/pagination-example",
+      "name": "pagination-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/popover-example",
+      "name": "popover-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/progress-example",
+      "name": "progress-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/radio-group-example",
+      "name": "radio-group-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/resizable-example",
+      "name": "resizable-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/scroll-area-example",
+      "name": "scroll-area-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/select-example",
+      "name": "select-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/separator-example",
+      "name": "separator-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/sheet-example",
+      "name": "sheet-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/sidebar-example",
+      "name": "sidebar-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/sidebar-icon-example",
+      "name": "sidebar-icon-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/sidebar-inset-example",
+      "name": "sidebar-inset-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/sidebar-floating-example",
+      "name": "sidebar-floating-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/skeleton-example",
+      "name": "skeleton-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/slider-example",
+      "name": "slider-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/sonner-example",
+      "name": "sonner-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/spinner-example",
+      "name": "spinner-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/switch-example",
+      "name": "switch-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/table-example",
+      "name": "table-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/tabs-example",
+      "name": "tabs-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/textarea-example",
+      "name": "textarea-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/toast-example",
+      "name": "toast-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/toggle-example",
+      "name": "toggle-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/toggle-group-example",
+      "name": "toggle-group-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/tooltip-example",
+      "name": "tooltip-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/demo",
+      "name": "demo",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/component-example",
+      "name": "component-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/attachment-example",
+      "name": "attachment-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/bubble-example",
+      "name": "bubble-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/message-scroller-example",
+      "name": "message-scroller-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/questionnaire-example",
+      "name": "questionnaire-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/marker-example",
+      "name": "marker-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/message-example",
+      "name": "message-example",
+      "upstreamType": "registry:example",
+      "astraleKind": "specimen",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/example",
+      "name": "example",
+      "upstreamType": "registry:component",
+      "astraleKind": "component",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/preview",
+      "name": "preview",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/preview-02",
+      "name": "preview-02",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/preview-03",
+      "name": "preview-03",
+      "upstreamType": "registry:block",
+      "astraleKind": "block",
+      "disposition": "upstream-reference"
+    }
+  ]
+}

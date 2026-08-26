@@ -31,8 +31,8 @@ Work:
 
 - add target layout and public-export/dependency-direction checks;
 - create pack/consumer fixtures and a registry validation/build harness;
-- add upstream provenance format and mechanically compare the official docs/registry union with
-  `upstream-components.tsv`;
+- add provider-neutral provenance and mechanically compare the global and Base/Nova registry scopes
+  with the committed upstream crosswalk;
 - add a direct dependency ownership/rationale check; and
 - establish initial install, tarball, CSS, and bundle measurements without turning them into
   budgets yet.
@@ -81,16 +81,18 @@ For every owner:
 
 - retrieve the candidate through exact shadcn CLI `4.18.0` and the Base UI/Nova/Tailwind v4 profile;
 - record provenance and digest;
-- normalize public imports, slots, tokens, errors, controlled state, and dependency ownership;
+- adapt only public import routing, formatting, unused imports, and dependency ownership; preserve
+  upstream component APIs, DOM anatomy, icons, classes, and defaults exactly;
 - write public API/type, behavior, keyboard/focus, accessibility, visual, SSR, and package subpath
   evidence; and
 - migrate the real GUI consumer slice where the owner is first needed.
 
 Exit:
 
-- every package-target row in `upstream-components.tsv` is `qualified`;
+- every emitted Base/Nova UI source has an exact digest, an explicit runtime or `component/*`
+  registry owner, and passing fidelity proof;
 - the root and every flat subpath import from a packed clean consumer;
-- direct dependencies have one real owner and no high-level optional library remains;
+- direct dependencies have one real owner and optional composition dependencies remain item-local;
 - root/subpath bundle evidence excludes unrelated owners; and
 - catalog coverage spans every component state and qualified preset.
 

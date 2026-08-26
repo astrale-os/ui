@@ -1,9 +1,9 @@
 import { Dialog as SheetPrimitive } from '@base-ui/react/dialog'
+import { XIcon } from 'lucide-react'
 import * as React from 'react'
 
 import { Button } from '#astrale-ui/action/button'
 import { cn } from '#astrale-ui/class-name'
-import { XIcon } from '#astrale-ui/icon'
 
 function Sheet({ ...props }: SheetPrimitive.Root.Props) {
   return <SheetPrimitive.Root data-slot="sheet" {...props} />
@@ -39,28 +39,14 @@ function SheetContent({
   children,
   side = 'right',
   showCloseButton = true,
-  portalProps,
-  overlayProps,
-  closeProps,
-  closeIcon = <XIcon />,
-  closeIconProps,
-  closeLabel = 'Close',
-  closeLabelProps,
   ...props
 }: SheetPrimitive.Popup.Props & {
   side?: 'top' | 'right' | 'bottom' | 'left'
   showCloseButton?: boolean
-  portalProps?: SheetPrimitive.Portal.Props
-  overlayProps?: SheetPrimitive.Backdrop.Props
-  closeProps?: SheetPrimitive.Close.Props
-  closeIcon?: React.ReactNode
-  closeIconProps?: React.ComponentProps<'span'>
-  closeLabel?: React.ReactNode
-  closeLabelProps?: React.ComponentProps<'span'>
 }) {
   return (
-    <SheetPortal {...portalProps}>
-      <SheetOverlay {...overlayProps} />
+    <SheetPortal>
+      <SheetOverlay />
       <SheetPrimitive.Popup
         data-slot="sheet-content"
         data-side={side}
@@ -75,23 +61,9 @@ function SheetContent({
           <SheetPrimitive.Close
             data-slot="sheet-close"
             render={<Button variant="ghost" className="absolute top-3 right-3" size="icon-sm" />}
-            {...closeProps}
           >
-            <span
-              {...closeIconProps}
-              data-slot="sheet-close-icon"
-              aria-hidden="true"
-              className={cn('contents', closeIconProps?.className)}
-            >
-              {closeIcon}
-            </span>
-            <span
-              {...closeLabelProps}
-              data-slot="sheet-close-label"
-              className={cn('sr-only', closeLabelProps?.className)}
-            >
-              {closeLabel}
-            </span>
+            <XIcon />
+            <span className="sr-only">Close</span>
           </SheetPrimitive.Close>
         )}
       </SheetPrimitive.Popup>
@@ -143,8 +115,6 @@ export {
   Sheet,
   SheetTrigger,
   SheetClose,
-  SheetPortal,
-  SheetOverlay,
   SheetContent,
   SheetHeader,
   SheetFooter,

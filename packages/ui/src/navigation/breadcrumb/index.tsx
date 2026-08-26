@@ -1,9 +1,9 @@
 import { mergeProps } from '@base-ui/react/merge-props'
 import { useRender } from '@base-ui/react/use-render'
+import { ChevronRightIcon, MoreHorizontalIcon } from 'lucide-react'
 import * as React from 'react'
 
 import { cn } from '#astrale-ui/class-name'
-import { ChevronRightIcon, MoreHorizontalIcon } from '#astrale-ui/icon'
 
 function Breadcrumb({ className, ...props }: React.ComponentProps<'nav'>) {
   return <nav aria-label="breadcrumb" data-slot="breadcrumb" className={cn(className)} {...props} />
@@ -85,9 +85,7 @@ function BreadcrumbEllipsis({ className, ...props }: React.ComponentProps<'span'
       {...props}
     >
       <MoreHorizontalIcon />
-      <span data-slot="breadcrumb-ellipsis-label" className="sr-only">
-        More
-      </span>
+      <span className="sr-only">More</span>
     </span>
   )
 }

@@ -1,9 +1,7 @@
-import type { ComponentProps, ReactNode } from 'react'
-
 import { Accordion as AccordionPrimitive } from '@base-ui/react/accordion'
+import { ChevronDownIcon, ChevronUpIcon } from 'lucide-react'
 
 import { cn } from '#astrale-ui/class-name'
-import { ChevronDownIcon, ChevronUpIcon } from '#astrale-ui/icon'
 
 function Accordion({ className, ...props }: AccordionPrimitive.Root.Props) {
   return (
@@ -25,29 +23,9 @@ function AccordionItem({ className, ...props }: AccordionPrimitive.Item.Props) {
   )
 }
 
-function AccordionTrigger({
-  className,
-  children,
-  headerProps,
-  collapsedIcon = <ChevronDownIcon />,
-  expandedIcon = <ChevronUpIcon />,
-  collapsedIconProps,
-  expandedIconProps,
-  ...props
-}: AccordionPrimitive.Trigger.Props & {
-  headerProps?: AccordionPrimitive.Header.Props
-  collapsedIcon?: ReactNode
-  expandedIcon?: ReactNode
-  collapsedIconProps?: ComponentProps<'span'>
-  expandedIconProps?: ComponentProps<'span'>
-}) {
-  const { className: headerClassName, ...headerRest } = headerProps ?? {}
+function AccordionTrigger({ className, children, ...props }: AccordionPrimitive.Trigger.Props) {
   return (
-    <AccordionPrimitive.Header
-      data-slot="accordion-header"
-      className={cn('flex', headerClassName)}
-      {...headerRest}
-    >
+    <AccordionPrimitive.Header className="flex">
       <AccordionPrimitive.Trigger
         data-slot="accordion-trigger"
         className={cn(
@@ -57,54 +35,31 @@ function AccordionTrigger({
         {...props}
       >
         {children}
-        <span
-          {...collapsedIconProps}
+        <ChevronDownIcon
           data-slot="accordion-trigger-icon"
-          className={cn(
-            'pointer-events-none ml-auto size-4 shrink-0 group-aria-expanded/accordion-trigger:hidden',
-            collapsedIconProps?.className,
-          )}
-        >
-          {collapsedIcon}
-        </span>
-        <span
-          {...expandedIconProps}
-          data-slot="accordion-trigger-icon-expanded"
-          className={cn(
-            'pointer-events-none ml-auto hidden size-4 shrink-0 group-aria-expanded/accordion-trigger:inline',
-            expandedIconProps?.className,
-          )}
-        >
-          {expandedIcon}
-        </span>
+          className="pointer-events-none shrink-0 group-aria-expanded/accordion-trigger:hidden"
+        />
+        <ChevronUpIcon
+          data-slot="accordion-trigger-icon"
+          className="pointer-events-none hidden shrink-0 group-aria-expanded/accordion-trigger:inline"
+        />
       </AccordionPrimitive.Trigger>
     </AccordionPrimitive.Header>
   )
 }
 
-function AccordionContent({
-  className,
-  children,
-  contentProps,
-  ...props
-}: AccordionPrimitive.Panel.Props & {
-  contentProps?: ComponentProps<'div'>
-}) {
-  const { className: contentClassName, ...contentRest } = contentProps ?? {}
+function AccordionContent({ className, children, ...props }: AccordionPrimitive.Panel.Props) {
   return (
     <AccordionPrimitive.Panel
       data-slot="accordion-content"
-      className="h-(--accordion-panel-height) overflow-hidden text-sm transition-[height] duration-200 ease-out data-ending-style:h-0 data-starting-style:h-0 motion-reduce:transition-none"
+      className="overflow-hidden text-sm data-open:animate-accordion-down data-closed:animate-accordion-up"
       {...props}
     >
       <div
-        data-slot="accordion-content-inner"
         className={cn(
-          'pt-0 pb-2.5 [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-foreground [&_p:not(:last-child)]:mb-4',
+          'h-(--accordion-panel-height) pt-0 pb-2.5 data-ending-style:h-0 data-starting-style:h-0 [&_a]:underline [&_a]:underline-offset-3 [&_a]:hover:text-foreground [&_p:not(:last-child)]:mb-4',
           className,
-          contentClassName,
         )}
-        {...contentRest}
       >
         {children}
       </div>

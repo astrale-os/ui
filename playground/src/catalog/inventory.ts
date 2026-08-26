@@ -5,20 +5,20 @@ export const componentGroups = [
     components: [
       'button',
       'button-group',
-      'toggle',
-      'toggle-group',
+      'checkbox',
+      'field',
       'input',
       'input-group',
-      'textarea',
-      'checkbox',
-      'switch',
-      'radio-group',
-      'slider',
-      'select',
-      'native-select',
       'input-otp',
-      'field',
       'label',
+      'native-select',
+      'radio-group',
+      'select',
+      'slider',
+      'switch',
+      'textarea',
+      'toggle',
+      'toggle-group',
     ],
   },
   {
@@ -75,4 +75,20 @@ export const componentGroups = [
   },
 ] as const
 
-export const componentNames = componentGroups.flatMap((group) => group.components)
+export const registryComponents = [
+  'attachment',
+  'bubble',
+  'calendar',
+  'carousel',
+  'chart',
+  'combobox',
+  'marker',
+  'message',
+  'message-scroller',
+  'questionnaire',
+  'sidebar',
+  'sonner',
+] as const
+
+export const runtimeComponentNames = componentGroups.flatMap((group) => group.components)
+export const componentNames = [...runtimeComponentNames, ...registryComponents]

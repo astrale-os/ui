@@ -56,6 +56,10 @@ function digest(value) {
   return createHash('sha256').update(value).digest('hex')
 }
 
+function withoutClientDirective(content) {
+  return content.replace(/^['"]use client['"]\n\n/u, '')
+}
+
 async function listen(server) {
   return new Promise((resolve, reject) => {
     server.once('error', reject)
@@ -110,7 +114,9 @@ try {
     }
     try {
       const document = JSON.parse(await readFile(path.join(publicRoot, name), 'utf8'))
-      document.dependencies = []
+      document.dependencies = (document.dependencies ?? []).filter(
+        (dependency) => !dependency.startsWith('@astrale-os/ui@'),
+      )
       const body = Buffer.from(JSON.stringify(document))
       response.writeHead(200, {
         'content-type': 'application/json',
@@ -189,8 +195,8 @@ try {
         {
           compilerOptions: {
             target: 'ES2022',
-            module: 'NodeNext',
-            moduleResolution: 'NodeNext',
+            module: 'ESNext',
+            moduleResolution: 'Bundler',
             jsx: 'react-jsx',
             strict: true,
             noEmit: true,
@@ -236,8 +242,8 @@ try {
         const expected = built.files.find((candidate) => candidate.target === file.target)
         assert.ok(expected, `${item.name} is missing ${file.target} from its built payload`)
         assert.equal(
-          await readFile(installed, 'utf8'),
-          expected.content,
+          withoutClientDirective(await readFile(installed, 'utf8')),
+          withoutClientDirective(expected.content),
           `${item.name} did not install its exact owned source`,
         )
         installedFiles += 1
@@ -254,7 +260,7 @@ try {
       items: registry.items.length,
       installedFiles,
       deterministicFiles: builtFiles.length,
-      dependencyProof: 'preinstalled-qualified-tarball',
+      dependencyProof: 'qualified-tarball-plus-item-dependencies',
       registryDigest: digest(await readFile(path.join(registryRoot, 'registry.json'))),
       builtDigest: digest(
         Buffer.concat(

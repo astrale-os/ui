@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ui.astrale.ai/schemas/upstream-crosswalk.schema.json",
+  "title": "Astrale UI upstream crosswalk",
+  "type": "object",
+  "required": ["provider", "snapshot", "items"],
+  "properties": {
+    "provider": { "type": "string", "minLength": 1 },
+    "snapshot": {
+      "type": "object",
+      "required": ["tool", "version", "profile", "retrievedAt"],
+      "properties": {
+        "tool": { "type": "string" },
+        "version": { "type": "string" },
+        "profile": { "type": "object" },
+        "retrievedAt": { "type": "string", "format": "date" }
+      },
+      "additionalProperties": false
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["provider", "address", "name", "upstreamType", "astraleKind", "disposition"],
+        "properties": {
+          "provider": { "type": "string" },
+          "address": { "type": "string" },
+          "name": { "type": "string" },
+          "upstreamType": { "type": "string" },
+          "astraleKind": {
+            "enum": [
+              "component",
+              "pattern",
+              "block",
+              "specimen",
+              "headless",
+              "theme-asset",
+              "internal"
+            ]
+          },
+          "disposition": {
+            "enum": [
+              "owned-runtime",
+              "owned-registry-component",
+              "owned-runtime-support",
+              "upstream-reference",
+              "no-files-for-profile"
+            ]
+          },
+          "owner": { "type": "string" },
+          "proof": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

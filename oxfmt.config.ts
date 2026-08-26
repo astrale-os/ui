@@ -22,6 +22,9 @@ export default defineConfig({
     'playground/test-results/**',
     'playground/playwright-report/**',
     'artifacts/playground/**',
+    'tooling/upstream/providers/**',
+    'packages/ui/src/theme/preflight.css',
+    'packages/ui/src/theme/shadcn-tailwind.css',
   ],
   sortImports: {
     groups: [

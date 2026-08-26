@@ -22,8 +22,9 @@ commit cannot embed its own final hash. Primary checkouts were not edited.
 
 ## Upstream intake
 
-The runtime intake was created with exact `shadcn@4.18.0`, `base=base`, `style=nova`, and
-`@base-ui/react@1.7.0`. The source union and dispositions live in `upstream-components.tsv`.
+The initial runtime intake used `shadcn@4.18.0`, `base=base`, `style=nova`, and
+`@base-ui/react@1.7.0`. That broad-directory ledger was superseded on 2026-08-26 by exact source
+proofs under `tooling/upstream/providers/`; see [UPSTREAM-INTAKE.md](./UPSTREAM-INTAKE.md).
 
 ## UI proof
 

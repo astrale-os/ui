@@ -1,3 +1,7 @@
+import { useState } from 'react'
+import { Line, LineChart } from 'recharts'
+
+import { Toaster as SonnerToaster } from '../../../registry/components/sonner/sonner'
 import {
   Accordion,
   AccordionContent,
@@ -16,6 +20,11 @@ import {
   AlertDialogTrigger,
   AlertTitle,
   AspectRatio,
+  Attachment,
+  AttachmentContent,
+  AttachmentDescription,
+  AttachmentMedia,
+  AttachmentTitle,
   Avatar,
   AvatarBadge,
   AvatarFallback,
@@ -28,6 +37,9 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
+  Bubble,
+  BubbleContent,
+  BubbleGroup,
   Button,
   ButtonGroup,
   ButtonGroupText,
@@ -38,10 +50,23 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
+  Calendar,
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  ChartContainer,
   Checkbox,
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
+  Combobox,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxList,
   Command,
   CommandEmpty,
   CommandGroup,
@@ -107,6 +132,17 @@ import {
   ItemTitle,
   Kbd,
   Label,
+  Marker,
+  MarkerContent,
+  Message,
+  MessageContent,
+  MessageFooter,
+  MessageHeader,
+  MessageScroller,
+  MessageScrollerContent,
+  MessageScrollerItem,
+  MessageScrollerProvider,
+  MessageScrollerViewport,
   Menubar,
   MenubarContent,
   MenubarGroup,
@@ -131,6 +167,14 @@ import {
   PopoverTitle,
   PopoverTrigger,
   Progress,
+  Questionnaire,
+  QuestionnaireActions,
+  QuestionnaireChoice,
+  QuestionnaireChoices,
+  QuestionnaireItem,
+  QuestionnaireProgress,
+  QuestionnaireSubmit,
+  QuestionnaireTitle,
   RadioGroup,
   RadioGroupItem,
   ResizableHandle,
@@ -151,6 +195,12 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
+  Sidebar,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarProvider,
   Skeleton,
   Slider,
   Spinner,
@@ -175,8 +225,10 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@astrale-os/ui'
-import { useState } from 'react'
+} from './catalog-components'
+import { registryComponents } from './inventory'
+
+const registryComponentNames = new Set<string>(registryComponents)
 
 function Specimen({ name, children }: { name: string; children: React.ReactNode }) {
   return (
@@ -189,7 +241,9 @@ function Specimen({ name, children }: { name: string; children: React.ReactNode 
     >
       <CardHeader>
         <CardTitle>{name}</CardTitle>
-        <CardDescription>@astrale-os/ui/{name}</CardDescription>
+        <CardDescription>
+          {registryComponentNames.has(name) ? `component/${name}` : `@astrale-os/ui/${name}`}
+        </CardDescription>
       </CardHeader>
       <CardContent className="specimen-content">{children}</CardContent>
     </Card>
@@ -201,6 +255,14 @@ const selectItems = [
   { label: 'Staging', value: 'staging' },
 ]
 
+const questionnaireItems = [
+  {
+    choices: [{ value: 'inspect' }, { value: 'implement' }],
+    name: 'next',
+    required: true,
+  },
+] as const
+
 function ActionInputSpecimens() {
   const [switchValue, setSwitchValue] = useState(true)
   const [radio, setRadio] = useState('safe')
@@ -208,10 +270,10 @@ function ActionInputSpecimens() {
     <section id="actions-inputs" className="specimen-section" aria-labelledby="actions-title">
       <div className="section-heading">
         <div>
-          <p className="section-kicker">01 · Runtime components</p>
+          <p className="section-kicker">01 · Components</p>
           <h2 id="actions-title">Actions & inputs</h2>
         </div>
-        <Badge variant="outline">16 owners</Badge>
+        <Badge variant="outline">19 specimens</Badge>
       </div>
       <div className="specimen-grid">
         <Specimen name="button">
@@ -284,7 +346,10 @@ function ActionInputSpecimens() {
         <Specimen name="slider">
           <Field>
             <FieldLabel>Retention</FieldLabel>
-            <Slider value={62} aria-label="Retention" />
+            <Label>
+              Retention
+              <Slider value={[62]} />
+            </Label>
           </Field>
         </Specimen>
         <Specimen name="select">
@@ -337,6 +402,43 @@ function ActionInputSpecimens() {
           <Label htmlFor="plain-label">Explicit native relationship</Label>
           <Input id="plain-label" value="kernel.Identity" readOnly />
         </Specimen>
+        <Specimen name="calendar">
+          <Calendar mode="single" selected={new Date(2026, 7, 26)} />
+        </Specimen>
+        <Specimen name="combobox">
+          <Combobox items={selectItems} defaultValue={selectItems[0]}>
+            <ComboboxInput
+              aria-label="Choose environment"
+              placeholder="Choose environment"
+              showTrigger={false}
+            />
+            <ComboboxContent>
+              <ComboboxEmpty>No environment found.</ComboboxEmpty>
+              <ComboboxList>
+                {selectItems.map((item) => (
+                  <ComboboxItem key={item.value} value={item}>
+                    {item.label}
+                  </ComboboxItem>
+                ))}
+              </ComboboxList>
+            </ComboboxContent>
+          </Combobox>
+        </Specimen>
+        <Specimen name="questionnaire">
+          <Questionnaire defaultItem="next" items={questionnaireItems} onSubmit={() => undefined}>
+            <QuestionnaireProgress />
+            <QuestionnaireItem name="next" required>
+              <QuestionnaireTitle>What should happen next?</QuestionnaireTitle>
+              <QuestionnaireChoices>
+                <QuestionnaireChoice value="inspect">Inspect</QuestionnaireChoice>
+                <QuestionnaireChoice value="implement">Implement</QuestionnaireChoice>
+              </QuestionnaireChoices>
+            </QuestionnaireItem>
+            <QuestionnaireActions>
+              <QuestionnaireSubmit>Continue</QuestionnaireSubmit>
+            </QuestionnaireActions>
+          </Questionnaire>
+        </Specimen>
       </div>
     </section>
   )
@@ -347,10 +449,10 @@ function ContentFeedbackSpecimens() {
     <section id="content-feedback" className="specimen-section" aria-labelledby="content-title">
       <div className="section-heading">
         <div>
-          <p className="section-kicker">02 · Runtime components</p>
+          <p className="section-kicker">02 · Components</p>
           <h2 id="content-title">Content & feedback</h2>
         </div>
-        <Badge variant="outline">14 owners</Badge>
+        <Badge variant="outline">22 specimens</Badge>
       </div>
       <div className="specimen-grid">
         <Specimen name="alert">
@@ -408,7 +510,7 @@ function ContentFeedbackSpecimens() {
           </Empty>
         </Specimen>
         <Specimen name="item">
-          <ItemGroup>
+          <ItemGroup role="group">
             <Item variant="outline">
               <ItemMedia variant="icon">↗</ItemMedia>
               <ItemContent>
@@ -476,10 +578,96 @@ function ContentFeedbackSpecimens() {
         <Specimen name="toast">
           <Button
             variant="outline"
-            onClick={() => toast.success('Theme saved', { description: 'Ready to reuse.' })}
+            onClick={() =>
+              toast.add({
+                title: 'Theme saved',
+                description: 'Ready to reuse.',
+                type: 'success',
+              })
+            }
           >
             Send toast
           </Button>
+        </Specimen>
+        <Specimen name="attachment">
+          <Attachment>
+            <AttachmentMedia>TS</AttachmentMedia>
+            <AttachmentContent>
+              <AttachmentTitle>domain.ts</AttachmentTitle>
+              <AttachmentDescription>12 KB</AttachmentDescription>
+            </AttachmentContent>
+          </Attachment>
+        </Specimen>
+        <Specimen name="bubble">
+          <BubbleGroup>
+            <Bubble variant="muted">
+              <BubbleContent>Runtime source matches its provider proof.</BubbleContent>
+            </Bubble>
+          </BubbleGroup>
+        </Specimen>
+        <Specimen name="carousel">
+          <Carousel aria-label="Component families">
+            <CarouselContent>
+              {['Components', 'Patterns', 'Blocks'].map((label) => (
+                <CarouselItem key={label}>
+                  <Card size="sm">
+                    <CardContent>{label}</CardContent>
+                  </Card>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
+        </Specimen>
+        <Specimen name="chart">
+          <ChartContainer
+            className="w-full"
+            config={{ value: { label: 'Value', color: 'var(--ui-chart-1)' } }}
+            initialDimension={{ width: 320, height: 160 }}
+          >
+            <LineChart
+              accessibilityLayer={false}
+              data={[{ value: 12 }, { value: 28 }, { value: 21 }]}
+            >
+              <Line dataKey="value" stroke="var(--color-value)" />
+            </LineChart>
+          </ChartContainer>
+        </Specimen>
+        <Specimen name="marker">
+          <Marker variant="separator">
+            <MarkerContent>Today</MarkerContent>
+          </Marker>
+        </Specimen>
+        <Specimen name="message">
+          <Message>
+            <MessageContent>
+              <MessageHeader>Astrale UI</MessageHeader>
+              <Bubble variant="muted">
+                <BubbleContent>Exact upstream component anatomy.</BubbleContent>
+              </Bubble>
+              <MessageFooter>Just now</MessageFooter>
+            </MessageContent>
+          </Message>
+        </Specimen>
+        <Specimen name="message-scroller">
+          <MessageScrollerProvider>
+            <MessageScroller className="scroll-specimen">
+              <MessageScrollerViewport>
+                <MessageScrollerContent>
+                  <MessageScrollerItem messageId="catalog-message" scrollAnchor>
+                    <Bubble variant="muted">
+                      <BubbleContent>Scrollable message surface</BubbleContent>
+                    </Bubble>
+                  </MessageScrollerItem>
+                </MessageScrollerContent>
+              </MessageScrollerViewport>
+            </MessageScroller>
+          </MessageScrollerProvider>
+        </Specimen>
+        <Specimen name="sonner">
+          <SonnerToaster />
+          <span>Sonner host mounted</span>
         </Specimen>
       </div>
     </section>
@@ -492,10 +680,10 @@ function NavigationLayoutSpecimens() {
     <section id="navigation-layout" className="specimen-section" aria-labelledby="navigation-title">
       <div className="section-heading">
         <div>
-          <p className="section-kicker">03 · Runtime components</p>
+          <p className="section-kicker">03 · Components</p>
           <h2 id="navigation-title">Navigation & layout</h2>
         </div>
-        <Badge variant="outline">9 owners</Badge>
+        <Badge variant="outline">10 specimens</Badge>
       </div>
       <div className="specimen-grid">
         <Specimen name="accordion">
@@ -598,6 +786,18 @@ function NavigationLayoutSpecimens() {
             <TabsContent value="preview">Behavior remains live.</TabsContent>
           </Tabs>
         </Specimen>
+        <Specimen name="sidebar">
+          <SidebarProvider defaultOpen className="min-h-0">
+            <Sidebar collapsible="none">
+              <SidebarContent>
+                <SidebarGroup>
+                  <SidebarGroupLabel>Catalog</SidebarGroupLabel>
+                  <SidebarGroupContent>Components · Patterns · Blocks</SidebarGroupContent>
+                </SidebarGroup>
+              </SidebarContent>
+            </Sidebar>
+          </SidebarProvider>
+        </Specimen>
       </div>
     </section>
   )
@@ -608,10 +808,10 @@ function MenuOverlaySpecimens() {
     <section id="menus-overlays" className="specimen-section" aria-labelledby="overlay-title">
       <div className="section-heading">
         <div>
-          <p className="section-kicker">04 · Runtime components</p>
+          <p className="section-kicker">04 · Components</p>
           <h2 id="overlay-title">Menus & overlays</h2>
         </div>
-        <Badge variant="outline">11 owners</Badge>
+        <Badge variant="outline">11 specimens</Badge>
       </div>
       <div className="specimen-grid">
         <Specimen name="alert-dialog">

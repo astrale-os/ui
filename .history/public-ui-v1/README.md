@@ -24,7 +24,7 @@ after cutover. The migration may not advance a gate merely because its planned f
 | shadcn CLI             | `pnpm dlx shadcn@latest --version`                                           | `4.18.0`                                          |
 | shadcn project profile | pinned `shadcn init -b base -p nova` disposable intake                         | Base UI, Nova, Tailwind v4, React client components |
 | Base UI                | `@base-ui/react` selected by the pinned intake                                 | `1.7.0`                                          |
-| shadcn registry        | `search @shadcn --type ui --limit 100 --json`                                | 62 exact `registry:ui` items                      |
+| shadcn registry        | union of global and Base/Nova project-scoped search                           | 543 addresses; 63 `registry:ui` entries           |
 | shadcn documentation   | [components index](https://ui.shadcn.com/docs/components)                    | 64 documented surfaces                            |
 | public npm             | isolated direct `registry.npmjs.org` lookups outside the repository `.npmrc` | all six current names return `404`                |
 
@@ -70,8 +70,11 @@ checkout was dirty and behind `origin/main`; it was not modified.
 - [CUSTOMIZATION.md](./CUSTOMIZATION.md) owns the host override, open-part, render, class, style, and
   slot laws for runtime wrappers, patterns, and blocks.
 - [decisions.tsv](./decisions.tsv) is the compact decision and open-blocker ledger.
-- [upstream-components.tsv](./upstream-components.tsv) is the closed shadcn documentation and
-  registry intake inventory.
+- [UPSTREAM-INTAKE.md](./UPSTREAM-INTAKE.md) defines the provider-neutral intake and exact-fidelity
+  contract. The committed catalogs, crosswalk, provenance, and source proofs under
+  `tooling/upstream/providers/` are the mechanical authority.
+- [upstream-components.legacy.tsv](./upstream-components.legacy.tsv) is the superseded 2026-08-25
+  hand-maintained snapshot and is retained only as migration history.
 - [REGISTRY-FAMILIES.md](./REGISTRY-FAMILIES.md) owns the pattern-family and block-family model,
   initial variant obligations, and registry item laws.
 - [CLI-AND-SDK.md](./CLI-AND-SDK.md) owns the target `astrale ui` journey and the zero-weight SDK

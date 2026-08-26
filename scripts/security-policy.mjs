@@ -21,7 +21,7 @@ for (const dependency of productionDependencies) {
   }
   const dependencyManifest = JSON.parse(readFileSync(path.join(directory, 'package.json'), 'utf8'))
   assert.ok(
-    dependencyManifest.license === 'MIT' || dependencyManifest.license === 'Apache-2.0',
+    ['MIT', 'Apache-2.0', 'ISC'].includes(dependencyManifest.license),
     `${dependency}@${dependencyManifest.version} has unapproved license ${dependencyManifest.license}`,
   )
   licenses.set(dependency, dependencyManifest.license)

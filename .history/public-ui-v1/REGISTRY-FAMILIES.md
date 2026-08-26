@@ -6,7 +6,7 @@ Use the lowest category that truthfully owns the surface:
 
 | Category  | Distributed as           | Owns                                                                               | Must not own                                                     |
 | --------- | ------------------------ | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
-| component | `@astrale-os/ui` runtime | stable reusable behavior, accessibility, anatomy, semantic styling                 | application I/O or dependency-heavy feature composition          |
+| component | runtime or registry source | one upstream-faithful reusable component and its declared dependencies              | application I/O or a multi-component product journey              |
 | pattern   | registry source          | one reusable interaction or presentation family with multiple types and variants   | a full application region or hidden external effects             |
 | block     | registry source          | an off-the-shelf page or feature region composed from components and pattern logic | authentication, routing, fetching, persistence, or domain policy |
 | preset    | package CSS subpath      | coherent visual character across every component and registry preview              | component behavior or application theme persistence              |

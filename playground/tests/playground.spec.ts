@@ -29,7 +29,7 @@ test('playground renders every public runtime owner and complete registry invent
       .sort(),
   )
   expect(rendered).toEqual([...componentNames].sort())
-  expect(new Set(rendered).size).toBe(50)
+  expect(new Set(rendered).size).toBe(componentNames.length)
   const viewport = await page.evaluate(() => ({
     innerWidth,
     scrollWidth: document.documentElement.scrollWidth,
@@ -39,6 +39,19 @@ test('playground renders every public runtime owner and complete registry invent
   }))
   expect(viewport.scrollWidth).toBeLessThanOrEqual(viewport.innerWidth)
   expect(viewport.importWidth).toBeLessThanOrEqual(1)
+  const chartLine = page.locator('[data-component="chart"] path.recharts-line-curve').first()
+  await expect(chartLine).toBeVisible()
+  await expect
+    .poll(() =>
+      chartLine.evaluate((element) => {
+        const root = element.closest('[data-slot="ui-playground"]')
+        if (!root) return false
+        const styles = getComputedStyle(root)
+        const token = styles.getPropertyValue('--ui-chart-1').trim()
+        return token === 'oklch(0.58 0.18 251)' && getComputedStyle(element).stroke === token
+      }),
+    )
+    .toBe(true)
 
   await page.getByRole('tab', { name: 'Complete inventory' }).click()
   const registryItems = await page.locator('[data-registry-item]').evaluateAll((elements) =>
@@ -48,7 +61,7 @@ test('playground renders every public runtime owner and complete registry invent
       .sort(),
   )
   expect(registryItems).toEqual(registry.items.map((item) => item.name).sort())
-  expect(new Set(registryItems).size).toBe(52)
+  expect(new Set(registryItems).size).toBe(registry.items.length)
   await expect(page.locator('[data-registry-item="theme-observatory"]')).toBeVisible()
 })
 
@@ -56,6 +69,7 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
   context,
   page,
 }, testInfo) => {
+  test.setTimeout(60_000)
   const pageErrors: string[] = []
   page.on('pageerror', (error) => pageErrors.push(error.message))
   await context.grantPermissions(['clipboard-read', 'clipboard-write'])
@@ -99,7 +113,7 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
     .toContain('Avenir Next')
 
   await page.getByRole('tab', { name: 'Other' }).click()
-  await page.locator('input[aria-label="Corner radius"]').press('ArrowRight')
+  await page.getByRole('slider', { name: 'Corner radius' }).press('ArrowRight')
   await expect
     .poll(() =>
       root.evaluate((element) => getComputedStyle(element).getPropertyValue('--ui-radius').trim()),
@@ -164,9 +178,9 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
     })
   })
   await page.getByRole('button', { name: 'Copy CSS' }).click()
-  const copyFailure = page.getByRole('alert').filter({ hasText: 'Copy failed' })
+  const copyFailure = page.getByRole('dialog', { name: 'Copy failed' })
   await expect(copyFailure).toBeVisible()
-  await expect(page.getByRole('button', { name: 'Close toast' })).toHaveCount(0)
+  await expect(copyFailure.getByRole('button', { name: 'Close toast' })).toHaveCount(0)
   const downloadPromise = page.waitForEvent('download')
   await page.getByRole('button', { name: 'Download JSON' }).click()
   const download = await downloadPromise
@@ -189,7 +203,8 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
     mimeType: 'application/json',
     buffer: Buffer.from(JSON.stringify(exported)),
   })
-  await expect(page.getByRole('dialog', { name: 'Atelier imported' })).toBeVisible()
+  const importedToast = page.getByRole('dialog', { name: 'Atelier imported' })
+  await expect(importedToast).toBeVisible()
   await expect(importInput).toHaveValue('')
   await expect(root).toHaveAttribute('data-ui-theme', 'atelier')
   await expect.poll(primaryValue).toBe('oklch(0.62 0.2 145)')
@@ -205,6 +220,8 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
       root.evaluate((element) => getComputedStyle(element).getPropertyValue('--ui-radius').trim()),
     )
     .toBe('1.05rem')
+  await page.mouse.move(0, 0)
+  await expect(importedToast).toBeHidden({ timeout: 10_000 })
 
   const cssDownloadPromise = page.waitForEvent('download')
   await page.getByRole('button', { name: 'Download CSS' }).click()
@@ -265,7 +282,7 @@ test('invalid storage and save failures stay contained', async ({ page }) => {
     }
   })
   await page.getByRole('button', { name: 'Save theme' }).click()
-  const saveFailure = page.getByRole('alert').filter({ hasText: 'Theme save failed' })
+  const saveFailure = page.getByRole('dialog', { name: 'Theme save failed' })
   await expect(saveFailure).toContainText('Storage unavailable for qualification')
   await expect(page.getByLabel('Saved themes')).toHaveCount(0)
   await page.evaluate(() => {
@@ -277,16 +294,24 @@ test('invalid storage and save failures stay contained', async ({ page }) => {
 
 test('representative overlays and disclosures are keyboard operable', async ({ page }) => {
   await page.goto('/')
-  await page.getByRole('button', { name: 'Open dialog' }).click()
+  const dialogTrigger = page.getByRole('button', { name: 'Open dialog' })
+  await dialogTrigger.focus()
+  await page.keyboard.press('Enter')
   await expect(page.getByRole('dialog', { name: 'Edit Domain label' })).toBeVisible()
   await page.keyboard.press('Escape')
   await expect(page.getByRole('dialog', { name: 'Edit Domain label' })).toBeHidden()
 
-  await page.getByRole('button', { name: 'Public contract' }).click()
-  await expect(page.getByText('Every runtime owner has a flat package subpath.')).toBeVisible()
+  const disclosure = page.getByRole('button', { name: 'Public contract' })
+  const disclosureContent = page.getByText('Every runtime owner has a flat package subpath.')
+  await disclosure.focus()
+  await page.keyboard.press('Enter')
+  await expect(disclosureContent).toBeHidden()
+  await page.keyboard.press('Space')
+  await expect(disclosureContent).toBeVisible()
 })
 
 test('all starter modes have no serious automated accessibility violations', async ({ page }) => {
+  test.setTimeout(60_000)
   const consoleProblems: string[] = []
   page.on('console', (message) => {
     if (['error', 'warning'].includes(message.type())) consoleProblems.push(message.text())

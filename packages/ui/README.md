@@ -28,7 +28,9 @@ export function Welcome() {
 }
 ```
 
-Use flat subpaths such as `@astrale-os/ui/button` for the narrowest import. Higher-level patterns
-and blocks are installed as application-owned source with `astrale ui add`.
+Use flat subpaths such as `@astrale-os/ui/button` for the narrowest import. Dependency-heavy
+components, higher-level patterns, and blocks are installed as application-owned source with
+`astrale ui add`.
 
-`reset.css` is optional. `theme.css` never installs a global reset or Tailwind preflight.
+`reset.css` is optional and contains the pinned Tailwind Preflight required by upstream defaults.
+`theme.css` never installs that global reset implicitly.

@@ -1,0 +1,1095 @@
+{
+  "provider": "@shadcn",
+  "retrievedAt": "2026-08-26",
+  "profile": {
+    "cli": "4.18.0",
+    "base": "base",
+    "style": "nova",
+    "resolvedStyle": "base-nova"
+  },
+  "components": [
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/accordion",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/accordion.tsx",
+      "sourceDigest": "sha256:38fec90a34d857fff15ca47b4fab0f12171dbb44cb55a37d1f65f63a4eaf0c20",
+      "owner": "@astrale-os/ui/accordion",
+      "implementation": "packages/ui/src/disclosure/accordion/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/alert",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/alert.tsx",
+      "sourceDigest": "sha256:126a26b401ab2cd3f3855551d012b5dca7a96b7d6984a921add3ce2d441af4b6",
+      "owner": "@astrale-os/ui/alert",
+      "implementation": "packages/ui/src/feedback/alert/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/alert-dialog",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/alert-dialog.tsx",
+      "sourceDigest": "sha256:7abcaccfeb706cdaecc56f02a1b0ccb1be3f26ff2de8cf172a46b2bd550c1987",
+      "owner": "@astrale-os/ui/alert-dialog",
+      "implementation": "packages/ui/src/overlay/alert-dialog/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/aspect-ratio",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/aspect-ratio.tsx",
+      "sourceDigest": "sha256:c6db82ab2401e402c7c6d178ff59eb570535c76db5953b3bb78be564c5b24669",
+      "owner": "@astrale-os/ui/aspect-ratio",
+      "implementation": "packages/ui/src/content/aspect-ratio/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/attachment",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/attachment.tsx",
+      "sourceDigest": "sha256:a31f77d517247d84204d4f391656756c8d0f094d65a5aae2238e3731932d36a9",
+      "owner": "component/attachment",
+      "implementation": "registry/components/attachment/attachment.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-registry-component"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/avatar",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/avatar.tsx",
+      "sourceDigest": "sha256:01c9e2d6318a6c1b51b38831b52aa763e7284a27f83c76ad4fc78aa9836a8171",
+      "owner": "@astrale-os/ui/avatar",
+      "implementation": "packages/ui/src/content/avatar/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/badge",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/badge.tsx",
+      "sourceDigest": "sha256:968b0403af74a785c9408ca69a677235e49d0c80b2c27fb9858ad421a8778c7d",
+      "owner": "@astrale-os/ui/badge",
+      "implementation": "packages/ui/src/content/badge/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/breadcrumb",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/breadcrumb.tsx",
+      "sourceDigest": "sha256:26f83fc8ed302d710851a71b705f5f8f28c805561c1fb6945370617267c5a4a9",
+      "owner": "@astrale-os/ui/breadcrumb",
+      "implementation": "packages/ui/src/navigation/breadcrumb/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/bubble",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/bubble.tsx",
+      "sourceDigest": "sha256:c30f7689bb2be006fb12e5a5bf37e0c04eb2a3138327fb9324e293367394e9ba",
+      "owner": "component/bubble",
+      "implementation": "registry/components/bubble/bubble.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-registry-component"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/button",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/button.tsx",
+      "sourceDigest": "sha256:d14549ab3ba7a9d5d1f424c2599233bffa0b317121abf3b6efa2fb902d5e2781",
+      "owner": "@astrale-os/ui/button",
+      "implementation": "packages/ui/src/action/button/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/button-group",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/button-group.tsx",
+      "sourceDigest": "sha256:fe97631e1a07bc0add09503c5032002e37f4c71ef5dd3c7475b856a29848583d",
+      "owner": "@astrale-os/ui/button-group",
+      "implementation": "packages/ui/src/action/button-group/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/calendar",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/calendar.tsx",
+      "sourceDigest": "sha256:0ea3d4bd2cf7b8edef5bd5a724518d94d609b15f2f4f42e489c63f532706e55c",
+      "owner": "component/calendar",
+      "implementation": "registry/components/calendar/calendar.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-registry-component"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/card",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/card.tsx",
+      "sourceDigest": "sha256:d8113cbf964f8d1aadf2649d2944d8bbc6e3cfd49d36746f76868cbc4dde3cfe",
+      "owner": "@astrale-os/ui/card",
+      "implementation": "packages/ui/src/content/card/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/carousel",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/carousel.tsx",
+      "sourceDigest": "sha256:603eeef732fd59e84e87332d784716bd6d53ba3c114bccaa2b232daa07e33003",
+      "owner": "component/carousel",
+      "implementation": "registry/components/carousel/carousel.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-registry-component"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/chart",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/chart.tsx",
+      "sourceDigest": "sha256:3029092cb861794ccb562c96618cf711e193ee500a50fe766cd50c962991dbd7",
+      "owner": "component/chart",
+      "implementation": "registry/components/chart/chart.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-registry-component"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/checkbox",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/checkbox.tsx",
+      "sourceDigest": "sha256:7221fec06ed8f697d03157cec8e668f84fcc6706391f487a90773b7fe4fc762d",
+      "owner": "@astrale-os/ui/checkbox",
+      "implementation": "packages/ui/src/input/checkbox/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/collapsible",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/collapsible.tsx",
+      "sourceDigest": "sha256:3de60b605e64c835588cecc189fbcf907eb602b0158f970d614b067e868b491e",
+      "owner": "@astrale-os/ui/collapsible",
+      "implementation": "packages/ui/src/disclosure/collapsible/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/combobox",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/combobox.tsx",
+      "sourceDigest": "sha256:063eee29facaeb4a49e5f8fe91fb4644a874adad449a61e6bbee3e204edf2bae",
+      "owner": "component/combobox",
+      "implementation": "registry/components/combobox/combobox.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-registry-component"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/command",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/command.tsx",
+      "sourceDigest": "sha256:b80b0f0356add12993366cd4571ceae1416f50035ac189876373d0e5050308c5",
+      "owner": "@astrale-os/ui/command",
+      "implementation": "packages/ui/src/menu/command/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/context-menu",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/context-menu.tsx",
+      "sourceDigest": "sha256:8658b48f25544047357bc809e6f6485d2309e72cf310c521e92430003b0d56a8",
+      "owner": "@astrale-os/ui/context-menu",
+      "implementation": "packages/ui/src/menu/context-menu/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/dialog",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/dialog.tsx",
+      "sourceDigest": "sha256:ccabf6cc674a68b09d9168904bb46b7c1075a67312cf6f51f3e38b8eeacd2fdb",
+      "owner": "@astrale-os/ui/dialog",
+      "implementation": "packages/ui/src/overlay/dialog/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/direction",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/direction.tsx",
+      "sourceDigest": "sha256:ab76d53aee6608ca1465874e1565d36fde7c0d1642088f0428ab5f6342a1e863",
+      "owner": "@astrale-os/ui/direction",
+      "implementation": "packages/ui/src/layout/direction/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/drawer",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/drawer.tsx",
+      "sourceDigest": "sha256:b33d7b911b1a78fb524ee68bf483c4a1f538743ff04b91da56b3dc9b48fa70a6",
+      "owner": "@astrale-os/ui/drawer",
+      "implementation": "packages/ui/src/overlay/drawer/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/dropdown-menu",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/dropdown-menu.tsx",
+      "sourceDigest": "sha256:c143e8692f7b899d55c889d2978e3f1d0aef1bf5a83dffe1590a0640aba60044",
+      "owner": "@astrale-os/ui/dropdown-menu",
+      "implementation": "packages/ui/src/menu/dropdown-menu/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/empty",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/empty.tsx",
+      "sourceDigest": "sha256:e65ee3ba54a21ed61e3c50041bb12a6a3fcb215c56611cda6795c23a7bd89f61",
+      "owner": "@astrale-os/ui/empty",
+      "implementation": "packages/ui/src/content/empty/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/field",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/field.tsx",
+      "sourceDigest": "sha256:6160da8be06476aa0fb45162e8b27ab1fd481431d92c1c3ec850027e6cc4f400",
+      "owner": "@astrale-os/ui/field",
+      "implementation": "packages/ui/src/input/field/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/hover-card",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/hover-card.tsx",
+      "sourceDigest": "sha256:7e7880883ba91290133e61f8bf1df72547795b8d9f2c13d4a17a51c17540d712",
+      "owner": "@astrale-os/ui/hover-card",
+      "implementation": "packages/ui/src/overlay/hover-card/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/input",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/input.tsx",
+      "sourceDigest": "sha256:f7d6ecff9a4d631feeaf401c02bb87e26ddb38131c55d15a43b9290747390847",
+      "owner": "@astrale-os/ui/input",
+      "implementation": "packages/ui/src/input/input/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/input-group",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/input-group.tsx",
+      "sourceDigest": "sha256:80aa50078def5811cb80ceaee2e9f75472ea00b3e4966abf757f207716f645fb",
+      "owner": "@astrale-os/ui/input-group",
+      "implementation": "packages/ui/src/input/input-group/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/input-otp",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/input-otp.tsx",
+      "sourceDigest": "sha256:d010504eeb4982e5fd0e535111d81813829997b3c979b49592be2b4a510f3525",
+      "owner": "@astrale-os/ui/input-otp",
+      "implementation": "packages/ui/src/input/input-otp/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/item",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/item.tsx",
+      "sourceDigest": "sha256:3f5ec6eac0a7c2daea3f4403408974ff4bae1e949d328701bcf3a74a4554b6e0",
+      "owner": "@astrale-os/ui/item",
+      "implementation": "packages/ui/src/content/item/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/kbd",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/kbd.tsx",
+      "sourceDigest": "sha256:1e477363fca474e23b9a1f0e5d2920cd7319e076eaa5156ba29ea4722b96bba5",
+      "owner": "@astrale-os/ui/kbd",
+      "implementation": "packages/ui/src/content/kbd/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/label",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/label.tsx",
+      "sourceDigest": "sha256:7f19b8476658d25ff197c84030e58cd7395059d876a54630e025951e474ebdae",
+      "owner": "@astrale-os/ui/label",
+      "implementation": "packages/ui/src/input/label/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/marker",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/marker.tsx",
+      "sourceDigest": "sha256:cbeeb7baa6a8bdc7402bec4e37cd12ced0d78ec808441e0bc1b61293b8ede7f5",
+      "owner": "component/marker",
+      "implementation": "registry/components/marker/marker.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-registry-component"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/menubar",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/menubar.tsx",
+      "sourceDigest": "sha256:a0001ea6d9dfda9f52cf282438317f19cb99447947b54cb80dca764f04c308e9",
+      "owner": "@astrale-os/ui/menubar",
+      "implementation": "packages/ui/src/menu/menubar/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/message",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/message.tsx",
+      "sourceDigest": "sha256:9d2952bf3b641081f09aa2739535e6bbd1be0a4946789752a2c20d8aaef43185",
+      "owner": "component/message",
+      "implementation": "registry/components/message/message.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-registry-component"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/message-scroller",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/message-scroller.tsx",
+      "sourceDigest": "sha256:901c4a6a2a7d3f6227344f3a758debb7d0cb2f77f92c9acaf72a5e9e0ffdf777",
+      "owner": "component/message-scroller",
+      "implementation": "registry/components/message-scroller/message-scroller.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-registry-component"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/native-select",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/native-select.tsx",
+      "sourceDigest": "sha256:0010395c3c1cbedf60c47e52df4417a7a66944f0a85c8f9304ee900a2493648f",
+      "owner": "@astrale-os/ui/native-select",
+      "implementation": "packages/ui/src/input/native-select/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/navigation-menu",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/navigation-menu.tsx",
+      "sourceDigest": "sha256:076ba62c2d4292970470455ab9719badec7fedd74aaaaa40a7955cc366128e97",
+      "owner": "@astrale-os/ui/navigation-menu",
+      "implementation": "packages/ui/src/navigation/navigation-menu/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/pagination",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/pagination.tsx",
+      "sourceDigest": "sha256:0aba86a91ba0a8d99e92846f10b395d0ddc1a8901a4f54418e8802c12fad57c1",
+      "owner": "@astrale-os/ui/pagination",
+      "implementation": "packages/ui/src/navigation/pagination/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/popover",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/popover.tsx",
+      "sourceDigest": "sha256:59a0d01d22af44dc9969c3c2aac7cc2f5b712c51ee4c73e8453d81f3d9819ed1",
+      "owner": "@astrale-os/ui/popover",
+      "implementation": "packages/ui/src/overlay/popover/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/progress",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/progress.tsx",
+      "sourceDigest": "sha256:45e33890b5a82744fc27d0928f927c5942c1166e5e27de8f776b29112967d317",
+      "owner": "@astrale-os/ui/progress",
+      "implementation": "packages/ui/src/feedback/progress/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/questionnaire",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/questionnaire.tsx",
+      "sourceDigest": "sha256:88519aad6199bed7391907a6c2e3ee5bec4ebb2db11fef2a3ba6ad9153a272a5",
+      "owner": "component/questionnaire",
+      "implementation": "registry/components/questionnaire/questionnaire.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-registry-component"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/radio-group",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/radio-group.tsx",
+      "sourceDigest": "sha256:213e7fd8662ad3fa78ab2bc59061fa943f05ec97f94a7546a7093701482e9c58",
+      "owner": "@astrale-os/ui/radio-group",
+      "implementation": "packages/ui/src/input/radio-group/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/resizable",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/resizable.tsx",
+      "sourceDigest": "sha256:379baf7a1de109a1ea14419c99b76fbec1cb4f10d6ee13605b0b2940d615afeb",
+      "owner": "@astrale-os/ui/resizable",
+      "implementation": "packages/ui/src/layout/resizable/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/scroll-area",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/scroll-area.tsx",
+      "sourceDigest": "sha256:455522020830f8676f6df42b325c8dc43e5f45d18bdfe6ceee6351d49ad2a43c",
+      "owner": "@astrale-os/ui/scroll-area",
+      "implementation": "packages/ui/src/layout/scroll-area/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/select",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/select.tsx",
+      "sourceDigest": "sha256:ca3bd1b370ea67b84632d435c22d8270752fa6013c06c365162af265e4a0e87e",
+      "owner": "@astrale-os/ui/select",
+      "implementation": "packages/ui/src/input/select/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/separator",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/separator.tsx",
+      "sourceDigest": "sha256:082aff76b823256112a622d92dcef79dd008fe8c252611e184c002db770763f3",
+      "owner": "@astrale-os/ui/separator",
+      "implementation": "packages/ui/src/content/separator/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/sheet",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/sheet.tsx",
+      "sourceDigest": "sha256:e80712ffb97f01a3568523bc67c85823c882e86fb4ec922f5af13831ed3e22fe",
+      "owner": "@astrale-os/ui/sheet",
+      "implementation": "packages/ui/src/overlay/sheet/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/sidebar",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/sidebar.tsx",
+      "sourceDigest": "sha256:29e33400cfdd00cb499da3615ed2258d75192d2b2a5a5117a84d2db4242ed0bf",
+      "owner": "component/sidebar",
+      "implementation": "registry/components/sidebar/sidebar.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-registry-component"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/skeleton",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/skeleton.tsx",
+      "sourceDigest": "sha256:8110bba70d0cb9fe968c0b7bd092ad12258caef40b028b4a87f402bdab907faf",
+      "owner": "@astrale-os/ui/skeleton",
+      "implementation": "packages/ui/src/feedback/skeleton/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/slider",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/slider.tsx",
+      "sourceDigest": "sha256:d5f419f7f96a6aaf8c28251ceb58b48518379d8b61a9d7cb3f2dc9e254569290",
+      "owner": "@astrale-os/ui/slider",
+      "implementation": "packages/ui/src/input/slider/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/sonner",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/sonner.tsx",
+      "sourceDigest": "sha256:0c729f9f1ada0b0bedd9296710cc257dc43559fa6b8cc40f010d129e8ff85fdd",
+      "owner": "component/sonner",
+      "implementation": "registry/components/sonner/sonner.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-registry-component"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/spinner",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/spinner.tsx",
+      "sourceDigest": "sha256:900f722c961fa6e1c28104809d56831c9056dc69599e49d364cc13a6f33966a3",
+      "owner": "@astrale-os/ui/spinner",
+      "implementation": "packages/ui/src/feedback/spinner/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/switch",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/switch.tsx",
+      "sourceDigest": "sha256:cabbf7804a4d6768ef62f5c2256fbf39e214372318bb1b3b22d407f808c56249",
+      "owner": "@astrale-os/ui/switch",
+      "implementation": "packages/ui/src/input/switch/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/table",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/table.tsx",
+      "sourceDigest": "sha256:4e0d5b9f374a6dace8185d510be592c9194b67829d510c466fa8528cc1ee41df",
+      "owner": "@astrale-os/ui/table",
+      "implementation": "packages/ui/src/content/table/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/tabs",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/tabs.tsx",
+      "sourceDigest": "sha256:8bf9ee3935ab86c268a2a71cb5b4b67d3d5587ca9f2e0bf25f37ffdb1980434c",
+      "owner": "@astrale-os/ui/tabs",
+      "implementation": "packages/ui/src/navigation/tabs/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/textarea",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/textarea.tsx",
+      "sourceDigest": "sha256:58b58d84fc54ba5f4ca46937870c619349fd9eccc4d494250ac7bc73a94e05e9",
+      "owner": "@astrale-os/ui/textarea",
+      "implementation": "packages/ui/src/input/textarea/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/toast",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/toast.tsx",
+      "sourceDigest": "sha256:79c101fe4678ae8e14adc3b973fccfdccba157d6b1171dc0489af9d136c8d31d",
+      "owner": "@astrale-os/ui/toast",
+      "implementation": "packages/ui/src/feedback/toast/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/toggle",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/toggle.tsx",
+      "sourceDigest": "sha256:38b81d3872be232a2617a791069a43e2cc415208e3eff14814324319559fdde9",
+      "owner": "@astrale-os/ui/toggle",
+      "implementation": "packages/ui/src/action/toggle/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/toggle-group",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/toggle-group.tsx",
+      "sourceDigest": "sha256:36d12bb9c79b981c4ff98739f19c6bbdf9f3c5c82118c5cbe46444771948c944",
+      "owner": "@astrale-os/ui/toggle-group",
+      "implementation": "packages/ui/src/action/toggle-group/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    },
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/tooltip",
+      "upstreamType": "registry:ui",
+      "profile": {
+        "cli": "4.18.0",
+        "base": "base",
+        "style": "nova",
+        "resolvedStyle": "base-nova"
+      },
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/components/tooltip.tsx",
+      "sourceDigest": "sha256:2cea2294d4947b88d815860f64e0b5e0eb47a59bde47cfd194aac2230c923865",
+      "owner": "@astrale-os/ui/tooltip",
+      "implementation": "packages/ui/src/overlay/tooltip/index.tsx",
+      "adaptation": "imports-only",
+      "disposition": "owned-runtime"
+    }
+  ],
+  "aliases": [
+    {
+      "address": "@shadcn/form",
+      "upstreamType": "registry:ui",
+      "disposition": "no-files-for-profile"
+    }
+  ],
+  "hooks": [
+    {
+      "provider": "@shadcn",
+      "address": "@shadcn/use-mobile",
+      "upstreamType": "registry:hook",
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/hooks/use-mobile.ts",
+      "sourceDigest": "sha256:ad0936f84f1df79d3697bfbff9c18f8ad58431c1cbaf2359c6a853b0fcc9f28b",
+      "implementation": "registry/components/sidebar/use-mobile.ts",
+      "adaptation": "verbatim"
+    }
+  ],
+  "styles": [
+    {
+      "provider": "@shadcn",
+      "address": "shadcn/tailwind.css",
+      "upstreamType": "registry:style-support",
+      "source": "tooling/upstream/providers/shadcn/4.18.0/base-nova/styles/tailwind.css",
+      "sourceDigest": "sha256:bc7d83425702955b4cb67cb14ede9d603f9d912376d57a2d81d661094d2a782a",
+      "implementation": "packages/ui/src/theme/shadcn-tailwind.css",
+      "adaptation": "verbatim"
+    }
+  ]
+}

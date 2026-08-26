@@ -39,11 +39,6 @@
       "import": "./dist/index.js",
       "default": "./dist/index.js"
     },
-    "./class-name": {
-      "types": "./dist/class-name.d.ts",
-      "import": "./dist/class-name.js",
-      "default": "./dist/class-name.js"
-    },
     "./accordion": {
       "types": "./dist/disclosure/accordion/index.d.ts",
       "import": "./dist/disclosure/accordion/index.js",
@@ -98,6 +93,11 @@
       "types": "./dist/input/checkbox/index.d.ts",
       "import": "./dist/input/checkbox/index.js",
       "default": "./dist/input/checkbox/index.js"
+    },
+    "./class-name": {
+      "types": "./dist/class-name.d.ts",
+      "import": "./dist/class-name.js",
+      "default": "./dist/class-name.js"
     },
     "./collapsible": {
       "types": "./dist/disclosure/collapsible/index.d.ts",
@@ -254,11 +254,6 @@
       "import": "./dist/feedback/spinner/index.js",
       "default": "./dist/feedback/spinner/index.js"
     },
-    "./toast": {
-      "types": "./dist/feedback/toast/index.d.ts",
-      "import": "./dist/feedback/toast/index.js",
-      "default": "./dist/feedback/toast/index.js"
-    },
     "./switch": {
       "types": "./dist/input/switch/index.d.ts",
       "import": "./dist/input/switch/index.js",
@@ -278,6 +273,11 @@
       "types": "./dist/input/textarea/index.d.ts",
       "import": "./dist/input/textarea/index.js",
       "default": "./dist/input/textarea/index.js"
+    },
+    "./toast": {
+      "types": "./dist/feedback/toast/index.d.ts",
+      "import": "./dist/feedback/toast/index.js",
+      "default": "./dist/feedback/toast/index.js"
     },
     "./toggle": {
       "types": "./dist/action/toggle/index.d.ts",
@@ -317,8 +317,10 @@
     "@base-ui/react": "^1.7.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "input-otp": "^1.4.2",
-    "react-resizable-panels": "^4.5.3",
+    "cmdk": "^1.1.1",
+    "input-otp": "^1.5.0",
+    "lucide-react": "1.32.0",
+    "react-resizable-panels": "^4.12.3",
     "tailwind-merge": "^3.6.0"
   },
   "devDependencies": {

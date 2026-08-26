@@ -11,7 +11,7 @@ export function Playground() {
   const [mode, setMode] = useState<'light' | 'dark'>('light')
 
   return (
-    <Toaster position="top-right" timeout={2000}>
+    <Toaster>
       <style data-slot="live-theme-css">{workspace.css}</style>
       <div
         data-slot="ui-playground"

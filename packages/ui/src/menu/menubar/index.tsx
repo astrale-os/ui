@@ -2,10 +2,10 @@
 
 import { Menu as MenuPrimitive } from '@base-ui/react/menu'
 import { Menubar as MenubarPrimitive } from '@base-ui/react/menubar'
+import { CheckIcon } from 'lucide-react'
 import * as React from 'react'
 
 import { cn } from '#astrale-ui/class-name'
-import { CheckIcon } from '#astrale-ui/icon'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -119,10 +119,7 @@ function MenubarCheckboxItem({
       checked={checked}
       {...props}
     >
-      <span
-        data-slot="menubar-checkbox-indicator"
-        className="pointer-events-none absolute left-1.5 flex size-4 items-center justify-center [&_svg:not([class*='size-'])]:size-4"
-      >
+      <span className="pointer-events-none absolute left-1.5 flex size-4 items-center justify-center [&_svg:not([class*='size-'])]:size-4">
         <MenuPrimitive.CheckboxItemIndicator>
           <CheckIcon />
         </MenuPrimitive.CheckboxItemIndicator>
@@ -154,10 +151,7 @@ function MenubarRadioItem({
       )}
       {...props}
     >
-      <span
-        data-slot="menubar-radio-indicator"
-        className="pointer-events-none absolute left-1.5 flex size-4 items-center justify-center [&_svg:not([class*='size-'])]:size-4"
-      >
+      <span className="pointer-events-none absolute left-1.5 flex size-4 items-center justify-center [&_svg:not([class*='size-'])]:size-4">
         <MenuPrimitive.RadioItemIndicator>
           <CheckIcon />
         </MenuPrimitive.RadioItemIndicator>

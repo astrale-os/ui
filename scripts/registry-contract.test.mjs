@@ -6,6 +6,45 @@ import test from 'node:test'
 const sourcePath = 'registry/registry.source.json'
 const rootPath = 'registry/registry.json'
 const publicRootPath = 'registry.json'
+const provenance = JSON.parse(
+  await readFile('tooling/upstream/providers/shadcn/4.18.0/base-nova/provenance.json', 'utf8'),
+)
+const provenanceByAddress = new Map(
+  provenance.components.map((component) => [component.address, component]),
+)
+const registryPackage = JSON.parse(await readFile('registry/package.json', 'utf8'))
+
+function packageName(specifier) {
+  return specifier.startsWith('@')
+    ? specifier.split('/').slice(0, 2).join('/')
+    : specifier.split('/')[0]
+}
+
+function componentDependencies(source) {
+  return [
+    '@astrale-os/ui@^0.3.0-beta.0',
+    ...new Set(
+      importSpecifiers(source)
+        .filter(
+          (specifier) =>
+            specifier !== 'react' &&
+            !specifier.startsWith('.') &&
+            !specifier.startsWith('@astrale-os/ui'),
+        )
+        .map(packageName),
+    ),
+  ]
+    .map((name) => {
+      if (name.startsWith('@astrale-os/ui@')) return name
+      assert.ok(registryPackage.dependencies[name], `undeclared registry dependency ${name}`)
+      return `${name}@${registryPackage.dependencies[name]}`
+    })
+    .toSorted((a, b) => {
+      if (a.startsWith('@astrale-os/ui@')) return -1
+      if (b.startsWith('@astrale-os/ui@')) return 1
+      return a.localeCompare(b)
+    })
+}
 
 function importSpecifiers(source) {
   return [
@@ -31,6 +70,7 @@ async function readFamilyItems() {
         return manifest.items.map((item) => ({
           ...item,
           declaredPath: path.join(path.dirname(manifestPath), item.files[0].path),
+          declaredPaths: item.files.map((file) => path.join(path.dirname(manifestPath), file.path)),
         }))
       }),
     )
@@ -42,9 +82,9 @@ test('registry aggregation explicitly owns every family and exact item once', as
   const root = JSON.parse(await readFile(rootPath, 'utf8'))
   const publicRoot = JSON.parse(await readFile(publicRootPath, 'utf8'))
   assert.equal(source.shadcn, '4.18.0')
-  assert.equal(source.includes.length, 21)
+  assert.equal(source.includes.length, 22)
   assert.equal(new Set(source.includes).size, source.includes.length)
-  assert.equal(publicRoot.include.length, 22)
+  assert.equal(publicRoot.include.length, 23)
   assert.equal(publicRoot.include[0], 'registry/base/registry.json')
   assert.deepEqual(
     publicRoot.include.slice(1).sort(),
@@ -52,7 +92,7 @@ test('registry aggregation explicitly owns every family and exact item once', as
   )
 
   const familyItems = await readFamilyItems()
-  assert.equal(root.items.length, 52)
+  assert.equal(root.items.length, 64)
   assert.deepEqual(
     root.items.map((item) => item.name).sort(),
     familyItems.map((item) => item.name).sort(),
@@ -68,27 +108,35 @@ test('every registry item is independently bounded, controlled, and safe to inst
   const items = await readFamilyItems()
   for (const item of items) {
     const isTheme = item.meta.canonicalAddress.startsWith('theme/')
-    assert.match(item.name, /^(?:pattern|block|theme)-[a-z0-9-]+$/u)
+    const isComponent = item.meta.canonicalAddress.startsWith('component/')
+    assert.match(item.name, /^(?:component|pattern|block|theme)-[a-z0-9-]+$/u)
     assert.match(
       item.meta.canonicalAddress,
-      /^(?:(?:pattern|block)\/[a-z0-9-]+\/[a-z0-9-/]+|theme\/[a-z0-9-]+)$/u,
+      /^(?:component\/[a-z0-9-]+|(?:pattern|block)\/[a-z0-9-]+\/[a-z0-9-/]+|theme\/[a-z0-9-]+)$/u,
     )
-    assert.equal(item.type, isTheme ? 'registry:theme' : 'registry:block')
-    assert.equal(item.files.length, 1)
-    assert.deepEqual(item.dependencies, ['@astrale-os/ui@^0.3.0-beta.0'])
+    assert.equal(
+      item.type,
+      isTheme ? 'registry:theme' : isComponent ? 'registry:component' : 'registry:block',
+    )
+    assert.equal(item.files.length, isComponent && item.name === 'component-sidebar' ? 2 : 1)
 
     const file = item.files[0]
-    assert.match(file.path, isTheme ? /^[a-z0-9-]+\.css$/u : /^[a-z0-9-]+\.tsx$/u)
+    assert.match(file.path, isTheme ? /^[a-z0-9-]+\.css$/u : /^(?:[a-z0-9-]+\/)?[a-z0-9-]+\.tsx$/u)
     assert.match(
       file.target,
-      isTheme ? /^components\/astrale\/theme\//u : /^components\/astrale\/(?:pattern|block)\//u,
+      isTheme
+        ? /^components\/astrale\/theme\//u
+        : /^components\/astrale\/(?:component|pattern|block)\//u,
     )
-    assertSafeRelative(file.path)
-    assertSafeRelative(file.target)
-    await stat(item.declaredPath)
+    for (let index = 0; index < item.files.length; index += 1) {
+      assertSafeRelative(item.files[index].path)
+      assertSafeRelative(item.files[index].target)
+      await stat(item.declaredPaths[index])
+    }
 
     const itemSource = await readFile(item.declaredPath, 'utf8')
     if (isTheme) {
+      assert.deepEqual(item.dependencies, ['@astrale-os/ui@^0.3.0-beta.0'])
       assert.match(itemSource, /Consumer-owned after installation/u)
       assert.match(
         itemSource,
@@ -99,6 +147,19 @@ test('every registry item is independently bounded, controlled, and safe to inst
       assert.match(itemSource, /--ui-motion-standard:/u)
       continue
     }
+    if (isComponent) {
+      const upstream = provenanceByAddress.get(item.meta.upstreamAddress)
+      assert.ok(upstream, `${item.name} has no exact provenance owner`)
+      assert.equal(item.meta.provider, '@shadcn')
+      assert.equal(item.meta.upstreamAddress, `@shadcn/${item.meta.canonicalAddress.slice(10)}`)
+      assert.equal(item.meta.upstreamDigest, upstream.sourceDigest)
+      assert.equal(item.meta.canonicalAddress, upstream.owner)
+      assert.equal(item.declaredPath, upstream.implementation)
+      assert.equal(item.meta.adaptation, 'imports-only')
+      assert.deepEqual(item.dependencies, componentDependencies(itemSource))
+      continue
+    }
+    assert.deepEqual(item.dependencies, ['@astrale-os/ui@^0.3.0-beta.0'])
     const imports = importSpecifiers(itemSource)
     assert.equal(
       imports.every(
@@ -139,10 +200,18 @@ test('every registry item is independently bounded, controlled, and safe to inst
       'pattern/typography/dense-data',
     ])
     if (!presentationOnly.has(item.meta.canonicalAddress)) {
-      assert.match(
-        itemSource,
-        /\bon[A-Z][A-Za-z]+/u,
-        `${item.name} must inject application actions`,
+      const declaredActions = [
+        ...itemSource.matchAll(/\b(on[A-Z][A-Za-z]+)\??\s*\([^)]*\)\s*:/gu),
+      ].map((match) => match[1])
+      assert.ok(
+        declaredActions.length > 0,
+        `${item.name} must declare injected application actions`,
+      )
+      assert.ok(
+        declaredActions.some(
+          (action) => [...itemSource.matchAll(new RegExp(`\\b${action}\\b`, 'gu'))].length >= 3,
+        ),
+        `${item.name} must consume an injected application action`,
       )
     }
   }
@@ -224,11 +293,16 @@ test('registry inventory covers all locked V1 families and block compositions', 
 test('every built install item is exact current source rather than stale generated output', async () => {
   for (const item of await readFamilyItems()) {
     const built = JSON.parse(await readFile(`registry/public/r/${item.name}.json`, 'utf8'))
-    assert.equal(built.name, item.name)
-    assert.deepEqual(built.dependencies, item.dependencies)
-    assert.equal(built.meta.canonicalAddress, item.meta.canonicalAddress)
+    for (const field of ['name', 'type', 'title', 'description']) {
+      assert.equal(built[field], item[field], `${item.name} stale ${field}`)
+    }
+    assert.deepEqual(built.dependencies, item.dependencies, `${item.name} stale dependencies`)
+    assert.deepEqual(built.meta, item.meta, `${item.name} stale metadata`)
     assert.equal(built.files.length, item.files.length)
-    assert.equal(built.files[0].target, item.files[0].target)
-    assert.equal(built.files[0].content, await readFile(item.declaredPath, 'utf8'))
+    for (let index = 0; index < item.files.length; index += 1) {
+      assert.equal(built.files[index].type, item.files[index].type)
+      assert.equal(built.files[index].target, item.files[index].target)
+      assert.equal(built.files[index].content, await readFile(item.declaredPaths[index], 'utf8'))
+    }
   }
 })

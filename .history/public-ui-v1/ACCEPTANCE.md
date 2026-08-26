@@ -51,10 +51,10 @@ branch protection, post-public generator/consumer, or manual assistive-technolog
 ## C. Runtime dependency and size discipline
 
 - [ ] `shadcn` is absent from runtime dependencies and peers.
-- [ ] Chart, date, calendar, carousel, form, validation, toast, theme-provider, router, AI, upload,
-      markdown, and desktop libraries are absent from the base runtime dependency closure.
-- [ ] A general-purpose icon library is absent from the runtime dependency closure; required
-      control glyphs are owned, minimal, semantic, and replaceable through explicit slots.
+- [ ] Dependencies required by exact upstream runtime sources are declared by `@astrale-os/ui`,
+      remain tree-shakeable by flat subpath, and never enter SDK or CLI dependency closures.
+- [ ] No icon, engine, or provider import is substituted during source intake; dependency cost is
+      measured from packed consumers and reviewed independently from source fidelity.
 - [ ] `@base-ui/react` is the sole primitive engine; no Radix package remains in source, manifests,
       lockfiles, declarations, or the packed dependency closure.
 - [ ] Every component-specific external package is used by its owner and cannot be replaced by a
@@ -76,7 +76,8 @@ branch protection, post-public generator/consumer, or manual assistive-technolog
 - [ ] Component recipes consume semantic tokens; scans reject unapproved raw brand colors,
       one-off radii, shadows, z-indexes, and geometry.
 - [ ] `theme.css` contains no Tailwind preflight/reset and does not restyle arbitrary host elements.
-- [ ] `reset.css` is opt-in and its exact host effects have tests.
+- [ ] `reset.css` is opt-in, includes the exact pinned Tailwind Preflight required by upstream
+      defaults, and its exact host effects have tests.
 - [ ] Light/dark is class-based and computed styles prove both modes after CSS compilation.
 - [ ] RTL behavior passes for direction-sensitive controls and overlays.
 - [ ] Reduced-motion behavior disables or reduces nonessential animation without removing feedback.
@@ -149,17 +150,24 @@ Specific high-risk proofs:
 
 ## G. Upstream intake
 
-- [ ] The mechanical inventory equals the union of the current official 64 documentation surfaces
-      and 62 registry items, including docs-only and registry-only differences.
-- [ ] No row in `upstream-components.tsv` remains merely `observed` at V1 completion.
-- [ ] Every ingested owner records exact shadcn CLI version, Base UI base and version, Nova style, Tailwind version,
-      source item, retrieval date, and content digest.
+- [ ] The mechanical inventory equals the union of the pinned global registry scope and pinned
+      Base/Nova project scope; the 2026-08-26 baseline is 471 global, 216 profile, and 543 unique
+      provider addresses.
+- [ ] Every one of the 63 Base/Nova `registry:ui` addresses is dispositioned exactly: 50 emitted
+      sources are runtime-owned, 12 are exact consumer-owned `component/*` registry items, and
+      `@shadcn/form` is explicitly fileless for this profile.
+- [ ] Every ingested owner records provider address, upstream type, exact CLI/profile, retrieval
+      date, exact source path, exact source digest, public owner, and allowed adaptation.
 - [ ] Upstream source is retrieved through qualified shadcn commands, never copied from a moving raw
       URL.
-- [ ] Astrale normalization and intentional deviations are reviewable.
+- [ ] CI proves every owned runtime and registry component body equals its upstream source after
+      only the declared mechanical import, formatting, and unused-import adaptation; visual/API
+      deviations reject.
 - [ ] License and third-party notices cover all retained upstream code.
-- [ ] An upstream refresh intentionally updates the CLI pin, detects new/removed items, and refuses
-      to overwrite Astrale-owned changes.
+- [ ] An upstream refresh compares both global and project-scoped catalogs, detects new/removed or
+      scope-only items, and refuses unreviewed source overwrites.
+- [ ] The crosswalk schema admits arbitrary provider addresses such as `@ss-components/input-02`
+      without shadcn-specific fields or classification logic in consumers.
 
 ## H. Pattern families
 
