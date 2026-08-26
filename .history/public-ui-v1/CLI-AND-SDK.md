@@ -8,14 +8,14 @@ astrale ui init --preset astrale
 
 # Discover source compositions.
 astrale ui list chart
-astrale ui view pattern/chart/line/interactive
+astrale ui list line-interactive --json
 
 # Preview, then install consumer-owned source.
 astrale ui add pattern/chart/line/interactive --dry-run
 astrale ui add pattern/chart/line/interactive
 
-# Inspect later upstream changes without overwriting local edits.
-astrale ui diff pattern/chart/line/interactive
+# Verify the package, lock, theme, and installed source integrity.
+astrale ui doctor
 ```
 
 With no item arguments, `astrale ui add` is an interactive searchable picker. Under `--ci`, a
@@ -30,17 +30,16 @@ project state under the user's global `~/.astrale` CLI state.
 | Command                          | Intent                                                                                          | Important options and behavior                                                                  |
 | -------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
 | `astrale ui init [path]`         | initialize Astrale UI in an existing supported project                                          | `--preset <name>`, `--version <exact-or-tag>`, `--dry-run`, `--force`, `--no-install`, `--json` |
-| `astrale ui list [query]`        | list or search components, patterns, blocks, and presets                                        | `--type <pattern,block,preset,component>`, `--limit <n>`, `--json`                              |
-| `astrale ui view <items...>`     | show metadata, dependencies, files, provenance, and docs without writing                        | `--json`                                                                                        |
-| `astrale ui add [items...]`      | preview or install one or more pattern/block items                                              | `--dry-run`, `--diff [path]`, `--overwrite`, `--yes`, `--json`                                  |
-| `astrale ui diff [items...]`     | compare installed base, local source, and the selected release                                  | `--path <file>`, `--json`                                                                       |
+| `astrale ui list [query]`        | list or search installable patterns and blocks                                                  | `--type <pattern,block>`, `--limit <n>`, `--version <version>`, `--json`                        |
+| `astrale ui add [items...]`      | preview or install one or more pattern/block items                                              | `--dry-run`, `--overwrite`, `--yes`, `--json`                                                    |
 | `astrale ui doctor [path]`       | verify package, CSS, config, lock, aliases, registry reachability, and installed item integrity | `--json`                                                                                        |
 | `astrale ui preset list`         | list qualified preset CSS contracts                                                             | `--json`                                                                                        |
 | `astrale ui preset apply <name>` | change preset import and token configuration without rewriting components                       | `--dry-run`, `--force`, `--json`                                                                |
 
-There is intentionally no V1 `update` command. Source installed from the registry is consumer-owned;
-`diff` makes change visible and `add --overwrite` is an explicit destructive choice. A future
-three-way merge command requires evidence from real customized consumers.
+There are intentionally no V1 `view`, `diff`, or `update` commands. `list --json` exposes registry
+metadata without a second read surface, `doctor` verifies installed integrity, and source installed
+from the registry is consumer-owned. `add --overwrite --yes` is the explicit destructive choice. A
+future comparison or three-way merge command requires evidence from real customized consumers.
 
 Bare `button`, `dialog`, and other runtime component names are discoverable with `list`, but
 `add button` does not copy their source. `init` installs `@astrale-os/ui`, and applications import
@@ -104,7 +103,7 @@ An exact shadcn CLI invoked through the detected package runner owns:
 - include and item schema validation;
 - alias and target resolution;
 - registry and npm dependency expansion;
-- file/CSS dry-run, view, and diff behavior; and
+- file/CSS dry-run and installed-integrity behavior; and
 - the final file transformation.
 
 The qualified shadcn version comes from the selected release's `tooling/compatibility.json` and is
@@ -144,16 +143,16 @@ Unexpected defects remain the CLI's existing `UNEXPECTED_ERROR`; they are not fl
 `UI_TOOL_FAILED`. Secrets, authorization headers, environment values, and arbitrary source contents
 never appear in machine failures.
 
-## Add and diff laws
+## Add and integrity laws
 
 - Resolve the requested UI release tag to a commit before reading any registry source.
 - All root, include, item, and file reads use that one SHA.
 - Show exact files, npm dependencies, and package manifest/CSS changes before confirmation.
-- `--dry-run`, `view`, and `diff` perform no file, package, or lock write.
+- `list --json`, `--dry-run`, and `doctor` perform no file, package, or lock write.
 - A failed dependency install or file transform cannot advance the lock.
 - Repeating an already-installed exact item is a no-op.
 - If any installed file differs from its recorded base digest, ordinary add refuses overwrite and
-  directs the consumer to `diff`.
+  names the changed file and requires the consumer to review it.
 - `--overwrite` names every affected local file and requires confirmation unless `--yes`; under
   `--ci`, both flags must be explicit.
 - Cancellation settles the child process and leaves no partial lock claim.
@@ -206,7 +205,7 @@ post-create step.
 | source consistency | moving tag resolves once; all files read from one SHA; ref-resolution failure                                                                 |
 | init               | supported clean project; existing shadcn project merge; already initialized no-op; unsupported topology; dry-run; dependency failure rollback |
 | add                | single/multiple item; transitive file set; exact deps; confirmation; dry-run; idempotency; local-change rejection; explicit overwrite         |
-| diff               | unmodified, modified, deleted, upstream changed, unknown item, selected file                                                                  |
+| local ownership    | ordinary add refuses modified/deleted installed files; explicit overwrite requires `--yes`; doctor reports integrity                         |
 | security           | traversal, symlink escape, malicious manifest target, oversized payload, secret-safe errors, interrupted child                                |
 | package runners    | pnpm, npm, yarn, and Bun command construction; spaces in project path; missing runner                                                         |
 | SDK boundary       | packed CLI and SDK dependency closures contain no UI or shadcn packages                                                                       |

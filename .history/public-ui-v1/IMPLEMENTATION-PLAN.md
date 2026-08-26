@@ -129,7 +129,7 @@ CLI changes:
 
 - specify and register the UI command group without Kernel options;
 - implement project discovery, exact UI version/ref resolution, compatibility lookup, lock
-  validation, package-runner invocation, dry-run/view/diff/add, local-change refusal, doctor, and
+  validation, package-runner invocation, list/add dry-run, local-change refusal, doctor, and
   preset commands;
 - delegate registry transformations to the exact release-qualified shadcn CLI via pnpm/npm/yarn/Bun
   on demand;

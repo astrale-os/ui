@@ -206,8 +206,8 @@ Specific high-risk proofs:
       and cycles reject.
 - [ ] `shadcn build` produces deterministic built JSON from identical source/lock inputs.
 - [ ] Built output is compared by digest and retained as release evidence, not hand-edited.
-- [ ] Every item passes `view`, add dry-run, add, repeat add, diff, local edit, deletion, and explicit
-      overwrite cases.
+- [ ] Every item is discoverable through `list --json` and passes add dry-run, add, repeat add,
+      local edit, deletion, and explicit overwrite cases.
 - [ ] Every installed item typechecks, tests, lints, builds, and renders in a fresh supported fixture.
 - [ ] Registry fixtures cover common alias layouts and project paths containing spaces.
 - [ ] Network/ref failure, malformed payload, oversized payload, interrupted install, and dependency
@@ -224,12 +224,13 @@ Specific high-risk proofs:
       unrelated configuration.
 - [ ] `init --dry-run` performs no write or dependency install.
 - [ ] Repeated `init` is a no-op when exact desired state already exists.
-- [ ] `list`, `view`, and `add` without args have useful interactive behavior; `--ci` never prompts.
+- [ ] `list` without a query returns the admitted catalog; `add` without args has useful interactive
+      behavior; `--ci` never prompts.
 - [ ] `add` accepts multiple items and reports the complete transitive file/dependency plan.
 - [ ] All operations resolve one release ref to one 40-character commit and read only that snapshot.
 - [ ] `astrale-ui.lock.json` validates structurally and semantically before use.
 - [ ] Lock advancement happens only after successful dependency/file operations.
-- [ ] Diff detects unchanged, modified, deleted, and upstream-changed files.
+- [ ] `doctor` detects modified and deleted installed files from their lock digests.
 - [ ] Local source is never overwritten without explicit `--overwrite` plus confirmation or `--yes`
       in CI.
 - [ ] Cancellation and child failure settle without orphan process or false success.

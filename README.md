@@ -45,9 +45,8 @@ Install consumer-owned compositions without adding them to the runtime package:
 
 ```bash
 astrale ui list chart
-astrale ui view pattern/chart/line-basic
+astrale ui list line-basic --json
 astrale ui add pattern/chart/line-basic block/dashboard/overview
-astrale ui diff
 astrale ui doctor
 ```
 

@@ -58,11 +58,12 @@ the package archive.
 
 ## CLI proof
 
-Focused CLI proof passed with 37 tests and the existing intentional workspace-skill mirror skip:
+Focused CLI proof passed at `65d54cd` with 35 tests and the existing intentional workspace-skill
+mirror skip:
 
 - format, lint, production/test/Studio typechecks;
 - strict content-bearing built-item admission and one-SHA source resolution;
-- semantic read-only diff classification for upstream, modified, deleted, and unchanged files;
+- installed-file integrity checks and local-change refusal before replacement;
 - one JSON document per command, stable redacted errors, and non-interactive no-prompt behavior;
 - exact runner construction for pnpm/npm/yarn/Bun;
 - one-SHA include resolution, dry-run immutability, rollback, successful lock advancement, local
@@ -70,9 +71,9 @@ Focused CLI proof passed with 37 tests and the existing intentional workspace-sk
 - unchanged installed dependency boundary: UI, React, Base UI, Tailwind, and shadcn are invoked or
   read on demand and are not CLI manifest dependencies.
 
-The complete CLI `pnpm package:check` also passed: 814 tests passed, one intentional workspace-skill
-mirror test was skipped, and build, public exports, dependency closure, and package checks were
-green.
+The complete CLI `pnpm package:check` passed at the same commit: 817 tests passed, one intentional
+workspace-skill mirror test was skipped, and build, public exports, dependency closure, and package
+checks were green.
 
 ## SDK proof
 

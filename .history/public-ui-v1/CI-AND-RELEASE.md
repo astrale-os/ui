@@ -29,7 +29,7 @@ concurrency cancellation for superseded PR revisions.
 | `components`       | Node 24                                                                   | unit/behavior/public API/SSR-hydration suites                                                                                       | test report and coverage by owner, not one global percentage    |
 | `accessibility`    | Chromium plus targeted Firefox/WebKit smoke                               | axe catalog census, keyboard/focus automated journeys, semantic snapshots                                                           | HTML/JSON report and failures                                   |
 | `package`          | Node 24 and 26                                                            | build, pack, archive allowlist, ESM imports, CSS inspection, side effects, dependency rationale, SBOM                               | exact tarball, file list, integrity, CSS and dependency reports |
-| `registry`         | sharded by family                                                         | source validate/build/determinism; view/dry-run/add/diff; every item typecheck/test/build; malicious/rollback cases                 | built registry digest and per-item install report               |
+| `registry`         | sharded by family                                                         | source validate/build/determinism; list/dry-run/add/local-change refusal; every item typecheck/test/build; malicious/rollback cases | built registry digest and per-item install report               |
 | `consumers`        | pnpm and npm required; yarn/Bun CLI construction plus scheduled full runs | clean public-topology install from packed tarball; Vite/SSR/root/subpath/bundle/generated-app fixtures                              | install graph, bundle reports, logs                             |
 | `visual`           | presets x light/dark x selected RTL/reduced-motion x desktop/mobile       | component, pattern, and block state screenshots                                                                                     | Playwright report, diff images, baseline identity               |
 | `security`         | Node 24                                                                   | production audit, dependency review, license/notice, secret scan, CodeQL/static checks, registry path/payload policy                | machine reports and SBOM                                        |
@@ -146,6 +146,13 @@ GitHub requires OIDC `id-token: write`, a GitHub-hosted runner, npm 11.5.1 or ne
 configured workflow filename. Trusted publishing creates automatic provenance for a public package
 from a public repository. These are external admission facts and must be verified again when
 implementation begins, not assumed indefinitely from this 2026-08-25 design.
+
+Package visibility and repository visibility are separate controls: npm can publish this scoped
+package publicly even if GitHub remains private. V1 nevertheless requires a public repository
+because the CLI reads the tagged registry anonymously from GitHub and the release gate requires npm
+provenance, which npm does not generate for private repositories. A private-source alternative must
+first move the immutable registry to a public host and intentionally relax or replace that
+provenance contract.
 
 ## Public UI V1 beta handoff
 
