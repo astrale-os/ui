@@ -1,0 +1,33 @@
+import { readFile, writeFile } from 'node:fs/promises'
+import path from 'node:path'
+
+const source = JSON.parse(await readFile('registry/registry.source.json', 'utf8'))
+const items = []
+
+for (const include of source.includes) {
+  const relativeManifest = include.replace(/^\.\//u, '')
+  const manifest = JSON.parse(await readFile(path.join('registry', relativeManifest), 'utf8'))
+  const directory = path.posix.dirname(relativeManifest)
+  for (const item of manifest.items) {
+    items.push({
+      ...item,
+      files: item.files.map((file) => ({
+        ...file,
+        path: path.posix.join('registry', directory, file.path),
+      })),
+    })
+  }
+}
+
+const registry = {
+  $schema: 'https://ui.shadcn.com/schema/registry.json',
+  name: source.name,
+  homepage: 'https://github.com/astrale-os/ui',
+  items,
+}
+
+const formatted = JSON.stringify(registry, null, 2).replace(
+  /"dependencies": \[\n\s+"([^"]+)"\n\s+\]/gu,
+  '"dependencies": ["$1"]',
+)
+await writeFile('registry/registry.json', `${formatted}\n`, 'utf8')

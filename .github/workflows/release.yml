@@ -10,22 +10,22 @@ concurrency:
   cancel-in-progress: false
 
 permissions:
-  contents: read
+  actions: write
+  contents: write
+  pull-requests: write
 
 jobs:
   release:
-    permissions:
-      contents: write
-      pull-requests: write
     runs-on: ubuntu-latest
     outputs:
+      created: ${{ steps.release.outputs.releases_created }}
       releases_created: ${{ steps.release.outputs.releases_created }}
       prs_created: ${{ steps.release.outputs.prs_created }}
       release_prs: ${{ steps.release.outputs.prs }}
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - id: release
-        uses: astrale-os/config/.github/actions/release@e0a84a92c9da33aa9046847ca2d32e785a06ec75
+        uses: astrale-os/config/.github/actions/release@fa8b83b54565ee459f18e8711e006569a33995c2
         with:
           token: ${{ github.token }}
 
@@ -51,5 +51,28 @@ jobs:
           run_id="${run_url##*/}"
           case "$run_id" in
             ''|*[!0-9]*) echo "workflow dispatch did not return an exact run id" >&2; exit 1 ;;
+          esac
+          gh run watch "$run_id" --repo "$GITHUB_REPOSITORY" --compact --exit-status
+
+  publish:
+    needs: release
+    if: needs.release.outputs.created == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: 'false'
+      - name: Dispatch trusted Publish workflow
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PUBLISH_SHA: ${{ github.sha }}
+        run: |
+          publish_version="$(node -p "require('./packages/ui/package.json').version")"
+          publish_tag="v${publish_version}"
+          run_url="$(gh workflow run publish.yml --repo "$GITHUB_REPOSITORY" --ref "$publish_tag" -f expected-sha="$PUBLISH_SHA" -f expected-version="$publish_version")"
+          run_id="${run_url##*/}"
+          case "$run_id" in
+            ''|*[!0-9]*) echo "publish dispatch did not return an exact run id" >&2; exit 1 ;;
           esac
           gh run watch "$run_id" --repo "$GITHUB_REPOSITORY" --compact --exit-status

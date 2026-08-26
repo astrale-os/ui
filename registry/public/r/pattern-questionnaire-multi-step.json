@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pattern-questionnaire-multi-step",
+  "title": "Pattern · Questionnaire · Multi Step",
+  "description": "Astrale pattern/questionnaire/multi-step; controlled application responsibilities are injected through props.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "registry/patterns/questionnaire/multi-step.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\nimport { Input } from '@astrale-os/ui/input'\nexport function QuestionnaireMultiStep({\n  className,\n  style,\n  questions,\n  step,\n  answer,\n  onAnswer,\n  onStepChange,\n  onComplete,\n}: {\n  className?: string\n  style?: React.CSSProperties\n\n  questions: readonly { id: string; label: string }[]\n  step: number\n  answer: string\n  onAnswer(value: string): void\n  onStepChange(step: number): void\n  onComplete(): void\n}) {\n  const question = questions[step]\n  return (\n    <section\n      data-slot=\"pattern-questionnaire-multi-step\"\n      style={style}\n      aria-live=\"polite\"\n      className={className}\n    >\n      <p data-slot=\"patterns-questionnaire-multi-step-p\">\n        Question {step + 1} of {questions.length}\n      </p>\n      <label data-slot=\"patterns-questionnaire-multi-step-label\">\n        {question?.label}\n        <Input value={answer} onChange={(event) => onAnswer(event.currentTarget.value)} />\n      </label>\n      <div data-slot=\"patterns-questionnaire-multi-step-div\" className=\"flex gap-2\">\n        <Button disabled={step === 0} onClick={() => onStepChange(step - 1)}>\n          Back\n        </Button>\n        <Button\n          disabled={!answer}\n          onClick={() => (step === questions.length - 1 ? onComplete() : onStepChange(step + 1))}\n        >\n          {step === questions.length - 1 ? 'Complete' : 'Next'}\n        </Button>\n      </div>\n    </section>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "components/astrale/pattern/questionnaire/multi-step.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "pattern/questionnaire/multi-step",
+    "ownership": "consumer-source"
+  },
+  "type": "registry:block"
+}

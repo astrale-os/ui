@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pattern-message-thread",
+  "title": "Pattern · Message · Thread",
+  "description": "Astrale pattern/message/thread; controlled application responsibilities are injected through props.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "registry/patterns/message/thread.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\nexport type ThreadMessage = {\n  id: string\n  author: string\n  content: React.ReactNode\n  failed?: boolean\n}\nexport function MessageThread({\n  className,\n  style,\n  messages,\n  loading,\n  onRetry,\n}: {\n  className?: string\n  style?: React.CSSProperties\n\n  messages: readonly ThreadMessage[]\n  loading?: boolean\n  onRetry?(id: string): void\n}) {\n  return (\n    <section\n      data-slot=\"pattern-message-thread\"\n      style={style}\n      aria-label=\"Conversation\"\n      aria-busy={loading}\n      className={className}\n    >\n      <ol data-slot=\"patterns-message-thread-ol\" className=\"grid gap-3\">\n        {messages.map((message) => (\n          <li data-slot=\"patterns-message-thread-li\" key={message.id}>\n            <article data-slot=\"patterns-message-thread-article\" className=\"rounded-xl border p-3\">\n              <strong data-slot=\"patterns-message-thread-strong\">{message.author}</strong>\n              <div data-slot=\"patterns-message-thread-div\">{message.content}</div>\n              {message.failed && (\n                <Button variant=\"outline\" onClick={() => onRetry?.(message.id)}>\n                  Retry\n                </Button>\n              )}\n            </article>\n          </li>\n        ))}\n      </ol>\n      {loading && (\n        <p data-slot=\"patterns-message-thread-p\" role=\"status\">\n          Loading messages…\n        </p>\n      )}\n    </section>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "components/astrale/pattern/message/thread.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "pattern/message/thread",
+    "ownership": "consumer-source"
+  },
+  "type": "registry:block"
+}

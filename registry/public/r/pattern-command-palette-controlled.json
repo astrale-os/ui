@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pattern-command-palette-controlled",
+  "title": "Pattern · Command Palette · Controlled",
+  "description": "Astrale pattern/command-palette/controlled; controlled application responsibilities are injected through props.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "registry/patterns/command-palette/controlled.tsx",
+      "content": "import {\n  Command,\n  CommandEmpty,\n  CommandGroup,\n  CommandInput,\n  CommandItem,\n  CommandList,\n} from '@astrale-os/ui/command'\nimport { Dialog, DialogContent, DialogDescription, DialogTitle } from '@astrale-os/ui/dialog'\nexport function CommandPaletteControlled({\n  className,\n  style,\n  open,\n  query,\n  groups,\n  onOpenChange,\n  onQueryChange,\n  onAction,\n}: {\n  className?: string\n  style?: React.CSSProperties\n\n  open: boolean\n  query: string\n  groups: readonly { label: string; actions: readonly { id: string; label: string }[] }[]\n  onOpenChange(open: boolean): void\n  onQueryChange(query: string): void\n  onAction(id: string): void\n}) {\n  return (\n    <Dialog open={open} onOpenChange={onOpenChange}>\n      <DialogContent\n        data-slot=\"pattern-command-palette-controlled\"\n        style={style}\n        className={className}\n      >\n        <DialogTitle>Commands</DialogTitle>\n        <DialogDescription>Choose an action.</DialogDescription>\n        <Command value={query}>\n          <CommandInput value={query} onValueChange={onQueryChange} />\n          <CommandList>\n            <CommandEmpty>No result.</CommandEmpty>\n            {groups.map((group) => (\n              <CommandGroup key={group.label} heading={group.label}>\n                {group.actions.map((action) => (\n                  <CommandItem key={action.id} onSelect={() => onAction(action.id)}>\n                    {action.label}\n                  </CommandItem>\n                ))}\n              </CommandGroup>\n            ))}\n          </CommandList>\n        </Command>\n      </DialogContent>\n    </Dialog>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "components/astrale/pattern/command-palette/controlled.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "pattern/command-palette/controlled",
+    "ownership": "consumer-source"
+  },
+  "type": "registry:block"
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "block-authentication-sign-in-card",
+  "title": "Block · Authentication · Sign In Card",
+  "description": "Astrale block/authentication/sign-in-card; controlled application responsibilities are injected through props.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "registry/blocks/authentication/sign-in-card.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\nimport {\n  Card,\n  CardContent,\n  CardDescription,\n  CardFooter,\n  CardHeader,\n  CardTitle,\n} from '@astrale-os/ui/card'\nimport { cn } from '@astrale-os/ui/class-name'\nimport { Input } from '@astrale-os/ui/input'\nimport { useId } from 'react'\nexport function SignInCard({\n  className,\n  style,\n  values,\n  error,\n  submitting,\n  onChange,\n  onSubmit,\n}: {\n  className?: string\n  style?: React.CSSProperties\n\n  values: Readonly<Record<string, string>>\n  error?: string\n  submitting?: boolean\n  onChange(field: string, value: string): void\n  onSubmit(): void\n}) {\n  const formId = useId()\n  const errorId = useId()\n  return (\n    <Card\n      data-slot=\"block-authentication-sign-in-card\"\n      style={style}\n      className={cn('mx-auto max-w-md', className)}\n    >\n      <CardHeader>\n        <CardTitle>Sign in</CardTitle>\n        <CardDescription>Enter your details to continue.</CardDescription>\n      </CardHeader>\n      <CardContent>\n        <form\n          data-slot=\"blocks-authentication-sign-in-card-form\"\n          id={formId}\n          className=\"grid gap-4\"\n          onSubmit={(event) => {\n            event.preventDefault()\n            onSubmit()\n          }}\n        >\n          <label data-slot=\"blocks-authentication-sign-in-card-label\">\n            Email\n            <Input\n              name=\"email\"\n              type=\"email\"\n              value={values['email'] ?? ''}\n              required\n              aria-invalid={Boolean(error)}\n              aria-describedby={error ? errorId : undefined}\n              onChange={(event) => onChange('email', event.currentTarget.value)}\n            />\n          </label>\n          <label data-slot=\"blocks-authentication-sign-in-card-label\">\n            Password\n            <Input\n              name=\"password\"\n              type=\"password\"\n              value={values['password'] ?? ''}\n              required\n              aria-invalid={Boolean(error)}\n              aria-describedby={error ? errorId : undefined}\n              onChange={(event) => onChange('password', event.currentTarget.value)}\n            />\n          </label>\n          {error && (\n            <p data-slot=\"blocks-authentication-sign-in-card-p\" id={errorId} role=\"alert\">\n              {error}\n            </p>\n          )}\n        </form>\n      </CardContent>\n      <CardFooter>\n        <Button form={formId} type=\"submit\" disabled={submitting}>\n          {submitting ? 'Working…' : 'Sign in'}\n        </Button>\n      </CardFooter>\n    </Card>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "components/astrale/block/authentication/sign-in-card.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "block/authentication/sign-in-card",
+    "ownership": "consumer-source"
+  },
+  "type": "registry:block"
+}

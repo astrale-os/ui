@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+    "jsx": "react-jsx",
+    "paths": {
+      "#ui/class-name": ["./src/class-name.ts"],
+      "#ui/icon": ["./src/icon/index.tsx"],
+      "#ui/*": ["./src/*/index.tsx", "./src/*/index.ts"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["src/**/*.test.ts", "src/**/*.test.tsx"]
+}

@@ -1,0 +1,119 @@
+@import 'tailwindcss/theme.css';
+@import 'tailwindcss/utilities.css';
+@import 'tw-animate-css';
+
+@source '../**/*.{ts,tsx}';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --ui-background: oklch(0.985 0.004 85);
+  --ui-foreground: oklch(0.19 0.016 255);
+  --ui-card: oklch(1 0 0);
+  --ui-card-foreground: var(--ui-foreground);
+  --ui-popover: oklch(1 0 0);
+  --ui-popover-foreground: var(--ui-foreground);
+  --ui-primary: oklch(0.35 0.12 250);
+  --ui-primary-foreground: oklch(0.985 0.004 85);
+  --ui-secondary: oklch(0.94 0.012 85);
+  --ui-secondary-foreground: var(--ui-foreground);
+  --ui-muted: oklch(0.95 0.008 85);
+  --ui-muted-foreground: oklch(0.48 0.025 255);
+  --ui-accent: oklch(0.92 0.04 82);
+  --ui-accent-foreground: var(--ui-foreground);
+  --ui-destructive: oklch(0.58 0.2 28);
+  --ui-destructive-foreground: oklch(0.985 0 0);
+  --ui-border: oklch(0.87 0.014 80);
+  --ui-input: oklch(0.88 0.012 80);
+  --ui-ring: oklch(0.56 0.14 250);
+  --ui-chart-1: oklch(0.58 0.18 250);
+  --ui-chart-2: oklch(0.67 0.16 165);
+  --ui-chart-3: oklch(0.72 0.16 75);
+  --ui-chart-4: oklch(0.63 0.18 25);
+  --ui-chart-5: oklch(0.57 0.15 315);
+  --ui-radius: 0.7rem;
+  --ui-radius-panel: 1rem;
+  --ui-control-height: 2.25rem;
+  --ui-control-height-sm: 2rem;
+  --ui-control-height-lg: 2.5rem;
+  --ui-font-body: 'Avenir Next', 'Segoe UI Variable', ui-sans-serif, sans-serif;
+  --ui-font-heading: 'Iowan Old Style', 'Palatino Linotype', ui-serif, serif;
+  --ui-shadow-control: 0 1px 2px oklch(0.19 0.016 255 / 0.08);
+  --ui-shadow-panel: 0 18px 55px oklch(0.19 0.016 255 / 0.1);
+  --ui-motion-fast: 120ms;
+  --ui-motion-standard: 180ms;
+}
+
+@theme inline {
+  --color-background: var(--ui-background);
+  --color-foreground: var(--ui-foreground);
+  --color-card: var(--ui-card);
+  --color-card-foreground: var(--ui-card-foreground);
+  --color-popover: var(--ui-popover);
+  --color-popover-foreground: var(--ui-popover-foreground);
+  --color-primary: var(--ui-primary);
+  --color-primary-foreground: var(--ui-primary-foreground);
+  --color-secondary: var(--ui-secondary);
+  --color-secondary-foreground: var(--ui-secondary-foreground);
+  --color-muted: var(--ui-muted);
+  --color-muted-foreground: var(--ui-muted-foreground);
+  --color-accent: var(--ui-accent);
+  --color-accent-foreground: var(--ui-accent-foreground);
+  --color-destructive: var(--ui-destructive);
+  --color-destructive-foreground: var(--ui-destructive-foreground);
+  --color-border: var(--ui-border);
+  --color-input: var(--ui-input);
+  --color-ring: var(--ui-ring);
+  --color-chart-1: var(--ui-chart-1);
+  --color-chart-2: var(--ui-chart-2);
+  --color-chart-3: var(--ui-chart-3);
+  --color-chart-4: var(--ui-chart-4);
+  --color-chart-5: var(--ui-chart-5);
+  --radius-sm: calc(var(--ui-radius) - 0.25rem);
+  --radius-md: calc(var(--ui-radius) - 0.125rem);
+  --radius-lg: var(--ui-radius);
+  --radius-xl: var(--ui-radius-panel);
+  --font-sans: var(--ui-font-body);
+  --font-serif: var(--ui-font-heading);
+  --shadow-xs: var(--ui-shadow-control);
+  --shadow-sm: var(--ui-shadow-control);
+}
+
+:where([data-slot]) {
+  font-family: var(--ui-font-body);
+}
+
+:where([data-slot='card'], [data-slot='dialog-content'], [data-slot='sheet-content']) {
+  box-shadow: var(--ui-shadow-panel);
+}
+
+:where(
+  [data-slot='button'],
+  [data-slot='input'],
+  [data-slot='select-trigger'],
+  [data-slot='native-select']
+) {
+  min-height: var(--ui-control-height);
+  transition-duration: var(--ui-motion-fast);
+}
+
+:where([data-slot='button'][data-size='sm'], [data-slot='native-select'][data-size='sm']) {
+  min-height: var(--ui-control-height-sm);
+}
+
+:where([data-slot='button'][data-size='lg']) {
+  min-height: var(--ui-control-height-lg);
+}
+
+:where([data-slot='card-title'], [data-slot='dialog-title'], [data-slot='sheet-title']) {
+  font-family: var(--ui-font-heading);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :where([data-slot]) {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 1ms !important;
+  }
+}

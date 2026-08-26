@@ -1,0 +1,43 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-patterns-questionnaire",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "pattern-questionnaire-multi-step",
+      "type": "registry:block",
+      "title": "Pattern · Questionnaire · Multi Step",
+      "description": "Astrale pattern/questionnaire/multi-step; controlled application responsibilities are injected through props.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "multi-step.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/questionnaire/multi-step.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/questionnaire/multi-step",
+        "ownership": "consumer-source"
+      }
+    },
+    {
+      "name": "pattern-questionnaire-single-page",
+      "type": "registry:block",
+      "title": "Pattern · Questionnaire · Single Page",
+      "description": "Astrale pattern/questionnaire/single-page; controlled application responsibilities are injected through props.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "single-page.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/questionnaire/single-page.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/questionnaire/single-page",
+        "ownership": "consumer-source"
+      }
+    }
+  ]
+}

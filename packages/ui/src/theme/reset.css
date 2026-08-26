@@ -1,0 +1,25 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--ui-background);
+  color: var(--ui-foreground);
+  font-family: var(--ui-font-body);
+  text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font: inherit;
+}

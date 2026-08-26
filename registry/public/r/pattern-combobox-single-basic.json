@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pattern-combobox-single-basic",
+  "title": "Pattern · Combobox · Single Basic",
+  "description": "Astrale pattern/combobox/single-basic; controlled application responsibilities are injected through props.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "registry/patterns/combobox/single-basic.tsx",
+      "content": "import { Input } from '@astrale-os/ui/input'\nimport { useId } from 'react'\nexport type ComboOption = { id: string; label: string }\nexport function ComboboxSingleBasic({\n  className,\n  style,\n  options,\n  query,\n  value,\n  open,\n  inputLabel = 'Filter options',\n  listboxLabel = 'Options',\n  onQueryChange,\n  onValueChange,\n}: {\n  className?: string\n  style?: React.CSSProperties\n\n  options: readonly ComboOption[]\n  query: string\n  value?: string\n  open: boolean\n  inputLabel?: string\n  listboxLabel?: string\n  onQueryChange(value: string): void\n  onValueChange(value: string): void\n}) {\n  const listboxId = useId()\n  const visible = options.filter((option) =>\n    option.label.toLowerCase().includes(query.toLowerCase()),\n  )\n  return (\n    <div data-slot=\"pattern-combobox-single-basic\" style={style} className={className}>\n      <Input\n        role=\"combobox\"\n        aria-label={inputLabel}\n        aria-autocomplete=\"list\"\n        aria-expanded={open}\n        aria-controls={listboxId}\n        value={query}\n        onChange={(event) => onQueryChange(event.currentTarget.value)}\n      />\n      {open && (\n        <ul\n          data-slot=\"patterns-combobox-single-basic-ul\"\n          id={listboxId}\n          role=\"listbox\"\n          aria-label={listboxLabel}\n        >\n          {visible.map((option) => (\n            <li\n              data-slot=\"patterns-combobox-single-basic-li\"\n              key={option.id}\n              role=\"option\"\n              aria-selected={option.id === value}\n              tabIndex={0}\n              onClick={() => onValueChange(option.id)}\n              onKeyDown={(event) => {\n                if (event.key === 'Enter' || event.key === ' ') {\n                  event.preventDefault()\n                  onValueChange(option.id)\n                }\n              }}\n            >\n              {option.label}\n            </li>\n          ))}\n        </ul>\n      )}\n    </div>\n  )\n}\n",
+      "type": "registry:component",
+      "target": "components/astrale/pattern/combobox/single-basic.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "pattern/combobox/single-basic",
+    "ownership": "consumer-source"
+  },
+  "type": "registry:block"
+}

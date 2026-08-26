@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/astrale-os/ui/main/schemas/astrale-registry-source.schema.json",
+  "title": "Astrale registry source aggregation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "name", "shadcn", "includes"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "name": { "const": "astrale-ui" },
+    "shadcn": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "includes": {
+      "type": "array",
+      "minItems": 20,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^\\./(?:patterns|blocks)/[a-z0-9-]+/registry\\.json$"
+      }
+    }
+  }
+}

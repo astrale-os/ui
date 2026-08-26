@@ -1,23 +1,82 @@
 name: Publish
 
-on:
-  push:
-    branches: [main]
-    paths:
-      - '.release-please-manifest.json'
-  workflow_dispatch:
+# Release Please is the sole version authority. Once it creates a GitHub release,
+# release.yml dispatches this trusted workflow at that exact main commit. The
+# shared publisher derives `beta` from prerelease versions, publishes to public
+# npm through OIDC, and verifies both the immutable version and channel tag.
 
-permissions:
-  contents: read
-  packages: write
+on:
+  workflow_dispatch:
+    inputs:
+      expected-sha:
+        description: Exact released main commit whose UI package must be published.
+        required: true
+        type: string
+      expected-version:
+        description: Exact beta version created by Release Please at the admitted commit.
+        required: true
+        type: string
+
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   publish:
+    environment: npm
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
-      - uses: actions/checkout@v7
-      - uses: astrale-os/config/.github/actions/publish/packages@e0a84a92c9da33aa9046847ca2d32e785a06ec75
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
-          dirs: 'constants utils styles preset components ui'
+          ref: ${{ inputs.expected-sha }}
+          fetch-depth: 0
+          persist-credentials: 'false'
+      - name: Admit exact release commit
+        env:
+          EXPECTED_SHA: ${{ inputs.expected-sha }}
+          EXPECTED_VERSION: ${{ inputs.expected-version }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          [[ "$EXPECTED_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$EXPECTED_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+-beta\.[0-9]+$ ]]
+          test "$(git rev-parse HEAD)" = "$EXPECTED_SHA"
+          test "$(node -p "require('./packages/ui/package.json').version")" = "$EXPECTED_VERSION"
+          test "$(git rev-parse "refs/tags/v${EXPECTED_VERSION}^{commit}")" = "$EXPECTED_SHA"
+          git merge-base --is-ancestor "$EXPECTED_SHA" origin/main
+          test "$(gh api "repos/${GITHUB_REPOSITORY}/releases/tags/v${EXPECTED_VERSION}" --jq .tag_name)" = "v${EXPECTED_VERSION}"
+      - uses: astrale-os/config/.github/actions/publish/packages@fa8b83b54565ee459f18e8711e006569a33995c2
+        with:
+          dirs: packages/ui
+          mirror-public-packages: 'false'
+          install-command: pnpm install --frozen-lockfile
+          build-command: pnpm --filter @astrale-os/ui-catalog exec playwright install --with-deps chromium && pnpm qualify
+          prerelease-tag: auto
+      - name: Qualify exact public npm publication
+        env:
+          EXPECTED_SHA: ${{ inputs.expected-sha }}
+        run: pnpm qualify:publication
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        if: always()
+        with:
+          name: public-npm-publication
+          path: artifacts/publication/**
+
+  mirror:
+    needs: publish
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ inputs.expected-sha }}
+          persist-credentials: 'false'
+      - uses: astrale-os/config/.github/actions/publish/mirror-npm-to-github@fa8b83b54565ee459f18e8711e006569a33995c2
+        with:
+          dirs: packages/ui
           github-token: ${{ github.token }}
-          build-command: pnpm build
+          repository: astrale-os/ui
