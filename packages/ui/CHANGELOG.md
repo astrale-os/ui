@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.3.0-beta.7](https://github.com/astrale-os/ui/compare/v0.3.0-beta.6...v0.3.0-beta.7) (2026-08-26)
+
+
+### Features
+
+* intake complete upstream UI registry ([#31](https://github.com/astrale-os/ui/issues/31)) ([ea08c8c](https://github.com/astrale-os/ui/commit/ea08c8cd41d8fe8b3a176be3c6d3424e172fe127))
+
+
+### Bug Fixes
+
+* **ui:** align the qualified toolchain ([#29](https://github.com/astrale-os/ui/issues/29)) ([458270b](https://github.com/astrale-os/ui/commit/458270b3079098fbfe95fccc9df86ed4277a48af))
+
 ## [0.3.0-beta.6](https://github.com/astrale-os/ui/compare/v0.3.0-beta.5...v0.3.0-beta.6) (2026-08-26)
 
 
