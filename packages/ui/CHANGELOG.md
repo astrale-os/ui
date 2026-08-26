@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0-beta.9](https://github.com/astrale-os/ui/compare/v0.3.0-beta.8...v0.3.0-beta.9) (2026-08-26)
+
+
+### Bug Fixes
+
+* **ui:** make playground specimens interactive ([#34](https://github.com/astrale-os/ui/issues/34)) ([43a9cee](https://github.com/astrale-os/ui/commit/43a9ceea940124172428c137fa5378f2782ab7f9))
+
 ## [0.3.0-beta.8](https://github.com/astrale-os/ui/compare/v0.3.0-beta.7...v0.3.0-beta.8) (2026-08-26)
 
 
