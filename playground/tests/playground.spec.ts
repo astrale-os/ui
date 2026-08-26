@@ -1,5 +1,5 @@
 import AxeBuilder from '@axe-core/playwright'
-import { expect, test, type Download } from '@playwright/test'
+import { expect, test, type Download, type Page } from '@playwright/test'
 
 import registry from '../../registry/registry.json' with { type: 'json' }
 import { componentNames } from '../src/catalog/inventory.js'
@@ -9,6 +9,11 @@ async function downloadText(download: Download) {
   const chunks: Buffer[] = []
   for await (const chunk of stream) chunks.push(Buffer.from(chunk))
   return Buffer.concat(chunks).toString('utf8')
+}
+
+async function openThemeCustomizer(page: Page) {
+  await page.getByRole('button', { name: 'Customize theme' }).click()
+  await expect(page.getByLabel('Theme generator')).toBeVisible()
 }
 
 test('playground renders every public runtime owner and complete registry inventory', async ({
@@ -21,6 +26,7 @@ test('playground renders every public runtime owner and complete registry invent
   ).toHaveCount(0)
   await expect(page.getByText('Tune the system.')).toHaveCount(0)
   await expect(page.getByText('Theme studio')).toHaveCount(0)
+  await expect(page.getByLabel('Theme generator')).toHaveCount(0)
 
   const rendered = await page.locator('[data-component]').evaluateAll((elements) =>
     elements
@@ -33,12 +39,8 @@ test('playground renders every public runtime owner and complete registry invent
   const viewport = await page.evaluate(() => ({
     innerWidth,
     scrollWidth: document.documentElement.scrollWidth,
-    importWidth: document
-      .querySelector<HTMLInputElement>('[aria-label="Import theme document"]')!
-      .getBoundingClientRect().width,
   }))
   expect(viewport.scrollWidth).toBeLessThanOrEqual(viewport.innerWidth)
-  expect(viewport.importWidth).toBeLessThanOrEqual(1)
   const chartLine = page.locator('[data-component="chart"] path.recharts-line-curve').first()
   await expect(chartLine).toBeVisible()
   await expect
@@ -52,6 +54,16 @@ test('playground renders every public runtime owner and complete registry invent
       }),
     )
     .toBe(true)
+
+  await openThemeCustomizer(page)
+  await expect(page.locator('[data-slot="theme-studio"]')).toBeVisible()
+  const importWidth = await page
+    .getByLabel('Import theme document')
+    .evaluate((element) => element.getBoundingClientRect().width)
+  expect(importWidth).toBeLessThanOrEqual(1)
+  await expect(page.locator('[data-component="button"]')).toBeVisible()
+  await page.getByRole('button', { name: 'Close', exact: true }).click()
+  await expect(page.getByLabel('Theme generator')).toHaveCount(0)
 
   await page.getByRole('tab', { name: 'Complete inventory' }).click()
   const registryItems = await page.locator('[data-registry-item]').evaluateAll((elements) =>
@@ -74,6 +86,7 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
   page.on('pageerror', (error) => pageErrors.push(error.message))
   await context.grantPermissions(['clipboard-read', 'clipboard-write'])
   await page.goto('/')
+  await openThemeCustomizer(page)
   const root = page.locator('[data-slot="ui-playground"]')
   const primaryValue = () =>
     root.evaluate((element) => getComputedStyle(element).getPropertyValue('--ui-primary').trim())
@@ -92,6 +105,14 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
   const primaryToken = page.getByLabel('Primary', { exact: true })
   await primaryToken.fill('oklch(0.62 0.2 145)')
   await primaryToken.blur()
+  await expect.poll(primaryValue).toBe('oklch(0.62 0.2 145)')
+  await page.keyboard.press('Escape')
+  const customizerTrigger = page.getByRole('button', { name: 'Customize theme' })
+  await expect(customizerTrigger).toBeFocused()
+  await page.keyboard.press('Enter')
+  await expect(page.getByLabel('Theme generator')).toBeVisible()
+  await expect(page.getByLabel('Primary', { exact: true })).toHaveValue('oklch(0.62 0.2 145)')
+  await expect(page.getByRole('button', { name: 'Undo' })).toBeEnabled()
   await expect.poll(primaryValue).toBe('oklch(0.62 0.2 145)')
 
   await page.getByRole('button', { name: 'Undo' }).click()
@@ -150,6 +171,7 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
     })
 
   await page.reload()
+  await openThemeCustomizer(page)
   await page.getByLabel('Saved themes').click()
   await page.getByRole('option', { name: 'Atelier' }).click()
   await page.getByRole('button', { name: 'Dark', exact: true }).click()
@@ -246,6 +268,7 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
 test('phone layout settles without horizontal overflow', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 })
   await page.goto('/')
+  await openThemeCustomizer(page)
   await expect
     .poll(() =>
       page.evaluate(() => ({
@@ -256,7 +279,12 @@ test('phone layout settles without horizontal overflow', async ({ page }) => {
         ),
       })),
     )
-    .toEqual({ viewport: 390, document: 390, panel: 390 })
+    .toEqual(expect.objectContaining({ viewport: 390, document: 390 }))
+  const panelWidth = await page
+    .getByLabel('Theme generator')
+    .evaluate((element) => Math.ceil(element.getBoundingClientRect().width))
+  expect(panelWidth).toBeGreaterThanOrEqual(374)
+  expect(panelWidth).toBeLessThanOrEqual(390)
 })
 
 test('invalid storage and save failures stay contained', async ({ page }) => {
@@ -268,6 +296,7 @@ test('invalid storage and save failures stay contained', async ({ page }) => {
   )
   await page.reload()
   await expect(page.locator('[data-slot="ui-playground"]')).toBeVisible()
+  await openThemeCustomizer(page)
   await expect(page.getByLabel('Saved themes')).toHaveCount(0)
 
   await page.evaluate(() => {
@@ -294,6 +323,28 @@ test('invalid storage and save failures stay contained', async ({ page }) => {
 
 test('representative overlays and disclosures are keyboard operable', async ({ page }) => {
   await page.goto('/')
+  const customizerTrigger = page.getByRole('button', { name: 'Customize theme' })
+  await customizerTrigger.focus()
+  await page.keyboard.press('Enter')
+  await expect(page.getByLabel('Theme generator')).toBeVisible()
+  const drawerPopup = page.locator('[data-slot="drawer-popup"]')
+  const focusRemainsInDrawer = () =>
+    page.evaluate(() => Boolean(document.activeElement?.closest('[data-slot="drawer-popup"]')))
+  await drawerPopup.focus()
+  await page.keyboard.press('Shift+Tab')
+  await expect.poll(focusRemainsInDrawer).toBe(true)
+  const lastDrawerControl = drawerPopup
+    .locator(
+      'button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [href], [tabindex]:not([tabindex="-1"])',
+    )
+    .last()
+  await lastDrawerControl.focus()
+  await page.keyboard.press('Tab')
+  await expect.poll(focusRemainsInDrawer).toBe(true)
+  await expect(lastDrawerControl).not.toBeFocused()
+  await page.keyboard.press('Escape')
+  await expect(page.getByLabel('Theme generator')).toHaveCount(0)
+
   const dialogTrigger = page.getByRole('button', { name: 'Open dialog' })
   await dialogTrigger.focus()
   await page.keyboard.press('Enter')
@@ -318,6 +369,7 @@ test('all starter modes have no serious automated accessibility violations', asy
   })
   await page.emulateMedia({ reducedMotion: 'reduce' })
   await page.goto('/')
+  await openThemeCustomizer(page)
   const accordionDurations = await page
     .locator('[data-slot="accordion-content"]')
     .evaluateAll((elements) =>

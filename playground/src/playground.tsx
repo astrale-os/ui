@@ -1,4 +1,14 @@
-import { Toaster } from '@astrale-os/ui'
+import { Button } from '@astrale-os/ui/button'
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from '@astrale-os/ui/drawer'
+import { Toaster } from '@astrale-os/ui/toast'
 import { useState } from 'react'
 
 import { ComponentSpecimens } from './catalog/component-specimens.js'
@@ -23,11 +33,25 @@ export function Playground() {
             <ComponentSpecimens />
             <RegistrySpecimens />
           </main>
-
-          <aside className="theme-panel" aria-label="Theme generator">
-            <ThemeStudio workspace={workspace} mode={mode} onModeChange={setMode} />
-          </aside>
         </div>
+
+        <Drawer swipeDirection="right" showSwipeHandle>
+          <DrawerTrigger className="theme-drawer-trigger" render={<Button />}>
+            Customize theme
+          </DrawerTrigger>
+          <DrawerContent className="theme-drawer-popup">
+            <DrawerHeader className="theme-drawer-header">
+              <DrawerTitle className="sr-only">Theme customizer</DrawerTitle>
+              <DrawerDescription className="sr-only">
+                Customize the live theme while inspecting the component catalog.
+              </DrawerDescription>
+              <DrawerClose render={<Button variant="outline" size="sm" />}>Close</DrawerClose>
+            </DrawerHeader>
+            <div className="theme-panel" aria-label="Theme generator">
+              <ThemeStudio workspace={workspace} mode={mode} onModeChange={setMode} />
+            </div>
+          </DrawerContent>
+        </Drawer>
       </div>
     </Toaster>
   )
