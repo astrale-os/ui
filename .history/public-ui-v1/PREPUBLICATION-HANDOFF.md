@@ -7,7 +7,7 @@ Date: 2026-08-26. This is the stopping point before any package publication or v
 | Owner | Baseline `origin/main` | Qualified local commit |
 | --- | --- | --- |
 | UI | `d460f711c05e4f14f1467c7992e3193e0ceb913a` | `b5cb9b6fe7710e7a8bc1978776bb49270e8eac62` |
-| CLI | `634843cdcaeb34fa4a9a338a58be2a5d4578a31a` | `2da8ff20f3af72bb1d72af6bde295a77ea33b807` |
+| CLI | `634843cdcaeb34fa4a9a338a58be2a5d4578a31a` | `65d54cd811821ba032c14efa18ebf76467aa06c7` |
 | SDK | `5bc5e528a5368f80942b406bfd772a36a286c289` | `c20ee0adecddac1cc36dba006b66a8daf1380d52` |
 | GUI | `ba1b2c9afd1fa9ed97de525c176a8ee9580a93de` | `2ef24d60421d29f408f4bdd1baccea7a26bf55a2` |
 | Admin | `f0a4cb4e95488132d41d1ce88bd632d61ef8940e` | `cc0818a7c75abfc27d2f178eb6c788d31bfadf3a` |
@@ -53,10 +53,10 @@ only observed dist-tag was `latest -> 0.2.1`. Neither `0.3.0-beta.0` nor a `beta
   production audit reports no known vulnerability.
 - Catalog: four desktop/mobile Chromium journeys across Astrale/compact/expressive, light/dark,
   reduced motion and keyboard behavior with no critical/serious axe finding.
-- CLI: complete `pnpm package:check` passed with 814 tests and one intentional workspace mirror
-  skip. The focused UI/program layer passed 37 tests and the same skip, including strict built-item
-  admission, semantic read-only diff, stable JSON/errors, dry-run targets, and non-interactive
-  behavior.
+- CLI: complete `pnpm package:check` passed at `65d54cd` with 817 tests and one intentional
+  workspace mirror skip. Focused UI/program proof passed 35 tests with the same skip and includes
+  the exact reduced command tree, strict built-item admission, local-change refusal, stable
+  JSON/errors, dry-run targets, and non-interactive behavior.
 - SDK/generator: complete `pnpm qualify` passed. That includes 543 SDK tests, 1 Node-server test,
   34 package/release script tests, 193 Cloudflare-adapter tests, 47 Astrale-adapter tests, 13
   scaffold tests, all package-surface/pack checks, and physical generated-project qualification for
@@ -99,3 +99,11 @@ Bun binary is materialized and linted under the same admission boundary consumer
 No local source, tarball, registry, or browser result is presented as the V1 public npm artifact,
 provenance, branch-protection, or stable assistive-technology evidence. Remote PR CI is reported
 separately from the existing legacy public npm lineage.
+
+The npm package and GitHub repository have independent visibility. A public npm package can be
+published from a private GitHub repository through trusted publishing, but npm does not generate
+provenance for that topology. More importantly, this V1 CLI resolves release tags and immutable
+registry files anonymously from `api.github.com` and `raw.githubusercontent.com`; a private
+repository would make `astrale ui init`, `list`, and `add` unavailable to public consumers. Keeping
+the source repository private therefore requires a separate public immutable registry host and a
+different release contract; that is not this candidate.

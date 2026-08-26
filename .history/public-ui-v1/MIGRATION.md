@@ -142,7 +142,7 @@ Work:
 
 - add the UI group and commands to the current CLI program owner and specification;
 - add exact release/ref resolution, lock schema/admission, project discovery, process delegation,
-  cancellation, dry-run/diff, machine output, and security checks;
+  cancellation, dry-run, local-change refusal, machine output, and security checks;
 - invoke the release-qualified shadcn version through the detected package runner on demand;
 - update CLI help digest, skill documentation, release/package checks, and dependency boundary; and
 - qualify pnpm, npm, yarn, and Bun consumer journeys.

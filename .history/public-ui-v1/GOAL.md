@@ -17,8 +17,8 @@ The repository must provide:
    expressive presets;
 4. a valid source registry containing useful multi-variant pattern families and off-the-shelf,
    controlled blocks that import only public `@astrale-os/ui` paths;
-5. a local `astrale ui` CLI namespace for initialization, discovery, preview, add, diff, doctor, and
-   preset selection without adding UI or shadcn dependencies to the installed Astrale CLI;
+5. a local `astrale ui` CLI namespace for initialization, discovery, add, doctor, and preset
+   selection without adding UI or shadcn dependencies to the installed Astrale CLI;
 6. no UI dependency, export, peer, or runtime weight in `@astrale-os/sdk`;
 7. the real GUI consumer and explicit generated-React journey migrated without compatibility
    facades;
