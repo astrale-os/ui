@@ -35,7 +35,7 @@ export function ChartLineBasic({
           data-slot="patterns-chart-line-basic-polyline"
           points={points}
           fill="none"
-          stroke="var(--color-chart-1)"
+          stroke="var(--color-chart-1, var(--ui-chart-1))"
           strokeWidth="3"
           vectorEffect="non-scaling-stroke"
         />
