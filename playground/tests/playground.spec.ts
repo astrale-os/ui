@@ -69,6 +69,7 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
   context,
   page,
 }, testInfo) => {
+  test.setTimeout(60_000)
   const pageErrors: string[] = []
   page.on('pageerror', (error) => pageErrors.push(error.message))
   await context.grantPermissions(['clipboard-read', 'clipboard-write'])
@@ -202,7 +203,8 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
     mimeType: 'application/json',
     buffer: Buffer.from(JSON.stringify(exported)),
   })
-  await expect(page.getByRole('dialog', { name: 'Atelier imported' })).toBeVisible()
+  const importedToast = page.getByRole('dialog', { name: 'Atelier imported' })
+  await expect(importedToast).toBeVisible()
   await expect(importInput).toHaveValue('')
   await expect(root).toHaveAttribute('data-ui-theme', 'atelier')
   await expect.poll(primaryValue).toBe('oklch(0.62 0.2 145)')
@@ -218,6 +220,8 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
       root.evaluate((element) => getComputedStyle(element).getPropertyValue('--ui-radius').trim()),
     )
     .toBe('1.05rem')
+  await page.mouse.move(0, 0)
+  await expect(importedToast).toBeHidden({ timeout: 10_000 })
 
   const cssDownloadPromise = page.waitForEvent('download')
   await page.getByRole('button', { name: 'Download CSS' }).click()
