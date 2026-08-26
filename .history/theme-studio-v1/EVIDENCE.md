@@ -1,5 +1,20 @@
 # Qualification evidence
 
+Theme customizer drawer qualification on 2026-08-26:
+
+- The playground catalog now owns the full viewport while the theme customizer opens through the
+  public Astrale `Drawer` and `Button` entrypoints. The catalog remains visible behind the modal
+  surface, and no playground-only drawer implementation or runtime component styling was added.
+- Browser qualification proves the drawer starts closed, opens and closes through visible controls
+  and Escape, traps forward and reverse keyboard focus, restores focus to its trigger, and preserves
+  unsaved theme state across close and reopen.
+- Desktop and 390-pixel mobile journeys prove the complete catalog remains available, the drawer
+  stays within the viewport, theme editing remains live, and all starter/mode combinations have no
+  critical or serious automated accessibility violations.
+- Final `pnpm qualify` passed static contracts, runtime and registry tests, security and license
+  gates, deterministic package and registry consumers, the production playground build, and all 12
+  desktop/mobile browser journeys.
+
 Expanded upstream intake qualification on 2026-08-26:
 
 - The provider-neutral census contains 543 unique shadcn addresses across the global and Base/Nova
