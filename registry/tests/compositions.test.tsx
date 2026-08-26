@@ -5,11 +5,36 @@ import { afterEach, describe, expect, test } from 'vitest'
 import { SignInCard } from '../blocks/authentication/sign-in-card.js'
 import { AppearanceSettings } from '../blocks/settings/appearance.js'
 import { HorizontalCarousel } from '../patterns/carousel/horizontal-controlled.js'
+import { ChartLineBasic } from '../patterns/chart/line-basic.js'
 import { ComboboxSingleBasic } from '../patterns/combobox/single-basic.js'
 
 afterEach(cleanup)
 
 describe('owned registry compositions', () => {
+  test('chart has a preset-backed default while retaining host token control', () => {
+    const { rerender } = render(
+      <ChartLineBasic
+        data={[
+          { label: 'Intake', value: 18 },
+          { label: 'Public beta', value: 100 },
+        ]}
+      />,
+    )
+    const line = document.querySelector('[data-slot="patterns-chart-line-basic-polyline"]')
+    expect(line).toHaveAttribute('stroke', 'var(--color-chart-1, var(--ui-chart-1))')
+
+    rerender(
+      <ChartLineBasic
+        className="host-chart"
+        style={{ '--color-chart-1': 'var(--ui-primary)' } as React.CSSProperties}
+        data={[{ label: 'Qualified', value: 100 }]}
+      />,
+    )
+    const root = document.querySelector('[data-slot="pattern-chart-line-basic"]')
+    expect(root).toHaveClass('host-chart')
+    expect(root).toHaveStyle({ '--color-chart-1': 'var(--ui-primary)' })
+  })
+
   test('combobox instances keep unique relationships and inject query and selection state', async () => {
     const user = userEvent.setup()
     const changes: string[] = []

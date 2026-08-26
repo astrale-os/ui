@@ -49,3 +49,20 @@ test('component keyboard journeys and responsive catalog navigation work', async
   await expect(page.getByText('Root and flat subpaths are both supported.')).toBeVisible()
   await expect(page.getByRole('navigation', { name: 'Catalog navigation' })).toBeVisible()
 })
+
+test('chart color paints from the preset and remains host-overridable', async ({ page }) => {
+  await page.goto('/')
+  const chart = page.locator('[data-slot="pattern-chart-line-basic"]')
+  const line = chart.locator('[data-slot="patterns-chart-line-basic-polyline"]')
+
+  const presetStroke = await line.evaluate((element) => getComputedStyle(element).stroke)
+  expect(presetStroke).not.toBe('')
+  expect(presetStroke).not.toBe('none')
+  expect(presetStroke).not.toBe('rgba(0, 0, 0, 0)')
+
+  await chart.evaluate((element) => element.style.setProperty('--color-chart-1', 'rgb(1, 2, 3)'))
+  await expect
+    .poll(() => line.evaluate((element) => getComputedStyle(element).stroke))
+    .toBe('rgb(1, 2, 3)')
+  expect(await line.evaluate((element) => getComputedStyle(element).stroke)).not.toBe(presetStroke)
+})
