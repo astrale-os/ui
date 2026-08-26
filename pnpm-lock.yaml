@@ -9,7 +9,7 @@ importers:
   .:
     devDependencies:
       '@astrale/commitlint-config':
-        specifier: jsr:@astrale/commitlint-config@~2.0.0
+        specifier: jsr:~2.0.3
         version: '@jsr/astrale__commitlint-config@2.0.3'
       '@astrale/typescript-config':
         specifier: jsr:@astrale/typescript-config@~1.1.0
