@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0-beta.5](https://github.com/astrale-os/ui/compare/v0.3.0-beta.4...v0.3.0-beta.5) (2026-08-26)
+
+
+### Bug Fixes
+
+* **playground:** reset imported theme input safely ([#24](https://github.com/astrale-os/ui/issues/24)) ([1fe5563](https://github.com/astrale-os/ui/commit/1fe5563a508421428927e82b55da2f3f3cd00ec8))
+
 ## [0.3.0-beta.4](https://github.com/astrale-os/ui/compare/v0.3.0-beta.3...v0.3.0-beta.4) (2026-08-26)
 
 
