@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0-beta.2](https://github.com/astrale-os/ui/compare/v0.3.0-beta.1...v0.3.0-beta.2) (2026-08-26)
+
+
+### Bug Fixes
+
+* **package:** isolate internal import aliases ([#11](https://github.com/astrale-os/ui/issues/11)) ([1fddbc0](https://github.com/astrale-os/ui/commit/1fddbc0d29d00a94f16ace1431c28f0ffd7a3c26))
+
 ## [0.3.0-beta.1](https://github.com/astrale-os/ui/compare/v0.3.0-beta.0...v0.3.0-beta.1) (2026-08-26)
 
 
