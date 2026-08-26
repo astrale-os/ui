@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0-beta.8](https://github.com/astrale-os/ui/compare/v0.3.0-beta.7...v0.3.0-beta.8) (2026-08-26)
+
+
+### Features
+
+* **ui:** move playground theme customizer into drawer ([#32](https://github.com/astrale-os/ui/issues/32)) ([3838ae0](https://github.com/astrale-os/ui/commit/3838ae0f57f9e2f50b29daf3319bd5f5eb8ebcfd))
+
 ## [0.3.0-beta.7](https://github.com/astrale-os/ui/compare/v0.3.0-beta.6...v0.3.0-beta.7) (2026-08-26)
 
 
