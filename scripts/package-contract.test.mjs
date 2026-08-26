@@ -36,6 +36,20 @@ async function walk(directory) {
   ).flat()
 }
 
+function cssBlock(source, prelude) {
+  const preludeStart = source.indexOf(prelude)
+  assert.notEqual(preludeStart, -1, `missing CSS prelude ${prelude}`)
+  const blockStart = source.indexOf('{', preludeStart + prelude.length)
+  assert.notEqual(blockStart, -1, `missing CSS block for ${prelude}`)
+  let depth = 1
+  for (let index = blockStart + 1; index < source.length; index += 1) {
+    if (source[index] === '{') depth += 1
+    if (source[index] === '}') depth -= 1
+    if (depth === 0) return source.slice(blockStart + 1, index)
+  }
+  assert.fail(`unclosed CSS block for ${prelude}`)
+}
+
 test('the workspace has one public runtime package with a flat supported API', async () => {
   const root = JSON.parse(await readFile('package.json', 'utf8'))
   const manifest = JSON.parse(await readFile(`${packageRoot}/package.json`, 'utf8'))
@@ -207,7 +221,21 @@ test('theme has an opt-in reset and all public presets own the same character vo
   const theme = await readFile(`${packageRoot}/src/theme/theme.css`, 'utf8')
   assert.doesNotMatch(theme, /tailwindcss\/preflight/u)
   assert.doesNotMatch(theme, /@import\s+["']\.\/reset/u)
-  assert.match(theme, /prefers-reduced-motion:\s*reduce/u)
+  const reducedMotion = cssBlock(theme, '@media (prefers-reduced-motion: reduce)')
+  const slotMotion = cssBlock(reducedMotion, ':where([data-slot])')
+  assert.deepEqual(
+    [...slotMotion.matchAll(/(?:animation|transition)-duration:\s*[^;]+/gu)].map(
+      (match) => match[0],
+    ),
+    ['animation-duration: 1ms !important', 'transition-duration: 1ms !important'],
+  )
+  const accordionMotion = cssBlock(reducedMotion, ":where([data-slot='accordion-content'])")
+  assert.deepEqual(
+    [...accordionMotion.matchAll(/(?:animation|transition)-duration:\s*[^;]+/gu)].map(
+      (match) => match[0],
+    ),
+    ['animation-duration: 0s !important', 'transition-duration: 0s !important'],
+  )
 
   const presets = await Promise.all(
     ['astrale', 'compact', 'expressive'].map((name) =>

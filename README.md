@@ -93,9 +93,13 @@ storage, analytics, and SDK calls does not belong in this repository.
 
 ```bash
 pnpm install --frozen-lockfile
+pnpm playground:dev
 pnpm check
 pnpm qualify
 ```
+
+`pnpm playground:dev` resolves runtime components, theme CSS, and presets directly to their source
+owners, so library edits update through Vite HMR without a package rebuild.
 
 `pnpm qualify` covers contracts, component behavior, portable themes, the source registry, a clean
 packed-package consumer and tree-shaking budget, the playground build, and Chromium
