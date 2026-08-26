@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.3.0-beta.4](https://github.com/astrale-os/ui/compare/v0.3.0-beta.3...v0.3.0-beta.4) (2026-08-26)
+
+
+### Features
+
+* **playground:** add portable theme studio ([#22](https://github.com/astrale-os/ui/issues/22)) ([5b1d060](https://github.com/astrale-os/ui/commit/5b1d0606924e9cc9d6683db150ab45ccf34fc771))
+
+
+### Bug Fixes
+
+* **tabs:** honor Base UI orientation contract ([#20](https://github.com/astrale-os/ui/issues/20)) ([de9b244](https://github.com/astrale-os/ui/commit/de9b244df65b266b4ec3fbb72efe62313c9c6a9e))
+
 ## [0.3.0-beta.3](https://github.com/astrale-os/ui/compare/v0.3.0-beta.2...v0.3.0-beta.3) (2026-08-26)
 
 
