@@ -8,18 +8,27 @@ Interactive catalog repair on 2026-08-26, from UI `origin/main`
   and scroll position remain unchanged while the active page changes.
 - Component cards no longer repeat their package or registry address below the component name. The
   nested Card specimen uses the complete upstream anatomy and fills its available specimen width.
+  The opt-in reset now includes the exact compiled equivalent of shadcn's required global
+  `border-border outline-ring/50` rule, so structural borders resolve through theme tokens instead
+  of inheriting text color.
+- The Select specimen uses the official Base item-aligned composition. Dropdown Menu and Menubar
+  now exercise the official example anatomy across groups, labels, separators, shortcuts,
+  checkbox/radio state, destructive items, and keyboard-opened submenus without changing their
+  exact owned component sources.
 - The theme customizer remains an exact public Astrale Drawer composition. Playground-only CSS
   disables its backdrop blur while retaining the upstream Drawer source byte-for-byte modulo the
   already admitted import and formatting adaptations.
 - The browser suite proves the repaired behavior on desktop and mobile, including exact input
-  values, active selection/value state, carousel movement, pagination isolation, card sizing,
-  subtitle absence, and computed `backdrop-filter: none`. A test-review pass also reproduced and
-  removed a transition-timing race from the settled-state accessibility scan.
+  values, active selection/value state, Select item alignment, continuous Spinner motion when the
+  host requests no motion reduction, preserved reduced-motion behavior, menu state/submenus,
+  carousel movement, pagination isolation, card sizing/tokenized borders, subtitle absence, and
+  computed `backdrop-filter: none`. Test-review passes also reproduced and removed timing races
+  from the settled-state accessibility and menu journeys.
 - Final `pnpm qualify` passed 32 contract tests, 11 runtime tests, 5 registry behavior tests, the
   security policy over 399 tracked files, deterministic package and 64-item registry consumers,
   the production playground build, and all 14 desktop/mobile browser journeys. The deterministic
-  package is 59,331 bytes with SHA-256
-  `9b20cbc8682f9690f712586e6b4960791a8147f23cc6da24585de23939096335`.
+  package is 59,351 bytes with SHA-256
+  `8d2c857bb355a290e2f3b12bc0039aa4b516d1d7eb5b7dd5242ad489973ec4a4`.
 
 Theme customizer drawer qualification on 2026-08-26:
 

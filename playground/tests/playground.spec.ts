@@ -49,8 +49,14 @@ test('playground renders every public runtime owner and complete registry invent
     card: element
       .querySelector(':scope > [data-slot="card-content"] > [data-slot="card"]')
       ?.getBoundingClientRect().width,
+    footerBorder: getComputedStyle(element.querySelector('[data-slot="card-footer"]')!)
+      .borderTopColor,
+    borderToken: getComputedStyle(element.closest('[data-slot="ui-playground"]')!)
+      .getPropertyValue('--ui-border')
+      .trim(),
   }))
   expect(cardWidths.card).toBeGreaterThan(cardWidths.specimen * 0.8)
+  expect(cardWidths.footerBorder).toBe(cardWidths.borderToken)
   const chartLine = page.locator('[data-component="chart"] path.recharts-line-curve').first()
   await expect(chartLine).toBeVisible()
   await expect
@@ -97,6 +103,7 @@ test('playground renders every public runtime owner and complete registry invent
 test('catalog specimens own their interaction without navigating the playground', async ({
   page,
 }) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' })
   await page.goto('/')
 
   const domainPath = page.getByRole('textbox', { name: 'Domain path' })
@@ -107,7 +114,24 @@ test('catalog specimens own their interaction without navigating the playground'
   await expect(graphPath).toHaveValue('domains/journal')
 
   const select = page.locator('[data-component="select"]')
-  await select.getByRole('combobox', { name: 'Environment' }).click()
+  await select.evaluate((element) => element.scrollIntoView({ block: 'center' }))
+  const selectTrigger = select.getByRole('combobox', { name: 'Environment' })
+  await selectTrigger.click()
+  const selectedOption = page
+    .locator('[data-slot="select-content"]')
+    .getByRole('option', { name: 'Production' })
+  await expect
+    .poll(async () => {
+      const [triggerBox, optionBox] = await Promise.all([
+        selectTrigger.boundingBox(),
+        selectedOption.boundingBox(),
+      ])
+      if (!triggerBox || !optionBox) return Number.POSITIVE_INFINITY
+      const triggerCenter = triggerBox.y + triggerBox.height / 2
+      const optionCenter = optionBox.y + optionBox.height / 2
+      return Math.abs(triggerCenter - optionCenter)
+    })
+    .toBeLessThan(2)
   await page.getByRole('option', { name: 'Staging' }).click()
   await expect(select.getByRole('combobox', { name: 'Environment' })).toContainText('Staging')
 
@@ -120,6 +144,23 @@ test('catalog specimens own their interaction without navigating the playground'
   await otp.fill('805214')
   await expect(otp).toHaveValue('805214')
 
+  const spinner = page.locator('[data-component="spinner"] [data-slot="spinner"]')
+  await spinner.scrollIntoViewIfNeeded()
+  const spinnerMotion = await spinner.evaluate(async (element) => {
+    const before = getComputedStyle(element).transform
+    await new Promise((resolve) => setTimeout(resolve, 120))
+    const styles = getComputedStyle(element)
+    return {
+      before,
+      after: styles.transform,
+      duration: styles.animationDuration,
+      name: styles.animationName,
+      playState: styles.animationPlayState,
+    }
+  })
+  expect(spinnerMotion).toMatchObject({ duration: '1s', name: 'spin', playState: 'running' })
+  expect(spinnerMotion.after).not.toBe(spinnerMotion.before)
+
   await page.getByRole('button', { name: 'Thursday, August 27th, 2026' }).click()
   await expect(
     page.getByRole('gridcell', { name: /Thursday, August 27th, 2026/u }),
@@ -130,6 +171,36 @@ test('catalog specimens own their interaction without navigating the playground'
   await expect(previous).toBeDisabled()
   await carousel.getByRole('button', { name: 'Next slide' }).click()
   await expect(previous).toBeEnabled()
+
+  const dropdown = page.locator('[data-component="dropdown-menu"]')
+  await dropdown.scrollIntoViewIfNeeded()
+  await dropdown.getByRole('button', { name: 'Complex menu' }).click()
+  await expect(page.getByRole('menuitem', { name: /Profile/u })).toContainText('⇧⌘P')
+  const statusBar = page.getByRole('menuitemcheckbox', { name: 'Status Bar' })
+  await expect(statusBar).toHaveAttribute('aria-checked', 'false')
+  await statusBar.click()
+  await expect(statusBar).toHaveAttribute('aria-checked', 'true')
+  await page.getByRole('menuitem', { name: 'Invite Users' }).press('ArrowRight')
+  await expect(page.getByRole('menuitem', { name: 'Email', exact: true })).toBeVisible()
+  await page.keyboard.press('Escape')
+  await page.keyboard.press('Escape')
+
+  const menubar = page.locator('[data-component="menubar"]')
+  await menubar.getByRole('menuitem', { name: 'File' }).click()
+  await expect(page.getByRole('menuitem', { name: /New Tab/u })).toContainText('⌘T')
+  await page.getByRole('menuitem', { name: 'Share' }).press('ArrowRight')
+  await expect(page.getByRole('menuitem', { name: 'Email link' })).toBeVisible()
+  await page.keyboard.press('Escape')
+  await page.keyboard.press('Escape')
+  const themeMenu = menubar.getByRole('menuitem', { name: 'Theme' })
+  await themeMenu.click()
+  const darkItem = page.getByRole('menuitemradio', { name: 'Dark' })
+  await darkItem.click()
+  await expect(themeMenu).toHaveAttribute('aria-expanded', 'true')
+  await expect(darkItem).toHaveAttribute('aria-checked', 'true')
+  await page.keyboard.press('Escape')
+  await expect(themeMenu).toHaveAttribute('aria-expanded', 'false')
+  await expect(darkItem).toBeHidden()
 
   const pagination = page.locator('[data-component="pagination"]')
   await pagination.scrollIntoViewIfNeeded()

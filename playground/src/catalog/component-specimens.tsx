@@ -95,10 +95,17 @@ import {
   DrawerTitle,
   DrawerTrigger,
   DropdownMenu,
+  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
   Empty,
   EmptyContent,
@@ -144,10 +151,19 @@ import {
   MessageScrollerProvider,
   MessageScrollerViewport,
   Menubar,
+  MenubarCheckboxItem,
   MenubarContent,
   MenubarGroup,
   MenubarItem,
+  MenubarLabel,
   MenubarMenu,
+  MenubarRadioGroup,
+  MenubarRadioItem,
+  MenubarSeparator,
+  MenubarShortcut,
+  MenubarSub,
+  MenubarSubContent,
+  MenubarSubTrigger,
   MenubarTrigger,
   NativeSelect,
   NativeSelectOption,
@@ -364,7 +380,7 @@ function ActionInputSpecimens() {
             <SelectTrigger aria-label="Environment">
               <SelectValue />
             </SelectTrigger>
-            <SelectContent alignItemWithTrigger={false}>
+            <SelectContent>
               <SelectGroup>
                 {selectItems.map((item) => (
                   <SelectItem key={item.value} value={item.value}>
@@ -830,6 +846,12 @@ function NavigationLayoutSpecimens() {
 }
 
 function MenuOverlaySpecimens() {
+  const [showSidebar, setShowSidebar] = useState(true)
+  const [showStatusBar, setShowStatusBar] = useState(false)
+  const [showBookmarks, setShowBookmarks] = useState(true)
+  const [showUrls, setShowUrls] = useState(false)
+  const [menubarTheme, setMenubarTheme] = useState('system')
+
   return (
     <section id="menus-overlays" className="specimen-section" aria-labelledby="overlay-title">
       <div className="section-heading">
@@ -918,13 +940,60 @@ function MenuOverlaySpecimens() {
         <Specimen name="dropdown-menu">
           <DropdownMenu>
             <DropdownMenuTrigger render={<Button variant="outline" />}>
-              More actions
+              Complex menu
             </DropdownMenuTrigger>
-            <DropdownMenuContent>
+            <DropdownMenuContent className="w-56">
               <DropdownMenuGroup>
-                <DropdownMenuLabel>Domain</DropdownMenuLabel>
-                <DropdownMenuItem>Open</DropdownMenuItem>
-                <DropdownMenuItem>Inspect</DropdownMenuItem>
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuItem>
+                  Profile
+                  <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  Billing
+                  <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  Settings
+                  <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+                </DropdownMenuItem>
+              </DropdownMenuGroup>
+              <DropdownMenuSeparator />
+              <DropdownMenuGroup>
+                <DropdownMenuLabel>View</DropdownMenuLabel>
+                <DropdownMenuCheckboxItem checked={showSidebar} onCheckedChange={setShowSidebar}>
+                  Sidebar
+                </DropdownMenuCheckboxItem>
+                <DropdownMenuCheckboxItem
+                  checked={showStatusBar}
+                  onCheckedChange={setShowStatusBar}
+                >
+                  Status Bar
+                </DropdownMenuCheckboxItem>
+              </DropdownMenuGroup>
+              <DropdownMenuSeparator />
+              <DropdownMenuGroup>
+                <DropdownMenuSub>
+                  <DropdownMenuSubTrigger>Invite Users</DropdownMenuSubTrigger>
+                  <DropdownMenuPortal>
+                    <DropdownMenuSubContent>
+                      <DropdownMenuGroup>
+                        <DropdownMenuItem>Email</DropdownMenuItem>
+                        <DropdownMenuItem>Message</DropdownMenuItem>
+                      </DropdownMenuGroup>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem>More...</DropdownMenuItem>
+                    </DropdownMenuSubContent>
+                  </DropdownMenuPortal>
+                </DropdownMenuSub>
+              </DropdownMenuGroup>
+              <DropdownMenuSeparator />
+              <DropdownMenuGroup>
+                <DropdownMenuItem>Support</DropdownMenuItem>
+                <DropdownMenuItem variant="destructive">
+                  Sign Out
+                  <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+                </DropdownMenuItem>
               </DropdownMenuGroup>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -941,12 +1010,56 @@ function MenuOverlaySpecimens() {
         <Specimen name="menubar">
           <Menubar>
             <MenubarMenu>
-              <MenubarTrigger>View</MenubarTrigger>
+              <MenubarTrigger>File</MenubarTrigger>
               <MenubarContent>
+                <MenubarItem>
+                  New Tab <MenubarShortcut>⌘T</MenubarShortcut>
+                </MenubarItem>
+                <MenubarItem>
+                  New Window <MenubarShortcut>⌘N</MenubarShortcut>
+                </MenubarItem>
+                <MenubarItem disabled>New Incognito Window</MenubarItem>
+                <MenubarSeparator />
+                <MenubarSub>
+                  <MenubarSubTrigger>Share</MenubarSubTrigger>
+                  <MenubarSubContent>
+                    <MenubarItem>Email link</MenubarItem>
+                    <MenubarItem>Messages</MenubarItem>
+                    <MenubarItem>Notes</MenubarItem>
+                  </MenubarSubContent>
+                </MenubarSub>
+                <MenubarSeparator />
+                <MenubarItem>
+                  Print... <MenubarShortcut>⌘P</MenubarShortcut>
+                </MenubarItem>
+              </MenubarContent>
+            </MenubarMenu>
+            <MenubarMenu>
+              <MenubarTrigger>View</MenubarTrigger>
+              <MenubarContent className="w-44">
                 <MenubarGroup>
-                  <MenubarItem>Refresh</MenubarItem>
-                  <MenubarItem>Open journal</MenubarItem>
+                  <MenubarLabel inset>Appearance</MenubarLabel>
+                  <MenubarCheckboxItem
+                    inset
+                    checked={showBookmarks}
+                    onCheckedChange={setShowBookmarks}
+                  >
+                    Bookmarks
+                  </MenubarCheckboxItem>
+                  <MenubarCheckboxItem inset checked={showUrls} onCheckedChange={setShowUrls}>
+                    Full URLs
+                  </MenubarCheckboxItem>
                 </MenubarGroup>
+              </MenubarContent>
+            </MenubarMenu>
+            <MenubarMenu>
+              <MenubarTrigger>Theme</MenubarTrigger>
+              <MenubarContent>
+                <MenubarRadioGroup value={menubarTheme} onValueChange={setMenubarTheme}>
+                  <MenubarRadioItem value="light">Light</MenubarRadioItem>
+                  <MenubarRadioItem value="dark">Dark</MenubarRadioItem>
+                  <MenubarRadioItem value="system">System</MenubarRadioItem>
+                </MenubarRadioGroup>
               </MenubarContent>
             </MenubarMenu>
           </Menubar>
