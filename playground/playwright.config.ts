@@ -4,7 +4,7 @@ export default defineConfig({
   testDir: './tests',
   outputDir: '../artifacts/playground/playwright',
   webServer: {
-    command: 'pnpm dev --host 127.0.0.1 --port 4173',
+    command: 'pnpm --workspace-root playground:dev --host 127.0.0.1 --port 4173',
     port: 4173,
     reuseExistingServer: !process.env.CI,
   },

@@ -30,6 +30,7 @@
     "registry:check": "pnpm themes:check && pnpm registry:index && pnpm registry:typecheck && node --test scripts/registry-contract.test.mjs",
     "registry:qualify": "node scripts/qualify-registry.mjs",
     "playground:typecheck": "pnpm --filter @astrale-os/ui-playground typecheck",
+    "playground:dev": "pnpm build && pnpm --filter @astrale-os/ui-playground dev",
     "playground:build": "pnpm --filter @astrale-os/ui-playground build",
     "playground:test": "pnpm --filter @astrale-os/ui-playground test:e2e",
     "package:qualify": "node scripts/qualify-package.mjs",

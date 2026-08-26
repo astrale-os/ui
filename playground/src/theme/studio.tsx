@@ -3,7 +3,6 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-  Badge,
   Button,
   Card,
   CardContent,
@@ -126,8 +125,14 @@ function download(name: string, type: string, source: string) {
 }
 
 async function copy(source: string, message: string) {
-  await navigator.clipboard.writeText(source)
-  toast.success(message)
+  try {
+    await navigator.clipboard.writeText(source)
+    toast.success(message)
+  } catch (error) {
+    toast.error('Copy failed', {
+      description: error instanceof Error ? error.message : String(error),
+    })
+  }
 }
 
 function selectItems(values: string[]) {
@@ -262,12 +267,7 @@ export function ThemeStudio({
 
   return (
     <Card className="theme-studio" data-slot="theme-studio">
-      <CardHeader className="theme-studio-header">
-        <div>
-          <Badge variant="outline">Base UI · Nova</Badge>
-          <CardTitle>Theme studio</CardTitle>
-          <CardDescription>Every change is live across the complete playground.</CardDescription>
-        </div>
+      <CardContent className="theme-studio-content">
         <div className="theme-history-actions">
           <Button
             variant="outline"
@@ -286,8 +286,6 @@ export function ThemeStudio({
             Redo
           </Button>
         </div>
-      </CardHeader>
-      <CardContent className="theme-studio-content">
         <FieldGroup>
           <Field orientation="horizontal">
             <FieldLabel>Mode</FieldLabel>
@@ -350,8 +348,14 @@ export function ThemeStudio({
             </Button>
             <Button
               onClick={() => {
-                const theme = workspace.save()
-                toast.success(`${theme.label} saved in this browser`)
+                try {
+                  const theme = workspace.save()
+                  toast.success(`${theme.label} saved in this browser`)
+                } catch (error) {
+                  toast.error('Theme save failed', {
+                    description: error instanceof Error ? error.message : String(error),
+                  })
+                }
               }}
             >
               Save theme
