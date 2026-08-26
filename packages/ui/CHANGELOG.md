@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0-beta.4](https://github.com/astrale-os/ui/compare/v0.3.0-beta.3...v0.3.0-beta.4) (2026-08-26)
+
+
+### Documentation
+
+* **history:** record public beta delivery ([#16](https://github.com/astrale-os/ui/issues/16)) ([1c57f48](https://github.com/astrale-os/ui/commit/1c57f48b4eec01fb87727b40049f15b129a1387a))
+
 ## [0.3.0-beta.3](https://github.com/astrale-os/ui/compare/v0.3.0-beta.2...v0.3.0-beta.3) (2026-08-26)
 
 
