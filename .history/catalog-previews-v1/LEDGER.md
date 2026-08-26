@@ -79,7 +79,7 @@ This table tracks review-sized groups only. Item-level truth must come from `cat
 | CP-G05 | closed | One preview failure can invalidate the shared render surface           | catalog/isolation   | Scene-local module and render failure proofs                  |
 | CP-G06 | closed | Preview source/example provenance is not a first-class admission rule  | upstream/catalog    | Generated pinned source map and exact runtime admission       |
 | CP-G07 | closed | Browser tests are hand-authored against the current centralized layout | playground/tests    | Path-derived 112-scene desktop/mobile matrix                  |
-| CP-G08 | in-progress | One continuous overview makes components, patterns, and blocks hard to navigate | playground/catalog | Three derived URL-backed kind tabs plus complete browser regression |
+| CP-G08 | closed | One continuous overview makes components, patterns, and blocks hard to navigate | playground/catalog | Three derived URL-backed kind tabs plus complete browser regression |
 
 ## Defects encountered during implementation
 
@@ -91,6 +91,7 @@ Add rows; never repair product source inside a preview.
 | CP-B02 | closed | Failed ESM imports cannot retry in the same document | catalog/error contract | Module failures offer reload; render failures retry locally | Unit and browser failure proofs |
 | CP-B03 | closed | Preview classes changed published `theme.css` through automatic scanning | package/theme build | `source(none)` plus explicit runtime source root | Exact baseline comparison; only dead `.visible` utility removed |
 | CP-B04 | closed | Generic child `max-width: 100%` overrode sourced block constraints such as `max-w-2xl` | playground canvas | Remove the high-specificity maximum; viewport canvas owns width and centering only | Live computed-style probe: Team 672px and Sign-in 448px, both centered |
+| CP-B05 | closed | Production lazy proof assumed all catalog kinds remained in one DOM and was absent from PR CI | playground qualification | Keep the scroll journey inside Blocks, isolate direct-load proof in a fresh context, and run it in the playground CI job | `pnpm playground:test:production` green after an exact production rebuild |
 
 ## Evidence log
 
@@ -110,6 +111,7 @@ Append exact observations. `planned` commands or queued CI runs are not evidence
 | 2026-08-26 | `e656410` | complete qualification | `pnpm qualify` | Green end to end after source-scan correction |
 | 2026-08-26 | `e656410` | HMR and screenshots | `agent-browser` against port 4321 | Existing-file edit and add/remove scene update proven; `artifacts/playground/catalog-carousel-family{,-mobile}.png` retained |
 | 2026-08-26 | `e656410` | adversarial review | Tests-reviewer critic and gap-finder, followed by two critic reruns | Final critic: no remaining critical or high test-quality issue |
+| 2026-08-26 | `dc647b6` | catalog navigation follow-up | `pnpm qualify`; agent-browser; three-round tests-reviewer audit | Green: 32 browser passes, two deliberate viewport-neutral skips, one production-lazy pass, unchanged 59,352-byte/116-file package and registry digests; final critic found no issue |
 
 ## Completion rule
 

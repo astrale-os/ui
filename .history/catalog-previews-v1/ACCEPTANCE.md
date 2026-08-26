@@ -53,15 +53,15 @@ All criteria below are closed by the evidence recorded in [LEDGER.md](./LEDGER.m
 
 ## Live catalog behavior
 
-- [ ] The sticky header exposes URL-backed Components, Patterns, and Blocks tabs with exactly one
+- [x] The sticky header exposes URL-backed Components, Patterns, and Blocks tabs with exactly one
       active catalog kind.
-- [ ] Component groups have a stable semantic order; pattern and block families have stable
+- [x] Component groups have a stable semantic order; pattern and block families have stable
       alphabetical order.
-- [ ] Card isolation uses an accessible eye action; derived scene-count badges appear only for
+- [x] Card isolation uses an accessible eye action; derived scene-count badges appear only for
       addresses with more than one scene.
-- [ ] The Back control and native browser Back restore the originating catalog anchor at the same
+- [x] The Back control and native browser Back restore the originating catalog anchor at the same
       viewport offset; direct deep links fall back inside the owning catalog kind.
-- [ ] Viewport block canvases preserve sourced maximum widths, center constrained blocks, and let
+- [x] Viewport block canvases preserve sourced maximum widths, center constrained blocks, and let
       unconstrained blocks use the available width on desktop and mobile.
 - [x] Overview pages show the canonical preview for every item.
 - [x] Family pages show every item and every named scene in that family.
