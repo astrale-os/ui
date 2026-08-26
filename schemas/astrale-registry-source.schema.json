@@ -11,11 +11,11 @@
     "shadcn": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
     "includes": {
       "type": "array",
-      "minItems": 20,
+      "minItems": 21,
       "uniqueItems": true,
       "items": {
         "type": "string",
-        "pattern": "^\\./(?:patterns|blocks)/[a-z0-9-]+/registry\\.json$"
+        "pattern": "^\\./(?:(?:patterns|blocks)/[a-z0-9-]+|themes)/registry\\.json$"
       }
     }
   }

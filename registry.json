@@ -23,6 +23,7 @@
     "registry/patterns/questionnaire/registry.json",
     "registry/patterns/sidebar/registry.json",
     "registry/patterns/toast/registry.json",
-    "registry/patterns/typography/registry.json"
+    "registry/patterns/typography/registry.json",
+    "registry/themes/registry.json"
   ]
 }

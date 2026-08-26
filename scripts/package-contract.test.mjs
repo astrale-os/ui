@@ -80,6 +80,21 @@ test('the workspace has one public runtime package with a flat supported API', a
       assert.doesNotMatch(value, /\/src\//u)
     }
   }
+
+  const { componentNames } = await import('../playground/src/catalog/inventory.ts')
+  const publicComponents = Object.entries(manifest.exports)
+    .filter(
+      ([subpath, target]) =>
+        subpath.startsWith('./') &&
+        subpath !== './class-name' &&
+        target &&
+        typeof target === 'object' &&
+        typeof target.import === 'string' &&
+        target.import.endsWith('/index.js'),
+    )
+    .map(([subpath]) => subpath.slice(2))
+    .toSorted()
+  assert.deepEqual([...componentNames].toSorted(), publicComponents)
 })
 
 test('runtime dependencies exclude optional composition and umbrella libraries', async () => {
@@ -121,6 +136,27 @@ test('production source follows semantic owners and contains no hidden applicati
     /(?:localStorage|sessionStorage|document\.cookie|\bfetch\(|XMLHttpRequest|EventSource|WebSocket)/u,
   )
   assert.doesNotMatch(source, /(?:Dock|Taskbar|WindowManager|macOS)/u)
+  assert.doesNotMatch(
+    source,
+    /(?:group-|group-has-)?data-(?:horizontal|vertical)(?:[/:]|\b)/u,
+    'Base UI orientation styles must target data-orientation, not nonexistent shorthand attributes',
+  )
+})
+
+test('Base UI orientation owners target the emitted data-orientation contract', async () => {
+  const owners = [
+    'action/button-group',
+    'action/toggle-group',
+    'content/separator',
+    'input/field',
+    'input/slider',
+    'layout/scroll-area',
+    'navigation/tabs',
+  ]
+  for (const owner of owners) {
+    const source = await readFile(`${packageRoot}/src/${owner}/index.tsx`, 'utf8')
+    assert.match(source, /(?:group-)?data-\[orientation=(?:horizontal|vertical)\]/u, owner)
+  }
 })
 
 test('every runtime-owned intrinsic visual part has a stable slot', async () => {

@@ -131,11 +131,13 @@ function CommandList({ className, ...props }: AutocompletePrimitive.List.Props) 
 
 function CommandEmpty({ className, ...props }: AutocompletePrimitive.Empty.Props) {
   return (
-    <AutocompletePrimitive.Empty
-      data-slot="command-empty"
-      className={cn('py-6 text-center text-sm', className)}
-      {...props}
-    />
+    <div role="option" aria-disabled="true" data-slot="command-empty-option">
+      <AutocompletePrimitive.Empty
+        data-slot="command-empty"
+        className={cn('py-6 text-center text-sm', className)}
+        {...props}
+      />
+    </div>
   )
 }
 

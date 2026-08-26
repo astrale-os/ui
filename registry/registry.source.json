@@ -22,6 +22,7 @@
     "./patterns/questionnaire/registry.json",
     "./patterns/sidebar/registry.json",
     "./patterns/toast/registry.json",
-    "./patterns/typography/registry.json"
+    "./patterns/typography/registry.json",
+    "./themes/registry.json"
   ]
 }
