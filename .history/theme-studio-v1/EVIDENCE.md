@@ -1,5 +1,35 @@
 # Qualification evidence
 
+Fresh source and consumer iteration on 2026-08-26, from UI `origin/main`
+`910640c8227af4893eb10bae9b00e88ba319a7ce`:
+
+- Removed the global header, hero copy, catalog rail, navigation note, and Theme Studio marketing
+  header. The playground now opens directly on the runtime catalog with the theme controls as its
+  only persistent side surface.
+- `pnpm playground:dev` starts from a checkout without `packages/ui/dist`, prepares package output
+  once for TypeScript/package consumers, and resolves every public runtime entrypoint plus theme and
+  preset CSS to its source owner. Physical component and CSS edits both hot-updated in Chromium
+  without a page reload; the edited theme state remained intact.
+- `pnpm qualify`: green, including 28 contract tests, 11 runtime tests, 5 registry behavior tests,
+  the security policy, deterministic package and registry qualification, the production playground
+  build, and all 12 Playwright journeys across desktop and mobile.
+- The browser journeys exact-match all 50 runtime owners and all 52 registry items; exercise color,
+  mode, typography, geometry, randomization, undo/redo, local save/reload, JSON import/export, CSS
+  export, clipboard success/failure, malformed storage/write failure containment, responsive layout,
+  representative overlays/disclosures, and all starter/mode accessibility combinations. Reduced
+  motion has exact computed zero-duration accordion behavior and a clean console.
+- The qualified tarball is deterministic at 58,647 bytes with SHA-256
+  `4201a0aae954847afd75b5abe9e4ed3d09b664f234d4d6a127a7bb73f669e4d8`; all 52 registry items
+  install deterministically.
+- Independent critic and gap-finder passes exposed and closed a flaky temporary-download import,
+  partial registry/import/reduced-motion assertions, absent CSS-source HMR, and uncontained clipboard
+  and storage failures. The final critic pass found no remaining material test-quality issue.
+- In a fresh external Vite React/Tailwind project, published `@astrale-os/cli@1.0.0-beta.22`
+  initialized published `@astrale-os/ui@0.3.0-beta.5`, installed the actual playground export through
+  `astrale ui add ../atelier.css`, returned every `ui doctor` check healthy, and built successfully.
+  A separate browser observed the exported primary color, radius, and body font exactly with no
+  console or page errors.
+
 Local source qualification on 2026-08-26:
 
 - `pnpm qualify`: green, including 27 contract tests, 11 runtime tests, 5 registry behavior tests,

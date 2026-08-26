@@ -43,115 +43,20 @@ textarea {
     color var(--ui-motion-standard);
 }
 
-.skip-link {
-  position: fixed;
-  top: -5rem;
-  left: 1rem;
-  z-index: 100;
-  border-radius: var(--ui-radius);
-  background: var(--ui-foreground);
-  color: var(--ui-background);
-  padding: 0.75rem 1rem;
-}
-
-.skip-link:focus {
-  top: 1rem;
-}
-
-.playground-header {
-  position: sticky;
-  top: 0;
-  z-index: 30;
-  display: grid;
-  grid-template-columns: 15rem minmax(18rem, 36rem) 1fr;
-  align-items: center;
-  gap: 1rem;
-  min-height: 4rem;
-  border-bottom: 1px solid var(--ui-border);
-  background: color-mix(in oklab, var(--ui-background) 88%, transparent);
-  padding: 0.75rem 1rem;
-  backdrop-filter: blur(20px) saturate(1.2);
-}
-
-.playground-wordmark {
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
-}
-
-.playground-wordmark > span {
-  display: grid;
-  place-items: center;
-  font-size: 1.4rem;
-  color: var(--ui-primary);
-}
-
-.playground-wordmark div {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.05;
-}
-
-.playground-wordmark strong {
-  font-family: var(--ui-font-heading);
-}
-
-.playground-wordmark small {
-  color: var(--ui-muted-foreground);
-}
-
-.global-search {
-  margin: 0;
-  box-shadow: var(--ui-shadow-control);
-}
-
-.global-search > [data-slot='input-group'] {
-  width: 100%;
-}
-
-.header-status {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 0.5rem;
-}
-
 .playground-layout {
   display: grid;
-  grid-template-columns: 15rem minmax(0, 1fr) 27rem;
+  grid-template-columns: minmax(0, 1fr) 27rem;
   align-items: start;
 }
 
-.playground-navigation,
 .theme-panel {
   position: sticky;
-  top: 4rem;
-  height: calc(100dvh - 4rem);
+  top: 0;
+  height: 100dvh;
   background: color-mix(in oklab, var(--ui-background) 92%, transparent);
   backdrop-filter: blur(18px);
 }
 
-.playground-navigation {
-  border-right: 1px solid var(--ui-border);
-}
-
-.navigation-scroll {
-  height: 100%;
-}
-
-.playground-navigation nav {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  padding: 1rem 0.75rem;
-}
-
-.playground-navigation nav [data-slot='button'] {
-  width: 100%;
-  justify-content: space-between;
-}
-
-.nav-label,
 .section-kicker {
   margin: 0 0 0.75rem;
   color: var(--ui-muted-foreground);
@@ -160,22 +65,6 @@ textarea {
   text-transform: uppercase;
 }
 
-.navigation-note {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-  padding: 1rem;
-  color: var(--ui-muted-foreground);
-  font-size: 0.76rem;
-  line-height: 1.55;
-}
-
-.navigation-note p {
-  margin: 0;
-}
-
-.navigation-note code,
-.metric-row code,
 .install-command {
   overflow-wrap: anywhere;
   border-radius: calc(var(--ui-radius) - 0.2rem);
@@ -190,46 +79,11 @@ textarea {
   min-width: 0;
 }
 
-.playground-hero {
-  display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(18rem, 0.85fr);
-  align-items: center;
-  gap: clamp(2rem, 6vw, 6rem);
-  min-height: calc(100dvh - 4rem);
-  border-bottom: 1px solid var(--ui-border);
-  padding: clamp(3rem, 7vw, 7rem);
-}
-
-.hero-copy h1,
 .section-heading h2 {
   margin: 0;
   font-family: var(--ui-font-heading);
   font-weight: 520;
   letter-spacing: -0.045em;
-}
-
-.hero-copy h1 {
-  display: flex;
-  flex-direction: column;
-  font-size: clamp(3.4rem, 7vw, 7.4rem);
-  line-height: 0.88;
-}
-
-.hero-copy h1 em {
-  color: var(--ui-primary);
-  font-weight: inherit;
-}
-
-.hero-copy > p:not(.section-kicker) {
-  max-width: 44rem;
-  color: var(--ui-muted-foreground);
-  font-size: 1.08rem;
-  line-height: 1.7;
-}
-
-.hero-console {
-  transform: rotate(0.8deg);
-  box-shadow: var(--ui-shadow-panel);
 }
 
 .stack {
@@ -239,7 +93,6 @@ textarea {
 }
 
 .inline-cluster,
-.metric-row,
 .section-heading,
 .theme-history-actions,
 .theme-preset-actions,
@@ -250,18 +103,8 @@ textarea {
   gap: 0.65rem;
 }
 
-.metric-row,
 .section-heading {
   justify-content: space-between;
-}
-
-.metric-row {
-  color: var(--ui-muted-foreground);
-  font-size: 0.78rem;
-}
-
-.metric-row strong {
-  color: var(--ui-foreground);
 }
 
 .specimen-section,
@@ -410,20 +253,6 @@ textarea {
   box-shadow: var(--ui-shadow-panel);
 }
 
-.theme-studio-header {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 1rem;
-  border-bottom: 1px solid var(--ui-border);
-  padding-block: 1rem;
-}
-
-.theme-studio-header [data-slot='badge'] {
-  margin-bottom: 0.75rem;
-}
-
 .theme-studio-content {
   min-height: 0;
   flex: 1;
@@ -497,21 +326,17 @@ textarea {
 
 @media (max-width: 1420px) {
   .playground-layout {
-    grid-template-columns: 13rem minmax(0, 1fr) 24rem;
-  }
-  .playground-header {
-    grid-template-columns: 13rem minmax(15rem, 1fr) auto;
+    grid-template-columns: minmax(0, 1fr) 24rem;
   }
 }
 
 @media (max-width: 1120px) {
   .playground-layout {
-    grid-template-columns: 12rem minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr);
   }
   .theme-panel {
     position: relative;
     top: auto;
-    grid-column: 1 / -1;
     height: auto;
     border-top: 1px solid var(--ui-border);
     border-left: 0;
@@ -524,46 +349,14 @@ textarea {
   .theme-studio-content {
     overflow-y: visible;
   }
-  .playground-header {
-    grid-template-columns: 12rem minmax(15rem, 1fr);
-  }
-  .header-status {
-    display: none;
-  }
 }
 
 @media (max-width: 760px) {
   html {
     scroll-behavior: auto;
   }
-  .playground-header {
-    position: relative;
-    grid-template-columns: 1fr;
-  }
   .playground-layout {
     display: block;
-  }
-  .playground-navigation {
-    position: relative;
-    top: auto;
-    height: auto;
-    border-right: 0;
-    border-bottom: 1px solid var(--ui-border);
-  }
-  .playground-navigation nav {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .navigation-note {
-    display: none;
-  }
-  .playground-hero {
-    grid-template-columns: 1fr;
-    min-height: auto;
-    padding-top: 4rem;
-  }
-  .hero-copy h1 {
-    font-size: clamp(3rem, 15vw, 5rem);
   }
   .specimen-grid,
   .registry-live-grid,
@@ -581,8 +374,5 @@ textarea {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
-  }
-  .hero-console {
-    transform: none;
   }
 }

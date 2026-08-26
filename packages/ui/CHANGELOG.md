@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0-beta.6](https://github.com/astrale-os/ui/compare/v0.3.0-beta.5...v0.3.0-beta.6) (2026-08-26)
+
+
+### Bug Fixes
+
+* **ui:** streamline playground theme iteration ([#27](https://github.com/astrale-os/ui/issues/27)) ([ff49b84](https://github.com/astrale-os/ui/commit/ff49b844789df3b716b9f0e3d7bde4a0e9a1caf2))
+
 ## [0.3.0-beta.5](https://github.com/astrale-os/ui/compare/v0.3.0-beta.4...v0.3.0-beta.5) (2026-08-26)
 
 

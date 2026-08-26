@@ -1,6 +1,6 @@
 {
   "name": "@astrale-os/ui-workspace",
-  "version": "0.3.0-beta.5",
+  "version": "0.3.0-beta.6",
   "private": true,
   "repository": {
     "type": "git",
@@ -30,6 +30,7 @@
     "registry:check": "pnpm themes:check && pnpm registry:index && pnpm registry:typecheck && node --test scripts/registry-contract.test.mjs",
     "registry:qualify": "node scripts/qualify-registry.mjs",
     "playground:typecheck": "pnpm --filter @astrale-os/ui-playground typecheck",
+    "playground:dev": "pnpm build && pnpm --filter @astrale-os/ui-playground dev",
     "playground:build": "pnpm --filter @astrale-os/ui-playground build",
     "playground:test": "pnpm --filter @astrale-os/ui-playground test:e2e",
     "package:qualify": "node scripts/qualify-package.mjs",
