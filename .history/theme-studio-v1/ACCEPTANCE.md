@@ -41,4 +41,4 @@
 - [x] UI and CLI focused tests pass, followed by supported full qualification.
 - [x] Two-agent test review finds no remaining gamed tests or high-risk uncovered behavior.
 - [x] Browser screenshots are retained for desktop and mobile.
-- [ ] UI and CLI PRs pass remote CI, merge at exact revisions, and leave no task-owned local work.
+- [x] UI and CLI PRs pass remote CI, merge at exact revisions, and leave no task-owned local work.
