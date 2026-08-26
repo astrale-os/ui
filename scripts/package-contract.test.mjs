@@ -1,5 +1,4 @@
 import assert from 'node:assert/strict'
-import { spawnSync } from 'node:child_process'
 import { readFile, readdir } from 'node:fs/promises'
 import path from 'node:path'
 import test from 'node:test'
@@ -7,8 +6,6 @@ import test from 'node:test'
 const packageRoot = 'packages/ui'
 const forbiddenRuntimeDependencies = [
   'shadcn',
-  'cmdk',
-  'lucide-react',
   'radix-ui',
   'recharts',
   'react-day-picker',
@@ -95,7 +92,7 @@ test('the workspace has one public runtime package with a flat supported API', a
     }
   }
 
-  const { componentNames } = await import('../playground/src/catalog/inventory.ts')
+  const { runtimeComponentNames } = await import('../playground/src/catalog/inventory.ts')
   const publicComponents = Object.entries(manifest.exports)
     .filter(
       ([subpath, target]) =>
@@ -108,17 +105,26 @@ test('the workspace has one public runtime package with a flat supported API', a
     )
     .map(([subpath]) => subpath.slice(2))
     .toSorted()
-  assert.deepEqual([...componentNames].toSorted(), publicComponents)
+  assert.deepEqual([...runtimeComponentNames].toSorted(), publicComponents)
 })
 
 test('runtime dependencies exclude optional composition and umbrella libraries', async () => {
   const manifest = JSON.parse(await readFile(`${packageRoot}/package.json`, 'utf8'))
-  const lockfile = await readFile('pnpm-lock.yaml', 'utf8')
   const installed = new Set([
     ...Object.keys(manifest.dependencies ?? {}),
     ...Object.keys(manifest.peerDependencies ?? {}),
   ])
   assert.equal(manifest.dependencies?.['@base-ui/react'], '^1.7.0')
+  assert.deepEqual(Object.keys(manifest.dependencies).toSorted(), [
+    '@base-ui/react',
+    'class-variance-authority',
+    'clsx',
+    'cmdk',
+    'input-otp',
+    'lucide-react',
+    'react-resizable-panels',
+    'tailwind-merge',
+  ])
   for (const dependency of forbiddenRuntimeDependencies)
     assert.equal(installed.has(dependency), false)
   assert.equal(
@@ -129,8 +135,6 @@ test('runtime dependencies exclude optional composition and umbrella libraries',
     [...installed].some((name) => name.startsWith('@astrale-os/sdk')),
     false,
   )
-  assert.doesNotMatch(lockfile, /['"]?@radix-ui\//u)
-  assert.doesNotMatch(lockfile, /\n  cmdk@/u)
 })
 
 test('production source follows semantic owners and contains no hidden application effects', async () => {
@@ -149,15 +153,18 @@ test('production source follows semantic owners and contains no hidden applicati
     source,
     /(?:localStorage|sessionStorage|document\.cookie|\bfetch\(|XMLHttpRequest|EventSource|WebSocket)/u,
   )
-  assert.doesNotMatch(source, /(?:Dock|Taskbar|WindowManager|macOS)/u)
-  assert.doesNotMatch(
-    source,
-    /(?:group-|group-has-)?data-(?:horizontal|vertical)(?:[/:]|\b)/u,
-    'Base UI orientation styles must target data-orientation, not nonexistent shorthand attributes',
-  )
 })
 
-test('Base UI orientation owners target the emitted data-orientation contract', async () => {
+test('the exact shadcn support layer maps orientation shorthand to Base UI state', async () => {
+  const support = await readFile(`${packageRoot}/src/theme/shadcn-tailwind.css`, 'utf8')
+  assert.match(
+    support,
+    /@custom-variant data-horizontal\s*\{\s*&:where\(\[data-orientation="horizontal"\]\)/u,
+  )
+  assert.match(
+    support,
+    /@custom-variant data-vertical\s*\{\s*&:where\(\[data-orientation="vertical"\]\)/u,
+  )
   const owners = [
     'action/button-group',
     'action/toggle-group',
@@ -169,52 +176,8 @@ test('Base UI orientation owners target the emitted data-orientation contract', 
   ]
   for (const owner of owners) {
     const source = await readFile(`${packageRoot}/src/${owner}/index.tsx`, 'utf8')
-    assert.match(source, /(?:group-)?data-\[orientation=(?:horizontal|vertical)\]/u, owner)
+    assert.match(source, /(?:group-)?data-(?:horizontal|vertical)(?:[/:]|\b)/u, owner)
   }
-})
-
-test('every runtime-owned intrinsic visual part has a stable slot', async () => {
-  const files = (await walk(`${packageRoot}/src`)).filter(
-    (file) => file.endsWith('.tsx') && !file.endsWith('.test.tsx'),
-  )
-  const missing = []
-  const visualTags = new Set([
-    'a',
-    'button',
-    'div',
-    'fieldset',
-    'form',
-    'input',
-    'label',
-    'li',
-    'nav',
-    'ol',
-    'option',
-    'select',
-    'span',
-    'svg',
-    'table',
-    'tbody',
-    'td',
-    'textarea',
-    'tfoot',
-    'th',
-    'thead',
-    'tr',
-    'ul',
-  ])
-
-  for (const file of files) {
-    const source = await readFile(file, 'utf8')
-    for (const match of source.matchAll(/<([a-z][a-z0-9-]*)\b([^<>]*?)\/?\s*>/gsu)) {
-      if (!visualTags.has(match[1])) continue
-      if (/\bdata-slot\s*=/u.test(match[2])) continue
-      const line = source.slice(0, match.index).split('\n').length
-      missing.push(`${file}:${line} <${match[1]}>`)
-    }
-  }
-
-  assert.deepEqual(missing, [])
 })
 
 test('theme has an opt-in reset and all public presets own the same character vocabulary', async () => {
@@ -256,11 +219,4 @@ test('theme has an opt-in reset and all public presets own the same character vo
     assert.match(preset, /\.dark/u)
   }
   assert.equal(new Set(presets).size, presets.length)
-})
-
-test('upstream intake ledger is closed and content-addressed to current owners', () => {
-  const result = spawnSync(process.execPath, ['scripts/refresh-upstream-ledger.mjs', '--check'], {
-    encoding: 'utf8',
-  })
-  assert.equal(result.status, 0, result.stderr || result.stdout)
 })

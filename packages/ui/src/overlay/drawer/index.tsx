@@ -33,7 +33,7 @@ function Drawer({
 }: DrawerPrimitive.Root.Props & {
   showSwipeHandle?: boolean
 }) {
-  const hasSnapPoints = snapPoints !== undefined && snapPoints !== null && snapPoints.length > 0
+  const hasSnapPoints = snapPoints != null && snapPoints.length > 0
   const contextValue = React.useMemo(
     () => ({ hasSnapPoints, modal, showSwipeHandle, swipeDirection }),
     [hasSnapPoints, modal, showSwipeHandle, swipeDirection],
@@ -91,40 +91,17 @@ function DrawerSwipeHandle({ className, ...props }: React.ComponentProps<'div'>)
   )
 }
 
-function DrawerContent({
-  className,
-  children,
-  portalProps,
-  overlayProps,
-  viewportProps,
-  swipeHandleProps,
-  contentProps,
-  ...props
-}: DrawerPrimitive.Popup.Props & {
-  portalProps?: DrawerPrimitive.Portal.Props
-  overlayProps?: DrawerPrimitive.Backdrop.Props
-  viewportProps?: DrawerPrimitive.Viewport.Props
-  swipeHandleProps?: React.ComponentProps<'div'>
-  contentProps?: DrawerPrimitive.Content.Props
-}) {
+function DrawerContent({ className, children, ...props }: DrawerPrimitive.Popup.Props) {
   const { hasSnapPoints, modal, showSwipeHandle, swipeDirection } = useDrawer()
   const swipeAxis = swipeDirection === 'down' || swipeDirection === 'up' ? 'y' : 'x'
-  const { className: viewportClassName, ...viewportRest } = viewportProps ?? {}
-  const { className: contentClassName, ...contentRest } = contentProps ?? {}
 
   return (
-    <DrawerPortal data-slot="drawer-portal" {...portalProps}>
-      {modal === true && (
-        <DrawerOverlay data-snap-points={hasSnapPoints ? '' : undefined} {...overlayProps} />
-      )}
+    <DrawerPortal data-slot="drawer-portal">
+      {modal === true && <DrawerOverlay data-snap-points={hasSnapPoints ? '' : undefined} />}
       <DrawerPrimitive.Viewport
         data-slot="drawer-viewport"
         data-modal={modal}
-        className={cn(
-          'pointer-events-none fixed inset-0 z-50 select-none data-[modal=true]:pointer-events-auto',
-          viewportClassName,
-        )}
-        {...viewportRest}
+        className="pointer-events-none fixed inset-0 z-50 select-none data-[modal=true]:pointer-events-auto"
       >
         <DrawerPrimitive.Popup
           data-slot="drawer-popup"
@@ -159,14 +136,12 @@ function DrawerContent({
           )}
           {...props}
         >
-          {showSwipeHandle && <DrawerSwipeHandle {...swipeHandleProps} />}
+          {showSwipeHandle && <DrawerSwipeHandle />}
           <DrawerPrimitive.Content
             data-slot="drawer-content"
             className={cn(
               'flex min-h-0 flex-1 flex-col overflow-hidden overscroll-contain rounded-[inherit] transition-opacity duration-300 ease-[cubic-bezier(0.45,1.005,0,1.005)] select-text group-data-nested-drawer-open/drawer-popup:opacity-0 group-data-nested-drawer-swiping/drawer-popup:opacity-100 group-data-swiping/drawer-popup:select-none',
-              contentClassName,
             )}
-            {...contentRest}
           >
             {children}
           </DrawerPrimitive.Content>

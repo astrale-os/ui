@@ -73,8 +73,8 @@ describe('runtime owners', () => {
   test('slider keeps scalar controlled and uncontrolled state to one thumb', () => {
     const { container } = render(
       <>
-        <Slider aria-label="Controlled density" value={42} />
-        <Slider aria-label="Default density" defaultValue={18} />
+        <Slider aria-label="Controlled density" value={[42]} />
+        <Slider aria-label="Default density" defaultValue={[18]} />
       </>,
     )
     const inputs = [...container.querySelectorAll('input[type="range"]')]
@@ -91,14 +91,11 @@ describe('runtime owners', () => {
     expect(checkbox).toBeChecked()
   })
 
-  test('representative convenience wrappers expose their internally emitted visual parts', () => {
+  test('public classes compose and emitted visual parts retain stable data slots', () => {
     const { container } = render(
       <>
-        <Switch
-          aria-label="Notifications"
-          thumbProps={{ className: 'host-thumb', style: { opacity: 0.75 } }}
-        />
-        <Table containerProps={{ className: 'host-table-container', style: { maxWidth: 320 } }}>
+        <Switch aria-label="Notifications" className="host-switch" />
+        <Table className="host-table">
           <tbody>
             <tr>
               <td>Value</td>
@@ -106,33 +103,30 @@ describe('runtime owners', () => {
           </tbody>
         </Table>
         <Select defaultValue="one">
-          <SelectTrigger icon={<span data-testid="host-select-icon">Custom</span>}>
+          <SelectTrigger className="host-select-trigger">
             <SelectValue />
           </SelectTrigger>
         </Select>
-        <NativeSelect
-          aria-label="Environment"
-          className="host-native-select"
-          wrapperProps={{ className: 'host-native-wrapper' }}
-          icon={<span data-testid="host-native-icon">Open</span>}
-        >
+        <NativeSelect aria-label="Environment" className="host-native-select">
           <option value="production">Production</option>
         </NativeSelect>
       </>,
     )
 
-    const thumb = container.querySelector('[data-slot="switch-thumb"]')
-    expect(thumb).toHaveClass('host-thumb')
-    expect(thumb).toHaveStyle({ opacity: '0.75' })
-    const tableContainer = container.querySelector('[data-slot="table-container"]')
-    expect(tableContainer).toHaveClass('host-table-container')
-    expect(tableContainer).toHaveStyle({ maxWidth: '320px' })
-    expect(screen.getByTestId('host-select-icon')).toBeInTheDocument()
-    expect(screen.getByRole('combobox', { name: 'Environment' })).toHaveClass('host-native-select')
-    expect(container.querySelector('[data-slot="native-select-wrapper"]')).toHaveClass(
-      'host-native-wrapper',
+    expect(screen.getByRole('switch', { name: 'Notifications' })).toHaveClass('host-switch')
+    expect(container.querySelector('[data-slot="switch-thumb"]')).toBeInTheDocument()
+    expect(container.querySelector('[data-slot="table-container"]')).toBeInTheDocument()
+    expect(container.querySelector('[data-slot="table"]')).toHaveClass('host-table')
+    expect(container.querySelector('[data-slot="select-trigger"]')).toHaveClass(
+      'host-select-trigger',
     )
-    expect(screen.getByTestId('host-native-icon')).toBeInTheDocument()
+    expect(container.querySelector('[data-slot="native-select-wrapper"]')).toHaveClass(
+      'host-native-select',
+    )
+    expect(screen.getByRole('combobox', { name: 'Environment' })).toHaveAttribute(
+      'data-slot',
+      'native-select',
+    )
   })
 
   test('accordion and tabs preserve composite keyboard contracts', async () => {
@@ -141,9 +135,7 @@ describe('runtime owners', () => {
       <>
         <Accordion>
           <AccordionItem value="details">
-            <AccordionTrigger collapsedIconProps={{ className: 'host-collapsed-icon' }}>
-              Details
-            </AccordionTrigger>
+            <AccordionTrigger className="host-accordion-trigger">Details</AccordionTrigger>
             <AccordionContent>Visible details</AccordionContent>
           </AccordionItem>
         </Accordion>
@@ -160,9 +152,8 @@ describe('runtime owners', () => {
 
     await user.click(screen.getByRole('button', { name: 'Details' }))
     expect(screen.getByText('Visible details')).toBeVisible()
-    expect(document.querySelector('[data-slot="accordion-trigger-icon"]')).toHaveClass(
-      'host-collapsed-icon',
-    )
+    expect(screen.getByRole('button', { name: 'Details' })).toHaveClass('host-accordion-trigger')
+    expect(document.querySelector('[data-slot="accordion-trigger-icon"]')).toBeInTheDocument()
 
     const firstTab = screen.getByRole('tab', { name: 'One' })
     firstTab.focus()
@@ -182,15 +173,15 @@ describe('runtime owners', () => {
     )
 
     expect(screen.getByTestId('horizontal-tabs')).toHaveAttribute('data-orientation', 'horizontal')
-    expect(screen.getByTestId('horizontal-tabs')).toHaveClass('flex-col')
+    expect(screen.getByTestId('horizontal-tabs')).toHaveClass('data-horizontal:flex-col')
     expect(screen.getByTestId('vertical-tabs')).toHaveAttribute('data-orientation', 'vertical')
-    expect(screen.getByTestId('vertical-tabs')).toHaveClass('flex-row')
+    expect(screen.getByTestId('vertical-tabs')).toHaveClass('data-horizontal:flex-col')
   })
 
-  test('command filtering and keyboard activation are owned by Base UI', async () => {
+  test('command filtering and keyboard activation preserve the upstream cmdk contract', async () => {
     const user = userEvent.setup()
     let selected = ''
-    render(
+    const { container } = render(
       <Command>
         <CommandInput aria-label="Find command" />
         <CommandList>
@@ -207,8 +198,9 @@ describe('runtime owners', () => {
       </Command>,
     )
 
-    const input = screen.getByRole('combobox', { name: 'Find command' })
-    await user.type(input, 'sett')
+    const input = container.querySelector<HTMLInputElement>('[data-slot="command-input"]')
+    expect(input).not.toBeNull()
+    await user.type(input!, 'sett')
     expect(screen.queryByText('Dashboard')).not.toBeInTheDocument()
     expect(screen.getByText('Settings')).toBeVisible()
     await user.keyboard('{ArrowDown}{Enter}')
@@ -220,10 +212,7 @@ describe('runtime owners', () => {
     render(
       <Dialog>
         <DialogTrigger render={<Button />}>Open settings</DialogTrigger>
-        <DialogContent
-          closeIcon={<span data-testid="host-close-icon">×</span>}
-          closeLabel="Dismiss settings"
-        >
+        <DialogContent>
           <DialogTitle>Settings</DialogTitle>
           <DialogDescription>Configure the workspace.</DialogDescription>
           <Button>Save</Button>
@@ -236,19 +225,21 @@ describe('runtime owners', () => {
     expect(screen.getByRole('dialog', { name: 'Settings' })).toHaveAccessibleDescription(
       'Configure the workspace.',
     )
-    expect(screen.getByRole('button', { name: 'Dismiss settings' })).toContainElement(
-      screen.getByTestId('host-close-icon'),
-    )
+    expect(screen.getByRole('button', { name: 'Close' })).toBeInTheDocument()
     await user.keyboard('{Escape}')
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
     expect(trigger).toHaveFocus()
   })
 
-  test('toast convenience methods retain Base live-region behavior and open viewport placement', async () => {
+  test('toast manager and rendered parts preserve the upstream Base UI contract', async () => {
     const manager = createToastManager()
-    render(<Toaster toastManager={manager} position="top-center" />)
+    render(<Toaster toastManager={manager} />)
 
-    manager.error('Unable to save', { description: 'Try the operation again.' })
+    manager.add({
+      title: 'Unable to save',
+      description: 'Try the operation again.',
+      type: 'error',
+    })
 
     const toastRoot = await waitFor(() => {
       const root = document.querySelector<HTMLElement>('[data-slot="toast"]')
@@ -257,9 +248,6 @@ describe('runtime owners', () => {
     })
     expect(within(toastRoot).getByText('Unable to save')).toBeVisible()
     expect(within(toastRoot).getByText('Try the operation again.')).toBeVisible()
-    expect(document.querySelector('[data-slot="toast-viewport"]')).toHaveAttribute(
-      'data-position',
-      'top-center',
-    )
+    expect(document.querySelector('[data-slot="toast-viewport"]')).toBeInTheDocument()
   })
 })

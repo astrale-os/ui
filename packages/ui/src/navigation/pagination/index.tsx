@@ -1,8 +1,8 @@
+import { ChevronLeftIcon, ChevronRightIcon, MoreHorizontalIcon } from 'lucide-react'
 import * as React from 'react'
 
 import { Button } from '#astrale-ui/action/button'
 import { cn } from '#astrale-ui/class-name'
-import { ChevronLeftIcon, ChevronRightIcon, MoreHorizontalIcon } from '#astrale-ui/icon'
 
 function Pagination({ className, ...props }: React.ComponentProps<'nav'>) {
   return (
@@ -67,9 +67,7 @@ function PaginationPrevious({
       {...props}
     >
       <ChevronLeftIcon data-icon="inline-start" />
-      <span data-slot="pagination-previous-label" className="hidden sm:block">
-        {text}
-      </span>
+      <span className="hidden sm:block">{text}</span>
     </PaginationLink>
   )
 }
@@ -86,9 +84,7 @@ function PaginationNext({
       className={cn('pr-1.5!', className)}
       {...props}
     >
-      <span data-slot="pagination-next-label" className="hidden sm:block">
-        {text}
-      </span>
+      <span className="hidden sm:block">{text}</span>
       <ChevronRightIcon data-icon="inline-end" />
     </PaginationLink>
   )
@@ -106,9 +102,7 @@ function PaginationEllipsis({ className, ...props }: React.ComponentProps<'span'
       {...props}
     >
       <MoreHorizontalIcon />
-      <span data-slot="pagination-ellipsis-label" className="sr-only">
-        More pages
-      </span>
+      <span className="sr-only">More pages</span>
     </span>
   )
 }

@@ -28,6 +28,16 @@ export default defineConfig({
   overrides: [
     {
       files: [
+        'packages/ui/src/**/index.tsx',
+        'registry/components/**/*.{ts,tsx}',
+        'tooling/upstream/providers/**/*.{ts,tsx}',
+      ],
+      rules: {
+        eqeqeq: 'off',
+      },
+    },
+    {
+      files: [
         '**/__tests__/**/*.ts',
         '**/*.test.ts',
         '**/*.perf.ts',

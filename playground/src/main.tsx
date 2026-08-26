@@ -1,6 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import '@astrale-os/ui/theme.css'
+import '@astrale-os/ui/reset.css'
+
+import './playground-theme.css'
 import '@astrale-os/ui/presets/astrale.css'
 
 import './playground.css'

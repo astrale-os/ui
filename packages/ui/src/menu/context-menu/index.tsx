@@ -1,10 +1,10 @@
 'use client'
 
 import { ContextMenu as ContextMenuPrimitive } from '@base-ui/react/context-menu'
+import { ChevronRightIcon, CheckIcon } from 'lucide-react'
 import * as React from 'react'
 
 import { cn } from '#astrale-ui/class-name'
-import { ChevronRightIcon, CheckIcon } from '#astrale-ui/icon'
 
 function ContextMenu({ ...props }: ContextMenuPrimitive.Root.Props) {
   return <ContextMenuPrimitive.Root data-slot="context-menu" {...props} />
@@ -161,10 +161,7 @@ function ContextMenuCheckboxItem({
       checked={checked}
       {...props}
     >
-      <span
-        data-slot="context-menu-checkbox-indicator"
-        className="pointer-events-none absolute right-2"
-      >
+      <span className="pointer-events-none absolute right-2">
         <ContextMenuPrimitive.CheckboxItemIndicator>
           <CheckIcon />
         </ContextMenuPrimitive.CheckboxItemIndicator>
@@ -196,10 +193,7 @@ function ContextMenuRadioItem({
       )}
       {...props}
     >
-      <span
-        data-slot="context-menu-radio-indicator"
-        className="pointer-events-none absolute right-2"
-      >
+      <span className="pointer-events-none absolute right-2">
         <ContextMenuPrimitive.RadioItemIndicator>
           <CheckIcon />
         </ContextMenuPrimitive.RadioItemIndicator>

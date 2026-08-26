@@ -3,6 +3,7 @@
   "name": "astrale-ui",
   "shadcn": "4.18.0",
   "includes": [
+    "./components/registry.json",
     "./blocks/application-shell/registry.json",
     "./blocks/authentication/registry.json",
     "./blocks/communication/registry.json",

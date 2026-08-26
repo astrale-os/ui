@@ -51,15 +51,15 @@ Gate:
 - clean packed root and subpath imports pass;
 - theme import does not install preflight;
 - dark, RTL, reduced-motion, and preset fixture checks pass; and
-- package install graph contains no shadcn/chart/date/form/carousel/toast/theme-provider/general-icon
-  dependency.
+- package install graph contains no shadcn/chart/date/form/carousel/toast/theme-provider dependency;
+  exact runtime icon dependencies remain unchanged from upstream.
 
 ## Work package 3 — Absorb runtime component owners
 
 For each semantic batch:
 
 1. obtain current candidate source through exact shadcn commands;
-2. retain correct Base UI behavior while normalizing imports and theme/anatomy contracts;
+2. preserve the upstream source exactly while adapting imports and file ownership mechanically;
 3. move the owner into the target family;
 4. add its flat export and curated root export;
 5. add focused behavior/API/a11y tests; and
@@ -72,9 +72,10 @@ Batches:
 - menu and navigation; and
 - overlay and layout.
 
-Move calendar, carousel, chart, combobox, form, sidebar, toast/sonner, command-dialog, and
-`use-mobile` out of runtime ownership. Remove `lucide-react` by replacing internal control glyphs
-with minimal owned SVG and explicit consumer icon slots where product icons are visible.
+Move attachment, bubble, calendar, carousel, chart, combobox, marker, message, message-scroller,
+questionnaire, sidebar, sonner, and `use-mobile` out of runtime ownership. Preserve their upstream
+icons, classes, defaults, and behavior exactly; registry installation makes their dependencies and
+source consumer-owned.
 
 Gate:
 

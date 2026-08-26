@@ -27,6 +27,322 @@
       }
     },
     {
+      "name": "component-attachment",
+      "title": "Component · attachment",
+      "description": "Exact @shadcn/attachment Base Nova source with import-only Astrale adaptation.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "class-variance-authority@^0.7.1"
+      ],
+      "files": [
+        {
+          "path": "registry/components/attachment/attachment.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/attachment.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/attachment",
+        "ownership": "consumer-source",
+        "provider": "@shadcn",
+        "upstreamAddress": "@shadcn/attachment",
+        "upstreamDigest": "sha256:a31f77d517247d84204d4f391656756c8d0f094d65a5aae2238e3731932d36a9",
+        "adaptation": "imports-only"
+      },
+      "type": "registry:component"
+    },
+    {
+      "name": "component-bubble",
+      "title": "Component · bubble",
+      "description": "Exact @shadcn/bubble Base Nova source with import-only Astrale adaptation.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "class-variance-authority@^0.7.1"
+      ],
+      "files": [
+        {
+          "path": "registry/components/bubble/bubble.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/bubble.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/bubble",
+        "ownership": "consumer-source",
+        "provider": "@shadcn",
+        "upstreamAddress": "@shadcn/bubble",
+        "upstreamDigest": "sha256:c30f7689bb2be006fb12e5a5bf37e0c04eb2a3138327fb9324e293367394e9ba",
+        "adaptation": "imports-only"
+      },
+      "type": "registry:component"
+    },
+    {
+      "name": "component-calendar",
+      "title": "Component · calendar",
+      "description": "Exact @shadcn/calendar Base Nova source with import-only Astrale adaptation.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react-day-picker@^10.0.1"
+      ],
+      "files": [
+        {
+          "path": "registry/components/calendar/calendar.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/calendar.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/calendar",
+        "ownership": "consumer-source",
+        "provider": "@shadcn",
+        "upstreamAddress": "@shadcn/calendar",
+        "upstreamDigest": "sha256:0ea3d4bd2cf7b8edef5bd5a724518d94d609b15f2f4f42e489c63f532706e55c",
+        "adaptation": "imports-only"
+      },
+      "type": "registry:component"
+    },
+    {
+      "name": "component-carousel",
+      "title": "Component · carousel",
+      "description": "Exact @shadcn/carousel Base Nova source with import-only Astrale adaptation.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "embla-carousel-react@^8.6.0",
+        "lucide-react@1.32.0"
+      ],
+      "files": [
+        {
+          "path": "registry/components/carousel/carousel.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/carousel.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/carousel",
+        "ownership": "consumer-source",
+        "provider": "@shadcn",
+        "upstreamAddress": "@shadcn/carousel",
+        "upstreamDigest": "sha256:603eeef732fd59e84e87332d784716bd6d53ba3c114bccaa2b232daa07e33003",
+        "adaptation": "imports-only"
+      },
+      "type": "registry:component"
+    },
+    {
+      "name": "component-chart",
+      "title": "Component · chart",
+      "description": "Exact @shadcn/chart Base Nova source with import-only Astrale adaptation.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "recharts@3.8.0"
+      ],
+      "files": [
+        {
+          "path": "registry/components/chart/chart.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/chart.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/chart",
+        "ownership": "consumer-source",
+        "provider": "@shadcn",
+        "upstreamAddress": "@shadcn/chart",
+        "upstreamDigest": "sha256:3029092cb861794ccb562c96618cf711e193ee500a50fe766cd50c962991dbd7",
+        "adaptation": "imports-only"
+      },
+      "type": "registry:component"
+    },
+    {
+      "name": "component-combobox",
+      "title": "Component · combobox",
+      "description": "Exact @shadcn/combobox Base Nova source with import-only Astrale adaptation.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "lucide-react@1.32.0"
+      ],
+      "files": [
+        {
+          "path": "registry/components/combobox/combobox.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/combobox.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/combobox",
+        "ownership": "consumer-source",
+        "provider": "@shadcn",
+        "upstreamAddress": "@shadcn/combobox",
+        "upstreamDigest": "sha256:063eee29facaeb4a49e5f8fe91fb4644a874adad449a61e6bbee3e204edf2bae",
+        "adaptation": "imports-only"
+      },
+      "type": "registry:component"
+    },
+    {
+      "name": "component-marker",
+      "title": "Component · marker",
+      "description": "Exact @shadcn/marker Base Nova source with import-only Astrale adaptation.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "class-variance-authority@^0.7.1"
+      ],
+      "files": [
+        {
+          "path": "registry/components/marker/marker.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/marker.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/marker",
+        "ownership": "consumer-source",
+        "provider": "@shadcn",
+        "upstreamAddress": "@shadcn/marker",
+        "upstreamDigest": "sha256:cbeeb7baa6a8bdc7402bec4e37cd12ced0d78ec808441e0bc1b61293b8ede7f5",
+        "adaptation": "imports-only"
+      },
+      "type": "registry:component"
+    },
+    {
+      "name": "component-message",
+      "title": "Component · message",
+      "description": "Exact @shadcn/message Base Nova source with import-only Astrale adaptation.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0"
+      ],
+      "files": [
+        {
+          "path": "registry/components/message/message.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/message.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/message",
+        "ownership": "consumer-source",
+        "provider": "@shadcn",
+        "upstreamAddress": "@shadcn/message",
+        "upstreamDigest": "sha256:9d2952bf3b641081f09aa2739535e6bbd1be0a4946789752a2c20d8aaef43185",
+        "adaptation": "imports-only"
+      },
+      "type": "registry:component"
+    },
+    {
+      "name": "component-message-scroller",
+      "title": "Component · message-scroller",
+      "description": "Exact @shadcn/message-scroller Base Nova source with import-only Astrale adaptation.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@shadcn/react@^0.3.0",
+        "lucide-react@1.32.0"
+      ],
+      "files": [
+        {
+          "path": "registry/components/message-scroller/message-scroller.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/message-scroller.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/message-scroller",
+        "ownership": "consumer-source",
+        "provider": "@shadcn",
+        "upstreamAddress": "@shadcn/message-scroller",
+        "upstreamDigest": "sha256:901c4a6a2a7d3f6227344f3a758debb7d0cb2f77f92c9acaf72a5e9e0ffdf777",
+        "adaptation": "imports-only"
+      },
+      "type": "registry:component"
+    },
+    {
+      "name": "component-questionnaire",
+      "title": "Component · questionnaire",
+      "description": "Exact @shadcn/questionnaire Base Nova source with import-only Astrale adaptation.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@shadcn/react@^0.3.0",
+        "lucide-react@1.32.0"
+      ],
+      "files": [
+        {
+          "path": "registry/components/questionnaire/questionnaire.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/questionnaire.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/questionnaire",
+        "ownership": "consumer-source",
+        "provider": "@shadcn",
+        "upstreamAddress": "@shadcn/questionnaire",
+        "upstreamDigest": "sha256:88519aad6199bed7391907a6c2e3ee5bec4ebb2db11fef2a3ba6ad9153a272a5",
+        "adaptation": "imports-only"
+      },
+      "type": "registry:component"
+    },
+    {
+      "name": "component-sidebar",
+      "title": "Component · sidebar",
+      "description": "Exact @shadcn/sidebar Base Nova source with import-only Astrale adaptation.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "class-variance-authority@^0.7.1",
+        "lucide-react@1.32.0"
+      ],
+      "files": [
+        {
+          "path": "registry/components/sidebar/sidebar.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/sidebar/sidebar.tsx"
+        },
+        {
+          "path": "registry/components/sidebar/use-mobile.ts",
+          "type": "registry:hook",
+          "target": "components/astrale/component/sidebar/use-mobile.ts"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/sidebar",
+        "ownership": "consumer-source",
+        "provider": "@shadcn",
+        "upstreamAddress": "@shadcn/sidebar",
+        "upstreamDigest": "sha256:29e33400cfdd00cb499da3615ed2258d75192d2b2a5a5117a84d2db4242ed0bf",
+        "adaptation": "imports-only"
+      },
+      "type": "registry:component"
+    },
+    {
+      "name": "component-sonner",
+      "title": "Component · sonner",
+      "description": "Exact @shadcn/sonner Base Nova source with import-only Astrale adaptation.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "next-themes@^0.4.6",
+        "sonner@^2.0.8"
+      ],
+      "files": [
+        {
+          "path": "registry/components/sonner/sonner.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/sonner.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/sonner",
+        "ownership": "consumer-source",
+        "provider": "@shadcn",
+        "upstreamAddress": "@shadcn/sonner",
+        "upstreamDigest": "sha256:0c729f9f1ada0b0bedd9296710cc257dc43559fa6b8cc40f010d129e8ff85fdd",
+        "adaptation": "imports-only"
+      },
+      "type": "registry:component"
+    },
+    {
       "name": "block-application-shell-compact-command",
       "title": "Block · Application Shell · Compact Command",
       "description": "Astrale block/application-shell/compact-command; controlled application responsibilities are injected through props.",

@@ -1,6 +1,5 @@
 'use client'
 
-import * as React from 'react'
 import * as ResizablePrimitive from 'react-resizable-panels'
 
 import { cn } from '#astrale-ui/class-name'
@@ -22,13 +21,9 @@ function ResizablePanel({ ...props }: ResizablePrimitive.PanelProps) {
 function ResizableHandle({
   withHandle,
   className,
-  gripProps,
-  grip,
   ...props
 }: ResizablePrimitive.SeparatorProps & {
   withHandle?: boolean
-  gripProps?: React.ComponentProps<'div'>
-  grip?: React.ReactNode
 }) {
   return (
     <ResizablePrimitive.Separator
@@ -39,14 +34,7 @@ function ResizableHandle({
       )}
       {...props}
     >
-      {withHandle &&
-        (grip ?? (
-          <div
-            data-slot="resizable-handle-grip"
-            {...gripProps}
-            className={cn('z-10 flex h-6 w-1 shrink-0 rounded-lg bg-border', gripProps?.className)}
-          />
-        ))}
+      {withHandle && <div className="z-10 flex h-6 w-1 shrink-0 rounded-lg bg-border" />}
     </ResizablePrimitive.Separator>
   )
 }

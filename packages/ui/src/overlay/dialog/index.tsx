@@ -1,11 +1,11 @@
 'use client'
 
 import { Dialog as DialogPrimitive } from '@base-ui/react/dialog'
+import { XIcon } from 'lucide-react'
 import * as React from 'react'
 
 import { Button } from '#astrale-ui/action/button'
 import { cn } from '#astrale-ui/class-name'
-import { XIcon } from '#astrale-ui/icon'
 
 function Dialog({ ...props }: DialogPrimitive.Root.Props) {
   return <DialogPrimitive.Root data-slot="dialog" {...props} />
@@ -40,27 +40,13 @@ function DialogContent({
   className,
   children,
   showCloseButton = true,
-  portalProps,
-  overlayProps,
-  closeProps,
-  closeIcon = <XIcon />,
-  closeIconProps,
-  closeLabel = 'Close',
-  closeLabelProps,
   ...props
 }: DialogPrimitive.Popup.Props & {
   showCloseButton?: boolean
-  portalProps?: DialogPrimitive.Portal.Props
-  overlayProps?: DialogPrimitive.Backdrop.Props
-  closeProps?: DialogPrimitive.Close.Props
-  closeIcon?: React.ReactNode
-  closeIconProps?: React.ComponentProps<'span'>
-  closeLabel?: React.ReactNode
-  closeLabelProps?: React.ComponentProps<'span'>
 }) {
   return (
-    <DialogPortal {...portalProps}>
-      <DialogOverlay {...overlayProps} />
+    <DialogPortal>
+      <DialogOverlay />
       <DialogPrimitive.Popup
         data-slot="dialog-content"
         className={cn(
@@ -74,23 +60,9 @@ function DialogContent({
           <DialogPrimitive.Close
             data-slot="dialog-close"
             render={<Button variant="ghost" className="absolute top-2 right-2" size="icon-sm" />}
-            {...closeProps}
           >
-            <span
-              {...closeIconProps}
-              data-slot="dialog-close-icon"
-              aria-hidden="true"
-              className={cn('contents', closeIconProps?.className)}
-            >
-              {closeIcon}
-            </span>
-            <span
-              {...closeLabelProps}
-              data-slot="dialog-close-label"
-              className={cn('sr-only', closeLabelProps?.className)}
-            >
-              {closeLabel}
-            </span>
+            <XIcon />
+            <span className="sr-only">Close</span>
           </DialogPrimitive.Close>
         )}
       </DialogPrimitive.Popup>

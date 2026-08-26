@@ -1,0 +1,29 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-sonner",
+  "title": "Component · sonner",
+  "description": "Exact @shadcn/sonner Base Nova source with import-only Astrale adaptation.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0",
+    "next-themes@^0.4.6",
+    "sonner@^2.0.8"
+  ],
+  "files": [
+    {
+      "path": "registry/components/sonner/sonner.tsx",
+      "content": "import {\n  CircleCheckIcon,\n  InfoIcon,\n  TriangleAlertIcon,\n  OctagonXIcon,\n  Loader2Icon,\n} from 'lucide-react'\nimport { useTheme } from 'next-themes'\nimport { Toaster as Sonner, type ToasterProps } from 'sonner'\n\nconst Toaster = ({ ...props }: ToasterProps) => {\n  const { theme = 'system' } = useTheme()\n\n  return (\n    <Sonner\n      theme={theme as ToasterProps['theme']}\n      className=\"toaster group\"\n      icons={{\n        success: <CircleCheckIcon className=\"size-4\" />,\n        info: <InfoIcon className=\"size-4\" />,\n        warning: <TriangleAlertIcon className=\"size-4\" />,\n        error: <OctagonXIcon className=\"size-4\" />,\n        loading: <Loader2Icon className=\"size-4 animate-spin\" />,\n      }}\n      style={\n        {\n          '--normal-bg': 'var(--popover)',\n          '--normal-text': 'var(--popover-foreground)',\n          '--normal-border': 'var(--border)',\n          '--border-radius': 'var(--radius)',\n        } as React.CSSProperties\n      }\n      toastOptions={{\n        classNames: {\n          toast: 'cn-toast',\n        },\n      }}\n      {...props}\n    />\n  )\n}\n\nexport { Toaster }\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/sonner.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/sonner",
+    "ownership": "consumer-source",
+    "provider": "@shadcn",
+    "upstreamAddress": "@shadcn/sonner",
+    "upstreamDigest": "sha256:0c729f9f1ada0b0bedd9296710cc257dc43559fa6b8cc40f010d129e8ff85fdd",
+    "adaptation": "imports-only"
+  },
+  "type": "registry:component"
+}

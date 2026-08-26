@@ -1,3 +1,5 @@
+import assert from 'node:assert/strict'
+import { spawnSync } from 'node:child_process'
 import { readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 
@@ -31,3 +33,7 @@ const formatted = JSON.stringify(registry, null, 2).replace(
   '"dependencies": ["$1"]',
 )
 await writeFile('registry/registry.json', `${formatted}\n`, 'utf8')
+const format = spawnSync('pnpm', ['exec', 'oxfmt', '--write', 'registry/registry.json'], {
+  encoding: 'utf8',
+})
+assert.equal(format.status, 0, format.stderr || format.stdout)

@@ -5,5 +5,11 @@
     "noEmit": true,
     "types": ["vitest/globals", "@testing-library/jest-dom"]
   },
-  "include": ["patterns/**/*.tsx", "blocks/**/*.tsx", "tests/**/*.tsx"]
+  "include": [
+    "components/**/*.ts",
+    "components/**/*.tsx",
+    "patterns/**/*.tsx",
+    "blocks/**/*.tsx",
+    "tests/**/*.tsx"
+  ]
 }

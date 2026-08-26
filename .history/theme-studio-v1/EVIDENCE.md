@@ -1,5 +1,26 @@
 # Qualification evidence
 
+Expanded upstream intake qualification on 2026-08-26:
+
+- The provider-neutral census contains 543 unique shadcn addresses across the global and Base/Nova
+  scopes. All 63 profile UI addresses close exactly as 50 runtime owners, 12 consumer-owned
+  `component/*` registry items, and the fileless `@shadcn/form` profile alias.
+- Exact source/digest qualification rejects any component API, class, icon, DOM, variant, or default
+  drift. Only import routing, formatting, unused-import removal, and file ownership are admitted.
+- The expanded registry contains 64 independently addressable items and 65 files. Its isolated
+  consumer installs the qualified UI tarball plus every item-local dependency through the real
+  shadcn CLI, compares installed source modulo the CLI-managed `use client` directive, and
+  typechecks the complete result.
+- The playground renders all 62 emitted components from runtime or registry source, retains direct
+  source HMR, and includes all 64 registry items in its generated inventory. Desktop and mobile
+  browser qualification covers theme authoring, error containment, keyboard behavior, responsive
+  layout, and every starter in light and dark mode.
+- Final `pnpm qualify` passed 31 static contracts, 11 runtime tests, 5 registry behavior tests, the
+  security/license gate, deterministic package and registry consumers, the production playground,
+  and all 12 desktop/mobile browser journeys. The deterministic package is 59,329 bytes with
+  SHA-256 `a7fbf380b3df1ea613d8beb63163237839a3581633e517c252f9a9cd7797b41c`;
+  the isolated registry consumer installs and typechecks all 64 items and 65 files.
+
 Fresh source and consumer iteration on 2026-08-26, from UI `origin/main`
 `910640c8227af4893eb10bae9b00e88ba319a7ce`:
 

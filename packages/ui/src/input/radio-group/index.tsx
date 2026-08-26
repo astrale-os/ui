@@ -1,5 +1,3 @@
-import type { ReactNode } from 'react'
-
 import { Radio as RadioPrimitive } from '@base-ui/react/radio'
 import { RadioGroup as RadioGroupPrimitive } from '@base-ui/react/radio-group'
 
@@ -15,21 +13,7 @@ function RadioGroup({ className, ...props }: RadioGroupPrimitive.Props) {
   )
 }
 
-function RadioGroupItem({
-  className,
-  indicator = (
-    <span
-      data-slot="radio-group-indicator-mark"
-      className="size-2 rounded-full bg-primary-foreground"
-    />
-  ),
-  indicatorProps,
-  ...props
-}: RadioPrimitive.Root.Props & {
-  indicator?: ReactNode
-  indicatorProps?: RadioPrimitive.Indicator.Props
-}) {
-  const { className: indicatorClassName, ...indicatorRest } = indicatorProps ?? {}
+function RadioGroupItem({ className, ...props }: RadioPrimitive.Root.Props) {
   return (
     <RadioPrimitive.Root
       data-slot="radio-group-item"
@@ -41,10 +25,9 @@ function RadioGroupItem({
     >
       <RadioPrimitive.Indicator
         data-slot="radio-group-indicator"
-        className={cn('flex size-4 items-center justify-center', indicatorClassName)}
-        {...indicatorRest}
+        className="flex size-4 items-center justify-center"
       >
-        {indicator}
+        <span className="absolute top-1/2 left-1/2 size-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary-foreground" />
       </RadioPrimitive.Indicator>
     </RadioPrimitive.Root>
   )

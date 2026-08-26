@@ -1,8 +1,8 @@
 import { NavigationMenu as NavigationMenuPrimitive } from '@base-ui/react/navigation-menu'
 import { cva } from 'class-variance-authority'
+import { ChevronDownIcon } from 'lucide-react'
 
 import { cn } from '#astrale-ui/class-name'
-import { ChevronDownIcon } from '#astrale-ui/icon'
 
 function NavigationMenu({
   align = 'start',
@@ -143,10 +143,7 @@ function NavigationMenuIndicator({
       )}
       {...props}
     >
-      <div
-        data-slot="navigation-menu-indicator-mark"
-        className="relative top-[60%] h-2 w-2 rotate-45 rounded-tl-sm bg-border shadow-md"
-      />
+      <div className="relative top-[60%] h-2 w-2 rotate-45 rounded-tl-sm bg-border shadow-md" />
     </NavigationMenuPrimitive.Icon>
   )
 }

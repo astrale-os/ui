@@ -38,6 +38,10 @@ export default defineConfig({
         replacement: fileURLToPath(new URL('../packages/ui/src/theme/theme.css', import.meta.url)),
       },
       {
+        find: /^@astrale-os\/ui\/reset\.css$/u,
+        replacement: fileURLToPath(new URL('../packages/ui/src/theme/reset.css', import.meta.url)),
+      },
+      {
         find: /^@astrale-os\/ui\/presets\/(.+)\.css$/u,
         replacement: fileURLToPath(
           new URL('../packages/ui/src/theme/presets/$1.css', import.meta.url),

@@ -10,8 +10,17 @@
   },
   "dependencies": {
     "@astrale-os/ui": "workspace:*",
+    "@base-ui/react": "^1.7.0",
+    "@shadcn/react": "^0.3.0",
+    "class-variance-authority": "^0.7.1",
+    "embla-carousel-react": "^8.6.0",
+    "lucide-react": "1.32.0",
+    "next-themes": "^0.4.6",
     "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react-day-picker": "^10.0.1",
+    "react-dom": "19.2.8",
+    "recharts": "3.8.0",
+    "sonner": "^2.0.8"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.12.1",

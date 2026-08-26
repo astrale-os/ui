@@ -1,22 +1,11 @@
 'use client'
 
-import type { ReactNode } from 'react'
-
 import { Checkbox as CheckboxPrimitive } from '@base-ui/react/checkbox'
+import { CheckIcon } from 'lucide-react'
 
 import { cn } from '#astrale-ui/class-name'
-import { CheckIcon } from '#astrale-ui/icon'
 
-function Checkbox({
-  className,
-  indicator = <CheckIcon />,
-  indicatorProps,
-  ...props
-}: CheckboxPrimitive.Root.Props & {
-  indicator?: ReactNode
-  indicatorProps?: CheckboxPrimitive.Indicator.Props
-}) {
-  const { className: indicatorClassName, ...indicatorRest } = indicatorProps ?? {}
+function Checkbox({ className, ...props }: CheckboxPrimitive.Root.Props) {
   return (
     <CheckboxPrimitive.Root
       data-slot="checkbox"
@@ -28,13 +17,9 @@ function Checkbox({
     >
       <CheckboxPrimitive.Indicator
         data-slot="checkbox-indicator"
-        className={cn(
-          'grid place-content-center text-current transition-none [&>svg]:size-3.5',
-          indicatorClassName,
-        )}
-        {...indicatorRest}
+        className="grid place-content-center text-current transition-none [&>svg]:size-3.5"
       >
-        {indicator}
+        <CheckIcon />
       </CheckboxPrimitive.Indicator>
     </CheckboxPrimitive.Root>
   )

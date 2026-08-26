@@ -1,10 +1,10 @@
 'use client'
 
 import { Select as SelectPrimitive } from '@base-ui/react/select'
+import { ChevronDownIcon, CheckIcon, ChevronUpIcon } from 'lucide-react'
 import * as React from 'react'
 
 import { cn } from '#astrale-ui/class-name'
-import { ChevronDownIcon, CheckIcon, ChevronUpIcon } from '#astrale-ui/icon'
 
 const Select = SelectPrimitive.Root
 
@@ -32,13 +32,9 @@ function SelectTrigger({
   className,
   size = 'default',
   children,
-  icon = <ChevronDownIcon />,
-  iconProps,
   ...props
 }: SelectPrimitive.Trigger.Props & {
   size?: 'sm' | 'default'
-  icon?: React.ReactNode
-  iconProps?: SelectPrimitive.Icon.Props
 }) {
   return (
     <SelectPrimitive.Trigger
@@ -52,13 +48,8 @@ function SelectTrigger({
     >
       {children}
       <SelectPrimitive.Icon
-        data-slot="select-icon"
-        {...iconProps}
-        render={iconProps?.render ?? <span data-slot="select-icon" />}
-        className={cn('pointer-events-none size-4 text-muted-foreground', iconProps?.className)}
-      >
-        {icon}
-      </SelectPrimitive.Icon>
+        render={<ChevronDownIcon className="pointer-events-none size-4 text-muted-foreground" />}
+      />
     </SelectPrimitive.Trigger>
   )
 }
@@ -71,34 +62,21 @@ function SelectContent({
   align = 'center',
   alignOffset = 0,
   alignItemWithTrigger = true,
-  portalProps,
-  positionerProps,
-  listProps,
-  scrollUpProps,
-  scrollDownProps,
   ...props
 }: SelectPrimitive.Popup.Props &
   Pick<
     SelectPrimitive.Positioner.Props,
     'align' | 'alignOffset' | 'side' | 'sideOffset' | 'alignItemWithTrigger'
-  > & {
-    portalProps?: SelectPrimitive.Portal.Props
-    positionerProps?: SelectPrimitive.Positioner.Props
-    listProps?: SelectPrimitive.List.Props
-    scrollUpProps?: React.ComponentProps<typeof SelectPrimitive.ScrollUpArrow>
-    scrollDownProps?: React.ComponentProps<typeof SelectPrimitive.ScrollDownArrow>
-  }) {
+  >) {
   return (
-    <SelectPrimitive.Portal {...portalProps}>
+    <SelectPrimitive.Portal>
       <SelectPrimitive.Positioner
         side={side}
         sideOffset={sideOffset}
         align={align}
         alignOffset={alignOffset}
         alignItemWithTrigger={alignItemWithTrigger}
-        {...positionerProps}
-        data-slot="select-positioner"
-        className={cn('isolate z-50', positionerProps?.className)}
+        className="isolate z-50"
       >
         <SelectPrimitive.Popup
           data-slot="select-content"
@@ -109,11 +87,9 @@ function SelectContent({
           )}
           {...props}
         >
-          <SelectScrollUpButton {...scrollUpProps} />
-          <SelectPrimitive.List {...listProps} data-slot="select-list">
-            {children}
-          </SelectPrimitive.List>
-          <SelectScrollDownButton {...scrollDownProps} />
+          <SelectScrollUpButton />
+          <SelectPrimitive.List>{children}</SelectPrimitive.List>
+          <SelectScrollDownButton />
         </SelectPrimitive.Popup>
       </SelectPrimitive.Positioner>
     </SelectPrimitive.Portal>
@@ -130,18 +106,7 @@ function SelectLabel({ className, ...props }: SelectPrimitive.GroupLabel.Props) 
   )
 }
 
-function SelectItem({
-  className,
-  children,
-  itemTextProps,
-  indicatorProps,
-  indicator = <CheckIcon className="pointer-events-none" />,
-  ...props
-}: SelectPrimitive.Item.Props & {
-  itemTextProps?: SelectPrimitive.ItemText.Props
-  indicatorProps?: SelectPrimitive.ItemIndicator.Props
-  indicator?: React.ReactNode
-}) {
+function SelectItem({ className, children, ...props }: SelectPrimitive.Item.Props) {
   return (
     <SelectPrimitive.Item
       data-slot="select-item"
@@ -151,26 +116,15 @@ function SelectItem({
       )}
       {...props}
     >
-      <SelectPrimitive.ItemText
-        {...itemTextProps}
-        data-slot="select-item-text"
-        className={cn('flex flex-1 shrink-0 gap-2 whitespace-nowrap', itemTextProps?.className)}
-      >
+      <SelectPrimitive.ItemText className="flex flex-1 shrink-0 gap-2 whitespace-nowrap">
         {children}
       </SelectPrimitive.ItemText>
       <SelectPrimitive.ItemIndicator
-        {...indicatorProps}
-        data-slot="select-item-indicator"
         render={
-          indicatorProps?.render ?? (
-            <span
-              data-slot="select-item-indicator"
-              className="pointer-events-none absolute right-2 flex size-4 items-center justify-center"
-            />
-          )
+          <span className="pointer-events-none absolute right-2 flex size-4 items-center justify-center" />
         }
       >
-        {indicator}
+        <CheckIcon className="pointer-events-none" />
       </SelectPrimitive.ItemIndicator>
     </SelectPrimitive.Item>
   )
@@ -188,7 +142,6 @@ function SelectSeparator({ className, ...props }: SelectPrimitive.Separator.Prop
 
 function SelectScrollUpButton({
   className,
-  children = <ChevronUpIcon />,
   ...props
 }: React.ComponentProps<typeof SelectPrimitive.ScrollUpArrow>) {
   return (
@@ -200,14 +153,13 @@ function SelectScrollUpButton({
       )}
       {...props}
     >
-      {children}
+      <ChevronUpIcon />
     </SelectPrimitive.ScrollUpArrow>
   )
 }
 
 function SelectScrollDownButton({
   className,
-  children = <ChevronDownIcon />,
   ...props
 }: React.ComponentProps<typeof SelectPrimitive.ScrollDownArrow>) {
   return (
@@ -219,7 +171,7 @@ function SelectScrollDownButton({
       )}
       {...props}
     >
-      {children}
+      <ChevronDownIcon />
     </SelectPrimitive.ScrollDownArrow>
   )
 }
