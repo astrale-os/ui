@@ -104,6 +104,7 @@ test('publishes exactly one public npm package from the Release Please commit us
   assert.deepEqual(Object.keys(releaseConfig.packages), ['.'])
   assert.deepEqual(Object.keys(releaseManifest), ['.'])
   assert.equal(releaseConfig.packages['.']['changelog-path'], 'packages/ui/CHANGELOG.md')
+  assert.deepEqual(releaseConfig.packages['.']['exclude-paths'], ['.history', '.release'])
   assert.deepEqual(releaseConfig.packages['.']['extra-files'], [
     {
       type: 'json',

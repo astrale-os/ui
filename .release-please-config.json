@@ -10,6 +10,7 @@
     ".": {
       "component": "ui",
       "package-name": "@astrale-os/ui",
+      "exclude-paths": [".history", ".release"],
       "changelog-path": "packages/ui/CHANGELOG.md",
       "extra-files": [
         {
