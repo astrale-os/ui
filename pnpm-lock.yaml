@@ -9,8 +9,8 @@ importers:
   .:
     devDependencies:
       '@astrale/commitlint-config':
-        specifier: jsr:~2.0.3
-        version: '@jsr/astrale__commitlint-config@2.0.3'
+        specifier: jsr:@astrale/commitlint-config@~2.0.5
+        version: '@jsr/astrale__commitlint-config@2.0.5'
       '@astrale/typescript-config':
         specifier: jsr:@astrale/typescript-config@~1.1.0
         version: '@jsr/astrale__typescript-config@1.1.3'
@@ -390,8 +390,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
-  '@jsr/astrale__commitlint-config@2.0.3':
-    resolution: {integrity: sha512-tFkIGIwioooXgYlGSnIMqB9GK/NAfYjL5/leb6iKRIU8lGI0/7xYKXKG7X8cBdujdVVGxmV8/p9KklezXQdziQ==, tarball: https://npm.jsr.io/~/11/@jsr/astrale__commitlint-config/2.0.3.tgz}
+  '@jsr/astrale__commitlint-config@2.0.5':
+    resolution: {integrity: sha512-dXO9vr+IyELVhzqWECaRFD5DSCXRcveBE0A0BDNzW2/z3I6i9zH+tOjvIhET4UFfORTxZGD3XYFwBEV+3uTtuA==, tarball: https://npm.jsr.io/~/11/@jsr/astrale__commitlint-config/2.0.5.tgz}
 
   '@jsr/astrale__typescript-config@1.1.3':
     resolution: {integrity: sha512-68NWYPk7Q6wBc8kj5zKheFu2yIlV7r2FiiWe9bLHGq4KFQEDm+VNpTtXLU13thKCHmfa6yTr4BQy3oDSrrd7UA==, tarball: https://npm.jsr.io/~/11/@jsr/astrale__typescript-config/1.1.3.tgz}
@@ -2251,7 +2251,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  '@jsr/astrale__commitlint-config@2.0.3': {}
+  '@jsr/astrale__commitlint-config@2.0.5': {}
 
   '@jsr/astrale__typescript-config@1.1.3': {}
 
