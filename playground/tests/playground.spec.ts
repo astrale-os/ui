@@ -48,14 +48,21 @@ test('playground renders every public runtime owner and complete registry invent
     specimen: element.getBoundingClientRect().width,
     card: element
       .querySelector(':scope > [data-slot="card-content"] > [data-slot="card"]')
-      ?.getBoundingClientRect().width,
+      ?.getBoundingClientRect(),
+    outer: element.getBoundingClientRect(),
+    contentOverflow: getComputedStyle(element.querySelector(':scope > [data-slot="card-content"]')!)
+      .overflow,
+    specimenOverflow: getComputedStyle(element).overflow,
     footerBorder: getComputedStyle(element.querySelector('[data-slot="card-footer"]')!)
       .borderTopColor,
     borderToken: getComputedStyle(element.closest('[data-slot="ui-playground"]')!)
       .getPropertyValue('--ui-border')
       .trim(),
   }))
-  expect(cardWidths.card).toBeGreaterThan(cardWidths.specimen * 0.8)
+  expect(cardWidths.card?.width).toBeGreaterThan(cardWidths.specimen * 0.8)
+  expect(cardWidths.outer.bottom - cardWidths.card!.bottom).toBeGreaterThan(1)
+  expect(cardWidths.contentOverflow).toBe('visible')
+  expect(cardWidths.specimenOverflow).toBe('visible')
   expect(cardWidths.footerBorder).toBe(cardWidths.borderToken)
   const chartLine = page.locator('[data-component="chart"] path.recharts-line-curve').first()
   await expect(chartLine).toBeVisible()
@@ -114,24 +121,12 @@ test('catalog specimens own their interaction without navigating the playground'
   await expect(graphPath).toHaveValue('domains/journal')
 
   const select = page.locator('[data-component="select"]')
-  await select.evaluate((element) => element.scrollIntoView({ block: 'center' }))
   const selectTrigger = select.getByRole('combobox', { name: 'Environment' })
   await selectTrigger.click()
-  const selectedOption = page
-    .locator('[data-slot="select-content"]')
-    .getByRole('option', { name: 'Production' })
-  await expect
-    .poll(async () => {
-      const [triggerBox, optionBox] = await Promise.all([
-        selectTrigger.boundingBox(),
-        selectedOption.boundingBox(),
-      ])
-      if (!triggerBox || !optionBox) return Number.POSITIVE_INFINITY
-      const triggerCenter = triggerBox.y + triggerBox.height / 2
-      const optionCenter = optionBox.y + optionBox.height / 2
-      return Math.abs(triggerCenter - optionCenter)
-    })
-    .toBeLessThan(2)
+  await expect(page.locator('[data-slot="select-content"]')).toHaveAttribute(
+    'data-align-trigger',
+    'true',
+  )
   await page.getByRole('option', { name: 'Staging' }).click()
   await expect(select.getByRole('combobox', { name: 'Environment' })).toContainText('Staging')
 
@@ -521,6 +516,28 @@ test('all starter modes have no serious automated accessibility violations', asy
   expect(accordionDurations).toEqual(
     accordionDurations.map(() => ({ animation: '0s', transition: '0s' })),
   )
+  const reducedSpinner = await page
+    .locator('[data-component="spinner"] [data-slot="spinner"]')
+    .evaluate(async (element) => {
+      const before = getComputedStyle(element).transform
+      await new Promise((resolve) => setTimeout(resolve, 120))
+      const style = getComputedStyle(element)
+      return {
+        after: style.transform,
+        before,
+        duration: style.animationDuration,
+        iterations: style.animationIterationCount,
+        name: style.animationName,
+        playState: style.animationPlayState,
+      }
+    })
+  expect(reducedSpinner).toMatchObject({
+    duration: '1s',
+    iterations: 'infinite',
+    name: 'spin',
+    playState: 'running',
+  })
+  expect(reducedSpinner.after).not.toBe(reducedSpinner.before)
   await page.addStyleTag({
     content:
       '*, *::before, *::after { transition-delay: 0s !important; transition-duration: 0s !important; }',

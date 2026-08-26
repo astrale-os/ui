@@ -243,7 +243,15 @@ import {
   TooltipTrigger,
 } from './catalog-components'
 
-function Specimen({ name, children }: { name: string; children: React.ReactNode }) {
+function Specimen({
+  name,
+  children,
+  style,
+}: {
+  name: string
+  children: React.ReactNode
+  style?: React.CSSProperties
+}) {
   return (
     <Card
       id={`component-${name}`}
@@ -251,6 +259,7 @@ function Specimen({ name, children }: { name: string; children: React.ReactNode 
       size="sm"
       data-component={name}
       data-slot="component-specimen"
+      style={style}
     >
       <CardHeader>
         <CardTitle>{name}</CardTitle>
@@ -508,7 +517,7 @@ function ContentFeedbackSpecimens() {
             <Badge variant="outline">Inherited</Badge>
           </div>
         </Specimen>
-        <Specimen name="card">
+        <Specimen name="card" style={{ paddingBottom: 'var(--card-spacing)' }}>
           <Card size="sm" className="w-full">
             <CardHeader>
               <CardTitle>Domain revision</CardTitle>

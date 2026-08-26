@@ -197,7 +197,7 @@ test('theme has an opt-in reset and all public presets own the same character vo
     'outline-color: color-mix(in oklab, var(--ui-ring) 50%, transparent)',
   ])
   const reducedMotion = cssBlock(theme, '@media (prefers-reduced-motion: reduce)')
-  const slotMotion = cssBlock(reducedMotion, ':where([data-slot])')
+  const slotMotion = cssBlock(reducedMotion, ":where([data-slot]:not([data-slot='spinner']))")
   assert.deepEqual(
     [...slotMotion.matchAll(/(?:animation|transition)-duration:\s*[^;]+/gu)].map(
       (match) => match[0],
