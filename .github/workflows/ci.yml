@@ -95,7 +95,7 @@ jobs:
           fail-on-severity: high
           allow-licenses: Apache-2.0, BSD-2-Clause, BSD-3-Clause, ISC, MIT
 
-  catalog:
+  playground:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -104,16 +104,16 @@ jobs:
           node-version: 26
           frozen-lockfile: 'true'
       - run: pnpm build
-      - run: pnpm --filter @astrale-os/ui-catalog exec playwright install --with-deps chromium
-      - run: pnpm catalog:build
-      - run: pnpm catalog:test
+      - run: pnpm --filter @astrale-os/ui-playground exec playwright install --with-deps chromium
+      - run: pnpm playground:build
+      - run: pnpm playground:test
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         if: always()
         with:
-          name: catalog-browser-evidence
+          name: playground-browser-evidence
           path: |
-            catalog/playwright-report/**
-            catalog/test-results/**
+            playground/playwright-report/**
+            artifacts/playground/**
 
   commitlint:
     runs-on: ubuntu-latest

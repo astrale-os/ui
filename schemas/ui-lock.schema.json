@@ -30,22 +30,36 @@
     "tooling": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["shadcn"],
-      "properties": { "shadcn": { "type": "string", "minLength": 1 } }
+      "required": ["shadcn", "base", "style", "baseUi"],
+      "properties": {
+        "shadcn": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+        "base": { "const": "base" },
+        "style": { "const": "nova" },
+        "baseUi": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" }
+      }
     },
     "preset": { "enum": ["astrale", "compact", "expressive"] },
     "items": {
       "type": "object",
+      "propertyNames": {
+        "pattern": "^(?:(?:pattern|block)/[a-z0-9-]+/[a-z0-9-/]+|theme/[a-z][a-z0-9]*(?:-[a-z0-9]+)*)$"
+      },
       "additionalProperties": {
         "type": "object",
         "additionalProperties": false,
         "required": ["address", "sourceDigest", "files"],
         "properties": {
-          "address": { "type": "string", "minLength": 1 },
-          "sourceDigest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+          "address": {
+            "type": "string",
+            "pattern": "^(?:(?:pattern|block)/[a-z0-9-]+/[a-z0-9-/]+|theme/[a-z][a-z0-9]*(?:-[a-z0-9]+)*)$"
+          },
+          "sourceDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
           "files": {
             "type": "object",
-            "additionalProperties": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+            "propertyNames": {
+              "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))(?!.*\\\\).+$"
+            },
+            "additionalProperties": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
           }
         }
       }

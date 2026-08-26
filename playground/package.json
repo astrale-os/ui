@@ -1,5 +1,5 @@
 {
-  "name": "@astrale-os/ui-catalog",
+  "name": "@astrale-os/ui-playground",
   "private": true,
   "type": "module",
   "scripts": {

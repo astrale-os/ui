@@ -16,6 +16,7 @@ import { Checkbox } from './input/checkbox/index.js'
 import { Input } from './input/input/index.js'
 import { NativeSelect } from './input/native-select/index.js'
 import { Select, SelectTrigger, SelectValue } from './input/select/index.js'
+import { Slider } from './input/slider/index.js'
 import { Switch } from './input/switch/index.js'
 import {
   Command,
@@ -67,6 +68,18 @@ describe('runtime owners', () => {
     expect(input).toBeDisabled()
     expect(input).toHaveAttribute('aria-invalid', 'true')
     expect(input).toHaveValue('Astrale')
+  })
+
+  test('slider keeps scalar controlled and uncontrolled state to one thumb', () => {
+    const { container } = render(
+      <>
+        <Slider aria-label="Controlled density" value={42} />
+        <Slider aria-label="Default density" defaultValue={18} />
+      </>,
+    )
+    const inputs = [...container.querySelectorAll('input[type="range"]')]
+    expect(inputs).toHaveLength(2)
+    expect(inputs.map((input) => input.getAttribute('aria-valuenow'))).toEqual(['42', '18'])
   })
 
   test('checkbox exposes its checked state and changes through keyboard activation', async () => {

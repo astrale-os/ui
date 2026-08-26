@@ -1,7 +1,7 @@
 packages:
   - 'packages/*'
   - 'registry'
-  - 'catalog'
+  - 'playground'
 
 linkWorkspacePackages: true
 strictPeerDependencies: true

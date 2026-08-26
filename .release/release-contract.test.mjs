@@ -29,7 +29,7 @@ test('pins supported CI and release workflow dependencies', async () => {
   assert.match(ci, /pnpm package:qualify/u)
   assert.match(ci, /pnpm registry:qualify/u)
   assert.match(ci, /pnpm test:registry-behavior/u)
-  assert.match(ci, /pnpm catalog:test/u)
+  assert.match(ci, /pnpm playground:test/u)
   assert.match(ci, /pnpm test:security/u)
   assert.match(ci, /pnpm audit --prod --audit-level high/u)
   assert.match(
@@ -92,7 +92,7 @@ test('publishes exactly one public npm package from the Release Please commit us
   assert.match(publish, /mirror-public-packages:\s*'false'/u)
   assert.match(
     publish,
-    /build-command:\s*pnpm --filter @astrale-os\/ui-catalog exec playwright install --with-deps chromium && pnpm qualify/u,
+    /build-command:\s*pnpm --filter @astrale-os\/ui-playground exec playwright install --with-deps chromium && pnpm qualify/u,
   )
   assert.match(publish, /prerelease-tag:\s*auto/u)
   assert.match(publish, /run:\s*pnpm qualify:publication/u)

@@ -884,6 +884,66 @@
         "canonicalAddress": "pattern/typography/dense-data",
         "ownership": "consumer-source"
       }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "theme-atelier",
+      "type": "registry:theme",
+      "title": "Theme · Atelier",
+      "description": "Warm paper, lacquer red, generous geometry, and a playful studio cadence.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "registry/themes/atelier.css",
+          "type": "registry:file",
+          "target": "components/astrale/theme/atelier.css"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "theme/atelier",
+        "ownership": "consumer-source",
+        "document": "atelier.astrale-theme.json"
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "theme-observatory",
+      "type": "registry:theme",
+      "title": "Theme · Observatory",
+      "description": "Quiet mineral surfaces, deep orbital blue, and measured editorial typography.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "registry/themes/observatory.css",
+          "type": "registry:file",
+          "target": "components/astrale/theme/observatory.css"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "theme/observatory",
+        "ownership": "consumer-source",
+        "document": "observatory.astrale-theme.json"
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "theme-terminal",
+      "type": "registry:theme",
+      "title": "Theme · Terminal",
+      "description": "Dense graphite instrumentation with phosphor cyan and exacting mono rhythm.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "registry/themes/terminal.css",
+          "type": "registry:file",
+          "target": "components/astrale/theme/terminal.css"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "theme/terminal",
+        "ownership": "consumer-source",
+        "document": "terminal.astrale-theme.json"
+      }
     }
   ]
 }

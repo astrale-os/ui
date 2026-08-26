@@ -2,6 +2,7 @@ import { defineConfig, devices } from '@playwright/test'
 
 export default defineConfig({
   testDir: './tests',
+  outputDir: '../artifacts/playground/playwright',
   webServer: {
     command: 'pnpm dev --host 127.0.0.1 --port 4173',
     port: 4173,
