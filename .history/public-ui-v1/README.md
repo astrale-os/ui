@@ -87,6 +87,8 @@ checkout was dirty and behind `origin/main`; it was not modified.
 - [QUALIFICATION.md](./QUALIFICATION.md) records the exact local proof and remaining external gaps.
 - [PREPUBLICATION-HANDOFF.md](./PREPUBLICATION-HANDOFF.md) records the final local cohort, artifact
   identity, evidence limits, and trusted V1 beta release sequence.
+- [PUBLIC-BETA-LEDGER.md](./PUBLIC-BETA-LEDGER.md) supersedes prepublication status with the exact
+  published cohort, delivery defects, merged owners, CI proof, and external Domain/View journey.
 
 ## Status vocabulary
 
@@ -102,6 +104,6 @@ Only evidence may change `implemented` to `qualified` or `published`.
 
 ## Current state
 
-The implementation is locally qualified through the package, registry, catalog, and CLI boundaries
-recorded in `QUALIFICATION.md`. Public repository, first npm publication, and public-registry
-consumer cutover remain open external gates. This ledger does not authorize a first publish.
+The public beta cutover is complete through the exact releases and evidence recorded in
+`PUBLIC-BETA-LEDGER.md`. Earlier prepublication status paragraphs are retained as temporal evidence,
+not current release state.
