@@ -4,8 +4,8 @@ import { Menu as MenuPrimitive } from '@base-ui/react/menu'
 import { Menubar as MenubarPrimitive } from '@base-ui/react/menubar'
 import * as React from 'react'
 
-import { cn } from '#ui/class-name'
-import { CheckIcon } from '#ui/icon'
+import { cn } from '#astrale-ui/class-name'
+import { CheckIcon } from '#astrale-ui/icon'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,7 +20,7 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from '#ui/menu/dropdown-menu'
+} from '#astrale-ui/menu/dropdown-menu'
 
 function Menubar({ className, ...props }: MenubarPrimitive.Props) {
   return (

@@ -2,7 +2,7 @@
 
 import { Progress as ProgressPrimitive } from '@base-ui/react/progress'
 
-import { cn } from '#ui/class-name'
+import { cn } from '#astrale-ui/class-name'
 
 function Progress({ className, children, value, ...props }: ProgressPrimitive.Root.Props) {
   return (

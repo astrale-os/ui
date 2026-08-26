@@ -1,7 +1,7 @@
 import * as React from 'react'
 
-import { cn } from '#ui/class-name'
-import { ChevronDownIcon } from '#ui/icon'
+import { cn } from '#astrale-ui/class-name'
+import { ChevronDownIcon } from '#astrale-ui/icon'
 
 type NativeSelectProps = Omit<React.ComponentProps<'select'>, 'size'> & {
   size?: 'sm' | 'default'

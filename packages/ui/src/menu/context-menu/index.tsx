@@ -3,8 +3,8 @@
 import { ContextMenu as ContextMenuPrimitive } from '@base-ui/react/context-menu'
 import * as React from 'react'
 
-import { cn } from '#ui/class-name'
-import { ChevronRightIcon, CheckIcon } from '#ui/icon'
+import { cn } from '#astrale-ui/class-name'
+import { ChevronRightIcon, CheckIcon } from '#astrale-ui/icon'
 
 function ContextMenu({ ...props }: ContextMenuPrimitive.Root.Props) {
   return <ContextMenuPrimitive.Root data-slot="context-menu" {...props} />

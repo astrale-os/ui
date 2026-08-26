@@ -66,6 +66,12 @@ test('the workspace has one public runtime package with a flat supported API', a
   }
   assert.deepEqual(publishable, [{ file: 'packages/ui/package.json', name: '@astrale-os/ui' }])
 
+  assert.deepEqual(Object.keys(manifest.imports).toSorted(), [
+    '#astrale-ui/*',
+    '#astrale-ui/class-name',
+    '#astrale-ui/icon',
+  ])
+
   for (const [subpath, target] of Object.entries(manifest.exports)) {
     if (subpath === './package.json') continue
     const targets = typeof target === 'string' ? [target] : Object.values(target)
@@ -109,6 +115,7 @@ test('production source follows semantic owners and contains no hidden applicati
     )
   }
   assert.doesNotMatch(source, /@astrale-os\/(?:ui-components|ui-utils|ui-styles)/u)
+  assert.doesNotMatch(source, /(?:from|import\()\s*['"]#ui\//u)
   assert.doesNotMatch(
     source,
     /(?:localStorage|sessionStorage|document\.cookie|\bfetch\(|XMLHttpRequest|EventSource|WebSocket)/u,

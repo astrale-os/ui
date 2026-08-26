@@ -2,7 +2,7 @@
 
 import { Switch as SwitchPrimitive } from '@base-ui/react/switch'
 
-import { cn } from '#ui/class-name'
+import { cn } from '#astrale-ui/class-name'
 
 function Switch({
   className,

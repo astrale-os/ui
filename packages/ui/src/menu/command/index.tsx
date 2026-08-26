@@ -3,9 +3,9 @@
 import { Autocomplete as AutocompletePrimitive } from '@base-ui/react/autocomplete'
 import * as React from 'react'
 
-import { cn } from '#ui/class-name'
-import { SearchIcon } from '#ui/icon'
-import { InputGroup, InputGroupAddon } from '#ui/input/input-group'
+import { cn } from '#astrale-ui/class-name'
+import { SearchIcon } from '#astrale-ui/icon'
+import { InputGroup, InputGroupAddon } from '#astrale-ui/input/input-group'
 
 type CommandProps = Omit<React.ComponentProps<'div'>, 'defaultValue'> & {
   value?: string

@@ -3,8 +3,8 @@ import { useRender } from '@base-ui/react/use-render'
 import { cva, type VariantProps } from 'class-variance-authority'
 import * as React from 'react'
 
-import { cn } from '#ui/class-name'
-import { Separator } from '#ui/content/separator'
+import { cn } from '#astrale-ui/class-name'
+import { Separator } from '#astrale-ui/content/separator'
 
 function ItemGroup({ className, ...props }: React.ComponentProps<'div'>) {
   return (

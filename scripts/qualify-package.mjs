@@ -166,6 +166,14 @@ try {
     path.join(consumer, 'main.js'),
     "import { Button } from '@astrale-os/ui'\ndocument.querySelector('#app').dataset.component = Button.name\n",
   )
+  await writeFile(
+    path.join(consumer, 'vite.config.js'),
+    [
+      "import path from 'node:path'",
+      "import { defineConfig } from 'vite'",
+      "export default defineConfig({ resolve: { alias: [{ find: /^#ui\\//, replacement: path.resolve('ui') + '/' }] } })",
+    ].join('\n') + '\n',
+  )
   const moduleSpecifiers = Object.keys(packedManifest.exports)
     .filter((subpath) => !subpath.endsWith('.css') && subpath !== './package.json')
     .map((subpath) => (subpath === '.' ? '@astrale-os/ui' : '@astrale-os/ui/' + subpath.slice(2)))

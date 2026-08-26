@@ -2,8 +2,8 @@ import { mergeProps } from '@base-ui/react/merge-props'
 import { useRender } from '@base-ui/react/use-render'
 import * as React from 'react'
 
-import { cn } from '#ui/class-name'
-import { ChevronRightIcon, MoreHorizontalIcon } from '#ui/icon'
+import { cn } from '#astrale-ui/class-name'
+import { ChevronRightIcon, MoreHorizontalIcon } from '#astrale-ui/icon'
 
 function Breadcrumb({ className, ...props }: React.ComponentProps<'nav'>) {
   return <nav aria-label="breadcrumb" data-slot="breadcrumb" className={cn(className)} {...props} />

@@ -1,6 +1,6 @@
 import { Slider as SliderPrimitive } from '@base-ui/react/slider'
 
-import { cn } from '#ui/class-name'
+import { cn } from '#astrale-ui/class-name'
 
 function Slider({
   className,

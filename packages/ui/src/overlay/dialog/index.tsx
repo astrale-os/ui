@@ -3,9 +3,9 @@
 import { Dialog as DialogPrimitive } from '@base-ui/react/dialog'
 import * as React from 'react'
 
-import { Button } from '#ui/action/button'
-import { cn } from '#ui/class-name'
-import { XIcon } from '#ui/icon'
+import { Button } from '#astrale-ui/action/button'
+import { cn } from '#astrale-ui/class-name'
+import { XIcon } from '#astrale-ui/icon'
 
 function Dialog({ ...props }: DialogPrimitive.Root.Props) {
   return <DialogPrimitive.Root data-slot="dialog" {...props} />
