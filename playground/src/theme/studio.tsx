@@ -245,7 +245,8 @@ export function ThemeStudio({
     : `astrale ui add ./${workspace.theme.name}.css`
 
   async function importTheme(event: ChangeEvent<HTMLInputElement>) {
-    const file = event.currentTarget.files?.[0]
+    const input = event.currentTarget
+    const file = input.files?.[0]
     if (!file) return
     try {
       const theme = workspace.importText(await file.text())
@@ -255,7 +256,7 @@ export function ThemeStudio({
         description: error instanceof Error ? error.message : String(error),
       })
     } finally {
-      event.currentTarget.value = ''
+      input.value = ''
     }
   }
 
