@@ -196,7 +196,7 @@ test('uses TypeScript 7 with tsc throughout the rebuilt workspace', async () => 
     [
       'package.json',
       'packages/ui/package.json',
-      'catalog/package.json',
+      'playground/package.json',
       'registry/package.json',
     ].map(async (file) => [file, JSON.parse(await readFile(file, 'utf8'))]),
   )
@@ -215,7 +215,7 @@ test('uses TypeScript 7 with tsc throughout the rebuilt workspace', async () => 
     assert.doesNotMatch(manifest.scripts?.typecheck ?? '', /\btsgo\b/u, `${file} typecheck`)
   }
 
-  const catalog = manifests.find(([file]) => file === 'catalog/package.json')[1]
-  assert.equal(catalog.devDependencies?.vite, '8.2.1')
-  assert.equal(catalog.devDependencies?.['@vitejs/plugin-react'], '6.0.5')
+  const playground = manifests.find(([file]) => file === 'playground/package.json')[1]
+  assert.equal(playground.devDependencies?.vite, '8.2.1')
+  assert.equal(playground.devDependencies?.['@vitejs/plugin-react'], '6.0.5')
 })

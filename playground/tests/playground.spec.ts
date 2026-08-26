@@ -44,6 +44,8 @@ test('playground renders every public runtime owner and complete registry invent
 test('theme editing, mode, history, saving, import, and export remain live', async ({
   page,
 }, testInfo) => {
+  const pageErrors: string[] = []
+  page.on('pageerror', (error) => pageErrors.push(error.message))
   await page.goto('/')
   const root = page.locator('[data-slot="ui-playground"]')
   const primaryValue = () =>
@@ -111,9 +113,11 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
   await page.getByLabel('Starter').click()
   await page.getByRole('option', { name: 'Terminal' }).click()
   await expect(root).toHaveAttribute('data-ui-theme', 'terminal')
-  await page.getByLabel('Import theme document').setInputFiles((await download.path())!)
+  const importInput = page.getByLabel('Import theme document')
+  await importInput.setInputFiles((await download.path())!)
   await expect(root).toHaveAttribute('data-ui-theme', 'atelier')
   await expect.poll(primaryValue).toBe('oklch(0.62 0.2 145)')
+  await expect(importInput).toHaveValue('')
 
   const cssDownloadPromise = page.waitForEvent('download')
   await page.getByRole('button', { name: 'Download CSS' }).click()
@@ -122,6 +126,7 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
   const css = await downloadText(cssDownload)
   expect(css).toContain('Consumer-owned after installation.')
   expect(css.match(/--ui-primary: oklch\(0\.62 0\.2 145\);/gu)).toHaveLength(1)
+  expect(pageErrors).toEqual([])
   await testInfo.attach(`theme-studio-${testInfo.project.name}`, {
     body: await page.screenshot(),
     contentType: 'image/png',
