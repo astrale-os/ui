@@ -98,16 +98,16 @@ Append exact observations. `planned` commands or queued CI runs are not evidence
 | ---------- | --------- | --------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------- |
 | 2026-08-26 | `e702761` | design baseline | Read current manifests, catalog source, browser tests, and Theme Studio/Public UI ledgers | Plan only; no implementation or qualification claimed |
 | 2026-08-26 | `e702761` | baseline qualification | `pnpm qualify`, `pnpm package:qualify`, `pnpm registry:qualify` | Green; package 59,361 bytes/116 files/SHA `939dad…`; registry 64 items/digest `a88547…` |
-| 2026-08-26 | implementation tree | catalog closure | `pnpm catalog:check` | 111 canonical items and 112 scenes; 8 non-ceremonial fixtures |
-| 2026-08-26 | implementation tree | unit and contract proof | `pnpm check` | 38 contract tests and 2 playground unit tests green |
-| 2026-08-26 | implementation tree | dev browser matrix | `pnpm playground:test` | 29 passed, one deliberate mobile skip; all 112 scenes mounted on desktop/mobile and six-theme family Axe matrix green |
-| 2026-08-26 | implementation tree | production lazy proof | `pnpm playground:test:production` | Hashed chunk isolation, prefetch boundary, one fetch, and stable geometry green |
-| 2026-08-26 | implementation tree | performance | `pnpm playground:build` | 112 dynamic entries; 585,560-byte complete initial JS graph versus 1,315,610-byte eager baseline |
-| 2026-08-26 | implementation tree | distribution | `pnpm package:qualify`; `pnpm registry:qualify` | Package 59,352 bytes/116 files/SHA `a7712b…`; no preview files; registry digest unchanged `a88547…` |
-| 2026-08-26 | implementation tree | artifact investigation | Exact baseline rebuild at `e702761`; CSS rule-set comparison | Package delta is only removal of dead `.visible` utility formerly admitted from non-runtime test text; runtime source scan is now explicit |
-| 2026-08-26 | implementation tree | complete qualification | `pnpm qualify` | Green end to end after source-scan correction |
-| 2026-08-26 | implementation tree | HMR and screenshots | `agent-browser` against port 4321 | Existing-file edit and add/remove scene update proven; `artifacts/playground/catalog-carousel-family{,-mobile}.png` retained |
-| 2026-08-26 | implementation tree | adversarial review | Tests-reviewer critic and gap-finder, followed by two critic reruns | Final critic: no remaining critical or high test-quality issue |
+| 2026-08-26 | `e656410` | catalog closure | `pnpm catalog:check` | 111 canonical items and 112 scenes; 8 non-ceremonial fixtures |
+| 2026-08-26 | `e656410` | unit and contract proof | `pnpm check` | 38 contract tests and 2 playground unit tests green |
+| 2026-08-26 | `e656410` | dev browser matrix | `pnpm playground:test` | 29 passed, one deliberate mobile skip; all 112 scenes mounted on desktop/mobile and six-theme family Axe matrix green |
+| 2026-08-26 | `e656410` | production lazy proof | `pnpm playground:test:production` | Hashed chunk isolation, prefetch boundary, one fetch, and stable geometry green |
+| 2026-08-26 | `e656410` | performance | `pnpm playground:build` | 112 dynamic entries; 585,560-byte complete initial JS graph versus 1,315,610-byte eager baseline |
+| 2026-08-26 | `e656410` | distribution | `pnpm package:qualify`; `pnpm registry:qualify` | Beta.9 package 59,352 bytes/116 files/SHA `2cfc87…`; no preview files; registry digest unchanged `a88547…` |
+| 2026-08-26 | `e656410` | artifact investigation | Exact baseline rebuild at `e702761`; CSS rule-set comparison | Package delta is only removal of dead `.visible` utility formerly admitted from non-runtime test text; runtime source scan is now explicit |
+| 2026-08-26 | `e656410` | complete qualification | `pnpm qualify` | Green end to end after source-scan correction |
+| 2026-08-26 | `e656410` | HMR and screenshots | `agent-browser` against port 4321 | Existing-file edit and add/remove scene update proven; `artifacts/playground/catalog-carousel-family{,-mobile}.png` retained |
+| 2026-08-26 | `e656410` | adversarial review | Tests-reviewer critic and gap-finder, followed by two critic reruns | Final critic: no remaining critical or high test-quality issue |
 
 ## Completion rule
 
