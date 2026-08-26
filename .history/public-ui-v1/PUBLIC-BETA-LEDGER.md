@@ -28,7 +28,7 @@ not advanced to a prerelease; npm requires an interactive account OTP for this d
 
 | Repository | Pull requests | Closed behavior |
 | --- | --- | --- |
-| UI | [#7](https://github.com/astrale-os/ui/pull/7), [#10](https://github.com/astrale-os/ui/pull/10), [#11](https://github.com/astrale-os/ui/pull/11), [#12](https://github.com/astrale-os/ui/pull/12), [#13](https://github.com/astrale-os/ui/pull/13), [#14](https://github.com/astrale-os/ui/pull/14), [#15](https://github.com/astrale-os/ui/pull/15) | Public package/registry cutover, npmjs routing, trusted publish and mirror, consumer-safe internal import namespace, visible default chart token with host override, whole-product release ownership, beta.3 release |
+| UI | [#7](https://github.com/astrale-os/ui/pull/7), [#10](https://github.com/astrale-os/ui/pull/10), [#11](https://github.com/astrale-os/ui/pull/11), [#12](https://github.com/astrale-os/ui/pull/12), [#13](https://github.com/astrale-os/ui/pull/13), [#14](https://github.com/astrale-os/ui/pull/14), [#15](https://github.com/astrale-os/ui/pull/15), [#16](https://github.com/astrale-os/ui/pull/16), [#18](https://github.com/astrale-os/ui/pull/18) | Public package/registry cutover, npmjs routing, trusted publish and mirror, consumer-safe internal import namespace, visible default chart token with host override, whole-product release ownership, beta.3 release, final evidence ledger, non-product release routing |
 | CLI | [#160](https://github.com/astrale-os/cli/pull/160), [#162](https://github.com/astrale-os/cli/pull/162), [#164](https://github.com/astrale-os/cli/pull/164), [#166](https://github.com/astrale-os/cli/pull/166), [#168](https://github.com/astrale-os/cli/pull/168), [#170](https://github.com/astrale-os/cli/pull/170), [#171](https://github.com/astrale-os/cli/pull/171), [#174](https://github.com/astrale-os/cli/pull/174), [#175](https://github.com/astrale-os/cli/pull/175), [#176](https://github.com/astrale-os/cli/pull/176) | Public UI namespace, beta resolution, nested registry provenance, Domain registry workspace ownership, exact UI pin restoration, current Schema client contracts, shipped standalone Viewer cohort, exact external-navigation grants, beta.20 release |
 | SDK | [#236](https://github.com/astrale-os/sdk/pull/236), [#242](https://github.com/astrale-os/sdk/pull/242), [#243](https://github.com/astrale-os/sdk/pull/243), [#246](https://github.com/astrale-os/sdk/pull/246), [#247](https://github.com/astrale-os/sdk/pull/247) | Zero-runtime UI integration guidance, generator package-manager/workspace correctness, stable local Cloudflare origin, published beta cohort |
 | GUI | [#28](https://github.com/astrale-os/gui/pull/28) | Public npm UI resolution and exact beta consumption |
@@ -82,6 +82,12 @@ Domains; the remaining open pull requests in those repositories have unrelated o
     create a release. The whole repository now owns one UI release, with root, public package, and
     release-manifest versions locked together; an actual Release Please dry run and beta.3 release
     proved the registry-only chart fix was included.
+14. The first attempt to exclude delivery ledgers from releases used glob and exact-file forms that
+    Release Please does not recognize, so it generated a stale beta.4 proposal. The release
+    contract now lives under the excluded `.release` owner, history lives under `.history`, both
+    use supported directory-prefix exclusions, and repository maintenance uses the hidden `chore`
+    type. Release Please 17.3 was run against the exact pushed PR #18 revision and reported zero
+    release pull requests; PR #17 was then explicitly closed without publishing beta.4.
 
 Each production test change received an adversarial critic and gap-finder pass. Material gaps found
 by those reviews were corrected before merge.
@@ -93,7 +99,11 @@ by those reviews were corrected before merge.
   release candidate passed the dispatched full CI run
   [32930509534](https://github.com/astrale-os/ui/actions/runs/32930509534); trusted npm publish plus
   identical GitHub Packages mirror passed in
-  [32930644736](https://github.com/astrale-os/ui/actions/runs/32930644736).
+  [32930644736](https://github.com/astrale-os/ui/actions/runs/32930644736). The final non-product
+  routing revision passed the full main CI run
+  [32932088960](https://github.com/astrale-os/ui/actions/runs/32932088960), while its Release run
+  [32932088954](https://github.com/astrale-os/ui/actions/runs/32932088954) completed without creating
+  or publishing another release.
 - CLI UI and View changes passed Node 22/24/26, Studio Chromium smoke, CodeQL, and the full local
   package gate: 868 tests passed, one intentional skill-mirror skip, zero failures, followed by
   standalone build, public exports, and dependency-boundary verification. The exact beta.20 main
