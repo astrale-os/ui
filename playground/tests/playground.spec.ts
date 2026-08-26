@@ -25,6 +25,11 @@ const expectedCanonicalAddresses = [
 const expectedComponentNames = expectedCanonicalAddresses
   .filter((address) => address.startsWith('component/'))
   .map((address) => address.slice('component/'.length))
+const expectedAddressesByKind = {
+  Components: expectedCanonicalAddresses.filter((address) => address.startsWith('component/')),
+  Patterns: expectedCanonicalAddresses.filter((address) => address.startsWith('pattern/')),
+  Blocks: expectedCanonicalAddresses.filter((address) => address.startsWith('block/')),
+} as const
 const expectedFamilies = [
   ...new Set([
     ...componentGroups
@@ -58,6 +63,11 @@ const expectedSceneIds = globSync(
     return `${kind}/${composition[2]}/${match.groups!.subject}#${scene}`
   })
   .sort()
+const expectedSceneCounts = new Map<string, number>()
+for (const id of expectedSceneIds) {
+  const address = id.split('#')[0]!
+  expectedSceneCounts.set(address, (expectedSceneCounts.get(address) ?? 0) + 1)
+}
 
 async function downloadText(download: Download) {
   const stream = await download.createReadStream()
@@ -77,6 +87,68 @@ async function loadPreview(page: Page, address: string, scene = 'default') {
   await preview.scrollIntoViewIfNeeded()
   await expect(preview).toHaveAttribute('data-preview-status', 'ready', { timeout: 15_000 })
   return preview
+}
+
+async function selectCatalogKind(page: Page, kind: keyof typeof expectedAddressesByKind) {
+  const sections = page.getByLabel('Catalog sections')
+  await sections.getByRole('tab', { name: kind }).click()
+  await expect(sections.getByRole('tab', { name: kind })).toHaveAttribute('aria-selected', 'true')
+  await expect(page.locator('[data-preview-address]')).toHaveCount(
+    expectedAddressesByKind[kind].length,
+  )
+}
+
+async function expectDerivedSceneIndicators(
+  page: Page,
+  kind: keyof typeof expectedAddressesByKind,
+) {
+  const observed = await page.locator('[data-preview-address]').evaluateAll((elements) =>
+    elements
+      .map((element) => {
+        const action = element.querySelector('.preview-card-actions')
+        const views = action?.querySelectorAll<HTMLElement>('[aria-label^="View "]') ?? []
+        const badges = action?.querySelectorAll<HTMLElement>('[data-slot="badge"]') ?? []
+        const view = views[0]
+        const badge = badges[0]
+        const visible = (target: HTMLElement | undefined) => {
+          if (!target) return false
+          const rect = target.getBoundingClientRect()
+          const style = getComputedStyle(target)
+          return (
+            rect.width > 0 &&
+            rect.height > 0 &&
+            style.display !== 'none' &&
+            style.visibility !== 'hidden'
+          )
+        }
+        return {
+          address: element.getAttribute('data-preview-address'),
+          actionCount: element.querySelectorAll('.preview-card-actions').length,
+          badge: badge?.textContent ?? null,
+          badgeCount: badges.length,
+          badgeLabel: badge?.getAttribute('aria-label') ?? null,
+          badgeVisible: visible(badge),
+          viewCount: views.length,
+          viewVisible: visible(view),
+        }
+      })
+      .sort((left, right) => left.address!.localeCompare(right.address!)),
+  )
+  expect(observed).toEqual(
+    expectedAddressesByKind[kind].map((address) => {
+      const count = expectedSceneCounts.get(address)!
+      return {
+        address,
+        actionCount: 1,
+        badge: count > 1 ? String(count) : null,
+        badgeCount: count > 1 ? 1 : 0,
+        badgeLabel: count > 1 ? `${count} preview scenes` : null,
+        badgeVisible: count > 1,
+        viewCount: 1,
+        viewVisible: true,
+      }
+    }),
+  )
 }
 
 test('playground exposes every public runtime owner and complete visual registry inventory', async ({
@@ -99,20 +171,23 @@ test('playground exposes every public runtime owner and complete visual registry
   )
   expect(rendered).toEqual(expectedComponentNames)
   expect(new Set(rendered).size).toBe(expectedComponentNames.length)
-  const canonicalPreviews = await page.locator('[data-preview-address]').evaluateAll((elements) =>
-    elements.map((element) => ({
-      address: element.getAttribute('data-preview-address'),
-      scene: element.getAttribute('data-preview-scene'),
-    })),
-  )
+  const canonicalPreviews: { address: string | null; scene: string | null }[] = []
+  for (const kind of ['Components', 'Patterns', 'Blocks'] as const) {
+    await selectCatalogKind(page, kind)
+    canonicalPreviews.push(
+      ...(await page.locator('[data-preview-address]').evaluateAll((elements) =>
+        elements.map((element) => ({
+          address: element.getAttribute('data-preview-address'),
+          scene: element.getAttribute('data-preview-scene'),
+        })),
+      )),
+    )
+  }
   expect(canonicalPreviews).toHaveLength(expectedCanonicalAddresses.length)
   expect(new Set(canonicalPreviews.map((item) => `${item.address}#${item.scene}`)).size).toBe(
     expectedCanonicalAddresses.length,
   )
   expect(canonicalPreviews.every((item) => item.scene === 'default')).toBe(true)
-  await expect(page.locator('[data-preview-address][role="region"]')).toHaveCount(
-    expectedCanonicalAddresses.length,
-  )
   expect(canonicalPreviews.map((item) => item.address).sort()).toEqual(expectedCanonicalAddresses)
   await expect(page.locator('[data-preview-address="block/settings/team"]')).toHaveAttribute(
     'data-preview-status',
@@ -127,8 +202,9 @@ test('playground exposes every public runtime owner and complete visual registry
   )
   await search.clear()
   await expect(page.locator('[data-preview-address]')).toHaveCount(
-    expectedCanonicalAddresses.length,
+    expectedAddressesByKind.Blocks.length,
   )
+  await selectCatalogKind(page, 'Components')
   await search.fill('variants')
   const namedButton = page.locator(
     '[data-preview-address="component/button"][data-preview-scene="variants"]',
@@ -184,6 +260,43 @@ test('playground exposes every public runtime owner and complete visual registry
     )
     .toBe(true)
 
+  await selectCatalogKind(page, 'Blocks')
+  const team = await loadPreview(page, 'block/settings/team')
+  const teamLayout = await team.evaluate((element) => {
+    const content = element.querySelector(':scope > [data-slot="card-content"]')!
+    const block = content.querySelector('[data-slot="block-settings-team"]')!
+    const contentRect = content.getBoundingClientRect()
+    const blockRect = block.getBoundingClientRect()
+    return {
+      width: Math.round(blockRect.width),
+      contentWidth: Math.round(contentRect.width),
+      maxWidth: getComputedStyle(block).maxWidth,
+      leftGap: Math.round(blockRect.left - contentRect.left),
+      rightGap: Math.round(contentRect.right - blockRect.right),
+    }
+  })
+  expect(teamLayout.maxWidth).toBe('672px')
+  expect(teamLayout.width).toBe(Math.min(672, teamLayout.contentWidth - 24))
+  expect(Math.abs(teamLayout.leftGap - teamLayout.rightGap)).toBeLessThanOrEqual(1)
+  const signInLayout = await loadPreview(page, 'block/authentication/sign-in-card')
+  const signInGeometry = await signInLayout.evaluate((element) => {
+    const content = element.querySelector(':scope > [data-slot="card-content"]')!
+    const block = content.querySelector('[data-slot="block-authentication-sign-in-card"]')!
+    const contentRect = content.getBoundingClientRect()
+    const blockRect = block.getBoundingClientRect()
+    return {
+      width: Math.round(blockRect.width),
+      contentWidth: Math.round(contentRect.width),
+      maxWidth: getComputedStyle(block).maxWidth,
+      leftGap: Math.round(blockRect.left - contentRect.left),
+      rightGap: Math.round(contentRect.right - blockRect.right),
+    }
+  })
+  expect(signInGeometry.maxWidth).toBe('448px')
+  expect(signInGeometry.width).toBe(Math.min(448, signInGeometry.contentWidth - 24))
+  expect(Math.abs(signInGeometry.leftGap - signInGeometry.rightGap)).toBeLessThanOrEqual(1)
+  await selectCatalogKind(page, 'Components')
+
   await openThemeCustomizer(page)
   await expect(page.locator('[data-slot="theme-studio"]')).toBeVisible()
   await expect
@@ -214,6 +327,7 @@ test('catalog loads previews near the viewport once and preserves loaded state',
     if (request.url().includes('.preview.tsx')) previewRequests.push(request.url())
   })
   await page.goto('/')
+  await selectCatalogKind(page, 'Blocks')
 
   const distant = page.locator('[data-preview-address="block/settings/team"]')
   await expect(distant).toHaveAttribute('data-preview-status', 'idle')
@@ -221,11 +335,11 @@ test('catalog loads previews near the viewport once and preserves loaded state',
   await loadPreview(page, 'block/settings/team')
   expect(previewRequests.filter((url) => url.includes('/team.preview.tsx'))).toHaveLength(1)
 
+  await selectCatalogKind(page, 'Components')
   const select = await loadPreview(page, 'component/select')
   await select.getByRole('combobox', { name: 'Environment' }).click()
   await page.getByRole('option', { name: 'Staging' }).click()
   await expect(select.getByRole('combobox', { name: 'Environment' })).toContainText('Staging')
-  await distant.scrollIntoViewIfNeeded()
   await select.scrollIntoViewIfNeeded()
   await expect(select).toHaveAttribute('data-preview-status', 'ready')
   await expect(select.getByRole('combobox', { name: 'Environment' })).toContainText('Staging')
@@ -244,6 +358,130 @@ test('catalog loads previews near the viewport once and preserves loaded state',
   await expect(page.getByRole('button', { name: 'Revoke' })).toBeVisible()
 })
 
+test('kind tabs, scene indicators, isolation, and both back journeys preserve place', async ({
+  page,
+}) => {
+  await page.goto('/')
+  await expect(
+    page.getByLabel('Catalog sections').getByRole('tab', { name: 'Components' }),
+  ).toHaveAttribute('aria-selected', 'true')
+  await expect(page.locator('.section-heading h2')).toHaveText([
+    'Actions & inputs',
+    'Content & feedback',
+    'Menus & overlays',
+    'Navigation & layout',
+    'Registry components',
+  ])
+  await expectDerivedSceneIndicators(page, 'Components')
+  const sections = page.getByLabel('Catalog sections')
+  const componentsTab = sections.getByRole('tab', { name: 'Components' })
+  await componentsTab.focus()
+  await componentsTab.press('ArrowRight')
+  const patternsTab = sections.getByRole('tab', { name: 'Patterns' })
+  await expect(patternsTab).toBeFocused()
+  await patternsTab.press('Enter')
+  await expect(page).toHaveURL(/\?kind=pattern$/u)
+  await expect(patternsTab).toHaveAttribute('aria-selected', 'true')
+  await page.goBack()
+  await expect(page).toHaveURL(/\/$/u)
+  await expect(componentsTab).toHaveAttribute('aria-selected', 'true')
+  await expect(componentsTab).toBeFocused()
+  await page.goForward()
+  await expect(page).toHaveURL(/\?kind=pattern$/u)
+  await expect(page.locator('[data-preview-address]')).toHaveCount(
+    expectedAddressesByKind.Patterns.length,
+  )
+  await page.goBack()
+
+  await selectCatalogKind(page, 'Patterns')
+  await expect(page).toHaveURL(/\?kind=pattern$/u)
+  await expectDerivedSceneIndicators(page, 'Patterns')
+  await selectCatalogKind(page, 'Blocks')
+  await expect(page).toHaveURL(/\?kind=block$/u)
+  await expectDerivedSceneIndicators(page, 'Blocks')
+
+  const signIn = await loadPreview(page, 'block/authentication/sign-in-card')
+  await signIn.evaluate((element) => element.scrollIntoView({ block: 'center' }))
+  const initialTop = await signIn.evaluate((element) => element.getBoundingClientRect().top)
+  const viewSignIn = signIn.getByRole('button', { name: 'View sign in card preview' })
+  await viewSignIn.focus()
+  await viewSignIn.press('Enter')
+  await expect(page).toHaveURL(/\?preview=block%2Fauthentication%2Fsign-in-card%23default$/u)
+  await expect(page.locator('[data-preview-address]')).toHaveCount(1)
+  await expect(
+    page.locator('[data-preview-address="block/authentication/sign-in-card"]'),
+  ).toHaveCount(1)
+  await expect(page.locator('.preview-card-actions')).toHaveCount(0)
+  const back = page.getByRole('button', { name: 'Back' })
+  await expect(back.locator('[data-icon="inline-start"]')).toHaveCount(1)
+  await back.press('Enter')
+  await expect(page).toHaveURL(/\?kind=block$/u)
+  const restored = page.locator('[data-preview-address="block/authentication/sign-in-card"]')
+  const restoredView = restored.getByRole('button', { name: 'View sign in card preview' })
+  await expect
+    .poll(() => restored.evaluate((element) => element.getBoundingClientRect().top))
+    .toBeCloseTo(initialTop, 0)
+  await expect(restoredView).toBeFocused()
+
+  const nativeTop = await restored.evaluate((element) => element.getBoundingClientRect().top)
+  await restoredView.press('Enter')
+  await page.goBack()
+  await expect(page).toHaveURL(/\?kind=block$/u)
+  await expect
+    .poll(() => restored.evaluate((element) => element.getBoundingClientRect().top))
+    .toBeCloseTo(nativeTop, 0)
+  await expect(restoredView).toBeFocused()
+
+  await page.goto('/?preview=block%2Fauthentication%2Fsign-in-card%23default')
+  await page.getByRole('button', { name: 'Back' }).click()
+  await expect(page).toHaveURL(/\?kind=block$/u)
+  await expect(page.locator('[data-preview-address]')).toHaveCount(
+    expectedAddressesByKind.Blocks.length,
+  )
+})
+
+test('return anchor survives a delayed lazy block resolving above it', async ({
+  page,
+}, testInfo) => {
+  test.skip(
+    testInfo.project.name !== 'desktop',
+    'The delayed geometry contract is viewport-neutral.',
+  )
+  let releaseWorkspace: (() => void) | undefined
+  const workspaceRelease = new Promise<void>((resolve) => {
+    releaseWorkspace = resolve
+  })
+  await page.route(/\/responsive-workspace\.preview\.tsx(?:\?|$)/u, async (route) => {
+    await workspaceRelease
+    await route.continue()
+  })
+  await page.goto('/')
+  await selectCatalogKind(page, 'Blocks')
+  const delayed = page.locator(
+    '[data-preview-address="block/application-shell/responsive-workspace"]',
+  )
+  await expect(delayed).toHaveAttribute('data-preview-status', 'loading')
+  const loadingHeight = await delayed.evaluate((element) => element.getBoundingClientRect().height)
+
+  const signIn = await loadPreview(page, 'block/authentication/sign-in-card')
+  await signIn.evaluate((element) => element.scrollIntoView({ block: 'center' }))
+  const expectedTop = await signIn.evaluate((element) => element.getBoundingClientRect().top)
+  await signIn.getByRole('button', { name: 'View sign in card preview' }).click()
+  await page.getByRole('button', { name: 'Back' }).click()
+  await expect
+    .poll(() => signIn.evaluate((element) => element.getBoundingClientRect().top))
+    .toBeCloseTo(expectedTop, 0)
+
+  await page.waitForTimeout(350)
+  releaseWorkspace?.()
+  await expect(delayed).toHaveAttribute('data-preview-status', 'ready')
+  const readyHeight = await delayed.evaluate((element) => element.getBoundingClientRect().height)
+  expect(readyHeight).toBeGreaterThan(loadingHeight + 100)
+  await expect
+    .poll(() => signIn.evaluate((element) => element.getBoundingClientRect().top))
+    .toBeCloseTo(expectedTop, 0)
+})
+
 test('every canonical preview mounts without page or console failures', async ({ page }) => {
   test.setTimeout(180_000)
   const pageErrors: string[] = []
@@ -253,17 +491,20 @@ test('every canonical preview mounts without page or console failures', async ({
     if (['error', 'warning'].includes(message.type())) consoleProblems.push(message.text())
   })
   await page.goto('/')
-  const previews = page.locator('[data-preview-address]')
-  await expect(previews).toHaveCount(expectedCanonicalAddresses.length)
-  for (let index = 0; index < expectedCanonicalAddresses.length; index += 1) {
-    const preview = previews.nth(index)
-    await preview.scrollIntoViewIfNeeded()
-    await expect(preview).toHaveAttribute('data-preview-status', 'ready', { timeout: 10_000 })
-    await expect(preview.getByText('Preview unavailable')).toHaveCount(0)
+  let ready = 0
+  for (const kind of ['Components', 'Patterns', 'Blocks'] as const) {
+    await selectCatalogKind(page, kind)
+    const previews = page.locator('[data-preview-address]')
+    const count = await previews.count()
+    for (let index = 0; index < count; index += 1) {
+      const preview = previews.nth(index)
+      await preview.scrollIntoViewIfNeeded()
+      await expect(preview).toHaveAttribute('data-preview-status', 'ready', { timeout: 10_000 })
+      await expect(preview.getByText('Preview unavailable')).toHaveCount(0)
+      ready += 1
+    }
   }
-  await expect(page.locator('[data-preview-status="ready"]')).toHaveCount(
-    expectedCanonicalAddresses.length,
-  )
+  expect(ready).toBe(expectedCanonicalAddresses.length)
   expect(pageErrors).toEqual([])
   expect(consoleProblems).toEqual([])
   const width = await page.evaluate(() => ({
@@ -376,7 +617,9 @@ test('representative patterns and blocks keep controlled state without product n
   const email = signIn.getByRole('textbox', { name: 'Email' })
   await email.fill('owner@astrale.ai')
   await expect(email).toHaveValue('owner@astrale.ai')
-  await interactWithoutNavigation(() => signIn.getByRole('button', { name: 'Sign in' }).click())
+  await interactWithoutNavigation(() =>
+    signIn.getByRole('button', { name: 'Sign in', exact: true }).click(),
+  )
 
   await page.goto('/?family=block%2Fsettings')
   const notifications = await loadPreview(page, 'block/settings/notifications')
@@ -390,7 +633,7 @@ test('invalid catalog addresses have an accessible empty state', async ({ page }
   await page.goto('/?preview=component%2Fmissing%23default')
   const alert = page.getByRole('alert')
   await expect(alert).toContainText('No previews found')
-  await expect(page.getByRole('button', { name: 'Back to catalog' })).toBeVisible()
+  await expect(page.getByRole('button', { name: 'Back' })).toBeVisible()
 })
 
 test('a failed preview module is contained and recovers after a document reload', async ({
@@ -418,6 +661,7 @@ test('loading and readiness expose stable accessible canvas semantics', async ({
     await route.continue()
   })
   await page.goto('/')
+  await selectCatalogKind(page, 'Blocks')
   const preview = page.locator('[data-preview-address="block/settings/team"]')
   const labelledBy = await preview.getAttribute('aria-labelledby')
   expect(labelledBy).toBeTruthy()

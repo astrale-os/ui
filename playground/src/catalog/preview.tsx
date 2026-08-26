@@ -8,8 +8,10 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
+  Badge,
   Skeleton,
 } from '@astrale-os/ui'
+import { EyeIcon } from 'lucide-react'
 import { Component, useCallback, useEffect, useRef, useState } from 'react'
 
 import {
@@ -98,11 +100,15 @@ function PreviewLoadFailure({ message }: { message: string }) {
 export function PreviewCanvas({
   descriptor,
   eager = false,
+  sceneCount = 1,
+  showOpen = true,
   onNavigate,
 }: {
   descriptor: PreviewDescriptor
   eager?: boolean
-  onNavigate: (url: string) => void
+  sceneCount?: number
+  showOpen?: boolean
+  onNavigate: (url: string, anchorId?: string, focusId?: string) => void
 }) {
   const cardRef = useRef<HTMLDivElement>(null)
   const active = useRef(true)
@@ -172,6 +178,7 @@ export function PreviewCanvas({
       data-component={componentName}
       data-preview-address={descriptor.address}
       data-preview-scene={descriptor.scene}
+      data-preview-kind={descriptor.kind}
       data-preview-status={status}
       data-preview-canvas={canvas}
       data-slot="component-specimen"
@@ -181,20 +188,30 @@ export function PreviewCanvas({
     >
       <CardHeader>
         <CardTitle id={`preview-title-${previewId}`}>{descriptor.title}</CardTitle>
-        <CardAction>
-          <Button
-            variant="ghost"
-            size="sm"
-            nativeButton={false}
-            render={<a href={isolated} />}
-            onClick={(event) => {
-              event.preventDefault()
-              onNavigate(isolated)
-            }}
-          >
-            Open
-          </Button>
-        </CardAction>
+        {showOpen ? (
+          <CardAction className="preview-card-actions">
+            {sceneCount > 1 ? (
+              <Badge variant="outline" aria-label={`${sceneCount} preview scenes`}>
+                {sceneCount}
+              </Badge>
+            ) : null}
+            <Button
+              id={`view-${previewId}`}
+              variant="ghost"
+              size="icon-sm"
+              nativeButton={false}
+              aria-label={`View ${descriptor.title} preview`}
+              title="View preview"
+              render={<a href={isolated} />}
+              onClick={(event) => {
+                event.preventDefault()
+                onNavigate(isolated, `preview-${previewId}`, `view-${previewId}`)
+              }}
+            >
+              <EyeIcon />
+            </Button>
+          </CardAction>
+        ) : null}
       </CardHeader>
       <CardContent className="specimen-content preview-content">
         {status === 'idle' || status === 'loading' ? (
