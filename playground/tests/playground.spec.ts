@@ -183,12 +183,14 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
   await page.getByLabel('Starter').click()
   await page.getByRole('option', { name: 'Terminal' }).click()
   await expect(root).toHaveAttribute('data-ui-theme', 'terminal')
-  await page.getByLabel('Import theme document').setInputFiles({
+  const importInput = page.getByLabel('Import theme document')
+  await importInput.setInputFiles({
     name: 'atelier.astrale-theme.json',
     mimeType: 'application/json',
     buffer: Buffer.from(JSON.stringify(exported)),
   })
   await expect(page.getByRole('dialog', { name: 'Atelier imported' })).toBeVisible()
+  await expect(importInput).toHaveValue('')
   await expect(root).toHaveAttribute('data-ui-theme', 'atelier')
   await expect.poll(primaryValue).toBe('oklch(0.62 0.2 145)')
   await expect

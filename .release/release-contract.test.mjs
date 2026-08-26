@@ -3,7 +3,7 @@ import { execFileSync } from 'node:child_process'
 import { access, readFile } from 'node:fs/promises'
 import test from 'node:test'
 
-const configSha = 'c02d9486144144dff268910469870345b683e8b3'
+const configSha = 'e89c7e84ed0b5bad2dcbf80f7a4547e30672155e'
 
 test('pins supported CI and release workflow dependencies', async () => {
   const [ci, release, publish] = await Promise.all(
@@ -87,7 +87,7 @@ test('publishes exactly one public npm package from the Release Please commit us
     publish,
     /gh api "repos\/\$\{GITHUB_REPOSITORY\}\/releases\/tags\/v\$\{EXPECTED_VERSION\}"/u,
   )
-  assert.match(publish, /publish\/packages@c02d9486144144dff268910469870345b683e8b3/u)
+  assert.match(publish, /publish\/packages@e89c7e84ed0b5bad2dcbf80f7a4547e30672155e/u)
   assert.match(publish, /dirs:\s*packages\/ui/u)
   assert.match(publish, /mirror-public-packages:\s*'false'/u)
   assert.match(
@@ -99,7 +99,7 @@ test('publishes exactly one public npm package from the Release Please commit us
   assert.match(publish, /actions\/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a/u)
   assert.match(publish, /mirror:\s*\n\s+needs:\s*publish/u)
   assert.match(publish, /packages:\s*write/u)
-  assert.match(publish, /publish\/mirror-npm-to-github@c02d9486144144dff268910469870345b683e8b3/u)
+  assert.match(publish, /publish\/mirror-npm-to-github@e89c7e84ed0b5bad2dcbf80f7a4547e30672155e/u)
   assert.match(publish, /repository:\s*astrale-os\/ui/u)
   assert.deepEqual(Object.keys(releaseConfig.packages), ['.'])
   assert.deepEqual(Object.keys(releaseManifest), ['.'])
@@ -164,6 +164,7 @@ test('tracks the strict lock policy and pinned repository toolchain', async () =
     readFile('package.json', 'utf8').then(JSON.parse),
   ])
   assert.match(workspace, /^linkWorkspacePackages: true$/mu)
+  assert.match(workspace, /^strictPeerDependencies: true$/mu)
   assert.match(workspace, /^minimumReleaseAge: 10080$/mu)
   assert.match(workspace, /^minimumReleaseAgeStrict: true$/mu)
   assert.match(workspace, /^minimumReleaseAgeIgnoreMissingTime: false$/mu)
@@ -188,4 +189,33 @@ test('tracks the strict lock policy and pinned repository toolchain', async () =
   assert.deepEqual([...new Set(tarballs.map((value) => new URL(value).hostname))], ['npm.jsr.io'])
   assert.equal(root.devDependencies.oxfmt, '0.63.0')
   assert.equal(root.devDependencies.oxlint, '1.78.0')
+})
+
+test('uses TypeScript 7 with tsc throughout the rebuilt workspace', async () => {
+  const manifests = await Promise.all(
+    [
+      'package.json',
+      'packages/ui/package.json',
+      'playground/package.json',
+      'registry/package.json',
+    ].map(async (file) => [file, JSON.parse(await readFile(file, 'utf8'))]),
+  )
+
+  for (const [file, manifest] of manifests) {
+    assert.equal(manifest.devDependencies?.typescript, '7.0.2', `${file} TypeScript version`)
+    assert.equal(
+      manifest.devDependencies?.['@typescript/native-preview'],
+      undefined,
+      `${file} native preview`,
+    )
+  }
+
+  for (const [file, manifest] of manifests.slice(1)) {
+    assert.match(manifest.scripts?.typecheck ?? '', /\btsc\b/u, `${file} typecheck`)
+    assert.doesNotMatch(manifest.scripts?.typecheck ?? '', /\btsgo\b/u, `${file} typecheck`)
+  }
+
+  const playground = manifests.find(([file]) => file === 'playground/package.json')[1]
+  assert.equal(playground.devDependencies?.vite, '8.2.1')
+  assert.equal(playground.devDependencies?.['@vitejs/plugin-react'], '6.0.5')
 })

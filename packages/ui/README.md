@@ -32,4 +32,3 @@ Use flat subpaths such as `@astrale-os/ui/button` for the narrowest import. High
 and blocks are installed as application-owned source with `astrale ui add`.
 
 `reset.css` is optional. `theme.css` never installs a global reset or Tailwind preflight.
-

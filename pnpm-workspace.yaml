@@ -4,6 +4,7 @@ packages:
   - 'playground'
 
 linkWorkspacePackages: true
+strictPeerDependencies: true
 
 # Block packages released < 7 days ago (10080 minutes) — supply-chain hardening.
 minimumReleaseAge: 10080
@@ -14,6 +15,7 @@ minimumReleaseAgeExclude:
   - '@astrale-os/*'
   - '@astrale-domains/*'
   - '@astrale/*'
+  - '@jsr/astrale__commitlint-config@2.0.5'
   - 'create-astrale-domain'
   - 'bun-types@1.4.0'
 

@@ -7,4 +7,3 @@ The runtime package composes focused React libraries including Radix UI, cmdk, I
 react-resizable-panels, and Vaul. Their licenses and notices remain available in their distributed
 packages. This file records copied or adapted source; ordinary dependency licenses are additionally
 checked from the exact release lockfile during qualification.
-

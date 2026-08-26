@@ -5,4 +5,3 @@ Astrale UI incorporates and adapts source generated from
 
 Focused runtime dependencies retain their own package licenses. The release qualification checks
 the exact lockfile and packed dependency graph for license and notice drift.
-
