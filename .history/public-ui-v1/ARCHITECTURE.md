@@ -285,7 +285,7 @@ resolves that tag to one commit SHA before reading the root, includes, or files.
 
 Each item is copy-pasteable, imports public package paths only, declares item-specific npm
 dependencies, and has no hidden I/O. Installed files become consumer-owned. A recorded upstream
-base digest supports later diffs; local edits are never silently overwritten.
+base digest supports installed-integrity checks; local edits are never silently overwritten.
 
 ## Ownership exclusions
 

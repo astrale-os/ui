@@ -108,7 +108,7 @@ Every pattern and block item must satisfy all of the following:
     mobile and desktop viewports where responsive.
 11. A dry run lists exact files, dependencies, and CSS changes and performs no write.
 12. Reinstalling the same item and digest is idempotent.
-13. Locally changed installed files are detected. Normal add/diff never overwrites them.
+13. Locally changed installed files are detected. Normal add never overwrites them.
 14. Installed source contains no telemetry, network endpoint, secret, or environment assumption.
 15. A block's included pattern logic is read from the same repository SHA; V1 never follows an
     unpinned same-repository dependency to a moving branch.
