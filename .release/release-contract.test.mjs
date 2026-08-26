@@ -3,7 +3,7 @@ import { execFileSync } from 'node:child_process'
 import { access, readFile } from 'node:fs/promises'
 import test from 'node:test'
 
-const configSha = '394998fcabb3cd4f0e2eccc5f969579837ea0c41'
+const configSha = 'e89c7e84ed0b5bad2dcbf80f7a4547e30672155e'
 
 test('pins supported CI and release workflow dependencies', async () => {
   const [ci, release, publish] = await Promise.all(
@@ -87,7 +87,7 @@ test('publishes exactly one public npm package from the Release Please commit us
     publish,
     /gh api "repos\/\$\{GITHUB_REPOSITORY\}\/releases\/tags\/v\$\{EXPECTED_VERSION\}"/u,
   )
-  assert.match(publish, /publish\/packages@394998fcabb3cd4f0e2eccc5f969579837ea0c41/u)
+  assert.match(publish, /publish\/packages@e89c7e84ed0b5bad2dcbf80f7a4547e30672155e/u)
   assert.match(publish, /dirs:\s*packages\/ui/u)
   assert.match(publish, /mirror-public-packages:\s*'false'/u)
   assert.match(
@@ -99,7 +99,7 @@ test('publishes exactly one public npm package from the Release Please commit us
   assert.match(publish, /actions\/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a/u)
   assert.match(publish, /mirror:\s*\n\s+needs:\s*publish/u)
   assert.match(publish, /packages:\s*write/u)
-  assert.match(publish, /publish\/mirror-npm-to-github@394998fcabb3cd4f0e2eccc5f969579837ea0c41/u)
+  assert.match(publish, /publish\/mirror-npm-to-github@e89c7e84ed0b5bad2dcbf80f7a4547e30672155e/u)
   assert.match(publish, /repository:\s*astrale-os\/ui/u)
   assert.deepEqual(Object.keys(releaseConfig.packages), ['.'])
   assert.deepEqual(Object.keys(releaseManifest), ['.'])

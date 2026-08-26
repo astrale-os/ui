@@ -47,7 +47,7 @@ jobs:
           test "$(git rev-parse "refs/tags/v${EXPECTED_VERSION}^{commit}")" = "$EXPECTED_SHA"
           git merge-base --is-ancestor "$EXPECTED_SHA" origin/main
           test "$(gh api "repos/${GITHUB_REPOSITORY}/releases/tags/v${EXPECTED_VERSION}" --jq .tag_name)" = "v${EXPECTED_VERSION}"
-      - uses: astrale-os/config/.github/actions/publish/packages@394998fcabb3cd4f0e2eccc5f969579837ea0c41
+      - uses: astrale-os/config/.github/actions/publish/packages@e89c7e84ed0b5bad2dcbf80f7a4547e30672155e
         with:
           dirs: packages/ui
           mirror-public-packages: 'false'
@@ -75,7 +75,7 @@ jobs:
         with:
           ref: ${{ inputs.expected-sha }}
           persist-credentials: 'false'
-      - uses: astrale-os/config/.github/actions/publish/mirror-npm-to-github@394998fcabb3cd4f0e2eccc5f969579837ea0c41
+      - uses: astrale-os/config/.github/actions/publish/mirror-npm-to-github@e89c7e84ed0b5bad2dcbf80f7a4547e30672155e
         with:
           dirs: packages/ui
           github-token: ${{ github.token }}

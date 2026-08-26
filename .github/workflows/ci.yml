@@ -24,7 +24,7 @@ jobs:
         node-version: [24, 26]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-      - uses: astrale-os/config/.github/actions/setup@394998fcabb3cd4f0e2eccc5f969579837ea0c41
+      - uses: astrale-os/config/.github/actions/setup@e89c7e84ed0b5bad2dcbf80f7a4547e30672155e
         with:
           node-version: ${{ matrix.node-version }}
           frozen-lockfile: 'true'
@@ -34,7 +34,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-      - uses: astrale-os/config/.github/actions/setup@394998fcabb3cd4f0e2eccc5f969579837ea0c41
+      - uses: astrale-os/config/.github/actions/setup@e89c7e84ed0b5bad2dcbf80f7a4547e30672155e
         with:
           node-version: 26
           frozen-lockfile: 'true'
@@ -61,7 +61,7 @@ jobs:
       security-events: write
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-      - uses: astrale-os/config/.github/actions/setup@394998fcabb3cd4f0e2eccc5f969579837ea0c41
+      - uses: astrale-os/config/.github/actions/setup@e89c7e84ed0b5bad2dcbf80f7a4547e30672155e
         with:
           node-version: 24
           frozen-lockfile: 'true'
@@ -99,7 +99,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-      - uses: astrale-os/config/.github/actions/setup@394998fcabb3cd4f0e2eccc5f969579837ea0c41
+      - uses: astrale-os/config/.github/actions/setup@e89c7e84ed0b5bad2dcbf80f7a4547e30672155e
         with:
           node-version: 26
           frozen-lockfile: 'true'
@@ -120,7 +120,7 @@ jobs:
     if: github.event_name == 'pull_request'
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-      - uses: astrale-os/config/.github/actions/setup@394998fcabb3cd4f0e2eccc5f969579837ea0c41
+      - uses: astrale-os/config/.github/actions/setup@e89c7e84ed0b5bad2dcbf80f7a4547e30672155e
         with:
           frozen-lockfile: 'true'
       - name: Validate PR title
