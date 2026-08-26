@@ -41,6 +41,29 @@ test('playground renders every public runtime owner and complete registry invent
     scrollWidth: document.documentElement.scrollWidth,
   }))
   expect(viewport.scrollWidth).toBeLessThanOrEqual(viewport.innerWidth)
+  await expect(page.getByText('@astrale-os/ui/toggle', { exact: true })).toHaveCount(0)
+  await expect(page.getByText('component/calendar', { exact: true })).toHaveCount(0)
+  const cardSpecimen = page.locator('[data-component="card"]')
+  const cardWidths = await cardSpecimen.evaluate((element) => ({
+    specimen: element.getBoundingClientRect().width,
+    card: element
+      .querySelector(':scope > [data-slot="card-content"] > [data-slot="card"]')
+      ?.getBoundingClientRect(),
+    outer: element.getBoundingClientRect(),
+    contentOverflow: getComputedStyle(element.querySelector(':scope > [data-slot="card-content"]')!)
+      .overflow,
+    specimenOverflow: getComputedStyle(element).overflow,
+    footerBorder: getComputedStyle(element.querySelector('[data-slot="card-footer"]')!)
+      .borderTopColor,
+    borderToken: getComputedStyle(element.closest('[data-slot="ui-playground"]')!)
+      .getPropertyValue('--ui-border')
+      .trim(),
+  }))
+  expect(cardWidths.card?.width).toBeGreaterThan(cardWidths.specimen * 0.8)
+  expect(cardWidths.outer.bottom - cardWidths.card!.bottom).toBeGreaterThan(1)
+  expect(cardWidths.contentOverflow).toBe('visible')
+  expect(cardWidths.specimenOverflow).toBe('visible')
+  expect(cardWidths.footerBorder).toBe(cardWidths.borderToken)
   const chartLine = page.locator('[data-component="chart"] path.recharts-line-curve').first()
   await expect(chartLine).toBeVisible()
   await expect
@@ -57,6 +80,13 @@ test('playground renders every public runtime owner and complete registry invent
 
   await openThemeCustomizer(page)
   await expect(page.locator('[data-slot="theme-studio"]')).toBeVisible()
+  await expect
+    .poll(() =>
+      page
+        .locator('[data-slot="drawer-overlay"]')
+        .evaluate((element) => getComputedStyle(element).backdropFilter),
+    )
+    .toBe('none')
   const importWidth = await page
     .getByLabel('Import theme document')
     .evaluate((element) => element.getBoundingClientRect().width)
@@ -75,6 +105,107 @@ test('playground renders every public runtime owner and complete registry invent
   expect(registryItems).toEqual(registry.items.map((item) => item.name).sort())
   expect(new Set(registryItems).size).toBe(registry.items.length)
   await expect(page.locator('[data-registry-item="theme-observatory"]')).toBeVisible()
+})
+
+test('catalog specimens own their interaction without navigating the playground', async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' })
+  await page.goto('/')
+
+  const domainPath = page.getByRole('textbox', { name: 'Domain path' })
+  await domainPath.fill('/:journal.astrale.ai')
+  await expect(domainPath).toHaveValue('/:journal.astrale.ai')
+  const graphPath = page.getByRole('textbox', { name: 'Graph path' })
+  await graphPath.fill('domains/journal')
+  await expect(graphPath).toHaveValue('domains/journal')
+
+  const select = page.locator('[data-component="select"]')
+  const selectTrigger = select.getByRole('combobox', { name: 'Environment' })
+  await selectTrigger.click()
+  await expect(page.locator('[data-slot="select-content"]')).toHaveAttribute(
+    'data-align-trigger',
+    'true',
+  )
+  await page.getByRole('option', { name: 'Staging' }).click()
+  await expect(select.getByRole('combobox', { name: 'Environment' })).toContainText('Staging')
+
+  const slider = page.getByRole('slider', { name: 'Retention' })
+  await expect(slider).toHaveAttribute('aria-valuenow', '62')
+  await slider.press('ArrowRight')
+  await expect(slider).toHaveAttribute('aria-valuenow', '63')
+
+  const otp = page.getByRole('textbox', { name: 'Verification code' })
+  await otp.fill('805214')
+  await expect(otp).toHaveValue('805214')
+
+  const spinner = page.locator('[data-component="spinner"] [data-slot="spinner"]')
+  await spinner.scrollIntoViewIfNeeded()
+  const spinnerMotion = await spinner.evaluate(async (element) => {
+    const before = getComputedStyle(element).transform
+    await new Promise((resolve) => setTimeout(resolve, 120))
+    const styles = getComputedStyle(element)
+    return {
+      before,
+      after: styles.transform,
+      duration: styles.animationDuration,
+      name: styles.animationName,
+      playState: styles.animationPlayState,
+    }
+  })
+  expect(spinnerMotion).toMatchObject({ duration: '1s', name: 'spin', playState: 'running' })
+  expect(spinnerMotion.after).not.toBe(spinnerMotion.before)
+
+  await page.getByRole('button', { name: 'Thursday, August 27th, 2026' }).click()
+  await expect(
+    page.getByRole('gridcell', { name: /Thursday, August 27th, 2026/u }),
+  ).toHaveAttribute('aria-selected', 'true')
+
+  const carousel = page.getByRole('region', { name: 'Component families' })
+  const previous = carousel.getByRole('button', { name: 'Previous slide' })
+  await expect(previous).toBeDisabled()
+  await carousel.getByRole('button', { name: 'Next slide' }).click()
+  await expect(previous).toBeEnabled()
+
+  const dropdown = page.locator('[data-component="dropdown-menu"]')
+  await dropdown.scrollIntoViewIfNeeded()
+  await dropdown.getByRole('button', { name: 'Complex menu' }).click()
+  await expect(page.getByRole('menuitem', { name: /Profile/u })).toContainText('⇧⌘P')
+  const statusBar = page.getByRole('menuitemcheckbox', { name: 'Status Bar' })
+  await expect(statusBar).toHaveAttribute('aria-checked', 'false')
+  await statusBar.click()
+  await expect(statusBar).toHaveAttribute('aria-checked', 'true')
+  await page.getByRole('menuitem', { name: 'Invite Users' }).press('ArrowRight')
+  await expect(page.getByRole('menuitem', { name: 'Email', exact: true })).toBeVisible()
+  await page.keyboard.press('Escape')
+  await page.keyboard.press('Escape')
+
+  const menubar = page.locator('[data-component="menubar"]')
+  await menubar.getByRole('menuitem', { name: 'File' }).click()
+  await expect(page.getByRole('menuitem', { name: /New Tab/u })).toContainText('⌘T')
+  await page.getByRole('menuitem', { name: 'Share' }).press('ArrowRight')
+  await expect(page.getByRole('menuitem', { name: 'Email link' })).toBeVisible()
+  await page.keyboard.press('Escape')
+  await page.keyboard.press('Escape')
+  const themeMenu = menubar.getByRole('menuitem', { name: 'Theme' })
+  await themeMenu.click()
+  const darkItem = page.getByRole('menuitemradio', { name: 'Dark' })
+  await darkItem.click()
+  await expect(themeMenu).toHaveAttribute('aria-expanded', 'true')
+  await expect(darkItem).toHaveAttribute('aria-checked', 'true')
+  await page.keyboard.press('Escape')
+  await expect(themeMenu).toHaveAttribute('aria-expanded', 'false')
+  await expect(darkItem).toBeHidden()
+
+  const pagination = page.locator('[data-component="pagination"]')
+  await pagination.scrollIntoViewIfNeeded()
+  const before = await page.evaluate(() => ({ href: location.href, scrollY }))
+  await pagination.getByRole('button', { name: '2' }).click()
+  await expect(pagination.getByRole('button', { name: '2' })).toHaveAttribute(
+    'aria-current',
+    'page',
+  )
+  await expect.poll(() => page.evaluate(() => ({ href: location.href, scrollY }))).toEqual(before)
 })
 
 test('theme editing, mode, history, saving, import, and export remain live', async ({
@@ -385,6 +516,32 @@ test('all starter modes have no serious automated accessibility violations', asy
   expect(accordionDurations).toEqual(
     accordionDurations.map(() => ({ animation: '0s', transition: '0s' })),
   )
+  const reducedSpinner = await page
+    .locator('[data-component="spinner"] [data-slot="spinner"]')
+    .evaluate(async (element) => {
+      const before = getComputedStyle(element).transform
+      await new Promise((resolve) => setTimeout(resolve, 120))
+      const style = getComputedStyle(element)
+      return {
+        after: style.transform,
+        before,
+        duration: style.animationDuration,
+        iterations: style.animationIterationCount,
+        name: style.animationName,
+        playState: style.animationPlayState,
+      }
+    })
+  expect(reducedSpinner).toMatchObject({
+    duration: '1s',
+    iterations: 'infinite',
+    name: 'spin',
+    playState: 'running',
+  })
+  expect(reducedSpinner.after).not.toBe(reducedSpinner.before)
+  await page.addStyleTag({
+    content:
+      '*, *::before, *::after { transition-delay: 0s !important; transition-duration: 0s !important; }',
+  })
   const starters = {
     Atelier: { slug: 'atelier', light: 'oklch(0.52 0.2 28)', dark: 'oklch(0.72 0.19 32)' },
     Observatory: {

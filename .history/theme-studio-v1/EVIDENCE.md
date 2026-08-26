@@ -1,5 +1,37 @@
 # Qualification evidence
 
+Interactive catalog repair on 2026-08-26, from UI `origin/main`
+`121a5b1cee581df3ef9ab4a19d1fe80849cbd2c1`:
+
+- Catalog inputs, Select, Slider, OTP, Calendar, Carousel, and Pagination now own live specimen
+  state. Pagination prevents its demonstration link from navigating and proves that both the URL
+  and scroll position remain unchanged while the active page changes.
+- Component cards no longer repeat their package or registry address below the component name. The
+  nested Card specimen uses the complete upstream anatomy and fills its available specimen width.
+  Its catalog frame preserves the upstream Card's top and bottom ring instead of clipping it or
+  inheriting descendant-footer spacing behavior from the nested example.
+  The opt-in reset now includes the exact compiled equivalent of shadcn's required global
+  `border-border outline-ring/50` rule, so structural borders resolve through theme tokens instead
+  of inheriting text color.
+- The Select specimen uses the official Base item-aligned composition. Dropdown Menu and Menubar
+  now exercise the official example anatomy across groups, labels, separators, shortcuts,
+  checkbox/radio state, destructive items, and keyboard-opened submenus without changing their
+  exact owned component sources.
+- The theme customizer remains an exact public Astrale Drawer composition. Playground-only CSS
+  disables its backdrop blur while retaining the upstream Drawer source byte-for-byte modulo the
+  already admitted import and formatting adaptations.
+- The browser suite proves the repaired behavior on desktop and mobile, including exact input
+  values, active selection/value state, Select item alignment, continuous upstream Spinner motion
+  under both motion preferences while other reduced-motion overrides remain intact, menu state/submenus,
+  carousel movement, pagination isolation, card sizing/tokenized borders, subtitle absence, and
+  computed `backdrop-filter: none`. Test-review passes also reproduced and removed timing races
+  from the settled-state accessibility and menu journeys.
+- Final `pnpm qualify` passed 32 contract tests, 11 runtime tests, 5 registry behavior tests, the
+  security policy over 399 tracked files, deterministic package and 64-item registry consumers,
+  the production playground build, and all 14 desktop/mobile browser journeys. The deterministic
+  package is 59,361 bytes with SHA-256
+  `939dad273dbb40273f5a54c4f46cbf1648fa0a76dff794cafafc12fbd86e9cc7`.
+
 Theme customizer drawer qualification on 2026-08-26:
 
 - The playground catalog now owns the full viewport while the theme customizer opens through the

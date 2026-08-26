@@ -95,10 +95,17 @@ import {
   DrawerTitle,
   DrawerTrigger,
   DropdownMenu,
+  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
   Empty,
   EmptyContent,
@@ -144,10 +151,19 @@ import {
   MessageScrollerProvider,
   MessageScrollerViewport,
   Menubar,
+  MenubarCheckboxItem,
   MenubarContent,
   MenubarGroup,
   MenubarItem,
+  MenubarLabel,
   MenubarMenu,
+  MenubarRadioGroup,
+  MenubarRadioItem,
+  MenubarSeparator,
+  MenubarShortcut,
+  MenubarSub,
+  MenubarSubContent,
+  MenubarSubTrigger,
   MenubarTrigger,
   NativeSelect,
   NativeSelectOption,
@@ -226,11 +242,16 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from './catalog-components'
-import { registryComponents } from './inventory'
 
-const registryComponentNames = new Set<string>(registryComponents)
-
-function Specimen({ name, children }: { name: string; children: React.ReactNode }) {
+function Specimen({
+  name,
+  children,
+  style,
+}: {
+  name: string
+  children: React.ReactNode
+  style?: React.CSSProperties
+}) {
   return (
     <Card
       id={`component-${name}`}
@@ -238,12 +259,10 @@ function Specimen({ name, children }: { name: string; children: React.ReactNode 
       size="sm"
       data-component={name}
       data-slot="component-specimen"
+      style={style}
     >
       <CardHeader>
         <CardTitle>{name}</CardTitle>
-        <CardDescription>
-          {registryComponentNames.has(name) ? `component/${name}` : `@astrale-os/ui/${name}`}
-        </CardDescription>
       </CardHeader>
       <CardContent className="specimen-content">{children}</CardContent>
     </Card>
@@ -266,6 +285,10 @@ const questionnaireItems = [
 function ActionInputSpecimens() {
   const [switchValue, setSwitchValue] = useState(true)
   const [radio, setRadio] = useState('safe')
+  const [calendarDate, setCalendarDate] = useState<Date | undefined>(new Date(2026, 7, 26))
+  const [sliderValue, setSliderValue] = useState([62])
+  const [selectValue, setSelectValue] = useState('production')
+  const [otp, setOtp] = useState('')
   return (
     <section id="actions-inputs" className="specimen-section" aria-labelledby="actions-title">
       <div className="section-heading">
@@ -303,14 +326,14 @@ function ActionInputSpecimens() {
           </ToggleGroup>
         </Specimen>
         <Specimen name="input">
-          <Input aria-label="Domain path" value="/:observatory.astrale.ai" readOnly />
+          <Input aria-label="Domain path" defaultValue="/:observatory.astrale.ai" />
         </Specimen>
         <Specimen name="input-group">
           <InputGroup>
             <InputGroupAddon>
               <InputGroupText>astrale://</InputGroupText>
             </InputGroupAddon>
-            <InputGroupInput aria-label="Graph path" value="domains/observatory" readOnly />
+            <InputGroupInput aria-label="Graph path" defaultValue="domains/observatory" />
             <InputGroupAddon align="inline-end">
               <InputGroupButton>Copy</InputGroupButton>
             </InputGroupAddon>
@@ -348,16 +371,25 @@ function ActionInputSpecimens() {
             <FieldLabel>Retention</FieldLabel>
             <Label>
               Retention
-              <Slider value={[62]} />
+              <Slider
+                value={sliderValue}
+                onValueChange={(value) => setSliderValue(value as number[])}
+              />
             </Label>
           </Field>
         </Specimen>
         <Specimen name="select">
-          <Select items={selectItems} value="production">
+          <Select
+            items={selectItems}
+            value={selectValue}
+            onValueChange={(value) => {
+              if (value) setSelectValue(value)
+            }}
+          >
             <SelectTrigger aria-label="Environment">
               <SelectValue />
             </SelectTrigger>
-            <SelectContent alignItemWithTrigger={false}>
+            <SelectContent>
               <SelectGroup>
                 {selectItems.map((item) => (
                   <SelectItem key={item.value} value={item.value}>
@@ -375,7 +407,7 @@ function ActionInputSpecimens() {
           </NativeSelect>
         </Specimen>
         <Specimen name="input-otp">
-          <InputOTP maxLength={6} value="421907" readOnly aria-label="Verification code">
+          <InputOTP maxLength={6} value={otp} onChange={setOtp} aria-label="Verification code">
             <InputOTPGroup>
               {[0, 1, 2].map((index) => (
                 <InputOTPSlot index={index} key={index} />
@@ -393,17 +425,17 @@ function ActionInputSpecimens() {
           <FieldGroup>
             <Field>
               <FieldLabel htmlFor="field-name">Domain label</FieldLabel>
-              <Input id="field-name" value="Observatory" readOnly />
+              <Input id="field-name" defaultValue="Observatory" />
               <FieldDescription>Visible to every authorized operator.</FieldDescription>
             </Field>
           </FieldGroup>
         </Specimen>
         <Specimen name="label">
           <Label htmlFor="plain-label">Explicit native relationship</Label>
-          <Input id="plain-label" value="kernel.Identity" readOnly />
+          <Input id="plain-label" defaultValue="kernel.Identity" />
         </Specimen>
         <Specimen name="calendar">
-          <Calendar mode="single" selected={new Date(2026, 7, 26)} />
+          <Calendar mode="single" selected={calendarDate} onSelect={setCalendarDate} />
         </Specimen>
         <Specimen name="combobox">
           <Combobox items={selectItems} defaultValue={selectItems[0]}>
@@ -485,8 +517,8 @@ function ContentFeedbackSpecimens() {
             <Badge variant="outline">Inherited</Badge>
           </div>
         </Specimen>
-        <Specimen name="card">
-          <Card size="sm">
+        <Specimen name="card" style={{ paddingBottom: 'var(--card-spacing)' }}>
+          <Card size="sm" className="w-full">
             <CardHeader>
               <CardTitle>Domain revision</CardTitle>
               <CardDescription>sha256:62d081…</CardDescription>
@@ -494,6 +526,7 @@ function ContentFeedbackSpecimens() {
                 <Badge>Current</Badge>
               </CardAction>
             </CardHeader>
+            <CardContent>Ready for deployment.</CardContent>
             <CardFooter>Committed 12 seconds ago</CardFooter>
           </Card>
         </Specimen>
@@ -675,6 +708,8 @@ function ContentFeedbackSpecimens() {
 }
 
 function NavigationLayoutSpecimens() {
+  const [page, setPage] = useState(1)
+
   const [open, setOpen] = useState(false)
   return (
     <section id="navigation-layout" className="specimen-section" aria-labelledby="navigation-title">
@@ -741,12 +776,28 @@ function NavigationLayoutSpecimens() {
           <Pagination>
             <PaginationContent>
               <PaginationItem>
-                <PaginationLink href="#" isActive>
+                <PaginationLink
+                  href="#"
+                  isActive={page === 1}
+                  onClick={(event) => {
+                    event.preventDefault()
+                    setPage(1)
+                  }}
+                >
                   1
                 </PaginationLink>
               </PaginationItem>
               <PaginationItem>
-                <PaginationLink href="#">2</PaginationLink>
+                <PaginationLink
+                  href="#"
+                  isActive={page === 2}
+                  onClick={(event) => {
+                    event.preventDefault()
+                    setPage(2)
+                  }}
+                >
+                  2
+                </PaginationLink>
               </PaginationItem>
               <PaginationItem>
                 <PaginationEllipsis />
@@ -804,6 +855,12 @@ function NavigationLayoutSpecimens() {
 }
 
 function MenuOverlaySpecimens() {
+  const [showSidebar, setShowSidebar] = useState(true)
+  const [showStatusBar, setShowStatusBar] = useState(false)
+  const [showBookmarks, setShowBookmarks] = useState(true)
+  const [showUrls, setShowUrls] = useState(false)
+  const [menubarTheme, setMenubarTheme] = useState('system')
+
   return (
     <section id="menus-overlays" className="specimen-section" aria-labelledby="overlay-title">
       <div className="section-heading">
@@ -892,13 +949,60 @@ function MenuOverlaySpecimens() {
         <Specimen name="dropdown-menu">
           <DropdownMenu>
             <DropdownMenuTrigger render={<Button variant="outline" />}>
-              More actions
+              Complex menu
             </DropdownMenuTrigger>
-            <DropdownMenuContent>
+            <DropdownMenuContent className="w-56">
               <DropdownMenuGroup>
-                <DropdownMenuLabel>Domain</DropdownMenuLabel>
-                <DropdownMenuItem>Open</DropdownMenuItem>
-                <DropdownMenuItem>Inspect</DropdownMenuItem>
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuItem>
+                  Profile
+                  <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  Billing
+                  <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  Settings
+                  <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+                </DropdownMenuItem>
+              </DropdownMenuGroup>
+              <DropdownMenuSeparator />
+              <DropdownMenuGroup>
+                <DropdownMenuLabel>View</DropdownMenuLabel>
+                <DropdownMenuCheckboxItem checked={showSidebar} onCheckedChange={setShowSidebar}>
+                  Sidebar
+                </DropdownMenuCheckboxItem>
+                <DropdownMenuCheckboxItem
+                  checked={showStatusBar}
+                  onCheckedChange={setShowStatusBar}
+                >
+                  Status Bar
+                </DropdownMenuCheckboxItem>
+              </DropdownMenuGroup>
+              <DropdownMenuSeparator />
+              <DropdownMenuGroup>
+                <DropdownMenuSub>
+                  <DropdownMenuSubTrigger>Invite Users</DropdownMenuSubTrigger>
+                  <DropdownMenuPortal>
+                    <DropdownMenuSubContent>
+                      <DropdownMenuGroup>
+                        <DropdownMenuItem>Email</DropdownMenuItem>
+                        <DropdownMenuItem>Message</DropdownMenuItem>
+                      </DropdownMenuGroup>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem>More...</DropdownMenuItem>
+                    </DropdownMenuSubContent>
+                  </DropdownMenuPortal>
+                </DropdownMenuSub>
+              </DropdownMenuGroup>
+              <DropdownMenuSeparator />
+              <DropdownMenuGroup>
+                <DropdownMenuItem>Support</DropdownMenuItem>
+                <DropdownMenuItem variant="destructive">
+                  Sign Out
+                  <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+                </DropdownMenuItem>
               </DropdownMenuGroup>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -915,12 +1019,56 @@ function MenuOverlaySpecimens() {
         <Specimen name="menubar">
           <Menubar>
             <MenubarMenu>
-              <MenubarTrigger>View</MenubarTrigger>
+              <MenubarTrigger>File</MenubarTrigger>
               <MenubarContent>
+                <MenubarItem>
+                  New Tab <MenubarShortcut>⌘T</MenubarShortcut>
+                </MenubarItem>
+                <MenubarItem>
+                  New Window <MenubarShortcut>⌘N</MenubarShortcut>
+                </MenubarItem>
+                <MenubarItem disabled>New Incognito Window</MenubarItem>
+                <MenubarSeparator />
+                <MenubarSub>
+                  <MenubarSubTrigger>Share</MenubarSubTrigger>
+                  <MenubarSubContent>
+                    <MenubarItem>Email link</MenubarItem>
+                    <MenubarItem>Messages</MenubarItem>
+                    <MenubarItem>Notes</MenubarItem>
+                  </MenubarSubContent>
+                </MenubarSub>
+                <MenubarSeparator />
+                <MenubarItem>
+                  Print... <MenubarShortcut>⌘P</MenubarShortcut>
+                </MenubarItem>
+              </MenubarContent>
+            </MenubarMenu>
+            <MenubarMenu>
+              <MenubarTrigger>View</MenubarTrigger>
+              <MenubarContent className="w-44">
                 <MenubarGroup>
-                  <MenubarItem>Refresh</MenubarItem>
-                  <MenubarItem>Open journal</MenubarItem>
+                  <MenubarLabel inset>Appearance</MenubarLabel>
+                  <MenubarCheckboxItem
+                    inset
+                    checked={showBookmarks}
+                    onCheckedChange={setShowBookmarks}
+                  >
+                    Bookmarks
+                  </MenubarCheckboxItem>
+                  <MenubarCheckboxItem inset checked={showUrls} onCheckedChange={setShowUrls}>
+                    Full URLs
+                  </MenubarCheckboxItem>
                 </MenubarGroup>
+              </MenubarContent>
+            </MenubarMenu>
+            <MenubarMenu>
+              <MenubarTrigger>Theme</MenubarTrigger>
+              <MenubarContent>
+                <MenubarRadioGroup value={menubarTheme} onValueChange={setMenubarTheme}>
+                  <MenubarRadioItem value="light">Light</MenubarRadioItem>
+                  <MenubarRadioItem value="dark">Dark</MenubarRadioItem>
+                  <MenubarRadioItem value="system">System</MenubarRadioItem>
+                </MenubarRadioGroup>
               </MenubarContent>
             </MenubarMenu>
           </Menubar>

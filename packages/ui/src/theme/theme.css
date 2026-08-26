@@ -111,7 +111,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  :where([data-slot]) {
+  :where([data-slot]:not([data-slot='spinner'])) {
     animation-duration: 1ms !important;
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;

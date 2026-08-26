@@ -182,10 +182,22 @@ test('the exact shadcn support layer maps orientation shorthand to Base UI state
 
 test('theme has an opt-in reset and all public presets own the same character vocabulary', async () => {
   const theme = await readFile(`${packageRoot}/src/theme/theme.css`, 'utf8')
+  const reset = await readFile(`${packageRoot}/src/theme/reset.css`, 'utf8')
   assert.doesNotMatch(theme, /tailwindcss\/preflight/u)
   assert.doesNotMatch(theme, /@import\s+["']\.\/reset/u)
+  const resetSupportStart = reset.indexOf('\n* {\n')
+  assert.notEqual(resetSupportStart, -1, 'missing universal reset support selector')
+  const resetSupport = cssBlock(reset.slice(resetSupportStart + 1), '*')
+    .replace(/\/\*[\s\S]*?\*\//gu, '')
+    .split(';')
+    .map((declaration) => declaration.trim())
+    .filter(Boolean)
+  assert.deepEqual(resetSupport, [
+    'border-color: var(--ui-border)',
+    'outline-color: color-mix(in oklab, var(--ui-ring) 50%, transparent)',
+  ])
   const reducedMotion = cssBlock(theme, '@media (prefers-reduced-motion: reduce)')
-  const slotMotion = cssBlock(reducedMotion, ':where([data-slot])')
+  const slotMotion = cssBlock(reducedMotion, ":where([data-slot]:not([data-slot='spinner']))")
   assert.deepEqual(
     [...slotMotion.matchAll(/(?:animation|transition)-duration:\s*[^;]+/gu)].map(
       (match) => match[0],

@@ -136,7 +136,7 @@ textarea {
 [data-slot='component-specimen'] {
   min-width: 0;
   max-width: 100%;
-  overflow: hidden;
+  overflow: visible;
   box-shadow: none;
 }
 
@@ -145,7 +145,7 @@ textarea {
   min-width: 0;
   max-width: 100%;
   min-height: 5rem;
-  overflow: hidden;
+  overflow: visible;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
@@ -258,6 +258,11 @@ textarea {
   --drawer-content-width: min(27rem, 100vw);
   width: min(27rem, 100vw);
   box-shadow: var(--ui-shadow-panel);
+}
+
+body:has(.theme-drawer-popup) [data-slot='drawer-overlay'] {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
 .theme-drawer-header {

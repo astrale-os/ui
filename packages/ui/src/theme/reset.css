@@ -6,6 +6,11 @@
   box-sizing: border-box;
 }
 
+* {
+  border-color: var(--ui-border);
+  outline-color: color-mix(in oklab, var(--ui-ring) 50%, transparent);
+}
+
 html {
   text-size-adjust: 100%;
 }
