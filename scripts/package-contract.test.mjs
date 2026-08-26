@@ -183,6 +183,8 @@ test('the exact shadcn support layer maps orientation shorthand to Base UI state
 test('theme has an opt-in reset and all public presets own the same character vocabulary', async () => {
   const theme = await readFile(`${packageRoot}/src/theme/theme.css`, 'utf8')
   const reset = await readFile(`${packageRoot}/src/theme/reset.css`, 'utf8')
+  assert.match(theme, /@import 'tailwindcss\/utilities\.css' source\(none\);/u)
+  assert.match(theme, /@source '\.\.\/\*\*\/\*\.\{ts,tsx\}';/u)
   assert.doesNotMatch(theme, /tailwindcss\/preflight/u)
   assert.doesNotMatch(theme, /@import\s+["']\.\/reset/u)
   const resetSupportStart = reset.indexOf('\n* {\n')

@@ -2,13 +2,20 @@
   "extends": "../tsconfig.base.json",
   "compilerOptions": {
     "jsx": "react-jsx",
-    "noEmit": true
+    "noEmit": true,
+    "types": ["vitest/globals", "@testing-library/jest-dom"]
   },
   "include": [
     "src",
     "vite.config.ts",
     "playwright.config.ts",
+    "playwright.production.config.ts",
     "tests",
+    "production-tests",
+    "../packages/ui/previews/**/*.ts",
+    "../packages/ui/previews/**/*.tsx",
+    "../registry/**/*.fixture.ts",
+    "../registry/**/*.preview.tsx",
     "../tooling/theme-document/**/*.ts"
   ]
 }

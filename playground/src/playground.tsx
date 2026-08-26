@@ -11,8 +11,7 @@ import {
 import { Toaster } from '@astrale-os/ui/toast'
 import { useState } from 'react'
 
-import { ComponentSpecimens } from './catalog/component-specimens.js'
-import { RegistrySpecimens } from './catalog/registry-specimens.js'
+import { Catalog } from './catalog/catalog.js'
 import { ThemeStudio } from './theme/studio.js'
 import { useThemeWorkspace } from './theme/workspace.js'
 
@@ -30,8 +29,7 @@ export function Playground() {
       >
         <div className="playground-layout">
           <main id="playground-main" className="playground-main">
-            <ComponentSpecimens />
-            <RegistrySpecimens />
+            <Catalog />
           </main>
         </div>
 

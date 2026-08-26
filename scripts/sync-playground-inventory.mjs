@@ -36,7 +36,18 @@ const registryComponents = provenance.components
   .map((component) => component.address.slice('@shadcn/'.length))
   .toSorted()
 
+const componentSources = Object.fromEntries(
+  provenance.components
+    .filter((component) =>
+      ['owned-runtime', 'owned-registry-component'].includes(component.disposition),
+    )
+    .map((component) => {
+      const name = component.address.slice(component.address.indexOf('/') + 1)
+      return [`component/${name}`, component.address]
+    }),
+)
+
 await writeFile(
   'playground/src/catalog/inventory.ts',
-  `export const componentGroups = ${JSON.stringify(output, null, 2)} as const\n\nexport const registryComponents = ${JSON.stringify(registryComponents, null, 2)} as const\n\nexport const runtimeComponentNames = componentGroups.flatMap((group) => group.components)\nexport const componentNames = [...runtimeComponentNames, ...registryComponents]\n`,
+  `export const componentGroups = ${JSON.stringify(output, null, 2)} as const\n\nexport const registryComponents = ${JSON.stringify(registryComponents, null, 2)} as const\n\nexport const componentSources = ${JSON.stringify(componentSources, null, 2)} as const\n\nexport const runtimeComponentNames = componentGroups.flatMap((group) => group.components)\nexport const componentNames = [...runtimeComponentNames, ...registryComponents]\n`,
 )

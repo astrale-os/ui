@@ -8,7 +8,9 @@
   "include": [
     "components/**/*.ts",
     "components/**/*.tsx",
+    "patterns/**/*.ts",
     "patterns/**/*.tsx",
+    "blocks/**/*.ts",
     "blocks/**/*.tsx",
     "tests/**/*.tsx"
   ]
