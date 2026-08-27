@@ -146,7 +146,7 @@ try {
     'pnpm',
     [
       'add',
-      `file:${tarball}`,
+      `@astrale-os/ui@file:${tarball}`,
       'react@19.2.8',
       'react-dom@19.2.8',
       'vite@8.1.1',
