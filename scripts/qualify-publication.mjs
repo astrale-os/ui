@@ -161,13 +161,13 @@ function run(file, args, cwd, userConfig) {
   return result.stdout.trim()
 }
 
-async function observe(label, operation) {
+export async function observe(label, operation) {
   const attempts = Number(process.env.PUBLICATION_VERIFY_ATTEMPTS ?? 60)
   const delayMilliseconds = Number(process.env.PUBLICATION_VERIFY_DELAY_MS ?? 5_000)
   let failure
   for (let attempt = 1; attempt <= attempts; attempt += 1) {
     try {
-      return operation()
+      return await operation()
     } catch (error) {
       failure = error
       if (attempt < attempts) await delay(delayMilliseconds)
@@ -299,16 +299,20 @@ export async function main(options = {}) {
 
     let provenance
     for (const manager of consumerManagers) {
-      const observation = await qualifyConsumer(
-        manager,
-        path.join(temporary, `${manager}-consumer`),
-        specifier,
-        userConfig,
-        expected,
-        path.join(temporary, 'pnpm-store'),
-        runCommand,
-        admissions,
-      )
+      const consumerDirectory = path.join(temporary, `${manager}-consumer`)
+      const observation = await observe(`${manager} consumer install`, async () => {
+        await rm(consumerDirectory, { recursive: true, force: true })
+        return qualifyConsumer(
+          manager,
+          consumerDirectory,
+          specifier,
+          userConfig,
+          expected,
+          path.join(temporary, 'pnpm-store'),
+          runCommand,
+          admissions,
+        )
+      })
       if (observation) provenance = observation
     }
     assert.ok(provenance, 'public npm provenance was not qualified')

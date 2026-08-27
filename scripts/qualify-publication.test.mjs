@@ -15,6 +15,7 @@ import {
   consumerInstallCommand,
   consumerManagers,
   main,
+  observe,
   parseDistTags,
   releaseTag,
 } from './qualify-publication.mjs'
@@ -221,6 +222,28 @@ test('parses exact npm dist-tag observations', () => {
     latest: '0.2.1',
   })
   assert.throws(() => parseDistTags('not-a-tag-line'), /invalid npm dist-tag line/u)
+})
+
+test('retries asynchronous registry observations', async () => {
+  const previousAttempts = process.env.PUBLICATION_VERIFY_ATTEMPTS
+  const previousDelay = process.env.PUBLICATION_VERIFY_DELAY_MS
+  process.env.PUBLICATION_VERIFY_ATTEMPTS = '2'
+  process.env.PUBLICATION_VERIFY_DELAY_MS = '0'
+  let attempts = 0
+  try {
+    const result = await observe('propagated package', async () => {
+      attempts += 1
+      if (attempts === 1) throw new Error('package endpoint is stale')
+      return 'visible'
+    })
+    assert.equal(result, 'visible')
+    assert.equal(attempts, 2)
+  } finally {
+    if (previousAttempts === undefined) delete process.env.PUBLICATION_VERIFY_ATTEMPTS
+    else process.env.PUBLICATION_VERIFY_ATTEMPTS = previousAttempts
+    if (previousDelay === undefined) delete process.env.PUBLICATION_VERIFY_DELAY_MS
+    else process.env.PUBLICATION_VERIFY_DELAY_MS = previousDelay
+  }
 })
 
 test('orchestrates exact metadata, tag, both consumers, provenance, and retained report', async () => {
