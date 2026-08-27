@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0-beta.11](https://github.com/astrale-os/ui/compare/v0.3.0-beta.10...v0.3.0-beta.11) (2026-08-27)
+
+
+### Bug Fixes
+
+* **ui:** qualify public playground before release ([#43](https://github.com/astrale-os/ui/issues/43)) ([85dfb36](https://github.com/astrale-os/ui/commit/85dfb36e71472512e0b005135b4aac6d4f0b004f))
+
 ## [0.3.0-beta.10](https://github.com/astrale-os/ui/compare/v0.3.0-beta.9...v0.3.0-beta.10) (2026-08-27)
 
 
