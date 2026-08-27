@@ -18,6 +18,12 @@ const crosswalk = JSON.parse(
 const tailwindProvenance = JSON.parse(
   await readFile('tooling/upstream/providers/tailwindcss/4.3.3/provenance.json', 'utf8'),
 )
+const reactAriaProvenance = JSON.parse(
+  await readFile(
+    'tooling/upstream/providers/react-aria/1.20.0/tailwind-color-picker/provenance.json',
+    'utf8',
+  ),
+)
 const owners = new Map(
   provenance.components
     .filter((component) => component.disposition === 'owned-runtime')
@@ -164,5 +170,66 @@ test('the upstream Tailwind support layer is vendored verbatim', async () => {
     const implementation = await readFile(style.implementation, 'utf8')
     assert.equal(digest(source), style.sourceDigest)
     assert.equal(implementation, source)
+  }
+})
+
+test('the React Aria color picker differs only by owned imports and formatting', async () => {
+  const temporary = await mkdtemp(path.join(tmpdir(), 'astrale-color-picker-fidelity-'))
+  const importOwners = new Map([
+    ['color-picker.js', 'ColorPicker'],
+    ['color-swatch.js', 'ColorSwatch'],
+    ['color-area.js', 'ColorArea'],
+    ['color-slider.js', 'ColorSlider'],
+    ['color-field.js', 'ColorField'],
+    ['color-thumb.js', 'ColorThumb'],
+    ['dialog.js', 'Dialog'],
+    ['popover.js', 'Popover'],
+    ['field.js', 'Field'],
+  ])
+  try {
+    for (const [filename, expectedDigest] of Object.entries(reactAriaProvenance.files)) {
+      const source = await readFile(
+        `tooling/upstream/providers/react-aria/1.20.0/tailwind-color-picker/${filename}`,
+        'utf8',
+      )
+      assert.equal(digest(source), expectedDigest)
+      let implementation = await readFile(`registry/components/color-picker/${filename}`, 'utf8')
+      for (const [target, owner] of importOwners) {
+        implementation = implementation.replaceAll(
+          `'./${target}'`,
+          `'@/registry/react-aria/ui/${owner}'`,
+        )
+      }
+      implementation = implementation.replaceAll(
+        "'./react-aria-utils.js'",
+        "'@/registry/react-aria/lib/react-aria-utils'",
+      )
+      if (
+        source.includes("import React from 'react';") &&
+        !implementation.includes("from 'react'")
+      ) {
+        implementation = implementation.replace(
+          "'use client'\n",
+          "'use client'\nimport React from 'react'\n",
+        )
+      }
+      await mkdir(path.join(temporary, 'source'), { recursive: true })
+      await mkdir(path.join(temporary, 'implementation'), { recursive: true })
+      await writeFile(path.join(temporary, 'source', filename), source)
+      await writeFile(path.join(temporary, 'implementation', filename), implementation)
+    }
+    const formatted = spawnSync('pnpm', ['exec', 'oxfmt', '--write', temporary], {
+      encoding: 'utf8',
+    })
+    assert.equal(formatted.status, 0, formatted.stderr)
+    for (const filename of Object.keys(reactAriaProvenance.files)) {
+      assert.equal(
+        await readFile(path.join(temporary, 'implementation', filename), 'utf8'),
+        await readFile(path.join(temporary, 'source', filename), 'utf8'),
+        `${filename} contains a non-import upstream change`,
+      )
+    }
+  } finally {
+    await rm(temporary, { recursive: true })
   }
 })

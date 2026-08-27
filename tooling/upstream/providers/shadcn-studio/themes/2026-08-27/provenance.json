@@ -1,0 +1,60 @@
+{
+  "provider": "@ss-themes",
+  "resolvedAt": "2026-08-27",
+  "presets": [
+    {
+      "name": "art-deco",
+      "upstreamAddress": "@ss-themes/art-deco",
+      "sourceUrl": "https://shadcnstudio.com/r/themes/art-deco.json",
+      "sourceDigest": "sha256:f03ca0e202d389c247deaaac7e76bb2cc10bb02703005472ed9ccaaffbadf3ac"
+    },
+    {
+      "name": "claude",
+      "upstreamAddress": "@ss-themes/claude",
+      "sourceUrl": "https://shadcnstudio.com/r/themes/claude.json",
+      "sourceDigest": "sha256:376a79c1da9a26f61d29258e30f813fdda1ed1888d4ecff4fef47c3f6213aba6"
+    },
+    {
+      "name": "clean-slate",
+      "upstreamAddress": "@ss-themes/clean-slate",
+      "sourceUrl": "https://shadcnstudio.com/r/themes/clean-slate.json",
+      "sourceDigest": "sha256:870bbfef22474bb0d6bf8d26b49282bb54ff75640964fd8c90397862fb98ed49"
+    },
+    {
+      "name": "ghibli-studio",
+      "upstreamAddress": "@ss-themes/ghibli-studio",
+      "sourceUrl": "https://shadcnstudio.com/r/themes/ghibli-studio.json",
+      "sourceDigest": "sha256:573ebe68ba420398f591ac8f0e937200f0457d0b041070c2a97fd564c93d7aa1"
+    },
+    {
+      "name": "marshmallow",
+      "upstreamAddress": "@ss-themes/marshmallow",
+      "sourceUrl": "https://shadcnstudio.com/r/themes/marshmallow.json",
+      "sourceDigest": "sha256:5a907fe474f9c2897363729d549ed7ce376f9005d9a0df1f86fede5d8cdcaa41"
+    },
+    {
+      "name": "marvel",
+      "upstreamAddress": "@ss-themes/marvel",
+      "sourceUrl": "https://shadcnstudio.com/r/themes/marvel.json",
+      "sourceDigest": "sha256:a411460fb6b549bbf5c690f1686e90398af176265b68ba00364078821df80692"
+    },
+    {
+      "name": "modern-minimal",
+      "upstreamAddress": "@ss-themes/modern-minimal",
+      "sourceUrl": "https://shadcnstudio.com/r/themes/modern-minimal.json",
+      "sourceDigest": "sha256:d50b9ed3a2bb788f0b4445fe9cfd8a5010d43e17a0b30db284f542d73080177c"
+    },
+    {
+      "name": "neo-brutalism",
+      "upstreamAddress": "@ss-themes/neo-brutalism",
+      "sourceUrl": "https://shadcnstudio.com/r/themes/neo-brutalism.json",
+      "sourceDigest": "sha256:6acb25cf28e70951b35ce0dcc0de11569f3f6c5037007def412dddd348c4d4aa"
+    },
+    {
+      "name": "spotify",
+      "upstreamAddress": "@ss-themes/spotify",
+      "sourceUrl": "https://shadcnstudio.com/r/themes/spotify.json",
+      "sourceDigest": "sha256:868988e25097cefbe7645b573affe2aaf4263439c27b5a24926a9d81744f44e0"
+    }
+  ]
+}

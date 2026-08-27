@@ -1,0 +1,102 @@
+/* Generated from clean-slate.astrale-theme.json. Consumer-owned after installation. */
+:root,
+[data-ui-preset='clean-slate'],
+[data-ui-theme='clean-slate'] {
+  color-scheme: light;
+  --ui-background: oklch(0.98 0.00 247.86);
+  --ui-foreground: oklch(0.28 0.04 260.03);
+  --ui-card: oklch(1.00 0 0);
+  --ui-card-foreground: oklch(0.28 0.04 260.03);
+  --ui-popover: oklch(1.00 0 0);
+  --ui-popover-foreground: oklch(0.28 0.04 260.03);
+  --ui-primary: oklch(0.59 0.20 277.12);
+  --ui-primary-foreground: oklch(1.00 0 0);
+  --ui-secondary: oklch(0.93 0.01 264.53);
+  --ui-secondary-foreground: oklch(0.37 0.03 259.73);
+  --ui-muted: oklch(0.97 0.00 264.54);
+  --ui-muted-foreground: oklch(0.55 0.02 264.36);
+  --ui-accent: oklch(0.93 0.03 272.79);
+  --ui-accent-foreground: oklch(0.37 0.03 259.73);
+  --ui-destructive: oklch(0.64 0.21 25.33);
+  --ui-destructive-foreground: oklch(1.00 0 0);
+  --ui-border: oklch(0.87 0.01 258.34);
+  --ui-input: oklch(0.87 0.01 258.34);
+  --ui-ring: oklch(0.59 0.20 277.12);
+  --ui-chart-1: oklch(0.59 0.20 277.12);
+  --ui-chart-2: oklch(0.51 0.23 276.97);
+  --ui-chart-3: oklch(0.46 0.21 277.02);
+  --ui-chart-4: oklch(0.40 0.18 277.37);
+  --ui-chart-5: oklch(0.36 0.14 278.70);
+  --ui-sidebar: oklch(0.97 0.00 264.54);
+  --ui-sidebar-foreground: oklch(0.28 0.04 260.03);
+  --ui-sidebar-primary: oklch(0.59 0.20 277.12);
+  --ui-sidebar-primary-foreground: oklch(1.00 0 0);
+  --ui-sidebar-accent: oklch(0.93 0.03 272.79);
+  --ui-sidebar-accent-foreground: oklch(0.37 0.03 259.73);
+  --ui-sidebar-border: oklch(0.87 0.01 258.34);
+  --ui-sidebar-ring: oklch(0.59 0.20 277.12);
+  --ui-radius: 0.625rem;
+  --ui-radius-panel: 0.625rem;
+  --ui-control-height: 2.25rem;
+  --ui-control-height-sm: 2rem;
+  --ui-control-height-lg: 2.5rem;
+  --ui-font-body: 'Merriweather', ui-serif, serif;
+  --ui-font-heading: 'Inter', ui-sans-serif, sans-serif;
+  --ui-font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --ui-shadow-control: 0px 4px 8px -1px oklch(0.00 0 0 / 0.05);
+  --ui-shadow-panel:
+    0px 4px 8px -1px oklch(0.00 0 0 / 0.10), 0px 4px 6px -2px oklch(0.00 0 0 / 0.10);
+  --ui-motion-fast: 120ms;
+  --ui-motion-standard: 180ms;
+}
+
+:root.dark,
+[data-ui-preset='clean-slate'].dark,
+[data-ui-theme='clean-slate'].dark {
+  color-scheme: dark;
+  --ui-background: oklch(0.21 0.04 265.75);
+  --ui-foreground: oklch(0.93 0.01 255.51);
+  --ui-card: oklch(0.28 0.04 260.03);
+  --ui-card-foreground: oklch(0.93 0.01 255.51);
+  --ui-popover: oklch(0.28 0.04 260.03);
+  --ui-popover-foreground: oklch(0.93 0.01 255.51);
+  --ui-primary: oklch(0.68 0.16 276.93);
+  --ui-primary-foreground: oklch(0.21 0.04 265.75);
+  --ui-secondary: oklch(0.34 0.03 260.91);
+  --ui-secondary-foreground: oklch(0.87 0.01 258.34);
+  --ui-muted: oklch(0.28 0.04 260.03);
+  --ui-muted-foreground: oklch(0.71 0.02 261.32);
+  --ui-accent: oklch(0.37 0.03 259.73);
+  --ui-accent-foreground: oklch(0.87 0.01 258.34);
+  --ui-destructive: oklch(0.64 0.21 25.33);
+  --ui-destructive-foreground: oklch(0.21 0.04 265.75);
+  --ui-border: oklch(0.45 0.03 256.80);
+  --ui-input: oklch(0.45 0.03 256.80);
+  --ui-ring: oklch(0.68 0.16 276.93);
+  --ui-chart-1: oklch(0.68 0.16 276.93);
+  --ui-chart-2: oklch(0.59 0.20 277.12);
+  --ui-chart-3: oklch(0.51 0.23 276.97);
+  --ui-chart-4: oklch(0.46 0.21 277.02);
+  --ui-chart-5: oklch(0.40 0.18 277.37);
+  --ui-sidebar: oklch(0.28 0.04 260.03);
+  --ui-sidebar-foreground: oklch(0.93 0.01 255.51);
+  --ui-sidebar-primary: oklch(0.68 0.16 276.93);
+  --ui-sidebar-primary-foreground: oklch(0.21 0.04 265.75);
+  --ui-sidebar-accent: oklch(0.37 0.03 259.73);
+  --ui-sidebar-accent-foreground: oklch(0.87 0.01 258.34);
+  --ui-sidebar-border: oklch(0.45 0.03 256.80);
+  --ui-sidebar-ring: oklch(0.68 0.16 276.93);
+  --ui-radius: 0.625rem;
+  --ui-radius-panel: 0.625rem;
+  --ui-control-height: 2.25rem;
+  --ui-control-height-sm: 2rem;
+  --ui-control-height-lg: 2.5rem;
+  --ui-font-body: 'Merriweather', ui-serif, serif;
+  --ui-font-heading: 'Inter', ui-sans-serif, sans-serif;
+  --ui-font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --ui-shadow-control: 0px 4px 8px -1px oklch(0.00 0 0 / 0.05);
+  --ui-shadow-panel:
+    0px 4px 8px -1px oklch(0.00 0 0 / 0.10), 0px 4px 6px -2px oklch(0.00 0 0 / 0.10);
+  --ui-motion-fast: 120ms;
+  --ui-motion-standard: 180ms;
+}

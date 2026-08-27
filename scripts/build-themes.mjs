@@ -5,6 +5,7 @@ import path from 'node:path'
 import {
   parseThemeDocumentText,
   renderThemeCss,
+  themeFontRegistryDependencies,
   themeCanonicalAddress,
   themeCssTarget,
 } from '../tooling/theme-document/index.ts'
@@ -34,6 +35,7 @@ for (const file of sources) {
     title: `Theme · ${theme.label}`,
     description: theme.description,
     dependencies: ['@astrale-os/ui@^0.3.0-beta.0'],
+    registryDependencies: themeFontRegistryDependencies(theme),
     files: [
       {
         path: cssFile,

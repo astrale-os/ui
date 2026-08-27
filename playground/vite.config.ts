@@ -15,7 +15,11 @@ const catalogModule = normalizePath(
 const previewRoots = [
   fileURLToPath(new URL('../packages/ui/previews', import.meta.url)),
   fileURLToPath(new URL('../registry', import.meta.url)),
+  fileURLToPath(new URL('../.internal/shadcn-studio/registry', import.meta.url)),
 ]
+const studioStageRoot = fileURLToPath(
+  new URL('../.internal/shadcn-studio/stage/src', import.meta.url),
+)
 
 function catalogPreviewFileWatcher(): Plugin {
   return {
@@ -32,6 +36,31 @@ function catalogPreviewFileWatcher(): Plugin {
       }
       server.watcher.on('add', refreshCatalog)
       server.watcher.on('unlink', refreshCatalog)
+    },
+  }
+}
+
+function studioItemSupportResolver(): Plugin {
+  return {
+    name: 'astrale-studio-item-support-resolver',
+    enforce: 'pre',
+    resolveId(source, importer) {
+      if (!source.startsWith('@/')) return
+      const match = importer
+        ? /^(.*\/\.internal\/shadcn-studio\/registry\/(?:components|patterns|blocks)\/[^/]+\/[^/]+)\//u.exec(
+            normalizePath(importer),
+          )
+        : undefined
+      const candidates = [
+        ...(match ? [`${match[1]}/support/${source.slice(2)}`] : []),
+        `${studioStageRoot}/${source.slice(2)}`,
+      ]
+      for (const candidate of candidates) {
+        for (const extension of ['', '.tsx', '.ts', '.jsx', '.js']) {
+          if (existsSync(`${candidate}${extension}`)) return `${candidate}${extension}`
+        }
+      }
+      return undefined
     },
   }
 }
@@ -55,9 +84,18 @@ const publicSourceAliases = Object.entries(uiPackage.exports).flatMap(([entrypoi
   ]
 })
 
-export default defineConfig({
-  plugins: [tailwindcss(), react(), catalogPreviewFileWatcher()],
+export default defineConfig(({ mode }) => ({
+  plugins: [studioItemSupportResolver(), tailwindcss(), react(), catalogPreviewFileWatcher()],
+  // Next's client-only Link/Image entrypoints inspect this compile-time value.
+  // The licensed registry source remains unchanged; this is playground runtime plumbing.
+  define: {
+    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV ?? 'development'),
+    __ASTRALE_STUDIO_CATALOG__: JSON.stringify(
+      mode !== 'public' && process.env.ASTRALE_STUDIO_CATALOG !== '0',
+    ),
+  },
   resolve: {
+    dedupe: ['@base-ui/react', 'cmdk', 'react', 'react-dom'],
     alias: [
       {
         find: /^@astrale-os\/ui\/theme\.css$/u,
@@ -85,4 +123,4 @@ export default defineConfig({
     forwardConsole: { unhandledErrors: false, logLevels: ['error', 'warn'] },
   },
   build: { manifest: true, sourcemap: false },
-})
+}))

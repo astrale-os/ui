@@ -4,17 +4,32 @@ import {
   AlertTitle,
   Badge,
   Button,
-  Input,
+  Kbd,
+  ScrollArea,
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
 } from '@astrale-os/ui'
-import { ArrowLeftIcon } from 'lucide-react'
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import { ArrowLeftIcon, ListTreeIcon, SearchIcon } from 'lucide-react'
+import { lazy, Suspense, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 
+import { componentNames } from './inventory.js'
 import { PreviewCanvas } from './preview.js'
 import { previewDescriptors, type PreviewDescriptor } from './previews.js'
+
+const CommandPaletteControlled = lazy(() =>
+  import('../../../registry/patterns/command-palette/controlled.js').then((module) => ({
+    default: module.CommandPaletteControlled,
+  })),
+)
 
 function currentSearch() {
   return new URLSearchParams(window.location.search)
@@ -37,14 +52,8 @@ const catalogKindLabels: Record<CatalogKind, string> = {
   pattern: 'Patterns',
   block: 'Blocks',
 }
-const componentGroupOrder = new Map(
-  [
-    'Actions & inputs',
-    'Content & feedback',
-    'Menus & overlays',
-    'Navigation & layout',
-    'Registry components',
-  ].map((group, index) => [group, index]),
+const componentFamilyOrder = new Map<string, number>(
+  componentNames.map((family, index) => [family, index]),
 )
 
 function isCatalogKind(value: string | null): value is CatalogKind {
@@ -69,22 +78,38 @@ function withoutSmoothScroll(scroll: () => void) {
 function groupDescriptors(descriptors: PreviewDescriptor[]) {
   const groups = new Map<string, PreviewDescriptor[]>()
   for (const descriptor of descriptors) {
-    const group = groups.get(descriptor.group) ?? []
+    const key = `${descriptor.kind}/${descriptor.family}`
+    const group = groups.get(key) ?? []
     group.push(descriptor)
-    groups.set(descriptor.group, group)
+    groups.set(key, group)
   }
-  return [...groups].sort(([left], [right]) => {
-    const leftOrder = componentGroupOrder.get(left)
-    const rightOrder = componentGroupOrder.get(right)
-    if (leftOrder !== undefined || rightOrder !== undefined) {
-      return (leftOrder ?? Number.MAX_SAFE_INTEGER) - (rightOrder ?? Number.MAX_SAFE_INTEGER)
-    }
-    return left.localeCompare(right)
-  })
+  for (const items of groups.values()) {
+    items.sort(
+      (left, right) =>
+        left.address.split('/').length - right.address.split('/').length ||
+        left.id.localeCompare(right.id),
+    )
+  }
+  return [...groups]
+    .sort(([, leftItems], [, rightItems]) => {
+      const left = leftItems[0]!
+      const right = rightItems[0]!
+      if (left.kind === 'component' && right.kind === 'component') {
+        const leftOrder = componentFamilyOrder.get(left.family)
+        const rightOrder = componentFamilyOrder.get(right.family)
+        if (leftOrder !== undefined || rightOrder !== undefined) {
+          return (leftOrder ?? Number.MAX_SAFE_INTEGER) - (rightOrder ?? Number.MAX_SAFE_INTEGER)
+        }
+      }
+      return left.group.localeCompare(right.group)
+    })
+    .map(([, items]) => [items[0]!.group, items] as const)
 }
 
 export function Catalog() {
-  const [query, setQuery] = useState('')
+  const [commandMounted, setCommandMounted] = useState(false)
+  const [commandOpen, setCommandOpen] = useState(false)
+  const [commandQuery, setCommandQuery] = useState('')
   const [search, setSearch] = useState(currentSearch)
   const pendingRestoration = useRef<CatalogHistoryState | undefined>(undefined)
 
@@ -119,6 +144,33 @@ export function Catalog() {
       if (scrollFrame !== undefined) window.cancelAnimationFrame(scrollFrame)
     }
   }, [])
+
+  useEffect(() => {
+    const toggleCommand = (event: KeyboardEvent) => {
+      if (
+        event.defaultPrevented ||
+        event.repeat ||
+        event.key.toLowerCase() !== 'k' ||
+        (!event.metaKey && !event.ctrlKey)
+      )
+        return
+      if (
+        !commandOpen &&
+        document.querySelector(
+          '[data-slot="dialog-content"][data-open], [data-slot="drawer-popup"][data-open], [data-slot="sheet-content"][data-open]',
+        )
+      )
+        return
+      event.preventDefault()
+      if (commandOpen) setCommandOpen(false)
+      else {
+        setCommandMounted(true)
+        setCommandOpen(true)
+      }
+    }
+    document.addEventListener('keydown', toggleCommand)
+    return () => document.removeEventListener('keydown', toggleCommand)
+  }, [commandOpen])
 
   useLayoutEffect(() => {
     const restoration = pendingRestoration.current
@@ -219,30 +271,35 @@ export function Catalog() {
     selectedDescriptor?.kind ??
     (isCatalogKind(familyKind) ? familyKind : undefined) ??
     (isCatalogKind(requestedKind) ? requestedKind : 'component')
-  const sceneCounts = useMemo(() => {
-    const counts = new Map<string, number>()
-    for (const descriptor of previewDescriptors) {
-      counts.set(descriptor.address, (counts.get(descriptor.address) ?? 0) + 1)
-    }
-    return counts
-  }, [])
+  const outlineGroups = useMemo(
+    () =>
+      groupDescriptors(
+        previewDescriptors.filter((item) => item.kind === activeKind && item.canonical),
+      ),
+    [activeKind],
+  )
+  const commandGroups = useMemo(
+    () =>
+      catalogKinds.map((kind) => ({
+        label: catalogKindLabels[kind],
+        actions: groupDescriptors(
+          previewDescriptors.filter((item) => item.kind === kind && item.canonical),
+        ).map(([group, items]) => ({
+          id: `${items[0]!.kind}/${items[0]!.family}`,
+          label: group,
+          keywords: items.flatMap((item) => [item.address, item.title, item.scene]),
+        })),
+      })),
+    [],
+  )
   const descriptors = useMemo(() => {
-    const needle = query.trim().toLowerCase()
     let selected = previewDescriptors
     if (selectedPreview) selected = selected.filter((item) => item.id === selectedPreview)
     else if (selectedFamily) {
       selected = selected.filter((item) => `${item.kind}/${item.family}` === selectedFamily)
-    } else {
-      selected = selected.filter((item) => item.kind === activeKind)
-      if (!needle) selected = selected.filter((item) => item.canonical)
-    }
-    if (!needle) return selected
-    return selected.filter((item) =>
-      [item.address, item.scene, item.title, item.group].some((value) =>
-        value.toLowerCase().includes(needle),
-      ),
-    )
-  }, [activeKind, query, selectedFamily, selectedPreview])
+    } else selected = selected.filter((item) => item.kind === activeKind && item.canonical)
+    return selected
+  }, [activeKind, selectedFamily, selectedPreview])
   const groups = groupDescriptors(descriptors)
   const isolated = Boolean(selectedPreview)
 
@@ -251,7 +308,6 @@ export function Catalog() {
       value={activeKind}
       onValueChange={(value) => {
         if (!isCatalogKind(value) || value === activeKind) return
-        setQuery('')
         navigate(kindUrl(value), 'catalog-controls', `catalog-tab-${activeKind}`)
       }}
       data-slot="component-catalog"
@@ -265,6 +321,42 @@ export function Catalog() {
             Back
           </Button>
         ) : null}
+        <Sheet>
+          <SheetTrigger
+            render={<Button id="catalog-outline-trigger" variant="outline" size="sm" />}
+          >
+            <ListTreeIcon data-icon="inline-start" />
+            Outline
+          </SheetTrigger>
+          <SheetContent side="left">
+            <SheetHeader>
+              <SheetTitle>{catalogKindLabels[activeKind]}</SheetTitle>
+              <SheetDescription>Jump to a catalog family.</SheetDescription>
+            </SheetHeader>
+            <ScrollArea className="catalog-outline-scroll">
+              <nav
+                className="catalog-outline-list"
+                aria-label={`${catalogKindLabels[activeKind]} outline`}
+              >
+                {outlineGroups.map(([group, items]) => {
+                  const family = `${items[0]!.kind}/${items[0]!.family}`
+                  const familyUrl = `${window.location.pathname}?family=${encodeURIComponent(family)}`
+                  const sectionId = `catalog-group-${family.replaceAll('/', '-')}`
+                  return (
+                    <SheetClose
+                      key={family}
+                      render={<Button variant="ghost" className="w-full justify-between" />}
+                      onClick={() => navigate(familyUrl, sectionId, 'catalog-outline-trigger')}
+                    >
+                      {group}
+                      <Badge variant="outline">{items.length}</Badge>
+                    </SheetClose>
+                  )
+                })}
+              </nav>
+            </ScrollArea>
+          </SheetContent>
+        </Sheet>
         <TabsList aria-label="Catalog sections">
           {catalogKinds.map((kind) => (
             <TabsTrigger key={kind} id={`catalog-tab-${kind}`} value={kind}>
@@ -272,20 +364,58 @@ export function Catalog() {
             </TabsTrigger>
           ))}
         </TabsList>
-        <Input
+        <Button
+          id="catalog-command-trigger"
           className="catalog-search"
-          aria-label="Search catalog"
-          placeholder={`Search ${catalogKindLabels[activeKind].toLowerCase()}…`}
-          value={query}
-          onChange={(event) => setQuery(event.currentTarget.value)}
-        />
+          variant="outline"
+          aria-haspopup="dialog"
+          aria-expanded={commandOpen}
+          aria-keyshortcuts="Meta+K Control+K"
+          onClick={() => {
+            setCommandMounted(true)
+            setCommandOpen(true)
+          }}
+        >
+          <SearchIcon data-icon="inline-start" />
+          Search components
+          <Kbd className="ml-auto">⌘K</Kbd>
+        </Button>
       </div>
+
+      {commandMounted ? (
+        <Suspense fallback={null}>
+          <CommandPaletteControlled
+            className="w-full max-w-lg!"
+            open={commandOpen}
+            query={commandQuery}
+            groups={commandGroups}
+            title="Search catalog"
+            description="Search components, patterns, and blocks."
+            placeholder="Search components, patterns, and blocks…"
+            emptyLabel="No catalog family found."
+            onOpenChange={(open) => {
+              setCommandOpen(open)
+              if (!open) setCommandQuery('')
+            }}
+            onQueryChange={setCommandQuery}
+            onAction={(family) => {
+              setCommandOpen(false)
+              setCommandQuery('')
+              navigate(
+                `${window.location.pathname}?family=${encodeURIComponent(family)}`,
+                `catalog-group-${family.replaceAll('/', '-')}`,
+                'catalog-command-trigger',
+              )
+            }}
+          />
+        </Suspense>
+      ) : null}
 
       <TabsContent value={activeKind} className="catalog-panel">
         {groups.length === 0 ? (
           <Alert>
             <AlertTitle>No previews found</AlertTitle>
-            <AlertDescription>Check the catalog address or search.</AlertDescription>
+            <AlertDescription>Check the catalog address.</AlertDescription>
           </Alert>
         ) : null}
 
@@ -323,16 +453,7 @@ export function Catalog() {
               </div>
               <div className={isolated ? 'preview-grid preview-grid--isolated' : 'preview-grid'}>
                 {items.map((descriptor) => (
-                  <PreviewCanvas
-                    key={descriptor.id}
-                    descriptor={descriptor}
-                    eager={isolated}
-                    sceneCount={
-                      !isolated && !selectedFamily ? sceneCounts.get(descriptor.address) : 1
-                    }
-                    showOpen={!isolated}
-                    onNavigate={navigate}
-                  />
+                  <PreviewCanvas key={descriptor.id} descriptor={descriptor} eager={isolated} />
                 ))}
               </div>
             </section>

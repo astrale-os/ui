@@ -1,4 +1,4 @@
-export const THEME_DOCUMENT_VERSION = 1 as const
+export const THEME_DOCUMENT_VERSION = 2 as const
 export const THEME_DOCUMENT_MAX_BYTES = 131_072
 
 export const themeColorTokens = [
@@ -26,6 +26,14 @@ export const themeColorTokens = [
   'chart3',
   'chart4',
   'chart5',
+  'sidebar',
+  'sidebarForeground',
+  'sidebarPrimary',
+  'sidebarPrimaryForeground',
+  'sidebarAccent',
+  'sidebarAccentForeground',
+  'sidebarBorder',
+  'sidebarRing',
 ] as const
 
 export type ThemeColorToken = (typeof themeColorTokens)[number]
@@ -44,6 +52,7 @@ export interface ThemeDocument {
   readonly typography: {
     readonly body: string
     readonly heading: string
+    readonly mono: string
   }
   readonly geometry: {
     readonly radius: string
@@ -121,6 +130,79 @@ const cssNames: Record<ThemeColorToken, string> = {
   chart3: 'chart-3',
   chart4: 'chart-4',
   chart5: 'chart-5',
+  sidebar: 'sidebar',
+  sidebarForeground: 'sidebar-foreground',
+  sidebarPrimary: 'sidebar-primary',
+  sidebarPrimaryForeground: 'sidebar-primary-foreground',
+  sidebarAccent: 'sidebar-accent',
+  sidebarAccentForeground: 'sidebar-accent-foreground',
+  sidebarBorder: 'sidebar-border',
+  sidebarRing: 'sidebar-ring',
+}
+
+const fontRegistryByFamily = new Map([
+  ['Delius Swash Caps', 'font-delius-swash-caps'],
+  ['DM Sans', 'font-dm-sans'],
+  ['Gabriela', 'font-gabriela'],
+  ['Geist', 'font-geist'],
+  ['Geist Mono', 'font-geist-mono'],
+  ['Inter', 'font-inter'],
+  ['JetBrains Mono', 'font-jetbrains-mono'],
+  ['Lato', 'font-lato'],
+  ['Merriweather', 'font-merriweather'],
+  ['Nunito', 'font-nunito'],
+  ['Outfit', 'font-outfit'],
+  ['PT Serif', 'font-pt-serif'],
+  ['Roboto Mono', 'font-roboto-mono'],
+  ['Source Serif 4', 'font-source-serif-4'],
+  ['Space Mono', 'font-space-mono'],
+])
+
+export function themeFontRegistryDependencies(theme: ThemeDocument): string[] {
+  return [
+    ...new Set(
+      [theme.typography.heading, theme.typography.body, theme.typography.mono].flatMap((stack) => {
+        const family = /^'([^']+)'/u.exec(stack)?.[1]
+        const item = family ? fontRegistryByFamily.get(family) : undefined
+        return item ? [`https://shadcnstudio.com/r/fonts/${item}.json`] : []
+      }),
+    ),
+  ]
+}
+
+function migrateThemeDocument(input: unknown): unknown {
+  if (!input || typeof input !== 'object' || Array.isArray(input)) return input
+  const candidate = input as Record<string, unknown>
+  if (candidate.version !== 1) return input
+  const appearance = candidate.appearance as
+    | { light?: Record<string, unknown>; dark?: Record<string, unknown> }
+    | undefined
+  const typography = candidate.typography as Record<string, unknown> | undefined
+  if (!appearance?.light || !appearance.dark || !typography) return input
+
+  const migrateMode = (mode: Record<string, unknown>) => ({
+    ...mode,
+    sidebar: mode.card,
+    sidebarForeground: mode.foreground,
+    sidebarPrimary: mode.primary,
+    sidebarPrimaryForeground: mode.primaryForeground,
+    sidebarAccent: mode.accent,
+    sidebarAccentForeground: mode.accentForeground,
+    sidebarBorder: mode.border,
+    sidebarRing: mode.ring,
+  })
+  return {
+    ...candidate,
+    version: THEME_DOCUMENT_VERSION,
+    appearance: {
+      light: migrateMode(appearance.light),
+      dark: migrateMode(appearance.dark),
+    },
+    typography: {
+      ...typography,
+      mono: "'SFMono-Regular', 'Cascadia Code', ui-monospace, monospace",
+    },
+  }
 }
 
 function record(value: unknown, label: string): Record<string, unknown> {
@@ -239,7 +321,7 @@ function mode(value: unknown, label: string): ThemeMode {
 }
 
 export function parseThemeDocument(input: unknown): ThemeDocument {
-  const candidate = record(input, 'theme')
+  const candidate = record(migrateThemeDocument(input), 'theme')
   exactKeys(
     candidate,
     [
@@ -266,7 +348,7 @@ export function parseThemeDocument(input: unknown): ThemeDocument {
   const appearance = record(candidate.appearance, 'theme.appearance')
   exactKeys(appearance, ['light', 'dark'], 'theme.appearance')
   const typography = record(candidate.typography, 'theme.typography')
-  exactKeys(typography, ['body', 'heading'], 'theme.typography')
+  exactKeys(typography, ['body', 'heading', 'mono'], 'theme.typography')
   const geometry = record(candidate.geometry, 'theme.geometry')
   exactKeys(geometry, ['radius', 'panelRadius'], 'theme.geometry')
   const density = record(candidate.density, 'theme.density')
@@ -289,6 +371,7 @@ export function parseThemeDocument(input: unknown): ThemeDocument {
     typography: {
       body: text(typography.body, 'theme.typography.body', fontPattern),
       heading: text(typography.heading, 'theme.typography.heading', fontPattern),
+      mono: text(typography.mono, 'theme.typography.mono', fontPattern),
     },
     geometry: {
       radius: text(geometry.radius, 'theme.geometry.radius', lengthPattern, 1, 24),
@@ -353,8 +436,11 @@ function variables(theme: ThemeDocument, selectedMode: 'light' | 'dark'): string
     `  --ui-control-height-lg: ${theme.density.controlLarge};`,
     `  --ui-font-body: ${theme.typography.body};`,
     `  --ui-font-heading: ${theme.typography.heading};`,
+    `  --ui-font-mono: ${theme.typography.mono};`,
     `  --ui-shadow-control: ${theme.effects.controlShadow};`,
-    `  --ui-shadow-panel: ${theme.effects.panelShadow};`,
+    theme.effects.panelShadow.includes(',')
+      ? `  --ui-shadow-panel:\n    ${theme.effects.panelShadow};`
+      : `  --ui-shadow-panel: ${theme.effects.panelShadow};`,
     `  --ui-motion-fast: ${theme.motion.fast};`,
     `  --ui-motion-standard: ${theme.motion.standard};`,
   ]

@@ -21,7 +21,7 @@
     "$schema": {
       "const": "https://raw.githubusercontent.com/astrale-os/ui/main/schemas/theme.schema.json"
     },
-    "version": { "const": 1 },
+    "version": { "const": 2 },
     "name": {
       "type": "string",
       "minLength": 1,
@@ -51,10 +51,11 @@
     "typography": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["body", "heading"],
+      "required": ["body", "heading", "mono"],
       "properties": {
         "body": { "$ref": "#/$defs/font" },
-        "heading": { "$ref": "#/$defs/font" }
+        "heading": { "$ref": "#/$defs/font" },
+        "mono": { "$ref": "#/$defs/font" }
       }
     },
     "geometry": {
@@ -129,7 +130,15 @@
         "chart2",
         "chart3",
         "chart4",
-        "chart5"
+        "chart5",
+        "sidebar",
+        "sidebarForeground",
+        "sidebarPrimary",
+        "sidebarPrimaryForeground",
+        "sidebarAccent",
+        "sidebarAccentForeground",
+        "sidebarBorder",
+        "sidebarRing"
       ],
       "properties": {
         "background": { "$ref": "#/$defs/color" },
@@ -155,7 +164,15 @@
         "chart2": { "$ref": "#/$defs/color" },
         "chart3": { "$ref": "#/$defs/color" },
         "chart4": { "$ref": "#/$defs/color" },
-        "chart5": { "$ref": "#/$defs/color" }
+        "chart5": { "$ref": "#/$defs/color" },
+        "sidebar": { "$ref": "#/$defs/color" },
+        "sidebarForeground": { "$ref": "#/$defs/color" },
+        "sidebarPrimary": { "$ref": "#/$defs/color" },
+        "sidebarPrimaryForeground": { "$ref": "#/$defs/color" },
+        "sidebarAccent": { "$ref": "#/$defs/color" },
+        "sidebarAccentForeground": { "$ref": "#/$defs/color" },
+        "sidebarBorder": { "$ref": "#/$defs/color" },
+        "sidebarRing": { "$ref": "#/$defs/color" }
       }
     },
     "font": {

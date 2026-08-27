@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/astrale-os/ui/main/schemas/theme.schema.json",
-  "version": 1,
+  "version": 2,
   "name": "observatory",
   "label": "Observatory",
   "description": "Quiet mineral surfaces, deep orbital blue, and measured editorial typography.",
@@ -24,12 +24,20 @@
       "destructiveForeground": "oklch(0.985 0 0)",
       "border": "oklch(0.87 0.018 82)",
       "input": "oklch(0.88 0.016 82)",
-      "ring": "oklch(0.57 0.15 251)",
+      "ring": "oklch(0.705 0.015 286.067)",
       "chart1": "oklch(0.58 0.18 251)",
       "chart2": "oklch(0.68 0.16 165)",
       "chart3": "oklch(0.73 0.17 78)",
       "chart4": "oklch(0.63 0.19 28)",
-      "chart5": "oklch(0.58 0.15 315)"
+      "chart5": "oklch(0.58 0.15 315)",
+      "sidebar": "oklch(0.998 0.002 82)",
+      "sidebarForeground": "oklch(0.19 0.02 255)",
+      "sidebarPrimary": "oklch(0.36 0.14 251)",
+      "sidebarPrimaryForeground": "oklch(0.985 0.006 82)",
+      "sidebarAccent": "oklch(0.9 0.07 78)",
+      "sidebarAccentForeground": "oklch(0.27 0.04 255)",
+      "sidebarBorder": "oklch(0.87 0.018 82)",
+      "sidebarRing": "oklch(0.705 0.015 286.067)"
     },
     "dark": {
       "background": "oklch(0.15 0.02 255)",
@@ -50,23 +58,42 @@
       "destructiveForeground": "oklch(0.98 0 0)",
       "border": "oklch(0.3 0.025 255)",
       "input": "oklch(0.29 0.025 255)",
-      "ring": "oklch(0.7 0.13 250)",
+      "ring": "oklch(0.552 0.016 285.938)",
       "chart1": "oklch(0.7 0.16 250)",
       "chart2": "oklch(0.72 0.14 165)",
       "chart3": "oklch(0.76 0.16 78)",
       "chart4": "oklch(0.72 0.17 28)",
-      "chart5": "oklch(0.7 0.14 315)"
+      "chart5": "oklch(0.7 0.14 315)",
+      "sidebar": "oklch(0.19 0.024 255)",
+      "sidebarForeground": "oklch(0.95 0.008 82)",
+      "sidebarPrimary": "oklch(0.76 0.13 250)",
+      "sidebarPrimaryForeground": "oklch(0.15 0.02 255)",
+      "sidebarAccent": "oklch(0.38 0.08 78)",
+      "sidebarAccentForeground": "oklch(0.96 0.008 82)",
+      "sidebarBorder": "oklch(0.3 0.025 255)",
+      "sidebarRing": "oklch(0.552 0.016 285.938)"
     }
   },
   "typography": {
     "body": "'Avenir Next', 'Segoe UI Variable', ui-sans-serif, sans-serif",
-    "heading": "'Iowan Old Style', 'Palatino Linotype', ui-serif, serif"
+    "heading": "'Iowan Old Style', 'Palatino Linotype', ui-serif, serif",
+    "mono": "'SFMono-Regular', 'Cascadia Code', ui-monospace, monospace"
   },
-  "geometry": { "radius": "0.7rem", "panelRadius": "1rem" },
-  "density": { "control": "2.25rem", "controlSmall": "2rem", "controlLarge": "2.5rem" },
+  "geometry": {
+    "radius": "0.7rem",
+    "panelRadius": "1rem"
+  },
+  "density": {
+    "control": "2.25rem",
+    "controlSmall": "2rem",
+    "controlLarge": "2.5rem"
+  },
   "effects": {
     "controlShadow": "0 1px 2px oklch(0.19 0.02 255 / 0.08)",
     "panelShadow": "0 18px 55px oklch(0.19 0.02 255 / 0.1)"
   },
-  "motion": { "fast": "120ms", "standard": "180ms" }
+  "motion": {
+    "fast": "120ms",
+    "standard": "180ms"
+  }
 }

@@ -1,4 +1,7 @@
 @import '@astrale-os/ui/theme.css';
 
+@plugin 'tailwindcss-react-aria-components';
+
 @source './**/*.{ts,tsx}';
 @source '../../registry/**/*.{ts,tsx}';
+@source '../../.internal/shadcn-studio/registry/**/*.{ts,tsx}';

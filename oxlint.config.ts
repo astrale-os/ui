@@ -34,6 +34,7 @@ export default defineConfig({
       ],
       rules: {
         eqeqeq: 'off',
+        'prefer-const': 'off',
       },
     },
     {

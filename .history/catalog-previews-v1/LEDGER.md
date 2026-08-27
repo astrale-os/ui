@@ -20,6 +20,9 @@ future `catalog:check` report owns item-level closure.
 | CP-D10 | locked | Registry and package manifests remain product authorities                                      | Prevents a second catalog inventory from drifting               |
 | CP-D11 | locked | No Storybook, router, iframe-by-default, preview DSL, or prop inference                        | Keeps V1 small and repository-native                            |
 | CP-D12 | locked | External source changes follow exact provider provenance; previews never redesign source       | Preserves current intake and regression philosophy              |
+| CP-D13 | locked | Public defaults and sourced variants share one exact component family without duplicate addresses | Makes the complete component surface visible without creating a second inventory |
+| CP-D14 | locked | One hidden left outline replaces repeated per-card isolation actions | Preserves full catalog width while making every family directly reachable |
+| CP-D15 | locked | Catalog command search lazily composes the owned controlled command-palette pattern and canonical preview descriptors | Keeps Cmd/Ctrl+K navigation homoiconic, prevents a private or duplicate search inventory, and keeps cmdk/Dialog out of the initial graph |
 
 ## Current baseline
 
@@ -80,6 +83,9 @@ This table tracks review-sized groups only. Item-level truth must come from `cat
 | CP-G06 | closed | Preview source/example provenance is not a first-class admission rule  | upstream/catalog    | Generated pinned source map and exact runtime admission       |
 | CP-G07 | closed | Browser tests are hand-authored against the current centralized layout | playground/tests    | Path-derived 112-scene desktop/mobile matrix                  |
 | CP-G08 | closed | One continuous overview makes components, patterns, and blocks hard to navigate | playground/catalog | Three derived URL-backed kind tabs plus complete browser regression |
+| CP-G09 | closed | Runtime examples appeared as five small groups while 737 Studio variants were appended far below | playground/catalog | Exact family grouping places the public default first and every distinct variant after it; closed-set uniqueness passes |
+| CP-G10 | closed | Repeated eye actions added noise after every sourced variant became visible | playground/catalog | Eye actions removed; View family plus the hidden outline own ordinary navigation; direct isolation URLs remain qualified |
+| CP-G11 | closed | Large catalogs required keyboard-first cross-kind discovery without restoring a permanent navigation rail | playground/catalog | Owned CommandDialog and Kbd composition searches the exact canonical family set through Cmd/Ctrl+K; click, keyboard selection, Escape, and Back restoration pass on desktop/mobile |
 
 ## Defects encountered during implementation
 
@@ -112,6 +118,10 @@ Append exact observations. `planned` commands or queued CI runs are not evidence
 | 2026-08-26 | `e656410` | HMR and screenshots | `agent-browser` against port 4321 | Existing-file edit and add/remove scene update proven; `artifacts/playground/catalog-carousel-family{,-mobile}.png` retained |
 | 2026-08-26 | `e656410` | adversarial review | Tests-reviewer critic and gap-finder, followed by two critic reruns | Final critic: no remaining critical or high test-quality issue |
 | 2026-08-26 | `dc647b6` | catalog navigation follow-up | `pnpm qualify`; agent-browser; three-round tests-reviewer audit | Green: 32 browser passes, two deliberate viewport-neutral skips, one production-lazy pass, unchanged 59,352-byte/116-file package and registry digests; final critic found no issue |
+| 2026-08-27 | local internal tree | component family integration | browser census plus public and internal closed-set Playwright assertions | 800 component previews visible; every public and Studio address occurs once under exactly one family on desktop and mobile |
+| 2026-08-27 | local playground | outline navigation follow-up | agent-browser screenshot; desktop/mobile outline, family, native Back, focus, and lazy-geometry journeys | Hidden by default; exact family/count census; no per-card eye action; family jumps and restoration green |
+| 2026-08-27 | local playground | command navigation follow-up | exact local Studio `command-10` composition; generated canonical family groups; focused desktop/mobile Playwright and agent-browser inspection | Search trigger uses owned Button/SearchIcon/Kbd, Cmd/Ctrl+K opens the owned controlled pattern, exact family count has no duplicates, and selection/Escape/Back focus journeys pass |
+| 2026-08-27 | local playground | command navigation closure | `pnpm check`; focused desktop/mobile Playwright; public production build/chunk verifier; production lazy Playwright; three-round tests-reviewer audit | 40/40 contracts and 2/2 unit tests green; shortcut repeat/ownership/modal/focus and zero-preview-import search paths green; exact Calendar selection loads; command owner is a lazy chunk; initial graph 539,606/600,000 bytes; production lazy proof green; final critic found no issue |
 
 ## Completion rule
 

@@ -31,7 +31,8 @@ test('portable schema and TypeScript admission own the same complete color vocab
   const mode = schema.$defs.mode
   assert.deepEqual(mode.required.toSorted(), [...themeColorTokens].toSorted())
   assert.deepEqual(Object.keys(mode.properties).toSorted(), [...themeColorTokens].toSorted())
-  assert.equal(schema.properties.version.const, 1)
+  assert.equal(schema.properties.version.const, 2)
+  assert.deepEqual(schema.properties.typography.required.toSorted(), ['body', 'heading', 'mono'])
   assert.equal(schema.additionalProperties, false)
   assert.equal(schema.properties.name.pattern, themeDocumentPatternSources.name)
   assert.equal(schema.properties.label.pattern, themeDocumentPatternSources.label)
@@ -47,7 +48,20 @@ test('every starter round-trips and projects to exact consumer-owned light and d
   const documents = await themes()
   assert.deepEqual(
     documents.map(({ theme }) => theme.name),
-    ['atelier', 'observatory', 'terminal'],
+    [
+      'art-deco',
+      'atelier',
+      'claude',
+      'clean-slate',
+      'ghibli-studio',
+      'marshmallow',
+      'marvel',
+      'modern-minimal',
+      'neo-brutalism',
+      'observatory',
+      'spotify',
+      'terminal',
+    ],
   )
   for (const { file, theme } of documents) {
     assert.deepEqual(parseThemeDocumentText(serializeThemeDocument(theme)), theme)
@@ -55,15 +69,47 @@ test('every starter round-trips and projects to exact consumer-owned light and d
     assert.equal(css, await readFile(`${directory}/${theme.name}.css`, 'utf8'), file)
     assert.match(css, new RegExp(`\\[data-ui-theme='${theme.name}'\\]`))
     assert.match(css, new RegExp(`\\[data-ui-theme='${theme.name}'\\]\\.dark`))
-    for (const token of ['--ui-background', '--ui-primary', '--ui-chart-5']) {
+    for (const token of [
+      '--ui-background',
+      '--ui-primary',
+      '--ui-chart-5',
+      '--ui-sidebar-accent',
+      '--ui-font-mono',
+    ]) {
       assert.equal(css.match(new RegExp(`${token}:`, 'gu'))?.length, 2)
     }
   }
 })
 
+test('version 1 saved themes migrate deterministically to the complete version 2 surface', async () => {
+  const current = (await themes()).find(({ theme }) => theme.name === 'observatory').theme
+  const legacy = structuredClone(current)
+  legacy.version = 1
+  delete legacy.typography.mono
+  for (const mode of ['light', 'dark']) {
+    for (const token of [
+      'sidebar',
+      'sidebarForeground',
+      'sidebarPrimary',
+      'sidebarPrimaryForeground',
+      'sidebarAccent',
+      'sidebarAccentForeground',
+      'sidebarBorder',
+      'sidebarRing',
+    ]) {
+      delete legacy.appearance[mode][token]
+    }
+  }
+  const migrated = parseThemeDocument(legacy)
+  assert.equal(migrated.version, 2)
+  assert.equal(migrated.appearance.light.sidebar, current.appearance.light.card)
+  assert.equal(migrated.appearance.dark.sidebarAccent, current.appearance.dark.accent)
+  assert.match(migrated.typography.mono, /ui-monospace/u)
+})
+
 test('admission rejects unknown fields and CSS injection before projection', async () => {
   const documents = await themes()
-  assert.equal(documents.length, 3)
+  assert.equal(documents.length, 12)
   const source = documents[0].theme
   for (const candidate of [
     { ...source, surprise: true },

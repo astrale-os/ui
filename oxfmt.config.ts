@@ -18,6 +18,7 @@ export default defineConfig({
     '**/*.gen.ts',
     '**/*.gen.tsx',
     'registry/public/**',
+    'registry/themes/*.css',
     'registry/themes/registry.json',
     'playground/test-results/**',
     'playground/playwright-report/**',

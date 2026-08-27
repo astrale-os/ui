@@ -32,6 +32,14 @@
   --ui-chart-3: oklch(0.72 0.16 75);
   --ui-chart-4: oklch(0.63 0.18 25);
   --ui-chart-5: oklch(0.57 0.15 315);
+  --ui-sidebar: var(--ui-card);
+  --ui-sidebar-foreground: var(--ui-foreground);
+  --ui-sidebar-primary: var(--ui-primary);
+  --ui-sidebar-primary-foreground: var(--ui-primary-foreground);
+  --ui-sidebar-accent: var(--ui-accent);
+  --ui-sidebar-accent-foreground: var(--ui-accent-foreground);
+  --ui-sidebar-border: var(--ui-border);
+  --ui-sidebar-ring: var(--ui-ring);
   --ui-radius: 0.7rem;
   --ui-radius-panel: 1rem;
   --ui-control-height: 2.25rem;
@@ -39,6 +47,7 @@
   --ui-control-height-lg: 2.5rem;
   --ui-font-body: 'Avenir Next', 'Segoe UI Variable', ui-sans-serif, sans-serif;
   --ui-font-heading: 'Iowan Old Style', 'Palatino Linotype', ui-serif, serif;
+  --ui-font-mono: 'SFMono-Regular', 'Cascadia Code', ui-monospace, monospace;
   --ui-shadow-control: 0 1px 2px oklch(0.19 0.016 255 / 0.08);
   --ui-shadow-panel: 0 18px 55px oklch(0.19 0.016 255 / 0.1);
   --ui-motion-fast: 120ms;
@@ -70,12 +79,21 @@
   --color-chart-3: var(--ui-chart-3);
   --color-chart-4: var(--ui-chart-4);
   --color-chart-5: var(--ui-chart-5);
+  --color-sidebar: var(--ui-sidebar);
+  --color-sidebar-foreground: var(--ui-sidebar-foreground);
+  --color-sidebar-primary: var(--ui-sidebar-primary);
+  --color-sidebar-primary-foreground: var(--ui-sidebar-primary-foreground);
+  --color-sidebar-accent: var(--ui-sidebar-accent);
+  --color-sidebar-accent-foreground: var(--ui-sidebar-accent-foreground);
+  --color-sidebar-border: var(--ui-sidebar-border);
+  --color-sidebar-ring: var(--ui-sidebar-ring);
   --radius-sm: calc(var(--ui-radius) - 0.25rem);
   --radius-md: calc(var(--ui-radius) - 0.125rem);
   --radius-lg: var(--ui-radius);
   --radius-xl: var(--ui-radius-panel);
   --font-sans: var(--ui-font-body);
   --font-serif: var(--ui-font-heading);
+  --font-mono: var(--ui-font-mono);
   --shadow-xs: var(--ui-shadow-control);
   --shadow-sm: var(--ui-shadow-control);
 }
@@ -108,6 +126,10 @@
 
 :where([data-slot='card-title'], [data-slot='dialog-title'], [data-slot='sheet-title']) {
   font-family: var(--ui-font-heading);
+}
+
+:where([data-slot='kbd']) {
+  font-family: var(--ui-font-mono);
 }
 
 @media (prefers-reduced-motion: reduce) {

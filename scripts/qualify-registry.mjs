@@ -57,7 +57,7 @@ function digest(value) {
 }
 
 function withoutClientDirective(content) {
-  return content.replace(/^['"]use client['"]\n\n/u, '')
+  return content.replace(/^['"]use client['"];?\r?\n(?:\r?\n)?/u, '')
 }
 
 async function listen(server) {
