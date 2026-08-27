@@ -146,7 +146,6 @@ try {
     'pnpm',
     [
       'add',
-      '--prefer-offline',
       tarball,
       'react@19.2.8',
       'react-dom@19.2.8',
