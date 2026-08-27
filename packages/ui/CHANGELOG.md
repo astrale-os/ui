@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.3.0-beta.10](https://github.com/astrale-os/ui/compare/v0.3.0-beta.9...v0.3.0-beta.10) (2026-08-27)
+
+
+### Features
+
+* **ui:** generate lazy playground catalog ([#36](https://github.com/astrale-os/ui/issues/36)) ([f22fd78](https://github.com/astrale-os/ui/commit/f22fd78d46dd5138abe5fe48d3178d0de53d3ec8))
+* **ui:** own complete variant catalog ([#42](https://github.com/astrale-os/ui/issues/42)) ([d4f3050](https://github.com/astrale-os/ui/commit/d4f3050232d21134e05c5f82351f8dd3d1c2a57d))
+* **ui:** refine playground catalog navigation ([#38](https://github.com/astrale-os/ui/issues/38)) ([5324042](https://github.com/astrale-os/ui/commit/5324042f592e0a2ed0a9eda5bf8da971dfc66e9f))
+
 ## [0.3.0-beta.9](https://github.com/astrale-os/ui/compare/v0.3.0-beta.8...v0.3.0-beta.9) (2026-08-26)
 
 
