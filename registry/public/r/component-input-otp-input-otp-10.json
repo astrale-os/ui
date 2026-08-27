@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-input-otp-input-otp-10",
+  "title": "Input OTP 10",
+  "description": "A 6-digit OTP input field with custom dot separator and grouped layout",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/input-otp/input-otp-10/input-otp-10.tsx",
+      "content": "import { useId } from 'react'\n\nimport { InputOTP, InputOTPGroup, InputOTPSlot } from '@astrale-os/ui/input-otp'\nimport { Label } from '@astrale-os/ui/label'\n\nconst InputOTPCustomSeparatorDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='space-y-3'>\n      <Label htmlFor={id}>Input OTP Custom Separator</Label>\n      <InputOTP id={id} maxLength={6}>\n        <InputOTPGroup>\n          <InputOTPSlot index={0} />\n          <InputOTPSlot index={1} />\n          <InputOTPSlot index={2} />\n        </InputOTPGroup>\n        <div role='separator' className='text-muted-foreground'>\n          <span className='bg-muted-foreground block h-1 w-1 rounded-full'></span>\n        </div>\n        <InputOTPGroup>\n          <InputOTPSlot index={3} />\n          <InputOTPSlot index={4} />\n          <InputOTPSlot index={5} />\n        </InputOTPGroup>\n      </InputOTP>\n    </div>\n  )\n}\n\nexport default InputOTPCustomSeparatorDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/input-otp/input-otp-10.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/input-otp/input-otp-10",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

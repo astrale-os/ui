@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-progress-progress-05",
+  "title": "Progress 5",
+  "description": "Scaling demonstration showing progress bars in four distinct thicknesses from thin to extra-bold.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/progress/progress-05/progress-05.tsx",
+      "content": "import { Progress, ProgressLabel, ProgressValue } from '@astrale-os/ui/progress'\n\nconst ProgressHeightDemo = () => {\n  return (\n    <div className='flex w-full flex-col gap-4'>\n      {/* Default progress bar */}\n\n      <Progress value={80}>\n        <ProgressLabel>Default</ProgressLabel>\n        <ProgressValue className='text-foreground font-medium' />\n      </Progress>\n\n      {/* Medium progress bar */}\n      <Progress value={70} className='*:data-[slot=progress-track]:h-2'>\n        <ProgressLabel>Medium</ProgressLabel>\n        <ProgressValue className='text-foreground font-medium' />\n      </Progress>\n\n      {/* Large progress bar */}\n      <Progress value={50} className='*:data-[slot=progress-track]:h-3'>\n        <ProgressLabel>Large</ProgressLabel>\n        <ProgressValue className='text-foreground font-medium' />\n      </Progress>\n\n      {/* Extra Large progress bar */}\n      <Progress value={30} className='*:data-[slot=progress-track]:h-4'>\n        <ProgressLabel>Extra Large</ProgressLabel>\n        <ProgressValue className='text-foreground font-medium' />\n      </Progress>\n    </div>\n  )\n}\n\nexport default ProgressHeightDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/progress/progress-05.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/progress/progress-05",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

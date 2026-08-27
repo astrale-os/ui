@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-skeleton-skeleton-09",
+  "title": "Skeleton 9",
+  "description": "Interactive toggle skeleton demonstrating switchable loaded/skeleton states within a card.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/skeleton/skeleton-09/skeleton-09.tsx",
+      "content": "import { useState } from 'react'\n\nimport { Button } from '@astrale-os/ui/button'\nimport { Card, CardContent, CardHeader } from '@astrale-os/ui/card'\nimport { Skeleton } from '@astrale-os/ui/skeleton'\nimport { cn } from '@astrale-os/ui/class-name'\n\nconst base = 'rounded-xl transition-colors duration-500'\n\nconst SkeletonToggle = () => {\n  const [isLoaded, setIsLoaded] = useState(false)\n\n  return (\n    <div className='w-full max-w-xs'>\n      <Card>\n        <CardHeader>\n          {isLoaded ? (\n            <div className={cn(base, 'bg-primary/70 aspect-video w-full')} />\n          ) : (\n            <Skeleton className={cn(base, 'aspect-video w-full')} />\n          )}\n        </CardHeader>\n        <CardContent className='space-y-2'>\n          {isLoaded ? (\n            <>\n              <div className={cn(base, 'bg-primary/70 h-4 w-3/4')} />\n              <div className={cn(base, 'bg-primary/50 h-4 w-full')} />\n              <div className={cn(base, 'bg-primary/30 h-4 w-2/3')} />\n            </>\n          ) : (\n            <>\n              <Skeleton className={cn(base, 'h-4 w-3/4')} />\n              <Skeleton className={cn(base, 'h-4 w-full')} />\n              <Skeleton className={cn(base, 'h-4 w-2/3')} />\n            </>\n          )}\n          <div className='mt-2 flex justify-between'>\n            {isLoaded ? (\n              <>\n                <div className={cn(base, 'bg-primary/70 h-8 w-20 rounded-md')} />\n                <div className={cn(base, 'bg-primary/70 size-8 rounded-md')} />\n              </>\n            ) : (\n              <>\n                <Skeleton className={cn(base, 'h-8 w-20 rounded-md')} />\n                <Skeleton className={cn(base, 'size-8 rounded-md')} />\n              </>\n            )}\n          </div>\n        </CardContent>\n      </Card>\n      <div className='mt-4 flex items-center gap-2'>\n        <Button className='flex-1' onClick={() => setIsLoaded(false)}>\n          Hide\n        </Button>\n        <Button className='flex-1' onClick={() => setIsLoaded(true)}>\n          Show\n        </Button>\n      </div>\n    </div>\n  )\n}\n\nexport default SkeletonToggle\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/skeleton/skeleton-09.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/skeleton/skeleton-09",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

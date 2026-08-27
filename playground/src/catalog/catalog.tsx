@@ -19,17 +19,48 @@ import {
   TabsTrigger,
 } from '@astrale-os/ui'
 import { ArrowLeftIcon, ListTreeIcon, SearchIcon } from 'lucide-react'
-import { lazy, Suspense, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import {
+  Component,
+  lazy,
+  Suspense,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+  type ReactNode,
+} from 'react'
 
 import { componentNames } from './inventory.js'
-import { PreviewCanvas } from './preview.js'
-import { previewDescriptors, type PreviewDescriptor } from './previews.js'
+import { observeNearViewport, PreviewCanvas } from './preview.js'
+import { prefetchPreviewFamily, previewDescriptors, type PreviewDescriptor } from './previews.js'
 
 const CommandPaletteControlled = lazy(() =>
   import('../../../registry/patterns/command-palette/controlled.js').then((module) => ({
     default: module.CommandPaletteControlled,
   })),
 )
+
+class CommandPaletteBoundary extends Component<{ children: ReactNode }, { unavailable: boolean }> {
+  state = { unavailable: false }
+
+  static getDerivedStateFromError() {
+    return { unavailable: true }
+  }
+
+  render() {
+    if (!this.state.unavailable) return this.props.children
+    return (
+      <Alert>
+        <AlertTitle>Search unavailable</AlertTitle>
+        <AlertDescription>The search interface could not be loaded.</AlertDescription>
+        <Button variant="outline" size="sm" onClick={() => window.location.reload()}>
+          Reload catalog
+        </Button>
+      </Alert>
+    )
+  }
+}
 
 function currentSearch() {
   return new URLSearchParams(window.location.search)
@@ -104,6 +135,41 @@ function groupDescriptors(descriptors: PreviewDescriptor[]) {
       return left.group.localeCompare(right.group)
     })
     .map(([, items]) => [items[0]!.group, items] as const)
+}
+
+function prefetchFamily(family: string) {
+  void prefetchPreviewFamily(family).catch(() => undefined)
+}
+
+function CatalogFamilySection({
+  family,
+  id,
+  labelledBy,
+  children,
+}: {
+  family: string
+  id: string
+  labelledBy: string
+  children: React.ReactNode
+}) {
+  const sectionRef = useRef<HTMLElement>(null)
+  useEffect(() => {
+    const section = sectionRef.current
+    if (!section) return
+    return observeNearViewport(section, () => prefetchFamily(family))
+  }, [family])
+  return (
+    <section
+      ref={sectionRef}
+      id={id}
+      className="specimen-section"
+      aria-labelledby={labelledBy}
+      onMouseEnter={() => prefetchFamily(family)}
+      onFocusCapture={() => prefetchFamily(family)}
+    >
+      {children}
+    </section>
+  )
 }
 
 export function Catalog() {
@@ -265,6 +331,12 @@ export function Catalog() {
   const selectedDescriptor = selectedPreview
     ? previewDescriptors.find((item) => item.id === selectedPreview)
     : undefined
+  useEffect(() => {
+    const family = selectedDescriptor
+      ? `${selectedDescriptor.kind}/${selectedDescriptor.family}`
+      : selectedFamily
+    if (family) prefetchFamily(family)
+  }, [selectedDescriptor, selectedFamily])
   const familyKind = selectedFamily?.split('/')[0] ?? null
   const requestedKind = search.get('kind')
   const activeKind: CatalogKind =
@@ -282,13 +354,13 @@ export function Catalog() {
     () =>
       catalogKinds.map((kind) => ({
         label: catalogKindLabels[kind],
-        actions: groupDescriptors(
-          previewDescriptors.filter((item) => item.kind === kind && item.canonical),
-        ).map(([group, items]) => ({
-          id: `${items[0]!.kind}/${items[0]!.family}`,
-          label: group,
-          keywords: items.flatMap((item) => [item.address, item.title, item.scene]),
-        })),
+        actions: previewDescriptors
+          .filter((item) => item.kind === kind && item.canonical)
+          .map((item) => ({
+            id: item.id,
+            label: item.title,
+            keywords: [item.address, item.group, item.family, item.scene],
+          })),
       })),
     [],
   )
@@ -346,6 +418,8 @@ export function Catalog() {
                     <SheetClose
                       key={family}
                       render={<Button variant="ghost" className="w-full justify-between" />}
+                      onMouseEnter={() => prefetchFamily(family)}
+                      onFocus={() => prefetchFamily(family)}
                       onClick={() => navigate(familyUrl, sectionId, 'catalog-outline-trigger')}
                     >
                       {group}
@@ -383,32 +457,41 @@ export function Catalog() {
       </div>
 
       {commandMounted ? (
-        <Suspense fallback={null}>
-          <CommandPaletteControlled
-            className="w-full max-w-lg!"
-            open={commandOpen}
-            query={commandQuery}
-            groups={commandGroups}
-            title="Search catalog"
-            description="Search components, patterns, and blocks."
-            placeholder="Search components, patterns, and blocks…"
-            emptyLabel="No catalog family found."
-            onOpenChange={(open) => {
-              setCommandOpen(open)
-              if (!open) setCommandQuery('')
-            }}
-            onQueryChange={setCommandQuery}
-            onAction={(family) => {
-              setCommandOpen(false)
-              setCommandQuery('')
-              navigate(
-                `${window.location.pathname}?family=${encodeURIComponent(family)}`,
-                `catalog-group-${family.replaceAll('/', '-')}`,
-                'catalog-command-trigger',
-              )
-            }}
-          />
-        </Suspense>
+        <CommandPaletteBoundary>
+          <Suspense fallback={null}>
+            <CommandPaletteControlled
+              className="w-full max-w-lg!"
+              open={commandOpen}
+              query={commandQuery}
+              groups={commandGroups}
+              title="Search catalog"
+              description="Search components, patterns, and blocks."
+              placeholder="Search components, patterns, and blocks…"
+              emptyLabel="No catalog family found."
+              onOpenChange={(open) => {
+                setCommandOpen(open)
+                if (!open) setCommandQuery('')
+              }}
+              onQueryChange={setCommandQuery}
+              onActionIntent={(id) => {
+                const descriptor = previewDescriptors.find((item) => item.id === id)
+                if (descriptor) prefetchFamily(`${descriptor.kind}/${descriptor.family}`)
+              }}
+              onAction={(id) => {
+                const descriptor = previewDescriptors.find((item) => item.id === id)
+                if (!descriptor) return
+                setCommandOpen(false)
+                setCommandQuery('')
+                prefetchFamily(`${descriptor.kind}/${descriptor.family}`)
+                navigate(
+                  `${window.location.pathname}?preview=${encodeURIComponent(descriptor.id)}`,
+                  `catalog-group-${descriptor.kind}-${descriptor.family}`,
+                  'catalog-command-trigger',
+                )
+              }}
+            />
+          </Suspense>
+        </CommandPaletteBoundary>
       ) : null}
 
       <TabsContent value={activeKind} className="catalog-panel">
@@ -424,11 +507,11 @@ export function Catalog() {
           const familyUrl = `${window.location.pathname}?family=${encodeURIComponent(family)}`
           const sectionId = `catalog-group-${family.replaceAll('/', '-')}`
           return (
-            <section
+            <CatalogFamilySection
               key={group}
+              family={family}
               id={sectionId}
-              className="specimen-section"
-              aria-labelledby={`${sectionId}-heading`}
+              labelledBy={`${sectionId}-heading`}
             >
               <div className="section-heading">
                 <h2 id={`${sectionId}-heading`}>{group}</h2>
@@ -441,6 +524,8 @@ export function Catalog() {
                       size="sm"
                       nativeButton={false}
                       render={<a href={familyUrl} />}
+                      onMouseEnter={() => prefetchFamily(family)}
+                      onFocus={() => prefetchFamily(family)}
                       onClick={(event) => {
                         event.preventDefault()
                         navigate(familyUrl, sectionId, `${sectionId}-view`)
@@ -456,7 +541,7 @@ export function Catalog() {
                   <PreviewCanvas key={descriptor.id} descriptor={descriptor} eager={isolated} />
                 ))}
               </div>
-            </section>
+            </CatalogFamilySection>
           )
         })}
       </TabsContent>

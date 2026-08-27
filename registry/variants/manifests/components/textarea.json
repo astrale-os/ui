@@ -1,0 +1,427 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-components-textarea",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "component-textarea-textarea-01",
+      "type": "registry:component",
+      "title": "Textarea 1",
+      "description": "A basic textarea input field with placeholder text",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "textarea-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/textarea/textarea-01.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/textarea/textarea-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-textarea-textarea-02",
+      "type": "registry:component",
+      "title": "Textarea 2",
+      "description": "A textarea with associated label for improved accessibility",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "textarea-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/textarea/textarea-02.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/textarea/textarea-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-textarea-textarea-03",
+      "type": "registry:component",
+      "title": "Textarea 3",
+      "description": "A textarea with helper text below for additional context",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "textarea-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/textarea/textarea-03.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/textarea/textarea-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-textarea-textarea-04",
+      "type": "registry:component",
+      "title": "Textarea 4",
+      "description": "A textarea with right-aligned helper text for guidance",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "textarea-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/textarea/textarea-04.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/textarea/textarea-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-textarea-textarea-05",
+      "type": "registry:component",
+      "title": "Textarea 5",
+      "description": "An invalid textarea with error styling and validation message",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "textarea-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/textarea/textarea-05.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/textarea/textarea-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-textarea-textarea-06",
+      "type": "registry:component",
+      "title": "Textarea 6",
+      "description": "A textarea with hint text providing user guidance and tips",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "textarea-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/textarea/textarea-06.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/textarea/textarea-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-textarea-textarea-07",
+      "type": "registry:component",
+      "title": "Textarea 7",
+      "description": "A required textarea with asterisk indicator for mandatory fields",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "textarea-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/textarea/textarea-07.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/textarea/textarea-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-textarea-textarea-08",
+      "type": "registry:component",
+      "title": "Textarea 8",
+      "description": "A textarea with colored border (indigo) styling and focus ring effects",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "textarea-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/textarea/textarea-08.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/textarea/textarea-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-textarea-textarea-09",
+      "type": "registry:component",
+      "title": "Textarea 9",
+      "description": "A filled textarea with muted background and transparent border styling",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "textarea-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/textarea/textarea-09.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/textarea/textarea-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-textarea-textarea-10",
+      "type": "registry:component",
+      "title": "Textarea 10",
+      "description": "Textarea size variations with small, default, and large height options",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "textarea-10.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/textarea/textarea-10.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/textarea/textarea-10",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-textarea-textarea-11",
+      "type": "registry:component",
+      "title": "Textarea 11",
+      "description": "A textarea with start icon positioned on the left side",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "textarea-11.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/textarea/textarea-11.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/textarea/textarea-11",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-textarea-textarea-12",
+      "type": "registry:component",
+      "title": "Textarea 12",
+      "description": "A textarea with end icon positioned on the right side",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "textarea-12.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/textarea/textarea-12.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/textarea/textarea-12",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-textarea-textarea-13",
+      "type": "registry:component",
+      "title": "Textarea 13",
+      "description": "A textarea with overlapping label for modern form design",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "textarea-13.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/textarea/textarea-13.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/textarea/textarea-13",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-textarea-textarea-14",
+      "type": "registry:component",
+      "title": "Textarea 14",
+      "description": "A textarea with floating label that animates on focus",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "textarea-14.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/textarea/textarea-14.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/textarea/textarea-14",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-textarea-textarea-15",
+      "type": "registry:component",
+      "title": "Textarea 15",
+      "description": "A textarea with inset label for compact form layouts",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "textarea-15.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/textarea/textarea-15.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/textarea/textarea-15",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-textarea-textarea-16",
+      "type": "registry:component",
+      "title": "Textarea 16",
+      "description": "A textarea with separate submit button below for form submission",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "textarea-16.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/textarea/textarea-16.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/textarea/textarea-16",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-textarea-textarea-17",
+      "type": "registry:component",
+      "title": "Textarea 17",
+      "description": "An auto-growing textarea with field-sizing-content that expands with text content",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "textarea-17.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/textarea/textarea-17.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/textarea/textarea-17",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-textarea-textarea-18",
+      "type": "registry:component",
+      "title": "Textarea 18",
+      "description": "A textarea with disabled resize functionality for fixed dimensions",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "textarea-18.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/textarea/textarea-18.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/textarea/textarea-18",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-textarea-textarea-19",
+      "type": "registry:component",
+      "title": "Textarea 19",
+      "description": "A textarea with character count display and remaining characters indicator",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "textarea-19.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/textarea/textarea-19.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/textarea/textarea-19",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-textarea-textarea-20",
+      "type": "registry:component",
+      "title": "Textarea 20",
+      "description": "A read-only textarea with muted background styling for displaying non-editable content",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "textarea-20.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/textarea/textarea-20.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/textarea/textarea-20",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-textarea-textarea-21",
+      "type": "registry:component",
+      "title": "Textarea 21",
+      "description": "A disabled textarea in non-interactive state for form display",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "textarea-21.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/textarea/textarea-21.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/textarea/textarea-21",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

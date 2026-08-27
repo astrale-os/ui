@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-badge-badge-02",
+  "title": "Badge 2",
+  "description": "Secondary variant badge with muted styling for less prominent labels",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/badge/badge-02/badge-02.tsx",
+      "content": "import { Badge } from '@astrale-os/ui/badge'\n\nconst BadgeSecondaryDemo = () => {\n  return <Badge variant='secondary'>Secondary</Badge>\n}\n\nexport default BadgeSecondaryDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/badge/badge-02.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/badge/badge-02",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

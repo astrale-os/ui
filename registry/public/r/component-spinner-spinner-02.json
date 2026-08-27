@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-spinner-spinner-02",
+  "title": "Spinner 2",
+  "description": "A variety of animated loading icons including Rotate, Pinwheel, and Refresh styles for unique visual feedback.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/spinner/spinner-02/spinner-02.tsx",
+      "content": "import { RotateCwIcon, LoaderPinwheelIcon, RefreshCcwIcon } from \"lucide-react\";\n\nconst SpinnerIconDemo = () => {\n  return (\n    <div className='flex items-center gap-6'>\n      <RotateCwIcon role='status' aria-label='Loading' className='size-6 animate-spin' />\n      <LoaderPinwheelIcon role='status' aria-label='Loading' className='size-6 animate-spin' />\n      <RefreshCcwIcon role='status' aria-label='Loading' className='direction-[reverse] size-6 animate-spin' />\n    </div>\n  )\n}\n\nexport default SpinnerIconDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/spinner/spinner-02.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/spinner/spinner-02",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

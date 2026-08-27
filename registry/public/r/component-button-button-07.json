@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-button-button-07",
+  "title": "Button 7",
+  "description": "A button component with large size variant",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/button/button-07/button-07.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\n\nconst ButtonLargeDemo = () => {\n  return <Button size='lg'>Large</Button>\n}\n\nexport default ButtonLargeDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/button/button-07.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/button/button-07",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

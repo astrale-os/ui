@@ -1,0 +1,33 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-button-button-49",
+  "title": "Button 49",
+  "description": "Button with stitched border design using layered shadow effects",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "class-variance-authority@^0.7.1",
+    "lucide-react@1.32.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/button/button-49/button-49.tsx",
+      "content": "import { CraftButton, CraftButtonIcon, CraftButtonLabel } from '@/components/ui/craft-button'\nimport { ArrowUpRightIcon } from \"lucide-react\"\n\nconst CraftButtonDemo = () => {\n  return (\n    <CraftButton>\n      <CraftButtonLabel>Click me</CraftButtonLabel>\n      <CraftButtonIcon>\n        <ArrowUpRightIcon className='size-3 stroke-2 transition-transform duration-500 group-hover/button:rotate-45' />\n      </CraftButtonIcon>\n    </CraftButton>\n  )\n}\n\nexport default CraftButtonDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/button/button-49.tsx"
+    },
+    {
+      "path": "source/components/button/button-49/support/components/ui/craft-button.tsx",
+      "content": "'use client'\n\nimport * as React from 'react'\n\nimport { Button } from '@astrale-os/ui/button'\nimport { cn } from '@astrale-os/ui/class-name'\n\ninterface CraftButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'render'> {\n  children?: React.ReactNode\n  render?: React.ReactElement\n}\n\ninterface CraftButtonLabelProps {\n  children: React.ReactNode\n  className?: string\n}\n\ninterface CraftButtonIconProps {\n  children: React.ReactNode\n  className?: string\n}\n\nfunction CraftButtonLabel({ children, className }: CraftButtonLabelProps) {\n  return (\n    <span className={cn('group-hover/button:text-foreground relative z-2 transition-colors duration-500', className)}>\n      {children}\n    </span>\n  )\n}\n\nfunction CraftButtonIcon({ children, className }: CraftButtonIconProps) {\n  return (\n    <span className={cn('relative z-1 size-5', className)}>\n      <span className='bg-background absolute inset-0 -z-1 size-5 rounded-full transition-transform duration-500 group-hover/button:scale-[15]' />\n      <span className='bg-background text-primary group-hover/button:bg-primary group-hover/button:text-background relative z-2 flex size-5 items-center justify-center rounded-full transition-all duration-500'>\n        {children}\n      </span>\n    </span>\n  )\n}\n\nfunction CraftButton({ children, render, className, ...rest }: CraftButtonProps) {\n  return (\n    <Button\n      render={render}\n      nativeButton={!render}\n      className={cn(\n        'hover:bg-background dark:hover:border-primary/30 h-9 cursor-pointer gap-2 overflow-hidden rounded-full border-0 px-4! duration-500 hover:shadow-md active:translate-y-0 dark:border dark:border-transparent',\n        className\n      )}\n      {...rest}\n    >\n      {children}\n    </Button>\n  )\n}\n\nexport {\n  CraftButton,\n  CraftButtonIcon,\n  CraftButtonLabel,\n  type CraftButtonIconProps,\n  type CraftButtonLabelProps,\n  type CraftButtonProps\n}\n",
+      "type": "registry:ui",
+      "target": "components/ui/craft-button.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/button/button-49",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

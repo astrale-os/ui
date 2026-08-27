@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-select-select-01",
+  "title": "Select 1",
+  "description": "A basic native select dropdown for gender selection",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/select/select-01/select-01.tsx",
+      "content": "import { useId } from 'react'\n\nimport { Label } from '@astrale-os/ui/label'\nimport { NativeSelect, NativeSelectOption } from '@astrale-os/ui/native-select'\n\nconst NativeSelectDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>Native select default</Label>\n      <NativeSelect id={id}>\n        <NativeSelectOption value='1'>Male</NativeSelectOption>\n        <NativeSelectOption value='2'>Female</NativeSelectOption>\n        <NativeSelectOption value='3'>Other</NativeSelectOption>\n      </NativeSelect>\n    </div>\n  )\n}\n\nexport default NativeSelectDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/select/select-01.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/select/select-01",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

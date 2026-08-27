@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-badge-badge-09",
+  "title": "Badge 9",
+  "description": "Small size badge with reduced padding for compact display areas",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/badge/badge-09/badge-09.tsx",
+      "content": "import { Badge } from '@astrale-os/ui/badge'\n\nconst BadgeSmallDemo = () => {\n  return <Badge className='h-4.5 px-1.5 py-px'>Small</Badge>\n}\n\nexport default BadgeSmallDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/badge/badge-09.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/badge/badge-09",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

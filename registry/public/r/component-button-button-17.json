@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-button-button-17",
+  "title": "Button 17",
+  "description": "Loading button with spinning icon in disabled state",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/button/button-17/button-17.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\nimport { LoaderCircleIcon } from \"lucide-react\"\n\nconst ButtonLoadingDemo = () => {\n  return (\n    <Button disabled>\n      <LoaderCircleIcon className='animate-spin' />\n      Loading\n    </Button>\n  )\n}\n\nexport default ButtonLoadingDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/button/button-17.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/button/button-17",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

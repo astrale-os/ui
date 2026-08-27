@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-sonner-sonner-15",
+  "title": "Sonner 15",
+  "description": "An outline-styled warning toast notification with amber border theming for caution messages",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "sonner@^2.0.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/sonner/sonner-15/sonner-15.tsx",
+      "content": "import { toast } from 'sonner'\n\nimport { Button } from '@astrale-os/ui/button'\n\nconst OutlineWarningSonnerDemo = () => {\n  return (\n    <Button\n      variant='outline'\n      onClick={() =>\n        toast.warning('Warning: Please check the entered data.', {\n          style: {\n            '--normal-bg': 'var(--background)',\n            '--normal-text': 'light-dark(var(--color-amber-600), var(--color-amber-400))',\n            '--normal-border': 'light-dark(var(--color-amber-600), var(--color-amber-400))'\n          } as React.CSSProperties\n        })\n      }\n    >\n      Outline Warning Toast\n    </Button>\n  )\n}\n\nexport default OutlineWarningSonnerDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/sonner/sonner-15.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/sonner/sonner-15",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

@@ -4,7 +4,7 @@
     "jsx": "react-jsx",
     "noEmit": true,
     "paths": {
-      "@/*": ["../.internal/shadcn-studio/stage/src/*"]
+      "@/*": ["../registry/variants/support/*"]
     },
     "types": ["vitest/globals", "@testing-library/jest-dom"]
   },
@@ -20,5 +20,6 @@
     "../registry/**/*.fixture.ts",
     "../registry/**/*.preview.tsx",
     "../tooling/theme-document/**/*.ts"
-  ]
+  ],
+  "exclude": ["../registry/variants/source"]
 }

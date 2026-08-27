@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-input-otp-input-otp-08",
+  "title": "Input OTP 8",
+  "description": "A 6-digit OTP input field with grouped layout and visual separator between groups",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/input-otp/input-otp-08/input-otp-08.tsx",
+      "content": "import { useId } from 'react'\n\nimport { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from '@astrale-os/ui/input-otp'\nimport { Label } from '@astrale-os/ui/label'\n\nconst InputOTPGroupedDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='space-y-3'>\n      <Label htmlFor={id}>Input OTP Grouped</Label>\n      <InputOTP id={id} maxLength={6}>\n        <InputOTPGroup>\n          <InputOTPSlot index={0} />\n          <InputOTPSlot index={1} />\n          <InputOTPSlot index={2} />\n        </InputOTPGroup>\n        <InputOTPSeparator />\n        <InputOTPGroup>\n          <InputOTPSlot index={3} />\n          <InputOTPSlot index={4} />\n          <InputOTPSlot index={5} />\n        </InputOTPGroup>\n      </InputOTP>\n    </div>\n  )\n}\n\nexport default InputOTPGroupedDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/input-otp/input-otp-08.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/input-otp/input-otp-08",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

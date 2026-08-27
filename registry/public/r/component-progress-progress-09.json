@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-progress-progress-09",
+  "title": "Progress 9",
+  "description": "Vertical progress bar implementation within a card layout, demonstrating non-traditional orientation support.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/progress/progress-09/progress-09.tsx",
+      "content": "import { useState, useEffect } from 'react'\n\nimport { Progress } from '@astrale-os/ui/progress'\n\nconst ProgressVerticalDemo = () => {\n  const [progress, setProgress] = useState(0)\n\n  useEffect(() => {\n    const timer = setTimeout(() => setProgress(75), 500)\n\n    return () => clearTimeout(timer)\n  }, [])\n\n  return (\n    <div className='bg-card flex flex-col items-center justify-center space-y-6 rounded-xl border p-6 px-8 shadow-sm'>\n      <span className='text-base font-medium'>Completed</span>\n\n      <div className='relative flex h-32 w-4 items-center justify-center'>\n        <Progress value={progress} className='absolute w-32 -rotate-90 **:data-[slot=progress-track]:h-2' />\n      </div>\n\n      <span className='text-base font-medium tabular-nums'>{progress}%</span>\n    </div>\n  )\n}\n\nexport default ProgressVerticalDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/progress/progress-09.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/progress/progress-09",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-label-label-03",
+  "title": "Label 3",
+  "description": "Label with info tooltip.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/label/label-03/label-03.tsx",
+      "content": "import { useId } from 'react'\nimport { Input } from '@astrale-os/ui/input'\nimport { Label } from '@astrale-os/ui/label'\nimport { Tooltip, TooltipContent, TooltipTrigger } from '@astrale-os/ui/tooltip'\nimport { InfoIcon } from \"lucide-react\"\n\nconst TooltipWithLabel = () => {\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>\n        Client ID{' '}\n        <Tooltip>\n          <TooltipTrigger\n            render={\n              <InfoIcon className='size-4' />\n            }\n          />\n          <TooltipContent>\n            <p>Public identifier for your application.</p>\n          </TooltipContent>\n        </Tooltip>\n      </Label>\n      <Input id={id} type='text' placeholder='client_12**56' />\n    </div>\n  )\n}\n\nexport default TooltipWithLabel\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/label/label-03.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/label/label-03",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

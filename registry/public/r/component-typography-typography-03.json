@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-typography-typography-03",
+  "title": "Typography 3",
+  "description": "H3 heading with semibold weight and medium-large text scale for subsection titles.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/typography/typography-03/typography-03.tsx",
+      "content": "const TypographyH3Demo = () => {\n  return <h3 className='text-2xl font-semibold max-sm:w-full'>h3 - A Small Revolt</h3>\n}\n\nexport default TypographyH3Demo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/typography/typography-03.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/typography/typography-03",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

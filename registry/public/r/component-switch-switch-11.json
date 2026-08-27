@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-switch-switch-11",
+  "title": "Switch 11",
+  "description": "A dual-icon switch with clickable sun and moon icons for theme mode switching",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/switch/switch-11/switch-11.tsx",
+      "content": "'use client'\n\nimport { useId, useState } from 'react'\nimport { Switch } from '@astrale-os/ui/switch'\nimport { SunIcon, MoonIcon } from \"lucide-react\"\n\nconst SwitchDualIconLabelDemo = () => {\n  const id = useId()\n  const [checked, setChecked] = useState(true)\n\n  const toggleSwitch = () => setChecked(prev => !prev)\n\n  return (\n    <div className='group inline-flex items-center gap-2' data-state={checked ? 'checked' : 'unchecked'}>\n      <span\n        id={`${id}-light`}\n        className='group-data-checked:text-muted-foreground/70 cursor-pointer text-left text-sm font-medium'\n        aria-controls={id}\n        onClick={() => setChecked(false)}\n      >\n        <SunIcon className='size-4' aria-hidden='true' />\n      </span>\n      <Switch\n        id={id}\n        checked={checked}\n        onCheckedChange={toggleSwitch}\n        aria-labelledby={`${id}-dark ${id}-light`}\n        aria-label='Toggle between dark and light mode'\n      />\n      <span\n        id={`${id}-dark`}\n        className='group-data-unchecked:text-muted-foreground/70 cursor-pointer text-right text-sm font-medium'\n        aria-controls={id}\n        onClick={() => setChecked(true)}\n      >\n        <MoonIcon className='size-4' aria-hidden='true' />\n      </span>\n    </div>\n  )\n}\n\nexport default SwitchDualIconLabelDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/switch/switch-11.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/switch/switch-11",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

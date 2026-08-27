@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pattern-list-list-02",
+  "title": "List 2",
+  "description": "Notification settings list using outlined Item cards with icon media, title, description, and a toggle Switch per row.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/patterns/list/list-02/list-02.tsx",
+      "content": "import { Item, ItemActions, ItemContent, ItemDescription, ItemMedia, ItemTitle } from '@astrale-os/ui/item'\n\nimport { Switch } from '@astrale-os/ui/switch'\nimport { BellIcon, MailIcon, MessageSquareIcon, UserIcon } from \"lucide-react\"\n\nconst ListNotifications = () => {\n  return (\n    <div className='w-full max-w-sm space-y-4'>\n      <Item variant='outline'>\n        <ItemMedia variant='icon'>\n          <BellIcon\n          />\n        </ItemMedia>\n        <ItemContent>\n          <ItemTitle>Push Notifications</ItemTitle>\n          <ItemDescription>Get notified on your device</ItemDescription>\n        </ItemContent>\n        <ItemActions>\n          <Switch />\n        </ItemActions>\n      </Item>\n      <Item variant='outline'>\n        <ItemMedia variant='icon'>\n          <MailIcon\n          />\n        </ItemMedia>\n        <ItemContent>\n          <ItemTitle>Email Notifications</ItemTitle>\n          <ItemDescription>Receive updates via email</ItemDescription>\n        </ItemContent>\n        <ItemActions>\n          <Switch defaultChecked />\n        </ItemActions>\n      </Item>\n      <Item variant='outline'>\n        <ItemMedia variant='icon'>\n          <MessageSquareIcon\n          />\n        </ItemMedia>\n        <ItemContent>\n          <ItemTitle>SMS Notifications</ItemTitle>\n          <ItemDescription>Receive updates via SMS</ItemDescription>\n        </ItemContent>\n        <ItemActions>\n          <Switch defaultChecked />\n        </ItemActions>\n      </Item>\n      <Item variant='outline'>\n        <ItemMedia variant='icon'>\n          <UserIcon\n          />\n        </ItemMedia>\n        <ItemContent>\n          <ItemTitle>Profile Visibility</ItemTitle>\n          <ItemDescription>Control who can see your profile</ItemDescription>\n        </ItemContent>\n        <ItemActions>\n          <Switch />\n        </ItemActions>\n      </Item>\n    </div>\n  )\n}\n\nexport default ListNotifications\n",
+      "type": "registry:component",
+      "target": "components/astrale/pattern/list/list-02.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "pattern/list/list-02",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:block"
+}

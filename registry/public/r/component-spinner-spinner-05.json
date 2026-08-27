@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-spinner-spinner-05",
+  "title": "Spinner 5",
+  "description": "Loading indicators integrated into buttons of different variants to provide feedback for action-based events.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/spinner/spinner-05/spinner-05.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\nimport { Spinner } from '@astrale-os/ui/spinner'\n\nconst SpinnerButtonDemo = () => {\n  return (\n    <div className='flex items-center gap-4'>\n      {/* Save Action (Primary) */}\n      <Button disabled>\n        <Spinner />\n        Saving...\n      </Button>\n\n      {/* Delete Confirm (Destructive) */}\n      <Button variant='destructive'>\n        <Spinner />\n        Deleting...\n      </Button>\n\n      {/* Compact Icon Button */}\n      <Button className='rounded-md' size='icon'>\n        <Spinner className='size-4' />\n      </Button>\n    </div>\n  )\n}\n\nexport default SpinnerButtonDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/spinner/spinner-05.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/spinner/spinner-05",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

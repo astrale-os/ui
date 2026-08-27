@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pattern-list-list-10",
+  "title": "List 10",
+  "description": "Scrollable list of 50 items inside a ScrollArea with per-item fade-in and slide-up animations triggered on viewport entry using Motion.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "motion@^13.1.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/patterns/list/list-10/list-10.tsx",
+      "content": "'use client'\n\nimport * as React from 'react'\n\nimport { motion } from 'motion/react'\n\nimport { ScrollArea } from '@astrale-os/ui/scroll-area'\nimport { Separator } from '@astrale-os/ui/separator'\n\nconst items = Array.from({ length: 50 }).map((_, i, a) => `item-${a.length - i}`)\n\nconst ScrollList = () => {\n  return (\n    <ScrollArea className='h-72 w-48 rounded-md border'>\n      <div className='px-4'>\n        <h4 className='bg-background sticky top-0 py-2 leading-none font-medium'>Items</h4>\n        {items.map((item, index) => (\n          <React.Fragment key={item}>\n            <motion.div\n              className='text-sm'\n              initial={{ opacity: 0, y: 10 }}\n              whileInView={{ opacity: 1, y: 0 }}\n              viewport={{ once: true, root: undefined, amount: 0.5 }}\n              transition={{ duration: 0.3, delay: index * 0.02 }}\n            >\n              {item}\n            </motion.div>\n            <Separator className='my-2' />\n          </React.Fragment>\n        ))}\n      </div>\n    </ScrollArea>\n  )\n}\n\nexport default ScrollList\n",
+      "type": "registry:component",
+      "target": "components/astrale/pattern/list/list-10.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "pattern/list/list-10",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:block"
+}

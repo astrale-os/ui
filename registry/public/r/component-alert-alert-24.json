@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-alert-alert-24",
+  "title": "Alert 24",
+  "description": "Soft warning alert with amber background and subtle styling for warnings.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/alert/alert-24/alert-24.tsx",
+      "content": "import { Alert, AlertDescription, AlertTitle } from '@astrale-os/ui/alert'\nimport { CircleAlertIcon } from \"lucide-react\"\n\nconst AlertSoftWarningDemo = () => {\n  return (\n    <Alert className='border-none bg-amber-600/10 text-amber-600 dark:bg-amber-400/10 dark:text-amber-400'>\n      <CircleAlertIcon\n      />\n      <AlertTitle>This file might be too large</AlertTitle>\n      <AlertDescription className='text-amber-600/80 dark:text-amber-400/80'>\n        Uploading large files may take longer or fail. Consider compressing it first.\n      </AlertDescription>\n    </Alert>\n  )\n}\n\nexport default AlertSoftWarningDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/alert/alert-24.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/alert/alert-24",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pattern-pagination-pagination-06",
+  "title": "Pagination 6",
+  "description": "A pagination component with fully rounded button styling for modern appearance",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/patterns/pagination/pagination-06/pagination-06.tsx",
+      "content": "import {\n  Pagination,\n  PaginationContent,\n  PaginationItem,\n  PaginationLink,\n  PaginationNext,\n  PaginationPrevious\n} from '@astrale-os/ui/pagination'\n\nconst pages = [1, 2, 3]\n\nconst PaginationWithRoundedButton = () => {\n  return (\n    <Pagination>\n      <PaginationContent>\n        <PaginationItem>\n          <PaginationPrevious href='#' className='rounded-full' />\n        </PaginationItem>\n        {pages.map(page => (\n          <PaginationItem key={page}>\n            <PaginationLink href={`#${page}`} isActive={page === 2} className='rounded-full'>\n              {page}\n            </PaginationLink>\n          </PaginationItem>\n        ))}\n        <PaginationItem>\n          <PaginationNext href='#' className='rounded-full' />\n        </PaginationItem>\n      </PaginationContent>\n    </Pagination>\n  )\n}\n\nexport default PaginationWithRoundedButton\n",
+      "type": "registry:component",
+      "target": "components/astrale/pattern/pagination/pagination-06.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "pattern/pagination/pagination-06",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:block"
+}

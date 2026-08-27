@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-button-button-38",
+  "title": "Button 38",
+  "description": "Notification icon button with animated blue dot indicator",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/button/button-38/button-38.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\nimport { BellIcon } from \"lucide-react\"\n\nconst IconButtonNotificationDotDemo = () => {\n  return (\n    <Button variant='outline' size='icon' className='relative'>\n      <BellIcon\n      />\n      <span className='absolute -top-0.5 -right-0.5 size-2 animate-bounce rounded-full bg-sky-600 dark:bg-sky-400' />\n      <span className='sr-only'>Notifications</span>\n    </Button>\n  )\n}\n\nexport default IconButtonNotificationDotDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/button/button-38.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/button/button-38",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-button-button-18",
+  "title": "Button 18",
+  "description": "Link button with animated underline effect on hover",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/button/button-18/button-18.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\n\nconst ButtonAnimatedLinkDemo = () => {\n  return (\n    <Button\n      variant='link'\n      render={<a href='#' />}\n      nativeButton={false}\n      className='after:bg-primary relative no-underline! after:absolute after:bottom-1 after:h-px after:w-3/4 after:origin-bottom-right after:scale-x-0 after:transition-transform after:duration-300 after:ease-in-out hover:after:origin-bottom-left hover:after:scale-x-100'\n    >\n      Contact Us\n    </Button>\n  )\n}\n\nexport default ButtonAnimatedLinkDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/button/button-18.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/button/button-18",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

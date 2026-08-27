@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-button-button-05",
+  "title": "Button 5",
+  "description": "Outline buttons with icons positioned before and after text",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/button/button-05/button-05.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\nimport { Undo2Icon, Redo2Icon } from \"lucide-react\"\n\nconst ButtonIconDemo = () => {\n  return (\n    <div className='flex flex-wrap items-center gap-4'>\n      <Button variant='outline'>\n        <Undo2Icon\n        />\n        Undo\n      </Button>\n      <Button variant='outline'>\n        Redo\n        <Redo2Icon\n        />\n      </Button>\n    </div>\n  )\n}\n\nexport default ButtonIconDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/button/button-05.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/button/button-05",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

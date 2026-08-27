@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-slider-slider-04",
+  "title": "Slider 4",
+  "description": "A vertical slider variant supporting multiple thumbs for signal spanning and node distribution tasks.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/slider/slider-04/slider-04.tsx",
+      "content": "import { Slider } from '@astrale-os/ui/slider'\nimport { Label } from '@astrale-os/ui/label'\n\nconst SliderVerticalMultiThumbDemo = () => {\n  return (\n    <div className='flex w-full justify-center gap-10 py-4'>\n      {/* Range Slider Section */}\n      <div className='space-y-4'>\n        <Label className='text-sm font-medium'>Signal Span</Label>\n        <Slider defaultValue={[25, 60]} max={100} step={1} orientation='vertical' />\n      </div>\n\n      {/* Multi-Thumb Slider Section */}\n      <div className='space-y-4'>\n        <Label className='text-sm font-medium'>Nodes Distribution</Label>\n        <Slider defaultValue={[20, 50, 80]} max={100} step={1} orientation='vertical' />\n      </div>\n    </div>\n  )\n}\n\nexport default SliderVerticalMultiThumbDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/slider/slider-04.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/slider/slider-04",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

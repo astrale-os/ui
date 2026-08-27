@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-separator-separator-08",
+  "title": "Separator 8",
+  "description": "Vertical separators with integrated text labels positioned at the top, center, or bottom of the line.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/separator/separator-08/separator-08.tsx",
+      "content": "import { Separator } from '@astrale-os/ui/separator'\n\nconst SeparatorVerticalTextDemo = () => {\n  return (\n    <div className='flex h-64 w-full max-w-sm justify-center gap-16'>\n      <div className='flex flex-col items-center gap-3'>\n        <span className='text-muted-foreground shrink-0 text-sm font-medium'>Top</span>\n        <Separator orientation='vertical' className='mx-auto flex-1' />\n      </div>\n\n      <div className='flex flex-col items-center gap-3'>\n        <Separator orientation='vertical' className='mx-auto flex-1' />\n        <span className='text-muted-foreground shrink-0 text-sm font-medium'>Center</span>\n        <Separator orientation='vertical' className='mx-auto flex-1' />\n      </div>\n\n      <div className='flex flex-col items-center gap-3'>\n        <Separator orientation='vertical' className='mx-auto flex-1' />\n        <span className='text-muted-foreground shrink-0 text-sm font-medium'>Bottom</span>\n      </div>\n    </div>\n  )\n}\n\nexport default SeparatorVerticalTextDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/separator/separator-08.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/separator/separator-08",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

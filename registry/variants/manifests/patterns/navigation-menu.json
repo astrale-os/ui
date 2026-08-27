@@ -1,0 +1,187 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-patterns-navigation-menu",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "pattern-navigation-menu-navigation-menu-01",
+      "type": "registry:block",
+      "title": "Navigation Menu 1",
+      "description": "A standard navigation menu featuring a single-column layout with clear titles and supporting descriptions for each item.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "next@^15.3.3"],
+      "files": [
+        {
+          "path": "navigation-menu-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/navigation-menu/navigation-menu-01.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/navigation-menu/navigation-menu-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-navigation-menu-navigation-menu-02",
+      "type": "registry:block",
+      "title": "Navigation Menu 2",
+      "description": "A balanced two-column navigation menu optimized for displaying a larger set of resources with concise descriptions.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "next@^15.3.3"],
+      "files": [
+        {
+          "path": "navigation-menu-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/navigation-menu/navigation-menu-02.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/navigation-menu/navigation-menu-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-navigation-menu-navigation-menu-03",
+      "type": "registry:block",
+      "title": "Navigation Menu 3",
+      "description": "An enhanced navigation menu with integrated icons and status badges, providing visual cues and additional context for each link.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "next@^15.3.3"],
+      "files": [
+        {
+          "path": "navigation-menu-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/navigation-menu/navigation-menu-03.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/navigation-menu/navigation-menu-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-navigation-menu-navigation-menu-04",
+      "type": "registry:block",
+      "title": "Navigation Menu 4",
+      "description": "A structured navigation menu that organizes items into logical sections, using icons and descriptions to guide user exploration.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "next@^15.3.3"],
+      "files": [
+        {
+          "path": "navigation-menu-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/navigation-menu/navigation-menu-04.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/navigation-menu/navigation-menu-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-navigation-menu-navigation-menu-05",
+      "type": "registry:block",
+      "title": "Navigation Menu 5",
+      "description": "A versatile navigation menu combining a functional tool list with a dedicated call-to-action area for improved conversion.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "next@^15.3.3"],
+      "files": [
+        {
+          "path": "navigation-menu-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/navigation-menu/navigation-menu-05.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/navigation-menu/navigation-menu-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-navigation-menu-navigation-menu-06",
+      "type": "registry:block",
+      "title": "Navigation Menu 6",
+      "description": "A rich developer-centric navigation menu featuring a tools grid and a visual sidebar for tutorials or spotlight content.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "next@^15.3.3"],
+      "files": [
+        {
+          "path": "navigation-menu-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/navigation-menu/navigation-menu-06.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/navigation-menu/navigation-menu-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-navigation-menu-navigation-menu-07",
+      "type": "registry:block",
+      "title": "Navigation Menu 7",
+      "description": "A multi-section navigation menu designed for complex information architectures, grouping tools, integrations, and resources.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "next@^15.3.3"],
+      "files": [
+        {
+          "path": "navigation-menu-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/navigation-menu/navigation-menu-07.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/navigation-menu/navigation-menu-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-navigation-menu-navigation-menu-08",
+      "type": "registry:block",
+      "title": "Navigation Menu 8",
+      "description": "An analytics-driven navigation menu that showcases real-time metrics and organized report links in a dashboard-style dropdown.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "next@^15.3.3"],
+      "files": [
+        {
+          "path": "navigation-menu-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/navigation-menu/navigation-menu-08.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/navigation-menu/navigation-menu-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-navigation-menu-navigation-menu-09",
+      "type": "registry:block",
+      "title": "Navigation Menu 9",
+      "description": "A multi-trigger navigation menu providing a clean and organized way to access diverse categories of site content.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "next@^15.3.3"],
+      "files": [
+        {
+          "path": "navigation-menu-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/navigation-menu/navigation-menu-09.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/navigation-menu/navigation-menu-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

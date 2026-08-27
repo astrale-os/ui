@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-context-menu-context-menu-02",
+  "title": "Context Menu 2",
+  "description": "Context menu with a nested submenu exposing Save File, Create Folder, and View Details options.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/context-menu/context-menu-02/context-menu-02.tsx",
+      "content": "import {\n  ContextMenu,\n  ContextMenuContent,\n  ContextMenuGroup,\n  ContextMenuItem,\n  ContextMenuSub,\n  ContextMenuSubContent,\n  ContextMenuSubTrigger,\n  ContextMenuTrigger\n} from '@astrale-os/ui/context-menu'\n\nconst ContextSubMenuDemo = () => {\n  return (\n    <ContextMenu>\n      <div className='mt-4 flex w-full max-w-xs flex-col items-start gap-2'>\n        <ContextMenuTrigger className='flex h-45 w-full items-center justify-center rounded-xl border border-dashed text-sm'>\n          Right click here\n        </ContextMenuTrigger>\n        <div className='text-muted-foreground text-sm font-medium'>Menu with submenu</div>\n      </div>\n      <ContextMenuContent>\n        <ContextMenuGroup>\n          <ContextMenuItem>Copy</ContextMenuItem>\n          <ContextMenuItem>Cut</ContextMenuItem>\n        </ContextMenuGroup>\n        <ContextMenuSub>\n          <ContextMenuSubTrigger>More Options</ContextMenuSubTrigger>\n          <ContextMenuSubContent>\n            <ContextMenuGroup>\n              <ContextMenuItem>Save File</ContextMenuItem>\n              <ContextMenuItem>Create Folder</ContextMenuItem>\n              <ContextMenuItem>View Details</ContextMenuItem>\n            </ContextMenuGroup>\n          </ContextMenuSubContent>\n        </ContextMenuSub>\n      </ContextMenuContent>\n    </ContextMenu>\n  )\n}\n\nexport default ContextSubMenuDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/context-menu/context-menu-02.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/context-menu/context-menu-02",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

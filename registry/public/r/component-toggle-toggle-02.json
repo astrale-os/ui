@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-toggle-toggle-02",
+  "title": "Toggle 2",
+  "description": "Grouped outline toggles for text formatting with icons.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/toggle/toggle-02/toggle-02.tsx",
+      "content": "import { Toggle } from '@astrale-os/ui/toggle'\nimport { ItalicIcon, BoldIcon } from \"lucide-react\"\n\nconst ToggleOutline = () => {\n  return (\n    <div className='flex flex-wrap items-center gap-2'>\n      <Toggle variant='outline' aria-label='Toggle italic'>\n        <ItalicIcon\n        />\n        Italic\n      </Toggle>\n      <Toggle variant='outline' aria-label='Toggle bold'>\n        <BoldIcon\n        />\n        Bold\n      </Toggle>\n    </div>\n  )\n}\n\nexport default ToggleOutline\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/toggle/toggle-02.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/toggle/toggle-02",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

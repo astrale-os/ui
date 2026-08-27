@@ -1,0 +1,356 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-components-accordion",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "component-accordion-accordion-01",
+      "type": "registry:component",
+      "title": "Accordion 1",
+      "description": "Basic accordion with default styling and collapsible FAQ items.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "accordion-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/accordion/accordion-01.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/accordion/accordion-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-accordion-accordion-02",
+      "type": "registry:component",
+      "title": "Accordion 2",
+      "description": "Card-style accordion with separated items, shadow effects, and rotated chevron icons.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "lucide-react@1.32.0"
+      ],
+      "files": [
+        {
+          "path": "accordion-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/accordion/accordion-02.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/accordion/accordion-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-accordion-accordion-03",
+      "type": "registry:component",
+      "title": "Accordion 3",
+      "description": "Icon-enhanced accordion with category icons displayed before each item title.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "accordion-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/accordion/accordion-03.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/accordion/accordion-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-accordion-accordion-04",
+      "type": "registry:component",
+      "title": "Accordion 4",
+      "description": "Plus/minus icon accordion with animated icon transitions for expand/collapse states.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "lucide-react@1.32.0",
+        "radix-ui@^1.6.7"
+      ],
+      "files": [
+        {
+          "path": "accordion-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/accordion/accordion-04.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/accordion/accordion-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-accordion-accordion-05",
+      "type": "registry:component",
+      "title": "Accordion 5",
+      "description": "Active state accordion with amber highlighting for expanded items and borders.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "accordion-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/accordion/accordion-05.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/accordion/accordion-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-accordion-accordion-06",
+      "type": "registry:component",
+      "title": "Accordion 6",
+      "description": "Icon and expand indicator accordion with category icons and plus icon for expand/collapse.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "lucide-react@1.32.0",
+        "radix-ui@^1.6.7"
+      ],
+      "files": [
+        {
+          "path": "accordion-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/accordion/accordion-06.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/accordion/accordion-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-accordion-accordion-07",
+      "type": "registry:component",
+      "title": "Accordion 7",
+      "description": "Avatar-based accordion displaying user profiles with avatar images, names, and email addresses.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "accordion-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/accordion/accordion-07.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/accordion/accordion-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-accordion-accordion-08",
+      "type": "registry:component",
+      "title": "Accordion 8",
+      "description": "Enhanced icon accordion with circular icon containers and subtitle descriptions for each item.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "lucide-react@1.32.0",
+        "radix-ui@^1.6.7"
+      ],
+      "files": [
+        {
+          "path": "accordion-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/accordion/accordion-08.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/accordion/accordion-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-accordion-accordion-09",
+      "type": "registry:component",
+      "title": "Accordion 9",
+      "description": "Outline-style accordion with bordered items and spacing between each accordion item.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "accordion-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/accordion/accordion-09.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/accordion/accordion-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-accordion-accordion-10",
+      "type": "registry:component",
+      "title": "Accordion 10",
+      "description": "Box-style accordion with unified border container around all accordion items.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "accordion-10.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/accordion/accordion-10.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/accordion/accordion-10",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-accordion-accordion-11",
+      "type": "registry:component",
+      "title": "Accordion 11",
+      "description": "Tab-style accordion with accent background highlighting for expanded items.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "accordion-11.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/accordion/accordion-11.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/accordion/accordion-11",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-accordion-accordion-12",
+      "type": "registry:component",
+      "title": "Accordion 12",
+      "description": "Tab with outline accordion featuring bordered highlighting and shadow effects for expanded items.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "lucide-react@1.32.0",
+        "radix-ui@^1.6.7"
+      ],
+      "files": [
+        {
+          "path": "accordion-12.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/accordion/accordion-12.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/accordion/accordion-12",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-accordion-accordion-13",
+      "type": "registry:component",
+      "title": "Accordion 13",
+      "description": "Media content accordion with category icons and embedded images in accordion content.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "accordion-13.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/accordion/accordion-13.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/accordion/accordion-13",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-accordion-accordion-14",
+      "type": "registry:component",
+      "title": "Accordion 14",
+      "description": "Filled header accordion with accent background triggers and separated content sections.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "accordion-14.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/accordion/accordion-14.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/accordion/accordion-14",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-accordion-accordion-15",
+      "type": "registry:component",
+      "title": "Accordion 15",
+      "description": "Multi-level accordion with nested collapsible sections for hierarchical FAQ organization.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "lucide-react@1.32.0",
+        "radix-ui@^1.6.7"
+      ],
+      "files": [
+        {
+          "path": "accordion-15.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/accordion/accordion-15.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/accordion/accordion-15",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-accordion-accordion-16",
+      "type": "registry:component",
+      "title": "Accordion 16",
+      "description": "Simplified multi-level accordion with plus/minus icons for nested FAQ categories and questions.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "accordion-16.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/accordion/accordion-16.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/accordion/accordion-16",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

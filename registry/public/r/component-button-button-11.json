@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-button-button-11",
+  "title": "Button 11",
+  "description": "A Primary Button with gradient background effect for primary action",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/button/button-11/button-11.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\n\nconst ButtonGradientDemo = () => {\n  return (\n    <Button className='from-primary via-primary/60 to-primary border-0 bg-transparent bg-linear-to-r bg-size-[200%_auto] hover:bg-transparent hover:bg-position-[99%_center]'>\n      Get Started\n    </Button>\n  )\n}\n\nexport default ButtonGradientDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/button/button-11.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/button/button-11",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

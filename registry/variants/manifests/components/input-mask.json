@@ -1,0 +1,145 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-components-input-mask",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "component-input-mask-input-mask-01",
+      "type": "registry:component",
+      "title": "Input Mask 1",
+      "description": "An input field with custom alphanumeric mask pattern for structured data entry",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8", "use-mask-input@^3.13.0"],
+      "files": [
+        {
+          "path": "input-mask-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input-mask/input-mask-01.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input-mask/input-mask-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-mask-input-mask-02",
+      "type": "registry:component",
+      "title": "Input Mask 2",
+      "description": "A time input field with HH:MM:SS mask formatting for precise time entry",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8", "use-mask-input@^3.13.0"],
+      "files": [
+        {
+          "path": "input-mask-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input-mask/input-mask-02.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input-mask/input-mask-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-mask-input-mask-03",
+      "type": "registry:component",
+      "title": "Input Mask 3",
+      "description": "A credit card number input with automatic formatting and card type detection",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react-payment-inputs@^1.2.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "input-mask-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input-mask/input-mask-03.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input-mask/input-mask-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-mask-input-mask-04",
+      "type": "registry:component",
+      "title": "Input Mask 4",
+      "description": "A credit card expiry date input with MM/YY formatting and validation",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "react-payment-inputs@^1.2.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "input-mask-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input-mask/input-mask-04.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input-mask/input-mask-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-mask-input-mask-05",
+      "type": "registry:component",
+      "title": "Input Mask 5",
+      "description": "A credit card CVC input field with secure formatting and length validation",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "react-payment-inputs@^1.2.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "input-mask-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input-mask/input-mask-05.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input-mask/input-mask-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-mask-input-mask-06",
+      "type": "registry:component",
+      "title": "Input Mask 6",
+      "description": "A comprehensive credit card details form with card number, expiry, and CVC inputs with automatic formatting",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react-payment-inputs@^1.2.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "input-mask-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input-mask/input-mask-06.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input-mask/input-mask-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

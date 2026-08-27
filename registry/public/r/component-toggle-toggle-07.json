@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-toggle-toggle-07",
+  "title": "Toggle 7",
+  "description": "Icon-only power toggle that swaps icons and applies conditional color styles.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/toggle/toggle-07/toggle-07.tsx",
+      "content": "import { useState } from 'react'\nimport { Toggle } from '@astrale-os/ui/toggle'\nimport { cn } from '@astrale-os/ui/class-name'\nimport { PowerIcon } from \"lucide-react\"\n\nconst ToggleIconPattern = () => {\n  const [isPowerOff, setIsPowerOff] = useState(false)\n\n  return (\n    <div className='flex items-center justify-center'>\n      <Toggle\n        variant='outline'\n        aria-label='power toggle'\n        onClick={() => setIsPowerOff(!isPowerOff)}\n        className={cn(\n          isPowerOff\n            ? 'border-green-600 text-green-600! hover:bg-green-600/10 focus-visible:border-green-600 focus-visible:ring-green-600/20 dark:border-green-400 dark:text-green-400! dark:hover:bg-green-400/10 dark:focus-visible:border-green-400 dark:focus-visible:ring-green-400/40'\n            : 'border-destructive text-destructive! hover:bg-destructive/10 focus-visible:border-destructive focus-visible:ring-destructive/20 dark:border-destructive dark:text-destructive! dark:hover:bg-destructive/10 dark:focus-visible:border-destructive dark:focus-visible:ring-destructive/40'\n        )}\n      >\n        {isPowerOff ? (\n          <PowerIcon\n          />\n        ) : (\n          <PowerIcon\n          />\n        )}\n      </Toggle>\n    </div>\n  )\n}\n\nexport default ToggleIconPattern\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/toggle/toggle-07.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/toggle/toggle-07",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

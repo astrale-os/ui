@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-sonner-sonner-14",
+  "title": "Sonner 14",
+  "description": "An outline-styled success toast notification with green border theming for positive feedback",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "sonner@^2.0.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/sonner/sonner-14/sonner-14.tsx",
+      "content": "'use client'\n\nimport { toast } from 'sonner'\n\nimport { Button } from '@astrale-os/ui/button'\n\nconst OutlineSuccessSonnerDemo = () => {\n  return (\n    <Button\n      variant='outline'\n      onClick={() =>\n        toast.success('Action completed successfully!', {\n          style: {\n            '--normal-bg': 'var(--background)',\n            '--normal-text': 'light-dark(var(--color-green-600), var(--color-green-400))',\n            '--normal-border': 'light-dark(var(--color-green-600), var(--color-green-400))'\n          } as React.CSSProperties\n        })\n      }\n    >\n      Outline Success Toast\n    </Button>\n  )\n}\n\nexport default OutlineSuccessSonnerDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/sonner/sonner-14.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/sonner/sonner-14",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

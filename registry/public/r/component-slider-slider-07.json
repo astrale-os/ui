@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-slider-slider-07",
+  "title": "Slider 7",
+  "description": "A performance profile slider with integrated text labels (Eco, Balanced, Standard, Turbo) to help users select system modes.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/slider/slider-07/slider-07.tsx",
+      "content": "import { Slider } from '@astrale-os/ui/slider'\nimport { Label } from '@astrale-os/ui/label'\n\nconst SliderLabelDemo = () => {\n  return (\n    <div className='flex w-full max-w-xs flex-col gap-6'>\n      <div className='space-y-1'>\n        <Label className='text-sm font-medium'>Performance Profile</Label>\n        <p className='text-muted-foreground text-xs'>Choose a balance between power and efficiency.</p>\n      </div>\n\n      <div className='space-y-4'>\n        <Slider aria-label='Performance level' defaultValue={20} max={40} min={0} step={10} />\n        <div\n          aria-hidden='true'\n          className='text-muted-foreground flex w-full items-center justify-between text-xs font-medium uppercase'\n        >\n          <span className='text-left'>Eco</span>\n          <span className='text-center'>Balanced</span>\n          <span className='text-center'>Standard</span>\n          <span className='text-center'>High</span>\n          <span className='text-right'>Turbo</span>\n        </div>\n      </div>\n    </div>\n  )\n}\n\nexport default SliderLabelDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/slider/slider-07.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/slider/slider-07",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-skeleton-skeleton-11",
+  "title": "Skeleton 11",
+  "description": "Table/list skeleton showing a header row and repeating row placeholders for datasets.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/skeleton/skeleton-11/skeleton-11.tsx",
+      "content": "import { Skeleton } from '@astrale-os/ui/skeleton'\n\nconst SkeletonTable = () => {\n  return (\n    <div className='mx-auto flex w-full max-w-2xl flex-col gap-4'>\n      <div className='flex items-center gap-4 border-b pb-2'>\n        <Skeleton className='size-8 rounded-md' />\n        <Skeleton className='h-8 flex-1' />\n        <Skeleton className='h-8 w-24' />\n        <Skeleton className='h-8 w-20' />\n      </div>\n      {Array.from({ length: 4 }).map((_, i) => (\n        <div key={i} className='flex items-center gap-4'>\n          <Skeleton className='size-8 rounded-md' />\n          <Skeleton className='h-8 flex-1' />\n          <Skeleton className='h-8 w-24' />\n          <Skeleton className='h-8 w-20' />\n        </div>\n      ))}\n    </div>\n  )\n}\n\nexport default SkeletonTable\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/skeleton/skeleton-11.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/skeleton/skeleton-11",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-skeleton-skeleton-06",
+  "title": "Skeleton 6",
+  "description": "Chat interface skeleton showing incoming/outgoing message placeholders and input area.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/skeleton/skeleton-06/skeleton-06.tsx",
+      "content": "import { Card, CardContent } from '@astrale-os/ui/card'\nimport { Skeleton } from '@astrale-os/ui/skeleton'\n\nconst SkeletonChat = () => {\n  return (\n    <Card className='w-full max-w-xs'>\n      <CardContent>\n        {/* Incoming message */}\n        <div className='flex items-start gap-2.5'>\n          <Skeleton className='size-8 shrink-0 rounded-full' />\n          <div className='flex flex-col gap-1'>\n            <Skeleton className='h-3 w-20' />\n            <Skeleton className='h-20 w-48 rounded-lg rounded-tl-none' />\n            <Skeleton className='h-2.5 w-12' />\n          </div>\n        </div>\n        {/* Outgoing message */}\n        <div className='flex items-start justify-end gap-2.5'>\n          <div className='flex flex-col items-end gap-1'>\n            <Skeleton className='h-10 w-40 rounded-lg rounded-tr-none' />\n            <Skeleton className='h-2.5 w-12' />\n          </div>\n        </div>\n        {/* Incoming message */}\n        <div className='flex items-start gap-2.5'>\n          <Skeleton className='size-8 shrink-0 rounded-full' />\n          <div className='flex flex-col gap-1'>\n            <Skeleton className='h-3 w-16' />\n            <Skeleton className='h-16 w-48 rounded-lg rounded-tl-none' />\n            <Skeleton className='h-2.5 w-12' />\n          </div>\n        </div>\n        {/* Input area */}\n        <div className='flex items-center gap-2 pt-3'>\n          <Skeleton className='h-8 flex-1 rounded-md' />\n          <Skeleton className='size-8 rounded-md' />\n          <Skeleton className='size-8 rounded-md' />\n        </div>\n      </CardContent>\n    </Card>\n  )\n}\n\nexport default SkeletonChat\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/skeleton/skeleton-06.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/skeleton/skeleton-06",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

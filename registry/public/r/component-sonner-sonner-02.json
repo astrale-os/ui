@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-sonner-sonner-02",
+  "title": "Sonner 2",
+  "description": "A toast notification with title and description for detailed information",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "sonner@^2.0.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/sonner/sonner-02/sonner-02.tsx",
+      "content": "import { toast } from 'sonner'\n\nimport { Button } from '@astrale-os/ui/button'\n\nconst SonnerWithDescriptionDemo = () => {\n  return (\n    <Button\n      variant='outline'\n      onClick={() =>\n        toast('Event is created', {\n          description: 'Friday, August 15, 2025 at 9:00 AM'\n        })\n      }\n    >\n      Toast with description\n    </Button>\n  )\n}\n\nexport default SonnerWithDescriptionDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/sonner/sonner-02.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/sonner/sonner-02",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

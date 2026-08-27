@@ -1,0 +1,331 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-patterns-phone-input",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "pattern-phone-input-phone-input-01",
+      "type": "registry:block",
+      "title": "Phone Input 1",
+      "description": "A phone input component with country code selection",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "lucide-react@1.32.0",
+        "react-phone-number-input@^3.4.17",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "phone-input-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/phone-input/phone-input-01.tsx"
+        },
+        {
+          "path": "support/components/ui/phone-input.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/phone-input.tsx"
+        },
+        {
+          "path": "support/components/ui/combobox.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/combobox.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/phone-input/phone-input-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-phone-input-phone-input-02",
+      "type": "registry:block",
+      "title": "Phone Input 2",
+      "description": "A phone input component with a label",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "lucide-react@1.32.0",
+        "react-phone-number-input@^3.4.17",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "phone-input-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/phone-input/phone-input-02.tsx"
+        },
+        {
+          "path": "support/components/ui/phone-input.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/phone-input.tsx"
+        },
+        {
+          "path": "support/components/ui/combobox.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/combobox.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/phone-input/phone-input-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-phone-input-phone-input-03",
+      "type": "registry:block",
+      "title": "Phone Input 3",
+      "description": "A phone input component with different sizes",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "lucide-react@1.32.0",
+        "react-phone-number-input@^3.4.17",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "phone-input-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/phone-input/phone-input-03.tsx"
+        },
+        {
+          "path": "support/components/ui/phone-input.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/phone-input.tsx"
+        },
+        {
+          "path": "support/components/ui/combobox.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/combobox.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/phone-input/phone-input-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-phone-input-phone-input-04",
+      "type": "registry:block",
+      "title": "Phone Input 4",
+      "description": "A phone input component with a disabled state",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "lucide-react@1.32.0",
+        "react-phone-number-input@^3.4.17",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "phone-input-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/phone-input/phone-input-04.tsx"
+        },
+        {
+          "path": "support/components/ui/phone-input.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/phone-input.tsx"
+        },
+        {
+          "path": "support/components/ui/combobox.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/combobox.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/phone-input/phone-input-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-phone-input-phone-input-05",
+      "type": "registry:block",
+      "title": "Phone Input 5",
+      "description": "A phone input component with rounded corners",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "lucide-react@1.32.0",
+        "react-phone-number-input@^3.4.17",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "phone-input-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/phone-input/phone-input-05.tsx"
+        },
+        {
+          "path": "support/components/ui/phone-input.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/phone-input.tsx"
+        },
+        {
+          "path": "support/components/ui/combobox.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/combobox.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/phone-input/phone-input-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-phone-input-phone-input-06",
+      "type": "registry:block",
+      "title": "Phone Input 6",
+      "description": "A phone input component with helper text",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "lucide-react@1.32.0",
+        "react-phone-number-input@^3.4.17",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "phone-input-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/phone-input/phone-input-06.tsx"
+        },
+        {
+          "path": "support/components/ui/phone-input.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/phone-input.tsx"
+        },
+        {
+          "path": "support/components/ui/combobox.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/combobox.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/phone-input/phone-input-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-phone-input-phone-input-07",
+      "type": "registry:block",
+      "title": "Phone Input 7",
+      "description": "A phone input component with default value",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "lucide-react@1.32.0",
+        "react-phone-number-input@^3.4.17",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "phone-input-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/phone-input/phone-input-07.tsx"
+        },
+        {
+          "path": "support/components/ui/phone-input.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/phone-input.tsx"
+        },
+        {
+          "path": "support/components/ui/combobox.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/combobox.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/phone-input/phone-input-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-phone-input-phone-input-08",
+      "type": "registry:block",
+      "title": "Phone Input 8",
+      "description": "A phone input component with invalid state",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "lucide-react@1.32.0",
+        "react-phone-number-input@^3.4.17",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "phone-input-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/phone-input/phone-input-08.tsx"
+        },
+        {
+          "path": "support/components/ui/phone-input.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/phone-input.tsx"
+        },
+        {
+          "path": "support/components/ui/combobox.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/combobox.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/phone-input/phone-input-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-phone-input-phone-input-09",
+      "type": "registry:block",
+      "title": "Phone Input 9",
+      "description": "A phone input component with read-only state",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "lucide-react@1.32.0",
+        "react-phone-number-input@^3.4.17",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "phone-input-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/phone-input/phone-input-09.tsx"
+        },
+        {
+          "path": "support/components/ui/phone-input.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/phone-input.tsx"
+        },
+        {
+          "path": "support/components/ui/combobox.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/combobox.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/phone-input/phone-input-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

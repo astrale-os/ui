@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-kbd-kbd-01",
+  "title": "Kbd 1",
+  "description": "Modifier keys and shortcut combo display with grouped Kbd components for ⌘, ⇧, ⌥, ⌃ symbols and a Ctrl+K search shortcut.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/kbd/kbd-01/kbd-01.tsx",
+      "content": "import { Kbd, KbdGroup } from '@astrale-os/ui/kbd'\n\nconst KbdDemo = () => {\n  return (\n    <div className='flex flex-col items-center gap-6'>\n      {/* Modifier Keys */}\n      <div className='flex flex-col items-center gap-2'>\n        <span className='text-muted-foreground text-sm font-medium'>Modifier Keys</span>\n        <KbdGroup>\n          <Kbd>⌘</Kbd>\n          <Kbd>⇧</Kbd>\n          <Kbd>⌥</Kbd>\n          <Kbd>⌃</Kbd>\n        </KbdGroup>\n      </div>\n\n      {/* Another Combination */}\n      <div className='flex flex-col items-center gap-2'>\n        <span className='text-muted-foreground text-sm font-medium'>Open Search</span>\n        <KbdGroup className='text-muted-foreground'>\n          <Kbd>Ctrl</Kbd>\n          <span>+</span>\n          <Kbd>K</Kbd>\n        </KbdGroup>\n      </div>\n    </div>\n  )\n}\n\nexport default KbdDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/kbd/kbd-01.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/kbd/kbd-01",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

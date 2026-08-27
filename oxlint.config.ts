@@ -24,6 +24,8 @@ export default defineConfig({
     '**/*.cjs',
     '**/*.gen.ts',
     '**/*.gen.tsx',
+    'registry/variants/source/**',
+    'registry/variants/support/**',
   ],
   overrides: [
     {

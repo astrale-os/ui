@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-badge-badge-13",
+  "title": "Badge 13",
+  "description": "Selectable badge with checkbox functionality for interactive selection",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/badge/badge-13/badge-13.tsx",
+      "content": "'use client'\n\nimport { useState, useId } from 'react'\nimport { Badge } from '@astrale-os/ui/badge'\nimport { Checkbox } from '@astrale-os/ui/checkbox'\nimport { CheckCircleIcon } from \"lucide-react\"\n\nconst BadgeSelectableDemo = () => {\n  const [selected, setSelected] = useState(false)\n\n  const id = useId()\n\n  return (\n    <Badge\n      variant={selected ? 'secondary' : 'outline'}\n      className='has-focus-visible:border-ring/50 has-focus-visible:ring-ring/50 relative cursor-pointer rounded-sm outline-none has-focus-visible:ring-2'\n    >\n      <Checkbox\n        id={id}\n        className='peer sr-only absolute after:absolute after:inset-0'\n        checked={selected}\n        onCheckedChange={checked => setSelected(!!checked)}\n      />\n      <CheckCircleIcon className='hidden size-3 text-green-600 peer-data-checked:block dark:text-green-400' aria-hidden='true' />\n      <label htmlFor={id} className='cursor-pointer select-none after:absolute after:inset-0'>\n        {selected ? 'Selected' : 'Selectable'}\n      </label>\n    </Badge>\n  )\n}\n\nexport default BadgeSelectableDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/badge/badge-13.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/badge/badge-13",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

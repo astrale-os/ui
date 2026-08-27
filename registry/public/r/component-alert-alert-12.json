@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-alert-alert-12",
+  "title": "Alert 12",
+  "description": "Information/error indicator alert with destructive background styling and informational content.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/alert/alert-12/alert-12.tsx",
+      "content": "import { Alert, AlertTitle } from '@astrale-os/ui/alert'\nimport { UserRoundXIcon } from \"lucide-react\"\n\nconst AlertIndicatorDestructiveDemo = () => {\n  return (\n    <Alert className='border-destructive bg-destructive/10 text-destructive rounded-none border-0 border-l-6 *:[svg]:row-span-1'>\n      <UserRoundXIcon\n      />\n      <AlertTitle>Your request to join the team is denied.</AlertTitle>\n    </Alert>\n  )\n}\n\nexport default AlertIndicatorDestructiveDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/alert/alert-12.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/alert/alert-12",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

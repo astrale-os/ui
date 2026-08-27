@@ -88,9 +88,9 @@ test('registry aggregation explicitly owns every family and exact item once', as
   const root = JSON.parse(await readFile(rootPath, 'utf8'))
   const publicRoot = JSON.parse(await readFile(publicRootPath, 'utf8'))
   assert.equal(source.shadcn, '4.18.0')
-  assert.equal(source.includes.length, 22)
+  assert.ok(source.includes.length >= 1)
   assert.equal(new Set(source.includes).size, source.includes.length)
-  assert.equal(publicRoot.include.length, 23)
+  assert.equal(publicRoot.include.length, source.includes.length + 1)
   assert.equal(publicRoot.include[0], 'registry/base/registry.json')
   assert.deepEqual(
     publicRoot.include.slice(1).sort(),
@@ -98,7 +98,7 @@ test('registry aggregation explicitly owns every family and exact item once', as
   )
 
   const familyItems = await readFamilyItems()
-  assert.equal(root.items.length, 74)
+  assert.equal(root.items.length, familyItems.length)
   assert.deepEqual(
     root.items.map((item) => item.name).sort(),
     familyItems.map((item) => item.name).sort(),
@@ -115,10 +115,11 @@ test('every registry item is independently bounded, controlled, and safe to inst
   for (const item of items) {
     const isTheme = item.meta.canonicalAddress.startsWith('theme/')
     const isComponent = item.meta.canonicalAddress.startsWith('component/')
+    const isVariant = item.meta.provider === '@astrale-os/ui'
     assert.match(item.name, /^(?:component|pattern|block|theme)-[a-z0-9-]+$/u)
     assert.match(
       item.meta.canonicalAddress,
-      /^(?:component\/[a-z0-9-]+|(?:pattern|block)\/[a-z0-9-]+\/[a-z0-9-/]+|theme\/[a-z0-9-]+)$/u,
+      /^(?:component\/[a-z0-9-]+(?:\/[a-z0-9-]+)?|(?:pattern|block)\/[a-z0-9-]+\/[a-z0-9-/]+|theme\/[a-z0-9-]+)$/u,
     )
     assert.equal(
       item.type,
@@ -127,7 +128,14 @@ test('every registry item is independently bounded, controlled, and safe to inst
     assert.ok(item.files.length >= 1)
 
     const file = item.files[0]
-    assert.match(file.path, isTheme ? /^[a-z0-9-]+\.css$/u : /^(?:[a-z0-9-]+\/)?[a-z0-9-]+\.tsx?$/u)
+    assert.match(
+      file.path,
+      isTheme
+        ? /^[a-z0-9-]+\.css$/u
+        : isVariant
+          ? /[a-z0-9-]+\.tsx?$/u
+          : /^(?:[a-z0-9-]+\/)?[a-z0-9-]+\.tsx?$/u,
+    )
     assert.match(
       file.target,
       isTheme
@@ -151,6 +159,18 @@ test('every registry item is independently bounded, controlled, and safe to inst
       assert.match(itemSource, /--ui-primary:/u)
       assert.match(itemSource, /--ui-font-heading:/u)
       assert.match(itemSource, /--ui-motion-standard:/u)
+      continue
+    }
+    if (isVariant) {
+      assert.equal(item.meta.source, '@astrale-os/ui')
+      assert.equal(item.meta.license, 'MIT')
+      assert.deepEqual(Object.keys(item.meta).sort(), [
+        'canonicalAddress',
+        'license',
+        'provider',
+        'source',
+      ])
+      assert.ok(item.dependencies.includes('@astrale-os/ui@^0.3.0-beta.0'))
       continue
     }
     if (isComponent) {

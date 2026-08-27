@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-separator-separator-13",
+  "title": "Separator 13",
+  "description": "Adaptive separators that switch orientation based on screen size to maintain layout integrity between actions.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/separator/separator-13/separator-13.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\nimport { Separator } from '@astrale-os/ui/separator'\n\nconst SeparatorButtonDemo = () => {\n  return (\n    <div className='flex w-fit flex-col items-center justify-center gap-4 sm:w-full sm:flex-row'>\n      <Button variant='outline' size='lg' className='border-destructive! text-destructive!'>\n        <img\n          src='https://cdn.shadcnstudio.com/ss-assets/brand-logo/google-icon.png?width=20&height=20&format=auto'\n          alt='Google Icon'\n          className='size-5'\n        />\n        <span className='flex flex-1 justify-center'>Continue with Google</span>\n      </Button>\n\n      <Separator orientation='vertical' className='hidden h-9 sm:block' />\n      <Separator className='block h-9 sm:hidden' />\n\n      <Button variant='outline' size='lg' className='border-sky-600 text-sky-600 dark:border-sky-400 dark:text-sky-400'>\n        <img\n          src='https://cdn.shadcnstudio.com/ss-assets/brand-logo/facebook-icon.png?width=20&height=20&format=auto'\n          alt='Facebook Icon'\n          className='size-5'\n        />\n        <span className='flex flex-1 justify-center'>Continue with Facebook</span>\n      </Button>\n    </div>\n  )\n}\n\nexport default SeparatorButtonDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/separator/separator-13.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/separator/separator-13",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

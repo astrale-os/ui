@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-input-input-28",
+  "title": "Input 28",
+  "description": "A URL input field with a protocol selector dropdown at the start",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/input/input-28/input-28.tsx",
+      "content": "import { useId } from 'react'\n\nimport { ButtonGroup } from '@astrale-os/ui/button-group'\nimport { Input } from '@astrale-os/ui/input'\nimport { Label } from '@astrale-os/ui/label'\nimport { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@astrale-os/ui/select'\n\nconst items = [\n  { label: 'https://', value: 'https://' },\n  { label: 'http://', value: 'http://' },\n  { label: 'ftp://', value: 'ftp://' },\n  { label: 'sftp://', value: 'sftp://' },\n  { label: 'ws://', value: 'ws://' },\n  { label: 'wss://', value: 'wss://' }\n]\n\nconst InputStartSelectDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>Input with start select</Label>\n      <ButtonGroup className='w-full'>\n        <Select items={items} defaultValue='https://'>\n          <SelectTrigger id={id}>\n            <SelectValue />\n          </SelectTrigger>\n          <SelectContent>\n            {items.map(item => (\n              <SelectItem key={item.value} value={item.value} className='pr-2 [&_svg]:hidden'>\n                {item.label}\n              </SelectItem>\n            ))}\n          </SelectContent>\n        </Select>\n        <Input id={id} type='text' placeholder='shadcnstudio.com' />\n      </ButtonGroup>\n    </div>\n  )\n}\n\nexport default InputStartSelectDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/input/input-28.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/input/input-28",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

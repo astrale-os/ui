@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pattern-navigation-menu-navigation-menu-09",
+  "title": "Navigation Menu 9",
+  "description": "A multi-trigger navigation menu providing a clean and organized way to access diverse categories of site content.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "next@^15.3.3"
+  ],
+  "files": [
+    {
+      "path": "source/patterns/navigation-menu/navigation-menu-09/navigation-menu-09.tsx",
+      "content": "import Link from 'next/link'\n\nimport {\n  NavigationMenu,\n  NavigationMenuContent,\n  NavigationMenuItem,\n  NavigationMenuLink,\n  NavigationMenuList,\n  NavigationMenuTrigger\n} from '@astrale-os/ui/navigation-menu'\n\nconst NavigationMenuDemo = () => {\n  return (\n    <div className='flex items-center justify-center'>\n      <NavigationMenu>\n        <NavigationMenuList>\n          <NavigationMenuItem>\n            <NavigationMenuTrigger className='[&>svg]:size-4'>Getting started</NavigationMenuTrigger>\n            <NavigationMenuContent>\n              <ul className='w-50'>\n                <li>\n                  <NavigationMenuLink render={<Link href='#' />}>\n                    <div className='px-1 font-medium'>Introduction</div>\n                  </NavigationMenuLink>\n                </li>\n                <li>\n                  <NavigationMenuLink render={<Link href='#' />}>\n                    <div className='px-1 font-medium'>Installation</div>\n                  </NavigationMenuLink>\n                </li>\n                <li>\n                  <NavigationMenuLink render={<Link href='#' />}>\n                    <div className='px-1 font-medium'>Quick Start</div>\n                  </NavigationMenuLink>\n                </li>\n              </ul>\n            </NavigationMenuContent>\n          </NavigationMenuItem>\n          <NavigationMenuItem>\n            <NavigationMenuTrigger className='[&>svg]:size-4'>Components</NavigationMenuTrigger>\n            <NavigationMenuContent>\n              <ul className='w-50'>\n                <li>\n                  <NavigationMenuLink render={<Link href='#' />}>\n                    <div className='px-1 font-medium'>Alert Dialog</div>\n                  </NavigationMenuLink>\n                </li>\n                <li>\n                  <NavigationMenuLink render={<Link href='#' />}>\n                    <div className='px-1 font-medium'>Hover Card</div>\n                  </NavigationMenuLink>\n                </li>\n                <li>\n                  <NavigationMenuLink render={<Link href='#' />}>\n                    <div className='px-1 font-medium'>Button</div>\n                  </NavigationMenuLink>\n                </li>\n              </ul>\n            </NavigationMenuContent>\n          </NavigationMenuItem>\n          <NavigationMenuItem>\n            <NavigationMenuLink render={<Link href='#' />}>Docs</NavigationMenuLink>\n          </NavigationMenuItem>\n        </NavigationMenuList>\n      </NavigationMenu>\n    </div>\n  )\n}\n\nexport default NavigationMenuDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/pattern/navigation-menu/navigation-menu-09.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "pattern/navigation-menu/navigation-menu-09",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:block"
+}

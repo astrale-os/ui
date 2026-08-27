@@ -1,6 +1,7 @@
 import type { ComponentType } from 'react'
 
-import registry from '../../../registry/registry.json'
+import coreCatalog from '../../../registry/core-catalog.json'
+import { variantFamilyLoaders } from './generated/variant-families.gen.js'
 import { componentSources } from './inventory.js'
 
 declare const __ASTRALE_STUDIO_CATALOG__: boolean
@@ -29,34 +30,72 @@ export type PreviewDescriptor = {
   load: () => Promise<PreviewModule>
 }
 
-type StudioCatalogItem = { address: string; title: string; source: string }
+type CatalogItem = {
+  address: string
+  title: string
+  classification: 'component' | 'pattern' | 'block'
+  family: string
+  source?: string
+  variantCount: number
+}
+
+type VariantFamilyModule = {
+  previewLoaders: Record<string, () => Promise<PreviewModule>>
+}
 
 const runtimeModules = import.meta.glob<PreviewModule>(
   '../../../packages/ui/previews/**/*.preview.tsx',
 )
-const registryModules = import.meta.glob<PreviewModule>('../../../registry/**/*.preview.tsx')
-const studioModules = __ASTRALE_STUDIO_CATALOG__
-  ? import.meta.glob<PreviewModule>('../../../.internal/shadcn-studio/registry/**/*.preview.tsx')
-  : {}
+const registryModules = import.meta.glob<PreviewModule>([
+  '../../../registry/**/*.preview.tsx',
+  '!../../../registry/variants/**/*.preview.tsx',
+])
 const studioCatalogModules = (
   __ASTRALE_STUDIO_CATALOG__
-    ? import.meta.glob('../../../.internal/shadcn-studio/catalog.json', {
+    ? import.meta.glob('../../../registry/variants/catalog.json', {
         eager: true,
         import: 'default',
       })
     : {}
-) as Record<string, StudioCatalogItem[]>
+) as Record<string, CatalogItem[]>
 const studioCatalog = Object.values(studioCatalogModules)[0] ?? []
+const variantFamilyLoaderMap = (__ASTRALE_STUDIO_CATALOG__
+  ? variantFamilyLoaders
+  : {}) as unknown as Record<string, () => Promise<VariantFamilyModule>>
+const variantFamilyModulePromises = new Map<string, Promise<VariantFamilyModule>>()
+
+function loadVariantFamily(family: string) {
+  const existing = variantFamilyModulePromises.get(family)
+  if (existing) return existing
+  const load = variantFamilyLoaderMap[family]
+  if (!load) return Promise.reject(new Error(`No variant family loader for ${family}.`))
+  const pending = load().catch((error: unknown) => {
+    variantFamilyModulePromises.delete(family)
+    throw error
+  })
+  variantFamilyModulePromises.set(family, pending)
+  return pending
+}
+
+export function prefetchPreviewFamily(family: string) {
+  if (!variantFamilyLoaderMap[family]) return Promise.resolve()
+  return loadVariantFamily(family).then(() => undefined)
+}
+
+async function loadVariantPreview(family: string, id: string) {
+  const module = await loadVariantFamily(family)
+  const load = module.previewLoaders[id]
+  if (!load) throw new Error(`Variant family ${family} does not own ${id}.`)
+  return load()
+}
 
 const registryTitles = new Map([
-  ...registry.items.map((item) => [item.meta.canonicalAddress, item.title] as const),
+  ...coreCatalog.map((item) => [item.address, item.title] as const),
   ...studioCatalog.map((item) => [item.address, item.title] as const),
 ])
 const registrySources = new Map([
-  ...registry.items
-    .filter((item) => 'upstreamAddress' in item.meta)
-    .map((item) => [item.meta.canonicalAddress, item.meta.upstreamAddress] as const),
-  ...studioCatalog.map((item) => [item.address, item.source] as const),
+  ...coreCatalog.flatMap((item) => (item.source ? [[item.address, item.source] as const] : [])),
+  ...studioCatalog.flatMap((item) => (item.source ? [[item.address, item.source] as const] : [])),
 ])
 const admittedComponentSources: Readonly<Record<string, string>> = componentSources
 
@@ -83,7 +122,7 @@ function describe(path: string, load: () => Promise<PreviewModule>): PreviewDesc
     family = subject
   } else {
     const studio =
-      /\/\.internal\/shadcn-studio\/registry\/(components|patterns|blocks)\/([^/]+)\/([^/]+)\/[^/]+$/u.exec(
+      /\/registry\/variants\/source\/(components|patterns|blocks)\/([^/]+)\/([^/]+)\/[^/]+$/u.exec(
         path,
       )
     const component = /\/registry\/components\/([^/]+)\/[^/]+$/u.exec(path)
@@ -131,12 +170,30 @@ function describe(path: string, load: () => Promise<PreviewModule>): PreviewDesc
   }
 }
 
+function describeProvider(item: CatalogItem): PreviewDescriptor {
+  const family = `${item.classification}/${item.family}`
+  const id = `${item.address}#default`
+  return {
+    address: item.address,
+    scene: 'default',
+    id,
+    canonical: true,
+    kind: item.classification,
+    family: item.family,
+    group: words(item.family),
+    title: item.title,
+    defaultCanvas: item.classification === 'block' ? 'viewport' : 'panel',
+    expectedSource: item.source,
+    load: () => loadVariantPreview(family, id),
+  }
+}
+
 export const previewDescriptors = [
   ...Object.entries(runtimeModules),
   ...Object.entries(registryModules),
-  ...Object.entries(studioModules),
 ]
   .map(([path, load]) => describe(path, load))
+  .concat(studioCatalog.map(describeProvider))
   .sort((left, right) => left.id.localeCompare(right.id))
 
 const admittedCanvases = new Set<PreviewCanvas>(['compact', 'panel', 'wide', 'viewport'])

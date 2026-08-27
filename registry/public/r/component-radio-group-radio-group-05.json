@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-radio-group-radio-group-05",
+  "title": "Radio Group 5",
+  "description": "A radio group with dashed borders",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/radio-group/radio-group-05/radio-group-05.tsx",
+      "content": "import { Label } from '@astrale-os/ui/label'\nimport { RadioGroup, RadioGroupItem } from '@astrale-os/ui/radio-group'\n\nconst RadioGroupDashedDemo = () => {\n  return (\n    <RadioGroup defaultValue='standard'>\n      <div className='flex items-center gap-2'>\n        <RadioGroupItem\n          value='standard'\n          id='standard'\n          className='border-primary focus-visible:border-primary border-dashed'\n        />\n        <Label htmlFor='standard'>Standard Shipping</Label>\n      </div>\n      <div className='flex items-center gap-2'>\n        <RadioGroupItem\n          value='express'\n          id='express'\n          className='border-primary focus-visible:border-primary border-dashed'\n        />\n        <Label htmlFor='express'>Express Delivery</Label>\n      </div>\n      <div className='flex items-center gap-2'>\n        <RadioGroupItem\n          value='overnight'\n          id='overnight'\n          className='border-primary focus-visible:border-primary border-dashed'\n        />\n        <Label htmlFor='overnight'>Overnight Shipping</Label>\n      </div>\n    </RadioGroup>\n  )\n}\n\nexport default RadioGroupDashedDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/radio-group/radio-group-05.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/radio-group/radio-group-05",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

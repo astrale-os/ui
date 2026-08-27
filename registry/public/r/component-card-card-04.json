@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-card-card-04",
+  "title": "Card 4",
+  "description": "Image showcase card with gradient background and bottom-aligned image",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/card/card-04/card-04.tsx",
+      "content": "import { Card, CardContent, CardHeader, CardDescription, CardTitle } from '@astrale-os/ui/card'\n\nconst CardBottomImageDemo = () => {\n  return (\n    <Card className='max-w-md pb-0'>\n      <CardHeader>\n        <CardTitle>Fluid Gradient Flow</CardTitle>\n        <CardDescription>A vibrant and abstract background with smooth gradient curves.</CardDescription>\n      </CardHeader>\n      <CardContent className='px-0'>\n        <img\n          src='https://cdn.shadcnstudio.com/ss-assets/components/card/image-1.png?height=280&format=auto'\n          alt='Banner'\n          className='aspect-video h-70 rounded-b-xl object-cover'\n        />\n      </CardContent>\n    </Card>\n  )\n}\n\nexport default CardBottomImageDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/card/card-04.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/card/card-04",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

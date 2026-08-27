@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-dropdown-menu-dropdown-menu-01",
+  "title": "Dropdown Menu 1",
+  "description": "Basic dropdown menu with groups, separators, and submenu for account actions",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/dropdown-menu/dropdown-menu-01/dropdown-menu-01.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\nimport {\n  DropdownMenu,\n  DropdownMenuContent,\n  DropdownMenuGroup,\n  DropdownMenuItem,\n  DropdownMenuLabel,\n  DropdownMenuSeparator,\n  DropdownMenuSub,\n  DropdownMenuSubContent,\n  DropdownMenuSubTrigger,\n  DropdownMenuTrigger\n} from '@astrale-os/ui/dropdown-menu'\n\nconst DropdownMenuDemo = () => {\n  return (\n    <DropdownMenu>\n      <DropdownMenuTrigger render={<Button variant='outline'>Basic</Button>} />\n      <DropdownMenuContent className='w-56'>\n        <DropdownMenuGroup>\n          <DropdownMenuLabel>My Account</DropdownMenuLabel>\n          <DropdownMenuSeparator />\n          <DropdownMenuItem>Profile</DropdownMenuItem>\n          <DropdownMenuItem>Billing</DropdownMenuItem>\n        </DropdownMenuGroup>\n        <DropdownMenuSeparator />\n        <DropdownMenuGroup>\n          <DropdownMenuSub>\n            <DropdownMenuSubTrigger>Invite users</DropdownMenuSubTrigger>\n            <DropdownMenuSubContent>\n              <DropdownMenuItem>Email</DropdownMenuItem>\n              <DropdownMenuItem>Message</DropdownMenuItem>\n              <DropdownMenuSeparator />\n              <DropdownMenuItem>More...</DropdownMenuItem>\n            </DropdownMenuSubContent>\n          </DropdownMenuSub>\n          <DropdownMenuItem>GitHub</DropdownMenuItem>\n          <DropdownMenuItem>Support</DropdownMenuItem>\n          <DropdownMenuItem disabled>API</DropdownMenuItem>\n        </DropdownMenuGroup>\n      </DropdownMenuContent>\n    </DropdownMenu>\n  )\n}\n\nexport default DropdownMenuDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/dropdown-menu/dropdown-menu-01.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/dropdown-menu/dropdown-menu-01",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

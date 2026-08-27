@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-menubar-menubar-07",
+  "title": "Menu Bar 7",
+  "description": "Labeled section menubar with Recent and Favorites contact groups and Work and Personal group categories.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/menubar/menubar-07/menubar-07.tsx",
+      "content": "import {\n  Menubar,\n  MenubarContent,\n  MenubarItem,\n  MenubarLabel,\n  MenubarGroup,\n  MenubarMenu,\n  MenubarSeparator,\n  MenubarShortcut,\n  MenubarTrigger\n} from '@astrale-os/ui/menubar'\n\nconst MenuBarLabelDemo = () => {\n  return (\n    <div className='flex flex-col items-center justify-center space-y-4'>\n      <div className='text-muted-foreground text-sm font-medium'>Label Variant - Address Book</div>\n      <Menubar>\n        <MenubarMenu>\n          <MenubarTrigger>Contacts</MenubarTrigger>\n          <MenubarContent>\n            <MenubarGroup>\n              <MenubarLabel>Recent</MenubarLabel>\n              <MenubarItem>\n                John Doe <MenubarShortcut>⌘1</MenubarShortcut>\n              </MenubarItem>\n              <MenubarItem>\n                Jane Smith <MenubarShortcut>⌘2</MenubarShortcut>\n              </MenubarItem>\n            </MenubarGroup>\n            <MenubarSeparator />\n            <MenubarGroup>\n              <MenubarLabel>Favorites</MenubarLabel>\n              <MenubarItem>\n                Alice Johnson <MenubarShortcut>⌘3</MenubarShortcut>\n              </MenubarItem>\n              <MenubarItem>\n                Bob Wilson <MenubarShortcut>⌘4</MenubarShortcut>\n              </MenubarItem>\n              <MenubarSeparator />\n              <MenubarItem>\n                Add Contact <MenubarShortcut>⌘N</MenubarShortcut>\n              </MenubarItem>\n            </MenubarGroup>\n          </MenubarContent>\n        </MenubarMenu>\n        <MenubarMenu>\n          <MenubarTrigger>Groups</MenubarTrigger>\n          <MenubarContent>\n            <MenubarGroup>\n              <MenubarLabel>Work</MenubarLabel>\n              <MenubarItem>Team A</MenubarItem>\n              <MenubarItem>Team B</MenubarItem>\n            </MenubarGroup>\n            <MenubarSeparator />\n            <MenubarGroup>\n              <MenubarLabel>Personal</MenubarLabel>\n              <MenubarItem>Family</MenubarItem>\n              <MenubarItem>Friends</MenubarItem>\n            </MenubarGroup>\n          </MenubarContent>\n        </MenubarMenu>\n      </Menubar>\n    </div>\n  )\n}\n\nexport default MenuBarLabelDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/menubar/menubar-07.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/menubar/menubar-07",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

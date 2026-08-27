@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-drawer-drawer-05",
+  "title": "Drawer 5",
+  "description": "Right-side sign-in form drawer with name, email, address, and description fields.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/drawer/drawer-05/drawer-05.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\nimport {\n  Drawer,\n  DrawerClose,\n  DrawerContent,\n  DrawerDescription,\n  DrawerFooter,\n  DrawerHeader,\n  DrawerTitle,\n  DrawerTrigger\n} from '@astrale-os/ui/drawer'\nimport { Input } from '@astrale-os/ui/input'\nimport { Label } from '@astrale-os/ui/label'\nimport { Textarea } from '@astrale-os/ui/textarea'\n\nconst DrawerWithSides = () => {\n  return (\n    <Drawer swipeDirection='right'>\n      <DrawerTrigger render={<Button variant='outline' />}>Form</DrawerTrigger>\n      <DrawerContent>\n        <DrawerHeader>\n          <DrawerTitle>Sign In</DrawerTitle>\n          <DrawerDescription>Fill the form to get full access</DrawerDescription>\n        </DrawerHeader>\n        <div className='grid flex-1 auto-rows-min gap-6 px-4'>\n          <div className='grid gap-3'>\n            <Label htmlFor='drawer-demo-name'>Full Name</Label>\n            <Input id='drawer-demo-name' placeholder='John Doe' />\n          </div>\n          <div className='grid gap-3'>\n            <Label htmlFor='drawer-demo-email'>Email</Label>\n            <Input id='drawer-demo-email' placeholder='john.doe@example.com' />\n          </div>\n          <div className='grid gap-3'>\n            <Label htmlFor='drawer-demo-address'>Address</Label>\n            <Input id='drawer-demo-address' placeholder='123 Main St' />\n          </div>\n          <div className='grid gap-3'>\n            <Label htmlFor='drawer-demo-description'>Description</Label>\n            <Textarea id='drawer-demo-description' placeholder='Enter a description' />\n          </div>\n        </div>\n        <DrawerFooter>\n          <Button>Submit</Button>\n          <DrawerClose render={<Button variant='outline' />}>Cancel</DrawerClose>\n        </DrawerFooter>\n      </DrawerContent>\n    </Drawer>\n  )\n}\n\nexport default DrawerWithSides\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/drawer/drawer-05.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/drawer/drawer-05",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

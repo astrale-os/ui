@@ -1,0 +1,187 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-components-context-menu",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "component-context-menu-context-menu-01",
+      "type": "registry:component",
+      "title": "Context Menu 1",
+      "description": "Basic context menu with a single grouped item list containing Copy, Paste, and Delete actions.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "context-menu-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/context-menu/context-menu-01.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/context-menu/context-menu-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-context-menu-context-menu-02",
+      "type": "registry:component",
+      "title": "Context Menu 2",
+      "description": "Context menu with a nested submenu exposing Save File, Create Folder, and View Details options.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "context-menu-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/context-menu/context-menu-02.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/context-menu/context-menu-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-context-menu-context-menu-03",
+      "type": "registry:component",
+      "title": "Context Menu 3",
+      "description": "Context menu with keyboard shortcut labels and multiple disabled items for restricted actions.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "context-menu-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/context-menu/context-menu-03.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/context-menu/context-menu-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-context-menu-context-menu-04",
+      "type": "registry:component",
+      "title": "Context Menu 4",
+      "description": "Context menu with keyboard shortcut bindings for New File, Open, Save, Print, and Close actions.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "context-menu-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/context-menu/context-menu-04.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/context-menu/context-menu-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-context-menu-context-menu-05",
+      "type": "registry:component",
+      "title": "Context Menu 5",
+      "description": "Labeled group context menu with Project and Actions sections and a destructive Archive Project item.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "context-menu-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/context-menu/context-menu-05.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/context-menu/context-menu-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-context-menu-context-menu-06",
+      "type": "registry:component",
+      "title": "Context Menu 6",
+      "description": "Icon-enhanced context menu with inline icons for each action and a destructive Remove from Library item.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "context-menu-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/context-menu/context-menu-06.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/context-menu/context-menu-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-context-menu-context-menu-07",
+      "type": "registry:component",
+      "title": "Context Menu 7",
+      "description": "Context menu with checkbox toggles for view settings and a radio group for layout density selection.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "context-menu-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/context-menu/context-menu-07.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/context-menu/context-menu-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-context-menu-context-menu-08",
+      "type": "registry:component",
+      "title": "Context Menu 8",
+      "description": "Context menu embedded inside a top Sheet drawer for file-level actions with a destructive delete option.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "context-menu-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/context-menu/context-menu-08.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/context-menu/context-menu-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-context-menu-context-menu-09",
+      "type": "registry:component",
+      "title": "Context Menu 9",
+      "description": "Full-featured context menu combining shortcuts, nested submenus, checkbox toggles, radio group sorting, and destructive actions.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "context-menu-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/context-menu/context-menu-09.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/context-menu/context-menu-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

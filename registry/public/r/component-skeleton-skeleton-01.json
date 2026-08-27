@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-skeleton-skeleton-01",
+  "title": "Skeleton 1",
+  "description": "Compact avatar with two-line text skeleton, suitable for user rows or list items.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/skeleton/skeleton-01/skeleton-01.tsx",
+      "content": "import { Skeleton } from '@astrale-os/ui/skeleton'\n\nconst SkeletonDemo = () => {\n  return (\n    <div className='flex items-center gap-4'>\n      <Skeleton className='size-12 rounded-full' />\n      <div className='space-y-2'>\n        <Skeleton className='h-4 w-62.5' />\n        <Skeleton className='h-4 w-50' />\n      </div>\n    </div>\n  )\n}\n\nexport default SkeletonDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/skeleton/skeleton-01.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/skeleton/skeleton-01",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

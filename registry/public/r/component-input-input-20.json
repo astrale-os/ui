@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-input-input-20",
+  "title": "Input 20",
+  "description": "A domain input field with an external \".com\" add-on box at the end",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/input/input-20/input-20.tsx",
+      "content": "import { useId } from 'react'\n\nimport { Button } from '@astrale-os/ui/button'\nimport { ButtonGroup } from '@astrale-os/ui/button-group'\nimport { Input } from '@astrale-os/ui/input'\nimport { Label } from '@astrale-os/ui/label'\n\nconst InputEndAddOnDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>Input with end add-on</Label>\n      <ButtonGroup>\n        <Input id={id} placeholder='shadcnstudio.com' />\n        <Button variant='outline'>.com</Button>\n      </ButtonGroup>\n    </div>\n  )\n}\n\nexport default InputEndAddOnDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/input/input-20.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/input/input-20",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

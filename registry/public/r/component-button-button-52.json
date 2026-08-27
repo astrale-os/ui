@@ -1,0 +1,32 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-button-button-52",
+  "title": "Button 52",
+  "description": "Button with stitched border design using layered shadow effects",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "class-variance-authority@^0.7.1",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/button/button-52/button-52.tsx",
+      "content": "import { PrimaryOrionButton } from '@/components/ui/orion-button'\n\nconst PrimaryOrionButtonDemo = () => {\n  return <PrimaryOrionButton>Orion Button</PrimaryOrionButton>\n}\n\nexport default PrimaryOrionButtonDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/button/button-52.tsx"
+    },
+    {
+      "path": "source/components/button/button-52/support/components/ui/orion-button.tsx",
+      "content": "import * as React from 'react'\n\nimport { Button } from '@astrale-os/ui/button'\n\nimport { cn } from '@astrale-os/ui/class-name'\n\ninterface OrionButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'render'> {\n  children: React.ReactNode\n  className?: string\n  render?: React.ReactElement\n}\n\nfunction PrimaryOrionButton({ children, render, className, ...props }: OrionButtonProps) {\n  return (\n    <Button\n      render={render}\n      nativeButton={!render}\n      className={cn(\n        '[a]:hover:bg-primary hover:bg-primary h-10 rounded-md border-0 px-6 text-base shadow-[inset_0_2px_3px_0_var(--primary),inset_2px_-4px_4px_0_rgba(0,0,0,0.25),inset_-2px_4px_4px_0_rgba(255,255,255,0.35)] transition-shadow duration-300 hover:shadow-[inset_0_0_0_0_var(--primary),inset_1px_-1.5px_2px_0_rgba(0,0,0,0.25),inset_-1px_1.5px_2px_0_rgba(255,255,255,0.35)] active:translate-y-0',\n        className\n      )}\n      {...props}\n    >\n      {children}\n    </Button>\n  )\n}\n\nfunction SecondaryOrionButton({ children, render, className, ...props }: OrionButtonProps) {\n  return (\n    <Button\n      variant='secondary'\n      render={render}\n      nativeButton={!render}\n      className={cn(\n        'bg-secondary text-secondary-foreground hover:bg-secondary h-10 rounded-md border-0 px-6 text-base shadow-[inset_0_2px_3px_0_var(--secondary),inset_2px_-4px_4px_0_rgba(0,0,0,0.25),inset_-2px_4px_4px_0_rgba(255,255,255,0.35)] transition-shadow duration-300 hover:shadow-[inset_0_0_0_0_var(--secondary),inset_1px_-1.5px_2px_0_rgba(0,0,0,0.25),inset_-1px_1.5px_2px_0_rgba(255,255,255,0.35)] active:translate-y-0',\n        className\n      )}\n      {...props}\n    >\n      {children}\n    </Button>\n  )\n}\n\nexport { PrimaryOrionButton, SecondaryOrionButton, type OrionButtonProps }\n",
+      "type": "registry:ui",
+      "target": "components/ui/orion-button.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/button/button-52",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

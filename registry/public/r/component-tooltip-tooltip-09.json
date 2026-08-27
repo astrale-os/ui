@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-tooltip-tooltip-09",
+  "title": "Tooltip 9",
+  "description": "A tooltip displaying user information with avatar and name",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/tooltip/tooltip-09/tooltip-09.tsx",
+      "content": "import { Avatar, AvatarFallback, AvatarImage } from '@astrale-os/ui/avatar'\nimport { Button } from '@astrale-os/ui/button'\nimport { Tooltip, TooltipContent, TooltipTrigger } from '@astrale-os/ui/tooltip'\n\nconst TooltipAvatarDemo = () => {\n  return (\n    <Tooltip>\n      <TooltipTrigger\n        render={\n          <Button variant='outline' size='sm'>\n            Avatar\n          </Button>\n        }\n      />\n      <TooltipContent>\n        <div className='flex items-center gap-1.5'>\n          <Avatar className='size-5'>\n            <AvatarImage src='https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-5.png' alt='Hallie Richards' />\n            <AvatarFallback className='text-xs'>HR</AvatarFallback>\n          </Avatar>\n          <p className='font-medium'>Hallie Richards</p>\n        </div>\n      </TooltipContent>\n    </Tooltip>\n  )\n}\n\nexport default TooltipAvatarDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/tooltip/tooltip-09.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/tooltip/tooltip-09",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

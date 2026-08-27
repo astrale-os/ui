@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-button-group-button-group-15",
+  "title": "Button Group 15",
+  "description": "Navigation button group with scale animation on press using Framer Motion",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0",
+    "motion@^13.1.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/button-group/button-group-15/button-group-15.tsx",
+      "content": "import * as motion from 'motion/react-client'\nimport { Button } from '@astrale-os/ui/button'\nimport { ButtonGroup } from '@astrale-os/ui/button-group'\nimport { ChevronLeftIcon, ChevronRightIcon } from \"lucide-react\"\n\nconst ButtonGroupScaleDemo = () => {\n  return (\n    <ButtonGroup className='*:border-primary *:not-last:border-r-primary-foreground/30 *:bg-clip-border'>\n      <Button className='transition-none active:translate-y-0' render={<motion.button whileTap={{ scale: 0.9 }} />}>\n        <ChevronLeftIcon\n        />\n        Previous\n      </Button>\n      <Button className='transition-none active:translate-y-0' render={<motion.button whileTap={{ scale: 0.9 }} />}>\n        Next\n        <ChevronRightIcon\n        />\n      </Button>\n    </ButtonGroup>\n  )\n}\n\nexport default ButtonGroupScaleDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/button-group/button-group-15.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/button-group/button-group-15",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

@@ -20,7 +20,7 @@ import {
 const visibilityCallbacks = new Map<Element, () => void>()
 let visibilityObserver: IntersectionObserver | undefined
 
-function observeNearViewport(element: Element, callback: () => void) {
+export function observeNearViewport(element: Element, callback: () => void) {
   if (typeof IntersectionObserver === 'undefined') {
     callback()
     return () => undefined

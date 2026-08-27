@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-toggle-group-toggle-group-07",
+  "title": "Toggle Group 7",
+  "description": "Single-select toggle group with four text alignment icons for left, center, right, and justified alignment.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/toggle-group/toggle-group-07/toggle-group-07.tsx",
+      "content": "import { ToggleGroup, ToggleGroupItem } from '@astrale-os/ui/toggle-group'\nimport { AlignLeftIcon, AlignCenterIcon, AlignRightIcon, MenuIcon } from \"lucide-react\"\n\nconst ToggleGroupAlignment = () => {\n  return (\n    <div className='flex items-center justify-center'>\n      <ToggleGroup defaultValue={['left']} spacing={1}>\n        <ToggleGroupItem value='left' aria-label='Align left'>\n          <AlignLeftIcon\n          />\n        </ToggleGroupItem>\n        <ToggleGroupItem value='center' aria-label='Align center'>\n          <AlignCenterIcon\n          />\n        </ToggleGroupItem>\n        <ToggleGroupItem value='right' aria-label='Align right'>\n          <AlignRightIcon\n          />\n        </ToggleGroupItem>\n        <ToggleGroupItem value='justify' aria-label='Justify'>\n          <MenuIcon\n          />\n        </ToggleGroupItem>\n      </ToggleGroup>\n    </div>\n  )\n}\n\nexport default ToggleGroupAlignment\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/toggle-group/toggle-group-07.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/toggle-group/toggle-group-07",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

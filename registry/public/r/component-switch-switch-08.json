@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-switch-switch-08",
+  "title": "Switch 8",
+  "description": "A switch with dynamic label that changes text based on toggle state (Yes/No)",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/switch/switch-08/switch-08.tsx",
+      "content": "import { useState } from 'react'\n\nimport { Label } from '@astrale-os/ui/label'\nimport { Switch } from '@astrale-os/ui/switch'\n\nconst SwitchToggleLabelDemo = () => {\n  const [checked, setChecked] = useState<boolean>(true)\n\n  return (\n    <div className='inline-flex items-center gap-2'>\n      <Switch id='toggle-label' checked={checked} onCheckedChange={setChecked} aria-label='Toggle switch label' />\n      <Label htmlFor='toggle-label' className='text-sm font-medium'>\n        {checked ? 'Yes' : 'No'}\n      </Label>\n    </div>\n  )\n}\n\nexport default SwitchToggleLabelDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/switch/switch-08.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/switch/switch-08",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

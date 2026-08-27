@@ -1,0 +1,307 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-components-popover",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "component-popover-popover-01",
+      "type": "registry:component",
+      "title": "Popover 1",
+      "description": "A ratings popover displaying star ratings with progress bars and review statistics",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "popover-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/popover/popover-01.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/popover/popover-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-popover-popover-02",
+      "type": "registry:component",
+      "title": "Popover 2",
+      "description": "A dimensions popover with input fields for width, max width, height, and max height settings",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "popover-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/popover/popover-02.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/popover/popover-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-popover-popover-03",
+      "type": "registry:component",
+      "title": "Popover 3",
+      "description": "A pricing popover displaying plan details with features and pricing information",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "popover-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/popover/popover-03.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/popover/popover-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-popover-popover-04",
+      "type": "registry:component",
+      "title": "Popover 4",
+      "description": "A volume control popover with a slider for adjusting audio levels",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "popover-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/popover/popover-04.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/popover/popover-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-popover-popover-05",
+      "type": "registry:component",
+      "title": "Popover 5",
+      "description": "An informational popover about Shadcn Studio with description and learn more link",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "popover-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/popover/popover-05.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/popover/popover-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-popover-popover-06",
+      "type": "registry:component",
+      "title": "Popover 6",
+      "description": "A download progress popover with progress bar and pause/cancel/retry controls",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "popover-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/popover/popover-06.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/popover/popover-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-popover-popover-07",
+      "type": "registry:component",
+      "title": "Popover 7",
+      "description": "A file deletion confirmation popover with warning icon and action buttons",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "popover-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/popover/popover-07.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/popover/popover-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-popover-popover-08",
+      "type": "registry:component",
+      "title": "Popover 8",
+      "description": "A feedback popover with textarea for user comments and send/cancel actions",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "popover-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/popover/popover-08.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/popover/popover-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-popover-popover-09",
+      "type": "registry:component",
+      "title": "Popover 9",
+      "description": "A filter popover with checkbox options and price range slider controls",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "popover-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/popover/popover-09.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/popover/popover-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-popover-popover-10",
+      "type": "registry:component",
+      "title": "Popover 10",
+      "description": "A user search popover with debounced input, loading states, and avatar display",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "popover-10.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/popover/popover-10.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/popover/popover-10",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-popover-popover-11",
+      "type": "registry:component",
+      "title": "Popover 11",
+      "description": "A notifications popover with unread indicators and mark-as-read functionality",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "popover-11.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/popover/popover-11.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/popover/popover-11",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-popover-popover-12",
+      "type": "registry:component",
+      "title": "Popover 12",
+      "description": "An informational popover with image and content layout for location details",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "popover-12.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/popover/popover-12.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/popover/popover-12",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-popover-popover-13",
+      "type": "registry:component",
+      "title": "Popover 13",
+      "description": "A promotional popover with QR code and coupon code with copy functionality with slide in from left animation",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "popover-13.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/popover/popover-13.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/popover/popover-13",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-popover-popover-14",
+      "type": "registry:component",
+      "title": "Popover 14",
+      "description": "A team sharing popover with email input and member selection checkboxes with slide in from bottom animation",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "popover-14.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/popover/popover-14.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/popover/popover-14",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-popover-popover-15",
+      "type": "registry:component",
+      "title": "Popover 15",
+      "description": "A user profile popover with avatar, bio, and social statistics display with zoom-in animation",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "popover-15.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/popover/popover-15.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/popover/popover-15",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

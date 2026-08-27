@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-drawer-drawer-14",
+  "title": "Drawer 14",
+  "description": "Right-side contact profile drawer with a verified avatar badge and labeled info sections for personal details and team memberships.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/drawer/drawer-14/drawer-14.tsx",
+      "content": "import { Avatar, AvatarFallback, AvatarImage } from '@astrale-os/ui/avatar'\nimport { Button } from '@astrale-os/ui/button'\nimport { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger } from '@astrale-os/ui/drawer'\nimport { Separator } from '@astrale-os/ui/separator'\nimport { UserIcon, BadgeCheckIcon } from \"lucide-react\"\n\nconst DrawerProfile = () => {\n  return (\n    <Drawer swipeDirection='right'>\n      <DrawerTrigger render={<Button variant='outline' />}><UserIcon\n                    />{' '}Profile\n                  </DrawerTrigger>\n      <DrawerContent>\n        <DrawerHeader>\n          <DrawerTitle>Contact Details</DrawerTitle>\n        </DrawerHeader>\n        <div className='no-scrollbar h-full overflow-y-auto'>\n          <div className='bg-muted p-2'>\n            <p className='text-muted-foreground ml-4 uppercase'>Contact</p>\n          </div>\n          <div className='flex flex-col items-center justify-center gap-4 p-6'>\n            <div className='relative w-fit'>\n              <Avatar className='size-14'>\n                <AvatarImage src='https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-1.png' alt='Hallie Richards' />\n                <AvatarFallback>HR</AvatarFallback>\n              </Avatar>\n              <span className='absolute -top-1.5 -right-1.5'>\n                <span className='sr-only'>Verified</span>\n                <BadgeCheckIcon className='text-background size-6 fill-sky-500' />\n              </span>\n            </div>\n            <div className='space-y-2 text-center'>\n              <h4 className='text-lg font-medium'>Matthew Johnson</h4>\n              <p>A-8486214</p>\n            </div>\n          </div>\n          <div className='bg-muted p-2'>\n            <p className='text-muted-foreground ml-4 uppercase'>Information</p>\n          </div>\n          <div className='space-y-3 p-4'>\n            <div className='space-y-1'>\n              <div className='text-muted-foreground uppercase'>Full Name</div>\n              <div className='text-sm'>Matthew Johnson</div>\n            </div>\n            <Separator />\n            <div className='space-y-1'>\n              <div className='text-muted-foreground uppercase'>Country</div>\n              <div className='text-sm'>USA</div>\n            </div>\n            <Separator />\n            <div className='space-y-1'>\n              <div className='text-muted-foreground uppercase'>Role</div>\n              <div className='text-sm'>Developer</div>\n            </div>\n            <Separator />\n            <div className='space-y-1'>\n              <div className='text-muted-foreground uppercase'>Email</div>\n              <div className='text-sm'>matthew@shadcnstudio.com</div>\n            </div>\n            <Separator />\n            <div className='space-y-1'>\n              <div className='text-muted-foreground uppercase'>Phone number</div>\n              <div className='text-sm'>+1 548 564 62 28</div>\n            </div>\n          </div>\n          <div className='bg-muted p-2'>\n            <p className='text-muted-foreground ml-4 uppercase'>Teams</p>\n          </div>\n          <div className='space-y-3 p-4'>\n            <div className='space-y-1'>\n              <div className='text-muted-foreground uppercase'>Backend Developer</div>\n              <div className='text-sm'>126 Members</div>\n            </div>\n            <Separator />\n            <div className='space-y-1'>\n              <div className='text-muted-foreground uppercase'>React Developer</div>\n              <div className='text-sm'>98 Members</div>\n            </div>\n          </div>\n        </div>\n      </DrawerContent>\n    </Drawer>\n  )\n}\n\nexport default DrawerProfile\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/drawer/drawer-14.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/drawer/drawer-14",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-input-input-26",
+  "title": "Input 26",
+  "description": "A password input field with a toggle button to show/hide password visibility",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/input/input-26/input-26.tsx",
+      "content": "'use client'\n\nimport { useId, useState } from 'react'\nimport { Button } from '@astrale-os/ui/button'\nimport { InputGroup, InputGroupAddon, InputGroupInput } from '@astrale-os/ui/input-group'\nimport { Label } from '@astrale-os/ui/label'\nimport { EyeOffIcon, EyeIcon } from \"lucide-react\"\n\nconst InputPasswordDemo = () => {\n  const [isVisible, setIsVisible] = useState(false)\n\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>Password input</Label>\n      <InputGroup>\n        <InputGroupInput id={id} type={isVisible ? 'text' : 'password'} placeholder='Password' />\n        <InputGroupAddon align='inline-end'>\n          <Button\n            variant='ghost'\n            size='icon'\n            onClick={() => setIsVisible(prevState => !prevState)}\n            className='text-muted-foreground focus-visible:ring-ring/50 rounded-l-none hover:bg-transparent'\n          >\n            {isVisible ? (\n              <EyeOffIcon\n              />\n            ) : (\n              <EyeIcon\n              />\n            )}\n            <span className='sr-only'>{isVisible ? 'Hide password' : 'Show password'}</span>\n          </Button>\n        </InputGroupAddon>\n      </InputGroup>\n    </div>\n  )\n}\n\nexport default InputPasswordDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/input/input-26.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/input/input-26",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

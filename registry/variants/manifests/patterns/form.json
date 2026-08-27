@@ -1,0 +1,300 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-patterns-form",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "pattern-form-form-01",
+      "type": "registry:block",
+      "title": "Form 1",
+      "description": "Form with radio group selection and alert notifications for user feedback",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@hookform/resolvers@^5.9.1",
+        "lucide-react@1.32.0",
+        "react-hook-form@^7.85.0",
+        "react@19.2.8",
+        "sonner@^2.0.8",
+        "zod@3.25.76"
+      ],
+      "files": [
+        {
+          "path": "form-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/form/form-01.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/form/form-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-form-form-02",
+      "type": "registry:block",
+      "title": "Form 2",
+      "description": "Form with checkbox controls and alert integration for user selections",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@hookform/resolvers@^5.9.1",
+        "lucide-react@1.32.0",
+        "react-hook-form@^7.85.0",
+        "react@19.2.8",
+        "sonner@^2.0.8",
+        "zod@3.25.76"
+      ],
+      "files": [
+        {
+          "path": "form-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/form/form-02.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/form/form-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-form-form-03",
+      "type": "registry:block",
+      "title": "Form 3",
+      "description": "Form with switch toggle controls for settings and preferences",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@hookform/resolvers@^5.9.1",
+        "lucide-react@1.32.0",
+        "react-hook-form@^7.85.0",
+        "react@19.2.8",
+        "sonner@^2.0.8",
+        "zod@3.25.76"
+      ],
+      "files": [
+        {
+          "path": "form-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/form/form-03.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/form/form-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-form-form-04",
+      "type": "registry:block",
+      "title": "Form 4",
+      "description": "Form with input fields and validation alerts for data entry",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@hookform/resolvers@^5.9.1",
+        "lucide-react@1.32.0",
+        "react-hook-form@^7.85.0",
+        "react@19.2.8",
+        "sonner@^2.0.8",
+        "zod@3.25.76"
+      ],
+      "files": [
+        {
+          "path": "form-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/form/form-04.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/form/form-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-form-form-05",
+      "type": "registry:block",
+      "title": "Form 5",
+      "description": "Form with OTP input component for secure verification codes",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@hookform/resolvers@^5.9.1",
+        "lucide-react@1.32.0",
+        "react-hook-form@^7.85.0",
+        "react@19.2.8",
+        "sonner@^2.0.8",
+        "zod@3.25.76"
+      ],
+      "files": [
+        {
+          "path": "form-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/form/form-05.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/form/form-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-form-form-06",
+      "type": "registry:block",
+      "title": "Form 6",
+      "description": "Form with textarea component for multi-line text input",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@hookform/resolvers@^5.9.1",
+        "lucide-react@1.32.0",
+        "react-hook-form@^7.85.0",
+        "react@19.2.8",
+        "sonner@^2.0.8",
+        "zod@3.25.76"
+      ],
+      "files": [
+        {
+          "path": "form-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/form/form-06.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/form/form-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-form-form-07",
+      "type": "registry:block",
+      "title": "Form 7",
+      "description": "Form with select dropdown components for option selection",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@hookform/resolvers@^5.9.1",
+        "lucide-react@1.32.0",
+        "react-hook-form@^7.85.0",
+        "react@19.2.8",
+        "sonner@^2.0.8",
+        "zod@3.25.76"
+      ],
+      "files": [
+        {
+          "path": "form-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/form/form-07.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/form/form-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-form-form-08",
+      "type": "registry:block",
+      "title": "Form 8",
+      "description": "Form with combobox for searchable selection",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "@hookform/resolvers@^5.9.1",
+        "lucide-react@1.32.0",
+        "react-hook-form@^7.85.0",
+        "react@19.2.8",
+        "sonner@^2.0.8",
+        "zod@3.25.76"
+      ],
+      "files": [
+        {
+          "path": "form-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/form/form-08.tsx"
+        },
+        {
+          "path": "support/components/ui/combobox.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/combobox.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/form/form-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-form-form-09",
+      "type": "registry:block",
+      "title": "Form 9",
+      "description": "Form with date picker in popover for date selection",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@hookform/resolvers@^5.9.1",
+        "date-fns@^4.4.0",
+        "lucide-react@1.32.0",
+        "react-day-picker@^10.0.1",
+        "react-hook-form@^7.85.0",
+        "react@19.2.8",
+        "sonner@^2.0.8",
+        "zod@3.25.76"
+      ],
+      "files": [
+        {
+          "path": "form-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/form/form-09.tsx"
+        },
+        {
+          "path": "support/components/ui/calendar.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/calendar.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/form/form-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-form-form-10",
+      "type": "registry:block",
+      "title": "Form 10",
+      "description": "Comprehensive form with multiple input types in card layout for complex data entry",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@hookform/resolvers@^5.9.1",
+        "lucide-react@1.32.0",
+        "react-hook-form@^7.85.0",
+        "react@19.2.8",
+        "sonner@^2.0.8",
+        "zod@3.25.76"
+      ],
+      "files": [
+        {
+          "path": "form-10.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/form/form-10.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/form/form-10",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

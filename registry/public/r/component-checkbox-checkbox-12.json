@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-checkbox-checkbox-12",
+  "title": "Checkbox 12",
+  "description": "Filled circular checkboxes with color themes and circle check icons",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "@base-ui/react@^1.7.0",
+    "lucide-react@1.32.0",
+    "radix-ui@^1.6.7"
+  ],
+  "files": [
+    {
+      "path": "source/components/checkbox/checkbox-12/checkbox-12.tsx",
+      "content": "import { Checkbox as CheckboxPrimitive } from '@base-ui/react/checkbox'\nimport { CircleCheckIcon } from \"lucide-react\"\n\nconst CheckboxFilledIconDemo = () => {\n  return (\n    <div className='flex items-center gap-2'>\n      <CheckboxPrimitive.Root\n        data-slot='checkbox'\n        defaultChecked\n        className='peer bg-destructive focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 data-checked:text-destructive size-7 shrink-0 rounded-full transition-colors outline-none focus-visible:ring-3'\n        aria-label='Color destructive'\n      >\n        <CheckboxPrimitive.Indicator\n          data-slot='checkbox-indicator'\n          className='flex h-full items-center justify-center text-current transition-none'\n        >\n          <CircleCheckIcon className='size-5.5 fill-white stroke-current' />\n        </CheckboxPrimitive.Indicator>\n      </CheckboxPrimitive.Root>\n      <CheckboxPrimitive.Root\n        data-slot='checkbox'\n        defaultChecked\n        className='peer size-7 shrink-0 rounded-full bg-sky-600 outline-none focus-visible:ring-3 focus-visible:ring-sky-600/20 data-checked:text-sky-600 dark:bg-sky-400 dark:focus-visible:ring-sky-400/40 dark:data-checked:text-sky-400'\n        aria-label='Color info'\n      >\n        <CheckboxPrimitive.Indicator\n          data-slot='checkbox-indicator'\n          className='flex h-full items-center justify-center text-current transition-none'\n        >\n          <CircleCheckIcon className='size-5.5 fill-white stroke-current' />\n        </CheckboxPrimitive.Indicator>\n      </CheckboxPrimitive.Root>\n      <CheckboxPrimitive.Root\n        data-slot='checkbox'\n        defaultChecked\n        className='peer size-7 shrink-0 rounded-full bg-green-600 outline-none focus-visible:ring-3 focus-visible:ring-green-600/20 data-checked:text-green-600 dark:bg-green-400 dark:focus-visible:ring-green-400/40 dark:data-checked:text-green-400'\n        aria-label='Color success'\n      >\n        <CheckboxPrimitive.Indicator\n          data-slot='checkbox-indicator'\n          className='flex h-full items-center justify-center text-current transition-none'\n        >\n          <CircleCheckIcon className='size-5.5 fill-white stroke-current' />\n        </CheckboxPrimitive.Indicator>\n      </CheckboxPrimitive.Root>\n    </div>\n  )\n}\n\nexport default CheckboxFilledIconDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/checkbox/checkbox-12.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/checkbox/checkbox-12",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

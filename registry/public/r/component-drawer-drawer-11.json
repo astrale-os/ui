@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-drawer-drawer-11",
+  "title": "Drawer 11",
+  "description": "Right-side settings drawer with toggle switches grouped under notifications, privacy, and security sections.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/drawer/drawer-11/drawer-11.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\nimport {\n  Drawer,\n  DrawerContent,\n  DrawerDescription,\n  DrawerHeader,\n  DrawerTitle,\n  DrawerTrigger\n} from '@astrale-os/ui/drawer'\nimport { Switch } from '@astrale-os/ui/switch'\n\ntype Section = {\n  heading: string\n  items: string[]\n  checked?: string[]\n}\n\ninterface DrawerSettingsProps {\n  sections?: Section[]\n}\n\nconst defaultSections: Section[] = [\n  {\n    heading: 'Notifications',\n    items: ['Email notification', 'SMS', 'Messenger'],\n    checked: ['Email notification']\n  },\n  {\n    heading: 'Privacy',\n    items: ['Profile visibility', 'Search engine indexing', 'Data sharing', 'Two-factor authentication'],\n    checked: ['Profile visibility', 'Two-factor authentication']\n  },\n  {\n    heading: 'Security',\n    items: ['Password', 'Two-factor authentication', 'Data encryption', 'Login alerts'],\n    checked: ['Two-factor authentication', 'Login alerts']\n  }\n]\n\nconst DrawerSettings = ({ sections = defaultSections }: DrawerSettingsProps) => {\n  return (\n    <Drawer swipeDirection='right'>\n      <DrawerTrigger render={<Button variant='outline' />}>Manage Notifications</DrawerTrigger>\n      <DrawerContent>\n        <DrawerHeader className='mb-3 border-b'>\n          <DrawerTitle>Settings</DrawerTitle>\n          <DrawerDescription>Manage your notification preferences</DrawerDescription>\n        </DrawerHeader>\n        <div className='space-y-6 px-4'>\n          {sections.map(section => (\n            <div key={section.heading} className='space-y-4'>\n              <p className='text-base font-medium'>{section.heading}</p>\n              <div className='space-y-2'>\n                {section.items.map((item, i) => {\n                  const id = `${section.heading.replace(/\\s+/g, '-')}-${i}`.toLowerCase()\n\n                  return (\n                    <div key={id} className='flex items-center justify-between gap-4'>\n                      <p>{item}</p>\n                      <Switch id={id} defaultChecked={section.checked?.includes(item)} />\n                    </div>\n                  )\n                })}\n              </div>\n            </div>\n          ))}\n        </div>\n      </DrawerContent>\n    </Drawer>\n  )\n}\n\nexport default DrawerSettings\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/drawer/drawer-11.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/drawer/drawer-11",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

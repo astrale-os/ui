@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-input-input-19",
+  "title": "Input 19",
+  "description": "A URL input field with an external \"https://\" add-on box at the start",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/input/input-19/input-19.tsx",
+      "content": "import { useId } from 'react'\n\nimport { Button } from '@astrale-os/ui/button'\nimport { ButtonGroup } from '@astrale-os/ui/button-group'\nimport { Input } from '@astrale-os/ui/input'\nimport { Label } from '@astrale-os/ui/label'\n\nconst InputStartAddOnDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>Input with start add-on</Label>\n      <ButtonGroup>\n        <Button variant='outline'>https://</Button>\n        <Input id={id} placeholder='shadcnstudio.com' className='w-full' />\n      </ButtonGroup>\n    </div>\n  )\n}\n\nexport default InputStartAddOnDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/input/input-19.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/input/input-19",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

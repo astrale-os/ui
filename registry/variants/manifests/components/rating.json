@@ -1,0 +1,247 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-components-rating",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "component-rating-rating-01",
+      "type": "registry:component",
+      "title": "Rating 1",
+      "description": "Basic interactive star rating with whole-number precision and controlled value state.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "class-variance-authority@^0.7.1",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "rating-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/rating/rating-01.tsx"
+        },
+        {
+          "path": "support/components/ui/rating.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/rating.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/rating/rating-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-rating-rating-02",
+      "type": "registry:component",
+      "title": "Rating 2",
+      "description": "Half-star precision rating with 0.5 step increments and controlled value state.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "class-variance-authority@^0.7.1",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "rating-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/rating/rating-02.tsx"
+        },
+        {
+          "path": "support/components/ui/rating.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/rating.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/rating/rating-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-rating-rating-03",
+      "type": "registry:component",
+      "title": "Rating 3",
+      "description": "Read-only star rating with a fixed display value and non-interactive label.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "class-variance-authority@^0.7.1",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "rating-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/rating/rating-03.tsx"
+        },
+        {
+          "path": "support/components/ui/rating.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/rating.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/rating/rating-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-rating-rating-04",
+      "type": "registry:component",
+      "title": "Rating 4",
+      "description": "Size variants rating showcasing extra small, small, medium, and large icon sizes in a grid layout.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "class-variance-authority@^0.7.1",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "rating-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/rating/rating-04.tsx"
+        },
+        {
+          "path": "support/components/ui/rating.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/rating.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/rating/rating-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-rating-rating-05",
+      "type": "registry:component",
+      "title": "Rating 5",
+      "description": "Color variants rating displaying yellow, destructive, secondary, and outline themed stars in a grid layout.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "class-variance-authority@^0.7.1",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "rating-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/rating/rating-05.tsx"
+        },
+        {
+          "path": "support/components/ui/rating.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/rating.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/rating/rating-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-rating-rating-06",
+      "type": "registry:component",
+      "title": "Rating 6",
+      "description": "Custom icon rating with heart, energy bolt, and sparkle icon variants with tailored fill and stroke styles.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "class-variance-authority@^0.7.1",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "rating-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/rating/rating-06.tsx"
+        },
+        {
+          "path": "support/components/ui/rating.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/rating.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/rating/rating-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-rating-rating-07",
+      "type": "registry:component",
+      "title": "Rating 7",
+      "description": "Controlled rating card with programmatic clear and preset value buttons and current score display.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "class-variance-authority@^0.7.1",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "rating-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/rating/rating-07.tsx"
+        },
+        {
+          "path": "support/components/ui/rating.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/rating.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/rating/rating-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-rating-rating-08",
+      "type": "registry:component",
+      "title": "Rating 8",
+      "description": "Emoji-based rating picker with five expression buttons and corresponding text labels for user feedback.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "class-variance-authority@^0.7.1",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "rating-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/rating/rating-08.tsx"
+        },
+        {
+          "path": "support/components/ui/rating.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/rating.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/rating/rating-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

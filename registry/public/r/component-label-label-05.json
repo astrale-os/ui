@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-label-label-05",
+  "title": "Label 5",
+  "description": "Inline-edit label with edit/confirm button.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/label/label-05/label-05.tsx",
+      "content": "'use client'\nimport { useState } from 'react'\nimport { Button } from '@astrale-os/ui/button'\nimport { Field, FieldDescription } from '@astrale-os/ui/field'\nimport { Input } from '@astrale-os/ui/input'\nimport { Label } from '@astrale-os/ui/label'\nimport { CheckIcon, PencilIcon } from \"lucide-react\"\n\nconst ButtonWithLabel = () => {\n  const [isEditing, setIsEditing] = useState(false)\n  const [value, setValue] = useState('my-next-app')\n\n  return (\n    <Field className='w-full max-w-xs'>\n      <Label htmlFor='label-inline-edit' className='gap-2'>\n        Project Name\n        <Button size='icon-xs' variant='ghost' onClick={() => setIsEditing(!isEditing)}>\n          {isEditing ? (\n            <CheckIcon className='size-3.5' />\n          ) : (\n            <PencilIcon className='size-3.5' />\n          )}\n        </Button>\n      </Label>\n      {isEditing ? (\n        <Input id='label-inline-edit' value={value} onChange={e => setValue(e.target.value)} autoFocus />\n      ) : (\n        <FieldDescription>{value}</FieldDescription>\n      )}\n    </Field>\n  )\n}\n\nexport default ButtonWithLabel\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/label/label-05.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/label/label-05",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

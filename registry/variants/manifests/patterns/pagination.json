@@ -1,0 +1,307 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-patterns-pagination",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "pattern-pagination-pagination-01",
+      "type": "registry:block",
+      "title": "Pagination 1",
+      "description": "A basic pagination component with previous, numbered pages, and next controls",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "pagination-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/pagination/pagination-01.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/pagination/pagination-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-pagination-pagination-02",
+      "type": "registry:block",
+      "title": "Pagination 2",
+      "description": "A pagination component with chevron icons for previous and next navigation",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "pagination-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/pagination/pagination-02.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/pagination/pagination-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-pagination-pagination-03",
+      "type": "registry:block",
+      "title": "Pagination 3",
+      "description": "A pagination component with primary button styling for the active page",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "pagination-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/pagination/pagination-03.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/pagination/pagination-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-pagination-pagination-04",
+      "type": "registry:block",
+      "title": "Pagination 4",
+      "description": "A pagination component with secondary button styling and custom variants",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "pagination-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/pagination/pagination-04.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/pagination/pagination-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-pagination-pagination-05",
+      "type": "registry:block",
+      "title": "Pagination 5",
+      "description": "A bordered pagination component with dividers and connected button styling",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "pagination-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/pagination/pagination-05.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/pagination/pagination-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-pagination-pagination-06",
+      "type": "registry:block",
+      "title": "Pagination 6",
+      "description": "A pagination component with fully rounded button styling for modern appearance",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "pagination-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/pagination/pagination-06.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/pagination/pagination-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-pagination-pagination-07",
+      "type": "registry:block",
+      "title": "Pagination 7",
+      "description": "A pagination component with first and last page navigation buttons",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "pagination-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/pagination/pagination-07.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/pagination/pagination-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-pagination-pagination-08",
+      "type": "registry:block",
+      "title": "Pagination 8",
+      "description": "A pagination component with ellipsis and tooltip showing hidden page count",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "pagination-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/pagination/pagination-08.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/pagination/pagination-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-pagination-pagination-09",
+      "type": "registry:block",
+      "title": "Pagination 9",
+      "description": "A pagination component with underline styling for the active page indicator",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "pagination-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/pagination/pagination-09.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/pagination/pagination-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-pagination-pagination-10",
+      "type": "registry:block",
+      "title": "Pagination 10",
+      "description": "A card-style pagination component with border, shadow, and contained layout",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "pagination-10.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/pagination/pagination-10.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/pagination/pagination-10",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-pagination-pagination-11",
+      "type": "registry:block",
+      "title": "Pagination 11",
+      "description": "A minimal numberless pagination component with only previous and next controls",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "pagination-11.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/pagination/pagination-11.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/pagination/pagination-11",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-pagination-pagination-12",
+      "type": "registry:block",
+      "title": "Pagination 12",
+      "description": "A numberless pagination component with current page indicator text display",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "pagination-12.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/pagination/pagination-12.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/pagination/pagination-12",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-pagination-pagination-13",
+      "type": "registry:block",
+      "title": "Pagination 13",
+      "description": "A compact mini pagination component with page count display and icon navigation",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "pagination-13.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/pagination/pagination-13.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/pagination/pagination-13",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-pagination-pagination-14",
+      "type": "registry:block",
+      "title": "Pagination 14",
+      "description": "A pagination component with page size selector dropdown for customizable results per page",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "pagination-14.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/pagination/pagination-14.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/pagination/pagination-14",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-pagination-pagination-15",
+      "type": "registry:block",
+      "title": "Pagination 15",
+      "description": "A comprehensive pagination component with page size selector, tooltips, and detailed navigation controls",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "pagination-15.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/pagination/pagination-15.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/pagination/pagination-15",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

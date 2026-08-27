@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-avatar-avatar-11",
+  "title": "Avatar 11",
+  "description": "Avatar with notification badge showing count number for alerts and messages.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/avatar/avatar-11/avatar-11.tsx",
+      "content": "import { Avatar, AvatarBadge, AvatarFallback, AvatarImage } from '@astrale-os/ui/avatar'\n\nconst AvatarNotificationBadgeDemo = () => {\n  return (\n    <Avatar size='lg' className='rounded-sm after:rounded-[inherit]'>\n      <AvatarImage\n        src='https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-5.png'\n        alt='Hallie Richards'\n        className='rounded-sm'\n      />\n      <AvatarFallback>HR</AvatarFallback>\n      <AvatarBadge className='-top-2.5 -right-2.5 bg-indigo-500 px-1 text-xs tabular-nums ring-0 group-data-[size=lg]/avatar:size-5'>\n        8\n      </AvatarBadge>\n    </Avatar>\n  )\n}\n\nexport default AvatarNotificationBadgeDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/avatar/avatar-11.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/avatar/avatar-11",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

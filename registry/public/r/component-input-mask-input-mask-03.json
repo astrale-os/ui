@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-input-mask-input-mask-03",
+  "title": "Input Mask 3",
+  "description": "A credit card number input with automatic formatting and card type detection",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0",
+    "react-payment-inputs@^1.2.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/input-mask/input-mask-03/input-mask-03.tsx",
+      "content": "import { useId } from 'react'\n\nimport { usePaymentInputs } from 'react-payment-inputs'\nimport images, { type CardImages } from 'react-payment-inputs/images'\nimport { InputGroup, InputGroupAddon, InputGroupInput } from '@astrale-os/ui/input-group'\nimport { Label } from '@astrale-os/ui/label'\nimport { CreditCardIcon } from \"lucide-react\"\n\nconst InputCardNumberDemo = () => {\n  const id = useId()\n  const { meta, getCardNumberProps, getCardImageProps } = usePaymentInputs()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>Card number</Label>\n      <InputGroup>\n        <InputGroupInput {...getCardNumberProps()} id={id} />\n        <InputGroupAddon align='inline-end' className='pointer-events-none'>\n          {meta.cardType ? (\n            <svg\n              className='size-6 overflow-hidden'\n              {...getCardImageProps({\n                images: images as unknown as CardImages\n              })}\n            />\n          ) : (\n            <CreditCardIcon className='size-4' />\n          )}\n          <span className='sr-only'>Card Provider</span>\n        </InputGroupAddon>\n      </InputGroup>\n      <p className='text-muted-foreground text-xs'>\n        Built with{' '}\n        <a\n          className='hover:text-foreground underline'\n          href='https://github.com/medipass/react-payment-inputs'\n          target='_blank'\n          rel='noopener noreferrer'\n        >\n          React Payment Inputs\n        </a>\n      </p>\n    </div>\n  )\n}\n\nexport default InputCardNumberDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/input-mask/input-mask-03.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/input-mask/input-mask-03",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

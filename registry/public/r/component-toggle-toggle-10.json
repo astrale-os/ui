@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-toggle-toggle-10",
+  "title": "Toggle 10",
+  "description": "Text-only toggles demonstrating label changes on toggle.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/toggle/toggle-10/toggle-10.tsx",
+      "content": "import { useState } from 'react'\n\nimport { Toggle } from '@astrale-os/ui/toggle'\n\nconst ToggleText = () => {\n  const [isRTL, setIsRTL] = useState(false)\n  const [isOn, setIsOn] = useState(false)\n\n  return (\n    <div className='flex flex-wrap items-center justify-center gap-2'>\n      <Toggle aria-label='rtl-ltr' onClick={() => setIsRTL(!isRTL)}>\n        {isRTL ? 'RTL' : 'LTR'}\n      </Toggle>\n      <Toggle aria-label='on-off' onClick={() => setIsOn(!isOn)}>\n        {isOn ? 'ON' : 'OFF'}\n      </Toggle>\n    </div>\n  )\n}\n\nexport default ToggleText\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/toggle/toggle-10.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/toggle/toggle-10",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-checkbox-checkbox-11",
+  "title": "Checkbox 11",
+  "description": "Custom icon checkboxes with heart, star, and circle icons for visual feedback",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "@base-ui/react@^1.7.0",
+    "lucide-react@1.32.0",
+    "radix-ui@^1.6.7"
+  ],
+  "files": [
+    {
+      "path": "source/components/checkbox/checkbox-11/checkbox-11.tsx",
+      "content": "import { Checkbox as CheckboxPrimitive } from '@base-ui/react/checkbox'\nimport { HeartIcon, StarIcon, CircleIcon } from \"lucide-react\"\n\nconst CheckboxCustomIconsDemo = () => {\n  return (\n    <div className='flex items-center gap-2'>\n      <CheckboxPrimitive.Root\n        data-slot='checkbox'\n        defaultChecked\n        className='focus-visible:ring-ring/50 rounded-sm outline-none focus-visible:ring-3'\n        aria-label='Heart icon'\n      >\n        <span className='in-data-checked:hidden'>\n          <HeartIcon className='stroke-1' />\n        </span>\n        <span className='in-data-unchecked:hidden'>\n          <HeartIcon className='fill-destructive stroke-destructive text-destructive stroke-1' />\n        </span>\n      </CheckboxPrimitive.Root>\n      <CheckboxPrimitive.Root\n        data-slot='checkbox'\n        defaultChecked\n        className='focus-visible:ring-ring/50 rounded-sm outline-none focus-visible:ring-3'\n        aria-label='Star icon'\n      >\n        <span className='in-data-checked:hidden'>\n          <StarIcon className='stroke-1' />\n        </span>\n        <span className='in-data-unchecked:hidden'>\n          <StarIcon className='fill-amber-500 stroke-amber-500 stroke-1 text-amber-500 dark:fill-amber-400 dark:stroke-amber-400 dark:text-amber-400' />\n        </span>\n      </CheckboxPrimitive.Root>\n      <CheckboxPrimitive.Root\n        data-slot='checkbox'\n        defaultChecked\n        className='focus-visible:ring-ring/50 rounded-sm outline-none focus-visible:ring-3'\n        aria-label='Circle icon'\n      >\n        <span className='in-data-checked:hidden'>\n          <CircleIcon className='stroke-1' />\n        </span>\n        <span className='in-data-unchecked:hidden'>\n          <CircleIcon className='fill-green-600 stroke-green-600 stroke-1 text-green-600 dark:fill-green-400 dark:stroke-green-400 dark:text-green-400' />\n        </span>\n      </CheckboxPrimitive.Root>\n    </div>\n  )\n}\n\nexport default CheckboxCustomIconsDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/checkbox/checkbox-11.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/checkbox/checkbox-11",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

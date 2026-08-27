@@ -24,6 +24,7 @@ const runtimeAddresses = Object.entries(uiPackage.exports)
   )
   .map(([entrypoint]) => `component/${entrypoint.slice(2)}`)
 const visualRegistryAddresses = registry.items
+  .filter((item) => item.meta.provider !== '@astrale-os/ui')
   .map((item) => item.meta.canonicalAddress)
   .filter((address) => /^(?:component|pattern|block)\//u.test(address))
 const expectedCanonicalAddresses = [
@@ -64,6 +65,7 @@ const expectedSceneIds = globSync(
   ['packages/ui/previews/**/*.preview.tsx', 'registry/**/*.preview.tsx'],
   { cwd: repositoryRoot },
 )
+  .filter((file) => !file.includes('registry/variants/'))
   .map((file) => {
     const normalized = file.replaceAll('\\', '/')
     const filename = normalized.split('/').at(-1)!
@@ -403,7 +405,7 @@ test('kind tabs, outline, family navigation, and both back journeys preserve pla
   )
 })
 
-test('command palette searches canonical families and preserves keyboard navigation', async ({
+test('command palette searches canonical items and preserves keyboard navigation', async ({
   page,
 }) => {
   const previewRequests: string[] = []
@@ -444,17 +446,17 @@ test('command palette searches canonical families and preserves keyboard navigat
     ),
   )
   await expect(palette).toBeVisible()
-  await expect(palette.getByRole('option')).toHaveCount(expectedFamilies.length)
+  await expect(palette.getByRole('option')).toHaveCount(expectedCanonicalAddresses.length)
   const input = palette.getByPlaceholder('Search components, patterns, and blocks…')
   await expect(input).toBeFocused()
   await input.fill('range basic')
   await page.waitForTimeout(250)
   expect(previewRequests).toHaveLength(previewRequestBaseline)
-  expect(await palette.getByRole('option').count()).toBeLessThan(expectedFamilies.length)
+  expect(await palette.getByRole('option').count()).toBeLessThan(expectedCanonicalAddresses.length)
   const calendar = palette.getByRole('option').first()
-  await expect(calendar).toHaveAccessibleName('calendar patterns')
+  await expect(calendar).toHaveAccessibleName('Pattern · Calendar · Range Basic')
   await calendar.press('Enter')
-  await expect(page).toHaveURL(/\?family=pattern%2Fcalendar$/u)
+  await expect(page).toHaveURL(/\?preview=pattern%2Fcalendar%2Frange-basic%23default$/u)
   await expect(palette).toBeHidden()
   await loadPreview(page, 'pattern/calendar/range-basic')
   expect(previewRequests.some((url) => url.includes('/calendar/range-basic.preview.tsx'))).toBe(
@@ -500,6 +502,22 @@ test('command palette searches canonical families and preserves keyboard navigat
   await expect(page.getByLabel('Theme generator')).toBeVisible()
   await page.keyboard.press('Control+k')
   await expect(palette).toBeHidden()
+})
+
+test('a command palette chunk failure leaves the catalog usable', async ({ page }) => {
+  await page.route(
+    /\/(?:assets\/controlled-[^/]+\.js|@fs\/.*\/registry\/patterns\/command-palette\/controlled\.tsx)(?:\?.*)?$/u,
+    (route) => route.abort(),
+  )
+  await page.goto('/')
+  await page.getByRole('button', { name: /Search components/u }).click()
+  await expect(page.getByText('Search unavailable', { exact: true })).toBeVisible()
+  await expect(page.getByRole('button', { name: 'Reload catalog' })).toBeVisible()
+  const patternsTab = page.getByLabel('Catalog sections').getByRole('tab', { name: 'Patterns' })
+  await patternsTab.click()
+  await expect(patternsTab).toHaveAttribute('aria-selected', 'true')
+  await expect(page).toHaveURL(/\?kind=pattern$/u)
+  await expect(page.locator('[data-preview-address^="pattern/"]').first()).toBeVisible()
 })
 
 test('return anchor survives a delayed lazy block resolving above it', async ({

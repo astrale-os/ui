@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-checkbox-checkbox-05",
+  "title": "Checkbox 5",
+  "description": "Multiple checkboxes in different sizes for size comparison and selection",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/checkbox/checkbox-05/checkbox-05.tsx",
+      "content": "import { Checkbox } from '@astrale-os/ui/checkbox'\n\nconst CheckboxSizesDemo = () => {\n  return (\n    <div className='flex items-center gap-2'>\n      <Checkbox defaultChecked aria-label='Size default' />\n      <Checkbox className='size-5' defaultChecked aria-label='Size small' />\n      <Checkbox className='size-6' defaultChecked aria-label='Size large' />\n    </div>\n  )\n}\n\nexport default CheckboxSizesDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/checkbox/checkbox-05.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/checkbox/checkbox-05",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

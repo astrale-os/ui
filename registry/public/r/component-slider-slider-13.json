@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-slider-slider-13",
+  "title": "Slider 13",
+  "description": "An opacity control slider linked to a numeric input, demonstrating bidirectional state management for fine-tuned visibility adjustments.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/slider/slider-13/slider-13.tsx",
+      "content": "'use client'\n\nimport { useState } from 'react'\n\nimport { Input } from '@astrale-os/ui/input'\nimport { Label } from '@astrale-os/ui/label'\nimport { Slider } from '@astrale-os/ui/slider'\n\nconst SliderInputDemo = () => {\n  const [opacity, setOpacity] = useState(1)\n\n  const handleSliderChange = (newValues: number) => {\n    setOpacity(newValues)\n  }\n\n  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {\n    const val = e.target.value\n\n    if (val === '') {\n      setOpacity(0)\n\n      return\n    }\n\n    const newValue = parseFloat(val)\n\n    if (!isNaN(newValue)) {\n      const clampedValue = Math.min(1, Math.max(0, newValue))\n\n      setOpacity(clampedValue)\n    }\n  }\n\n  return (\n    <div className='mx-auto flex w-full max-w-sm flex-col gap-6 p-6'>\n      {/* The Controlled UI Group */}\n      <div className='flex flex-col gap-4'>\n        <div className='flex items-center justify-between'>\n          <Label className='text-sm font-medium'>Control Surface</Label>\n          <span className='text-muted-foreground text-xs font-medium'>{Math.round(opacity * 100)}% Visible</span>\n        </div>\n\n        <Slider\n          value={opacity}\n          onValueChange={v => handleSliderChange(v as number)}\n          min={0}\n          max={1}\n          step={0.01}\n          aria-label='Adjust visibility'\n        />\n      </div>\n\n      {/* The Constant Controller Area (Always Visible) */}\n      <div className='bg-card flex items-center justify-between rounded-lg border p-4 shadow-sm'>\n        <div className='flex flex-col gap-1' style={{ opacity: opacity }}>\n          <Label className='text-sm font-medium uppercase'>Master Alpha</Label>\n          <p className='text-muted-foreground text-xs'>Adjust opacity via input</p>\n        </div>\n        <div className='relative'>\n          <Input\n            type='number'\n            value={opacity}\n            onChange={handleInputChange}\n            className='max-w-14 text-center text-sm transition-all [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'\n            min={0}\n            max={1}\n            step={0.01}\n          />\n        </div>\n      </div>\n    </div>\n  )\n}\n\nexport default SliderInputDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/slider/slider-13.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/slider/slider-13",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

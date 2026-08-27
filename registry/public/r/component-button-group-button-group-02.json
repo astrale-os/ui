@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-button-group-button-group-02",
+  "title": "Button Group 2",
+  "description": "Interactive like button group with toggle state and dynamic count",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/button-group/button-group-02/button-group-02.tsx",
+      "content": "'use client'\n\nimport { useState } from 'react'\n\nimport { Button } from '@astrale-os/ui/button'\nimport { ButtonGroup } from '@astrale-os/ui/button-group'\nimport Heart from '@/assets/svg/heart'\n\nconst ButtonGroupLikeDemo = () => {\n  const [isLiked, setIsLiked] = useState(true)\n\n  return (\n    <ButtonGroup>\n      <Button variant='outline' onClick={() => setIsLiked(!isLiked)}>\n        {isLiked ? <Heart className='fill-destructive stroke-destructive' /> : <Heart />}\n        Like\n      </Button>\n      <Button variant='outline' className='bg-background dark:border-input dark:bg-input/30'>\n        {isLiked ? 46 : 45}\n      </Button>\n    </ButtonGroup>\n  )\n}\n\nexport default ButtonGroupLikeDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/button-group/button-group-02.tsx"
+    },
+    {
+      "path": "source/components/button-group/button-group-02/support/assets/svg/heart.tsx",
+      "content": "import type { SVGAttributes } from 'react'\n\nconst Heart = (props: SVGAttributes<SVGElement>) => {\n  return (\n    <svg\n      xmlns='http://www.w3.org/2000/svg'\n      width='24'\n      height='24'\n      viewBox='0 0 24 24'\n      fill='none'\n      stroke='currentColor'\n      strokeWidth='2'\n      strokeLinecap='round'\n      strokeLinejoin='round'\n      {...props}\n    >\n      <path d='M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5' />\n    </svg>\n  )\n}\n\nexport default Heart\n",
+      "type": "registry:component",
+      "target": "assets/svg/heart.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/button-group/button-group-02",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

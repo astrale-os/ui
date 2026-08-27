@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pattern-list-list-08",
+  "title": "List 8",
+  "description": "Task progress list grouped inside a Card with color-coded status headers, each task item displaying a title and an inline progress bar with percentage.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/patterns/list/list-08/list-08.tsx",
+      "content": "import { Card, CardContent, CardHeader } from '@astrale-os/ui/card'\nimport { Item, ItemContent, ItemTitle } from '@astrale-os/ui/item'\nimport { Progress } from '@astrale-os/ui/progress'\n\nconst ListProgress = () => {\n  return (\n    <div className='w-full space-y-4'>\n      <Card className='pt-0'>\n        <CardHeader className='bg-muted p-2'>\n          <span className='inline-flex w-fit shrink-0 items-center justify-center gap-1 px-2 py-0.5 text-sm font-medium whitespace-nowrap'>\n            <span className='size-2 rounded-full bg-green-600 dark:bg-green-400' aria-hidden='true' />\n            In Progress\n          </span>\n        </CardHeader>\n        <CardContent className='space-y-2'>\n          <Item variant='outline'>\n            <ItemContent className='space-y-1'>\n              <ItemTitle>Productive B2C smart contracts</ItemTitle>\n              <div className='flex items-center justify-between gap-2'>\n                <Progress value={80} className='flex-1 **:data-[slot=progress-track]:h-2'></Progress>\n                <span className='text-muted-foreground text-xs'>80%</span>\n              </div>\n            </ItemContent>\n          </Item>\n          <Item variant='outline'>\n            <ItemContent className='space-y-1'>\n              <ItemTitle>Repurpose proactive strategies</ItemTitle>\n              <div className='flex items-center justify-between gap-2'>\n                <Progress value={25} className='flex-1 **:data-[slot=progress-track]:h-2'></Progress>\n                <span className='text-muted-foreground text-xs'>25%</span>\n              </div>\n            </ItemContent>\n          </Item>\n          <Item variant='outline'>\n            <ItemContent className='space-y-1'>\n              <ItemTitle>Leverage virtual architecture</ItemTitle>\n              <div className='flex items-center justify-between gap-2'>\n                <Progress value={65} className='flex-1 **:data-[slot=progress-track]:h-2'></Progress>\n                <span className='text-muted-foreground text-xs'>65%</span>\n              </div>\n            </ItemContent>\n          </Item>\n          <Item variant='outline'>\n            <ItemContent className='space-y-1'>\n              <ItemTitle>Enhance best-of-breed solutions</ItemTitle>\n              <div className='flex items-center justify-between gap-2'>\n                <Progress value={75} className='flex-1 **:data-[slot=progress-track]:h-2'></Progress>\n                <span className='text-muted-foreground text-xs'>75%</span>\n              </div>\n            </ItemContent>\n          </Item>\n        </CardContent>\n        <CardHeader className='bg-muted rounded-none p-2'>\n          <span className='inline-flex w-fit shrink-0 items-center justify-center gap-1 px-2 py-0.5 text-sm font-medium whitespace-nowrap'>\n            <span className='size-2 rounded-full bg-amber-600 dark:bg-amber-400' aria-hidden='true' />\n            In Planned\n          </span>\n        </CardHeader>\n        <CardContent className='space-y-2'>\n          <Item variant='outline'>\n            <ItemContent className='space-y-1'>\n              <ItemTitle>Admin Dashboard</ItemTitle>\n              <div className='flex items-center justify-between gap-2'>\n                <Progress value={0} className='flex-1 **:data-[slot=progress-track]:h-2'></Progress>\n                <span className='text-muted-foreground text-xs'>0%</span>\n              </div>\n            </ItemContent>\n          </Item>\n          <Item variant='outline'>\n            <ItemContent className='space-y-1'>\n              <ItemTitle>Full Template Support</ItemTitle>\n              <div className='flex items-center justify-between gap-2'>\n                <Progress value={0} className='flex-1 **:data-[slot=progress-track]:h-2'></Progress>\n                <span className='text-muted-foreground text-xs'>0%</span>\n              </div>\n            </ItemContent>\n          </Item>\n        </CardContent>\n      </Card>\n    </div>\n  )\n}\n\nexport default ListProgress\n",
+      "type": "registry:component",
+      "target": "components/astrale/pattern/list/list-08.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "pattern/list/list-08",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:block"
+}

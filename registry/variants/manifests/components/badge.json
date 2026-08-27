@@ -1,0 +1,487 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-components-badge",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "component-badge-badge-01",
+      "type": "registry:component",
+      "title": "Badge 1",
+      "description": "Default badge demonstrating basic styling with standard text display",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "badge-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/badge/badge-01.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/badge/badge-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-badge-badge-02",
+      "type": "registry:component",
+      "title": "Badge 2",
+      "description": "Secondary variant badge with muted styling for less prominent labels",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "badge-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/badge/badge-02.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/badge/badge-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-badge-badge-03",
+      "type": "registry:component",
+      "title": "Badge 3",
+      "description": "Destructive variant badge with red styling for error or warning states",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "badge-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/badge/badge-03.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/badge/badge-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-badge-badge-04",
+      "type": "registry:component",
+      "title": "Badge 4",
+      "description": "Outline variant badge with bordered styling for subtle emphasis",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "badge-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/badge/badge-04.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/badge/badge-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-badge-badge-05",
+      "type": "registry:component",
+      "title": "Badge 5",
+      "description": "Dot indicator badge with colored circle for compact status representation",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "badge-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/badge/badge-05.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/badge/badge-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-badge-badge-06",
+      "type": "registry:component",
+      "title": "Badge 6",
+      "description": "Rounded badge with full border radius for pill-shaped appearance",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "badge-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/badge/badge-06.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/badge/badge-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-badge-badge-07",
+      "type": "registry:component",
+      "title": "Badge 7",
+      "description": "Number badge with circular design for count and notification displays",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "badge-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/badge/badge-07.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/badge/badge-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-badge-badge-08",
+      "type": "registry:component",
+      "title": "Badge 8",
+      "description": "Large size badge with increased padding for prominence",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "badge-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/badge/badge-08.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/badge/badge-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-badge-badge-09",
+      "type": "registry:component",
+      "title": "Badge 9",
+      "description": "Small size badge with reduced padding for compact display areas",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "badge-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/badge/badge-09.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/badge/badge-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-badge-badge-10",
+      "type": "registry:component",
+      "title": "Badge 10",
+      "description": "Badge with icon integration for enhanced visual context",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "badge-10.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/badge/badge-10.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/badge/badge-10",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-badge-badge-11",
+      "type": "registry:component",
+      "title": "Badge 11",
+      "description": "Link badge that can be used as clickable navigation element",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "badge-11.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/badge/badge-11.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/badge/badge-11",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-badge-badge-12",
+      "type": "registry:component",
+      "title": "Badge 12",
+      "description": "Closable badge with X button for dismissible notifications",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "badge-12.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/badge/badge-12.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/badge/badge-12",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-badge-badge-13",
+      "type": "registry:component",
+      "title": "Badge 13",
+      "description": "Selectable badge with checkbox functionality for interactive selection",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "badge-13.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/badge/badge-13.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/badge/badge-13",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-badge-badge-14",
+      "type": "registry:component",
+      "title": "Badge 14",
+      "description": "Gradient styled badge with vibrant indigo-to-pink color transition",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "badge-14.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/badge/badge-14.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/badge/badge-14",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-badge-badge-15",
+      "type": "registry:component",
+      "title": "Badge 15",
+      "description": "Gradient outline badge with bordered gradient effect",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "badge-15.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/badge/badge-15.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/badge/badge-15",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-badge-badge-16",
+      "type": "registry:component",
+      "title": "Badge 16",
+      "description": "In-progress status badge with amber color and dot indicator",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "badge-16.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/badge/badge-16.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/badge/badge-16",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-badge-badge-17",
+      "type": "registry:component",
+      "title": "Badge 17",
+      "description": "Blocked status badge with destructive color and dot indicator",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "badge-17.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/badge/badge-17.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/badge/badge-17",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-badge-badge-18",
+      "type": "registry:component",
+      "title": "Badge 18",
+      "description": "Completed status badge with green color and dot indicator",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "badge-18.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/badge/badge-18.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/badge/badge-18",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-badge-badge-19",
+      "type": "registry:component",
+      "title": "Badge 19",
+      "description": "Pending status badge with amber outline and alert icon",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "badge-19.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/badge/badge-19.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/badge/badge-19",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-badge-badge-20",
+      "type": "registry:component",
+      "title": "Badge 20",
+      "description": "Failed status badge with destructive outline and ban icon",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "badge-20.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/badge/badge-20.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/badge/badge-20",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-badge-badge-21",
+      "type": "registry:component",
+      "title": "Badge 21",
+      "description": "Successful status badge with green outline and check icon",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "badge-21.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/badge/badge-21.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/badge/badge-21",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-badge-badge-22",
+      "type": "registry:component",
+      "title": "Badge 22",
+      "description": "Avatar badge combining user profile image with label text",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "badge-22.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/badge/badge-22.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/badge/badge-22",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-badge-badge-23",
+      "type": "registry:component",
+      "title": "Badge 23",
+      "description": "Cart notification badge with count display over shopping icon",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "badge-23.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/badge/badge-23.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/badge/badge-23",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-badge-badge-24",
+      "type": "registry:component",
+      "title": "Badge 24",
+      "description": "Online status indicator badge with green dot over avatar",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "badge-24.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/badge/badge-24.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/badge/badge-24",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

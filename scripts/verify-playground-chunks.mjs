@@ -1,11 +1,16 @@
 import assert from 'node:assert/strict'
-import { glob, readFile, stat } from 'node:fs/promises'
+import { glob, readFile } from 'node:fs/promises'
 import path from 'node:path'
+import { gzipSync } from 'node:zlib'
 
 const dist = 'playground/dist'
 const requirePublic = process.argv.includes('--public')
 const requireStudio = process.argv.includes('--studio')
-assert.ok(!(requirePublic && requireStudio), 'choose --public or --studio')
+assert.notEqual(
+  requirePublic,
+  requireStudio,
+  'usage: verify-playground-chunks.mjs --public | --studio',
+)
 const manifest = JSON.parse(await readFile(path.join(dist, '.vite/manifest.json'), 'utf8'))
 const entry = Object.values(manifest).find((item) => item.isEntry)
 assert.ok(entry, 'playground manifest has no entry')
@@ -21,32 +26,54 @@ assert.ok(entrySource, 'playground entry has no source key')
 visitInitial(entrySource)
 
 const previewEntries = Object.entries(manifest).filter(([source]) =>
-  /(?:packages\/ui\/previews|registry\/(?:components|patterns|blocks)|\.internal\/shadcn-studio\/registry\/(?:components|patterns|blocks))\/.+\.preview\.tsx$/u.test(
+  /(?:packages\/ui\/previews|registry\/(?:components|patterns|blocks)|registry\/variants\/source\/(?:components|patterns|blocks))\/.+\.preview\.tsx$/u.test(
     source,
   ),
 )
 const previewSources = []
 for await (const source of glob(
-  [
-    'packages/ui/previews/**/*.preview.tsx',
-    'registry/**/*.preview.tsx',
-    '.internal/shadcn-studio/registry/**/*.preview.tsx',
-  ],
+  ['packages/ui/previews/**/*.preview.tsx', 'registry/**/*.preview.tsx'],
   { cwd: process.cwd() },
 )) {
   previewSources.push(source)
 }
 const studioEntryCount = previewEntries.filter(([source]) =>
-  source.includes('.internal/shadcn-studio/registry/'),
+  source.includes('registry/variants/source/'),
 ).length
 if (requirePublic) assert.equal(studioEntryCount, 0, 'public build contains Studio preview chunks')
 if (requireStudio) assert.equal(studioEntryCount, 902, 'Studio build preview closure')
+const familyLoaderEntries = Object.keys(manifest).filter((source) =>
+  source.includes('src/catalog/generated/variant-families/'),
+)
+if (requirePublic)
+  assert.equal(familyLoaderEntries.length, 0, 'public build contains variant family loaders')
+if (requireStudio) {
+  const manifestFamilies = []
+  for await (const source of glob('registry/variants/manifests/**/*.json')) {
+    manifestFamilies.push(source)
+  }
+  assert.equal(
+    familyLoaderEntries.length,
+    manifestFamilies.length,
+    'one generated loader per variant family',
+  )
+  assert.equal(
+    familyLoaderEntries.every((source) => manifest[source].isDynamicEntry === true),
+    true,
+    'variant family loaders must be dynamic entries',
+  )
+  assert.equal(
+    familyLoaderEntries.some((source) => initialSources.has(source)),
+    false,
+    'variant family loaders must not be reachable from the initial graph',
+  )
+}
 const admittedPreviewSources =
   studioEntryCount > 0
     ? previewSources
-    : previewSources.filter((source) => !source.startsWith('.internal/shadcn-studio/registry/'))
+    : previewSources.filter((source) => !source.startsWith('registry/variants/source/'))
 const studioPreviewCount = admittedPreviewSources.filter((source) =>
-  source.startsWith('.internal/shadcn-studio/registry/'),
+  source.startsWith('registry/variants/source/'),
 ).length
 if (requirePublic) assert.equal(studioPreviewCount, 0, 'public build admitted Studio sources')
 if (requireStudio) assert.equal(studioPreviewCount, 902, 'Studio source preview closure')
@@ -76,14 +103,20 @@ assert.equal(
   'theme studio must not be reachable from the initial graph',
 )
 
-const entryBytes = (
-  await Promise.all(
-    [...initialSources]
-      .map((source) => manifest[source]?.file)
-      .filter((file) => file?.endsWith('.js'))
-      .map((file) => stat(path.join(dist, file))),
-  )
-).reduce((total, file) => total + file.size, 0)
+const initialJavaScript = await Promise.all(
+  [...initialSources]
+    .map((source) => manifest[source]?.file)
+    .filter((file) => file?.endsWith('.js'))
+    .map((file) => readFile(path.join(dist, file))),
+)
+const entryBytes = initialJavaScript.reduce((total, file) => total + file.length, 0)
+const entryGzipBytes = initialJavaScript.reduce((total, file) => total + gzipSync(file).length, 0)
+const initialSource = Buffer.concat(initialJavaScript).toString('utf8')
+assert.doesNotMatch(
+  initialSource,
+  /registry\/variants\/source\/.+?\.preview\.tsx/u,
+  'initial graph must not contain individual variant preview loader paths',
+)
 const entryBudget = studioPreviewCount > 0 ? 1_000_000 : 600_000
 assert.ok(
   entryBytes < entryBudget,
@@ -91,5 +124,5 @@ assert.ok(
 )
 
 console.log(
-  `PASS playground chunks (${previewEntries.length} dynamic previews, ${studioPreviewCount} Studio previews, ${entryBytes}/${entryBudget} entry bytes)`,
+  `PASS playground chunks (${previewEntries.length} dynamic previews, ${studioPreviewCount} adapted Studio previews, ${familyLoaderEntries.length} family loaders, ${entryBytes} raw / ${entryGzipBytes} gzip initial bytes; ${entryBudget} raw budget)`,
 )

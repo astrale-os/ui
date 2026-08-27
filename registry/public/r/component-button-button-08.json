@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-button-button-08",
+  "title": "Button 8",
+  "description": "A button component with small size variant",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/button/button-08/button-08.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\n\nconst ButtonSmallDemo = () => {\n  return <Button size='sm'>Small</Button>\n}\n\nexport default ButtonSmallDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/button/button-08.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/button/button-08",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

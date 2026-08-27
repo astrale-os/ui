@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-popover-popover-12",
+  "title": "Popover 12",
+  "description": "An informational popover with image and content layout for location details",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/popover/popover-12/popover-12.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\nimport {\n  Popover,\n  PopoverContent,\n  PopoverTrigger,\n  PopoverHeader,\n  PopoverTitle,\n  PopoverDescription\n} from '@astrale-os/ui/popover'\nimport { MapPinIcon, ChevronRightIcon } from \"lucide-react\"\n\nconst PopoverAboutHimalayasDemo = () => {\n  return (\n    <Popover>\n      <PopoverTrigger render={<Button variant='outline' size='icon' />}>\n        <MapPinIcon\n        />\n        <span className='sr-only'>About Himalayas</span>\n      </PopoverTrigger>\n      <PopoverContent className='w-85 p-0'>\n        <div className='flex'>\n          <PopoverHeader className='gap-2 p-4'>\n            <PopoverTitle className='text-base'>About Himalayas</PopoverTitle>\n            <PopoverDescription className='text-xs'>\n              The Great Himalayan mountain ranges in the Indian sub-continent region.{' '}\n            </PopoverDescription>\n            <a\n              href='https://en.wikipedia.org/wiki/Himalayas'\n              target='_blank'\n              rel='noopener noreferrer'\n              className='flex w-fit text-xs hover:underline'\n            >\n              Read more\n              <ChevronRightIcon className='size-4' />\n            </a>\n          </PopoverHeader>\n          <img\n            src='https://lp-cms-production.imgix.net/2021-01/GettyRF_450207051.jpg?height=136'\n            alt='the himalayas'\n            className='h-34 w-2/5 rounded-r-md object-cover'\n          />\n        </div>\n      </PopoverContent>\n    </Popover>\n  )\n}\n\nexport default PopoverAboutHimalayasDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/popover/popover-12.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/popover/popover-12",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-scroll-area-scroll-area-06",
+  "title": "Scroll Area 6",
+  "description": "A horizontal image gallery with a persistent scrollbar for easy navigation through a collection of photos.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/scroll-area/scroll-area-06/scroll-area-06.tsx",
+      "content": "import { ScrollArea, ScrollBar } from '@astrale-os/ui/scroll-area'\n\nconst images = [\n  { src: 'https://cdn.shadcnstudio.com/ss-assets/blocks/marketing/gallery/image-38.png', alt: 'Gallery Image 1' },\n  { src: 'https://cdn.shadcnstudio.com/ss-assets/blocks/marketing/gallery/image-39.png', alt: 'Gallery Image 2' },\n  { src: 'https://cdn.shadcnstudio.com/ss-assets/blocks/marketing/gallery/image-40.png', alt: 'Gallery Image 3' },\n  { src: 'https://cdn.shadcnstudio.com/ss-assets/blocks/marketing/gallery/image-41.png', alt: 'Gallery Image 4' },\n  { src: 'https://cdn.shadcnstudio.com/ss-assets/blocks/marketing/gallery/image-42.png', alt: 'Gallery Image 5' }\n]\n\nconst ScrollAreaGalleryDemo = () => {\n  return (\n    <div className='rounded-md border'>\n      <ScrollArea className='relative h-auto w-full max-w-xs sm:max-w-md'>\n        <h4 className='absolute top-3 left-4 text-sm font-medium'>Image Gallery</h4>\n        <div className='mt-6 mb-2 p-4'>\n          <div className='flex space-x-4'>\n            {images.map((image, i) => (\n              <img key={i} src={image.src} alt={image.alt} className='h-60 w-50 shrink-0 rounded-md shadow-sm' />\n            ))}\n            <div className='w-px shrink-0' />\n          </div>\n        </div>\n        <ScrollBar orientation='horizontal' className='mx-4 my-2' />\n      </ScrollArea>\n    </div>\n  )\n}\n\nexport default ScrollAreaGalleryDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/scroll-area/scroll-area-06.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/scroll-area/scroll-area-06",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-select-select-24",
+  "title": "Select 24",
+  "description": "A custom select dropdown with overlapping label positioned over the border",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/select/select-24/select-24.tsx",
+      "content": "import { useId } from 'react'\n\nimport { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@astrale-os/ui/select'\n\nconst items = [\n  { label: 'Select city', value: null },\n  { label: 'New York', value: '1' },\n  { label: 'London', value: '2' },\n  { label: 'Tokyo', value: '3' },\n  { label: 'Paris', value: '4' }\n]\n\nconst SelectWithOverlappingLabelDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='group relative w-full max-w-xs'>\n      <label\n        htmlFor={id}\n        className='bg-background text-foreground absolute top-0 left-2 z-10 block -translate-y-1/2 px-1 text-xs font-medium group-has-disabled:opacity-50'\n      >\n        Select with overlapping label\n      </label>\n      <Select items={items}>\n        <SelectTrigger id={id} className='dark:bg-background! w-full'>\n          <SelectValue />\n        </SelectTrigger>\n        <SelectContent className='p-1'>\n          {items.slice(1).map(item => (\n            <SelectItem key={item.value} value={item.value}>\n              {item.label}\n            </SelectItem>\n          ))}\n        </SelectContent>\n      </Select>\n    </div>\n  )\n}\n\nexport default SelectWithOverlappingLabelDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/select/select-24.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/select/select-24",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

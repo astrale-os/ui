@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-menubar-menubar-05",
+  "title": "Menu Bar 5",
+  "description": "Icon-enhanced menubar with Data and Charts menus using inline icons for a spreadsheet application.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/menubar/menubar-05/menubar-05.tsx",
+      "content": "import {\n  Menubar,\n  MenubarContent,\n  MenubarGroup,\n  MenubarItem,\n  MenubarMenu,\n  MenubarSeparator,\n  MenubarShortcut,\n  MenubarTrigger\n} from '@astrale-os/ui/menubar'\nimport { DatabaseIcon, TableIcon, FilterIcon, BarChartIcon, PieChartIcon, CalculatorIcon } from \"lucide-react\"\n\nconst MenuBarIconsDemo = () => {\n  return (\n    <div className='flex flex-col items-center justify-center space-y-4'>\n      <div className='text-muted-foreground text-sm font-medium'>Icons Variant - Spreadsheet App</div>\n      <Menubar>\n        <MenubarMenu>\n          <MenubarTrigger>Data</MenubarTrigger>\n          <MenubarContent>\n            <MenubarItem>\n              <DatabaseIcon\n              />\n              Import Data <MenubarShortcut>⌘I</MenubarShortcut>\n            </MenubarItem>\n            <MenubarItem>\n              <TableIcon\n              />\n              New Table\n            </MenubarItem>\n            <MenubarSeparator />\n            <MenubarItem>\n              <FilterIcon\n              />\n              Filter <MenubarShortcut>⌘F</MenubarShortcut>\n            </MenubarItem>\n          </MenubarContent>\n        </MenubarMenu>\n        <MenubarMenu>\n          <MenubarTrigger>Charts</MenubarTrigger>\n          <MenubarContent>\n            <MenubarGroup>\n              <MenubarItem>\n                <BarChartIcon\n                />\n                Bar Chart\n              </MenubarItem>\n              <MenubarItem>\n                <PieChartIcon\n                />\n                Pie Chart\n              </MenubarItem>\n              <MenubarSeparator />\n              <MenubarItem>\n                <CalculatorIcon\n                />\n                Formulas\n              </MenubarItem>\n            </MenubarGroup>\n          </MenubarContent>\n        </MenubarMenu>\n      </Menubar>\n    </div>\n  )\n}\n\nexport default MenuBarIconsDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/menubar/menubar-05.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/menubar/menubar-05",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

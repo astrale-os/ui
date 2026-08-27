@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-toggle-group-toggle-group-08",
+  "title": "Toggle Group 8",
+  "description": "Outline single-select toggle group with chart type icons for switching between line, column, pie, and scatter views.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/toggle-group/toggle-group-08/toggle-group-08.tsx",
+      "content": "import { ToggleGroup, ToggleGroupItem } from '@astrale-os/ui/toggle-group'\nimport { ChartLineIcon, ChartNoAxesColumnIcon, ChartPieIcon, ChartScatterIcon } from \"lucide-react\"\n\nconst ToggleGroupLayout = () => {\n  return (\n    <div className='flex items-center justify-center'>\n      <ToggleGroup defaultValue={['2']} variant='outline' spacing={0}>\n        <ToggleGroupItem value='1' aria-label='chart line'>\n          <ChartLineIcon\n          />\n        </ToggleGroupItem>\n        <ToggleGroupItem value='2' aria-label='chart column'>\n          <ChartNoAxesColumnIcon\n          />\n        </ToggleGroupItem>\n        <ToggleGroupItem value='3' aria-label='chart pie'>\n          <ChartPieIcon\n          />\n        </ToggleGroupItem>\n        <ToggleGroupItem value='4' aria-label='chart scatter'>\n          <ChartScatterIcon\n          />\n        </ToggleGroupItem>\n      </ToggleGroup>\n    </div>\n  )\n}\n\nexport default ToggleGroupLayout\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/toggle-group/toggle-group-08.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/toggle-group/toggle-group-08",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pattern-form-form-04",
+  "title": "Form 4",
+  "description": "Form with input fields and validation alerts for data entry",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "@hookform/resolvers@^5.9.1",
+    "lucide-react@1.32.0",
+    "react-hook-form@^7.85.0",
+    "react@19.2.8",
+    "sonner@^2.0.8",
+    "zod@3.25.76"
+  ],
+  "files": [
+    {
+      "path": "source/patterns/form/form-04/form-04.tsx",
+      "content": "import * as React from 'react'\n\nimport { zodResolver } from '@hookform/resolvers/zod'\nimport { Controller, useForm } from 'react-hook-form'\nimport { toast } from 'sonner'\nimport * as z from 'zod'\nimport { Alert, AlertTitle } from '@astrale-os/ui/alert'\nimport { Button } from '@astrale-os/ui/button'\nimport { Field, FieldDescription, FieldError, FieldLabel } from '@astrale-os/ui/field'\nimport { Input } from '@astrale-os/ui/input'\nimport { CheckCheckIcon } from \"lucide-react\"\n\n// Define the form schema\nconst formSchema = z.object({\n  email: z.string().min(1, 'Email is required').email({ message: 'Please enter a valid email address.' })\n})\n\ntype FormValues = z.infer<typeof formSchema>\n\nconst InputFormDemo = () => {\n  const form = useForm<FormValues>({\n    resolver: zodResolver(formSchema),\n    defaultValues: {\n      email: ''\n    }\n  })\n\n  const onSubmit = () => {\n    toast.custom(() => (\n      <Alert className='border-green-600 text-green-600 dark:border-green-400 dark:text-green-400 *:[svg]:row-span-1'>\n        <CheckCheckIcon\n        />\n        <AlertTitle>Reset password link sent to your email</AlertTitle>\n      </Alert>\n    ))\n  }\n\n  return (\n    <form onSubmit={form.handleSubmit(onSubmit)} className='w-full max-w-xs space-y-6'>\n      <Controller\n        name='email'\n        control={form.control}\n        render={({ field, fieldState }) => (\n          <Field data-invalid={fieldState.invalid}>\n            <FieldLabel htmlFor={field.name}>Reset Your Password:</FieldLabel>\n            <Input\n              {...field}\n              id={field.name}\n              type='email'\n              aria-invalid={fieldState.invalid}\n              placeholder='Email address'\n              autoComplete='email'\n            />\n            <FieldDescription>Enter your email address to receive a reset link.</FieldDescription>\n            {fieldState.invalid && <FieldError errors={[fieldState.error]} />}\n          </Field>\n        )}\n      />\n\n      <Button type='submit'>Send Link</Button>\n    </form>\n  )\n}\n\nexport default InputFormDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/pattern/form/form-04.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "pattern/form/form-04",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:block"
+}

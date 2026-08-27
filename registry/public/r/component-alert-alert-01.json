@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-alert-alert-01",
+  "title": "Alert 1",
+  "description": "Basic alert with circle alert icon and simple title message.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/alert/alert-01/alert-01.tsx",
+      "content": "import { Alert, AlertTitle } from '@astrale-os/ui/alert'\nimport { CircleAlertIcon } from \"lucide-react\"\n\nconst AlertDemo = () => {\n  return (\n    <Alert className='*:[svg]:row-span-1'>\n      <CircleAlertIcon\n      />\n      <AlertTitle>New message!</AlertTitle>\n    </Alert>\n  )\n}\n\nexport default AlertDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/alert/alert-01.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/alert/alert-01",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

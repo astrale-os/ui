@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pattern-navigation-menu-navigation-menu-05",
+  "title": "Navigation Menu 5",
+  "description": "A versatile navigation menu combining a functional tool list with a dedicated call-to-action area for improved conversion.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0",
+    "next@^15.3.3"
+  ],
+  "files": [
+    {
+      "path": "source/patterns/navigation-menu/navigation-menu-05/navigation-menu-05.tsx",
+      "content": "import Link from 'next/link'\nimport { Button } from '@astrale-os/ui/button'\nimport {\n  NavigationMenu,\n  NavigationMenuContent,\n  NavigationMenuItem,\n  NavigationMenuLink,\n  NavigationMenuList,\n  NavigationMenuTrigger\n} from '@astrale-os/ui/navigation-menu'\nimport { SparklesIcon, BoxIcon, PaintbrushIcon, ArrowRightIcon } from \"lucide-react\"\n\nconst products = [\n  {\n    icon: (\n      <SparklesIcon\n      />\n    ),\n    label: 'Design Tools',\n    description: 'Powerful tools for creating stunning interfaces',\n    href: '#'\n  },\n  {\n    icon: (\n      <BoxIcon\n      />\n    ),\n    label: 'Component Library',\n    description: 'Pre-built components ready to use',\n    href: '#'\n  },\n  {\n    icon: (\n      <PaintbrushIcon\n      />\n    ),\n    label: 'Theme Builder',\n    description: 'Customize themes and styles effortlessly',\n    href: '#'\n  }\n]\n\nconst ctaSection = {\n  title: 'Start Designing',\n  description: 'Explore our design system and build faster.',\n  buttons: [\n    {\n      label: 'Browse Components',\n      icon: (\n        <ArrowRightIcon\n        />\n      ),\n      variant: 'default' as const\n    },\n    { label: 'Learn More', variant: 'outline' as const }\n  ]\n}\n\nconst NavigationMenuDesignDemo = () => (\n  <div className='flex items-center justify-center'>\n    <NavigationMenu>\n      <NavigationMenuList>\n        <NavigationMenuItem>\n          <NavigationMenuTrigger className='[&>svg]:size-4'>Design</NavigationMenuTrigger>\n          <NavigationMenuContent>\n            <div className='w-70 p-1 sm:w-120 lg:w-135'>\n              <div className='grid grid-cols-1 gap-4 sm:grid-cols-[2fr_1fr]'>\n                <div>\n                  {products.map(product => (\n                    <NavigationMenuLink\n                      render={<Link href={product.href} />}\n                      key={product.label}\n                      className='flex flex-row items-start gap-2 *:[svg]:mt-1 *:[svg]:size-5'\n                    >\n                      {product.icon}\n                      <div>\n                        <p className='font-medium'>{product.label}</p>\n                        <p className='text-muted-foreground'>{product.description}</p>\n                      </div>\n                    </NavigationMenuLink>\n                  ))}\n                </div>\n                <div className='bg-muted flex flex-col gap-4 rounded-lg p-4'>\n                  <div className='space-y-1'>\n                    <h4 className='font-medium'>{ctaSection.title}</h4>\n                    <p className='text-muted-foreground text-sm'>{ctaSection.description}</p>\n                  </div>\n                  <div className='space-y-2'>\n                    {ctaSection.buttons.map(button => (\n                      <Button\n                        render={<a href='#' />}\n                        nativeButton={false}\n                        className='w-full *:[svg]:size-4'\n                        key={button.label}\n                        variant={button.variant}\n                      >\n                        {button.label}\n                        {button.icon}\n                      </Button>\n                    ))}\n                  </div>\n                </div>\n              </div>\n            </div>\n          </NavigationMenuContent>\n        </NavigationMenuItem>\n      </NavigationMenuList>\n    </NavigationMenu>\n  </div>\n)\n\nexport default NavigationMenuDesignDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/pattern/navigation-menu/navigation-menu-05.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "pattern/navigation-menu/navigation-menu-05",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:block"
+}

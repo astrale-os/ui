@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-skeleton-skeleton-03",
+  "title": "Skeleton 3",
+  "description": "Card skeleton with avatar header and media/content placeholder, mimics a loading card.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/skeleton/skeleton-03/skeleton-03.tsx",
+      "content": "import { Card, CardContent, CardHeader } from '@astrale-os/ui/card'\nimport { Skeleton } from '@astrale-os/ui/skeleton'\n\nconst SkeletonCard = () => {\n  return (\n    <Card className='w-full max-w-xs'>\n      <CardHeader className='flex items-center gap-4'>\n        <Skeleton className='size-12 rounded-full' />\n        <div className='space-y-2'>\n          <Skeleton className='h-4 w-40' />\n          <Skeleton className='h-4 w-25' />\n        </div>\n      </CardHeader>\n      <CardContent>\n        <Skeleton className='aspect-video w-full' />\n      </CardContent>\n    </Card>\n  )\n}\n\nexport default SkeletonCard\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/skeleton/skeleton-03.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/skeleton/skeleton-03",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

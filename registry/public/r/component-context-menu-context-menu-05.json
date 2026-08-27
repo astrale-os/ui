@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-context-menu-context-menu-05",
+  "title": "Context Menu 5",
+  "description": "Labeled group context menu with Project and Actions sections and a destructive Archive Project item.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/context-menu/context-menu-05/context-menu-05.tsx",
+      "content": "import {\n  ContextMenu,\n  ContextMenuContent,\n  ContextMenuGroup,\n  ContextMenuItem,\n  ContextMenuLabel,\n  ContextMenuSeparator,\n  ContextMenuShortcut,\n  ContextMenuTrigger\n} from '@astrale-os/ui/context-menu'\nimport { ArchiveIcon } from \"lucide-react\"\n\nconst ContextGroupDemo = () => {\n  return (\n    <ContextMenu>\n      <div className='mt-4 flex w-full max-w-xs flex-col items-start gap-2'>\n        <ContextMenuTrigger className='flex h-45 w-full items-center justify-center rounded-xl border border-dashed text-sm'>\n          Right click here\n        </ContextMenuTrigger>\n        <div className='text-muted-foreground text-sm font-medium'>Menu with labeled sections</div>\n      </div>\n      <ContextMenuContent>\n        <ContextMenuGroup>\n          <ContextMenuLabel>Project</ContextMenuLabel>\n          <ContextMenuItem>\n            New Project\n            <ContextMenuShortcut>⌘N</ContextMenuShortcut>\n          </ContextMenuItem>\n          <ContextMenuItem>\n            Open Project\n            <ContextMenuShortcut>⌘O</ContextMenuShortcut>\n          </ContextMenuItem>\n        </ContextMenuGroup>\n        <ContextMenuSeparator />\n        <ContextMenuGroup>\n          <ContextMenuLabel>Actions</ContextMenuLabel>\n          <ContextMenuItem>\n            Share Project\n            <ContextMenuShortcut>⌘H</ContextMenuShortcut>\n          </ContextMenuItem>\n          <ContextMenuItem>\n            Duplicate\n            <ContextMenuShortcut>⌘D</ContextMenuShortcut>\n          </ContextMenuItem>\n        </ContextMenuGroup>\n        <ContextMenuSeparator />\n        <ContextMenuGroup>\n          <ContextMenuItem variant='destructive'>\n            Archive Project\n            <ContextMenuShortcut>\n              <ArchiveIcon\n              />\n            </ContextMenuShortcut>\n          </ContextMenuItem>\n        </ContextMenuGroup>\n      </ContextMenuContent>\n    </ContextMenu>\n  )\n}\n\nexport default ContextGroupDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/context-menu/context-menu-05.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/context-menu/context-menu-05",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-alert-alert-19",
+  "title": "Alert 19",
+  "description": "Outline success alert with green border and text for success messages.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/alert/alert-19/alert-19.tsx",
+      "content": "import { Alert, AlertDescription, AlertTitle } from '@astrale-os/ui/alert'\nimport { CheckCheckIcon } from \"lucide-react\"\n\nconst AlertOutlineSuccessDemo = () => {\n  return (\n    <Alert className='border-green-600 text-green-600 dark:border-green-400 dark:text-green-400'>\n      <CheckCheckIcon\n      />\n      <AlertTitle>Account created successfully</AlertTitle>\n      <AlertDescription className='text-green-600/80 dark:text-green-400/80'>\n        You are all set! You can now log in and start exploring your dashboard.\n      </AlertDescription>\n    </Alert>\n  )\n}\n\nexport default AlertOutlineSuccessDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/alert/alert-19.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/alert/alert-19",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

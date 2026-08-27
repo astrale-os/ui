@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-checkbox-checkbox-07",
+  "title": "Checkbox 7",
+  "description": "Checkbox with description text providing additional context and information",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/checkbox/checkbox-07/checkbox-07.tsx",
+      "content": "import { useId } from 'react'\n\nimport { Checkbox } from '@astrale-os/ui/checkbox'\nimport { Label } from '@astrale-os/ui/label'\n\nconst CheckboxDescriptionDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='flex items-start gap-2'>\n      <Checkbox id={id} defaultChecked />\n      <div className='grid gap-2'>\n        <Label htmlFor={id} className='leading-4'>\n          Accept terms and conditions\n        </Label>\n        <p className='text-muted-foreground text-xs'>\n          By clicking this checkbox, you agree to the terms and conditions.\n        </p>\n      </div>\n    </div>\n  )\n}\n\nexport default CheckboxDescriptionDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/checkbox/checkbox-07.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/checkbox/checkbox-07",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

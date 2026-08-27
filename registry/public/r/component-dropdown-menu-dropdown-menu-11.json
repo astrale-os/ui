@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-dropdown-menu-dropdown-menu-11",
+  "title": "Dropdown Menu 11",
+  "description": "Task priority selector dropdown with icons and priority levels",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/dropdown-menu/dropdown-menu-11/dropdown-menu-11.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\nimport {\n  DropdownMenu,\n  DropdownMenuContent,\n  DropdownMenuGroup,\n  DropdownMenuItem,\n  DropdownMenuLabel,\n  DropdownMenuTrigger\n} from '@astrale-os/ui/dropdown-menu'\nimport { ChevronsUpIcon, ChevronUpIcon, EqualIcon, ChevronDownIcon, ChevronsDownIcon } from \"lucide-react\"\n\nconst listItems = [\n  {\n    icon: (\n      <ChevronsUpIcon\n      />\n    ),\n    color: '*:[svg]:text-destructive',\n    priority: 'Highest'\n  },\n  {\n    icon: (\n      <ChevronUpIcon\n      />\n    ),\n    color: '*:[svg]:text-destructive/60',\n    priority: 'High'\n  },\n  {\n    icon: (\n      <EqualIcon\n      />\n    ),\n    color: '*:[svg]:text-amber-600 dark:*:[svg]:text-amber-400',\n    priority: 'Medium'\n  },\n  {\n    icon: (\n      <ChevronDownIcon\n      />\n    ),\n    color: '*:[svg]:text-green-600/60 dark:*:[svg]:text-green-400/60',\n    priority: 'Low'\n  },\n  {\n    icon: (\n      <ChevronsDownIcon\n      />\n    ),\n    color: '*:[svg]:text-green-600 dark:*:[svg]:text-green-400',\n    priority: 'Lowest'\n  }\n]\n\nconst DropdownMenuBorderedMenuDemo = () => {\n  return (\n    <DropdownMenu>\n      <DropdownMenuTrigger render={<Button variant='outline'>Bordered Menu</Button>} />\n      <DropdownMenuContent className='w-56 shadow-none'>\n        <DropdownMenuGroup>\n          <DropdownMenuLabel>Task priority</DropdownMenuLabel>\n        </DropdownMenuGroup>\n        <DropdownMenuGroup>\n          {listItems.map((item, index) => (\n            <DropdownMenuItem key={index}>\n              <span className={item.color}>{item.icon}</span>\n              {item.priority}\n            </DropdownMenuItem>\n          ))}\n        </DropdownMenuGroup>\n      </DropdownMenuContent>\n    </DropdownMenu>\n  )\n}\n\nexport default DropdownMenuBorderedMenuDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/dropdown-menu/dropdown-menu-11.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/dropdown-menu/dropdown-menu-11",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

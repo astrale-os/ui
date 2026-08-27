@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-radio-group-radio-group-15",
+  "title": "Radio Group 15",
+  "description": "An animated inset radio group with smooth transitions for language selection",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "@base-ui/react@^1.7.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/radio-group/radio-group-15/radio-group-15.tsx",
+      "content": "import { Radio as RadioPrimitive } from '@base-ui/react/radio'\nimport { RadioGroup as RadioGroupPrimitive } from '@base-ui/react/radio-group'\nimport { Label } from '@astrale-os/ui/label'\nimport { CircleIcon } from \"lucide-react\"\n\nconst RadioGroupAnimatedInsetDemo = () => {\n  return (\n    <RadioGroupPrimitive data-slot='radio-group' defaultValue='english' className='grid gap-3'>\n      <div className='flex items-center gap-2'>\n        <RadioPrimitive.Root\n          value='english'\n          id='lang-english'\n          data-slot='radio-group-item'\n          className='border-input text-primary-foreground focus-visible:border-ring focus-visible:ring-ring/50 data-checked:border-primary data-checked:bg-primary! [&_svg]:fill-primary-foreground relative aspect-square size-4 shrink-0 rounded-full border shadow-xs transition-[color,box-shadow,border] outline-none focus-visible:ring-3 [&_svg]:size-4 data-checked:[&_svg]:size-2.5'\n        >\n          <CircleIcon className='fill-primary absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-500' />\n        </RadioPrimitive.Root>\n        <Label htmlFor='lang-english'>English</Label>\n      </div>\n\n      <div className='flex items-center gap-2'>\n        <RadioPrimitive.Root\n          value='spanish'\n          id='lang-spanish'\n          data-slot='radio-group-item'\n          className='border-input text-primary-foreground focus-visible:border-ring focus-visible:ring-ring/50 data-checked:border-primary data-checked:bg-primary! [&_svg]:fill-primary-foreground relative aspect-square size-4 shrink-0 rounded-full border shadow-xs transition-[color,box-shadow,border] outline-none focus-visible:ring-3 [&_svg]:size-4 data-checked:[&_svg]:size-2.5'\n        >\n          <CircleIcon className='fill-primary absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-500' />\n        </RadioPrimitive.Root>\n        <Label htmlFor='lang-spanish'>Español</Label>\n      </div>\n\n      <div className='flex items-center gap-2'>\n        <RadioPrimitive.Root\n          value='french'\n          id='lang-french'\n          data-slot='radio-group-item'\n          className='border-input text-primary-foreground focus-visible:border-ring focus-visible:ring-ring/50 data-checked:border-primary data-checked:bg-primary! [&_svg]:fill-primary-foreground relative aspect-square size-4 shrink-0 rounded-full border shadow-xs transition-[color,box-shadow,border] outline-none focus-visible:ring-3 [&_svg]:size-4 data-checked:[&_svg]:size-2.5'\n        >\n          <CircleIcon className='fill-primary absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-500' />\n        </RadioPrimitive.Root>\n        <Label htmlFor='lang-french'>Français</Label>\n      </div>\n    </RadioGroupPrimitive>\n  )\n}\n\nexport default RadioGroupAnimatedInsetDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/radio-group/radio-group-15.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/radio-group/radio-group-15",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

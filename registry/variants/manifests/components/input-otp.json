@@ -1,0 +1,207 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-components-input-otp",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "component-input-otp-input-otp-01",
+      "type": "registry:component",
+      "title": "Input OTP 1",
+      "description": "A 4-digit numeric OTP input field with individual slots for each digit",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "input-otp@^1.5.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-otp-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input-otp/input-otp-01.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input-otp/input-otp-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-otp-input-otp-02",
+      "type": "registry:component",
+      "title": "Input OTP 2",
+      "description": "A 4-character alphanumeric OTP input field supporting both letters and numbers",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "input-otp@^1.5.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-otp-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input-otp/input-otp-02.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input-otp/input-otp-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-otp-input-otp-03",
+      "type": "registry:component",
+      "title": "Input OTP 3",
+      "description": "A 4-digit OTP input field with resend functionality and helper text",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-otp-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input-otp/input-otp-03.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input-otp/input-otp-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-otp-input-otp-04",
+      "type": "registry:component",
+      "title": "Input OTP 4",
+      "description": "A 4-digit OTP input field with countdown timer and automatic resend functionality",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-otp-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input-otp/input-otp-04.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input-otp/input-otp-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-otp-input-otp-05",
+      "type": "registry:component",
+      "title": "Input OTP 5",
+      "description": "A 4-digit OTP input field with outlined styling and rounded borders",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-otp-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input-otp/input-otp-05.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input-otp/input-otp-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-otp-input-otp-06",
+      "type": "registry:component",
+      "title": "Input OTP 6",
+      "description": "A 4-digit OTP input field with filled background styling and muted appearance",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-otp-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input-otp/input-otp-06.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input-otp/input-otp-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-otp-input-otp-07",
+      "type": "registry:component",
+      "title": "Input OTP 7",
+      "description": "A 4-digit OTP input field with minimal underline styling and no background",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-otp-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input-otp/input-otp-07.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input-otp/input-otp-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-otp-input-otp-08",
+      "type": "registry:component",
+      "title": "Input OTP 8",
+      "description": "A 6-digit OTP input field with grouped layout and visual separator between groups",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-otp-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input-otp/input-otp-08.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input-otp/input-otp-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-otp-input-otp-09",
+      "type": "registry:component",
+      "title": "Input OTP 9",
+      "description": "A 6-digit OTP input field with outlined grouped layout and visual separator",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-otp-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input-otp/input-otp-09.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input-otp/input-otp-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-otp-input-otp-10",
+      "type": "registry:component",
+      "title": "Input OTP 10",
+      "description": "A 6-digit OTP input field with custom dot separator and grouped layout",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-otp-10.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input-otp/input-otp-10.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input-otp/input-otp-10",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

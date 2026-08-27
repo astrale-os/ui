@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-aspect-ratio-aspect-ratio-07",
+  "title": "Aspect Ratio 7",
+  "description": "Aspect-ratio container demonstrating a 21:9 ratio with centered content, rounded corners, and muted background for ultra-wide media placeholders.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/aspect-ratio/aspect-ratio-07/aspect-ratio-07.tsx",
+      "content": "import { AspectRatio } from '@astrale-os/ui/aspect-ratio'\n\nconst AspectRatioDemo = () => {\n  return (\n    <div className='flex w-full max-w-sm flex-col items-center gap-4'>\n      <AspectRatio ratio={21 / 9} className='bg-muted flex w-full max-w-sm items-center justify-center rounded-lg'>\n        <p className='text-xl font-medium md:text-3xl'>21:9</p>\n      </AspectRatio>\n      <p className='text-muted-foreground text-xs'>21:9 Aspect Ratio.</p>\n    </div>\n  )\n}\n\nexport default AspectRatioDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/aspect-ratio/aspect-ratio-07.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/aspect-ratio/aspect-ratio-07",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-switch-switch-03",
+  "title": "Switch 3",
+  "description": "A mini-sized switch with border styling for compact interface layouts",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/switch/switch-03/switch-03.tsx",
+      "content": "import { Switch } from '@astrale-os/ui/switch'\n\nconst SwitchMiniDemo = () => {\n  return (\n    <Switch\n      aria-label='Mini switch'\n      className='[&_span]:border-input border-none data-[size=default]:h-3 [&_span]:border [&_span]:group-data-[size=default]/switch:size-4.5'\n    />\n  )\n}\n\nexport default SwitchMiniDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/switch/switch-03.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/switch/switch-03",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

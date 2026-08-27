@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-input-input-36",
+  "title": "Input 36",
+  "description": "Input field with clear button to instantly reset the field value",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/input/input-36/input-36.tsx",
+      "content": "'use client'\n\nimport { useId, useRef, useState } from 'react'\nimport { Button } from '@astrale-os/ui/button'\nimport { InputGroup, InputGroupAddon, InputGroupInput } from '@astrale-os/ui/input-group'\nimport { Label } from '@astrale-os/ui/label'\nimport { CircleXIcon } from \"lucide-react\"\n\nconst InputClearDemo = () => {\n  const [value, setValue] = useState('Click to clear')\n\n  const inputRef = useRef<HTMLInputElement>(null)\n\n  const id = useId()\n\n  const handleClearInput = () => {\n    setValue('')\n\n    if (inputRef.current) {\n      inputRef.current.focus()\n    }\n  }\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>Input with clear button</Label>\n      <InputGroup>\n        <InputGroupInput\n          ref={inputRef}\n          id={id}\n          type='text'\n          placeholder='Type something...'\n          value={value}\n          onChange={e => setValue(e.target.value)}\n        />\n        {value && (\n          <InputGroupAddon align='inline-end'>\n            <Button\n              variant='ghost'\n              size='icon'\n              onClick={handleClearInput}\n              className='text-muted-foreground hover:bg-transparent'\n            >\n              <CircleXIcon\n              />\n              <span className='sr-only'>Clear input</span>\n            </Button>\n          </InputGroupAddon>\n        )}\n      </InputGroup>\n    </div>\n  )\n}\n\nexport default InputClearDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/input/input-36.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/input/input-36",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

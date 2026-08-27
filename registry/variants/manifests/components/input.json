@@ -1,0 +1,951 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-components-input",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "component-input-input-01",
+      "type": "registry:component",
+      "title": "Input 1",
+      "description": "A basic email input field with placeholder text",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "input-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-01.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-input-02",
+      "type": "registry:component",
+      "title": "Input 2",
+      "description": "An email input field with a descriptive label for improved accessibility",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-02.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-input-03",
+      "type": "registry:component",
+      "title": "Input 3",
+      "description": "A required email input field with a red asterisk indicator and validation",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-03.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-input-04",
+      "type": "registry:component",
+      "title": "Input 4",
+      "description": "A disabled email input field that prevents user interaction",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-04.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-input-05",
+      "type": "registry:component",
+      "title": "Input 5",
+      "description": "A read-only email input field with default value and muted styling",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-05.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-input-06",
+      "type": "registry:component",
+      "title": "Input 6",
+      "description": "Text input fields showcasing different size variants (small, medium, large)",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "input-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-06.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-input-07",
+      "type": "registry:component",
+      "title": "Input 7",
+      "description": "An email input field with a pre-filled default value",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-07.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-input-08",
+      "type": "registry:component",
+      "title": "Input 8",
+      "description": "An input field with fully rounded borders for a modern appearance",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-08.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-input-09",
+      "type": "registry:component",
+      "title": "Input 9",
+      "description": "An input field with helper text below for additional guidance",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-09.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-input-10",
+      "type": "registry:component",
+      "title": "Input 10",
+      "description": "An email input field with right-aligned helper text for privacy assurance",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-10.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-10.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-10",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-input-11",
+      "type": "registry:component",
+      "title": "Input 11",
+      "description": "An email input field with hint text indicating the field is optional",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-11.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-11.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-11",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-input-12",
+      "type": "registry:component",
+      "title": "Input 12",
+      "description": "An email input field with error validation and dynamic error message display",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-12.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-12.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-12",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-input-13",
+      "type": "registry:component",
+      "title": "Input 13",
+      "description": "An email input field with custom indigo focus ring styling",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-13.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-13.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-13",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-input-14",
+      "type": "registry:component",
+      "title": "Input 14",
+      "description": "A username input field with a user icon positioned at the start",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-14.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-14.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-14",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-input-15",
+      "type": "registry:component",
+      "title": "Input 15",
+      "description": "An email input field with a mail icon positioned at the end",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-15.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-15.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-15",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-input-16",
+      "type": "registry:component",
+      "title": "Input 16",
+      "description": "A URL input field with \"https://\" text prefix positioned at the start",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-16.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-16.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-16",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-input-17",
+      "type": "registry:component",
+      "title": "Input 17",
+      "description": "A domain input field with \".com\" text suffix positioned at the end",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-17.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-17.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-17",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-input-18",
+      "type": "registry:component",
+      "title": "Input 18",
+      "description": "A URL input field with both \"https://\" prefix and \".com\" suffix text add-ons",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-18.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-18.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-18",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-input-19",
+      "type": "registry:component",
+      "title": "Input 19",
+      "description": "A URL input field with an external \"https://\" add-on box at the start",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-19.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-19.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-19",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-input-20",
+      "type": "registry:component",
+      "title": "Input 20",
+      "description": "A domain input field with an external \".com\" add-on box at the end",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-20.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-20.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-20",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-input-21",
+      "type": "registry:component",
+      "title": "Input 21",
+      "description": "A URL input field with both external \"https://\" and \".com\" add-on boxes",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-21.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-21.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-21",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-input-22",
+      "type": "registry:component",
+      "title": "Input 22",
+      "description": "An email input field with a filled muted background style and no border",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-22.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-22.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-22",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-input-23",
+      "type": "registry:component",
+      "title": "Input 23",
+      "description": "An email input field with an overlapping label positioned over the border",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-23.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-23.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-23",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-input-24",
+      "type": "registry:component",
+      "title": "Input 24",
+      "description": "An email input field with an animated floating label that moves on focus",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-24.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-24.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-24",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-input-25",
+      "type": "registry:component",
+      "title": "Input 25",
+      "description": "An email input field with an inset label positioned above the input area",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-25.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-25.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-25",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-input-26",
+      "type": "registry:component",
+      "title": "Input 26",
+      "description": "A password input field with a toggle button to show/hide password visibility",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-26.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-26.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-26",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-input-27",
+      "type": "registry:component",
+      "title": "Input 27",
+      "description": "A file input field with custom styling for the file picker button",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-27.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-27.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-27",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-input-28",
+      "type": "registry:component",
+      "title": "Input 28",
+      "description": "A URL input field with a protocol selector dropdown at the start",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-28.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-28.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-28",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-input-29",
+      "type": "registry:component",
+      "title": "Input 29",
+      "description": "A domain input field with a TLD selector dropdown at the end",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-29.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-29.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-29",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-input-30",
+      "type": "registry:component",
+      "title": "Input 30",
+      "description": "An email input field paired with a subscribe button for newsletter signups",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-30.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-30.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-30",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-input-31",
+      "type": "registry:component",
+      "title": "Input 31",
+      "description": "An email input field with an inline send button positioned at the end",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-31.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-31.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-31",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-input-32",
+      "type": "registry:component",
+      "title": "Input 32",
+      "description": "Input field with a right-aligned icon button, ideal for actions like downloading or submitting email addresses",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-32.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-32.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-32",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-input-33",
+      "type": "registry:component",
+      "title": "Input 33",
+      "description": "An email input field with an external subscribe button connected via styling",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-33.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-33.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-33",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-input-34",
+      "type": "registry:component",
+      "title": "Input 34",
+      "description": "Input field with character limit counter showing current count out of maximum allowed",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-34.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-34.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-34",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-input-35",
+      "type": "registry:component",
+      "title": "Input 35",
+      "description": "Input field with real-time character counter, guiding users on remaining character allowance.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-35.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-35.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-35",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-input-36",
+      "type": "registry:component",
+      "title": "Input 36",
+      "description": "Input field with clear button to instantly reset the field value",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-36.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-36.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-36",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-input-37",
+      "type": "registry:component",
+      "title": "Input 37",
+      "description": "Search input field with keyboard shortcut indicator (⌘K) for enhanced UX",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-37.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-37.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-37",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-input-38",
+      "type": "registry:component",
+      "title": "Input 38",
+      "description": "Search input field with search icon and microphone button for voice input",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-38.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-38.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-38",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-input-39",
+      "type": "registry:component",
+      "title": "Input 39",
+      "description": "Search input field with loading indicator that shows during search operations",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-39.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-39.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-39",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-input-40",
+      "type": "registry:component",
+      "title": "Input 40",
+      "description": "Number input field with increment/decrement buttons using React Aria Components",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react-aria-components@^1.20.0"
+      ],
+      "files": [
+        {
+          "path": "input-40.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-40.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-40",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-input-41",
+      "type": "registry:component",
+      "title": "Input 41",
+      "description": "Number field with increment/decrement buttons positioned at the end using React Aria",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react-aria-components@^1.20.0"
+      ],
+      "files": [
+        {
+          "path": "input-41.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-41.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-41",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-input-42",
+      "type": "registry:component",
+      "title": "Input 42",
+      "description": "Number field with vertically stacked increment/decrement buttons using React Aria",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react-aria-components@^1.20.0"
+      ],
+      "files": [
+        {
+          "path": "input-42.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-42.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-42",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-input-43",
+      "type": "registry:component",
+      "title": "Input 43",
+      "description": "Number field with rounded increment/decrement buttons positioned inline using React Aria",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react-aria-components@^1.20.0"
+      ],
+      "files": [
+        {
+          "path": "input-43.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-43.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-43",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-input-44",
+      "type": "registry:component",
+      "title": "Input 44",
+      "description": "Number field with rounded increment/decrement buttons positioned at the end using React Aria",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react-aria-components@^1.20.0"
+      ],
+      "files": [
+        {
+          "path": "input-44.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-44.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-44",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-input-45",
+      "type": "registry:component",
+      "title": "Input 45",
+      "description": "Number field with vertically stacked chevron buttons for increment/decrement using React Aria",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react-aria-components@^1.20.0"
+      ],
+      "files": [
+        {
+          "path": "input-45.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-45.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-45",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-input-input-46",
+      "type": "registry:component",
+      "title": "Input 46",
+      "description": "Password input field with strength meter and requirements validation checker",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "input-46.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/input/input-46.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/input/input-46",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

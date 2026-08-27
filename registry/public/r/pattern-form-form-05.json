@@ -1,0 +1,30 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pattern-form-form-05",
+  "title": "Form 5",
+  "description": "Form with OTP input component for secure verification codes",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "@hookform/resolvers@^5.9.1",
+    "lucide-react@1.32.0",
+    "react-hook-form@^7.85.0",
+    "react@19.2.8",
+    "sonner@^2.0.8",
+    "zod@3.25.76"
+  ],
+  "files": [
+    {
+      "path": "source/patterns/form/form-05/form-05.tsx",
+      "content": "'use client'\n\nimport * as React from 'react'\n\nimport { zodResolver } from '@hookform/resolvers/zod'\nimport { Controller, useForm } from 'react-hook-form'\nimport { toast } from 'sonner'\nimport * as z from 'zod'\nimport { Alert, AlertTitle } from '@astrale-os/ui/alert'\nimport { Button } from '@astrale-os/ui/button'\nimport { Field, FieldDescription, FieldError, FieldLabel } from '@astrale-os/ui/field'\nimport { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from '@astrale-os/ui/input-otp'\nimport { CheckCheckIcon } from \"lucide-react\"\n\n// Define the form schema\nconst formSchema = z.object({\n  pin: z.string().min(6, {\n    message: 'Your one-time password must be 6 characters.'\n  })\n})\n\ntype FormValues = z.infer<typeof formSchema>\n\nconst InputOTPFormDemo = () => {\n  const form = useForm<FormValues>({\n    resolver: zodResolver(formSchema),\n    defaultValues: {\n      pin: ''\n    }\n  })\n\n  function onSubmit() {\n    toast.custom(() => (\n      <Alert className='border-green-600 text-green-600 sm:w-100 dark:border-green-400 dark:text-green-400 *:[svg]:row-span-1'>\n        <CheckCheckIcon\n        />\n        <AlertTitle>Your verification is complete. You can now proceed.</AlertTitle>\n      </Alert>\n    ))\n  }\n\n  return (\n    <form onSubmit={form.handleSubmit(onSubmit)} className='w-full max-w-xs space-y-6'>\n      <Controller\n        name='pin'\n        control={form.control}\n        render={({ field, fieldState }) => (\n          <Field data-invalid={fieldState.invalid}>\n            <FieldLabel htmlFor='pin'>One-Time Password</FieldLabel>\n            <InputOTP maxLength={6} {...field} id='pin'>\n              <InputOTPGroup className='*:aria-invalid:ring-destructive/20 *:dark:aria-invalid:ring-destructive/40 gap-2 has-aria-invalid:ring-0 *:aria-invalid:ring-3 *:data-[slot=input-otp-slot]:rounded-lg *:data-[slot=input-otp-slot]:border'>\n                <InputOTPSlot aria-invalid={fieldState.invalid} index={0} />\n                <InputOTPSlot aria-invalid={fieldState.invalid} index={1} />\n                <InputOTPSlot aria-invalid={fieldState.invalid} index={2} />\n              </InputOTPGroup>\n              <InputOTPSeparator />\n              <InputOTPGroup className='*:aria-invalid:ring-destructive/20 *:dark:aria-invalid:ring-destructive/40 gap-2 has-aria-invalid:ring-0 *:aria-invalid:ring-3 *:data-[slot=input-otp-slot]:rounded-lg *:data-[slot=input-otp-slot]:border'>\n                <InputOTPSlot aria-invalid={fieldState.invalid} index={3} />\n                <InputOTPSlot aria-invalid={fieldState.invalid} index={4} />\n                <InputOTPSlot aria-invalid={fieldState.invalid} index={5} />\n              </InputOTPGroup>\n            </InputOTP>\n            <FieldDescription>Please enter the 6-digit OTP sent to your phone.</FieldDescription>\n            {fieldState.invalid && <FieldError errors={[fieldState.error]} />}\n          </Field>\n        )}\n      />\n\n      <Button type='submit'>Submit</Button>\n    </form>\n  )\n}\n\nexport default InputOTPFormDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/pattern/form/form-05.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "pattern/form/form-05",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:block"
+}

@@ -1,0 +1,522 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-components-progress",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "component-progress-progress-01",
+      "type": "registry:component",
+      "title": "Progress 1",
+      "description": "Standard progress bar with a timed animation showing value transitions from empty to half-filled.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "progress-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/progress/progress-01.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/progress/progress-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-progress-progress-02",
+      "type": "registry:component",
+      "title": "Progress 2",
+      "description": "Dual progress indicators for file downloads, featuring integrated labels for percentage and data volume.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "progress-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/progress/progress-02.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/progress/progress-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-progress-progress-03",
+      "type": "registry:component",
+      "title": "Progress 3",
+      "description": "Simulated real-time loading bar that dynamically updates with randomized increments and status messaging.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "progress-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/progress/progress-03.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/progress/progress-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-progress-progress-04",
+      "type": "registry:component",
+      "title": "Progress 4",
+      "description": "Visual variety pack showcasing standard rounded, full pill-shaped, and sharp rectangular progress bar variants.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "progress-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/progress/progress-04.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/progress/progress-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-progress-progress-05",
+      "type": "registry:component",
+      "title": "Progress 5",
+      "description": "Scaling demonstration showing progress bars in four distinct thicknesses from thin to extra-bold.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "progress-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/progress/progress-05.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/progress/progress-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-progress-progress-06",
+      "type": "registry:component",
+      "title": "Progress 6",
+      "description": "Premium progress indicators featuring vibrant gradients and moving 'shimmer' animations for active states.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "progress-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/progress/progress-06.tsx"
+        }
+      ],
+      "css": {
+        "@keyframes gradient-flow": {
+          "0%": {
+            "background-position": "100% 0%"
+          },
+          "100%": {
+            "background-position": "-100% 0%"
+          }
+        }
+      },
+      "meta": {
+        "canonicalAddress": "component/progress/progress-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-progress-progress-07",
+      "type": "registry:component",
+      "title": "Progress 7",
+      "description": "Interactive storage management card combining a progress bar with a slider for real-time capacity simulation.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "progress-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/progress/progress-07.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/progress/progress-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-progress-progress-08",
+      "type": "registry:component",
+      "title": "Progress 8",
+      "description": "Color-themed progress bars utilizing semantic palettes (Success, Warning, Info, Danger) for clear status communication.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "progress-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/progress/progress-08.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/progress/progress-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-progress-progress-09",
+      "type": "registry:component",
+      "title": "Progress 9",
+      "description": "Vertical progress bar implementation within a card layout, demonstrating non-traditional orientation support.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "progress-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/progress/progress-09.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/progress/progress-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-progress-progress-10",
+      "type": "registry:component",
+      "title": "Progress 10",
+      "description": "Compact vertical indicators with numerical percentage labels embedded directly inside the progress track.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "progress-10.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/progress/progress-10.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/progress/progress-10",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-progress-progress-11",
+      "type": "registry:component",
+      "title": "Progress 11",
+      "description": "System monitoring dashboard featuring vertical progress bars for tracking CPU, RAM, Disk, and Load metrics.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "progress-11.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/progress/progress-11.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/progress/progress-11",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-progress-progress-12",
+      "type": "registry:component",
+      "title": "Progress 12",
+      "description": "Vertical progress bar thickness comparison, ranging from single-pixel lines to wide status columns.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "progress-12.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/progress/progress-12.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/progress/progress-12",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-progress-progress-13",
+      "type": "registry:component",
+      "title": "Progress 13",
+      "description": "Horizontal progress bars featuring centered percentage labels overlayed directly on the moving indicator.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "progress-13.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/progress/progress-13.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/progress/progress-13",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-progress-progress-14",
+      "type": "registry:component",
+      "title": "Progress 14",
+      "description": "Functional checklist component that automatically calculates and displays overall project completion progress.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "progress-14.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/progress/progress-14.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/progress/progress-14",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-progress-progress-15",
+      "type": "registry:component",
+      "title": "Progress 15",
+      "description": "Clean radial progress wheel featuring a centered label and linked slider control for precision adjustments.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "progress-15.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/progress/progress-15.tsx"
+        },
+        {
+          "path": "support/components/ui/circular-progress.tsx",
+          "type": "registry:component",
+          "target": "components/ui/circular-progress.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/progress/progress-15",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-progress-progress-16",
+      "type": "registry:component",
+      "title": "Progress 16",
+      "description": "Radial storage visualization displaying used versus available capacity within a modern circular track.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "progress-16.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/progress/progress-16.tsx"
+        },
+        {
+          "path": "support/components/ui/circular-progress.tsx",
+          "type": "registry:component",
+          "target": "components/ui/circular-progress.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/progress/progress-16",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-progress-progress-17",
+      "type": "registry:component",
+      "title": "Progress 17",
+      "description": "Comparison of circular progress stroke styles, featuring both rounded and squared-off path endings.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "progress-17.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/progress/progress-17.tsx"
+        },
+        {
+          "path": "support/components/ui/circular-progress.tsx",
+          "type": "registry:component",
+          "target": "components/ui/circular-progress.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/progress/progress-17",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-progress-progress-18",
+      "type": "registry:component",
+      "title": "Progress 18",
+      "description": "Exploration of radial stroke weights, contrasting thin background tracks with bold progress indicators.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "progress-18.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/progress/progress-18.tsx"
+        },
+        {
+          "path": "support/components/ui/circular-progress.tsx",
+          "type": "registry:component",
+          "target": "components/ui/circular-progress.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/progress/progress-18",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-progress-progress-19",
+      "type": "registry:component",
+      "title": "Progress 19",
+      "description": "Fitness-inspired health rings using concentric circular progress bars for Move, Exercise, and Stand tracking.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "progress-19.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/progress/progress-19.tsx"
+        },
+        {
+          "path": "support/components/ui/circular-progress.tsx",
+          "type": "registry:component",
+          "target": "components/ui/circular-progress.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/progress/progress-19",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-progress-progress-20",
+      "type": "registry:component",
+      "title": "Progress 20",
+      "description": "Advanced download manager with interactive controls for pausing, resuming, and monitoring multi-file transfers.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "progress-20.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/progress/progress-20.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/progress/progress-20",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-progress-progress-21",
+      "type": "registry:component",
+      "title": "Progress 21",
+      "description": "Animated striped progress bars with a moving \"barber pole\" effect, available in multiple semantic colorways.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "progress-21.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/progress/progress-21.tsx"
+        }
+      ],
+      "css": {
+        "@keyframes progress-bar-stripes": {
+          "from": {
+            "background-position-x": "0.75rem"
+          },
+          "to": {
+            "background-position-x": "0"
+          }
+        }
+      },
+      "meta": {
+        "canonicalAddress": "component/progress/progress-21",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-progress-progress-22",
+      "type": "registry:component",
+      "title": "Progress 22",
+      "description": "Professional dashboard widget featuring an animated gauge, control slider, and secondary status indicators.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "progress-22.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/progress/progress-22.tsx"
+        },
+        {
+          "path": "support/components/ui/circular-progress.tsx",
+          "type": "registry:component",
+          "target": "components/ui/circular-progress.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/progress/progress-22",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-progress-progress-23",
+      "type": "registry:component",
+      "title": "Progress 23",
+      "description": "Performance-themed radial gauge with a dashed track and dynamic color shifting based on score thresholds.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "progress-23.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/progress/progress-23.tsx"
+        },
+        {
+          "path": "support/components/ui/circular-progress.tsx",
+          "type": "registry:component",
+          "target": "components/ui/circular-progress.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/progress/progress-23",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

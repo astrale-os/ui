@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-context-menu-context-menu-04",
+  "title": "Context Menu 4",
+  "description": "Context menu with keyboard shortcut bindings for New File, Open, Save, Print, and Close actions.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/context-menu/context-menu-04/context-menu-04.tsx",
+      "content": "import {\n  ContextMenu,\n  ContextMenuContent,\n  ContextMenuGroup,\n  ContextMenuItem,\n  ContextMenuSeparator,\n  ContextMenuShortcut,\n  ContextMenuTrigger\n} from '@astrale-os/ui/context-menu'\n\nconst ContextShortcutsDemo = () => {\n  return (\n    <ContextMenu>\n      <div className='mt-4 flex w-full max-w-xs flex-col items-start gap-2'>\n        <ContextMenuTrigger className='flex h-45 w-full items-center justify-center rounded-xl border border-dashed text-sm'>\n          Right click here\n        </ContextMenuTrigger>\n        <div className='text-muted-foreground text-sm font-medium'>Menu with shortcuts</div>\n      </div>\n      <ContextMenuContent>\n        <ContextMenuGroup>\n          <ContextMenuItem>\n            New File\n            <ContextMenuShortcut>⌘N</ContextMenuShortcut>\n          </ContextMenuItem>\n          <ContextMenuItem>\n            Open\n            <ContextMenuShortcut>⌘O</ContextMenuShortcut>\n          </ContextMenuItem>\n          <ContextMenuItem>\n            Save\n            <ContextMenuShortcut>⌘S</ContextMenuShortcut>\n          </ContextMenuItem>\n        </ContextMenuGroup>\n        <ContextMenuSeparator />\n        <ContextMenuGroup>\n          <ContextMenuItem>\n            Print\n            <ContextMenuShortcut>⌘P</ContextMenuShortcut>\n          </ContextMenuItem>\n          <ContextMenuItem>\n            Close\n            <ContextMenuShortcut>⌘W</ContextMenuShortcut>\n          </ContextMenuItem>\n        </ContextMenuGroup>\n      </ContextMenuContent>\n    </ContextMenu>\n  )\n}\n\nexport default ContextShortcutsDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/context-menu/context-menu-04.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/context-menu/context-menu-04",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

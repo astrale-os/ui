@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-input-input-05",
+  "title": "Input 5",
+  "description": "A read-only email input field with default value and muted styling",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/input/input-05/input-05.tsx",
+      "content": "import { useId } from 'react'\n\nimport { Input } from '@astrale-os/ui/input'\nimport { Label } from '@astrale-os/ui/label'\n\nconst InputReadOnlyDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>Read-only input</Label>\n      <Input\n        id={id}\n        type='email'\n        placeholder='Email address'\n        defaultValue='example@xyz.com'\n        className='read-only:bg-muted'\n        readOnly\n      />\n    </div>\n  )\n}\n\nexport default InputReadOnlyDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/input/input-05.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/input/input-05",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

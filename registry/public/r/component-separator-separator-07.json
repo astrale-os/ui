@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-separator-separator-07",
+  "title": "Separator 7",
+  "description": "Horizontal separators with integrated text labels positioned at the start, center, or end of the line.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/separator/separator-07/separator-07.tsx",
+      "content": "import { Separator } from '@astrale-os/ui/separator'\n\nconst SeparatorTextDemo = () => {\n  return (\n    <div className='w-full max-w-sm'>\n      <div className='flex flex-col gap-6'>\n        <div className='relative flex items-center gap-2'>\n          <span className='text-muted-foreground shrink-0 pr-2 text-sm font-medium'>Start</span>\n          <Separator className='flex-1' />\n        </div>\n\n        <div className='relative flex items-center gap-2'>\n          <Separator className='flex-1' />\n          <span className='text-muted-foreground shrink-0 px-2 text-sm font-medium'>Center</span>\n          <Separator className='flex-1' />\n        </div>\n\n        <div className='relative flex items-center gap-2'>\n          <Separator className='flex-1' />\n          <span className='text-muted-foreground shrink-0 pl-2 text-sm font-medium'>End</span>\n        </div>\n      </div>\n    </div>\n  )\n}\n\nexport default SeparatorTextDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/separator/separator-07.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/separator/separator-07",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

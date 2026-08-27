@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pattern-command-command-07",
+  "title": "Command 7",
+  "description": "IDE-style dialog command palette with Actions shortcuts and a dynamic file list showing filenames and paths.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/patterns/command/command-07/command-07.tsx",
+      "content": "import * as React from 'react'\nimport { Button } from '@astrale-os/ui/button'\nimport {\n  Command,\n  CommandDialog,\n  CommandEmpty,\n  CommandGroup,\n  CommandInput,\n  CommandItem,\n  CommandList,\n  CommandSeparator,\n  CommandShortcut\n} from '@astrale-os/ui/command'\nimport { FileIcon } from \"lucide-react\"\n\nconst files = [\n  { name: 'page.tsx', path: 'src/app/page.tsx' },\n  { name: 'package.json', path: 'package.json' },\n  { name: 'globals.css', path: 'src/styles/globals.css' },\n  { name: 'utils.ts', path: 'src/lib/utils.ts' },\n  { name: 'layout.tsx', path: 'src/app/layout.tsx' },\n  { name: 'README.md', path: 'README.md' },\n  { name: 'api.ts', path: 'src/lib/api.ts' },\n  { name: 'button.tsx', path: 'src/components/ui/button.tsx' }\n]\n\nconst CommandPalette = () => {\n  const [open, setOpen] = React.useState(false)\n\n  return (\n    <div className='flex flex-col gap-4'>\n      <Button onClick={() => setOpen(true)} variant='outline' className='w-fit'>\n        Command Palette\n      </Button>\n      <CommandDialog open={open} onOpenChange={setOpen}>\n        <Command>\n          <CommandInput placeholder='Type a command or search...' />\n          <CommandList>\n            <CommandEmpty>No results found.</CommandEmpty>\n            <CommandGroup heading='Actions'>\n              <CommandItem>\n                <span>Go to file</span>\n                <CommandShortcut>⌘P</CommandShortcut>\n              </CommandItem>\n              <CommandItem>\n                <span>Show and Run commands</span>\n                <CommandShortcut>⇧⌘P</CommandShortcut>\n              </CommandItem>\n              <CommandItem>\n                <span>Open Quick Chat</span>\n                <CommandShortcut>⇧⌘L</CommandShortcut>\n              </CommandItem>\n              <CommandItem>\n                <span>Git: clone</span>\n                <CommandShortcut>^⌘I</CommandShortcut>\n              </CommandItem>\n            </CommandGroup>\n            <CommandSeparator />\n            <CommandGroup heading='Files'>\n              {files.map(file => (\n                <CommandItem key={file.path} className='gap-2.5'>\n                  <FileIcon className='size-4 shrink-0' />\n                  <div className='flex flex-1 items-center gap-2'>\n                    <span className='font-medium'>{file.name}</span>\n                    <span className='text-muted-foreground truncate text-xs'>{file.path}</span>\n                  </div>\n                </CommandItem>\n              ))}\n            </CommandGroup>\n          </CommandList>\n        </Command>\n      </CommandDialog>\n    </div>\n  )\n}\n\nexport default CommandPalette\n",
+      "type": "registry:component",
+      "target": "components/astrale/pattern/command/command-07.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "pattern/command/command-07",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:block"
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-dropdown-menu-dropdown-menu-15",
+  "title": "Dropdown Menu 15",
+  "description": "Left side animation dropdown menu",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/dropdown-menu/dropdown-menu-15/dropdown-menu-15.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\nimport {\n  DropdownMenu,\n  DropdownMenuContent,\n  DropdownMenuGroup,\n  DropdownMenuItem,\n  DropdownMenuLabel,\n  DropdownMenuTrigger,\n  DropdownMenuSeparator\n} from '@astrale-os/ui/dropdown-menu'\n\nconst DropdownSlideLeftAnimationDemo = () => {\n  return (\n    <DropdownMenu>\n      <DropdownMenuTrigger render={<Button variant='outline'>Slide Left Animation</Button>} />\n      <DropdownMenuContent className='data-open:slide-in-from-left-20 data-open:zoom-in-100 data-open:data-[side=bottom]:slide-in-from-top-0 data-open:data-[side=top]:slide-in-from-bottom-0 data-closed:slide-out-to-left-20 data-closed:zoom-out-100 w-56 duration-400'>\n        <DropdownMenuGroup>\n          <DropdownMenuLabel>Settings</DropdownMenuLabel>\n        </DropdownMenuGroup>\n        <DropdownMenuGroup>\n          <DropdownMenuItem>My Profile</DropdownMenuItem>\n          <DropdownMenuItem>Settings</DropdownMenuItem>\n          <DropdownMenuItem>Billing</DropdownMenuItem>\n          <DropdownMenuItem>FAQs</DropdownMenuItem>\n        </DropdownMenuGroup>\n        <DropdownMenuSeparator />\n        <DropdownMenuGroup>\n          <DropdownMenuLabel>Contact</DropdownMenuLabel>\n        </DropdownMenuGroup>\n        <DropdownMenuGroup>\n          <DropdownMenuItem>Call Support</DropdownMenuItem>\n          <DropdownMenuItem>Chat with us</DropdownMenuItem>\n        </DropdownMenuGroup>\n      </DropdownMenuContent>\n    </DropdownMenu>\n  )\n}\n\nexport default DropdownSlideLeftAnimationDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/dropdown-menu/dropdown-menu-15.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/dropdown-menu/dropdown-menu-15",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

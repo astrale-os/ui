@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-toggle-toggle-14",
+  "title": "Toggle 14",
+  "description": "Motion-based theme toggle using motion/react for animated Sun/Moon icon transitions.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0",
+    "motion@^13.1.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/toggle/toggle-14/toggle-14.tsx",
+      "content": "'use client'\n\nimport { useState } from 'react'\n\nimport { AnimatePresence, motion } from 'motion/react'\nimport { Toggle } from '@astrale-os/ui/toggle'\nimport { MoonIcon, SunIcon } from \"lucide-react\"\n\nconst iconVariants = {\n  initial: { opacity: 0, rotate: -90, scale: 0.5 },\n  animate: {\n    opacity: 1,\n    rotate: 0,\n    scale: 1,\n    transition: { type: 'spring' as const, stiffness: 200, damping: 15 }\n  },\n  exit: {\n    opacity: 0,\n    rotate: 90,\n    scale: 0.5,\n    transition: { duration: 0.15, ease: 'easeIn' as const }\n  }\n}\n\nconst MotionThemeToggle = () => {\n  const [isDark, setIsDark] = useState(false)\n\n  return (\n    <Toggle\n      aria-label='theme toggle'\n      pressed={isDark}\n      onPressedChange={setIsDark}\n      className='bg-transparent hover:bg-transparent aria-pressed:bg-transparent'\n    >\n      <AnimatePresence mode='wait' initial={false}>\n        <motion.span\n          key={isDark ? 'moon' : 'sun'}\n          variants={iconVariants}\n          initial='initial'\n          animate='animate'\n          exit='exit'\n          className='flex items-center justify-center'\n        >\n          {isDark ? (\n            <MoonIcon className='size-6' />\n          ) : (\n            <SunIcon className='size-6' />\n          )}\n        </motion.span>\n      </AnimatePresence>\n    </Toggle>\n  )\n}\n\nexport default MotionThemeToggle\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/toggle/toggle-14.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/toggle/toggle-14",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

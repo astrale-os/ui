@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-toggle-toggle-09",
+  "title": "Toggle 9",
+  "description": "Emoji flip toggles using 3D rotation and backface-hidden for a card-flip effect.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/toggle/toggle-09/toggle-09.tsx",
+      "content": "'use client'\n\nimport { useState } from 'react'\n\nimport { Toggle } from '@astrale-os/ui/toggle'\nimport { cn } from '@astrale-os/ui/class-name'\n\nconst ToggleEmoji = () => {\n  const [isFlipped, setIsFlipped] = useState(false)\n  const [isFlipped2, setIsFlipped2] = useState(false)\n\n  return (\n    <div className='perspective-250 flex items-center justify-center gap-6'>\n      <Toggle\n        aria-label='emoji flip toggle'\n        pressed={isFlipped}\n        onPressedChange={setIsFlipped}\n        className={cn(\n          'relative bg-transparent text-3xl hover:bg-transparent aria-pressed:bg-transparent',\n          'transition-transform duration-500 transform-3d',\n          isFlipped ? 'transform-[rotateY(180deg)]' : 'transform-[rotateY(0deg)]'\n        )}\n      >\n        <span className='absolute inset-0 backface-hidden'>😭</span>\n        <span className='absolute inset-0 transform-[rotateY(180deg)] backface-hidden'>🥳</span>\n      </Toggle>\n      <Toggle\n        aria-label='emoji flip toggle'\n        pressed={isFlipped2}\n        onPressedChange={setIsFlipped2}\n        className={cn(\n          'relative bg-transparent text-3xl hover:bg-transparent aria-pressed:bg-transparent',\n          'transition-transform duration-500 transform-3d',\n          isFlipped2 ? 'transform-[rotateY(180deg)]' : 'transform-[rotateY(0deg)]'\n        )}\n      >\n        <span className='absolute inset-0 backface-hidden'>🥶</span>\n        <span className='absolute inset-0 transform-[rotateY(180deg)] backface-hidden'>🥵</span>\n      </Toggle>\n    </div>\n  )\n}\n\nexport default ToggleEmoji\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/toggle/toggle-09.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/toggle/toggle-09",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

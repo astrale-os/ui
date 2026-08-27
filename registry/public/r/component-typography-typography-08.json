@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-typography-typography-08",
+  "title": "Typography 8",
+  "description": "Unordered list with disc bullets, left indent, and vertical spacing between items.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/typography/typography-08/typography-08.tsx",
+      "content": "const TypographyListDemo = () => {\n  return (\n    <ul className='my-6 ml-6 list-disc space-y-2'>\n      <li>Item one - A single troubadour&apos;s chuckle</li>\n      <li>Item two - Morning whispers in the bazaar</li>\n      <li>Item three - Nightly lantern laughter</li>\n    </ul>\n  )\n}\n\nexport default TypographyListDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/typography/typography-08.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/typography/typography-08",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

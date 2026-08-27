@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-toggle-group-toggle-group-10",
+  "title": "Toggle Group 10",
+  "description": "Large outline pricing plan switcher with a 'Save 20%' badge on the Elite option using a destructive pill label.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/toggle-group/toggle-group-10/toggle-group-10.tsx",
+      "content": "import { ToggleGroup, ToggleGroupItem } from '@astrale-os/ui/toggle-group'\n\nconst ToggleGroupPricing = () => {\n  return (\n    <div className='flex items-center justify-center'>\n      <ToggleGroup defaultValue={['basic']} variant='outline' size='lg' spacing={0}>\n        <ToggleGroupItem value='basic'>Basic</ToggleGroupItem>\n        <ToggleGroupItem value='elite' className='gap-2'>\n          Elite\n          <span className='bg-destructive text-primary-foreground rounded-full px-2 py-0.5 text-xs font-medium'>\n            Save 20%\n          </span>\n        </ToggleGroupItem>\n      </ToggleGroup>\n    </div>\n  )\n}\n\nexport default ToggleGroupPricing\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/toggle-group/toggle-group-10.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/toggle-group/toggle-group-10",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

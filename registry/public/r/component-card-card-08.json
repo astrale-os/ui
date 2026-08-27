@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-card-card-08",
+  "title": "Card 8",
+  "description": "Soft background card with subtle primary color theme",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/card/card-08/card-08.tsx",
+      "content": "import { Card, CardContent, CardHeader, CardTitle } from '@astrale-os/ui/card'\n\nconst CardSoftDemo = () => {\n  return (\n    <Card className='bg-primary/20 max-w-md gap-2'>\n      <CardHeader>\n        <CardTitle>Design Throwdown</CardTitle>\n      </CardHeader>\n      <CardContent>\n        Where passion, pressure, and pixels collide - push your creativity to the edge and show what you are made of.\n      </CardContent>\n    </Card>\n  )\n}\n\nexport default CardSoftDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/card/card-08.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/card/card-08",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

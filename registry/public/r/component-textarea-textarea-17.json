@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-textarea-textarea-17",
+  "title": "Textarea 17",
+  "description": "An auto-growing textarea with field-sizing-content that expands with text content",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/textarea/textarea-17/textarea-17.tsx",
+      "content": "import { useId } from 'react'\n\nimport { Label } from '@astrale-os/ui/label'\nimport { Textarea } from '@astrale-os/ui/textarea'\n\nconst TextareaAutoGrowDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>Auto growing textarea</Label>\n      <Textarea\n        id={id}\n        placeholder='Type your feedback here'\n        className='field-sizing-content max-h-30 min-h-0 resize-none py-1.75'\n      />\n    </div>\n  )\n}\n\nexport default TextareaAutoGrowDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/textarea/textarea-17.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/textarea/textarea-17",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

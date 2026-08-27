@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-avatar-avatar-07",
+  "title": "Avatar 7",
+  "description": "Status avatar with busy indicator showing red status dot.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/avatar/avatar-07/avatar-07.tsx",
+      "content": "import { Avatar, AvatarBadge, AvatarFallback, AvatarImage } from '@astrale-os/ui/avatar'\n\nconst AvatarStatusBusyDemo = () => {\n  return (\n    <Avatar>\n      <AvatarImage src='https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-5.png' alt='Hallie Richards' />\n      <AvatarFallback>HR</AvatarFallback>\n      <AvatarBadge className='bg-destructive'>\n        <span className='sr-only'>Busy</span>\n      </AvatarBadge>\n    </Avatar>\n  )\n}\n\nexport default AvatarStatusBusyDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/avatar/avatar-07.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/avatar/avatar-07",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

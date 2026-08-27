@@ -1,0 +1,427 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-patterns-combobox",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "pattern-combobox-combobox-01",
+      "type": "registry:block",
+      "title": "Combobox 1",
+      "description": "Basic combobox with framework selection and searchable dropdown",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "combobox-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/combobox/combobox-01.tsx"
+        },
+        {
+          "path": "support/components/ui/combobox.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/combobox.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/combobox/combobox-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-combobox-combobox-02",
+      "type": "registry:block",
+      "title": "Combobox 2",
+      "description": "Grouped combobox with fruits, vegetables, and beverages organized by categories",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "combobox-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/combobox/combobox-02.tsx"
+        },
+        {
+          "path": "support/components/ui/combobox.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/combobox.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/combobox/combobox-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-combobox-combobox-03",
+      "type": "registry:block",
+      "title": "Combobox 3",
+      "description": "Grouped combobox with disabled options and category-based selection",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "combobox-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/combobox/combobox-03.tsx"
+        },
+        {
+          "path": "support/components/ui/combobox.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/combobox.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/combobox/combobox-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-combobox-combobox-04",
+      "type": "registry:block",
+      "title": "Combobox 4",
+      "description": "Industry selector combobox with icons for various business sectors",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "combobox-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/combobox/combobox-04.tsx"
+        },
+        {
+          "path": "support/components/ui/combobox.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/combobox.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/combobox/combobox-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-combobox-combobox-05",
+      "type": "registry:block",
+      "title": "Combobox 5",
+      "description": "Framework selector combobox with custom check icon styling",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "combobox-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/combobox/combobox-05.tsx"
+        },
+        {
+          "path": "support/components/ui/combobox.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/combobox.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/combobox/combobox-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-combobox-combobox-06",
+      "type": "registry:block",
+      "title": "Combobox 6",
+      "description": "combobox with add new option functionality",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "combobox-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/combobox/combobox-06.tsx"
+        },
+        {
+          "path": "support/components/ui/combobox.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/combobox.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/combobox/combobox-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-combobox-combobox-07",
+      "type": "registry:block",
+      "title": "Combobox 7",
+      "description": "Timezone selector combobox with real timezone data from Intl API",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "combobox-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/combobox/combobox-07.tsx"
+        },
+        {
+          "path": "support/components/ui/combobox.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/combobox.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/combobox/combobox-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-combobox-combobox-08",
+      "type": "registry:block",
+      "title": "Combobox 8",
+      "description": "User selector combobox with avatars, name and email addresses",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "combobox-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/combobox/combobox-08.tsx"
+        },
+        {
+          "path": "support/components/ui/combobox.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/combobox.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/combobox/combobox-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-combobox-combobox-09",
+      "type": "registry:block",
+      "title": "Combobox 9",
+      "description": "Country selector combobox with flag icons and country selection",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "combobox-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/combobox/combobox-09.tsx"
+        },
+        {
+          "path": "support/components/ui/combobox.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/combobox.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/combobox/combobox-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-combobox-combobox-10",
+      "type": "registry:block",
+      "title": "Combobox 10",
+      "description": "Multi-select framework combobox with badge display and removable selections",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "combobox-10.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/combobox/combobox-10.tsx"
+        },
+        {
+          "path": "support/components/ui/combobox.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/combobox.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/combobox/combobox-10",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-combobox-combobox-11",
+      "type": "registry:block",
+      "title": "Combobox 11",
+      "description": "Multiple-select combobox with expandable badge view to show or hide selected items dynamically",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "combobox-11.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/combobox/combobox-11.tsx"
+        },
+        {
+          "path": "support/components/ui/combobox.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/combobox.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/combobox/combobox-11",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-combobox-combobox-12",
+      "type": "registry:block",
+      "title": "Combobox 12",
+      "description": "Multi-select combobox with a count badge showing the number of selected frameworks.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "combobox-12.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/combobox/combobox-12.tsx"
+        },
+        {
+          "path": "support/components/ui/combobox.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/combobox.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/combobox/combobox-12",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-combobox-combobox-13",
+      "type": "registry:block",
+      "title": "Combobox 13",
+      "description": "Framework selector combobox with smooth animations and motion effects",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "combobox-13.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/combobox/combobox-13.tsx"
+        },
+        {
+          "path": "support/components/ui/combobox.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/combobox.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/combobox/combobox-13",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-combobox-combobox-14",
+      "type": "registry:block",
+      "title": "Combobox 14",
+      "description": "Framework selector combobox with floating label animation and enhanced styling",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "combobox-14.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/combobox/combobox-14.tsx"
+        },
+        {
+          "path": "support/components/ui/combobox.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/combobox.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/combobox/combobox-14",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

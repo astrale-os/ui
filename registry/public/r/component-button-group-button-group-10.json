@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-button-group-button-group-10",
+  "title": "Button Group 10",
+  "description": "Flip transformation button group with horizontal and vertical controls",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/button-group/button-group-10/button-group-10.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\nimport { ButtonGroup } from '@astrale-os/ui/button-group'\nimport { FlipHorizontalIcon, FlipVerticalIcon } from \"lucide-react\"\n\nconst ButtonGroupDemo = () => {\n  return (\n    <ButtonGroup className='*:border-primary *:not-last:border-r-primary-foreground/30 *:bg-clip-border'>\n      <Button size='icon'>\n        <FlipHorizontalIcon\n        />\n        <span className='sr-only'>Flip Horizontal</span>\n      </Button>\n      <Button size='icon'>\n        <FlipVerticalIcon\n        />\n        <span className='sr-only'>Flip Vertical</span>\n      </Button>\n    </ButtonGroup>\n  )\n}\n\nexport default ButtonGroupDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/button-group/button-group-10.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/button-group/button-group-10",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

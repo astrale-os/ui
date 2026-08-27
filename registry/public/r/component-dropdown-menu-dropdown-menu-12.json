@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-dropdown-menu-dropdown-menu-12",
+  "title": "Dropdown Menu 12",
+  "description": "User profile menu dropdown with icons for profile, settings, billing, and FAQ",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/dropdown-menu/dropdown-menu-12/dropdown-menu-12.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\nimport {\n  DropdownMenu,\n  DropdownMenuContent,\n  DropdownMenuGroup,\n  DropdownMenuItem,\n  DropdownMenuLabel,\n  DropdownMenuTrigger\n} from '@astrale-os/ui/dropdown-menu'\nimport { UserIcon, SettingsIcon, ReceiptIcon, DollarSignIcon, CircleHelpIcon } from \"lucide-react\"\n\nconst DropdownMenuItemIconDemo = () => {\n  return (\n    <DropdownMenu>\n      <DropdownMenuTrigger render={<Button variant='outline'>Menu item with icon</Button>} />\n      <DropdownMenuContent className='w-56'>\n        <DropdownMenuGroup>\n          <DropdownMenuLabel>User Profile</DropdownMenuLabel>\n        </DropdownMenuGroup>\n        <DropdownMenuGroup>\n          <DropdownMenuItem>\n            <UserIcon\n            />\n            Profile\n          </DropdownMenuItem>\n          <DropdownMenuItem>\n            <SettingsIcon\n            />\n            Settings\n          </DropdownMenuItem>\n          <DropdownMenuItem>\n            <ReceiptIcon\n            />\n            Billing Plans\n          </DropdownMenuItem>\n          <DropdownMenuItem>\n            <DollarSignIcon\n            />\n            Pricing\n          </DropdownMenuItem>\n          <DropdownMenuItem>\n            <CircleHelpIcon\n            />\n            FAQ\n          </DropdownMenuItem>\n        </DropdownMenuGroup>\n      </DropdownMenuContent>\n    </DropdownMenu>\n  )\n}\n\nexport default DropdownMenuItemIconDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/dropdown-menu/dropdown-menu-12.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/dropdown-menu/dropdown-menu-12",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

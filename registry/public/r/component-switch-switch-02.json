@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-switch-switch-02",
+  "title": "Switch 2",
+  "description": "A square-styled switch with rounded corners for alternative visual design",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/switch/switch-02/switch-02.tsx",
+      "content": "import { Switch } from '@astrale-os/ui/switch'\n\nconst SwitchSquareDemo = () => {\n  return <Switch aria-label='Square switch' className='rounded-xs [&_span]:rounded-xs' />\n}\n\nexport default SwitchSquareDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/switch/switch-02.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/switch/switch-02",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

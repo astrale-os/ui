@@ -1,0 +1,1244 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-components-button",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "component-button-button-01",
+      "type": "registry:component",
+      "title": "Button 1",
+      "description": "A basic button component with default styling",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "button-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-01.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-02",
+      "type": "registry:component",
+      "title": "Button 2",
+      "description": "A button component in disabled state",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "button-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-02.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-03",
+      "type": "registry:component",
+      "title": "Button 3",
+      "description": "A rounded button with icon and text content",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "button-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-03.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-04",
+      "type": "registry:component",
+      "title": "Button 4",
+      "description": "A button with animated icon that moves on hover",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "button-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-04.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-05",
+      "type": "registry:component",
+      "title": "Button 5",
+      "description": "Outline buttons with icons positioned before and after text",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "button-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-05.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-06",
+      "type": "registry:component",
+      "title": "Button 6",
+      "description": "Grouped action buttons for Cancel and Save operations",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "button-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-06.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-07",
+      "type": "registry:component",
+      "title": "Button 7",
+      "description": "A button component with large size variant",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "button-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-07.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-08",
+      "type": "registry:component",
+      "title": "Button 8",
+      "description": "A button component with small size variant",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "button-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-08.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-09",
+      "type": "registry:component",
+      "title": "Button 9",
+      "description": "A button component with custom extra small sizing",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "button-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-09.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-10",
+      "type": "registry:component",
+      "title": "Button 10",
+      "description": "A destructive button with gradient background for delete actions",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "button-10.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-10.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-10",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-11",
+      "type": "registry:component",
+      "title": "Button 11",
+      "description": "A Primary Button with gradient background effect for primary action",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "button-11.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-11.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-11",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-12",
+      "type": "registry:component",
+      "title": "Button 12",
+      "description": "Upgrade button with amber gradient and icon",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "button-12.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-12.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-12",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-13",
+      "type": "registry:component",
+      "title": "Button 13",
+      "description": "Outline button with sky blue theme for duplicate action",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "button-13.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-13.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-13",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-14",
+      "type": "registry:component",
+      "title": "Button 14",
+      "description": "Outline button with dashed border for download action",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "button-14.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-14.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-14",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-15",
+      "type": "registry:component",
+      "title": "Button 15",
+      "description": "Destructive outline button for discard/delete actions",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "button-15.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-15.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-15",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-16",
+      "type": "registry:component",
+      "title": "Button 16",
+      "description": "Ghost button with animated arrow on hover",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "button-16.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-16.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-16",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-17",
+      "type": "registry:component",
+      "title": "Button 17",
+      "description": "Loading button with spinning icon in disabled state",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "button-17.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-17.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-17",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-18",
+      "type": "registry:component",
+      "title": "Button 18",
+      "description": "Link button with animated underline effect on hover",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "button-18.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-18.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-18",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-19",
+      "type": "registry:component",
+      "title": "Button 19",
+      "description": "Publish button with circular icon badge and rounded outline styling",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "button-19.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-19.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-19",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-20",
+      "type": "registry:component",
+      "title": "Button 20",
+      "description": "Copy button UI displaying a truncated URL with a rounded \"Copy\" icon for quick copying.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "button-20.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-20.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-20",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-21",
+      "type": "registry:component",
+      "title": "Button 21",
+      "description": "Button with badge indicator showing unread message count",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "button-21.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-21.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-21",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-22",
+      "type": "registry:component",
+      "title": "Button 22",
+      "description": "caution button with a warning icon and soft amber styling to indicate alerts or risks.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "button-22.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-22.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-22",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-23",
+      "type": "registry:component",
+      "title": "Button 23",
+      "description": "Save button with a floppy disk icon and soft blue background for non-intrusive actions.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "button-23.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-23.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-23",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-24",
+      "type": "registry:component",
+      "title": "Button 24",
+      "description": "Action buttons styled for “Reject” and “Approve” with colored shield icons to indicate decision-based actions",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "button-24.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-24.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-24",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-25",
+      "type": "registry:component",
+      "title": "Button 25",
+      "description": "Notifications button with bell icon and red notification badge counter",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "button-25.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-25.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-25",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-26",
+      "type": "registry:component",
+      "title": "Button 26",
+      "description": "Promise-based button with loading spinner and success/error state transitions",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "button-26.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-26.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-26",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-27",
+      "type": "registry:component",
+      "title": "Button 27",
+      "description": "User profile button with avatar image and username display",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "button-27.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-27.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-27",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-28",
+      "type": "registry:component",
+      "title": "Button 28",
+      "description": "Copy button with state transition animation between copy and check icons",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "button-28.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-28.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-28",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-29",
+      "type": "registry:component",
+      "title": "Button 29",
+      "description": "Social media icon buttons for Google, X/Twitter, Facebook, and GitHub",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "button-29.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-29.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-29",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-30",
+      "type": "registry:component",
+      "title": "Button 30",
+      "description": "Social authentication buttons with branded colors and \"Continue with\" text",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "button-30.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-30.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-30",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-31",
+      "type": "registry:component",
+      "title": "Button 31",
+      "description": "Icon-only button with bookmark icon and screen reader accessibility",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "button-31.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-31.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-31",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-32",
+      "type": "registry:component",
+      "title": "Button 32",
+      "description": "Circular icon button with plus icon and tooltip for enhanced UX",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "button-32.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-32.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-32",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-33",
+      "type": "registry:component",
+      "title": "Button 33",
+      "description": "Toggle icon button that switches between menu and close icons",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "button-33.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-33.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-33",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-34",
+      "type": "registry:component",
+      "title": "Button 34",
+      "description": "Theme toggle button switching between sun and moon icons with colored styling",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "button-34.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-34.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-34",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-35",
+      "type": "registry:component",
+      "title": "Button 35",
+      "description": "Mail icon button with notification badge counter for unread messages",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "button-35.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-35.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-35",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-36",
+      "type": "registry:component",
+      "title": "Button 36",
+      "description": "Security icon button with destructive gradient background effect",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "button-36.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-36.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-36",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-37",
+      "type": "registry:component",
+      "title": "Button 37",
+      "description": "Success icon button with soft green background and check icon",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "button-37.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-37.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-37",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-38",
+      "type": "registry:component",
+      "title": "Button 38",
+      "description": "Notification icon button with animated blue dot indicator",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "button-38.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-38.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-38",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-39",
+      "type": "registry:component",
+      "title": "Button 39",
+      "description": "Animated button with ripple effect on click",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "class-variance-authority@^0.7.1",
+        "motion@^13.1.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "button-39.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-39.tsx"
+        },
+        {
+          "path": "support/components/ui/ripple-button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/ripple-button.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-39",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-40",
+      "type": "registry:component",
+      "title": "Button 40",
+      "description": "Button with ring hover effect that shows animated border on hover",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "button-40.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-40.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-40",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-41",
+      "type": "registry:component",
+      "title": "Button 41",
+      "description": "Button with shine hover effect using gradient animation",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "button-41.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-41.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-41",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-42",
+      "type": "registry:component",
+      "title": "Button 42",
+      "description": "Button with tap scale animation using Framer Motion",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "motion@^13.1.0"],
+      "files": [
+        {
+          "path": "button-42.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-42.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-42",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-43",
+      "type": "registry:component",
+      "title": "Button 43",
+      "description": "Button with shimmer effect animation across the surface",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "motion@^13.1.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "button-43.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-43.tsx"
+        },
+        {
+          "path": "support/components/ui/shimmer-button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/shimmer-button.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-43",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-44",
+      "type": "registry:component",
+      "title": "Button 44",
+      "description": "Button with bounce hover effect on mouse interaction",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "class-variance-authority@^0.7.1",
+        "motion@^13.1.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "button-44.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-44.tsx"
+        },
+        {
+          "path": "support/components/ui/bounce-button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/bounce-button.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-44",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-45",
+      "type": "registry:component",
+      "title": "Button 45",
+      "description": "Button with magnetic effect that follows mouse movement",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "class-variance-authority@^0.7.1",
+        "motion@^13.1.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "button-45.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-45.tsx"
+        },
+        {
+          "path": "support/components/ui/magnetic-button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/magnetic-button.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-45",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-46",
+      "type": "registry:component",
+      "title": "Button 46",
+      "description": "Destructive button with heartbeat pulse animation effect",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "button-46.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-46.tsx"
+        }
+      ],
+      "css": {
+        "@keyframes heartbeat": {
+          "0%": {
+            "box-shadow": "0 0 0 0 var(--heartbeat-color, var(--destructive))",
+            "transform": "scale(1)"
+          },
+          "50%": {
+            "box-shadow": "0 0 0 6px transparent",
+            "transform": "scale(1.03)"
+          },
+          "100%": {
+            "box-shadow": "0 0 0 0 transparent",
+            "transform": "scale(1)"
+          }
+        }
+      },
+      "meta": {
+        "canonicalAddress": "component/button/button-46",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-47",
+      "type": "registry:component",
+      "title": "Button 47",
+      "description": "Button with stitched border design using layered shadow effects",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "button-47.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-47.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-47",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-48",
+      "type": "registry:component",
+      "title": "Button 48",
+      "description": "Button with stitched border design using layered shadow effects",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "class-variance-authority@^0.7.1",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "button-48.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-48.tsx"
+        },
+        {
+          "path": "support/components/ui/matter-button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/matter-button.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-48",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-49",
+      "type": "registry:component",
+      "title": "Button 49",
+      "description": "Button with stitched border design using layered shadow effects",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "class-variance-authority@^0.7.1",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "button-49.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-49.tsx"
+        },
+        {
+          "path": "support/components/ui/craft-button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/craft-button.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-49",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-50",
+      "type": "registry:component",
+      "title": "Button 50",
+      "description": "Button with stitched border design using layered shadow effects",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "class-variance-authority@^0.7.1",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "button-50.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-50.tsx"
+        },
+        {
+          "path": "support/components/ui/swipe-button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/swipe-button.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-50",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-51",
+      "type": "registry:component",
+      "title": "Button 51",
+      "description": "Button with stitched border design using layered shadow effects",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "class-variance-authority@^0.7.1",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "button-51.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-51.tsx"
+        },
+        {
+          "path": "support/components/ui/flow-button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/flow-button.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-51",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-52",
+      "type": "registry:component",
+      "title": "Button 52",
+      "description": "Button with stitched border design using layered shadow effects",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "class-variance-authority@^0.7.1",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "button-52.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-52.tsx"
+        },
+        {
+          "path": "support/components/ui/orion-button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/orion-button.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-52",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-53",
+      "type": "registry:component",
+      "title": "Button 53",
+      "description": "Button with stitched border design using layered shadow effects",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "class-variance-authority@^0.7.1",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "button-53.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-53.tsx"
+        },
+        {
+          "path": "support/components/ui/grow-button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/grow-button.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-53",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-54",
+      "type": "registry:component",
+      "title": "Button 54",
+      "description": "Button with stitched border design using layered shadow effects",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "class-variance-authority@^0.7.1",
+        "motion@^13.1.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "button-54.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-54.tsx"
+        },
+        {
+          "path": "support/components/ui/border-beam.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/border-beam.tsx"
+        },
+        {
+          "path": "support/components/ui/neural-button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/neural-button.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button/button-54",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-button-55",
+      "type": "registry:component",
+      "title": "Button 55",
+      "description": "Button with stitched border design using layered shadow effects",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "class-variance-authority@^0.7.1",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "button-55.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button/button-55.tsx"
+        },
+        {
+          "path": "support/components/ui/glass-button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/glass-button.tsx"
+        }
+      ],
+      "css": {
+        "@property --button-angle": {
+          "syntax": "'<angle>'",
+          "inherits": "false",
+          "initial-value": "-75deg"
+        }
+      },
+      "meta": {
+        "canonicalAddress": "component/button/button-55",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

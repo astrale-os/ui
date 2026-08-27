@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-input-input-38",
+  "title": "Input 38",
+  "description": "Search input field with search icon and microphone button for voice input",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/input/input-38/input-38.tsx",
+      "content": "import { useId } from 'react'\nimport { Button } from '@astrale-os/ui/button'\nimport { InputGroup, InputGroupAddon, InputGroupInput } from '@astrale-os/ui/input-group'\nimport { Label } from '@astrale-os/ui/label'\nimport { SearchIcon, MicIcon } from \"lucide-react\"\n\nconst InputSearchIconDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>Search input with icon and button</Label>\n      <InputGroup>\n        <InputGroupAddon>\n          <SearchIcon className='size-4' />\n          <span className='sr-only'>Search</span>\n        </InputGroupAddon>\n        <InputGroupInput\n          id={id}\n          type='search'\n          placeholder='Search...'\n          className='[&::-webkit-search-cancel-button]:appearance-none [&::-webkit-search-decoration]:appearance-none [&::-webkit-search-results-button]:appearance-none [&::-webkit-search-results-decoration]:appearance-none'\n        />\n        <InputGroupAddon align='inline-end'>\n          <Button variant='ghost' size='icon' className='text-muted-foreground hover:bg-transparent'>\n            <MicIcon\n            />\n            <span className='sr-only'>Press to speak</span>\n          </Button>\n        </InputGroupAddon>\n      </InputGroup>\n    </div>\n  )\n}\n\nexport default InputSearchIconDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/input/input-38.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/input/input-38",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

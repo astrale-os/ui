@@ -1,0 +1,427 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-components-switch",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "component-switch-switch-01",
+      "type": "registry:component",
+      "title": "Switch 1",
+      "description": "A basic switch component with label for simple on/off controls",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "switch-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/switch/switch-01.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/switch/switch-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-switch-switch-02",
+      "type": "registry:component",
+      "title": "Switch 2",
+      "description": "A square-styled switch with rounded corners for alternative visual design",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "switch-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/switch/switch-02.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/switch/switch-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-switch-switch-03",
+      "type": "registry:component",
+      "title": "Switch 3",
+      "description": "A mini-sized switch with border styling for compact interface layouts",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "switch-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/switch/switch-03.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/switch/switch-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-switch-switch-04",
+      "type": "registry:component",
+      "title": "Switch 4",
+      "description": "Color-themed switches with destructive, success, info, and warning variants",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "switch-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/switch/switch-04.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/switch/switch-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-switch-switch-05",
+      "type": "registry:component",
+      "title": "Switch 5",
+      "description": "Multiple size variations of switches with small, medium, and large options",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "switch-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/switch/switch-05.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/switch/switch-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-switch-switch-06",
+      "type": "registry:component",
+      "title": "Switch 6",
+      "description": "Outline-styled switches with transparent backgrounds and colored borders for different themes",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "switch-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/switch/switch-06.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/switch/switch-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-switch-switch-07",
+      "type": "registry:component",
+      "title": "Switch 7",
+      "description": "A gradient-styled switch with amber to sky/indigo color transitions based on state",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "switch-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/switch/switch-07.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/switch/switch-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-switch-switch-08",
+      "type": "registry:component",
+      "title": "Switch 8",
+      "description": "A switch with dynamic label that changes text based on toggle state (Yes/No)",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "switch-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/switch/switch-08.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/switch/switch-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-switch-switch-09",
+      "type": "registry:component",
+      "title": "Switch 9",
+      "description": "A dual-label switch with clickable Yes/No labels that toggle the switch state",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "switch-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/switch/switch-09.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/switch/switch-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-switch-switch-10",
+      "type": "registry:component",
+      "title": "Switch 10",
+      "description": "A switch with icon label that toggles between sun and moon icons for theme switching",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "switch-10.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/switch/switch-10.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/switch/switch-10",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-switch-switch-11",
+      "type": "registry:component",
+      "title": "Switch 11",
+      "description": "A dual-icon switch with clickable sun and moon icons for theme mode switching",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "switch-11.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/switch/switch-11.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/switch/switch-11",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-switch-switch-12",
+      "type": "registry:component",
+      "title": "Switch 12",
+      "description": "A switch with check and X icon indicators that change visibility based on toggle state",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "switch-12.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/switch/switch-12.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/switch/switch-12",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-switch-switch-13",
+      "type": "registry:component",
+      "title": "Switch 13",
+      "description": "A switch with sliding check and X icon indicators that move with the toggle handle",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "switch-13.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/switch/switch-13.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/switch/switch-13",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-switch-switch-14",
+      "type": "registry:component",
+      "title": "Switch 14",
+      "description": "A square-styled switch with sliding Yes/No text indicators in the background",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "switch-14.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/switch/switch-14.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/switch/switch-14",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-switch-switch-15",
+      "type": "registry:component",
+      "title": "Switch 15",
+      "description": "A switch integrated within a card layout with database icon for backup settings",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "switch-15.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/switch/switch-15.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/switch/switch-15",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-switch-switch-16",
+      "type": "registry:component",
+      "title": "Switch 16",
+      "description": "A switch card with Google Cloud icon for backup service toggle functionality",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "switch-16.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/switch/switch-16.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/switch/switch-16",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-switch-switch-17",
+      "type": "registry:component",
+      "title": "Switch 17",
+      "description": "A switch card with GitHub icon for repository connection toggle functionality",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "switch-17.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/switch/switch-17.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/switch/switch-17",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-switch-switch-18",
+      "type": "registry:component",
+      "title": "Switch 18",
+      "description": "A list group of switches with icons for skill preference selection across multiple categories",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "switch-18.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/switch/switch-18.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/switch/switch-18",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-switch-switch-19",
+      "type": "registry:component",
+      "title": "Switch 19",
+      "description": "Animated motion switches in multiple sizes with smooth transition effects",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "motion@^13.1.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "switch-19.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/switch/switch-19.tsx"
+        },
+        {
+          "path": "support/components/ui/motion-switch.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/motion-switch.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/switch/switch-19",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-switch-switch-20",
+      "type": "registry:component",
+      "title": "Switch 20",
+      "description": "Animated gradient motion switches with color transitions and multiple size variations",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "motion@^13.1.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "switch-20.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/switch/switch-20.tsx"
+        },
+        {
+          "path": "support/components/ui/motion-switch.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/motion-switch.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/switch/switch-20",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

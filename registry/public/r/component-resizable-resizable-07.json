@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-resizable-resizable-07",
+  "title": "Resizable 7",
+  "description": "Three-panel code-editor layout with filename tab headers, minimum size constraints, and no visible drag handles.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/resizable/resizable-07/resizable-07.tsx",
+      "content": "import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@astrale-os/ui/resizable'\n\nconst ResizableMultiple = () => {\n  return (\n    <ResizablePanelGroup orientation='horizontal' className='min-h-50 rounded-2xl border'>\n      <ResizablePanel defaultSize={25} minSize={15}>\n        <div className='flex border-b p-2'>\n          <span className='text-sm font-medium italic'>page.tsx</span>\n        </div>\n        <p className='p-2 text-sm'>\n          Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias iste quia accusamus sapiente autem enim?\n        </p>\n      </ResizablePanel>\n      <ResizableHandle />\n      <ResizablePanel defaultSize={50} minSize={25}>\n        <div className='flex border-b p-2'>\n          <span className='text-sm font-medium italic'>resizable-07.tsx</span>\n        </div>\n        <p className='p-2 text-sm'>\n          Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias iste quia accusamus sapiente autem enim?\n        </p>\n      </ResizablePanel>\n      <ResizableHandle />\n      <ResizablePanel defaultSize={25} minSize={15}>\n        <div className='flex border-b p-2'>\n          <span className='text-sm font-medium italic'>layout.tsx</span>\n        </div>\n        <p className='p-2 text-sm'>\n          Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias iste quia accusamus sapiente autem enim?\n        </p>\n      </ResizablePanel>\n    </ResizablePanelGroup>\n  )\n}\n\nexport default ResizableMultiple\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/resizable/resizable-07.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/resizable/resizable-07",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

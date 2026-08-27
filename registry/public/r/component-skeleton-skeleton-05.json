@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-skeleton-skeleton-05",
+  "title": "Skeleton 5",
+  "description": "Profile page skeleton featuring a cover banner, avatar placeholder and action button placeholder.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/skeleton/skeleton-05/skeleton-05.tsx",
+      "content": "import { Card, CardContent } from '@astrale-os/ui/card'\nimport { Skeleton } from '@astrale-os/ui/skeleton'\n\nconst SkeletonProfilePage = () => {\n  return (\n    <Card className='w-full overflow-hidden pt-0'>\n      {/* Cover banner */}\n      <Skeleton className='h-32 w-full rounded-none' />\n\n      <CardContent className='space-y-4 pt-0'>\n        {/* Avatar + action buttons row */}\n        <div className='-mt-10 flex items-end justify-between'>\n          <Skeleton className='ring-background size-20 rounded-full ring-4' />\n          <Skeleton className='h-8 w-20 rounded-md' />\n        </div>\n\n        {/* Name and job title */}\n        <div className='space-y-1.5'>\n          <Skeleton className='h-4 w-36' />\n          <Skeleton className='h-4 w-56' />\n        </div>\n      </CardContent>\n    </Card>\n  )\n}\n\nexport default SkeletonProfilePage\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/skeleton/skeleton-05.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/skeleton/skeleton-05",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

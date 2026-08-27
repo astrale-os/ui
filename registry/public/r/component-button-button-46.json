@@ -1,0 +1,40 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-button-button-46",
+  "title": "Button 46",
+  "description": "Destructive button with heartbeat pulse animation effect",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/button/button-46/button-46.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\n\nconst ButtonHeartbeatEffectDemo = () => {\n  return (\n    <Button variant='destructive' className='animate-heartbeat bg-destructive! dark:bg-destructive! m-9 text-white'>\n      Heartbeat Effect\n    </Button>\n  )\n}\n\nexport default ButtonHeartbeatEffectDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/button/button-46.tsx"
+    }
+  ],
+  "css": {
+    "@keyframes heartbeat": {
+      "0%": {
+        "box-shadow": "0 0 0 0 var(--heartbeat-color, var(--destructive))",
+        "transform": "scale(1)"
+      },
+      "50%": {
+        "box-shadow": "0 0 0 6px transparent",
+        "transform": "scale(1.03)"
+      },
+      "100%": {
+        "box-shadow": "0 0 0 0 transparent",
+        "transform": "scale(1)"
+      }
+    }
+  },
+  "meta": {
+    "canonicalAddress": "component/button/button-46",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-card-card-14",
+  "title": "Card 14",
+  "description": "Dismissible action card with close button and call-to-action content",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/card/card-14/card-14.tsx",
+      "content": "'use client'\n\nimport { useState } from 'react'\nimport { Button } from '@astrale-os/ui/button'\nimport { Card, CardContent, CardHeader, CardTitle } from '@astrale-os/ui/card'\nimport { XIcon } from \"lucide-react\"\n\nconst CardActionDemo = () => {\n  const [isActive, setIsActive] = useState(true)\n\n  if (!isActive) return null\n\n  return (\n    <Card className='relative max-w-lg'>\n      <Button\n        variant='ghost'\n        size='icon'\n        onClick={() => setIsActive(false)}\n        className='absolute top-2 right-2 rounded-full'\n      >\n        <XIcon\n        />\n        <span className='sr-only'>Close</span>\n      </Button>\n      <CardHeader>\n        <CardTitle className='text-center'>Have a project in mind</CardTitle>\n      </CardHeader>\n      <CardContent className='flex flex-col gap-4 text-center'>\n        <p>Let&apos;s discuss! Our Assistant team is excited to hear about your projects, ideas and questions. </p>\n        <Button>Contact Our Team</Button>\n      </CardContent>\n    </Card>\n  )\n}\n\nexport default CardActionDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/card/card-14.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/card/card-14",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

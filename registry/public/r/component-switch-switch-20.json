@@ -1,0 +1,33 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-switch-switch-20",
+  "title": "Switch 20",
+  "description": "Animated gradient motion switches with color transitions and multiple size variations",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "@base-ui/react@^1.7.0",
+    "motion@^13.1.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/switch/switch-20/switch-20.tsx",
+      "content": "import { Label } from '@astrale-os/ui/label'\nimport { Switch } from '@/components/ui/motion-switch'\n\nconst SwitchAnimatedGradientDemo = () => {\n  return (\n    <div className='flex flex-col gap-3'>\n      <div className='flex items-center space-x-2'>\n        <Switch\n          aria-label='Animated gradient small switch'\n          size='sm'\n          id='small-gradient-switch'\n          className='focus-visible:border-destructive to-destructive/60 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 border-none bg-gradient-to-r from-amber-500 data-checked:from-sky-400 data-checked:to-indigo-700 [&_span]:size-5 [&_span]:!translate-x-0.25'\n        />\n        <Label htmlFor='small-gradient-switch'>Small switch</Label>\n      </div>\n      <div className='flex items-center space-x-2'>\n        <Switch\n          aria-label='Animated gradient medium switch'\n          id='medium-gradient-switch'\n          className='focus-visible:border-destructive to-destructive/60 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 border-none bg-gradient-to-r from-amber-500 data-checked:from-sky-400 data-checked:to-indigo-700 [&_span]:size-5 [&_span]:!translate-x-0.25'\n        />\n        <Label htmlFor='medium-gradient-switch'>Medium switch</Label>\n      </div>\n      <div className='flex items-center space-x-2'>\n        <Switch\n          aria-label='Animated gradient large switch'\n          size='lg'\n          id='large-gradient-switch'\n          className='focus-visible:border-destructive to-destructive/60 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 border-none bg-gradient-to-r from-amber-500 data-checked:from-sky-400 data-checked:to-indigo-700 [&_span]:size-5 [&_span]:!translate-x-0.25'\n        />\n        <Label htmlFor='large-gradient-switch'>Large switch</Label>\n      </div>\n    </div>\n  )\n}\n\nexport default SwitchAnimatedGradientDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/switch/switch-20.tsx"
+    },
+    {
+      "path": "source/components/switch/switch-20/support/components/ui/motion-switch.tsx",
+      "content": "'use client'\n\nimport * as React from 'react'\n\nimport { Switch as SwitchPrimitive } from '@base-ui/react/switch'\nimport { motion } from 'motion/react'\n\nimport { cn } from '@astrale-os/ui/class-name'\n\nconst SIZES = {\n  sm: { TRACK_WIDTH: 24, THUMB_SIZE: 12, THUMB_STRETCH: 17 },\n  md: { TRACK_WIDTH: 32, THUMB_SIZE: 16, THUMB_STRETCH: 26 },\n  lg: { TRACK_WIDTH: 40, THUMB_SIZE: 20, THUMB_STRETCH: 36 }\n}\n\nconst STRETCH_DURATION = 120 // ms\n\ntype Size = keyof typeof SIZES\n\ninterface SwitchProps extends React.ComponentProps<typeof SwitchPrimitive.Root> {\n  size?: Size\n}\n\nfunction Switch({ className, size = 'md', ...props }: SwitchProps) {\n  const { TRACK_WIDTH, THUMB_SIZE, THUMB_STRETCH } = SIZES[size]\n  const [isChecked, setIsChecked] = React.useState(props.checked ?? props.defaultChecked ?? false)\n  const [isStretching, setIsStretching] = React.useState(false)\n\n  React.useEffect(() => {\n    if (props.checked !== undefined) setIsChecked(props.checked)\n  }, [props.checked])\n\n  React.useEffect(() => {\n    setIsStretching(true)\n    const timeout = setTimeout(() => setIsStretching(false), STRETCH_DURATION)\n\n    return () => clearTimeout(timeout)\n  }, [isChecked])\n\n  const handleCheckedChange = (checked: boolean, eventDetails: SwitchPrimitive.Root.ChangeEventDetails) => {\n    setIsChecked(checked)\n    props.onCheckedChange?.(checked, eventDetails)\n  }\n\n  const thumbWidth = isStretching ? THUMB_STRETCH : THUMB_SIZE\n  const offsetUnchecked = 0\n  const offsetChecked = TRACK_WIDTH - thumbWidth - 2\n\n  const thumbLeft = isChecked ? offsetChecked : offsetUnchecked\n\n  return (\n    <SwitchPrimitive.Root\n      data-slot='switch'\n      className={cn(\n        `peer focus-visible:border-ring focus-visible:ring-ring/50 data-checked:bg-primary data-unchecked:bg-input dark:data-unchecked:bg-input/80 relative inline-flex shrink-0 items-center rounded-full border border-transparent shadow-xs transition-all outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50`,\n\n        // Dynamic width/height\n        size === 'sm' ? 'h-3.5 w-6' : size === 'lg' ? 'h-5.5 w-10' : 'h-4.5 w-8',\n        className\n      )}\n      checked={isChecked}\n      onCheckedChange={handleCheckedChange}\n      {...props}\n    >\n      <SwitchPrimitive.Thumb\n        render={\n          <motion.span\n            data-slot='switch-thumb'\n            className={cn(\n              'bg-background dark:data-checked:bg-primary-foreground dark:data-unchecked:bg-foreground pointer-events-none absolute block rounded-full ring-0'\n            )}\n            animate={{\n              width: thumbWidth,\n              left: thumbLeft,\n              transition: { duration: STRETCH_DURATION / 1000 }\n            }}\n            style={{\n              height: THUMB_SIZE,\n              minWidth: THUMB_SIZE,\n              maxWidth: THUMB_STRETCH\n            }}\n          />\n        }\n      />\n    </SwitchPrimitive.Root>\n  )\n}\n\nexport { Switch }\n",
+      "type": "registry:ui",
+      "target": "components/ui/motion-switch.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/switch/switch-20",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

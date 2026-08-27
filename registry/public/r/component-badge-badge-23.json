@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-badge-badge-23",
+  "title": "Badge 23",
+  "description": "Cart notification badge with count display over shopping icon",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/badge/badge-23/badge-23.tsx",
+      "content": "import { Avatar, AvatarFallback, AvatarBadge } from '@astrale-os/ui/avatar'\nimport { ShoppingCartIcon } from \"lucide-react\"\n\nconst BadgeCartDemo = () => {\n  return (\n    <div className='relative w-fit'>\n      <Avatar className='size-9 rounded-sm after:rounded-[inherit]'>\n        <AvatarFallback className='rounded-sm'>\n          <ShoppingCartIcon className='size-5' />\n        </AvatarFallback>\n        <AvatarBadge className='bg-primary -top-2.5 -right-2.5 rounded-full text-xs group-data-[size=default]/avatar:size-5'>\n          8\n        </AvatarBadge>\n      </Avatar>\n    </div>\n  )\n}\n\nexport default BadgeCartDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/badge/badge-23.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/badge/badge-23",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

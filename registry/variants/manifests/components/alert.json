@@ -1,0 +1,607 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-components-alert",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "component-alert-alert-01",
+      "type": "registry:component",
+      "title": "Alert 1",
+      "description": "Basic alert with circle alert icon and simple title message.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "alert-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/alert/alert-01.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/alert/alert-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-alert-alert-02",
+      "type": "registry:component",
+      "title": "Alert 2",
+      "description": "Avatar-enhanced alert with user profile image, and alert icon.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "alert-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/alert/alert-02.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/alert/alert-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-alert-alert-03",
+      "type": "registry:component",
+      "title": "Alert 3",
+      "description": "Closable alert with dismiss functionality using X icon and state management.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "alert-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/alert/alert-03.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/alert/alert-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-alert-alert-04",
+      "type": "registry:component",
+      "title": "Alert 4",
+      "description": "Interactive alert with link button featuring arrow icon and styled border/text colors.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "alert-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/alert/alert-04.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/alert/alert-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-alert-alert-05",
+      "type": "registry:component",
+      "title": "Alert 5",
+      "description": "Attached icon alert with separated icon section and destructive warning styling.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "alert-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/alert/alert-05.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/alert/alert-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-alert-alert-06",
+      "type": "registry:component",
+      "title": "Alert 6",
+      "description": "Focused icon alert with avatar-wrapped warning icon and destructive background styling.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "alert-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/alert/alert-06.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/alert/alert-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-alert-alert-07",
+      "type": "registry:component",
+      "title": "Alert 7",
+      "description": "File upload progress alert with animated progress bar, action buttons, and close functionality.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "alert-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/alert/alert-07.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/alert/alert-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-alert-alert-08",
+      "type": "registry:component",
+      "title": "Alert 8",
+      "description": "Multi-action alert with primary background, multiple buttons, and dismissible interface.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "alert-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/alert/alert-08.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/alert/alert-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-alert-alert-09",
+      "type": "registry:component",
+      "title": "Alert 9",
+      "description": "Task progress alert with user avatar, progress indicator, and task completion tracking.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "alert-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/alert/alert-09.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/alert/alert-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-alert-alert-10",
+      "type": "registry:component",
+      "title": "Alert 10",
+      "description": "Gradient background alert with email verification message and gradient styling.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "alert-10.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/alert/alert-10.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/alert/alert-10",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-alert-alert-11",
+      "type": "registry:component",
+      "title": "Alert 11",
+      "description": "Success indicator alert with left border highlight and green success styling.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "alert-11.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/alert/alert-11.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/alert/alert-11",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-alert-alert-12",
+      "type": "registry:component",
+      "title": "Alert 12",
+      "description": "Information/error indicator alert with destructive background styling and informational content.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "alert-12.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/alert/alert-12.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/alert/alert-12",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-alert-alert-13",
+      "type": "registry:component",
+      "title": "Alert 13",
+      "description": "displaying a minimal \"New message!\" notification with an attention icon and an actionable \"Open\" button",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "alert-13.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/alert/alert-13.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/alert/alert-13",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-alert-alert-14",
+      "type": "registry:component",
+      "title": "Alert 14",
+      "description": "Error indicator alert with red styling and destructive error message.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "alert-14.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/alert/alert-14.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/alert/alert-14",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-alert-alert-15",
+      "type": "registry:component",
+      "title": "Alert 15",
+      "description": "Pure destructive alert using built-in destructive variant with error styling.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "alert-15.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/alert/alert-15.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/alert/alert-15",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-alert-alert-16",
+      "type": "registry:component",
+      "title": "Alert 16",
+      "description": "Minimal alert without icon displaying simple message text only.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "alert-16.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/alert/alert-16.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/alert/alert-16",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-alert-alert-17",
+      "type": "registry:component",
+      "title": "Alert 17",
+      "description": "Standard alert with both title and description text providing detailed information.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "alert-17.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/alert/alert-17.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/alert/alert-17",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-alert-alert-18",
+      "type": "registry:component",
+      "title": "Alert 18",
+      "description": "Outline info alert with blue border and text styling for informational messages.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "alert-18.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/alert/alert-18.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/alert/alert-18",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-alert-alert-19",
+      "type": "registry:component",
+      "title": "Alert 19",
+      "description": "Outline success alert with green border and text for success messages.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "alert-19.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/alert/alert-19.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/alert/alert-19",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-alert-alert-20",
+      "type": "registry:component",
+      "title": "Alert 20",
+      "description": "Outline warning alert with amber border and text for warning messages.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "alert-20.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/alert/alert-20.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/alert/alert-20",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-alert-alert-21",
+      "type": "registry:component",
+      "title": "Alert 21",
+      "description": "Soft primary alert with subtle background and text styling for secondary messages.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "alert-21.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/alert/alert-21.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/alert/alert-21",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-alert-alert-22",
+      "type": "registry:component",
+      "title": "Alert 22",
+      "description": "Soft info alert with blue background and subtle styling for information.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "alert-22.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/alert/alert-22.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/alert/alert-22",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-alert-alert-23",
+      "type": "registry:component",
+      "title": "Alert 23",
+      "description": "Soft success alert with green background and subtle styling for success messages.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "alert-23.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/alert/alert-23.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/alert/alert-23",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-alert-alert-24",
+      "type": "registry:component",
+      "title": "Alert 24",
+      "description": "Soft warning alert with amber background and subtle styling for warnings.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "alert-24.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/alert/alert-24.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/alert/alert-24",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-alert-alert-25",
+      "type": "registry:component",
+      "title": "Alert 25",
+      "description": "Soft destructive alert with red background and subtle styling for errors.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "alert-25.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/alert/alert-25.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/alert/alert-25",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-alert-alert-26",
+      "type": "registry:component",
+      "title": "Alert 26",
+      "description": "Solid info alert with full primary background for prominent informational messages.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "alert-26.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/alert/alert-26.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/alert/alert-26",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-alert-alert-27",
+      "type": "registry:component",
+      "title": "Alert 27",
+      "description": "Solid success alert with full green background for prominent success messages.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "alert-27.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/alert/alert-27.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/alert/alert-27",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-alert-alert-28",
+      "type": "registry:component",
+      "title": "Alert 28",
+      "description": "Solid warning alert with full amber background for prominent warning messages.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "alert-28.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/alert/alert-28.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/alert/alert-28",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-alert-alert-29",
+      "type": "registry:component",
+      "title": "Alert 29",
+      "description": "Solid info alert with full blue background for prominent informational messages.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "alert-29.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/alert/alert-29.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/alert/alert-29",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-alert-alert-30",
+      "type": "registry:component",
+      "title": "Alert 30",
+      "description": "Solid destructive alert with full red background for prominent error messages.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "alert-30.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/alert/alert-30.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/alert/alert-30",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

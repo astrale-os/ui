@@ -4,4 +4,4 @@
 
 @source './**/*.{ts,tsx}';
 @source '../../registry/**/*.{ts,tsx}';
-@source '../../.internal/shadcn-studio/registry/**/*.{ts,tsx}';
+@source '../../registry/variants/source/**/*.{ts,tsx}';

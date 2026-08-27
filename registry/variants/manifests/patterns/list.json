@@ -1,0 +1,212 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-patterns-list",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "pattern-list-list-01",
+      "type": "registry:block",
+      "title": "List 1",
+      "description": "Basic list styles showcasing decimal, disc, and none list-style variants with grouped text items.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "list-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/list/list-01.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/list/list-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-list-list-02",
+      "type": "registry:block",
+      "title": "List 2",
+      "description": "Notification settings list using outlined Item cards with icon media, title, description, and a toggle Switch per row.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "list-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/list/list-02.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/list/list-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-list-list-03",
+      "type": "registry:block",
+      "title": "List 3",
+      "description": "Key-value description list using dl elements with horizontal separators between each label and value pair.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "list-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/list/list-03.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/list/list-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-list-list-04",
+      "type": "registry:block",
+      "title": "List 4",
+      "description": "Icon-prefixed unordered list using CircleArrowRight icons alongside each list item for a step-by-step guide style.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "list-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/list/list-04.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/list/list-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-list-list-05",
+      "type": "registry:block",
+      "title": "List 5",
+      "description": "User list with ring-bordered avatars, name and role, and a toggleable Follow/Unfollow button per entry separated by dividers.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "list-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/list/list-05.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/list/list-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-list-list-06",
+      "type": "registry:block",
+      "title": "List 6",
+      "description": "Settings navigation list using an ItemGroup with icon media, title, description, and a ChevronRight action arrow linking to each settings section.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "list-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/list/list-06.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/list/list-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-list-list-07",
+      "type": "registry:block",
+      "title": "List 7",
+      "description": "Product detail description list with a heading section and a bordered dl grid displaying label-value rows for name, category, price, and description.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "list-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/list/list-07.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/list/list-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-list-list-08",
+      "type": "registry:block",
+      "title": "List 8",
+      "description": "Task progress list grouped inside a Card with color-coded status headers, each task item displaying a title and an inline progress bar with percentage.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "list-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/list/list-08.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/list/list-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-list-list-09",
+      "type": "registry:block",
+      "title": "List 9",
+      "description": "Animated pin list where clicking an item or its Toggle pin button reorders it to the top, using Framer Motion spring layout transitions.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "motion@^13.1.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "list-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/list/list-09.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/list/list-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-list-list-10",
+      "type": "registry:block",
+      "title": "List 10",
+      "description": "Scrollable list of 50 items inside a ScrollArea with per-item fade-in and slide-up animations triggered on viewport entry using Motion.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "motion@^13.1.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "list-10.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/list/list-10.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/list/list-10",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

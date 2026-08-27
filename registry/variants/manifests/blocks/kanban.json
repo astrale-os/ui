@@ -1,0 +1,142 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-blocks-kanban",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "block-kanban-kanban-01",
+      "type": "registry:block",
+      "title": "kanban 1",
+      "description": "Task management kanban with Todo, In Progress, and Done columns. Cards show priority badges, due dates, and labels with visible column and item drag handles.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "@dnd-kit/core@^6.3.1",
+        "@dnd-kit/sortable@^10.0.0",
+        "@dnd-kit/utilities@^3.2.2",
+        "lucide-react@1.32.0",
+        "react-dom@19.2.8",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "kanban-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/block/kanban/kanban-01.tsx"
+        },
+        {
+          "path": "support/components/ui/kanban.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/kanban.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "block/kanban/kanban-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "block-kanban-kanban-02",
+      "type": "registry:block",
+      "title": "kanban 2",
+      "description": "Eisenhower Matrix kanban with urgency/importance quadrants. Cards display assignee avatars and priority badges with hidden drag handles for a clean layout.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "@dnd-kit/core@^6.3.1",
+        "@dnd-kit/sortable@^10.0.0",
+        "@dnd-kit/utilities@^3.2.2",
+        "react-dom@19.2.8",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "kanban-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/block/kanban/kanban-02.tsx"
+        },
+        {
+          "path": "support/components/ui/kanban.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/kanban.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "block/kanban/kanban-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "block-kanban-kanban-03",
+      "type": "registry:block",
+      "title": "kanban 3",
+      "description": "Initiative pipeline kanban with Intake, Execution, and Release stages. Cards show progress bars, health status, owner avatars, and due dates with visible drag handles.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "@dnd-kit/core@^6.3.1",
+        "@dnd-kit/sortable@^10.0.0",
+        "@dnd-kit/utilities@^3.2.2",
+        "lucide-react@1.32.0",
+        "react-dom@19.2.8",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "kanban-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/block/kanban/kanban-03.tsx"
+        },
+        {
+          "path": "support/components/ui/kanban.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/kanban.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "block/kanban/kanban-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "block-kanban-kanban-04",
+      "type": "registry:block",
+      "title": "kanban 4",
+      "description": "Engineering workflow kanban with Building, QA Review, and Shipped columns. Cards show task codes, assignee avatars, labels, and priority badges with gradient column accents.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "@dnd-kit/core@^6.3.1",
+        "@dnd-kit/sortable@^10.0.0",
+        "@dnd-kit/utilities@^3.2.2",
+        "lucide-react@1.32.0",
+        "react-dom@19.2.8",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "kanban-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/block/kanban/kanban-04.tsx"
+        },
+        {
+          "path": "support/components/ui/kanban.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/kanban.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "block/kanban/kanban-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

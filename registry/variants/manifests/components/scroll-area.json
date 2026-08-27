@@ -1,0 +1,127 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-components-scroll-area",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "component-scroll-area-scroll-area-01",
+      "type": "registry:component",
+      "title": "Scroll Area 1",
+      "description": "A standard vertical scroll area for long text content, featuring a subtle border and rounded corners.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "scroll-area-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/scroll-area/scroll-area-01.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/scroll-area/scroll-area-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-scroll-area-scroll-area-02",
+      "type": "registry:component",
+      "title": "Scroll Area 2",
+      "description": "A horizontal scroll area showcasing a list of feature cards with icons, titles, and descriptions.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "scroll-area-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/scroll-area/scroll-area-02.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/scroll-area/scroll-area-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-scroll-area-scroll-area-03",
+      "type": "registry:component",
+      "title": "Scroll Area 3",
+      "description": "A scrollable dialog component designed for displaying extensive product information and specifications.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "scroll-area-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/scroll-area/scroll-area-03.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/scroll-area/scroll-area-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-scroll-area-scroll-area-04",
+      "type": "registry:component",
+      "title": "Scroll Area 4",
+      "description": "A data table integrated within a scroll area, supporting both vertical and horizontal scrolling for large datasets.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "scroll-area-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/scroll-area/scroll-area-04.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/scroll-area/scroll-area-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-scroll-area-scroll-area-05",
+      "type": "registry:component",
+      "title": "Scroll Area 5",
+      "description": "A vertical image gallery with top and bottom fade effects to indicate additional scrollable content.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "scroll-area-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/scroll-area/scroll-area-05.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/scroll-area/scroll-area-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-scroll-area-scroll-area-06",
+      "type": "registry:component",
+      "title": "Scroll Area 6",
+      "description": "A horizontal image gallery with a persistent scrollbar for easy navigation through a collection of photos.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "scroll-area-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/scroll-area/scroll-area-06.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/scroll-area/scroll-area-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

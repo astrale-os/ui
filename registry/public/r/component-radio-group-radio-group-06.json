@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-radio-group-radio-group-06",
+  "title": "Radio Group 6",
+  "description": "A radio group with solid filled styling for theme selection",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/radio-group/radio-group-06/radio-group-06.tsx",
+      "content": "import { Label } from '@astrale-os/ui/label'\nimport { RadioGroup, RadioGroupItem } from '@astrale-os/ui/radio-group'\n\nconst RadioGroupSolidDemo = () => {\n  return (\n    <RadioGroup defaultValue='light'>\n      <div className='flex items-center gap-2'>\n        <RadioGroupItem\n          value='light'\n          id='theme-light'\n          className='data-checked:border-input data-checked:bg-primary-foreground dark:data-checked:bg-primary-foreground [&_[data-slot=radio-group-indicator]>span]:bg-primary'\n        />\n        <Label htmlFor='theme-light'>Light Theme</Label>\n      </div>\n      <div className='flex items-center gap-2'>\n        <RadioGroupItem\n          value='dark'\n          id='theme-dark'\n          className='data-checked:border-input data-checked:bg-primary-foreground dark:data-checked:bg-primary-foreground [&_[data-slot=radio-group-indicator]>span]:bg-primary'\n        />\n        <Label htmlFor='theme-dark'>Dark Theme</Label>\n      </div>\n      <div className='flex items-center gap-2'>\n        <RadioGroupItem\n          value='system'\n          id='theme-system'\n          className='data-checked:border-input data-checked:bg-primary-foreground dark:data-checked:bg-primary-foreground [&_[data-slot=radio-group-indicator]>span]:bg-primary'\n        />\n        <Label htmlFor='theme-system'>System Default</Label>\n      </div>\n    </RadioGroup>\n  )\n}\n\nexport default RadioGroupSolidDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/radio-group/radio-group-06.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/radio-group/radio-group-06",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

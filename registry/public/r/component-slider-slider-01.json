@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-slider-slider-01",
+  "title": "Slider 1",
+  "description": "A standard horizontal slider component for single value selection with a customizable range.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/slider/slider-01/slider-01.tsx",
+      "content": "import { Slider } from '@astrale-os/ui/slider'\n\nconst SliderDemo = () => {\n  return <Slider defaultValue={75} max={100} step={1} className='mx-auto w-full max-w-xs' />\n}\n\nexport default SliderDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/slider/slider-01.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/slider/slider-01",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

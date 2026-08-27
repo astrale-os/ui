@@ -1,0 +1,181 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-patterns-sortable",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "pattern-sortable-sortable-01",
+      "type": "registry:block",
+      "title": "Sortable 1",
+      "description": "Sortable list of items with drag-and-drop functionality and reorder feedback.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@dnd-kit/core@^6.3.1",
+        "@dnd-kit/sortable@^10.0.0",
+        "@dnd-kit/utilities@^3.2.2",
+        "lucide-react@1.32.0",
+        "radix-ui@^1.6.7",
+        "react-dom@19.2.8",
+        "react@19.2.8",
+        "sonner@^2.0.8"
+      ],
+      "files": [
+        {
+          "path": "sortable-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/sortable/sortable-01.tsx"
+        },
+        {
+          "path": "support/components/ui/sortable.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/sortable.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/sortable/sortable-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-sortable-sortable-02",
+      "type": "registry:block",
+      "title": "Sortable 2",
+      "description": "A horizontal sortable avatar list with hover drag handles and reorder feedback.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@dnd-kit/core@^6.3.1",
+        "@dnd-kit/sortable@^10.0.0",
+        "@dnd-kit/utilities@^3.2.2",
+        "lucide-react@1.32.0",
+        "radix-ui@^1.6.7",
+        "react-dom@19.2.8",
+        "react@19.2.8",
+        "sonner@^2.0.8"
+      ],
+      "files": [
+        {
+          "path": "sortable-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/sortable/sortable-02.tsx"
+        },
+        {
+          "path": "support/components/ui/sortable.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/sortable.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/sortable/sortable-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-sortable-sortable-03",
+      "type": "registry:block",
+      "title": "Sortable 3",
+      "description": "A nested sortable component with drag-and-drop functionality for option groups and values.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@dnd-kit/core@^6.3.1",
+        "@dnd-kit/sortable@^10.0.0",
+        "@dnd-kit/utilities@^3.2.2",
+        "lucide-react@1.32.0",
+        "radix-ui@^1.6.7",
+        "react-dom@19.2.8",
+        "react@19.2.8",
+        "sonner@^2.0.8"
+      ],
+      "files": [
+        {
+          "path": "sortable-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/sortable/sortable-03.tsx"
+        },
+        {
+          "path": "support/components/ui/sortable.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/sortable.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/sortable/sortable-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-sortable-sortable-04",
+      "type": "registry:block",
+      "title": "Sortable 4",
+      "description": "A notification priority sortable component with drag handles and toggle switches.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@dnd-kit/core@^6.3.1",
+        "@dnd-kit/sortable@^10.0.0",
+        "@dnd-kit/utilities@^3.2.2",
+        "lucide-react@1.32.0",
+        "radix-ui@^1.6.7",
+        "react-dom@19.2.8",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "sortable-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/sortable/sortable-04.tsx"
+        },
+        {
+          "path": "support/components/ui/sortable.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/sortable.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/sortable/sortable-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-sortable-sortable-05",
+      "type": "registry:block",
+      "title": "Sortable 5",
+      "description": "A two-column sortable task board for pending and completed tasks with avatar drag handles.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@dnd-kit/core@^6.3.1",
+        "@dnd-kit/sortable@^10.0.0",
+        "@dnd-kit/utilities@^3.2.2",
+        "lucide-react@1.32.0",
+        "radix-ui@^1.6.7",
+        "react-dom@19.2.8",
+        "react@19.2.8",
+        "sonner@^2.0.8"
+      ],
+      "files": [
+        {
+          "path": "sortable-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/sortable/sortable-05.tsx"
+        },
+        {
+          "path": "support/components/ui/sortable.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/sortable.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/sortable/sortable-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

@@ -21,6 +21,7 @@ export function CommandPaletteControlled({
   onOpenChange,
   onQueryChange,
   onAction,
+  onActionIntent,
 }: {
   className?: string
   style?: React.CSSProperties
@@ -37,6 +38,7 @@ export function CommandPaletteControlled({
   onOpenChange(open: boolean): void
   onQueryChange(query: string): void
   onAction(id: string): void
+  onActionIntent?(id: string): void
 }) {
   return (
     <CommandDialog
@@ -46,7 +48,11 @@ export function CommandPaletteControlled({
       description={description}
       className={className}
     >
-      <Command data-slot="pattern-command-palette-controlled" style={style}>
+      <Command
+        data-slot="pattern-command-palette-controlled"
+        style={style}
+        onValueChange={onActionIntent}
+      >
         <CommandInput placeholder={placeholder} value={query} onValueChange={onQueryChange} />
         <CommandList>
           <CommandEmpty>{emptyLabel}</CommandEmpty>
@@ -58,6 +64,8 @@ export function CommandPaletteControlled({
                   value={action.id}
                   keywords={action.keywords ? [...action.keywords] : undefined}
                   onSelect={() => onAction(action.id)}
+                  onMouseEnter={() => onActionIntent?.(action.id)}
+                  onFocus={() => onActionIntent?.(action.id)}
                 >
                   {action.label}
                 </CommandItem>
