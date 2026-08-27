@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/astrale-os/ui/main/schemas/theme.schema.json",
-  "version": 1,
+  "version": 2,
   "name": "atelier",
   "label": "Atelier",
   "description": "Warm paper, lacquer red, generous geometry, and a playful studio cadence.",
@@ -29,7 +29,15 @@
       "chart2": "oklch(0.7 0.18 115)",
       "chart3": "oklch(0.62 0.17 245)",
       "chart4": "oklch(0.73 0.17 72)",
-      "chart5": "oklch(0.58 0.18 330)"
+      "chart5": "oklch(0.58 0.18 330)",
+      "sidebar": "oklch(0.995 0.008 62)",
+      "sidebarForeground": "oklch(0.21 0.045 25)",
+      "sidebarPrimary": "oklch(0.52 0.2 28)",
+      "sidebarPrimaryForeground": "oklch(0.98 0.01 62)",
+      "sidebarAccent": "oklch(0.82 0.16 115)",
+      "sidebarAccentForeground": "oklch(0.24 0.055 120)",
+      "sidebarBorder": "oklch(0.77 0.07 62)",
+      "sidebarRing": "oklch(0.6 0.2 28)"
     },
     "dark": {
       "background": "oklch(0.16 0.04 25)",
@@ -55,18 +63,37 @@
       "chart2": "oklch(0.7 0.16 115)",
       "chart3": "oklch(0.7 0.15 245)",
       "chart4": "oklch(0.76 0.16 72)",
-      "chart5": "oklch(0.68 0.16 330)"
+      "chart5": "oklch(0.68 0.16 330)",
+      "sidebar": "oklch(0.21 0.05 25)",
+      "sidebarForeground": "oklch(0.94 0.025 62)",
+      "sidebarPrimary": "oklch(0.72 0.19 32)",
+      "sidebarPrimaryForeground": "oklch(0.17 0.04 25)",
+      "sidebarAccent": "oklch(0.65 0.15 115)",
+      "sidebarAccentForeground": "oklch(0.17 0.04 25)",
+      "sidebarBorder": "oklch(0.38 0.08 35)",
+      "sidebarRing": "oklch(0.72 0.18 32)"
     }
   },
   "typography": {
     "body": "'Aptos', 'Gill Sans', ui-sans-serif, sans-serif",
-    "heading": "'Cooper Black', 'Iowan Old Style', ui-serif, serif"
+    "heading": "'Cooper Black', 'Iowan Old Style', ui-serif, serif",
+    "mono": "'SFMono-Regular', 'Cascadia Code', ui-monospace, monospace"
   },
-  "geometry": { "radius": "1rem", "panelRadius": "1.5rem" },
-  "density": { "control": "2.5rem", "controlSmall": "2.15rem", "controlLarge": "2.8rem" },
+  "geometry": {
+    "radius": "1rem",
+    "panelRadius": "1.5rem"
+  },
+  "density": {
+    "control": "2.5rem",
+    "controlSmall": "2.15rem",
+    "controlLarge": "2.8rem"
+  },
   "effects": {
     "controlShadow": "0 2px 0 oklch(0.21 0.045 25 / 0.14)",
     "panelShadow": "0 24px 0 -12px oklch(0.58 0.22 28 / 0.22)"
   },
-  "motion": { "fast": "150ms", "standard": "240ms" }
+  "motion": {
+    "fast": "150ms",
+    "standard": "240ms"
+  }
 }

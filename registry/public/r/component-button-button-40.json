@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-button-button-40",
+  "title": "Button 40",
+  "description": "Button with ring hover effect that shows animated border on hover",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/button/button-40/button-40.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\n\nconst ButtonRingHoverDemo = () => {\n  return (\n    <Button className='ring-offset-background hover:ring-primary/90 transition-all duration-300 hover:ring-2 hover:ring-offset-2'>\n      Ring Hover\n    </Button>\n  )\n}\n\nexport default ButtonRingHoverDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/button/button-40.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/button/button-40",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

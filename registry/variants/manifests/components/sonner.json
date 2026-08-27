@@ -1,0 +1,407 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-components-sonner",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "component-sonner-sonner-01",
+      "type": "registry:component",
+      "title": "Sonner 1",
+      "description": "A basic toast notification with simple message display",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "sonner@^2.0.8"],
+      "files": [
+        {
+          "path": "sonner-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/sonner/sonner-01.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/sonner/sonner-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-sonner-sonner-02",
+      "type": "registry:component",
+      "title": "Sonner 2",
+      "description": "A toast notification with title and description for detailed information",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "sonner@^2.0.8"],
+      "files": [
+        {
+          "path": "sonner-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/sonner/sonner-02.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/sonner/sonner-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-sonner-sonner-03",
+      "type": "registry:component",
+      "title": "Sonner 3",
+      "description": "A toast notification with custom icon for enhanced visual communication",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "sonner@^2.0.8"],
+      "files": [
+        {
+          "path": "sonner-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/sonner/sonner-03.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/sonner/sonner-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-sonner-sonner-04",
+      "type": "registry:component",
+      "title": "Sonner 4",
+      "description": "A toast notification with avatar component for personalized user notifications",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "sonner@^2.0.8"],
+      "files": [
+        {
+          "path": "sonner-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/sonner/sonner-04.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/sonner/sonner-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-sonner-sonner-05",
+      "type": "registry:component",
+      "title": "Sonner 5",
+      "description": "A closable toast notification with user-controlled dismiss functionality",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "sonner@^2.0.8"],
+      "files": [
+        {
+          "path": "sonner-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/sonner/sonner-05.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/sonner/sonner-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-sonner-sonner-06",
+      "type": "registry:component",
+      "title": "Sonner 6",
+      "description": "A toast notification with action button for interactive user responses",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "sonner@^2.0.8"],
+      "files": [
+        {
+          "path": "sonner-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/sonner/sonner-06.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/sonner/sonner-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-sonner-sonner-07",
+      "type": "registry:component",
+      "title": "Sonner 7",
+      "description": "A promise-based toast notification with loading, success, and error states",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "sonner@^2.0.8"],
+      "files": [
+        {
+          "path": "sonner-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/sonner/sonner-07.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/sonner/sonner-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-sonner-sonner-08",
+      "type": "registry:component",
+      "title": "Sonner 8",
+      "description": "A toast notification with configurable positioning options for all screen corners and centers for e.g. (top-left, top-right, bottom-left, bottom-right, center)",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "sonner@^2.0.8"],
+      "files": [
+        {
+          "path": "sonner-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/sonner/sonner-08.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/sonner/sonner-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-sonner-sonner-09",
+      "type": "registry:component",
+      "title": "Sonner 9",
+      "description": "A soft-styled info toast notification with color-mixed background for subtle messaging",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "sonner@^2.0.8"],
+      "files": [
+        {
+          "path": "sonner-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/sonner/sonner-09.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/sonner/sonner-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-sonner-sonner-10",
+      "type": "registry:component",
+      "title": "Sonner 10",
+      "description": "A soft-styled success toast notification with green color theming for positive feedback",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "sonner@^2.0.8"],
+      "files": [
+        {
+          "path": "sonner-10.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/sonner/sonner-10.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/sonner/sonner-10",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-sonner-sonner-11",
+      "type": "registry:component",
+      "title": "Sonner 11",
+      "description": "A soft-styled warning toast notification with amber color theming for caution messages",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "sonner@^2.0.8"],
+      "files": [
+        {
+          "path": "sonner-11.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/sonner/sonner-11.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/sonner/sonner-11",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-sonner-sonner-12",
+      "type": "registry:component",
+      "title": "Sonner 12",
+      "description": "A soft-styled destructive error toast notification with subtle red theming for error messages",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "sonner@^2.0.8"],
+      "files": [
+        {
+          "path": "sonner-12.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/sonner/sonner-12.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/sonner/sonner-12",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-sonner-sonner-13",
+      "type": "registry:component",
+      "title": "Sonner 13",
+      "description": "An outline-styled info toast notification with border highlighting for informational messages",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "sonner@^2.0.8"],
+      "files": [
+        {
+          "path": "sonner-13.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/sonner/sonner-13.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/sonner/sonner-13",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-sonner-sonner-14",
+      "type": "registry:component",
+      "title": "Sonner 14",
+      "description": "An outline-styled success toast notification with green border theming for positive feedback",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "sonner@^2.0.8"],
+      "files": [
+        {
+          "path": "sonner-14.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/sonner/sonner-14.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/sonner/sonner-14",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-sonner-sonner-15",
+      "type": "registry:component",
+      "title": "Sonner 15",
+      "description": "An outline-styled warning toast notification with amber border theming for caution messages",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "sonner@^2.0.8"],
+      "files": [
+        {
+          "path": "sonner-15.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/sonner/sonner-15.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/sonner/sonner-15",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-sonner-sonner-16",
+      "type": "registry:component",
+      "title": "Sonner 16",
+      "description": "An outline-styled destructive error toast notification with red border theming for error messages",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "sonner@^2.0.8"],
+      "files": [
+        {
+          "path": "sonner-16.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/sonner/sonner-16.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/sonner/sonner-16",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-sonner-sonner-17",
+      "type": "registry:component",
+      "title": "Sonner 17",
+      "description": "A solid-styled info toast notification with blue background and white text for prominent messaging",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "sonner@^2.0.8"],
+      "files": [
+        {
+          "path": "sonner-17.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/sonner/sonner-17.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/sonner/sonner-17",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-sonner-sonner-18",
+      "type": "registry:component",
+      "title": "Sonner 18",
+      "description": "A solid-styled success toast notification with green background and white text for prominent positive feedback",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "sonner@^2.0.8"],
+      "files": [
+        {
+          "path": "sonner-18.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/sonner/sonner-18.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/sonner/sonner-18",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-sonner-sonner-19",
+      "type": "registry:component",
+      "title": "Sonner 19",
+      "description": "A solid-styled warning toast notification with amber background and white text for prominent caution messages",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "sonner@^2.0.8"],
+      "files": [
+        {
+          "path": "sonner-19.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/sonner/sonner-19.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/sonner/sonner-19",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-sonner-sonner-20",
+      "type": "registry:component",
+      "title": "Sonner 20",
+      "description": "A solid-styled destructive error toast notification with red background and white text for prominent error messages",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "sonner@^2.0.8"],
+      "files": [
+        {
+          "path": "sonner-20.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/sonner/sonner-20.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/sonner/sonner-20",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

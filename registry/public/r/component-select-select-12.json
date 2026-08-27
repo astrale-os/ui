@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-select-select-12",
+  "title": "Select 12",
+  "description": "A custom select dropdown with icon",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/select/select-12/select-12.tsx",
+      "content": "import { useId } from 'react'\nimport { Label } from '@astrale-os/ui/label'\nimport { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@astrale-os/ui/select'\nimport { FilmIcon } from \"lucide-react\"\n\nconst items = [\n  { label: 'Select time', value: null },\n  { label: 'God of Wars', value: 'god of wars' },\n  { label: 'Ghost Rider', value: 'ghost rider' },\n  { label: 'The Cloth', value: 'the cloth' },\n  { label: 'The Possession', value: 'the possession' }\n]\n\nconst SelectWithIconDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>Select with icon</Label>\n      <Select items={items} defaultValue='god of wars'>\n        <SelectTrigger id={id} className='relative w-full pl-9'>\n          <div className='text-muted-foreground/80 pointer-events-none absolute inset-y-0 left-0 flex items-center justify-center pl-3 group-has-[select[disabled]]:opacity-50'>\n            <FilmIcon size={16} aria-hidden='true' />\n          </div>\n          <SelectValue />\n        </SelectTrigger>\n        <SelectContent alignItemWithTrigger={false} side='bottom' className='p-1'>\n          {items.slice(1).map(item => (\n            <SelectItem key={item.value} value={item.value}>\n              {item.label}\n            </SelectItem>\n          ))}\n        </SelectContent>\n      </Select>\n    </div>\n  )\n}\n\nexport default SelectWithIconDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/select/select-12.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/select/select-12",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

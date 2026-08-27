@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-input-input-14",
+  "title": "Input 14",
+  "description": "A username input field with a user icon positioned at the start",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/input/input-14/input-14.tsx",
+      "content": "import { useId } from 'react'\nimport { InputGroup, InputGroupAddon, InputGroupInput } from '@astrale-os/ui/input-group'\nimport { Label } from '@astrale-os/ui/label'\nimport { UserIcon } from \"lucide-react\"\n\nconst InputStartIconDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>Input with start icon</Label>\n      <InputGroup className='max-w-xs'>\n        <InputGroupAddon>\n          <UserIcon className='size-4' />\n        </InputGroupAddon>\n        <InputGroupInput id={id} placeholder='Username' />\n      </InputGroup>\n    </div>\n  )\n}\n\nexport default InputStartIconDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/input/input-14.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/input/input-14",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

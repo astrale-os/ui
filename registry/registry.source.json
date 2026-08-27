@@ -24,6 +24,7 @@
     "./patterns/sidebar/registry.json",
     "./patterns/toast/registry.json",
     "./patterns/typography/registry.json",
+    "./variants/registry.json",
     "./themes/registry.json"
   ]
 }

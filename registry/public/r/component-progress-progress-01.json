@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-progress-progress-01",
+  "title": "Progress 1",
+  "description": "Standard progress bar with a timed animation showing value transitions from empty to half-filled.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/progress/progress-01/progress-01.tsx",
+      "content": "'use client'\n\nimport { useState, useEffect } from 'react'\n\nimport { Progress } from '@astrale-os/ui/progress'\n\nconst ProgressDemo = () => {\n  const [progress, setProgress] = useState(0)\n\n  useEffect(() => {\n    const timer = setTimeout(() => setProgress(50), 500)\n\n    return () => clearTimeout(timer)\n  }, [])\n\n  return <Progress value={progress} className='w-full' />\n}\n\nexport default ProgressDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/progress/progress-01.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/progress/progress-01",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

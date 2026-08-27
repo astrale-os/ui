@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-button-button-33",
+  "title": "Button 33",
+  "description": "Toggle icon button that switches between menu and close icons",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/button/button-33/button-33.tsx",
+      "content": "import { useState } from 'react'\nimport { Button } from '@astrale-os/ui/button'\nimport { XIcon, MenuIcon } from \"lucide-react\"\n\nconst IconButtonToggleDemo = () => {\n  const [isOpen, setIsOpen] = useState(false)\n\n  return (\n    <Button variant='ghost' size='icon' onClick={() => setIsOpen(!isOpen)} aria-label='Toggle menu'>\n      {isOpen ? (\n        <XIcon\n        />\n      ) : (\n        <MenuIcon\n        />\n      )}\n    </Button>\n  )\n}\n\nexport default IconButtonToggleDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/button/button-33.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/button/button-33",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

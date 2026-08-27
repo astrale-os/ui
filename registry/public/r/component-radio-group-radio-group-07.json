@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-radio-group-radio-group-07",
+  "title": "Radio Group 7",
+  "description": "A radio group with descriptions for detailed plan selection options",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/radio-group/radio-group-07/radio-group-07.tsx",
+      "content": "import { Label } from '@astrale-os/ui/label'\nimport { RadioGroup, RadioGroupItem } from '@astrale-os/ui/radio-group'\n\nconst RadioGroupDescriptionDemo = () => {\n  return (\n    <RadioGroup defaultValue='basic'>\n      <div className='flex gap-2'>\n        <RadioGroupItem value='basic' id='plan-basic' />\n        <div className='grid flex-1 space-y-2'>\n          <Label htmlFor='plan-basic'>Basic Plan</Label>\n          <p className='text-muted-foreground text-xs'>Perfect for individuals just getting started</p>\n        </div>\n      </div>\n      <div className='flex gap-2'>\n        <RadioGroupItem value='pro' id='plan-pro' />\n        <div className='grid flex-1 space-y-2'>\n          <Label htmlFor='plan-pro'>Pro Plan</Label>\n          <p className='text-muted-foreground text-xs'>Advanced features for power users and small teams</p>\n        </div>\n      </div>\n      <div className='flex gap-2'>\n        <RadioGroupItem value='enterprise' id='plan-enterprise' />\n        <div className='grid flex-1 space-y-2'>\n          <Label htmlFor='plan-enterprise'>Enterprise Plan</Label>\n          <p className='text-muted-foreground text-xs'>Custom solutions for large organizations</p>\n        </div>\n      </div>\n    </RadioGroup>\n  )\n}\n\nexport default RadioGroupDescriptionDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/radio-group/radio-group-07.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/radio-group/radio-group-07",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

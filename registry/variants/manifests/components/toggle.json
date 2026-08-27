@@ -1,0 +1,312 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-components-toggle",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "component-toggle-toggle-01",
+      "type": "registry:component",
+      "title": "Toggle 1",
+      "description": "Outline toggle with icon and label that highlights when active.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "toggle-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/toggle/toggle-01.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/toggle/toggle-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-toggle-toggle-02",
+      "type": "registry:component",
+      "title": "Toggle 2",
+      "description": "Grouped outline toggles for text formatting with icons.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "toggle-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/toggle/toggle-02.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/toggle/toggle-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-toggle-toggle-03",
+      "type": "registry:component",
+      "title": "Toggle 3",
+      "description": "Demonstrates toggle sizes: small, default, and large variants.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "toggle-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/toggle/toggle-03.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/toggle/toggle-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-toggle-toggle-04",
+      "type": "registry:component",
+      "title": "Toggle 4",
+      "description": "Shows enabled and disabled toggle states with appropriate styling.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "toggle-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/toggle/toggle-04.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/toggle/toggle-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-toggle-toggle-05",
+      "type": "registry:component",
+      "title": "Toggle 5",
+      "description": "Icon toggles that change fill and stroke colors when active.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "toggle-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/toggle/toggle-05.tsx"
+        },
+        {
+          "path": "support/assets/svg/heart.tsx",
+          "type": "registry:component",
+          "target": "assets/svg/heart.tsx"
+        },
+        {
+          "path": "support/assets/svg/thumbs-up.tsx",
+          "type": "registry:lib",
+          "target": "assets/svg/thumbs-up.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/toggle/toggle-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-toggle-toggle-06",
+      "type": "registry:component",
+      "title": "Toggle 6",
+      "description": "Controlled toggles with dynamic text patterns.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "toggle-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/toggle/toggle-06.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/toggle/toggle-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-toggle-toggle-07",
+      "type": "registry:component",
+      "title": "Toggle 7",
+      "description": "Icon-only power toggle that swaps icons and applies conditional color styles.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "toggle-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/toggle/toggle-07.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/toggle/toggle-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-toggle-toggle-08",
+      "type": "registry:component",
+      "title": "Toggle 8",
+      "description": "Multiple stateful icon toggles with simple animations.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "toggle-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/toggle/toggle-08.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/toggle/toggle-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-toggle-toggle-09",
+      "type": "registry:component",
+      "title": "Toggle 9",
+      "description": "Emoji flip toggles using 3D rotation and backface-hidden for a card-flip effect.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "toggle-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/toggle/toggle-09.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/toggle/toggle-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-toggle-toggle-10",
+      "type": "registry:component",
+      "title": "Toggle 10",
+      "description": "Text-only toggles demonstrating label changes on toggle.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "toggle-10.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/toggle/toggle-10.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/toggle/toggle-10",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-toggle-toggle-11",
+      "type": "registry:component",
+      "title": "Toggle 11",
+      "description": "Large toggle combining icon and text using pressed state.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "toggle-11.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/toggle/toggle-11.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/toggle/toggle-11",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-toggle-toggle-12",
+      "type": "registry:component",
+      "title": "Toggle 12",
+      "description": "Toggle integrated with tooltip and badge to show notification counts and states.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "toggle-12.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/toggle/toggle-12.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/toggle/toggle-12",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-toggle-toggle-13",
+      "type": "registry:component",
+      "title": "Toggle 13",
+      "description": "Animated toggle using a MotionToggle UI component with particle animation.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "motion@^13.1.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "toggle-13.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/toggle/toggle-13.tsx"
+        },
+        {
+          "path": "support/components/ui/motion-toggle.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/motion-toggle.tsx"
+        },
+        {
+          "path": "support/assets/svg/heart.tsx",
+          "type": "registry:component",
+          "target": "assets/svg/heart.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/toggle/toggle-13",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-toggle-toggle-14",
+      "type": "registry:component",
+      "title": "Toggle 14",
+      "description": "Motion-based theme toggle using motion/react for animated Sun/Moon icon transitions.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "motion@^13.1.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "toggle-14.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/toggle/toggle-14.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/toggle/toggle-14",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

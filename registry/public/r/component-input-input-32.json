@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-input-input-32",
+  "title": "Input 32",
+  "description": "Input field with a right-aligned icon button, ideal for actions like downloading or submitting email addresses",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/input/input-32/input-32.tsx",
+      "content": "import { useId } from 'react'\nimport { Button } from '@astrale-os/ui/button'\nimport { ButtonGroup } from '@astrale-os/ui/button-group'\nimport { Input } from '@astrale-os/ui/input'\nimport { Label } from '@astrale-os/ui/label'\nimport { DownloadIcon } from \"lucide-react\"\n\nconst InputIconButtonDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>Input with icon button</Label>\n      <ButtonGroup className='w-full'>\n        <Input id={id} type='email' placeholder='Email address' />\n        <Button variant='outline' size='icon'>\n          <DownloadIcon\n          />\n          <span className='sr-only'>Download</span>\n        </Button>\n      </ButtonGroup>\n    </div>\n  )\n}\n\nexport default InputIconButtonDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/input/input-32.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/input/input-32",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

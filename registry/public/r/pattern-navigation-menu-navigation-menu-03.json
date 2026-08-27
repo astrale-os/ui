@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pattern-navigation-menu-navigation-menu-03",
+  "title": "Navigation Menu 3",
+  "description": "An enhanced navigation menu with integrated icons and status badges, providing visual cues and additional context for each link.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0",
+    "next@^15.3.3"
+  ],
+  "files": [
+    {
+      "path": "source/patterns/navigation-menu/navigation-menu-03/navigation-menu-03.tsx",
+      "content": "import Link from 'next/link'\nimport { Badge } from '@astrale-os/ui/badge'\nimport {\n  NavigationMenu,\n  NavigationMenuContent,\n  NavigationMenuItem,\n  NavigationMenuLink,\n  NavigationMenuList,\n  NavigationMenuTrigger\n} from '@astrale-os/ui/navigation-menu'\nimport { PaletteIcon, TypeIcon, BoxIcon, PaintbrushIcon, CodeIcon, EyeIcon } from \"lucide-react\"\n\nconst features = [\n  {\n    icon: (\n      <PaletteIcon\n      />\n    ),\n    label: 'Color Picker',\n    description: 'Intuitive color selection with hex, RGB, and HSL support',\n    badge: { label: 'New', variant: 'default' as const },\n    href: '#'\n  },\n  {\n    icon: (\n      <TypeIcon\n      />\n    ),\n    label: 'Typography Editor',\n    description: 'Fine-tune fonts, sizes, and spacing for perfect text hierarchy',\n    badge: { label: 'Beta', variant: 'secondary' as const },\n    href: '#'\n  },\n  {\n    icon: (\n      <BoxIcon\n      />\n    ),\n    label: 'Component Library',\n    description: 'Pre-built components with customizable variants and states',\n    badge: { label: 'Pro', variant: 'outline' as const },\n    href: '#'\n  },\n  {\n    icon: (\n      <PaintbrushIcon\n      />\n    ),\n    label: 'Theme Builder',\n    description: 'Create and manage design themes with live preview',\n    badge: { label: 'Preview', variant: 'outline' as const },\n    href: '#'\n  },\n  {\n    icon: (\n      <CodeIcon\n      />\n    ),\n    label: 'Code Generator',\n    description: 'Automatically generate clean, production-ready code',\n    badge: { label: 'New', variant: 'default' as const },\n    href: '#'\n  },\n  {\n    icon: (\n      <EyeIcon\n      />\n    ),\n    label: 'Accessibility Checker',\n    description: 'Ensure your designs meet WCAG guidelines and best practices',\n    badge: { label: 'Beta', variant: 'secondary' as const },\n    href: '#'\n  }\n]\n\nconst NavigationMenuFeatureDemo = () => (\n  <div className='flex items-center justify-center'>\n    <NavigationMenu>\n      <NavigationMenuList>\n        <NavigationMenuItem>\n          <NavigationMenuTrigger className='[&>svg]:size-4'>Features</NavigationMenuTrigger>\n          <NavigationMenuContent>\n            <div className='w-100 space-y-1 p-1'>\n              {features.map(feature => (\n                <NavigationMenuLink\n                  render={<Link href={feature.href} />}\n                  key={feature.label}\n                  className='flex items-start gap-2 *:[svg]:mt-1 *:[svg]:size-5'\n                >\n                  {feature.icon}\n                  <div className='flex-1'>\n                    <div className='flex items-center gap-2'>\n                      <span className='font-medium'>{feature.label}</span>\n                      <Badge variant={feature.badge.variant}>{feature.badge.label}</Badge>\n                    </div>\n                    <span className='text-muted-foreground'>{feature.description}</span>\n                  </div>\n                </NavigationMenuLink>\n              ))}\n            </div>\n          </NavigationMenuContent>\n        </NavigationMenuItem>\n      </NavigationMenuList>\n    </NavigationMenu>\n  </div>\n)\n\nexport default NavigationMenuFeatureDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/pattern/navigation-menu/navigation-menu-03.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "pattern/navigation-menu/navigation-menu-03",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:block"
+}

@@ -1,0 +1,102 @@
+/* Generated from art-deco.astrale-theme.json. Consumer-owned after installation. */
+:root,
+[data-ui-preset='art-deco'],
+[data-ui-theme='art-deco'] {
+  color-scheme: light;
+  --ui-background: oklch(0.96 0.03 106.96);
+  --ui-foreground: oklch(0.40 0.07 91.45);
+  --ui-card: oklch(0.98 0.04 95.41);
+  --ui-card-foreground: oklch(0.32 0 0);
+  --ui-popover: oklch(0.98 0.04 95.41);
+  --ui-popover-foreground: oklch(0.32 0 0);
+  --ui-primary: oklch(0.77 0.14 91.05);
+  --ui-primary-foreground: oklch(0 0 0);
+  --ui-secondary: oklch(0.67 0.13 61.29);
+  --ui-secondary-foreground: oklch(0 0 0);
+  --ui-muted: oklch(0.93 0.03 106.91);
+  --ui-muted-foreground: oklch(0.32 0 0);
+  --ui-accent: oklch(0.89 0.18 95.32);
+  --ui-accent-foreground: oklch(0.32 0 0);
+  --ui-destructive: oklch(0.70 0.20 32.32);
+  --ui-destructive-foreground: oklch(0 0 0);
+  --ui-border: oklch(0.83 0.11 92.68);
+  --ui-input: oklch(0.65 0.13 81.56);
+  --ui-ring: oklch(0.75 0.15 83.98);
+  --ui-chart-1: oklch(0.89 0.18 95.32);
+  --ui-chart-2: oklch(0.67 0.13 61.29);
+  --ui-chart-3: oklch(0.65 0.13 81.56);
+  --ui-chart-4: oklch(0.75 0.15 83.98);
+  --ui-chart-5: oklch(0.77 0.14 91.05);
+  --ui-sidebar: oklch(0.96 0.03 106.96);
+  --ui-sidebar-foreground: oklch(0.32 0 0);
+  --ui-sidebar-primary: oklch(0.77 0.14 91.05);
+  --ui-sidebar-primary-foreground: oklch(0.32 0 0);
+  --ui-sidebar-accent: oklch(0.89 0.18 95.32);
+  --ui-sidebar-accent-foreground: oklch(0.32 0 0);
+  --ui-sidebar-border: oklch(0.65 0.13 81.56);
+  --ui-sidebar-ring: oklch(0.75 0.15 83.98);
+  --ui-radius: 0.625rem;
+  --ui-radius-panel: 0.625rem;
+  --ui-control-height: 2.25rem;
+  --ui-control-height-sm: 2rem;
+  --ui-control-height-lg: 2.5rem;
+  --ui-font-body: 'Delius Swash Caps', ui-serif, serif;
+  --ui-font-heading: 'Delius Swash Caps', ui-sans-serif, sans-serif;
+  --ui-font-mono: 'Delius Swash Caps', ui-monospace, monospace;
+  --ui-shadow-control: 0px 1px 3px 0px oklch(0.70 0.17 28.12 / 0.03);
+  --ui-shadow-panel:
+    0px 1px 3px 0px oklch(0.70 0.17 28.12 / 0.05), 0px 4px 6px -1px oklch(0.70 0.17 28.12 / 0.05);
+  --ui-motion-fast: 120ms;
+  --ui-motion-standard: 180ms;
+}
+
+:root.dark,
+[data-ui-preset='art-deco'].dark,
+[data-ui-theme='art-deco'].dark {
+  color-scheme: dark;
+  --ui-background: oklch(0.32 0 0);
+  --ui-foreground: oklch(0.96 0.03 106.96);
+  --ui-card: oklch(0.41 0 0);
+  --ui-card-foreground: oklch(0.96 0.03 106.96);
+  --ui-popover: oklch(0.41 0 0);
+  --ui-popover-foreground: oklch(0.96 0.03 106.96);
+  --ui-primary: oklch(0.84 0.17 82.56);
+  --ui-primary-foreground: oklch(0 0 0);
+  --ui-secondary: oklch(0.47 0.11 50.84);
+  --ui-secondary-foreground: oklch(0.96 0.03 106.96);
+  --ui-muted: oklch(0.44 0 0);
+  --ui-muted-foreground: oklch(0.96 0.03 106.96);
+  --ui-accent: oklch(0.66 0.14 80.23);
+  --ui-accent-foreground: oklch(0 0 0);
+  --ui-destructive: oklch(0.66 0.23 35.40);
+  --ui-destructive-foreground: oklch(0 0 0);
+  --ui-border: oklch(0.47 0.11 50.84);
+  --ui-input: oklch(0.47 0.11 50.84);
+  --ui-ring: oklch(0.65 0.13 81.56);
+  --ui-chart-1: oklch(0.75 0.15 83.98);
+  --ui-chart-2: oklch(0.47 0.11 50.84);
+  --ui-chart-3: oklch(0.65 0.13 81.56);
+  --ui-chart-4: oklch(0.75 0.15 83.98);
+  --ui-chart-5: oklch(0.65 0.13 81.56);
+  --ui-sidebar: oklch(0.32 0 0);
+  --ui-sidebar-foreground: oklch(1.00 0 0);
+  --ui-sidebar-primary: oklch(0.61 0.13 80.96);
+  --ui-sidebar-primary-foreground: oklch(1.00 0 0);
+  --ui-sidebar-accent: oklch(0.75 0.15 83.98);
+  --ui-sidebar-accent-foreground: oklch(0.96 0.03 106.96);
+  --ui-sidebar-border: oklch(0.47 0.11 50.84);
+  --ui-sidebar-ring: oklch(0.65 0.13 81.56);
+  --ui-radius: 0.625rem;
+  --ui-radius-panel: 0.625rem;
+  --ui-control-height: 2.25rem;
+  --ui-control-height-sm: 2rem;
+  --ui-control-height-lg: 2.5rem;
+  --ui-font-body: 'Delius Swash Caps', ui-serif, serif;
+  --ui-font-heading: 'Delius Swash Caps', ui-sans-serif, sans-serif;
+  --ui-font-mono: 'Delius Swash Caps', ui-monospace, monospace;
+  --ui-shadow-control: 0px 1px 3px 0px oklch(0.70 0.17 28.12 / 0.03);
+  --ui-shadow-panel:
+    0px 1px 3px 0px oklch(0.70 0.17 28.12 / 0.05), 0px 4px 6px -1px oklch(0.70 0.17 28.12 / 0.05);
+  --ui-motion-fast: 120ms;
+  --ui-motion-standard: 180ms;
+}

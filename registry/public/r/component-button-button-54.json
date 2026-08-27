@@ -1,0 +1,39 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-button-button-54",
+  "title": "Button 54",
+  "description": "Button with stitched border design using layered shadow effects",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "class-variance-authority@^0.7.1",
+    "motion@^13.1.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/button/button-54/button-54.tsx",
+      "content": "import { NeuralButton } from '@/components/ui/neural-button'\n\nconst NeuralButtonDemo = () => {\n  return <NeuralButton>Neural Button</NeuralButton>\n}\n\nexport default NeuralButtonDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/button/button-54.tsx"
+    },
+    {
+      "path": "source/components/button/button-54/support/components/ui/border-beam.tsx",
+      "content": "import type { MotionStyle, Transition } from 'motion/react'\nimport { motion } from 'motion/react'\n\nimport { cn } from '@astrale-os/ui/class-name'\n\ninterface BorderBeamProps {\n  size?: number\n  duration?: number\n  delay?: number\n  colorFrom?: string\n  colorTo?: string\n  transition?: Transition\n  className?: string\n  style?: React.CSSProperties\n  reverse?: boolean\n  initialOffset?: number\n  borderWidth?: number\n}\n\nfunction BorderBeam({\n  className,\n  size = 50,\n  delay = 0,\n  duration = 6,\n  colorFrom = 'var(--destructive)',\n  colorTo = 'var(--primary)',\n  transition,\n  style,\n  reverse = false,\n  initialOffset = 0,\n  borderWidth = 1\n}: BorderBeamProps) {\n  return (\n    <div\n      className='pointer-events-none absolute inset-0 rounded-[inherit] border-(length:--border-beam-width) border-transparent mask-[linear-gradient(transparent,transparent),linear-gradient(#000,#000)] mask-intersect [mask-clip:padding-box,border-box]'\n      style={\n        {\n          '--border-beam-width': `${borderWidth}px`\n        } as React.CSSProperties\n      }\n    >\n      <motion.div\n        className={cn(\n          'absolute aspect-square',\n          'rounded-full bg-linear-to-l from-[var(--color-from)] via-[var(--color-to)] to-transparent',\n          className\n        )}\n        style={\n          {\n            width: size,\n            offsetPath: `rect(0 auto auto 0 round ${size}px)`,\n            '--color-from': colorFrom,\n            '--color-to': colorTo,\n            ...style\n          } as MotionStyle\n        }\n        initial={{ offsetDistance: `${initialOffset}%` }}\n        animate={{\n          offsetDistance: reverse\n            ? [`${100 - initialOffset}%`, `${-initialOffset}%`]\n            : [`${initialOffset}%`, `${100 + initialOffset}%`]\n        }}\n        transition={{\n          repeat: Infinity,\n          ease: 'linear',\n          duration,\n          delay: -delay,\n          ...transition\n        }}\n      />\n    </div>\n  )\n}\n\nexport { BorderBeam, type BorderBeamProps }\n",
+      "type": "registry:ui",
+      "target": "components/ui/border-beam.tsx"
+    },
+    {
+      "path": "source/components/button/button-54/support/components/ui/neural-button.tsx",
+      "content": "'use client'\n\nimport * as React from 'react'\n\nimport { Button } from '@astrale-os/ui/button'\n\n// BorderBeam is a standalone animation component\nimport { BorderBeam } from '@/components/ui/border-beam'\n\nimport { cn } from '@astrale-os/ui/class-name'\n\ninterface NeuralButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'render'> {\n  children?: React.ReactNode\n  render?: React.ReactElement\n}\n\nfunction NeuralButton({ children, render, className, ...rest }: NeuralButtonProps) {\n  const neuralStyles = cn(\n    'relative z-1 h-10 overflow-hidden rounded-xl border-0 bg-sky-600! px-6 text-base text-white ring-2 ring-sky-600/60! transition-transform duration-200 ease-in-out hover:scale-105 active:translate-y-0 active:scale-95 dark:bg-sky-400/60! dark:ring-sky-400/60! focus-visible:ring-3 focus-visible:ring-sky-600 dark:focus-visible:ring-sky-400/60!',\n    className\n  )\n\n  const backgroundDecorations = (\n    <>\n      <span className='pointer-events-none absolute inset-0 -z-1 bg-linear-to-r from-neutral-900/20 to-white/20'>\n        <span className='absolute inset-px rounded-[calc(var(--radius-xl)-1px)] bg-sky-600 dark:bg-sky-400/60' />\n      </span>\n\n      <svg\n        width='98'\n        height='40'\n        viewBox='0 0 98 40'\n        fill='none'\n        xmlns='http://www.w3.org/2000/svg'\n        className='absolute inset-x-0 bottom-px h-12 w-full! blur-[6px]'\n      >\n        <g filter='url(#filter0_f_28138_7760)'>\n          <path\n            d='M99 37.5708C60.3329 38.179 38.3917 38.106 -1 37.5708C-1 37.5708 2.65293 34.4541 7.59896 29.7774C12.545 25.1008 81.7895 24.0613 90.3618 30.737C98.9341 37.4128 99 37.5708 99 37.5708Z'\n            fill='white'\n          />\n        </g>\n        <defs>\n          <filter\n            id='filter0_f_28138_7760'\n            x='-28.9'\n            y='-1.9'\n            width='155.8'\n            height='67.8'\n            filterUnits='userSpaceOnUse'\n            colorInterpolationFilters='sRGB'\n          >\n            <feFlood floodOpacity='0' result='BackgroundImageFix' />\n            <feBlend mode='normal' in='SourceGraphic' in2='BackgroundImageFix' result='shape' />\n            <feGaussianBlur stdDeviation='13.95' result='effect1_foregroundBlur_28138_7760' />\n          </filter>\n        </defs>\n      </svg>\n    </>\n  )\n\n  const overlayDecorations = (\n    <>\n      <span className='pointer-events-none absolute inset-0 z-1 rounded-xl [box-shadow:0px_1px_1.6px_0px_color-mix(in_oklab,white_68%,transparent)_inset]' />\n      <BorderBeam colorFrom='white' colorTo='white' size={35} />\n    </>\n  )\n\n  return (\n    <Button render={render} nativeButton={!render} className={neuralStyles} {...rest}>\n      {backgroundDecorations}\n      {children}\n      {overlayDecorations}\n    </Button>\n  )\n}\n\nexport { NeuralButton, type NeuralButtonProps }\n",
+      "type": "registry:ui",
+      "target": "components/ui/neural-button.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/button/button-54",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

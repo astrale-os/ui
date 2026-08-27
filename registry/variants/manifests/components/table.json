@@ -1,0 +1,327 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-components-table",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "component-table-table-01",
+      "type": "registry:component",
+      "title": "Table 1",
+      "description": "A basic table with caption, header, body, and footer displaying invoice data",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "table-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/table/table-01.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/table/table-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-table-table-02",
+      "type": "registry:component",
+      "title": "Table 2",
+      "description": "A bordered table with complete border styling around the table container",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "table-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/table/table-02.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/table/table-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-table-table-03",
+      "type": "registry:component",
+      "title": "Table 3",
+      "description": "A table with rounded corners and shadow styling for enhanced visual appeal",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "table-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/table/table-03.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/table/table-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-table-table-04",
+      "type": "registry:component",
+      "title": "Table 4",
+      "description": "A table with vertical lines between columns for clear data separation",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "table-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/table/table-04.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/table/table-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-table-table-05",
+      "type": "registry:component",
+      "title": "Table 5",
+      "description": "A table without borders for a clean, minimal appearance",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "table-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/table/table-05.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/table/table-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-table-table-06",
+      "type": "registry:component",
+      "title": "Table 6",
+      "description": "A striped rows table with alternating row background colors for improved readability",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "table-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/table/table-06.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/table/table-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-table-table-07",
+      "type": "registry:component",
+      "title": "Table 7",
+      "description": "A striped columns table with alternating column background colors for enhanced data comparison",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "table-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/table/table-07.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/table/table-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-table-table-08",
+      "type": "registry:component",
+      "title": "Table 8",
+      "description": "A table with highlighted row functionality for emphasis and user interaction",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "table-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/table/table-08.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/table/table-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-table-table-09",
+      "type": "registry:component",
+      "title": "Table 9",
+      "description": "A table with vertical scrolling functionality for displaying large datasets",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "table-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/table/table-09.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/table/table-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-table-table-10",
+      "type": "registry:component",
+      "title": "Table 10",
+      "description": "A table with sticky header that remains visible during vertical scrolling",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "table-10.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/table/table-10.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/table/table-10",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-table-table-11",
+      "type": "registry:component",
+      "title": "Table 11",
+      "description": "A table with sticky first column that remains fixed during horizontal scrolling",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "table-11.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/table/table-11.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/table/table-11",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-table-table-12",
+      "type": "registry:component",
+      "title": "Table 12",
+      "description": "A vertical table layout for displaying data in a column-oriented format with key-value pairs",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "table-12.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/table/table-12.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/table/table-12",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-table-table-13",
+      "type": "registry:component",
+      "title": "Table 13",
+      "description": "A table with avatar components for displaying user information with profile pictures",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "table-13.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/table/table-13.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/table/table-13",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-table-table-14",
+      "type": "registry:component",
+      "title": "Table 14",
+      "description": "A table with integrated pagination controls for navigating through large datasets",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "table-14.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/table/table-14.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/table/table-14",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-table-table-15",
+      "type": "registry:component",
+      "title": "Table 15",
+      "description": "A table with selectable rows using checkboxes for bulk actions and data manipulation",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "table-15.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/table/table-15.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/table/table-15",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-table-table-16",
+      "type": "registry:component",
+      "title": "Table 16",
+      "description": "A comprehensive product table with avatars, checkboxes, buttons, and action controls",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "table-16.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/table/table-16.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/table/table-16",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-label-label-06",
+  "title": "Label 6",
+  "description": "Label with status indicator linked to a select control.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/label/label-06/label-06.tsx",
+      "content": "import { useId, useState } from 'react'\n\nimport { Field } from '@astrale-os/ui/field'\nimport { Label } from '@astrale-os/ui/label'\nimport {\n  Select,\n  SelectContent,\n  SelectGroup,\n  SelectItem,\n  SelectLabel,\n  SelectTrigger,\n  SelectValue\n} from '@astrale-os/ui/select'\n\nconst items = [\n  { label: 'Online', value: 'online' },\n  { label: 'Offline', value: 'offline' },\n  { label: 'Busy', value: 'busy' },\n  { label: 'Away', value: 'away' }\n]\n\nconst SelectWithLabel = () => {\n  const id = useId()\n  const [status, setStatus] = useState<string>('online')\n\n  const statusColors: Record<string, string> = {\n    online: 'bg-green-600 dark:bg-green-400',\n    offline: 'bg-destructive',\n    busy: 'bg-sky-600 dark:bg-sky-400',\n    away: 'bg-amber-600 dark:bg-amber-400'\n  }\n\n  return (\n    <Field className='w-full max-w-xs'>\n      <Label htmlFor={id} className='gap-1.5'>\n        Server Status\n        <span className='relative flex size-2'>\n          <span\n            className={`absolute inline-flex size-full animate-ping rounded-full ${statusColors[status]} opacity-75`}\n          />\n          <span className={`relative inline-flex size-2 rounded-full ${statusColors[status]}`} />\n        </span>\n      </Label>\n      <Select items={items} value={status} onValueChange={val => setStatus(val as string)}>\n        <SelectTrigger id={id} className='w-full'>\n          <SelectValue />\n        </SelectTrigger>\n        <SelectContent>\n          <SelectGroup>\n            <SelectLabel>Server Status</SelectLabel>\n            <SelectItem value='online'>Online</SelectItem>\n            <SelectItem value='offline'>Offline</SelectItem>\n            <SelectItem value='busy'>Busy</SelectItem>\n            <SelectItem value='away'>Away</SelectItem>\n          </SelectGroup>\n        </SelectContent>\n      </Select>\n    </Field>\n  )\n}\n\nexport default SelectWithLabel\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/label/label-06.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/label/label-06",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

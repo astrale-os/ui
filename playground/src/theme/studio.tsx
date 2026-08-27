@@ -32,8 +32,10 @@ import {
   ToggleGroupItem,
   toast,
 } from '@astrale-os/ui'
+import { formatHex, parse } from 'culori'
 import { useEffect, useMemo, useRef, useState, type ChangeEvent, type ComponentProps } from 'react'
 
+import { ColorPicker } from '../../../registry/components/color-picker/color-picker.js'
 import {
   serializeThemeDocument,
   themeColorTokens,
@@ -67,6 +69,14 @@ const colorLabels: Record<ThemeColorToken, string> = {
   chart3: 'Chart 3',
   chart4: 'Chart 4',
   chart5: 'Chart 5',
+  sidebar: 'Menu background',
+  sidebarForeground: 'Menu foreground',
+  sidebarPrimary: 'Menu primary',
+  sidebarPrimaryForeground: 'Menu primary foreground',
+  sidebarAccent: 'Menu accent',
+  sidebarAccentForeground: 'Menu accent foreground',
+  sidebarBorder: 'Menu border',
+  sidebarRing: 'Menu focus ring',
 }
 
 const colorGroups: Array<{ label: string; tokens: ThemeColorToken[] }> = [
@@ -84,7 +94,7 @@ const colorGroups: Array<{ label: string; tokens: ThemeColorToken[] }> = [
     ],
   },
   {
-    label: 'Surface colors',
+    label: 'Base colors',
     tokens: [
       'background',
       'foreground',
@@ -99,21 +109,25 @@ const colorGroups: Array<{ label: string; tokens: ThemeColorToken[] }> = [
       'ring',
     ],
   },
+  {
+    label: 'Menu colors',
+    tokens: [
+      'sidebar',
+      'sidebarForeground',
+      'sidebarPrimary',
+      'sidebarPrimaryForeground',
+      'sidebarAccent',
+      'sidebarAccentForeground',
+      'sidebarBorder',
+      'sidebarRing',
+    ],
+  },
   { label: 'Chart colors', tokens: ['chart1', 'chart2', 'chart3', 'chart4', 'chart5'] },
 ]
 
-const bodyFonts = [
-  "'Avenir Next', 'Segoe UI Variable', ui-sans-serif, sans-serif",
-  "'IBM Plex Sans Condensed', 'Arial Narrow', ui-sans-serif, sans-serif",
-  "'Aptos', 'Gill Sans', ui-sans-serif, sans-serif",
-  "'Charter', 'Iowan Old Style', ui-serif, serif",
-]
-const headingFonts = [
-  "'Iowan Old Style', 'Palatino Linotype', ui-serif, serif",
-  "'IBM Plex Mono', 'SFMono-Regular', ui-monospace, monospace",
-  "'Cooper Black', 'Iowan Old Style', ui-serif, serif",
-  "'Avenir Next', 'Segoe UI Variable', ui-sans-serif, sans-serif",
-]
+const bodyFonts = [...new Set(starterThemes.map((theme) => theme.typography.body))]
+const headingFonts = [...new Set(starterThemes.map((theme) => theme.typography.heading))]
+const monoFonts = [...new Set(starterThemes.map((theme) => theme.typography.mono))]
 
 function download(name: string, type: string, source: string) {
   const url = URL.createObjectURL(new Blob([source], { type }))
@@ -143,6 +157,10 @@ function selectItems(values: string[]) {
 
 function firstSliderValue(value: number | readonly number[]) {
   return typeof value === 'number' ? value : value[0]!
+}
+
+function pickerColor(value: string) {
+  return formatHex(parse(value)) ?? '#000000'
 }
 
 function DraftInput({
@@ -225,7 +243,11 @@ function ColorField({
     <Field orientation="responsive" data-slot="theme-color-field">
       <FieldLabel htmlFor={`${mode}-${token}`}>{colorLabels[token]}</FieldLabel>
       <div className="theme-color-control" data-slot="theme-color-control">
-        <span data-slot="theme-color-swatch" aria-hidden="true" style={{ background: value }} />
+        <ColorPicker
+          label={`Pick ${colorLabels[token]}`}
+          value={pickerColor(value)}
+          onChange={(color) => onChange(color.toString('hex'))}
+        />
         <DraftInput id={`${mode}-${token}`} value={value} onCommit={onChange} spellCheck={false} />
       </div>
     </Field>
@@ -439,7 +461,30 @@ export function ThemeStudio({
           <TabsContent value="type">
             <FieldGroup className="theme-tab-panel">
               <Field>
-                <FieldLabel htmlFor="body-font">Body font</FieldLabel>
+                <FieldLabel htmlFor="heading-font">Sans-serif font (heading)</FieldLabel>
+                <Select
+                  items={selectItems(headingFonts)}
+                  value={workspace.theme.typography.heading}
+                  onValueChange={(value) => {
+                    if (value) workspace.setValue('typography', 'heading', value)
+                  }}
+                >
+                  <SelectTrigger id="heading-font">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent alignItemWithTrigger={false}>
+                    <SelectGroup>
+                      {selectItems(headingFonts).map((item) => (
+                        <SelectItem key={item.value} value={item.value}>
+                          {item.label}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </Field>
+              <Field>
+                <FieldLabel htmlFor="body-font">Serif font (body)</FieldLabel>
                 <Select
                   items={selectItems(bodyFonts)}
                   value={workspace.theme.typography.body}
@@ -462,20 +507,20 @@ export function ThemeStudio({
                 </Select>
               </Field>
               <Field>
-                <FieldLabel htmlFor="heading-font">Heading font</FieldLabel>
+                <FieldLabel htmlFor="mono-font">Monospace font (code and terminal)</FieldLabel>
                 <Select
-                  items={selectItems(headingFonts)}
-                  value={workspace.theme.typography.heading}
+                  items={selectItems(monoFonts)}
+                  value={workspace.theme.typography.mono}
                   onValueChange={(value) => {
-                    if (value) workspace.setValue('typography', 'heading', value)
+                    if (value) workspace.setValue('typography', 'mono', value)
                   }}
                 >
-                  <SelectTrigger id="heading-font">
+                  <SelectTrigger id="mono-font">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent alignItemWithTrigger={false}>
                     <SelectGroup>
-                      {selectItems(headingFonts).map((item) => (
+                      {selectItems(monoFonts).map((item) => (
                         <SelectItem key={item.value} value={item.value}>
                           {item.label}
                         </SelectItem>
@@ -489,6 +534,9 @@ export function ThemeStudio({
                   <CardTitle>The observable becomes operable.</CardTitle>
                   <CardDescription>Aa Bb Cc · 0123456789 · Schema revision 42</CardDescription>
                 </CardHeader>
+                <CardContent>
+                  <code data-slot="theme-typography-mono">pnpm astrale ui add theme</code>
+                </CardContent>
               </Card>
             </FieldGroup>
           </TabsContent>
@@ -552,6 +600,52 @@ export function ThemeStudio({
                 <FieldDescription>{workspace.theme.density.control}</FieldDescription>
               </Field>
               <Field>
+                <FieldLabel>
+                  Small control height
+                  <Slider
+                    value={[Number.parseFloat(workspace.theme.density.controlSmall)]}
+                    min={1.5}
+                    max={2.75}
+                    step={0.05}
+                    onValueChange={(value) =>
+                      workspace.setValue(
+                        'density',
+                        'controlSmall',
+                        `${firstSliderValue(value).toFixed(2)}rem`,
+                      )
+                    }
+                  />
+                </FieldLabel>
+                <FieldDescription>{workspace.theme.density.controlSmall}</FieldDescription>
+              </Field>
+              <Field>
+                <FieldLabel>
+                  Large control height
+                  <Slider
+                    value={[Number.parseFloat(workspace.theme.density.controlLarge)]}
+                    min={2}
+                    max={3.5}
+                    step={0.05}
+                    onValueChange={(value) =>
+                      workspace.setValue(
+                        'density',
+                        'controlLarge',
+                        `${firstSliderValue(value).toFixed(2)}rem`,
+                      )
+                    }
+                  />
+                </FieldLabel>
+                <FieldDescription>{workspace.theme.density.controlLarge}</FieldDescription>
+              </Field>
+              <Field>
+                <FieldLabel htmlFor="control-shadow">Control shadow</FieldLabel>
+                <DraftInput
+                  id="control-shadow"
+                  value={workspace.theme.effects.controlShadow}
+                  onCommit={(value) => workspace.setValue('effects', 'controlShadow', value)}
+                />
+              </Field>
+              <Field>
                 <FieldLabel htmlFor="panel-shadow">Panel shadow</FieldLabel>
                 <DraftInput
                   id="panel-shadow"
@@ -561,7 +655,22 @@ export function ThemeStudio({
               </Field>
               <Field>
                 <FieldLabel>
-                  Motion speed
+                  Fast motion
+                  <Slider
+                    value={[Number.parseFloat(workspace.theme.motion.fast)]}
+                    min={0}
+                    max={300}
+                    step={10}
+                    onValueChange={(value) =>
+                      workspace.setValue('motion', 'fast', `${firstSliderValue(value)}ms`)
+                    }
+                  />
+                </FieldLabel>
+                <FieldDescription>{workspace.theme.motion.fast}</FieldDescription>
+              </Field>
+              <Field>
+                <FieldLabel>
+                  Standard motion
                   <Slider
                     value={[Number.parseFloat(workspace.theme.motion.standard)]}
                     min={0}

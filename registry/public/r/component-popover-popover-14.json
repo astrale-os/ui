@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-popover-popover-14",
+  "title": "Popover 14",
+  "description": "A team sharing popover with email input and member selection checkboxes with slide in from bottom animation",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/popover/popover-14/popover-14.tsx",
+      "content": "import { useId } from 'react'\n\nimport { Avatar, AvatarFallback, AvatarImage } from '@astrale-os/ui/avatar'\nimport { Button } from '@astrale-os/ui/button'\nimport { Checkbox } from '@astrale-os/ui/checkbox'\nimport { Input } from '@astrale-os/ui/input'\nimport { Label } from '@astrale-os/ui/label'\nimport {\n  Popover,\n  PopoverContent,\n  PopoverTrigger,\n  PopoverHeader,\n  PopoverTitle,\n  PopoverDescription\n} from '@astrale-os/ui/popover'\n\nconst members = [\n  {\n    image: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-3.png',\n    fallback: 'HL',\n    name: 'Howard Lloyd',\n    designation: 'Product Manager'\n  },\n  {\n    image: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-6.png',\n    fallback: 'OS',\n    name: 'Olivia Sparks',\n    designation: 'Software Engineer'\n  },\n  {\n    image: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-5.png',\n    fallback: 'HR',\n    name: 'Hallie Richards',\n    designation: 'UI/UX Designer'\n  }\n]\n\nconst PopoverSlideInBottomDemo = () => {\n  const id = useId()\n\n  return (\n    <Popover>\n      <PopoverTrigger render={<Button variant='outline' />}>Slide-in from bottom</PopoverTrigger>\n      <PopoverContent className='data-open:slide-in-from-bottom-20 data-closed:slide-out-to-bottom-20 data-closed:zoom-out-100 data-open:zoom-in-100 w-80 duration-400'>\n        <div className='grid gap-4'>\n          <PopoverHeader className='space-y-1'>\n            <PopoverTitle>Share to team members</PopoverTitle>\n            <PopoverDescription>\n              Give your team members access to this project and start collaborating in real time\n            </PopoverDescription>\n          </PopoverHeader>\n          <div className='w-full space-y-1.5'>\n            <Label htmlFor={id} className='text-muted-foreground text-xs font-normal'>\n              Email address\n            </Label>\n            <div className='flex gap-2'>\n              <Input id={id} type='email' placeholder='example@xyz.com' className='h-8' />\n              <Button type='submit' size='sm'>\n                Share invite\n              </Button>\n            </div>\n          </div>\n          <div className='space-y-1.5'>\n            <Label className='text-muted-foreground text-xs font-normal'>Team members</Label>\n            <ul className='grid gap-2'>\n              {members.map((member, index) => (\n                <li key={index} className='flex items-center gap-3'>\n                  <Checkbox id={`member-${index + 1}`} />\n                  <Label htmlFor={`member-${index + 1}`} className='flex flex-1 items-center gap-2'>\n                    <div className='flex flex-1 items-center gap-2'>\n                      <Avatar className='size-6'>\n                        <AvatarImage src={member.image} alt={member.name} />\n                        <AvatarFallback className='text-xs'>{member.fallback}</AvatarFallback>\n                      </Avatar>\n                      <span className='text-sm font-medium'>{member.name}</span>\n                    </div>\n                    <span className='text-muted-foreground text-xs'>{member.designation}</span>\n                  </Label>\n                </li>\n              ))}\n            </ul>\n          </div>\n        </div>\n      </PopoverContent>\n    </Popover>\n  )\n}\n\nexport default PopoverSlideInBottomDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/popover/popover-14.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/popover/popover-14",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

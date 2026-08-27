@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-toggle-group-toggle-group-09",
+  "title": "Toggle Group 9",
+  "description": "Outline time-range selector with tooltip date labels for Today, 7-day, 30-day, 3-month, and 6-month periods.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/toggle-group/toggle-group-09/toggle-group-09.tsx",
+      "content": "import { ToggleGroup, ToggleGroupItem } from '@astrale-os/ui/toggle-group'\nimport { Tooltip, TooltipContent, TooltipTrigger } from '@astrale-os/ui/tooltip'\n\nconst ToggleGroupTooltip = () => {\n  return (\n    <div className='flex items-center justify-center'>\n      <ToggleGroup variant='outline' spacing={0}>\n        <Tooltip>\n          <TooltipTrigger render={<ToggleGroupItem value='1' aria-label='today' />}>Today</TooltipTrigger>\n          <TooltipContent>March 20, 2026</TooltipContent>\n        </Tooltip>\n        <Tooltip>\n          <TooltipTrigger render={<ToggleGroupItem value='2' aria-label='7 days' />}>7D</TooltipTrigger>\n          <TooltipContent>March 13, 2026 - March 20, 2026</TooltipContent>\n        </Tooltip>\n        <Tooltip>\n          <TooltipTrigger render={<ToggleGroupItem value='3' aria-label='30 days' />}>30D</TooltipTrigger>\n          <TooltipContent>Feb 18, 2026 - March 20, 2026</TooltipContent>\n        </Tooltip>\n        <Tooltip>\n          <TooltipTrigger render={<ToggleGroupItem value='4' aria-label='3 months' />}>3M</TooltipTrigger>\n          <TooltipContent>Dec 20, 2025 - March 20, 2026</TooltipContent>\n        </Tooltip>\n        <Tooltip>\n          <TooltipTrigger render={<ToggleGroupItem value='5' aria-label='6 months' />}>6M</TooltipTrigger>\n          <TooltipContent>Sept 20, 2025 - March 20, 2026</TooltipContent>\n        </Tooltip>\n      </ToggleGroup>\n    </div>\n  )\n}\n\nexport default ToggleGroupTooltip\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/toggle-group/toggle-group-09.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/toggle-group/toggle-group-09",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

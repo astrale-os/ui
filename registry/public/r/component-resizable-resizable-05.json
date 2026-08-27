@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-resizable-resizable-05",
+  "title": "Resizable 5",
+  "description": "Horizontal sidebar and content split with a centered visible drag handle.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/resizable/resizable-05/resizable-05.tsx",
+      "content": "import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@astrale-os/ui/resizable'\n\nconst ResizableHandleDemo = () => {\n  return (\n    <ResizablePanelGroup orientation='horizontal' className='min-h-50 max-w-md rounded-lg border md:min-w-112.5'>\n      <ResizablePanel defaultSize='25%'>\n        <div className='flex h-full items-center justify-center p-6'>\n          <span className='font-semibold'>Sidebar</span>\n        </div>\n      </ResizablePanel>\n      <ResizableHandle withHandle />\n      <ResizablePanel defaultSize='75%'>\n        <div className='flex h-full items-center justify-center p-6'>\n          <span className='font-semibold'>Content</span>\n        </div>\n      </ResizablePanel>\n    </ResizablePanelGroup>\n  )\n}\n\nexport default ResizableHandleDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/resizable/resizable-05.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/resizable/resizable-05",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

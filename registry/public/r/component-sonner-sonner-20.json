@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-sonner-sonner-20",
+  "title": "Sonner 20",
+  "description": "A solid-styled destructive error toast notification with red background and white text for prominent error messages",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "sonner@^2.0.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/sonner/sonner-20/sonner-20.tsx",
+      "content": "'use client'\n\nimport { toast } from 'sonner'\n\nimport { Button } from '@astrale-os/ui/button'\n\nconst SolidDestructiveSonnerDemo = () => {\n  return (\n    <Button\n      variant='outline'\n      onClick={() =>\n        toast.error('Oops, there was an error processing your request.', {\n          style: {\n            '--normal-bg':\n              'light-dark(var(--destructive), color-mix(in oklab, var(--destructive) 60%, var(--background)))',\n            '--normal-text': 'var(--color-white)',\n            '--normal-border': 'transparent'\n          } as React.CSSProperties\n        })\n      }\n    >\n      Solid Destructive Toast\n    </Button>\n  )\n}\n\nexport default SolidDestructiveSonnerDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/sonner/sonner-20.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/sonner/sonner-20",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

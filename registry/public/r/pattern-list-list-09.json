@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pattern-list-list-09",
+  "title": "List 9",
+  "description": "Animated pin list where clicking an item or its Toggle pin button reorders it to the top, using Framer Motion spring layout transitions.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0",
+    "motion@^13.1.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/patterns/list/list-09/list-09.tsx",
+      "content": "import { useState } from 'react'\n\nimport { motion } from 'motion/react'\nimport { Item, ItemActions, ItemContent, ItemDescription, ItemMedia, ItemTitle } from '@astrale-os/ui/item'\nimport { Toggle } from '@astrale-os/ui/toggle'\nimport { BrainCircuitIcon, CodeIcon, Gamepad2Icon, DumbbellIcon, PinIcon } from \"lucide-react\"\n\nconst ListItem = [\n  {\n    id: '1',\n    icon: (\n      <BrainCircuitIcon\n      />\n    ),\n    title: 'Brainstorming',\n    description: 'Generate new ideas and solutions for next project',\n    pinned: false\n  },\n  {\n    id: '2',\n    icon: (\n      <CodeIcon\n      />\n    ),\n    title: 'Coding',\n    description: 'Write and maintain code for projects',\n    pinned: false\n  },\n  {\n    id: '3',\n    icon: (\n      <Gamepad2Icon\n      />\n    ),\n    title: 'Gaming',\n    description: 'Play and test games',\n    pinned: false\n  },\n  {\n    id: '4',\n    icon: (\n      <DumbbellIcon\n      />\n    ),\n    title: 'Workout',\n    description: 'Exercise and stay fit',\n    pinned: false\n  }\n]\n\nconst PinList = () => {\n  const [items, setItems] = useState(ListItem)\n\n  const togglePin = (id: string) => {\n    setItems(prev => {\n      const updated = prev.map(item => (item.id === id ? { ...item, pinned: !item.pinned } : item))\n\n      const pinned = updated.filter(item => item.pinned)\n      const unpinned = updated.filter(item => !item.pinned)\n\n      return [...pinned, ...unpinned]\n    })\n  }\n\n  return (\n    <div className='flex flex-col items-center gap-4'>\n      <div className='w-full max-w-sm'>\n        <h4 className='mb-2 text-lg font-semibold'>All Tasks List</h4>\n        <motion.div layout className='flex flex-col gap-4'>\n          {items.map(item => (\n            <motion.div\n              key={item.id}\n              layoutId={item.id}\n              layout\n              transition={{ type: 'spring', stiffness: 400, damping: 35 }}\n            >\n              <Item variant='outline' className='group cursor-pointer' onClick={() => togglePin(item.id)}>\n                <ItemMedia variant='icon' className='*:[svg]:size-4'>\n                  {item.icon}\n                </ItemMedia>\n                <ItemContent>\n                  <ItemTitle>{item.title}</ItemTitle>\n                  <ItemDescription>{item.description}</ItemDescription>\n                </ItemContent>\n                <ItemActions>\n                  <Toggle\n                    pressed={item.pinned}\n                    onPressedChange={() => togglePin(item.id)}\n                    onClick={e => e.stopPropagation()}\n                    aria-label='Toggle Pin'\n                    variant='outline'\n                    className={\n                      item.pinned\n                        ? 'translate-y-0 opacity-100 transition-all duration-200'\n                        : 'translate-y-1 opacity-0 transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100'\n                    }\n                  >\n                    <PinIcon className={\n                                                      item.pinned ? 'fill-foreground transition-all duration-200' : 'transition-all duration-200'\n                                                    } />\n                  </Toggle>\n                </ItemActions>\n              </Item>\n            </motion.div>\n          ))}\n        </motion.div>\n      </div>\n      <p className='text-muted-foreground text-xs'>\n        Inspired by{' '}\n        <a\n          className='hover:text-foreground underline'\n          href='https://animate-ui.com/docs/components/community/pin-list'\n          target='_blank'\n          rel='noopener noreferrer'\n        >\n          Animate UI\n        </a>\n      </p>\n    </div>\n  )\n}\n\nexport default PinList\n",
+      "type": "registry:component",
+      "target": "components/astrale/pattern/list/list-09.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "pattern/list/list-09",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:block"
+}

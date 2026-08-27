@@ -1,0 +1,32 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-skeleton-skeleton-08",
+  "title": "Skeleton 8",
+  "description": "Large shimmer skeleton using animated motion for a polished loading shimmer effect.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "motion@^13.1.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/skeleton/skeleton-08/skeleton-08.tsx",
+      "content": "import { ShimmerSkeleton } from '@/components/ui/shimmer-skeleton'\n\nconst SkeletonShimmer = () => {\n  return <ShimmerSkeleton className='size-50' />\n}\n\nexport default SkeletonShimmer\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/skeleton/skeleton-08.tsx"
+    },
+    {
+      "path": "source/components/skeleton/skeleton-08/support/components/ui/shimmer-skeleton.tsx",
+      "content": "'use client'\n\nimport * as React from 'react'\n\nimport { motion, type HTMLMotionProps } from 'motion/react'\n\nimport { cn } from '@astrale-os/ui/class-name'\n\ninterface ShimmerSkeletonProps extends HTMLMotionProps<'div'> {}\n\nfunction ShimmerSkeleton({ className, ...props }: ShimmerSkeletonProps) {\n  return (\n    <motion.div\n      className={cn(\n        'rounded-md bg-[linear-gradient(120deg,var(--muted)_calc(var(--shimmer-x)-25%),oklch(100%_0_0/0.4)_var(--shimmer-x),var(--muted)_calc(var(--shimmer-x)+25%))] [--shimmer-x:0%]',\n        className\n      )}\n      initial={{\n        '--shimmer-x': '-100%'\n      }}\n      animate={{\n        '--shimmer-x': '200%'\n      }}\n      transition={{\n        '--shimmer-x': {\n          duration: 1.7,\n          repeat: Infinity,\n          ease: [0.445, 0.05, 0.55, 0.95]\n        }\n      }}\n      {...props}\n    />\n  )\n}\n\nexport { ShimmerSkeleton, type ShimmerSkeletonProps }\n",
+      "type": "registry:ui",
+      "target": "components/ui/shimmer-skeleton.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/skeleton/skeleton-08",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

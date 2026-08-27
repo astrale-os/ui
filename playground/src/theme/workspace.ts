@@ -1,8 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
-import atelierSource from '../../../registry/themes/atelier.astrale-theme.json'
-import observatorySource from '../../../registry/themes/observatory.astrale-theme.json'
-import terminalSource from '../../../registry/themes/terminal.astrale-theme.json'
 import {
   parseThemeDocument,
   parseThemeDocumentText,
@@ -12,12 +9,17 @@ import {
   type ThemeDocument,
 } from '../../../tooling/theme-document/index.js'
 
-const STORAGE_KEY = 'astrale-ui-playground:themes:v1'
+const STORAGE_KEY = 'astrale-ui-playground:themes:v2'
 const MAX_HISTORY = 50
 
-export const starterThemes = [atelierSource, observatorySource, terminalSource].map((source) =>
-  parseThemeDocument(source),
-)
+const starterModules = import.meta.glob('../../../registry/themes/*.astrale-theme.json', {
+  eager: true,
+  import: 'default',
+}) as Record<string, unknown>
+
+export const starterThemes = Object.values(starterModules)
+  .map((source) => parseThemeDocument(source))
+  .sort((left, right) => left.label.localeCompare(right.label))
 
 type Timeline = {
   past: ThemeDocument[]

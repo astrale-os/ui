@@ -1,0 +1,287 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-components-separator",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "component-separator-separator-01",
+      "type": "registry:component",
+      "title": "Separator 1",
+      "description": "A simple horizontal separator used to delineate distinct sections of a project settings page.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "separator-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/separator/separator-01.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/separator/separator-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-separator-separator-02",
+      "type": "registry:component",
+      "title": "Separator 2",
+      "description": "A basic vertical separator used to divide top-level navigation items like Dashboard, Projects, and Settings.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "separator-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/separator/separator-02.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/separator/separator-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-separator-separator-03",
+      "type": "registry:component",
+      "title": "Separator 3",
+      "description": "A sleek horizontal separator used within a list of user details to provide clear distinction between items.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "separator-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/separator/separator-03.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/separator/separator-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-separator-separator-04",
+      "type": "registry:component",
+      "title": "Separator 4",
+      "description": "Vertical separators used to cleanly divide statistical metrics in a profile header or dashboard.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "separator-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/separator/separator-04.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/separator/separator-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-separator-separator-05",
+      "type": "registry:component",
+      "title": "Separator 5",
+      "description": "A combination of horizontal and vertical separators within a profile card to organize user information and stats.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "separator-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/separator/separator-05.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/separator/separator-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-separator-separator-06",
+      "type": "registry:component",
+      "title": "Separator 6",
+      "description": "A showcase of different separator styles including solid, dashed, dotted, and gradient faded variants.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "separator-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/separator/separator-06.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/separator/separator-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-separator-separator-07",
+      "type": "registry:component",
+      "title": "Separator 7",
+      "description": "Horizontal separators with integrated text labels positioned at the start, center, or end of the line.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "separator-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/separator/separator-07.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/separator/separator-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-separator-separator-08",
+      "type": "registry:component",
+      "title": "Separator 8",
+      "description": "Vertical separators with integrated text labels positioned at the top, center, or bottom of the line.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "separator-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/separator/separator-08.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/separator/separator-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-separator-separator-09",
+      "type": "registry:component",
+      "title": "Separator 9",
+      "description": "Versatile horizontal separators featuring integrated elements like text, badges, buttons, and icons.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "separator-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/separator/separator-09.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/separator/separator-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-separator-separator-10",
+      "type": "registry:component",
+      "title": "Separator 10",
+      "description": "A collection of vertical separators featuring integrated avatars, status icons, and time markers for timeline displays.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "separator-10.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/separator/separator-10.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/separator/separator-10",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-separator-separator-11",
+      "type": "registry:component",
+      "title": "Separator 11",
+      "description": "A demonstration of various solid separator thicknesses, ranging from 1px to 4px for different visual weights.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "separator-11.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/separator/separator-11.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/separator/separator-11",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-separator-separator-12",
+      "type": "registry:component",
+      "title": "Separator 12",
+      "description": "A demonstration of various dashed separator thicknesses, showcasing style consistency across different weights.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "separator-12.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/separator/separator-12.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/separator/separator-12",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-separator-separator-13",
+      "type": "registry:component",
+      "title": "Separator 13",
+      "description": "Adaptive separators that switch orientation based on screen size to maintain layout integrity between actions.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "separator-13.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/separator/separator-13.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/separator/separator-13",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-separator-separator-14",
+      "type": "registry:component",
+      "title": "Separator 14",
+      "description": "Standard horizontal separators used to stack and distinguish different social login options in an authentication view.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "separator-14.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/separator/separator-14.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/separator/separator-14",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-input-input-37",
+  "title": "Input 37",
+  "description": "Search input field with keyboard shortcut indicator (⌘K) for enhanced UX",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/input/input-37/input-37.tsx",
+      "content": "import { useId } from 'react'\n\nimport { InputGroup, InputGroupAddon, InputGroupInput } from '@astrale-os/ui/input-group'\nimport { Kbd } from '@astrale-os/ui/kbd'\nimport { Label } from '@astrale-os/ui/label'\n\nconst InputSearchDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>Search input with &lt;kbd&gt;</Label>\n      <InputGroup>\n        <InputGroupInput\n          id={id}\n          type='search'\n          placeholder='Search...'\n          className='[&::-webkit-search-cancel-button]:appearance-none [&::-webkit-search-decoration]:appearance-none [&::-webkit-search-results-button]:appearance-none [&::-webkit-search-results-decoration]:appearance-none'\n        />\n        <InputGroupAddon align='inline-end'>\n          <Kbd>⌘k</Kbd>\n        </InputGroupAddon>\n      </InputGroup>\n    </div>\n  )\n}\n\nexport default InputSearchDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/input/input-37.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/input/input-37",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

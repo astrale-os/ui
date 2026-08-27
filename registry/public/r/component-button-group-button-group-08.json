@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-button-group-button-group-08",
+  "title": "Button Group 8",
+  "description": "Preview link button group with primary action and external link icon",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/button-group/button-group-08/button-group-08.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\nimport { ButtonGroup } from '@astrale-os/ui/button-group'\nimport { ExternalLinkIcon } from \"lucide-react\"\n\nconst ButtonGroupPreviewDemo = () => {\n  return (\n    <ButtonGroup>\n      <Button variant='outline' render={<a href='#' />} nativeButton={false}>\n        Live preview\n      </Button>\n      <Button variant='outline' size='icon' render={<a href='#' rel='noopener noreferrer' />} nativeButton={false}>\n        <ExternalLinkIcon\n        />\n        <span className='sr-only'>External link</span>\n      </Button>\n    </ButtonGroup>\n  )\n}\n\nexport default ButtonGroupPreviewDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/button-group/button-group-08.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/button-group/button-group-08",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

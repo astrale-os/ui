@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pattern-command-command-03",
+  "title": "Command 3",
+  "description": "Repository switcher command palette with Repositories and Operations groups and keyboard shortcuts.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/patterns/command/command-03/command-03.tsx",
+      "content": "import {\n  Command,\n  CommandEmpty,\n  CommandGroup,\n  CommandInput,\n  CommandItem,\n  CommandList,\n  CommandSeparator,\n  CommandShortcut\n} from '@astrale-os/ui/command'\nimport { FolderOpenIcon, GitBranchIcon, StarIcon, TagIcon, CopyIcon, Share2Icon } from \"lucide-react\"\n\nconst CommandRepoOps = () => {\n  return (\n    <Command className='max-w-sm rounded-lg border'>\n      <CommandInput placeholder='Switch Repository or operations...' />\n      <CommandList>\n        <CommandEmpty>No results found.</CommandEmpty>\n        <CommandGroup heading='Repositories'>\n          <CommandItem>\n            <FolderOpenIcon\n            />\n            <span>design-system</span>\n          </CommandItem>\n          <CommandItem>\n            <GitBranchIcon\n            />\n            <span>feature/dashboard-v2</span>\n          </CommandItem>\n          <CommandItem>\n            <StarIcon\n            />\n            <span>StarIconred Projects</span>\n            <CommandShortcut>⌘S</CommandShortcut>\n          </CommandItem>\n        </CommandGroup>\n        <CommandSeparator />\n        <CommandGroup heading='Operations'>\n          <CommandItem>\n            <TagIcon\n            />\n            <span>Create Release TagIcon</span>\n          </CommandItem>\n          <CommandItem>\n            <CopyIcon\n            />\n            <span>Duplicate Project</span>\n            <CommandShortcut>⌘D</CommandShortcut>\n          </CommandItem>\n          <CommandItem>\n            <Share2Icon\n            />\n            <span>Share Link</span>\n            <CommandShortcut>⌘L</CommandShortcut>\n          </CommandItem>\n        </CommandGroup>\n      </CommandList>\n    </Command>\n  )\n}\n\nexport default CommandRepoOps\n",
+      "type": "registry:component",
+      "target": "components/astrale/pattern/command/command-03.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "pattern/command/command-03",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:block"
+}

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-accordion-accordion-12",
+  "title": "Accordion 12",
+  "description": "Tab with outline accordion featuring bordered highlighting and shadow effects for expanded items.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "@base-ui/react@^1.7.0",
+    "lucide-react@1.32.0",
+    "radix-ui@^1.6.7"
+  ],
+  "files": [
+    {
+      "path": "source/components/accordion/accordion-12/accordion-12.tsx",
+      "content": "import { Accordion as AccordionPrimitive } from '@base-ui/react/accordion'\nimport { Accordion, AccordionContent, AccordionItem } from '@astrale-os/ui/accordion'\nimport { PlusIcon } from \"lucide-react\"\n\nconst items = [\n  {\n    title: 'How do I track my order?',\n    content: `You can track your order by logging into your account and visiting the \"Orders\" section. You'll receive tracking information via email once your order ships. For real-time updates, you can also use the tracking number provided in your shipping confirmation email.`\n  },\n  {\n    title: 'What is your return policy?',\n    content:\n      'We offer a 30-day return policy for most items. Products must be unused and in their original packaging. To initiate a return, please contact our customer service team or use the return portal in your account dashboard.'\n  },\n  {\n    title: 'How can I contact customer support?',\n    content:\n      'Our customer support team is available 24/7. You can reach us via live chat, email at support@example.com, or by phone at 1-800-123-4567. For faster service, please have your order number ready when contacting us.'\n  }\n]\n\nconst AccordionTabsOutlineDemo = () => {\n  return (\n    <Accordion\n      className='w-full overflow-visible border-0 [&>*>[data-slot=\"accordion-content\"]]:px-0'\n      defaultValue={['item-1']}\n    >\n      {items.map((item, index) => (\n        <AccordionItem\n          key={index}\n          value={`item-${index + 1}`}\n          className='data-open:border-border bg-background rounded-lg border border-transparent px-5 transition-colors duration-200 data-open:border data-open:shadow-md'\n        >\n          <AccordionPrimitive.Header className='flex'>\n            <AccordionPrimitive.Trigger\n              data-slot='accordion-trigger'\n              className='focus-visible:border-ring focus-visible:ring-ring/50 flex flex-1 items-center justify-between gap-4 rounded-lg border border-transparent py-2.5 text-left text-sm font-medium transition-all outline-none hover:underline focus-visible:ring-3 disabled:pointer-events-none disabled:opacity-50'\n            >\n              {item.title}\n              <PlusIcon className='text-muted-foreground pointer-events-none size-4 shrink-0 transition-transform duration-200 in-data-open:rotate-180 [&>path:last-child]:origin-center [&>path:last-child]:transition-all [&>path:last-child]:duration-200 in-data-open:[&>path:last-child]:rotate-90 in-data-open:[&>path:last-child]:opacity-0' />\n            </AccordionPrimitive.Trigger>\n          </AccordionPrimitive.Header>\n          <AccordionContent className='text-muted-foreground'>{item.content}</AccordionContent>\n        </AccordionItem>\n      ))}\n    </Accordion>\n  )\n}\n\nexport default AccordionTabsOutlineDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/accordion/accordion-12.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/accordion/accordion-12",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

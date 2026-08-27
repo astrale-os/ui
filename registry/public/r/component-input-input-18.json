@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-input-input-18",
+  "title": "Input 18",
+  "description": "A URL input field with both \"https://\" prefix and \".com\" suffix text add-ons",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/input/input-18/input-18.tsx",
+      "content": "import { useId } from 'react'\n\nimport { InputGroup, InputGroupAddon, InputGroupInput } from '@astrale-os/ui/input-group'\nimport { Label } from '@astrale-os/ui/label'\n\nconst InputTextAddOnsDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>Input with text add-ons</Label>\n      <InputGroup className='max-w-xs'>\n        <InputGroupAddon className='text-foreground font-normal'>https://</InputGroupAddon>\n        <InputGroupInput id={id} placeholder='shadcnstudio' />\n        <InputGroupAddon align='inline-end' className='text-foreground font-normal'>\n          .com\n        </InputGroupAddon>\n      </InputGroup>\n    </div>\n  )\n}\n\nexport default InputTextAddOnsDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/input/input-18.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/input/input-18",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pattern-list-list-06",
+  "title": "List 6",
+  "description": "Settings navigation list using an ItemGroup with icon media, title, description, and a ChevronRight action arrow linking to each settings section.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/patterns/list/list-06/list-06.tsx",
+      "content": "import {\n  Item,\n  ItemActions,\n  ItemContent,\n  ItemDescription,\n  ItemGroup,\n  ItemMedia,\n  ItemSeparator,\n  ItemTitle\n} from '@astrale-os/ui/item'\nimport { UserIcon, ChevronRightIcon, ShieldIcon, CreditCardIcon } from \"lucide-react\"\n\nconst ListUsers = () => {\n  return (\n    <div className='w-full max-w-sm space-y-2'>\n      <div className='mx-auto flex w-full max-w-md flex-col'>\n        <ItemGroup className='gap-0'>\n          <Item size='xs' render={<a href='#' />}>\n            <ItemMedia variant='icon'>\n              <UserIcon\n              />\n            </ItemMedia>\n            <ItemContent>\n              <ItemTitle>Account</ItemTitle>\n              <ItemDescription>Manage your account details</ItemDescription>\n            </ItemContent>\n            <ItemActions>\n              <ChevronRightIcon className='text-muted-foreground size-4' />\n            </ItemActions>\n          </Item>\n          <ItemSeparator />\n          <Item size='xs' render={<a href='#' />}>\n            <ItemMedia variant='icon'>\n              <ShieldIcon\n              />\n            </ItemMedia>\n            <ItemContent>\n              <ItemTitle>Privacy</ItemTitle>\n              <ItemDescription>Password and two-factor auth</ItemDescription>\n            </ItemContent>\n            <ItemActions>\n              <ChevronRightIcon className='text-muted-foreground size-4' />\n            </ItemActions>\n          </Item>\n          <ItemSeparator />\n          <Item size='xs' render={<a href='#' />}>\n            <ItemMedia variant='icon'>\n              <CreditCardIcon\n              />\n            </ItemMedia>\n            <ItemContent>\n              <ItemTitle>Payment</ItemTitle>\n              <ItemDescription>Plans, invoices, and payment</ItemDescription>\n            </ItemContent>\n            <ItemActions>\n              <ChevronRightIcon className='text-muted-foreground size-4' />\n            </ItemActions>\n          </Item>\n        </ItemGroup>\n      </div>\n    </div>\n  )\n}\n\nexport default ListUsers\n",
+      "type": "registry:component",
+      "target": "components/astrale/pattern/list/list-06.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "pattern/list/list-06",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:block"
+}

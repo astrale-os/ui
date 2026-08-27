@@ -1,0 +1,322 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-components-radio-group",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "component-radio-group-radio-group-01",
+      "type": "registry:component",
+      "title": "Radio Group 1",
+      "description": "A basic vertical radio group",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "radio-group-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/radio-group/radio-group-01.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/radio-group/radio-group-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-radio-group-radio-group-02",
+      "type": "registry:component",
+      "title": "Radio Group 2",
+      "description": "A horizontal radio group layout",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "radio-group-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/radio-group/radio-group-02.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/radio-group/radio-group-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-radio-group-radio-group-03",
+      "type": "registry:component",
+      "title": "Radio Group 3",
+      "description": "A colored radio group with custom styling for different states",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "radio-group-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/radio-group/radio-group-03.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/radio-group/radio-group-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-radio-group-radio-group-04",
+      "type": "registry:component",
+      "title": "Radio Group 4",
+      "description": "A radio group with different sizes for various display options",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "radio-group-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/radio-group/radio-group-04.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/radio-group/radio-group-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-radio-group-radio-group-05",
+      "type": "registry:component",
+      "title": "Radio Group 5",
+      "description": "A radio group with dashed borders",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "radio-group-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/radio-group/radio-group-05.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/radio-group/radio-group-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-radio-group-radio-group-06",
+      "type": "registry:component",
+      "title": "Radio Group 6",
+      "description": "A radio group with solid filled styling for theme selection",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "radio-group-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/radio-group/radio-group-06.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/radio-group/radio-group-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-radio-group-radio-group-07",
+      "type": "registry:component",
+      "title": "Radio Group 7",
+      "description": "A radio group with descriptions for detailed plan selection options",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "radio-group-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/radio-group/radio-group-07.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/radio-group/radio-group-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-radio-group-radio-group-08",
+      "type": "registry:component",
+      "title": "Radio Group 8",
+      "description": "A chip-style radio group with grid layout for size selection",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "radio-group-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/radio-group/radio-group-08.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/radio-group/radio-group-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-radio-group-radio-group-09",
+      "type": "registry:component",
+      "title": "Radio Group 9",
+      "description": "A list-style radio group with pricing and badges for plan selection",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "radio-group-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/radio-group/radio-group-09.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/radio-group/radio-group-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-radio-group-radio-group-10",
+      "type": "registry:component",
+      "title": "Radio Group 10",
+      "description": "A split-list radio group with highlighted selected state and pricing",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "radio-group-10.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/radio-group/radio-group-10.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/radio-group/radio-group-10",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-radio-group-radio-group-11",
+      "type": "registry:component",
+      "title": "Radio Group 11",
+      "description": "A card-style radio group with detailed descriptions and pricing",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "radio-group-11.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/radio-group/radio-group-11.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/radio-group/radio-group-11",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-radio-group-radio-group-12",
+      "type": "registry:component",
+      "title": "Radio Group 12",
+      "description": "A border less card radio group with hidden radio buttons and label-based selection",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "radio-group-12.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/radio-group/radio-group-12.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/radio-group/radio-group-12",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-radio-group-radio-group-13",
+      "type": "registry:component",
+      "title": "Radio Group 13",
+      "description": "A vertical card radio group with icons and centered layout for plan selection",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "radio-group-13.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/radio-group/radio-group-13.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/radio-group/radio-group-13",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-radio-group-radio-group-14",
+      "type": "registry:component",
+      "title": "Radio Group 14",
+      "description": "An animated radio group with motion effects for notification preferences",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "lucide-react@1.32.0",
+        "motion@^13.1.0",
+        "radix-ui@^1.6.7"
+      ],
+      "files": [
+        {
+          "path": "radio-group-14.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/radio-group/radio-group-14.tsx"
+        },
+        {
+          "path": "support/components/ui/motion-radio-group.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/motion-radio-group.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/radio-group/radio-group-14",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-radio-group-radio-group-15",
+      "type": "registry:component",
+      "title": "Radio Group 15",
+      "description": "An animated inset radio group with smooth transitions for language selection",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "lucide-react@1.32.0"
+      ],
+      "files": [
+        {
+          "path": "radio-group-15.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/radio-group/radio-group-15.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/radio-group/radio-group-15",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

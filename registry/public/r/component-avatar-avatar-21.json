@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-avatar-avatar-21",
+  "title": "Avatar 21",
+  "description": "Avatar group with popularity indicator styling and text showcasing community trust.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/avatar/avatar-21/avatar-21.tsx",
+      "content": "import { Avatar, AvatarGroup, AvatarFallback, AvatarImage } from '@astrale-os/ui/avatar'\n\nconst avatars = [\n  {\n    src: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-3.png',\n    fallback: 'OS',\n    name: 'Olivia Sparks'\n  },\n  {\n    src: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-6.png',\n    fallback: 'HL',\n    name: 'Howard Lloyd'\n  },\n  {\n    src: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-5.png',\n    fallback: 'HR',\n    name: 'Hallie Richards'\n  },\n  {\n    src: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-16.png',\n    fallback: 'JW',\n    name: 'Jenny Wilson'\n  }\n]\n\nconst AvatarGroupPopularityIndicatorDemo = () => {\n  return (\n    <div className='bg-background flex w-fit flex-wrap items-center justify-center rounded-full border p-1 shadow-sm'>\n      <AvatarGroup className='flex -space-x-1'>\n        {avatars.map((avatar, index) => (\n          <Avatar key={index} size='sm'>\n            <AvatarImage src={avatar.src} alt={avatar.name} />\n            <AvatarFallback>{avatar.fallback}</AvatarFallback>\n          </Avatar>\n        ))}\n      </AvatarGroup>\n      <p className='text-muted-foreground px-2 text-xs'>\n        Loved by <strong className='text-foreground font-medium'>10K+</strong> developers.\n      </p>\n    </div>\n  )\n}\n\nexport default AvatarGroupPopularityIndicatorDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/avatar/avatar-21.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/avatar/avatar-21",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

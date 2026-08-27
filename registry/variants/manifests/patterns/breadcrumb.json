@@ -1,0 +1,167 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-patterns-breadcrumb",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "pattern-breadcrumb-breadcrumb-01",
+      "type": "registry:block",
+      "title": "Breadcrumb 1",
+      "description": "Basic breadcrumb navigation with standard separators for page hierarchy",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "breadcrumb-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/breadcrumb/breadcrumb-01.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/breadcrumb/breadcrumb-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-breadcrumb-breadcrumb-02",
+      "type": "registry:block",
+      "title": "Breadcrumb 2",
+      "description": "Breadcrumb with home icon and slash separators for enhanced navigation",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "breadcrumb-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/breadcrumb/breadcrumb-02.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/breadcrumb/breadcrumb-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-breadcrumb-breadcrumb-03",
+      "type": "registry:block",
+      "title": "Breadcrumb 3",
+      "description": "Breadcrumb with folder icons and chevron separators for file system navigation",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "breadcrumb-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/breadcrumb/breadcrumb-03.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/breadcrumb/breadcrumb-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-breadcrumb-breadcrumb-04",
+      "type": "registry:block",
+      "title": "Breadcrumb 4",
+      "description": "Breadcrumb with dot icon separators for minimal visual hierarchy",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "breadcrumb-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/breadcrumb/breadcrumb-04.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/breadcrumb/breadcrumb-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-breadcrumb-breadcrumb-05",
+      "type": "registry:block",
+      "title": "Breadcrumb 5",
+      "description": "Breadcrumb styled with outlined badge components for modern tab-like appearance",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "breadcrumb-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/breadcrumb/breadcrumb-05.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/breadcrumb/breadcrumb-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-breadcrumb-breadcrumb-06",
+      "type": "registry:block",
+      "title": "Breadcrumb 6",
+      "description": "Breadcrumb with dropdown menu integration for compact nested navigation and outlined badge components for modern tab-like appearance",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "breadcrumb-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/breadcrumb/breadcrumb-06.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/breadcrumb/breadcrumb-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-breadcrumb-breadcrumb-07",
+      "type": "registry:block",
+      "title": "Breadcrumb 7",
+      "description": "Interactive breadcrumb with folder state icons and dropdown functionality",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "breadcrumb-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/breadcrumb/breadcrumb-07.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/breadcrumb/breadcrumb-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-breadcrumb-breadcrumb-08",
+      "type": "registry:block",
+      "title": "Breadcrumb 8",
+      "description": "Outlined breadcrumb with bordered container styling for defined boundaries",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "breadcrumb-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/breadcrumb/breadcrumb-08.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/breadcrumb/breadcrumb-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pattern-navigation-menu-navigation-menu-02",
+  "title": "Navigation Menu 2",
+  "description": "A balanced two-column navigation menu optimized for displaying a larger set of resources with concise descriptions.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "next@^15.3.3"
+  ],
+  "files": [
+    {
+      "path": "source/patterns/navigation-menu/navigation-menu-02/navigation-menu-02.tsx",
+      "content": "import Link from 'next/link'\n\nimport {\n  NavigationMenu,\n  NavigationMenuContent,\n  NavigationMenuItem,\n  NavigationMenuLink,\n  NavigationMenuList,\n  NavigationMenuTrigger\n} from '@astrale-os/ui/navigation-menu'\n\nconst components: { title: string; href: string; description: string }[] = [\n  {\n    title: 'Overview',\n    href: '#',\n    description: 'Start with a high-level introduction to the system, its patterns, and core building blocks.'\n  },\n  {\n    title: 'Design System',\n    href: '#',\n    description: 'Explore the tokens, spacing rules, and visual language used across every interface.'\n  },\n  {\n    title: 'Components',\n    href: '#',\n    description: 'Browse reusable UI elements with practical examples, variants, and implementation notes.'\n  },\n  {\n    title: 'Templates',\n    href: '#',\n    description: 'Use production-ready page sections and layouts to speed up assembly and prototyping.'\n  },\n  {\n    title: 'Theming',\n    href: '#',\n    description: 'Customize color, typography, and surface styles to match different product directions.'\n  },\n  {\n    title: 'Documentation',\n    href: '#',\n    description: 'Find setup guidance, usage details, and references to support implementation work.'\n  }\n]\n\nconst NavigationMenuTwoColumnDemo = () => {\n  return (\n    <div className='flex items-center justify-center'>\n      <NavigationMenu>\n        <NavigationMenuList>\n          <NavigationMenuItem className='flex'>\n            <NavigationMenuTrigger className='[&>svg]:size-4'>Resources</NavigationMenuTrigger>\n            <NavigationMenuContent>\n              <ul className='grid w-100 gap-2 md:w-125 md:grid-cols-2 lg:w-125'>\n                {components.map(component => (\n                  <NavigationMenuLink render={<Link href={component.href} />} key={component.title}>\n                    <div className='flex flex-col text-sm'>\n                      <div className='font-medium'>{component.title}</div>\n                      <div className='text-muted-foreground line-clamp-2'>{component.description}</div>\n                    </div>\n                  </NavigationMenuLink>\n                ))}\n              </ul>\n            </NavigationMenuContent>\n          </NavigationMenuItem>\n        </NavigationMenuList>\n      </NavigationMenu>\n    </div>\n  )\n}\n\nexport default NavigationMenuTwoColumnDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/pattern/navigation-menu/navigation-menu-02.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "pattern/navigation-menu/navigation-menu-02",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:block"
+}

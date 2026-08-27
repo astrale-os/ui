@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tailwind-dialog",
+  "type": "registry:ui",
+  "title": "Dialog",
+  "dependencies": [
+    "react",
+    "react-aria-components",
+    "tailwind-merge",
+    "tailwindcss-react-aria-components",
+    "tw-animate-css"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "components/ui/Dialog.tsx",
+      "type": "registry:ui",
+      "content": "'use client';\nimport React from 'react';\nimport {type DialogProps, Dialog as RACDialog, Heading} from 'react-aria-components/Dialog';\nimport {twMerge} from 'tailwind-merge';\n\nexport function Dialog(props: DialogProps) {\n  return (\n    <RACDialog\n      {...props}\n      className={twMerge(\n        'outline outline-0 box-border p-6 [[data-placement]>&]:p-4 max-h-[inherit] overflow-auto relative',\n        props.className\n      )}\n    />\n  );\n}\n\nexport {Heading};\n"
+    }
+  ],
+  "css": {
+    "@plugin \"tailwindcss-react-aria-components\"": {},
+    "@import \"tw-animate-css\"": {}
+  }
+}

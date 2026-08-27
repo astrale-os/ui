@@ -1,0 +1,340 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-blocks-data-table",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "block-data-table-data-table-01",
+      "type": "registry:block",
+      "title": "Data Table 1",
+      "description": "Basic data table with records and row selection functionality",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@tanstack/react-table@^8.21.3",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "data-table-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/block/data-table/data-table-01.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "block/data-table/data-table-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "block-data-table-data-table-02",
+      "type": "registry:block",
+      "title": "Data Table 2",
+      "description": "Density data table with density selection",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@tanstack/react-table@^8.21.3",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "data-table-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/block/data-table/data-table-02.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "block/data-table/data-table-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "block-data-table-data-table-03",
+      "type": "registry:block",
+      "title": "Data Table 3",
+      "description": "Payment records table with search filter, column visibility toggle, and refresh functionality",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@tanstack/react-table@^8.21.3",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "data-table-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/block/data-table/data-table-03.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "block/data-table/data-table-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "block-data-table-data-table-04",
+      "type": "registry:block",
+      "title": "Data Table 4",
+      "description": "Product inventory table with images, badges, and advanced filtering by multiple attributes",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@tanstack/react-table@^8.21.3",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "data-table-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/block/data-table/data-table-04.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "block/data-table/data-table-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "block-data-table-data-table-05",
+      "type": "registry:block",
+      "title": "Data Table 5",
+      "description": "table with sortable columns and up/down arrow sort indicators",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@tanstack/react-table@^8.21.3",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "data-table-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/block/data-table/data-table-05.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "block/data-table/data-table-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "block-data-table-data-table-06",
+      "type": "registry:block",
+      "title": "Data Table 6",
+      "description": "Data table with row expansion functionality for detailed content display",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@tanstack/react-table@^8.21.3",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "data-table-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/block/data-table/data-table-06.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "block/data-table/data-table-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "block-data-table-data-table-07",
+      "type": "registry:block",
+      "title": "Data Table 7",
+      "description": "Data table with pinnable columns sticking to the left side or right side for easy access",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@tanstack/react-table@^8.21.3",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "data-table-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/block/data-table/data-table-07.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "block/data-table/data-table-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "block-data-table-data-table-08",
+      "type": "registry:block",
+      "title": "Data Table 8",
+      "description": "Drag-and-drop data table with sortable rows and reordering functionality",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@dnd-kit/core@^6.3.1",
+        "@dnd-kit/modifiers@^9.0.0",
+        "@dnd-kit/sortable@^10.0.0",
+        "@dnd-kit/utilities@^3.2.2",
+        "@tanstack/react-table@^8.21.3",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "data-table-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/block/data-table/data-table-08.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "block/data-table/data-table-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "block-data-table-data-table-09",
+      "type": "registry:block",
+      "title": "Data Table 9",
+      "description": "Data table with expanding sub rows for detailed content display",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@tanstack/react-table@^8.21.3",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "data-table-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/block/data-table/data-table-09.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "block/data-table/data-table-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "block-data-table-data-table-10",
+      "type": "registry:block",
+      "title": "Data Table 10",
+      "description": "Data table with pagination, rows selection, and sorting system",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@tanstack/react-table@^8.21.3",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "data-table-10.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/block/data-table/data-table-10.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "block/data-table/data-table-10",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "block-data-table-data-table-11",
+      "type": "registry:block",
+      "title": "Data Table 11",
+      "description": "data table with sorting, row selection, and pagination - styled with Origin UI and powered by @tanstack/react-table",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@tanstack/react-table@^8.21.3",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "data-table-11.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/block/data-table/data-table-11.tsx"
+        },
+        {
+          "path": "support/hooks/use-pagination.ts",
+          "type": "registry:hook",
+          "target": "hooks/use-pagination.ts"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "block/data-table/data-table-11",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "block-data-table-data-table-12",
+      "type": "registry:block",
+      "title": "Data Table 12",
+      "description": "Data table with export functionality supporting CSV, Excel, and multiple formats",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@tanstack/react-table@^8.21.3",
+        "lucide-react@1.32.0",
+        "papaparse@^5.6.0",
+        "react@19.2.8",
+        "xlsx@https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
+      ],
+      "files": [
+        {
+          "path": "data-table-12.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/block/data-table/data-table-12.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "block/data-table/data-table-12",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "block-data-table-data-table-13",
+      "type": "registry:block",
+      "title": "Data Table 13",
+      "description": "editable data table with inline cell editing for text, status, and progress - supports row selection and live updates.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@tanstack/react-table@^8.21.3",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "data-table-13.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/block/data-table/data-table-13.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "block/data-table/data-table-13",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-input-input-06",
+  "title": "Input 6",
+  "description": "Text input fields showcasing different size variants (small, medium, large)",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/input/input-06/input-06.tsx",
+      "content": "import { Input } from '@astrale-os/ui/input'\n\nconst InputSizesDemo = () => {\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Input type='text' placeholder='Extra Small input' className='h-6' />\n      <Input type='text' placeholder='Small input' className='h-7' />\n      <Input type='text' placeholder='Medium input' />\n      <Input type='text' placeholder='Large input' className='h-9' />\n    </div>\n  )\n}\n\nexport default InputSizesDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/input/input-06.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/input/input-06",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

@@ -1,0 +1,187 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-components-resizable",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "component-resizable-resizable-01",
+      "type": "registry:component",
+      "title": "Resizable 1",
+      "description": "Two-panel horizontal split with a nested vertical sub-panel on the right and visible drag handles.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "resizable-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/resizable/resizable-01.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/resizable/resizable-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-resizable-resizable-02",
+      "type": "registry:component",
+      "title": "Resizable 2",
+      "description": "Two-panel horizontal split with a nested vertical sub-panel on the right and no visible drag handles.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "resizable-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/resizable/resizable-02.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/resizable/resizable-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-resizable-resizable-03",
+      "type": "registry:component",
+      "title": "Resizable 3",
+      "description": "Vertical two-panel split with Header and Content labels and no visible drag handle.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "resizable-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/resizable/resizable-03.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/resizable/resizable-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-resizable-resizable-04",
+      "type": "registry:component",
+      "title": "Resizable 4",
+      "description": "Three-row bento image grid with a 3-column top row, asymmetric 2-column middle row, and full-width bottom row.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "resizable-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/resizable/resizable-04.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/resizable/resizable-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-resizable-resizable-05",
+      "type": "registry:component",
+      "title": "Resizable 5",
+      "description": "Horizontal sidebar and content split with a centered visible drag handle.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "resizable-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/resizable/resizable-05.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/resizable/resizable-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-resizable-resizable-06",
+      "type": "registry:component",
+      "title": "Resizable 6",
+      "description": "Animated scaling handle that grows taller and wider on hover and active drag states using CSS transitions.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "resizable-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/resizable/resizable-06.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/resizable/resizable-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-resizable-resizable-07",
+      "type": "registry:component",
+      "title": "Resizable 7",
+      "description": "Three-panel code-editor layout with filename tab headers, minimum size constraints, and no visible drag handles.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "resizable-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/resizable/resizable-07.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/resizable/resizable-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-resizable-resizable-08",
+      "type": "registry:component",
+      "title": "Resizable 8",
+      "description": "Live percentage readout panel that updates each panel label in real time as the user drags the handle.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "resizable-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/resizable/resizable-08.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/resizable/resizable-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-resizable-resizable-09",
+      "type": "registry:component",
+      "title": "Resizable 9",
+      "description": "Data table with resizable columns using a synced header and body layout, avatar rows, and live column width tracking.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "resizable-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/resizable/resizable-09.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/resizable/resizable-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

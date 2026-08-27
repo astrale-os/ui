@@ -5,7 +5,17 @@ import test from 'node:test'
 import { fileURLToPath } from 'node:url'
 
 import playwrightConfig from '../playground/playwright.config.ts'
-import playgroundConfig from '../playground/vite.config.ts'
+import playgroundConfigDefinition from '../playground/vite.config.ts'
+
+const playgroundConfig =
+  typeof playgroundConfigDefinition === 'function'
+    ? playgroundConfigDefinition({
+        command: 'serve',
+        mode: 'development',
+        isSsrBuild: false,
+        isPreview: false,
+      })
+    : playgroundConfigDefinition
 
 const normalize = (value) => value.replaceAll('\\', '/')
 

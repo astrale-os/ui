@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-alert-alert-30",
+  "title": "Alert 30",
+  "description": "Solid destructive alert with full red background for prominent error messages.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/alert/alert-30/alert-30.tsx",
+      "content": "import { Alert, AlertDescription, AlertTitle } from '@astrale-os/ui/alert'\nimport { TriangleAlertIcon } from \"lucide-react\"\n\nconst AlertSolidDestructiveDemo = () => {\n  return (\n    <Alert className='bg-destructive dark:bg-destructive/60 border-none text-white'>\n      <TriangleAlertIcon\n      />\n      <AlertTitle>Couldn&apos;t save changes</AlertTitle>\n      <AlertDescription className='text-white/80'>Please try again or reload the page.</AlertDescription>\n    </Alert>\n  )\n}\n\nexport default AlertSolidDestructiveDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/alert/alert-30.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/alert/alert-30",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-alert-alert-29",
+  "title": "Alert 29",
+  "description": "Solid info alert with full blue background for prominent informational messages.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/alert/alert-29/alert-29.tsx",
+      "content": "import { Alert, AlertDescription, AlertTitle } from '@astrale-os/ui/alert'\nimport { CircleAlertIcon } from \"lucide-react\"\n\nconst AlertSolidInfoDemo = () => {\n  return (\n    <Alert className='border-none bg-sky-600 text-white dark:bg-sky-400'>\n      <CircleAlertIcon\n      />\n      <AlertTitle>Your profile is visible</AlertTitle>\n      <AlertDescription className='text-white/80'>Anyone can view your basic information.</AlertDescription>\n    </Alert>\n  )\n}\n\nexport default AlertSolidInfoDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/alert/alert-29.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/alert/alert-29",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

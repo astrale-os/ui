@@ -1,0 +1,372 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-components-card",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "component-card-card-01",
+      "type": "registry:component",
+      "title": "Card 1",
+      "description": "Login form card with email and password inputs",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "card-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/card/card-01.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/card/card-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-card-card-02",
+      "type": "registry:component",
+      "title": "Card 2",
+      "description": "Meeting notes card with team member avatars and attendee list",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "card-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/card/card-02.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/card/card-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-card-card-03",
+      "type": "registry:component",
+      "title": "Card 3",
+      "description": "Team invitation card with member list and invite functionality",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "card-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/card/card-03.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/card/card-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-card-card-04",
+      "type": "registry:component",
+      "title": "Card 4",
+      "description": "Image showcase card with gradient background and bottom-aligned image",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "card-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/card/card-04.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/card/card-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-card-card-05",
+      "type": "registry:component",
+      "title": "Card 5",
+      "description": "Image showcase card with top-aligned image and action buttons",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "card-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/card/card-05.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/card/card-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-card-card-06",
+      "type": "registry:component",
+      "title": "Card 6",
+      "description": "Horizontal layout card with side-by-side image and content",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "card-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/card/card-06.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/card/card-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-card-card-07",
+      "type": "registry:component",
+      "title": "Card 7",
+      "description": "Overlay card with image background and overlaid text content",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "card-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/card/card-07.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/card/card-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-card-card-08",
+      "type": "registry:component",
+      "title": "Card 8",
+      "description": "Soft background card with subtle primary color theme",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "card-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/card/card-08.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/card/card-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-card-card-09",
+      "type": "registry:component",
+      "title": "Card 9",
+      "description": "Outline card with primary border and transparent background",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "card-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/card/card-09.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/card/card-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-card-card-10",
+      "type": "registry:component",
+      "title": "Card 10",
+      "description": "Tabbed card with integrated tabs component for organized content sections",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "card-10.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/card/card-10.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/card/card-10",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-card-card-11",
+      "type": "registry:component",
+      "title": "Card 11",
+      "description": "Social media post card with user profile, image, hashtags and interaction buttons",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "card-11.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/card/card-11.tsx"
+        },
+        {
+          "path": "support/assets/svg/heart.tsx",
+          "type": "registry:component",
+          "target": "assets/svg/heart.tsx"
+        },
+        {
+          "path": "support/assets/svg/badge-check.tsx",
+          "type": "registry:component",
+          "target": "assets/svg/badge-check.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/card/card-11",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-card-card-12",
+      "type": "registry:component",
+      "title": "Card 12",
+      "description": "Product showcase card with gradient background, like button and pricing details",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "card-12.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/card/card-12.tsx"
+        },
+        {
+          "path": "support/assets/svg/heart.tsx",
+          "type": "registry:component",
+          "target": "assets/svg/heart.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/card/card-12",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-card-card-13",
+      "type": "registry:component",
+      "title": "Card 13",
+      "description": "Testimonial card with user profile, star rating and highlighted text review",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "class-variance-authority@^0.7.1",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "card-13.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/card/card-13.tsx"
+        },
+        {
+          "path": "support/components/ui/rating.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/rating.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/card/card-13",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-card-card-14",
+      "type": "registry:component",
+      "title": "Card 14",
+      "description": "Dismissible action card with close button and call-to-action content",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "card-14.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/card/card-14.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/card/card-14",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-card-card-15",
+      "type": "registry:component",
+      "title": "Card 15",
+      "description": "Connected card group with three image showcase cards arranged side by side",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "card-15.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/card/card-15.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/card/card-15",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-card-card-16",
+      "type": "registry:component",
+      "title": "Card 16",
+      "description": "Interactive spotlight card with animated glow effect that follows mouse movement",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "card-16.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/card/card-16.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/card/card-16",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-card-card-17",
+      "type": "registry:component",
+      "title": "Card 17",
+      "description": "Dynamic 3D hover card with perspective transforms and smooth depth animations",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "card-17.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/card/card-17.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/card/card-17",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

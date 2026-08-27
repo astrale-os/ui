@@ -184,9 +184,17 @@ test('tracks the strict lock policy and pinned repository toolchain', async () =
     ['link:../packages/ui', 'link:../packages/ui'],
   )
   const tarballs = [...lock.matchAll(/\btarball: ([^\s},]+)/gu)].map((match) => match[1])
-  assert.equal(tarballs.length, 2)
+  assert.equal(tarballs.length, 3)
   assert.deepEqual([...new Set(tarballs.map((value) => new URL(value).protocol))], ['https:'])
-  assert.deepEqual([...new Set(tarballs.map((value) => new URL(value).hostname))], ['npm.jsr.io'])
+  assert.deepEqual([...new Set(tarballs.map((value) => new URL(value).hostname))].sort(), [
+    'cdn.sheetjs.com',
+    'npm.jsr.io',
+  ])
+  assert.equal(
+    tarballs.filter((value) => value === 'https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz')
+      .length,
+    1,
+  )
   assert.equal(root.devDependencies.oxfmt, '0.63.0')
   assert.equal(root.devDependencies.oxlint, '1.78.0')
 })

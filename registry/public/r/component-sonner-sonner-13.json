@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-sonner-sonner-13",
+  "title": "Sonner 13",
+  "description": "An outline-styled info toast notification with border highlighting for informational messages",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "sonner@^2.0.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/sonner/sonner-13/sonner-13.tsx",
+      "content": "import { toast } from 'sonner'\n\nimport { Button } from '@astrale-os/ui/button'\n\nconst OutlineInfoSonnerDemo = () => {\n  return (\n    <Button\n      variant='outline'\n      onClick={() =>\n        toast.info('This is for your information, please note.', {\n          style: {\n            '--normal-bg': 'var(--background)',\n            '--normal-text': 'light-dark(var(--color-sky-600), var(--color-sky-400))',\n            '--normal-border': 'light-dark(var(--color-sky-600), var(--color-sky-400))'\n          } as React.CSSProperties\n        })\n      }\n    >\n      Outline Info Toast\n    </Button>\n  )\n}\n\nexport default OutlineInfoSonnerDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/sonner/sonner-13.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/sonner/sonner-13",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

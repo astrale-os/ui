@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-progress-progress-14",
+  "title": "Progress 14",
+  "description": "Functional checklist component that automatically calculates and displays overall project completion progress.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/progress/progress-14/progress-14.tsx",
+      "content": "'use client'\n\nimport { useState } from 'react'\nimport { cn } from '@astrale-os/ui/class-name'\nimport { Progress, ProgressLabel, ProgressValue } from '@astrale-os/ui/progress'\nimport { Button } from '@astrale-os/ui/button'\nimport { CheckCircle2Icon, CircleIcon } from \"lucide-react\"\n\ninterface Checkpoint {\n  id: string\n  label: string\n}\n\nexport interface ProgressChecklistProps {\n  items?: Checkpoint[]\n  defaultCompletedItems?: string[]\n}\n\nconst DEFAULT_ITEMS: Checkpoint[] = [\n  { id: 'ssl', label: 'Verify SSL certificates' },\n  { id: 'assets', label: 'Optimize images and assets' },\n  { id: 'seo', label: 'Update meta tags for SEO' },\n  { id: 'analytics', label: 'Configure analytics tracking' },\n  { id: 'testing', label: 'Test across browsers' }\n]\n\nconst ProgressChecklistDemo = ({\n  items = DEFAULT_ITEMS,\n  defaultCompletedItems = ['ssl', 'assets']\n}: ProgressChecklistProps) => {\n  const [completedItems, setCompletedItems] = useState<string[]>(defaultCompletedItems)\n\n  const toggleItem = (id: string) => {\n    setCompletedItems(prev => (prev.includes(id) ? prev.filter(itemId => itemId !== id) : [...prev, id]))\n  }\n\n  const validCompletedItems = completedItems.filter(id => items.some(item => item.id === id))\n\n  const progress = items.length > 0 ? (validCompletedItems.length / items.length) * 100 : 0\n\n  return (\n    <div className='flex w-full flex-col gap-6'>\n      <Progress id='go-live-progress' value={progress} className='*:data-[slot=progress-track]:h-2'>\n        <ProgressLabel className='text-sm font-medium'>Go-Live Checklist</ProgressLabel>\n        <ProgressValue className='text-muted-foreground text-sm'>\n          {() => `${validCompletedItems.length} / ${items.length} checks`}\n        </ProgressValue>\n      </Progress>\n\n      <div className='flex flex-col gap-2'>\n        {items.map(item => {\n          const isCompleted = validCompletedItems.includes(item.id)\n\n          return (\n            <Button\n              key={item.id}\n              onClick={() => toggleItem(item.id)}\n              variant='ghost'\n              className={cn(\n                'group hover:text-foreground flex items-center justify-start gap-3 text-sm transition-colors outline-none hover:bg-transparent',\n                isCompleted ? 'text-foreground' : 'text-muted-foreground'\n              )}\n            >\n              <div className='relative flex h-4 w-4 shrink-0 items-center justify-center'>\n                {isCompleted ? (\n                  <CheckCircle2Icon className='h-4 w-4 text-green-600 dark:text-green-400' />\n                ) : (\n                  <CircleIcon className='group-hover:text-foreground h-4 w-4 transition-colors' />\n                )}\n              </div>\n              <span>{item.label}</span>\n            </Button>\n          )\n        })}\n      </div>\n    </div>\n  )\n}\n\nexport default ProgressChecklistDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/progress/progress-14.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/progress/progress-14",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

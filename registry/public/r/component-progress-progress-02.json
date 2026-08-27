@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-progress-progress-02",
+  "title": "Progress 2",
+  "description": "Dual progress indicators for file downloads, featuring integrated labels for percentage and data volume.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/progress/progress-02/progress-02.tsx",
+      "content": "import { Field, FieldDescription } from '@astrale-os/ui/field'\nimport { Progress, ProgressLabel, ProgressValue } from '@astrale-os/ui/progress'\n\nconst ProgressLabelDemo = () => {\n  return (\n    <div className='flex w-full flex-col gap-4'>\n      {/* Progress bar with percentage */}\n      <Field>\n        <Progress value={64} className='transition-all duration-300'>\n          <ProgressLabel>Downloading...</ProgressLabel>\n          <ProgressValue className='text-foreground font-medium' />\n        </Progress>\n        <FieldDescription>design-system-v1.zip</FieldDescription>\n      </Field>\n\n      {/* Progress bar with MB */}\n      <Field>\n        <Progress value={64} className='transition-all duration-300'>\n          <ProgressLabel>Downloading...</ProgressLabel>\n          <ProgressValue className='text-foreground font-medium'>{() => '3.4 MB / 5 MB'}</ProgressValue>\n        </Progress>\n        <FieldDescription>design-system-v2.zip</FieldDescription>\n      </Field>\n    </div>\n  )\n}\n\nexport default ProgressLabelDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/progress/progress-02.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/progress/progress-02",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

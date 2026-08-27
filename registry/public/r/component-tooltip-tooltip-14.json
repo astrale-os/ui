@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-tooltip-tooltip-14",
+  "title": "Tooltip 14",
+  "description": "An alert hover card with warning icon for error notifications",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/tooltip/tooltip-14/tooltip-14.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\nimport { HoverCard, HoverCardContent, HoverCardTrigger } from '@astrale-os/ui/hover-card'\nimport { FileXCornerIcon } from \"lucide-react\"\n\nconst HoverCardAlertDemo = () => {\n  return (\n    <HoverCard>\n      <HoverCardTrigger delay={0} closeDelay={0} render={<Button variant='link'>Hover Card Alert</Button>} />\n      <HoverCardContent className='w-72'>\n        <div className='flex flex-col items-center text-center'>\n          <span className='bg-destructive/10 mb-2.5 flex size-12 items-center justify-center rounded-full'>\n            <FileXCornerIcon className='text-destructive size-6' />\n          </span>\n          <div className='mb-1 text-lg font-medium'>File is corrupted</div>\n          <p className='text-sm'>It might have some virus or something that might be harmful for your device. </p>\n        </div>\n      </HoverCardContent>\n    </HoverCard>\n  )\n}\n\nexport default HoverCardAlertDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/tooltip/tooltip-14.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/tooltip/tooltip-14",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

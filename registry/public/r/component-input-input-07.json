@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-input-input-07",
+  "title": "Input 7",
+  "description": "An email input field with a pre-filled default value",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/input/input-07/input-07.tsx",
+      "content": "import { useId } from 'react'\n\nimport { Input } from '@astrale-os/ui/input'\nimport { Label } from '@astrale-os/ui/label'\n\nconst InputDefaultValueDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>Input with default value</Label>\n      <Input id={id} type='email' placeholder='Email address' defaultValue='example@email.com' />\n    </div>\n  )\n}\n\nexport default InputDefaultValueDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/input/input-07.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/input/input-07",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

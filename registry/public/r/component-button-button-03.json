@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-button-button-03",
+  "title": "Button 3",
+  "description": "A rounded button with icon and text content",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/button/button-03/button-03.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\nimport { StarIcon } from \"lucide-react\"\n\nconst ButtonRoundedDemo = () => {\n  return (\n    <Button className='rounded-full'>\n      <StarIcon\n      />\n      Star\n    </Button>\n  )\n}\n\nexport default ButtonRoundedDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/button/button-03.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/button/button-03",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

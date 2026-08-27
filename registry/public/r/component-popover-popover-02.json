@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-popover-popover-02",
+  "title": "Popover 2",
+  "description": "A dimensions popover with input fields for width, max width, height, and max height settings",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/popover/popover-02/popover-02.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\nimport { Input } from '@astrale-os/ui/input'\nimport { Label } from '@astrale-os/ui/label'\nimport {\n  Popover,\n  PopoverContent,\n  PopoverTrigger,\n  PopoverHeader,\n  PopoverTitle,\n  PopoverDescription\n} from '@astrale-os/ui/popover'\nimport { PencilRulerIcon } from \"lucide-react\"\n\nconst PopoverDimensionsDemo = () => {\n  return (\n    <Popover>\n      <PopoverTrigger render={<Button variant='outline' size='icon' />}>\n        <PencilRulerIcon\n        />\n        <span className='sr-only'>Dimensions</span>\n      </PopoverTrigger>\n      <PopoverContent className='w-80'>\n        <div className='grid gap-4'>\n          <PopoverHeader className='gap-2'>\n            <PopoverTitle className='leading-none'>Dimensions</PopoverTitle>\n            <PopoverDescription>Set the dimensions for the layer.</PopoverDescription>\n          </PopoverHeader>\n          <div className='grid gap-2'>\n            <div className='grid grid-cols-3 items-center gap-4'>\n              <Label htmlFor='width'>Width</Label>\n              <Input id='width' defaultValue='100%' className='col-span-2 h-8' />\n            </div>\n            <div className='grid grid-cols-3 items-center gap-4'>\n              <Label htmlFor='maxWidth'>Max. width</Label>\n              <Input id='maxWidth' defaultValue='300px' className='col-span-2 h-8' />\n            </div>\n            <div className='grid grid-cols-3 items-center gap-4'>\n              <Label htmlFor='height'>Height</Label>\n              <Input id='height' defaultValue='25px' className='col-span-2 h-8' />\n            </div>\n            <div className='grid grid-cols-3 items-center gap-4'>\n              <Label htmlFor='maxHeight'>Max. height</Label>\n              <Input id='maxHeight' defaultValue='none' className='col-span-2 h-8' />\n            </div>\n          </div>\n        </div>\n      </PopoverContent>\n    </Popover>\n  )\n}\n\nexport default PopoverDimensionsDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/popover/popover-02.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/popover/popover-02",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

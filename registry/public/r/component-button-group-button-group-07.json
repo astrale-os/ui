@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-button-group-button-group-07",
+  "title": "Button Group 7",
+  "description": "Number input button group with plus/minus controls and value display",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/button-group/button-group-07/button-group-07.tsx",
+      "content": "'use client'\n\nimport { useState } from 'react'\nimport { Button } from '@astrale-os/ui/button'\nimport { ButtonGroup, ButtonGroupText } from '@astrale-os/ui/button-group'\nimport { MinusIcon, PlusIcon } from \"lucide-react\"\n\nconst ButtonGroupNumberDemo = () => {\n  const [value, setValue] = useState(216)\n\n  return (\n    <ButtonGroup className='*:border-primary *:not-last:border-r-primary-foreground/30 *:bg-clip-border'>\n      <Button\n        size='icon'\n        onClick={() => {\n          setValue(value - 1)\n        }}\n      >\n        <MinusIcon\n        />\n        <span className='sr-only'>Minus</span>\n      </Button>\n      <ButtonGroupText className='bg-primary text-primary-foreground'>{`${value}px`}</ButtonGroupText>\n      <Button\n        size='icon'\n        onClick={() => {\n          setValue(value + 1)\n        }}\n      >\n        <PlusIcon\n        />\n        <span className='sr-only'>Plus</span>\n      </Button>\n    </ButtonGroup>\n  )\n}\n\nexport default ButtonGroupNumberDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/button-group/button-group-07.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/button-group/button-group-07",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

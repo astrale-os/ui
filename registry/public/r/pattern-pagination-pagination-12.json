@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pattern-pagination-pagination-12",
+  "title": "Pagination 12",
+  "description": "A numberless pagination component with current page indicator text display",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/patterns/pagination/pagination-12/pagination-12.tsx",
+      "content": "import {\n  Pagination,\n  PaginationContent,\n  PaginationItem,\n  PaginationNext,\n  PaginationPrevious\n} from '@astrale-os/ui/pagination'\n\nconst NumberlessPaginationWithTextDemo = () => {\n  return (\n    <Pagination>\n      <PaginationContent className='w-full justify-between'>\n        <PaginationItem>\n          <PaginationPrevious href='#' className='border-border border' />\n        </PaginationItem>\n        <PaginationItem>\n          <p className='text-muted-foreground text-sm' aria-live='polite'>\n            Page <span className='text-foreground'>2</span> of <span className='text-foreground'>5</span>\n          </p>\n        </PaginationItem>\n        <PaginationItem>\n          <PaginationNext href='#' className='border-border border' />\n        </PaginationItem>\n      </PaginationContent>\n    </Pagination>\n  )\n}\n\nexport default NumberlessPaginationWithTextDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/pattern/pagination/pagination-12.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "pattern/pagination/pagination-12",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:block"
+}

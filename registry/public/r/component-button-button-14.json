@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-button-button-14",
+  "title": "Button 14",
+  "description": "Outline button with dashed border for download action",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/button/button-14/button-14.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\nimport { DownloadIcon } from \"lucide-react\"\n\nconst ButtonDownloadDemo = () => {\n  return (\n    <Button variant='outline' className='border-primary dark:border-primary border-dashed shadow-none'>\n      <DownloadIcon\n      />\n      Download\n    </Button>\n  )\n}\n\nexport default ButtonDownloadDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/button/button-14.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/button/button-14",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

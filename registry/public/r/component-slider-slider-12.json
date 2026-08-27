@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-slider-slider-12",
+  "title": "Slider 12",
+  "description": "Range and multi-thumb sliders with synchronized tooltips for precise price selection and temperature monitoring.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/slider/slider-12/slider-12.tsx",
+      "content": "import { useState } from 'react'\n\nimport { Label } from '@astrale-os/ui/label'\nimport { Slider } from '@astrale-os/ui/slider'\nimport { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@astrale-os/ui/tooltip'\n\nconst SliderMultiTooltipDemo = () => {\n  const [rangeValues, setRangeValues] = useState([25, 60])\n  const [distValues, setDistValues] = useState([20, 50, 80])\n  const [isHoveringRange, setIsHoveringRange] = useState(false)\n  const [isHoveringDist, setIsHoveringDist] = useState(false)\n\n  return (\n    <TooltipProvider>\n      <div className='flex w-full max-w-xs flex-col gap-14'>\n        {/* Price Range Section */}\n        <div className='space-y-4'>\n          <Label className='text-sm font-medium'>Price Selection</Label>\n          <div\n            className='relative px-0.5'\n            onMouseEnter={() => setIsHoveringRange(true)}\n            onMouseLeave={() => setIsHoveringRange(false)}\n          >\n            {rangeValues.map((val, i) => (\n              <Tooltip key={`range-${i}`} open={isHoveringRange}>\n                <TooltipTrigger\n                  render={\n                    <div\n                      className='pointer-events-none absolute top-[50%] h-px w-px'\n                      style={{\n                        left: `calc(${val}% + ${10 - val * 0.2}px)`\n                      }}\n                    />\n                  }\n                />\n                <TooltipContent\n                  side='top'\n                  className='bg-primary text-primary-foreground font-medium *:last:hidden'\n                  sideOffset={5}\n                >\n                  ${val}\n                </TooltipContent>\n              </Tooltip>\n            ))}\n            <Slider\n              value={rangeValues}\n              onValueChange={v => setRangeValues(v as number[])}\n              max={100}\n              step={1}\n              aria-label='Price slider'\n            />\n          </div>\n          <p className='text-center text-sm font-medium'>\n            <span className='text-muted-foreground'>Budget:</span> <span>${rangeValues[0]}</span> -{' '}\n            <span>${rangeValues[1]}</span>\n          </p>\n        </div>\n\n        {/* Temperature Monitoring Section */}\n        <div className='space-y-4'>\n          <Label className='text-sm font-medium'>Temperature Monitoring</Label>\n          <div\n            className='relative px-0.5'\n            onMouseEnter={() => setIsHoveringDist(true)}\n            onMouseLeave={() => setIsHoveringDist(false)}\n          >\n            {distValues.map((val, i) => (\n              <Tooltip key={`dist-${i}`} open={isHoveringDist}>\n                <TooltipTrigger\n                  render={\n                    <div\n                      className='pointer-events-none absolute top-[50%] h-px w-px'\n                      style={{\n                        left: `calc(${val}% + ${10 - val * 0.2}px)`\n                      }}\n                    />\n                  }\n                />\n                <TooltipContent\n                  side='top'\n                  className='bg-primary text-primary-foreground font-medium *:last:hidden'\n                  sideOffset={15}\n                >\n                  {val}°C\n                </TooltipContent>\n              </Tooltip>\n            ))}\n            <Slider\n              value={distValues}\n              onValueChange={v => setDistValues(v as number[])}\n              max={100}\n              step={1}\n              aria-label='Temperature slider'\n            />\n          </div>\n          <div className='text-muted-foreground flex justify-between text-sm font-medium uppercase'>\n            <span>Cold: {distValues[0]}°C</span>\n            <span>Warm: {distValues[1]}°C</span>\n            <span>Hot: {distValues[2]}°C</span>\n          </div>\n        </div>\n      </div>\n    </TooltipProvider>\n  )\n}\n\nexport default SliderMultiTooltipDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/slider/slider-12.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/slider/slider-12",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

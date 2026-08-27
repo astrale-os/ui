@@ -1,0 +1,602 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-components-tabs",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "component-tabs-tabs-01",
+      "type": "registry:component",
+      "title": "Tabs 1",
+      "description": "Basic tabs component with default styling for content organization and navigation",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "tabs-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tabs/tabs-01.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tabs/tabs-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-tabs-tabs-02",
+      "type": "registry:component",
+      "title": "Tabs 2",
+      "description": "Outlined tabs with border styling and background transparency for modern interface design",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "tabs-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tabs/tabs-02.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tabs/tabs-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-tabs-tabs-03",
+      "type": "registry:component",
+      "title": "Tabs 3",
+      "description": "Tabs with icons for enhanced visual navigation and improved user experience",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "tabs-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tabs/tabs-03.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tabs/tabs-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-tabs-tabs-04",
+      "type": "registry:component",
+      "title": "Tabs 4",
+      "description": "Tabs with badge components for displaying notifications, counters, or status indicators",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "tabs-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tabs/tabs-04.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tabs/tabs-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-tabs-tabs-05",
+      "type": "registry:component",
+      "title": "Tabs 5",
+      "description": "Vertical tabs with icons displayed above text labels in a stacked layout",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "tabs-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tabs/tabs-05.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tabs/tabs-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-tabs-tabs-06",
+      "type": "registry:component",
+      "title": "Tabs 6",
+      "description": "Tabs with badge count indicators showing numerical values for each tab",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "tabs-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tabs/tabs-06.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tabs/tabs-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-tabs-tabs-07",
+      "type": "registry:component",
+      "title": "Tabs 7",
+      "description": "Icon-only tabs with tooltip labels for compact navigation",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "tabs-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tabs/tabs-07.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tabs/tabs-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-tabs-tabs-08",
+      "type": "registry:component",
+      "title": "Tabs 8",
+      "description": "Simple justified tabs with equal width distribution across the container",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "tabs-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tabs/tabs-08.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tabs/tabs-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-tabs-tabs-09",
+      "type": "registry:component",
+      "title": "Tabs 9",
+      "description": "Solid pill-style tabs with rounded corners and filled background",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "tabs-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tabs/tabs-09.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tabs/tabs-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-tabs-tabs-10",
+      "type": "registry:component",
+      "title": "Tabs 10",
+      "description": "Outlined pill-style tabs with border styling and transparent background",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "tabs-10.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tabs/tabs-10.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tabs/tabs-10",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-tabs-tabs-11",
+      "type": "registry:component",
+      "title": "Tabs 11",
+      "description": "Underline tabs with border bottom styling for minimal navigation",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "tabs-11.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tabs/tabs-11.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tabs/tabs-11",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-tabs-tabs-12",
+      "type": "registry:component",
+      "title": "Tabs 12",
+      "description": "Sharp-cornered tabs with rectangular styling and bottom border",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "tabs-12.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tabs/tabs-12.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tabs/tabs-12",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-tabs-tabs-13",
+      "type": "registry:component",
+      "title": "Tabs 13",
+      "description": "Lifted tabs with shadow effects for elevated appearance",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "tabs-13.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tabs/tabs-13.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tabs/tabs-13",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-tabs-tabs-14",
+      "type": "registry:component",
+      "title": "Tabs 14",
+      "description": "Overflow tabs with scrollable area for handling many tab items",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "tabs-14.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tabs/tabs-14.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tabs/tabs-14",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-tabs-tabs-15",
+      "type": "registry:component",
+      "title": "Tabs 15",
+      "description": "Vertical tabs layout with left-side navigation structure",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "tabs-15.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tabs/tabs-15.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tabs/tabs-15",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-tabs-tabs-16",
+      "type": "registry:component",
+      "title": "Tabs 16",
+      "description": "Vertical tabs with underline styling in left-side layout",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "tabs-16.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tabs/tabs-16.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tabs/tabs-16",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-tabs-tabs-17",
+      "type": "registry:component",
+      "title": "Tabs 17",
+      "description": "Soft vertical tabs with gentle styling and left navigation",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "tabs-17.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tabs/tabs-17.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tabs/tabs-17",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-tabs-tabs-18",
+      "type": "registry:component",
+      "title": "Tabs 18",
+      "description": "Vertical tabs with solid background styling and left layout",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "tabs-18.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tabs/tabs-18.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tabs/tabs-18",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-tabs-tabs-19",
+      "type": "registry:component",
+      "title": "Tabs 19",
+      "description": "Vertical tabs with sharp corners and rectangular styling",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "tabs-19.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tabs/tabs-19.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tabs/tabs-19",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-tabs-tabs-20",
+      "type": "registry:component",
+      "title": "Tabs 20",
+      "description": "Vertical tabs with lined separator styling for organized layout",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "tabs-20.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tabs/tabs-20.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tabs/tabs-20",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-tabs-tabs-21",
+      "type": "registry:component",
+      "title": "Tabs 21",
+      "description": "Vertical tabs with tooltip functionality for additional information",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "tabs-21.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tabs/tabs-21.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tabs/tabs-21",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-tabs-tabs-22",
+      "type": "registry:component",
+      "title": "Tabs 22",
+      "description": "Vertical tabs with icons for enhanced visual navigation",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "tabs-22.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tabs/tabs-22.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tabs/tabs-22",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-tabs-tabs-23",
+      "type": "registry:component",
+      "title": "Tabs 23",
+      "description": "Vertical tabs with badge indicators in left navigation layout",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "tabs-23.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tabs/tabs-23.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tabs/tabs-23",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-tabs-tabs-24",
+      "type": "registry:component",
+      "title": "Tabs 24",
+      "description": "Vertical tabs with outline styling for clean bordered appearance",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "tabs-24.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tabs/tabs-24.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tabs/tabs-24",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-tabs-tabs-25",
+      "type": "registry:component",
+      "title": "Tabs 25",
+      "description": "Custom styled tabs with primary background active state and enhanced hover effects",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "tabs-25.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tabs/tabs-25.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tabs/tabs-25",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-tabs-tabs-26",
+      "type": "registry:component",
+      "title": "Tabs 26",
+      "description": "Custom tabs with underline styling using bottom border and no background",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "tabs-26.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tabs/tabs-26.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tabs/tabs-26",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-tabs-tabs-27",
+      "type": "registry:component",
+      "title": "Tabs 27",
+      "description": "Animated tabs with motion highlight transitions using motion-tabs components",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "motion@^13.1.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "tabs-27.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tabs/tabs-27.tsx"
+        },
+        {
+          "path": "support/components/ui/motion-highlight.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/motion-highlight.tsx"
+        },
+        {
+          "path": "support/components/ui/motion-tabs.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/motion-tabs.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tabs/tabs-27",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-tabs-tabs-28",
+      "type": "registry:component",
+      "title": "Tabs 28",
+      "description": "Expandable tabs with icons and collapsible content using framer motion animations",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "motion@^13.1.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "tabs-28.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tabs/tabs-28.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tabs/tabs-28",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-tabs-tabs-29",
+      "type": "registry:component",
+      "title": "Tabs 29",
+      "description": "Animated underline tabs with dynamic underline position tracking using framer motion",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "motion@^13.1.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "tabs-29.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tabs/tabs-29.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tabs/tabs-29",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

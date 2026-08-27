@@ -9,11 +9,14 @@ import {
   DrawerTrigger,
 } from '@astrale-os/ui/drawer'
 import { Toaster } from '@astrale-os/ui/toast'
-import { useState } from 'react'
+import { lazy, Suspense, useState } from 'react'
 
 import { Catalog } from './catalog/catalog.js'
-import { ThemeStudio } from './theme/studio.js'
 import { useThemeWorkspace } from './theme/workspace.js'
+
+const ThemeStudio = lazy(() =>
+  import('./theme/studio.js').then((module) => ({ default: module.ThemeStudio })),
+)
 
 export function Playground() {
   const workspace = useThemeWorkspace()
@@ -46,7 +49,9 @@ export function Playground() {
               <DrawerClose render={<Button variant="outline" size="sm" />}>Close</DrawerClose>
             </DrawerHeader>
             <div className="theme-panel" aria-label="Theme generator">
-              <ThemeStudio workspace={workspace} mode={mode} onModeChange={setMode} />
+              <Suspense fallback={null}>
+                <ThemeStudio workspace={workspace} mode={mode} onModeChange={setMode} />
+              </Suspense>
             </div>
           </DrawerContent>
         </Drawer>

@@ -1,0 +1,38 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-card-card-11",
+  "title": "Card 11",
+  "description": "Social media post card with user profile, image, hashtags and interaction buttons",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/card/card-11/card-11.tsx",
+      "content": "'use client'\n\nimport { useState } from 'react'\nimport { Avatar, AvatarFallback, AvatarImage } from '@astrale-os/ui/avatar'\nimport { Button } from '@astrale-os/ui/button'\nimport { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@astrale-os/ui/card'\nimport BadgeCheck from '@/assets/svg/badge-check'\nimport Heart from '@/assets/svg/heart'\nimport { UserPlusIcon, EllipsisIcon, MessageCircleIcon, RepeatIcon, SendIcon } from \"lucide-react\"\n\nconst CardTweetDemo = () => {\n  const [liked, setLiked] = useState<boolean>(true)\n\n  return (\n    <Card className='max-w-md'>\n      <CardHeader className='flex items-center justify-between gap-3'>\n        <div className='flex items-center gap-3'>\n          <Avatar className='ring-ring ring-2'>\n            <AvatarImage src='https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-5.png' alt='Hallie Richards' />\n            <AvatarFallback className='text-xs'>PG</AvatarFallback>\n          </Avatar>\n          <div className='flex flex-col gap-0.5'>\n            <CardTitle className='flex items-center gap-1 text-sm'>\n              Philip George <BadgeCheck className='text-background size-4 fill-sky-600 dark:fill-sky-400' />\n            </CardTitle>\n            <CardDescription>@philip20</CardDescription>\n          </div>\n        </div>\n        <div className='flex items-center gap-2'>\n          <Button variant='outline' size='sm'>\n            <UserPlusIcon\n            />\n            Follow\n          </Button>\n          <Button variant='ghost' size='icon' aria-label='Toggle menu'>\n            <EllipsisIcon\n            />\n          </Button>\n        </div>\n      </CardHeader>\n      <CardContent className='space-y-6 text-sm'>\n        <img\n          src='https://cdn.shadcnstudio.com/ss-assets/components/card/image-6.png?width=350&format=auto'\n          alt='Banner'\n          className='aspect-video w-full rounded-md object-cover'\n        />\n        <p>\n          Lost in the colors of the night 🌌✨ Sometimes the blur reveals more than clarity.{' '}\n          <a href='#' className='text-sky-600 dark:text-sky-400'>\n            #AbstractVibes\n          </a>{' '}\n          <a href='#' className='text-sky-600 dark:text-sky-400'>\n            #Dreamscape\n          </a>{' '}\n          <a href='#' className='text-sky-600 dark:text-sky-400'>\n            #VisualPoetry\n          </a>\n        </p>\n      </CardContent>\n      <CardFooter className='flex items-center gap-1'>\n        <Button\n          variant='ghost'\n          size='sm'\n          className='hover:bg-primary/10 dark:hover:bg-primary/20'\n          onClick={() => setLiked(!liked)}\n        >\n          {liked ? <Heart className='fill-destructive stroke-destructive' /> : <Heart />}\n          2.1K\n        </Button>\n        <Button variant='ghost' size='sm' className='hover:bg-primary/10 dark:hover:bg-primary/20'>\n          <MessageCircleIcon\n          />\n          1.4K\n        </Button>\n        <Button variant='ghost' size='sm' className='hover:bg-primary/10 dark:hover:bg-primary/20'>\n          <RepeatIcon\n          />\n          669\n        </Button>\n        <Button variant='ghost' size='sm' className='hover:bg-primary/10 dark:hover:bg-primary/20'>\n          <SendIcon\n          />\n          1.1K\n        </Button>\n      </CardFooter>\n    </Card>\n  )\n}\n\nexport default CardTweetDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/card/card-11.tsx"
+    },
+    {
+      "path": "source/components/card/card-11/support/assets/svg/heart.tsx",
+      "content": "import type { SVGAttributes } from 'react'\n\nconst Heart = (props: SVGAttributes<SVGElement>) => {\n  return (\n    <svg\n      xmlns='http://www.w3.org/2000/svg'\n      width='24'\n      height='24'\n      viewBox='0 0 24 24'\n      fill='none'\n      stroke='currentColor'\n      strokeWidth='2'\n      strokeLinecap='round'\n      strokeLinejoin='round'\n      {...props}\n    >\n      <path d='M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5' />\n    </svg>\n  )\n}\n\nexport default Heart\n",
+      "type": "registry:component",
+      "target": "assets/svg/heart.tsx"
+    },
+    {
+      "path": "source/components/card/card-11/support/assets/svg/badge-check.tsx",
+      "content": "import type { SVGAttributes } from 'react'\n\nconst BadgeCheck = (props: SVGAttributes<SVGElement>) => {\n  return (\n    <svg\n      xmlns='http://www.w3.org/2000/svg'\n      width='24'\n      height='24'\n      viewBox='0 0 24 24'\n      fill='none'\n      stroke='currentColor'\n      strokeWidth='2'\n      strokeLinecap='round'\n      strokeLinejoin='round'\n      {...props}\n    >\n      <path d='M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z' />\n      <path d='m9 12 2 2 4-4' />\n    </svg>\n  )\n}\n\nexport default BadgeCheck\n",
+      "type": "registry:component",
+      "target": "assets/svg/badge-check.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/card/card-11",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-alert-alert-16",
+  "title": "Alert 16",
+  "description": "Minimal alert without icon displaying simple message text only.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/alert/alert-16/alert-16.tsx",
+      "content": "import { Alert, AlertTitle } from '@astrale-os/ui/alert'\n\nconst AlertWithoutIconDemo = () => {\n  return (\n    <Alert>\n      <AlertTitle>New message!</AlertTitle>\n    </Alert>\n  )\n}\n\nexport default AlertWithoutIconDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/alert/alert-16.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/alert/alert-16",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

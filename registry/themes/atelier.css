@@ -27,6 +27,14 @@
   --ui-chart-3: oklch(0.62 0.17 245);
   --ui-chart-4: oklch(0.73 0.17 72);
   --ui-chart-5: oklch(0.58 0.18 330);
+  --ui-sidebar: oklch(0.995 0.008 62);
+  --ui-sidebar-foreground: oklch(0.21 0.045 25);
+  --ui-sidebar-primary: oklch(0.52 0.2 28);
+  --ui-sidebar-primary-foreground: oklch(0.98 0.01 62);
+  --ui-sidebar-accent: oklch(0.82 0.16 115);
+  --ui-sidebar-accent-foreground: oklch(0.24 0.055 120);
+  --ui-sidebar-border: oklch(0.77 0.07 62);
+  --ui-sidebar-ring: oklch(0.6 0.2 28);
   --ui-radius: 1rem;
   --ui-radius-panel: 1.5rem;
   --ui-control-height: 2.5rem;
@@ -34,6 +42,7 @@
   --ui-control-height-lg: 2.8rem;
   --ui-font-body: 'Aptos', 'Gill Sans', ui-sans-serif, sans-serif;
   --ui-font-heading: 'Cooper Black', 'Iowan Old Style', ui-serif, serif;
+  --ui-font-mono: 'SFMono-Regular', 'Cascadia Code', ui-monospace, monospace;
   --ui-shadow-control: 0 2px 0 oklch(0.21 0.045 25 / 0.14);
   --ui-shadow-panel: 0 24px 0 -12px oklch(0.58 0.22 28 / 0.22);
   --ui-motion-fast: 150ms;
@@ -68,6 +77,14 @@
   --ui-chart-3: oklch(0.7 0.15 245);
   --ui-chart-4: oklch(0.76 0.16 72);
   --ui-chart-5: oklch(0.68 0.16 330);
+  --ui-sidebar: oklch(0.21 0.05 25);
+  --ui-sidebar-foreground: oklch(0.94 0.025 62);
+  --ui-sidebar-primary: oklch(0.72 0.19 32);
+  --ui-sidebar-primary-foreground: oklch(0.17 0.04 25);
+  --ui-sidebar-accent: oklch(0.65 0.15 115);
+  --ui-sidebar-accent-foreground: oklch(0.17 0.04 25);
+  --ui-sidebar-border: oklch(0.38 0.08 35);
+  --ui-sidebar-ring: oklch(0.72 0.18 32);
   --ui-radius: 1rem;
   --ui-radius-panel: 1.5rem;
   --ui-control-height: 2.5rem;
@@ -75,6 +92,7 @@
   --ui-control-height-lg: 2.8rem;
   --ui-font-body: 'Aptos', 'Gill Sans', ui-sans-serif, sans-serif;
   --ui-font-heading: 'Cooper Black', 'Iowan Old Style', ui-serif, serif;
+  --ui-font-mono: 'SFMono-Regular', 'Cascadia Code', ui-monospace, monospace;
   --ui-shadow-control: 0 2px 0 oklch(0.21 0.045 25 / 0.14);
   --ui-shadow-panel: 0 24px 0 -12px oklch(0.58 0.22 28 / 0.22);
   --ui-motion-fast: 150ms;

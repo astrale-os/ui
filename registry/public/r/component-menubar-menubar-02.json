@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-menubar-menubar-02",
+  "title": "Menu Bar 2",
+  "description": "Checkbox variant menubar with View panel toggles and Effects filter selections for a video editor.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/menubar/menubar-02/menubar-02.tsx",
+      "content": "import { useState } from 'react'\n\nimport {\n  Menubar,\n  MenubarCheckboxItem,\n  MenubarContent,\n  MenubarItem,\n  MenubarMenu,\n  MenubarSeparator,\n  MenubarShortcut,\n  MenubarTrigger\n} from '@astrale-os/ui/menubar'\n\nconst MenuBarCheckBoxDemo = () => {\n  const [timeline, setTimeline] = useState(true)\n  const [audioWaveform, setAudioWaveform] = useState(false)\n  const [blur, setBlur] = useState(false)\n  const [sepia, setSepia] = useState(true)\n  const [vintage, setVintage] = useState(false)\n\n  return (\n    <div className='flex flex-col items-center justify-center space-y-4'>\n      <div className='text-muted-foreground text-sm font-medium'>Checkbox Variant</div>\n      <Menubar>\n        <MenubarMenu>\n          <MenubarTrigger>View</MenubarTrigger>\n          <MenubarContent className='w-auto'>\n            <MenubarCheckboxItem checked={timeline} onCheckedChange={setTimeline}>\n              Show Timeline\n            </MenubarCheckboxItem>\n            <MenubarCheckboxItem checked={audioWaveform} onCheckedChange={setAudioWaveform}>\n              Show Audio Waveform\n            </MenubarCheckboxItem>\n            <MenubarSeparator />\n            <MenubarItem inset>\n              Zoom In <MenubarShortcut>⌘+</MenubarShortcut>\n            </MenubarItem>\n            <MenubarItem disabled inset>\n              Zoom Out <MenubarShortcut>⌘-</MenubarShortcut>\n            </MenubarItem>\n          </MenubarContent>\n        </MenubarMenu>\n        <MenubarMenu>\n          <MenubarTrigger>Effects</MenubarTrigger>\n          <MenubarContent>\n            <MenubarCheckboxItem checked={blur} onCheckedChange={setBlur}>\n              Blur\n            </MenubarCheckboxItem>\n            <MenubarCheckboxItem checked={sepia} onCheckedChange={setSepia}>\n              Sepia\n            </MenubarCheckboxItem>\n            <MenubarCheckboxItem checked={vintage} onCheckedChange={setVintage}>\n              Vintage\n            </MenubarCheckboxItem>\n          </MenubarContent>\n        </MenubarMenu>\n      </Menubar>\n    </div>\n  )\n}\n\nexport default MenuBarCheckBoxDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/menubar/menubar-02.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/menubar/menubar-02",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

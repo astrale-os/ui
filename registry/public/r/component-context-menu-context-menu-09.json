@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-context-menu-context-menu-09",
+  "title": "Context Menu 9",
+  "description": "Full-featured context menu combining shortcuts, nested submenus, checkbox toggles, radio group sorting, and destructive actions.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/context-menu/context-menu-09/context-menu-09.tsx",
+      "content": "import { useState } from 'react'\n\nimport {\n  ContextMenu,\n  ContextMenuCheckboxItem,\n  ContextMenuContent,\n  ContextMenuGroup,\n  ContextMenuItem,\n  ContextMenuLabel,\n  ContextMenuRadioGroup,\n  ContextMenuRadioItem,\n  ContextMenuSeparator,\n  ContextMenuShortcut,\n  ContextMenuSub,\n  ContextMenuSubContent,\n  ContextMenuSubTrigger,\n  ContextMenuTrigger\n} from '@astrale-os/ui/context-menu'\n\nconst ContextMenuDemo = () => {\n  const [showPreview, setShowPreview] = useState(true)\n  const [showHiddenFiles, setShowHiddenFiles] = useState(false)\n  const [enableAutosave, setEnableAutosave] = useState(false)\n  const [sortBy, setSortBy] = useState('name')\n\n  return (\n    <ContextMenu>\n      <div className='mt-4 flex w-full max-w-xs flex-col items-start gap-2'>\n        <ContextMenuTrigger className='flex h-45 w-full items-center justify-center rounded-xl border border-dashed text-sm'>\n          Right click here\n        </ContextMenuTrigger>\n        <div className='text-muted-foreground text-sm font-medium'>Menu with all features combined</div>\n      </div>\n      <ContextMenuContent className='w-56'>\n        <ContextMenuGroup>\n          <ContextMenuItem>\n            Open\n            <ContextMenuShortcut>⌘O</ContextMenuShortcut>\n          </ContextMenuItem>\n          <ContextMenuItem disabled>\n            Rename\n            <ContextMenuShortcut>F2</ContextMenuShortcut>\n          </ContextMenuItem>\n          <ContextMenuItem>\n            Download\n            <ContextMenuShortcut>⌘D</ContextMenuShortcut>\n          </ContextMenuItem>\n          <ContextMenuSub>\n            <ContextMenuSubTrigger>More Actions</ContextMenuSubTrigger>\n            <ContextMenuSubContent className='w-44'>\n              <ContextMenuGroup>\n                <ContextMenuItem>Export as PDF...</ContextMenuItem>\n                <ContextMenuItem>Create Shortcut...</ContextMenuItem>\n                <ContextMenuItem>Manage Versions...</ContextMenuItem>\n              </ContextMenuGroup>\n              <ContextMenuSeparator />\n              <ContextMenuGroup>\n                <ContextMenuItem>Permissions</ContextMenuItem>\n              </ContextMenuGroup>\n              <ContextMenuSeparator />\n              <ContextMenuGroup>\n                <ContextMenuItem variant='destructive'>Remove</ContextMenuItem>\n              </ContextMenuGroup>\n            </ContextMenuSubContent>\n          </ContextMenuSub>\n        </ContextMenuGroup>\n\n        <ContextMenuSeparator />\n\n        <ContextMenuGroup>\n          <ContextMenuCheckboxItem checked={showPreview} onCheckedChange={setShowPreview}>\n            Show Preview\n          </ContextMenuCheckboxItem>\n          <ContextMenuCheckboxItem checked={showHiddenFiles} onCheckedChange={setShowHiddenFiles}>\n            Show Hidden Files\n          </ContextMenuCheckboxItem>\n          <ContextMenuCheckboxItem checked={enableAutosave} onCheckedChange={setEnableAutosave}>\n            Enable Autosave\n          </ContextMenuCheckboxItem>\n        </ContextMenuGroup>\n\n        <ContextMenuSeparator />\n\n        <ContextMenuGroup>\n          <ContextMenuRadioGroup value={sortBy} onValueChange={setSortBy}>\n            <ContextMenuLabel>Sort By</ContextMenuLabel>\n            <ContextMenuRadioItem value='name'>Name</ContextMenuRadioItem>\n            <ContextMenuRadioItem value='date'>Date Modified</ContextMenuRadioItem>\n            <ContextMenuRadioItem value='size'>Size</ContextMenuRadioItem>\n          </ContextMenuRadioGroup>\n        </ContextMenuGroup>\n      </ContextMenuContent>\n    </ContextMenu>\n  )\n}\n\nexport default ContextMenuDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/context-menu/context-menu-09.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/context-menu/context-menu-09",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

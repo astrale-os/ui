@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-textarea-textarea-10",
+  "title": "Textarea 10",
+  "description": "Textarea size variations with small, default, and large height options",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/textarea/textarea-10/textarea-10.tsx",
+      "content": "import { Textarea } from '@astrale-os/ui/textarea'\n\nconst TextareaSizesDemo = () => {\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Textarea className='min-h-10 py-1.5' placeholder='Small Textarea' />\n      <Textarea placeholder='Default(Medium) Textarea' />\n      <Textarea className='min-h-20 py-2.5' placeholder='Large Textarea' />\n    </div>\n  )\n}\n\nexport default TextareaSizesDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/textarea/textarea-10.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/textarea/textarea-10",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

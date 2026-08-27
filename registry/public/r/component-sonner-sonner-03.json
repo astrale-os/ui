@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-sonner-sonner-03",
+  "title": "Sonner 3",
+  "description": "A toast notification with custom icon for enhanced visual communication",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0",
+    "sonner@^2.0.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/sonner/sonner-03/sonner-03.tsx",
+      "content": "'use client'\n\nimport { toast } from 'sonner'\nimport { Button } from '@astrale-os/ui/button'\nimport { TruckIcon } from \"lucide-react\"\n\nconst SonnerWithIconDemo = () => {\n  return (\n    <Button\n      variant='outline'\n      onClick={() =>\n        toast(\n          <div className='flex items-center gap-2'>\n            <TruckIcon className='size-5.5 shrink-0' />\n            Your order has been successfully placed, and your parcel is on its way.\n          </div>\n        )\n      }\n    >\n      Toast with icon\n    </Button>\n  )\n}\n\nexport default SonnerWithIconDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/sonner/sonner-03.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/sonner/sonner-03",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

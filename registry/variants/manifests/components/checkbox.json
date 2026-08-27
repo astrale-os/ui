@@ -1,0 +1,431 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-components-checkbox",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "component-checkbox-checkbox-01",
+      "type": "registry:component",
+      "title": "Checkbox 1",
+      "description": "Basic checkbox with label for simple true/false selection",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "checkbox-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/checkbox/checkbox-01.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/checkbox/checkbox-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-checkbox-checkbox-02",
+      "type": "registry:component",
+      "title": "Checkbox 2",
+      "description": "Indeterminate checkbox with custom styling and three-state functionality",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "lucide-react@1.32.0",
+        "radix-ui@^1.6.7",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "checkbox-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/checkbox/checkbox-02.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/checkbox/checkbox-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-checkbox-checkbox-03",
+      "type": "registry:component",
+      "title": "Checkbox 3",
+      "description": "Checkbox with dashed border styling for visual distinction",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "checkbox-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/checkbox/checkbox-03.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/checkbox/checkbox-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-checkbox-checkbox-04",
+      "type": "registry:component",
+      "title": "Checkbox 4",
+      "description": "Todo list checkbox with strikethrough text when checked",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "checkbox-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/checkbox/checkbox-04.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/checkbox/checkbox-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-checkbox-checkbox-05",
+      "type": "registry:component",
+      "title": "Checkbox 5",
+      "description": "Multiple checkboxes in different sizes for size comparison and selection",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "checkbox-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/checkbox/checkbox-05.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/checkbox/checkbox-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-checkbox-checkbox-06",
+      "type": "registry:component",
+      "title": "Checkbox 6",
+      "description": "Badge-style checkboxes with hidden unchecked state for compact selection",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "checkbox-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/checkbox/checkbox-06.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/checkbox/checkbox-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-checkbox-checkbox-07",
+      "type": "registry:component",
+      "title": "Checkbox 7",
+      "description": "Checkbox with description text providing additional context and information",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "checkbox-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/checkbox/checkbox-07.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/checkbox/checkbox-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-checkbox-checkbox-08",
+      "type": "registry:component",
+      "title": "Checkbox 8",
+      "description": "Horizontal group of checkboxes for technology selection with organized layout",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "checkbox-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/checkbox/checkbox-08.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/checkbox/checkbox-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-checkbox-checkbox-09",
+      "type": "registry:component",
+      "title": "Checkbox 9",
+      "description": "Vertical group of checkboxes with icons for fruits selection",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "checkbox-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/checkbox/checkbox-09.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/checkbox/checkbox-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-checkbox-checkbox-10",
+      "type": "registry:component",
+      "title": "Checkbox 10",
+      "description": "Color-themed checkboxes with destructive, info, and success color variants",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "checkbox-10.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/checkbox/checkbox-10.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/checkbox/checkbox-10",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-checkbox-checkbox-11",
+      "type": "registry:component",
+      "title": "Checkbox 11",
+      "description": "Custom icon checkboxes with heart, star, and circle icons for visual feedback",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "lucide-react@1.32.0",
+        "radix-ui@^1.6.7"
+      ],
+      "files": [
+        {
+          "path": "checkbox-11.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/checkbox/checkbox-11.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/checkbox/checkbox-11",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-checkbox-checkbox-12",
+      "type": "registry:component",
+      "title": "Checkbox 12",
+      "description": "Filled circular checkboxes with color themes and circle check icons",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "lucide-react@1.32.0",
+        "radix-ui@^1.6.7"
+      ],
+      "files": [
+        {
+          "path": "checkbox-12.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/checkbox/checkbox-12.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/checkbox/checkbox-12",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-checkbox-checkbox-13",
+      "type": "registry:component",
+      "title": "Checkbox 13",
+      "description": "Card-style checkboxes with border highlighting and description text",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "checkbox-13.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/checkbox/checkbox-13.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/checkbox/checkbox-13",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-checkbox-checkbox-14",
+      "type": "registry:component",
+      "title": "Checkbox 14",
+      "description": "List group checkboxes with icons and skills selection in bordered layout",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "checkbox-14.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/checkbox/checkbox-14.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/checkbox/checkbox-14",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-checkbox-checkbox-15",
+      "type": "registry:component",
+      "title": "Checkbox 15",
+      "description": "Tree checkbox with parent-child relationship and indeterminate state",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "lucide-react@1.32.0",
+        "radix-ui@^1.6.7",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "checkbox-15.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/checkbox/checkbox-15.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/checkbox/checkbox-15",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-checkbox-checkbox-16",
+      "type": "registry:component",
+      "title": "Checkbox 16",
+      "description": "Form checkbox with terms acceptance, description text, and action buttons",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "checkbox-16.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/checkbox/checkbox-16.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/checkbox/checkbox-16",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-checkbox-checkbox-17",
+      "type": "registry:component",
+      "title": "Checkbox 17",
+      "description": "Smooth animated checkbox with motion transitions and visual feedback",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "motion@^13.1.0",
+        "radix-ui@^1.6.7",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "checkbox-17.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/checkbox/checkbox-17.tsx"
+        },
+        {
+          "path": "support/components/ui/motion-checkbox.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/motion-checkbox.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/checkbox/checkbox-17",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-checkbox-checkbox-18",
+      "type": "registry:component",
+      "title": "Checkbox 18",
+      "description": "Animated todo checkbox with strikethrough effect and smooth transitions",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "motion@^13.1.0",
+        "radix-ui@^1.6.7",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "checkbox-18.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/checkbox/checkbox-18.tsx"
+        },
+        {
+          "path": "support/components/ui/motion-checkbox.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/motion-checkbox.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/checkbox/checkbox-18",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-checkbox-checkbox-19",
+      "type": "registry:component",
+      "title": "Checkbox 19",
+      "description": "Checkbox with confetti animation effect when checked",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "motion@^13.1.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "checkbox-19.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/checkbox/checkbox-19.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/checkbox/checkbox-19",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

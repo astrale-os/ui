@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-avatar-avatar-12",
+  "title": "Avatar 12",
+  "description": "Avatar with verified badge showing check mark icon for verified accounts.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/avatar/avatar-12/avatar-12.tsx",
+      "content": "import { Avatar, AvatarFallback, AvatarImage } from '@astrale-os/ui/avatar'\nimport BadgeCheck from '@/assets/svg/badge-check'\n\nconst AvatarVerifiedDemo = () => {\n  return (\n    <div className='relative w-fit'>\n      <Avatar size='lg'>\n        <AvatarImage src='https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-5.png' alt='Hallie Richards' />\n        <AvatarFallback>HR</AvatarFallback>\n      </Avatar>\n      <span className='absolute -top-1.5 -right-1.5'>\n        <span className='sr-only'>Verified</span>\n        <BadgeCheck className='text-background size-5 fill-sky-500' />\n      </span>\n    </div>\n  )\n}\n\nexport default AvatarVerifiedDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/avatar/avatar-12.tsx"
+    },
+    {
+      "path": "source/components/avatar/avatar-12/support/assets/svg/badge-check.tsx",
+      "content": "import type { SVGAttributes } from 'react'\n\nconst BadgeCheck = (props: SVGAttributes<SVGElement>) => {\n  return (\n    <svg\n      xmlns='http://www.w3.org/2000/svg'\n      width='24'\n      height='24'\n      viewBox='0 0 24 24'\n      fill='none'\n      stroke='currentColor'\n      strokeWidth='2'\n      strokeLinecap='round'\n      strokeLinejoin='round'\n      {...props}\n    >\n      <path d='M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z' />\n      <path d='m9 12 2 2 4-4' />\n    </svg>\n  )\n}\n\nexport default BadgeCheck\n",
+      "type": "registry:component",
+      "target": "assets/svg/badge-check.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/avatar/avatar-12",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

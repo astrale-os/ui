@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-skeleton-skeleton-07",
+  "title": "Skeleton 7",
+  "description": "Accordion skeleton with multiple collapsible items represented by line and block placeholders.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/skeleton/skeleton-07/skeleton-07.tsx",
+      "content": "import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@astrale-os/ui/accordion'\nimport { Skeleton } from '@astrale-os/ui/skeleton'\n\nconst items = [\n  {\n    title: <Skeleton className='h-4 w-48' />,\n    content: <Skeleton className='h-20 w-full' />\n  },\n  {\n    title: <Skeleton className='h-4 w-48' />,\n    content: <Skeleton className='h-20 w-full' />\n  },\n  {\n    title: <Skeleton className='h-4 w-48' />,\n    content: <Skeleton className='h-20 w-full' />\n  }\n]\n\nconst SkeletonAccordion = () => {\n  return (\n    <Accordion className='w-full' defaultValue={['item-1']}>\n      {items.map((item, index) => (\n        <AccordionItem key={index} value={`item-${index + 1}`}>\n          <AccordionTrigger>{item.title}</AccordionTrigger>\n          <AccordionContent className='text-muted-foreground'>{item.content}</AccordionContent>\n        </AccordionItem>\n      ))}\n    </Accordion>\n  )\n}\n\nexport default SkeletonAccordion\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/skeleton/skeleton-07.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/skeleton/skeleton-07",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

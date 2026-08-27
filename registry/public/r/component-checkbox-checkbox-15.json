@@ -1,0 +1,28 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-checkbox-checkbox-15",
+  "title": "Checkbox 15",
+  "description": "Tree checkbox with parent-child relationship and indeterminate state",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "@base-ui/react@^1.7.0",
+    "lucide-react@1.32.0",
+    "radix-ui@^1.6.7",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/checkbox/checkbox-15/checkbox-15.tsx",
+      "content": "'use client'\n\nimport { useEffect, useState } from 'react'\n\nimport { Checkbox as CheckboxPrimitive } from '@base-ui/react/checkbox'\nimport { Label } from '@astrale-os/ui/label'\nimport { MinusIcon, CheckIcon } from \"lucide-react\"\n\nconst items = ['Child 1', 'Child 2', 'Child 3']\n\nconst Checkbox = (props: CheckboxPrimitive.Root.Props) => {\n  return (\n    <CheckboxPrimitive.Root\n      data-slot='checkbox'\n      className='peer border-input focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 aria-invalid:aria-checked:border-primary data-indeterminate:text-foreground dark:bg-input/30 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 data-checked:border-primary data-checked:bg-primary data-checked:text-primary-foreground dark:data-checked:bg-primary relative flex size-4 shrink-0 items-center justify-center rounded border transition-colors outline-none group-has-disabled/field:opacity-50 after:absolute after:-inset-x-3 after:-inset-y-2 focus-visible:ring-3 disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:ring-3'\n      {...props}\n    >\n      <CheckboxPrimitive.Indicator\n        data-slot='checkbox-indicator'\n        className='grid place-content-center text-current transition-none'\n      >\n        <MinusIcon className='hidden size-2.5 in-data-indeterminate:block' />\n        <CheckIcon className='hidden size-3.5 in-data-checked:block' />\n      </CheckboxPrimitive.Indicator>\n    </CheckboxPrimitive.Root>\n  )\n}\n\nconst CheckboxTreeDemo = () => {\n  const [checked, setChecked] = useState<boolean>(false)\n  const [indeterminate, setIndeterminate] = useState<boolean>(true)\n  const [selected, setSelected] = useState<string[]>(['Child 1', 'Child 2'])\n\n  useEffect(() => {\n    if (selected.length === items.length) {\n      setChecked(true)\n      setIndeterminate(false)\n    } else if (selected.length > 0) {\n      setChecked(false)\n      setIndeterminate(true)\n    } else {\n      setChecked(false)\n      setIndeterminate(false)\n    }\n  }, [selected])\n\n  const handleCheckedChange = (checked: boolean) => {\n    setChecked(checked)\n\n    if (checked === true) {\n      setSelected([...items])\n    } else if (checked === false) {\n      setSelected([])\n    }\n  }\n\n  return (\n    <div className='flex flex-col gap-4'>\n      <div className='flex items-center gap-2'>\n        <Checkbox id='parent' checked={checked} indeterminate={indeterminate} onCheckedChange={handleCheckedChange} />\n        <Label htmlFor='parent'>Parent</Label>\n      </div>\n      <div className='flex flex-col gap-2 pl-6'>\n        {items.map(label => (\n          <div key={label} className='flex items-center gap-2'>\n            <Checkbox\n              id={label}\n              checked={selected.includes(label)}\n              onCheckedChange={checked =>\n                setSelected(checked ? [...selected, label] : selected.filter(item => item !== label))\n              }\n            />\n            <Label htmlFor={label}>{label}</Label>\n          </div>\n        ))}\n      </div>\n    </div>\n  )\n}\n\nexport default CheckboxTreeDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/checkbox/checkbox-15.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/checkbox/checkbox-15",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-select-select-28",
+  "title": "Select 28",
+  "description": "A custom select dropdown with leading text before the selected value",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/select/select-28/select-28.tsx",
+      "content": "import { useId } from 'react'\n\nimport { Label } from '@astrale-os/ui/label'\nimport { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@astrale-os/ui/select'\n\nconst items = [\n  { label: 'Select a movie', value: null },\n  { label: 'Inception', value: '1' },\n  { label: 'Interstellar', value: '2' },\n  { label: 'The Dark Knight', value: '3' },\n  { label: 'Pulp Fiction', value: '4' }\n]\n\nconst SelectWithLeadingTextDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>Select with leading text</Label>\n      <Select items={items} defaultValue='1'>\n        <SelectTrigger id={id} className='w-full'>\n          Favorite Movie: <SelectValue />\n        </SelectTrigger>\n        <SelectContent alignItemWithTrigger={false} side='bottom' className='p-1'>\n          {items.slice(1).map(item => (\n            <SelectItem key={item.value} value={item.value}>\n              {item.label.replace('Favorite Movie: ', '')}\n            </SelectItem>\n          ))}\n        </SelectContent>\n      </Select>\n    </div>\n  )\n}\n\nexport default SelectWithLeadingTextDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/select/select-28.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/select/select-28",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

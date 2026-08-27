@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-input-input-31",
+  "title": "Input 31",
+  "description": "An email input field with an inline send button positioned at the end",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/input/input-31/input-31.tsx",
+      "content": "import { useId } from 'react'\nimport { Button } from '@astrale-os/ui/button'\nimport { InputGroup, InputGroupAddon, InputGroupInput } from '@astrale-os/ui/input-group'\nimport { Label } from '@astrale-os/ui/label'\nimport { SendHorizonalIcon } from \"lucide-react\"\n\nconst InputEndInlineButtonDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>Input with end inline button</Label>\n      <InputGroup>\n        <InputGroupInput id={id} placeholder='Email address' />\n        <InputGroupAddon align='inline-end'>\n          <Button\n            variant='ghost'\n            size='icon'\n            className='text-muted-foreground focus-visible:ring-ring/50 rounded-l-none hover:bg-transparent'\n          >\n            <SendHorizonalIcon\n            />\n            <span className='sr-only'>Subscribe</span>\n          </Button>\n        </InputGroupAddon>\n      </InputGroup>\n    </div>\n  )\n}\n\nexport default InputEndInlineButtonDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/input/input-31.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/input/input-31",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

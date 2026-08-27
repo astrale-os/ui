@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-badge-badge-01",
+  "title": "Badge 1",
+  "description": "Default badge demonstrating basic styling with standard text display",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/badge/badge-01/badge-01.tsx",
+      "content": "import { Badge } from '@astrale-os/ui/badge'\n\nconst BadgeDemo = () => {\n  return <Badge>Default</Badge>\n}\n\nexport default BadgeDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/badge/badge-01.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/badge/badge-01",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

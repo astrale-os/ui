@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-scroll-area-scroll-area-01",
+  "title": "Scroll Area 1",
+  "description": "A standard vertical scroll area for long text content, featuring a subtle border and rounded corners.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/scroll-area/scroll-area-01/scroll-area-01.tsx",
+      "content": "import { ScrollArea } from '@astrale-os/ui/scroll-area'\n\nconst ScrollAreaDemo = () => {\n  return (\n    <ScrollArea className='h-64 w-64 rounded-md border'>\n      <div className='px-4 py-2'>\n        <h4 className='mb-4 text-sm font-medium'>Scrollable Content</h4>\n        <div className='text-sm leading-relaxed'>\n          {Array.from({ length: 4 }, (_, i) => (\n            <p key={i} className='mb-4'>\n              Paragraph {i + 1}: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor\n              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco\n              laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit\n              esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa\n              qui officia deserunt mollit anim id est laborum.\n            </p>\n          ))}\n        </div>\n      </div>\n    </ScrollArea>\n  )\n}\n\nexport default ScrollAreaDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/scroll-area/scroll-area-01.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/scroll-area/scroll-area-01",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

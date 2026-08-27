@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-input-input-27",
+  "title": "Input 27",
+  "description": "A file input field with custom styling for the file picker button",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/input/input-27/input-27.tsx",
+      "content": "import { useId } from 'react'\n\nimport { Input } from '@astrale-os/ui/input'\nimport { Label } from '@astrale-os/ui/label'\n\nconst InputFileDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>File input</Label>\n      <Input\n        id={id}\n        type='file'\n        className='text-muted-foreground file:border-input file:text-foreground p-0 pr-3 italic file:mr-3 file:h-full file:border-0 file:border-r file:border-solid file:bg-transparent file:px-3 file:text-sm file:font-medium file:not-italic'\n      />\n    </div>\n  )\n}\n\nexport default InputFileDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/input/input-27.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/input/input-27",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tailwind-utils",
+  "type": "registry:lib",
+  "title": "utils",
+  "dependencies": [
+    "react-aria-components",
+    "tailwind-merge",
+    "tailwind-variants",
+    "tailwindcss-react-aria-components",
+    "tw-animate-css"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "lib/react-aria-utils.ts",
+      "type": "registry:lib",
+      "content": "import {composeRenderProps} from 'react-aria-components/composeRenderProps';\nimport {twMerge} from 'tailwind-merge';\nimport {tv} from 'tailwind-variants';\n\nexport const focusRing = tv({\n  base: 'outline outline-blue-600 dark:outline-blue-500 forced-colors:outline-[Highlight] outline-offset-2',\n  variants: {\n    isFocusVisible: {\n      false: 'outline-0',\n      true: 'outline-2'\n    }\n  }\n});\n\nexport function composeTailwindRenderProps<T>(\n  className: string | ((v: T) => string) | undefined,\n  tw: string\n): string | ((v: T) => string) {\n  return composeRenderProps(className, className => twMerge(tw, className));\n}\n"
+    }
+  ],
+  "css": {
+    "@plugin \"tailwindcss-react-aria-components\"": {},
+    "@import \"tw-animate-css\"": {}
+  }
+}

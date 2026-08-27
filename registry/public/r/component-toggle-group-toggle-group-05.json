@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-toggle-group-toggle-group-05",
+  "title": "Toggle Group 5",
+  "description": "Vertical outline toggle group with icon-only items for switching between column, grid, and list view layouts.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/toggle-group/toggle-group-05/toggle-group-05.tsx",
+      "content": "import { ToggleGroup, ToggleGroupItem } from '@astrale-os/ui/toggle-group'\nimport { Columns2Icon, LayoutGridIcon, ListIcon } from \"lucide-react\"\n\nconst ToggleGroupVertical = () => {\n  return (\n    <ToggleGroup variant='outline' orientation='vertical' defaultValue={['layout']} spacing={0}>\n      <ToggleGroupItem value='col' aria-label='Toggle columns'>\n        <Columns2Icon\n        />\n      </ToggleGroupItem>\n      <ToggleGroupItem value='layout' aria-label='Toggle layout'>\n        <LayoutGridIcon\n        />\n      </ToggleGroupItem>\n      <ToggleGroupItem value='list' aria-label='Toggle list'>\n        <ListIcon\n        />\n      </ToggleGroupItem>\n    </ToggleGroup>\n  )\n}\n\nexport default ToggleGroupVertical\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/toggle-group/toggle-group-05.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/toggle-group/toggle-group-05",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

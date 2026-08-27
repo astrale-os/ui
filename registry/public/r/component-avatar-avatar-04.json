@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-avatar-avatar-04",
+  "title": "Avatar 4",
+  "description": "Large sized avatar variant with expanded dimensions.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/avatar/avatar-04/avatar-04.tsx",
+      "content": "import { Avatar, AvatarFallback, AvatarImage } from '@astrale-os/ui/avatar'\n\nconst AvatarSizeDemo = () => {\n  return (\n    <Avatar size='lg'>\n      <AvatarImage src='https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-5.png' alt='Hallie Richards' />\n      <AvatarFallback>HR</AvatarFallback>\n    </Avatar>\n  )\n}\n\nexport default AvatarSizeDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/avatar/avatar-04.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/avatar/avatar-04",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-button-button-53",
+  "title": "Button 53",
+  "description": "Button with stitched border design using layered shadow effects",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "class-variance-authority@^0.7.1",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/button/button-53/button-53.tsx",
+      "content": "import { PrimaryGrowButton } from '@/components/ui/grow-button'\n\nconst PrimaryGrowButtonDemo = () => {\n  return <PrimaryGrowButton>Grow Button</PrimaryGrowButton>\n}\n\nexport default PrimaryGrowButtonDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/button/button-53.tsx"
+    },
+    {
+      "path": "source/components/button/button-53/support/components/ui/grow-button.tsx",
+      "content": "'use client'\n\nimport * as React from 'react'\n\nimport { Button } from '@astrale-os/ui/button'\n\nimport { cn } from '@astrale-os/ui/class-name'\n\ninterface GrowButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'render'> {\n  children?: React.ReactNode\n  render?: React.ReactElement\n}\n\nfunction PrimaryGrowButton(props: GrowButtonProps) {\n  const { children, render, className, ...rest } = props\n\n  return (\n    <Button\n      render={render}\n      nativeButton={!render}\n      className={cn(\n        'hover:bg-primary/90 [a]:hover:bg-primary/90 h-10 gap-2 rounded-lg border-0 px-6 text-base duration-200 ease-in-out active:-translate-x-0.5 active:translate-y-0.5',\n\n        // default shadows\n        '[box-shadow:0px_1px_8px_0px_color-mix(in_oklab,white_7%,transparent)_inset,0px_0px_4.3px_0px_color-mix(in_oklab,var(--primary)_11%,transparent)_inset,0px_0px_0px_2.5px_var(--primary),0px_9px_21.7px_3px_color-mix(in_oklab,var(--primary)_40%,transparent),0px_-1px_0px_1px_color-mix(in_oklab,white_18%,transparent)_inset,0px_4px_4px_0px_color-mix(in_oklab,var(--primary)_16%,transparent)] dark:[box-shadow:0px_1px_8px_0px_color-mix(in_oklab,black_7%,transparent)_inset,0px_0px_4.3px_0px_color-mix(in_oklab,var(--primary)_11%,transparent)_inset,0px_0px_0px_2.5px_var(--primary),0px_9px_21.7px_3px_color-mix(in_oklab,var(--primary)_40%,transparent),0px_-1px_0px_1px_color-mix(in_oklab,black_18%,transparent)_inset,0px_4px_4px_0px_color-mix(in_oklab,var(--primary)_16%,transparent)]',\n\n        // shadows on active state\n        'active:[box-shadow:0px_1px_8px_0px_color-mix(in_oklab,white_7%,transparent)_inset,0px_0px_4.3px_0px_color-mix(in_oklab,var(--primary)_11%,transparent)_inset,0px_0px_0px_2.5px_var(--primary),0px_7px_12px_0px_color-mix(in_oklab,var(--primary)_60%,transparent),0px_-1px_0px_1px_color-mix(in_oklab,white_18%,transparent)_inset,0px_4px_4px_0px_color-mix(in_oklab,var(--primary)_16%,transparent)] dark:active:[box-shadow:0px_1px_8px_0px_color-mix(in_oklab,black_7%,transparent)_inset,0px_0px_4.3px_0px_color-mix(in_oklab,var(--primary)_11%,transparent)_inset,0px_0px_0px_2.5px_var(--primary),0px_7px_12px_0px_color-mix(in_oklab,var(--primary)_60%,transparent),0px_-1px_0px_1px_color-mix(in_oklab,black_18%,transparent)_inset,0px_4px_4px_0px_color-mix(in_oklab,var(--primary)_16%,transparent)]',\n\n        // shadows on focus state\n        'focus-visible:[box-shadow:0px_1px_8px_0px_color-mix(in_oklab,white_7%,transparent)_inset,0px_0px_4.3px_0px_color-mix(in_oklab,var(--primary)_11%,transparent)_inset,0px_0px_0px_2.5px_var(--primary),0px_7px_12px_0px_color-mix(in_oklab,var(--primary)_60%,transparent),0px_-1px_0px_1px_color-mix(in_oklab,white_18%,transparent)_inset,0px_4px_4px_0px_color-mix(in_oklab,var(--primary)_16%,transparent)] dark:focus-visible:[box-shadow:0px_1px_8px_0px_color-mix(in_oklab,black_7%,transparent)_inset,0px_0px_4.3px_0px_color-mix(in_oklab,var(--primary)_11%,transparent)_inset,0px_0px_0px_2.5px_var(--primary),0px_7px_12px_0px_color-mix(in_oklab,var(--primary)_60%,transparent),0px_-1px_0px_1px_color-mix(in_oklab,black_18%,transparent)_inset,0px_4px_4px_0px_color-mix(in_oklab,var(--primary)_16%,transparent)]',\n        className\n      )}\n      {...rest}\n    >\n      {children}\n    </Button>\n  )\n}\n\nfunction SecondaryGrowButton(props: GrowButtonProps) {\n  const { children, render, className, ...rest } = props\n\n  return (\n    <Button\n      variant='secondary'\n      render={render}\n      nativeButton={!render}\n      className={cn(\n        'text-primary h-10 cursor-pointer gap-2 rounded-lg border border-[color-mix(in_oklab,var(--primary)_30%,var(--card))] bg-[color-mix(in_oklab,var(--primary)_10%,var(--card))] px-6 text-base hover:bg-[color-mix(in_oklab,var(--primary)_15%,var(--card))] active:translate-y-0 active:scale-95',\n        className\n      )}\n      {...rest}\n    >\n      {children}\n    </Button>\n  )\n}\n\nexport { PrimaryGrowButton, SecondaryGrowButton, type GrowButtonProps }\n",
+      "type": "registry:ui",
+      "target": "components/ui/grow-button.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/button/button-53",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

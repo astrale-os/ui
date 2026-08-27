@@ -1,0 +1,762 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-components-calendar",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "component-calendar-calendar-01",
+      "type": "registry:component",
+      "title": "Calendar 1",
+      "description": "Basic single date selection calendar with default month display",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react-day-picker@^10.0.1",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "calendar-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/calendar/calendar-01.tsx"
+        },
+        {
+          "path": "support/components/ui/calendar.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/calendar.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/calendar/calendar-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-calendar-calendar-02",
+      "type": "registry:component",
+      "title": "Calendar 2",
+      "description": "Multi-month calendar displaying two months side by side for single date selection",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react-day-picker@^10.0.1",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "calendar-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/calendar/calendar-02.tsx"
+        },
+        {
+          "path": "support/components/ui/calendar.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/calendar.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/calendar/calendar-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-calendar-calendar-03",
+      "type": "registry:component",
+      "title": "Calendar 3",
+      "description": "Single month calendar with date range selection capability",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react-day-picker@^10.0.1",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "calendar-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/calendar/calendar-03.tsx"
+        },
+        {
+          "path": "support/components/ui/calendar.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/calendar.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/calendar/calendar-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-calendar-calendar-04",
+      "type": "registry:component",
+      "title": "Calendar 4",
+      "description": "Multi-month calendar with date range selection across multiple months",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react-day-picker@^10.0.1",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "calendar-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/calendar/calendar-04.tsx"
+        },
+        {
+          "path": "support/components/ui/calendar.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/calendar.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/calendar/calendar-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-calendar-calendar-05",
+      "type": "registry:component",
+      "title": "Calendar 5",
+      "description": "Range selection calendar with minimum days constraint (5 days minimum)",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react-day-picker@^10.0.1",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "calendar-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/calendar/calendar-05.tsx"
+        },
+        {
+          "path": "support/components/ui/calendar.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/calendar.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/calendar/calendar-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-calendar-calendar-06",
+      "type": "registry:component",
+      "title": "Calendar 6",
+      "description": "Calendar with disabled dates before a specific date for restricted selection",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react-day-picker@^10.0.1",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "calendar-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/calendar/calendar-06.tsx"
+        },
+        {
+          "path": "support/components/ui/calendar.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/calendar.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/calendar/calendar-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-calendar-calendar-07",
+      "type": "registry:component",
+      "title": "Calendar 7",
+      "description": "Range calendar with disabled weekends for business day selection only",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react-day-picker@^10.0.1",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "calendar-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/calendar/calendar-07.tsx"
+        },
+        {
+          "path": "support/components/ui/calendar.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/calendar.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/calendar/calendar-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-calendar-calendar-08",
+      "type": "registry:component",
+      "title": "Calendar 8",
+      "description": "Localized calendar with language switching between English and Hindi",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react-day-picker@^10.0.1",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "calendar-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/calendar/calendar-08.tsx"
+        },
+        {
+          "path": "support/components/ui/calendar.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/calendar.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/calendar/calendar-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-calendar-calendar-09",
+      "type": "registry:component",
+      "title": "Calendar 9",
+      "description": "Calendar with month and year dropdown selectors for easy navigation",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react-day-picker@^10.0.1",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "calendar-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/calendar/calendar-09.tsx"
+        },
+        {
+          "path": "support/components/ui/calendar.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/calendar.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/calendar/calendar-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-calendar-calendar-10",
+      "type": "registry:component",
+      "title": "Calendar 10",
+      "description": "Variable size calendar with responsive cell sizing for different screen sizes",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react-day-picker@^10.0.1",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "calendar-10.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/calendar/calendar-10.tsx"
+        },
+        {
+          "path": "support/components/ui/calendar.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/calendar.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/calendar/calendar-10",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-calendar-calendar-11",
+      "type": "registry:component",
+      "title": "Calendar 11",
+      "description": "Event calendar with integrated event list display and add event functionality",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "little-date@^1.2.1",
+        "lucide-react@1.32.0",
+        "react-day-picker@^10.0.1",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "calendar-11.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/calendar/calendar-11.tsx"
+        },
+        {
+          "path": "support/components/ui/calendar.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/calendar.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/calendar/calendar-11",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-calendar-calendar-12",
+      "type": "registry:component",
+      "title": "Calendar 12",
+      "description": "Multi-select calendar allowing selection of multiple individual dates",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react-day-picker@^10.0.1",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "calendar-12.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/calendar/calendar-12.tsx"
+        },
+        {
+          "path": "support/components/ui/calendar.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/calendar.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/calendar/calendar-12",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-calendar-calendar-13",
+      "type": "registry:component",
+      "title": "Calendar 13",
+      "description": "Custom styled calendar with sky blue theme for selected dates",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react-day-picker@^10.0.1",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "calendar-13.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/calendar/calendar-13.tsx"
+        },
+        {
+          "path": "support/components/ui/calendar.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/calendar.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/calendar/calendar-13",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-calendar-calendar-14",
+      "type": "registry:component",
+      "title": "Calendar 14",
+      "description": "Custom styled range calendar with sky blue theme for date range selection",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react-day-picker@^10.0.1",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "calendar-14.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/calendar/calendar-14.tsx"
+        },
+        {
+          "path": "support/components/ui/calendar.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/calendar.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/calendar/calendar-14",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-calendar-calendar-15",
+      "type": "registry:component",
+      "title": "Calendar 15",
+      "description": "Calendar with right-aligned navigation controls for alternative layout",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react-day-picker@^10.0.1",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "calendar-15.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/calendar/calendar-15.tsx"
+        },
+        {
+          "path": "support/components/ui/calendar.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/calendar.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/calendar/calendar-15",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-calendar-calendar-16",
+      "type": "registry:component",
+      "title": "Calendar 16",
+      "description": "Calendar with left-aligned navigation controls for alternative layout",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react-day-picker@^10.0.1",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "calendar-16.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/calendar/calendar-16.tsx"
+        },
+        {
+          "path": "support/components/ui/calendar.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/calendar.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/calendar/calendar-16",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-calendar-calendar-17",
+      "type": "registry:component",
+      "title": "Calendar 17",
+      "description": "Calendar with week numbers displayed for week-based scheduling",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react-day-picker@^10.0.1",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "calendar-17.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/calendar/calendar-17.tsx"
+        },
+        {
+          "path": "support/components/ui/calendar.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/calendar.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/calendar/calendar-17",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-calendar-calendar-18",
+      "type": "registry:component",
+      "title": "Calendar 18",
+      "description": "Calendar with \"Today\" quick action button for fast current date selection",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react-day-picker@^10.0.1",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "calendar-18.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/calendar/calendar-18.tsx"
+        },
+        {
+          "path": "support/components/ui/calendar.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/calendar.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/calendar/calendar-18",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-calendar-calendar-19",
+      "type": "registry:component",
+      "title": "Calendar 19",
+      "description": "Calendar with synchronized date input field for manual date entry",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "date-fns@^4.4.0",
+        "lucide-react@1.32.0",
+        "react-day-picker@^10.0.1",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "calendar-19.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/calendar/calendar-19.tsx"
+        },
+        {
+          "path": "support/components/ui/calendar.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/calendar.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/calendar/calendar-19",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-calendar-calendar-20",
+      "type": "registry:component",
+      "title": "Calendar 20",
+      "description": "Calendar with integrated time input for complete datetime selection",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react-day-picker@^10.0.1",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "calendar-20.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/calendar/calendar-20.tsx"
+        },
+        {
+          "path": "support/components/ui/calendar.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/calendar.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/calendar/calendar-20",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-calendar-calendar-21",
+      "type": "registry:component",
+      "title": "Calendar 21",
+      "description": "Advanced calendar with collapsible year/month selection and custom navigation",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "date-fns@^4.4.0",
+        "lucide-react@1.32.0",
+        "react-day-picker@^10.0.1",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "calendar-21.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/calendar/calendar-21.tsx"
+        },
+        {
+          "path": "support/components/ui/calendar.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/calendar.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/calendar/calendar-21",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-calendar-calendar-22",
+      "type": "registry:component",
+      "title": "Calendar 22",
+      "description": "Calendar with preset date shortcuts (Today, Yesterday, Tomorrow, in 3 days, in a week, etc.)",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "date-fns@^4.4.0",
+        "lucide-react@1.32.0",
+        "react-day-picker@^10.0.1",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "calendar-22.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/calendar/calendar-22.tsx"
+        },
+        {
+          "path": "support/components/ui/calendar.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/calendar.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/calendar/calendar-22",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-calendar-calendar-23",
+      "type": "registry:component",
+      "title": "Calendar 23",
+      "description": "Range calendar with preset date range shortcuts (Last week, month, year, etc.)",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "date-fns@^4.4.0",
+        "lucide-react@1.32.0",
+        "react-day-picker@^10.0.1",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "calendar-23.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/calendar/calendar-23.tsx"
+        },
+        {
+          "path": "support/components/ui/calendar.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/calendar.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/calendar/calendar-23",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-calendar-calendar-24",
+      "type": "registry:component",
+      "title": "Calendar 24",
+      "description": "Appointment booking calendar with time slot selection and availability indicators",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react-day-picker@^10.0.1",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "calendar-24.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/calendar/calendar-24.tsx"
+        },
+        {
+          "path": "support/components/ui/calendar.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/calendar.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/calendar/calendar-24",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-calendar-calendar-25",
+      "type": "registry:component",
+      "title": "Calendar 25",
+      "description": "Pricing calendar with dynamic price display for each date based on availability",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react-day-picker@^10.0.1",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "calendar-25.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/calendar/calendar-25.tsx"
+        },
+        {
+          "path": "support/components/ui/calendar.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/calendar.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/calendar/calendar-25",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

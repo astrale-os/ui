@@ -1,0 +1,340 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-patterns-stepper",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "pattern-stepper-stepper-01",
+      "type": "registry:block",
+      "title": "Stepper 1",
+      "description": "A clean, horizontal stepper featuring numerical indicators and connecting lines for tracking multi-step progress.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "@stepperize/react@^6.0.1", "react@19.2.8"],
+      "files": [
+        {
+          "path": "stepper-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/stepper/stepper-01.tsx"
+        },
+        {
+          "path": "support/components/ui/stepper.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/stepper.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/stepper/stepper-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-stepper-stepper-02",
+      "type": "registry:block",
+      "title": "Stepper 2",
+      "description": "A horizontal stepper with centered labels beneath each numerical indicator, ideal for descriptive multi-stage workflows.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "@stepperize/react@^6.0.1", "react@19.2.8"],
+      "files": [
+        {
+          "path": "stepper-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/stepper/stepper-02.tsx"
+        },
+        {
+          "path": "support/components/ui/stepper.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/stepper.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/stepper/stepper-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-stepper-stepper-03",
+      "type": "registry:block",
+      "title": "Stepper 3",
+      "description": "A comprehensive horizontal stepper including both titles and detailed descriptions for each stage of the process.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "@stepperize/react@^6.0.1", "react@19.2.8"],
+      "files": [
+        {
+          "path": "stepper-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/stepper/stepper-03.tsx"
+        },
+        {
+          "path": "support/components/ui/stepper.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/stepper.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/stepper/stepper-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-stepper-stepper-04",
+      "type": "registry:block",
+      "title": "Stepper 4",
+      "description": "A compact horizontal stepper with labels positioned inline with the numerical indicators for better space efficiency.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "@stepperize/react@^6.0.1", "react@19.2.8"],
+      "files": [
+        {
+          "path": "stepper-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/stepper/stepper-04.tsx"
+        },
+        {
+          "path": "support/components/ui/stepper.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/stepper.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/stepper/stepper-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-stepper-stepper-05",
+      "type": "registry:block",
+      "title": "Stepper 5",
+      "description": "A responsive stepper that automatically transitions from a horizontal to a vertical layout on smaller screen sizes.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "@stepperize/react@^6.0.1", "react@19.2.8"],
+      "files": [
+        {
+          "path": "stepper-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/stepper/stepper-05.tsx"
+        },
+        {
+          "path": "support/components/ui/stepper.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/stepper.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/stepper/stepper-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-stepper-stepper-06",
+      "type": "registry:block",
+      "title": "Stepper 6",
+      "description": "A minimalist horizontal stepper utilizing outlined numerical indicators for a lighter visual footprint.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "@stepperize/react@^6.0.1", "react@19.2.8"],
+      "files": [
+        {
+          "path": "stepper-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/stepper/stepper-06.tsx"
+        },
+        {
+          "path": "support/components/ui/stepper.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/stepper.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/stepper/stepper-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-stepper-stepper-07",
+      "type": "registry:block",
+      "title": "Stepper 7",
+      "description": "A horizontal stepper that replaces numerical indicators with checkmark icons upon step completion for a clearer success state.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@stepperize/react@^6.0.1",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "stepper-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/stepper/stepper-07.tsx"
+        },
+        {
+          "path": "support/components/ui/stepper.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/stepper.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/stepper/stepper-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-stepper-stepper-08",
+      "type": "registry:block",
+      "title": "Stepper 8",
+      "description": "An interactive horizontal stepper integrated with content panels and navigation buttons for a full multi-page workflow.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@stepperize/react@^6.0.1",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "stepper-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/stepper/stepper-08.tsx"
+        },
+        {
+          "path": "support/components/ui/stepper.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/stepper.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/stepper/stepper-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-stepper-stepper-09",
+      "type": "registry:block",
+      "title": "Stepper 9",
+      "description": "A vertical stepper layout with lateral labels and descriptions, ideal for sidebars or narrow content areas.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@stepperize/react@^6.0.1",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "stepper-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/stepper/stepper-09.tsx"
+        },
+        {
+          "path": "support/components/ui/stepper.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/stepper.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/stepper/stepper-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-stepper-stepper-10",
+      "type": "registry:block",
+      "title": "Stepper 10",
+      "description": "A feature-rich stepper integrated with React Hook Form and Zod for validated, multi-step data entry workflows.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@hookform/resolvers@^5.9.1",
+        "@stepperize/react@^6.0.1",
+        "lucide-react@1.32.0",
+        "react-hook-form@^7.85.0",
+        "react@19.2.8",
+        "zod@3.25.76"
+      ],
+      "files": [
+        {
+          "path": "stepper-10.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/stepper/stepper-10.tsx"
+        },
+        {
+          "path": "support/components/ui/stepper.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/stepper.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/stepper/stepper-10",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-stepper-stepper-11",
+      "type": "registry:block",
+      "title": "Stepper 11",
+      "description": "A non-linear horizontal stepper that allows users to jump between steps and track individual step completion status.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@stepperize/react@^6.0.1",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "stepper-11.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/stepper/stepper-11.tsx"
+        },
+        {
+          "path": "support/components/ui/stepper.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/stepper.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/stepper/stepper-11",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-stepper-stepper-12",
+      "type": "registry:block",
+      "title": "Stepper 12",
+      "description": "A vertical stepper designed for long-form content, featuring smooth scroll-into-view behavior for active content blocks.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@stepperize/react@^6.0.1",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "stepper-12.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/stepper/stepper-12.tsx"
+        },
+        {
+          "path": "support/components/ui/stepper.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/stepper.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/stepper/stepper-12",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

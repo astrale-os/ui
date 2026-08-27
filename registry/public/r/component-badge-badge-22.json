@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-badge-badge-22",
+  "title": "Badge 22",
+  "description": "Avatar badge combining user profile image with label text",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/badge/badge-22/badge-22.tsx",
+      "content": "import { Badge } from '@astrale-os/ui/badge'\n\nconst BadgeAvatarDemo = () => {\n  return (\n    <Badge variant='outline' className='h-auto p-1 pr-2'>\n      <img\n        src='https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-5.png'\n        alt='Hallie Richards'\n        className='size-6 rounded-full'\n      />\n      Avatar\n    </Badge>\n  )\n}\n\nexport default BadgeAvatarDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/badge/badge-22.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/badge/badge-22",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

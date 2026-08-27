@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pattern-date-and-time-picker-date-picker-08",
+  "title": "Date Picker 8",
+  "description": "Simple time input field with step control for precise time selection",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/patterns/date-and-time-picker/date-picker-08/date-picker-08.tsx",
+      "content": "import { Input } from '@astrale-os/ui/input'\nimport { Label } from '@astrale-os/ui/label'\n\nconst DatePickerDemo = () => {\n  return (\n    <div className='flex w-full max-w-xs flex-col gap-2'>\n      <Label htmlFor='time-picker' className='px-1'>\n        Time input\n      </Label>\n      <Input\n        type='time'\n        id='time-picker'\n        step='1'\n        defaultValue='08:30:00'\n        className='bg-background appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none'\n      />\n    </div>\n  )\n}\n\nexport default DatePickerDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/pattern/date-and-time-picker/date-picker-08.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "pattern/date-and-time-picker/date-picker-08",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:block"
+}

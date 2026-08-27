@@ -1,0 +1,363 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-components-button-group",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "component-button-group-button-group-01",
+      "type": "registry:component",
+      "title": "Button Group 1",
+      "description": "Download button group with action button and download count display",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "button-group-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button-group/button-group-01.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button-group/button-group-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-group-button-group-02",
+      "type": "registry:component",
+      "title": "Button Group 2",
+      "description": "Interactive like button group with toggle state and dynamic count",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "button-group-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button-group/button-group-02.tsx"
+        },
+        {
+          "path": "support/assets/svg/heart.tsx",
+          "type": "registry:component",
+          "target": "assets/svg/heart.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button-group/button-group-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-group-button-group-03",
+      "type": "registry:component",
+      "title": "Button Group 3",
+      "description": "Toolbar button group with tooltips for design tools and actions",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "button-group-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button-group/button-group-03.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button-group/button-group-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-group-button-group-04",
+      "type": "registry:component",
+      "title": "Button Group 4",
+      "description": "Rounded media control button group with play, pause, and skip functions",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "button-group-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button-group/button-group-04.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button-group/button-group-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-group-button-group-05",
+      "type": "registry:component",
+      "title": "Button Group 5",
+      "description": "Social media links button group with branded colors and hover effects",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "button-group-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button-group/button-group-05.tsx"
+        },
+        {
+          "path": "support/assets/svg/dribbble-icon.tsx",
+          "type": "registry:component",
+          "target": "assets/svg/dribbble-icon.tsx"
+        },
+        {
+          "path": "support/assets/svg/facebook-icon.tsx",
+          "type": "registry:component",
+          "target": "assets/svg/facebook-icon.tsx"
+        },
+        {
+          "path": "support/assets/svg/instagram-icon.tsx",
+          "type": "registry:component",
+          "target": "assets/svg/instagram-icon.tsx"
+        },
+        {
+          "path": "support/assets/svg/twitch-icon.tsx",
+          "type": "registry:component",
+          "target": "assets/svg/twitch-icon.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button-group/button-group-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-group-button-group-06",
+      "type": "registry:component",
+      "title": "Button Group 6",
+      "description": "Zoom control button group with increment/decrement and percentage display",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "button-group-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button-group/button-group-06.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button-group/button-group-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-group-button-group-07",
+      "type": "registry:component",
+      "title": "Button Group 7",
+      "description": "Number input button group with plus/minus controls and value display",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "button-group-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button-group/button-group-07.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button-group/button-group-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-group-button-group-08",
+      "type": "registry:component",
+      "title": "Button Group 8",
+      "description": "Preview link button group with primary action and external link icon",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "button-group-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button-group/button-group-08.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button-group/button-group-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-group-button-group-09",
+      "type": "registry:component",
+      "title": "Button Group 9",
+      "description": "Action button group with edit, duplicate, and delete functions",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "button-group-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button-group/button-group-09.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button-group/button-group-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-group-button-group-10",
+      "type": "registry:component",
+      "title": "Button Group 10",
+      "description": "Flip transformation button group with horizontal and vertical controls",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "button-group-10.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button-group/button-group-10.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button-group/button-group-10",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-group-button-group-11",
+      "type": "registry:component",
+      "title": "Button Group 11",
+      "description": "Git merge button group with dropdown menu for merge strategy selection",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "button-group-11.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button-group/button-group-11.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button-group/button-group-11",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-group-button-group-12",
+      "type": "registry:component",
+      "title": "Button Group 12",
+      "description": "Ghost variant button group for navigation between settings, dashboard, and analytics",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "button-group-12.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button-group/button-group-12.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button-group/button-group-12",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-group-button-group-13",
+      "type": "registry:component",
+      "title": "Button Group 13",
+      "description": "Email action button group with ripple animation effects",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "class-variance-authority@^0.7.1",
+        "lucide-react@1.32.0",
+        "motion@^13.1.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "button-group-13.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button-group/button-group-13.tsx"
+        },
+        {
+          "path": "support/components/ui/ripple-button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/ripple-button.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button-group/button-group-13",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-group-button-group-14",
+      "type": "registry:component",
+      "title": "Button Group 14",
+      "description": "Like/dislike button group with expandable hover reveal animation",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "button-group-14.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button-group/button-group-14.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button-group/button-group-14",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-group-button-group-15",
+      "type": "registry:component",
+      "title": "Button Group 15",
+      "description": "Navigation button group with scale animation on press using Framer Motion",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "motion@^13.1.0"],
+      "files": [
+        {
+          "path": "button-group-15.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button-group/button-group-15.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button-group/button-group-15",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-button-group-button-group-16",
+      "type": "registry:component",
+      "title": "Button Group 16",
+      "description": "File action button group with animated shine/shimmer hover effect",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "button-group-16.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/button-group/button-group-16.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/button-group/button-group-16",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-alert-alert-08",
+  "title": "Alert 8",
+  "description": "Multi-action alert with primary background, multiple buttons, and dismissible interface.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/alert/alert-08/alert-08.tsx",
+      "content": "import { useState } from 'react'\nimport { Alert, AlertAction, AlertDescription, AlertTitle } from '@astrale-os/ui/alert'\nimport { Button } from '@astrale-os/ui/button'\nimport { CircleAlertIcon, XIcon } from \"lucide-react\"\n\nconst AlertMultipleActionDemo = () => {\n  const [isActive, setIsActive] = useState(true)\n\n  if (!isActive) return null\n\n  return (\n    <Alert className='bg-primary text-primary-foreground border-none'>\n      <CircleAlertIcon\n      />\n      <AlertTitle>A new update is available</AlertTitle>\n      <AlertDescription className='text-primary-foreground/80'>\n        <p className='mb-2!'>Includes the at new dashboard View. Pages end exports will now load taster</p>\n        <div className='flex items-center gap-3'>\n          <Button\n            size='xs'\n            className='bg-secondary/10 hover:bg-secondary/20 focus-visible:bg-secondary/20 cursor-pointer'\n          >\n            Skip this update\n          </Button>\n          <Button variant='secondary' size='xs' className='cursor-pointer'>\n            Install now\n          </Button>\n        </div>\n      </AlertDescription>\n      <AlertAction>\n        <button className='cursor-pointer' onClick={() => setIsActive(false)}>\n          <XIcon className='size-4' />\n          <span className='sr-only'>Close</span>\n        </button>\n      </AlertAction>\n    </Alert>\n  )\n}\n\nexport default AlertMultipleActionDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/alert/alert-08.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/alert/alert-08",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-drawer-drawer-15",
+  "title": "Drawer 15",
+  "description": "Animated bottom drawer with staggered fade-up motion for a product promo, original/discounted pricing, and a gradient buy-now button.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0",
+    "motion@^13.1.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/drawer/drawer-15/drawer-15.tsx",
+      "content": "'use client'\n\nimport { motion } from 'motion/react'\nimport { Button } from '@astrale-os/ui/button'\nimport {\n  Drawer,\n  DrawerContent,\n  DrawerFooter,\n  DrawerHeader,\n  DrawerTitle,\n  DrawerTrigger,\n  DrawerClose\n} from '@astrale-os/ui/drawer'\nimport { FingerprintPatternIcon } from \"lucide-react\"\n\nconst DrawerProfile = () => {\n  return (\n    <Drawer>\n      <DrawerTrigger render={<Button variant='outline' />}>Open Drawer</DrawerTrigger>\n      <DrawerContent>\n        <div className='mx-auto w-full max-w-sm px-4'>\n          <motion.div\n            initial={{ y: 30, opacity: 0 }}\n            animate={{ y: 0, opacity: 1 }}\n            transition={{ duration: 0.35, ease: 'easeOut', delay: 0.15 }}\n          >\n            <DrawerHeader>\n              <DrawerTitle className='flex items-center justify-center gap-2'>\n                <img\n                  src='https://cdn.shadcnstudio.com/ss-assets/blocks/dashboard-application/dropdown/image-10.png'\n                  alt='Shadcn Studio'\n                  className='size-6'\n                />\n                <span className='text-lg font-medium'>Shadcn Studio</span>\n              </DrawerTitle>\n            </DrawerHeader>\n          </motion.div>\n          <motion.p\n            initial={{ y: 30, opacity: 0 }}\n            animate={{ y: 0, opacity: 1 }}\n            transition={{ duration: 0.35, ease: 'easeOut', delay: 0.18 }}\n            className='text-sm'\n          >\n            Accelerate your project development with ready-to-use, and fully customizable shadcn ui Components, Blocks,\n            UI Kits, Boilerplates, Templates and Themes with AI Tools.\n          </motion.p>\n          <motion.div\n            className='mt-2 flex items-center justify-center gap-2'\n            initial={{ y: 30, opacity: 0 }}\n            animate={{ y: 0, opacity: 1 }}\n            transition={{ duration: 0.35, ease: 'easeOut', delay: 0.24 }}\n          >\n            <p className='text-xl font-medium'>$249</p>\n            <div className='flex flex-col items-start'>\n              <p className='text-muted-foreground text-sm line-through'>$359</p>\n              <p className='text-muted-foreground text-sm'>One-time pay</p>\n            </div>\n          </motion.div>\n          <motion.div\n            initial={{ y: 30, opacity: 0 }}\n            animate={{ y: 0, opacity: 1 }}\n            transition={{ duration: 0.35, ease: 'easeOut', delay: 0.36 }}\n          >\n            <DrawerFooter>\n              <div className='group relative'>\n                <Button className='w-full border-0 bg-linear-to-r from-indigo-500 to-pink-500 text-white'>\n                  Buy Now{' '}\n                  <FingerprintPatternIcon className='group-hover:animate-pulse' />\n                </Button>\n              </div>\n              <DrawerClose render={<Button variant='outline' />}>Maybe Later</DrawerClose>\n            </DrawerFooter>\n          </motion.div>\n        </div>\n      </DrawerContent>\n    </Drawer>\n  )\n}\n\nexport default DrawerProfile\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/drawer/drawer-15.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/drawer/drawer-15",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

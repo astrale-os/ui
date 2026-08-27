@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-progress-progress-04",
+  "title": "Progress 4",
+  "description": "Visual variety pack showcasing standard rounded, full pill-shaped, and sharp rectangular progress bar variants.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/progress/progress-04/progress-04.tsx",
+      "content": "import { Progress, ProgressLabel, ProgressValue } from '@astrale-os/ui/progress'\n\nconst ProgressShapeDemo = () => {\n  return (\n    <div className='flex w-full flex-col gap-3'>\n      {/* Standard progress bar */}\n      <div>\n        <Progress value={40} id='progress-rounded' className='*:data-[slot=progress-track]:h-2'>\n          <ProgressLabel>Rounded</ProgressLabel>\n          <ProgressValue className='text-foreground font-medium' />\n        </Progress>\n      </div>\n\n      {/* Pill progress bar */}\n      <div>\n        <Progress\n          value={60}\n          id='progress-pill'\n          className='*:data-[slot=progress-indicator]:rounded-r-full *:data-[slot=progress-track]:h-2'\n        >\n          <ProgressLabel>Pill</ProgressLabel>\n          <ProgressValue className='text-foreground font-medium' />\n        </Progress>\n      </div>\n\n      {/* Sharp progress bar */}\n      <div>\n        <Progress\n          value={80}\n          id='progress-sharp'\n          className='*:data-[slot=progress-track]:h-2 *:data-[slot=progress-track]:rounded-none'\n        >\n          <ProgressLabel>Sharp</ProgressLabel>\n          <ProgressValue className='text-foreground font-medium' />\n        </Progress>\n      </div>\n    </div>\n  )\n}\n\nexport default ProgressShapeDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/progress/progress-04.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/progress/progress-04",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

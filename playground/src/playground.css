@@ -95,15 +95,22 @@ textarea {
 .catalog-search {
   margin-left: auto;
   width: min(28rem, 100%);
+  justify-content: flex-start;
 }
 
 .catalog-panel {
   min-width: 0;
 }
 
-.preview-card-actions {
+.catalog-outline-scroll {
+  min-height: 0;
+  flex: 1;
+  padding: 0 0.75rem 1rem;
+}
+
+.catalog-outline-list {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 0.25rem;
 }
 
@@ -372,24 +379,28 @@ body:has(.theme-drawer-popup) [data-slot='drawer-overlay'] {
 
 .theme-color-control {
   display: grid;
-  grid-template-columns: 1.75rem minmax(0, 1fr);
+  grid-template-columns: 2rem minmax(0, 1fr);
   align-items: center;
   gap: 0.5rem;
   width: min(100%, 18rem);
-}
-
-.theme-color-swatch {
-  width: 1.75rem;
-  height: 1.75rem;
-  border: 1px solid var(--ui-border);
-  border-radius: calc(var(--ui-radius) - 0.2rem);
-  box-shadow: inset 0 0 0 2px var(--ui-card);
 }
 
 .theme-color-control [data-slot='input'] {
   min-width: 0;
   font-family: ui-monospace, monospace;
   font-size: 0.7rem;
+}
+
+.theme-color-control button > span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .theme-preset-actions > [data-slot='button'],

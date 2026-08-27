@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-alert-alert-17",
+  "title": "Alert 17",
+  "description": "Standard alert with both title and description text providing detailed information.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/alert/alert-17/alert-17.tsx",
+      "content": "import { Alert, AlertDescription, AlertTitle } from '@astrale-os/ui/alert'\nimport { CircleAlertIcon } from \"lucide-react\"\n\nconst AlertDescriptionDemo = () => {\n  return (\n    <Alert>\n      <CircleAlertIcon\n      />\n      <AlertTitle>Creating your account</AlertTitle>\n      <AlertDescription>Fill in your details to get started.</AlertDescription>\n    </Alert>\n  )\n}\n\nexport default AlertDescriptionDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/alert/alert-17.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/alert/alert-17",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

@@ -1,0 +1,207 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-components-spinner",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "component-spinner-spinner-01",
+      "type": "registry:component",
+      "title": "Spinner 1",
+      "description": "A standard spinner integrated within a list item to indicate an ongoing background process like asset uploading.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "spinner-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/spinner/spinner-01.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/spinner/spinner-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-spinner-spinner-02",
+      "type": "registry:component",
+      "title": "Spinner 2",
+      "description": "A variety of animated loading icons including Rotate, Pinwheel, and Refresh styles for unique visual feedback.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "spinner-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/spinner/spinner-02.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/spinner/spinner-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-spinner-spinner-03",
+      "type": "registry:component",
+      "title": "Spinner 3",
+      "description": "A demonstration of spinner sizing options ranging from extra-small (size-3) to large (size-8) for diverse UI needs.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "spinner-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/spinner/spinner-03.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/spinner/spinner-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-spinner-spinner-04",
+      "type": "registry:component",
+      "title": "Spinner 4",
+      "description": "A showcase of colorized spinners in different accent tones to visually represent various application states.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "spinner-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/spinner/spinner-04.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/spinner/spinner-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-spinner-spinner-05",
+      "type": "registry:component",
+      "title": "Spinner 5",
+      "description": "Loading indicators integrated into buttons of different variants to provide feedback for action-based events.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "spinner-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/spinner/spinner-05.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/spinner/spinner-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-spinner-spinner-06",
+      "type": "registry:component",
+      "title": "Spinner 6",
+      "description": "A centered loading state for session restoration, featuring a large spinner and detailed status text.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "spinner-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/spinner/spinner-06.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/spinner/spinner-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-spinner-spinner-07",
+      "type": "registry:component",
+      "title": "Spinner 7",
+      "description": "Spinners integrated within input fields and validation areas to provide real-time feedback during data entry.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "spinner-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/spinner/spinner-07.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/spinner/spinner-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-spinner-spinner-08",
+      "type": "registry:component",
+      "title": "Spinner 8",
+      "description": "A card-level loading overlay using a spinner and backdrop blur to gracefully transition during data refreshes.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "spinner-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/spinner/spinner-08.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/spinner/spinner-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-spinner-spinner-09",
+      "type": "registry:component",
+      "title": "Spinner 9",
+      "description": "A comprehensive task processing indicator that combines a spinner with a progress bar and action controls.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "spinner-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/spinner/spinner-09.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/spinner/spinner-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-spinner-spinner-10",
+      "type": "registry:component",
+      "title": "Spinner 10",
+      "description": "A showcase of creative spinner designs including dashed shapes, rotating gears, and orbiting dot animations.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "spinner-10.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/spinner/spinner-10.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/spinner/spinner-10",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

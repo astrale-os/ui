@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-avatar-avatar-06",
+  "title": "Avatar 6",
+  "description": "Icon avatar with colored background.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/avatar/avatar-06/avatar-06.tsx",
+      "content": "import { Avatar, AvatarFallback } from '@astrale-os/ui/avatar'\nimport { HomeIcon } from \"lucide-react\"\n\nconst AvatarIconDemo = () => {\n  return (\n    <Avatar className='after:border-indigo-500/10'>\n      <AvatarFallback className='bg-indigo-500/10 text-indigo-500'>\n        <HomeIcon className='size-4' />\n      </AvatarFallback>\n    </Avatar>\n  )\n}\n\nexport default AvatarIconDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/avatar/avatar-06.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/avatar/avatar-06",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

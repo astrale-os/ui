@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-drawer-drawer-01",
+  "title": "Drawer 1",
+  "description": "Minimal bottom drawer with a title, description, and a single cancel button in the footer.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/drawer/drawer-01/drawer-01.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\nimport {\n  Drawer,\n  DrawerClose,\n  DrawerContent,\n  DrawerDescription,\n  DrawerFooter,\n  DrawerHeader,\n  DrawerTitle,\n  DrawerTrigger\n} from '@astrale-os/ui/drawer'\n\nconst DrawerDemo = () => {\n  return (\n    <Drawer>\n      <DrawerTrigger render={<Button variant='outline' />}>Basic Drawer</DrawerTrigger>\n      <DrawerContent>\n        <div className='mx-auto w-full max-w-sm'>\n          <DrawerHeader>\n            <DrawerTitle>Notifications</DrawerTitle>\n            <DrawerDescription>Manage your notification settings.</DrawerDescription>\n          </DrawerHeader>\n          <DrawerFooter>\n            <DrawerClose render={<Button variant='outline' />}>Cancel</DrawerClose>\n          </DrawerFooter>\n        </div>\n      </DrawerContent>\n    </Drawer>\n  )\n}\n\nexport default DrawerDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/drawer/drawer-01.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/drawer/drawer-01",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

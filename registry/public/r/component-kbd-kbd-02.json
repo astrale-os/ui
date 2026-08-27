@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-kbd-kbd-02",
+  "title": "Kbd 2",
+  "description": "Chord shortcut display with sequential key combinations in muted pill containers, separated by plus icons for Keyboard Shortcuts and Close Editor actions.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/kbd/kbd-02/kbd-02.tsx",
+      "content": "import { Kbd, KbdGroup } from '@astrale-os/ui/kbd'\nimport { PlusIcon } from \"lucide-react\"\n\nconst KbdChordDemo = () => {\n  return (\n    <div className='flex flex-col items-start gap-4'>\n      <p className='text-sm font-medium'>Chord Shortcuts</p>\n      <div className='flex flex-col gap-2'>\n        <span className='text-muted-foreground text-sm font-medium'>Keyboard Shortcuts</span>\n        <div className='flex items-center gap-4'>\n          <div className='flex items-center gap-4'>\n            <KbdGroup className='bg-muted rounded-sm border p-1 shadow-xs'>\n              <span className='flex items-center gap-1'>\n                <Kbd className='bg-transparent'>Ctrl</Kbd>\n                <span className='text-muted-foreground text-sm'>+</span>\n                <Kbd className='bg-transparent'>K</Kbd>\n              </span>\n            </KbdGroup>\n          </div>\n          <div className='flex items-center gap-4'>\n            <PlusIcon className='text-muted-foreground size-4' />\n            <KbdGroup className='bg-muted rounded-sm border p-1 shadow-xs'>\n              <span className='flex items-center gap-1'>\n                <Kbd className='bg-transparent'>Ctrl</Kbd>\n                <span className='text-muted-foreground text-sm'>+</span>\n                <Kbd className='bg-transparent'>S</Kbd>\n              </span>\n            </KbdGroup>\n          </div>\n        </div>\n      </div>\n      <div className='flex flex-col gap-2'>\n        <span className='text-muted-foreground text-sm font-medium'>Close Editor</span>\n        <div className='flex items-center gap-4'>\n          <div className='flex items-center gap-4'>\n            <KbdGroup className='bg-muted rounded-sm border p-1 shadow-xs'>\n              <span className='flex items-center gap-1'>\n                <Kbd className='bg-transparent'>Ctrl</Kbd>\n                <span className='text-muted-foreground text-sm'>+</span>\n                <Kbd className='bg-transparent'>K</Kbd>\n              </span>\n            </KbdGroup>\n          </div>\n          <div className='flex items-center gap-4'>\n            <PlusIcon className='text-muted-foreground size-4' />\n            <KbdGroup className='bg-muted rounded-sm border p-1 shadow-xs'>\n              <span className='flex items-center gap-1'>\n                <Kbd className='bg-transparent'>W</Kbd>\n              </span>\n            </KbdGroup>\n          </div>\n        </div>\n      </div>\n      <div className='flex flex-col gap-2'>\n        <span className='text-muted-foreground text-sm font-medium'>Close All Editors</span>\n        <div className='flex items-center gap-4'>\n          <div className='flex items-center gap-4'>\n            <KbdGroup className='bg-muted rounded-sm border p-1 shadow-xs'>\n              <span className='flex items-center gap-1'>\n                <Kbd className='bg-transparent'>Ctrl</Kbd>\n                <span className='text-muted-foreground text-sm'>+</span>\n                <Kbd className='bg-transparent'>K</Kbd>\n              </span>\n            </KbdGroup>\n          </div>\n          <div className='flex items-center gap-4'>\n            <PlusIcon className='text-muted-foreground size-4' />\n            <KbdGroup className='bg-muted rounded-sm border p-1 shadow-xs'>\n              <span className='flex items-center gap-1'>\n                <Kbd className='bg-transparent'>Ctrl</Kbd>\n                <span className='text-muted-foreground text-sm'>+</span>\n                <Kbd className='bg-transparent'>W</Kbd>\n              </span>\n            </KbdGroup>\n          </div>\n        </div>\n      </div>\n    </div>\n  )\n}\n\nexport default KbdChordDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/kbd/kbd-02.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/kbd/kbd-02",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

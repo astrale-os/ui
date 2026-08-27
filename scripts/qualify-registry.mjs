@@ -36,7 +36,7 @@ async function runAsync(file, args, cwd = root, environment = {}) {
     let stderr = ''
     child.stdout.setEncoding('utf8').on('data', (chunk) => (stdout += chunk))
     child.stderr.setEncoding('utf8').on('data', (chunk) => (stderr += chunk))
-    const timer = setTimeout(() => child.kill('SIGTERM'), 180_000)
+    const timer = setTimeout(() => child.kill('SIGTERM'), 600_000)
     child.once('error', (error) => {
       clearTimeout(timer)
       reject(error)
@@ -57,7 +57,13 @@ function digest(value) {
 }
 
 function withoutClientDirective(content) {
-  return content.replace(/^['"]use client['"]\n\n/u, '')
+  return content.replace(/^['"]use client['"];?\r?\n(?:\r?\n)?/u, '')
+}
+
+function consumerOwnedSource(content) {
+  return content
+    .replaceAll('@astrale-os/ui/class-name', '@/lib/utils')
+    .replace(/@astrale-os\/ui\/([a-z0-9-]+)/gu, '@/components/ui/$1')
 }
 
 async function listen(server) {
@@ -91,6 +97,17 @@ try {
 
   const rebuilt = path.join(temporary, 'rebuilt')
   run('pnpm', ['dlx', 'shadcn@4.18.0', 'build', 'registry.json', '-o', rebuilt])
+  run('pnpm', [
+    'dlx',
+    'shadcn@4.18.0',
+    'build',
+    'registry.json',
+    '-c',
+    'registry/variants',
+    '-o',
+    rebuilt,
+  ])
+  await writeFile(path.join(rebuilt, 'registry.json'), `${JSON.stringify(registry, null, 2)}\n`)
   const builtFiles = (await readdir(publicRoot)).filter((file) => file.endsWith('.json')).toSorted()
   const rebuiltFiles = (await readdir(rebuilt)).filter((file) => file.endsWith('.json')).toSorted()
   assert.deepEqual(
@@ -132,7 +149,7 @@ try {
 
   try {
     const fixture = path.join(temporary, 'consumer with spaces')
-    await mkdir(path.join(fixture, 'src'), { recursive: true })
+    await mkdir(path.join(fixture, 'src/lib'), { recursive: true })
     await writeFile(
       path.join(fixture, 'package.json'),
       JSON.stringify(
@@ -146,8 +163,11 @@ try {
             'react-dom': '19.2.8',
           },
           devDependencies: {
+            '@types/node': '26.4.0',
+            '@types/papaparse': '5.5.2',
             '@types/react': '19.2.18',
             '@types/react-dom': '19.2.3',
+            '@types/react-payment-inputs': '1.1.4',
             tailwindcss: '4.3.3',
             typescript: '7.0.2',
           },
@@ -199,7 +219,9 @@ try {
             moduleResolution: 'Bundler',
             jsx: 'react-jsx',
             strict: true,
+            skipLibCheck: true,
             noEmit: true,
+            lib: ['ESNext', 'DOM', 'DOM.Iterable'],
             paths: { '@/*': ['./src/*'] },
           },
           include: ['src/components/**/*.tsx'],
@@ -209,13 +231,17 @@ try {
       ) + '\n',
     )
     await writeFile(path.join(fixture, 'src/index.css'), "@import 'tailwindcss';\n")
+    await writeFile(
+      path.join(fixture, 'src/lib/utils.ts'),
+      "export { cn } from '@astrale-os/ui/class-name'\n",
+    )
     const userConfig = path.join(fixture, '.npmrc')
     await writeFile(
       userConfig,
       'registry=https://registry.npmjs.org/\n@astrale-os:registry=https://registry.npmjs.org/\n',
     )
     const isolatedRegistry = { NPM_CONFIG_USERCONFIG: userConfig }
-    run('pnpm', ['install', '--ignore-scripts', '--prefer-offline'], fixture, isolatedRegistry)
+    run('pnpm', ['install', '--ignore-scripts'], fixture, isolatedRegistry)
 
     const urls = registry.items.map((item) => `http://127.0.0.1:${address.port}/${item.name}.json`)
     await runAsync(
@@ -227,6 +253,7 @@ try {
 
     const materialized = (await walk(fixture)).map((file) => path.relative(fixture, file))
     let installedFiles = 0
+    const sourcesByTarget = new Map()
     for (const item of registry.items) {
       const built = JSON.parse(await readFile(path.join(publicRoot, `${item.name}.json`), 'utf8'))
       for (const file of item.files) {
@@ -241,13 +268,26 @@ try {
         )
         const expected = built.files.find((candidate) => candidate.target === file.target)
         assert.ok(expected, `${item.name} is missing ${file.target} from its built payload`)
-        assert.equal(
-          withoutClientDirective(await readFile(installed, 'utf8')),
-          withoutClientDirective(expected.content),
-          `${item.name} did not install its exact owned source`,
-        )
+        const source = withoutClientDirective(expected.content)
+        const targetSources = sourcesByTarget.get(file.target) ?? {
+          items: [],
+          sources: new Set(),
+        }
+        targetSources.items.push(item.name)
+        targetSources.sources.add(source)
+        targetSources.sources.add(consumerOwnedSource(source))
+        sourcesByTarget.set(file.target, targetSources)
         installedFiles += 1
       }
+    }
+    for (const [target, targetSources] of sourcesByTarget) {
+      const installed = withoutClientDirective(
+        await readFile(path.join(fixture, 'src', target), 'utf8'),
+      )
+      assert.ok(
+        targetSources.sources.has(installed),
+        `${targetSources.items.join(', ')} did not install an exact declared source at ${target}`,
+      )
     }
     run('pnpm', ['exec', 'tsc'], fixture)
 

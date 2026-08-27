@@ -55,10 +55,15 @@ All criteria below are closed by the evidence recorded in [LEDGER.md](./LEDGER.m
 
 - [x] The sticky header exposes URL-backed Components, Patterns, and Blocks tabs with exactly one
       active catalog kind.
-- [x] Component groups have a stable semantic order; pattern and block families have stable
-      alphabetical order.
-- [x] Card isolation uses an accessible eye action; derived scene-count badges appear only for
-      addresses with more than one scene.
+- [x] Component families have a stable semantic order, contain the public default exactly once,
+      and contain every distinct sourced variant exactly once; pattern and block families have
+      stable alphabetical order.
+- [x] Ordinary navigation uses View family and a hidden left outline with exact family counts; no
+      repeated per-card action consumes preview space. Direct isolation URLs remain available for
+      debugging and qualification.
+- [x] Search components composes owned Button, Kbd, CommandDialog, and controlled command-palette
+      pattern surfaces; Cmd/Ctrl+K, click, filtering, keyboard selection, Escape, and Back focus
+      restoration work against the exact unique canonical family set on desktop and mobile.
 - [x] The Back control and native browser Back restore the originating catalog anchor at the same
       viewport offset; direct deep links fall back inside the owning catalog kind.
 - [x] Viewport block canvases preserve sourced maximum widths, center constrained blocks, and let
@@ -66,8 +71,8 @@ All criteria below are closed by the evidence recorded in [LEDGER.md](./LEDGER.m
 - [x] Overview pages show the canonical preview for every item.
 - [x] Family pages show every item and every named scene in that family.
 - [x] Each preview has an isolated URL and can load without importing unrelated scenes.
-- [x] Search works from descriptors before previews load and does not eagerly import offscreen
-      results.
+- [x] Command search works from descriptors before previews load and does not eagerly import
+      offscreen results.
 - [x] Each scene owns its state; interacting with one scene does not alter another.
 - [x] Demonstration forms, pagination, and links do not reload, navigate, or scroll the playground
       unexpectedly.

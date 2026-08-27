@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-typography-typography-07",
+  "title": "Typography 7",
+  "description": "Data table with bordered cells, header row, and alternating muted row backgrounds.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/typography/typography-07/typography-07.tsx",
+      "content": "const TypographyTableDemo = () => {\n  return (\n    <div className='my-6 w-full max-w-xl overflow-y-auto'>\n      <table className='w-full'>\n        <thead>\n          <tr className='even:bg-muted border-t p-0'>\n            <th className='border px-4 py-2 text-left font-semibold'>Royal Ledger</th>\n            <th className='border px-4 py-2 text-left font-semibold'>Public Joy Index</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr className='even:bg-muted border-t p-0'>\n            <td className='border px-4 py-2 text-left'>Scarce</td>\n            <td className='border px-4 py-2 text-left'>Rising</td>\n          </tr>\n          <tr className='even:bg-muted border-t p-0'>\n            <td className='border px-4 py-2 text-left'>Moderate</td>\n            <td className='border px-4 py-2 text-left'>Content</td>\n          </tr>\n          <tr className='even:bg-muted border-t p-0'>\n            <td className='border px-4 py-2 text-left'>Plentiful</td>\n            <td className='border px-4 py-2 text-left'>Joyful</td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  )\n}\n\nexport default TypographyTableDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/typography/typography-07.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/typography/typography-07",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

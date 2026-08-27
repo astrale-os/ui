@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-sonner-sonner-09",
+  "title": "Sonner 9",
+  "description": "A soft-styled info toast notification with color-mixed background for subtle messaging",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "sonner@^2.0.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/sonner/sonner-09/sonner-09.tsx",
+      "content": "import { toast } from 'sonner'\n\nimport { Button } from '@astrale-os/ui/button'\n\nconst SoftInfoSonnerDemo = () => {\n  return (\n    <Button\n      variant='outline'\n      onClick={() =>\n        toast.info('This is for your information, please note.', {\n          style: {\n            '--normal-bg':\n              'color-mix(in oklab, light-dark(var(--color-sky-600), var(--color-sky-400)) 10%, var(--background))',\n            '--normal-text': 'light-dark(var(--color-sky-600), var(--color-sky-400))',\n            '--normal-border': 'light-dark(var(--color-sky-600), var(--color-sky-400))'\n          } as React.CSSProperties\n        })\n      }\n    >\n      Soft Info Toast\n    </Button>\n  )\n}\n\nexport default SoftInfoSonnerDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/sonner/sonner-09.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/sonner/sonner-09",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

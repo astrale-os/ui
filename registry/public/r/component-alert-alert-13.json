@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-alert-alert-13",
+  "title": "Alert 13",
+  "description": "displaying a minimal \"New message!\" notification with an attention icon and an actionable \"Open\" button",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/alert/alert-13/alert-13.tsx",
+      "content": "import { Alert, AlertAction, AlertTitle } from '@astrale-os/ui/alert'\nimport { Button } from '@astrale-os/ui/button'\nimport { CircleAlertIcon } from \"lucide-react\"\n\nconst AlertWithActionDemo = () => {\n  return (\n    <Alert className='*:[svg]:row-span-1'>\n      <CircleAlertIcon\n      />\n      <AlertTitle className='flex-1'>New message!</AlertTitle>\n      <AlertAction className='top-1/2 -translate-y-1/2'>\n        <Button variant='outline' size='xs' className='cursor-pointer'>\n          Open\n        </Button>\n      </AlertAction>\n    </Alert>\n  )\n}\n\nexport default AlertWithActionDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/alert/alert-13.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/alert/alert-13",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

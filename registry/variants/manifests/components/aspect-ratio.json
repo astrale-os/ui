@@ -1,0 +1,147 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-components-aspect-ratio",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "component-aspect-ratio-aspect-ratio-01",
+      "type": "registry:component",
+      "title": "Aspect Ratio 1",
+      "description": "Aspect-ratio container demonstrating a 16:9 ratio with centered content, rounded corners, and muted background for media placeholders.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "aspect-ratio-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/aspect-ratio/aspect-ratio-01.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/aspect-ratio/aspect-ratio-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-aspect-ratio-aspect-ratio-02",
+      "type": "registry:component",
+      "title": "Aspect Ratio 2",
+      "description": "Responsive aspect-ratio example using a 9:16 ratio and captioned text, useful for image or video placeholders that preserve proportional sizing.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "aspect-ratio-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/aspect-ratio/aspect-ratio-02.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/aspect-ratio/aspect-ratio-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-aspect-ratio-aspect-ratio-03",
+      "type": "registry:component",
+      "title": "Aspect Ratio 3",
+      "description": "Tall aspect-ratio (3:4) demonstration ideal for portrait media; includes centered label and subtle muted styling.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "aspect-ratio-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/aspect-ratio/aspect-ratio-03.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/aspect-ratio/aspect-ratio-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-aspect-ratio-aspect-ratio-04",
+      "type": "registry:component",
+      "title": "Aspect Ratio 4",
+      "description": "Aspect-ratio container demonstrating a 4:3 ratio with centered content, rounded corners, and muted background for standard-definition broadcasts.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "aspect-ratio-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/aspect-ratio/aspect-ratio-04.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/aspect-ratio/aspect-ratio-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-aspect-ratio-aspect-ratio-05",
+      "type": "registry:component",
+      "title": "Aspect Ratio 5",
+      "description": "Aspect-ratio container demonstrating a 1:1 ratio with centered content, rounded corners, and muted background for square media placeholders.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "aspect-ratio-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/aspect-ratio/aspect-ratio-05.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/aspect-ratio/aspect-ratio-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-aspect-ratio-aspect-ratio-06",
+      "type": "registry:component",
+      "title": "Aspect Ratio 6",
+      "description": "Aspect-ratio container demonstrating a 3:2 ratio with centered content, rounded corners, and muted background for media placeholders.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "aspect-ratio-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/aspect-ratio/aspect-ratio-06.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/aspect-ratio/aspect-ratio-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-aspect-ratio-aspect-ratio-07",
+      "type": "registry:component",
+      "title": "Aspect Ratio 7",
+      "description": "Aspect-ratio container demonstrating a 21:9 ratio with centered content, rounded corners, and muted background for ultra-wide media placeholders.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "aspect-ratio-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/aspect-ratio/aspect-ratio-07.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/aspect-ratio/aspect-ratio-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

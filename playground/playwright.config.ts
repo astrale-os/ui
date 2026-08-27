@@ -1,12 +1,18 @@
 import { defineConfig, devices } from '@playwright/test'
 
+const studioProviderCatalog = process.env.ASTRALE_STUDIO_CATALOG === '1'
+
 export default defineConfig({
   testDir: './tests',
+  testIgnore: studioProviderCatalog ? [] : ['studio-variants.spec.ts'],
   outputDir: '../artifacts/playground/playwright',
   webServer: {
-    command: 'pnpm --workspace-root playground:dev --host 127.0.0.1 --port 4173',
+    command: studioProviderCatalog
+      ? 'pnpm exec vite preview --host 127.0.0.1 --port 4173'
+      : 'pnpm --workspace-root playground:dev --host 127.0.0.1 --port 4173',
     port: 4173,
-    reuseExistingServer: !process.env.CI,
+    reuseExistingServer: studioProviderCatalog ? false : !process.env.CI,
+    env: { ASTRALE_STUDIO_CATALOG: process.env.ASTRALE_STUDIO_CATALOG ?? '0' },
   },
   use: {
     baseURL: 'http://127.0.0.1:4173',

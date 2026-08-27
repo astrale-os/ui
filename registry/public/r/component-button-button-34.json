@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-button-button-34",
+  "title": "Button 34",
+  "description": "Theme toggle button switching between sun and moon icons with colored styling",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/button/button-34/button-34.tsx",
+      "content": "'use client'\n\nimport { useState } from 'react'\nimport { Button } from '@astrale-os/ui/button'\n\nimport { cn } from '@astrale-os/ui/class-name'\nimport { MoonIcon, SunIcon } from \"lucide-react\"\n\nconst IconButtonModeDemo = () => {\n  const [isDark, setIsDark] = useState(false)\n\n  return (\n    <Button\n      variant='outline'\n      size='icon'\n      onClick={() => setIsDark(!isDark)}\n      aria-label='Toggle dark mode'\n      className={cn(\n        isDark\n          ? 'border-sky-600 text-sky-600! hover:bg-sky-600/10 focus-visible:border-sky-600 focus-visible:ring-sky-600/20 dark:border-sky-400 dark:text-sky-400! dark:hover:bg-sky-400/10 dark:focus-visible:border-sky-400 dark:focus-visible:ring-sky-400/40'\n          : 'border-amber-600 text-amber-600! hover:bg-amber-600/10 focus-visible:border-amber-600 focus-visible:ring-amber-600/20 dark:border-amber-400 dark:text-amber-400! dark:hover:bg-amber-400/10 dark:focus-visible:border-amber-400 dark:focus-visible:ring-amber-400/40'\n      )}\n    >\n      {isDark ? (\n        <MoonIcon\n        />\n      ) : (\n        <SunIcon\n        />\n      )}\n    </Button>\n  )\n}\n\nexport default IconButtonModeDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/button/button-34.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/button/button-34",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

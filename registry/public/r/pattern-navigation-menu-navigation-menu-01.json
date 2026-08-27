@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pattern-navigation-menu-navigation-menu-01",
+  "title": "Navigation Menu 1",
+  "description": "A standard navigation menu featuring a single-column layout with clear titles and supporting descriptions for each item.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "next@^15.3.3"
+  ],
+  "files": [
+    {
+      "path": "source/patterns/navigation-menu/navigation-menu-01/navigation-menu-01.tsx",
+      "content": "import Link from 'next/link'\n\nimport {\n  NavigationMenu,\n  NavigationMenuContent,\n  NavigationMenuItem,\n  NavigationMenuLink,\n  NavigationMenuList,\n  NavigationMenuTrigger\n} from '@astrale-os/ui/navigation-menu'\n\nconst NavigationMenuDemo = () => {\n  return (\n    <div className='flex items-center justify-center'>\n      <NavigationMenu>\n        <NavigationMenuList>\n          <NavigationMenuItem>\n            <NavigationMenuTrigger className='[&>svg]:size-4'>Components</NavigationMenuTrigger>\n            <NavigationMenuContent>\n              <ul className='w-80'>\n                <li>\n                  <NavigationMenuLink render={<Link href='#' />}>\n                    <div className='flex flex-col px-1'>\n                      <div className='font-medium'>Alert Dialog</div>\n                      <div className='text-muted-foreground text-sm'>\n                        A modal dialog that interrupts the user with important content and expects a response.\n                      </div>\n                    </div>\n                  </NavigationMenuLink>\n                </li>\n                <li>\n                  <NavigationMenuLink render={<Link href='#' />}>\n                    <div className='flex flex-col px-1'>\n                      <div className='font-medium'>Hover Card</div>\n                      <div className='text-muted-foreground text-sm'>\n                        For sighted users to preview content available behind a link.\n                      </div>\n                    </div>\n                  </NavigationMenuLink>\n                </li>\n              </ul>\n            </NavigationMenuContent>\n          </NavigationMenuItem>\n        </NavigationMenuList>\n      </NavigationMenu>\n    </div>\n  )\n}\n\nexport default NavigationMenuDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/pattern/navigation-menu/navigation-menu-01.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "pattern/navigation-menu/navigation-menu-01",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:block"
+}

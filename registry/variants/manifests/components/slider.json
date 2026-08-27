@@ -1,0 +1,387 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-components-slider",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "component-slider-slider-01",
+      "type": "registry:component",
+      "title": "Slider 1",
+      "description": "A standard horizontal slider component for single value selection with a customizable range.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "slider-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/slider/slider-01.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/slider/slider-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-slider-slider-02",
+      "type": "registry:component",
+      "title": "Slider 2",
+      "description": "A horizontal slider supporting multiple thumbs for range selection and distribution point management.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "slider-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/slider/slider-02.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/slider/slider-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-slider-slider-03",
+      "type": "registry:component",
+      "title": "Slider 3",
+      "description": "A basic vertical slider component designed for single value control in compact vertical layouts.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "slider-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/slider/slider-03.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/slider/slider-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-slider-slider-04",
+      "type": "registry:component",
+      "title": "Slider 4",
+      "description": "A vertical slider variant supporting multiple thumbs for signal spanning and node distribution tasks.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "slider-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/slider/slider-04.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/slider/slider-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-slider-slider-05",
+      "type": "registry:component",
+      "title": "Slider 5",
+      "description": "A demonstration of disabled horizontal and vertical sliders with specialized styling to prevent user interaction.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "slider-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/slider/slider-05.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/slider/slider-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-slider-slider-06",
+      "type": "registry:component",
+      "title": "Slider 6",
+      "description": "A collection of sliders showcasing various thumb shapes such as Square, Diamond, Ring, Needle, and Pill for diverse aesthetic needs.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "slider-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/slider/slider-06.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/slider/slider-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-slider-slider-07",
+      "type": "registry:component",
+      "title": "Slider 7",
+      "description": "A performance profile slider with integrated text labels (Eco, Balanced, Standard, Turbo) to help users select system modes.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "slider-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/slider/slider-07.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/slider/slider-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-slider-slider-08",
+      "type": "registry:component",
+      "title": "Slider 8",
+      "description": "A clip selection slider with a fixed 15-second window, demonstrating how to maintain a constant range while dragging.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "slider-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/slider/slider-08.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/slider/slider-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-slider-slider-09",
+      "type": "registry:component",
+      "title": "Slider 9",
+      "description": "A sophisticated performance slider with dynamic ticks, mode descriptions, and state-dependent icons for advanced system controls.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "slider-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/slider/slider-09.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/slider/slider-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-slider-slider-10",
+      "type": "registry:component",
+      "title": "Slider 10",
+      "description": "An interactive demonstration of sliders with real-time value displays for volume control and price range selection.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "slider-10.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/slider/slider-10.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/slider/slider-10",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-slider-slider-11",
+      "type": "registry:component",
+      "title": "Slider 11",
+      "description": "A volume slider featuring a dynamic tooltip that follows the thumb and updates with percentage values and contextual icons.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "slider-11.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/slider/slider-11.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/slider/slider-11",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-slider-slider-12",
+      "type": "registry:component",
+      "title": "Slider 12",
+      "description": "Range and multi-thumb sliders with synchronized tooltips for precise price selection and temperature monitoring.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "slider-12.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/slider/slider-12.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/slider/slider-12",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-slider-slider-13",
+      "type": "registry:component",
+      "title": "Slider 13",
+      "description": "An opacity control slider linked to a numeric input, demonstrating bidirectional state management for fine-tuned visibility adjustments.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "slider-13.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/slider/slider-13.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/slider/slider-13",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-slider-slider-14",
+      "type": "registry:component",
+      "title": "Slider 14",
+      "description": "A precision volume slider integrated with +/- stepper buttons and a numeric input for granular control and manual entry.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "slider-14.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/slider/slider-14.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/slider/slider-14",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-slider-slider-15",
+      "type": "registry:component",
+      "title": "Slider 15",
+      "description": "An interactive experience rating slider that provides visual feedback through dynamic emojis and descriptive labels.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "slider-15.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/slider/slider-15.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/slider/slider-15",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-slider-slider-16",
+      "type": "registry:component",
+      "title": "Slider 16",
+      "description": "A corner radius slider providing a real-time visual preview of shape adjustments, from square to circle.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "slider-16.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/slider/slider-16.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/slider/slider-16",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-slider-slider-17",
+      "type": "registry:component",
+      "title": "Slider 17",
+      "description": "A multi-axis 3D object positioner using sliders to control X, Y, and Z coordinates with a live technical wireframe preview.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "slider-17.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/slider/slider-17.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/slider/slider-17",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-slider-slider-18",
+      "type": "registry:component",
+      "title": "Slider 18",
+      "description": "An advanced price range selector featuring a synchronized histogram, average price indicator, and precise numerical inputs.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "slider-18.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/slider/slider-18.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/slider/slider-18",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-slider-slider-19",
+      "type": "registry:component",
+      "title": "Slider 19",
+      "description": "A comprehensive photo adjustment interface using sliders to fine-tune brightness, contrast, and saturation with real-time image filtering.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "slider-19.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/slider/slider-19.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/slider/slider-19",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

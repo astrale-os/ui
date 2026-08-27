@@ -1,0 +1,312 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-components-drawer",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "component-drawer-drawer-01",
+      "type": "registry:component",
+      "title": "Drawer 1",
+      "description": "Minimal bottom drawer with a title, description, and a single cancel button in the footer.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "drawer-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/drawer/drawer-01.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/drawer/drawer-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-drawer-drawer-02",
+      "type": "registry:component",
+      "title": "Drawer 2",
+      "description": "Daily activity goal drawer with a bar chart visualization, large numeric display, and increment/decrement controls.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react@19.2.8",
+        "recharts@3.8.0"
+      ],
+      "files": [
+        {
+          "path": "drawer-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/drawer/drawer-02.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/drawer/drawer-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-drawer-drawer-03",
+      "type": "registry:component",
+      "title": "Drawer 3",
+      "description": "Right-side drawer with an overflowing scrollable content body and a learn-more call-to-action footer.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "drawer-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/drawer/drawer-03.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/drawer/drawer-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-drawer-drawer-04",
+      "type": "registry:component",
+      "title": "Drawer 4",
+      "description": "Multi-direction drawer with four side trigger buttons (top, right, bottom, left) opening an edit profile form.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "drawer-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/drawer/drawer-04.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/drawer/drawer-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-drawer-drawer-05",
+      "type": "registry:component",
+      "title": "Drawer 5",
+      "description": "Right-side sign-in form drawer with name, email, address, and description fields.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "drawer-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/drawer/drawer-05.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/drawer/drawer-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-drawer-drawer-06",
+      "type": "registry:component",
+      "title": "Drawer 6",
+      "description": "Non-modal right-side drawer without a background overlay, leaving the page content fully interactive.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "drawer-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/drawer/drawer-06.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/drawer/drawer-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-drawer-drawer-07",
+      "type": "registry:component",
+      "title": "Drawer 7",
+      "description": "Custom-overlay drawer using a composable content wrapper with an indigo-tinted semi-transparent background overlay.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "@base-ui/react@^1.7.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "drawer-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/drawer/drawer-07.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/drawer/drawer-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-drawer-drawer-08",
+      "type": "registry:component",
+      "title": "Drawer 8",
+      "description": "Three-variant drawer panel with subscribe (email), feedback (emoji rating + textarea), and contact form drawers side by side.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "drawer-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/drawer/drawer-08.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/drawer/drawer-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-drawer-drawer-09",
+      "type": "registry:component",
+      "title": "Drawer 9",
+      "description": "Right-side notifications drawer with avatar items, timestamps, unread dot indicators, and accept/decline action buttons.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "drawer-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/drawer/drawer-09.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/drawer/drawer-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-drawer-drawer-10",
+      "type": "registry:component",
+      "title": "Drawer 10",
+      "description": "Left-side file explorer drawer with a collapsible folder/file tree hierarchy using open and closed folder icons.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "drawer-10.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/drawer/drawer-10.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/drawer/drawer-10",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-drawer-drawer-11",
+      "type": "registry:component",
+      "title": "Drawer 11",
+      "description": "Right-side settings drawer with toggle switches grouped under notifications, privacy, and security sections.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "drawer-11.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/drawer/drawer-11.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/drawer/drawer-11",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-drawer-drawer-12",
+      "type": "registry:component",
+      "title": "Drawer 12",
+      "description": "Right-side product filter drawer with price range inputs, sort-by radio group, and brand and battery capacity checkboxes.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "drawer-12.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/drawer/drawer-12.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/drawer/drawer-12",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-drawer-drawer-13",
+      "type": "registry:component",
+      "title": "Drawer 13",
+      "description": "Right-side shopping cart drawer with product image cards, remove buttons, order subtotal/shipping summary, and checkout action.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "drawer-13.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/drawer/drawer-13.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/drawer/drawer-13",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-drawer-drawer-14",
+      "type": "registry:component",
+      "title": "Drawer 14",
+      "description": "Right-side contact profile drawer with a verified avatar badge and labeled info sections for personal details and team memberships.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "drawer-14.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/drawer/drawer-14.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/drawer/drawer-14",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-drawer-drawer-15",
+      "type": "registry:component",
+      "title": "Drawer 15",
+      "description": "Animated bottom drawer with staggered fade-up motion for a product promo, original/discounted pricing, and a gradient buy-now button.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "motion@^13.1.0"],
+      "files": [
+        {
+          "path": "drawer-15.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/drawer/drawer-15.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/drawer/drawer-15",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

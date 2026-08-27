@@ -1,0 +1,49 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-button-group-button-group-05",
+  "title": "Button Group 5",
+  "description": "Social media links button group with branded colors and hover effects",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/button-group/button-group-05/button-group-05.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\nimport { ButtonGroup } from '@astrale-os/ui/button-group'\n\nimport DribbbleIcon from '@/assets/svg/dribbble-icon'\nimport FacebookIcon from '@/assets/svg/facebook-icon'\nimport InstagramIcon from '@/assets/svg/instagram-icon'\nimport TwitchIcon from '@/assets/svg/twitch-icon'\n\nconst ButtonGroupSocialDemo = () => {\n  return (\n    <ButtonGroup>\n      <Button\n        variant='outline'\n        className='hover:bg-[#9146ff]/10!'\n        render={<a href='#' rel='noopener noreferrer' />}\n        nativeButton={false}\n      >\n        <TwitchIcon className='stroke-[#9146ff]' />\n        <span className='sr-only'>Twitch</span>\n      </Button>\n      <Button\n        variant='outline'\n        className='hover:bg-[#EA4C89]/10!'\n        render={<a href='#' rel='noopener noreferrer' />}\n        nativeButton={false}\n      >\n        <DribbbleIcon className='stroke-[#EA4C89]' />\n        <span className='sr-only'>Dribbble</span>\n      </Button>\n      <Button\n        variant='outline'\n        className='hover:bg-[#fb169a]/10!'\n        render={<a href='#' rel='noopener noreferrer' />}\n        nativeButton={false}\n      >\n        <InstagramIcon className='stroke-[#fb169a]' />\n        <span className='sr-only'>Instagram</span>\n      </Button>\n      <Button\n        variant='outline'\n        className='hover:bg-[#0866ff]/10!'\n        render={<a href='#' rel='noopener noreferrer' />}\n        nativeButton={false}\n      >\n        <FacebookIcon className='stroke-[#0866ff]' />\n        <span className='sr-only'>Facebook</span>\n      </Button>\n    </ButtonGroup>\n  )\n}\n\nexport default ButtonGroupSocialDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/button-group/button-group-05.tsx"
+    },
+    {
+      "path": "source/components/button-group/button-group-05/support/assets/svg/dribbble-icon.tsx",
+      "content": "import type { SVGAttributes } from 'react'\n\nconst DribbbleIcon = (props: SVGAttributes<SVGElement>) => {\n  return (\n    <svg\n      xmlns='http://www.w3.org/2000/svg'\n      width='24'\n      height='24'\n      viewBox='0 0 24 24'\n      fill='none'\n      stroke='currentColor'\n      strokeWidth='2'\n      strokeLinecap='round'\n      strokeLinejoin='round'\n      aria-hidden='true'\n      {...props}\n    >\n      <circle cx='12' cy='12' r='10'></circle>\n      <path d='M19.13 5.09C15.22 9.14 10 10.44 2.25 10.94'></path>\n      <path d='M21.75 12.84c-6.62-1.41-12.14 1-16.38 6.32'></path>\n      <path d='M8.56 2.75c4.37 6 6 9.42 8 17.72'></path>\n    </svg>\n  )\n}\n\nexport default DribbbleIcon\n",
+      "type": "registry:component",
+      "target": "assets/svg/dribbble-icon.tsx"
+    },
+    {
+      "path": "source/components/button-group/button-group-05/support/assets/svg/facebook-icon.tsx",
+      "content": "import type { SVGAttributes } from 'react'\n\nconst FacebookIcon = (props: SVGAttributes<SVGElement>) => {\n  return (\n    <svg\n      xmlns='http://www.w3.org/2000/svg'\n      width='24'\n      height='24'\n      viewBox='0 0 24 24'\n      fill='none'\n      stroke='currentColor'\n      strokeWidth='2'\n      strokeLinecap='round'\n      strokeLinejoin='round'\n      aria-hidden='true'\n      {...props}\n    >\n      <path d='M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z'></path>\n    </svg>\n  )\n}\n\nexport default FacebookIcon\n",
+      "type": "registry:component",
+      "target": "assets/svg/facebook-icon.tsx"
+    },
+    {
+      "path": "source/components/button-group/button-group-05/support/assets/svg/instagram-icon.tsx",
+      "content": "import type { SVGAttributes } from 'react'\n\nconst InstagramIcon = (props: SVGAttributes<SVGElement>) => {\n  return (\n    <svg\n      xmlns='http://www.w3.org/2000/svg'\n      width='24'\n      height='24'\n      viewBox='0 0 24 24'\n      fill='none'\n      stroke='currentColor'\n      strokeWidth='2'\n      strokeLinecap='round'\n      strokeLinejoin='round'\n      aria-hidden='true'\n      {...props}\n    >\n      <rect width='20' height='20' x='2' y='2' rx='5' ry='5'></rect>\n      <path d='M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z'></path>\n      <line x1='17.5' x2='17.51' y1='6.5' y2='6.5'></line>\n    </svg>\n  )\n}\n\nexport default InstagramIcon\n",
+      "type": "registry:component",
+      "target": "assets/svg/instagram-icon.tsx"
+    },
+    {
+      "path": "source/components/button-group/button-group-05/support/assets/svg/twitch-icon.tsx",
+      "content": "import type { SVGAttributes } from 'react'\n\nconst TwitchIcon = (props: SVGAttributes<SVGElement>) => {\n  return (\n    <svg\n      xmlns='http://www.w3.org/2000/svg'\n      width='24'\n      height='24'\n      viewBox='0 0 24 24'\n      fill='none'\n      stroke='currentColor'\n      strokeWidth='2'\n      strokeLinecap='round'\n      strokeLinejoin='round'\n      aria-hidden='true'\n      {...props}\n    >\n      <path d='M21 2H3v16h5v4l4-4h5l4-4V2zm-10 9V7m5 4V7'></path>\n    </svg>\n  )\n}\n\nexport default TwitchIcon\n",
+      "type": "registry:component",
+      "target": "assets/svg/twitch-icon.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/button-group/button-group-05",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

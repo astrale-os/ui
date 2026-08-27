@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-toggle-toggle-03",
+  "title": "Toggle 3",
+  "description": "Demonstrates toggle sizes: small, default, and large variants.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/toggle/toggle-03/toggle-03.tsx",
+      "content": "import { Toggle } from '@astrale-os/ui/toggle'\n\nconst ToggleSize = () => {\n  return (\n    <div className='flex items-center gap-2'>\n      <Toggle variant='outline' aria-label='Toggle small' size='sm'>\n        Small\n      </Toggle>\n      <Toggle variant='outline' aria-label='Toggle default' size='default'>\n        Default\n      </Toggle>\n      <Toggle variant='outline' aria-label='Toggle large' size='lg'>\n        Large\n      </Toggle>\n    </div>\n  )\n}\n\nexport default ToggleSize\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/toggle/toggle-03.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/toggle/toggle-03",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

@@ -1,0 +1,532 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-components-dialog",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "component-dialog-dialog-01",
+      "type": "registry:component",
+      "title": "Dialog 1",
+      "description": "Basic alert dialog with confirmation for destructive actions",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "dialog-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/dialog/dialog-01.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/dialog/dialog-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-dialog-dialog-02",
+      "type": "registry:component",
+      "title": "Dialog 2",
+      "description": "Alert dialog with icon and detailed feature list for update notifications",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "dialog-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/dialog/dialog-02.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/dialog/dialog-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-dialog-dialog-03",
+      "type": "registry:component",
+      "title": "Dialog 3",
+      "description": "Destructive alert dialog with warning icon and checkbox for permanent deletion",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "dialog-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/dialog/dialog-03.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/dialog/dialog-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-dialog-dialog-04",
+      "type": "registry:component",
+      "title": "Dialog 4",
+      "description": "Scrollable dialog with long content and scroll area for product information",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "dialog-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/dialog/dialog-04.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/dialog/dialog-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-dialog-dialog-05",
+      "type": "registry:component",
+      "title": "Dialog 5",
+      "description": "Scrollable dialog with sticky header for fixed navigation while scrolling content",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "dialog-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/dialog/dialog-05.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/dialog/dialog-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-dialog-dialog-06",
+      "type": "registry:component",
+      "title": "Dialog 6",
+      "description": "Scrollable dialog with sticky footer for persistent action buttons",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "dialog-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/dialog/dialog-06.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/dialog/dialog-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-dialog-dialog-07",
+      "type": "registry:component",
+      "title": "Dialog 7",
+      "description": "Full-screen dialog taking up the entire viewport for immersive content",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "dialog-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/dialog/dialog-07.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/dialog/dialog-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-dialog-dialog-08",
+      "type": "registry:component",
+      "title": "Dialog 8",
+      "description": "Terms and conditions dialog with structured content and accept/decline actions",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "dialog-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/dialog/dialog-08.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/dialog/dialog-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-dialog-dialog-09",
+      "type": "registry:component",
+      "title": "Dialog 9",
+      "description": "Subscription dialog with input field and subscribe button",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "dialog-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/dialog/dialog-09.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/dialog/dialog-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-dialog-dialog-10",
+      "type": "registry:component",
+      "title": "Dialog 10",
+      "description": "Referral program dialog with avatar display and email sharing functionality",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "dialog-10.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/dialog/dialog-10.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/dialog/dialog-10",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-dialog-dialog-11",
+      "type": "registry:component",
+      "title": "Dialog 11",
+      "description": "Rating feedback dialog with emoji radio buttons and text area for comments",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "dialog-11.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/dialog/dialog-11.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/dialog/dialog-11",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-dialog-dialog-12",
+      "type": "registry:component",
+      "title": "Dialog 12",
+      "description": "OTP verification dialog with input-otp component and validation feedback",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "input-otp@^1.5.0",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "dialog-12.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/dialog/dialog-12.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/dialog/dialog-12",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-dialog-dialog-13",
+      "type": "registry:component",
+      "title": "Dialog 13",
+      "description": "Sign up dialog with gradient background and terms acceptance checkbox",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "dialog-13.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/dialog/dialog-13.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/dialog/dialog-13",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-dialog-dialog-14",
+      "type": "registry:component",
+      "title": "Dialog 14",
+      "description": "Sign in dialog with gradient background and social login options",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "dialog-14.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/dialog/dialog-14.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/dialog/dialog-14",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-dialog-dialog-15",
+      "type": "registry:component",
+      "title": "Dialog 15",
+      "description": "Invite friends dialog with avatar list and email invitation functionality",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "dialog-15.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/dialog/dialog-15.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/dialog/dialog-15",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-dialog-dialog-16",
+      "type": "registry:component",
+      "title": "Dialog 16",
+      "description": "Profile edit dialog positioned at top-left corner of screen",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "dialog-16.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/dialog/dialog-16.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/dialog/dialog-16",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-dialog-dialog-17",
+      "type": "registry:component",
+      "title": "Dialog 17",
+      "description": "Profile edit dialog positioned at top-align corner of screen",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "dialog-17.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/dialog/dialog-17.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/dialog/dialog-17",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-dialog-dialog-18",
+      "type": "registry:component",
+      "title": "Dialog 18",
+      "description": "Profile edit dialog positioned at top-right-aligned of screen",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "dialog-18.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/dialog/dialog-18.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/dialog/dialog-18",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-dialog-dialog-19",
+      "type": "registry:component",
+      "title": "Dialog 19",
+      "description": "Profile edit dialog positioned at middle-left-aligned of screen",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "dialog-19.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/dialog/dialog-19.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/dialog/dialog-19",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-dialog-dialog-20",
+      "type": "registry:component",
+      "title": "Dialog 20",
+      "description": "Profile edit dialog positioned at middle-right side of screen",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "dialog-20.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/dialog/dialog-20.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/dialog/dialog-20",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-dialog-dialog-21",
+      "type": "registry:component",
+      "title": "Dialog 21",
+      "description": "Profile edit dialog positioned at bottom-left-aligned of screen",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "dialog-21.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/dialog/dialog-21.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/dialog/dialog-21",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-dialog-dialog-22",
+      "type": "registry:component",
+      "title": "Dialog 22",
+      "description": "Profile edit dialog positioned at center left of screen",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "dialog-22.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/dialog/dialog-22.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/dialog/dialog-22",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-dialog-dialog-23",
+      "type": "registry:component",
+      "title": "Dialog 23",
+      "description": "Profile edit dialog positioned at bottom right aligned of screen",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "dialog-23.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/dialog/dialog-23.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/dialog/dialog-23",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-dialog-dialog-24",
+      "type": "registry:component",
+      "title": "Dialog 24",
+      "description": "Profile edit dialog with slide-up animation from bottom",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "dialog-24.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/dialog/dialog-24.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/dialog/dialog-24",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-dialog-dialog-25",
+      "type": "registry:component",
+      "title": "Dialog 25",
+      "description": "Profile edit dialog with slide-right animation from left side of the screen",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "dialog-25.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/dialog/dialog-25.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/dialog/dialog-25",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-dialog-dialog-26",
+      "type": "registry:component",
+      "title": "Dialog 26",
+      "description": "Profile edit dialog with zoom in animation from center of the screen",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "dialog-26.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/dialog/dialog-26.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/dialog/dialog-26",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "provider": "@react-aria",
+  "upstreamAddress": "@react-aria/tailwind-colorpicker",
+  "package": "react-aria-components",
+  "packageVersion": "1.20.0",
+  "resolvedAt": "2026-08-27",
+  "registryUrls": [
+    "https://react-aria.adobe.com/registry/tailwind-colorpicker.json",
+    "https://react-aria.adobe.com/registry/tailwind-colorswatch.json",
+    "https://react-aria.adobe.com/registry/tailwind-colorarea.json",
+    "https://react-aria.adobe.com/registry/tailwind-colorslider.json",
+    "https://react-aria.adobe.com/registry/tailwind-colorfield.json",
+    "https://react-aria.adobe.com/registry/tailwind-dialog.json",
+    "https://react-aria.adobe.com/registry/tailwind-popover.json",
+    "https://react-aria.adobe.com/registry/tailwind-utils.json",
+    "https://react-aria.adobe.com/registry/tailwind-colorthumb.json",
+    "https://react-aria.adobe.com/registry/tailwind-field.json"
+  ],
+  "sourceDigest": "sha256:43069e33d32ac73f0e91f6994ab7fa6cc3148c88907ff47593588bde99061dbe",
+  "files": {
+    "color-area.tsx": "sha256:0c90825e4ece1b4de582be11985c3bcf3d9916acdabe81fa6b0160cac028a0d7",
+    "color-field.tsx": "sha256:279c44cb46e8c4f0e03e47e60fa55e888ccaeae46563bac629d902dfc37f89cc",
+    "color-picker.tsx": "sha256:cca489f00e4f72432a63d5ae75a0b9eb5fc7b70f2a515d78dcf69ffb68e19adf",
+    "color-slider.tsx": "sha256:ea3eec4cb7440044c628dda8e12e28ea87520fc71ece8ec90c4956d0153d48d7",
+    "color-swatch.tsx": "sha256:b121bd20a99fff0e2c6e2668300112d954d12e767059056316e129b5978c5a0a",
+    "color-thumb.tsx": "sha256:2c8ed6f3193adf1a57560e088da4cad3b6372c578580951ffe904d7790b1e33a",
+    "dialog.tsx": "sha256:cae9cef47ed90be73b90093a0198b12bd127325ac1f45f3b0c7ceeaedd45d3e5",
+    "field.tsx": "sha256:bc2087d83dd2154b24da6509c4d7683d4b3a53226a89ad19d19db84bf02127d4",
+    "popover.tsx": "sha256:a3cc4e1b7007d73ad98f75c2ece95cb985768c5d0f8c76307e72c64154f6bf6b",
+    "react-aria-utils.ts": "sha256:cc6475f2c16a751a2193adcf04e4943aa75fe4947eb2b3cb2c3a4846cea18e4b"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-card-card-12",
+  "title": "Card 12",
+  "description": "Product showcase card with gradient background, like button and pricing details",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/card/card-12/card-12.tsx",
+      "content": "import { useState } from 'react'\n\nimport { Badge } from '@astrale-os/ui/badge'\nimport { Button } from '@astrale-os/ui/button'\nimport { Card, CardHeader, CardDescription, CardTitle, CardFooter, CardContent } from '@astrale-os/ui/card'\nimport Heart from '@/assets/svg/heart'\n\nconst CardProductDemo = () => {\n  const [liked, setLiked] = useState<boolean>(false)\n\n  return (\n    <div className='relative max-w-md rounded-xl bg-linear-to-r from-neutral-600 to-violet-300 shadow-lg'>\n      <div className='flex h-60 items-center justify-center'>\n        <img\n          src='https://cdn.shadcnstudio.com/ss-assets/components/card/image-11.png?width=300&format=auto'\n          alt='Shoes'\n          className='w-75'\n        />\n      </div>\n      <Button\n        size='icon'\n        onClick={() => setLiked(!liked)}\n        className='bg-primary/10 hover:bg-primary/20 absolute top-4 right-4 rounded-full'\n      >\n        {liked ? <Heart className='fill-destructive stroke-destructive' /> : <Heart className='stroke-white' />}\n        <span className='sr-only'>Like</span>\n      </Button>\n      <Card className='ring-0'>\n        <CardHeader>\n          <CardTitle>Nike Jordan Air Rev</CardTitle>\n          <CardDescription className='flex items-center gap-2'>\n            <Badge variant='outline' className='rounded-sm'>\n              EU38\n            </Badge>\n            <Badge variant='outline' className='rounded-sm'>\n              Black and White\n            </Badge>\n          </CardDescription>\n        </CardHeader>\n        <CardContent>\n          <p>\n            Crossing hardwood comfort with off-court flair. &apos;80s-Inspired construction, bold details and\n            nothin&apos;-but-net style.\n          </p>\n        </CardContent>\n        <CardFooter className='justify-between gap-3 max-sm:flex-col max-sm:items-stretch'>\n          <div className='flex flex-col'>\n            <span className='text-sm font-medium uppercase'>Price</span>\n            <span className='text-xl font-semibold'>$69.99</span>\n          </div>\n          <Button size='lg'>Add to cart</Button>\n        </CardFooter>\n      </Card>\n    </div>\n  )\n}\n\nexport default CardProductDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/card/card-12.tsx"
+    },
+    {
+      "path": "source/components/card/card-12/support/assets/svg/heart.tsx",
+      "content": "import type { SVGAttributes } from 'react'\n\nconst Heart = (props: SVGAttributes<SVGElement>) => {\n  return (\n    <svg\n      xmlns='http://www.w3.org/2000/svg'\n      width='24'\n      height='24'\n      viewBox='0 0 24 24'\n      fill='none'\n      stroke='currentColor'\n      strokeWidth='2'\n      strokeLinecap='round'\n      strokeLinejoin='round'\n      {...props}\n    >\n      <path d='M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5' />\n    </svg>\n  )\n}\n\nexport default Heart\n",
+      "type": "registry:component",
+      "target": "assets/svg/heart.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/card/card-12",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

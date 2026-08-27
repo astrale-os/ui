@@ -1,0 +1,99 @@
+{
+  "$schema": "https://raw.githubusercontent.com/astrale-os/ui/main/schemas/theme.schema.json",
+  "version": 2,
+  "name": "ghibli-studio",
+  "label": "Ghibli Studio",
+  "description": "Shadcn Studio Ghibli Studio preset, mechanically projected to Astrale theme tokens.",
+  "appearance": {
+    "light": {
+      "background": "oklch(0.91 0.05 82.69)",
+      "foreground": "oklch(0.41 0.08 79.04)",
+      "card": "oklch(0.92 0.04 83.86)",
+      "cardForeground": "oklch(0.41 0.08 73.75)",
+      "popover": "oklch(0.92 0.04 83.86)",
+      "popoverForeground": "oklch(0.41 0.08 73.75)",
+      "primary": "oklch(0.71 0.10 111.99)",
+      "primaryForeground": "oklch(0.98 0.01 3.71)",
+      "secondary": "oklch(0.88 0.05 83.41)",
+      "secondaryForeground": "oklch(0.51 0.08 79.21)",
+      "muted": "oklch(0.86 0.06 83.48)",
+      "mutedForeground": "oklch(0.51 0.08 74.26)",
+      "accent": "oklch(0.86 0.05 84.50)",
+      "accentForeground": "oklch(0.26 0.02 358.42)",
+      "destructive": "oklch(0.63 0.24 29.21)",
+      "destructiveForeground": "oklch(0.98 0.01 3.71)",
+      "border": "oklch(0.74 0.06 79.81)",
+      "input": "oklch(0.74 0.06 79.81)",
+      "ring": "oklch(0.51 0.08 74.26)",
+      "chart1": "oklch(0.66 0.19 41.68)",
+      "chart2": "oklch(0.70 0.12 183.20)",
+      "chart3": "oklch(0.48 0.08 211.46)",
+      "chart4": "oklch(0.84 0.17 85.07)",
+      "chart5": "oklch(0.74 0.17 60.21)",
+      "sidebar": "oklch(0.87 0.06 83.96)",
+      "sidebarForeground": "oklch(0.41 0.08 79.04)",
+      "sidebarPrimary": "oklch(0.26 0.02 358.42)",
+      "sidebarPrimaryForeground": "oklch(0.98 0.01 3.71)",
+      "sidebarAccent": "oklch(0.83 0.06 84.46)",
+      "sidebarAccentForeground": "oklch(0.26 0.02 358.42)",
+      "sidebarBorder": "oklch(0.91 0.00 0.43)",
+      "sidebarRing": "oklch(0.71 0.00 0.37)"
+    },
+    "dark": {
+      "background": "oklch(0.20 0.01 48.35)",
+      "foreground": "oklch(0.88 0.05 79.26)",
+      "card": "oklch(0.25 0.01 56.14)",
+      "cardForeground": "oklch(0.88 0.05 79.26)",
+      "popover": "oklch(0.25 0.01 56.14)",
+      "popoverForeground": "oklch(0.88 0.05 79.26)",
+      "primary": "oklch(0.64 0.05 115.39)",
+      "primaryForeground": "oklch(0.98 0.01 3.71)",
+      "secondary": "oklch(0.33 0.02 60.70)",
+      "secondaryForeground": "oklch(0.88 0.05 83.41)",
+      "muted": "oklch(0.27 0.01 39.35)",
+      "mutedForeground": "oklch(0.74 0.06 79.81)",
+      "accent": "oklch(0.33 0.02 60.70)",
+      "accentForeground": "oklch(0.86 0.05 84.50)",
+      "destructive": "oklch(0.63 0.24 29.21)",
+      "destructiveForeground": "oklch(0.98 0.01 3.71)",
+      "border": "oklch(0.33 0.02 60.70)",
+      "input": "oklch(0.33 0.02 60.70)",
+      "ring": "oklch(0.64 0.05 115.39)",
+      "chart1": "oklch(0.66 0.19 41.68)",
+      "chart2": "oklch(0.70 0.12 183.20)",
+      "chart3": "oklch(0.48 0.08 211.46)",
+      "chart4": "oklch(0.84 0.17 85.07)",
+      "chart5": "oklch(0.74 0.17 60.21)",
+      "sidebar": "oklch(0.23 0.01 56.09)",
+      "sidebarForeground": "oklch(0.88 0.05 79.26)",
+      "sidebarPrimary": "oklch(0.64 0.05 115.39)",
+      "sidebarPrimaryForeground": "oklch(0.98 0.01 3.71)",
+      "sidebarAccent": "oklch(0.33 0.02 60.70)",
+      "sidebarAccentForeground": "oklch(0.86 0.05 84.50)",
+      "sidebarBorder": "oklch(0.33 0.02 60.70)",
+      "sidebarRing": "oklch(0.64 0.05 115.39)"
+    }
+  },
+  "typography": {
+    "body": "'PT Serif', ui-serif, serif",
+    "heading": "'Nunito', ui-sans-serif, sans-serif",
+    "mono": "'JetBrains Mono', ui-monospace, monospace"
+  },
+  "geometry": {
+    "radius": "0.625rem",
+    "panelRadius": "0.625rem"
+  },
+  "density": {
+    "control": "2.25rem",
+    "controlSmall": "2rem",
+    "controlLarge": "2.5rem"
+  },
+  "effects": {
+    "controlShadow": "0 1px 3px 0px oklch(0.00 0 0 / 0.05)",
+    "panelShadow": "0 1px 3px 0px oklch(0.00 0 0 / 0.10), 0 4px 6px -1px oklch(0.00 0 0 / 0.10)"
+  },
+  "motion": {
+    "fast": "120ms",
+    "standard": "180ms"
+  }
+}

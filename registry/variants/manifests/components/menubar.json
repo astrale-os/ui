@@ -1,0 +1,167 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-components-menubar",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "component-menubar-menubar-01",
+      "type": "registry:component",
+      "title": "Menu Bar 1",
+      "description": "Basic menubar with Notes, Edit, and View menus featuring shortcuts, separators, and disabled items.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "menubar-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/menubar/menubar-01.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/menubar/menubar-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-menubar-menubar-02",
+      "type": "registry:component",
+      "title": "Menu Bar 2",
+      "description": "Checkbox variant menubar with View panel toggles and Effects filter selections for a video editor.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "menubar-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/menubar/menubar-02.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/menubar/menubar-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-menubar-menubar-03",
+      "type": "registry:component",
+      "title": "Menu Bar 3",
+      "description": "Radio variant menubar with Playback mode and Genre selectors for a music player application.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "menubar-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/menubar/menubar-03.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/menubar/menubar-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-menubar-menubar-04",
+      "type": "registry:component",
+      "title": "Menu Bar 4",
+      "description": "Nested submenu menubar with Tools and Colors menus containing cascading submenu options for a drawing app.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "menubar-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/menubar/menubar-04.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/menubar/menubar-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-menubar-menubar-05",
+      "type": "registry:component",
+      "title": "Menu Bar 5",
+      "description": "Icon-enhanced menubar with Data and Charts menus using inline icons for a spreadsheet application.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "menubar-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/menubar/menubar-05.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/menubar/menubar-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-menubar-menubar-06",
+      "type": "registry:component",
+      "title": "Menu Bar 6",
+      "description": "Combined variant menubar with shortcuts, nested submenus, checkbox toggles, and radio selections for a code editor.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "menubar-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/menubar/menubar-06.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/menubar/menubar-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-menubar-menubar-07",
+      "type": "registry:component",
+      "title": "Menu Bar 7",
+      "description": "Labeled section menubar with Recent and Favorites contact groups and Work and Personal group categories.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "menubar-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/menubar/menubar-07.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/menubar/menubar-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-menubar-menubar-08",
+      "type": "registry:component",
+      "title": "Menu Bar 8",
+      "description": "Mixed interaction menubar with a radio feed filter and checkbox notification toggles for a social media dashboard.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "menubar-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/menubar/menubar-08.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/menubar/menubar-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

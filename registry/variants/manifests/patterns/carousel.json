@@ -1,0 +1,374 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-patterns-carousel",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "pattern-carousel-carousel-01",
+      "type": "registry:block",
+      "title": "Carousel 1",
+      "description": "Basic image carousel with single-item slides and previous/next navigation arrows.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "embla-carousel-react@^8.6.0",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "carousel-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/carousel/carousel-01.tsx"
+        },
+        {
+          "path": "support/components/ui/carousel.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/carousel.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/carousel/carousel-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-carousel-carousel-02",
+      "type": "registry:block",
+      "title": "Carousel 2",
+      "description": "Multi-item image carousel with start-aligned slides showing two to three items per view.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "embla-carousel-react@^8.6.0",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "carousel-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/carousel/carousel-02.tsx"
+        },
+        {
+          "path": "support/components/ui/carousel.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/carousel.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/carousel/carousel-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-carousel-carousel-03",
+      "type": "registry:block",
+      "title": "Carousel 3",
+      "description": "Vertical-orientation carousel with center-aligned slides and gradient fade overlays on top and bottom edges.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "embla-carousel-react@^8.6.0",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "carousel-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/carousel/carousel-03.tsx"
+        },
+        {
+          "path": "support/components/ui/carousel.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/carousel.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/carousel/carousel-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-carousel-carousel-04",
+      "type": "registry:block",
+      "title": "Carousel 4",
+      "description": "API-driven image carousel with a slide counter displaying the current index out of total slides.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "embla-carousel-react@^8.6.0",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "carousel-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/carousel/carousel-04.tsx"
+        },
+        {
+          "path": "support/components/ui/carousel.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/carousel.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/carousel/carousel-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-carousel-carousel-05",
+      "type": "registry:block",
+      "title": "Carousel 5",
+      "description": "Autoplay image carousel that advances slides automatically every two seconds using the embla-carousel-autoplay plugin.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "embla-carousel-autoplay@^8.6.0",
+        "embla-carousel-react@^8.6.0",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "carousel-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/carousel/carousel-05.tsx"
+        },
+        {
+          "path": "support/components/ui/carousel.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/carousel.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/carousel/carousel-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-carousel-carousel-06",
+      "type": "registry:block",
+      "title": "Carousel 6",
+      "description": "Looping center-aligned carousel with oversized slides that peek adjacent items on both sides.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "embla-carousel-react@^8.6.0",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "carousel-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/carousel/carousel-06.tsx"
+        },
+        {
+          "path": "support/components/ui/carousel.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/carousel.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/carousel/carousel-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-carousel-carousel-07",
+      "type": "registry:block",
+      "title": "Carousel 7",
+      "description": "Thumbnail-synced carousel with a main preview and a clickable thumbnail strip that highlights the active image.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "embla-carousel-autoplay@^8.6.0",
+        "embla-carousel-react@^8.6.0",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "carousel-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/carousel/carousel-07.tsx"
+        },
+        {
+          "path": "support/components/ui/carousel.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/carousel.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/carousel/carousel-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-carousel-carousel-08",
+      "type": "registry:block",
+      "title": "Carousel 8",
+      "description": "Profile card carousel with name and role overlays, navigated by animated dot indicators below.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "embla-carousel-react@^8.6.0",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "carousel-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/carousel/carousel-08.tsx"
+        },
+        {
+          "path": "support/components/ui/carousel.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/carousel.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/carousel/carousel-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-carousel-carousel-09",
+      "type": "registry:block",
+      "title": "Carousel 9",
+      "description": "Progress bar carousel with bottom-positioned navigation arrows and a progress indicator tracking scroll position.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "embla-carousel-react@^8.6.0",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "carousel-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/carousel/carousel-09.tsx"
+        },
+        {
+          "path": "support/components/ui/carousel.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/carousel.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/carousel/carousel-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-carousel-carousel-10",
+      "type": "registry:block",
+      "title": "Carousel 10",
+      "description": "Scale-effect looping carousel where inactive slides shrink to show depth while the active slide stays at full size.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "embla-carousel-react@^8.6.0",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "carousel-10.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/carousel/carousel-10.tsx"
+        },
+        {
+          "path": "support/components/ui/carousel.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/carousel.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/carousel/carousel-10",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-carousel-carousel-11",
+      "type": "registry:block",
+      "title": "Carousel 11",
+      "description": "Animated motion carousel with smooth slide transitions powered by the MotionCarousel component.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "button@^1.1.1",
+        "embla-carousel-react@^8.6.0",
+        "embla-carousel@^8.6.0",
+        "lucide-react@1.32.0",
+        "motion@^13.1.0",
+        "react@19.2.8"
+      ],
+      "registryDependencies": ["carousel"],
+      "files": [
+        {
+          "path": "carousel-11.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/carousel/carousel-11.tsx"
+        },
+        {
+          "path": "support/components/ui/motion-carousel.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/motion-carousel.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/carousel/carousel-11",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-carousel-carousel-12",
+      "type": "registry:block",
+      "title": "Carousel 12",
+      "description": "Radial 3D carousel with a cylindrical arc layout, rotateY perspective transforms, dot indicators, and keyboard navigation support.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "embla-carousel-react@^8.6.0",
+        "lucide-react@1.32.0",
+        "motion@^13.1.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "carousel-12.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/carousel/carousel-12.tsx"
+        },
+        {
+          "path": "support/components/ui/carousel.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/carousel.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/carousel/carousel-12",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

@@ -1,0 +1,163 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-components-sheet",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "component-sheet-sheet-01",
+      "type": "registry:component",
+      "title": "Sheet 1",
+      "description": "A basic sheet component with form inputs for profile editing",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "sheet-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/sheet/sheet-01.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/sheet/sheet-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-sheet-sheet-02",
+      "type": "registry:component",
+      "title": "Sheet 2",
+      "description": "A sheet component demonstrating different slide directions (top, right, bottom, left)",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "sheet-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/sheet/sheet-02.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/sheet/sheet-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-sheet-sheet-03",
+      "type": "registry:component",
+      "title": "Sheet 3",
+      "description": "A non-modal sheet component without overlay for profile editing",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "lucide-react@1.32.0"
+      ],
+      "files": [
+        {
+          "path": "sheet-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/sheet/sheet-03.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/sheet/sheet-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-sheet-sheet-04",
+      "type": "registry:component",
+      "title": "Sheet 4",
+      "description": "A sheet component with scrollable content for terms and conditions",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "sheet-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/sheet/sheet-04.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/sheet/sheet-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-sheet-sheet-05",
+      "type": "registry:component",
+      "title": "Sheet 5",
+      "description": "A sheet component with form validation and structured user registration",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@hookform/resolvers@^5.9.1",
+        "lucide-react@1.32.0",
+        "react-hook-form@^7.85.0",
+        "sonner@^2.0.8",
+        "zod@3.25.76"
+      ],
+      "files": [
+        {
+          "path": "sheet-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/sheet/sheet-05.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/sheet/sheet-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-sheet-sheet-06",
+      "type": "registry:component",
+      "title": "Sheet 6",
+      "description": "A navigation sheet component with collapsible menu structure",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "sheet-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/sheet/sheet-06.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/sheet/sheet-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-sheet-sheet-07",
+      "type": "registry:component",
+      "title": "Sheet 7",
+      "description": "A sheet component with data table, pagination, and form integration for adding user data",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@tanstack/react-table@^8.21.3",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "sheet-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/sheet/sheet-07.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/sheet/sheet-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

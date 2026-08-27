@@ -1,0 +1,327 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-components-dropdown-menu",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "component-dropdown-menu-dropdown-menu-01",
+      "type": "registry:component",
+      "title": "Dropdown Menu 1",
+      "description": "Basic dropdown menu with groups, separators, and submenu for account actions",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "dropdown-menu-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/dropdown-menu/dropdown-menu-01.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/dropdown-menu/dropdown-menu-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-dropdown-menu-dropdown-menu-02",
+      "type": "registry:component",
+      "title": "Dropdown Menu 2",
+      "description": "User switcher dropdown with avatar display and task assignment selection",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "dropdown-menu-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/dropdown-menu/dropdown-menu-02.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/dropdown-menu/dropdown-menu-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-dropdown-menu-dropdown-menu-03",
+      "type": "registry:component",
+      "title": "Dropdown Menu 3",
+      "description": "Chat list dropdown with avatars, message previews, and notification badges",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "dropdown-menu-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/dropdown-menu/dropdown-menu-03.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/dropdown-menu/dropdown-menu-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-dropdown-menu-dropdown-menu-04",
+      "type": "registry:component",
+      "title": "Dropdown Menu 4",
+      "description": "Contact list dropdown with avatars, email display, and send action buttons",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "dropdown-menu-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/dropdown-menu/dropdown-menu-04.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/dropdown-menu/dropdown-menu-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-dropdown-menu-dropdown-menu-05",
+      "type": "registry:component",
+      "title": "Dropdown Menu 5",
+      "description": "Meeting schedule dropdown with avatars, switch toggles for scheduling control",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "dropdown-menu-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/dropdown-menu/dropdown-menu-05.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/dropdown-menu/dropdown-menu-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-dropdown-menu-dropdown-menu-06",
+      "type": "registry:component",
+      "title": "Dropdown Menu 6",
+      "description": "Text editing dropdown menu with formatting options and descriptions",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "dropdown-menu-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/dropdown-menu/dropdown-menu-06.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/dropdown-menu/dropdown-menu-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-dropdown-menu-dropdown-menu-07",
+      "type": "registry:component",
+      "title": "Dropdown Menu 7",
+      "description": "User account menu dropdown with avatar trigger and profile management options",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "dropdown-menu-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/dropdown-menu/dropdown-menu-07.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/dropdown-menu/dropdown-menu-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-dropdown-menu-dropdown-menu-08",
+      "type": "registry:component",
+      "title": "Dropdown Menu 8",
+      "description": "User profile dropdown with avatar header, user info, and submenu for invitations",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "dropdown-menu-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/dropdown-menu/dropdown-menu-08.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/dropdown-menu/dropdown-menu-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-dropdown-menu-dropdown-menu-09",
+      "type": "registry:component",
+      "title": "Dropdown Menu 9",
+      "description": "Start-aligned dropdown menu with edit, share, and delete actions",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "dropdown-menu-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/dropdown-menu/dropdown-menu-09.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/dropdown-menu/dropdown-menu-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-dropdown-menu-dropdown-menu-10",
+      "type": "registry:component",
+      "title": "Dropdown Menu 10",
+      "description": "End-aligned dropdown menu with browser actions and keyboard shortcuts",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "dropdown-menu-10.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/dropdown-menu/dropdown-menu-10.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/dropdown-menu/dropdown-menu-10",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-dropdown-menu-dropdown-menu-11",
+      "type": "registry:component",
+      "title": "Dropdown Menu 11",
+      "description": "Task priority selector dropdown with icons and priority levels",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "dropdown-menu-11.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/dropdown-menu/dropdown-menu-11.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/dropdown-menu/dropdown-menu-11",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-dropdown-menu-dropdown-menu-12",
+      "type": "registry:component",
+      "title": "Dropdown Menu 12",
+      "description": "User profile menu dropdown with icons for profile, settings, billing, and FAQ",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "dropdown-menu-12.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/dropdown-menu/dropdown-menu-12.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/dropdown-menu/dropdown-menu-12",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-dropdown-menu-dropdown-menu-13",
+      "type": "registry:component",
+      "title": "Dropdown Menu 13",
+      "description": "Dropdown with checkbox controls for UI elements",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "dropdown-menu-13.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/dropdown-menu/dropdown-menu-13.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/dropdown-menu/dropdown-menu-13",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-dropdown-menu-dropdown-menu-14",
+      "type": "registry:component",
+      "title": "Dropdown Menu 14",
+      "description": "Radio group selection dropdown for panel position with single choice selection",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "dropdown-menu-14.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/dropdown-menu/dropdown-menu-14.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/dropdown-menu/dropdown-menu-14",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-dropdown-menu-dropdown-menu-15",
+      "type": "registry:component",
+      "title": "Dropdown Menu 15",
+      "description": "Left side animation dropdown menu",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "dropdown-menu-15.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/dropdown-menu/dropdown-menu-15.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/dropdown-menu/dropdown-menu-15",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-dropdown-menu-dropdown-menu-16",
+      "type": "registry:component",
+      "title": "Dropdown Menu 16",
+      "description": "Animated dropdown menu with slide up animation effect",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "dropdown-menu-16.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/dropdown-menu/dropdown-menu-16.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/dropdown-menu/dropdown-menu-16",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

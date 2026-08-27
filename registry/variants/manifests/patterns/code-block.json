@@ -1,0 +1,280 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-patterns-code-block",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "pattern-code-block-code-block-01",
+      "type": "registry:block",
+      "title": "Code Block 1",
+      "description": "TSX demo: single-file code block with Shiki syntax highlighting and copy-to-clipboard",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react@19.2.8",
+        "shiki@^4.4.3"
+      ],
+      "files": [
+        {
+          "path": "code-block-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/code-block/code-block-01.tsx"
+        },
+        {
+          "path": "support/components/ui/code-block.tsx",
+          "type": "registry:component",
+          "target": "components/ui/code-block.tsx"
+        }
+      ],
+      "css": {
+        ".dark .shiki, .dark .shiki span": {
+          "background-color": "transparent !important",
+          "color": "var(--shiki-dark) !important",
+          "font-style": "var(--shiki-dark-font-style) !important",
+          "font-weight": "var(--shiki-dark-font-weight) !important",
+          "text-decoration": "var(--shiki-dark-text-decoration) !important"
+        }
+      },
+      "meta": {
+        "canonicalAddress": "pattern/code-block/code-block-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-code-block-code-block-02",
+      "type": "registry:block",
+      "title": "Code Block 2",
+      "description": "Syntax-highlighted code block (Shiki) with copy button; supports filename tabs, line numbers, and highlighted lines",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react@19.2.8",
+        "shiki@^4.4.3"
+      ],
+      "files": [
+        {
+          "path": "code-block-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/code-block/code-block-02.tsx"
+        },
+        {
+          "path": "support/components/ui/code-block.tsx",
+          "type": "registry:component",
+          "target": "components/ui/code-block.tsx"
+        }
+      ],
+      "css": {
+        ".dark .shiki, .dark .shiki span": {
+          "background-color": "transparent !important",
+          "color": "var(--shiki-dark) !important",
+          "font-style": "var(--shiki-dark-font-style) !important",
+          "font-weight": "var(--shiki-dark-font-weight) !important",
+          "text-decoration": "var(--shiki-dark-text-decoration) !important"
+        }
+      },
+      "meta": {
+        "canonicalAddress": "pattern/code-block/code-block-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-code-block-code-block-03",
+      "type": "registry:block",
+      "title": "Code Block 3",
+      "description": "Syntax-highlighted code block (Shiki) with copy button; supports filename tabs, line numbers, and highlighted lines",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react@19.2.8",
+        "shiki@^4.4.3"
+      ],
+      "files": [
+        {
+          "path": "code-block-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/code-block/code-block-03.tsx"
+        },
+        {
+          "path": "support/components/ui/code-block.tsx",
+          "type": "registry:component",
+          "target": "components/ui/code-block.tsx"
+        }
+      ],
+      "css": {
+        ".dark .shiki, .dark .shiki span": {
+          "background-color": "transparent !important",
+          "color": "var(--shiki-dark) !important",
+          "font-style": "var(--shiki-dark-font-style) !important",
+          "font-weight": "var(--shiki-dark-font-weight) !important",
+          "text-decoration": "var(--shiki-dark-text-decoration) !important"
+        }
+      },
+      "meta": {
+        "canonicalAddress": "pattern/code-block/code-block-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-code-block-code-block-04",
+      "type": "registry:block",
+      "title": "Code Block 4",
+      "description": "Syntax-highlighted code block (Shiki) with copy button; supports filename tabs, line numbers, and highlighted lines",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react@19.2.8",
+        "shiki@^4.4.3"
+      ],
+      "files": [
+        {
+          "path": "code-block-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/code-block/code-block-04.tsx"
+        },
+        {
+          "path": "support/components/ui/code-block.tsx",
+          "type": "registry:component",
+          "target": "components/ui/code-block.tsx"
+        }
+      ],
+      "css": {
+        ".dark .shiki, .dark .shiki span": {
+          "background-color": "transparent !important",
+          "color": "var(--shiki-dark) !important",
+          "font-style": "var(--shiki-dark-font-style) !important",
+          "font-weight": "var(--shiki-dark-font-weight) !important",
+          "text-decoration": "var(--shiki-dark-text-decoration) !important"
+        }
+      },
+      "meta": {
+        "canonicalAddress": "pattern/code-block/code-block-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-code-block-code-block-05",
+      "type": "registry:block",
+      "title": "Code Block 5",
+      "description": "Syntax-highlighted code block (Shiki) with copy button; supports filename tabs, line numbers, and highlighted lines",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react@19.2.8",
+        "shiki@^4.4.3"
+      ],
+      "files": [
+        {
+          "path": "code-block-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/code-block/code-block-05.tsx"
+        },
+        {
+          "path": "support/components/ui/code-block.tsx",
+          "type": "registry:component",
+          "target": "components/ui/code-block.tsx"
+        }
+      ],
+      "css": {
+        ".dark .shiki, .dark .shiki span": {
+          "background-color": "transparent !important",
+          "color": "var(--shiki-dark) !important",
+          "font-style": "var(--shiki-dark-font-style) !important",
+          "font-weight": "var(--shiki-dark-font-weight) !important",
+          "text-decoration": "var(--shiki-dark-text-decoration) !important"
+        }
+      },
+      "meta": {
+        "canonicalAddress": "pattern/code-block/code-block-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-code-block-code-block-06",
+      "type": "registry:block",
+      "title": "Code Block 6",
+      "description": "Syntax-highlighted code block (Shiki) with copy button; supports filename tabs, line numbers, and highlighted lines",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react@19.2.8",
+        "shiki@^4.4.3"
+      ],
+      "files": [
+        {
+          "path": "code-block-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/code-block/code-block-06.tsx"
+        },
+        {
+          "path": "support/components/ui/code-block.tsx",
+          "type": "registry:component",
+          "target": "components/ui/code-block.tsx"
+        }
+      ],
+      "css": {
+        ".dark .shiki, .dark .shiki span": {
+          "background-color": "transparent !important",
+          "color": "var(--shiki-dark) !important",
+          "font-style": "var(--shiki-dark-font-style) !important",
+          "font-weight": "var(--shiki-dark-font-weight) !important",
+          "text-decoration": "var(--shiki-dark-text-decoration) !important"
+        }
+      },
+      "meta": {
+        "canonicalAddress": "pattern/code-block/code-block-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-code-block-code-block-07",
+      "type": "registry:block",
+      "title": "Code Block 7",
+      "description": "Layout variant - full-width code block with Shiki highlighting, copy support, and layout-specific styles",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react@19.2.8",
+        "shiki@^4.4.3"
+      ],
+      "files": [
+        {
+          "path": "code-block-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/code-block/code-block-07.tsx"
+        },
+        {
+          "path": "support/components/ui/code-block.tsx",
+          "type": "registry:component",
+          "target": "components/ui/code-block.tsx"
+        }
+      ],
+      "css": {
+        ".dark .shiki, .dark .shiki span": {
+          "background-color": "transparent !important",
+          "color": "var(--shiki-dark) !important",
+          "font-style": "var(--shiki-dark-font-style) !important",
+          "font-weight": "var(--shiki-dark-font-weight) !important",
+          "text-decoration": "var(--shiki-dark-text-decoration) !important"
+        }
+      },
+      "meta": {
+        "canonicalAddress": "pattern/code-block/code-block-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

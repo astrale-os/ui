@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-tooltip-tooltip-02",
+  "title": "Tooltip 2",
+  "description": "A light-themed tooltip with custom background and text colors",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/tooltip/tooltip-02/tooltip-02.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\nimport { Tooltip, TooltipContent, TooltipTrigger } from '@astrale-os/ui/tooltip'\n\nconst TooltipLightDemo = () => {\n  return (\n    <Tooltip>\n      <TooltipTrigger\n        render={\n          <Button variant='outline' size='sm'>\n            Light\n          </Button>\n        }\n      />\n      <TooltipContent className='bg-neutral-200 text-neutral-950 *:last:bg-inherit dark:bg-neutral-50'>\n        <p>This tooltip will be always light</p>\n      </TooltipContent>\n    </Tooltip>\n  )\n}\n\nexport default TooltipLightDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/tooltip/tooltip-02.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/tooltip/tooltip-02",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

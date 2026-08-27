@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-button-button-27",
+  "title": "Button 27",
+  "description": "User profile button with avatar image and username display",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/button/button-27/button-27.tsx",
+      "content": "import { Avatar, AvatarFallback, AvatarImage } from '@astrale-os/ui/avatar'\nimport { Button } from '@astrale-os/ui/button'\n\nconst ButtonAvatarDemo = () => {\n  return (\n    <Button className='hover:bg-primary/90 rounded-full pl-2'>\n      <Avatar className='size-5'>\n        <AvatarImage src='https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-5.png' alt='Hallie Richards' />\n        <AvatarFallback className='text-foreground text-xs'>HR</AvatarFallback>\n      </Avatar>\n      @hallierichards\n    </Button>\n  )\n}\n\nexport default ButtonAvatarDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/button/button-27.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/button/button-27",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

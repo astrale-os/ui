@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-aspect-ratio-aspect-ratio-02",
+  "title": "Aspect Ratio 2",
+  "description": "Responsive aspect-ratio example using a 9:16 ratio and captioned text, useful for image or video placeholders that preserve proportional sizing.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/aspect-ratio/aspect-ratio-02/aspect-ratio-02.tsx",
+      "content": "import { AspectRatio } from '@astrale-os/ui/aspect-ratio'\n\nconst AspectRatioDemo = () => {\n  return (\n    <div className='flex w-full max-w-sm flex-col items-center gap-4'>\n      <AspectRatio ratio={9 / 16} className='bg-muted flex w-full max-w-sm items-center justify-center rounded-lg'>\n        <p className='text-xl font-medium md:text-3xl'>9:16</p>\n      </AspectRatio>\n      <p className='text-muted-foreground text-xs'>9:16 Aspect Ratio.</p>\n    </div>\n  )\n}\n\nexport default AspectRatioDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/aspect-ratio/aspect-ratio-02.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/aspect-ratio/aspect-ratio-02",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

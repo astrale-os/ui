@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-avatar-avatar-18",
+  "title": "Avatar 18",
+  "description": "Avatar group with tooltip transitions and hover spacing effects.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/avatar/avatar-18/avatar-18.tsx",
+      "content": "import { Avatar, AvatarGroup, AvatarFallback, AvatarImage } from '@astrale-os/ui/avatar'\nimport { Tooltip, TooltipContent, TooltipTrigger } from '@astrale-os/ui/tooltip'\n\nconst avatars = [\n  {\n    src: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-3.png',\n    fallback: 'OS',\n    name: 'Olivia Sparks'\n  },\n  {\n    src: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-6.png',\n    fallback: 'HL',\n    name: 'Howard Lloyd'\n  },\n  {\n    src: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-5.png',\n    fallback: 'HR',\n    name: 'Hallie Richards'\n  },\n  {\n    src: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-16.png',\n    fallback: 'JW',\n    name: 'Jenny Wilson'\n  }\n]\n\nconst AvatarGroupTooltipTransitionDemo = () => {\n  return (\n    <AvatarGroup className='**:data-[slot=avatar]:ring-background hover:space-x-1 **:data-[slot=avatar]:ring-2'>\n      {avatars.map((avatar, index) => (\n        <Tooltip key={index}>\n          <TooltipTrigger className='transition-all duration-300 ease-in-out'>\n            <Avatar>\n              <AvatarImage src={avatar.src} alt={avatar.name} />\n              <AvatarFallback>{avatar.fallback}</AvatarFallback>\n            </Avatar>\n          </TooltipTrigger>\n          <TooltipContent>{avatar.name}</TooltipContent>\n        </Tooltip>\n      ))}\n    </AvatarGroup>\n  )\n}\n\nexport default AvatarGroupTooltipTransitionDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/avatar/avatar-18.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/avatar/avatar-18",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

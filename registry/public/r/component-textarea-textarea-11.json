@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-textarea-textarea-11",
+  "title": "Textarea 11",
+  "description": "A textarea with start icon positioned on the left side",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/textarea/textarea-11/textarea-11.tsx",
+      "content": "import { useId } from 'react'\nimport { Textarea } from '@astrale-os/ui/textarea'\nimport { Label } from '@astrale-os/ui/label'\nimport { HomeIcon } from \"lucide-react\"\n\nconst TextareaStartIconDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>Textarea with start icon</Label>\n      <div className='relative'>\n        <div className='text-muted-foreground pointer-events-none absolute top-2.5 left-0 flex items-center justify-center pl-3 peer-disabled:opacity-50'>\n          <HomeIcon className='size-4' />\n          <span className='sr-only'>Address</span>\n        </div>\n        <Textarea id={id} placeholder='Address' className='peer pl-9' />\n      </div>\n    </div>\n  )\n}\n\nexport default TextareaStartIconDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/textarea/textarea-11.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/textarea/textarea-11",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

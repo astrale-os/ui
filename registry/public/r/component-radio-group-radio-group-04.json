@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-radio-group-radio-group-04",
+  "title": "Radio Group 4",
+  "description": "A radio group with different sizes for various display options",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/radio-group/radio-group-04/radio-group-04.tsx",
+      "content": "import { Label } from '@astrale-os/ui/label'\nimport { RadioGroup, RadioGroupItem } from '@astrale-os/ui/radio-group'\n\nconst RadioGroupSizesDemo = () => {\n  return (\n    <RadioGroup defaultValue='default' className='flex items-center gap-4'>\n      <div className='flex items-center gap-2'>\n        <RadioGroupItem value='default' id='size-default' />\n        <Label htmlFor='size-default'>Default</Label>\n      </div>\n      <div className='flex items-center gap-2'>\n        <RadioGroupItem\n          value='medium'\n          id='size-medium'\n          className='size-5 [&_[data-slot=radio-group-indicator]>span]:size-2.5'\n        />\n        <Label htmlFor='size-medium'>Medium</Label>\n      </div>\n      <div className='flex items-center gap-2'>\n        <RadioGroupItem\n          value='large'\n          id='size-large'\n          className='size-6 [&_[data-slot=radio-group-indicator]>span]:size-3'\n        />\n        <Label htmlFor='size-large'>Large</Label>\n      </div>\n    </RadioGroup>\n  )\n}\n\nexport default RadioGroupSizesDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/radio-group/radio-group-04.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/radio-group/radio-group-04",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

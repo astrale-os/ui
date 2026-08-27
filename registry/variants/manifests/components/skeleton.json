@@ -1,0 +1,252 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-components-skeleton",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "component-skeleton-skeleton-01",
+      "type": "registry:component",
+      "title": "Skeleton 1",
+      "description": "Compact avatar with two-line text skeleton, suitable for user rows or list items.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "skeleton-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/skeleton/skeleton-01.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/skeleton/skeleton-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-skeleton-skeleton-02",
+      "type": "registry:component",
+      "title": "Skeleton 2",
+      "description": "Stacked text skeletons in two columns useful for loading lists or content placeholders.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "skeleton-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/skeleton/skeleton-02.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/skeleton/skeleton-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-skeleton-skeleton-03",
+      "type": "registry:component",
+      "title": "Skeleton 3",
+      "description": "Card skeleton with avatar header and media/content placeholder, mimics a loading card.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "skeleton-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/skeleton/skeleton-03.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/skeleton/skeleton-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-skeleton-skeleton-04",
+      "type": "registry:component",
+      "title": "Skeleton 4",
+      "description": "Form skeleton with labeled fields and input placeholders for loading states.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "skeleton-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/skeleton/skeleton-04.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/skeleton/skeleton-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-skeleton-skeleton-05",
+      "type": "registry:component",
+      "title": "Skeleton 5",
+      "description": "Profile page skeleton featuring a cover banner, avatar placeholder and action button placeholder.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "skeleton-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/skeleton/skeleton-05.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/skeleton/skeleton-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-skeleton-skeleton-06",
+      "type": "registry:component",
+      "title": "Skeleton 6",
+      "description": "Chat interface skeleton showing incoming/outgoing message placeholders and input area.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "skeleton-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/skeleton/skeleton-06.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/skeleton/skeleton-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-skeleton-skeleton-07",
+      "type": "registry:component",
+      "title": "Skeleton 7",
+      "description": "Accordion skeleton with multiple collapsible items represented by line and block placeholders.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "skeleton-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/skeleton/skeleton-07.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/skeleton/skeleton-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-skeleton-skeleton-08",
+      "type": "registry:component",
+      "title": "Skeleton 8",
+      "description": "Large shimmer skeleton using animated motion for a polished loading shimmer effect.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "motion@^13.1.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "skeleton-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/skeleton/skeleton-08.tsx"
+        },
+        {
+          "path": "support/components/ui/shimmer-skeleton.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/shimmer-skeleton.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/skeleton/skeleton-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-skeleton-skeleton-09",
+      "type": "registry:component",
+      "title": "Skeleton 9",
+      "description": "Interactive toggle skeleton demonstrating switchable loaded/skeleton states within a card.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "skeleton-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/skeleton/skeleton-09.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/skeleton/skeleton-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-skeleton-skeleton-10",
+      "type": "registry:component",
+      "title": "Skeleton 10",
+      "description": "User-list loading example with avatar placeholders, delayed loading simulation and follow button.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "skeleton-10.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/skeleton/skeleton-10.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/skeleton/skeleton-10",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-skeleton-skeleton-11",
+      "type": "registry:component",
+      "title": "Skeleton 11",
+      "description": "Table/list skeleton showing a header row and repeating row placeholders for datasets.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "skeleton-11.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/skeleton/skeleton-11.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/skeleton/skeleton-11",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-skeleton-skeleton-12",
+      "type": "registry:component",
+      "title": "Skeleton 12",
+      "description": "Grid of card skeletons with header and content placeholders for multi-column loading states.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "skeleton-12.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/skeleton/skeleton-12.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/skeleton/skeleton-12",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-sonner-sonner-05",
+  "title": "Sonner 5",
+  "description": "A closable toast notification with user-controlled dismiss functionality",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "sonner@^2.0.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/sonner/sonner-05/sonner-05.tsx",
+      "content": "import { toast } from 'sonner'\n\nimport { Button } from '@astrale-os/ui/button'\n\nconst ClosableSonnerDemo = () => {\n  return (\n    <Button\n      variant='outline'\n      onClick={() =>\n        toast('Action completed successfully!', {\n          closeButton: true\n        })\n      }\n    >\n      Closable Toast\n    </Button>\n  )\n}\n\nexport default ClosableSonnerDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/sonner/sonner-05.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/sonner/sonner-05",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

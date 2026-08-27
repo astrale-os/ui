@@ -3,6 +3,9 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "noEmit": true,
+    "paths": {
+      "@/*": ["../registry/variants/support/*"]
+    },
     "types": ["vitest/globals", "@testing-library/jest-dom"]
   },
   "include": [
@@ -17,5 +20,6 @@
     "../registry/**/*.fixture.ts",
     "../registry/**/*.preview.tsx",
     "../tooling/theme-document/**/*.ts"
-  ]
+  ],
+  "exclude": ["../registry/variants/source"]
 }

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-alert-alert-15",
+  "title": "Alert 15",
+  "description": "Pure destructive alert using built-in destructive variant with error styling.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/alert/alert-15/alert-15.tsx",
+      "content": "import { Alert, AlertTitle } from '@astrale-os/ui/alert'\nimport { TriangleAlertIcon } from \"lucide-react\"\n\nconst AlertPureDestructiveDemo = () => {\n  return (\n    <Alert variant='destructive' className='border-destructive *:[svg]:row-span-1'>\n      <TriangleAlertIcon\n      />\n      <AlertTitle>Unable to process your payment.</AlertTitle>\n    </Alert>\n  )\n}\n\nexport default AlertPureDestructiveDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/alert/alert-15.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/alert/alert-15",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

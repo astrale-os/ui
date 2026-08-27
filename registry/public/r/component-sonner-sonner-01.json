@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-sonner-sonner-01",
+  "title": "Sonner 1",
+  "description": "A basic toast notification with simple message display",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "sonner@^2.0.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/sonner/sonner-01/sonner-01.tsx",
+      "content": "'use client'\n\nimport { toast } from 'sonner'\n\nimport { Button } from '@astrale-os/ui/button'\n\nconst SonnerDemo = () => {\n  return (\n    <Button variant='outline' onClick={() => toast('Action completed successfully!')}>\n      Default Toast\n    </Button>\n  )\n}\n\nexport default SonnerDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/sonner/sonner-01.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/sonner/sonner-01",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

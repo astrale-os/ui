@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-switch-switch-15",
+  "title": "Switch 15",
+  "description": "A switch integrated within a card layout with database icon for backup settings",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/switch/switch-15/switch-15.tsx",
+      "content": "import { useId } from 'react'\nimport { Label } from '@astrale-os/ui/label'\nimport { Switch } from '@astrale-os/ui/switch'\nimport { DatabaseIcon } from \"lucide-react\"\n\nconst SwitchCardDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='border-input has-data-checked:border-primary/50 relative flex w-full items-start gap-2 rounded-md border p-4 shadow-xs outline-none'>\n      <Switch id={id} size='sm' className='order-1' aria-describedby={`${id}-description`} />\n      <div className='flex grow items-center gap-3'>\n        <DatabaseIcon className='size-6' />\n        <div className='grid grow gap-2'>\n          <Label htmlFor={id}>Backup</Label>\n          <p id={`${id}-description`} className='text-muted-foreground text-xs'>\n            Backup every file from your project.\n          </p>\n        </div>\n      </div>\n    </div>\n  )\n}\n\nexport default SwitchCardDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/switch/switch-15.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/switch/switch-15",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

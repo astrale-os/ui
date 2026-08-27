@@ -1,0 +1,287 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-patterns-command",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "pattern-command-command-01",
+      "type": "registry:block",
+      "title": "Command 1",
+      "description": "Inline command palette with Suggestions and Settings groups, category icons, and keyboard shortcuts.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "command-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/command/command-01.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/command/command-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-command-command-02",
+      "type": "registry:block",
+      "title": "Command 2",
+      "description": "Navigation-focused command palette with Pages and Actions groups, icons, and keyboard shortcuts.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "command-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/command/command-02.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/command/command-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-command-command-03",
+      "type": "registry:block",
+      "title": "Command 3",
+      "description": "Repository switcher command palette with Repositories and Operations groups and keyboard shortcuts.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "command-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/command/command-03.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/command/command-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-command-command-04",
+      "type": "registry:block",
+      "title": "Command 4",
+      "description": "Dialog command palette triggered by a button with a single Suggestions group.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "command-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/command/command-04.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/command/command-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-command-command-05",
+      "type": "registry:block",
+      "title": "Command 5",
+      "description": "Dialog command palette with a Settings group featuring icon-enhanced items and keyboard shortcuts.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "command-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/command/command-05.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/command/command-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-command-command-06",
+      "type": "registry:block",
+      "title": "Command 6",
+      "description": "Scrollable dialog command palette with Navigation, Actions, View, Account, and Tools groups and keyboard shortcuts.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "command-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/command/command-06.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/command/command-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-command-command-07",
+      "type": "registry:block",
+      "title": "Command 7",
+      "description": "IDE-style dialog command palette with Actions shortcuts and a dynamic file list showing filenames and paths.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "command-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/command/command-07.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/command/command-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-command-command-08",
+      "type": "registry:block",
+      "title": "Command 8",
+      "description": "Team member invite dialog palette with avatar-based user lists grouped into Team Leads, Developers, and Designers.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "command-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/command/command-08.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/command/command-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-command-command-09",
+      "type": "registry:block",
+      "title": "Command 9",
+      "description": "Developer workflow dialog palette triggered by a search icon with Code, Run, and Deploy groups and shortcuts.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "command-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/command/command-09.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/command/command-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-command-command-10",
+      "type": "registry:block",
+      "title": "Command 10",
+      "description": "Keyboard-triggered (⌘J) search palette with Suggestions, timestamped Recent items, Quick Links, and a navigation hint footer.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "command-10.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/command/command-10.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/command/command-10",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-command-command-11",
+      "type": "registry:block",
+      "title": "Command 11",
+      "description": "Filter-enhanced dialog palette with radio button Category, Sort, and Time controls plus checkbox item lists with counts.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "command-11.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/command/command-11.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/command/command-11",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-command-command-12",
+      "type": "registry:block",
+      "title": "Command 12",
+      "description": "Animated command dialog with a slide-up entrance animation from the bottom of the screen.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "command-12.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/command/command-12.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/command/command-12",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-command-command-13",
+      "type": "registry:block",
+      "title": "Command 13",
+      "description": "Animated command dialog with a slide-in entrance animation from the left side of the screen.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "command-13.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/command/command-13.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/command/command-13",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-command-command-14",
+      "type": "registry:block",
+      "title": "Command 14",
+      "description": "Animated command dialog with a zoom-in entrance animation scaling up from zero.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "command-14.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/command/command-14.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/command/command-14",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

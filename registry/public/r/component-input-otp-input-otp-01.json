@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-input-otp-input-otp-01",
+  "title": "Input OTP 1",
+  "description": "A 4-digit numeric OTP input field with individual slots for each digit",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "input-otp@^1.5.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/input-otp/input-otp-01/input-otp-01.tsx",
+      "content": "import { useId } from 'react'\n\nimport { REGEXP_ONLY_DIGITS } from 'input-otp'\n\nimport { InputOTP, InputOTPGroup, InputOTPSlot } from '@astrale-os/ui/input-otp'\nimport { Label } from '@astrale-os/ui/label'\n\nconst InputOTPNumberDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='space-y-3'>\n      <Label htmlFor={id}>Input OTP number</Label>\n      <InputOTP id={id} maxLength={4} pattern={REGEXP_ONLY_DIGITS}>\n        <InputOTPGroup>\n          <InputOTPSlot index={0} />\n          <InputOTPSlot index={1} />\n          <InputOTPSlot index={2} />\n          <InputOTPSlot index={3} />\n        </InputOTPGroup>\n      </InputOTP>\n    </div>\n  )\n}\n\nexport default InputOTPNumberDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/input-otp/input-otp-01.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/input-otp/input-otp-01",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

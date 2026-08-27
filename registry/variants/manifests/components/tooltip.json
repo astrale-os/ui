@@ -1,0 +1,362 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-components-tooltip",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "component-tooltip-tooltip-01",
+      "type": "registry:component",
+      "title": "Tooltip 1",
+      "description": "A basic tooltip with simple text content displayed on hover",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "tooltip-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tooltip/tooltip-01.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tooltip/tooltip-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-tooltip-tooltip-02",
+      "type": "registry:component",
+      "title": "Tooltip 2",
+      "description": "A light-themed tooltip with custom background and text colors",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "tooltip-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tooltip/tooltip-02.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tooltip/tooltip-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-tooltip-tooltip-03",
+      "type": "registry:component",
+      "title": "Tooltip 3",
+      "description": "A tooltip without the arrow indicator for clean minimal appearance",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "tooltip-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tooltip/tooltip-03.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tooltip/tooltip-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-tooltip-tooltip-04",
+      "type": "registry:component",
+      "title": "Tooltip 4",
+      "description": "An error-styled tooltip with destructive color scheme for warnings",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "tooltip-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tooltip/tooltip-04.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tooltip/tooltip-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-tooltip-tooltip-05",
+      "type": "registry:component",
+      "title": "Tooltip 5",
+      "description": "A tooltip with an icon and text content in a flexible layout",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "tooltip-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tooltip/tooltip-05.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tooltip/tooltip-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-tooltip-tooltip-06",
+      "type": "registry:component",
+      "title": "Tooltip 6",
+      "description": "A tooltip with rounded corners for a modern soft appearance",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "tooltip-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tooltip/tooltip-06.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tooltip/tooltip-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-tooltip-tooltip-07",
+      "type": "registry:component",
+      "title": "Tooltip 7",
+      "description": "A rich content tooltip with accessibility information, icon and formatted text",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "tooltip-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tooltip/tooltip-07.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tooltip/tooltip-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-tooltip-tooltip-08",
+      "type": "registry:component",
+      "title": "Tooltip 8",
+      "description": "A directional tooltip demo showing placement on all four sides for e.g. top, right, bottom, left",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "tooltip-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tooltip/tooltip-08.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tooltip/tooltip-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-tooltip-tooltip-09",
+      "type": "registry:component",
+      "title": "Tooltip 9",
+      "description": "A tooltip displaying user information with avatar and name",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "tooltip-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tooltip/tooltip-09.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tooltip/tooltip-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-tooltip-tooltip-10",
+      "type": "registry:component",
+      "title": "Tooltip 10",
+      "description": "A tooltip with badge indicator for pricing and status information",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "tooltip-10.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tooltip/tooltip-10.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tooltip/tooltip-10",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-tooltip-tooltip-11",
+      "type": "registry:component",
+      "title": "Tooltip 11",
+      "description": "A hover card with media content including image and description links",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "tooltip-11.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tooltip/tooltip-11.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tooltip/tooltip-11",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-tooltip-tooltip-12",
+      "type": "registry:component",
+      "title": "Tooltip 12",
+      "description": "A hover card displaying statistics with avatar and growth metrics",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "tooltip-12.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tooltip/tooltip-12.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tooltip/tooltip-12",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-tooltip-tooltip-13",
+      "type": "registry:component",
+      "title": "Tooltip 13",
+      "description": "A project hover card with progress bar, timeline, and team avatars",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "tooltip-13.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tooltip/tooltip-13.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tooltip/tooltip-13",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-tooltip-tooltip-14",
+      "type": "registry:component",
+      "title": "Tooltip 14",
+      "description": "An alert hover card with warning icon for error notifications",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "tooltip-14.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tooltip/tooltip-14.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tooltip/tooltip-14",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-tooltip-tooltip-15",
+      "type": "registry:component",
+      "title": "Tooltip 15",
+      "description": "A hover card showing today's task completion with team member avatars and percentage progress",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "tooltip-15.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tooltip/tooltip-15.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tooltip/tooltip-15",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-tooltip-tooltip-16",
+      "type": "registry:component",
+      "title": "Tooltip 16",
+      "description": "An animated tooltip with stacked avatars and hover effects using motion-tooltip component",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "motion@^13.1.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "tooltip-16.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tooltip/tooltip-16.tsx"
+        },
+        {
+          "path": "support/components/ui/motion-tooltip.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/motion-tooltip.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tooltip/tooltip-16",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-tooltip-tooltip-17",
+      "type": "registry:component",
+      "title": "Tooltip 17",
+      "description": "A global tooltip system with overlapping avatars and hover scaling effects using global-tooltip component",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "motion@^13.1.0",
+        "react-dom@19.2.8",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "tooltip-17.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/tooltip/tooltip-17.tsx"
+        },
+        {
+          "path": "support/components/ui/global-tooltip.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/global-tooltip.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/tooltip/tooltip-17",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

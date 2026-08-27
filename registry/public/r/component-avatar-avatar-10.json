@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-avatar-avatar-10",
+  "title": "Avatar 10",
+  "description": "Avatar with plus icon overlay for adding or editing profile functionality.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/avatar/avatar-10/avatar-10.tsx",
+      "content": "import { Avatar, AvatarFallback, AvatarImage, AvatarBadge } from '@astrale-os/ui/avatar'\nimport { PlusCircleIcon } from \"lucide-react\"\n\nconst AvatarPlusDemo = () => {\n  return (\n    <div className='after:rounded-[inherit]'>\n      <Avatar size='lg'>\n        <AvatarImage src='https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-5.png' alt='Hallie Richards' />\n        <AvatarFallback>HR</AvatarFallback>\n        <AvatarBadge className='-right-1 -bottom-1 bg-white ring-0 group-data-[size=lg]/avatar:size-4.25 group-data-[size=lg]/avatar:[&>svg]:size-4'>\n          <PlusCircleIcon className='text-background fill-slate-400' />\n        </AvatarBadge>\n      </Avatar>\n    </div>\n  )\n}\n\nexport default AvatarPlusDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/avatar/avatar-10.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/avatar/avatar-10",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

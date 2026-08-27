@@ -1,0 +1,212 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-components-collapsible",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "component-collapsible-collapsible-01",
+      "type": "registry:component",
+      "title": "Collapsible 1",
+      "description": "Basic collapsible with repository list and toggle button functionality",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "collapsible-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/collapsible/collapsible-01.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/collapsible/collapsible-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-collapsible-collapsible-02",
+      "type": "registry:component",
+      "title": "Collapsible 2",
+      "description": "File tree explorer with nested folders and expandable directory structure",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "collapsible-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/collapsible/collapsible-02.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/collapsible/collapsible-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-collapsible-collapsible-03",
+      "type": "registry:component",
+      "title": "Collapsible 3",
+      "description": "Task completion list with user avatars and progress percentages",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "collapsible-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/collapsible/collapsible-03.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/collapsible/collapsible-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-collapsible-collapsible-04",
+      "type": "registry:component",
+      "title": "Collapsible 4",
+      "description": "User list with avatars, status indicators and expandable team member details",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "collapsible-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/collapsible/collapsible-04.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/collapsible/collapsible-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-collapsible-collapsible-05",
+      "type": "registry:component",
+      "title": "Collapsible 5",
+      "description": "Filter panel with price range inputs, rating checkboxes and brand selection",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "collapsible-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/collapsible/collapsible-05.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/collapsible/collapsible-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-collapsible-collapsible-06",
+      "type": "registry:component",
+      "title": "Collapsible 6",
+      "description": "Simple text content collapsible with expandable paragraph sections",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "collapsible-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/collapsible/collapsible-06.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/collapsible/collapsible-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-collapsible-collapsible-07",
+      "type": "registry:component",
+      "title": "Collapsible 7",
+      "description": "FAQ card with collapsible answer section and expandable image content",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "collapsible-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/collapsible/collapsible-07.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/collapsible/collapsible-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-collapsible-collapsible-08",
+      "type": "registry:component",
+      "title": "Collapsible 8",
+      "description": "Menu items with dropdown actions and nested navigation structure",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "collapsible-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/collapsible/collapsible-08.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/collapsible/collapsible-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-collapsible-collapsible-09",
+      "type": "registry:component",
+      "title": "Collapsible 9",
+      "description": "Multi-step form with delivery address, shipping options and payment details",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react-payment-inputs@^1.2.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "collapsible-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/collapsible/collapsible-09.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/collapsible/collapsible-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-collapsible-collapsible-10",
+      "type": "registry:component",
+      "title": "Collapsible 10",
+      "description": "Animated collapsible with smooth transitions and motion effects",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "collapsible-10.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/collapsible/collapsible-10.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/collapsible/collapsible-10",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

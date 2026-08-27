@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-kbd-kbd-03",
+  "title": "Kbd 3",
+  "description": "Tooltip-integrated keyboard shortcut hints on a button group displaying shortcuts for Format, Run, Find, and Command Palette actions.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/kbd/kbd-03/kbd-03.tsx",
+      "content": "import { Kbd, KbdGroup } from '@astrale-os/ui/kbd'\nimport { Button } from '@astrale-os/ui/button'\nimport { ButtonGroup } from '@astrale-os/ui/button-group'\nimport { Tooltip, TooltipContent, TooltipTrigger } from '@astrale-os/ui/tooltip'\n\nconst KbdTooltipDemo = () => {\n  return (\n    <div className='flex flex-wrap gap-4'>\n      <ButtonGroup>\n        <Tooltip>\n          <TooltipTrigger render={<Button variant='outline' />}>Format</TooltipTrigger>\n          <TooltipContent>\n            Format document\n            <KbdGroup>\n              <Kbd>Shift</Kbd>\n              <Kbd>Alt</Kbd>\n              <Kbd>F</Kbd>\n            </KbdGroup>\n          </TooltipContent>\n        </Tooltip>\n        <Tooltip>\n          <TooltipTrigger render={<Button variant='outline' />}>Run</TooltipTrigger>\n          <TooltipContent>\n            Run file\n            <KbdGroup>\n              <Kbd>Ctrl</Kbd>\n              <Kbd>R</Kbd>\n            </KbdGroup>\n          </TooltipContent>\n        </Tooltip>\n        <Tooltip>\n          <TooltipTrigger render={<Button variant='outline' />}>Find</TooltipTrigger>\n          <TooltipContent>\n            Find in file\n            <KbdGroup>\n              <Kbd>Ctrl</Kbd>\n              <Kbd>F</Kbd>\n            </KbdGroup>\n          </TooltipContent>\n        </Tooltip>\n        <Tooltip>\n          <TooltipTrigger render={<Button variant='outline' />}>Command Palette</TooltipTrigger>\n          <TooltipContent>\n            Open Command Palette\n            <KbdGroup>\n              <Kbd>Ctrl</Kbd>\n              <Kbd>Shift</Kbd>\n              <Kbd>P</Kbd>\n            </KbdGroup>\n          </TooltipContent>\n        </Tooltip>\n      </ButtonGroup>\n    </div>\n  )\n}\n\nexport default KbdTooltipDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/kbd/kbd-03.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/kbd/kbd-03",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

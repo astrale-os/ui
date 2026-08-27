@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-select-select-23",
+  "title": "Select 23",
+  "description": "A custom select dropdown with separators and grouped countries by geographic regions",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/select/select-23/select-23.tsx",
+      "content": "import { useId } from 'react'\n\nimport { Label } from '@astrale-os/ui/label'\nimport {\n  Select,\n  SelectContent,\n  SelectGroup,\n  SelectItem,\n  SelectLabel,\n  SelectSeparator,\n  SelectTrigger,\n  SelectValue\n} from '@astrale-os/ui/select'\n\nconst northAmerica = [\n  { label: 'United States', value: '1' },\n  { label: 'Canada', value: '2' },\n  { label: 'Mexico', value: '3' }\n]\n\nconst europe = [\n  { label: 'United Kingdom', value: '4' },\n  { label: 'Germany', value: '5' },\n  { label: 'France', value: '6' }\n]\n\nconst asia = [\n  { label: 'India', value: '7' },\n  { label: 'Japan', value: '8' },\n  { label: 'China', value: '9' }\n]\n\nconst items = [{ label: 'Select framework', value: null }, ...northAmerica, ...europe, ...asia]\n\nconst SelectWithSeparatorDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>Select with separator</Label>\n      <Select items={items} defaultValue='7'>\n        <SelectTrigger id={id} className='w-full'>\n          <SelectValue />\n        </SelectTrigger>\n        <SelectContent>\n          <SelectGroup>\n            <SelectLabel>North America</SelectLabel>\n            {northAmerica.map(item => (\n              <SelectItem key={item.value} value={item.value}>\n                {item.label}\n              </SelectItem>\n            ))}\n          </SelectGroup>\n          <SelectSeparator />\n          <SelectGroup>\n            <SelectLabel>Europe</SelectLabel>\n            {europe.map(item => (\n              <SelectItem key={item.value} value={item.value}>\n                {item.label}\n              </SelectItem>\n            ))}\n          </SelectGroup>\n          <SelectSeparator />\n          <SelectGroup>\n            <SelectLabel>Asia</SelectLabel>\n            {asia.map(item => (\n              <SelectItem key={item.value} value={item.value}>\n                {item.label}\n              </SelectItem>\n            ))}\n          </SelectGroup>\n        </SelectContent>\n      </Select>\n    </div>\n  )\n}\n\nexport default SelectWithSeparatorDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/select/select-23.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/select/select-23",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

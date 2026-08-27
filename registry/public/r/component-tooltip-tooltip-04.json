@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-tooltip-tooltip-04",
+  "title": "Tooltip 4",
+  "description": "An error-styled tooltip with destructive color scheme for warnings",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/tooltip/tooltip-04/tooltip-04.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\nimport { Tooltip, TooltipContent, TooltipTrigger } from '@astrale-os/ui/tooltip'\n\nconst TooltipErrorDemo = () => {\n  return (\n    <Tooltip>\n      <TooltipTrigger\n        render={\n          <Button variant='outline' size='sm'>\n            Error\n          </Button>\n        }\n      />\n      <TooltipContent className='bg-destructive text-white *:last:bg-inherit'>\n        <p>This is an error tooltip</p>\n      </TooltipContent>\n    </Tooltip>\n  )\n}\n\nexport default TooltipErrorDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/tooltip/tooltip-04.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/tooltip/tooltip-04",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

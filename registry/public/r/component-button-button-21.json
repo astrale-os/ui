@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-button-button-21",
+  "title": "Button 21",
+  "description": "Button with badge indicator showing unread message count",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/button/button-21/button-21.tsx",
+      "content": "import { Badge } from '@astrale-os/ui/badge'\nimport { Button } from '@astrale-os/ui/button'\nimport { MailCheckIcon } from \"lucide-react\"\n\nconst ButtonMessagesBadgeDemo = () => {\n  return (\n    <Button variant='outline'>\n      <MailCheckIcon\n      />\n      Messages\n      <Badge variant='destructive' className='px-1.5 py-px'>\n        99+\n      </Badge>\n    </Button>\n  )\n}\n\nexport default ButtonMessagesBadgeDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/button/button-21.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/button/button-21",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

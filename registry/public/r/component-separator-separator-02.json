@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-separator-separator-02",
+  "title": "Separator 2",
+  "description": "A basic vertical separator used to divide top-level navigation items like Dashboard, Projects, and Settings.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/separator/separator-02/separator-02.tsx",
+      "content": "import { Separator } from '@astrale-os/ui/separator'\n\nconst SeparatorVerticalDemo = () => {\n  return (\n    <div className='flex h-5 items-center gap-4 text-sm font-medium'>\n      <div>Dashboard</div>\n      <Separator orientation='vertical' />\n      <div>Projects</div>\n      <Separator orientation='vertical' />\n      <div>Settings</div>\n    </div>\n  )\n}\n\nexport default SeparatorVerticalDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/separator/separator-02.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/separator/separator-02",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-alert-alert-03",
+  "title": "Alert 3",
+  "description": "Closable alert with dismiss functionality using X icon and state management.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/alert/alert-03/alert-03.tsx",
+      "content": "import { useState } from 'react'\nimport { Alert, AlertAction, AlertDescription, AlertTitle } from '@astrale-os/ui/alert'\nimport { CircleAlertIcon, XIcon } from \"lucide-react\"\n\nconst AlertClosableDemo = () => {\n  const [isActive, setIsActive] = useState(true)\n\n  if (!isActive) return null\n\n  return (\n    <Alert>\n      <CircleAlertIcon\n      />\n      <AlertTitle>New message!</AlertTitle>\n      <AlertDescription>12 unread messages. Tap to see.</AlertDescription>\n      <AlertAction>\n        <button className='cursor-pointer' onClick={() => setIsActive(false)}>\n          <XIcon className='size-4' />\n          <span className='sr-only'>Close</span>\n        </button>\n      </AlertAction>\n    </Alert>\n  )\n}\n\nexport default AlertClosableDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/alert/alert-03.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/alert/alert-03",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

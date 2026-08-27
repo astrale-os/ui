@@ -1,0 +1,34 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-checkbox-checkbox-18",
+  "title": "Checkbox 18",
+  "description": "Animated todo checkbox with strikethrough effect and smooth transitions",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "@base-ui/react@^1.7.0",
+    "motion@^13.1.0",
+    "radix-ui@^1.6.7",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/checkbox/checkbox-18/checkbox-18.tsx",
+      "content": "import { useId } from 'react'\n\nimport { Checkbox } from '@/components/ui/motion-checkbox'\nimport { Label } from '@astrale-os/ui/label'\n\nconst CheckboxAnimatedTodoListDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='flex items-center gap-2'>\n      <Checkbox\n        id={id}\n        defaultChecked\n        className='rounded-full focus-visible:border-blue-500 focus-visible:ring-blue-500/20 data-checked:border-blue-500! data-checked:bg-blue-500! dark:text-white dark:focus-visible:ring-blue-500/40'\n      />\n      <Label\n        htmlFor={id}\n        className='peer-data-checked:text-primary after:bg-primary relative after:absolute after:top-1/2 after:left-0 after:h-px after:w-full after:origin-bottom after:scale-x-0 after:transition-transform after:duration-500 after:ease-in-out peer-data-checked:after:origin-bottom peer-data-checked:after:scale-x-100'\n      >\n        Animated todo list item\n      </Label>\n    </div>\n  )\n}\n\nexport default CheckboxAnimatedTodoListDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/checkbox/checkbox-18.tsx"
+    },
+    {
+      "path": "source/components/checkbox/checkbox-18/support/components/ui/motion-checkbox.tsx",
+      "content": "import * as React from 'react'\n\nimport { Checkbox as CheckboxPrimitive } from '@base-ui/react/checkbox'\nimport { motion, type HTMLMotionProps } from 'motion/react'\n\nimport { cn } from '@astrale-os/ui/class-name'\n\ntype CheckboxProps = CheckboxPrimitive.Root.Props & HTMLMotionProps<'span'>\n\nfunction Checkbox({ className, onCheckedChange, ...props }: CheckboxProps) {\n  const [isChecked, setIsChecked] = React.useState<CheckboxPrimitive.Root.Props['checked']>(\n    props?.checked ?? props?.defaultChecked ?? false\n  )\n\n  React.useEffect(() => {\n    if (props?.checked !== undefined) setIsChecked(props.checked)\n  }, [props?.checked])\n\n  const handleCheckedChange = React.useCallback(\n    (\n      checked: Parameters<NonNullable<CheckboxPrimitive.Root.Props['onCheckedChange']>>[0],\n      eventDetails: Parameters<NonNullable<CheckboxPrimitive.Root.Props['onCheckedChange']>>[1]\n    ) => {\n      setIsChecked(checked)\n      onCheckedChange?.(checked, eventDetails)\n    },\n    [onCheckedChange]\n  )\n\n  return (\n    <CheckboxPrimitive.Root\n      {...props}\n      onCheckedChange={handleCheckedChange}\n      render={\n        <motion.span\n          data-slot='checkbox'\n          className={cn(\n            'peer border-input focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 aria-invalid:aria-checked:border-primary dark:bg-input/30 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 data-checked:border-primary data-checked:bg-primary data-checked:text-primary-foreground dark:data-checked:bg-primary relative flex size-4 shrink-0 items-center justify-center rounded border transition-colors outline-none group-has-disabled/field:opacity-50 after:absolute after:-inset-x-3 after:-inset-y-2 focus-visible:ring-3 disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:ring-3',\n            className\n          )}\n          whileTap={{ scale: 0.95 }}\n          whileHover={{ scale: 1.05 }}\n        />\n      }\n    >\n      <CheckboxPrimitive.Indicator\n        render={\n          <motion.svg\n            data-slot='checkbox-indicator'\n            xmlns='http://www.w3.org/2000/svg'\n            fill='none'\n            viewBox='0 0 24 24'\n            strokeWidth='3.5'\n            stroke='currentColor'\n            className='size-3.5'\n            initial='unchecked'\n            animate={isChecked ? 'checked' : 'unchecked'}\n          />\n        }\n      >\n        <motion.path\n          strokeLinecap='round'\n          strokeLinejoin='round'\n          d='M4.5 12.75l6 6 9-13.5'\n          variants={{\n            checked: {\n              pathLength: 1,\n              opacity: 1,\n              transition: {\n                duration: 0.2,\n                delay: 0.2\n              }\n            },\n            unchecked: {\n              pathLength: 0,\n              opacity: 0,\n              transition: {\n                duration: 0.2\n              }\n            }\n          }}\n        />\n      </CheckboxPrimitive.Indicator>\n    </CheckboxPrimitive.Root>\n  )\n}\n\nexport { Checkbox }\n",
+      "type": "registry:ui",
+      "target": "components/ui/motion-checkbox.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/checkbox/checkbox-18",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

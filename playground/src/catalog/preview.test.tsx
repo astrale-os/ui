@@ -33,7 +33,7 @@ test('a render failure stays local and retries without replacing the document', 
   expect(consoleError).toHaveBeenCalled()
 })
 
-test('component preview provenance must match the generated provider authority exactly', () => {
+test('component preview source must match the catalog contract exactly', () => {
   const descriptor: PreviewDescriptor = {
     address: 'component/button',
     scene: 'default',
@@ -57,7 +57,7 @@ test('component preview provenance must match the generated provider authority e
   expect(() =>
     admitPreviewModule(descriptor, {
       default: component,
-      preview: { source: '@ss-components/input-02' },
+      preview: { source: '@astrale-os/ui' },
     }),
   ).toThrow(/does not match @shadcn\/button/u)
 })

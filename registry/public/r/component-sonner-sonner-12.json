@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-sonner-sonner-12",
+  "title": "Sonner 12",
+  "description": "A soft-styled destructive error toast notification with subtle red theming for error messages",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "sonner@^2.0.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/sonner/sonner-12/sonner-12.tsx",
+      "content": "'use client'\n\nimport { toast } from 'sonner'\n\nimport { Button } from '@astrale-os/ui/button'\n\nconst SoftDestructiveSonnerDemo = () => {\n  return (\n    <Button\n      variant='outline'\n      onClick={() =>\n        toast.error('Oops, there was an error processing your request.', {\n          style: {\n            '--normal-bg': 'color-mix(in oklab, var(--destructive) 10%, var(--background))',\n            '--normal-text': 'var(--destructive)',\n            '--normal-border': 'var(--destructive)'\n          } as React.CSSProperties\n        })\n      }\n    >\n      Soft Destructive Toast\n    </Button>\n  )\n}\n\nexport default SoftDestructiveSonnerDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/sonner/sonner-12.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/sonner/sonner-12",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

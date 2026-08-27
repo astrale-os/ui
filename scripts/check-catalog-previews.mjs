@@ -32,6 +32,16 @@ export function previewIdentity(file) {
     address = `${kind}/${composition[2]}/${subject}`
   }
 
+  const variant =
+    /^registry\/variants\/source\/(components|patterns|blocks)\/([^/]+)\/([^/]+)\/([^/]+)$/u.exec(
+      normalized,
+    )
+  if (variant) {
+    assert.equal(variant[3], subject, `Variant preview subject mismatch: ${file}`)
+    const kind = variant[1] === 'components' ? 'component' : variant[1].slice(0, -1)
+    address = `${kind}/${variant[2]}/${subject}`
+  }
+
   assert.ok(address, `Preview is outside an admitted owner: ${file}`)
   return { address, scene, canonical: scene === 'default', file: normalized }
 }

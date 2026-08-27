@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-badge-badge-11",
+  "title": "Badge 11",
+  "description": "Link badge that can be used as clickable navigation element",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/badge/badge-11/badge-11.tsx",
+      "content": "import { Badge } from '@astrale-os/ui/badge'\nimport { ArrowRightIcon } from \"lucide-react\"\n\nconst BadgeLinkDemo = () => {\n  return (\n    <Badge render={<a href='#' />} className='focus-visible:ring-ring/50 focus-visible:ring-2 focus-visible:outline-0'>\n      Link{' '}\n      <ArrowRightIcon className='size-3' />\n    </Badge>\n  )\n}\n\nexport default BadgeLinkDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/badge/badge-11.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/badge/badge-11",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-button-group-button-group-09",
+  "title": "Button Group 9",
+  "description": "Action button group with edit, duplicate, and delete functions",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/button-group/button-group-09/button-group-09.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\nimport { ButtonGroup } from '@astrale-os/ui/button-group'\nimport { SquarePenIcon, CopyIcon, Trash2Icon } from \"lucide-react\"\n\nconst ButtonGroupActionsDemo = () => {\n  return (\n    <ButtonGroup>\n      <Button variant='outline'>\n        <SquarePenIcon\n        />\n        Edit\n      </Button>\n      <Button variant='outline'>\n        <CopyIcon\n        />\n        Duplicate\n      </Button>\n      <Button variant='outline'>\n        <Trash2Icon\n        />\n        Delete\n      </Button>\n    </ButtonGroup>\n  )\n}\n\nexport default ButtonGroupActionsDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/button-group/button-group-09.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/button-group/button-group-09",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

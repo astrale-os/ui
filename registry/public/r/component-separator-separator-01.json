@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-separator-separator-01",
+  "title": "Separator 1",
+  "description": "A simple horizontal separator used to delineate distinct sections of a project settings page.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/separator/separator-01/separator-01.tsx",
+      "content": "import { Separator } from '@astrale-os/ui/separator'\n\nconst SeparatorDemo = () => {\n  return (\n    <div className='flex max-w-sm flex-col gap-4 py-4 text-sm'>\n      <div className='flex flex-col gap-1'>\n        <div className='font-medium'>Project Settings</div>\n        <div className='text-muted-foreground'>Manage your project configuration and preferences.</div>\n      </div>\n      <Separator />\n      <p>\n        Configure notifications, integrations, and access controls to tailor the workspace to your team&apos;s needs.\n      </p>\n    </div>\n  )\n}\n\nexport default SeparatorDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/separator/separator-01.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/separator/separator-01",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

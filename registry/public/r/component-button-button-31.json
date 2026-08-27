@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-button-button-31",
+  "title": "Button 31",
+  "description": "Icon-only button with bookmark icon and screen reader accessibility",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/button/button-31/button-31.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\nimport { BookmarkIcon } from \"lucide-react\"\n\nconst IconButtonDemo = () => {\n  return (\n    <Button variant='outline' size='icon'>\n      <BookmarkIcon\n      />\n      <span className='sr-only'>Bookmark</span>\n    </Button>\n  )\n}\n\nexport default IconButtonDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/button/button-31.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/button/button-31",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

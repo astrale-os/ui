@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-badge-badge-10",
+  "title": "Badge 10",
+  "description": "Badge with icon integration for enhanced visual context",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/badge/badge-10/badge-10.tsx",
+      "content": "import { Badge } from '@astrale-os/ui/badge'\nimport { StarIcon } from \"lucide-react\"\n\nconst BadgeWithIconDemo = () => {\n  return (\n    <Badge>\n      <StarIcon className='size-3' />\n      With Icon\n    </Badge>\n  )\n}\n\nexport default BadgeWithIconDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/badge/badge-10.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/badge/badge-10",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

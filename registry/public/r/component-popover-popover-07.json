@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-popover-popover-07",
+  "title": "Popover 7",
+  "description": "A file deletion confirmation popover with warning icon and action buttons",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/popover/popover-07/popover-07.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\nimport {\n  Popover,\n  PopoverContent,\n  PopoverTrigger,\n  PopoverHeader,\n  PopoverTitle,\n  PopoverDescription\n} from '@astrale-os/ui/popover'\nimport { FileWarningIcon } from \"lucide-react\"\n\nconst PopoverDeleteFileDemo = () => {\n  return (\n    <Popover>\n      <PopoverTrigger render={<Button variant='outline' size='icon' />}>\n        <FileWarningIcon\n        />\n        <span className='sr-only'>Delete File</span>\n      </PopoverTrigger>\n      <PopoverContent className='w-80'>\n        <div className='flex flex-col items-center gap-4'>\n          <div className='flex aspect-square size-12 items-center justify-center rounded-full bg-red-500/10'>\n            <FileWarningIcon className='text-destructive size-6' />\n          </div>\n          <PopoverHeader className='gap-2 text-center'>\n            <PopoverTitle className='text-base font-semibold text-balance'>\n              Are you sure you want to delete this file?\n            </PopoverTitle>\n            <PopoverDescription>\n              Deleting this file can affect your project and other files connection so keep in mind before making\n              decision\n            </PopoverDescription>\n          </PopoverHeader>\n          <div className='grid w-full grid-cols-2 gap-2'>\n            <Button variant='secondary' size='sm'>\n              Cancel\n            </Button>\n            <Button variant='destructive' size='sm'>\n              Delete File\n            </Button>\n          </div>\n        </div>\n      </PopoverContent>\n    </Popover>\n  )\n}\n\nexport default PopoverDeleteFileDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/popover/popover-07.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/popover/popover-07",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

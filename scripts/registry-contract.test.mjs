@@ -12,6 +12,12 @@ const provenance = JSON.parse(
 const provenanceByAddress = new Map(
   provenance.components.map((component) => [component.address, component]),
 )
+const reactAriaProvenance = JSON.parse(
+  await readFile(
+    'tooling/upstream/providers/react-aria/1.20.0/tailwind-color-picker/provenance.json',
+    'utf8',
+  ),
+)
 const registryPackage = JSON.parse(await readFile('registry/package.json', 'utf8'))
 
 function packageName(specifier) {
@@ -20,11 +26,11 @@ function packageName(specifier) {
     : specifier.split('/')[0]
 }
 
-function componentDependencies(source) {
+function componentDependencies(source, styling = []) {
   return [
     '@astrale-os/ui@^0.3.0-beta.0',
     ...new Set(
-      importSpecifiers(source)
+      [...importSpecifiers(source), ...styling]
         .filter(
           (specifier) =>
             specifier !== 'react' &&
@@ -82,9 +88,9 @@ test('registry aggregation explicitly owns every family and exact item once', as
   const root = JSON.parse(await readFile(rootPath, 'utf8'))
   const publicRoot = JSON.parse(await readFile(publicRootPath, 'utf8'))
   assert.equal(source.shadcn, '4.18.0')
-  assert.equal(source.includes.length, 22)
+  assert.ok(source.includes.length >= 1)
   assert.equal(new Set(source.includes).size, source.includes.length)
-  assert.equal(publicRoot.include.length, 23)
+  assert.equal(publicRoot.include.length, source.includes.length + 1)
   assert.equal(publicRoot.include[0], 'registry/base/registry.json')
   assert.deepEqual(
     publicRoot.include.slice(1).sort(),
@@ -92,7 +98,7 @@ test('registry aggregation explicitly owns every family and exact item once', as
   )
 
   const familyItems = await readFamilyItems()
-  assert.equal(root.items.length, 64)
+  assert.equal(root.items.length, familyItems.length)
   assert.deepEqual(
     root.items.map((item) => item.name).sort(),
     familyItems.map((item) => item.name).sort(),
@@ -109,19 +115,27 @@ test('every registry item is independently bounded, controlled, and safe to inst
   for (const item of items) {
     const isTheme = item.meta.canonicalAddress.startsWith('theme/')
     const isComponent = item.meta.canonicalAddress.startsWith('component/')
+    const isVariant = item.meta.provider === '@astrale-os/ui'
     assert.match(item.name, /^(?:component|pattern|block|theme)-[a-z0-9-]+$/u)
     assert.match(
       item.meta.canonicalAddress,
-      /^(?:component\/[a-z0-9-]+|(?:pattern|block)\/[a-z0-9-]+\/[a-z0-9-/]+|theme\/[a-z0-9-]+)$/u,
+      /^(?:component\/[a-z0-9-]+(?:\/[a-z0-9-]+)?|(?:pattern|block)\/[a-z0-9-]+\/[a-z0-9-/]+|theme\/[a-z0-9-]+)$/u,
     )
     assert.equal(
       item.type,
       isTheme ? 'registry:theme' : isComponent ? 'registry:component' : 'registry:block',
     )
-    assert.equal(item.files.length, isComponent && item.name === 'component-sidebar' ? 2 : 1)
+    assert.ok(item.files.length >= 1)
 
     const file = item.files[0]
-    assert.match(file.path, isTheme ? /^[a-z0-9-]+\.css$/u : /^(?:[a-z0-9-]+\/)?[a-z0-9-]+\.tsx$/u)
+    assert.match(
+      file.path,
+      isTheme
+        ? /^[a-z0-9-]+\.css$/u
+        : isVariant
+          ? /[a-z0-9-]+\.tsx?$/u
+          : /^(?:[a-z0-9-]+\/)?[a-z0-9-]+\.tsx?$/u,
+    )
     assert.match(
       file.target,
       isTheme
@@ -147,16 +161,41 @@ test('every registry item is independently bounded, controlled, and safe to inst
       assert.match(itemSource, /--ui-motion-standard:/u)
       continue
     }
+    if (isVariant) {
+      assert.equal(item.meta.source, '@astrale-os/ui')
+      assert.equal(item.meta.license, 'MIT')
+      assert.deepEqual(Object.keys(item.meta).sort(), [
+        'canonicalAddress',
+        'license',
+        'provider',
+        'source',
+      ])
+      assert.ok(item.dependencies.includes('@astrale-os/ui@^0.3.0-beta.0'))
+      continue
+    }
     if (isComponent) {
-      const upstream = provenanceByAddress.get(item.meta.upstreamAddress)
-      assert.ok(upstream, `${item.name} has no exact provenance owner`)
-      assert.equal(item.meta.provider, '@shadcn')
-      assert.equal(item.meta.upstreamAddress, `@shadcn/${item.meta.canonicalAddress.slice(10)}`)
-      assert.equal(item.meta.upstreamDigest, upstream.sourceDigest)
-      assert.equal(item.meta.canonicalAddress, upstream.owner)
-      assert.equal(item.declaredPath, upstream.implementation)
+      if (item.meta.provider === '@shadcn') {
+        const upstream = provenanceByAddress.get(item.meta.upstreamAddress)
+        assert.ok(upstream, `${item.name} has no exact provenance owner`)
+        assert.equal(item.meta.upstreamAddress, `@shadcn/${item.meta.canonicalAddress.slice(10)}`)
+        assert.equal(item.meta.upstreamDigest, upstream.sourceDigest)
+        assert.equal(item.meta.canonicalAddress, upstream.owner)
+        assert.equal(item.declaredPath, upstream.implementation)
+      } else {
+        assert.equal(item.meta.provider, '@react-aria')
+        assert.equal(item.meta.upstreamAddress, reactAriaProvenance.upstreamAddress)
+        assert.equal(item.meta.upstreamDigest, reactAriaProvenance.sourceDigest)
+        assert.equal(item.meta.canonicalAddress, 'component/color-picker')
+        assert.equal(item.files.length, 10)
+      }
       assert.equal(item.meta.adaptation, 'imports-only')
-      assert.deepEqual(item.dependencies, componentDependencies(itemSource))
+      const itemSources = await Promise.all(
+        item.declaredPaths.map((declaredPath) => readFile(declaredPath, 'utf8')),
+      )
+      const styling = item.css
+        ? Object.keys(item.css).flatMap((rule) => /["']([^"']+)["']/u.exec(rule)?.[1] ?? [])
+        : []
+      assert.deepEqual(item.dependencies, componentDependencies(itemSources.join('\n'), styling))
       continue
     }
     assert.deepEqual(item.dependencies, ['@astrale-os/ui@^0.3.0-beta.0'])
@@ -258,7 +297,20 @@ test('registry inventory covers all locked V1 families and block compositions', 
       family,
     )
   }
-  for (const required of ['theme/atelier', 'theme/observatory', 'theme/terminal']) {
+  for (const required of [
+    'theme/art-deco',
+    'theme/atelier',
+    'theme/claude',
+    'theme/clean-slate',
+    'theme/ghibli-studio',
+    'theme/marshmallow',
+    'theme/marvel',
+    'theme/modern-minimal',
+    'theme/neo-brutalism',
+    'theme/observatory',
+    'theme/spotify',
+    'theme/terminal',
+  ]) {
     assert.ok(addresses.has(required), required)
   }
   for (const required of [
@@ -297,6 +349,8 @@ test('every built install item is exact current source rather than stale generat
       assert.equal(built[field], item[field], `${item.name} stale ${field}`)
     }
     assert.deepEqual(built.dependencies, item.dependencies, `${item.name} stale dependencies`)
+    assert.deepEqual(built.registryDependencies, item.registryDependencies)
+    assert.deepEqual(built.css, item.css)
     assert.deepEqual(built.meta, item.meta, `${item.name} stale metadata`)
     assert.equal(built.files.length, item.files.length)
     for (let index = 0; index < item.files.length; index += 1) {

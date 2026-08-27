@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-toggle-group-toggle-group-11",
+  "title": "Toggle Group 11",
+  "description": "Controlled font weight selector wrapped in a Field component with live 'Aa' previews for light, normal, medium, and bold weights.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/toggle-group/toggle-group-11/toggle-group-11.tsx",
+      "content": "'use client'\n\nimport * as React from 'react'\n\nimport { Field, FieldDescription, FieldLabel } from '@astrale-os/ui/field'\nimport { ToggleGroup, ToggleGroupItem } from '@astrale-os/ui/toggle-group'\n\nconst ToggleGroupStyle = () => {\n  const [fontWeight, setFontWeight] = React.useState('normal')\n\n  return (\n    <Field>\n      <FieldLabel>Font Weight</FieldLabel>\n      <ToggleGroup value={[fontWeight]} onValueChange={v => setFontWeight(v[0])} variant='outline' size='lg'>\n        <ToggleGroupItem\n          value='light'\n          aria-label='Light'\n          className='flex size-16 flex-col items-center justify-center rounded-xl'\n        >\n          <span className='text-2xl leading-none font-light'>Aa</span>\n          <span className='text-muted-foreground text-xs'>Light</span>\n        </ToggleGroupItem>\n        <ToggleGroupItem\n          value='normal'\n          aria-label='Normal'\n          className='flex size-16 flex-col items-center justify-center rounded-xl'\n        >\n          <span className='text-2xl leading-none font-normal'>Aa</span>\n          <span className='text-muted-foreground text-xs'>Normal</span>\n        </ToggleGroupItem>\n        <ToggleGroupItem\n          value='medium'\n          aria-label='Medium'\n          className='flex size-16 flex-col items-center justify-center rounded-xl'\n        >\n          <span className='text-2xl leading-none font-medium'>Aa</span>\n          <span className='text-muted-foreground text-xs'>Medium</span>\n        </ToggleGroupItem>\n        <ToggleGroupItem\n          value='bold'\n          aria-label='Bold'\n          className='flex size-16 flex-col items-center justify-center rounded-xl'\n        >\n          <span className='text-2xl leading-none font-bold'>Aa</span>\n          <span className='text-muted-foreground text-xs'>Bold</span>\n        </ToggleGroupItem>\n      </ToggleGroup>\n      <FieldDescription>\n        Use <code className='bg-muted rounded-md px-1 py-0.5 font-mono'>font-{fontWeight}</code> to set the font weight.\n      </FieldDescription>\n    </Field>\n  )\n}\n\nexport default ToggleGroupStyle\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/toggle-group/toggle-group-11.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/toggle-group/toggle-group-11",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

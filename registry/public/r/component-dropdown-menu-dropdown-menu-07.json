@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-dropdown-menu-dropdown-menu-07",
+  "title": "Dropdown Menu 7",
+  "description": "User account menu dropdown with avatar trigger and profile management options",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/dropdown-menu/dropdown-menu-07/dropdown-menu-07.tsx",
+      "content": "import { Avatar, AvatarFallback, AvatarImage } from '@astrale-os/ui/avatar'\nimport { Button } from '@astrale-os/ui/button'\nimport {\n  DropdownMenu,\n  DropdownMenuContent,\n  DropdownMenuGroup,\n  DropdownMenuItem,\n  DropdownMenuLabel,\n  DropdownMenuTrigger\n} from '@astrale-os/ui/dropdown-menu'\nimport { UserIcon, SettingsIcon, CreditCardIcon, BellIcon, LogOutIcon } from \"lucide-react\"\n\nconst listItems = [\n  {\n    icon: (\n      <UserIcon\n      />\n    ),\n    property: 'Profile'\n  },\n  {\n    icon: (\n      <SettingsIcon\n      />\n    ),\n    property: 'Settings'\n  },\n  {\n    icon: (\n      <CreditCardIcon\n      />\n    ),\n    property: 'Billing'\n  },\n  {\n    icon: (\n      <BellIcon\n      />\n    ),\n    property: 'Notifications'\n  },\n  {\n    icon: (\n      <LogOutIcon\n      />\n    ),\n    property: 'Sign Out'\n  }\n]\n\nconst DropdownMenuUserMenuDemo = () => {\n  return (\n    <DropdownMenu>\n      <DropdownMenuTrigger\n        render={\n          <Button variant='ghost' size='icon' className='rounded-full'>\n            <Avatar>\n              <AvatarImage src='https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-5.png' alt='Hallie Richards' />\n              <AvatarFallback className='text-xs'>HR</AvatarFallback>\n            </Avatar>\n          </Button>\n        }\n      />\n      <DropdownMenuContent className='w-56'>\n        <DropdownMenuGroup>\n          <DropdownMenuLabel>My Account</DropdownMenuLabel>\n          {listItems.map((item, index) => (\n            <DropdownMenuItem key={index} className='*:[svg]:text-muted-foreground'>\n              {item.icon}\n              <span className='text-popover-foreground'>{item.property}</span>\n            </DropdownMenuItem>\n          ))}\n        </DropdownMenuGroup>\n      </DropdownMenuContent>\n    </DropdownMenu>\n  )\n}\n\nexport default DropdownMenuUserMenuDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/dropdown-menu/dropdown-menu-07.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/dropdown-menu/dropdown-menu-07",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

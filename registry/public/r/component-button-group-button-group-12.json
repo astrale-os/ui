@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-button-group-button-group-12",
+  "title": "Button Group 12",
+  "description": "Ghost variant button group for navigation between settings, dashboard, and analytics",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/button-group/button-group-12/button-group-12.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\nimport { ButtonGroup } from '@astrale-os/ui/button-group'\nimport { SettingsIcon, BoxIcon, ChartBarBigIcon } from \"lucide-react\"\n\nconst ButtonGroupGhostDemo = () => {\n  return (\n    <ButtonGroup>\n      <Button variant='ghost'>\n        <SettingsIcon\n        />\n        Settings\n      </Button>\n      <Button variant='ghost'>\n        <BoxIcon\n        />\n        Dashboard\n      </Button>\n      <Button variant='ghost'>\n        <ChartBarBigIcon\n        />\n        Analytics\n      </Button>\n    </ButtonGroup>\n  )\n}\n\nexport default ButtonGroupGhostDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/button-group/button-group-12.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/button-group/button-group-12",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

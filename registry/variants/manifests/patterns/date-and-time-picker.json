@@ -1,0 +1,385 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-patterns-date-and-time-picker",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "pattern-date-and-time-picker-date-picker-01",
+      "type": "registry:block",
+      "title": "Date Picker 1",
+      "description": "Basic single date picker with popover calendar display",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react-day-picker@^10.0.1",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "date-picker-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/date-and-time-picker/date-picker-01.tsx"
+        },
+        {
+          "path": "support/components/ui/calendar.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/calendar.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/date-and-time-picker/date-picker-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-date-and-time-picker-date-picker-02",
+      "type": "registry:block",
+      "title": "Date Picker 2",
+      "description": "Date range picker with popover calendar for selecting start and end dates",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react-day-picker@^10.0.1",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "date-picker-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/date-and-time-picker/date-picker-02.tsx"
+        },
+        {
+          "path": "support/components/ui/calendar.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/calendar.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/date-and-time-picker/date-picker-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-date-and-time-picker-date-picker-03",
+      "type": "registry:block",
+      "title": "Date Picker 3",
+      "description": "Single date picker with calendar icon and enhanced visual styling",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react-day-picker@^10.0.1",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "date-picker-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/date-and-time-picker/date-picker-03.tsx"
+        },
+        {
+          "path": "support/components/ui/calendar.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/calendar.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/date-and-time-picker/date-picker-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-date-and-time-picker-date-picker-04",
+      "type": "registry:block",
+      "title": "Date Picker 4",
+      "description": "Date picker with integrated input field for manual date entry and calendar popup",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react-day-picker@^10.0.1",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "date-picker-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/date-and-time-picker/date-picker-04.tsx"
+        },
+        {
+          "path": "support/components/ui/calendar.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/calendar.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/date-and-time-picker/date-picker-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-date-and-time-picker-date-picker-05",
+      "type": "registry:block",
+      "title": "Date Picker 5",
+      "description": "Natural language date picker supporting phrases like \"tomorrow\" or \"next week\"",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "chrono-node@^2.10.1",
+        "lucide-react@1.32.0",
+        "react-day-picker@^10.0.1",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "date-picker-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/date-and-time-picker/date-picker-05.tsx"
+        },
+        {
+          "path": "support/components/ui/calendar.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/calendar.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/date-and-time-picker/date-picker-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-date-and-time-picker-date-picker-06",
+      "type": "registry:block",
+      "title": "Date Picker 6",
+      "description": "Date range picker with compact date formatting using little-date library",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "little-date@^1.2.1",
+        "lucide-react@1.32.0",
+        "react-day-picker@^10.0.1",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "date-picker-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/date-and-time-picker/date-picker-06.tsx"
+        },
+        {
+          "path": "support/components/ui/calendar.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/calendar.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/date-and-time-picker/date-picker-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-date-and-time-picker-date-picker-07",
+      "type": "registry:block",
+      "title": "Date Picker 7",
+      "description": "Single date picker with disabled outside days for cleaner calendar view",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react-day-picker@^10.0.1",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "date-picker-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/date-and-time-picker/date-picker-07.tsx"
+        },
+        {
+          "path": "support/components/ui/calendar.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/calendar.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/date-and-time-picker/date-picker-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-date-and-time-picker-date-picker-08",
+      "type": "registry:block",
+      "title": "Date Picker 8",
+      "description": "Simple time input field with step control for precise time selection",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "date-picker-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/date-and-time-picker/date-picker-08.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/date-and-time-picker/date-picker-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-date-and-time-picker-date-picker-09",
+      "type": "registry:block",
+      "title": "Date Picker 9",
+      "description": "Time input field with clock icon for enhanced visual identification",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "date-picker-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/date-and-time-picker/date-picker-09.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/date-and-time-picker/date-picker-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-date-and-time-picker-date-picker-10",
+      "type": "registry:block",
+      "title": "Date Picker 10",
+      "description": "Combined date picker and time input displayed side by side for datetime selection",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react-day-picker@^10.0.1",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "date-picker-10.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/date-and-time-picker/date-picker-10.tsx"
+        },
+        {
+          "path": "support/components/ui/calendar.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/calendar.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/date-and-time-picker/date-picker-10",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-date-and-time-picker-date-picker-11",
+      "type": "registry:block",
+      "title": "Date Picker 11",
+      "description": "Date picker with time range selection (from/to times) for event scheduling",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react-day-picker@^10.0.1",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "date-picker-11.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/date-and-time-picker/date-picker-11.tsx"
+        },
+        {
+          "path": "support/components/ui/calendar.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/calendar.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/date-and-time-picker/date-picker-11",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-date-and-time-picker-date-picker-12",
+      "type": "registry:block",
+      "title": "Date Picker 12",
+      "description": "Travel date picker with departure/return dates and time selection for bookings",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react-day-picker@^10.0.1",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "date-picker-12.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/date-and-time-picker/date-picker-12.tsx"
+        },
+        {
+          "path": "support/components/ui/calendar.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/calendar.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/date-and-time-picker/date-picker-12",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-date-and-time-picker-date-picker-13",
+      "type": "registry:block",
+      "title": "Date Picker 13",
+      "description": "Analytics chart with date range filter showing visitor data and interactive filtering",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "react-day-picker@^10.0.1",
+        "react@19.2.8",
+        "recharts@3.8.0"
+      ],
+      "files": [
+        {
+          "path": "date-picker-13.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/date-and-time-picker/date-picker-13.tsx"
+        },
+        {
+          "path": "support/components/ui/calendar.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/calendar.tsx"
+        },
+        {
+          "path": "support/components/ui/chart.tsx",
+          "type": "registry:lib",
+          "target": "components/ui/chart.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/date-and-time-picker/date-picker-13",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

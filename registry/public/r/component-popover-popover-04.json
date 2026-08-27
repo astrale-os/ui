@@ -1,0 +1,26 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-popover-popover-04",
+  "title": "Popover 4",
+  "description": "A volume control popover with a slider for adjusting audio levels",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/popover/popover-04/popover-04.tsx",
+      "content": "import { useState } from 'react'\nimport { Button } from '@astrale-os/ui/button'\nimport { Label } from '@astrale-os/ui/label'\nimport { Popover, PopoverContent, PopoverTrigger } from '@astrale-os/ui/popover'\nimport { Slider } from '@astrale-os/ui/slider'\nimport { Volume2Icon, VolumeXIcon } from \"lucide-react\"\n\nconst PopoverVolumeDemo = () => {\n  const [value, setValue] = useState([45])\n\n  return (\n    <Popover>\n      <PopoverTrigger render={<Button variant='outline' size='icon' />}>\n        <Volume2Icon\n        />\n        <span className='sr-only'>Volume control</span>\n      </PopoverTrigger>\n      <PopoverContent className='w-80'>\n        <div className='space-y-3'>\n          <div className='flex items-center justify-between gap-2'>\n            <Label className='leading-5'>Volume</Label>\n            <span className='text-sm font-medium tabular-nums'>{value}</span>\n          </div>\n          <div className='flex items-center gap-2'>\n            <VolumeXIcon className='size-4 shrink-0 opacity-60' />\n            <Slider value={value} onValueChange={value => setValue(value as number[])} aria-label='Volume slider' />\n            <Volume2Icon className='size-4 shrink-0 opacity-60' />\n          </div>\n        </div>\n      </PopoverContent>\n    </Popover>\n  )\n}\n\nexport default PopoverVolumeDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/popover/popover-04.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/popover/popover-04",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

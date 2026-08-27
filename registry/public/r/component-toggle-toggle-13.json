@@ -1,0 +1,38 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-toggle-toggle-13",
+  "title": "Toggle 13",
+  "description": "Animated toggle using a MotionToggle UI component with particle animation.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "motion@^13.1.0",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/toggle/toggle-13/toggle-13.tsx",
+      "content": "import { MotionToggle } from '@/components/ui/motion-toggle'\nimport Heart from '@/assets/svg/heart'\n\nconst ToggleAnimatedDemo = () => {\n  return (\n    <MotionToggle aria-label='Toggle bookmark' particleColor='var(--destructive)'>\n      <Heart className='group-data-[state=on]/toggle:fill-destructive group-data-[state=on]/toggle:stroke-destructive group-data-[state=on]/toggle:text-destructive' />\n      Shadcn Studio\n    </MotionToggle>\n  )\n}\n\nexport default ToggleAnimatedDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/toggle/toggle-13.tsx"
+    },
+    {
+      "path": "source/components/toggle/toggle-13/support/components/ui/motion-toggle.tsx",
+      "content": "import * as React from 'react'\n\nimport { motion } from 'motion/react'\n\nimport { Toggle, toggleVariants } from '@astrale-os/ui/toggle'\nimport { cn } from '@astrale-os/ui/class-name'\n\nconst PARTICLE_COUNT = 8\n\ninterface ParticleConfig {\n  id: number\n  x: number\n  y: number\n  size: number\n  duration: number\n  delay: number\n}\n\nfunction generateParticles(): ParticleConfig[] {\n  return Array.from({ length: PARTICLE_COUNT }, (_, i) => {\n    const angle = (i / PARTICLE_COUNT) * (2 * Math.PI)\n    const radius = 16 + Math.random() * 10\n\n    return {\n      id: i,\n      x: Math.cos(angle) * radius,\n      y: Math.sin(angle) * radius * 0.75,\n      size: 3 + Math.random() * 2.5,\n      duration: 0.5 + Math.random() * 0.2,\n      delay: i * 0.035\n    }\n  })\n}\n\nfunction ParticleBurst({ particles, color }: { particles: ParticleConfig[]; color: string }) {\n  return (\n    <div className='pointer-events-none absolute inset-0 flex items-center justify-center'>\n      <motion.div\n        className='absolute inset-0 rounded-md'\n        style={{\n          background: `radial-gradient(circle, ${color} 0%, transparent 70%)`\n        }}\n        initial={{ scale: 0.5, opacity: 0 }}\n        animate={{ scale: [0.5, 1.8, 1.6], opacity: [0, 0.3, 0] }}\n        transition={{ duration: 0.5, ease: 'easeOut' }}\n      />\n      {particles.map(p => (\n        <motion.div\n          key={p.id}\n          className='absolute rounded-full'\n          style={{\n            backgroundColor: color,\n            width: p.size,\n            height: p.size,\n            filter: 'blur(0.5px)'\n          }}\n          initial={{ scale: 0, opacity: 0.6, x: 0, y: 0 }}\n          animate={{\n            scale: [0, 1.1, 0],\n            opacity: [0.6, 0.9, 0],\n            x: [0, p.x],\n            y: [0, p.y]\n          }}\n          transition={{ duration: p.duration, delay: p.delay, ease: 'easeOut' }}\n        />\n      ))}\n    </div>\n  )\n}\n\ntype MotionToggleProps = Parameters<typeof Toggle>[0] & {\n  particleColor?: string\n}\n\nfunction MotionToggle({\n  className,\n  variant = 'default',\n  size = 'default',\n  onPressedChange,\n  children,\n  particleColor = 'hsl(var(--foreground))',\n  ...props\n}: MotionToggleProps) {\n  const [burstCount, setBurstCount] = React.useState(0)\n  const particles = React.useMemo(() => generateParticles(), [])\n\n  const handlePressedChange = React.useCallback(\n    (...args: Parameters<NonNullable<MotionToggleProps['onPressedChange']>>) => {\n      if (args[0]) setBurstCount(c => c + 1)\n      onPressedChange?.(...args)\n    },\n    [onPressedChange]\n  )\n\n  const [firstChild, ...restChildren] = React.Children.toArray(children)\n\n  return (\n    <Toggle className={cn(className)} variant={variant} size={size} onPressedChange={handlePressedChange} {...props}>\n      <span className='relative inline-flex items-center justify-center'>\n        {firstChild}\n        {burstCount > 0 && <ParticleBurst key={burstCount} particles={particles} color={particleColor} />}\n      </span>\n      {restChildren}\n    </Toggle>\n  )\n}\n\nexport { MotionToggle, toggleVariants }\n",
+      "type": "registry:ui",
+      "target": "components/ui/motion-toggle.tsx"
+    },
+    {
+      "path": "source/components/toggle/toggle-13/support/assets/svg/heart.tsx",
+      "content": "import type { SVGAttributes } from 'react'\n\nconst Heart = (props: SVGAttributes<SVGElement>) => {\n  return (\n    <svg\n      xmlns='http://www.w3.org/2000/svg'\n      width='24'\n      height='24'\n      viewBox='0 0 24 24'\n      fill='none'\n      stroke='currentColor'\n      strokeWidth='2'\n      strokeLinecap='round'\n      strokeLinejoin='round'\n      {...props}\n    >\n      <path d='M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5' />\n    </svg>\n  )\n}\n\nexport default Heart\n",
+      "type": "registry:component",
+      "target": "assets/svg/heart.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/toggle/toggle-13",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

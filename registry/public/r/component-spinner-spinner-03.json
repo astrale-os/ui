@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-spinner-spinner-03",
+  "title": "Spinner 3",
+  "description": "A demonstration of spinner sizing options ranging from extra-small (size-3) to large (size-8) for diverse UI needs.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/spinner/spinner-03/spinner-03.tsx",
+      "content": "import { Spinner } from '@astrale-os/ui/spinner'\n\nconst SpinnerSizeDemo = () => {\n  return (\n    <div className='flex items-center gap-6'>\n      <Spinner className='size-3' />\n      <Spinner className='size-4' />\n      <Spinner className='size-6' />\n      <Spinner className='size-8' />\n    </div>\n  )\n}\n\nexport default SpinnerSizeDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/spinner/spinner-03.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/spinner/spinner-03",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

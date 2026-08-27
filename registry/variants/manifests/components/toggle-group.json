@@ -1,0 +1,352 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-components-toggle-group",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "component-toggle-group-toggle-group-01",
+      "type": "registry:component",
+      "title": "Toggle Group 1",
+      "description": "Multi-select outline toggle group with icon-only formatting controls for bold, italic, and underline.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "toggle-group-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/toggle-group/toggle-group-01.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/toggle-group/toggle-group-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-toggle-group-toggle-group-02",
+      "type": "registry:component",
+      "title": "Toggle Group 2",
+      "description": "Multi-select default toggle group with icon-only formatting controls for bold, italic, and underline.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "toggle-group-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/toggle-group/toggle-group-02.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/toggle-group/toggle-group-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-toggle-group-toggle-group-03",
+      "type": "registry:component",
+      "title": "Toggle Group 3",
+      "description": "Size showcase with three stacked outline toggle groups demonstrating small, default, and large size variants.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "toggle-group-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/toggle-group/toggle-group-03.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/toggle-group/toggle-group-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-toggle-group-toggle-group-04",
+      "type": "registry:component",
+      "title": "Toggle Group 4",
+      "description": "Compact outline toggle group with custom item spacing and text-only directional options in single-select mode.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "toggle-group-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/toggle-group/toggle-group-04.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/toggle-group/toggle-group-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-toggle-group-toggle-group-05",
+      "type": "registry:component",
+      "title": "Toggle Group 5",
+      "description": "Vertical outline toggle group with icon-only items for switching between column, grid, and list view layouts.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "toggle-group-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/toggle-group/toggle-group-05.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/toggle-group/toggle-group-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-toggle-group-toggle-group-06",
+      "type": "registry:component",
+      "title": "Toggle Group 6",
+      "description": "Disabled state toggle group with icon-only formatting buttons demonstrating the group-level disabled prop.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "toggle-group-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/toggle-group/toggle-group-06.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/toggle-group/toggle-group-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-toggle-group-toggle-group-07",
+      "type": "registry:component",
+      "title": "Toggle Group 7",
+      "description": "Single-select toggle group with four text alignment icons for left, center, right, and justified alignment.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "toggle-group-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/toggle-group/toggle-group-07.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/toggle-group/toggle-group-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-toggle-group-toggle-group-08",
+      "type": "registry:component",
+      "title": "Toggle Group 8",
+      "description": "Outline single-select toggle group with chart type icons for switching between line, column, pie, and scatter views.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "toggle-group-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/toggle-group/toggle-group-08.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/toggle-group/toggle-group-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-toggle-group-toggle-group-09",
+      "type": "registry:component",
+      "title": "Toggle Group 9",
+      "description": "Outline time-range selector with tooltip date labels for Today, 7-day, 30-day, 3-month, and 6-month periods.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "toggle-group-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/toggle-group/toggle-group-09.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/toggle-group/toggle-group-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-toggle-group-toggle-group-10",
+      "type": "registry:component",
+      "title": "Toggle Group 10",
+      "description": "Large outline pricing plan switcher with a 'Save 20%' badge on the Elite option using a destructive pill label.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "toggle-group-10.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/toggle-group/toggle-group-10.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/toggle-group/toggle-group-10",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-toggle-group-toggle-group-11",
+      "type": "registry:component",
+      "title": "Toggle Group 11",
+      "description": "Controlled font weight selector wrapped in a Field component with live 'Aa' previews for light, normal, medium, and bold weights.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "toggle-group-11.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/toggle-group/toggle-group-11.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/toggle-group/toggle-group-11",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-toggle-group-toggle-group-12",
+      "type": "registry:component",
+      "title": "Toggle Group 12",
+      "description": "Large outline device preview toggle group with icons for monitor, tablet, smartphone, and external link viewport modes.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "toggle-group-12.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/toggle-group/toggle-group-12.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/toggle-group/toggle-group-12",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-toggle-group-toggle-group-13",
+      "type": "registry:component",
+      "title": "Toggle Group 13",
+      "description": "Rich text editor toolbar combining two bordered toggle groups for text formatting and alignment, with tooltips on each item.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "toggle-group-13.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/toggle-group/toggle-group-13.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/toggle-group/toggle-group-13",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-toggle-group-toggle-group-14",
+      "type": "registry:component",
+      "title": "Toggle Group 14",
+      "description": "Animated like/dislike toggle group with expand-on-hover behavior revealing labels, and color-coded active states in sky blue and destructive red.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "toggle-group-14.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/toggle-group/toggle-group-14.tsx"
+        },
+        {
+          "path": "support/assets/svg/thumbs-down.tsx",
+          "type": "registry:component",
+          "target": "assets/svg/thumbs-down.tsx"
+        },
+        {
+          "path": "support/assets/svg/thumbs-up.tsx",
+          "type": "registry:component",
+          "target": "assets/svg/thumbs-up.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/toggle-group/toggle-group-14",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-toggle-group-toggle-group-15",
+      "type": "registry:component",
+      "title": "Toggle Group 15",
+      "description": "Animated package manager selector (npm, yarn, pnpm) with a sliding background highlight using the motion-toggle-group component.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "motion@^13.1.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "toggle-group-15.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/toggle-group/toggle-group-15.tsx"
+        },
+        {
+          "path": "support/components/ui/motion-toggle-group.tsx",
+          "type": "registry:component",
+          "target": "components/ui/motion-toggle-group.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/toggle-group/toggle-group-15",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-toggle-group-toggle-group-16",
+      "type": "registry:component",
+      "title": "Toggle Group 16",
+      "description": "Animated pill-shaped theme mode selector with sun, moon, and laptop icons and a sliding background highlight using the motion-toggle-group component.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0",
+        "motion@^13.1.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "toggle-group-16.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/toggle-group/toggle-group-16.tsx"
+        },
+        {
+          "path": "support/components/ui/motion-toggle-group.tsx",
+          "type": "registry:component",
+          "target": "components/ui/motion-toggle-group.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/toggle-group/toggle-group-16",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

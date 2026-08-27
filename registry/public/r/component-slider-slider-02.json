@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-slider-slider-02",
+  "title": "Slider 2",
+  "description": "A horizontal slider supporting multiple thumbs for range selection and distribution point management.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/slider/slider-02/slider-02.tsx",
+      "content": "import { Slider } from '@astrale-os/ui/slider'\nimport { Label } from '@astrale-os/ui/label'\n\nconst SliderMultiThumbDemo = () => {\n  return (\n    <div className='flex w-full max-w-xs flex-col gap-10'>\n      {/* Range Slider Section */}\n      <div className='space-y-4'>\n        <Label className='text-sm font-medium'>Range Slider</Label>\n        <Slider defaultValue={[25, 60]} max={100} step={1} />\n      </div>\n\n      {/* Multi-Thumb Slider Section */}\n      <div className='space-y-4'>\n        <Label className='text-sm font-medium'>Distribution Points</Label>\n        <Slider defaultValue={[20, 50, 80]} max={100} step={1} />\n      </div>\n    </div>\n  )\n}\n\nexport default SliderMultiThumbDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/slider/slider-02.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/slider/slider-02",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

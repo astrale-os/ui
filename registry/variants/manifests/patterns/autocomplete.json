@@ -1,0 +1,315 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-patterns-autocomplete",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "pattern-autocomplete-autocomplete-01",
+      "type": "registry:block",
+      "title": "Autocomplete 1",
+      "description": "Basic autocomplete with a plain search input and a scrollable dropdown list of filterable items.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "class-variance-authority@^0.7.1",
+        "lucide-react@1.32.0"
+      ],
+      "files": [
+        {
+          "path": "autocomplete-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/autocomplete/autocomplete-01.tsx"
+        },
+        {
+          "path": "support/components/ui/autocomplete.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/autocomplete.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/autocomplete/autocomplete-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-autocomplete-autocomplete-02",
+      "type": "registry:block",
+      "title": "Autocomplete 2",
+      "description": "Disabled-state autocomplete with a non-interactive input that prevents user interaction and dropdown opening.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "class-variance-authority@^0.7.1",
+        "lucide-react@1.32.0"
+      ],
+      "files": [
+        {
+          "path": "autocomplete-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/autocomplete/autocomplete-02.tsx"
+        },
+        {
+          "path": "support/components/ui/autocomplete.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/autocomplete.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/autocomplete/autocomplete-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-autocomplete-autocomplete-03",
+      "type": "registry:block",
+      "title": "Autocomplete 3",
+      "description": "Labeled autocomplete with an accessible label element positioned above the search input.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "class-variance-authority@^0.7.1",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "autocomplete-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/autocomplete/autocomplete-03.tsx"
+        },
+        {
+          "path": "support/components/ui/autocomplete.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/autocomplete.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/autocomplete/autocomplete-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-autocomplete-autocomplete-04",
+      "type": "registry:block",
+      "title": "Autocomplete 4",
+      "description": "Size variants autocomplete showcasing small and large input sizes, each with a label and shared item list.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "class-variance-authority@^0.7.1",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "autocomplete-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/autocomplete/autocomplete-04.tsx"
+        },
+        {
+          "path": "support/components/ui/autocomplete.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/autocomplete.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/autocomplete/autocomplete-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-autocomplete-autocomplete-05",
+      "type": "registry:block",
+      "title": "Autocomplete 5",
+      "description": "Clearable autocomplete with a clear button inside the input to reset the selected value in one click.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "class-variance-authority@^0.7.1",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "autocomplete-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/autocomplete/autocomplete-05.tsx"
+        },
+        {
+          "path": "support/components/ui/autocomplete.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/autocomplete.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/autocomplete/autocomplete-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-autocomplete-autocomplete-06",
+      "type": "registry:block",
+      "title": "Autocomplete 6",
+      "description": "Auto-highlight autocomplete that automatically highlights the first matching item as the user types, paired with a clear button.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "class-variance-authority@^0.7.1",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "autocomplete-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/autocomplete/autocomplete-06.tsx"
+        },
+        {
+          "path": "support/components/ui/autocomplete.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/autocomplete.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/autocomplete/autocomplete-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-autocomplete-autocomplete-07",
+      "type": "registry:block",
+      "title": "Autocomplete 7",
+      "description": "Trigger button autocomplete with a dropdown toggle button alongside the input for opening the suggestion list.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "class-variance-authority@^0.7.1",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "autocomplete-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/autocomplete/autocomplete-07.tsx"
+        },
+        {
+          "path": "support/components/ui/autocomplete.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/autocomplete.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/autocomplete/autocomplete-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-autocomplete-autocomplete-08",
+      "type": "registry:block",
+      "title": "Autocomplete 8",
+      "description": "Grouped avatar autocomplete displaying team members organized into department groups with avatar images, names, and job titles.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "class-variance-authority@^0.7.1",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "autocomplete-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/autocomplete/autocomplete-08.tsx"
+        },
+        {
+          "path": "support/components/ui/autocomplete.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/autocomplete.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/autocomplete/autocomplete-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-autocomplete-autocomplete-09",
+      "type": "registry:block",
+      "title": "Autocomplete 9",
+      "description": "Async search autocomplete with debounced network requests, loading spinner, error handling, and avatar-based member results.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "class-variance-authority@^0.7.1",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "autocomplete-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/autocomplete/autocomplete-09.tsx"
+        },
+        {
+          "path": "support/components/ui/autocomplete.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/autocomplete.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/autocomplete/autocomplete-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "pattern-autocomplete-autocomplete-10",
+      "type": "registry:block",
+      "title": "Autocomplete 10",
+      "description": "Icon-decorated autocomplete with industry-specific icons rendered alongside each item label in the dropdown list.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "class-variance-authority@^0.7.1",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "autocomplete-10.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/pattern/autocomplete/autocomplete-10.tsx"
+        },
+        {
+          "path": "support/components/ui/autocomplete.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/autocomplete.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "pattern/autocomplete/autocomplete-10",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

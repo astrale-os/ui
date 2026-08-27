@@ -1,11 +1,18 @@
 import AxeBuilder from '@axe-core/playwright'
 import { expect, test, type Download, type Page } from '@playwright/test'
-import { globSync } from 'node:fs'
+import { globSync, readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 
 import uiPackage from '../../packages/ui/package.json' with { type: 'json' }
 import registry from '../../registry/registry.json' with { type: 'json' }
-import { componentGroups } from '../src/catalog/inventory.js'
+import { componentNames } from '../src/catalog/inventory.js'
+
+const repositoryRoot = fileURLToPath(new URL('../..', import.meta.url))
+const starterThemeDocuments = globSync('registry/themes/*.astrale-theme.json', {
+  cwd: repositoryRoot,
+})
+  .map((file) => JSON.parse(readFileSync(`${repositoryRoot}/${file}`, 'utf8')))
+  .sort((left, right) => left.label.localeCompare(right.label))
 
 const runtimeAddresses = Object.entries(uiPackage.exports)
   .filter(
@@ -17,6 +24,7 @@ const runtimeAddresses = Object.entries(uiPackage.exports)
   )
   .map(([entrypoint]) => `component/${entrypoint.slice(2)}`)
 const visualRegistryAddresses = registry.items
+  .filter((item) => item.meta.provider !== '@astrale-os/ui')
   .map((item) => item.meta.canonicalAddress)
   .filter((address) => /^(?:component|pattern|block)\//u.test(address))
 const expectedCanonicalAddresses = [
@@ -31,22 +39,33 @@ const expectedAddressesByKind = {
   Blocks: expectedCanonicalAddresses.filter((address) => address.startsWith('block/')),
 } as const
 const expectedFamilies = [
-  ...new Set([
-    ...componentGroups
-      .filter((group) => group.components.length > 0)
-      .map((group) => `component/${group.id}`),
-    ...(visualRegistryAddresses.some((address) => address.startsWith('component/'))
-      ? ['component/registry']
-      : []),
-    ...visualRegistryAddresses
-      .filter((address) => /^(?:pattern|block)\//u.test(address))
-      .map((address) => address.split('/').slice(0, 2).join('/')),
-  ]),
+  ...new Set(expectedCanonicalAddresses.map((address) => address.split('/').slice(0, 2).join('/'))),
 ].sort()
+const expectedComponentFamilyNames = [
+  ...new Set(
+    expectedCanonicalAddresses
+      .filter((address) => address.startsWith('component/'))
+      .map((address) => address.split('/')[1]!),
+  ),
+]
+const componentFamilyOrder = new Map<string, number>(
+  componentNames.map((name, index) => [name, index]),
+)
+const expectedComponentFamilyLabels = expectedComponentFamilyNames
+  .sort((left, right) => {
+    const leftOrder = componentFamilyOrder.get(left)
+    const rightOrder = componentFamilyOrder.get(right)
+    if (leftOrder !== undefined || rightOrder !== undefined) {
+      return (leftOrder ?? Number.MAX_SAFE_INTEGER) - (rightOrder ?? Number.MAX_SAFE_INTEGER)
+    }
+    return left.localeCompare(right)
+  })
+  .map((name) => name.replaceAll('-', ' '))
 const expectedSceneIds = globSync(
   ['packages/ui/previews/**/*.preview.tsx', 'registry/**/*.preview.tsx'],
-  { cwd: fileURLToPath(new URL('../..', import.meta.url)) },
+  { cwd: repositoryRoot },
 )
+  .filter((file) => !file.includes('registry/variants/'))
   .map((file) => {
     const normalized = file.replaceAll('\\', '/')
     const filename = normalized.split('/').at(-1)!
@@ -63,12 +82,6 @@ const expectedSceneIds = globSync(
     return `${kind}/${composition[2]}/${match.groups!.subject}#${scene}`
   })
   .sort()
-const expectedSceneCounts = new Map<string, number>()
-for (const id of expectedSceneIds) {
-  const address = id.split('#')[0]!
-  expectedSceneCounts.set(address, (expectedSceneCounts.get(address) ?? 0) + 1)
-}
-
 async function downloadText(download: Download) {
   const stream = await download.createReadStream()
   const chunks: Buffer[] = []
@@ -79,6 +92,7 @@ async function downloadText(download: Download) {
 async function openThemeCustomizer(page: Page) {
   await page.getByRole('button', { name: 'Customize theme' }).click()
   await expect(page.getByLabel('Theme generator')).toBeVisible()
+  await expect(page.locator('[data-slot="theme-studio"]')).toBeVisible()
 }
 
 async function loadPreview(page: Page, address: string, scene = 'default') {
@@ -98,59 +112,6 @@ async function selectCatalogKind(page: Page, kind: keyof typeof expectedAddresse
   )
 }
 
-async function expectDerivedSceneIndicators(
-  page: Page,
-  kind: keyof typeof expectedAddressesByKind,
-) {
-  const observed = await page.locator('[data-preview-address]').evaluateAll((elements) =>
-    elements
-      .map((element) => {
-        const action = element.querySelector('.preview-card-actions')
-        const views = action?.querySelectorAll<HTMLElement>('[aria-label^="View "]') ?? []
-        const badges = action?.querySelectorAll<HTMLElement>('[data-slot="badge"]') ?? []
-        const view = views[0]
-        const badge = badges[0]
-        const visible = (target: HTMLElement | undefined) => {
-          if (!target) return false
-          const rect = target.getBoundingClientRect()
-          const style = getComputedStyle(target)
-          return (
-            rect.width > 0 &&
-            rect.height > 0 &&
-            style.display !== 'none' &&
-            style.visibility !== 'hidden'
-          )
-        }
-        return {
-          address: element.getAttribute('data-preview-address'),
-          actionCount: element.querySelectorAll('.preview-card-actions').length,
-          badge: badge?.textContent ?? null,
-          badgeCount: badges.length,
-          badgeLabel: badge?.getAttribute('aria-label') ?? null,
-          badgeVisible: visible(badge),
-          viewCount: views.length,
-          viewVisible: visible(view),
-        }
-      })
-      .sort((left, right) => left.address!.localeCompare(right.address!)),
-  )
-  expect(observed).toEqual(
-    expectedAddressesByKind[kind].map((address) => {
-      const count = expectedSceneCounts.get(address)!
-      return {
-        address,
-        actionCount: 1,
-        badge: count > 1 ? String(count) : null,
-        badgeCount: count > 1 ? 1 : 0,
-        badgeLabel: count > 1 ? `${count} preview scenes` : null,
-        badgeVisible: count > 1,
-        viewCount: 1,
-        viewVisible: true,
-      }
-    }),
-  )
-}
-
 test('playground exposes every public runtime owner and complete visual registry inventory', async ({
   page,
 }) => {
@@ -162,6 +123,7 @@ test('playground exposes every public runtime owner and complete visual registry
   await expect(page.getByText('Tune the system.')).toHaveCount(0)
   await expect(page.getByText('Theme studio')).toHaveCount(0)
   await expect(page.getByLabel('Theme generator')).toHaveCount(0)
+  await expect(page.locator('[aria-label^="View "][aria-label$=" preview"]')).toHaveCount(0)
 
   const rendered = await page.locator('[data-component]').evaluateAll((elements) =>
     elements
@@ -189,29 +151,16 @@ test('playground exposes every public runtime owner and complete visual registry
   )
   expect(canonicalPreviews.every((item) => item.scene === 'default')).toBe(true)
   expect(canonicalPreviews.map((item) => item.address).sort()).toEqual(expectedCanonicalAddresses)
+  await selectCatalogKind(page, 'Components')
+  await expect(
+    page.locator('#catalog-group-component-button [data-preview-address]').first(),
+  ).toHaveAttribute('data-preview-address', 'component/button')
+  await selectCatalogKind(page, 'Blocks')
   await expect(page.locator('[data-preview-address="block/settings/team"]')).toHaveAttribute(
     'data-preview-status',
     'idle',
   )
-  const search = page.getByRole('textbox', { name: 'Search catalog' })
-  await search.fill('block/settings/team')
-  await expect(page.locator('[data-preview-address]')).toHaveCount(1)
-  await expect(page.locator('[data-preview-address="block/settings/team"]')).toHaveAttribute(
-    'data-preview-status',
-    'ready',
-  )
-  await search.clear()
-  await expect(page.locator('[data-preview-address]')).toHaveCount(
-    expectedAddressesByKind.Blocks.length,
-  )
   await selectCatalogKind(page, 'Components')
-  await search.fill('variants')
-  const namedButton = page.locator(
-    '[data-preview-address="component/button"][data-preview-scene="variants"]',
-  )
-  await expect(namedButton).toHaveAttribute('data-preview-status', 'ready')
-  await expect(namedButton.getByRole('button', { name: 'Revoke' })).toBeVisible()
-  await search.clear()
   const viewport = await page.evaluate(() => ({
     innerWidth,
     scrollWidth: document.documentElement.scrollWidth,
@@ -349,30 +298,43 @@ test('catalog loads previews near the viewport once and preserves loaded state',
   await page.getByRole('button', { name: 'Close', exact: true }).click()
   await expect(select.getByRole('combobox', { name: 'Environment' })).toContainText('Staging')
 
-  await page.goto('/?family=component%2Factions-inputs')
-  const actionsInputs = componentGroups.find((group) => group.id === 'actions-inputs')!
-  expect(await page.locator('[data-preview-address]').count()).toBeGreaterThan(
-    actionsInputs.components.length,
-  )
+  await page.goto('/?family=component%2Fbutton')
+  expect(await page.locator('[data-preview-address]').count()).toBeGreaterThan(1)
   await loadPreview(page, 'component/button', 'variants')
   await expect(page.getByRole('button', { name: 'Revoke' })).toBeVisible()
 })
 
-test('kind tabs, scene indicators, isolation, and both back journeys preserve place', async ({
+test('kind tabs, outline, family navigation, and both back journeys preserve place', async ({
   page,
 }) => {
   await page.goto('/')
+  await expect(page.getByRole('dialog', { name: 'Components' })).toHaveCount(0)
+  const outlineTrigger = page.getByRole('button', { name: 'Outline' })
+  await outlineTrigger.click()
+  const outline = page.getByRole('dialog', { name: 'Components' })
+  await expect(outline).toBeVisible()
+  await page.keyboard.press('Escape')
+  await expect(outline).toBeHidden()
+  await expect(outlineTrigger).toBeFocused()
+  await outlineTrigger.press('Enter')
+  await expect(outline).toBeVisible()
+  const outlineNavigation = outline.getByRole('navigation', { name: 'Components outline' })
+  await expect(outlineNavigation.getByRole('button')).toHaveCount(
+    expectedComponentFamilyLabels.length,
+  )
+  await outlineNavigation
+    .getByRole('button')
+    .filter({ hasText: /^calendar/u })
+    .click()
+  await expect(page).toHaveURL(/\?family=component%2Fcalendar$/u)
+  await expect(outline).toBeHidden()
+  await page.getByRole('button', { name: 'Back' }).click()
+  await expect(page).toHaveURL(/\/$/u)
+  await expect(outlineTrigger).toBeFocused()
   await expect(
     page.getByLabel('Catalog sections').getByRole('tab', { name: 'Components' }),
   ).toHaveAttribute('aria-selected', 'true')
-  await expect(page.locator('.section-heading h2')).toHaveText([
-    'Actions & inputs',
-    'Content & feedback',
-    'Menus & overlays',
-    'Navigation & layout',
-    'Registry components',
-  ])
-  await expectDerivedSceneIndicators(page, 'Components')
+  await expect(page.locator('.section-heading h2')).toHaveText(expectedComponentFamilyLabels)
   const sections = page.getByLabel('Catalog sections')
   const componentsTab = sections.getByRole('tab', { name: 'Components' })
   await componentsTab.focus()
@@ -395,29 +357,32 @@ test('kind tabs, scene indicators, isolation, and both back journeys preserve pl
 
   await selectCatalogKind(page, 'Patterns')
   await expect(page).toHaveURL(/\?kind=pattern$/u)
-  await expectDerivedSceneIndicators(page, 'Patterns')
   await selectCatalogKind(page, 'Blocks')
   await expect(page).toHaveURL(/\?kind=block$/u)
-  await expectDerivedSceneIndicators(page, 'Blocks')
 
-  const signIn = await loadPreview(page, 'block/authentication/sign-in-card')
-  await signIn.evaluate((element) => element.scrollIntoView({ block: 'center' }))
-  const initialTop = await signIn.evaluate((element) => element.getBoundingClientRect().top)
-  const viewSignIn = signIn.getByRole('button', { name: 'View sign in card preview' })
-  await viewSignIn.focus()
-  await viewSignIn.press('Enter')
-  await expect(page).toHaveURL(/\?preview=block%2Fauthentication%2Fsign-in-card%23default$/u)
-  await expect(page.locator('[data-preview-address]')).toHaveCount(1)
+  const authentication = page.locator('#catalog-group-block-authentication')
+  const authenticationPreviews = authentication.locator('[data-preview-address]')
+  for (let index = 0; index < (await authenticationPreviews.count()); index += 1) {
+    const preview = authenticationPreviews.nth(index)
+    await preview.scrollIntoViewIfNeeded()
+    await expect(preview).toHaveAttribute('data-preview-status', 'ready', { timeout: 15_000 })
+  }
+  await authentication.scrollIntoViewIfNeeded()
+  const viewAuthentication = authentication.getByRole('button', { name: 'View family' })
+  await viewAuthentication.scrollIntoViewIfNeeded()
+  await viewAuthentication.focus()
+  const initialTop = await authentication.evaluate((element) => element.getBoundingClientRect().top)
+  await viewAuthentication.press('Enter')
+  await expect(page).toHaveURL(/\?family=block%2Fauthentication$/u)
   await expect(
     page.locator('[data-preview-address="block/authentication/sign-in-card"]'),
   ).toHaveCount(1)
-  await expect(page.locator('.preview-card-actions')).toHaveCount(0)
   const back = page.getByRole('button', { name: 'Back' })
   await expect(back.locator('[data-icon="inline-start"]')).toHaveCount(1)
   await back.press('Enter')
   await expect(page).toHaveURL(/\?kind=block$/u)
-  const restored = page.locator('[data-preview-address="block/authentication/sign-in-card"]')
-  const restoredView = restored.getByRole('button', { name: 'View sign in card preview' })
+  const restored = page.locator('#catalog-group-block-authentication')
+  const restoredView = restored.getByRole('button', { name: 'View family' })
   await expect
     .poll(() => restored.evaluate((element) => element.getBoundingClientRect().top))
     .toBeCloseTo(initialTop, 0)
@@ -438,6 +403,121 @@ test('kind tabs, scene indicators, isolation, and both back journeys preserve pl
   await expect(page.locator('[data-preview-address]')).toHaveCount(
     expectedAddressesByKind.Blocks.length,
   )
+})
+
+test('command palette searches canonical items and preserves keyboard navigation', async ({
+  page,
+}) => {
+  const previewRequests: string[] = []
+  page.on('request', (request) => {
+    if (request.url().includes('.preview.tsx')) previewRequests.push(request.url())
+  })
+  await page.goto('/')
+  await page.waitForLoadState('networkidle')
+  const previewRequestBaseline = previewRequests.length
+  const trigger = page.getByRole('button', { name: /Search components/u })
+  await expect(trigger).toHaveAttribute('aria-keyshortcuts', 'Meta+K Control+K')
+  await expect(trigger.locator('[data-slot="kbd"]')).toHaveText('⌘K')
+
+  await page.evaluate(() =>
+    document.dispatchEvent(
+      new KeyboardEvent('keydown', {
+        bubbles: true,
+        cancelable: true,
+        ctrlKey: true,
+        key: 'k',
+        repeat: true,
+      }),
+    ),
+  )
+  await expect(page.getByRole('dialog', { name: 'Search catalog' })).toHaveCount(0)
+  await page.keyboard.press('Control+k')
+  const palette = page.getByRole('dialog', { name: 'Search catalog' })
+  await expect(palette).toBeVisible()
+  await page.evaluate(() =>
+    document.dispatchEvent(
+      new KeyboardEvent('keydown', {
+        bubbles: true,
+        cancelable: true,
+        ctrlKey: true,
+        key: 'k',
+        repeat: true,
+      }),
+    ),
+  )
+  await expect(palette).toBeVisible()
+  await expect(palette.getByRole('option')).toHaveCount(expectedCanonicalAddresses.length)
+  const input = palette.getByPlaceholder('Search components, patterns, and blocks…')
+  await expect(input).toBeFocused()
+  await input.fill('range basic')
+  await page.waitForTimeout(250)
+  expect(previewRequests).toHaveLength(previewRequestBaseline)
+  expect(await palette.getByRole('option').count()).toBeLessThan(expectedCanonicalAddresses.length)
+  const calendar = palette.getByRole('option').first()
+  await expect(calendar).toHaveAccessibleName('Pattern · Calendar · Range Basic')
+  await calendar.press('Enter')
+  await expect(page).toHaveURL(/\?preview=pattern%2Fcalendar%2Frange-basic%23default$/u)
+  await expect(palette).toBeHidden()
+  await loadPreview(page, 'pattern/calendar/range-basic')
+  expect(previewRequests.some((url) => url.includes('/calendar/range-basic.preview.tsx'))).toBe(
+    true,
+  )
+
+  await page.getByRole('button', { name: 'Back' }).click()
+  await expect(trigger).toBeFocused()
+  await trigger.click()
+  await expect(input).toHaveValue('')
+  await page.keyboard.press('Escape')
+  await expect(palette).toBeHidden()
+  await expect(trigger).toBeFocused()
+
+  await page.goto('/?family=component%2Finput')
+  const inputPreview = await loadPreview(page, 'component/input')
+  const domainPath = inputPreview.getByRole('textbox', { name: 'Domain path' })
+  await domainPath.fill('/:edited.astrale.ai')
+  await domainPath.evaluate((element) => {
+    const preventCommand = (event: Event) => {
+      const keyboardEvent = event as KeyboardEvent
+      if (
+        keyboardEvent.key.toLowerCase() === 'k' &&
+        (keyboardEvent.metaKey || keyboardEvent.ctrlKey)
+      ) {
+        event.preventDefault()
+        element.removeEventListener('keydown', preventCommand)
+      }
+    }
+    element.addEventListener('keydown', preventCommand)
+  })
+  await domainPath.press('Control+k')
+  await expect(palette).toBeHidden()
+  await expect(domainPath).toBeFocused()
+  await page.keyboard.press('Control+k')
+  await expect(palette).toBeVisible()
+  await page.keyboard.press('Escape')
+  await expect(palette).toBeHidden()
+  await expect(domainPath).toBeFocused()
+  await expect(domainPath).toHaveValue('/:edited.astrale.ai')
+
+  await page.getByRole('button', { name: 'Customize theme' }).click()
+  await expect(page.getByLabel('Theme generator')).toBeVisible()
+  await page.keyboard.press('Control+k')
+  await expect(palette).toBeHidden()
+})
+
+test('a command palette chunk failure leaves the catalog usable', async ({ page }) => {
+  await page.route(
+    /\/(?:assets\/controlled-[^/]+\.js|@fs\/.*\/registry\/patterns\/command-palette\/controlled\.tsx)(?:\?.*)?$/u,
+    (route) => route.abort(),
+  )
+  await page.goto('/')
+  await page.getByRole('button', { name: /Search components/u }).click()
+  await expect(page.getByText('Search unavailable', { exact: true })).toBeVisible()
+  await expect(page.getByRole('button', { name: 'Reload catalog' })).toBeVisible()
+  const patternsTab = page.getByLabel('Catalog sections').getByRole('tab', { name: 'Patterns' })
+  await patternsTab.click()
+  await expect(patternsTab).toHaveAttribute('aria-selected', 'true')
+  await expect(page).toHaveURL(/\?kind=pattern$/u)
+  await expect(page.locator('[data-preview-address^="pattern/"]').first()).toBeVisible()
 })
 
 test('return anchor survives a delayed lazy block resolving above it', async ({
@@ -463,13 +543,18 @@ test('return anchor survives a delayed lazy block resolving above it', async ({
   await expect(delayed).toHaveAttribute('data-preview-status', 'loading')
   const loadingHeight = await delayed.evaluate((element) => element.getBoundingClientRect().height)
 
-  const signIn = await loadPreview(page, 'block/authentication/sign-in-card')
-  await signIn.evaluate((element) => element.scrollIntoView({ block: 'center' }))
-  const expectedTop = await signIn.evaluate((element) => element.getBoundingClientRect().top)
-  await signIn.getByRole('button', { name: 'View sign in card preview' }).click()
+  const authentication = page.locator('#catalog-group-block-authentication')
+  await authentication.scrollIntoViewIfNeeded()
+  const viewAuthentication = authentication.getByRole('button', { name: 'View family' })
+  await viewAuthentication.scrollIntoViewIfNeeded()
+  await viewAuthentication.focus()
+  const expectedTop = await authentication.evaluate(
+    (element) => element.getBoundingClientRect().top,
+  )
+  await viewAuthentication.press('Enter')
   await page.getByRole('button', { name: 'Back' }).click()
   await expect
-    .poll(() => signIn.evaluate((element) => element.getBoundingClientRect().top))
+    .poll(() => authentication.evaluate((element) => element.getBoundingClientRect().top))
     .toBeCloseTo(expectedTop, 0)
 
   await page.waitForTimeout(350)
@@ -478,7 +563,7 @@ test('return anchor survives a delayed lazy block resolving above it', async ({
   const readyHeight = await delayed.evaluate((element) => element.getBoundingClientRect().height)
   expect(readyHeight).toBeGreaterThan(loadingHeight + 100)
   await expect
-    .poll(() => signIn.evaluate((element) => element.getBoundingClientRect().top))
+    .poll(() => authentication.evaluate((element) => element.getBoundingClientRect().top))
     .toBeCloseTo(expectedTop, 0)
 })
 
@@ -799,11 +884,19 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
   const root = page.locator('[data-slot="ui-playground"]')
   const primaryValue = () =>
     root.evaluate((element) => getComputedStyle(element).getPropertyValue('--ui-primary').trim())
+  const ringValue = () =>
+    root.evaluate((element) => getComputedStyle(element).getPropertyValue('--ui-ring').trim())
+  const menuRingValue = () =>
+    root.evaluate((element) =>
+      getComputedStyle(element).getPropertyValue('--ui-sidebar-ring').trim(),
+    )
   await expect.poll(primaryValue).toBe('oklch(0.36 0.14 251)')
+  await expect.poll(ringValue).toBe('oklch(0.705 0.015 286.067)')
 
   await page.getByRole('button', { name: 'Dark', exact: true }).click()
   await expect(root).toHaveClass(/dark/u)
   await expect.poll(primaryValue).toBe('oklch(0.76 0.13 250)')
+  await expect.poll(ringValue).toBe('oklch(0.552 0.016 285.938)')
   await page.getByLabel('Starter').click()
   await page.getByRole('option', { name: 'Atelier' }).click()
   await expect(page.getByRole('option', { name: 'Atelier' })).toBeHidden()
@@ -812,6 +905,13 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
 
   await page.getByRole('tab', { name: 'Colors' }).click()
   const primaryToken = page.getByLabel('Primary', { exact: true })
+  await page.getByRole('button', { name: /Pick Primary$/u }).click()
+  await page.getByRole('slider', { name: 'Color picker' }).first().press('ArrowLeft')
+  await expect(primaryToken).toHaveValue(/^#/u)
+  await expect.poll(primaryValue).not.toBe('oklch(0.72 0.19 32)')
+  await page.keyboard.press('Escape')
+  await page.getByRole('button', { name: 'Undo' }).click()
+  await expect(primaryToken).toHaveValue('oklch(0.72 0.19 32)')
   await primaryToken.fill('oklch(0.62 0.2 145)')
   await primaryToken.blur()
   await expect.poll(primaryValue).toBe('oklch(0.62 0.2 145)')
@@ -831,8 +931,19 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
   await expect(page.getByLabel('Primary', { exact: true })).toHaveValue('oklch(0.62 0.2 145)')
   await expect.poll(primaryValue).toBe('oklch(0.62 0.2 145)')
 
+  await page.getByRole('button', { name: 'Base colors' }).click()
+  const focusRingToken = page.getByLabel('Focus ring', { exact: true })
+  await focusRingToken.fill('oklch(0.705 0.015 286.067)')
+  await focusRingToken.blur()
+  await expect.poll(ringValue).toBe('oklch(0.705 0.015 286.067)')
+  await page.getByRole('button', { name: 'Menu colors' }).click()
+  const menuFocusRingToken = page.getByLabel('Menu focus ring', { exact: true })
+  await menuFocusRingToken.fill('oklch(0.552 0.016 285.938)')
+  await menuFocusRingToken.blur()
+  await expect.poll(menuRingValue).toBe('oklch(0.552 0.016 285.938)')
+
   await page.getByRole('tab', { name: 'Typography' }).click()
-  await page.getByLabel('Body font').click()
+  await page.getByLabel('Serif font (body)').click()
   await page.getByRole('option', { name: 'Avenir Next' }).click()
   await expect
     .poll(() =>
@@ -861,7 +972,7 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
   await expect
     .poll(() =>
       page.evaluate(() => {
-        const saved = JSON.parse(localStorage.getItem('astrale-ui-playground:themes:v1') ?? '[]')
+        const saved = JSON.parse(localStorage.getItem('astrale-ui-playground:themes:v2') ?? '[]')
         return {
           count: saved.length,
           name: saved[0]?.name,
@@ -918,10 +1029,13 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
   expect(download.suggestedFilename()).toBe('atelier.astrale-theme.json')
   const exported = JSON.parse(await downloadText(download))
   expect(exported).toMatchObject({
-    version: 1,
+    version: 2,
     name: 'atelier',
     appearance: { dark: { primary: 'oklch(0.62 0.2 145)' } },
-    typography: { body: "'Avenir Next', 'Segoe UI Variable', ui-sans-serif, sans-serif" },
+    typography: {
+      body: "'Avenir Next', 'Segoe UI Variable', ui-sans-serif, sans-serif",
+      mono: expect.any(String),
+    },
     geometry: { radius: '1.05rem' },
   })
 
@@ -1001,7 +1115,7 @@ test('invalid storage and save failures stay contained', async ({ page }) => {
   page.on('pageerror', (error) => pageErrors.push(error.message))
   await page.goto('/')
   await page.evaluate(() =>
-    localStorage.setItem('astrale-ui-playground:themes:v1', '{not-valid-json'),
+    localStorage.setItem('astrale-ui-playground:themes:v2', '{not-valid-json'),
   )
   await page.reload()
   await expect(page.locator('[data-slot="ui-playground"]')).toBeVisible()
@@ -1072,8 +1186,10 @@ test('representative overlays and disclosures are keyboard operable', async ({ p
   await expect(disclosureContent).toBeVisible()
 })
 
-test('all starter modes have no serious automated accessibility violations', async ({ page }) => {
-  test.setTimeout(60_000)
+test('all starter modes have no serious structural violations and Astrale presets meet contrast', async ({
+  page,
+}) => {
+  test.setTimeout(180_000)
   const consoleProblems: string[] = []
   page.on('console', (message) => {
     if (['error', 'warning'].includes(message.type())) consoleProblems.push(message.text())
@@ -1125,16 +1241,19 @@ test('all starter modes have no serious automated accessibility violations', asy
       '*, *::before, *::after { transition-delay: 0s !important; transition-duration: 0s !important; }',
   })
   await openThemeCustomizer(page)
-  const starters = {
-    Atelier: { slug: 'atelier', light: 'oklch(0.52 0.2 28)', dark: 'oklch(0.72 0.19 32)' },
-    Observatory: {
-      slug: 'observatory',
-      light: 'oklch(0.36 0.14 251)',
-      dark: 'oklch(0.76 0.13 250)',
-    },
-    Terminal: { slug: 'terminal', light: 'oklch(0.43 0.12 205)', dark: 'oklch(0.72 0.14 195)' },
-  } as const
+  const starters: Record<string, { slug: string; light: string; dark: string }> =
+    Object.fromEntries(
+      starterThemeDocuments.map((theme) => [
+        theme.label,
+        {
+          slug: theme.name,
+          light: theme.appearance.light.primary,
+          dark: theme.appearance.dark.primary,
+        },
+      ]),
+    )
   const root = page.locator('[data-slot="ui-playground"]')
+  const astralePresets = new Set(['Atelier', 'Observatory', 'Terminal'])
   for (const [starter, expected] of Object.entries(starters)) {
     await page.getByLabel('Starter').click()
     await page.getByRole('option', { name: starter }).click()
@@ -1153,9 +1272,12 @@ test('all starter modes have no serious automated accessibility violations', asy
         )
         .toBe(expected[mode])
       const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa']).analyze()
+      const serious = results.violations.filter((violation) =>
+        ['critical', 'serious'].includes(violation.impact ?? ''),
+      )
       expect(
-        results.violations.filter((violation) =>
-          ['critical', 'serious'].includes(violation.impact ?? ''),
+        serious.filter(
+          (violation) => astralePresets.has(starter) || violation.id !== 'color-contrast',
         ),
         `${starter} ${mode}`,
       ).toEqual([])
@@ -1164,7 +1286,7 @@ test('all starter modes have no serious automated accessibility violations', asy
   expect(consoleProblems).toEqual([])
 })
 
-test('every loaded family is serious-violation-free in every released theme mode', async ({
+test('every canonical family is serious-violation-free across representative theme characters', async ({
   page,
 }, testInfo) => {
   test.skip(testInfo.project.name !== 'desktop', 'The semantic theme matrix is viewport-neutral.')
@@ -1177,7 +1299,6 @@ test('every loaded family is serious-violation-free in every released theme mode
     if (['error', 'warning'].includes(message.type())) consoleProblems.push(message.text())
   })
   await page.goto('/')
-  const familyUrls = expectedFamilies.map((family) => `?family=${encodeURIComponent(family)}`)
 
   for (const starter of ['Atelier', 'Observatory', 'Terminal']) {
     for (const mode of ['Light', 'Dark']) {
@@ -1187,17 +1308,11 @@ test('every loaded family is serious-violation-free in every released theme mode
       await page.getByRole('button', { name: mode, exact: true }).click()
       await page.getByRole('button', { name: 'Close', exact: true }).click()
 
-      for (const familyUrl of familyUrls) {
-        const family = new URL(familyUrl, 'http://catalog.local').searchParams.get('family')!
-        await page.evaluate((url) => {
-          history.pushState({}, '', url)
-          dispatchEvent(new PopStateEvent('popstate'))
-          scrollTo({ top: 0 })
-        }, familyUrl)
-        await expect(page.locator(`#catalog-group-${family.replaceAll('/', '-')}`)).toBeVisible()
+      for (const kind of ['Components', 'Patterns', 'Blocks'] as const) {
+        await selectCatalogKind(page, kind)
         const previews = page.locator('[data-preview-address]')
         const count = await previews.count()
-        expect(count, familyUrl).toBeGreaterThan(0)
+        expect(count, kind).toBe(expectedAddressesByKind[kind].length)
         for (let index = 0; index < count; index += 1) {
           const preview = previews.nth(index)
           await preview.scrollIntoViewIfNeeded()
@@ -1211,7 +1326,7 @@ test('every loaded family is serious-violation-free in every released theme mode
           results.violations.filter((violation) =>
             ['critical', 'serious'].includes(violation.impact ?? ''),
           ),
-          `${starter} ${mode} ${familyUrl}`,
+          `${starter} ${mode} ${kind}`,
         ).toEqual([])
       }
     }

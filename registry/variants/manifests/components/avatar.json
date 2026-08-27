@@ -1,0 +1,432 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-components-avatar",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "component-avatar-avatar-01",
+      "type": "registry:component",
+      "title": "Avatar 1",
+      "description": "Basic avatar with profile image and fallback initials.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "avatar-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/avatar/avatar-01.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/avatar/avatar-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-avatar-avatar-02",
+      "type": "registry:component",
+      "title": "Avatar 2",
+      "description": "Avatar with ring border highlighting for active or selected states.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "avatar-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/avatar/avatar-02.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/avatar/avatar-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-avatar-avatar-03",
+      "type": "registry:component",
+      "title": "Avatar 3",
+      "description": "Small sized avatar variant with compact dimensions.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "avatar-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/avatar/avatar-03.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/avatar/avatar-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-avatar-avatar-04",
+      "type": "registry:component",
+      "title": "Avatar 4",
+      "description": "Large sized avatar variant with expanded dimensions.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "avatar-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/avatar/avatar-04.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/avatar/avatar-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-avatar-avatar-05",
+      "type": "registry:component",
+      "title": "Avatar 5",
+      "description": "Circular avatar with fallback initials.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "avatar-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/avatar/avatar-05.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/avatar/avatar-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-avatar-avatar-06",
+      "type": "registry:component",
+      "title": "Avatar 6",
+      "description": "Icon avatar with colored background.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "avatar-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/avatar/avatar-06.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/avatar/avatar-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-avatar-avatar-07",
+      "type": "registry:component",
+      "title": "Avatar 7",
+      "description": "Status avatar with busy indicator showing red status dot.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "avatar-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/avatar/avatar-07.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/avatar/avatar-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-avatar-avatar-08",
+      "type": "registry:component",
+      "title": "Avatar 8",
+      "description": "Status avatar with online indicator showing green status dot.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "avatar-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/avatar/avatar-08.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/avatar/avatar-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-avatar-avatar-09",
+      "type": "registry:component",
+      "title": "Avatar 9",
+      "description": "Status avatar with away indicator showing amber status dot for absent/away state.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "avatar-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/avatar/avatar-09.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/avatar/avatar-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-avatar-avatar-10",
+      "type": "registry:component",
+      "title": "Avatar 10",
+      "description": "Avatar with plus icon overlay for adding or editing profile functionality.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "avatar-10.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/avatar/avatar-10.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/avatar/avatar-10",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-avatar-avatar-11",
+      "type": "registry:component",
+      "title": "Avatar 11",
+      "description": "Avatar with notification badge showing count number for alerts and messages.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "avatar-11.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/avatar/avatar-11.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/avatar/avatar-11",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-avatar-avatar-12",
+      "type": "registry:component",
+      "title": "Avatar 12",
+      "description": "Avatar with verified badge showing check mark icon for verified accounts.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "avatar-12.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/avatar/avatar-12.tsx"
+        },
+        {
+          "path": "support/assets/svg/badge-check.tsx",
+          "type": "registry:component",
+          "target": "assets/svg/badge-check.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/avatar/avatar-12",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-avatar-avatar-13",
+      "type": "registry:component",
+      "title": "Avatar 13",
+      "description": "Avatar group displaying multiple overlapping users with ring borders.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "avatar-13.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/avatar/avatar-13.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/avatar/avatar-13",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-avatar-avatar-14",
+      "type": "registry:component",
+      "title": "Avatar 14",
+      "description": "Avatar group with count indicator showing additional users (+9) in overflow.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "avatar-14.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/avatar/avatar-14.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/avatar/avatar-14",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-avatar-avatar-15",
+      "type": "registry:component",
+      "title": "Avatar 15",
+      "description": "Large-sized avatar group with bigger dimensions for prominent display.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "avatar-15.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/avatar/avatar-15.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/avatar/avatar-15",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-avatar-avatar-16",
+      "type": "registry:component",
+      "title": "Avatar 16",
+      "description": "Avatar group with tooltip hover effects and elevation animation.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "avatar-16.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/avatar/avatar-16.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/avatar/avatar-16",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-avatar-avatar-17",
+      "type": "registry:component",
+      "title": "Avatar 17",
+      "description": "Avatar group with smooth spacing transition on hover interaction.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "avatar-17.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/avatar/avatar-17.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/avatar/avatar-17",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-avatar-avatar-18",
+      "type": "registry:component",
+      "title": "Avatar 18",
+      "description": "Avatar group with tooltip transitions and hover spacing effects.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "avatar-18.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/avatar/avatar-18.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/avatar/avatar-18",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-avatar-avatar-19",
+      "type": "registry:component",
+      "title": "Avatar 19",
+      "description": "Avatar group with dropdown menu showing additional users and actions.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "avatar-19.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/avatar/avatar-19.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/avatar/avatar-19",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-avatar-avatar-20",
+      "type": "registry:component",
+      "title": "Avatar 20",
+      "description": "Avatar group with outlined container and background styling.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "avatar-20.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/avatar/avatar-20.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/avatar/avatar-20",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-avatar-avatar-21",
+      "type": "registry:component",
+      "title": "Avatar 21",
+      "description": "Avatar group with popularity indicator styling and text showcasing community trust.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "avatar-21.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/avatar/avatar-21.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/avatar/avatar-21",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

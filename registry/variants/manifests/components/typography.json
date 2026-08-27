@@ -1,0 +1,307 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-components-typography",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "component-typography-typography-01",
+      "type": "registry:component",
+      "title": "Typography 1",
+      "description": "H1 heading with extra-bold weight, balanced text wrapping, and the largest heading scale.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "typography-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/typography/typography-01.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/typography/typography-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-typography-typography-02",
+      "type": "registry:component",
+      "title": "Typography 2",
+      "description": "H2 heading with semibold weight and large text scale for section titles.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "typography-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/typography/typography-02.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/typography/typography-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-typography-typography-03",
+      "type": "registry:component",
+      "title": "Typography 3",
+      "description": "H3 heading with semibold weight and medium-large text scale for subsection titles.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "typography-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/typography/typography-03.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/typography/typography-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-typography-typography-04",
+      "type": "registry:component",
+      "title": "Typography 4",
+      "description": "H4 heading with semibold weight and xl text scale for minor section headings.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "typography-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/typography/typography-04.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/typography/typography-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-typography-typography-05",
+      "type": "registry:component",
+      "title": "Typography 5",
+      "description": "Paragraph element with default body text styling for readable prose content.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "typography-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/typography/typography-05.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/typography/typography-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-typography-typography-06",
+      "type": "registry:component",
+      "title": "Typography 6",
+      "description": "Blockquote with left border accent, left padding, and italic text formatting.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "typography-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/typography/typography-06.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/typography/typography-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-typography-typography-07",
+      "type": "registry:component",
+      "title": "Typography 7",
+      "description": "Data table with bordered cells, header row, and alternating muted row backgrounds.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "typography-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/typography/typography-07.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/typography/typography-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-typography-typography-08",
+      "type": "registry:component",
+      "title": "Typography 8",
+      "description": "Unordered list with disc bullets, left indent, and vertical spacing between items.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "typography-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/typography/typography-08.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/typography/typography-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-typography-typography-09",
+      "type": "registry:component",
+      "title": "Typography 9",
+      "description": "Inline code element with monospace font, muted background, and rounded padding.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "typography-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/typography/typography-09.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/typography/typography-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-typography-typography-10",
+      "type": "registry:component",
+      "title": "Typography 10",
+      "description": "Large text variant with semibold weight for prominent non-heading labels.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "typography-10.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/typography/typography-10.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/typography/typography-10",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-typography-typography-11",
+      "type": "registry:component",
+      "title": "Typography 11",
+      "description": "Small text variant with tight leading and medium weight for compact labels.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "typography-11.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/typography/typography-11.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/typography/typography-11",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-typography-typography-12",
+      "type": "registry:component",
+      "title": "Typography 12",
+      "description": "Muted text variant with reduced contrast for secondary or helper text.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "typography-12.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/typography/typography-12.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/typography/typography-12",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-typography-typography-13",
+      "type": "registry:component",
+      "title": "Typography 13",
+      "description": "Gradient text with a linear color transition from muted primary to full primary.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "typography-13.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/typography/typography-13.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/typography/typography-13",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-typography-typography-14",
+      "type": "registry:component",
+      "title": "Typography 14",
+      "description": "Drop cap paragraph with a floated oversized first letter for editorial styling.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "typography-14.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/typography/typography-14.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/typography/typography-14",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-typography-typography-15",
+      "type": "registry:component",
+      "title": "Typography 15",
+      "description": "Inline text formatting showcase with mark, strikethrough, underline, small, strong, and emphasis elements.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "typography-15.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/typography/typography-15.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/typography/typography-15",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

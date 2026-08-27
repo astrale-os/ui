@@ -1,0 +1,787 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "astrale-variants-components-select",
+  "homepage": "https://github.com/astrale-os/ui",
+  "items": [
+    {
+      "name": "component-select-select-01",
+      "type": "registry:component",
+      "title": "Select 1",
+      "description": "A basic native select dropdown for gender selection",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "select-01.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/select/select-01.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/select/select-01",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-select-select-02",
+      "type": "registry:component",
+      "title": "Select 2",
+      "description": "A native select dropdown with placeholder text for user guidance",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "select-02.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/select/select-02.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/select/select-02",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-select-select-03",
+      "type": "registry:component",
+      "title": "Select 3",
+      "description": "A native select dropdown with icon for movie selection",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "select-03.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/select/select-03.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/select/select-03",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-select-select-04",
+      "type": "registry:component",
+      "title": "Select 4",
+      "description": "A native select dropdown with helper text",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "select-04.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/select/select-04.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/select/select-04",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-select-select-05",
+      "type": "registry:component",
+      "title": "Select 5",
+      "description": "A native select dropdown with error state and validation message",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "select-05.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/select/select-05.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/select/select-05",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-select-select-06",
+      "type": "registry:component",
+      "title": "Select 6",
+      "description": "A required native select dropdown with asterisk indicator",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "select-06.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/select/select-06.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/select/select-06",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-select-select-07",
+      "type": "registry:component",
+      "title": "Select 7",
+      "description": "A native select dropdown with option groups for categorized choices",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "select-07.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/select/select-07.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/select/select-07",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-select-select-08",
+      "type": "registry:component",
+      "title": "Select 8",
+      "description": "A native select dropdown with overlapping label design",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "select-08.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/select/select-08.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/select/select-08",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-select-select-09",
+      "type": "registry:component",
+      "title": "Select 9",
+      "description": "A native select dropdown with inset label design and custom styling",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "select-09.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/select/select-09.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/select/select-09",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-select-select-10",
+      "type": "registry:component",
+      "title": "Select 10",
+      "description": "A basic custom select dropdown with grouped items and labels",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "select-10.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/select/select-10.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/select/select-10",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-select-select-11",
+      "type": "registry:component",
+      "title": "Select 11",
+      "description": "A custom select dropdown with placeholder text",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "select-11.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/select/select-11.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/select/select-11",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-select-select-12",
+      "type": "registry:component",
+      "title": "Select 12",
+      "description": "A custom select dropdown with icon",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "select-12.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/select/select-12.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/select/select-12",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-select-select-13",
+      "type": "registry:component",
+      "title": "Select 13",
+      "description": "A custom select dropdown with helper text for location selection",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "select-13.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/select/select-13.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/select/select-13",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-select-select-14",
+      "type": "registry:component",
+      "title": "Select 14",
+      "description": "A custom select dropdown with error state and validation message",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "select-14.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/select/select-14.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/select/select-14",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-select-select-15",
+      "type": "registry:component",
+      "title": "Select 15",
+      "description": "A custom select dropdown with different size variants (small, default, large)",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "select-15.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/select/select-15.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/select/select-15",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-select-select-16",
+      "type": "registry:component",
+      "title": "Select 16",
+      "description": "A custom select dropdown with colored border and focus ring styling",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "select-16.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/select/select-16.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/select/select-16",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-select-select-17",
+      "type": "registry:component",
+      "title": "Select 17",
+      "description": "A custom select dropdown with colored background and themed styling",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "select-17.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/select/select-17.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/select/select-17",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-select-select-18",
+      "type": "registry:component",
+      "title": "Select 18",
+      "description": "A ghost-style custom select dropdown with minimal styling and hover effects",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "select-18.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/select/select-18.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/select/select-18",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-select-select-19",
+      "type": "registry:component",
+      "title": "Select 19",
+      "description": "A disabled custom select dropdown with reduced opacity and interaction",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "select-19.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/select/select-19.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/select/select-19",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-select-select-20",
+      "type": "registry:component",
+      "title": "Select 20",
+      "description": "A custom select dropdown with disabled individual options",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "select-20.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/select/select-20.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/select/select-20",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-select-select-21",
+      "type": "registry:component",
+      "title": "Select 21",
+      "description": "A custom select dropdown with required field indicator",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "select-21.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/select/select-21.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/select/select-21",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-select-select-22",
+      "type": "registry:component",
+      "title": "Select 22",
+      "description": "A custom select dropdown with multiple option groups",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "select-22.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/select/select-22.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/select/select-22",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-select-select-23",
+      "type": "registry:component",
+      "title": "Select 23",
+      "description": "A custom select dropdown with separators and grouped countries by geographic regions",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "select-23.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/select/select-23.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/select/select-23",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-select-select-24",
+      "type": "registry:component",
+      "title": "Select 24",
+      "description": "A custom select dropdown with overlapping label positioned over the border",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "select-24.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/select/select-24.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/select/select-24",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-select-select-25",
+      "type": "registry:component",
+      "title": "Select 25",
+      "description": "A custom select dropdown with inset label design inside bordered container",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "select-25.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/select/select-25.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/select/select-25",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-select-select-26",
+      "type": "registry:component",
+      "title": "Select 26",
+      "description": "A timezone select dropdown with grouped time zones by geographic regions",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "select-26.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/select/select-26.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/select/select-26",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-select-select-27",
+      "type": "registry:component",
+      "title": "Select 27",
+      "description": "A music genre select dropdown with icons for each option",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "select-27.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/select/select-27.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/select/select-27",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-select-select-28",
+      "type": "registry:component",
+      "title": "Select 28",
+      "description": "A custom select dropdown with leading text before the selected value",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "select-28.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/select/select-28.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/select/select-28",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-select-select-29",
+      "type": "registry:component",
+      "title": "Select 29",
+      "description": "A status select dropdown with colored circle indicators for each status",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "select-29.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/select/select-29.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/select/select-29",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-select-select-30",
+      "type": "registry:component",
+      "title": "Select 30",
+      "description": "A country select dropdown with flag images for each country option",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "select-30.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/select/select-30.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/select/select-30",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-select-select-31",
+      "type": "registry:component",
+      "title": "Select 31",
+      "description": "A user select dropdown with avatar images for each user option",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "select-31.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/select/select-31.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/select/select-31",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-select-select-32",
+      "type": "registry:component",
+      "title": "Select 32",
+      "description": "A multi-select dropdown with search functionality for product categories",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "cmdk@^1.1.1",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "select-32.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/select/select-32.tsx"
+        },
+        {
+          "path": "support/components/ui/multi-select.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/multi-select.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/select/select-32",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-select-select-33",
+      "type": "registry:component",
+      "title": "Select 33",
+      "description": "A multi-select dropdown with placeholder, badge display and removal functionality",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "cmdk@^1.1.1",
+        "lucide-react@1.32.0",
+        "react@19.2.8"
+      ],
+      "files": [
+        {
+          "path": "select-33.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/select/select-33.tsx"
+        },
+        {
+          "path": "support/components/ui/multi-select.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/multi-select.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/select/select-33",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-select-select-34",
+      "type": "registry:component",
+      "title": "Select 34",
+      "description": "A native multiple select dropdown for dietary preferences with bordered container",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "select-34.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/select/select-34.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/select/select-34",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-select-select-35",
+      "type": "registry:component",
+      "title": "Select 35",
+      "description": "A React Aria Components listbox with single selection for currency options",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react-aria-components@^1.20.0"],
+      "files": [
+        {
+          "path": "select-35.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/select/select-35.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/select/select-35",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-select-select-36",
+      "type": "registry:component",
+      "title": "Select 36",
+      "description": "A React Aria Components listbox with multiple selection and grouped language options",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react-aria-components@^1.20.0"],
+      "files": [
+        {
+          "path": "select-36.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/select/select-36.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/select/select-36",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-select-select-37",
+      "type": "registry:component",
+      "title": "Select 37",
+      "description": "An animated select dropdown with slide-in from bottom transition effect",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "select-37.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/select/select-37.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/select/select-37",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    },
+    {
+      "name": "component-select-select-38",
+      "type": "registry:component",
+      "title": "Select 38",
+      "description": "An animated select dropdown with zoom-in transition effect from center",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "react@19.2.8"],
+      "files": [
+        {
+          "path": "select-38.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/select/select-38.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/select/select-38",
+        "provider": "@astrale-os/ui",
+        "source": "@astrale-os/ui",
+        "license": "MIT"
+      }
+    }
+  ]
+}

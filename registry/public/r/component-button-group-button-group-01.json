@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-button-group-button-group-01",
+  "title": "Button Group 1",
+  "description": "Download button group with action button and download count display",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/button-group/button-group-01/button-group-01.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\nimport { ButtonGroup } from '@astrale-os/ui/button-group'\nimport { DownloadIcon } from \"lucide-react\"\n\nconst ButtonGroupDownloadDemo = () => {\n  return (\n    <ButtonGroup>\n      <Button variant='outline'>\n        <DownloadIcon\n        />\n        Download\n      </Button>\n      <Button variant='outline'>15K</Button>\n    </ButtonGroup>\n  )\n}\n\nexport default ButtonGroupDownloadDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/button-group/button-group-01.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/button-group/button-group-01",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

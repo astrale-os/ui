@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-progress-progress-11",
+  "title": "Progress 11",
+  "description": "System monitoring dashboard featuring vertical progress bars for tracking CPU, RAM, Disk, and Load metrics.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/progress/progress-11/progress-11.tsx",
+      "content": "import { Progress } from '@astrale-os/ui/progress'\n\nconst ProgressVerticalLabelsWithDemo = () => {\n  return (\n    <div className='flex items-end justify-center gap-8 py-4 xl:gap-10'>\n      <div className='group flex flex-col items-center gap-4 transition-all duration-300'>\n        <span className='cursor-default text-sm font-medium uppercase'>24%</span>\n        <div className='bg-muted relative flex h-48 w-2 items-center justify-center overflow-hidden rounded-full transition-all'>\n          <Progress\n            value={24}\n            className='absolute w-48 -rotate-90 rounded-none **:data-[slot=progress-indicator]:rounded-none *:data-[slot=progress-track]:h-2 *:data-[slot=progress-track]:rounded-none'\n          />\n        </div>\n        <span className='text-muted-foreground cursor-default text-sm font-medium transition-colors'>CPU</span>\n      </div>\n\n      <div className='group flex flex-col items-center gap-4 transition-all duration-300'>\n        <span className='cursor-default text-sm font-medium uppercase'>58%</span>\n        <div className='bg-muted relative flex h-48 w-2 items-center justify-center overflow-hidden rounded-full transition-all'>\n          <Progress\n            value={58}\n            className='absolute w-48 -rotate-90 rounded-none **:data-[slot=progress-indicator]:rounded-none *:data-[slot=progress-track]:h-2 *:data-[slot=progress-track]:rounded-none'\n          />\n        </div>\n        <span className='text-muted-foreground cursor-default text-sm font-medium transition-colors'>RAM</span>\n      </div>\n\n      <div className='group flex flex-col items-center gap-4 transition-all duration-300'>\n        <span className='cursor-default text-sm font-medium uppercase'>82%</span>\n        <div className='bg-muted relative flex h-48 w-2 items-center justify-center overflow-hidden rounded-full transition-all'>\n          <Progress\n            value={82}\n            className='absolute w-48 -rotate-90 rounded-none **:data-[slot=progress-indicator]:rounded-none *:data-[slot=progress-track]:h-2 *:data-[slot=progress-track]:rounded-none'\n          />\n        </div>\n        <span className='text-muted-foreground cursor-default text-sm font-medium transition-colors'>DISK</span>\n      </div>\n\n      <div className='group flex flex-col items-center gap-4 transition-all duration-300'>\n        <span className='cursor-default text-sm font-medium uppercase'>45%</span>\n        <div className='bg-muted relative flex h-48 w-2 items-center justify-center overflow-hidden rounded-full transition-all'>\n          <Progress\n            value={45}\n            className='absolute w-48 -rotate-90 rounded-none **:data-[slot=progress-indicator]:rounded-none *:data-[slot=progress-track]:h-2 *:data-[slot=progress-track]:rounded-none'\n          />\n        </div>\n        <span className='text-muted-foreground cursor-default text-sm font-medium transition-colors'>LOAD</span>\n      </div>\n    </div>\n  )\n}\n\nexport default ProgressVerticalLabelsWithDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/progress/progress-11.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/progress/progress-11",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

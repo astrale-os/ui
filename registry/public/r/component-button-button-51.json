@@ -1,0 +1,32 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-button-button-51",
+  "title": "Button 51",
+  "description": "Button with stitched border design using layered shadow effects",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "class-variance-authority@^0.7.1",
+    "react@19.2.8"
+  ],
+  "files": [
+    {
+      "path": "source/components/button/button-51/button-51.tsx",
+      "content": "import { PrimaryFlowButton } from '@/components/ui/flow-button'\n\nconst PrimaryFlowButtonDemo = () => {\n  return <PrimaryFlowButton>Flow Button</PrimaryFlowButton>\n}\n\nexport default PrimaryFlowButtonDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/button/button-51.tsx"
+    },
+    {
+      "path": "source/components/button/button-51/support/components/ui/flow-button.tsx",
+      "content": "'use client'\n\nimport * as React from 'react'\n\nimport { cn } from '@astrale-os/ui/class-name'\n\nimport { Button } from '@astrale-os/ui/button'\n\ninterface FlowButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'render'> {\n  children: React.ReactNode\n  className?: string\n  render?: React.ReactElement\n}\n\nfunction PrimaryFlowButton({ children, render, className, ...props }: FlowButtonProps) {\n  return (\n    <div className={cn('ring-primary/60 relative isolate w-fit overflow-hidden rounded-lg ring-2', className)}>\n      <Button\n        render={render}\n        nativeButton={!render}\n        className={cn(\n          '[a]:hover:bg-primary hover:bg-primary relative h-10 gap-2 rounded-lg border border-transparent bg-clip-padding px-6 text-base duration-500 text-shadow-xs active:not-aria-[haspopup]:translate-[none]',\n\n          // After - Border gradient effect with rotation\n          'after:absolute after:-inset-30 after:-z-1 after:rounded-[inherit] after:border after:border-inherit after:bg-origin-border after:mask-exclude after:transition-transform after:duration-500',\n\n          'after:bg-[conic-gradient(from_90deg_at_50%_50%,var(--primary),var(--primary)_50%,rgba(0,0,0,15%)_51%_99%,var(--primary))] hover:after:rotate-180 dark:after:bg-[conic-gradient(from_90deg_at_50%_50%,var(--primary),var(--primary)_50%,rgba(0,0,0,0%)_51%_99%,var(--primary))]'\n        )}\n        {...props}\n      >\n        {children}\n      </Button>\n    </div>\n  )\n}\n\nfunction SecondaryFlowButton({ children, render, className, ...props }: FlowButtonProps) {\n  return (\n    <div className={cn('ring-secondary/60 relative isolate w-fit overflow-hidden rounded-lg ring-2', className)}>\n      <Button\n        variant='secondary'\n        render={render}\n        nativeButton={!render}\n        className={cn(\n          'hover:bg-secondary [a]:hover:bg-secondary relative h-10 gap-2 rounded-lg border border-transparent bg-clip-padding px-6 text-base duration-500 text-shadow-xs active:not-aria-[haspopup]:translate-[none]',\n\n          // After - Border gradient effect with rotation\n          'after:absolute after:-inset-30 after:-z-1 after:rounded-[inherit] after:border after:border-inherit after:bg-origin-border after:mask-exclude after:mask-clip-content after:transition-transform after:duration-500 after:[mask:linear-gradient(black,black),linear-gradient(black,black)]',\n\n          'after:bg-[conic-gradient(from_90deg_at_50%_50%,var(--secondary),var(--secondary)_50%,rgba(0,0,0,15%)_51%_99%,var(--secondary))] hover:after:rotate-180 dark:after:bg-[conic-gradient(from_90deg_at_50%_50%,var(--secondary),var(--secondary)_50%,rgba(255,255,255,60%)_51%_99%,var(--secondary))]'\n        )}\n        {...props}\n      >\n        {children}\n      </Button>\n    </div>\n  )\n}\n\nexport { PrimaryFlowButton, SecondaryFlowButton, type FlowButtonProps }\n",
+      "type": "registry:ui",
+      "target": "components/ui/flow-button.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/button/button-51",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}

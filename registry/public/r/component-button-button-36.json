@@ -1,0 +1,25 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-button-button-36",
+  "title": "Button 36",
+  "description": "Security icon button with destructive gradient background effect",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "lucide-react@1.32.0"
+  ],
+  "files": [
+    {
+      "path": "source/components/button/button-36/button-36.tsx",
+      "content": "import { Button } from '@astrale-os/ui/button'\nimport { ShieldAlertIcon } from \"lucide-react\"\n\nconst IconButtonGradientDemo = () => {\n  return (\n    <Button\n      size='icon'\n      className='from-destructive via-destructive/60 to-destructive focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 bg-transparent bg-linear-to-r bg-size-[200%_auto] text-white hover:bg-transparent hover:bg-position-[99%_center]'\n    >\n      <ShieldAlertIcon\n      />\n      <span className='sr-only'>Security</span>\n    </Button>\n  )\n}\n\nexport default IconButtonGradientDemo\n",
+      "type": "registry:component",
+      "target": "components/astrale/component/button/button-36.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/button/button-36",
+    "provider": "@astrale-os/ui",
+    "source": "@astrale-os/ui",
+    "license": "MIT"
+  },
+  "type": "registry:component"
+}
