@@ -18,6 +18,7 @@
   },
   "files": [
     "dist",
+    "CHANGELOG.md",
     "README.md",
     "LICENSE",
     "THIRD-PARTY-NOTICES.md"
