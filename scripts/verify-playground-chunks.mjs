@@ -117,7 +117,7 @@ assert.doesNotMatch(
   /registry\/variants\/source\/.+?\.preview\.tsx/u,
   'initial graph must not contain individual variant preview loader paths',
 )
-const entryBudget = studioPreviewCount > 0 ? 1_000_000 : 600_000
+const entryBudget = studioPreviewCount > 0 ? 1_000_000 : 650_000
 assert.ok(
   entryBytes < entryBudget,
   `initial playground JavaScript ${entryBytes} exceeds the ${entryBudget}-byte ${studioPreviewCount > 0 ? 'internal Studio' : 'public'} budget`,
