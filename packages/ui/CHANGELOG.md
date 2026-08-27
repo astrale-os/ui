@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0-beta.12](https://github.com/astrale-os/ui/compare/v0.3.0-beta.11...v0.3.0-beta.12) (2026-08-27)
+
+
+### Bug Fixes
+
+* **ui:** retry propagated consumer installs ([#45](https://github.com/astrale-os/ui/issues/45)) ([ed5bf55](https://github.com/astrale-os/ui/commit/ed5bf558e4444b00dda422e7932fc1263f03da46))
+
 ## [0.3.0-beta.11](https://github.com/astrale-os/ui/compare/v0.3.0-beta.10...v0.3.0-beta.11) (2026-08-27)
 
 
