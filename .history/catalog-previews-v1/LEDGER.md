@@ -98,6 +98,7 @@ Add rows; never repair product source inside a preview.
 | CP-B03 | closed | Preview classes changed published `theme.css` through automatic scanning | package/theme build | `source(none)` plus explicit runtime source root | Exact baseline comparison; only dead `.visible` utility removed |
 | CP-B04 | closed | Generic child `max-width: 100%` overrode sourced block constraints such as `max-w-2xl` | playground canvas | Remove the high-specificity maximum; viewport canvas owns width and centering only | Live computed-style probe: Team 672px and Sign-in 448px, both centered |
 | CP-B05 | closed | Production lazy proof assumed all catalog kinds remained in one DOM and was absent from PR CI | playground qualification | Keep the scroll journey inside Blocks, isolate direct-load proof in a fresh context, and run it in the playground CI job | `pnpm playground:test:production` green after an exact production rebuild |
+| CP-B06 | closed | PR CI exercised the production browser against the preceding Studio build, so the public bundle budget was first evaluated by release publication | playground qualification | Route CI through the owning public build, chunk verifier, and browser command; calibrate the raw ceiling to the measured complete public catalog without changing the lazy boundary | Public 627,187 raw / 170,699 gzip under 650,000; Studio 778,103 raw / 181,344 gzip under 1,000,000 |
 
 ## Evidence log
 
@@ -122,6 +123,8 @@ Append exact observations. `planned` commands or queued CI runs are not evidence
 | 2026-08-27 | local playground | outline navigation follow-up | agent-browser screenshot; desktop/mobile outline, family, native Back, focus, and lazy-geometry journeys | Hidden by default; exact family/count census; no per-card eye action; family jumps and restoration green |
 | 2026-08-27 | local playground | command navigation follow-up | exact local Studio `command-10` composition; generated canonical family groups; focused desktop/mobile Playwright and agent-browser inspection | Search trigger uses owned Button/SearchIcon/Kbd, Cmd/Ctrl+K opens the owned controlled pattern, exact family count has no duplicates, and selection/Escape/Back focus journeys pass |
 | 2026-08-27 | local playground | command navigation closure | `pnpm check`; focused desktop/mobile Playwright; public production build/chunk verifier; production lazy Playwright; three-round tests-reviewer audit | 40/40 contracts and 2/2 unit tests green; shortcut repeat/ownership/modal/focus and zero-preview-import search paths green; exact Calendar selection loads; command owner is a lazy chunk; initial graph 539,606/600,000 bytes; production lazy proof green; final critic found no issue |
+| 2026-08-27 | `68b8010` release | publication preflight | Trusted Publish run `33103754214` | Correctly stopped before either registry publish: complete public catalog measured 627,187 raw bytes against the stale 600,000-byte ceiling |
+| 2026-08-27 | local release fix | exact production boundaries | `pnpm playground:build`; `pnpm playground:test:production` | Studio: 1,015 dynamic previews, 902 provider previews, 58 family loaders, 778,103 raw / 181,344 gzip initial JS; public: 113 dynamic previews, no provider loaders, 627,187 raw / 170,699 gzip initial JS; production lazy browser proof green |
 
 ## Completion rule
 

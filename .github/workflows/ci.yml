@@ -108,7 +108,7 @@ jobs:
       - run: pnpm --filter @astrale-os/ui-playground exec playwright install --with-deps chromium
       - run: pnpm playground:build
       - run: pnpm playground:test
-      - run: pnpm --filter @astrale-os/ui-playground test:production
+      - run: pnpm playground:test:production
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         if: always()
         with:
