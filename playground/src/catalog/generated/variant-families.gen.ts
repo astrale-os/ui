@@ -1,61 +1,189 @@
 // Generated from registry/variants/manifests. Do not edit.
-export const variantFamilyLoaders = {
-  "block/data-table": () => import('./variant-families/block-data-table.gen.js'),
-  "block/kanban": () => import('./variant-families/block-kanban.gen.js'),
-  "component/accordion": () => import('./variant-families/component-accordion.gen.js'),
-  "component/alert": () => import('./variant-families/component-alert.gen.js'),
-  "component/aspect-ratio": () => import('./variant-families/component-aspect-ratio.gen.js'),
-  "component/avatar": () => import('./variant-families/component-avatar.gen.js'),
-  "component/badge": () => import('./variant-families/component-badge.gen.js'),
-  "component/button": () => import('./variant-families/component-button.gen.js'),
-  "component/button-group": () => import('./variant-families/component-button-group.gen.js'),
-  "component/calendar": () => import('./variant-families/component-calendar.gen.js'),
-  "component/card": () => import('./variant-families/component-card.gen.js'),
-  "component/checkbox": () => import('./variant-families/component-checkbox.gen.js'),
-  "component/collapsible": () => import('./variant-families/component-collapsible.gen.js'),
-  "component/context-menu": () => import('./variant-families/component-context-menu.gen.js'),
-  "component/dialog": () => import('./variant-families/component-dialog.gen.js'),
-  "component/drawer": () => import('./variant-families/component-drawer.gen.js'),
-  "component/dropdown-menu": () => import('./variant-families/component-dropdown-menu.gen.js'),
-  "component/input": () => import('./variant-families/component-input.gen.js'),
-  "component/input-mask": () => import('./variant-families/component-input-mask.gen.js'),
-  "component/input-otp": () => import('./variant-families/component-input-otp.gen.js'),
-  "component/kbd": () => import('./variant-families/component-kbd.gen.js'),
-  "component/label": () => import('./variant-families/component-label.gen.js'),
-  "component/menubar": () => import('./variant-families/component-menubar.gen.js'),
-  "component/popover": () => import('./variant-families/component-popover.gen.js'),
-  "component/progress": () => import('./variant-families/component-progress.gen.js'),
-  "component/radio-group": () => import('./variant-families/component-radio-group.gen.js'),
-  "component/rating": () => import('./variant-families/component-rating.gen.js'),
-  "component/resizable": () => import('./variant-families/component-resizable.gen.js'),
-  "component/scroll-area": () => import('./variant-families/component-scroll-area.gen.js'),
-  "component/select": () => import('./variant-families/component-select.gen.js'),
-  "component/separator": () => import('./variant-families/component-separator.gen.js'),
-  "component/sheet": () => import('./variant-families/component-sheet.gen.js'),
-  "component/skeleton": () => import('./variant-families/component-skeleton.gen.js'),
-  "component/slider": () => import('./variant-families/component-slider.gen.js'),
-  "component/sonner": () => import('./variant-families/component-sonner.gen.js'),
-  "component/spinner": () => import('./variant-families/component-spinner.gen.js'),
-  "component/switch": () => import('./variant-families/component-switch.gen.js'),
-  "component/table": () => import('./variant-families/component-table.gen.js'),
-  "component/tabs": () => import('./variant-families/component-tabs.gen.js'),
-  "component/textarea": () => import('./variant-families/component-textarea.gen.js'),
-  "component/toggle": () => import('./variant-families/component-toggle.gen.js'),
-  "component/toggle-group": () => import('./variant-families/component-toggle-group.gen.js'),
-  "component/tooltip": () => import('./variant-families/component-tooltip.gen.js'),
-  "component/typography": () => import('./variant-families/component-typography.gen.js'),
-  "pattern/autocomplete": () => import('./variant-families/pattern-autocomplete.gen.js'),
-  "pattern/breadcrumb": () => import('./variant-families/pattern-breadcrumb.gen.js'),
-  "pattern/carousel": () => import('./variant-families/pattern-carousel.gen.js'),
-  "pattern/code-block": () => import('./variant-families/pattern-code-block.gen.js'),
-  "pattern/combobox": () => import('./variant-families/pattern-combobox.gen.js'),
-  "pattern/command": () => import('./variant-families/pattern-command.gen.js'),
-  "pattern/date-and-time-picker": () => import('./variant-families/pattern-date-and-time-picker.gen.js'),
-  "pattern/form": () => import('./variant-families/pattern-form.gen.js'),
-  "pattern/list": () => import('./variant-families/pattern-list.gen.js'),
-  "pattern/navigation-menu": () => import('./variant-families/pattern-navigation-menu.gen.js'),
-  "pattern/pagination": () => import('./variant-families/pattern-pagination.gen.js'),
-  "pattern/phone-input": () => import('./variant-families/pattern-phone-input.gen.js'),
-  "pattern/sortable": () => import('./variant-families/pattern-sortable.gen.js'),
-  "pattern/stepper": () => import('./variant-families/pattern-stepper.gen.js'),
-} as const
+export function loadGeneratedVariantFamily(family: string) {
+  switch (family) {
+    case "block/data-table":
+      return import('./variant-families/block-data-table.gen.js')
+    case "block/kanban":
+      return import('./variant-families/block-kanban.gen.js')
+    case "component/accordion":
+      return import('./variant-families/component-accordion.gen.js')
+    case "component/alert":
+      return import('./variant-families/component-alert.gen.js')
+    case "component/aspect-ratio":
+      return import('./variant-families/component-aspect-ratio.gen.js')
+    case "component/avatar":
+      return import('./variant-families/component-avatar.gen.js')
+    case "component/badge":
+      return import('./variant-families/component-badge.gen.js')
+    case "component/button":
+      return import('./variant-families/component-button.gen.js')
+    case "component/button-group":
+      return import('./variant-families/component-button-group.gen.js')
+    case "component/calendar":
+      return import('./variant-families/component-calendar.gen.js')
+    case "component/card":
+      return import('./variant-families/component-card.gen.js')
+    case "component/checkbox":
+      return import('./variant-families/component-checkbox.gen.js')
+    case "component/collapsible":
+      return import('./variant-families/component-collapsible.gen.js')
+    case "component/context-menu":
+      return import('./variant-families/component-context-menu.gen.js')
+    case "component/dialog":
+      return import('./variant-families/component-dialog.gen.js')
+    case "component/drawer":
+      return import('./variant-families/component-drawer.gen.js')
+    case "component/dropdown-menu":
+      return import('./variant-families/component-dropdown-menu.gen.js')
+    case "component/input":
+      return import('./variant-families/component-input.gen.js')
+    case "component/input-mask":
+      return import('./variant-families/component-input-mask.gen.js')
+    case "component/input-otp":
+      return import('./variant-families/component-input-otp.gen.js')
+    case "component/kbd":
+      return import('./variant-families/component-kbd.gen.js')
+    case "component/label":
+      return import('./variant-families/component-label.gen.js')
+    case "component/menubar":
+      return import('./variant-families/component-menubar.gen.js')
+    case "component/popover":
+      return import('./variant-families/component-popover.gen.js')
+    case "component/progress":
+      return import('./variant-families/component-progress.gen.js')
+    case "component/radio-group":
+      return import('./variant-families/component-radio-group.gen.js')
+    case "component/rating":
+      return import('./variant-families/component-rating.gen.js')
+    case "component/resizable":
+      return import('./variant-families/component-resizable.gen.js')
+    case "component/scroll-area":
+      return import('./variant-families/component-scroll-area.gen.js')
+    case "component/select":
+      return import('./variant-families/component-select.gen.js')
+    case "component/separator":
+      return import('./variant-families/component-separator.gen.js')
+    case "component/sheet":
+      return import('./variant-families/component-sheet.gen.js')
+    case "component/skeleton":
+      return import('./variant-families/component-skeleton.gen.js')
+    case "component/slider":
+      return import('./variant-families/component-slider.gen.js')
+    case "component/sonner":
+      return import('./variant-families/component-sonner.gen.js')
+    case "component/spinner":
+      return import('./variant-families/component-spinner.gen.js')
+    case "component/switch":
+      return import('./variant-families/component-switch.gen.js')
+    case "component/table":
+      return import('./variant-families/component-table.gen.js')
+    case "component/tabs":
+      return import('./variant-families/component-tabs.gen.js')
+    case "component/textarea":
+      return import('./variant-families/component-textarea.gen.js')
+    case "component/toggle":
+      return import('./variant-families/component-toggle.gen.js')
+    case "component/toggle-group":
+      return import('./variant-families/component-toggle-group.gen.js')
+    case "component/tooltip":
+      return import('./variant-families/component-tooltip.gen.js')
+    case "component/typography":
+      return import('./variant-families/component-typography.gen.js')
+    case "pattern/autocomplete":
+      return import('./variant-families/pattern-autocomplete.gen.js')
+    case "pattern/breadcrumb":
+      return import('./variant-families/pattern-breadcrumb.gen.js')
+    case "pattern/carousel":
+      return import('./variant-families/pattern-carousel.gen.js')
+    case "pattern/code-block":
+      return import('./variant-families/pattern-code-block.gen.js')
+    case "pattern/combobox":
+      return import('./variant-families/pattern-combobox.gen.js')
+    case "pattern/command":
+      return import('./variant-families/pattern-command.gen.js')
+    case "pattern/date-and-time-picker":
+      return import('./variant-families/pattern-date-and-time-picker.gen.js')
+    case "pattern/form":
+      return import('./variant-families/pattern-form.gen.js')
+    case "pattern/list":
+      return import('./variant-families/pattern-list.gen.js')
+    case "pattern/navigation-menu":
+      return import('./variant-families/pattern-navigation-menu.gen.js')
+    case "pattern/pagination":
+      return import('./variant-families/pattern-pagination.gen.js')
+    case "pattern/phone-input":
+      return import('./variant-families/pattern-phone-input.gen.js')
+    case "pattern/sortable":
+      return import('./variant-families/pattern-sortable.gen.js')
+    case "pattern/stepper":
+      return import('./variant-families/pattern-stepper.gen.js')
+    default:
+      return Promise.reject(new Error(`Unknown variant family ${family}.`))
+  }
+}
+
+export function hasGeneratedVariantFamily(family: string) {
+  switch (family) {
+    case "block/data-table":
+    case "block/kanban":
+    case "component/accordion":
+    case "component/alert":
+    case "component/aspect-ratio":
+    case "component/avatar":
+    case "component/badge":
+    case "component/button":
+    case "component/button-group":
+    case "component/calendar":
+    case "component/card":
+    case "component/checkbox":
+    case "component/collapsible":
+    case "component/context-menu":
+    case "component/dialog":
+    case "component/drawer":
+    case "component/dropdown-menu":
+    case "component/input":
+    case "component/input-mask":
+    case "component/input-otp":
+    case "component/kbd":
+    case "component/label":
+    case "component/menubar":
+    case "component/popover":
+    case "component/progress":
+    case "component/radio-group":
+    case "component/rating":
+    case "component/resizable":
+    case "component/scroll-area":
+    case "component/select":
+    case "component/separator":
+    case "component/sheet":
+    case "component/skeleton":
+    case "component/slider":
+    case "component/sonner":
+    case "component/spinner":
+    case "component/switch":
+    case "component/table":
+    case "component/tabs":
+    case "component/textarea":
+    case "component/toggle":
+    case "component/toggle-group":
+    case "component/tooltip":
+    case "component/typography":
+    case "pattern/autocomplete":
+    case "pattern/breadcrumb":
+    case "pattern/carousel":
+    case "pattern/code-block":
+    case "pattern/combobox":
+    case "pattern/command":
+    case "pattern/date-and-time-picker":
+    case "pattern/form":
+    case "pattern/list":
+    case "pattern/navigation-menu":
+    case "pattern/pagination":
+    case "pattern/phone-input":
+    case "pattern/sortable":
+    case "pattern/stepper":
+      return true
+    default:
+      return false
+  }
+}

@@ -37,7 +37,8 @@ const generatedRoot = 'playground/src/catalog/generated'
 const generatedFamiliesRoot = path.join(generatedRoot, 'variant-families')
 await rm(generatedFamiliesRoot, { recursive: true, force: true })
 await mkdir(generatedFamiliesRoot, { recursive: true })
-const familyLoaderEntries = []
+const familyLoaderCases = []
+const familyPresenceCases = []
 for (const [familyKey, familyItems] of [...familyGroups].sort(([left], [right]) =>
   left.localeCompare(right),
 )) {
@@ -45,22 +46,23 @@ for (const [familyKey, familyItems] of [...familyGroups].sort(([left], [right]) 
   const sourceKind = classification === 'component' ? 'components' : `${classification}s`
   const generatedName = `${classification}-${family}.gen.ts`
   const sourceRoot = `../../../../../registry/variants/source/${sourceKind}/${family}`
-  const loaderEntries = familyItems.map((item) => {
+  const loaderCases = familyItems.map((item) => {
     const itemId = item.meta.canonicalAddress.split('/').at(-1)
     const previewPath = `${sourceRoot}/${itemId}/${itemId}.preview.tsx`
-    return `  ${JSON.stringify(`${item.meta.canonicalAddress}#default`)}: modules[${JSON.stringify(previewPath)}]!,`
+    return `    case ${JSON.stringify(`${item.meta.canonicalAddress}#default`)}:\n      return modules[${JSON.stringify(previewPath)}]!()`
   })
   await writeFile(
     path.join(generatedFamiliesRoot, generatedName),
-    `import type { PreviewModule } from '../../previews.js'\n\nconst modules = import.meta.glob<PreviewModule>(${JSON.stringify(`${sourceRoot}/**/*.preview.tsx`)})\n\nexport const previewLoaders = {\n${loaderEntries.join('\n')}\n} satisfies Record<string, () => Promise<PreviewModule>>\n`,
+    `import type { PreviewModule } from '../../previews.js'\n\nconst modules = import.meta.glob<PreviewModule>(${JSON.stringify(`${sourceRoot}/**/*.preview.tsx`)})\n\nexport function loadPreview(id: string): Promise<PreviewModule> {\n  switch (id) {\n${loaderCases.join('\n')}\n    default:\n      return Promise.reject(new Error(\`Unknown variant preview \${id}.\`))\n  }\n}\n`,
   )
-  familyLoaderEntries.push(
-    `  ${JSON.stringify(familyKey)}: () => import('./variant-families/${generatedName.replace(/\.ts$/u, '.js')}'),`,
+  familyLoaderCases.push(
+    `    case ${JSON.stringify(familyKey)}:\n      return import('./variant-families/${generatedName.replace(/\.ts$/u, '.js')}')`,
   )
+  familyPresenceCases.push(`    case ${JSON.stringify(familyKey)}:`)
 }
 await writeFile(
   path.join(generatedRoot, 'variant-families.gen.ts'),
-  `// Generated from registry/variants/manifests. Do not edit.\nexport const variantFamilyLoaders = {\n${familyLoaderEntries.join('\n')}\n} as const\n`,
+  `// Generated from registry/variants/manifests. Do not edit.\nexport function loadGeneratedVariantFamily(family: string) {\n  switch (family) {\n${familyLoaderCases.join('\n')}\n    default:\n      return Promise.reject(new Error(\`Unknown variant family \${family}.\`))\n  }\n}\n\nexport function hasGeneratedVariantFamily(family: string) {\n  switch (family) {\n${familyPresenceCases.join('\n')}\n      return true\n    default:\n      return false\n  }\n}\n`,
 )
 await writeFile('registry/variants/registry.json', `${JSON.stringify(registry, null, 2)}\n`)
 await writeFile(

@@ -1,7 +1,10 @@
 import type { ComponentType } from 'react'
 
 import coreCatalog from '../../../registry/core-catalog.json'
-import { variantFamilyLoaders } from './generated/variant-families.gen.js'
+import {
+  hasGeneratedVariantFamily,
+  loadGeneratedVariantFamily,
+} from './generated/variant-families.gen.js'
 import { componentSources } from './inventory.js'
 
 declare const __ASTRALE_STUDIO_CATALOG__: boolean
@@ -40,7 +43,7 @@ type CatalogItem = {
 }
 
 type VariantFamilyModule = {
-  previewLoaders: Record<string, () => Promise<PreviewModule>>
+  loadPreview: (id: string) => Promise<PreviewModule>
 }
 
 const runtimeModules = import.meta.glob<PreviewModule>(
@@ -59,17 +62,14 @@ const studioCatalogModules = (
     : {}
 ) as Record<string, CatalogItem[]>
 const studioCatalog = Object.values(studioCatalogModules)[0] ?? []
-const variantFamilyLoaderMap = (__ASTRALE_STUDIO_CATALOG__
-  ? variantFamilyLoaders
-  : {}) as unknown as Record<string, () => Promise<VariantFamilyModule>>
 const variantFamilyModulePromises = new Map<string, Promise<VariantFamilyModule>>()
 
 function loadVariantFamily(family: string) {
   const existing = variantFamilyModulePromises.get(family)
   if (existing) return existing
-  const load = variantFamilyLoaderMap[family]
-  if (!load) return Promise.reject(new Error(`No variant family loader for ${family}.`))
-  const pending = load().catch((error: unknown) => {
+  if (!__ASTRALE_STUDIO_CATALOG__ || !hasGeneratedVariantFamily(family))
+    return Promise.reject(new Error(`No variant family loader for ${family}.`))
+  const pending = loadGeneratedVariantFamily(family).catch((error: unknown) => {
     variantFamilyModulePromises.delete(family)
     throw error
   })
@@ -78,15 +78,13 @@ function loadVariantFamily(family: string) {
 }
 
 export function prefetchPreviewFamily(family: string) {
-  if (!variantFamilyLoaderMap[family]) return Promise.resolve()
+  if (!__ASTRALE_STUDIO_CATALOG__ || !hasGeneratedVariantFamily(family)) return Promise.resolve()
   return loadVariantFamily(family).then(() => undefined)
 }
 
 async function loadVariantPreview(family: string, id: string) {
   const module = await loadVariantFamily(family)
-  const load = module.previewLoaders[id]
-  if (!load) throw new Error(`Variant family ${family} does not own ${id}.`)
-  return load()
+  return module.loadPreview(id)
 }
 
 const registryTitles = new Map([
