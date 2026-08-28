@@ -60,6 +60,15 @@ test('the workspace has one public runtime package with a flat supported API', a
   assert.equal(manifest.publishConfig.registry, 'https://registry.npmjs.org')
   assert.equal(manifest.publishConfig.access, 'public')
   assert.deepEqual(manifest.sideEffects, ['**/*.css'])
+  assert.deepEqual(manifest.files, [
+    'dist',
+    'CHANGELOG.md',
+    'README.md',
+    'LICENSE',
+    'THIRD-PARTY-NOTICES.md',
+  ])
+  assert.equal(manifest.dependencies?.['@babel/parser'], undefined)
+  assert.equal(root.devDependencies?.['@babel/parser'], '8.0.4')
   assert.match(workspace, /^  - 'packages\/\*'$/mu)
   assert.doesNotMatch(workspace, /^  - '(components|constants|preset|styles|ui|utils)'$/mu)
 

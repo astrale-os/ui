@@ -18,6 +18,7 @@ export default defineConfig({
     '**/*.gen.ts',
     '**/*.gen.tsx',
     'registry/public/**',
+    'search/public/**',
     'registry/variants/registry.json',
     'registry/variants/source/**',
     'registry/variants/support/**',

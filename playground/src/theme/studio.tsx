@@ -277,7 +277,7 @@ export function ThemeStudio({
       theme.name === workspace.theme.name &&
       serializeThemeDocument(theme) === serializeThemeDocument(workspace.theme),
   )
-  const installCommand = published
+  const command = published
     ? `astrale ui add theme/${workspace.theme.name}`
     : `astrale ui add ./${workspace.theme.name}.css`
 
@@ -714,7 +714,7 @@ export function ThemeStudio({
               <Field>
                 <FieldLabel>One-command install</FieldLabel>
                 <code className="install-command" data-slot="theme-install-command">
-                  {installCommand}
+                  {command}
                 </code>
                 <FieldDescription>
                   {published
@@ -723,7 +723,7 @@ export function ThemeStudio({
                 </FieldDescription>
               </Field>
               <div className="theme-export-actions">
-                <Button onClick={() => copy(installCommand, 'Install command copied')}>
+                <Button onClick={() => copy(command, 'Install command copied')}>
                   Copy command
                 </Button>
                 <Button variant="outline" onClick={() => copy(workspace.css, 'Theme CSS copied')}>

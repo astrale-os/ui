@@ -53,9 +53,71 @@ jobs:
             ''|*[!0-9]*) echo "workflow dispatch did not return an exact run id" >&2; exit 1 ;;
           esac
           gh run watch "$run_id" --repo "$GITHUB_REPOSITORY" --compact --exit-status
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ matrix.release_pr.headBranchName }}
+          path: ui-release
+          persist-credentials: 'false'
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          repository: astrale-os/cli
+          ref: main
+          path: cli-consumer
+          persist-credentials: 'false'
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2
+        with:
+          bun-version: 1.4.0
+      - uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: 24
+          cache: pnpm
+          cache-dependency-path: |
+            ui-release/pnpm-lock.yaml
+            cli-consumer/pnpm-lock.yaml
+      - name: Install exact release producer and current CLI consumer
+        run: |
+          pnpm --dir ui-release install --frozen-lockfile
+          STANDALONE=true pnpm --dir cli-consumer install --frozen-lockfile
+      - name: Qualify UI release through the current CLI consumer
+        run: pnpm --dir cli-consumer qualification:ui-search "$GITHUB_WORKSPACE/ui-release"
+
+  search-contract:
+    needs: release
+    if: needs.release.outputs.created == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ github.sha }}
+          path: ui-release
+          persist-credentials: 'false'
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          repository: astrale-os/cli
+          ref: main
+          path: cli-consumer
+          persist-credentials: 'false'
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2
+        with:
+          bun-version: 1.4.0
+      - uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: 24
+          cache: pnpm
+          cache-dependency-path: |
+            ui-release/pnpm-lock.yaml
+            cli-consumer/pnpm-lock.yaml
+      - name: Install exact released producer and current CLI consumer
+        run: |
+          pnpm --dir ui-release install --frozen-lockfile
+          STANDALONE=true pnpm --dir cli-consumer install --frozen-lockfile
+      - name: Admit the exact released UI through the current CLI consumer
+        run: pnpm --dir cli-consumer qualification:ui-search "$GITHUB_WORKSPACE/ui-release"
 
   publish:
-    needs: release
+    needs: [release, search-contract]
     if: needs.release.outputs.created == 'true'
     runs-on: ubuntu-latest
     steps:

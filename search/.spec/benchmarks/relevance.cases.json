@@ -1,0 +1,102 @@
+[
+  {
+    "query": "editable payment table with export",
+    "relevant": ["block/data-table/data-table-12", "block/data-table/data-table-13"]
+  },
+  {
+    "query": "payment table column visibility refresh",
+    "relevant": ["block/data-table/data-table-03"]
+  },
+  {
+    "query": "loading button with spinner",
+    "relevant": ["component/button/button-17", "component/button/button-26"]
+  },
+  {
+    "query": "destructive confirmation dialog",
+    "relevant": ["component/dialog/dialog-01", "component/dialog/dialog-03"]
+  },
+  {
+    "query": "email input with accessible label",
+    "relevant": [
+      "pattern/autocomplete/autocomplete-03",
+      "component/input/input-02",
+      "component/input/input-25",
+      "component/label/label-02"
+    ]
+  },
+  {
+    "query": "repository command palette keyboard shortcuts",
+    "relevant": ["pattern/command/command-03"]
+  },
+  { "query": "warm paper theme", "relevant": ["theme/atelier"] },
+  {
+    "query": "multi step questionnaire",
+    "relevant": ["pattern/questionnaire/multi-step"]
+  },
+  {
+    "query": "timezone selector with real timezone data",
+    "relevant": ["pattern/combobox/combobox-07", "component/select/select-26"]
+  },
+  {
+    "query": "country selector with flags",
+    "relevant": ["pattern/combobox/combobox-09", "component/select/select-30"]
+  },
+  {
+    "query": "credit card expiry validation",
+    "relevant": ["component/input-mask/input-mask-04"]
+  },
+  {
+    "query": "otp verification dialog validation",
+    "relevant": ["component/dialog/dialog-12"]
+  },
+  {
+    "query": "code block copy filename tabs line numbers",
+    "relevant": [
+      "pattern/code-block/code-block-02",
+      "pattern/code-block/code-block-03",
+      "pattern/code-block/code-block-04",
+      "pattern/code-block/code-block-05",
+      "pattern/code-block/code-block-06"
+    ]
+  },
+  {
+    "query": "sign in dialog gradient social login",
+    "relevant": ["component/dialog/dialog-14"]
+  },
+  {
+    "query": "inline editable table row selection progress",
+    "relevant": ["block/data-table/data-table-13"]
+  },
+  {
+    "query": "carosel",
+    "relevant": [
+      "pattern/carousel/carousel-01",
+      "pattern/carousel/carousel-03",
+      "pattern/carousel/carousel-04",
+      "pattern/carousel/carousel-05",
+      "pattern/carousel/carousel-06",
+      "pattern/carousel/carousel-08",
+      "pattern/carousel/carousel-11"
+    ]
+  },
+  {
+    "query": "domain revision ready for deployment committed",
+    "relevant": ["@astrale-os/ui/card"]
+  },
+  {
+    "query": "production staging environment selector",
+    "relevant": ["component/combobox", "@astrale-os/ui/select"]
+  },
+  {
+    "query": "theme saved ready to reuse toast",
+    "relevant": ["@astrale-os/ui/toast"]
+  },
+  {
+    "query": "revoke grant changes authority confirmation",
+    "relevant": ["@astrale-os/ui/alert-dialog"]
+  },
+  {
+    "query": "two page pagination ellipsis",
+    "relevant": ["@astrale-os/ui/pagination", "pattern/pagination/pagination-08"]
+  }
+]
