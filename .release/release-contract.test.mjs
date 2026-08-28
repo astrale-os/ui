@@ -53,6 +53,14 @@ test('pins supported CI and release workflow dependencies', async () => {
   )
   assert.match(release, /repository: astrale-os\/cli/u)
   assert.match(release, /ref: main/u)
+  assert.equal(
+    [
+      ...release.matchAll(
+        /uses: pnpm\/action-setup@[0-9a-f]{40}[^\n]*\n\s+with:\s*\n\s+version: 12\.0\.0/gu,
+      ),
+    ].length,
+    2,
+  )
   assert.match(
     release,
     /pnpm --dir cli-consumer qualification:ui-search "\$GITHUB_WORKSPACE\/ui-release"/u,
