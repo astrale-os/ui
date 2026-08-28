@@ -15,7 +15,7 @@ minimumReleaseAgeExclude:
   - '@astrale-os/*'
   - '@astrale-domains/*'
   - '@astrale/*'
-  - '@jsr/astrale__commitlint-config@2.0.5'
+  - '@jsr/astrale__*'
   - 'create-astrale-domain'
 
 # Never install implicitly before `pnpm run` or `pnpm exec`.
