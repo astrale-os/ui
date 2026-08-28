@@ -27,6 +27,7 @@ test('pins supported CI and release workflow dependencies', async () => {
   assert.match(ci, /matrix:\s*\n\s+node-version:\s*\[24, 26\]/u)
   assert.match(ci, /frozen-lockfile: 'true'/u)
   assert.match(ci, /pnpm package:qualify/u)
+  assert.match(ci, /pnpm search:benchmark/u)
   assert.match(ci, /pnpm registry:qualify/u)
   assert.match(ci, /pnpm test:registry-behavior/u)
   assert.match(ci, /pnpm playground:test/u)
@@ -50,6 +51,12 @@ test('pins supported CI and release workflow dependencies', async () => {
     ].length,
     2,
   )
+  assert.match(release, /repository: astrale-os\/cli/u)
+  assert.match(release, /ref: main/u)
+  assert.match(
+    release,
+    /pnpm --dir cli-consumer qualification:ui-search "\$GITHUB_WORKSPACE\/ui-release"/u,
+  )
 })
 
 test('publishes exactly one public npm package from the Release Please commit using OIDC', async () => {
@@ -63,6 +70,13 @@ test('publishes exactly one public npm package from the Release Please commit us
   const releaseManifest = JSON.parse(await readFile('.release-please-manifest.json', 'utf8'))
 
   assert.match(release, /needs\.release\.outputs\.created == 'true'/u)
+  assert.match(release, /search-contract:\s*\n\s+needs: release/u)
+  assert.match(release, /search-contract:[\s\S]*?ref:\s*\$\{\{ github\.sha \}\}/u)
+  assert.match(
+    release,
+    /Admit the exact released UI through the current CLI consumer[\s\S]*?qualification:ui-search/u,
+  )
+  assert.match(release, /publish:\s*\n\s+needs: \[release, search-contract\]/u)
   assert.match(release, /ref:\s*\$\{\{ github\.sha \}\}/u)
   assert.match(release, /PUBLISH_SHA:\s*\$\{\{ github\.sha \}\}/u)
   assert.match(release, /publish_tag="v\$\{publish_version\}"/u)

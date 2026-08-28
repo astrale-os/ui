@@ -47,8 +47,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@astrale-os/ui/card'
 Install consumer-owned compositions without adding them to the runtime package:
 
 ```bash
-astrale ui list chart
-astrale ui list line-basic --json
+astrale ui search "editable chart with export"
+astrale ui search "line chart" --json
 astrale ui add component/chart component/sidebar
 astrale ui add pattern/chart/line-basic block/dashboard/overview
 astrale ui add theme/observatory

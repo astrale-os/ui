@@ -42,7 +42,8 @@ jobs:
       - run: pnpm test:components
       - run: pnpm test:registry-behavior
       - run: pnpm registry:build
-      - run: git diff --exit-code -- registry/registry.json registry/public/r
+      - run: git diff --exit-code -- registry/registry.json registry/public/r search/public
+      - run: pnpm search:benchmark
       - run: pnpm package:qualify
       - run: pnpm registry:qualify
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
