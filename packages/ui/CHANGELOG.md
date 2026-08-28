@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.3.0-beta.13](https://github.com/astrale-os/ui/compare/v0.3.0-beta.12...v0.3.0-beta.13) (2026-08-28)
+
+
+### Features
+
+* add generated UI search artifacts ([#47](https://github.com/astrale-os/ui/issues/47)) ([6b958aa](https://github.com/astrale-os/ui/commit/6b958aab3aa4c943377ffe95ac0d96e3bf94d6f8))
+
+
+### Bug Fixes
+
+* pin release qualification toolchain ([#49](https://github.com/astrale-os/ui/issues/49)) ([e86566b](https://github.com/astrale-os/ui/commit/e86566b5193995d78ac6c7d8e4ba8b1e7a882130))
+
 ## [0.3.0-beta.12](https://github.com/astrale-os/ui/compare/v0.3.0-beta.11...v0.3.0-beta.12) (2026-08-27)
 
 
