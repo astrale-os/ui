@@ -84,10 +84,7 @@ test('the workspace separates its public runtime package from its control-plane 
     const candidate = JSON.parse(await readFile(file, 'utf8'))
     if (candidate.private !== true) publishable.push({ file, name: candidate.name })
   }
-  assert.deepEqual(publishable, [
-    { file: 'domain/package.json', name: '@astrale-domains/ui' },
-    { file: 'packages/ui/package.json', name: '@astrale-os/ui' },
-  ])
+  assert.deepEqual(publishable, [{ file: 'packages/ui/package.json', name: '@astrale-os/ui' }])
 
   assert.deepEqual(Object.keys(manifest.imports).toSorted(), [
     '#astrale-ui/*',
