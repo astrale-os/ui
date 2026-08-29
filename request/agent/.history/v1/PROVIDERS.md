@@ -59,12 +59,11 @@ Claude Code, Codex, Cursor, or another CLI can be run inside Actions, but that m
 execution, credentials, sandboxing, lifecycle, and publishing. Such wrappers are self-hosted
 adapters, not managed-provider APIs.
 
-This route is now the selected first production adapter because the available direct-provider
+This route is the first live-qualified production adapter because the available direct-provider
 accounts could not create work. GitHub hosts and exposes the workflow run, Claude Code supplies the
 agent harness, and Microsoft Foundry supplies the model. GitHub API `2026-03-10` returns the exact
-workflow-run id from dispatch, avoiding start-time list/poll correlation. The immutable Claude Code
-base action is used instead of the full GitHub integration so the model step never receives the
-later PR-publishing credential.
+workflow-run id from dispatch, avoiding start-time list/poll correlation. The exact locked Claude
+Code CLI runs directly so the model step never receives the later PR-publishing credential.
 
 Authoritative references:
 
@@ -72,8 +71,6 @@ Authoritative references:
 - GitHub workflow runs: <https://docs.github.com/en/rest/actions/workflow-runs>
 - Microsoft Foundry Claude Code configuration:
   <https://learn.microsoft.com/en-us/azure/foundry/foundry-models/how-to/configure-claude-code>
-- Claude Code base action:
-  <https://github.com/anthropics/claude-code-action/tree/main/base-action>
 
 ## What the provider matrix proves
 

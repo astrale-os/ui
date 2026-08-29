@@ -21,7 +21,7 @@ used to infer implementation or ratification.
 | RQ-D12 | candidate | Screenshots are mandatory evidence; live preview uses a replaceable GitHub deployment URL adapter | Preview adapter selection pending |
 | RQ-D13 | candidate | Candidate execution uses unprivileged `pull_request`; a fixed base publisher may transfer only admitted static bytes without execution | Adversarial workflow POC pending |
 | RQ-D14 | candidate | Request PRs never publish; existing release owns publication | Current workflow census and end-to-end proof pending |
-| RQ-D15 | accepted | Managed execution uses the narrow `request/agent` dispatch/observe/PR contract; provider selection is injected | Three adapters pass one shared local contract; selected live delivery remains a separate gate |
+| RQ-D15 | accepted | Managed execution uses the narrow `request/agent` dispatch/observe/PR contract; provider selection is injected | Three adapters pass one shared contract; selected Actions/Claude Code/Foundry delivery completed live |
 | RQ-D16 | accepted | GitHub request/PR is portable continuity; every review revision is a fresh normalized run | PR-targeted revision and provider replacement rules pass deterministic proof |
 | RQ-D17 | accepted | A possibly accepted dispatch cannot retry/fail over; one branch has one non-terminal writer | Unknown-outcome, digest, timeout, canonical concurrency, and reconciliation proofs pass |
 
@@ -34,10 +34,10 @@ used to infer implementation or ratification.
 | RQ-Q03 | open | Which static host provides the smallest isolated, expiring PR preview adapter for this public repo? | Two-adapter operational comparison and one live POC |
 | RQ-Q04 | open | Where should required MIT notices live so installed source and npm/package output both comply? | Schema and package/install fixture proof |
 | RQ-Q05 | open | Can the checker mechanically distinguish imported source refreshes from ordinary owned edits without false positives? | Merge-base fixture matrix across add/update/delete/refactor |
-| RQ-Q06 | open | What narrow credential can the agent use to push/open a PR without ever executing candidate code in that trust zone? | Agent sandbox/publisher threat-model POC |
+| RQ-Q06 | accepted | What narrow credential can the agent use to push/open a PR without ever executing candidate code in that trust zone? | An environment-scoped publishing token exists only in a fresh fixed publisher job after credential-free qualification; live PR #59 proves the separation |
 | RQ-Q07 | open | Should runtime-package additions be allowed in V1 or require a separate maintainer-approved request state? | Package-size/dependency and ownership review |
 | RQ-Q08 | open | Is exact MIT-only automatic admission too narrow for the first real request? | Real candidate corpus; policy remains narrow until evidence says otherwise |
-| RQ-Q09 | accepted | Which managed route qualifies production first? | GitHub Actions + Claude Code + Azure Foundry selected; workflow-to-PR POC remains before enablement |
+| RQ-Q09 | accepted | Which managed route qualifies production first? | GitHub Actions + Claude Code + Azure Foundry completed issue #54 through worker run `33248754603`, PR #59, and ordinary PR CI |
 | RQ-Q10 | accepted | Can GitHub request metadata persist/recover an attempt without another store? | Closed trusted comment plus canonical workflow concurrency; cross-process CAS is explicitly not claimed |
 
 ## Evidence
@@ -56,8 +56,8 @@ used to infer implementation or ratification.
 | 2026-08-29 | local implementation | Managed-agent shared contract, provider matrices, request dispatcher/store/schema/workflow, current primary provider docs, and two-agent adversarial review | All Critical/High local findings corrected; live GitHub creation still HTTP 412 and Cursor live proof remains unavailable |
 | 2026-08-29 | CLI isolated worktree | Unicode 512/513 boundary, safe macOS/Linux/Windows launcher argv, browser fallback, direct action, full Commander parsing, exact help surface | 34 passed, one unrelated workspace-mirror test skipped; no GitHub SDK/token/package dependency added |
 | 2026-08-29 | UI branch `feat/managed-ui-request-agent` at base `87072ac580c26ff7825af345816ec92f0bfc9ef1` | Full repository qualification | Exact final `pnpm check`, `pnpm test:security`, and `git diff --check` pass with 50 request tests, catalog 1014/1015 closure, registry 902/58 closure, and unchanged package/playground/search gates |
-| 2026-08-29 | live credential recheck | Provider credential names and GitHub CLI authentication only; no secret values read | No provider variable is available and `gh auth status` reports the active token invalid; live PR delivery remains externally blocked |
-| 2026-08-29 | Azure and selected worker | Redacted production Luna/Opus calls, live Claude Code Foundry call, current GitHub workflow API, pinned Claude base action, 89 request tests | Inference and agent transport are live; neutral workflow adapter and isolated proposal/qualification/publication jobs are locally green; default-branch PR delivery remains |
+| 2026-08-29 | Azure and selected worker | Redacted production Luna/Opus calls, live Claude Code Foundry call, current GitHub workflow API, exact locked Claude Code CLI, 90 request tests | Inference, agent transport, neutral adapter, and isolated proposal/qualification/publication jobs are green without exposing secret values |
+| 2026-08-29 | live request issue #54 | Coordinator run `33248736805`; worker run `33248754603`; disposable PR #59; native CI run `33248841797` | Default-branch dispatch recovered the exact durable run, created one intended-repository PR, and entered ordinary CI; every check passed, then the evidence-only PR and branch were deliberately closed rather than merged |
 
 ## Review findings
 

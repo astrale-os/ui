@@ -18,11 +18,10 @@ on Microsoft Foundry. All three pass the same deterministic restart, admission, 
 cancellation, and reconciliation contract; provider-specific state/failure matrices are qualified
 separately.
 
-The Azure deployment and Claude Code Foundry transport have been exercised live. The complete
-Actions-worker-to-PR journey remains a production-enable gate until the worker workflow is present
-on the default branch and completes one disposable request. GitHub Copilot task creation remains
-unqualified because the configured account/repository returned HTTP 412, and no Cursor credential
-is configured.
+The Azure deployment, Claude Code Foundry transport, and complete Actions-worker-to-PR journey have
+been exercised live from the default branch through one disposable request and ordinary PR CI.
+GitHub Copilot task creation remains unqualified because the configured account/repository returned
+HTTP 412, and no Cursor credential is configured.
 
 Provider models, chats, sessions, tools, MCP, environments, secrets, streams, cost units, and raw
 payloads remain private. The only operations are dispatch, observe, reconcile an uncertain start,
@@ -38,9 +37,9 @@ never claims remote cancellation.
 - `cursor` targets Cloud Agents API V1 with Basic API-key authentication, derives one deterministic
   `bc-<uuid>` agent identity per attempt, validates the exact repository or PR target, and confirms
   or retains requested cancellation by observing the run.
-- `github-actions-claude-code` pins GitHub API `2026-03-10` and an immutable Claude Code base-action
-  revision. GitHub returns the exact workflow-run id at dispatch; read-only reconciliation uses the
-  exact attempt `display_title`. The worker runs Claude Code on Azure Foundry without a GitHub write
+- `github-actions-claude-code` pins GitHub API `2026-03-10` and the exact Claude Code CLI package.
+  GitHub returns the exact workflow-run id at dispatch; read-only reconciliation uses the exact
+  attempt `display_title`. The worker runs Claude Code on Azure Foundry without a GitHub write
   credential, transports only a bounded inert patch into a clean qualification job, and applies the
   qualified patch again in a fresh publisher job. The publishing token never shares a job or
   mutable workspace with agent or candidate execution.

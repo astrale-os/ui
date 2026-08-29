@@ -14,14 +14,14 @@ Status values: `candidate`, `accepted`, `rejected`, `blocked`.
 | MA-D06 | accepted | One non-terminal writer per request/PR branch | Canonical workflow concurrency is the explicit production serialization owner |
 | MA-D07 | accepted | Successful V1 runs return exactly one intended-repository PR | Both mappings reject missing, multiple, and wrong-repository proposals |
 | MA-D08 | accepted | Cancellation is total but its guarantee is explicit | None/requested/confirmed/terminal outcomes are represented without casts |
-| MA-D09 | accepted | One selected adapter must complete live before enablement; a second live provider is continuing portability evidence | Three structurally different adapters pass one shared suite; Actions/Claude Code/Foundry is selected for live qualification |
+| MA-D09 | accepted | One selected adapter must complete live before enablement; a second live provider is continuing portability evidence | Three structurally different adapters pass one shared suite; Actions/Claude Code/Foundry completed live qualification |
 | MA-D10 | accepted | Persist attempt/run binding in GitHub request metadata before adding infrastructure | Closed record schema, trusted actor, restart, duplicate/malformed/bounded scans proven |
 
 ## Open questions
 
 | ID | Status | Question | Closure evidence |
 | --- | --- | --- | --- |
-| MA-Q01 | accepted | Which provider/account qualifies production first? | GitHub Actions worker + Claude Code + Azure Foundry selected; exact workflow-to-PR POC remains in the production-enable gate |
+| MA-Q01 | accepted | Which provider/account qualifies production first? | GitHub Actions worker + Claude Code + Azure Foundry completed issue #54 through worker run `33248754603` and PR #59 |
 | MA-Q02 | accepted | Is GitHub issue metadata sufficient for attempt persistence and restart recovery? | GitHub comment record plus canonical Actions concurrency; no false cross-process CAS claim |
 | MA-Q03 | accepted | What objective, identifier, message, and polling bounds belong in V1? | Durable limits, schema, byte-bound and timeout tests |
 | MA-Q04 | accepted | Which provider errors prove pre-accept failure versus unknown acceptance? | HTTP/transport/timeout matrices fail closed; dispatch ambiguity remains unsafe |
@@ -38,7 +38,7 @@ Status values: `candidate`, `accepted`, `rejected`, `blocked`.
 | MA-E03 | Cursor Cloud Agents V1 | Beta agent/run API with stream, cancellation, artifacts, existing PR, automatic PR | Rich candidate; provider options remain private |
 | MA-E04 | Devin V3 | Organization/enterprise sessions, messages, statuses, structured output, PR list | Direct candidate; access/cost proof pending |
 | MA-E05 | Codex SDK / Cloud | SDK is local programmatic control; no equivalent official managed coding-task REST control plane established | Self-hosted execution is a different adapter class, not V1 priority |
-| MA-E06 | GitHub Actions + Claude Code + Azure Foundry | Current GitHub dispatch returns an exact run id; pinned Claude Code base action supports Foundry; production Azure Luna/Opus and Claude Code transport respond live | Selected V1 route; separate post-agent credential owns PR publication |
+| MA-E06 | GitHub Actions + Claude Code + Azure Foundry | Current GitHub dispatch returns an exact run id; exact locked Claude Code CLI supports Foundry; production Azure Luna/Opus, Claude Code transport, and workflow-to-PR delivery respond live | Selected V1 route; separate post-agent credential owns PR publication |
 
 Exact references and caveats are retained in [PROVIDERS.md](./PROVIDERS.md).
 
@@ -55,7 +55,8 @@ Exact references and caveats are retained in [PROVIDERS.md](./PROVIDERS.md).
 | 2026-08-29 | UI branch `feat/managed-ui-request-agent` at base `87072ac580c26ff7825af345816ec92f0bfc9ef1` | `pnpm check`; `pnpm test:security`; `git diff --check` | Exact final tree passes build, format, lint, workspace typecheck, 41 repository contracts, playground unit, search, 50 request tests, catalog/registry/playground closure, security policy, and whitespace proof |
 | 2026-08-29 | live credential recheck | Environment variable-name census; `gh auth status` | No `CURSOR_API_KEY`, `COPILOT_AGENT_TOKEN`, `GITHUB_TOKEN`, or `GH_TOKEN` is present; the configured `bdjafer` GitHub token reports invalid, so no further remote write attempt is authorized or possible |
 | 2026-08-29 | Azure production deployment | Redacted direct calls through `domains/ai-gateway/.env.prod`; Claude Code `2.1.223` with Foundry resource authentication | `gpt-5.6-luna` returned `AZURE_LUNA_OK`, `claude-opus-5` returned `AZURE_OPUS_OK`, and Claude Code returned `CLAUDE_CODE_FOUNDRY_OK`; no secret value entered output or repository state |
-| 2026-08-29 | local Actions/Claude Code adapter | GitHub API `2026-03-10`, immutable base-action `a874e9ecd7bb36efdad65429c6b35815f5a08f10`, `pnpm check`, `pnpm test:security`, `git diff --check` | Three adapters and 89 request tests pass; reruns, forged reconciliation, failure artifacts, branch poisoning, revision freshness, state/failure matrices, dispatch ambiguity, and three-job credential isolation are covered; live workflow-to-PR proof remains |
+| 2026-08-29 | local Actions/Claude Code adapter | GitHub API `2026-03-10`, exact locked `@anthropic-ai/claude-code@2.1.223`, `pnpm check`, `pnpm test:security`, `git diff --check` | Three adapters and 90 request tests pass; reruns, forged reconciliation, failure artifacts, branch poisoning, revision freshness, state/failure matrices, dispatch ambiguity, and three-job credential isolation are covered |
+| 2026-08-29 | live request issue #54 | Coordinator run `33248736805`; worker run `33248754603`; disposable PR #59; native CI run `33248841797` | Default-branch dispatch persisted and recovered the exact run, the three isolated jobs created one intended-repository PR, and every ordinary PR check passed; the evidence-only PR and branch were then deliberately closed |
 
 ## Review ledger
 
@@ -65,7 +66,7 @@ Exact references and caveats are retained in [PROVIDERS.md](./PROVIDERS.md).
 | API depth review | accepted | Every public field must affect a caller journey and have consumer/evidence/qualification |
 | State review | accepted | Complete transitions, waiting distinctions, terminal monotonicity, unknown-state handling |
 | Security review | accepted | Credentials, least privilege, prompt/source trust, one-writer and unknown-outcome laws |
-| Provider review | candidate | Three exact fixture mappings pass one shared contract; selected Actions/Claude Code/Foundry workflow-to-PR delivery remains required |
+| Provider review | accepted | Three exact fixture mappings pass one shared contract; selected Actions/Claude Code/Foundry workflow-to-PR delivery completed live |
 | Product review | accepted | Existing request, CI, preview, review, and publication gates remain owners |
 
 ## Review findings
