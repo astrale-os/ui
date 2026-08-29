@@ -180,7 +180,9 @@ jobs:
           node-version: 24
           frozen-lockfile: 'true'
       - name: Regenerate repository-owned derived artifacts
-        run: pnpm registry:build
+        run: |
+          pnpm registry:build
+          pnpm format
       - name: Qualify the candidate without publication authority
         run: pnpm check
       - name: Encode the qualified candidate as inert patch evidence
