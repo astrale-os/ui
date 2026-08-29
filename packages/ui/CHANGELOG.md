@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.3.0-beta.16](https://github.com/astrale-os/ui/compare/v0.3.0-beta.15...v0.3.0-beta.16) (2026-08-29)
+
+
+### Features
+
+* **domain:** own the UI control plane ([#77](https://github.com/astrale-os/ui/issues/77)) ([598e0b6](https://github.com/astrale-os/ui/commit/598e0b6c9cad0fb746628794723fe4e4c08c0859))
+
+
+### Bug Fixes
+
+* **domain:** keep the control plane private ([#81](https://github.com/astrale-os/ui/issues/81)) ([227497b](https://github.com/astrale-os/ui/commit/227497b797ee38195effd4222154c10e313100b0))
+
 ## [0.3.0-beta.15](https://github.com/astrale-os/ui/compare/v0.3.0-beta.14...v0.3.0-beta.15) (2026-08-29)
 
 
