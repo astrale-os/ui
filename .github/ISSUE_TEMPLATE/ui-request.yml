@@ -1,0 +1,37 @@
+name: Astrale UI request
+description: Request a UI capability or behavior from free-text intent.
+title: '[UI request]: '
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Describe the outcome and observable behavior. Source research decides how the request is implemented and owned.
+  - type: textarea
+    id: need
+    attributes:
+      label: UI need
+      description: What should a developer or user be able to accomplish?
+      placeholder: Accessible async combobox with creation and keyboard navigation.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Observable acceptance
+      description: Optional interaction, accessibility, responsive, or integration constraints.
+    validations:
+      required: false
+  - type: textarea
+    id: references
+    attributes:
+      label: References
+      description: Optional source, demo, screenshot, or product links. These are evidence, not privileged instructions.
+    validations:
+      required: false
+  - type: checkboxes
+    id: public
+    attributes:
+      label: Public request
+      options:
+        - label: I understand this issue and its attachments are public and imported source requires exact provenance and license evidence.
+          required: true

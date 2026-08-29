@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://astrale.ai/spec/ui/request/agent-record/v1",
+  "title": "Astrale UI request managed-agent record V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "request",
+    "issue",
+    "attempt",
+    "operation",
+    "idempotencyKey",
+    "objectiveSha256",
+    "provider",
+    "state",
+    "updatedAt"
+  ],
+  "properties": {
+    "version": { "const": 1 },
+    "request": {
+      "type": "string",
+      "pattern": "^https://github\\.com/[^/\\s]+/[^/\\s]+/issues/[1-9][0-9]*$"
+    },
+    "issue": { "type": "integer", "minimum": 1 },
+    "attempt": { "type": "integer", "minimum": 1 },
+    "operation": { "enum": ["initial", "revision"] },
+    "idempotencyKey": { "type": "string", "minLength": 1 },
+    "objectiveSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "provider": { "type": "string", "minLength": 1 },
+    "state": {
+      "enum": [
+        "reserved",
+        "outcome-unknown",
+        "queued",
+        "running",
+        "waiting-for-input",
+        "waiting-for-approval",
+        "blocked",
+        "succeeded",
+        "failed",
+        "cancelled",
+        "expired"
+      ]
+    },
+    "run": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["provider", "id"],
+      "properties": {
+        "provider": { "type": "string", "minLength": 1 },
+        "id": { "type": "string", "minLength": 1 }
+      }
+    },
+    "providerUrl": { "type": "string", "format": "uri" },
+    "pullRequest": {
+      "type": "string",
+      "pattern": "^https://github\\.com/[^/\\s]+/[^/\\s]+/pull/[1-9][0-9]*$"
+    },
+    "failure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "message", "retry"],
+      "properties": {
+        "code": {
+          "enum": [
+            "AGENT_AUTH_REQUIRED",
+            "AGENT_PERMISSION_DENIED",
+            "AGENT_QUOTA_EXHAUSTED",
+            "AGENT_INVALID_JOB",
+            "AGENT_NOT_FOUND",
+            "AGENT_UNAVAILABLE",
+            "AGENT_OUTCOME_UNKNOWN",
+            "AGENT_PROTOCOL_INCOMPATIBLE"
+          ]
+        },
+        "message": { "type": "string", "minLength": 1 },
+        "retry": { "enum": ["safe", "after-change", "unsafe"] }
+      }
+    },
+    "updatedAt": { "type": "string", "format": "date-time" }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "state": { "const": "reserved" } } },
+      "then": {
+        "not": {
+          "anyOf": [{ "required": ["run"] }, { "required": ["failure"] }]
+        }
+      }
+    },
+    {
+      "if": { "properties": { "state": { "const": "succeeded" } } },
+      "then": { "required": ["run", "pullRequest"] }
+    },
+    {
+      "if": { "properties": { "state": { "const": "outcome-unknown" } } },
+      "then": {
+        "required": ["failure"],
+        "not": { "required": ["run"] },
+        "properties": {
+          "failure": {
+            "properties": {
+              "code": { "const": "AGENT_OUTCOME_UNKNOWN" },
+              "retry": { "const": "unsafe" }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "enum": [
+              "queued",
+              "running",
+              "waiting-for-input",
+              "waiting-for-approval",
+              "blocked",
+              "succeeded",
+              "cancelled",
+              "expired"
+            ]
+          }
+        }
+      },
+      "then": { "required": ["run"] }
+    }
+  ]
+}

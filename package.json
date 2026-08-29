@@ -34,6 +34,8 @@
     "search:test": "node --test search/search.test.mjs && tsc --noEmit --strict --skipLibCheck --module NodeNext --moduleResolution NodeNext search/.spec/api.d.ts search/.spec/internal.d.ts search/.spec/limits.ts search/.spec/packages/babel-parser.ts",
     "search:check": "node search/generate.mjs --check && pnpm search:test",
     "search:benchmark": "node --expose-gc search/benchmark.mjs",
+    "request:check": "node --test request/agent/*.test.mjs request/agent/adapters/*.test.mjs request/*.test.mjs && tsc --noEmit --strict --skipLibCheck --target ES2022 --module NodeNext --moduleResolution NodeNext request/.spec/api.d.ts request/.spec/limits.ts request/.spec/laws.ts request/.spec/states/request.ts request/agent/.spec/api.d.ts request/agent/.spec/capabilities.ts request/agent/.spec/laws.ts request/agent/.spec/limits.ts request/agent/.spec/states/run.ts request/agent/.spec/examples/dispatch.ts",
+    "request:run": "node request/run.mjs",
     "studio:registry:build": "pnpm studio:registry && pnpm registry:build && node scripts/registry-variants/check-registry-build.mjs",
     "studio:typecheck": "pnpm registry:typecheck && pnpm playground:typecheck",
     "studio:typecheck:non-drawer": "pnpm registry:typecheck && pnpm playground:typecheck",
@@ -52,7 +54,7 @@
     "playground:test:production": "pnpm --filter @astrale-os/ui-playground build:public && node scripts/verify-playground-chunks.mjs --public && pnpm --filter @astrale-os/ui-playground test:production",
     "package:qualify": "node scripts/qualify-package.mjs",
     "qualify:publication": "node scripts/qualify-publication.mjs",
-    "check": "pnpm build && pnpm format:check && pnpm lint && pnpm typecheck && pnpm test:contracts && pnpm test:playground-unit && pnpm search:check && pnpm catalog:check && pnpm registry:check && pnpm playground:typecheck",
+    "check": "pnpm build && pnpm format:check && pnpm lint && pnpm typecheck && pnpm test:contracts && pnpm test:playground-unit && pnpm search:check && pnpm request:check && pnpm catalog:check && pnpm registry:check && pnpm playground:typecheck",
     "qualify": "pnpm check && pnpm test:components && pnpm test:registry-behavior && pnpm test:security && pnpm build && pnpm registry:build && pnpm package:qualify && pnpm registry:qualify && pnpm playground:build && pnpm playground:test && pnpm playground:test:production",
     "prepare": "husky"
   },
@@ -62,11 +64,13 @@
     "@babel/parser": "8.0.4",
     "@commitlint/cli": "21.2.2",
     "@commitlint/config-conventional": "21.2.2",
+    "ajv": "8.20.0",
     "husky": "~9.1.7",
     "lint-staged": "17.3.0",
     "oxfmt": "0.63.0",
     "oxlint": "1.78.0",
-    "typescript": "7.0.2"
+    "typescript": "7.0.2",
+    "yaml": "2.9.0"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
