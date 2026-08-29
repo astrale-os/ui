@@ -4507,6 +4507,14 @@
     "variantCount": 10
   },
   {
+    "address": "component/status-heatmap",
+    "title": "Component · status heatmap",
+    "classification": "component",
+    "family": "status-heatmap",
+    "source": "@heatmap/status-heatmap",
+    "variantCount": 1
+  },
+  {
     "address": "component/switch/switch-01",
     "title": "Switch 1",
     "classification": "component",

@@ -391,6 +391,28 @@
         "upstreamDigest": "sha256:0c729f9f1ada0b0bedd9296710cc257dc43559fa6b8cc40f010d129e8ff85fdd",
         "adaptation": "imports-only"
       }
+    },
+    {
+      "name": "component-status-heatmap",
+      "type": "registry:component",
+      "title": "Component · status heatmap",
+      "description": "Exact @heatmap/status-heatmap source with import-only Astrale adaptation.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "date-fns@^4.4.0"],
+      "files": [
+        {
+          "path": "status-heatmap/status-heatmap.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/component/status-heatmap.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/status-heatmap",
+        "ownership": "consumer-source",
+        "provider": "@heatmap",
+        "upstreamAddress": "@heatmap/status-heatmap",
+        "upstreamDigest": "sha256:1bbb1e191988f48a63a290ad149f3c1d744a36ef1305c875f89fc347aa26ed45",
+        "adaptation": "imports-only"
+      }
     }
   ]
 }
