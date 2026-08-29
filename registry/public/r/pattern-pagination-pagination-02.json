@@ -12,7 +12,7 @@
       "path": "source/patterns/pagination/pagination-02/pagination-02.tsx",
       "content": "import { Pagination, PaginationContent, PaginationItem, PaginationLink } from '@astrale-os/ui/pagination'\nimport { ChevronLeftIcon, ChevronRightIcon } from \"lucide-react\"\n\nconst PaginationWithIconDemo = () => {\n  return (\n    <Pagination>\n      <PaginationContent>\n        <PaginationItem>\n          <PaginationLink href='#' aria-label='Go to previous page' size='icon'>\n            <ChevronLeftIcon\n            />\n          </PaginationLink>\n        </PaginationItem>\n        <PaginationItem>\n          <PaginationLink href='#'>1</PaginationLink>\n        </PaginationItem>\n        <PaginationItem>\n          <PaginationLink href='#' isActive>\n            2\n          </PaginationLink>\n        </PaginationItem>\n        <PaginationItem>\n          <PaginationLink href='#'>3</PaginationLink>\n        </PaginationItem>\n        <PaginationItem>\n          <PaginationLink href='#' aria-label='Go to next page' size='icon'>\n            <ChevronRightIcon\n            />\n          </PaginationLink>\n        </PaginationItem>\n      </PaginationContent>\n    </Pagination>\n  )\n}\n\nexport default PaginationWithIconDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/pattern/pagination/pagination-02.tsx"
+      "target": "components/astrale/components/pagination/pagination-02.tsx"
     }
   ],
   "meta": {

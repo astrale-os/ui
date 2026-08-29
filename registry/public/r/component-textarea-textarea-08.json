@@ -12,7 +12,7 @@
       "path": "source/components/textarea/textarea-08/textarea-08.tsx",
       "content": "import { useId } from 'react'\n\nimport { Label } from '@astrale-os/ui/label'\nimport { Textarea } from '@astrale-os/ui/textarea'\n\nconst TextareaWithColoredBorderDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>Textarea with colored border and ring</Label>\n      <Textarea\n        placeholder='Type your feedback here'\n        id={id}\n        className='focus-visible:border-indigo-500 focus-visible:ring-indigo-500/20 dark:focus-visible:ring-indigo-500/40'\n      />\n    </div>\n  )\n}\n\nexport default TextareaWithColoredBorderDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/textarea/textarea-08.tsx"
+      "target": "components/astrale/components/textarea/textarea-08.tsx"
     }
   ],
   "meta": {

@@ -13,7 +13,7 @@
       "path": "source/components/button/button-51/button-51.tsx",
       "content": "import { PrimaryFlowButton } from '@/components/ui/flow-button'\n\nconst PrimaryFlowButtonDemo = () => {\n  return <PrimaryFlowButton>Flow Button</PrimaryFlowButton>\n}\n\nexport default PrimaryFlowButtonDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/button/button-51.tsx"
+      "target": "components/astrale/components/button/button-51.tsx"
     },
     {
       "path": "source/components/button/button-51/support/components/ui/flow-button.tsx",

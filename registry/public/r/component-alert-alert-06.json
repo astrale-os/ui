@@ -12,7 +12,7 @@
       "path": "source/components/alert/alert-06/alert-06.tsx",
       "content": "import { Alert, AlertTitle } from '@astrale-os/ui/alert'\nimport { Avatar, AvatarFallback } from '@astrale-os/ui/avatar'\nimport { FileWarningIcon } from \"lucide-react\"\n\nconst AlertFocusedIconDemo = () => {\n  return (\n    <Alert className='grid-cols-[auto_1fr] items-center gap-x-2'>\n      <Avatar size='sm' className='row-span-1 rounded-sm'>\n        <AvatarFallback className='bg-destructive dark:bg-destructive/60 rounded-sm text-white'>\n          <FileWarningIcon className='size-3.5' />\n        </AvatarFallback>\n      </Avatar>\n      <AlertTitle>This file contains virus!</AlertTitle>\n    </Alert>\n  )\n}\n\nexport default AlertFocusedIconDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/alert/alert-06.tsx"
+      "target": "components/astrale/components/alert/alert-06.tsx"
     }
   ],
   "meta": {

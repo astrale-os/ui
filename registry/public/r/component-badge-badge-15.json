@@ -11,7 +11,7 @@
       "path": "source/components/badge/badge-15/badge-15.tsx",
       "content": "import { Badge } from '@astrale-os/ui/badge'\n\nconst BadgeGradientOutlineDemo = () => {\n  return (\n    <div className='flex items-center justify-center rounded-full bg-linear-to-r from-indigo-500 to-pink-500 p-0.5'>\n      <Badge className='bg-background text-foreground hover:bg-background border-none'>Gradient Outline</Badge>\n    </div>\n  )\n}\n\nexport default BadgeGradientOutlineDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/badge/badge-15.tsx"
+      "target": "components/astrale/components/badge/badge-15.tsx"
     }
   ],
   "meta": {

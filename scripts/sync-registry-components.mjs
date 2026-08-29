@@ -16,6 +16,19 @@ const versions = {
   ...runtimePackage.dependencies,
   ...registryPackage.dependencies,
 }
+const currentRegistry = JSON.parse(await readFile('registry/components/registry.json', 'utf8'))
+const retainedItems = currentRegistry.items
+  .filter((item) => item.meta?.provider !== '@shadcn')
+  .map((item) => ({
+    ...item,
+    files: item.files.map((file) => ({
+      ...file,
+      target: file.target.replace(
+        /^components\/astrale\/component\//u,
+        'components/astrale/components/',
+      ),
+    })),
+  }))
 
 function packageName(specifier) {
   if (specifier.startsWith('@')) return specifier.split('/').slice(0, 2).join('/')
@@ -55,15 +68,15 @@ for (const component of provenance.components.filter(
       path: component.implementation.replace(/^registry\/components\//u, ''),
       type: 'registry:component',
       target: nested
-        ? `components/astrale/component/${name}/${name}.tsx`
-        : `components/astrale/component/${name}.tsx`,
+        ? `components/astrale/components/${name}/${name}.tsx`
+        : `components/astrale/components/${name}.tsx`,
     },
   ]
   if (name === 'sidebar') {
     files.push({
       path: 'sidebar/use-mobile.ts',
       type: 'registry:hook',
-      target: 'components/astrale/component/sidebar/use-mobile.ts',
+      target: 'components/astrale/components/sidebar/use-mobile.ts',
     })
   }
   items.push({
@@ -85,6 +98,9 @@ for (const component of provenance.components.filter(
 }
 
 assert.equal(items.length, 12)
+const registryItems = [...items, ...retainedItems].sort((left, right) =>
+  left.meta.canonicalAddress.localeCompare(right.meta.canonicalAddress),
+)
 await writeFile(
   'registry/components/registry.json',
   `${JSON.stringify(
@@ -92,7 +108,7 @@ await writeFile(
       $schema: 'https://ui.shadcn.com/schema/registry.json',
       name: 'astrale-components',
       homepage: 'https://github.com/astrale-os/ui',
-      items,
+      items: registryItems,
     },
     null,
     2,

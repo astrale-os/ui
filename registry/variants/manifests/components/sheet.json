@@ -13,7 +13,7 @@
         {
           "path": "sheet-01.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/sheet/sheet-01.tsx"
+          "target": "components/astrale/components/sheet/sheet-01.tsx"
         }
       ],
       "meta": {
@@ -33,7 +33,7 @@
         {
           "path": "sheet-02.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/sheet/sheet-02.tsx"
+          "target": "components/astrale/components/sheet/sheet-02.tsx"
         }
       ],
       "meta": {
@@ -57,7 +57,7 @@
         {
           "path": "sheet-03.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/sheet/sheet-03.tsx"
+          "target": "components/astrale/components/sheet/sheet-03.tsx"
         }
       ],
       "meta": {
@@ -77,7 +77,7 @@
         {
           "path": "sheet-04.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/sheet/sheet-04.tsx"
+          "target": "components/astrale/components/sheet/sheet-04.tsx"
         }
       ],
       "meta": {
@@ -104,7 +104,7 @@
         {
           "path": "sheet-05.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/sheet/sheet-05.tsx"
+          "target": "components/astrale/components/sheet/sheet-05.tsx"
         }
       ],
       "meta": {
@@ -124,7 +124,7 @@
         {
           "path": "sheet-06.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/sheet/sheet-06.tsx"
+          "target": "components/astrale/components/sheet/sheet-06.tsx"
         }
       ],
       "meta": {
@@ -149,7 +149,7 @@
         {
           "path": "sheet-07.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/sheet/sheet-07.tsx"
+          "target": "components/astrale/components/sheet/sheet-07.tsx"
         }
       ],
       "meta": {

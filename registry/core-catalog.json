@@ -6769,87 +6769,10 @@
     "variantCount": 2
   },
   {
-    "address": "theme/art-deco",
-    "title": "Theme · Art Deco",
-    "classification": "theme",
-    "family": "art-deco",
-    "variantCount": 1
-  },
-  {
-    "address": "theme/atelier",
-    "title": "Theme · Atelier",
-    "classification": "theme",
-    "family": "atelier",
-    "variantCount": 1
-  },
-  {
-    "address": "theme/claude",
-    "title": "Theme · Claude",
-    "classification": "theme",
-    "family": "claude",
-    "variantCount": 1
-  },
-  {
-    "address": "theme/clean-slate",
-    "title": "Theme · Clean Slate",
-    "classification": "theme",
-    "family": "clean-slate",
-    "variantCount": 1
-  },
-  {
-    "address": "theme/ghibli-studio",
-    "title": "Theme · Ghibli Studio",
-    "classification": "theme",
-    "family": "ghibli-studio",
-    "variantCount": 1
-  },
-  {
-    "address": "theme/marshmallow",
-    "title": "Theme · Marshmallow",
-    "classification": "theme",
-    "family": "marshmallow",
-    "variantCount": 1
-  },
-  {
-    "address": "theme/marvel",
-    "title": "Theme · Marvel",
-    "classification": "theme",
-    "family": "marvel",
-    "variantCount": 1
-  },
-  {
-    "address": "theme/modern-minimal",
-    "title": "Theme · Modern Minimal",
-    "classification": "theme",
-    "family": "modern-minimal",
-    "variantCount": 1
-  },
-  {
-    "address": "theme/neo-brutalism",
-    "title": "Theme · Neo Brutalism",
-    "classification": "theme",
-    "family": "neo-brutalism",
-    "variantCount": 1
-  },
-  {
     "address": "theme/observatory",
     "title": "Theme · Observatory",
     "classification": "theme",
     "family": "observatory",
-    "variantCount": 1
-  },
-  {
-    "address": "theme/spotify",
-    "title": "Theme · Spotify",
-    "classification": "theme",
-    "family": "spotify",
-    "variantCount": 1
-  },
-  {
-    "address": "theme/terminal",
-    "title": "Theme · Terminal",
-    "classification": "theme",
-    "family": "terminal",
     "variantCount": 1
   }
 ]

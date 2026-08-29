@@ -12,7 +12,7 @@
       "path": "source/components/textarea/textarea-16/textarea-16.tsx",
       "content": "import { useId } from 'react'\n\nimport { Button } from '@astrale-os/ui/button'\nimport { Label } from '@astrale-os/ui/label'\nimport { Textarea } from '@astrale-os/ui/textarea'\n\nconst TextareaWithButtonDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>Textarea with button</Label>\n      <Textarea id={id} placeholder='Type your feedback here' />\n      <Button size='sm'>Submit Feedback</Button>\n    </div>\n  )\n}\n\nexport default TextareaWithButtonDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/textarea/textarea-16.tsx"
+      "target": "components/astrale/components/textarea/textarea-16.tsx"
     }
   ],
   "meta": {

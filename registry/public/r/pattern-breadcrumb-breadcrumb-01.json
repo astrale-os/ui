@@ -11,7 +11,7 @@
       "path": "source/patterns/breadcrumb/breadcrumb-01/breadcrumb-01.tsx",
       "content": "import {\n  Breadcrumb,\n  BreadcrumbItem,\n  BreadcrumbLink,\n  BreadcrumbList,\n  BreadcrumbPage,\n  BreadcrumbSeparator\n} from '@astrale-os/ui/breadcrumb'\n\nconst BreadcrumbDemo = () => {\n  return (\n    <Breadcrumb>\n      <BreadcrumbList>\n        <BreadcrumbItem>\n          <BreadcrumbLink href='#'>Home</BreadcrumbLink>\n        </BreadcrumbItem>\n        <BreadcrumbSeparator />\n        <BreadcrumbItem>\n          <BreadcrumbLink href='#'>Documents</BreadcrumbLink>\n        </BreadcrumbItem>\n        <BreadcrumbSeparator />\n        <BreadcrumbItem>\n          <BreadcrumbPage>Add Document</BreadcrumbPage>\n        </BreadcrumbItem>\n      </BreadcrumbList>\n    </Breadcrumb>\n  )\n}\n\nexport default BreadcrumbDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/pattern/breadcrumb/breadcrumb-01.tsx"
+      "target": "components/astrale/components/breadcrumb/breadcrumb-01.tsx"
     }
   ],
   "meta": {

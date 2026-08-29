@@ -13,7 +13,7 @@
       "path": "source/components/toggle/toggle-12/toggle-12.tsx",
       "content": "import { useState } from 'react'\nimport { Badge } from '@astrale-os/ui/badge'\nimport { Toggle } from '@astrale-os/ui/toggle'\nimport { Tooltip, TooltipContent, TooltipTrigger } from '@astrale-os/ui/tooltip'\nimport { BellOffIcon, BellIcon } from \"lucide-react\"\n\nconst ToggleTooltip = () => {\n  const [notification, setNotification] = useState(false)\n\n  return (\n    <div className='flex flex-wrap items-center justify-center'>\n      <Tooltip>\n        <TooltipTrigger\n          render={\n            <Toggle\n              size='lg'\n              variant='outline'\n              aria-label='Toggle notification'\n              pressed={notification}\n              onPressedChange={setNotification}\n              className='relative'\n            />\n          }\n        >\n          {notification ? (\n            <BellOffIcon\n            />\n          ) : (\n            <BellIcon\n            />\n          )}\n          {notification ? null : (\n            <Badge className='absolute -top-2.5 -right-2.5 h-5 min-w-5 px-1 tabular-nums'>8</Badge>\n          )}\n        </TooltipTrigger>\n        <TooltipContent>{notification ? 'Notifications Off' : 'Notifications On'}</TooltipContent>\n      </Tooltip>\n    </div>\n  )\n}\n\nexport default ToggleTooltip\n",
       "type": "registry:component",
-      "target": "components/astrale/component/toggle/toggle-12.tsx"
+      "target": "components/astrale/components/toggle/toggle-12.tsx"
     }
   ],
   "meta": {

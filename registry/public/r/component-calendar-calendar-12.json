@@ -14,7 +14,7 @@
       "path": "source/components/calendar/calendar-12/calendar-12.tsx",
       "content": "import { useState } from 'react'\n\nimport { Calendar } from '@/components/ui/calendar'\n\nconst CalendarMultiSelectDemo = () => {\n  const [dates, setDates] = useState<Date[]>([new Date(2025, 5, 12), new Date(2025, 5, 17)])\n\n  return (\n    <div>\n      <Calendar mode='multiple' required selected={dates} onSelect={setDates} max={5} className='rounded-lg border' />\n      <p className='text-muted-foreground mt-3 text-center text-xs' role='region'>\n        Multi day select calendar\n      </p>\n    </div>\n  )\n}\n\nexport default CalendarMultiSelectDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/calendar/calendar-12.tsx"
+      "target": "components/astrale/components/calendar/calendar-12.tsx"
     },
     {
       "path": "source/components/calendar/calendar-12/support/components/ui/calendar.tsx",

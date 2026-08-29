@@ -13,7 +13,7 @@
         {
           "path": "progress-01.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/progress/progress-01.tsx"
+          "target": "components/astrale/components/progress/progress-01.tsx"
         }
       ],
       "meta": {
@@ -33,7 +33,7 @@
         {
           "path": "progress-02.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/progress/progress-02.tsx"
+          "target": "components/astrale/components/progress/progress-02.tsx"
         }
       ],
       "meta": {
@@ -53,7 +53,7 @@
         {
           "path": "progress-03.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/progress/progress-03.tsx"
+          "target": "components/astrale/components/progress/progress-03.tsx"
         }
       ],
       "meta": {
@@ -73,7 +73,7 @@
         {
           "path": "progress-04.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/progress/progress-04.tsx"
+          "target": "components/astrale/components/progress/progress-04.tsx"
         }
       ],
       "meta": {
@@ -93,7 +93,7 @@
         {
           "path": "progress-05.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/progress/progress-05.tsx"
+          "target": "components/astrale/components/progress/progress-05.tsx"
         }
       ],
       "meta": {
@@ -113,7 +113,7 @@
         {
           "path": "progress-06.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/progress/progress-06.tsx"
+          "target": "components/astrale/components/progress/progress-06.tsx"
         }
       ],
       "css": {
@@ -143,7 +143,7 @@
         {
           "path": "progress-07.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/progress/progress-07.tsx"
+          "target": "components/astrale/components/progress/progress-07.tsx"
         }
       ],
       "meta": {
@@ -163,7 +163,7 @@
         {
           "path": "progress-08.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/progress/progress-08.tsx"
+          "target": "components/astrale/components/progress/progress-08.tsx"
         }
       ],
       "meta": {
@@ -183,7 +183,7 @@
         {
           "path": "progress-09.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/progress/progress-09.tsx"
+          "target": "components/astrale/components/progress/progress-09.tsx"
         }
       ],
       "meta": {
@@ -203,7 +203,7 @@
         {
           "path": "progress-10.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/progress/progress-10.tsx"
+          "target": "components/astrale/components/progress/progress-10.tsx"
         }
       ],
       "meta": {
@@ -223,7 +223,7 @@
         {
           "path": "progress-11.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/progress/progress-11.tsx"
+          "target": "components/astrale/components/progress/progress-11.tsx"
         }
       ],
       "meta": {
@@ -243,7 +243,7 @@
         {
           "path": "progress-12.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/progress/progress-12.tsx"
+          "target": "components/astrale/components/progress/progress-12.tsx"
         }
       ],
       "meta": {
@@ -263,7 +263,7 @@
         {
           "path": "progress-13.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/progress/progress-13.tsx"
+          "target": "components/astrale/components/progress/progress-13.tsx"
         }
       ],
       "meta": {
@@ -283,7 +283,7 @@
         {
           "path": "progress-14.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/progress/progress-14.tsx"
+          "target": "components/astrale/components/progress/progress-14.tsx"
         }
       ],
       "meta": {
@@ -303,7 +303,7 @@
         {
           "path": "progress-15.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/progress/progress-15.tsx"
+          "target": "components/astrale/components/progress/progress-15.tsx"
         },
         {
           "path": "support/components/ui/circular-progress.tsx",
@@ -328,7 +328,7 @@
         {
           "path": "progress-16.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/progress/progress-16.tsx"
+          "target": "components/astrale/components/progress/progress-16.tsx"
         },
         {
           "path": "support/components/ui/circular-progress.tsx",
@@ -353,7 +353,7 @@
         {
           "path": "progress-17.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/progress/progress-17.tsx"
+          "target": "components/astrale/components/progress/progress-17.tsx"
         },
         {
           "path": "support/components/ui/circular-progress.tsx",
@@ -378,7 +378,7 @@
         {
           "path": "progress-18.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/progress/progress-18.tsx"
+          "target": "components/astrale/components/progress/progress-18.tsx"
         },
         {
           "path": "support/components/ui/circular-progress.tsx",
@@ -403,7 +403,7 @@
         {
           "path": "progress-19.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/progress/progress-19.tsx"
+          "target": "components/astrale/components/progress/progress-19.tsx"
         },
         {
           "path": "support/components/ui/circular-progress.tsx",
@@ -428,7 +428,7 @@
         {
           "path": "progress-20.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/progress/progress-20.tsx"
+          "target": "components/astrale/components/progress/progress-20.tsx"
         }
       ],
       "meta": {
@@ -448,7 +448,7 @@
         {
           "path": "progress-21.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/progress/progress-21.tsx"
+          "target": "components/astrale/components/progress/progress-21.tsx"
         }
       ],
       "css": {
@@ -478,7 +478,7 @@
         {
           "path": "progress-22.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/progress/progress-22.tsx"
+          "target": "components/astrale/components/progress/progress-22.tsx"
         },
         {
           "path": "support/components/ui/circular-progress.tsx",
@@ -503,7 +503,7 @@
         {
           "path": "progress-23.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/progress/progress-23.tsx"
+          "target": "components/astrale/components/progress/progress-23.tsx"
         },
         {
           "path": "support/components/ui/circular-progress.tsx",

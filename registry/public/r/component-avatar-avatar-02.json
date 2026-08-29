@@ -11,7 +11,7 @@
       "path": "source/components/avatar/avatar-02/avatar-02.tsx",
       "content": "import { Avatar, AvatarFallback, AvatarImage } from '@astrale-os/ui/avatar'\n\nconst AvatarRingDemo = () => {\n  return (\n    <Avatar className='ring-ring ring-2'>\n      <AvatarImage src='https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-5.png' alt='Hallie Richards' />\n      <AvatarFallback>HR</AvatarFallback>\n    </Avatar>\n  )\n}\n\nexport default AvatarRingDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/avatar/avatar-02.tsx"
+      "target": "components/astrale/components/avatar/avatar-02.tsx"
     }
   ],
   "meta": {

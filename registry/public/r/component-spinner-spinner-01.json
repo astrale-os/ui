@@ -11,7 +11,7 @@
       "path": "source/components/spinner/spinner-01/spinner-01.tsx",
       "content": "import { Item, ItemContent, ItemMedia, ItemTitle } from '@astrale-os/ui/item'\nimport { Spinner } from '@astrale-os/ui/spinner'\n\nconst SpinnerDemo = () => {\n  return (\n    <div className='flex w-full max-w-xs flex-col gap-4 rounded'>\n      <Item className='bg-muted'>\n        <ItemMedia>\n          <Spinner />\n        </ItemMedia>\n        <ItemContent>\n          <ItemTitle>Uploading assets...</ItemTitle>\n        </ItemContent>\n        <ItemContent className='flex-none justify-end'>\n          <span className='text-sm'>45%</span>\n        </ItemContent>\n      </Item>\n    </div>\n  )\n}\n\nexport default SpinnerDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/spinner/spinner-01.tsx"
+      "target": "components/astrale/components/spinner/spinner-01.tsx"
     }
   ],
   "meta": {

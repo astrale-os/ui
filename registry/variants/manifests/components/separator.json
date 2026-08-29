@@ -13,7 +13,7 @@
         {
           "path": "separator-01.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/separator/separator-01.tsx"
+          "target": "components/astrale/components/separator/separator-01.tsx"
         }
       ],
       "meta": {
@@ -33,7 +33,7 @@
         {
           "path": "separator-02.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/separator/separator-02.tsx"
+          "target": "components/astrale/components/separator/separator-02.tsx"
         }
       ],
       "meta": {
@@ -53,7 +53,7 @@
         {
           "path": "separator-03.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/separator/separator-03.tsx"
+          "target": "components/astrale/components/separator/separator-03.tsx"
         }
       ],
       "meta": {
@@ -73,7 +73,7 @@
         {
           "path": "separator-04.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/separator/separator-04.tsx"
+          "target": "components/astrale/components/separator/separator-04.tsx"
         }
       ],
       "meta": {
@@ -93,7 +93,7 @@
         {
           "path": "separator-05.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/separator/separator-05.tsx"
+          "target": "components/astrale/components/separator/separator-05.tsx"
         }
       ],
       "meta": {
@@ -113,7 +113,7 @@
         {
           "path": "separator-06.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/separator/separator-06.tsx"
+          "target": "components/astrale/components/separator/separator-06.tsx"
         }
       ],
       "meta": {
@@ -133,7 +133,7 @@
         {
           "path": "separator-07.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/separator/separator-07.tsx"
+          "target": "components/astrale/components/separator/separator-07.tsx"
         }
       ],
       "meta": {
@@ -153,7 +153,7 @@
         {
           "path": "separator-08.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/separator/separator-08.tsx"
+          "target": "components/astrale/components/separator/separator-08.tsx"
         }
       ],
       "meta": {
@@ -173,7 +173,7 @@
         {
           "path": "separator-09.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/separator/separator-09.tsx"
+          "target": "components/astrale/components/separator/separator-09.tsx"
         }
       ],
       "meta": {
@@ -193,7 +193,7 @@
         {
           "path": "separator-10.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/separator/separator-10.tsx"
+          "target": "components/astrale/components/separator/separator-10.tsx"
         }
       ],
       "meta": {
@@ -213,7 +213,7 @@
         {
           "path": "separator-11.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/separator/separator-11.tsx"
+          "target": "components/astrale/components/separator/separator-11.tsx"
         }
       ],
       "meta": {
@@ -233,7 +233,7 @@
         {
           "path": "separator-12.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/separator/separator-12.tsx"
+          "target": "components/astrale/components/separator/separator-12.tsx"
         }
       ],
       "meta": {
@@ -253,7 +253,7 @@
         {
           "path": "separator-13.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/separator/separator-13.tsx"
+          "target": "components/astrale/components/separator/separator-13.tsx"
         }
       ],
       "meta": {
@@ -273,7 +273,7 @@
         {
           "path": "separator-14.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/separator/separator-14.tsx"
+          "target": "components/astrale/components/separator/separator-14.tsx"
         }
       ],
       "meta": {

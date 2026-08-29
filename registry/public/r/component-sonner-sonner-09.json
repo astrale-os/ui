@@ -12,7 +12,7 @@
       "path": "source/components/sonner/sonner-09/sonner-09.tsx",
       "content": "import { toast } from 'sonner'\n\nimport { Button } from '@astrale-os/ui/button'\n\nconst SoftInfoSonnerDemo = () => {\n  return (\n    <Button\n      variant='outline'\n      onClick={() =>\n        toast.info('This is for your information, please note.', {\n          style: {\n            '--normal-bg':\n              'color-mix(in oklab, light-dark(var(--color-sky-600), var(--color-sky-400)) 10%, var(--background))',\n            '--normal-text': 'light-dark(var(--color-sky-600), var(--color-sky-400))',\n            '--normal-border': 'light-dark(var(--color-sky-600), var(--color-sky-400))'\n          } as React.CSSProperties\n        })\n      }\n    >\n      Soft Info Toast\n    </Button>\n  )\n}\n\nexport default SoftInfoSonnerDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/sonner/sonner-09.tsx"
+      "target": "components/astrale/components/sonner/sonner-09.tsx"
     }
   ],
   "meta": {

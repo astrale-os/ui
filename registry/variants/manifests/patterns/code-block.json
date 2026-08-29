@@ -18,7 +18,7 @@
         {
           "path": "code-block-01.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/code-block/code-block-01.tsx"
+          "target": "components/astrale/components/code-block/code-block-01.tsx"
         },
         {
           "path": "support/components/ui/code-block.tsx",
@@ -57,7 +57,7 @@
         {
           "path": "code-block-02.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/code-block/code-block-02.tsx"
+          "target": "components/astrale/components/code-block/code-block-02.tsx"
         },
         {
           "path": "support/components/ui/code-block.tsx",
@@ -96,7 +96,7 @@
         {
           "path": "code-block-03.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/code-block/code-block-03.tsx"
+          "target": "components/astrale/components/code-block/code-block-03.tsx"
         },
         {
           "path": "support/components/ui/code-block.tsx",
@@ -135,7 +135,7 @@
         {
           "path": "code-block-04.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/code-block/code-block-04.tsx"
+          "target": "components/astrale/components/code-block/code-block-04.tsx"
         },
         {
           "path": "support/components/ui/code-block.tsx",
@@ -174,7 +174,7 @@
         {
           "path": "code-block-05.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/code-block/code-block-05.tsx"
+          "target": "components/astrale/components/code-block/code-block-05.tsx"
         },
         {
           "path": "support/components/ui/code-block.tsx",
@@ -213,7 +213,7 @@
         {
           "path": "code-block-06.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/code-block/code-block-06.tsx"
+          "target": "components/astrale/components/code-block/code-block-06.tsx"
         },
         {
           "path": "support/components/ui/code-block.tsx",
@@ -252,7 +252,7 @@
         {
           "path": "code-block-07.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/code-block/code-block-07.tsx"
+          "target": "components/astrale/components/code-block/code-block-07.tsx"
         },
         {
           "path": "support/components/ui/code-block.tsx",

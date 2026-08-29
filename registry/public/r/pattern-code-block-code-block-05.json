@@ -14,7 +14,7 @@
       "path": "source/patterns/code-block/code-block-05/code-block-05.tsx",
       "content": "import { CodeBlock } from '@/components/ui/code-block'\n\nconst AvatarCode = `import { Avatar, AvatarFallback, AvatarImage } from \"@/components/ui/avatar\"\n\nexport default function AvatarComponent() {\n  return (\n    <Avatar>\n      <AvatarImage src='https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-5.png' alt='Hallie Richards' />\n      <AvatarFallback className='text-xs'>HR</AvatarFallback>\n    </Avatar>\n  )\n}`\n\nconst ButtonCode = `import { ArrowRightIcon } from \"lucide-react\"\nimport { Button } from \"@astrale-os/ui/button\"\n\nexport default function ButtonIconHoverDemo() {\n  return (\n    <Button className='group'>\n      Get In Touch\n      <ArrowRightIcon className='transition-transform duration-200 group-hover:translate-x-0.5' />\n    </Button>\n  )\n}`\n\nconst CodeBlockTabs = () => {\n  return (\n    <CodeBlock\n      className='w-full max-w-xl'\n      files={[\n        { filename: 'avatar.tsx', code: AvatarCode, language: 'tsx', showLineNumbers: true },\n        { filename: 'button.tsx', code: ButtonCode, language: 'tsx', showLineNumbers: true }\n      ]}\n    />\n  )\n}\n\nexport default CodeBlockTabs\n",
       "type": "registry:component",
-      "target": "components/astrale/pattern/code-block/code-block-05.tsx"
+      "target": "components/astrale/components/code-block/code-block-05.tsx"
     },
     {
       "path": "source/patterns/code-block/code-block-05/support/components/ui/code-block.tsx",

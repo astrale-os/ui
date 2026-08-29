@@ -11,7 +11,7 @@
       "path": "source/components/avatar/avatar-09/avatar-09.tsx",
       "content": "import { Avatar, AvatarBadge, AvatarFallback, AvatarImage } from '@astrale-os/ui/avatar'\n\nconst AvatarStatusAwayDemo = () => {\n  return (\n    <Avatar className='rounded-sm after:rounded-[inherit]'>\n      <AvatarImage\n        src='https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-5.png'\n        alt='Hallie Richards'\n        className='rounded-sm'\n      />\n      <AvatarFallback>HR</AvatarFallback>\n      <AvatarBadge className='-top-1 -right-1 bg-amber-600 group-data-[size=default]/avatar:size-2 dark:bg-amber-400'>\n        <span className='sr-only'>Away</span>\n      </AvatarBadge>\n    </Avatar>\n  )\n}\n\nexport default AvatarStatusAwayDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/avatar/avatar-09.tsx"
+      "target": "components/astrale/components/avatar/avatar-09.tsx"
     }
   ],
   "meta": {

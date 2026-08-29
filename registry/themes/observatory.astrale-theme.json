@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/astrale-os/ui/main/schemas/theme.schema.json",
-  "version": 2,
+  "version": 5,
   "name": "observatory",
   "label": "Observatory",
   "description": "Quiet mineral surfaces, deep orbital blue, and measured editorial typography.",
@@ -75,8 +75,18 @@
     }
   },
   "typography": {
-    "body": "'Avenir Next', 'Segoe UI Variable', ui-sans-serif, sans-serif",
-    "heading": "'Iowan Old Style', 'Palatino Linotype', ui-serif, serif",
+    "body": {
+      "family": "'Avenir Next', 'Segoe UI Variable', ui-sans-serif, sans-serif",
+      "tracking": "0",
+      "leading": "1.5",
+      "weight": 400
+    },
+    "heading": {
+      "family": "'Iowan Old Style', 'Palatino Linotype', ui-serif, serif",
+      "tracking": "-0.01em",
+      "leading": "1.2",
+      "weight": 600
+    },
     "mono": "'SFMono-Regular', 'Cascadia Code', ui-monospace, monospace"
   },
   "geometry": {

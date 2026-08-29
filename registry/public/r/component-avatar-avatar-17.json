@@ -11,7 +11,7 @@
       "path": "source/components/avatar/avatar-17/avatar-17.tsx",
       "content": "import { Avatar, AvatarGroup, AvatarFallback, AvatarImage } from '@astrale-os/ui/avatar'\n\nconst avatars = [\n  {\n    src: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-3.png',\n    fallback: 'OS',\n    name: 'Olivia Sparks'\n  },\n  {\n    src: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-6.png',\n    fallback: 'HL',\n    name: 'Howard Lloyd'\n  },\n  {\n    src: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-5.png',\n    fallback: 'HR',\n    name: 'Hallie Richards'\n  },\n  {\n    src: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-16.png',\n    fallback: 'JW',\n    name: 'Jenny Wilson'\n  }\n]\n\nconst AvatarGroupTransitionDemo = () => {\n  return (\n    <AvatarGroup className='hover:space-x-1'>\n      {avatars.map((avatar, index) => (\n        <Avatar key={index} className='transition-all duration-300 ease-in-out'>\n          <AvatarImage src={avatar.src} alt={avatar.name} />\n          <AvatarFallback>{avatar.fallback}</AvatarFallback>\n        </Avatar>\n      ))}\n    </AvatarGroup>\n  )\n}\n\nexport default AvatarGroupTransitionDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/avatar/avatar-17.tsx"
+      "target": "components/astrale/components/avatar/avatar-17.tsx"
     }
   ],
   "meta": {

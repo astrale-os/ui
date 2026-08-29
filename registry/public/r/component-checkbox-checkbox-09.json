@@ -12,7 +12,7 @@
       "path": "source/components/checkbox/checkbox-09/checkbox-09.tsx",
       "content": "import { Checkbox } from '@astrale-os/ui/checkbox'\nimport { Label } from '@astrale-os/ui/label'\nimport { AppleIcon, CherryIcon, GrapeIcon } from \"lucide-react\"\n\nconst fruits = [\n  {\n    label: 'Apple',\n    icon: (\n      <AppleIcon aria-hidden='true' />\n    )\n  },\n  {\n    label: 'Cherry',\n    icon: (\n      <CherryIcon aria-hidden='true' />\n    )\n  },\n  {\n    label: 'Grape',\n    icon: (\n      <GrapeIcon aria-hidden='true' />\n    )\n  }\n]\n\nconst CheckboxVerticalGroupDemo = () => {\n  return (\n    <div className='space-y-4'>\n      <Label className='font-semibold'>Favorite Fruits</Label>\n      <div className='flex flex-col gap-4'>\n        {fruits.map(({ label, icon }) => (\n          <div key={label} className='flex items-center gap-2'>\n            <Checkbox id={label} />\n            <Label htmlFor={label} className='*:[svg]:size-4'>\n              {icon}\n              {label}\n            </Label>\n          </div>\n        ))}\n      </div>\n    </div>\n  )\n}\n\nexport default CheckboxVerticalGroupDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/checkbox/checkbox-09.tsx"
+      "target": "components/astrale/components/checkbox/checkbox-09.tsx"
     }
   ],
   "meta": {

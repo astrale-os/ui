@@ -11,7 +11,7 @@
       "path": "source/components/button/button-01/button-01.tsx",
       "content": "import { Button } from '@astrale-os/ui/button'\n\nconst ButtonDemo = () => {\n  return <Button>Button</Button>\n}\n\nexport default ButtonDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/button/button-01.tsx"
+      "target": "components/astrale/components/button/button-01.tsx"
     }
   ],
   "meta": {

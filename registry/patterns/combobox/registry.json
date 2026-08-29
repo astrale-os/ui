@@ -13,7 +13,7 @@
         {
           "path": "multiple.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/combobox/multiple.tsx"
+          "target": "components/astrale/components/combobox/multiple.tsx"
         }
       ],
       "meta": {
@@ -31,7 +31,7 @@
         {
           "path": "single-basic.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/combobox/single-basic.tsx"
+          "target": "components/astrale/components/combobox/single-basic.tsx"
         }
       ],
       "meta": {

@@ -13,7 +13,7 @@
         {
           "path": "bar-basic.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/chart/bar-basic.tsx"
+          "target": "components/astrale/components/chart/bar-basic.tsx"
         }
       ],
       "meta": {
@@ -31,7 +31,7 @@
         {
           "path": "line-basic.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/chart/line-basic.tsx"
+          "target": "components/astrale/components/chart/line-basic.tsx"
         }
       ],
       "meta": {

@@ -12,7 +12,7 @@
       "path": "source/components/tooltip/tooltip-05/tooltip-05.tsx",
       "content": "import { Button } from '@astrale-os/ui/button'\nimport { Tooltip, TooltipContent, TooltipTrigger } from '@astrale-os/ui/tooltip'\nimport { InfoIcon } from \"lucide-react\"\n\nconst TooltipIconDemo = () => {\n  return (\n    <Tooltip>\n      <TooltipTrigger\n        render={\n          <Button variant='outline' size='sm'>\n            Icon\n          </Button>\n        }\n      />\n      <TooltipContent className='max-w-64 text-pretty'>\n        <div className='flex items-center gap-1.5'>\n          <InfoIcon className='size-5' />\n          <p>This tooltip has an icon</p>\n        </div>\n      </TooltipContent>\n    </Tooltip>\n  )\n}\n\nexport default TooltipIconDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/tooltip/tooltip-05.tsx"
+      "target": "components/astrale/components/tooltip/tooltip-05.tsx"
     }
   ],
   "meta": {

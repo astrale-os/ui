@@ -12,7 +12,7 @@
       "path": "source/components/popover/popover-08/popover-08.tsx",
       "content": "import { Button } from '@astrale-os/ui/button'\nimport { Popover, PopoverContent, PopoverTrigger } from '@astrale-os/ui/popover'\nimport { Textarea } from '@astrale-os/ui/textarea'\nimport { MessageCircleIcon } from \"lucide-react\"\n\nconst PopoverFeedbackDemo = () => {\n  return (\n    <Popover>\n      <PopoverTrigger render={<Button variant='outline' size='icon' />}>\n        <MessageCircleIcon\n        />\n        <span className='sr-only'>Feedback</span>\n      </PopoverTrigger>\n      <PopoverContent className='w-80'>\n        <div className='grid gap-2'>\n          <div className='font-medium'>Feedback</div>\n          <Textarea placeholder='Type your message here.' className='max-h-56' />\n          <div className='grid w-full grid-cols-2 gap-2'>\n            <Button size='sm'>Send</Button>\n            <Button variant='secondary' size='sm'>\n              Cancel\n            </Button>\n          </div>\n        </div>\n      </PopoverContent>\n    </Popover>\n  )\n}\n\nexport default PopoverFeedbackDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/popover/popover-08.tsx"
+      "target": "components/astrale/components/popover/popover-08.tsx"
     }
   ],
   "meta": {

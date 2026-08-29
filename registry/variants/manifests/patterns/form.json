@@ -21,7 +21,7 @@
         {
           "path": "form-01.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/form/form-01.tsx"
+          "target": "components/astrale/components/form/form-01.tsx"
         }
       ],
       "meta": {
@@ -49,7 +49,7 @@
         {
           "path": "form-02.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/form/form-02.tsx"
+          "target": "components/astrale/components/form/form-02.tsx"
         }
       ],
       "meta": {
@@ -77,7 +77,7 @@
         {
           "path": "form-03.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/form/form-03.tsx"
+          "target": "components/astrale/components/form/form-03.tsx"
         }
       ],
       "meta": {
@@ -105,7 +105,7 @@
         {
           "path": "form-04.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/form/form-04.tsx"
+          "target": "components/astrale/components/form/form-04.tsx"
         }
       ],
       "meta": {
@@ -133,7 +133,7 @@
         {
           "path": "form-05.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/form/form-05.tsx"
+          "target": "components/astrale/components/form/form-05.tsx"
         }
       ],
       "meta": {
@@ -161,7 +161,7 @@
         {
           "path": "form-06.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/form/form-06.tsx"
+          "target": "components/astrale/components/form/form-06.tsx"
         }
       ],
       "meta": {
@@ -189,7 +189,7 @@
         {
           "path": "form-07.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/form/form-07.tsx"
+          "target": "components/astrale/components/form/form-07.tsx"
         }
       ],
       "meta": {
@@ -218,7 +218,7 @@
         {
           "path": "form-08.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/form/form-08.tsx"
+          "target": "components/astrale/components/form/form-08.tsx"
         },
         {
           "path": "support/components/ui/combobox.tsx",
@@ -253,7 +253,7 @@
         {
           "path": "form-09.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/form/form-09.tsx"
+          "target": "components/astrale/components/form/form-09.tsx"
         },
         {
           "path": "support/components/ui/calendar.tsx",
@@ -286,7 +286,7 @@
         {
           "path": "form-10.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/form/form-10.tsx"
+          "target": "components/astrale/components/form/form-10.tsx"
         }
       ],
       "meta": {

@@ -13,7 +13,7 @@
         {
           "path": "sonner-01.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/sonner/sonner-01.tsx"
+          "target": "components/astrale/components/sonner/sonner-01.tsx"
         }
       ],
       "meta": {
@@ -33,7 +33,7 @@
         {
           "path": "sonner-02.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/sonner/sonner-02.tsx"
+          "target": "components/astrale/components/sonner/sonner-02.tsx"
         }
       ],
       "meta": {
@@ -53,7 +53,7 @@
         {
           "path": "sonner-03.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/sonner/sonner-03.tsx"
+          "target": "components/astrale/components/sonner/sonner-03.tsx"
         }
       ],
       "meta": {
@@ -73,7 +73,7 @@
         {
           "path": "sonner-04.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/sonner/sonner-04.tsx"
+          "target": "components/astrale/components/sonner/sonner-04.tsx"
         }
       ],
       "meta": {
@@ -93,7 +93,7 @@
         {
           "path": "sonner-05.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/sonner/sonner-05.tsx"
+          "target": "components/astrale/components/sonner/sonner-05.tsx"
         }
       ],
       "meta": {
@@ -113,7 +113,7 @@
         {
           "path": "sonner-06.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/sonner/sonner-06.tsx"
+          "target": "components/astrale/components/sonner/sonner-06.tsx"
         }
       ],
       "meta": {
@@ -133,7 +133,7 @@
         {
           "path": "sonner-07.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/sonner/sonner-07.tsx"
+          "target": "components/astrale/components/sonner/sonner-07.tsx"
         }
       ],
       "meta": {
@@ -153,7 +153,7 @@
         {
           "path": "sonner-08.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/sonner/sonner-08.tsx"
+          "target": "components/astrale/components/sonner/sonner-08.tsx"
         }
       ],
       "meta": {
@@ -173,7 +173,7 @@
         {
           "path": "sonner-09.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/sonner/sonner-09.tsx"
+          "target": "components/astrale/components/sonner/sonner-09.tsx"
         }
       ],
       "meta": {
@@ -193,7 +193,7 @@
         {
           "path": "sonner-10.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/sonner/sonner-10.tsx"
+          "target": "components/astrale/components/sonner/sonner-10.tsx"
         }
       ],
       "meta": {
@@ -213,7 +213,7 @@
         {
           "path": "sonner-11.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/sonner/sonner-11.tsx"
+          "target": "components/astrale/components/sonner/sonner-11.tsx"
         }
       ],
       "meta": {
@@ -233,7 +233,7 @@
         {
           "path": "sonner-12.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/sonner/sonner-12.tsx"
+          "target": "components/astrale/components/sonner/sonner-12.tsx"
         }
       ],
       "meta": {
@@ -253,7 +253,7 @@
         {
           "path": "sonner-13.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/sonner/sonner-13.tsx"
+          "target": "components/astrale/components/sonner/sonner-13.tsx"
         }
       ],
       "meta": {
@@ -273,7 +273,7 @@
         {
           "path": "sonner-14.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/sonner/sonner-14.tsx"
+          "target": "components/astrale/components/sonner/sonner-14.tsx"
         }
       ],
       "meta": {
@@ -293,7 +293,7 @@
         {
           "path": "sonner-15.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/sonner/sonner-15.tsx"
+          "target": "components/astrale/components/sonner/sonner-15.tsx"
         }
       ],
       "meta": {
@@ -313,7 +313,7 @@
         {
           "path": "sonner-16.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/sonner/sonner-16.tsx"
+          "target": "components/astrale/components/sonner/sonner-16.tsx"
         }
       ],
       "meta": {
@@ -333,7 +333,7 @@
         {
           "path": "sonner-17.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/sonner/sonner-17.tsx"
+          "target": "components/astrale/components/sonner/sonner-17.tsx"
         }
       ],
       "meta": {
@@ -353,7 +353,7 @@
         {
           "path": "sonner-18.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/sonner/sonner-18.tsx"
+          "target": "components/astrale/components/sonner/sonner-18.tsx"
         }
       ],
       "meta": {
@@ -373,7 +373,7 @@
         {
           "path": "sonner-19.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/sonner/sonner-19.tsx"
+          "target": "components/astrale/components/sonner/sonner-19.tsx"
         }
       ],
       "meta": {
@@ -393,7 +393,7 @@
         {
           "path": "sonner-20.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/sonner/sonner-20.tsx"
+          "target": "components/astrale/components/sonner/sonner-20.tsx"
         }
       ],
       "meta": {

@@ -12,7 +12,7 @@
       "path": "source/components/switch/switch-08/switch-08.tsx",
       "content": "import { useState } from 'react'\n\nimport { Label } from '@astrale-os/ui/label'\nimport { Switch } from '@astrale-os/ui/switch'\n\nconst SwitchToggleLabelDemo = () => {\n  const [checked, setChecked] = useState<boolean>(true)\n\n  return (\n    <div className='inline-flex items-center gap-2'>\n      <Switch id='toggle-label' checked={checked} onCheckedChange={setChecked} aria-label='Toggle switch label' />\n      <Label htmlFor='toggle-label' className='text-sm font-medium'>\n        {checked ? 'Yes' : 'No'}\n      </Label>\n    </div>\n  )\n}\n\nexport default SwitchToggleLabelDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/switch/switch-08.tsx"
+      "target": "components/astrale/components/switch/switch-08.tsx"
     }
   ],
   "meta": {

@@ -13,7 +13,7 @@
         {
           "path": "controlled.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/command-palette/controlled.tsx"
+          "target": "components/astrale/components/command-palette/controlled.tsx"
         }
       ],
       "meta": {
@@ -31,7 +31,7 @@
         {
           "path": "dialog-basic.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/command-palette/dialog-basic.tsx"
+          "target": "components/astrale/components/command-palette/dialog-basic.tsx"
         }
       ],
       "meta": {

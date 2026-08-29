@@ -11,7 +11,7 @@
       "path": "source/patterns/pagination/pagination-01/pagination-01.tsx",
       "content": "import {\n  Pagination,\n  PaginationContent,\n  PaginationItem,\n  PaginationLink,\n  PaginationNext,\n  PaginationPrevious\n} from '@astrale-os/ui/pagination'\n\nconst PaginationDemo = () => {\n  return (\n    <Pagination>\n      <PaginationContent>\n        <PaginationItem>\n          <PaginationPrevious href='#' />\n        </PaginationItem>\n        <PaginationItem>\n          <PaginationLink href='#'>1</PaginationLink>\n        </PaginationItem>\n        <PaginationItem>\n          <PaginationLink href='#' isActive>\n            2\n          </PaginationLink>\n        </PaginationItem>\n        <PaginationItem>\n          <PaginationLink href='#'>3</PaginationLink>\n        </PaginationItem>\n        <PaginationItem>\n          <PaginationNext href='#' />\n        </PaginationItem>\n      </PaginationContent>\n    </Pagination>\n  )\n}\n\nexport default PaginationDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/pattern/pagination/pagination-01.tsx"
+      "target": "components/astrale/components/pagination/pagination-01.tsx"
     }
   ],
   "meta": {

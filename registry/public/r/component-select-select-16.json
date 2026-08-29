@@ -12,7 +12,7 @@
       "path": "source/components/select/select-16/select-16.tsx",
       "content": "import { useId } from 'react'\n\nimport { Label } from '@astrale-os/ui/label'\nimport { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@astrale-os/ui/select'\n\nconst items = [\n  { label: 'Select framework', value: null },\n  { label: 'Electronics', value: '1' },\n  { label: 'Clothing', value: '2' },\n  { label: 'Home Appliances', value: '3' },\n  { label: 'Books', value: '4' }\n]\n\nconst SelectWithColorBorderAndRingDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>Select with colored border and ring</Label>\n      <Select items={items} defaultValue='1'>\n        <SelectTrigger\n          id={id}\n          className='w-full focus-visible:border-indigo-500 focus-visible:ring-indigo-500/20 dark:focus-visible:ring-indigo-500/40'\n        >\n          <SelectValue />\n        </SelectTrigger>\n        <SelectContent className='p-1'>\n          {items.slice(1).map(item => (\n            <SelectItem key={item.value} value={item.value}>\n              {item.label}\n            </SelectItem>\n          ))}\n        </SelectContent>\n      </Select>\n    </div>\n  )\n}\n\nexport default SelectWithColorBorderAndRingDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/select/select-16.tsx"
+      "target": "components/astrale/components/select/select-16.tsx"
     }
   ],
   "meta": {

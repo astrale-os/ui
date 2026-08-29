@@ -11,7 +11,7 @@
       "path": "source/components/separator/separator-06/separator-06.tsx",
       "content": "import { Separator } from '@astrale-os/ui/separator'\n\nconst SeparatorStylesDemo = () => {\n  return (\n    <div className='w-full max-w-sm'>\n      <div className='flex flex-col gap-6'>\n        <div className='space-y-3'>\n          <h4 className='text-sm font-medium'>Solid (Default)</h4>\n          <Separator />\n        </div>\n\n        <div className='space-y-3'>\n          <h4 className='text-sm font-medium'>Dashed</h4>\n          <Separator className='border-border border-b-2 border-dashed bg-transparent' />\n        </div>\n\n        <div className='space-y-3'>\n          <h4 className='text-sm font-medium'>Dotted</h4>\n          <Separator className='border-border border-b-[3px] border-dotted bg-transparent' />\n        </div>\n\n        <div className='space-y-3'>\n          <h4 className='text-sm font-medium'>Gradient Faded</h4>\n          <Separator className='via-border bg-transparent bg-linear-to-r from-transparent to-transparent' />\n        </div>\n      </div>\n    </div>\n  )\n}\n\nexport default SeparatorStylesDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/separator/separator-06.tsx"
+      "target": "components/astrale/components/separator/separator-06.tsx"
     }
   ],
   "meta": {

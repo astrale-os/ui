@@ -12,7 +12,7 @@
       "path": "source/components/dropdown-menu/dropdown-menu-09/dropdown-menu-09.tsx",
       "content": "import { Button } from '@astrale-os/ui/button'\nimport {\n  DropdownMenu,\n  DropdownMenuContent,\n  DropdownMenuSeparator,\n  DropdownMenuGroup,\n  DropdownMenuItem,\n  DropdownMenuTrigger\n} from '@astrale-os/ui/dropdown-menu'\nimport { PencilLineIcon, UploadIcon, Trash2Icon } from \"lucide-react\"\n\nconst DropdownMenuAlignStartDemo = () => {\n  return (\n    <DropdownMenu>\n      <DropdownMenuTrigger render={<Button variant='outline'>Align Start</Button>} />\n      <DropdownMenuContent className='w-34'>\n        <DropdownMenuGroup>\n          <DropdownMenuItem>\n            <PencilLineIcon\n            />\n            Edit\n          </DropdownMenuItem>\n          <DropdownMenuItem>\n            <UploadIcon\n            />\n            Share\n          </DropdownMenuItem>\n          <DropdownMenuSeparator />\n          <DropdownMenuItem variant='destructive'>\n            <Trash2Icon\n            />\n            <span>Delete</span>\n          </DropdownMenuItem>\n        </DropdownMenuGroup>\n      </DropdownMenuContent>\n    </DropdownMenu>\n  )\n}\n\nexport default DropdownMenuAlignStartDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/dropdown-menu/dropdown-menu-09.tsx"
+      "target": "components/astrale/components/dropdown-menu/dropdown-menu-09.tsx"
     }
   ],
   "meta": {

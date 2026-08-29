@@ -12,7 +12,7 @@
       "path": "source/components/button/button-23/button-23.tsx",
       "content": "import { Button } from '@astrale-os/ui/button'\nimport { SaveIcon } from \"lucide-react\"\n\nconst ButtonSaveDemo = () => {\n  return (\n    <Button className='bg-sky-600/10 text-sky-600 hover:bg-sky-600/20 focus-visible:border-sky-600/40 focus-visible:ring-sky-600/20 dark:bg-sky-400/10 dark:text-sky-400 dark:hover:bg-sky-400/20 dark:focus-visible:border-sky-400/40 dark:focus-visible:ring-sky-400/40'>\n      <SaveIcon\n      />\n      Save\n    </Button>\n  )\n}\n\nexport default ButtonSaveDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/button/button-23.tsx"
+      "target": "components/astrale/components/button/button-23.tsx"
     }
   ],
   "meta": {

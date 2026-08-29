@@ -13,7 +13,7 @@
         {
           "path": "textarea-01.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/textarea/textarea-01.tsx"
+          "target": "components/astrale/components/textarea/textarea-01.tsx"
         }
       ],
       "meta": {
@@ -33,7 +33,7 @@
         {
           "path": "textarea-02.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/textarea/textarea-02.tsx"
+          "target": "components/astrale/components/textarea/textarea-02.tsx"
         }
       ],
       "meta": {
@@ -53,7 +53,7 @@
         {
           "path": "textarea-03.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/textarea/textarea-03.tsx"
+          "target": "components/astrale/components/textarea/textarea-03.tsx"
         }
       ],
       "meta": {
@@ -73,7 +73,7 @@
         {
           "path": "textarea-04.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/textarea/textarea-04.tsx"
+          "target": "components/astrale/components/textarea/textarea-04.tsx"
         }
       ],
       "meta": {
@@ -93,7 +93,7 @@
         {
           "path": "textarea-05.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/textarea/textarea-05.tsx"
+          "target": "components/astrale/components/textarea/textarea-05.tsx"
         }
       ],
       "meta": {
@@ -113,7 +113,7 @@
         {
           "path": "textarea-06.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/textarea/textarea-06.tsx"
+          "target": "components/astrale/components/textarea/textarea-06.tsx"
         }
       ],
       "meta": {
@@ -133,7 +133,7 @@
         {
           "path": "textarea-07.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/textarea/textarea-07.tsx"
+          "target": "components/astrale/components/textarea/textarea-07.tsx"
         }
       ],
       "meta": {
@@ -153,7 +153,7 @@
         {
           "path": "textarea-08.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/textarea/textarea-08.tsx"
+          "target": "components/astrale/components/textarea/textarea-08.tsx"
         }
       ],
       "meta": {
@@ -173,7 +173,7 @@
         {
           "path": "textarea-09.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/textarea/textarea-09.tsx"
+          "target": "components/astrale/components/textarea/textarea-09.tsx"
         }
       ],
       "meta": {
@@ -193,7 +193,7 @@
         {
           "path": "textarea-10.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/textarea/textarea-10.tsx"
+          "target": "components/astrale/components/textarea/textarea-10.tsx"
         }
       ],
       "meta": {
@@ -213,7 +213,7 @@
         {
           "path": "textarea-11.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/textarea/textarea-11.tsx"
+          "target": "components/astrale/components/textarea/textarea-11.tsx"
         }
       ],
       "meta": {
@@ -233,7 +233,7 @@
         {
           "path": "textarea-12.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/textarea/textarea-12.tsx"
+          "target": "components/astrale/components/textarea/textarea-12.tsx"
         }
       ],
       "meta": {
@@ -253,7 +253,7 @@
         {
           "path": "textarea-13.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/textarea/textarea-13.tsx"
+          "target": "components/astrale/components/textarea/textarea-13.tsx"
         }
       ],
       "meta": {
@@ -273,7 +273,7 @@
         {
           "path": "textarea-14.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/textarea/textarea-14.tsx"
+          "target": "components/astrale/components/textarea/textarea-14.tsx"
         }
       ],
       "meta": {
@@ -293,7 +293,7 @@
         {
           "path": "textarea-15.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/textarea/textarea-15.tsx"
+          "target": "components/astrale/components/textarea/textarea-15.tsx"
         }
       ],
       "meta": {
@@ -313,7 +313,7 @@
         {
           "path": "textarea-16.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/textarea/textarea-16.tsx"
+          "target": "components/astrale/components/textarea/textarea-16.tsx"
         }
       ],
       "meta": {
@@ -333,7 +333,7 @@
         {
           "path": "textarea-17.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/textarea/textarea-17.tsx"
+          "target": "components/astrale/components/textarea/textarea-17.tsx"
         }
       ],
       "meta": {
@@ -353,7 +353,7 @@
         {
           "path": "textarea-18.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/textarea/textarea-18.tsx"
+          "target": "components/astrale/components/textarea/textarea-18.tsx"
         }
       ],
       "meta": {
@@ -373,7 +373,7 @@
         {
           "path": "textarea-19.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/textarea/textarea-19.tsx"
+          "target": "components/astrale/components/textarea/textarea-19.tsx"
         }
       ],
       "meta": {
@@ -393,7 +393,7 @@
         {
           "path": "textarea-20.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/textarea/textarea-20.tsx"
+          "target": "components/astrale/components/textarea/textarea-20.tsx"
         }
       ],
       "meta": {
@@ -413,7 +413,7 @@
         {
           "path": "textarea-21.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/textarea/textarea-21.tsx"
+          "target": "components/astrale/components/textarea/textarea-21.tsx"
         }
       ],
       "meta": {

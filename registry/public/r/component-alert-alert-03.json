@@ -13,7 +13,7 @@
       "path": "source/components/alert/alert-03/alert-03.tsx",
       "content": "import { useState } from 'react'\nimport { Alert, AlertAction, AlertDescription, AlertTitle } from '@astrale-os/ui/alert'\nimport { CircleAlertIcon, XIcon } from \"lucide-react\"\n\nconst AlertClosableDemo = () => {\n  const [isActive, setIsActive] = useState(true)\n\n  if (!isActive) return null\n\n  return (\n    <Alert>\n      <CircleAlertIcon\n      />\n      <AlertTitle>New message!</AlertTitle>\n      <AlertDescription>12 unread messages. Tap to see.</AlertDescription>\n      <AlertAction>\n        <button className='cursor-pointer' onClick={() => setIsActive(false)}>\n          <XIcon className='size-4' />\n          <span className='sr-only'>Close</span>\n        </button>\n      </AlertAction>\n    </Alert>\n  )\n}\n\nexport default AlertClosableDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/alert/alert-03.tsx"
+      "target": "components/astrale/components/alert/alert-03.tsx"
     }
   ],
   "meta": {

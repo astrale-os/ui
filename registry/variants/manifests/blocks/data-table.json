@@ -17,7 +17,7 @@
         {
           "path": "data-table-01.tsx",
           "type": "registry:component",
-          "target": "components/astrale/block/data-table/data-table-01.tsx"
+          "target": "components/astrale/components/data-table/data-table-01.tsx"
         }
       ],
       "meta": {
@@ -42,7 +42,7 @@
         {
           "path": "data-table-02.tsx",
           "type": "registry:component",
-          "target": "components/astrale/block/data-table/data-table-02.tsx"
+          "target": "components/astrale/components/data-table/data-table-02.tsx"
         }
       ],
       "meta": {
@@ -67,7 +67,7 @@
         {
           "path": "data-table-03.tsx",
           "type": "registry:component",
-          "target": "components/astrale/block/data-table/data-table-03.tsx"
+          "target": "components/astrale/components/data-table/data-table-03.tsx"
         }
       ],
       "meta": {
@@ -92,7 +92,7 @@
         {
           "path": "data-table-04.tsx",
           "type": "registry:component",
-          "target": "components/astrale/block/data-table/data-table-04.tsx"
+          "target": "components/astrale/components/data-table/data-table-04.tsx"
         }
       ],
       "meta": {
@@ -117,7 +117,7 @@
         {
           "path": "data-table-05.tsx",
           "type": "registry:component",
-          "target": "components/astrale/block/data-table/data-table-05.tsx"
+          "target": "components/astrale/components/data-table/data-table-05.tsx"
         }
       ],
       "meta": {
@@ -141,7 +141,7 @@
         {
           "path": "data-table-06.tsx",
           "type": "registry:component",
-          "target": "components/astrale/block/data-table/data-table-06.tsx"
+          "target": "components/astrale/components/data-table/data-table-06.tsx"
         }
       ],
       "meta": {
@@ -166,7 +166,7 @@
         {
           "path": "data-table-07.tsx",
           "type": "registry:component",
-          "target": "components/astrale/block/data-table/data-table-07.tsx"
+          "target": "components/astrale/components/data-table/data-table-07.tsx"
         }
       ],
       "meta": {
@@ -195,7 +195,7 @@
         {
           "path": "data-table-08.tsx",
           "type": "registry:component",
-          "target": "components/astrale/block/data-table/data-table-08.tsx"
+          "target": "components/astrale/components/data-table/data-table-08.tsx"
         }
       ],
       "meta": {
@@ -220,7 +220,7 @@
         {
           "path": "data-table-09.tsx",
           "type": "registry:component",
-          "target": "components/astrale/block/data-table/data-table-09.tsx"
+          "target": "components/astrale/components/data-table/data-table-09.tsx"
         }
       ],
       "meta": {
@@ -245,7 +245,7 @@
         {
           "path": "data-table-10.tsx",
           "type": "registry:component",
-          "target": "components/astrale/block/data-table/data-table-10.tsx"
+          "target": "components/astrale/components/data-table/data-table-10.tsx"
         }
       ],
       "meta": {
@@ -270,7 +270,7 @@
         {
           "path": "data-table-11.tsx",
           "type": "registry:component",
-          "target": "components/astrale/block/data-table/data-table-11.tsx"
+          "target": "components/astrale/components/data-table/data-table-11.tsx"
         },
         {
           "path": "support/hooks/use-pagination.ts",
@@ -302,7 +302,7 @@
         {
           "path": "data-table-12.tsx",
           "type": "registry:component",
-          "target": "components/astrale/block/data-table/data-table-12.tsx"
+          "target": "components/astrale/components/data-table/data-table-12.tsx"
         }
       ],
       "meta": {
@@ -326,7 +326,7 @@
         {
           "path": "data-table-13.tsx",
           "type": "registry:component",
-          "target": "components/astrale/block/data-table/data-table-13.tsx"
+          "target": "components/astrale/components/data-table/data-table-13.tsx"
         }
       ],
       "meta": {

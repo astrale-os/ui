@@ -95,6 +95,15 @@ async function openThemeCustomizer(page: Page) {
   await expect(page.locator('[data-slot="theme-studio"]')).toBeVisible()
 }
 
+async function selectFieldOption(page: Page, label: string, option: string) {
+  const openContent = page.locator('[data-slot="select-content"]:visible')
+  await expect(openContent).toHaveCount(0)
+  await page.getByLabel(label, { exact: true }).click()
+  await expect(openContent).toHaveCount(1)
+  await openContent.getByRole('option', { name: option, exact: true }).click()
+  await expect(openContent).toHaveCount(0)
+}
+
 async function loadPreview(page: Page, address: string, scene = 'default') {
   const preview = page.locator(`[data-preview-address="${address}"][data-preview-scene="${scene}"]`)
   await expect(preview).toHaveCount(1)
@@ -122,7 +131,7 @@ test('playground exposes every public runtime owner and complete visual registry
   ).toHaveCount(0)
   await expect(page.getByText('Tune the system.')).toHaveCount(0)
   await expect(page.getByText('Theme studio')).toHaveCount(0)
-  await expect(page.getByLabel('Theme generator')).toHaveCount(0)
+  await expect(page.getByLabel('Theme generator')).not.toBeVisible()
   await expect(page.locator('[aria-label^="View "][aria-label$=" preview"]')).toHaveCount(0)
 
   const rendered = await page.locator('[data-component]').evaluateAll((elements) =>
@@ -248,24 +257,62 @@ test('playground exposes every public runtime owner and complete visual registry
 
   await openThemeCustomizer(page)
   await expect(page.locator('[data-slot="theme-studio"]')).toBeVisible()
-  await expect
-    .poll(() =>
-      page
-        .locator('[data-slot="drawer-overlay"]')
-        .evaluate((element) => getComputedStyle(element).backdropFilter),
-    )
-    .toBe('none')
+  await expect(page.locator('[data-slot="drawer-overlay"]')).toHaveCount(0)
+  await expect(page.locator('#playground-main')).not.toHaveAttribute('inert', '')
   const importWidth = await page
     .getByLabel('Import theme document')
     .evaluate((element) => element.getBoundingClientRect().width)
   expect(importWidth).toBeLessThanOrEqual(1)
   await expect(page.locator('[data-component="button"]')).toBeVisible()
   await page.getByRole('button', { name: 'Close', exact: true }).click()
-  await expect(page.getByLabel('Theme generator')).toHaveCount(0)
+  await expect(page.getByLabel('Theme generator')).not.toBeVisible()
 
   await openThemeCustomizer(page)
-  await page.getByLabel('Starter').click()
-  await expect(page.getByRole('option', { name: 'Observatory' })).toBeVisible()
+  const themeSelect = page.getByRole('combobox', { name: 'Theme' })
+  await themeSelect.click()
+  await expect(page.getByRole('option', { name: 'Observatory', exact: true })).toBeVisible()
+})
+
+test('theme runtime stays isolated from catalog size and projects only changed properties', async ({
+  page,
+}) => {
+  await page.goto('/')
+  const documentRoot = page.locator('html')
+  const catalog = page.locator('#playground-main')
+  await openThemeCustomizer(page)
+
+  await expect(page.locator('[data-slot="live-theme-css"]')).toHaveCount(0)
+  await expect(page.locator('[data-slot="drawer-overlay"]')).toHaveCount(0)
+  await expect(catalog).not.toHaveAttribute('inert', '')
+  await expect
+    .poll(() =>
+      page
+        .locator('.specimen-section')
+        .nth(1)
+        .evaluate((element) => getComputedStyle(element).contentVisibility),
+    )
+    .toBe('auto')
+
+  const properties = () =>
+    documentRoot.evaluate((element) =>
+      Object.fromEntries(
+        [...element.style]
+          .filter((name) => name.startsWith('--ui-'))
+          .map((name) => [name, element.style.getPropertyValue(name)]),
+      ),
+    )
+  const before = await properties()
+  const primary = page.getByLabel('Primary', { exact: true })
+  await primary.fill('oklch(0.61 0.18 145)')
+  await primary.blur()
+  await expect
+    .poll(() => documentRoot.evaluate((element) => element.style.getPropertyValue('--ui-primary')))
+    .toBe('oklch(0.61 0.18 145)')
+  const after = await properties()
+
+  expect(Object.keys(after).filter((name) => before[name] !== after[name])).toEqual([
+    '--ui-primary',
+  ])
 })
 
 test('catalog loads previews near the viewport once and preserves loaded state', async ({
@@ -871,16 +918,75 @@ test('catalog specimens own their interaction without navigating the playground'
   await expect.poll(() => page.evaluate(() => ({ href: location.href, scrollY }))).toEqual(before)
 })
 
+test('typography sliders preview during one gesture and commit one history entry', async ({
+  page,
+}) => {
+  await page.goto('/')
+  await openThemeCustomizer(page)
+  const studio = page.getByLabel('Theme generator')
+  const root = page.locator('[data-slot="ui-playground"]')
+  await page.getByRole('tab', { name: 'Typography' }).click()
+  const slider = page.getByRole('slider', { name: 'Body letter spacing' })
+  const cssValue = () =>
+    root.evaluate((element) =>
+      getComputedStyle(element).getPropertyValue('--ui-tracking-body').trim(),
+    )
+  await expect(slider).toHaveAttribute('aria-valuetext', '0')
+  await expect(studio.getByRole('button', { name: 'Undo' })).toBeDisabled()
+  await slider.scrollIntoViewIfNeeded()
+
+  const sliderField = page.locator('[data-slot="theme-range-field"]').filter({ has: slider })
+  const sliderControl = sliderField.locator('[data-base-ui-slider-control]')
+  const trackBox = await sliderControl.boundingBox()
+  expect(trackBox).not.toBeNull()
+  await page.mouse.move(trackBox!.x + trackBox!.width / 2, trackBox!.y + trackBox!.height / 2)
+  await page.mouse.down()
+  await page.mouse.move(trackBox!.x + trackBox!.width * 0.8, trackBox!.y + trackBox!.height / 2, {
+    steps: 8,
+  })
+  await expect(slider).not.toHaveAttribute('aria-valuetext', '0')
+  await expect.poll(cssValue).not.toBe('0')
+  await expect(studio.getByRole('button', { name: 'Undo' })).toBeDisabled()
+  const previewed = await cssValue()
+  await page.mouse.up()
+
+  await expect(studio.getByRole('button', { name: 'Undo' })).toBeEnabled()
+  await studio.getByRole('button', { name: 'Undo' }).click()
+  await expect.poll(cssValue).toBe('0')
+  await expect(studio.getByRole('button', { name: 'Undo' })).toBeDisabled()
+  await studio.getByRole('button', { name: 'Redo' }).click()
+  await expect.poll(cssValue).toBe(previewed)
+
+  const committed = await cssValue()
+  await slider.scrollIntoViewIfNeeded()
+  const nextTrackBox = await sliderControl.boundingBox()
+  expect(nextTrackBox).not.toBeNull()
+  await page.mouse.move(
+    nextTrackBox!.x + nextTrackBox!.width * 0.8,
+    nextTrackBox!.y + nextTrackBox!.height / 2,
+  )
+  await page.mouse.down()
+  await page.mouse.move(
+    nextTrackBox!.x + nextTrackBox!.width * 0.2,
+    nextTrackBox!.y + nextTrackBox!.height / 2,
+  )
+  await expect.poll(cssValue).not.toBe(committed)
+  await sliderControl.dispatchEvent('pointercancel')
+  await page.mouse.up()
+  await expect.poll(cssValue).toBe(committed)
+})
+
 test('theme editing, mode, history, saving, import, and export remain live', async ({
   context,
   page,
 }, testInfo) => {
-  test.setTimeout(60_000)
+  test.setTimeout(90_000)
   const pageErrors: string[] = []
   page.on('pageerror', (error) => pageErrors.push(error.message))
   await context.grantPermissions(['clipboard-read', 'clipboard-write'])
   await page.goto('/')
   await openThemeCustomizer(page)
+  const studio = page.getByLabel('Theme generator')
   const root = page.locator('[data-slot="ui-playground"]')
   const primaryValue = () =>
     root.evaluate((element) => getComputedStyle(element).getPropertyValue('--ui-primary').trim())
@@ -897,21 +1003,48 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
   await expect(root).toHaveClass(/dark/u)
   await expect.poll(primaryValue).toBe('oklch(0.76 0.13 250)')
   await expect.poll(ringValue).toBe('oklch(0.552 0.016 285.938)')
-  await page.getByLabel('Starter').click()
-  await page.getByRole('option', { name: 'Atelier' }).click()
-  await expect(page.getByRole('option', { name: 'Atelier' })).toBeHidden()
-  await expect(root).toHaveAttribute('data-ui-theme', 'atelier')
-  await expect.poll(primaryValue).toBe('oklch(0.72 0.19 32)')
-
+  await expect(root).toHaveAttribute('data-ui-theme', 'observatory')
+  const paletteDarkPrimary = page
+    .getByRole('combobox', { name: 'Theme' })
+    .locator('[data-slot="theme-palette-icon"] > span')
+    .nth(3)
+  await expect
+    .poll(() =>
+      page
+        .getByRole('combobox', { name: 'Theme' })
+        .locator('[data-slot="theme-palette-icon"] > span')
+        .evaluateAll((elements) =>
+          elements.map((element) => getComputedStyle(element).backgroundColor),
+        ),
+    )
+    .toEqual([
+      'oklch(0.985 0.006 82)',
+      'oklch(0.36 0.14 251)',
+      'oklch(0.15 0.02 255)',
+      'oklch(0.76 0.13 250)',
+    ])
   await page.getByRole('tab', { name: 'Colors' }).click()
   const primaryToken = page.getByLabel('Primary', { exact: true })
   await page.getByRole('button', { name: /Pick Primary$/u }).click()
-  await page.getByRole('slider', { name: 'Color picker' }).first().press('ArrowLeft')
+  const colorArea = page.locator('.aspect-square:visible')
+  await expect(colorArea).toHaveCount(1)
+  const colorAreaBox = await colorArea.boundingBox()
+  expect(colorAreaBox).not.toBeNull()
+  await page.mouse.move(colorAreaBox!.x + colorAreaBox!.width * 0.25, colorAreaBox!.y + 24)
+  await page.mouse.down()
+  await page.mouse.move(
+    colorAreaBox!.x + colorAreaBox!.width * 0.75,
+    colorAreaBox!.y + colorAreaBox!.height * 0.65,
+    { steps: 12 },
+  )
+  await expect.poll(primaryValue).not.toBe('oklch(0.76 0.13 250)')
+  await expect(studio.getByRole('button', { name: 'Undo' })).toBeDisabled()
+  await page.mouse.up()
   await expect(primaryToken).toHaveValue(/^#/u)
-  await expect.poll(primaryValue).not.toBe('oklch(0.72 0.19 32)')
+  await expect.poll(primaryValue).not.toBe('oklch(0.76 0.13 250)')
   await page.keyboard.press('Escape')
-  await page.getByRole('button', { name: 'Undo' }).click()
-  await expect(primaryToken).toHaveValue('oklch(0.72 0.19 32)')
+  await studio.getByRole('button', { name: 'Undo' }).click()
+  await expect(primaryToken).toHaveValue('oklch(0.76 0.13 250)')
   await primaryToken.fill('oklch(0.62 0.2 145)')
   await primaryToken.blur()
   await expect.poll(primaryValue).toBe('oklch(0.62 0.2 145)')
@@ -921,13 +1054,16 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
   await page.keyboard.press('Enter')
   await expect(page.getByLabel('Theme generator')).toBeVisible()
   await expect(page.getByLabel('Primary', { exact: true })).toHaveValue('oklch(0.62 0.2 145)')
-  await expect(page.getByRole('button', { name: 'Undo' })).toBeEnabled()
+  await expect(studio.getByRole('button', { name: 'Undo' })).toBeEnabled()
   await expect.poll(primaryValue).toBe('oklch(0.62 0.2 145)')
+  await expect
+    .poll(() => paletteDarkPrimary.evaluate((element) => getComputedStyle(element).backgroundColor))
+    .toBe('oklch(0.62 0.2 145)')
 
-  await page.getByRole('button', { name: 'Undo' }).click()
-  await expect(primaryToken).toHaveValue('oklch(0.72 0.19 32)')
-  await expect.poll(primaryValue).toBe('oklch(0.72 0.19 32)')
-  await page.getByRole('button', { name: 'Redo' }).click()
+  await studio.getByRole('button', { name: 'Undo' }).click()
+  await expect(primaryToken).toHaveValue('oklch(0.76 0.13 250)')
+  await expect.poll(primaryValue).toBe('oklch(0.76 0.13 250)')
+  await studio.getByRole('button', { name: 'Redo' }).click()
   await expect(page.getByLabel('Primary', { exact: true })).toHaveValue('oklch(0.62 0.2 145)')
   await expect.poll(primaryValue).toBe('oklch(0.62 0.2 145)')
 
@@ -943,15 +1079,78 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
   await expect.poll(menuRingValue).toBe('oklch(0.552 0.016 285.938)')
 
   await page.getByRole('tab', { name: 'Typography' }).click()
-  await page.getByLabel('Serif font (body)').click()
-  await page.getByRole('option', { name: 'Avenir Next' }).click()
+  await expect(page.locator('.theme-typography-section h3')).toHaveText([
+    'Heading',
+    'Body',
+    'Terminal',
+  ])
+  await expect(page.getByLabel('Body font', { exact: true })).toContainText('Avenir Next · Sans')
+  await expect(page.getByLabel('Heading font', { exact: true })).toContainText(
+    'Iowan Old Style · Serif',
+  )
+  const terminalSection = page.locator('.theme-typography-section').filter({
+    has: page.getByRole('heading', { name: 'Terminal', exact: true }),
+  })
+  await expect(terminalSection.getByRole('combobox')).toHaveCount(1)
+  await expect(terminalSection.getByRole('slider')).toHaveCount(0)
+  await selectFieldOption(page, 'Body font', 'System UI · Sans')
   await expect
     .poll(() =>
       root.evaluate((element) =>
         getComputedStyle(element).getPropertyValue('--ui-font-body').trim(),
       ),
     )
-    .toContain('Avenir Next')
+    .toContain('system-ui')
+  await selectFieldOption(page, 'Heading font', 'Charter · Serif')
+  await selectFieldOption(page, 'Body weight', '500')
+  await selectFieldOption(page, 'Heading weight', '700')
+  const bodyTracking = page.getByRole('slider', { name: 'Body letter spacing' })
+  const bodyLeading = page.getByRole('slider', { name: 'Body line height' })
+  const headingTracking = page.getByRole('slider', { name: 'Heading letter spacing' })
+  const headingLeading = page.getByRole('slider', { name: 'Heading line height' })
+  await expect(bodyTracking).toHaveAttribute('aria-valuetext', '0')
+  await expect(bodyLeading).toHaveAttribute('aria-valuetext', '1.5')
+  await expect(headingTracking).toHaveAttribute('aria-valuetext', '-0.01em')
+  await expect(headingLeading).toHaveAttribute('aria-valuetext', '1.2')
+  await bodyTracking.press('ArrowRight')
+  await bodyLeading.press('ArrowRight')
+  await headingTracking.press('ArrowLeft')
+  await headingLeading.press('ArrowRight')
+  await expect(bodyTracking).toHaveAttribute('aria-valuetext', '0.005em')
+  await expect(bodyLeading).toHaveAttribute('aria-valuetext', '1.55')
+  await expect(headingTracking).toHaveAttribute('aria-valuetext', '-0.015em')
+  await expect(headingLeading).toHaveAttribute('aria-valuetext', '1.25')
+  await selectFieldOption(page, 'Terminal font', 'SFMono Regular · Mono')
+  await expect
+    .poll(() =>
+      root.evaluate((element) =>
+        getComputedStyle(element).getPropertyValue('--ui-tracking-body').trim(),
+      ),
+    )
+    .toBe('0.005em')
+  const typographySpecimen = page.locator('[data-slot="theme-studio"]')
+  const bodySpecimen = typographySpecimen.locator('[data-slot="theme-typography-body"]')
+  const headingSpecimen = typographySpecimen.locator('[data-slot="card-title"]')
+  const monoSpecimen = typographySpecimen.locator('[data-slot="theme-typography-mono"]')
+  await expect
+    .poll(() =>
+      bodySpecimen.evaluate((element) => {
+        const style = getComputedStyle(element)
+        return [style.fontFamily, style.fontWeight, style.letterSpacing, style.lineHeight]
+      }),
+    )
+    .toEqual([expect.stringContaining('system-ui'), '500', '0.0624px', '19.344px'])
+  await expect
+    .poll(() =>
+      headingSpecimen.evaluate((element) => {
+        const style = getComputedStyle(element)
+        return [style.fontFamily, style.fontWeight, style.letterSpacing, style.lineHeight]
+      }),
+    )
+    .toEqual([expect.stringContaining('Charter'), '700', '-0.24px', '20px'])
+  await expect
+    .poll(() => monoSpecimen.evaluate((element) => getComputedStyle(element).fontFamily))
+    .toContain('SFMono-Regular')
 
   await page.getByRole('tab', { name: 'Other' }).click()
   await page.getByRole('slider', { name: 'Corner radius' }).press('ArrowRight')
@@ -959,15 +1158,60 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
     .poll(() =>
       root.evaluate((element) => getComputedStyle(element).getPropertyValue('--ui-radius').trim()),
     )
-    .toBe('1.05rem')
+    .toBe('0.75rem')
 
-  await page.getByRole('button', { name: 'Randomize' }).click()
+  const variation = studio.getByRole('button', { name: 'Variation' })
+  await expect(variation).toBeDisabled()
+  const typographyLock = studio.getByRole('button', { name: /^Typography /u })
+  await typographyLock.click()
+  await expect(typographyLock).toHaveAttribute('aria-pressed', 'true')
+  await studio.getByRole('button', { name: 'New direction' }).click()
+  await expect(variation).toBeEnabled()
+  await expect(typographyLock).toContainText('Edited')
   await expect.poll(primaryValue).not.toBe('oklch(0.62 0.2 145)')
-  await page.getByRole('button', { name: 'Undo' }).click()
-  await expect.poll(primaryValue).toBe('oklch(0.62 0.2 145)')
+  const firstGeneratedPrimary = await primaryValue()
+  const generatedContrast = await new AxeBuilder({ page })
+    .include('[data-slot="ui-playground"]')
+    .withRules(['color-contrast'])
+    .analyze()
+  expect(generatedContrast.violations).toEqual([])
+  await expect
+    .poll(() =>
+      root.evaluate((element) =>
+        getComputedStyle(element).getPropertyValue('--ui-font-body').trim(),
+      ),
+    )
+    .toBe("system-ui, -apple-system, 'Segoe UI', sans-serif")
 
-  await page.getByRole('button', { name: 'Save theme' }).click()
-  const savedToast = page.getByRole('dialog', { name: 'Atelier saved in this browser' })
+  await page.getByRole('tab', { name: 'Export' }).click()
+  const generatedDownloadPromise = page.waitForEvent('download')
+  await page.getByRole('button', { name: 'Download JSON' }).click()
+  const generatedDocument = JSON.parse(await downloadText(await generatedDownloadPromise))
+  expect(generatedDocument.generation).toMatchObject({
+    kind: 'astrale.theme-generation',
+    version: 1,
+    engineVersion: 1,
+    fontCatalogVersion: 1,
+    locks: ['typography'],
+    editedBranches: ['typography'],
+    lineage: { kind: 'new-direction' },
+  })
+  expect(generatedDocument.generation.seed).toMatch(/^[0-9a-f]{32}$/u)
+  expect(generatedDocument.generation.derivationSeeds).toEqual({
+    palette: expect.stringMatching(/^[0-9a-f]{32}$/u),
+    typography: expect.stringMatching(/^[0-9a-f]{32}$/u),
+    geometry: expect.stringMatching(/^[0-9a-f]{32}$/u),
+  })
+  await variation.click()
+  await expect.poll(primaryValue).not.toBe(firstGeneratedPrimary)
+  await studio.getByRole('button', { name: 'Undo' }).click()
+  await expect.poll(primaryValue).toBe(firstGeneratedPrimary)
+  await studio.getByRole('button', { name: 'Undo' }).click()
+  await expect.poll(primaryValue).toBe('oklch(0.62 0.2 145)')
+  await expect(variation).toBeDisabled()
+
+  await studio.getByRole('button', { name: 'Save theme' }).click()
+  const savedToast = page.getByRole('dialog', { name: 'Observatory saved in this browser' })
   await expect(savedToast).toBeVisible()
   await expect
     .poll(() =>
@@ -977,40 +1221,42 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
           count: saved.length,
           name: saved[0]?.name,
           primary: saved[0]?.appearance?.dark?.primary,
-          body: saved[0]?.typography?.body,
+          body: saved[0]?.typography?.body?.family,
+          bodyWeight: saved[0]?.typography?.body?.weight,
           radius: saved[0]?.geometry?.radius,
         }
       }),
     )
     .toEqual({
       count: 1,
-      name: 'atelier',
+      name: 'observatory',
       primary: 'oklch(0.62 0.2 145)',
-      body: "'Avenir Next', 'Segoe UI Variable', ui-sans-serif, sans-serif",
-      radius: '1.05rem',
+      body: "system-ui, -apple-system, 'Segoe UI', sans-serif",
+      bodyWeight: 500,
+      radius: '0.75rem',
     })
 
   await page.reload()
   await openThemeCustomizer(page)
-  await page.getByLabel('Saved themes').click()
-  await page.getByRole('option', { name: 'Atelier' }).click()
+  await page.getByRole('combobox', { name: 'Theme' }).click()
+  await page.getByRole('option', { name: 'Observatory Saved' }).click()
   await page.getByRole('button', { name: 'Dark', exact: true }).click()
-  await expect(root).toHaveAttribute('data-ui-theme', 'atelier')
+  await expect(root).toHaveAttribute('data-ui-theme', 'observatory')
   await expect.poll(primaryValue).toBe('oklch(0.62 0.2 145)')
   await expect
     .poll(() =>
       root.evaluate((element) => getComputedStyle(element).getPropertyValue('--ui-radius').trim()),
     )
-    .toBe('1.05rem')
+    .toBe('0.75rem')
 
   await page.getByRole('tab', { name: 'Export' }).click()
   await expect(page.locator('[data-slot="theme-install-command"]')).toContainText(
-    'astrale ui add ./atelier.css',
+    'astrale ui add ./observatory.css',
   )
   await page.getByRole('button', { name: 'Copy command' }).click()
   await expect
     .poll(() => page.evaluate(() => navigator.clipboard.readText()))
-    .toBe('astrale ui add ./atelier.css')
+    .toBe('astrale ui add ./observatory.css')
   await expect(page.getByRole('dialog', { name: 'Install command copied' })).toBeVisible()
   await expect(page.getByRole('button', { name: 'Close toast' })).toHaveCount(0)
   await page.evaluate(() => {
@@ -1022,36 +1268,49 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
   await page.getByRole('button', { name: 'Copy CSS' }).click()
   const copyFailure = page.getByRole('dialog', { name: 'Copy failed' })
   await expect(copyFailure).toBeVisible()
+  await page.mouse.move(1, 1)
   await expect(copyFailure.getByRole('button', { name: 'Close toast' })).toHaveCount(0)
+  await expect(copyFailure).not.toBeVisible({ timeout: 10_000 })
   const downloadPromise = page.waitForEvent('download')
   await page.getByRole('button', { name: 'Download JSON' }).click()
   const download = await downloadPromise
-  expect(download.suggestedFilename()).toBe('atelier.astrale-theme.json')
+  expect(download.suggestedFilename()).toBe('observatory.astrale-theme.json')
   const exported = JSON.parse(await downloadText(download))
   expect(exported).toMatchObject({
-    version: 2,
-    name: 'atelier',
+    version: 5,
+    name: 'observatory',
     appearance: { dark: { primary: 'oklch(0.62 0.2 145)' } },
     typography: {
-      body: "'Avenir Next', 'Segoe UI Variable', ui-sans-serif, sans-serif",
+      body: {
+        family: "system-ui, -apple-system, 'Segoe UI', sans-serif",
+        tracking: '0.005em',
+        leading: '1.55',
+        weight: 500,
+      },
+      heading: {
+        family: "Charter, 'Bitstream Charter', 'Sitka Text', Cambria, serif",
+        tracking: '-0.015em',
+        leading: '1.25',
+        weight: 700,
+      },
       mono: expect.any(String),
     },
-    geometry: { radius: '1.05rem' },
+    geometry: { radius: '0.75rem' },
   })
 
-  await page.getByLabel('Starter').click()
-  await page.getByRole('option', { name: 'Terminal' }).click()
-  await expect(root).toHaveAttribute('data-ui-theme', 'terminal')
+  await page.getByRole('combobox', { name: 'Theme' }).click()
+  await page.getByRole('option', { name: 'Observatory', exact: true }).click()
+  await expect.poll(primaryValue).toBe('oklch(0.76 0.13 250)')
   const importInput = page.getByLabel('Import theme document')
   await importInput.setInputFiles({
-    name: 'atelier.astrale-theme.json',
+    name: 'observatory.astrale-theme.json',
     mimeType: 'application/json',
     buffer: Buffer.from(JSON.stringify(exported)),
   })
-  const importedToast = page.getByRole('dialog', { name: 'Atelier imported' })
+  const importedToast = page.getByRole('dialog', { name: 'Observatory imported' })
   await expect(importedToast).toBeVisible()
   await expect(importInput).toHaveValue('')
-  await expect(root).toHaveAttribute('data-ui-theme', 'atelier')
+  await expect(root).toHaveAttribute('data-ui-theme', 'observatory')
   await expect.poll(primaryValue).toBe('oklch(0.62 0.2 145)')
   await expect
     .poll(() =>
@@ -1059,26 +1318,27 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
         getComputedStyle(element).getPropertyValue('--ui-font-body').trim(),
       ),
     )
-    .toContain('Avenir Next')
+    .toContain('system-ui')
   await expect
     .poll(() =>
       root.evaluate((element) => getComputedStyle(element).getPropertyValue('--ui-radius').trim()),
     )
-    .toBe('1.05rem')
+    .toBe('0.75rem')
   await page.mouse.move(0, 0)
   await expect(importedToast).toBeHidden({ timeout: 10_000 })
 
   const cssDownloadPromise = page.waitForEvent('download')
   await page.getByRole('button', { name: 'Download CSS' }).click()
   const cssDownload = await cssDownloadPromise
-  expect(cssDownload.suggestedFilename()).toBe('atelier.css')
+  expect(cssDownload.suggestedFilename()).toBe('observatory.css')
   const css = await downloadText(cssDownload)
   expect(css).toContain('Consumer-owned after installation.')
   expect(css.match(/--ui-primary: oklch\(0\.62 0\.2 145\);/gu)).toHaveLength(1)
-  expect(css).toContain(
-    "--ui-font-body: 'Avenir Next', 'Segoe UI Variable', ui-sans-serif, sans-serif;",
-  )
-  expect(css).toContain('--ui-radius: 1.05rem;')
+  expect(css).toContain("--ui-font-body: system-ui, -apple-system, 'Segoe UI', sans-serif;")
+  expect(css).toContain('--ui-tracking-body: 0.005em;')
+  expect(css).toContain('--ui-weight-body: 500;')
+  expect(css).toContain('--ui-weight-heading: 700;')
+  expect(css).toContain('--ui-radius: 0.75rem;')
   await expect(page.getByRole('button', { name: 'Close toast' })).toHaveCount(0)
   await testInfo.attach(`theme-studio-${testInfo.project.name}`, {
     body: await page.screenshot(),
@@ -1086,6 +1346,61 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
   })
   await page.waitForTimeout(100)
   expect(pageErrors).toEqual([])
+})
+
+test('generated provenance, locks, and edited branches survive save, reload, export, and import', async ({
+  page,
+}) => {
+  test.setTimeout(90_000)
+  await page.goto('/')
+  await openThemeCustomizer(page)
+  const studio = page.getByLabel('Theme generator')
+  await studio.getByRole('button', { name: /^Typography /u }).click()
+  await studio.getByRole('button', { name: 'New direction' }).click()
+  await expect(studio.getByRole('button', { name: 'Variation' })).toBeEnabled()
+
+  const primary = page.getByLabel('Primary', { exact: true })
+  await primary.fill('#123456')
+  await primary.blur()
+  await studio.getByRole('button', { name: 'Save theme' }).click()
+  const storedGeneration = await page.evaluate(() => {
+    const themes = JSON.parse(localStorage.getItem('astrale-ui-playground:themes:v2') ?? '[]')
+    return themes[0]?.generation
+  })
+  expect(storedGeneration).toMatchObject({
+    locks: ['typography'],
+    editedBranches: ['palette', 'typography'],
+    lineage: { kind: 'new-direction' },
+  })
+
+  await page.reload()
+  await openThemeCustomizer(page)
+  await page.getByRole('combobox', { name: 'Theme' }).click()
+  await page.getByRole('option', { name: 'Observatory Saved' }).click()
+  await expect(studio.getByRole('button', { name: 'Variation' })).toBeEnabled()
+  await expect(studio.getByRole('button', { name: /^Typography /u })).toContainText(
+    'Locked · Edited',
+  )
+  await expect(studio.getByRole('button', { name: /^Colors /u })).toContainText('Edited')
+
+  await page.getByRole('tab', { name: 'Export' }).click()
+  const downloadPromise = page.waitForEvent('download')
+  await page.getByRole('button', { name: 'Download JSON' }).click()
+  const exported = await downloadText(await downloadPromise)
+  expect(JSON.parse(exported).generation).toEqual(storedGeneration)
+
+  await page.getByRole('combobox', { name: 'Theme' }).click()
+  await page.getByRole('option', { name: 'Observatory', exact: true }).click()
+  await page.getByLabel('Import theme document').setInputFiles({
+    name: 'generated.astrale-theme.json',
+    mimeType: 'application/json',
+    buffer: Buffer.from(exported),
+  })
+  await expect(studio.getByRole('button', { name: 'Variation' })).toBeEnabled()
+  await expect(studio.getByRole('button', { name: /^Typography /u })).toContainText(
+    'Locked · Edited',
+  )
+  await expect(studio.getByRole('button', { name: /^Colors /u })).toContainText('Edited')
 })
 
 test('phone layout settles without horizontal overflow', async ({ page }) => {
@@ -1108,6 +1423,46 @@ test('phone layout settles without horizontal overflow', async ({ page }) => {
     .evaluate((element) => Math.ceil(element.getBoundingClientRect().width))
   expect(panelWidth).toBeGreaterThanOrEqual(374)
   expect(panelWidth).toBeLessThanOrEqual(390)
+  await page.getByRole('tab', { name: 'Typography' }).click()
+  await expect(page.locator('.theme-typography-section')).toHaveCount(3)
+  await expect(page.getByRole('slider', { name: 'Body letter spacing' })).toBeVisible()
+  await expect
+    .poll(() =>
+      page.getByLabel('Theme generator').evaluate((element) => ({
+        client: element.clientWidth,
+        scroll: element.scrollWidth,
+        columns: [...element.querySelectorAll('.theme-typography-controls')].map(
+          (control) => getComputedStyle(control).gridTemplateColumns.split(' ').length,
+        ),
+      })),
+    )
+    .toEqual({ client: panelWidth, scroll: panelWidth, columns: [1, 1, 1] })
+})
+
+test('saved version 3 themes migrate to the complete typography model', async ({ page }) => {
+  const legacy = structuredClone(starterThemeDocuments[0]!)
+  legacy.version = 3
+  legacy.name = 'legacy-observatory'
+  legacy.label = 'Legacy Observatory'
+  delete legacy.typography.body.weight
+  await page.addInitScript((theme) => {
+    localStorage.setItem('astrale-ui-playground:themes:v2', JSON.stringify([theme]))
+  }, legacy)
+  await page.goto('/')
+  await openThemeCustomizer(page)
+  await page.getByRole('combobox', { name: 'Theme' }).click()
+  await page.getByRole('option', { name: 'Legacy Observatory Saved' }).click()
+  await page.getByRole('tab', { name: 'Typography' }).click()
+  await expect(page.getByLabel('Body weight', { exact: true })).toContainText('400')
+  await page.getByRole('button', { name: 'Save theme' }).click()
+  await expect
+    .poll(() =>
+      page.evaluate(() => {
+        const saved = JSON.parse(localStorage.getItem('astrale-ui-playground:themes:v2') ?? '[]')
+        return [saved[0]?.version, saved[0]?.typography?.body?.weight]
+      }),
+    )
+    .toEqual([5, 400])
 })
 
 test('invalid storage and save failures stay contained', async ({ page }) => {
@@ -1120,7 +1475,9 @@ test('invalid storage and save failures stay contained', async ({ page }) => {
   await page.reload()
   await expect(page.locator('[data-slot="ui-playground"]')).toBeVisible()
   await openThemeCustomizer(page)
-  await expect(page.getByLabel('Saved themes')).toHaveCount(0)
+  await page.getByRole('combobox', { name: 'Theme' }).click()
+  await expect(page.getByRole('option')).toHaveCount(1)
+  await page.keyboard.press('Escape')
 
   await page.evaluate(() => {
     const storage = Storage.prototype as Storage & { restoreSetItem?: () => void }
@@ -1136,7 +1493,9 @@ test('invalid storage and save failures stay contained', async ({ page }) => {
   await page.getByRole('button', { name: 'Save theme' }).click()
   const saveFailure = page.getByRole('dialog', { name: 'Theme save failed' })
   await expect(saveFailure).toContainText('Storage unavailable for qualification')
-  await expect(page.getByLabel('Saved themes')).toHaveCount(0)
+  await page.getByRole('combobox', { name: 'Theme' }).click()
+  await expect(page.getByRole('option')).toHaveCount(1)
+  await page.keyboard.press('Escape')
   await page.evaluate(() => {
     const storage = Storage.prototype as Storage & { restoreSetItem?: () => void }
     storage.restoreSetItem?.()
@@ -1150,23 +1509,13 @@ test('representative overlays and disclosures are keyboard operable', async ({ p
   await customizerTrigger.focus()
   await page.keyboard.press('Enter')
   await expect(page.getByLabel('Theme generator')).toBeVisible()
-  const drawerPopup = page.locator('[data-slot="drawer-popup"]')
-  const focusRemainsInDrawer = () =>
-    page.evaluate(() => Boolean(document.activeElement?.closest('[data-slot="drawer-popup"]')))
-  await drawerPopup.focus()
-  await page.keyboard.press('Shift+Tab')
-  await expect.poll(focusRemainsInDrawer).toBe(true)
-  const lastDrawerControl = drawerPopup
-    .locator(
-      'button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [href], [tabindex]:not([tabindex="-1"])',
-    )
-    .last()
-  await lastDrawerControl.focus()
+  const inspector = page.getByRole('dialog', { name: 'Theme customizer' })
+  await expect(customizerTrigger).toBeFocused()
   await page.keyboard.press('Tab')
-  await expect.poll(focusRemainsInDrawer).toBe(true)
-  await expect(lastDrawerControl).not.toBeFocused()
+  await expect(inspector.getByRole('button', { name: 'Close' })).toBeFocused()
   await page.keyboard.press('Escape')
-  await expect(page.getByLabel('Theme generator')).toHaveCount(0)
+  await expect(page.getByLabel('Theme generator')).not.toBeVisible()
+  await expect(customizerTrigger).toBeFocused()
 
   await loadPreview(page, 'component/dialog')
   const dialogTrigger = page.getByRole('button', { name: 'Open dialog' })
@@ -1253,10 +1602,9 @@ test('all starter modes have no serious structural violations and Astrale preset
       ]),
     )
   const root = page.locator('[data-slot="ui-playground"]')
-  const astralePresets = new Set(['Atelier', 'Observatory', 'Terminal'])
   for (const [starter, expected] of Object.entries(starters)) {
-    await page.getByLabel('Starter').click()
-    await page.getByRole('option', { name: starter }).click()
+    await page.getByRole('combobox', { name: 'Theme' }).click()
+    await page.getByRole('option', { name: starter, exact: true }).click()
     for (const mode of ['light', 'dark'] as const) {
       await page
         .getByRole('button', { name: mode === 'light' ? 'Light' : 'Dark', exact: true })
@@ -1275,12 +1623,7 @@ test('all starter modes have no serious structural violations and Astrale preset
       const serious = results.violations.filter((violation) =>
         ['critical', 'serious'].includes(violation.impact ?? ''),
       )
-      expect(
-        serious.filter(
-          (violation) => astralePresets.has(starter) || violation.id !== 'color-contrast',
-        ),
-        `${starter} ${mode}`,
-      ).toEqual([])
+      expect(serious, `${starter} ${mode}`).toEqual([])
     }
   }
   expect(consoleProblems).toEqual([])
@@ -1300,11 +1643,11 @@ test('every canonical family is serious-violation-free across representative the
   })
   await page.goto('/')
 
-  for (const starter of ['Atelier', 'Observatory', 'Terminal']) {
+  for (const starter of ['Observatory']) {
     for (const mode of ['Light', 'Dark']) {
       await openThemeCustomizer(page)
-      await page.getByLabel('Starter').click()
-      await page.getByRole('option', { name: starter }).click()
+      await page.getByRole('combobox', { name: 'Theme' }).click()
+      await page.getByRole('option', { name: starter, exact: true }).click()
       await page.getByRole('button', { name: mode, exact: true }).click()
       await page.getByRole('button', { name: 'Close', exact: true }).click()
 

@@ -14,7 +14,7 @@
       "path": "source/components/calendar/calendar-09/calendar-09.tsx",
       "content": "'use client'\n\nimport { useState } from 'react'\n\nimport { Calendar } from '@/components/ui/calendar'\n\nconst CalendarWithMonthYearDropdownDemo = () => {\n  const [date, setDate] = useState<Date | undefined>(new Date())\n\n  return (\n    <div>\n      <Calendar\n        mode='single'\n        selected={date}\n        onSelect={setDate}\n        className='rounded-md border'\n        captionLayout='dropdown'\n      />\n      <p className='text-muted-foreground mt-3 text-center text-xs' role='region'>\n        Month and year dropdown calendar\n      </p>\n    </div>\n  )\n}\n\nexport default CalendarWithMonthYearDropdownDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/calendar/calendar-09.tsx"
+      "target": "components/astrale/components/calendar/calendar-09.tsx"
     },
     {
       "path": "source/components/calendar/calendar-09/support/components/ui/calendar.tsx",

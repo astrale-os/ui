@@ -12,7 +12,7 @@
       "path": "source/components/popover/popover-05/popover-05.tsx",
       "content": "import { Button } from '@astrale-os/ui/button'\nimport { Popover, PopoverContent, PopoverTrigger } from '@astrale-os/ui/popover'\nimport { InfoIcon } from \"lucide-react\"\n\nconst PopoverAboutDemo = () => {\n  return (\n    <Popover>\n      <PopoverTrigger render={<Button variant='outline' size='icon' />}>\n        <InfoIcon\n        />\n        <span className='sr-only'>About Shadcn Studio</span>\n      </PopoverTrigger>\n      <PopoverContent className='w-80'>\n        <div className='grid gap-4'>\n          <div className='space-y-1.5 text-center'>\n            <div className='text-lg font-semibold'>About Shadcn Studio</div>\n            <p className='text-muted-foreground text-sm'>\n              Welcome to Shadcn Studio - your toolkit for building sleek, customizable UI components with ease!\n            </p>\n          </div>\n          <Button\n            size='sm'\n            nativeButton={false}\n            render={\n              <a\n                href='https://shadcnstudio.com/docs/getting-started/introduction'\n                target='_blank'\n                rel='noopener noreferrer'\n              >\n                Learn More\n              </a>\n            }\n          ></Button>\n        </div>\n      </PopoverContent>\n    </Popover>\n  )\n}\n\nexport default PopoverAboutDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/popover/popover-05.tsx"
+      "target": "components/astrale/components/popover/popover-05.tsx"
     }
   ],
   "meta": {

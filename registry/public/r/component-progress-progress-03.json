@@ -12,7 +12,7 @@
       "path": "source/components/progress/progress-03/progress-03.tsx",
       "content": "'use client'\n\nimport { useEffect, useState } from 'react'\n\nimport { Progress, ProgressLabel, ProgressValue } from '@astrale-os/ui/progress'\n\nconst ProgressLoadingDemo = () => {\n  const [value, setValue] = useState(20)\n\n  useEffect(() => {\n    const interval = setInterval(() => {\n      setValue(current => Math.min(100, Math.round(current + Math.random() * 25)))\n    }, 1000)\n\n    return () => clearInterval(interval)\n  }, [])\n\n  return (\n    <div className='w-full'>\n      <Progress value={value} className='transition-all duration-300'>\n        <ProgressLabel>{value >= 100 ? 'Complete' : 'Loading...'}</ProgressLabel>\n        <ProgressValue className='text-foreground font-medium' />\n      </Progress>\n    </div>\n  )\n}\n\nexport default ProgressLoadingDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/progress/progress-03.tsx"
+      "target": "components/astrale/components/progress/progress-03.tsx"
     }
   ],
   "meta": {

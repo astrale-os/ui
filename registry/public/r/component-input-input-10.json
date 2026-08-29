@@ -12,7 +12,7 @@
       "path": "source/components/input/input-10/input-10.tsx",
       "content": "import { useId } from 'react'\n\nimport { Input } from '@astrale-os/ui/input'\nimport { Label } from '@astrale-os/ui/label'\n\nconst InputEndHelperTextDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>Input with end helper text</Label>\n      <Input id={id} type='email' placeholder='Email address' />\n      <p className='text-muted-foreground text-end text-xs'>We&apos;ll never share your email with anyone else.</p>\n    </div>\n  )\n}\n\nexport default InputEndHelperTextDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/input/input-10.tsx"
+      "target": "components/astrale/components/input/input-10.tsx"
     }
   ],
   "meta": {

@@ -13,7 +13,7 @@
       "path": "source/components/input/input-32/input-32.tsx",
       "content": "import { useId } from 'react'\nimport { Button } from '@astrale-os/ui/button'\nimport { ButtonGroup } from '@astrale-os/ui/button-group'\nimport { Input } from '@astrale-os/ui/input'\nimport { Label } from '@astrale-os/ui/label'\nimport { DownloadIcon } from \"lucide-react\"\n\nconst InputIconButtonDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>Input with icon button</Label>\n      <ButtonGroup className='w-full'>\n        <Input id={id} type='email' placeholder='Email address' />\n        <Button variant='outline' size='icon'>\n          <DownloadIcon\n          />\n          <span className='sr-only'>Download</span>\n        </Button>\n      </ButtonGroup>\n    </div>\n  )\n}\n\nexport default InputIconButtonDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/input/input-32.tsx"
+      "target": "components/astrale/components/input/input-32.tsx"
     }
   ],
   "meta": {

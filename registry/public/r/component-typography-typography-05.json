@@ -11,7 +11,7 @@
       "path": "source/components/typography/typography-05/typography-05.tsx",
       "content": "const TypographyPDemo = () => {\n  return <p>p - Laughter returned in clusters and whispers, filling the market squares once more.</p>\n}\n\nexport default TypographyPDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/typography/typography-05.tsx"
+      "target": "components/astrale/components/typography/typography-05.tsx"
     }
   ],
   "meta": {

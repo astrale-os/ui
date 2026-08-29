@@ -15,7 +15,7 @@
       "path": "source/components/checkbox/checkbox-17/checkbox-17.tsx",
       "content": "import { useId } from 'react'\n\nimport { Checkbox } from '@/components/ui/motion-checkbox'\nimport { Label } from '@astrale-os/ui/label'\n\nconst CheckboxAnimatedDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='flex items-center gap-2'>\n      <Checkbox id={id} defaultChecked />\n      <Label htmlFor={id}>Animated checkbox</Label>\n    </div>\n  )\n}\n\nexport default CheckboxAnimatedDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/checkbox/checkbox-17.tsx"
+      "target": "components/astrale/components/checkbox/checkbox-17.tsx"
     },
     {
       "path": "source/components/checkbox/checkbox-17/support/components/ui/motion-checkbox.tsx",

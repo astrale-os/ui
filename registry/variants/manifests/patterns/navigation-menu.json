@@ -13,7 +13,7 @@
         {
           "path": "navigation-menu-01.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/navigation-menu/navigation-menu-01.tsx"
+          "target": "components/astrale/components/navigation-menu/navigation-menu-01.tsx"
         }
       ],
       "meta": {
@@ -33,7 +33,7 @@
         {
           "path": "navigation-menu-02.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/navigation-menu/navigation-menu-02.tsx"
+          "target": "components/astrale/components/navigation-menu/navigation-menu-02.tsx"
         }
       ],
       "meta": {
@@ -53,7 +53,7 @@
         {
           "path": "navigation-menu-03.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/navigation-menu/navigation-menu-03.tsx"
+          "target": "components/astrale/components/navigation-menu/navigation-menu-03.tsx"
         }
       ],
       "meta": {
@@ -73,7 +73,7 @@
         {
           "path": "navigation-menu-04.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/navigation-menu/navigation-menu-04.tsx"
+          "target": "components/astrale/components/navigation-menu/navigation-menu-04.tsx"
         }
       ],
       "meta": {
@@ -93,7 +93,7 @@
         {
           "path": "navigation-menu-05.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/navigation-menu/navigation-menu-05.tsx"
+          "target": "components/astrale/components/navigation-menu/navigation-menu-05.tsx"
         }
       ],
       "meta": {
@@ -113,7 +113,7 @@
         {
           "path": "navigation-menu-06.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/navigation-menu/navigation-menu-06.tsx"
+          "target": "components/astrale/components/navigation-menu/navigation-menu-06.tsx"
         }
       ],
       "meta": {
@@ -133,7 +133,7 @@
         {
           "path": "navigation-menu-07.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/navigation-menu/navigation-menu-07.tsx"
+          "target": "components/astrale/components/navigation-menu/navigation-menu-07.tsx"
         }
       ],
       "meta": {
@@ -153,7 +153,7 @@
         {
           "path": "navigation-menu-08.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/navigation-menu/navigation-menu-08.tsx"
+          "target": "components/astrale/components/navigation-menu/navigation-menu-08.tsx"
         }
       ],
       "meta": {
@@ -173,7 +173,7 @@
         {
           "path": "navigation-menu-09.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/navigation-menu/navigation-menu-09.tsx"
+          "target": "components/astrale/components/navigation-menu/navigation-menu-09.tsx"
         }
       ],
       "meta": {

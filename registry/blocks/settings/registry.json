@@ -13,7 +13,7 @@
         {
           "path": "appearance.tsx",
           "type": "registry:component",
-          "target": "components/astrale/block/settings/appearance.tsx"
+          "target": "components/astrale/components/settings/appearance.tsx"
         }
       ],
       "meta": {
@@ -31,7 +31,7 @@
         {
           "path": "notifications.tsx",
           "type": "registry:component",
-          "target": "components/astrale/block/settings/notifications.tsx"
+          "target": "components/astrale/components/settings/notifications.tsx"
         }
       ],
       "meta": {
@@ -49,7 +49,7 @@
         {
           "path": "profile.tsx",
           "type": "registry:component",
-          "target": "components/astrale/block/settings/profile.tsx"
+          "target": "components/astrale/components/settings/profile.tsx"
         }
       ],
       "meta": {
@@ -67,7 +67,7 @@
         {
           "path": "team.tsx",
           "type": "registry:component",
-          "target": "components/astrale/block/settings/team.tsx"
+          "target": "components/astrale/components/settings/team.tsx"
         }
       ],
       "meta": {

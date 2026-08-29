@@ -11,7 +11,7 @@
       "path": "source/components/card/card-07/card-07.tsx",
       "content": "import { Card, CardContent, CardHeader, CardTitle } from '@astrale-os/ui/card'\n\nconst CardOverlayDemo = () => {\n  return (\n    <Card className='before:bg-primary/70 relative max-w-md py-0 before:absolute before:size-full before:rounded-xl'>\n      <CardContent className='px-0'>\n        <img\n          src='https://cdn.shadcnstudio.com/ss-assets/components/card/image-8.png?widht=448&height=280&format=auto'\n          alt='Banner'\n          className='h-50 w-md rounded-xl'\n        />\n      </CardContent>\n      <div className='absolute'>\n        <CardHeader className='text-primary-foreground mb-2 w-full pt-4'>\n          <CardTitle>Creative Catalyst</CardTitle>\n        </CardHeader>\n        <CardContent className='text-primary-foreground/80'>\n          Step into a world where imagination takes the lead and every pixel tells a story. This is a space designed to\n          unleash your creative potential without boundaries or time constraints. Explore bold ideas, experiment with\n          vibrant concepts, and craft visuals that inspire and captivate.\n        </CardContent>\n      </div>\n    </Card>\n  )\n}\n\nexport default CardOverlayDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/card/card-07.tsx"
+      "target": "components/astrale/components/card/card-07.tsx"
     }
   ],
   "meta": {

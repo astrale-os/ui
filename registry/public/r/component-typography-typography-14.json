@@ -11,7 +11,7 @@
       "path": "source/components/typography/typography-14/typography-14.tsx",
       "content": "const TypographyFirstLetterDemo = () => {\n  return (\n    <p className='first-letter:text-base-content w-full max-w-xl text-justify first-letter:float-left first-letter:me-3 first-letter:text-7xl first-letter:font-bold'>\n      Once overlooked, the record now sings of small summers, quiet kitchens, and bright-remembered nights. Its grooves\n      carry a map of memory, each crack a moment worth revisiting. I trace the edges with a careful thumb, and the room\n      blooms with songs that used to belong only to the past.\n    </p>\n  )\n}\n\nexport default TypographyFirstLetterDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/typography/typography-14.tsx"
+      "target": "components/astrale/components/typography/typography-14.tsx"
     }
   ],
   "meta": {

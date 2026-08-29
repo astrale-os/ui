@@ -12,7 +12,7 @@
       "path": "source/components/input/input-13/input-13.tsx",
       "content": "import { useId } from 'react'\n\nimport { Input } from '@astrale-os/ui/input'\nimport { Label } from '@astrale-os/ui/label'\n\nconst InputColoredRingDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>Input with colored ring</Label>\n      <Input\n        id={id}\n        type='email'\n        placeholder='Email address'\n        className='focus-visible:border-indigo-500 focus-visible:ring-indigo-500/20 dark:focus-visible:ring-indigo-500/40'\n      />\n    </div>\n  )\n}\n\nexport default InputColoredRingDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/input/input-13.tsx"
+      "target": "components/astrale/components/input/input-13.tsx"
     }
   ],
   "meta": {

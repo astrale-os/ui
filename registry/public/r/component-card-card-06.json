@@ -11,7 +11,7 @@
       "path": "source/components/card/card-06/card-06.tsx",
       "content": "import { Card, CardContent, CardHeader, CardDescription, CardTitle, CardFooter } from '@astrale-os/ui/card'\nimport { Button } from '@astrale-os/ui/button'\n\nconst CardHorizontalDemo = () => {\n  return (\n    <Card className='max-w-lg overflow-hidden py-0 sm:flex-row sm:gap-0'>\n      <CardContent className='grow px-0'>\n        <img\n          src='https://cdn.shadcnstudio.com/ss-assets/components/card/image-3.png'\n          alt='Banner'\n          className='size-full'\n        />\n      </CardContent>\n      <div className='sm:min-w-60'>\n        <CardHeader className='pt-4'>\n          <CardTitle>Dreamy Colorwave Gradient</CardTitle>\n          <CardDescription className='mb-4'>\n            A smooth blend of vibrant pinks, purples, and blues for a magical touch.\n          </CardDescription>\n        </CardHeader>\n        <CardFooter className='gap-3 py-4'>\n          <Button className='bg-transparent bg-linear-to-br from-purple-500 to-pink-500 text-white focus-visible:ring-pink-600/20'>\n            Explore More\n          </Button>\n        </CardFooter>\n      </div>\n    </Card>\n  )\n}\n\nexport default CardHorizontalDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/card/card-06.tsx"
+      "target": "components/astrale/components/card/card-06.tsx"
     }
   ],
   "meta": {

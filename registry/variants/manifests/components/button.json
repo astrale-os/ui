@@ -13,7 +13,7 @@
         {
           "path": "button-01.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-01.tsx"
+          "target": "components/astrale/components/button/button-01.tsx"
         }
       ],
       "meta": {
@@ -33,7 +33,7 @@
         {
           "path": "button-02.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-02.tsx"
+          "target": "components/astrale/components/button/button-02.tsx"
         }
       ],
       "meta": {
@@ -53,7 +53,7 @@
         {
           "path": "button-03.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-03.tsx"
+          "target": "components/astrale/components/button/button-03.tsx"
         }
       ],
       "meta": {
@@ -73,7 +73,7 @@
         {
           "path": "button-04.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-04.tsx"
+          "target": "components/astrale/components/button/button-04.tsx"
         }
       ],
       "meta": {
@@ -93,7 +93,7 @@
         {
           "path": "button-05.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-05.tsx"
+          "target": "components/astrale/components/button/button-05.tsx"
         }
       ],
       "meta": {
@@ -113,7 +113,7 @@
         {
           "path": "button-06.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-06.tsx"
+          "target": "components/astrale/components/button/button-06.tsx"
         }
       ],
       "meta": {
@@ -133,7 +133,7 @@
         {
           "path": "button-07.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-07.tsx"
+          "target": "components/astrale/components/button/button-07.tsx"
         }
       ],
       "meta": {
@@ -153,7 +153,7 @@
         {
           "path": "button-08.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-08.tsx"
+          "target": "components/astrale/components/button/button-08.tsx"
         }
       ],
       "meta": {
@@ -173,7 +173,7 @@
         {
           "path": "button-09.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-09.tsx"
+          "target": "components/astrale/components/button/button-09.tsx"
         }
       ],
       "meta": {
@@ -193,7 +193,7 @@
         {
           "path": "button-10.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-10.tsx"
+          "target": "components/astrale/components/button/button-10.tsx"
         }
       ],
       "meta": {
@@ -213,7 +213,7 @@
         {
           "path": "button-11.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-11.tsx"
+          "target": "components/astrale/components/button/button-11.tsx"
         }
       ],
       "meta": {
@@ -233,7 +233,7 @@
         {
           "path": "button-12.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-12.tsx"
+          "target": "components/astrale/components/button/button-12.tsx"
         }
       ],
       "meta": {
@@ -253,7 +253,7 @@
         {
           "path": "button-13.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-13.tsx"
+          "target": "components/astrale/components/button/button-13.tsx"
         }
       ],
       "meta": {
@@ -273,7 +273,7 @@
         {
           "path": "button-14.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-14.tsx"
+          "target": "components/astrale/components/button/button-14.tsx"
         }
       ],
       "meta": {
@@ -293,7 +293,7 @@
         {
           "path": "button-15.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-15.tsx"
+          "target": "components/astrale/components/button/button-15.tsx"
         }
       ],
       "meta": {
@@ -313,7 +313,7 @@
         {
           "path": "button-16.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-16.tsx"
+          "target": "components/astrale/components/button/button-16.tsx"
         }
       ],
       "meta": {
@@ -333,7 +333,7 @@
         {
           "path": "button-17.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-17.tsx"
+          "target": "components/astrale/components/button/button-17.tsx"
         }
       ],
       "meta": {
@@ -353,7 +353,7 @@
         {
           "path": "button-18.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-18.tsx"
+          "target": "components/astrale/components/button/button-18.tsx"
         }
       ],
       "meta": {
@@ -373,7 +373,7 @@
         {
           "path": "button-19.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-19.tsx"
+          "target": "components/astrale/components/button/button-19.tsx"
         }
       ],
       "meta": {
@@ -393,7 +393,7 @@
         {
           "path": "button-20.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-20.tsx"
+          "target": "components/astrale/components/button/button-20.tsx"
         }
       ],
       "meta": {
@@ -413,7 +413,7 @@
         {
           "path": "button-21.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-21.tsx"
+          "target": "components/astrale/components/button/button-21.tsx"
         }
       ],
       "meta": {
@@ -433,7 +433,7 @@
         {
           "path": "button-22.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-22.tsx"
+          "target": "components/astrale/components/button/button-22.tsx"
         }
       ],
       "meta": {
@@ -453,7 +453,7 @@
         {
           "path": "button-23.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-23.tsx"
+          "target": "components/astrale/components/button/button-23.tsx"
         }
       ],
       "meta": {
@@ -473,7 +473,7 @@
         {
           "path": "button-24.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-24.tsx"
+          "target": "components/astrale/components/button/button-24.tsx"
         }
       ],
       "meta": {
@@ -493,7 +493,7 @@
         {
           "path": "button-25.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-25.tsx"
+          "target": "components/astrale/components/button/button-25.tsx"
         }
       ],
       "meta": {
@@ -513,7 +513,7 @@
         {
           "path": "button-26.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-26.tsx"
+          "target": "components/astrale/components/button/button-26.tsx"
         }
       ],
       "meta": {
@@ -533,7 +533,7 @@
         {
           "path": "button-27.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-27.tsx"
+          "target": "components/astrale/components/button/button-27.tsx"
         }
       ],
       "meta": {
@@ -553,7 +553,7 @@
         {
           "path": "button-28.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-28.tsx"
+          "target": "components/astrale/components/button/button-28.tsx"
         }
       ],
       "meta": {
@@ -573,7 +573,7 @@
         {
           "path": "button-29.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-29.tsx"
+          "target": "components/astrale/components/button/button-29.tsx"
         }
       ],
       "meta": {
@@ -593,7 +593,7 @@
         {
           "path": "button-30.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-30.tsx"
+          "target": "components/astrale/components/button/button-30.tsx"
         }
       ],
       "meta": {
@@ -613,7 +613,7 @@
         {
           "path": "button-31.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-31.tsx"
+          "target": "components/astrale/components/button/button-31.tsx"
         }
       ],
       "meta": {
@@ -633,7 +633,7 @@
         {
           "path": "button-32.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-32.tsx"
+          "target": "components/astrale/components/button/button-32.tsx"
         }
       ],
       "meta": {
@@ -653,7 +653,7 @@
         {
           "path": "button-33.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-33.tsx"
+          "target": "components/astrale/components/button/button-33.tsx"
         }
       ],
       "meta": {
@@ -673,7 +673,7 @@
         {
           "path": "button-34.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-34.tsx"
+          "target": "components/astrale/components/button/button-34.tsx"
         }
       ],
       "meta": {
@@ -693,7 +693,7 @@
         {
           "path": "button-35.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-35.tsx"
+          "target": "components/astrale/components/button/button-35.tsx"
         }
       ],
       "meta": {
@@ -713,7 +713,7 @@
         {
           "path": "button-36.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-36.tsx"
+          "target": "components/astrale/components/button/button-36.tsx"
         }
       ],
       "meta": {
@@ -733,7 +733,7 @@
         {
           "path": "button-37.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-37.tsx"
+          "target": "components/astrale/components/button/button-37.tsx"
         }
       ],
       "meta": {
@@ -753,7 +753,7 @@
         {
           "path": "button-38.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-38.tsx"
+          "target": "components/astrale/components/button/button-38.tsx"
         }
       ],
       "meta": {
@@ -778,7 +778,7 @@
         {
           "path": "button-39.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-39.tsx"
+          "target": "components/astrale/components/button/button-39.tsx"
         },
         {
           "path": "support/components/ui/ripple-button.tsx",
@@ -803,7 +803,7 @@
         {
           "path": "button-40.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-40.tsx"
+          "target": "components/astrale/components/button/button-40.tsx"
         }
       ],
       "meta": {
@@ -823,7 +823,7 @@
         {
           "path": "button-41.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-41.tsx"
+          "target": "components/astrale/components/button/button-41.tsx"
         }
       ],
       "meta": {
@@ -843,7 +843,7 @@
         {
           "path": "button-42.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-42.tsx"
+          "target": "components/astrale/components/button/button-42.tsx"
         }
       ],
       "meta": {
@@ -863,7 +863,7 @@
         {
           "path": "button-43.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-43.tsx"
+          "target": "components/astrale/components/button/button-43.tsx"
         },
         {
           "path": "support/components/ui/shimmer-button.tsx",
@@ -893,7 +893,7 @@
         {
           "path": "button-44.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-44.tsx"
+          "target": "components/astrale/components/button/button-44.tsx"
         },
         {
           "path": "support/components/ui/bounce-button.tsx",
@@ -923,7 +923,7 @@
         {
           "path": "button-45.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-45.tsx"
+          "target": "components/astrale/components/button/button-45.tsx"
         },
         {
           "path": "support/components/ui/magnetic-button.tsx",
@@ -948,7 +948,7 @@
         {
           "path": "button-46.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-46.tsx"
+          "target": "components/astrale/components/button/button-46.tsx"
         }
       ],
       "css": {
@@ -984,7 +984,7 @@
         {
           "path": "button-47.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-47.tsx"
+          "target": "components/astrale/components/button/button-47.tsx"
         }
       ],
       "meta": {
@@ -1008,7 +1008,7 @@
         {
           "path": "button-48.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-48.tsx"
+          "target": "components/astrale/components/button/button-48.tsx"
         },
         {
           "path": "support/components/ui/matter-button.tsx",
@@ -1038,7 +1038,7 @@
         {
           "path": "button-49.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-49.tsx"
+          "target": "components/astrale/components/button/button-49.tsx"
         },
         {
           "path": "support/components/ui/craft-button.tsx",
@@ -1067,7 +1067,7 @@
         {
           "path": "button-50.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-50.tsx"
+          "target": "components/astrale/components/button/button-50.tsx"
         },
         {
           "path": "support/components/ui/swipe-button.tsx",
@@ -1096,7 +1096,7 @@
         {
           "path": "button-51.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-51.tsx"
+          "target": "components/astrale/components/button/button-51.tsx"
         },
         {
           "path": "support/components/ui/flow-button.tsx",
@@ -1125,7 +1125,7 @@
         {
           "path": "button-52.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-52.tsx"
+          "target": "components/astrale/components/button/button-52.tsx"
         },
         {
           "path": "support/components/ui/orion-button.tsx",
@@ -1154,7 +1154,7 @@
         {
           "path": "button-53.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-53.tsx"
+          "target": "components/astrale/components/button/button-53.tsx"
         },
         {
           "path": "support/components/ui/grow-button.tsx",
@@ -1184,7 +1184,7 @@
         {
           "path": "button-54.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-54.tsx"
+          "target": "components/astrale/components/button/button-54.tsx"
         },
         {
           "path": "support/components/ui/border-beam.tsx",
@@ -1218,7 +1218,7 @@
         {
           "path": "button-55.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/button/button-55.tsx"
+          "target": "components/astrale/components/button/button-55.tsx"
         },
         {
           "path": "support/components/ui/glass-button.tsx",

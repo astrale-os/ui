@@ -12,7 +12,7 @@
       "path": "source/components/input/input-21/input-21.tsx",
       "content": "import { useId } from 'react'\n\nimport { Button } from '@astrale-os/ui/button'\nimport { ButtonGroup } from '@astrale-os/ui/button-group'\nimport { Input } from '@astrale-os/ui/input'\nimport { Label } from '@astrale-os/ui/label'\n\nconst InputAddOnsDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>Input with add-ons</Label>\n      <ButtonGroup>\n        <Button variant='outline'>https://</Button>\n        <Input id={id} placeholder='shadcnstudio.com' />\n        <Button variant='outline'>.com</Button>\n      </ButtonGroup>\n    </div>\n  )\n}\n\nexport default InputAddOnsDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/input/input-21.tsx"
+      "target": "components/astrale/components/input/input-21.tsx"
     }
   ],
   "meta": {

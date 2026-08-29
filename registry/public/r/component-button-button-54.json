@@ -14,7 +14,7 @@
       "path": "source/components/button/button-54/button-54.tsx",
       "content": "import { NeuralButton } from '@/components/ui/neural-button'\n\nconst NeuralButtonDemo = () => {\n  return <NeuralButton>Neural Button</NeuralButton>\n}\n\nexport default NeuralButtonDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/button/button-54.tsx"
+      "target": "components/astrale/components/button/button-54.tsx"
     },
     {
       "path": "source/components/button/button-54/support/components/ui/border-beam.tsx",

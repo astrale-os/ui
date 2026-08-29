@@ -13,7 +13,7 @@
       "path": "source/components/button/button-53/button-53.tsx",
       "content": "import { PrimaryGrowButton } from '@/components/ui/grow-button'\n\nconst PrimaryGrowButtonDemo = () => {\n  return <PrimaryGrowButton>Grow Button</PrimaryGrowButton>\n}\n\nexport default PrimaryGrowButtonDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/button/button-53.tsx"
+      "target": "components/astrale/components/button/button-53.tsx"
     },
     {
       "path": "source/components/button/button-53/support/components/ui/grow-button.tsx",

@@ -12,7 +12,7 @@
       "path": "source/components/input/input-35/input-35.tsx",
       "content": "'use client'\n\nimport { useId, useState, type ChangeEvent } from 'react'\n\nimport { Input } from '@astrale-os/ui/input'\nimport { Label } from '@astrale-os/ui/label'\n\nconst maxLength = 12\nconst initialValue = ''\n\nconst InputCharacterLeftDemo = () => {\n  const [value, setValue] = useState(initialValue)\n  const [characterCount, setCharacterCount] = useState(initialValue.length)\n\n  const id = useId()\n\n  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {\n    if (e.target.value.length <= maxLength) {\n      setValue(e.target.value)\n      setCharacterCount(e.target.value.length)\n    }\n  }\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>Input with characters left</Label>\n      <Input type='text' placeholder='Username' value={value} maxLength={maxLength} onChange={handleChange} />\n      <p className='text-muted-foreground text-xs'>\n        <span className='tabular-nums'>{maxLength - characterCount}</span> characters left\n      </p>\n    </div>\n  )\n}\n\nexport default InputCharacterLeftDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/input/input-35.tsx"
+      "target": "components/astrale/components/input/input-35.tsx"
     }
   ],
   "meta": {

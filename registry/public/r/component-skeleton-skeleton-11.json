@@ -11,7 +11,7 @@
       "path": "source/components/skeleton/skeleton-11/skeleton-11.tsx",
       "content": "import { Skeleton } from '@astrale-os/ui/skeleton'\n\nconst SkeletonTable = () => {\n  return (\n    <div className='mx-auto flex w-full max-w-2xl flex-col gap-4'>\n      <div className='flex items-center gap-4 border-b pb-2'>\n        <Skeleton className='size-8 rounded-md' />\n        <Skeleton className='h-8 flex-1' />\n        <Skeleton className='h-8 w-24' />\n        <Skeleton className='h-8 w-20' />\n      </div>\n      {Array.from({ length: 4 }).map((_, i) => (\n        <div key={i} className='flex items-center gap-4'>\n          <Skeleton className='size-8 rounded-md' />\n          <Skeleton className='h-8 flex-1' />\n          <Skeleton className='h-8 w-24' />\n          <Skeleton className='h-8 w-20' />\n        </div>\n      ))}\n    </div>\n  )\n}\n\nexport default SkeletonTable\n",
       "type": "registry:component",
-      "target": "components/astrale/component/skeleton/skeleton-11.tsx"
+      "target": "components/astrale/components/skeleton/skeleton-11.tsx"
     }
   ],
   "meta": {

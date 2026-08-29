@@ -13,7 +13,7 @@
       "path": "source/components/textarea/textarea-12/textarea-12.tsx",
       "content": "import { useId } from 'react'\nimport { Textarea } from '@astrale-os/ui/textarea'\nimport { Label } from '@astrale-os/ui/label'\nimport { HomeIcon } from \"lucide-react\"\n\nconst TextareaEndIconDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>Textarea with end icon</Label>\n      <div className='relative'>\n        <div className='text-muted-foreground pointer-events-none absolute top-2.5 right-0 flex items-center justify-center pr-3 peer-disabled:opacity-50'>\n          <HomeIcon className='size-4' />\n          <span className='sr-only'>Address</span>\n        </div>\n        <Textarea id={id} placeholder='Address' className='peer pr-9' />\n      </div>\n    </div>\n  )\n}\n\nexport default TextareaEndIconDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/textarea/textarea-12.tsx"
+      "target": "components/astrale/components/textarea/textarea-12.tsx"
     }
   ],
   "meta": {

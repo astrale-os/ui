@@ -11,7 +11,7 @@
       "path": "source/components/separator/separator-04/separator-04.tsx",
       "content": "import { Separator } from '@astrale-os/ui/separator'\n\nconst SeparatorVerticalDescriptionDemo = () => {\n  return (\n    <div className='flex items-center gap-4 text-center text-sm'>\n      <div className='flex flex-col items-center gap-1'>\n        <span className='text-lg font-medium'>128</span>\n        <span className='text-muted-foreground text-xs font-medium uppercase'>Posts</span>\n      </div>\n      <Separator orientation='vertical' className='h-12' />\n      <div className='flex flex-col items-center gap-1'>\n        <span className='text-lg font-medium'>12.4k</span>\n        <span className='text-muted-foreground text-xs font-medium uppercase'>Followers</span>\n      </div>\n      <Separator orientation='vertical' className='h-12' />\n      <div className='flex flex-col items-center gap-1'>\n        <span className='text-lg font-medium'>890</span>\n        <span className='text-muted-foreground text-xs font-medium uppercase'>Following</span>\n      </div>\n    </div>\n  )\n}\n\nexport default SeparatorVerticalDescriptionDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/separator/separator-04.tsx"
+      "target": "components/astrale/components/separator/separator-04.tsx"
     }
   ],
   "meta": {

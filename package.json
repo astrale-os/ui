@@ -19,6 +19,7 @@
     "test:contracts": "node --test scripts/*.test.mjs .release/*.test.mjs",
     "test:components": "pnpm --filter @astrale-os/ui test",
     "test:playground-unit": "pnpm --filter @astrale-os/ui-playground test:unit",
+    "theme-generator:qualify": "ASTRALE_THEME_GENERATOR_CORPUS=1 pnpm --filter @astrale-os/ui-playground exec vitest run src/theme/generator.corpus.test.tsx --maxWorkers=1 --pool=threads",
     "test:registry-behavior": "pnpm --filter @astrale-os/ui-registry-workspace test",
     "test:security": "node scripts/security-policy.mjs",
     "themes:build": "node scripts/build-themes.mjs",
@@ -56,7 +57,7 @@
     "package:qualify": "node scripts/qualify-package.mjs",
     "qualify:publication": "node scripts/qualify-publication.mjs",
     "check": "pnpm build && pnpm format:check && pnpm lint && pnpm typecheck && pnpm test:contracts && pnpm test:playground-unit && pnpm search:check && pnpm request:check && pnpm domain:check && pnpm catalog:check && pnpm registry:check && pnpm playground:typecheck",
-    "qualify": "pnpm check && pnpm test:components && pnpm test:registry-behavior && pnpm test:security && pnpm build && pnpm registry:build && pnpm package:qualify && pnpm registry:qualify && pnpm playground:build && pnpm playground:test && pnpm playground:test:production",
+    "qualify": "pnpm check && pnpm theme-generator:qualify && pnpm test:components && pnpm test:registry-behavior && pnpm test:security && pnpm build && pnpm registry:build && pnpm package:qualify && pnpm registry:qualify && pnpm playground:build && pnpm playground:test && pnpm playground:test:production",
     "prepare": "husky"
   },
   "devDependencies": {

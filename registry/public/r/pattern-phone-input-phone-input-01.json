@@ -15,7 +15,7 @@
       "path": "source/patterns/phone-input/phone-input-01/phone-input-01.tsx",
       "content": "import { PhoneInput } from '@/components/ui/phone-input'\n\nconst PhoneInputDemo = () => {\n  return <PhoneInput placeholder='Enter contact number' />\n}\n\nexport default PhoneInputDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/pattern/phone-input/phone-input-01.tsx"
+      "target": "components/astrale/components/phone-input/phone-input-01.tsx"
     },
     {
       "path": "source/patterns/phone-input/phone-input-01/support/components/ui/phone-input.tsx",

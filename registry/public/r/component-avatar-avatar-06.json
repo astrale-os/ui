@@ -12,7 +12,7 @@
       "path": "source/components/avatar/avatar-06/avatar-06.tsx",
       "content": "import { Avatar, AvatarFallback } from '@astrale-os/ui/avatar'\nimport { HomeIcon } from \"lucide-react\"\n\nconst AvatarIconDemo = () => {\n  return (\n    <Avatar className='after:border-indigo-500/10'>\n      <AvatarFallback className='bg-indigo-500/10 text-indigo-500'>\n        <HomeIcon className='size-4' />\n      </AvatarFallback>\n    </Avatar>\n  )\n}\n\nexport default AvatarIconDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/avatar/avatar-06.tsx"
+      "target": "components/astrale/components/avatar/avatar-06.tsx"
     }
   ],
   "meta": {

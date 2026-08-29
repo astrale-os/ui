@@ -13,7 +13,7 @@
         {
           "path": "accordion-01.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/accordion/accordion-01.tsx"
+          "target": "components/astrale/components/accordion/accordion-01.tsx"
         }
       ],
       "meta": {
@@ -37,7 +37,7 @@
         {
           "path": "accordion-02.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/accordion/accordion-02.tsx"
+          "target": "components/astrale/components/accordion/accordion-02.tsx"
         }
       ],
       "meta": {
@@ -57,7 +57,7 @@
         {
           "path": "accordion-03.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/accordion/accordion-03.tsx"
+          "target": "components/astrale/components/accordion/accordion-03.tsx"
         }
       ],
       "meta": {
@@ -82,7 +82,7 @@
         {
           "path": "accordion-04.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/accordion/accordion-04.tsx"
+          "target": "components/astrale/components/accordion/accordion-04.tsx"
         }
       ],
       "meta": {
@@ -102,7 +102,7 @@
         {
           "path": "accordion-05.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/accordion/accordion-05.tsx"
+          "target": "components/astrale/components/accordion/accordion-05.tsx"
         }
       ],
       "meta": {
@@ -127,7 +127,7 @@
         {
           "path": "accordion-06.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/accordion/accordion-06.tsx"
+          "target": "components/astrale/components/accordion/accordion-06.tsx"
         }
       ],
       "meta": {
@@ -147,7 +147,7 @@
         {
           "path": "accordion-07.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/accordion/accordion-07.tsx"
+          "target": "components/astrale/components/accordion/accordion-07.tsx"
         }
       ],
       "meta": {
@@ -172,7 +172,7 @@
         {
           "path": "accordion-08.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/accordion/accordion-08.tsx"
+          "target": "components/astrale/components/accordion/accordion-08.tsx"
         }
       ],
       "meta": {
@@ -192,7 +192,7 @@
         {
           "path": "accordion-09.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/accordion/accordion-09.tsx"
+          "target": "components/astrale/components/accordion/accordion-09.tsx"
         }
       ],
       "meta": {
@@ -212,7 +212,7 @@
         {
           "path": "accordion-10.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/accordion/accordion-10.tsx"
+          "target": "components/astrale/components/accordion/accordion-10.tsx"
         }
       ],
       "meta": {
@@ -232,7 +232,7 @@
         {
           "path": "accordion-11.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/accordion/accordion-11.tsx"
+          "target": "components/astrale/components/accordion/accordion-11.tsx"
         }
       ],
       "meta": {
@@ -257,7 +257,7 @@
         {
           "path": "accordion-12.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/accordion/accordion-12.tsx"
+          "target": "components/astrale/components/accordion/accordion-12.tsx"
         }
       ],
       "meta": {
@@ -277,7 +277,7 @@
         {
           "path": "accordion-13.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/accordion/accordion-13.tsx"
+          "target": "components/astrale/components/accordion/accordion-13.tsx"
         }
       ],
       "meta": {
@@ -297,7 +297,7 @@
         {
           "path": "accordion-14.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/accordion/accordion-14.tsx"
+          "target": "components/astrale/components/accordion/accordion-14.tsx"
         }
       ],
       "meta": {
@@ -322,7 +322,7 @@
         {
           "path": "accordion-15.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/accordion/accordion-15.tsx"
+          "target": "components/astrale/components/accordion/accordion-15.tsx"
         }
       ],
       "meta": {
@@ -342,7 +342,7 @@
         {
           "path": "accordion-16.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/accordion/accordion-16.tsx"
+          "target": "components/astrale/components/accordion/accordion-16.tsx"
         }
       ],
       "meta": {

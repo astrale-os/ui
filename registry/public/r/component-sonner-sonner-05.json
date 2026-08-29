@@ -12,7 +12,7 @@
       "path": "source/components/sonner/sonner-05/sonner-05.tsx",
       "content": "import { toast } from 'sonner'\n\nimport { Button } from '@astrale-os/ui/button'\n\nconst ClosableSonnerDemo = () => {\n  return (\n    <Button\n      variant='outline'\n      onClick={() =>\n        toast('Action completed successfully!', {\n          closeButton: true\n        })\n      }\n    >\n      Closable Toast\n    </Button>\n  )\n}\n\nexport default ClosableSonnerDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/sonner/sonner-05.tsx"
+      "target": "components/astrale/components/sonner/sonner-05.tsx"
     }
   ],
   "meta": {

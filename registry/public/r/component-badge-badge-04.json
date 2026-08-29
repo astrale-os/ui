@@ -11,7 +11,7 @@
       "path": "source/components/badge/badge-04/badge-04.tsx",
       "content": "import { Badge } from '@astrale-os/ui/badge'\n\nconst BadgeOutlineDemo = () => {\n  return <Badge variant='outline'>Outline</Badge>\n}\n\nexport default BadgeOutlineDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/badge/badge-04.tsx"
+      "target": "components/astrale/components/badge/badge-04.tsx"
     }
   ],
   "meta": {

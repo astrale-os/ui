@@ -18,7 +18,7 @@
         {
           "path": "combobox-01.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/combobox/combobox-01.tsx"
+          "target": "components/astrale/components/combobox/combobox-01.tsx"
         },
         {
           "path": "support/components/ui/combobox.tsx",
@@ -48,7 +48,7 @@
         {
           "path": "combobox-02.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/combobox/combobox-02.tsx"
+          "target": "components/astrale/components/combobox/combobox-02.tsx"
         },
         {
           "path": "support/components/ui/combobox.tsx",
@@ -78,7 +78,7 @@
         {
           "path": "combobox-03.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/combobox/combobox-03.tsx"
+          "target": "components/astrale/components/combobox/combobox-03.tsx"
         },
         {
           "path": "support/components/ui/combobox.tsx",
@@ -108,7 +108,7 @@
         {
           "path": "combobox-04.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/combobox/combobox-04.tsx"
+          "target": "components/astrale/components/combobox/combobox-04.tsx"
         },
         {
           "path": "support/components/ui/combobox.tsx",
@@ -138,7 +138,7 @@
         {
           "path": "combobox-05.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/combobox/combobox-05.tsx"
+          "target": "components/astrale/components/combobox/combobox-05.tsx"
         },
         {
           "path": "support/components/ui/combobox.tsx",
@@ -168,7 +168,7 @@
         {
           "path": "combobox-06.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/combobox/combobox-06.tsx"
+          "target": "components/astrale/components/combobox/combobox-06.tsx"
         },
         {
           "path": "support/components/ui/combobox.tsx",
@@ -198,7 +198,7 @@
         {
           "path": "combobox-07.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/combobox/combobox-07.tsx"
+          "target": "components/astrale/components/combobox/combobox-07.tsx"
         },
         {
           "path": "support/components/ui/combobox.tsx",
@@ -228,7 +228,7 @@
         {
           "path": "combobox-08.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/combobox/combobox-08.tsx"
+          "target": "components/astrale/components/combobox/combobox-08.tsx"
         },
         {
           "path": "support/components/ui/combobox.tsx",
@@ -258,7 +258,7 @@
         {
           "path": "combobox-09.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/combobox/combobox-09.tsx"
+          "target": "components/astrale/components/combobox/combobox-09.tsx"
         },
         {
           "path": "support/components/ui/combobox.tsx",
@@ -288,7 +288,7 @@
         {
           "path": "combobox-10.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/combobox/combobox-10.tsx"
+          "target": "components/astrale/components/combobox/combobox-10.tsx"
         },
         {
           "path": "support/components/ui/combobox.tsx",
@@ -318,7 +318,7 @@
         {
           "path": "combobox-11.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/combobox/combobox-11.tsx"
+          "target": "components/astrale/components/combobox/combobox-11.tsx"
         },
         {
           "path": "support/components/ui/combobox.tsx",
@@ -348,7 +348,7 @@
         {
           "path": "combobox-12.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/combobox/combobox-12.tsx"
+          "target": "components/astrale/components/combobox/combobox-12.tsx"
         },
         {
           "path": "support/components/ui/combobox.tsx",
@@ -378,7 +378,7 @@
         {
           "path": "combobox-13.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/combobox/combobox-13.tsx"
+          "target": "components/astrale/components/combobox/combobox-13.tsx"
         },
         {
           "path": "support/components/ui/combobox.tsx",
@@ -408,7 +408,7 @@
         {
           "path": "combobox-14.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/combobox/combobox-14.tsx"
+          "target": "components/astrale/components/combobox/combobox-14.tsx"
         },
         {
           "path": "support/components/ui/combobox.tsx",

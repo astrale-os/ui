@@ -11,7 +11,7 @@
       "path": "source/components/typography/typography-01/typography-01.tsx",
       "content": "const TypographyH1Demo = () => {\n  return <h1 className='text-3xl font-extrabold text-balance md:text-4xl'>h1 - A New Dawn of Silent Laughter</h1>\n}\n\nexport default TypographyH1Demo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/typography/typography-01.tsx"
+      "target": "components/astrale/components/typography/typography-01.tsx"
     }
   ],
   "meta": {

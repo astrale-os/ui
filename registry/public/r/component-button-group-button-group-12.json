@@ -12,7 +12,7 @@
       "path": "source/components/button-group/button-group-12/button-group-12.tsx",
       "content": "import { Button } from '@astrale-os/ui/button'\nimport { ButtonGroup } from '@astrale-os/ui/button-group'\nimport { SettingsIcon, BoxIcon, ChartBarBigIcon } from \"lucide-react\"\n\nconst ButtonGroupGhostDemo = () => {\n  return (\n    <ButtonGroup>\n      <Button variant='ghost'>\n        <SettingsIcon\n        />\n        Settings\n      </Button>\n      <Button variant='ghost'>\n        <BoxIcon\n        />\n        Dashboard\n      </Button>\n      <Button variant='ghost'>\n        <ChartBarBigIcon\n        />\n        Analytics\n      </Button>\n    </ButtonGroup>\n  )\n}\n\nexport default ButtonGroupGhostDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/button-group/button-group-12.tsx"
+      "target": "components/astrale/components/button-group/button-group-12.tsx"
     }
   ],
   "meta": {

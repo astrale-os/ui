@@ -11,7 +11,7 @@
       "path": "source/components/badge/badge-01/badge-01.tsx",
       "content": "import { Badge } from '@astrale-os/ui/badge'\n\nconst BadgeDemo = () => {\n  return <Badge>Default</Badge>\n}\n\nexport default BadgeDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/badge/badge-01.tsx"
+      "target": "components/astrale/components/badge/badge-01.tsx"
     }
   ],
   "meta": {

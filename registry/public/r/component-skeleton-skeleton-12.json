@@ -11,7 +11,7 @@
       "path": "source/components/skeleton/skeleton-12/skeleton-12.tsx",
       "content": "import { Card, CardContent, CardHeader } from '@astrale-os/ui/card'\nimport { Skeleton } from '@astrale-os/ui/skeleton'\n\nconst SkeletonWidgetsCards = () => {\n  return (\n    <div className='mx-auto grid w-full max-w-2xl grid-cols-2 gap-4 md:grid-cols-4'>\n      {Array.from({ length: 4 }).map((_, i) => (\n        <Card key={i}>\n          <CardHeader className='gap-2 pb-2'>\n            <Skeleton className='h-4 w-10' />\n            <Skeleton className='h-8 w-24' />\n          </CardHeader>\n          <CardContent className='space-y-2'>\n            <Skeleton className='h-4 w-full' />\n          </CardContent>\n        </Card>\n      ))}\n    </div>\n  )\n}\n\nexport default SkeletonWidgetsCards\n",
       "type": "registry:component",
-      "target": "components/astrale/component/skeleton/skeleton-12.tsx"
+      "target": "components/astrale/components/skeleton/skeleton-12.tsx"
     }
   ],
   "meta": {

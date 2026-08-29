@@ -12,7 +12,7 @@
       "path": "source/components/badge/badge-20/badge-20.tsx",
       "content": "import { Badge } from '@astrale-os/ui/badge'\nimport { BanIcon } from \"lucide-react\"\n\nconst BadgeFailedDemo = () => {\n  return (\n    <Badge\n      variant='outline'\n      className='border-destructive text-destructive [a]:hover:bg-destructive/10 [a]:hover:text-destructive/90 rounded-sm'\n    >\n      <BanIcon className='size-3' />\n      Failed\n    </Badge>\n  )\n}\n\nexport default BadgeFailedDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/badge/badge-20.tsx"
+      "target": "components/astrale/components/badge/badge-20.tsx"
     }
   ],
   "meta": {

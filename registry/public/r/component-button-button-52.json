@@ -13,7 +13,7 @@
       "path": "source/components/button/button-52/button-52.tsx",
       "content": "import { PrimaryOrionButton } from '@/components/ui/orion-button'\n\nconst PrimaryOrionButtonDemo = () => {\n  return <PrimaryOrionButton>Orion Button</PrimaryOrionButton>\n}\n\nexport default PrimaryOrionButtonDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/button/button-52.tsx"
+      "target": "components/astrale/components/button/button-52.tsx"
     },
     {
       "path": "source/components/button/button-52/support/components/ui/orion-button.tsx",

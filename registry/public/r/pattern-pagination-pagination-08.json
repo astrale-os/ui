@@ -11,7 +11,7 @@
       "path": "source/patterns/pagination/pagination-08/pagination-08.tsx",
       "content": "import {\n  Pagination,\n  PaginationContent,\n  PaginationEllipsis,\n  PaginationItem,\n  PaginationLink,\n  PaginationNext,\n  PaginationPrevious\n} from '@astrale-os/ui/pagination'\nimport { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@astrale-os/ui/tooltip'\n\nconst PaginationWithEllipsisDemo = () => {\n  return (\n    <Pagination>\n      <PaginationContent>\n        <PaginationItem>\n          <PaginationPrevious href='#' />\n        </PaginationItem>\n        <PaginationItem>\n          <PaginationLink href='#'>1</PaginationLink>\n        </PaginationItem>\n        <PaginationItem>\n          <PaginationLink href='#' isActive>\n            2\n          </PaginationLink>\n        </PaginationItem>\n        <PaginationItem>\n          <TooltipProvider>\n            <Tooltip>\n              <TooltipTrigger\n                render={\n                  <span tabIndex={0}>\n                    <PaginationEllipsis />\n                  </span>\n                }\n              />\n              <TooltipContent>\n                <p>8 other pages</p>\n              </TooltipContent>\n            </Tooltip>\n          </TooltipProvider>\n        </PaginationItem>\n        <PaginationItem>\n          <PaginationNext href='#' />\n        </PaginationItem>\n      </PaginationContent>\n    </Pagination>\n  )\n}\n\nexport default PaginationWithEllipsisDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/pattern/pagination/pagination-08.tsx"
+      "target": "components/astrale/components/pagination/pagination-08.tsx"
     }
   ],
   "meta": {

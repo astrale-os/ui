@@ -11,7 +11,7 @@
       "path": "source/components/button/button-11/button-11.tsx",
       "content": "import { Button } from '@astrale-os/ui/button'\n\nconst ButtonGradientDemo = () => {\n  return (\n    <Button className='from-primary via-primary/60 to-primary border-0 bg-transparent bg-linear-to-r bg-size-[200%_auto] hover:bg-transparent hover:bg-position-[99%_center]'>\n      Get Started\n    </Button>\n  )\n}\n\nexport default ButtonGradientDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/button/button-11.tsx"
+      "target": "components/astrale/components/button/button-11.tsx"
     }
   ],
   "meta": {

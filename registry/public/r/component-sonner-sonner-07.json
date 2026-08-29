@@ -12,7 +12,7 @@
       "path": "source/components/sonner/sonner-07/sonner-07.tsx",
       "content": "import { toast } from 'sonner'\n\nimport { Button } from '@astrale-os/ui/button'\n\nconst SonnerWithPromiseDemo = () => {\n  const promise = () =>\n    new Promise((resolve, reject) =>\n      setTimeout(() => {\n        if (Math.random() < 0.5) {\n          resolve('foo')\n        } else {\n          reject('fox')\n        }\n      }, 2000)\n    )\n\n  return (\n    <Button\n      variant='outline'\n      onClick={() =>\n        toast.promise(promise, {\n          loading: 'Loading...',\n          success: 'Toast has been added successfully!',\n          error: 'Oops, there was an error adding the toast.'\n        })\n      }\n    >\n      Toast with promise\n    </Button>\n  )\n}\n\nexport default SonnerWithPromiseDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/sonner/sonner-07.tsx"
+      "target": "components/astrale/components/sonner/sonner-07.tsx"
     }
   ],
   "meta": {

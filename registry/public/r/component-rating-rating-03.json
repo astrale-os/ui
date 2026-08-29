@@ -14,7 +14,7 @@
       "path": "source/components/rating/rating-03/rating-03.tsx",
       "content": "import { Rating } from '@/components/ui/rating'\n\nconst RatingReadOnlyDemo = () => {\n  return (\n    <div className='flex flex-col items-start justify-center gap-2'>\n      <p className='text-start text-sm font-medium'>Read Only</p>\n      <Rating readOnly size={24} precision={0.5} value={3.5} />\n    </div>\n  )\n}\n\nexport default RatingReadOnlyDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/rating/rating-03.tsx"
+      "target": "components/astrale/components/rating/rating-03.tsx"
     },
     {
       "path": "source/components/rating/rating-03/support/components/ui/rating.tsx",

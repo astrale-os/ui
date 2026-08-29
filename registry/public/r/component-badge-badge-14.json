@@ -11,7 +11,7 @@
       "path": "source/components/badge/badge-14/badge-14.tsx",
       "content": "import { Badge } from '@astrale-os/ui/badge'\n\nconst BadgeGradientDemo = () => {\n  return (\n    <Badge className='rounded-sm border-transparent bg-linear-to-r from-indigo-500 to-pink-500 bg-size-[105%] bg-center text-white'>\n      Gradient\n    </Badge>\n  )\n}\n\nexport default BadgeGradientDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/badge/badge-14.tsx"
+      "target": "components/astrale/components/badge/badge-14.tsx"
     }
   ],
   "meta": {

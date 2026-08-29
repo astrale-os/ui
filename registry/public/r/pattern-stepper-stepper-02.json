@@ -13,7 +13,7 @@
       "path": "source/patterns/stepper/stepper-02/stepper-02.tsx",
       "content": "import {\n  Stepper,\n  StepperItem,\n  StepperTrigger,\n  StepperIndicator,\n  StepperSeparator,\n  StepperTitle,\n  StepperNav\n} from '@/components/ui/stepper'\n\nconst steps = [\n  { id: 'details', title: 'Details' },\n  { id: 'confirm', title: 'Confirm' },\n  { id: 'done', title: 'Done' }\n]\n\nconst StepperLabelDemo = () => {\n  return (\n    <Stepper steps={steps} className='flex items-center max-md:w-xs md:w-full md:max-w-3xl'>\n      <StepperNav>\n        {steps.map((step, index) => (\n          <StepperItem key={index} stepId={step.id} className='relative flex-1'>\n            <StepperTrigger className='flex flex-col gap-2.5'>\n              <StepperIndicator>{index + 1}</StepperIndicator>\n              <StepperTitle>{step.title}</StepperTitle>\n            </StepperTrigger>\n            {steps.length > index + 1 && (\n              <StepperSeparator className='absolute inset-x-0 top-2 right-[calc(-50%+18px)] left-[calc(50%+18px)]' />\n            )}\n          </StepperItem>\n        ))}\n      </StepperNav>\n    </Stepper>\n  )\n}\n\nexport default StepperLabelDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/pattern/stepper/stepper-02.tsx"
+      "target": "components/astrale/components/stepper/stepper-02.tsx"
     },
     {
       "path": "source/patterns/stepper/stepper-02/support/components/ui/stepper.tsx",

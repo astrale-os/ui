@@ -119,7 +119,7 @@ function project(source) {
 
   return {
     $schema: schema,
-    version: 2,
+    version: 5,
     name: source.name,
     label: label(source.name),
     description: `Shadcn Studio ${label(source.name)} preset, mechanically projected to Astrale theme tokens.`,
@@ -128,8 +128,18 @@ function project(source) {
       dark: colorMode(light, dark),
     },
     typography: {
-      body: fontStack(body, 'ui-serif, serif'),
-      heading: fontStack(heading, 'ui-sans-serif, sans-serif'),
+      body: {
+        family: fontStack(body, 'ui-serif, serif'),
+        tracking: '0',
+        leading: '1.5',
+        weight: 400,
+      },
+      heading: {
+        family: fontStack(heading, 'ui-sans-serif, sans-serif'),
+        tracking: '-0.01em',
+        leading: '1.2',
+        weight: 600,
+      },
       mono: fontStack(mono, 'ui-monospace, monospace'),
     },
     geometry: { radius, panelRadius: radius },

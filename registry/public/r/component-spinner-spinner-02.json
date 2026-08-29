@@ -12,7 +12,7 @@
       "path": "source/components/spinner/spinner-02/spinner-02.tsx",
       "content": "import { RotateCwIcon, LoaderPinwheelIcon, RefreshCcwIcon } from \"lucide-react\";\n\nconst SpinnerIconDemo = () => {\n  return (\n    <div className='flex items-center gap-6'>\n      <RotateCwIcon role='status' aria-label='Loading' className='size-6 animate-spin' />\n      <LoaderPinwheelIcon role='status' aria-label='Loading' className='size-6 animate-spin' />\n      <RefreshCcwIcon role='status' aria-label='Loading' className='direction-[reverse] size-6 animate-spin' />\n    </div>\n  )\n}\n\nexport default SpinnerIconDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/spinner/spinner-02.tsx"
+      "target": "components/astrale/components/spinner/spinner-02.tsx"
     }
   ],
   "meta": {

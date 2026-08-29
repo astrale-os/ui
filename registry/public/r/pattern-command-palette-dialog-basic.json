@@ -11,7 +11,7 @@
       "path": "registry/patterns/command-palette/dialog-basic.tsx",
       "content": "import { Button } from '@astrale-os/ui/button'\nimport {\n  Command,\n  CommandEmpty,\n  CommandGroup,\n  CommandInput,\n  CommandItem,\n  CommandList,\n} from '@astrale-os/ui/command'\nimport {\n  Dialog,\n  DialogContent,\n  DialogDescription,\n  DialogTitle,\n  DialogTrigger,\n} from '@astrale-os/ui/dialog'\nexport function CommandPaletteDialog({\n  className,\n  style,\n  actions,\n  onAction,\n}: {\n  className?: string\n  style?: React.CSSProperties\n\n  actions: readonly { id: string; label: string }[]\n  onAction(id: string): void\n}) {\n  return (\n    <Dialog>\n      <DialogTrigger render={<Button variant=\"outline\" />}>Open command palette</DialogTrigger>\n      <DialogContent\n        data-slot=\"pattern-command-palette-dialog-basic\"\n        style={style}\n        className={className}\n      >\n        <DialogTitle>Commands</DialogTitle>\n        <DialogDescription>Search available actions.</DialogDescription>\n        <Command>\n          <CommandInput placeholder=\"Search commands\" />\n          <CommandList>\n            <CommandEmpty>No command found.</CommandEmpty>\n            <CommandGroup>\n              {actions.map((action) => (\n                <CommandItem key={action.id} onSelect={() => onAction(action.id)}>\n                  {action.label}\n                </CommandItem>\n              ))}\n            </CommandGroup>\n          </CommandList>\n        </Command>\n      </DialogContent>\n    </Dialog>\n  )\n}\n",
       "type": "registry:component",
-      "target": "components/astrale/pattern/command-palette/dialog-basic.tsx"
+      "target": "components/astrale/components/command-palette/dialog-basic.tsx"
     }
   ],
   "meta": {

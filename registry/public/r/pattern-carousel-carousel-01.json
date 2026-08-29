@@ -14,7 +14,7 @@
       "path": "source/patterns/carousel/carousel-01/carousel-01.tsx",
       "content": "import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'\n\nconst images = [\n  {\n    image: 'https://cdn.shadcnstudio.com/ss-assets/blocks/marketing/gallery/image-34.png',\n    alt: 'Flowers'\n  },\n  {\n    image: 'https://cdn.shadcnstudio.com/ss-assets/blocks/marketing/gallery/image-35.png',\n    alt: 'Flowers'\n  },\n  {\n    image: 'https://cdn.shadcnstudio.com/ss-assets/blocks/marketing/gallery/image-36.png',\n    alt: 'Flowers'\n  },\n  {\n    image: 'https://cdn.shadcnstudio.com/ss-assets/blocks/marketing/gallery/image-37.png',\n    alt: 'Flowers'\n  },\n  {\n    image: 'https://cdn.shadcnstudio.com/ss-assets/blocks/marketing/gallery/image-76.png',\n    alt: 'Flowers'\n  }\n]\n\nconst CarouselDemo = () => {\n  return (\n    <Carousel className='w-full max-w-48'>\n      <CarouselContent>\n        {images.map((image, index) => (\n          <CarouselItem key={index}>\n            <div className='p-1'>\n              <img src={image.image} alt={image.alt} className='w-auto rounded-md object-cover' />\n            </div>\n          </CarouselItem>\n        ))}\n      </CarouselContent>\n      <CarouselPrevious />\n      <CarouselNext />\n    </Carousel>\n  )\n}\n\nexport default CarouselDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/pattern/carousel/carousel-01.tsx"
+      "target": "components/astrale/components/carousel/carousel-01.tsx"
     },
     {
       "path": "source/patterns/carousel/carousel-01/support/components/ui/carousel.tsx",

@@ -12,7 +12,7 @@
       "path": "source/components/button/button-15/button-15.tsx",
       "content": "import { Button } from '@astrale-os/ui/button'\nimport { Trash2Icon } from \"lucide-react\"\n\nconst ButtonDiscardDemo = () => {\n  return (\n    <Button\n      variant='outline'\n      className='border-destructive text-destructive hover:bg-destructive/10 hover:text-destructive focus-visible:border-destructive focus-visible:ring-destructive/20 dark:border-destructive dark:hover:bg-destructive/10 dark:focus-visible:ring-destructive/40'\n    >\n      <Trash2Icon\n      />\n      Discard\n    </Button>\n  )\n}\n\nexport default ButtonDiscardDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/button/button-15.tsx"
+      "target": "components/astrale/components/button/button-15.tsx"
     }
   ],
   "meta": {

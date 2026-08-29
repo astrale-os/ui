@@ -13,7 +13,7 @@
       "path": "source/components/input/input-14/input-14.tsx",
       "content": "import { useId } from 'react'\nimport { InputGroup, InputGroupAddon, InputGroupInput } from '@astrale-os/ui/input-group'\nimport { Label } from '@astrale-os/ui/label'\nimport { UserIcon } from \"lucide-react\"\n\nconst InputStartIconDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>Input with start icon</Label>\n      <InputGroup className='max-w-xs'>\n        <InputGroupAddon>\n          <UserIcon className='size-4' />\n        </InputGroupAddon>\n        <InputGroupInput id={id} placeholder='Username' />\n      </InputGroup>\n    </div>\n  )\n}\n\nexport default InputStartIconDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/input/input-14.tsx"
+      "target": "components/astrale/components/input/input-14.tsx"
     }
   ],
   "meta": {

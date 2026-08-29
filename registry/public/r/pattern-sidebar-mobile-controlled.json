@@ -11,7 +11,7 @@
       "path": "registry/patterns/sidebar/mobile-controlled.tsx",
       "content": "import { Button } from '@astrale-os/ui/button'\nimport {\n  Sheet,\n  SheetContent,\n  SheetDescription,\n  SheetTitle,\n  SheetTrigger,\n} from '@astrale-os/ui/sheet'\nexport function MobileSidebarControlled({\n  className,\n  style,\n  open,\n  links,\n  onOpenChange,\n  onNavigate,\n}: {\n  className?: string\n  style?: React.CSSProperties\n\n  open: boolean\n  links: readonly { id: string; label: string }[]\n  onOpenChange(open: boolean): void\n  onNavigate(id: string): void\n}) {\n  return (\n    <Sheet open={open} onOpenChange={onOpenChange}>\n      <SheetTrigger render={<Button variant=\"outline\" />}>Open navigation</SheetTrigger>\n      <SheetContent\n        data-slot=\"pattern-sidebar-mobile-controlled\"\n        style={style}\n        side=\"left\"\n        className={className}\n      >\n        <SheetTitle>Navigation</SheetTitle>\n        <SheetDescription>Choose a destination.</SheetDescription>\n        <nav data-slot=\"patterns-sidebar-mobile-controlled-nav\" className=\"grid\">\n          {links.map((link) => (\n            <Button\n              key={link.id}\n              variant=\"ghost\"\n              onClick={() => {\n                onNavigate(link.id)\n                onOpenChange(false)\n              }}\n            >\n              {link.label}\n            </Button>\n          ))}\n        </nav>\n      </SheetContent>\n    </Sheet>\n  )\n}\n",
       "type": "registry:component",
-      "target": "components/astrale/pattern/sidebar/mobile-controlled.tsx"
+      "target": "components/astrale/components/sidebar/mobile-controlled.tsx"
     }
   ],
   "meta": {

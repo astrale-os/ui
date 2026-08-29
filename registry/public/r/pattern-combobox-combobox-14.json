@@ -14,7 +14,7 @@
       "path": "source/patterns/combobox/combobox-14/combobox-14.tsx",
       "content": "'use client'\n\nimport { useId } from 'react'\n\nimport {\n  Combobox,\n  ComboboxContent,\n  ComboboxEmpty,\n  ComboboxInput,\n  ComboboxItem,\n  ComboboxList\n} from '@/components/ui/combobox'\nimport { Label } from '@astrale-os/ui/label'\n\nconst frameworks = ['Next.js', 'SvelteKit', 'Nuxt.js', 'Remix', 'Astro'] as const\n\nconst ComboboxSlideInDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>Combobox menu zoom-in</Label>\n      <Combobox id={id} items={frameworks}>\n        <ComboboxInput placeholder='Select a framework' />\n        <ComboboxContent className='data-open:zoom-in-0! duration-500'>\n          <ComboboxEmpty>No items found.</ComboboxEmpty>\n          <ComboboxList>\n            {item => (\n              <ComboboxItem key={item} value={item}>\n                {item}\n              </ComboboxItem>\n            )}\n          </ComboboxList>\n        </ComboboxContent>\n      </Combobox>\n    </div>\n  )\n}\n\nexport default ComboboxSlideInDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/pattern/combobox/combobox-14.tsx"
+      "target": "components/astrale/components/combobox/combobox-14.tsx"
     },
     {
       "path": "source/patterns/combobox/combobox-14/support/components/ui/combobox.tsx",

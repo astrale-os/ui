@@ -13,7 +13,7 @@
         {
           "path": "menubar-01.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/menubar/menubar-01.tsx"
+          "target": "components/astrale/components/menubar/menubar-01.tsx"
         }
       ],
       "meta": {
@@ -33,7 +33,7 @@
         {
           "path": "menubar-02.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/menubar/menubar-02.tsx"
+          "target": "components/astrale/components/menubar/menubar-02.tsx"
         }
       ],
       "meta": {
@@ -53,7 +53,7 @@
         {
           "path": "menubar-03.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/menubar/menubar-03.tsx"
+          "target": "components/astrale/components/menubar/menubar-03.tsx"
         }
       ],
       "meta": {
@@ -73,7 +73,7 @@
         {
           "path": "menubar-04.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/menubar/menubar-04.tsx"
+          "target": "components/astrale/components/menubar/menubar-04.tsx"
         }
       ],
       "meta": {
@@ -93,7 +93,7 @@
         {
           "path": "menubar-05.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/menubar/menubar-05.tsx"
+          "target": "components/astrale/components/menubar/menubar-05.tsx"
         }
       ],
       "meta": {
@@ -113,7 +113,7 @@
         {
           "path": "menubar-06.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/menubar/menubar-06.tsx"
+          "target": "components/astrale/components/menubar/menubar-06.tsx"
         }
       ],
       "meta": {
@@ -133,7 +133,7 @@
         {
           "path": "menubar-07.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/menubar/menubar-07.tsx"
+          "target": "components/astrale/components/menubar/menubar-07.tsx"
         }
       ],
       "meta": {
@@ -153,7 +153,7 @@
         {
           "path": "menubar-08.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/menubar/menubar-08.tsx"
+          "target": "components/astrale/components/menubar/menubar-08.tsx"
         }
       ],
       "meta": {

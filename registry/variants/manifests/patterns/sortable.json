@@ -23,7 +23,7 @@
         {
           "path": "sortable-01.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/sortable/sortable-01.tsx"
+          "target": "components/astrale/components/sortable/sortable-01.tsx"
         },
         {
           "path": "support/components/ui/sortable.tsx",
@@ -58,7 +58,7 @@
         {
           "path": "sortable-02.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/sortable/sortable-02.tsx"
+          "target": "components/astrale/components/sortable/sortable-02.tsx"
         },
         {
           "path": "support/components/ui/sortable.tsx",
@@ -93,7 +93,7 @@
         {
           "path": "sortable-03.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/sortable/sortable-03.tsx"
+          "target": "components/astrale/components/sortable/sortable-03.tsx"
         },
         {
           "path": "support/components/ui/sortable.tsx",
@@ -127,7 +127,7 @@
         {
           "path": "sortable-04.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/sortable/sortable-04.tsx"
+          "target": "components/astrale/components/sortable/sortable-04.tsx"
         },
         {
           "path": "support/components/ui/sortable.tsx",
@@ -162,7 +162,7 @@
         {
           "path": "sortable-05.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/sortable/sortable-05.tsx"
+          "target": "components/astrale/components/sortable/sortable-05.tsx"
         },
         {
           "path": "support/components/ui/sortable.tsx",

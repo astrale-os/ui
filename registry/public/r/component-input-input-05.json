@@ -12,7 +12,7 @@
       "path": "source/components/input/input-05/input-05.tsx",
       "content": "import { useId } from 'react'\n\nimport { Input } from '@astrale-os/ui/input'\nimport { Label } from '@astrale-os/ui/label'\n\nconst InputReadOnlyDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>Read-only input</Label>\n      <Input\n        id={id}\n        type='email'\n        placeholder='Email address'\n        defaultValue='example@xyz.com'\n        className='read-only:bg-muted'\n        readOnly\n      />\n    </div>\n  )\n}\n\nexport default InputReadOnlyDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/input/input-05.tsx"
+      "target": "components/astrale/components/input/input-05.tsx"
     }
   ],
   "meta": {

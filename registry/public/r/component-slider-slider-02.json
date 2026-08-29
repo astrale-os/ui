@@ -11,7 +11,7 @@
       "path": "source/components/slider/slider-02/slider-02.tsx",
       "content": "import { Slider } from '@astrale-os/ui/slider'\nimport { Label } from '@astrale-os/ui/label'\n\nconst SliderMultiThumbDemo = () => {\n  return (\n    <div className='flex w-full max-w-xs flex-col gap-10'>\n      {/* Range Slider Section */}\n      <div className='space-y-4'>\n        <Label className='text-sm font-medium'>Range Slider</Label>\n        <Slider defaultValue={[25, 60]} max={100} step={1} />\n      </div>\n\n      {/* Multi-Thumb Slider Section */}\n      <div className='space-y-4'>\n        <Label className='text-sm font-medium'>Distribution Points</Label>\n        <Slider defaultValue={[20, 50, 80]} max={100} step={1} />\n      </div>\n    </div>\n  )\n}\n\nexport default SliderMultiThumbDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/slider/slider-02.tsx"
+      "target": "components/astrale/components/slider/slider-02.tsx"
     }
   ],
   "meta": {

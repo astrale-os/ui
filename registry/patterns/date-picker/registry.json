@@ -13,7 +13,7 @@
         {
           "path": "range.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/date-picker/range.tsx"
+          "target": "components/astrale/components/date-picker/range.tsx"
         }
       ],
       "meta": {
@@ -31,7 +31,7 @@
         {
           "path": "single.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/date-picker/single.tsx"
+          "target": "components/astrale/components/date-picker/single.tsx"
         }
       ],
       "meta": {

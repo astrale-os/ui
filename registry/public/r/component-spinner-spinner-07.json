@@ -12,7 +12,7 @@
       "path": "source/components/spinner/spinner-07/spinner-07.tsx",
       "content": "import {\n  InputGroup,\n  InputGroupAddon,\n  InputGroupButton,\n  InputGroupInput,\n  InputGroupTextarea\n} from '@astrale-os/ui/input-group'\nimport { Spinner } from '@astrale-os/ui/spinner'\nimport { ArrowUpIcon } from \"lucide-react\"\n\nconst SpinnerInputDemo = () => {\n  return (\n    <div className='flex w-full max-w-md flex-col gap-2'>\n      {/* Input with spinner */}\n      <InputGroup>\n        <InputGroupInput placeholder='Send a message...' />\n        <InputGroupAddon align='inline-end'>\n          <Spinner className='size-4' />\n        </InputGroupAddon>\n      </InputGroup>\n\n      {/* Textarea with spinner */}\n      <InputGroup>\n        <InputGroupTextarea placeholder='Send a message...' />\n        <InputGroupAddon align='block-end'>\n          <InputGroupButton className='ml-auto' variant='default' size='icon-sm'>\n            <ArrowUpIcon\n            />\n            <span className='sr-only'>Send</span>\n          </InputGroupButton>\n        </InputGroupAddon>\n      </InputGroup>\n      <div className='text-muted-foreground flex items-center gap-2 text-sm'>\n        <Spinner className='size-4' />\n        Validating...\n      </div>\n    </div>\n  )\n}\n\nexport default SpinnerInputDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/spinner/spinner-07.tsx"
+      "target": "components/astrale/components/spinner/spinner-07.tsx"
     }
   ],
   "meta": {

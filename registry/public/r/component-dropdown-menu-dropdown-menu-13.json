@@ -12,7 +12,7 @@
       "path": "source/components/dropdown-menu/dropdown-menu-13/dropdown-menu-13.tsx",
       "content": "'use client'\n\nimport { useState } from 'react'\n\nimport { Button } from '@astrale-os/ui/button'\nimport {\n  DropdownMenu,\n  DropdownMenuCheckboxItem,\n  DropdownMenuContent,\n  DropdownMenuGroup,\n  DropdownMenuLabel,\n  DropdownMenuSeparator,\n  DropdownMenuTrigger\n} from '@astrale-os/ui/dropdown-menu'\n\nconst DropdownMenuCheckboxDemo = () => {\n  const [showStatusBar, setShowStatusBar] = useState(true)\n  const [showActivityBar, setShowActivityBar] = useState(false)\n  const [showPanel, setShowPanel] = useState(false)\n\n  return (\n    <DropdownMenu>\n      <DropdownMenuTrigger render={<Button variant='outline'>With checkbox</Button>} />\n      <DropdownMenuContent className='w-56'>\n        <DropdownMenuGroup>\n          <DropdownMenuLabel>Appearance</DropdownMenuLabel>\n        </DropdownMenuGroup>\n        <DropdownMenuSeparator />\n        <DropdownMenuCheckboxItem checked={showStatusBar} onCheckedChange={setShowStatusBar}>\n          Status Bar\n        </DropdownMenuCheckboxItem>\n        <DropdownMenuCheckboxItem checked={showActivityBar} onCheckedChange={setShowActivityBar} disabled>\n          API\n        </DropdownMenuCheckboxItem>\n        <DropdownMenuCheckboxItem checked={showPanel} onCheckedChange={setShowPanel}>\n          Invite users\n        </DropdownMenuCheckboxItem>\n      </DropdownMenuContent>\n    </DropdownMenu>\n  )\n}\n\nexport default DropdownMenuCheckboxDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/dropdown-menu/dropdown-menu-13.tsx"
+      "target": "components/astrale/components/dropdown-menu/dropdown-menu-13.tsx"
     }
   ],
   "meta": {

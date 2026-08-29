@@ -11,7 +11,7 @@
       "path": "source/components/tooltip/tooltip-08/tooltip-08.tsx",
       "content": "import { Button } from '@astrale-os/ui/button'\nimport { Tooltip, TooltipContent, TooltipTrigger } from '@astrale-os/ui/tooltip'\n\nconst TooltipDirectionsDemo = () => {\n  return (\n    <div className='flex flex-wrap gap-2'>\n      <Tooltip>\n        <TooltipTrigger\n          render={\n            <Button variant='outline' size='sm'>\n              Left\n            </Button>\n          }\n        />\n        <TooltipContent side='left'>Tooltip on left</TooltipContent>\n      </Tooltip>\n      <Tooltip>\n        <TooltipTrigger\n          render={\n            <Button variant='outline' size='sm'>\n              Top\n            </Button>\n          }\n        />\n        <TooltipContent side='top'>Tooltip on top</TooltipContent>\n      </Tooltip>\n      <Tooltip>\n        <TooltipTrigger\n          render={\n            <Button variant='outline' size='sm'>\n              Bottom\n            </Button>\n          }\n        />\n        <TooltipContent side='bottom'>Tooltip on bottom</TooltipContent>\n      </Tooltip>\n      <Tooltip>\n        <TooltipTrigger\n          render={\n            <Button variant='outline' size='sm'>\n              Right\n            </Button>\n          }\n        />\n        <TooltipContent side='right'>Tooltip on right</TooltipContent>\n      </Tooltip>\n    </div>\n  )\n}\n\nexport default TooltipDirectionsDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/tooltip/tooltip-08.tsx"
+      "target": "components/astrale/components/tooltip/tooltip-08.tsx"
     }
   ],
   "meta": {

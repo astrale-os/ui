@@ -11,7 +11,7 @@
       "path": "source/components/typography/typography-15/typography-15.tsx",
       "content": "const TypographyMultiDemo = () => {\n  return (\n    <div className='space-y-4'>\n      <p>\n        You can use the <mark>mark</mark> tag to highlight important pieces of text in a sentence.\n      </p>\n      <p>\n        <s>Struck content indicates deprecated or removed information.</s>\n      </p>\n      <p>\n        <u>Underlined text emphasizes links or terms.</u>\n      </p>\n      <p>\n        <small>small - Terms and conditions apply.</small>\n      </p>\n      <p>\n        <strong>strong - Important action required.</strong>\n      </p>\n      <p>\n        <em>em - Emphasized aside or subtle note.</em>\n      </p>\n    </div>\n  )\n}\n\nexport default TypographyMultiDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/typography/typography-15.tsx"
+      "target": "components/astrale/components/typography/typography-15.tsx"
     }
   ],
   "meta": {

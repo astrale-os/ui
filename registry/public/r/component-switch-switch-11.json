@@ -13,7 +13,7 @@
       "path": "source/components/switch/switch-11/switch-11.tsx",
       "content": "'use client'\n\nimport { useId, useState } from 'react'\nimport { Switch } from '@astrale-os/ui/switch'\nimport { SunIcon, MoonIcon } from \"lucide-react\"\n\nconst SwitchDualIconLabelDemo = () => {\n  const id = useId()\n  const [checked, setChecked] = useState(true)\n\n  const toggleSwitch = () => setChecked(prev => !prev)\n\n  return (\n    <div className='group inline-flex items-center gap-2' data-state={checked ? 'checked' : 'unchecked'}>\n      <span\n        id={`${id}-light`}\n        className='group-data-checked:text-muted-foreground/70 cursor-pointer text-left text-sm font-medium'\n        aria-controls={id}\n        onClick={() => setChecked(false)}\n      >\n        <SunIcon className='size-4' aria-hidden='true' />\n      </span>\n      <Switch\n        id={id}\n        checked={checked}\n        onCheckedChange={toggleSwitch}\n        aria-labelledby={`${id}-dark ${id}-light`}\n        aria-label='Toggle between dark and light mode'\n      />\n      <span\n        id={`${id}-dark`}\n        className='group-data-unchecked:text-muted-foreground/70 cursor-pointer text-right text-sm font-medium'\n        aria-controls={id}\n        onClick={() => setChecked(true)}\n      >\n        <MoonIcon className='size-4' aria-hidden='true' />\n      </span>\n    </div>\n  )\n}\n\nexport default SwitchDualIconLabelDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/switch/switch-11.tsx"
+      "target": "components/astrale/components/switch/switch-11.tsx"
     }
   ],
   "meta": {

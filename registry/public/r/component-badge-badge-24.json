@@ -11,7 +11,7 @@
       "path": "source/components/badge/badge-24/badge-24.tsx",
       "content": "import { Avatar, AvatarFallback, AvatarImage, AvatarBadge } from '@astrale-os/ui/avatar'\n\nconst BadgeStatusOnlineDemo = () => {\n  return (\n    <div className='relative w-fit'>\n      <Avatar className='size-10'>\n        <AvatarImage src='https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-5.png' alt='Hallie Richards' />\n        <AvatarFallback>HR</AvatarFallback>\n        <AvatarBadge className='bg-green-600 group-data-[size=default]/avatar:size-2 dark:bg-green-400'>\n          <span className='sr-only'>Online</span>\n        </AvatarBadge>\n      </Avatar>\n    </div>\n  )\n}\n\nexport default BadgeStatusOnlineDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/badge/badge-24.tsx"
+      "target": "components/astrale/components/badge/badge-24.tsx"
     }
   ],
   "meta": {

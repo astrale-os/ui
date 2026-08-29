@@ -11,7 +11,7 @@
       "path": "source/components/spinner/spinner-09/spinner-09.tsx",
       "content": "import { Button } from '@astrale-os/ui/button'\nimport {\n  Item,\n  ItemActions,\n  ItemContent,\n  ItemDescription,\n  ItemFooter,\n  ItemMedia,\n  ItemTitle\n} from '@astrale-os/ui/item'\nimport { Progress } from '@astrale-os/ui/progress'\nimport { Spinner } from '@astrale-os/ui/spinner'\n\nconst SpinnerProcessingDemo = () => {\n  return (\n    <div className='flex w-full max-w-sm flex-col gap-4 rounded-md'>\n      <Item className='bg-card' variant='outline'>\n        <ItemMedia variant='icon'>\n          <Spinner />\n        </ItemMedia>\n        <ItemContent>\n          <ItemTitle>Processing video...</ItemTitle>\n          <ItemDescription>Rendering 4K footage • 45% complete</ItemDescription>\n        </ItemContent>\n        <ItemActions>\n          <Button size='sm' variant='outline'>\n            Pause\n          </Button>\n        </ItemActions>\n        <ItemFooter>\n          <Progress value={45} className='w-full' />\n        </ItemFooter>\n      </Item>\n    </div>\n  )\n}\n\nexport default SpinnerProcessingDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/spinner/spinner-09.tsx"
+      "target": "components/astrale/components/spinner/spinner-09.tsx"
     }
   ],
   "meta": {

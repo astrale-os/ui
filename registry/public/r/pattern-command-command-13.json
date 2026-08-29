@@ -12,7 +12,7 @@
       "path": "source/patterns/command/command-13/command-13.tsx",
       "content": "import * as React from 'react'\n\nimport { Button } from '@astrale-os/ui/button'\nimport {\n  Command,\n  CommandDialog,\n  CommandEmpty,\n  CommandGroup,\n  CommandInput,\n  CommandItem,\n  CommandList\n} from '@astrale-os/ui/command'\n\nconst CommandSlideToRight = () => {\n  const [open, setOpen] = React.useState(false)\n\n  return (\n    <div className='flex flex-col gap-4'>\n      <Button onClick={() => setOpen(true)} variant='outline' className='w-fit'>\n        Slide to Right\n      </Button>\n      <CommandDialog\n        open={open}\n        onOpenChange={setOpen}\n        className='data-open:slide-in-from-left-20 data-open:zoom-in-100! data-open:duration-600 sm:max-w-106.25'\n      >\n        <Command>\n          <CommandInput placeholder='Type a command or search...' />\n          <CommandList>\n            <CommandEmpty>No results found.</CommandEmpty>\n            <CommandGroup heading='Suggestions'>\n              <CommandItem>Calendar</CommandItem>\n              <CommandItem>Search Emoji</CommandItem>\n              <CommandItem>Calculator</CommandItem>\n            </CommandGroup>\n          </CommandList>\n        </Command>\n      </CommandDialog>\n    </div>\n  )\n}\n\nexport default CommandSlideToRight\n",
       "type": "registry:component",
-      "target": "components/astrale/pattern/command/command-13.tsx"
+      "target": "components/astrale/components/command/command-13.tsx"
     }
   ],
   "meta": {

@@ -12,7 +12,7 @@
       "path": "source/components/switch/switch-12/switch-12.tsx",
       "content": "import { Switch } from '@astrale-os/ui/switch'\nimport { CheckIcon, XIcon } from \"lucide-react\"\n\nconst SwitchIconIndicatorDemo = () => {\n  return (\n    <div className='relative'>\n      <Switch\n        className='peer bg-input/50! [&_span]:bg-background! data-[size=default]:h-5.5 data-[size=default]:w-10 [&_span]:group-data-[size=default]/switch:size-5 [&_span]:data-checked:translate-x-4.5 [&_span]:data-checked:rtl:-translate-x-4.5'\n        aria-label='Switch with icon indicators'\n      />\n      <span className='peer-data-checked:text-muted-foreground/70 pointer-events-none absolute top-1 left-0.75'>\n        <CheckIcon className='size-3.5' aria-hidden='true' />\n      </span>\n      <span className='peer-data-unchecked:text-muted-foreground/70 pointer-events-none absolute top-1 right-0.75'>\n        <XIcon className='size-3.5' aria-hidden='true' />\n      </span>\n    </div>\n  )\n}\n\nexport default SwitchIconIndicatorDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/switch/switch-12.tsx"
+      "target": "components/astrale/components/switch/switch-12.tsx"
     }
   ],
   "meta": {

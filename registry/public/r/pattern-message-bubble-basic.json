@@ -11,7 +11,7 @@
       "path": "registry/patterns/message/bubble-basic.tsx",
       "content": "import { cn } from '@astrale-os/ui/class-name'\nexport function MessageBubble({\n  className,\n  style,\n  role,\n  name,\n  timestamp,\n  children,\n}: {\n  className?: string\n  style?: React.CSSProperties\n\n  role: 'user' | 'assistant' | 'system'\n  name: string\n  timestamp?: string\n  children: React.ReactNode\n}) {\n  return (\n    <article\n      data-slot=\"pattern-message-bubble-basic\"\n      style={style}\n      data-role={role}\n      className={cn('max-w-prose rounded-xl border bg-card p-3', className)}\n    >\n      <header\n        data-slot=\"patterns-message-bubble-basic-header\"\n        className=\"flex justify-between gap-4\"\n      >\n        <strong data-slot=\"patterns-message-bubble-basic-strong\">{name}</strong>\n        {timestamp && <time data-slot=\"patterns-message-bubble-basic-time\">{timestamp}</time>}\n      </header>\n      <div data-slot=\"patterns-message-bubble-basic-div\">{children}</div>\n    </article>\n  )\n}\n",
       "type": "registry:component",
-      "target": "components/astrale/pattern/message/bubble-basic.tsx"
+      "target": "components/astrale/components/message/bubble-basic.tsx"
     }
   ],
   "meta": {

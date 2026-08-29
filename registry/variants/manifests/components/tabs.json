@@ -13,7 +13,7 @@
         {
           "path": "tabs-01.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tabs/tabs-01.tsx"
+          "target": "components/astrale/components/tabs/tabs-01.tsx"
         }
       ],
       "meta": {
@@ -33,7 +33,7 @@
         {
           "path": "tabs-02.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tabs/tabs-02.tsx"
+          "target": "components/astrale/components/tabs/tabs-02.tsx"
         }
       ],
       "meta": {
@@ -53,7 +53,7 @@
         {
           "path": "tabs-03.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tabs/tabs-03.tsx"
+          "target": "components/astrale/components/tabs/tabs-03.tsx"
         }
       ],
       "meta": {
@@ -73,7 +73,7 @@
         {
           "path": "tabs-04.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tabs/tabs-04.tsx"
+          "target": "components/astrale/components/tabs/tabs-04.tsx"
         }
       ],
       "meta": {
@@ -93,7 +93,7 @@
         {
           "path": "tabs-05.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tabs/tabs-05.tsx"
+          "target": "components/astrale/components/tabs/tabs-05.tsx"
         }
       ],
       "meta": {
@@ -113,7 +113,7 @@
         {
           "path": "tabs-06.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tabs/tabs-06.tsx"
+          "target": "components/astrale/components/tabs/tabs-06.tsx"
         }
       ],
       "meta": {
@@ -133,7 +133,7 @@
         {
           "path": "tabs-07.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tabs/tabs-07.tsx"
+          "target": "components/astrale/components/tabs/tabs-07.tsx"
         }
       ],
       "meta": {
@@ -153,7 +153,7 @@
         {
           "path": "tabs-08.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tabs/tabs-08.tsx"
+          "target": "components/astrale/components/tabs/tabs-08.tsx"
         }
       ],
       "meta": {
@@ -173,7 +173,7 @@
         {
           "path": "tabs-09.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tabs/tabs-09.tsx"
+          "target": "components/astrale/components/tabs/tabs-09.tsx"
         }
       ],
       "meta": {
@@ -193,7 +193,7 @@
         {
           "path": "tabs-10.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tabs/tabs-10.tsx"
+          "target": "components/astrale/components/tabs/tabs-10.tsx"
         }
       ],
       "meta": {
@@ -213,7 +213,7 @@
         {
           "path": "tabs-11.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tabs/tabs-11.tsx"
+          "target": "components/astrale/components/tabs/tabs-11.tsx"
         }
       ],
       "meta": {
@@ -233,7 +233,7 @@
         {
           "path": "tabs-12.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tabs/tabs-12.tsx"
+          "target": "components/astrale/components/tabs/tabs-12.tsx"
         }
       ],
       "meta": {
@@ -253,7 +253,7 @@
         {
           "path": "tabs-13.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tabs/tabs-13.tsx"
+          "target": "components/astrale/components/tabs/tabs-13.tsx"
         }
       ],
       "meta": {
@@ -273,7 +273,7 @@
         {
           "path": "tabs-14.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tabs/tabs-14.tsx"
+          "target": "components/astrale/components/tabs/tabs-14.tsx"
         }
       ],
       "meta": {
@@ -293,7 +293,7 @@
         {
           "path": "tabs-15.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tabs/tabs-15.tsx"
+          "target": "components/astrale/components/tabs/tabs-15.tsx"
         }
       ],
       "meta": {
@@ -313,7 +313,7 @@
         {
           "path": "tabs-16.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tabs/tabs-16.tsx"
+          "target": "components/astrale/components/tabs/tabs-16.tsx"
         }
       ],
       "meta": {
@@ -333,7 +333,7 @@
         {
           "path": "tabs-17.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tabs/tabs-17.tsx"
+          "target": "components/astrale/components/tabs/tabs-17.tsx"
         }
       ],
       "meta": {
@@ -353,7 +353,7 @@
         {
           "path": "tabs-18.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tabs/tabs-18.tsx"
+          "target": "components/astrale/components/tabs/tabs-18.tsx"
         }
       ],
       "meta": {
@@ -373,7 +373,7 @@
         {
           "path": "tabs-19.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tabs/tabs-19.tsx"
+          "target": "components/astrale/components/tabs/tabs-19.tsx"
         }
       ],
       "meta": {
@@ -393,7 +393,7 @@
         {
           "path": "tabs-20.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tabs/tabs-20.tsx"
+          "target": "components/astrale/components/tabs/tabs-20.tsx"
         }
       ],
       "meta": {
@@ -413,7 +413,7 @@
         {
           "path": "tabs-21.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tabs/tabs-21.tsx"
+          "target": "components/astrale/components/tabs/tabs-21.tsx"
         }
       ],
       "meta": {
@@ -433,7 +433,7 @@
         {
           "path": "tabs-22.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tabs/tabs-22.tsx"
+          "target": "components/astrale/components/tabs/tabs-22.tsx"
         }
       ],
       "meta": {
@@ -453,7 +453,7 @@
         {
           "path": "tabs-23.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tabs/tabs-23.tsx"
+          "target": "components/astrale/components/tabs/tabs-23.tsx"
         }
       ],
       "meta": {
@@ -473,7 +473,7 @@
         {
           "path": "tabs-24.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tabs/tabs-24.tsx"
+          "target": "components/astrale/components/tabs/tabs-24.tsx"
         }
       ],
       "meta": {
@@ -493,7 +493,7 @@
         {
           "path": "tabs-25.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tabs/tabs-25.tsx"
+          "target": "components/astrale/components/tabs/tabs-25.tsx"
         }
       ],
       "meta": {
@@ -513,7 +513,7 @@
         {
           "path": "tabs-26.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tabs/tabs-26.tsx"
+          "target": "components/astrale/components/tabs/tabs-26.tsx"
         }
       ],
       "meta": {
@@ -533,7 +533,7 @@
         {
           "path": "tabs-27.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tabs/tabs-27.tsx"
+          "target": "components/astrale/components/tabs/tabs-27.tsx"
         },
         {
           "path": "support/components/ui/motion-highlight.tsx",
@@ -568,7 +568,7 @@
         {
           "path": "tabs-28.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tabs/tabs-28.tsx"
+          "target": "components/astrale/components/tabs/tabs-28.tsx"
         }
       ],
       "meta": {
@@ -588,7 +588,7 @@
         {
           "path": "tabs-29.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tabs/tabs-29.tsx"
+          "target": "components/astrale/components/tabs/tabs-29.tsx"
         }
       ],
       "meta": {

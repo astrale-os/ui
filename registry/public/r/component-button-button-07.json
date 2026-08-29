@@ -11,7 +11,7 @@
       "path": "source/components/button/button-07/button-07.tsx",
       "content": "import { Button } from '@astrale-os/ui/button'\n\nconst ButtonLargeDemo = () => {\n  return <Button size='lg'>Large</Button>\n}\n\nexport default ButtonLargeDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/button/button-07.tsx"
+      "target": "components/astrale/components/button/button-07.tsx"
     }
   ],
   "meta": {

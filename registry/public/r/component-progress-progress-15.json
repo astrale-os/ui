@@ -12,7 +12,7 @@
       "path": "source/components/progress/progress-15/progress-15.tsx",
       "content": "import { useState } from 'react'\n\nimport { Slider } from '@astrale-os/ui/slider'\nimport { CircularProgress } from '@/components/ui/circular-progress'\n\nconst CircularProgressDemo = () => {\n  const [progress, setProgress] = useState(50)\n\n  return (\n    <div className='mx-auto flex w-full max-w-xs flex-col items-center'>\n      <CircularProgress\n        size={120}\n        showLabel\n        renderLabel={v => Math.round(v)}\n        strokeWidth={8}\n        value={progress}\n        progressBgClassName='stroke-primary/10'\n        progressClassName='stroke-primary'\n        labelClassName='text-xl'\n      />\n      <Slider\n        className='mt-6 w-[80%]'\n        value={[progress]}\n        max={100}\n        onValueChange={val => setProgress(Array.isArray(val) ? val[0] : val)}\n        step={1}\n      />\n    </div>\n  )\n}\n\nexport default CircularProgressDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/progress/progress-15.tsx"
+      "target": "components/astrale/components/progress/progress-15.tsx"
     },
     {
       "path": "source/components/progress/progress-15/support/components/ui/circular-progress.tsx",

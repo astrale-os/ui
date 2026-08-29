@@ -11,7 +11,7 @@
       "path": "source/components/spinner/spinner-06/spinner-06.tsx",
       "content": "import { Button } from '@astrale-os/ui/button'\nimport { Spinner } from '@astrale-os/ui/spinner'\n\nconst SpinnerTextDemo = () => {\n  return (\n    <div className='mx-auto flex w-full items-center justify-center'>\n      <div className='flex w-full max-w-xs flex-col items-center gap-2'>\n        <div className='bg-muted rounded-md p-3'>\n          <Spinner className='size-6' />\n        </div>\n        <div className='text-lg font-medium'>Restoring your session</div>\n        <div className='text-muted-foreground text-center'>\n          Re-authenticating and restoring your preferences securely.\n        </div>\n        <Button variant='outline'>Sign out</Button>\n      </div>\n    </div>\n  )\n}\n\nexport default SpinnerTextDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/spinner/spinner-06.tsx"
+      "target": "components/astrale/components/spinner/spinner-06.tsx"
     }
   ],
   "meta": {

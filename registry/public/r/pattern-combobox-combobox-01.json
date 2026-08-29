@@ -14,7 +14,7 @@
       "path": "source/patterns/combobox/combobox-01/combobox-01.tsx",
       "content": "import {\n  Combobox,\n  ComboboxContent,\n  ComboboxEmpty,\n  ComboboxInput,\n  ComboboxItem,\n  ComboboxList\n} from '@/components/ui/combobox'\n\nconst frameworks = ['Next.js', 'SvelteKit', 'Nuxt.js', 'Remix', 'Astro'] as const\n\nconst ComboboxDemo = () => {\n  return (\n    <Combobox items={frameworks}>\n      <ComboboxInput placeholder='Select a framework' />\n      <ComboboxContent>\n        <ComboboxEmpty>No items found.</ComboboxEmpty>\n        <ComboboxList>\n          {item => (\n            <ComboboxItem key={item} value={item}>\n              {item}\n            </ComboboxItem>\n          )}\n        </ComboboxList>\n      </ComboboxContent>\n    </Combobox>\n  )\n}\n\nexport default ComboboxDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/pattern/combobox/combobox-01.tsx"
+      "target": "components/astrale/components/combobox/combobox-01.tsx"
     },
     {
       "path": "source/patterns/combobox/combobox-01/support/components/ui/combobox.tsx",

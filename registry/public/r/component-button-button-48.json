@@ -13,7 +13,7 @@
       "path": "source/components/button/button-48/button-48.tsx",
       "content": "import { MatterButton } from '@/components/ui/matter-button'\n\nconst MatterButtonDemo = () => {\n  return <MatterButton>Matter Button</MatterButton>\n}\n\nexport default MatterButtonDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/button/button-48.tsx"
+      "target": "components/astrale/components/button/button-48.tsx"
     },
     {
       "path": "source/components/button/button-48/support/components/ui/matter-button.tsx",

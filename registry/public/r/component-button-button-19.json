@@ -12,7 +12,7 @@
       "path": "source/components/button/button-19/button-19.tsx",
       "content": "import { Button } from '@astrale-os/ui/button'\nimport { ShareIcon } from \"lucide-react\"\n\nconst ButtonPublishDemo = () => {\n  return (\n    <Button variant='outline' className='h-11 rounded-full px-2'>\n      <span className='bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-full'>\n        <ShareIcon\n        />\n      </span>\n      Publish\n    </Button>\n  )\n}\n\nexport default ButtonPublishDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/button/button-19.tsx"
+      "target": "components/astrale/components/button/button-19.tsx"
     }
   ],
   "meta": {

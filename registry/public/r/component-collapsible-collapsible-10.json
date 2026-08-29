@@ -12,7 +12,7 @@
       "path": "source/components/collapsible/collapsible-10/collapsible-10.tsx",
       "content": "import { Button } from '@astrale-os/ui/button'\nimport { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@astrale-os/ui/collapsible'\nimport { ChevronsUpDownIcon } from \"lucide-react\"\n\nconst CollapsibleAnimatedDemo = () => {\n  return (\n    <Collapsible className='group flex w-full max-w-87.5 flex-col gap-2'>\n      <div className='flex items-center justify-between gap-4 px-4'>\n        <div className='text-sm font-semibold'>@peduarte starred 3 repositories</div>\n        <CollapsibleTrigger\n          render={\n            <Button variant='ghost' size='icon-sm'>\n              <ChevronsUpDownIcon\n              />\n              <span className='sr-only'>Toggle</span>\n            </Button>\n          }\n        />\n      </div>\n      <div className='rounded-md border px-4 py-2 font-mono text-sm'>@radix-ui/primitives</div>\n      <CollapsibleContent className='flex h-(--collapsible-panel-height) flex-col gap-2 overflow-hidden transition-all duration-300 data-ending-style:h-0 data-starting-style:h-0'>\n        <div className='rounded-md border px-4 py-2 font-mono text-sm'>@radix-ui/colors</div>\n        <div className='rounded-md border px-4 py-2 font-mono text-sm'>@stitches/react</div>\n      </CollapsibleContent>\n    </Collapsible>\n  )\n}\n\nexport default CollapsibleAnimatedDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/collapsible/collapsible-10.tsx"
+      "target": "components/astrale/components/collapsible/collapsible-10.tsx"
     }
   ],
   "meta": {

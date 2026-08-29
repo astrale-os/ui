@@ -11,7 +11,7 @@
       "path": "source/components/radio-group/radio-group-01/radio-group-01.tsx",
       "content": "import { Label } from '@astrale-os/ui/label'\nimport { RadioGroup, RadioGroupItem } from '@astrale-os/ui/radio-group'\n\nconst RadioGroupDemo = () => {\n  return (\n    <RadioGroup defaultValue='higher-secondary'>\n      <div className='flex items-center gap-2'>\n        <RadioGroupItem value='higher-secondary' id='higher-secondary' />\n        <Label htmlFor='higher-secondary'>Higher Secondary</Label>\n      </div>\n      <div className='flex items-center gap-2'>\n        <RadioGroupItem value='graduation' id='graduation' />\n        <Label htmlFor='graduation'>Graduation</Label>\n      </div>\n      <div className='flex items-center gap-2'>\n        <RadioGroupItem value='post-graduation' id='post-graduation' />\n        <Label htmlFor='post-graduation'>Post Graduation</Label>\n      </div>\n    </RadioGroup>\n  )\n}\n\nexport default RadioGroupDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/radio-group/radio-group-01.tsx"
+      "target": "components/astrale/components/radio-group/radio-group-01.tsx"
     }
   ],
   "meta": {

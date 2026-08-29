@@ -11,7 +11,7 @@
       "path": "source/components/progress/progress-06/progress-06.tsx",
       "content": "import { Progress, ProgressLabel, ProgressValue } from '@astrale-os/ui/progress'\n\nconst ProgressGradientDemo = () => {\n  return (\n    <div className='flex w-full flex-col gap-4'>\n      {/* Progress Bar with Gradient Animation */}\n      <Progress\n        value={70}\n        className='**:data-[slot=progress-indicator]:from-muted **:data-[slot=progress-indicator]:via-muted/70 **:data-[slot=progress-indicator]:to-primary **:data-[slot=progress-indicator]:rounded-l-full **:data-[slot=progress-indicator]:bg-linear-to-r'\n      >\n        <ProgressLabel>Uploading...</ProgressLabel>\n        <ProgressValue className='text-foreground font-medium' />\n      </Progress>\n\n      {/* Progress Bar with Moving Gradient Animation */}\n      <Progress\n        value={70}\n        className='**:data-[slot=progress-indicator]:animate-gradient-flow **:data-[slot=progress-indicator]:from-primary **:data-[slot=progress-indicator]:via-muted/70 **:data-[slot=progress-indicator]:to-primary **:data-[slot=progress-indicator]:rounded-l-full **:data-[slot=progress-indicator]:bg-linear-to-r **:data-[slot=progress-indicator]:bg-size-[200%_100%]'\n      >\n        <ProgressLabel>Processing files</ProgressLabel>\n        <ProgressValue className='text-foreground font-medium' />\n      </Progress>\n    </div>\n  )\n}\n\nexport default ProgressGradientDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/progress/progress-06.tsx"
+      "target": "components/astrale/components/progress/progress-06.tsx"
     }
   ],
   "css": {

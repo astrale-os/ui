@@ -11,7 +11,7 @@
       "path": "source/components/tooltip/tooltip-06/tooltip-06.tsx",
       "content": "import { Button } from '@astrale-os/ui/button'\nimport { Tooltip, TooltipContent, TooltipTrigger } from '@astrale-os/ui/tooltip'\n\nconst TooltipRoundedDemo = () => {\n  return (\n    <Tooltip>\n      <TooltipTrigger\n        render={\n          <Button variant='outline' size='sm'>\n            Rounded\n          </Button>\n        }\n      />\n      <TooltipContent className='rounded-full'>\n        <p>This tooltip is rounded</p>\n      </TooltipContent>\n    </Tooltip>\n  )\n}\n\nexport default TooltipRoundedDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/tooltip/tooltip-06.tsx"
+      "target": "components/astrale/components/tooltip/tooltip-06.tsx"
     }
   ],
   "meta": {

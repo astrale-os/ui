@@ -12,7 +12,7 @@
       "path": "source/components/sonner/sonner-02/sonner-02.tsx",
       "content": "import { toast } from 'sonner'\n\nimport { Button } from '@astrale-os/ui/button'\n\nconst SonnerWithDescriptionDemo = () => {\n  return (\n    <Button\n      variant='outline'\n      onClick={() =>\n        toast('Event is created', {\n          description: 'Friday, August 15, 2025 at 9:00 AM'\n        })\n      }\n    >\n      Toast with description\n    </Button>\n  )\n}\n\nexport default SonnerWithDescriptionDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/sonner/sonner-02.tsx"
+      "target": "components/astrale/components/sonner/sonner-02.tsx"
     }
   ],
   "meta": {

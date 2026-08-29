@@ -11,7 +11,7 @@
       "path": "source/components/context-menu/context-menu-01/context-menu-01.tsx",
       "content": "import {\n  ContextMenu,\n  ContextMenuContent,\n  ContextMenuGroup,\n  ContextMenuItem,\n  ContextMenuTrigger\n} from '@astrale-os/ui/context-menu'\n\nconst ContextMenuDemo = () => {\n  return (\n    <ContextMenu>\n      <div className='mt-4 flex w-full max-w-xs flex-col items-start gap-2'>\n        <ContextMenuTrigger className='flex h-45 w-full items-center justify-center rounded-xl border border-dashed text-sm'>\n          Right click here\n        </ContextMenuTrigger>\n        <div className='text-muted-foreground text-sm font-medium'>Menu with basic options</div>\n      </div>\n      <ContextMenuContent>\n        <ContextMenuGroup>\n          <ContextMenuItem>Copy</ContextMenuItem>\n          <ContextMenuItem>Paste</ContextMenuItem>\n          <ContextMenuItem>Delete</ContextMenuItem>\n        </ContextMenuGroup>\n      </ContextMenuContent>\n    </ContextMenu>\n  )\n}\n\nexport default ContextMenuDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/context-menu/context-menu-01.tsx"
+      "target": "components/astrale/components/context-menu/context-menu-01.tsx"
     }
   ],
   "meta": {

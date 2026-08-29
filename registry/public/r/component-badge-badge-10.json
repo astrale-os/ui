@@ -12,7 +12,7 @@
       "path": "source/components/badge/badge-10/badge-10.tsx",
       "content": "import { Badge } from '@astrale-os/ui/badge'\nimport { StarIcon } from \"lucide-react\"\n\nconst BadgeWithIconDemo = () => {\n  return (\n    <Badge>\n      <StarIcon className='size-3' />\n      With Icon\n    </Badge>\n  )\n}\n\nexport default BadgeWithIconDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/badge/badge-10.tsx"
+      "target": "components/astrale/components/badge/badge-10.tsx"
     }
   ],
   "meta": {

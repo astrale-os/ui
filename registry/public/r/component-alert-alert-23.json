@@ -12,7 +12,7 @@
       "path": "source/components/alert/alert-23/alert-23.tsx",
       "content": "import { Alert, AlertDescription, AlertTitle } from '@astrale-os/ui/alert'\nimport { CheckCheckIcon } from \"lucide-react\"\n\nconst AlertSoftSuccessDemo = () => {\n  return (\n    <Alert className='border-none bg-green-600/10 text-green-600 dark:bg-green-400/10 dark:text-green-400'>\n      <CheckCheckIcon\n      />\n      <AlertTitle>File uploaded successfully</AlertTitle>\n      <AlertDescription className='text-green-600/80 dark:text-green-400/80'>\n        Your document has been saved and is now available in your files.\n      </AlertDescription>\n    </Alert>\n  )\n}\n\nexport default AlertSoftSuccessDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/alert/alert-23.tsx"
+      "target": "components/astrale/components/alert/alert-23.tsx"
     }
   ],
   "meta": {

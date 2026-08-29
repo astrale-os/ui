@@ -12,7 +12,7 @@
       "path": "source/components/sonner/sonner-01/sonner-01.tsx",
       "content": "'use client'\n\nimport { toast } from 'sonner'\n\nimport { Button } from '@astrale-os/ui/button'\n\nconst SonnerDemo = () => {\n  return (\n    <Button variant='outline' onClick={() => toast('Action completed successfully!')}>\n      Default Toast\n    </Button>\n  )\n}\n\nexport default SonnerDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/sonner/sonner-01.tsx"
+      "target": "components/astrale/components/sonner/sonner-01.tsx"
     }
   ],
   "meta": {

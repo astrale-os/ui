@@ -11,7 +11,7 @@
       "path": "source/components/button/button-46/button-46.tsx",
       "content": "import { Button } from '@astrale-os/ui/button'\n\nconst ButtonHeartbeatEffectDemo = () => {\n  return (\n    <Button variant='destructive' className='animate-heartbeat bg-destructive! dark:bg-destructive! m-9 text-white'>\n      Heartbeat Effect\n    </Button>\n  )\n}\n\nexport default ButtonHeartbeatEffectDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/button/button-46.tsx"
+      "target": "components/astrale/components/button/button-46.tsx"
     }
   ],
   "css": {

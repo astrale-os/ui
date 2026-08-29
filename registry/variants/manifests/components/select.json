@@ -13,7 +13,7 @@
         {
           "path": "select-01.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/select/select-01.tsx"
+          "target": "components/astrale/components/select/select-01.tsx"
         }
       ],
       "meta": {
@@ -33,7 +33,7 @@
         {
           "path": "select-02.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/select/select-02.tsx"
+          "target": "components/astrale/components/select/select-02.tsx"
         }
       ],
       "meta": {
@@ -53,7 +53,7 @@
         {
           "path": "select-03.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/select/select-03.tsx"
+          "target": "components/astrale/components/select/select-03.tsx"
         }
       ],
       "meta": {
@@ -73,7 +73,7 @@
         {
           "path": "select-04.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/select/select-04.tsx"
+          "target": "components/astrale/components/select/select-04.tsx"
         }
       ],
       "meta": {
@@ -93,7 +93,7 @@
         {
           "path": "select-05.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/select/select-05.tsx"
+          "target": "components/astrale/components/select/select-05.tsx"
         }
       ],
       "meta": {
@@ -113,7 +113,7 @@
         {
           "path": "select-06.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/select/select-06.tsx"
+          "target": "components/astrale/components/select/select-06.tsx"
         }
       ],
       "meta": {
@@ -133,7 +133,7 @@
         {
           "path": "select-07.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/select/select-07.tsx"
+          "target": "components/astrale/components/select/select-07.tsx"
         }
       ],
       "meta": {
@@ -153,7 +153,7 @@
         {
           "path": "select-08.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/select/select-08.tsx"
+          "target": "components/astrale/components/select/select-08.tsx"
         }
       ],
       "meta": {
@@ -173,7 +173,7 @@
         {
           "path": "select-09.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/select/select-09.tsx"
+          "target": "components/astrale/components/select/select-09.tsx"
         }
       ],
       "meta": {
@@ -193,7 +193,7 @@
         {
           "path": "select-10.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/select/select-10.tsx"
+          "target": "components/astrale/components/select/select-10.tsx"
         }
       ],
       "meta": {
@@ -213,7 +213,7 @@
         {
           "path": "select-11.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/select/select-11.tsx"
+          "target": "components/astrale/components/select/select-11.tsx"
         }
       ],
       "meta": {
@@ -233,7 +233,7 @@
         {
           "path": "select-12.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/select/select-12.tsx"
+          "target": "components/astrale/components/select/select-12.tsx"
         }
       ],
       "meta": {
@@ -253,7 +253,7 @@
         {
           "path": "select-13.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/select/select-13.tsx"
+          "target": "components/astrale/components/select/select-13.tsx"
         }
       ],
       "meta": {
@@ -273,7 +273,7 @@
         {
           "path": "select-14.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/select/select-14.tsx"
+          "target": "components/astrale/components/select/select-14.tsx"
         }
       ],
       "meta": {
@@ -293,7 +293,7 @@
         {
           "path": "select-15.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/select/select-15.tsx"
+          "target": "components/astrale/components/select/select-15.tsx"
         }
       ],
       "meta": {
@@ -313,7 +313,7 @@
         {
           "path": "select-16.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/select/select-16.tsx"
+          "target": "components/astrale/components/select/select-16.tsx"
         }
       ],
       "meta": {
@@ -333,7 +333,7 @@
         {
           "path": "select-17.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/select/select-17.tsx"
+          "target": "components/astrale/components/select/select-17.tsx"
         }
       ],
       "meta": {
@@ -353,7 +353,7 @@
         {
           "path": "select-18.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/select/select-18.tsx"
+          "target": "components/astrale/components/select/select-18.tsx"
         }
       ],
       "meta": {
@@ -373,7 +373,7 @@
         {
           "path": "select-19.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/select/select-19.tsx"
+          "target": "components/astrale/components/select/select-19.tsx"
         }
       ],
       "meta": {
@@ -393,7 +393,7 @@
         {
           "path": "select-20.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/select/select-20.tsx"
+          "target": "components/astrale/components/select/select-20.tsx"
         }
       ],
       "meta": {
@@ -413,7 +413,7 @@
         {
           "path": "select-21.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/select/select-21.tsx"
+          "target": "components/astrale/components/select/select-21.tsx"
         }
       ],
       "meta": {
@@ -433,7 +433,7 @@
         {
           "path": "select-22.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/select/select-22.tsx"
+          "target": "components/astrale/components/select/select-22.tsx"
         }
       ],
       "meta": {
@@ -453,7 +453,7 @@
         {
           "path": "select-23.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/select/select-23.tsx"
+          "target": "components/astrale/components/select/select-23.tsx"
         }
       ],
       "meta": {
@@ -473,7 +473,7 @@
         {
           "path": "select-24.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/select/select-24.tsx"
+          "target": "components/astrale/components/select/select-24.tsx"
         }
       ],
       "meta": {
@@ -493,7 +493,7 @@
         {
           "path": "select-25.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/select/select-25.tsx"
+          "target": "components/astrale/components/select/select-25.tsx"
         }
       ],
       "meta": {
@@ -513,7 +513,7 @@
         {
           "path": "select-26.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/select/select-26.tsx"
+          "target": "components/astrale/components/select/select-26.tsx"
         }
       ],
       "meta": {
@@ -533,7 +533,7 @@
         {
           "path": "select-27.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/select/select-27.tsx"
+          "target": "components/astrale/components/select/select-27.tsx"
         }
       ],
       "meta": {
@@ -553,7 +553,7 @@
         {
           "path": "select-28.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/select/select-28.tsx"
+          "target": "components/astrale/components/select/select-28.tsx"
         }
       ],
       "meta": {
@@ -573,7 +573,7 @@
         {
           "path": "select-29.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/select/select-29.tsx"
+          "target": "components/astrale/components/select/select-29.tsx"
         }
       ],
       "meta": {
@@ -593,7 +593,7 @@
         {
           "path": "select-30.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/select/select-30.tsx"
+          "target": "components/astrale/components/select/select-30.tsx"
         }
       ],
       "meta": {
@@ -613,7 +613,7 @@
         {
           "path": "select-31.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/select/select-31.tsx"
+          "target": "components/astrale/components/select/select-31.tsx"
         }
       ],
       "meta": {
@@ -638,7 +638,7 @@
         {
           "path": "select-32.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/select/select-32.tsx"
+          "target": "components/astrale/components/select/select-32.tsx"
         },
         {
           "path": "support/components/ui/multi-select.tsx",
@@ -668,7 +668,7 @@
         {
           "path": "select-33.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/select/select-33.tsx"
+          "target": "components/astrale/components/select/select-33.tsx"
         },
         {
           "path": "support/components/ui/multi-select.tsx",
@@ -693,7 +693,7 @@
         {
           "path": "select-34.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/select/select-34.tsx"
+          "target": "components/astrale/components/select/select-34.tsx"
         }
       ],
       "meta": {
@@ -713,7 +713,7 @@
         {
           "path": "select-35.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/select/select-35.tsx"
+          "target": "components/astrale/components/select/select-35.tsx"
         }
       ],
       "meta": {
@@ -733,7 +733,7 @@
         {
           "path": "select-36.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/select/select-36.tsx"
+          "target": "components/astrale/components/select/select-36.tsx"
         }
       ],
       "meta": {
@@ -753,7 +753,7 @@
         {
           "path": "select-37.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/select/select-37.tsx"
+          "target": "components/astrale/components/select/select-37.tsx"
         }
       ],
       "meta": {
@@ -773,7 +773,7 @@
         {
           "path": "select-38.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/select/select-38.tsx"
+          "target": "components/astrale/components/select/select-38.tsx"
         }
       ],
       "meta": {

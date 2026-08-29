@@ -14,7 +14,7 @@
       "path": "source/patterns/stepper/stepper-07/stepper-07.tsx",
       "content": "'use client'\nimport {\n  Stepper,\n  StepperItem,\n  StepperTrigger,\n  StepperIndicator,\n  StepperSeparator,\n  StepperNav\n} from '@/components/ui/stepper'\nimport { CircleCheckBigIcon } from \"lucide-react\"\n\nconst steps = [{ id: '1' }, { id: '2' }, { id: '3' }]\n\nconst StepperCheckDemo = () => {\n  return (\n    <Stepper\n      steps={steps}\n      className='flex items-center max-md:w-xs md:w-full md:max-w-xl'\n      defaultValue={steps[1].id}\n      indicators={{\n        completed: (\n          <CircleCheckBigIcon className='size-5' />\n        )\n      }}\n    >\n      <StepperNav>\n        {steps.map((step, idx) => (\n          <StepperItem key={step.id} stepId={step.id} loading={false}>\n            <StepperTrigger className='p-0'>\n              <StepperIndicator className='flex items-center justify-center'>{idx + 1}</StepperIndicator>\n            </StepperTrigger>\n            {idx < steps.length - 1 && <StepperSeparator className='h-0.5 flex-1' />}\n          </StepperItem>\n        ))}\n      </StepperNav>\n    </Stepper>\n  )\n}\n\nexport default StepperCheckDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/pattern/stepper/stepper-07.tsx"
+      "target": "components/astrale/components/stepper/stepper-07.tsx"
     },
     {
       "path": "source/patterns/stepper/stepper-07/support/components/ui/stepper.tsx",

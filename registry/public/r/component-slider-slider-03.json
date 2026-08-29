@@ -11,7 +11,7 @@
       "path": "source/components/slider/slider-03/slider-03.tsx",
       "content": "import { Slider } from '@astrale-os/ui/slider'\n\nconst SliderVerticalDemo = () => {\n  return <Slider defaultValue={50} max={100} step={1} orientation='vertical' />\n}\n\nexport default SliderVerticalDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/slider/slider-03.tsx"
+      "target": "components/astrale/components/slider/slider-03.tsx"
     }
   ],
   "meta": {

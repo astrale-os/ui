@@ -11,7 +11,7 @@
       "path": "source/components/separator/separator-03/separator-03.tsx",
       "content": "import { Separator } from '@astrale-os/ui/separator'\n\nconst SeparatorDetailDemo = () => {\n  return (\n    <div className='flex w-full max-w-sm flex-col gap-2 text-sm'>\n      <dl className='flex items-center justify-between'>\n        <dt className='font-medium'>Name</dt>\n        <dd className='text-muted-foreground'>Sofia Davis</dd>\n      </dl>\n      <Separator />\n      <dl className='flex items-center justify-between'>\n        <dt className='font-medium'>Email</dt>\n        <dd className='text-muted-foreground'>sofia@example.com</dd>\n      </dl>\n      <Separator />\n      <dl className='flex items-center justify-between'>\n        <dt className='font-medium'>Role</dt>\n        <dd className='text-muted-foreground'>Developer</dd>\n      </dl>\n    </div>\n  )\n}\n\nexport default SeparatorDetailDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/separator/separator-03.tsx"
+      "target": "components/astrale/components/separator/separator-03.tsx"
     }
   ],
   "meta": {

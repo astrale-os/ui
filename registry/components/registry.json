@@ -17,7 +17,7 @@
         {
           "path": "attachment/attachment.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/attachment.tsx"
+          "target": "components/astrale/components/attachment.tsx"
         }
       ],
       "meta": {
@@ -43,7 +43,7 @@
         {
           "path": "bubble/bubble.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/bubble.tsx"
+          "target": "components/astrale/components/bubble.tsx"
         }
       ],
       "meta": {
@@ -69,7 +69,7 @@
         {
           "path": "calendar/calendar.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/calendar.tsx"
+          "target": "components/astrale/components/calendar.tsx"
         }
       ],
       "meta": {
@@ -95,7 +95,7 @@
         {
           "path": "carousel/carousel.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/carousel.tsx"
+          "target": "components/astrale/components/carousel.tsx"
         }
       ],
       "meta": {
@@ -117,7 +117,7 @@
         {
           "path": "chart/chart.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/chart.tsx"
+          "target": "components/astrale/components/chart.tsx"
         }
       ],
       "meta": {
@@ -126,32 +126,6 @@
         "provider": "@shadcn",
         "upstreamAddress": "@shadcn/chart",
         "upstreamDigest": "sha256:3029092cb861794ccb562c96618cf711e193ee500a50fe766cd50c962991dbd7",
-        "adaptation": "imports-only"
-      }
-    },
-    {
-      "name": "component-combobox",
-      "type": "registry:component",
-      "title": "Component · combobox",
-      "description": "Exact @shadcn/combobox Base Nova source with import-only Astrale adaptation.",
-      "dependencies": [
-        "@astrale-os/ui@^0.3.0-beta.0",
-        "@base-ui/react@^1.7.0",
-        "lucide-react@1.32.0"
-      ],
-      "files": [
-        {
-          "path": "combobox/combobox.tsx",
-          "type": "registry:component",
-          "target": "components/astrale/component/combobox.tsx"
-        }
-      ],
-      "meta": {
-        "canonicalAddress": "component/combobox",
-        "ownership": "consumer-source",
-        "provider": "@shadcn",
-        "upstreamAddress": "@shadcn/combobox",
-        "upstreamDigest": "sha256:063eee29facaeb4a49e5f8fe91fb4644a874adad449a61e6bbee3e204edf2bae",
         "adaptation": "imports-only"
       }
     },
@@ -172,52 +146,52 @@
         {
           "path": "color-picker/color-picker.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/color-picker/color-picker.tsx"
+          "target": "components/astrale/components/color-picker/color-picker.tsx"
         },
         {
           "path": "color-picker/color-area.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/color-picker/color-area.tsx"
+          "target": "components/astrale/components/color-picker/color-area.tsx"
         },
         {
           "path": "color-picker/color-field.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/color-picker/color-field.tsx"
+          "target": "components/astrale/components/color-picker/color-field.tsx"
         },
         {
           "path": "color-picker/color-slider.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/color-picker/color-slider.tsx"
+          "target": "components/astrale/components/color-picker/color-slider.tsx"
         },
         {
           "path": "color-picker/color-swatch.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/color-picker/color-swatch.tsx"
+          "target": "components/astrale/components/color-picker/color-swatch.tsx"
         },
         {
           "path": "color-picker/color-thumb.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/color-picker/color-thumb.tsx"
+          "target": "components/astrale/components/color-picker/color-thumb.tsx"
         },
         {
           "path": "color-picker/dialog.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/color-picker/dialog.tsx"
+          "target": "components/astrale/components/color-picker/dialog.tsx"
         },
         {
           "path": "color-picker/field.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/color-picker/field.tsx"
+          "target": "components/astrale/components/color-picker/field.tsx"
         },
         {
           "path": "color-picker/popover.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/color-picker/popover.tsx"
+          "target": "components/astrale/components/color-picker/popover.tsx"
         },
         {
           "path": "color-picker/react-aria-utils.ts",
           "type": "registry:lib",
-          "target": "components/astrale/component/color-picker/react-aria-utils.ts"
+          "target": "components/astrale/components/color-picker/react-aria-utils.ts"
         }
       ],
       "css": {
@@ -230,6 +204,32 @@
         "provider": "@react-aria",
         "upstreamAddress": "@react-aria/tailwind-colorpicker",
         "upstreamDigest": "sha256:43069e33d32ac73f0e91f6994ab7fa6cc3148c88907ff47593588bde99061dbe",
+        "adaptation": "imports-only"
+      }
+    },
+    {
+      "name": "component-combobox",
+      "type": "registry:component",
+      "title": "Component · combobox",
+      "description": "Exact @shadcn/combobox Base Nova source with import-only Astrale adaptation.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "@base-ui/react@^1.7.0",
+        "lucide-react@1.32.0"
+      ],
+      "files": [
+        {
+          "path": "combobox/combobox.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/components/combobox.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/combobox",
+        "ownership": "consumer-source",
+        "provider": "@shadcn",
+        "upstreamAddress": "@shadcn/combobox",
+        "upstreamDigest": "sha256:063eee29facaeb4a49e5f8fe91fb4644a874adad449a61e6bbee3e204edf2bae",
         "adaptation": "imports-only"
       }
     },
@@ -247,7 +247,7 @@
         {
           "path": "marker/marker.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/marker.tsx"
+          "target": "components/astrale/components/marker.tsx"
         }
       ],
       "meta": {
@@ -269,7 +269,7 @@
         {
           "path": "message/message.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/message.tsx"
+          "target": "components/astrale/components/message.tsx"
         }
       ],
       "meta": {
@@ -295,7 +295,7 @@
         {
           "path": "message-scroller/message-scroller.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/message-scroller.tsx"
+          "target": "components/astrale/components/message-scroller.tsx"
         }
       ],
       "meta": {
@@ -321,7 +321,7 @@
         {
           "path": "questionnaire/questionnaire.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/questionnaire.tsx"
+          "target": "components/astrale/components/questionnaire.tsx"
         }
       ],
       "meta": {
@@ -348,12 +348,12 @@
         {
           "path": "sidebar/sidebar.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/sidebar/sidebar.tsx"
+          "target": "components/astrale/components/sidebar/sidebar.tsx"
         },
         {
           "path": "sidebar/use-mobile.ts",
           "type": "registry:hook",
-          "target": "components/astrale/component/sidebar/use-mobile.ts"
+          "target": "components/astrale/components/sidebar/use-mobile.ts"
         }
       ],
       "meta": {
@@ -380,7 +380,7 @@
         {
           "path": "sonner/sonner.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/sonner.tsx"
+          "target": "components/astrale/components/sonner.tsx"
         }
       ],
       "meta": {
@@ -402,7 +402,7 @@
         {
           "path": "status-heatmap/status-heatmap.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/status-heatmap.tsx"
+          "target": "components/astrale/components/status-heatmap.tsx"
         }
       ],
       "meta": {

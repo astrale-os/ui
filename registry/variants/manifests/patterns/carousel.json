@@ -18,7 +18,7 @@
         {
           "path": "carousel-01.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/carousel/carousel-01.tsx"
+          "target": "components/astrale/components/carousel/carousel-01.tsx"
         },
         {
           "path": "support/components/ui/carousel.tsx",
@@ -48,7 +48,7 @@
         {
           "path": "carousel-02.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/carousel/carousel-02.tsx"
+          "target": "components/astrale/components/carousel/carousel-02.tsx"
         },
         {
           "path": "support/components/ui/carousel.tsx",
@@ -78,7 +78,7 @@
         {
           "path": "carousel-03.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/carousel/carousel-03.tsx"
+          "target": "components/astrale/components/carousel/carousel-03.tsx"
         },
         {
           "path": "support/components/ui/carousel.tsx",
@@ -108,7 +108,7 @@
         {
           "path": "carousel-04.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/carousel/carousel-04.tsx"
+          "target": "components/astrale/components/carousel/carousel-04.tsx"
         },
         {
           "path": "support/components/ui/carousel.tsx",
@@ -139,7 +139,7 @@
         {
           "path": "carousel-05.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/carousel/carousel-05.tsx"
+          "target": "components/astrale/components/carousel/carousel-05.tsx"
         },
         {
           "path": "support/components/ui/carousel.tsx",
@@ -169,7 +169,7 @@
         {
           "path": "carousel-06.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/carousel/carousel-06.tsx"
+          "target": "components/astrale/components/carousel/carousel-06.tsx"
         },
         {
           "path": "support/components/ui/carousel.tsx",
@@ -200,7 +200,7 @@
         {
           "path": "carousel-07.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/carousel/carousel-07.tsx"
+          "target": "components/astrale/components/carousel/carousel-07.tsx"
         },
         {
           "path": "support/components/ui/carousel.tsx",
@@ -230,7 +230,7 @@
         {
           "path": "carousel-08.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/carousel/carousel-08.tsx"
+          "target": "components/astrale/components/carousel/carousel-08.tsx"
         },
         {
           "path": "support/components/ui/carousel.tsx",
@@ -260,7 +260,7 @@
         {
           "path": "carousel-09.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/carousel/carousel-09.tsx"
+          "target": "components/astrale/components/carousel/carousel-09.tsx"
         },
         {
           "path": "support/components/ui/carousel.tsx",
@@ -290,7 +290,7 @@
         {
           "path": "carousel-10.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/carousel/carousel-10.tsx"
+          "target": "components/astrale/components/carousel/carousel-10.tsx"
         },
         {
           "path": "support/components/ui/carousel.tsx",
@@ -324,7 +324,7 @@
         {
           "path": "carousel-11.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/carousel/carousel-11.tsx"
+          "target": "components/astrale/components/carousel/carousel-11.tsx"
         },
         {
           "path": "support/components/ui/motion-carousel.tsx",
@@ -355,7 +355,7 @@
         {
           "path": "carousel-12.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/carousel/carousel-12.tsx"
+          "target": "components/astrale/components/carousel/carousel-12.tsx"
         },
         {
           "path": "support/components/ui/carousel.tsx",

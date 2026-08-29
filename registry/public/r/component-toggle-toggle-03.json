@@ -11,7 +11,7 @@
       "path": "source/components/toggle/toggle-03/toggle-03.tsx",
       "content": "import { Toggle } from '@astrale-os/ui/toggle'\n\nconst ToggleSize = () => {\n  return (\n    <div className='flex items-center gap-2'>\n      <Toggle variant='outline' aria-label='Toggle small' size='sm'>\n        Small\n      </Toggle>\n      <Toggle variant='outline' aria-label='Toggle default' size='default'>\n        Default\n      </Toggle>\n      <Toggle variant='outline' aria-label='Toggle large' size='lg'>\n        Large\n      </Toggle>\n    </div>\n  )\n}\n\nexport default ToggleSize\n",
       "type": "registry:component",
-      "target": "components/astrale/component/toggle/toggle-03.tsx"
+      "target": "components/astrale/components/toggle/toggle-03.tsx"
     }
   ],
   "meta": {

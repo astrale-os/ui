@@ -13,7 +13,7 @@
       "path": "source/components/button/button-43/button-43.tsx",
       "content": "import { ShimmerButton } from '@/components/ui/shimmer-button'\n\nconst ButtonShimmerEffectDemo = () => {\n  return <ShimmerButton>Shimmer Button</ShimmerButton>\n}\n\nexport default ButtonShimmerEffectDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/button/button-43.tsx"
+      "target": "components/astrale/components/button/button-43.tsx"
     },
     {
       "path": "source/components/button/button-43/support/components/ui/shimmer-button.tsx",

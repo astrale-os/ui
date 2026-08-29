@@ -12,7 +12,7 @@
       "path": "source/components/alert/alert-12/alert-12.tsx",
       "content": "import { Alert, AlertTitle } from '@astrale-os/ui/alert'\nimport { UserRoundXIcon } from \"lucide-react\"\n\nconst AlertIndicatorDestructiveDemo = () => {\n  return (\n    <Alert className='border-destructive bg-destructive/10 text-destructive rounded-none border-0 border-l-6 *:[svg]:row-span-1'>\n      <UserRoundXIcon\n      />\n      <AlertTitle>Your request to join the team is denied.</AlertTitle>\n    </Alert>\n  )\n}\n\nexport default AlertIndicatorDestructiveDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/alert/alert-12.tsx"
+      "target": "components/astrale/components/alert/alert-12.tsx"
     }
   ],
   "meta": {

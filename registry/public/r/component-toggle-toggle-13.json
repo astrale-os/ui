@@ -13,7 +13,7 @@
       "path": "source/components/toggle/toggle-13/toggle-13.tsx",
       "content": "import { MotionToggle } from '@/components/ui/motion-toggle'\nimport Heart from '@/assets/svg/heart'\n\nconst ToggleAnimatedDemo = () => {\n  return (\n    <MotionToggle aria-label='Toggle bookmark' particleColor='var(--destructive)'>\n      <Heart className='group-data-[state=on]/toggle:fill-destructive group-data-[state=on]/toggle:stroke-destructive group-data-[state=on]/toggle:text-destructive' />\n      Shadcn Studio\n    </MotionToggle>\n  )\n}\n\nexport default ToggleAnimatedDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/toggle/toggle-13.tsx"
+      "target": "components/astrale/components/toggle/toggle-13.tsx"
     },
     {
       "path": "source/components/toggle/toggle-13/support/components/ui/motion-toggle.tsx",

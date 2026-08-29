@@ -12,7 +12,7 @@
       "path": "source/components/textarea/textarea-18/textarea-18.tsx",
       "content": "import { useId } from 'react'\n\nimport { Label } from '@astrale-os/ui/label'\nimport { Textarea } from '@astrale-os/ui/textarea'\n\nconst TextareaNoResizeDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>No resize textarea</Label>\n      <Textarea id={id} placeholder='Type your feedback here' className='resize-none' />\n    </div>\n  )\n}\n\nexport default TextareaNoResizeDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/textarea/textarea-18.tsx"
+      "target": "components/astrale/components/textarea/textarea-18.tsx"
     }
   ],
   "meta": {

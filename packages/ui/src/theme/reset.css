@@ -20,6 +20,8 @@ body {
   background: var(--ui-background);
   color: var(--ui-foreground);
   font-family: var(--ui-font-body);
+  letter-spacing: var(--ui-tracking-body);
+  line-height: var(--ui-leading-body);
   text-rendering: optimizeLegibility;
 }
 

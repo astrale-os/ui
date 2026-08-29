@@ -13,7 +13,7 @@
       "path": "source/components/sonner/sonner-03/sonner-03.tsx",
       "content": "'use client'\n\nimport { toast } from 'sonner'\nimport { Button } from '@astrale-os/ui/button'\nimport { TruckIcon } from \"lucide-react\"\n\nconst SonnerWithIconDemo = () => {\n  return (\n    <Button\n      variant='outline'\n      onClick={() =>\n        toast(\n          <div className='flex items-center gap-2'>\n            <TruckIcon className='size-5.5 shrink-0' />\n            Your order has been successfully placed, and your parcel is on its way.\n          </div>\n        )\n      }\n    >\n      Toast with icon\n    </Button>\n  )\n}\n\nexport default SonnerWithIconDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/sonner/sonner-03.tsx"
+      "target": "components/astrale/components/sonner/sonner-03.tsx"
     }
   ],
   "meta": {

@@ -12,7 +12,7 @@
       "path": "source/patterns/breadcrumb/breadcrumb-03/breadcrumb-03.tsx",
       "content": "import {\n  Breadcrumb,\n  BreadcrumbItem,\n  BreadcrumbLink,\n  BreadcrumbList,\n  BreadcrumbPage,\n  BreadcrumbSeparator\n} from '@astrale-os/ui/breadcrumb'\nimport { HomeIcon, ChevronsRightIcon, FolderIcon, FileIcon } from \"lucide-react\"\n\nconst BreadcrumbChevronsSeparatorDemo = () => {\n  return (\n    <Breadcrumb>\n      <BreadcrumbList>\n        <BreadcrumbItem>\n          <BreadcrumbLink href='#'>\n            <HomeIcon className='size-4' />\n            <span className='sr-only'>Home</span>\n          </BreadcrumbLink>\n        </BreadcrumbItem>\n        <BreadcrumbSeparator>\n          <ChevronsRightIcon\n          />\n        </BreadcrumbSeparator>\n        <BreadcrumbItem>\n          <BreadcrumbLink href='#' className='flex items-center gap-1'>\n            <FolderIcon className='size-4' />\n            Documents\n          </BreadcrumbLink>\n        </BreadcrumbItem>\n        <BreadcrumbSeparator>\n          <ChevronsRightIcon\n          />\n        </BreadcrumbSeparator>\n        <BreadcrumbItem>\n          <BreadcrumbPage className='flex items-center gap-1'>\n            <FileIcon className='inline size-4' />\n            Add Document\n          </BreadcrumbPage>\n        </BreadcrumbItem>\n      </BreadcrumbList>\n    </Breadcrumb>\n  )\n}\n\nexport default BreadcrumbChevronsSeparatorDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/pattern/breadcrumb/breadcrumb-03.tsx"
+      "target": "components/astrale/components/breadcrumb/breadcrumb-03.tsx"
     }
   ],
   "meta": {

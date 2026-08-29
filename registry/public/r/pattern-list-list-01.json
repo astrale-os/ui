@@ -11,7 +11,7 @@
       "path": "source/patterns/list/list-01/list-01.tsx",
       "content": "const ListDemo = () => {\n  return (\n    <div className='space-y-4'>\n      <div className='space-y-2'>\n        <h5 className='text-base-content text-lg'>List decimal</h5>\n        <ol className='list-inside list-decimal space-y-2 text-sm'>\n          <li>Start by signing up for our newsletter.</li>\n          <li>Explore our collection of articles and tutorials.</li>\n          <li>Join our community forums to connect with like-minded individuals.</li>\n        </ol>\n      </div>\n\n      <div className='space-y-2'>\n        <h5 className='text-base-content text-lg'>List disc</h5>\n        <ul className='list-inside list-disc space-y-2 text-sm'>\n          <li>Benefits of regular exercise:</li>\n          <li>Healthy weight maintenance</li>\n          <li>Improved mood and mental health</li>\n        </ul>\n      </div>\n\n      <div className='space-y-2'>\n        <h5 className='text-base-content text-lg'>List none</h5>\n        <ul className='list-inside list-none space-y-2 text-sm'>\n          <li>Essential items for a hiking trip:</li>\n          <li>Backpack with proper support</li>\n          <li>Water bottle or hydration pack</li>\n        </ul>\n      </div>\n    </div>\n  )\n}\n\nexport default ListDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/pattern/list/list-01.tsx"
+      "target": "components/astrale/components/list/list-01.tsx"
     }
   ],
   "meta": {

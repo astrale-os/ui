@@ -13,7 +13,7 @@
         {
           "path": "alert-01.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/alert/alert-01.tsx"
+          "target": "components/astrale/components/alert/alert-01.tsx"
         }
       ],
       "meta": {
@@ -33,7 +33,7 @@
         {
           "path": "alert-02.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/alert/alert-02.tsx"
+          "target": "components/astrale/components/alert/alert-02.tsx"
         }
       ],
       "meta": {
@@ -53,7 +53,7 @@
         {
           "path": "alert-03.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/alert/alert-03.tsx"
+          "target": "components/astrale/components/alert/alert-03.tsx"
         }
       ],
       "meta": {
@@ -73,7 +73,7 @@
         {
           "path": "alert-04.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/alert/alert-04.tsx"
+          "target": "components/astrale/components/alert/alert-04.tsx"
         }
       ],
       "meta": {
@@ -93,7 +93,7 @@
         {
           "path": "alert-05.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/alert/alert-05.tsx"
+          "target": "components/astrale/components/alert/alert-05.tsx"
         }
       ],
       "meta": {
@@ -113,7 +113,7 @@
         {
           "path": "alert-06.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/alert/alert-06.tsx"
+          "target": "components/astrale/components/alert/alert-06.tsx"
         }
       ],
       "meta": {
@@ -133,7 +133,7 @@
         {
           "path": "alert-07.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/alert/alert-07.tsx"
+          "target": "components/astrale/components/alert/alert-07.tsx"
         }
       ],
       "meta": {
@@ -153,7 +153,7 @@
         {
           "path": "alert-08.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/alert/alert-08.tsx"
+          "target": "components/astrale/components/alert/alert-08.tsx"
         }
       ],
       "meta": {
@@ -173,7 +173,7 @@
         {
           "path": "alert-09.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/alert/alert-09.tsx"
+          "target": "components/astrale/components/alert/alert-09.tsx"
         }
       ],
       "meta": {
@@ -193,7 +193,7 @@
         {
           "path": "alert-10.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/alert/alert-10.tsx"
+          "target": "components/astrale/components/alert/alert-10.tsx"
         }
       ],
       "meta": {
@@ -213,7 +213,7 @@
         {
           "path": "alert-11.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/alert/alert-11.tsx"
+          "target": "components/astrale/components/alert/alert-11.tsx"
         }
       ],
       "meta": {
@@ -233,7 +233,7 @@
         {
           "path": "alert-12.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/alert/alert-12.tsx"
+          "target": "components/astrale/components/alert/alert-12.tsx"
         }
       ],
       "meta": {
@@ -253,7 +253,7 @@
         {
           "path": "alert-13.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/alert/alert-13.tsx"
+          "target": "components/astrale/components/alert/alert-13.tsx"
         }
       ],
       "meta": {
@@ -273,7 +273,7 @@
         {
           "path": "alert-14.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/alert/alert-14.tsx"
+          "target": "components/astrale/components/alert/alert-14.tsx"
         }
       ],
       "meta": {
@@ -293,7 +293,7 @@
         {
           "path": "alert-15.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/alert/alert-15.tsx"
+          "target": "components/astrale/components/alert/alert-15.tsx"
         }
       ],
       "meta": {
@@ -313,7 +313,7 @@
         {
           "path": "alert-16.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/alert/alert-16.tsx"
+          "target": "components/astrale/components/alert/alert-16.tsx"
         }
       ],
       "meta": {
@@ -333,7 +333,7 @@
         {
           "path": "alert-17.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/alert/alert-17.tsx"
+          "target": "components/astrale/components/alert/alert-17.tsx"
         }
       ],
       "meta": {
@@ -353,7 +353,7 @@
         {
           "path": "alert-18.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/alert/alert-18.tsx"
+          "target": "components/astrale/components/alert/alert-18.tsx"
         }
       ],
       "meta": {
@@ -373,7 +373,7 @@
         {
           "path": "alert-19.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/alert/alert-19.tsx"
+          "target": "components/astrale/components/alert/alert-19.tsx"
         }
       ],
       "meta": {
@@ -393,7 +393,7 @@
         {
           "path": "alert-20.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/alert/alert-20.tsx"
+          "target": "components/astrale/components/alert/alert-20.tsx"
         }
       ],
       "meta": {
@@ -413,7 +413,7 @@
         {
           "path": "alert-21.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/alert/alert-21.tsx"
+          "target": "components/astrale/components/alert/alert-21.tsx"
         }
       ],
       "meta": {
@@ -433,7 +433,7 @@
         {
           "path": "alert-22.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/alert/alert-22.tsx"
+          "target": "components/astrale/components/alert/alert-22.tsx"
         }
       ],
       "meta": {
@@ -453,7 +453,7 @@
         {
           "path": "alert-23.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/alert/alert-23.tsx"
+          "target": "components/astrale/components/alert/alert-23.tsx"
         }
       ],
       "meta": {
@@ -473,7 +473,7 @@
         {
           "path": "alert-24.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/alert/alert-24.tsx"
+          "target": "components/astrale/components/alert/alert-24.tsx"
         }
       ],
       "meta": {
@@ -493,7 +493,7 @@
         {
           "path": "alert-25.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/alert/alert-25.tsx"
+          "target": "components/astrale/components/alert/alert-25.tsx"
         }
       ],
       "meta": {
@@ -513,7 +513,7 @@
         {
           "path": "alert-26.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/alert/alert-26.tsx"
+          "target": "components/astrale/components/alert/alert-26.tsx"
         }
       ],
       "meta": {
@@ -533,7 +533,7 @@
         {
           "path": "alert-27.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/alert/alert-27.tsx"
+          "target": "components/astrale/components/alert/alert-27.tsx"
         }
       ],
       "meta": {
@@ -553,7 +553,7 @@
         {
           "path": "alert-28.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/alert/alert-28.tsx"
+          "target": "components/astrale/components/alert/alert-28.tsx"
         }
       ],
       "meta": {
@@ -573,7 +573,7 @@
         {
           "path": "alert-29.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/alert/alert-29.tsx"
+          "target": "components/astrale/components/alert/alert-29.tsx"
         }
       ],
       "meta": {
@@ -593,7 +593,7 @@
         {
           "path": "alert-30.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/alert/alert-30.tsx"
+          "target": "components/astrale/components/alert/alert-30.tsx"
         }
       ],
       "meta": {

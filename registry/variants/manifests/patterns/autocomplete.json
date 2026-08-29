@@ -18,7 +18,7 @@
         {
           "path": "autocomplete-01.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/autocomplete/autocomplete-01.tsx"
+          "target": "components/astrale/components/autocomplete/autocomplete-01.tsx"
         },
         {
           "path": "support/components/ui/autocomplete.tsx",
@@ -48,7 +48,7 @@
         {
           "path": "autocomplete-02.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/autocomplete/autocomplete-02.tsx"
+          "target": "components/astrale/components/autocomplete/autocomplete-02.tsx"
         },
         {
           "path": "support/components/ui/autocomplete.tsx",
@@ -79,7 +79,7 @@
         {
           "path": "autocomplete-03.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/autocomplete/autocomplete-03.tsx"
+          "target": "components/astrale/components/autocomplete/autocomplete-03.tsx"
         },
         {
           "path": "support/components/ui/autocomplete.tsx",
@@ -110,7 +110,7 @@
         {
           "path": "autocomplete-04.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/autocomplete/autocomplete-04.tsx"
+          "target": "components/astrale/components/autocomplete/autocomplete-04.tsx"
         },
         {
           "path": "support/components/ui/autocomplete.tsx",
@@ -141,7 +141,7 @@
         {
           "path": "autocomplete-05.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/autocomplete/autocomplete-05.tsx"
+          "target": "components/astrale/components/autocomplete/autocomplete-05.tsx"
         },
         {
           "path": "support/components/ui/autocomplete.tsx",
@@ -172,7 +172,7 @@
         {
           "path": "autocomplete-06.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/autocomplete/autocomplete-06.tsx"
+          "target": "components/astrale/components/autocomplete/autocomplete-06.tsx"
         },
         {
           "path": "support/components/ui/autocomplete.tsx",
@@ -203,7 +203,7 @@
         {
           "path": "autocomplete-07.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/autocomplete/autocomplete-07.tsx"
+          "target": "components/astrale/components/autocomplete/autocomplete-07.tsx"
         },
         {
           "path": "support/components/ui/autocomplete.tsx",
@@ -234,7 +234,7 @@
         {
           "path": "autocomplete-08.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/autocomplete/autocomplete-08.tsx"
+          "target": "components/astrale/components/autocomplete/autocomplete-08.tsx"
         },
         {
           "path": "support/components/ui/autocomplete.tsx",
@@ -265,7 +265,7 @@
         {
           "path": "autocomplete-09.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/autocomplete/autocomplete-09.tsx"
+          "target": "components/astrale/components/autocomplete/autocomplete-09.tsx"
         },
         {
           "path": "support/components/ui/autocomplete.tsx",
@@ -296,7 +296,7 @@
         {
           "path": "autocomplete-10.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/autocomplete/autocomplete-10.tsx"
+          "target": "components/astrale/components/autocomplete/autocomplete-10.tsx"
         },
         {
           "path": "support/components/ui/autocomplete.tsx",
