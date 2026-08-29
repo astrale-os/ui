@@ -1,6 +1,4 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.astrale.ai/ui/request/source-evidence-v1.schema.json",
   "type": "object",
   "additionalProperties": false,
   "required": ["sources"],
