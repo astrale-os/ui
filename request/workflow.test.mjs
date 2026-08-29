@@ -24,6 +24,12 @@ const workerWorkflow = await readFile(
 const packageManifest = JSON.parse(
   await readFile(new URL('../package.json', import.meta.url), 'utf8'),
 )
+const sourceEvidenceSchema = JSON.parse(
+  await readFile(
+    new URL('./.spec/schemas/source-evidence-v1.schema.json', import.meta.url),
+    'utf8',
+  ),
+)
 const workspacePolicy = parse(
   await readFile(new URL('../pnpm-workspace.yaml', import.meta.url), 'utf8'),
 )
@@ -227,6 +233,13 @@ git apply --index --binary --whitespace=nowarn "$patch"
     'pnpm check',
   )
   assert.equal(packageManifest.devDependencies['@anthropic-ai/claude-code'], '2.1.223')
+  assert.deepEqual(Object.keys(sourceEvidenceSchema).toSorted(), [
+    'additionalProperties',
+    'properties',
+    'required',
+    'type',
+  ])
+  assert.equal(sourceEvidenceSchema.properties.sources.maxItems, 12)
   assert.equal(workspacePolicy.allowBuilds['@anthropic-ai/claude-code'], false)
   assert.equal(
     propose.steps[setupIndex].uses,
