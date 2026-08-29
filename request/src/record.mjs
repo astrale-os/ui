@@ -38,6 +38,7 @@ export const recordKeyValues = Object.freeze([
   'operation',
   'idempotencyKey',
   'objectiveSha256',
+  'acceptedCommentIds',
   'provider',
   'state',
   'run',
@@ -90,6 +91,18 @@ export function acceptUiRequestRecord(value) {
       !value.run.id
     ) {
       throw new TypeError('managed request run reference is malformed')
+    }
+  }
+  if (value.acceptedCommentIds !== undefined) {
+    if (
+      !Array.isArray(value.acceptedCommentIds) ||
+      value.acceptedCommentIds.length > limits.maxAcceptedCommentCount ||
+      value.acceptedCommentIds.some(
+        (commentId) => !Number.isSafeInteger(commentId) || commentId < 1,
+      ) ||
+      new Set(value.acceptedCommentIds).size !== value.acceptedCommentIds.length
+    ) {
+      throw new TypeError('managed request accepted comment snapshot is malformed')
     }
   }
   if (value.providerUrl !== undefined) {

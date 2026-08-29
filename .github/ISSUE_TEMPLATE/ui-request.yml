@@ -5,7 +5,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Describe the outcome and observable behavior. Source research decides how the request is implemented and owned.
+        Describe the outcome and observable behavior. Maintainers may refine the accepted request in comments, then apply `ui:ready`. Source research decides how the request is implemented and owned.
   - type: textarea
     id: need
     attributes:

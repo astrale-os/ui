@@ -5,6 +5,65 @@ import { managedAgentLimits } from '../agent/.spec/limits.ts'
 import { operationSignal, readBoundedJson } from '../agent/src/http.mjs'
 import { hasRecordMarker, parseRecordComment, renderRecordComment } from './record.mjs'
 
+const acceptedAssociations = new Set(['OWNER', 'MEMBER', 'COLLABORATOR'])
+
+function acceptedComment(value) {
+  if (
+    !value ||
+    typeof value !== 'object' ||
+    !Number.isSafeInteger(value.id) ||
+    value.id < 1 ||
+    value.user?.type === 'Bot' ||
+    !acceptedAssociations.has(value.author_association)
+  ) {
+    return null
+  }
+  if (
+    typeof value.user?.login !== 'string' ||
+    value.user.login.length === 0 ||
+    typeof value.body !== 'string' ||
+    typeof value.created_at !== 'string' ||
+    typeof value.updated_at !== 'string' ||
+    !Number.isFinite(Date.parse(value.created_at)) ||
+    !Number.isFinite(Date.parse(value.updated_at))
+  ) {
+    throw new TypeError('GitHub accepted maintainer comment is malformed')
+  }
+  return {
+    id: value.id,
+    author: value.user.login,
+    association: value.author_association,
+    createdAt: value.created_at,
+    updatedAt: value.updated_at,
+    body: value.body,
+  }
+}
+
+function admittedComments(comments, selectedIds) {
+  const ordered = comments.toSorted(
+    (left, right) => Date.parse(left.createdAt) - Date.parse(right.createdAt) || left.id - right.id,
+  )
+  const selected =
+    selectedIds === undefined
+      ? ordered
+      : selectedIds.map((id) => {
+          const comment = ordered.find((entry) => entry.id === id)
+          if (!comment) throw new TypeError('A reserved accepted maintainer comment is unavailable')
+          return comment
+        })
+  if (selected.length > limits.maxAcceptedCommentCount) {
+    throw new TypeError('Accepted maintainer comments exceed the admitted count')
+  }
+  const totalBodyBytes = selected.reduce(
+    (total, comment) => total + Buffer.byteLength(comment.body, 'utf8'),
+    0,
+  )
+  if (totalBodyBytes > limits.maxAcceptedCommentBodyUtf8Bytes) {
+    throw new TypeError('Accepted maintainer comments exceed the admitted size')
+  }
+  return selected
+}
+
 export function createGitHubRequestStore(options) {
   const token = options?.token
   const owner = options?.owner
@@ -39,7 +98,11 @@ export function createGitHubRequestStore(options) {
   return Object.freeze({
     repository: `https://github.com/${owner}/${repo}`,
 
-    async getIssue(issue, signal) {
+    async getRequest(issue, options = {}) {
+      const { commentMode = 'current', signal } = options
+      if (!['current', 'recorded'].includes(commentMode)) {
+        throw new TypeError('GitHub request comment mode is invalid')
+      }
       const body = await request(
         `/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/issues/${issue}`,
         { signal },
@@ -57,11 +120,8 @@ export function createGitHubRequestStore(options) {
       if (Buffer.byteLength(body.body, 'utf8') > limits.maxIssueBodyUtf8Bytes) {
         throw new TypeError('GitHub issue body exceeds the admitted size')
       }
-      return { number: issue, title: body.title, body: body.body, url: body.html_url }
-    },
-
-    async getRecord(issue, signal) {
       let found = null
+      const accepted = []
       let complete = false
       for (let page = 1; page <= limits.maxRecordCommentPages; page += 1) {
         const comments = await request(
@@ -70,15 +130,26 @@ export function createGitHubRequestStore(options) {
         )
         if (!Array.isArray(comments)) throw new TypeError('GitHub comments response is malformed')
         for (const comment of comments) {
-          if (comment?.user?.login !== actor) continue
-          const record = parseRecordComment(comment.body)
-          if (!record && hasRecordMarker(comment.body)) {
-            throw new TypeError('GitHub issue contains a malformed trusted request record')
+          if (comment?.user?.login === actor) {
+            if (typeof comment.body !== 'string') {
+              throw new TypeError('GitHub issue contains a malformed trusted request record')
+            }
+            const record = parseRecordComment(comment.body)
+            if (!record && hasRecordMarker(comment.body)) {
+              throw new TypeError('GitHub issue contains a malformed trusted request record')
+            }
+            if (record) {
+              if (!Number.isSafeInteger(comment.id) || comment.id < 1) {
+                throw new TypeError('GitHub trusted request record comment is malformed')
+              }
+              if (found) {
+                throw new TypeError('GitHub issue contains more than one trusted request record')
+              }
+              found = { commentId: comment.id, record }
+            }
           }
-          if (!record) continue
-          if (found)
-            throw new TypeError('GitHub issue contains more than one trusted request record')
-          found = { commentId: comment.id, record }
+          const eligible = acceptedComment(comment)
+          if (eligible) accepted.push(eligible)
         }
         if (comments.length < 10) {
           complete = true
@@ -86,7 +157,18 @@ export function createGitHubRequestStore(options) {
         }
       }
       if (!complete) throw new TypeError('GitHub issue comments exceed the admitted scan bound')
-      return found
+      const selectedIds =
+        commentMode === 'recorded' ? (found?.record.acceptedCommentIds ?? []) : undefined
+      return {
+        issue: {
+          number: issue,
+          title: body.title,
+          body: body.body,
+          url: body.html_url,
+          comments: admittedComments(accepted, selectedIds),
+        },
+        binding: found,
+      }
     },
 
     async createRecord(issue, record, signal) {

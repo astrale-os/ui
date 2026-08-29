@@ -90,7 +90,8 @@ test('keeps the schema object keys and enumerations closed against runtime admis
   assert.deepEqual(
     schema.required,
     recordKeyValues.filter(
-      (key) => !['run', 'providerUrl', 'pullRequest', 'failure'].includes(key),
+      (key) =>
+        !['acceptedCommentIds', 'run', 'providerUrl', 'pullRequest', 'failure'].includes(key),
     ),
   )
   assert.deepEqual(schema.allOf[0], {

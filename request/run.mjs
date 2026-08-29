@@ -39,8 +39,8 @@ export function parseRunnerArguments(argv) {
   }
   const issue = canonicalInteger(argument(argv, '--issue'), '--issue')
   const operation = argument(argv, '--operation', 'run')
-  if (!['run', 'reconcile', 'revise', 'cancel'].includes(operation)) {
-    throw new Error('--operation must be run, reconcile, revise, or cancel')
+  if (!['auto', 'run', 'reconcile', 'revise', 'cancel'].includes(operation)) {
+    throw new Error('--operation must be auto, run, reconcile, revise, or cancel')
   }
   const maximumWait = canonicalInteger(
     argument(argv, '--max-wait-ms', String(90 * 60 * 1000)),

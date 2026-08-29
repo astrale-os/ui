@@ -27,6 +27,12 @@
     "operation": { "enum": ["initial", "revision"] },
     "idempotencyKey": { "type": "string", "minLength": 1 },
     "objectiveSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "acceptedCommentIds": {
+      "type": "array",
+      "maxItems": 50,
+      "uniqueItems": true,
+      "items": { "type": "integer", "minimum": 1 }
+    },
     "provider": { "type": "string", "minLength": 1 },
     "state": {
       "enum": [

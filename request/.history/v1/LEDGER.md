@@ -24,6 +24,8 @@ used to infer implementation or ratification.
 | RQ-D15 | accepted | Managed execution uses the narrow `request/agent` dispatch/observe/PR contract; provider selection is injected | Three adapters pass one shared contract; selected Actions/Claude Code/Foundry delivery completed live |
 | RQ-D16 | accepted | GitHub request/PR is portable continuity; every review revision is a fresh normalized run | PR-targeted revision and provider replacement rules pass deterministic proof |
 | RQ-D17 | accepted | A possibly accepted dispatch cannot retry/fail over; one branch has one non-terminal writer | Unknown-outcome, digest, timeout, canonical concurrency, and reconciliation proofs pass |
+| RQ-D18 | accepted | The issue body plus bounded owner/member/collaborator comments form one accepted attempt snapshot; public and bot comments never enter the objective | Comment admission, limits, digest, and reconciliation proofs |
+| RQ-D19 | accepted | One authorized `ui:ready` label starts or revises from the trusted record; status remains in the trusted comment | Workflow gate, actor-permission, concurrency, and auto-operation proofs |
 
 ## Investigation questions
 
@@ -58,6 +60,7 @@ used to infer implementation or ratification.
 | 2026-08-29 | UI branch `feat/managed-ui-request-agent` at base `87072ac580c26ff7825af345816ec92f0bfc9ef1` | Full repository qualification | Exact final `pnpm check`, `pnpm test:security`, and `git diff --check` pass with 50 request tests, catalog 1014/1015 closure, registry 902/58 closure, and unchanged package/playground/search gates |
 | 2026-08-29 | Azure and selected worker | Redacted production Luna/Opus calls, live Claude Code Foundry call, current GitHub workflow API, exact locked Claude Code CLI, 90 request tests | Inference, agent transport, neutral adapter, and isolated proposal/qualification/publication jobs are green without exposing secret values |
 | 2026-08-29 | live request issue #54 | Coordinator run `33248736805`; worker run `33248754603`; disposable PR #59; native CI run `33248841797` | Default-branch dispatch recovered the exact durable run, created one intended-repository PR, and entered ordinary CI; every check passed, then the evidence-only PR and branch were deliberately closed rather than merged |
+| 2026-08-30 | local implementation | Accepted maintainer discussion snapshots and authorized `ui:ready` execution | 108 focused tests, full `pnpm check`, security policy, UTF-8/count bounds, reconciliation safety, duplicate-record rejection, executable permission-gate fixtures, and manual recovery pass; live evidence follows the default-branch rollout |
 
 ## Review findings
 
