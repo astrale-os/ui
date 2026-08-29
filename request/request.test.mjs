@@ -128,6 +128,34 @@ test('persists the exact reservation before dispatch and survives coordinator re
   assert.equal(agent.dispatches.length, 1)
 })
 
+test('waits one poll interval before observing a newly dispatched workflow run', async () => {
+  const store = memoryStore()
+  const events = []
+  const agent = fixtureAgent('fixture', {
+    observeResult: {
+      kind: 'observed',
+      run: run('fixture', 'succeeded', { pullRequest: `${repository}/pull/77` }),
+    },
+  })
+  const originalDispatch = agent.dispatch.bind(agent)
+  agent.dispatch = async (...arguments_) => {
+    events.push('dispatch')
+    return originalDispatch(...arguments_)
+  }
+  const originalObserve = agent.observe.bind(agent)
+  agent.observe = async (...arguments_) => {
+    events.push('observe')
+    return originalObserve(...arguments_)
+  }
+
+  const completed = await dispatcher(store, agent, {
+    sleep: async (milliseconds) => events.push(`sleep:${milliseconds}`),
+  }).execute(123, 'run')
+
+  assert.equal(completed.record.state, 'succeeded')
+  assert.deepEqual(events, ['dispatch', 'sleep:15000', 'observe'])
+})
+
 test('blocks uncertain outcomes and never starts a second writer', async () => {
   const store = memoryStore()
   const agent = fixtureAgent('fixture', {
