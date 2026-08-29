@@ -21,6 +21,12 @@ const workerWorkflow = await readFile(
   new URL('../.github/workflows/ui-request-claude-code.yml', import.meta.url),
   'utf8',
 )
+const packageManifest = JSON.parse(
+  await readFile(new URL('../package.json', import.meta.url), 'utf8'),
+)
+const workspacePolicy = parse(
+  await readFile(new URL('../pnpm-workspace.yaml', import.meta.url), 'utf8'),
+)
 const parsedWorkflow = parse(workflow)
 const parsedWorkerWorkflow = parse(workerWorkflow)
 
@@ -108,6 +114,9 @@ test('moves inert candidate evidence across isolated propose, qualify, and publi
   const agentIndex = propose.steps.findIndex(
     (step) => step.name === 'Implement the accepted request with Claude Code',
   )
+  const setupIndex = propose.steps.findIndex((step) =>
+    step.uses?.startsWith('astrale-os/config/.github/actions/setup@'),
+  )
   const publishIndex = publish.steps.findIndex(
     (step) => step.name === 'Publish exactly one pull request for this attempt',
   )
@@ -127,9 +136,11 @@ test('moves inert candidate evidence across isolated propose, qualify, and publi
   assert.equal(checkouts[1].with.ref, '${{ needs.propose.outputs.baseline_sha }}')
   assert.equal(checkouts[2].with.ref, checkouts[1].with.ref)
   assert.notEqual(agentIndex, -1)
+  assert.notEqual(setupIndex, -1)
   assert.notEqual(commitIndex, -1)
   assert.notEqual(publishIndex, -1)
   assert.ok(commitIndex < publishIndex)
+  assert.ok(setupIndex < agentIndex)
   const upload = propose.steps.find((step) => step.uses?.startsWith('actions/upload-artifact@'))
   const qualifyDownload = qualify.steps.find((step) =>
     step.uses?.startsWith('actions/download-artifact@'),
@@ -183,16 +194,31 @@ git apply --index --binary --whitespace=nowarn "$patch"
     ).run,
     'pnpm check',
   )
+  assert.equal(packageManifest.devDependencies['@anthropic-ai/claude-code'], '2.1.223')
+  assert.equal(workspacePolicy.allowBuilds['@anthropic-ai/claude-code'], false)
   assert.equal(
-    propose.steps[agentIndex].uses,
-    'anthropics/claude-code-action/base-action@a874e9ecd7bb36efdad65429c6b35815f5a08f10',
+    propose.steps[setupIndex].uses,
+    'astrale-os/config/.github/actions/setup@8e2e2abd0320be0c2f64033916519ab3b66c7dd7',
   )
-  assert.match(propose.steps[agentIndex].with.claude_args, /--model claude-opus-5/u)
-  assert.match(
-    propose.steps[agentIndex].with.claude_args,
-    /--allowedTools Read,Edit,Write,Glob,Grep,WebFetch,WebSearch/u,
+  assert.deepEqual(secretReferences(propose.steps[setupIndex]), [])
+  assert.equal(
+    propose.steps[agentIndex].run,
+    `set -euo pipefail
+node --input-type=module -e 'const url = new URL(process.env.ANTHROPIC_FOUNDRY_BASE_URL); if (url.protocol !== "https:" || url.username || url.password || url.search || url.hash || url.pathname !== "/anthropic") process.exit(1); console.log("Foundry base URL admitted.")'
+printf '%s' "$INPUT_OBJECTIVE" | node node_modules/@anthropic-ai/claude-code/cli-wrapper.cjs ${'\\'}
+  --bare ${'\\'}
+  --model claude-opus-5 ${'\\'}
+  --effort low ${'\\'}
+  --permission-mode acceptEdits ${'\\'}
+  --allowedTools Read,Edit,Write,Glob,Grep,WebFetch,WebSearch ${'\\'}
+  --no-session-persistence ${'\\'}
+  --max-budget-usd 20 ${'\\'}
+  --print
+`,
   )
-  assert.doesNotMatch(propose.steps[agentIndex].with.claude_args, /\bBash\b/u)
+  assert.equal(propose.steps[agentIndex].env.INPUT_OBJECTIVE, '${{ inputs.objective }}')
+  assert.equal(propose.steps[agentIndex].env.CLAUDE_CODE_USE_FOUNDRY, '1')
+  assert.doesNotMatch(propose.steps[agentIndex].run, /\bBash\b/u)
   assert.deepEqual(secretReferences(qualify), [])
   assert.deepEqual(secretReferences(publish.steps[commitIndex]), [])
   assert.equal(
@@ -263,8 +289,8 @@ echo "baseline_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
   )
   assert.deepEqual(secretReferences(parsedWorkerWorkflow), [
     {
-      path: `jobs.propose.steps.${agentIndex}.env.ANTHROPIC_FOUNDRY_RESOURCE`,
-      value: '${{ secrets.ANTHROPIC_FOUNDRY_RESOURCE }}',
+      path: `jobs.propose.steps.${agentIndex}.env.ANTHROPIC_FOUNDRY_BASE_URL`,
+      value: '${{ secrets.ANTHROPIC_FOUNDRY_BASE_URL }}',
     },
     {
       path: `jobs.propose.steps.${agentIndex}.env.ANTHROPIC_FOUNDRY_API_KEY`,
