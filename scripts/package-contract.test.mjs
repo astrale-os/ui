@@ -47,7 +47,7 @@ function cssBlock(source, prelude) {
   assert.fail(`unclosed CSS block for ${prelude}`)
 }
 
-test('the workspace has one public runtime package with a flat supported API', async () => {
+test('the workspace separates its public runtime package from its control-plane Domain', async () => {
   const root = JSON.parse(await readFile('package.json', 'utf8'))
   const manifest = JSON.parse(await readFile(`${packageRoot}/package.json`, 'utf8'))
   const workspace = await readFile('pnpm-workspace.yaml', 'utf8')
@@ -84,7 +84,10 @@ test('the workspace has one public runtime package with a flat supported API', a
     const candidate = JSON.parse(await readFile(file, 'utf8'))
     if (candidate.private !== true) publishable.push({ file, name: candidate.name })
   }
-  assert.deepEqual(publishable, [{ file: 'packages/ui/package.json', name: '@astrale-os/ui' }])
+  assert.deepEqual(publishable, [
+    { file: 'domain/package.json', name: '@astrale-domains/ui' },
+    { file: 'packages/ui/package.json', name: '@astrale-os/ui' },
+  ])
 
   assert.deepEqual(Object.keys(manifest.imports).toSorted(), [
     '#astrale-ui/*',

@@ -1,0 +1,36 @@
+import type { Providers } from '@astrale-os/sdk/integration'
+import type { Runtime } from '@astrale-os/sdk/runtime'
+
+import { defineRuntime } from '@astrale-os/sdk/runtime'
+
+import type { schema } from '#schema'
+
+import { integrations } from '#integrations'
+import {
+  createGitHubRequestSubmissionProvider,
+  githubRequestSubmissionConfigurationFromEnvironment,
+  type GitHubRequestSubmissionEnvironment,
+} from '#providers/github'
+import { requestWorkflow } from '#workflows/request'
+
+export type Environment = GitHubRequestSubmissionEnvironment
+
+const runtime: Runtime<
+  typeof schema,
+  typeof integrations,
+  (environment: Environment) => { readonly providers: Providers<typeof integrations> }
+> = defineRuntime<typeof schema>()({
+  integrations,
+  initialize(environment: Environment) {
+    const providers = {
+      requestSubmission: createGitHubRequestSubmissionProvider({
+        ...githubRequestSubmissionConfigurationFromEnvironment(environment),
+      }),
+    } satisfies Providers<typeof integrations>
+    return { providers }
+  },
+  actions: [],
+  workflows: [requestWorkflow],
+})
+
+export default runtime

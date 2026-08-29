@@ -1,6 +1,7 @@
 # Astrale UI
 
-Astrale UI is one public React package plus an owned shadcn-compatible source registry.
+Astrale UI is one public React runtime package, an owned shadcn-compatible source registry, and its
+narrow ecosystem control-plane Domain.
 
 - `@astrale-os/ui` provides accessible runtime components and semantic theme contracts.
 - `component/*` registry items provide exact dependency-heavy or app-owned component source.
@@ -8,6 +9,7 @@ Astrale UI is one public React package plus an owned shadcn-compatible source re
 - `block/*` registry items provide complete, off-the-shelf feature-region source.
 - `theme/*` registry items provide portable light/dark character source that projects to CSS.
 - `astrale ui` initializes projects and installs source from one immutable release snapshot.
+- `ui.astrale.ai` owns authenticated, idempotent UI requests without copying registry or search data.
 
 Base UI is the internal behavioral engine and Nova is the pinned shadcn style profile. Neither is
 part of Astrale's public API. Runtime components preserve stable `data-slot` anatomy and expose
@@ -86,12 +88,14 @@ registry/
   blocks/<family>/           complete application-region compositions
   themes/                    portable documents and generated consumer-owned CSS
 playground/                  complete living catalog and theme-authoring workbench
+domain/                      independently deployable UI request control-plane Domain
 tooling/theme-document/      portable admission and deterministic CSS projection
 .history/public-ui-v1/       migration goal, decisions, defects, and acceptance ledgers
 ```
 
-Application product policy such as docks, taskbars, windows, routing, data fetching, permissions,
-storage, analytics, and SDK calls does not belong in this repository.
+Application product policy such as docks, taskbars, windows, routing, arbitrary data fetching,
+storage, and analytics does not belong in the runtime or registry. `domain/` is the explicit owner
+for the UI ecosystem's authenticated request coordination and SDK-backed graph behavior.
 
 ## Development
 
@@ -113,9 +117,9 @@ Shadcn is an intake provider rather than a permanent public API; provider addres
 packed-package consumer and tree-shaking budget, the playground build, and Chromium
 accessibility/interaction tests.
 
-Releases are managed as one Release Please package and one `v<version>` tag. The publish workflow
-admits the exact tag and package version, reruns qualification, then publishes publicly to npm using
-trusted publishing and provenance. It contains no token fallback.
+The runtime remains one Release Please component with `v<version>` tags. The independent Domain
+component uses `domain-v<version>` tags. Each trusted workflow admits its exact tag, SHA, and package
+version before public npm publication; neither contains a token fallback.
 
 ## License
 

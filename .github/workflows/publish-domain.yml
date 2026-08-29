@@ -1,0 +1,74 @@
+name: Publish Domain
+
+on:
+  workflow_dispatch:
+    inputs:
+      expected-sha:
+        description: Exact released main commit whose UI Domain package must be published.
+        required: true
+        type: string
+      expected-version:
+        description: Exact Domain version created by Release Please at the admitted commit.
+        required: true
+        type: string
+
+concurrency:
+  group: publish-domain-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    environment: npm
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ inputs.expected-sha }}
+          fetch-depth: 0
+          persist-credentials: 'false'
+      - name: Admit exact Domain release commit
+        env:
+          EXPECTED_SHA: ${{ inputs.expected-sha }}
+          EXPECTED_VERSION: ${{ inputs.expected-version }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          [[ "$EXPECTED_SHA" =~ ^[0-9a-f]{40}$ ]]
+          [[ "$EXPECTED_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z]+(\.[0-9A-Za-z]+)*)?$ ]]
+          test "$(git rev-parse HEAD)" = "$EXPECTED_SHA"
+          test "$(node -p "require('./domain/package.json').version")" = "$EXPECTED_VERSION"
+          test "$(git rev-parse "refs/tags/domain-v${EXPECTED_VERSION}^{commit}")" = "$EXPECTED_SHA"
+          git merge-base --is-ancestor "$EXPECTED_SHA" origin/main
+          test "$(gh api "repos/${GITHUB_REPOSITORY}/releases/tags/domain-v${EXPECTED_VERSION}" --jq .tag_name)" = "domain-v${EXPECTED_VERSION}"
+      - uses: astrale-os/config/.github/actions/publish/packages@8e2e2abd0320be0c2f64033916519ab3b66c7dd7
+        with:
+          dirs: domain
+          mirror-public-packages: 'false'
+          install-command: pnpm --dir domain install --frozen-lockfile
+          build-command: pnpm --dir domain typecheck && pnpm --dir domain test && pnpm --dir domain lint && pnpm --dir domain build && pnpm --dir domain package
+          prerelease-tag: auto
+      - name: Qualify exact public Domain publication
+        env:
+          EXPECTED_VERSION: ${{ inputs.expected-version }}
+        run: |
+          set -eu
+          registry="https://registry.npmjs.org"
+          specifier="@astrale-domains/ui@${EXPECTED_VERSION}"
+          expected_tag="latest"
+          case "$EXPECTED_VERSION" in
+            *-*) expected_tag="${EXPECTED_VERSION#*-}"; expected_tag="${expected_tag%%.*}" ;;
+          esac
+          observed=""
+          for attempt in $(seq 1 60); do
+            observed="$(npm view "$specifier" version --registry="$registry" 2>/dev/null || true)"
+            test "$observed" = "$EXPECTED_VERSION" && break
+            sleep 5
+          done
+          test "$observed" = "$EXPECTED_VERSION"
+          npm dist-tag ls @astrale-domains/ui --registry="$registry" | grep -Fx "$expected_tag: $EXPECTED_VERSION"
+          consumer="$(mktemp -d)"
+          printf '%s\n' '{"name":"astrale-ui-domain-public-consumer","private":true,"type":"module"}' > "$consumer/package.json"
+          npm --prefix "$consumer" install --ignore-scripts --no-audit --no-fund --save-exact --registry="$registry" "$specifier"
+          (cd "$consumer" && node --input-type=module --eval "await import('@astrale-domains/ui')" --no-warnings)

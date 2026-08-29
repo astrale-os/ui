@@ -1,0 +1,35 @@
+packages: []
+linkWorkspacePackages: false
+preferWorkspacePackages: false
+hoistWorkspacePackages: false
+sharedWorkspaceLockfile: true
+strictPeerDependencies: true
+blockExoticSubdeps: true
+lockfileIncludeTarballUrl: true
+
+# pnpm blocks dependency build scripts by default; these need their postinstall
+# to run (workerd is wrangler's runtime — without it `pnpm dev`/`pnpm run deploy prod`
+# fails).
+allowBuilds:
+  bun: true
+  esbuild: true
+  sharp: true
+  workerd: true
+  # Optional native msgpack acceleration; the JS fallback is the portable
+  # scaffold baseline and does not require executing a transitive build script.
+  msgpackr-extract: false
+
+# Reject newly released third-party packages for seven days. First-party
+# public packages are exempt.
+minimumReleaseAge: 10080
+minimumReleaseAgeStrict: true
+minimumReleaseAgeIgnoreMissingTime: false
+trustLockfile: false
+minimumReleaseAgeExclude:
+  - '@astrale-os/*'
+  - '@astrale-domains/*'
+  - '@astrale/*'
+  - 'create-astrale-domain'
+
+# Never install implicitly before `pnpm run` or `pnpm exec`.
+verifyDepsBeforeRun: false

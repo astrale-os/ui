@@ -6,10 +6,12 @@ import test from 'node:test'
 const configSha = '8e2e2abd0320be0c2f64033916519ab3b66c7dd7'
 
 test('pins supported CI and release workflow dependencies', async () => {
-  const [ci, release, publish] = await Promise.all(
-    ['ci', 'release', 'publish'].map((name) => readFile(`.github/workflows/${name}.yml`, 'utf8')),
+  const [ci, release, publish, publishDomain] = await Promise.all(
+    ['ci', 'release', 'publish', 'publish-domain'].map((name) =>
+      readFile(`.github/workflows/${name}.yml`, 'utf8'),
+    ),
   )
-  for (const workflow of [ci, release, publish]) {
+  for (const workflow of [ci, release, publish, publishDomain]) {
     const actionReferences = [...workflow.matchAll(/^\s*-?\s*uses:\s*([^\s#]+)/gmu)].map(
       (match) => match[1],
     )
@@ -20,7 +22,9 @@ test('pins supported CI and release workflow dependencies', async () => {
     assert.doesNotMatch(workflow, /NPM_TOKEN|NODE_AUTH_TOKEN|secrets\./u)
   }
   const configRefs = [
-    ...[ci, release, publish].join('\n').matchAll(/astrale-os\/config\/.+@([0-9a-f]{40})/gu),
+    ...[ci, release, publish, publishDomain]
+      .join('\n')
+      .matchAll(/astrale-os\/config\/.+@([0-9a-f]{40})/gu),
   ]
   assert.ok(configRefs.length > 0)
   assert.deepEqual([...new Set(configRefs.map((match) => match[1]))], [configSha])
@@ -33,6 +37,8 @@ test('pins supported CI and release workflow dependencies', async () => {
   assert.match(ci, /pnpm playground:test/u)
   assert.match(ci, /pnpm test:security/u)
   assert.match(ci, /pnpm audit --prod --audit-level high/u)
+  assert.match(ci, /pnpm --dir domain install --frozen-lockfile/u)
+  assert.match(ci, /pnpm --dir domain package/u)
   assert.match(
     ci,
     /security:\s*[\s\S]*?permissions:\s*\n\s+actions:\s*read\s*\n\s+contents:\s*read\s*\n\s+security-events:\s*write/u,
@@ -67,17 +73,25 @@ test('pins supported CI and release workflow dependencies', async () => {
   )
 })
 
-test('publishes exactly one public npm package from the Release Please commit using OIDC', async () => {
-  const [release, publish] = await Promise.all([
+test('publishes the runtime and Domain from their exact independent Release Please commits', async () => {
+  const [release, publish, publishDomain] = await Promise.all([
     readFile('.github/workflows/release.yml', 'utf8'),
     readFile('.github/workflows/publish.yml', 'utf8'),
+    readFile('.github/workflows/publish-domain.yml', 'utf8'),
   ])
   const manifest = JSON.parse(await readFile('packages/ui/package.json', 'utf8'))
+  const domainManifest = JSON.parse(await readFile('domain/package.json', 'utf8'))
   const rootManifest = JSON.parse(await readFile('package.json', 'utf8'))
   const releaseConfig = JSON.parse(await readFile('.release-please-config.json', 'utf8'))
   const releaseManifest = JSON.parse(await readFile('.release-please-manifest.json', 'utf8'))
 
   assert.match(release, /needs\.release\.outputs\.created == 'true'/u)
+  assert.match(release, /paths_released: \$\{\{ steps\.release\.outputs\.paths_released \}\}/u)
+  assert.match(release, /contains\(fromJSON\(needs\.release\.outputs\.paths_released\), '\.'\)/u)
+  assert.match(
+    release,
+    /contains\(fromJSON\(needs\.release\.outputs\.paths_released\), 'domain'\)/u,
+  )
   assert.match(release, /search-contract:\s*\n\s+needs: release/u)
   assert.match(release, /search-contract:[\s\S]*?ref:\s*\$\{\{ github\.sha \}\}/u)
   assert.match(
@@ -93,6 +107,9 @@ test('publishes exactly one public npm package from the Release Please commit us
   assert.match(release, /-f expected-version="\$publish_version"/u)
   assert.match(release, /--ref "\$publish_tag"/u)
   assert.match(release, /gh run watch "\$run_id"/u)
+  assert.match(release, /publish-domain:\s*\n\s+needs: release/u)
+  assert.match(release, /publish_tag="domain-v\$\{publish_version\}"/u)
+  assert.match(release, /gh workflow run publish-domain\.yml/u)
   assert.match(publish, /workflow_dispatch/u)
   assert.doesNotMatch(publish, /push:\s*\n\s+tags:/u)
   assert.match(publish, /id-token:\s*write/u)
@@ -123,10 +140,23 @@ test('publishes exactly one public npm package from the Release Please commit us
   assert.match(publish, /packages:\s*write/u)
   assert.match(publish, /publish\/mirror-npm-to-github@8e2e2abd0320be0c2f64033916519ab3b66c7dd7/u)
   assert.match(publish, /repository:\s*astrale-os\/ui/u)
-  assert.deepEqual(Object.keys(releaseConfig.packages), ['.'])
-  assert.deepEqual(Object.keys(releaseManifest), ['.'])
+  assert.match(publishDomain, /workflow_dispatch/u)
+  assert.match(publishDomain, /id-token:\s*write/u)
+  assert.doesNotMatch(publishDomain, /(?:npm-token:|NPM_TOKEN|NODE_AUTH_TOKEN|secrets\.)/u)
+  assert.match(publishDomain, /environment:\s*npm/u)
+  assert.match(publishDomain, /ref:\s*\$\{\{ inputs\.expected-sha \}\}/u)
+  assert.match(publishDomain, /refs\/tags\/domain-v\$\{EXPECTED_VERSION\}/u)
+  assert.match(publishDomain, /releases\/tags\/domain-v\$\{EXPECTED_VERSION\}/u)
+  assert.match(publishDomain, /publish\/packages@8e2e2abd0320be0c2f64033916519ab3b66c7dd7/u)
+  assert.match(publishDomain, /dirs:\s*domain/u)
+  assert.match(publishDomain, /mirror-public-packages:\s*'false'/u)
+  assert.match(publishDomain, /pnpm --dir domain install --frozen-lockfile/u)
+  assert.match(publishDomain, /npm dist-tag ls @astrale-domains\/ui/u)
+  assert.match(publishDomain, /await import\('@astrale-domains\/ui'\)/u)
+  assert.deepEqual(Object.keys(releaseConfig.packages), ['.', 'domain'])
+  assert.deepEqual(Object.keys(releaseManifest), ['.', 'domain'])
   assert.equal(releaseConfig.packages['.']['changelog-path'], 'packages/ui/CHANGELOG.md')
-  assert.deepEqual(releaseConfig.packages['.']['exclude-paths'], ['.history', '.release'])
+  assert.deepEqual(releaseConfig.packages['.']['exclude-paths'], ['.history', '.release', 'domain'])
   assert.deepEqual(releaseConfig.packages['.']['extra-files'], [
     {
       type: 'json',
@@ -138,13 +168,28 @@ test('publishes exactly one public npm package from the Release Please commit us
   assert.equal(releaseConfig.prerelease, true)
   assert.equal(releaseConfig['prerelease-type'], 'beta')
   assert.equal(releaseConfig['always-update'], true)
+  assert.deepEqual(releaseConfig.packages.domain, {
+    component: 'domain',
+    'package-name': '@astrale-domains/ui',
+    versioning: 'default',
+    prerelease: false,
+    'include-component-in-tag': true,
+    'initial-version': '0.1.0',
+  })
   assert.match(manifest.version, /^\d+\.\d+\.\d+-beta\.\d+$/u)
   assert.equal(rootManifest.version, manifest.version)
   assert.equal(releaseManifest['.'], manifest.version)
+  assert.equal(releaseManifest.domain, domainManifest.version)
   assert.equal(rootManifest.scripts['qualify:publication'], 'node scripts/qualify-publication.mjs')
   assert.equal(manifest.name, '@astrale-os/ui')
   assert.equal(manifest.publishConfig.registry, 'https://registry.npmjs.org')
   assert.equal(manifest.publishConfig.access, 'public')
+  assert.equal(domainManifest.name, '@astrale-domains/ui')
+  assert.equal(domainManifest.version, '0.0.0')
+  assert.equal(domainManifest.repository.url, 'git+https://github.com/astrale-os/ui.git')
+  assert.equal(domainManifest.repository.directory, 'domain')
+  assert.equal(domainManifest.publishConfig.registry, 'https://registry.npmjs.org/')
+  assert.equal(domainManifest.publishConfig.access, 'public')
 })
 
 test('declares one credential-free public registry policy for local package operations', async () => {
