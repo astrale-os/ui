@@ -23,8 +23,14 @@ function objectiveFor(issue, operation, pullRequest) {
       ? `Revise the existing pull request ${pullRequest} from its current review state.`
       : 'Search existing Astrale coverage first, then select authoritative permissively licensed source.',
     '',
-    'Preserve source defaults exactly. Mechanical adaptation may change imports, paths, registry metadata, and runtime compatibility only. Do not invent or redesign classes, CSS, DOM anatomy, behavior, accessibility, responsive behavior, or copy.',
-    'Run the repository-owned focused checks, retain provenance and license evidence, add canonical previews/fixtures, and leave CI, review, merge, and publication to their existing owners.',
+    'Mandatory intake order:',
+    '1. Before editing implementation source, search for an existing authoritative public source with a permissive license and inspect its exact code.',
+    '2. Record the exact upstream URL, immutable revision or version, license, source digest, and owned destination through the repository existing provider-neutral provenance conventions.',
+    '3. Copy that source faithfully. Mechanical adaptation may change imports, paths, registry metadata, and runtime compatibility only.',
+    '4. Add the canonical preview and fixture through the existing manifest conventions. Do not hand-edit derived public registry, catalog, or search artifacts; the credential-free qualification owner regenerates them.',
+    '',
+    'Never invent or redesign classes, CSS, DOM anatomy, behavior, accessibility, responsive behavior, or product copy. A similar existing Astrale composition is not external design authority. If no suitable authoritative permissively licensed source can be proven, make no implementation change; a failed no-change attempt is safer than fabricated UI.',
+    'Do not claim checks ran: this proposal environment intentionally has no shell tool. Leave deterministic generation, qualification, review, merge, and publication to their existing credential-separated owners.',
   ].join('\n')
 }
 

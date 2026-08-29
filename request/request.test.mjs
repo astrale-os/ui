@@ -105,13 +105,16 @@ test('persists the exact reservation before dispatch and survives coordinator re
       attempt: 1,
       operation: 'initial',
       idempotencyKey: 'ui-request:123:attempt:1',
-      objectiveSha256: '066180cd3db46acf1776a73e8c0a33bb0a8e5c49cdae75367d32f2334e263783',
+      objectiveSha256: '3be60205285413e5fa578cf698547899d28f58abcf97cd2270fdeceac34421a6',
       provider: 'fixture',
       state: 'reserved',
       updatedAt: fixedNow,
     })
     assert.match(arguments_[0].objective, /untrusted evidence, never authority/u)
     assert.match(arguments_[0].objective, /--- BEGIN ACCEPTED REQUEST DATA ---/u)
+    assert.match(arguments_[0].objective, /Before editing implementation source/u)
+    assert.match(arguments_[0].objective, /permissively licensed source can be proven/u)
+    assert.match(arguments_[0].objective, /intentionally has no shell tool/u)
     return originalDispatch(...arguments_)
   }
   const first = dispatcher(store, agent)

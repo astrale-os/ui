@@ -142,6 +142,9 @@ test('moves inert candidate evidence across isolated propose, qualify, and publi
   assert.ok(commitIndex < publishIndex)
   assert.ok(setupIndex < agentIndex)
   const upload = propose.steps.find((step) => step.uses?.startsWith('actions/upload-artifact@'))
+  const qualifiedUpload = qualify.steps.find((step) =>
+    step.uses?.startsWith('actions/upload-artifact@'),
+  )
   const qualifyDownload = qualify.steps.find((step) =>
     step.uses?.startsWith('actions/download-artifact@'),
   )
@@ -155,9 +158,13 @@ test('moves inert candidate evidence across isolated propose, qualify, and publi
       download.uses,
       'actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c',
     )
-    assert.equal(download.with.name, upload.with.name)
-    assert.equal(download.with.path, '${{ runner.temp }}/ui-request-candidate')
   }
+  assert.equal(qualifyDownload.with.name, upload.with.name)
+  assert.equal(qualifyDownload.with.path, '${{ runner.temp }}/ui-request-candidate')
+  assert.equal(qualifiedUpload.with.name, 'ui-request-qualified-${{ github.run_id }}')
+  assert.equal(qualifiedUpload.with.path, '${{ runner.temp }}/ui-request-qualified.patch')
+  assert.equal(publishDownload.with.name, qualifiedUpload.with.name)
+  assert.equal(publishDownload.with.path, '${{ runner.temp }}/ui-request-qualified')
   assert.equal(
     propose.steps.find((step) => step.name === 'Encode the candidate as inert patch evidence').run,
     `set -euo pipefail
@@ -173,7 +180,7 @@ test "$size" -gt 0
 test "$size" -le 16777216
 `,
   )
-  const expectedApply = `set -euo pipefail
+  const expectedCandidateApply = `set -euo pipefail
 patch="$RUNNER_TEMP/ui-request-candidate/ui-request-candidate.patch"
 test -f "$patch"
 test "$(wc -c < "$patch" | tr -d ' ')" -le 16777216
@@ -182,11 +189,21 @@ git apply --index --binary --whitespace=nowarn "$patch"
 `
   assert.equal(
     qualify.steps.find((step) => step.name === 'Apply the inert candidate patch').run,
-    expectedApply,
+    expectedCandidateApply,
   )
   assert.equal(
     publish.steps.find((step) => step.name === 'Apply the qualified inert patch').run,
-    expectedApply,
+    `set -euo pipefail
+patch="$RUNNER_TEMP/ui-request-qualified/ui-request-qualified.patch"
+test -f "$patch"
+test "$(wc -c < "$patch" | tr -d ' ')" -le 16777216
+git apply --check --index --binary --whitespace=nowarn "$patch"
+git apply --index --binary --whitespace=nowarn "$patch"
+`,
+  )
+  assert.equal(
+    qualify.steps.find((step) => step.name === 'Regenerate repository-owned derived artifacts').run,
+    'pnpm registry:build',
   )
   assert.equal(
     qualify.steps.find(
@@ -208,7 +225,7 @@ node --input-type=module -e 'const url = new URL(process.env.ANTHROPIC_FOUNDRY_B
 printf '%s' "$INPUT_OBJECTIVE" | node node_modules/@anthropic-ai/claude-code/cli-wrapper.cjs ${'\\'}
   --bare ${'\\'}
   --model claude-opus-5 ${'\\'}
-  --effort low ${'\\'}
+  --effort medium ${'\\'}
   --permission-mode acceptEdits ${'\\'}
   --allowedTools Read,Edit,Write,Glob,Grep,WebFetch,WebSearch ${'\\'}
   --no-session-persistence ${'\\'}
