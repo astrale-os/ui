@@ -516,4 +516,3 @@ test('uses TypeScript 7 with tsc throughout the rebuilt workspace', async () => 
   assert.equal(playground.devDependencies?.vite, '8.2.1')
   assert.equal(playground.devDependencies?.['@vitejs/plugin-react'], '6.0.5')
 })
-
