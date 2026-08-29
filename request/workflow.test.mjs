@@ -1,5 +1,9 @@
 import assert from 'node:assert/strict'
+import { spawnSync } from 'node:child_process'
+import { chmodSync, existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { readFile } from 'node:fs/promises'
+import { tmpdir } from 'node:os'
+import path from 'node:path'
 import test from 'node:test'
 import { parse } from 'yaml'
 
@@ -55,6 +59,61 @@ function secretReferences(value, path = [], found = []) {
   return found
 }
 
+function workflowOutputs(value) {
+  return Object.fromEntries(
+    value
+      .trim()
+      .split('\n')
+      .filter(Boolean)
+      .map((line) => {
+        const separator = line.indexOf('=')
+        return [line.slice(0, separator), line.slice(separator + 1)]
+      }),
+  )
+}
+
+function executeWorkflowShell(script, environment = {}, fakeGitHub = false) {
+  const directory = mkdtempSync(path.join(tmpdir(), 'ui-request-workflow-'))
+  const output = path.join(directory, 'output')
+  const githubLog = path.join(directory, 'gh.log')
+  if (fakeGitHub) {
+    const gh = path.join(directory, 'gh')
+    writeFileSync(
+      gh,
+      `#!/bin/sh
+printf '%s\n' "$*" >> "$FAKE_GH_LOG"
+if [ "\${FAKE_GH_FAIL:-}" = '1' ]; then exit 1; fi
+printf '%s\n' "\${FAKE_GH_PERMISSION:-}"
+`,
+    )
+    chmodSync(gh, 0o755)
+  }
+  try {
+    const result = spawnSync('/bin/bash', ['-c', script], {
+      encoding: 'utf8',
+      env: {
+        ...process.env,
+        ...environment,
+        GITHUB_OUTPUT: output,
+        ...(fakeGitHub ? { FAKE_GH_LOG: githubLog, PATH: `${directory}:${process.env.PATH}` } : {}),
+      },
+    })
+    const rawOutput = existsSync(output) ? readFileSync(output, 'utf8') : ''
+    const githubCalls = existsSync(githubLog)
+      ? readFileSync(githubLog, 'utf8').trim().split('\n').filter(Boolean)
+      : []
+    return {
+      status: result.status,
+      stderr: result.stderr,
+      rawOutput,
+      outputs: workflowOutputs(rawOutput),
+      githubCalls,
+    }
+  } finally {
+    rmSync(directory, { recursive: true, force: true })
+  }
+}
+
 test('keeps the public request form free of provider and implementation taxonomy', () => {
   assert.match(form, /\n\s+- type: textarea\n\s+id: need\n/u)
   assert.match(form, /attachments are public/u)
@@ -65,7 +124,9 @@ test('keeps the public request form free of provider and implementation taxonomy
 test('keeps selection trusted and routes exact credentials through mutually exclusive steps', () => {
   const inputs = parsedWorkflow.on.workflow_dispatch.inputs
   assert.equal('provider' in inputs, false)
+  const gate = parsedWorkflow.jobs.gate
   const steps = parsedWorkflow.jobs.request.steps
+  const labelIndex = gate.steps.findIndex((step) => step.name === 'Admit authorized issue label')
   const azureIndex = steps.findIndex(
     (step) => step.name === 'Dispatch or reconcile through Azure Claude Code',
   )
@@ -75,10 +136,29 @@ test('keeps selection trusted and routes exact credentials through mutually excl
   const cursorIndex = steps.findIndex(
     (step) => step.name === 'Dispatch or reconcile through Cursor',
   )
+  const consumeIndex = steps.findIndex((step) => step.name === 'Consume accepted request label')
+  assert.notEqual(labelIndex, -1)
   assert.notEqual(azureIndex, -1)
   assert.notEqual(githubIndex, -1)
   assert.notEqual(cursorIndex, -1)
+  assert.notEqual(consumeIndex, -1)
   assert.deepEqual(secretReferences(parsedWorkflow), [
+    {
+      path: `jobs.gate.steps.${labelIndex}.env.GH_TOKEN`,
+      value: '${{ github.token }}',
+    },
+    {
+      path: `jobs.gate.steps.${labelIndex}.env.INPUT_ACTOR`,
+      value: '${{ github.actor }}',
+    },
+    {
+      path: `jobs.gate.steps.${labelIndex}.env.INPUT_ACTOR_TYPE`,
+      value: '${{ github.event.sender.type }}',
+    },
+    {
+      path: `jobs.gate.steps.${labelIndex}.env.INPUT_ISSUE_NUMBER`,
+      value: '${{ github.event.issue.number }}',
+    },
     {
       path: `jobs.request.steps.${azureIndex}.env.GITHUB_TOKEN`,
       value: '${{ github.token }}',
@@ -99,6 +179,10 @@ test('keeps selection trusted and routes exact credentials through mutually excl
       path: `jobs.request.steps.${cursorIndex}.env.CURSOR_API_KEY`,
       value: '${{ secrets.CURSOR_API_KEY }}',
     },
+    {
+      path: `jobs.request.steps.${consumeIndex}.env.GH_TOKEN`,
+      value: '${{ github.token }}',
+    },
   ])
   assert.equal('pull_request_target' in parsedWorkflow.on, false)
   assert.equal(
@@ -110,7 +194,134 @@ test('keeps selection trusted and routes exact credentials through mutually excl
   assert.equal(steps[azureIndex].env.UI_REQUEST_AGENT_PROVIDER, 'github-actions-claude-code')
   assert.equal(steps[githubIndex].env.UI_REQUEST_AGENT_PROVIDER, 'github-copilot')
   assert.equal(steps[cursorIndex].env.UI_REQUEST_AGENT_PROVIDER, 'cursor')
-  assert.equal(parsedWorkflow.permissions.actions, 'write')
+  assert.deepEqual(parsedWorkflow.permissions, { contents: 'read' })
+  assert.equal('environment' in gate, false)
+  assert.deepEqual(gate.permissions, { contents: 'read', issues: 'read' })
+  assert.equal(parsedWorkflow.jobs.request.environment, 'ui-request-agent')
+  assert.deepEqual(parsedWorkflow.jobs.request.permissions, {
+    actions: 'write',
+    contents: 'read',
+    issues: 'write',
+    'pull-requests': 'read',
+  })
+})
+
+test('starts only from the authorized ui:ready issue label and consumes it after admission', () => {
+  assert.deepEqual(parsedWorkflow.on.issues.types, ['labeled'])
+  assert.equal(
+    parsedWorkflow.jobs.gate.if,
+    "github.event_name == 'workflow_dispatch' || (github.event.label.name == 'ui:ready' && github.event.issue.state == 'open')",
+  )
+  const label = parsedWorkflow.jobs.gate.steps.find(
+    (step) => step.name === 'Admit authorized issue label',
+  )
+  assert.deepEqual(label.env, {
+    GH_TOKEN: '${{ github.token }}',
+    INPUT_ACTOR: '${{ github.actor }}',
+    INPUT_ACTOR_TYPE: '${{ github.event.sender.type }}',
+    INPUT_ISSUE_NUMBER: '${{ github.event.issue.number }}',
+  })
+  for (const permission of ['admin', 'write']) {
+    const admitted = executeWorkflowShell(
+      label.run,
+      {
+        FAKE_GH_PERMISSION: permission,
+        GITHUB_REPOSITORY: 'astrale-os/ui',
+        INPUT_ACTOR: 'maintainer',
+        INPUT_ACTOR_TYPE: 'User',
+        INPUT_ISSUE_NUMBER: '123',
+      },
+      true,
+    )
+    assert.equal(admitted.status, 0, admitted.stderr)
+    assert.deepEqual(admitted.outputs, {
+      issue_number: '123',
+      operation: 'auto',
+      labeled: 'true',
+    })
+    assert.deepEqual(admitted.githubCalls, [
+      'api repos/astrale-os/ui/collaborators/maintainer/permission --jq .permission',
+    ])
+  }
+  for (const permission of ['read', 'triage', 'none', 'malformed']) {
+    const denied = executeWorkflowShell(
+      label.run,
+      {
+        FAKE_GH_PERMISSION: permission,
+        GITHUB_REPOSITORY: 'astrale-os/ui',
+        INPUT_ACTOR: 'untrusted',
+        INPUT_ACTOR_TYPE: 'User',
+        INPUT_ISSUE_NUMBER: '123',
+      },
+      true,
+    )
+    assert.notEqual(denied.status, 0)
+    assert.equal(denied.rawOutput, '')
+    assert.deepEqual(denied.githubCalls, [
+      'api repos/astrale-os/ui/collaborators/untrusted/permission --jq .permission',
+    ])
+  }
+  for (const environment of [
+    { FAKE_GH_PERMISSION: 'write', INPUT_ACTOR_TYPE: 'Bot' },
+    { FAKE_GH_FAIL: '1', INPUT_ACTOR_TYPE: 'User' },
+  ]) {
+    const denied = executeWorkflowShell(
+      label.run,
+      {
+        GITHUB_REPOSITORY: 'astrale-os/ui',
+        INPUT_ACTOR: 'untrusted',
+        INPUT_ISSUE_NUMBER: '123',
+        ...environment,
+      },
+      true,
+    )
+    assert.notEqual(denied.status, 0)
+    assert.equal(denied.rawOutput, '')
+  }
+  const consume = parsedWorkflow.jobs.request.steps.find(
+    (step) => step.name === 'Consume accepted request label',
+  )
+  assert.equal(consume.if, "success() && needs.gate.outputs.labeled == 'true'")
+  const consumed = executeWorkflowShell(
+    consume.run,
+    {
+      GITHUB_REPOSITORY: 'astrale-os/ui',
+      INPUT_ISSUE_NUMBER: '123',
+    },
+    true,
+  )
+  assert.equal(consumed.status, 0, consumed.stderr)
+  assert.deepEqual(consumed.githubCalls, [
+    'api --method DELETE repos/astrale-os/ui/issues/123/labels/ui%3Aready',
+  ])
+})
+
+test('manual reconciliation selects exact recovery inputs without label state', () => {
+  const manual = parsedWorkflow.jobs.gate.steps.find(
+    (step) => step.name === 'Admit manual request operation',
+  )
+  const selected = parsedWorkflow.jobs.gate.steps.find(
+    (step) => step.name === 'Select admitted request input',
+  )
+  const admitted = executeWorkflowShell(manual.run, {
+    INPUT_ISSUE_NUMBER: '51',
+    INPUT_OPERATION: 'reconcile',
+  })
+  assert.equal(admitted.status, 0, admitted.stderr)
+  const result = executeWorkflowShell(selected.run, {
+    LABEL_ISSUE_NUMBER: '',
+    LABEL_OPERATION: '',
+    LABEL_TRIGGERED: '',
+    MANUAL_ISSUE_NUMBER: admitted.outputs.issue_number,
+    MANUAL_OPERATION: admitted.outputs.operation,
+    MANUAL_TRIGGERED: admitted.outputs.labeled,
+  })
+  assert.equal(result.status, 0, result.stderr)
+  assert.deepEqual(result.outputs, {
+    issue_number: '51',
+    operation: 'reconcile',
+    labeled: 'false',
+  })
 })
 
 test('moves inert candidate evidence across isolated propose, qualify, and publish jobs', () => {
@@ -397,7 +608,10 @@ echo "baseline_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 })
 
 test('serializes canonical issue identity and keeps workflow inputs out of shell source', () => {
-  assert.equal(parsedWorkflow.concurrency.group, 'ui-request-${{ fromJSON(inputs.issue_number) }}')
+  assert.equal(
+    parsedWorkflow.concurrency.group,
+    "ui-request-${{ fromJSON(format('{0}', github.event.issue.number || inputs.issue_number)) }}",
+  )
   for (const step of parsedWorkflow.jobs.request.steps.filter((entry) =>
     entry.run?.includes('request:run'),
   )) {
@@ -405,13 +619,18 @@ test('serializes canonical issue identity and keeps workflow inputs out of shell
       step.run,
       'pnpm request:run --issue "$INPUT_ISSUE_NUMBER" --operation "$INPUT_OPERATION"',
     )
-    assert.equal(step.env.INPUT_ISSUE_NUMBER, '${{ inputs.issue_number }}')
-    assert.equal(step.env.INPUT_OPERATION, '${{ inputs.operation }}')
+    assert.equal(step.env.INPUT_ISSUE_NUMBER, '${{ needs.gate.outputs.issue_number }}')
+    assert.equal(step.env.INPUT_OPERATION, '${{ needs.gate.outputs.operation }}')
     assert.doesNotMatch(step.run, /\$\{\{/u)
   }
   assert.deepEqual(parseRunnerArguments(['--issue', '51']), {
     issue: 51,
     operation: 'run',
+    maximumWait: 90 * 60 * 1000,
+  })
+  assert.deepEqual(parseRunnerArguments(['--issue', '51', '--operation', 'auto']), {
+    issue: 51,
+    operation: 'auto',
     maximumWait: 90 * 60 * 1000,
   })
   for (const alias of ['051', '5.1e1', '+51', '51.0']) {

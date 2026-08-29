@@ -1,6 +1,9 @@
 name: UI Request Agent
 
 on:
+  issues:
+    types:
+      - labeled
   workflow_dispatch:
     inputs:
       issue_number:
@@ -19,20 +22,86 @@ on:
           - cancel
 
 concurrency:
-  group: ui-request-${{ fromJSON(inputs.issue_number) }}
+  group: ui-request-${{ fromJSON(format('{0}', github.event.issue.number || inputs.issue_number)) }}
   cancel-in-progress: false
 
 permissions:
-  actions: write
   contents: read
-  issues: write
-  pull-requests: read
 
 jobs:
+  gate:
+    if: github.event_name == 'workflow_dispatch' || (github.event.label.name == 'ui:ready' && github.event.issue.state == 'open')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: read
+    outputs:
+      issue_number: ${{ steps.issue.outputs.issue_number }}
+      operation: ${{ steps.issue.outputs.operation }}
+      labeled: ${{ steps.issue.outputs.labeled }}
+    steps:
+      - name: Admit manual request operation
+        id: manual
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          INPUT_ISSUE_NUMBER: ${{ inputs.issue_number }}
+          INPUT_OPERATION: ${{ inputs.operation }}
+        run: |
+          echo "issue_number=$INPUT_ISSUE_NUMBER" >> "$GITHUB_OUTPUT"
+          echo "operation=$INPUT_OPERATION" >> "$GITHUB_OUTPUT"
+          echo 'labeled=false' >> "$GITHUB_OUTPUT"
+      - name: Admit authorized issue label
+        id: label
+        if: github.event_name == 'issues'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          INPUT_ACTOR: ${{ github.actor }}
+          INPUT_ACTOR_TYPE: ${{ github.event.sender.type }}
+          INPUT_ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          set -euo pipefail
+          test "$INPUT_ACTOR_TYPE" = 'User'
+          permission="$(gh api "repos/$GITHUB_REPOSITORY/collaborators/$INPUT_ACTOR/permission" --jq .permission)"
+          case "$permission" in
+            admin|write) ;;
+            *)
+              echo "ui:ready requires write, maintain, or admin repository permission." >&2
+              exit 1
+              ;;
+          esac
+          echo "issue_number=$INPUT_ISSUE_NUMBER" >> "$GITHUB_OUTPUT"
+          echo 'operation=auto' >> "$GITHUB_OUTPUT"
+          echo 'labeled=true' >> "$GITHUB_OUTPUT"
+      - name: Select admitted request input
+        id: issue
+        env:
+          LABEL_ISSUE_NUMBER: ${{ steps.label.outputs.issue_number }}
+          LABEL_OPERATION: ${{ steps.label.outputs.operation }}
+          LABEL_TRIGGERED: ${{ steps.label.outputs.labeled }}
+          MANUAL_ISSUE_NUMBER: ${{ steps.manual.outputs.issue_number }}
+          MANUAL_OPERATION: ${{ steps.manual.outputs.operation }}
+          MANUAL_TRIGGERED: ${{ steps.manual.outputs.labeled }}
+        run: |
+          issue_number="${LABEL_ISSUE_NUMBER:-$MANUAL_ISSUE_NUMBER}"
+          operation="${LABEL_OPERATION:-$MANUAL_OPERATION}"
+          labeled="${LABEL_TRIGGERED:-$MANUAL_TRIGGERED}"
+          test -n "$issue_number"
+          test -n "$operation"
+          test -n "$labeled"
+          echo "issue_number=$issue_number" >> "$GITHUB_OUTPUT"
+          echo "operation=$operation" >> "$GITHUB_OUTPUT"
+          echo "labeled=$labeled" >> "$GITHUB_OUTPUT"
+
   request:
+    needs: gate
     runs-on: ubuntu-latest
     timeout-minutes: 100
     environment: ui-request-agent
+    permissions:
+      actions: write
+      contents: read
+      issues: write
+      pull-requests: read
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
@@ -45,8 +114,8 @@ jobs:
         if: vars.UI_REQUEST_AGENT_PROVIDER == '' || vars.UI_REQUEST_AGENT_PROVIDER == 'github-actions-claude-code'
         env:
           GITHUB_TOKEN: ${{ github.token }}
-          INPUT_ISSUE_NUMBER: ${{ inputs.issue_number }}
-          INPUT_OPERATION: ${{ inputs.operation }}
+          INPUT_ISSUE_NUMBER: ${{ needs.gate.outputs.issue_number }}
+          INPUT_OPERATION: ${{ needs.gate.outputs.operation }}
           UI_REQUEST_AGENT_PROVIDER: github-actions-claude-code
         run: pnpm request:run --issue "$INPUT_ISSUE_NUMBER" --operation "$INPUT_OPERATION"
       - name: Dispatch or reconcile through GitHub Copilot
@@ -54,8 +123,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
           COPILOT_AGENT_TOKEN: ${{ secrets.COPILOT_AGENT_TOKEN }}
-          INPUT_ISSUE_NUMBER: ${{ inputs.issue_number }}
-          INPUT_OPERATION: ${{ inputs.operation }}
+          INPUT_ISSUE_NUMBER: ${{ needs.gate.outputs.issue_number }}
+          INPUT_OPERATION: ${{ needs.gate.outputs.operation }}
           UI_REQUEST_AGENT_PROVIDER: github-copilot
         run: pnpm request:run --issue "$INPUT_ISSUE_NUMBER" --operation "$INPUT_OPERATION"
       - name: Dispatch or reconcile through Cursor
@@ -63,8 +132,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
           CURSOR_API_KEY: ${{ secrets.CURSOR_API_KEY }}
-          INPUT_ISSUE_NUMBER: ${{ inputs.issue_number }}
-          INPUT_OPERATION: ${{ inputs.operation }}
+          INPUT_ISSUE_NUMBER: ${{ needs.gate.outputs.issue_number }}
+          INPUT_OPERATION: ${{ needs.gate.outputs.operation }}
           UI_REQUEST_AGENT_PROVIDER: cursor
         run: pnpm request:run --issue "$INPUT_ISSUE_NUMBER" --operation "$INPUT_OPERATION"
       - name: Reject unsupported provider configuration
@@ -74,3 +143,9 @@ jobs:
         run: |
           echo "Unsupported UI_REQUEST_AGENT_PROVIDER: $CONFIGURED_PROVIDER" >&2
           exit 1
+      - name: Consume accepted request label
+        if: success() && needs.gate.outputs.labeled == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          INPUT_ISSUE_NUMBER: ${{ needs.gate.outputs.issue_number }}
+        run: gh api --method DELETE "repos/$GITHUB_REPOSITORY/issues/$INPUT_ISSUE_NUMBER/labels/ui%3Aready"

@@ -162,7 +162,7 @@ test('production runner rejects unsupported provider configuration before any fe
   assert.equal(requests, 0)
 })
 
-test('production runner forwards cancellation without dispatching another writer', async () => {
+test('production runner invokes Cursor cancellation without dispatching another writer', async () => {
   const record = {
     version: 1,
     request: `${repository}/issues/123`,
@@ -171,11 +171,16 @@ test('production runner forwards cancellation without dispatching another writer
     operation: 'initial',
     idempotencyKey: 'ui-request:123:attempt:1',
     objectiveSha256: 'a'.repeat(64),
-    provider: 'github-copilot',
+    provider: 'cursor',
     state: 'running',
     run: {
-      provider: 'github-copilot',
-      id: encodeRunIdentity({ owner: 'astrale-os', repo: 'ui', task: 'existing-task' }),
+      provider: 'cursor',
+      id: encodeRunIdentity({
+        repository,
+        agent: 'bc-00000000-0000-5000-8000-000000000001',
+        run: 'run-00000000-0000-0000-0000-000000000001',
+        baseRef: 'main',
+      }),
     },
     updatedAt: fixedNow,
   }
@@ -192,15 +197,18 @@ test('production runner forwards cancellation without dispatching another writer
         },
       ])
     }
-    if (url.endsWith('/tasks/existing-task')) {
+    if (url.endsWith('/cancel') && init.method === 'POST') {
+      return json({ id: 'run-00000000-0000-0000-0000-000000000001' })
+    }
+    if (url.endsWith('/runs/run-00000000-0000-0000-0000-000000000001')) {
       return json({
-        id: 'existing-task',
-        html_url: 'https://github.com/astrale-os/ui/copilot/tasks/existing-task',
-        state: 'in_progress',
-        artifacts: [],
-        sessions: [{ head_ref: 'copilot/request-123', base_ref: 'main' }],
-        created_at: fixedNow,
-        updated_at: fixedNow,
+        id: 'run-00000000-0000-0000-0000-000000000001',
+        agentId: 'bc-00000000-0000-5000-8000-000000000001',
+        status: requests.some(({ url: requestUrl }) => requestUrl.endsWith('/cancel'))
+          ? 'CANCELLED'
+          : 'RUNNING',
+        createdAt: fixedNow,
+        updatedAt: fixedNow,
       })
     }
     if (url.endsWith('/issues/comments/91') && init.method === 'PATCH') return json({})
@@ -212,8 +220,8 @@ test('production runner forwards cancellation without dispatching another writer
     environment: {
       GITHUB_REPOSITORY: 'astrale-os/ui',
       GITHUB_TOKEN: 'github-store-token',
-      COPILOT_AGENT_TOKEN: 'copilot-token',
-      UI_REQUEST_AGENT_PROVIDER: 'github-copilot',
+      CURSOR_API_KEY: 'cursor-key',
+      UI_REQUEST_AGENT_PROVIDER: 'cursor',
     },
     fetch,
     now: () => fixedNow,
@@ -221,12 +229,17 @@ test('production runner forwards cancellation without dispatching another writer
   })
 
   assert.equal(execution.exitCode, 0)
-  assert.equal(execution.result.kind, 'unchanged')
-  assert.equal(execution.result.record.state, 'running')
+  assert.equal(execution.result.kind, 'updated')
+  assert.equal(execution.result.record.state, 'cancelled')
   assert.equal(
-    requests.some(
-      ({ url, method }) => url.endsWith('/agents/repos/astrale-os/ui/tasks') && method === 'POST',
-    ),
+    requests.filter(
+      ({ url, method }) =>
+        url.endsWith('/runs/run-00000000-0000-0000-0000-000000000001/cancel') && method === 'POST',
+    ).length,
+    1,
+  )
+  assert.equal(
+    requests.some(({ url, method }) => url.endsWith('/v1/agents') && method === 'POST'),
     false,
   )
 })
