@@ -11,7 +11,7 @@
       "path": "source/components/badge/badge-17/badge-17.tsx",
       "content": "import { Badge } from '@astrale-os/ui/badge'\n\nconst BadgeBlockedDemo = () => {\n  return (\n    <Badge className='bg-destructive/10 text-destructive focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 [a]:hover:bg-destructive/5 border-none focus-visible:outline-none'>\n      <span className='bg-destructive size-1.5 rounded-full' aria-hidden='true' />\n      Blocked\n    </Badge>\n  )\n}\n\nexport default BadgeBlockedDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/badge/badge-17.tsx"
+      "target": "components/astrale/components/badge/badge-17.tsx"
     }
   ],
   "meta": {

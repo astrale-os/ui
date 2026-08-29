@@ -11,7 +11,7 @@
       "path": "source/components/badge/badge-06/badge-06.tsx",
       "content": "import { Badge } from '@astrale-os/ui/badge'\n\nconst BadgeRoundedDemo = () => {\n  return <Badge className='rounded-sm'>Rounded</Badge>\n}\n\nexport default BadgeRoundedDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/badge/badge-06.tsx"
+      "target": "components/astrale/components/badge/badge-06.tsx"
     }
   ],
   "meta": {

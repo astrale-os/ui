@@ -13,7 +13,7 @@
         {
           "path": "basic.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/data-table/basic.tsx"
+          "target": "components/astrale/components/data-table/basic.tsx"
         }
       ],
       "meta": {
@@ -31,7 +31,7 @@
         {
           "path": "server-controlled.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/data-table/server-controlled.tsx"
+          "target": "components/astrale/components/data-table/server-controlled.tsx"
         }
       ],
       "meta": {

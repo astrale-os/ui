@@ -11,7 +11,7 @@
       "path": "registry/patterns/calendar/single-basic.tsx",
       "content": "import { Button } from '@astrale-os/ui/button'\nimport { cn } from '@astrale-os/ui/class-name'\n\nexport type CalendarDay = { iso: string; label: string; disabled?: boolean }\nexport type CalendarSingleBasicProps = {\n  days: readonly CalendarDay[]\n  value?: string\n  onValueChange(value: string): void\n  label?: string\n}\nexport function CalendarSingleBasic({\n  className,\n  style,\n  days,\n  value,\n  onValueChange,\n  label = 'Choose a date',\n}: CalendarSingleBasicProps & { className?: string; style?: React.CSSProperties }) {\n  return (\n    <section\n      data-slot=\"pattern-calendar-single-basic\"\n      style={style}\n      aria-label={label}\n      className={cn('grid grid-cols-7 gap-1', className)}\n    >\n      {days.map((day) => (\n        <Button\n          key={day.iso}\n          type=\"button\"\n          variant={value === day.iso ? 'default' : 'ghost'}\n          size=\"icon-sm\"\n          aria-pressed={value === day.iso}\n          disabled={day.disabled}\n          onClick={() => onValueChange(day.iso)}\n        >\n          <time data-slot=\"patterns-calendar-single-basic-time\" dateTime={day.iso}>\n            {day.label}\n          </time>\n        </Button>\n      ))}\n    </section>\n  )\n}\n",
       "type": "registry:component",
-      "target": "components/astrale/pattern/calendar/single-basic.tsx"
+      "target": "components/astrale/components/calendar/single-basic.tsx"
     }
   ],
   "meta": {

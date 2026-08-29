@@ -12,7 +12,7 @@
       "path": "source/components/select/select-08/select-08.tsx",
       "content": "import { useId } from 'react'\n\nimport { NativeSelect, NativeSelectOption } from '@astrale-os/ui/native-select'\n\nconst NativeSelectWithOverlappingLabelDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='group relative w-full max-w-xs'>\n      <label\n        htmlFor={id}\n        className='bg-background text-foreground absolute top-0 left-2 z-10 block -translate-y-1/2 px-1 text-xs font-medium group-has-[select:disabled]:opacity-50'\n      >\n        Native select with overlapping label\n      </label>\n      <NativeSelect id={id} className='w-full'>\n        <NativeSelectOption value='1'>Developer</NativeSelectOption>\n        <NativeSelectOption value='2'>Designer</NativeSelectOption>\n        <NativeSelectOption value='3'>Manager</NativeSelectOption>\n        <NativeSelectOption value='4'>QA Engineer</NativeSelectOption>\n      </NativeSelect>\n    </div>\n  )\n}\n\nexport default NativeSelectWithOverlappingLabelDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/select/select-08.tsx"
+      "target": "components/astrale/components/select/select-08.tsx"
     }
   ],
   "meta": {

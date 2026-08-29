@@ -11,7 +11,7 @@
       "path": "source/components/switch/switch-05/switch-05.tsx",
       "content": "import { Switch } from '@astrale-os/ui/switch'\n\nconst SwitchSizesDemo = () => {\n  return (\n    <div className='flex items-center gap-3'>\n      <Switch size='sm' aria-label='Small switch' />\n      <Switch aria-label='Medium switch' />\n      <Switch\n        aria-label='Large switch'\n        className='data-[size=default]:h-5.5 data-[size=default]:w-10 [&_span]:group-data-[size=default]/switch:size-5 data-checked:[&_span]:translate-x-4.5 data-checked:[&_span]:rtl:-translate-x-4.5'\n      />\n    </div>\n  )\n}\n\nexport default SwitchSizesDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/switch/switch-05.tsx"
+      "target": "components/astrale/components/switch/switch-05.tsx"
     }
   ],
   "meta": {

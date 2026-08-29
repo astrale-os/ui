@@ -12,7 +12,7 @@
       "path": "source/components/select/select-34/select-34.tsx",
       "content": "import { useId } from 'react'\n\nimport { Label } from '@astrale-os/ui/label'\nimport { NativeSelect, NativeSelectOption } from '@astrale-os/ui/native-select'\n\nconst NativeSelectMultipleDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>Native multiple select</Label>\n      <div className='border-input overflow-hidden rounded-lg border leading-none'>\n        <NativeSelect\n          id={id}\n          multiple\n          className='w-full *:h-full *:border-0 **:px-2.5 **:py-1 *:focus-visible:border-none *:focus-visible:ring-0 *:data-[slot=native-select]:px-0'\n        >\n          <NativeSelectOption value='1'>Vegetarian</NativeSelectOption>\n          <NativeSelectOption value='2'>Vegan</NativeSelectOption>\n          <NativeSelectOption value='3'>Gluten-Free</NativeSelectOption>\n          <NativeSelectOption value='4'>Halal</NativeSelectOption>\n          <NativeSelectOption value='5'>Kosher</NativeSelectOption>\n          <NativeSelectOption value='6'>Dairy-Free</NativeSelectOption>\n        </NativeSelect>\n      </div>\n    </div>\n  )\n}\n\nexport default NativeSelectMultipleDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/select/select-34.tsx"
+      "target": "components/astrale/components/select/select-34.tsx"
     }
   ],
   "meta": {

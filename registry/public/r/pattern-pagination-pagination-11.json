@@ -11,7 +11,7 @@
       "path": "source/patterns/pagination/pagination-11/pagination-11.tsx",
       "content": "import {\n  Pagination,\n  PaginationContent,\n  PaginationItem,\n  PaginationNext,\n  PaginationPrevious\n} from '@astrale-os/ui/pagination'\n\nconst NumberlessPaginationDemo = () => {\n  return (\n    <Pagination>\n      <PaginationContent className='w-full justify-between'>\n        <PaginationItem>\n          <PaginationPrevious href='#' className='border-border border' />\n        </PaginationItem>\n        <PaginationItem>\n          <PaginationNext href='#' className='border-border border' />\n        </PaginationItem>\n      </PaginationContent>\n    </Pagination>\n  )\n}\n\nexport default NumberlessPaginationDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/pattern/pagination/pagination-11.tsx"
+      "target": "components/astrale/components/pagination/pagination-11.tsx"
     }
   ],
   "meta": {

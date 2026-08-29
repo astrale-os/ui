@@ -13,7 +13,7 @@
         {
           "path": "bubble-basic.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/message/bubble-basic.tsx"
+          "target": "components/astrale/components/message/bubble-basic.tsx"
         }
       ],
       "meta": {
@@ -31,7 +31,7 @@
         {
           "path": "thread.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/message/thread.tsx"
+          "target": "components/astrale/components/message/thread.tsx"
         }
       ],
       "meta": {

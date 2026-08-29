@@ -11,7 +11,7 @@
       "path": "source/components/label/label-01/label-01.tsx",
       "content": "import { Checkbox } from '@astrale-os/ui/checkbox'\nimport { Label } from '@astrale-os/ui/label'\n\nconst LabelDemoCheckbox = () => {\n  return (\n    <div className='flex gap-2'>\n      <Checkbox id='terms' />\n      <Label htmlFor='terms'>Accept terms and conditions</Label>\n    </div>\n  )\n}\n\nexport default LabelDemoCheckbox\n",
       "type": "registry:component",
-      "target": "components/astrale/component/label/label-01.tsx"
+      "target": "components/astrale/components/label/label-01.tsx"
     }
   ],
   "meta": {

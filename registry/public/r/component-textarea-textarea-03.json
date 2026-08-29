@@ -12,7 +12,7 @@
       "path": "source/components/textarea/textarea-03/textarea-03.tsx",
       "content": "import { useId } from 'react'\n\nimport { Label } from '@astrale-os/ui/label'\nimport { Textarea } from '@astrale-os/ui/textarea'\n\nconst TextareaWithHelperTextDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>Textarea with helper text</Label>\n      <Textarea placeholder='Type your feedback here' id={id} />\n      <p className='text-muted-foreground text-xs'>Your feedback is useful for us.</p>\n    </div>\n  )\n}\n\nexport default TextareaWithHelperTextDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/textarea/textarea-03.tsx"
+      "target": "components/astrale/components/textarea/textarea-03.tsx"
     }
   ],
   "meta": {

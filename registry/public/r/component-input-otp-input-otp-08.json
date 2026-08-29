@@ -12,7 +12,7 @@
       "path": "source/components/input-otp/input-otp-08/input-otp-08.tsx",
       "content": "import { useId } from 'react'\n\nimport { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from '@astrale-os/ui/input-otp'\nimport { Label } from '@astrale-os/ui/label'\n\nconst InputOTPGroupedDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='space-y-3'>\n      <Label htmlFor={id}>Input OTP Grouped</Label>\n      <InputOTP id={id} maxLength={6}>\n        <InputOTPGroup>\n          <InputOTPSlot index={0} />\n          <InputOTPSlot index={1} />\n          <InputOTPSlot index={2} />\n        </InputOTPGroup>\n        <InputOTPSeparator />\n        <InputOTPGroup>\n          <InputOTPSlot index={3} />\n          <InputOTPSlot index={4} />\n          <InputOTPSlot index={5} />\n        </InputOTPGroup>\n      </InputOTP>\n    </div>\n  )\n}\n\nexport default InputOTPGroupedDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/input-otp/input-otp-08.tsx"
+      "target": "components/astrale/components/input-otp/input-otp-08.tsx"
     }
   ],
   "meta": {

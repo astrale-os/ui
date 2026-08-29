@@ -15,7 +15,7 @@
       "path": "source/patterns/carousel/carousel-05/carousel-05.tsx",
       "content": "import * as React from 'react'\n\nimport Autoplay from 'embla-carousel-autoplay'\n\nimport { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'\n\nconst Images = [\n  {\n    image: 'https://cdn.shadcnstudio.com/ss-assets/blocks/marketing/gallery/image-65.png',\n    alt: 'Silhouettes on beach'\n  },\n  {\n    image: 'https://cdn.shadcnstudio.com/ss-assets/blocks/marketing/gallery/image-66.png',\n    alt: 'Snowy mountain peaks'\n  },\n  {\n    image: 'https://cdn.shadcnstudio.com/ss-assets/blocks/marketing/gallery/image-67.png',\n    alt: 'Rolling green hills'\n  },\n  {\n    image: 'https://cdn.shadcnstudio.com/ss-assets/blocks/marketing/gallery/image-68.png',\n    alt: 'Sunset landscape'\n  }\n]\n\nconst CarouselAuto = () => {\n  return (\n    <Carousel\n      plugins={[\n        Autoplay({\n          delay: 2000\n        })\n      ]}\n      className='w-full max-w-40 sm:max-w-xs'\n    >\n      <CarouselContent>\n        {Images.map((image, index) => (\n          <CarouselItem key={index}>\n            <div className='p-1'>\n              <img src={image.image} alt={image.alt} className='h-full w-full rounded-md object-cover' />\n            </div>\n          </CarouselItem>\n        ))}\n      </CarouselContent>\n      <CarouselPrevious />\n      <CarouselNext />\n    </Carousel>\n  )\n}\n\nexport default CarouselAuto\n",
       "type": "registry:component",
-      "target": "components/astrale/pattern/carousel/carousel-05.tsx"
+      "target": "components/astrale/components/carousel/carousel-05.tsx"
     },
     {
       "path": "source/patterns/carousel/carousel-05/support/components/ui/carousel.tsx",

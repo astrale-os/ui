@@ -11,6 +11,26 @@ const teamChunk = Object.entries(manifest).find(([source]) =>
 const buttonChunk = Object.entries(manifest).find(([source]) =>
   source.endsWith('/packages/ui/previews/button/button.preview.tsx'),
 )?.[1].file
+const generatorChunk = Object.entries(manifest).find(([source]) =>
+  source.endsWith('/tooling/theme-generator/index.ts'),
+)?.[1].file
+
+test('theme generation loads only when a generation action requests it', async ({ page }) => {
+  expect(generatorChunk).toBeTruthy()
+  const requests: string[] = []
+  page.on('request', (request) => requests.push(new URL(request.url()).pathname.slice(1)))
+  await page.goto('/')
+  await page.waitForTimeout(500)
+  expect(requests).not.toContain(generatorChunk)
+
+  await page.getByRole('button', { name: 'Customize theme' }).click()
+  await expect(page.locator('[data-slot="theme-studio"]')).toBeVisible()
+  expect(requests).not.toContain(generatorChunk)
+
+  await page.getByRole('button', { name: 'New direction' }).click()
+  await expect(page.getByRole('button', { name: 'Variation' })).toBeEnabled()
+  expect(requests).toContain(generatorChunk)
+})
 
 test('production chunks stay isolated, load near the viewport once, and preserve scroll geometry', async ({
   browser,

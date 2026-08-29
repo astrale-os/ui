@@ -12,7 +12,7 @@
       "path": "source/components/textarea/textarea-17/textarea-17.tsx",
       "content": "import { useId } from 'react'\n\nimport { Label } from '@astrale-os/ui/label'\nimport { Textarea } from '@astrale-os/ui/textarea'\n\nconst TextareaAutoGrowDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>Auto growing textarea</Label>\n      <Textarea\n        id={id}\n        placeholder='Type your feedback here'\n        className='field-sizing-content max-h-30 min-h-0 resize-none py-1.75'\n      />\n    </div>\n  )\n}\n\nexport default TextareaAutoGrowDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/textarea/textarea-17.tsx"
+      "target": "components/astrale/components/textarea/textarea-17.tsx"
     }
   ],
   "meta": {

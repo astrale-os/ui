@@ -12,7 +12,7 @@
       "path": "source/components/button/button-20/button-20.tsx",
       "content": "import { Button } from '@astrale-os/ui/button'\nimport { CopyIcon } from \"lucide-react\"\n\nconst ButtonCopyDemo = () => {\n  return (\n    <div className='flex h-10.5 items-center overflow-hidden rounded-full border px-1'>\n      <p className='text-muted-foreground max-w-56 truncate overflow-hidden px-2.5 text-sm'>\n        https://shadcnstudio.com/docs/components/button\n      </p>\n      <Button\n        size='icon'\n        className='rounded-full bg-sky-600 text-white hover:bg-sky-600/90 focus-visible:border-sky-600 focus-visible:ring-sky-600/20 dark:bg-sky-400/60 dark:focus-visible:border-sky-400 dark:focus-visible:ring-sky-400/40'\n      >\n        <CopyIcon\n        />\n        <span className='sr-only'>Copy</span>\n      </Button>\n    </div>\n  )\n}\n\nexport default ButtonCopyDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/button/button-20.tsx"
+      "target": "components/astrale/components/button/button-20.tsx"
     }
   ],
   "meta": {

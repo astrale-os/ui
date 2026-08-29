@@ -13,7 +13,7 @@
         {
           "path": "application.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/sidebar/application.tsx"
+          "target": "components/astrale/components/sidebar/application.tsx"
         }
       ],
       "meta": {
@@ -31,7 +31,7 @@
         {
           "path": "mobile-controlled.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/sidebar/mobile-controlled.tsx"
+          "target": "components/astrale/components/sidebar/mobile-controlled.tsx"
         }
       ],
       "meta": {

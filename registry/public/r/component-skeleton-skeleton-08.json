@@ -13,7 +13,7 @@
       "path": "source/components/skeleton/skeleton-08/skeleton-08.tsx",
       "content": "import { ShimmerSkeleton } from '@/components/ui/shimmer-skeleton'\n\nconst SkeletonShimmer = () => {\n  return <ShimmerSkeleton className='size-50' />\n}\n\nexport default SkeletonShimmer\n",
       "type": "registry:component",
-      "target": "components/astrale/component/skeleton/skeleton-08.tsx"
+      "target": "components/astrale/components/skeleton/skeleton-08.tsx"
     },
     {
       "path": "source/components/skeleton/skeleton-08/support/components/ui/shimmer-skeleton.tsx",

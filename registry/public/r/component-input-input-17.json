@@ -12,7 +12,7 @@
       "path": "source/components/input/input-17/input-17.tsx",
       "content": "import { useId } from 'react'\n\nimport { InputGroup, InputGroupAddon, InputGroupInput } from '@astrale-os/ui/input-group'\nimport { Label } from '@astrale-os/ui/label'\n\nconst InputEndTextAddOnDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>Input with end text add-on</Label>\n      <InputGroup className='max-w-xs'>\n        <InputGroupInput id={id} placeholder='shadcnstudio' />\n        <InputGroupAddon align='inline-end' className='text-foreground font-normal'>\n          .com\n        </InputGroupAddon>\n      </InputGroup>\n    </div>\n  )\n}\n\nexport default InputEndTextAddOnDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/input/input-17.tsx"
+      "target": "components/astrale/components/input/input-17.tsx"
     }
   ],
   "meta": {

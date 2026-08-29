@@ -11,7 +11,7 @@
       "path": "source/components/spinner/spinner-03/spinner-03.tsx",
       "content": "import { Spinner } from '@astrale-os/ui/spinner'\n\nconst SpinnerSizeDemo = () => {\n  return (\n    <div className='flex items-center gap-6'>\n      <Spinner className='size-3' />\n      <Spinner className='size-4' />\n      <Spinner className='size-6' />\n      <Spinner className='size-8' />\n    </div>\n  )\n}\n\nexport default SpinnerSizeDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/spinner/spinner-03.tsx"
+      "target": "components/astrale/components/spinner/spinner-03.tsx"
     }
   ],
   "meta": {

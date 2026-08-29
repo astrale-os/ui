@@ -11,7 +11,7 @@
       "path": "registry/patterns/data-table/basic.tsx",
       "content": "export type DataColumn<Row> = { key: keyof Row; label: string; render?(row: Row): React.ReactNode }\nexport function DataTableBasic<Row extends { id: string }>({\n  className,\n  style,\n  rows,\n  columns,\n  caption = 'Data',\n}: {\n  className?: string\n  style?: React.CSSProperties\n\n  rows: readonly Row[]\n  columns: readonly DataColumn<Row>[]\n  caption?: string\n}) {\n  return (\n    <table data-slot=\"pattern-data-table-basic\" style={style} className={className}>\n      <caption data-slot=\"patterns-data-table-basic-caption\" className=\"sr-only\">\n        {caption}\n      </caption>\n      <thead data-slot=\"patterns-data-table-basic-thead\">\n        <tr data-slot=\"patterns-data-table-basic-tr\">\n          {columns.map((column) => (\n            <th data-slot=\"patterns-data-table-basic-th\" key={String(column.key)} scope=\"col\">\n              {column.label}\n            </th>\n          ))}\n        </tr>\n      </thead>\n      <tbody data-slot=\"patterns-data-table-basic-tbody\">\n        {rows.map((row) => (\n          <tr data-slot=\"patterns-data-table-basic-tr\" key={row.id}>\n            {columns.map((column) => (\n              <td data-slot=\"patterns-data-table-basic-td\" key={String(column.key)}>\n                {column.render?.(row) ?? String(row[column.key] ?? '')}\n              </td>\n            ))}\n          </tr>\n        ))}\n      </tbody>\n    </table>\n  )\n}\n",
       "type": "registry:component",
-      "target": "components/astrale/pattern/data-table/basic.tsx"
+      "target": "components/astrale/components/data-table/basic.tsx"
     }
   ],
   "meta": {

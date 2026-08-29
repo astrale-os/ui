@@ -12,7 +12,7 @@
       "path": "source/components/select/select-02/select-02.tsx",
       "content": "import { useId } from 'react'\n\nimport { Label } from '@astrale-os/ui/label'\nimport { NativeSelect, NativeSelectOption } from '@astrale-os/ui/native-select'\n\nconst NativeSelectPlaceholderDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>Native select with placeholder</Label>\n      <NativeSelect id={id} defaultValue=''>\n        <NativeSelectOption value='' disabled>\n          Please select a gender\n        </NativeSelectOption>\n        <NativeSelectOption value='1'>Male</NativeSelectOption>\n        <NativeSelectOption value='2'>Female</NativeSelectOption>\n        <NativeSelectOption value='3'>Other</NativeSelectOption>\n      </NativeSelect>\n    </div>\n  )\n}\n\nexport default NativeSelectPlaceholderDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/select/select-02.tsx"
+      "target": "components/astrale/components/select/select-02.tsx"
     }
   ],
   "meta": {

@@ -13,7 +13,7 @@
         {
           "path": "switch-01.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/switch/switch-01.tsx"
+          "target": "components/astrale/components/switch/switch-01.tsx"
         }
       ],
       "meta": {
@@ -33,7 +33,7 @@
         {
           "path": "switch-02.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/switch/switch-02.tsx"
+          "target": "components/astrale/components/switch/switch-02.tsx"
         }
       ],
       "meta": {
@@ -53,7 +53,7 @@
         {
           "path": "switch-03.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/switch/switch-03.tsx"
+          "target": "components/astrale/components/switch/switch-03.tsx"
         }
       ],
       "meta": {
@@ -73,7 +73,7 @@
         {
           "path": "switch-04.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/switch/switch-04.tsx"
+          "target": "components/astrale/components/switch/switch-04.tsx"
         }
       ],
       "meta": {
@@ -93,7 +93,7 @@
         {
           "path": "switch-05.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/switch/switch-05.tsx"
+          "target": "components/astrale/components/switch/switch-05.tsx"
         }
       ],
       "meta": {
@@ -113,7 +113,7 @@
         {
           "path": "switch-06.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/switch/switch-06.tsx"
+          "target": "components/astrale/components/switch/switch-06.tsx"
         }
       ],
       "meta": {
@@ -133,7 +133,7 @@
         {
           "path": "switch-07.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/switch/switch-07.tsx"
+          "target": "components/astrale/components/switch/switch-07.tsx"
         }
       ],
       "meta": {
@@ -153,7 +153,7 @@
         {
           "path": "switch-08.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/switch/switch-08.tsx"
+          "target": "components/astrale/components/switch/switch-08.tsx"
         }
       ],
       "meta": {
@@ -173,7 +173,7 @@
         {
           "path": "switch-09.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/switch/switch-09.tsx"
+          "target": "components/astrale/components/switch/switch-09.tsx"
         }
       ],
       "meta": {
@@ -193,7 +193,7 @@
         {
           "path": "switch-10.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/switch/switch-10.tsx"
+          "target": "components/astrale/components/switch/switch-10.tsx"
         }
       ],
       "meta": {
@@ -213,7 +213,7 @@
         {
           "path": "switch-11.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/switch/switch-11.tsx"
+          "target": "components/astrale/components/switch/switch-11.tsx"
         }
       ],
       "meta": {
@@ -233,7 +233,7 @@
         {
           "path": "switch-12.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/switch/switch-12.tsx"
+          "target": "components/astrale/components/switch/switch-12.tsx"
         }
       ],
       "meta": {
@@ -253,7 +253,7 @@
         {
           "path": "switch-13.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/switch/switch-13.tsx"
+          "target": "components/astrale/components/switch/switch-13.tsx"
         }
       ],
       "meta": {
@@ -273,7 +273,7 @@
         {
           "path": "switch-14.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/switch/switch-14.tsx"
+          "target": "components/astrale/components/switch/switch-14.tsx"
         }
       ],
       "meta": {
@@ -293,7 +293,7 @@
         {
           "path": "switch-15.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/switch/switch-15.tsx"
+          "target": "components/astrale/components/switch/switch-15.tsx"
         }
       ],
       "meta": {
@@ -313,7 +313,7 @@
         {
           "path": "switch-16.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/switch/switch-16.tsx"
+          "target": "components/astrale/components/switch/switch-16.tsx"
         }
       ],
       "meta": {
@@ -333,7 +333,7 @@
         {
           "path": "switch-17.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/switch/switch-17.tsx"
+          "target": "components/astrale/components/switch/switch-17.tsx"
         }
       ],
       "meta": {
@@ -353,7 +353,7 @@
         {
           "path": "switch-18.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/switch/switch-18.tsx"
+          "target": "components/astrale/components/switch/switch-18.tsx"
         }
       ],
       "meta": {
@@ -378,7 +378,7 @@
         {
           "path": "switch-19.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/switch/switch-19.tsx"
+          "target": "components/astrale/components/switch/switch-19.tsx"
         },
         {
           "path": "support/components/ui/motion-switch.tsx",
@@ -408,7 +408,7 @@
         {
           "path": "switch-20.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/switch/switch-20.tsx"
+          "target": "components/astrale/components/switch/switch-20.tsx"
         },
         {
           "path": "support/components/ui/motion-switch.tsx",

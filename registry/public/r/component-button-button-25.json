@@ -12,7 +12,7 @@
       "path": "source/components/button/button-25/button-25.tsx",
       "content": "import { Badge } from '@astrale-os/ui/badge'\nimport { Button } from '@astrale-os/ui/button'\nimport { BellIcon } from \"lucide-react\"\n\nconst ButtonNotificationsBadgeDemo = () => {\n  return (\n    <Button variant='outline' className='relative'>\n      <BellIcon\n      />\n      Notifications\n      <Badge variant='destructive' className='absolute -top-2.5 -right-2.5 h-5 min-w-5 px-1 tabular-nums'>\n        8\n      </Badge>\n    </Button>\n  )\n}\n\nexport default ButtonNotificationsBadgeDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/button/button-25.tsx"
+      "target": "components/astrale/components/button/button-25.tsx"
     }
   ],
   "meta": {

@@ -11,7 +11,7 @@
       "path": "source/components/input/input-01/input-01.tsx",
       "content": "import { Input } from '@astrale-os/ui/input'\n\nconst InputDemo = () => {\n  return <Input type='email' placeholder='Email address' className='max-w-xs' />\n}\n\nexport default InputDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/input/input-01.tsx"
+      "target": "components/astrale/components/input/input-01.tsx"
     }
   ],
   "meta": {

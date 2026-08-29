@@ -1,5 +1,8 @@
-export const THEME_DOCUMENT_VERSION = 2 as const
+export const THEME_DOCUMENT_VERSION = 5 as const
 export const THEME_DOCUMENT_MAX_BYTES = 131_072
+export const THEME_GENERATOR_VERSION = 1 as const
+export const THEME_GENERATOR_ENGINE_VERSION = 1 as const
+export const THEME_FONT_CATALOG_VERSION = 1 as const
 
 export const themeColorTokens = [
   'background',
@@ -39,6 +42,55 @@ export const themeColorTokens = [
 export type ThemeColorToken = (typeof themeColorTokens)[number]
 export type ThemeMode = Record<ThemeColorToken, string>
 
+export const generatorBranches = ['palette', 'typography', 'geometry'] as const
+export type GeneratorBranch = (typeof generatorBranches)[number]
+export type PaletteRelation = 'tonal' | 'analogous' | 'complementary' | 'split'
+
+export interface ThemeDNA {
+  readonly palette: {
+    readonly hue: number
+    readonly relation: PaletteRelation
+    readonly colorfulness: number
+    readonly contrast: number
+    readonly tint: number
+    readonly warmth: number
+  }
+  readonly typography: {
+    readonly contrast: number
+    readonly compactness: number
+  }
+  readonly geometry: {
+    readonly density: number
+    readonly roundness: number
+    readonly elevation: number
+  }
+}
+
+export type GeneratorLineage =
+  | { readonly kind: 'new-direction' }
+  | { readonly kind: 'variation'; readonly parentSeed: string }
+  | { readonly kind: 'fallback'; readonly failedAttempts: 12 }
+
+export interface GeneratorMetadata {
+  readonly kind: 'astrale.theme-generation'
+  readonly version: typeof THEME_GENERATOR_VERSION
+  readonly engineVersion: typeof THEME_GENERATOR_ENGINE_VERSION
+  readonly fontCatalogVersion: typeof THEME_FONT_CATALOG_VERSION
+  readonly seed: string
+  readonly derivationSeeds: Readonly<Record<GeneratorBranch, string>>
+  readonly dna: ThemeDNA
+  readonly locks: readonly GeneratorBranch[]
+  readonly editedBranches: readonly GeneratorBranch[]
+  readonly lineage: GeneratorLineage
+}
+
+export interface ThemeTypographyRole {
+  readonly family: string
+  readonly tracking: string
+  readonly leading: string
+  readonly weight: number
+}
+
 export interface ThemeDocument {
   readonly $schema: string
   readonly version: typeof THEME_DOCUMENT_VERSION
@@ -50,8 +102,8 @@ export interface ThemeDocument {
     readonly dark: ThemeMode
   }
   readonly typography: {
-    readonly body: string
-    readonly heading: string
+    readonly body: ThemeTypographyRole
+    readonly heading: ThemeTypographyRole
     readonly mono: string
   }
   readonly geometry: {
@@ -71,6 +123,7 @@ export interface ThemeDocument {
     readonly fast: string
     readonly standard: string
   }
+  readonly generation?: GeneratorMetadata
 }
 
 export class ThemeDocumentError extends Error {
@@ -89,10 +142,13 @@ const descriptionPattern = /^[^{}<>\\\n\r]*$/u
 const colorPattern =
   /^(?!.*\/\*)(?!.*\*\/)(?:(?:oklch|rgb|rgba|hsl|hsla)\(\s*[+-]?(?:[0-9]|\.)[0-9+.%degarturn,/\s-]*\)|#[0-9A-Fa-f]{3,8})$/u
 const lengthPattern = /^(?:0|[0-9]+(?:\.[0-9]+)?(?:px|rem|em))$/u
+const trackingPattern = /^(?:0|-?0\.(?:0(?:[0-3][0-9]*|40*)?)em)$/u
+const leadingPattern = /^(?:1(?:\.[0-9]+)?|2(?:\.0+)?)$/u
 const durationPattern = /^(?:0|[0-9]+(?:\.[0-9]+)?m?s)$/u
 const shadowPattern =
   /^(?!.*\/\*)(?!.*\*\/)(?:none|(?:inset\s+)?-?(?:0|[0-9]+(?:\.[0-9]+)?(?:px|rem|em))(?:\s|$)[^{};\\]+)$/u
 const fontPattern = /^(?!.*\/\*)(?!.*\*\/)[^{};\\\n\r]{1,240}$/u
+const generatorSeedPattern = /^[0-9a-f]{32}$/u
 
 export const themeDocumentPatternSources = {
   name: slugPattern.source,
@@ -101,8 +157,11 @@ export const themeDocumentPatternSources = {
   color: colorPattern.source,
   font: fontPattern.source,
   length: lengthPattern.source,
+  tracking: trackingPattern.source,
+  leading: leadingPattern.source,
   duration: durationPattern.source,
   cssValue: shadowPattern.source,
+  generatorSeed: generatorSeedPattern.source,
 } as const
 
 const cssNames: Record<ThemeColorToken, string> = {
@@ -161,7 +220,11 @@ const fontRegistryByFamily = new Map([
 export function themeFontRegistryDependencies(theme: ThemeDocument): string[] {
   return [
     ...new Set(
-      [theme.typography.heading, theme.typography.body, theme.typography.mono].flatMap((stack) => {
+      [
+        theme.typography.heading.family,
+        theme.typography.body.family,
+        theme.typography.mono,
+      ].flatMap((stack) => {
         const family = /^'([^']+)'/u.exec(stack)?.[1]
         const item = family ? fontRegistryByFamily.get(family) : undefined
         return item ? [`https://shadcnstudio.com/r/fonts/${item}.json`] : []
@@ -172,37 +235,74 @@ export function themeFontRegistryDependencies(theme: ThemeDocument): string[] {
 
 function migrateThemeDocument(input: unknown): unknown {
   if (!input || typeof input !== 'object' || Array.isArray(input)) return input
-  const candidate = input as Record<string, unknown>
-  if (candidate.version !== 1) return input
-  const appearance = candidate.appearance as
-    | { light?: Record<string, unknown>; dark?: Record<string, unknown> }
-    | undefined
-  const typography = candidate.typography as Record<string, unknown> | undefined
-  if (!appearance?.light || !appearance.dark || !typography) return input
-
-  const migrateMode = (mode: Record<string, unknown>) => ({
-    ...mode,
-    sidebar: mode.card,
-    sidebarForeground: mode.foreground,
-    sidebarPrimary: mode.primary,
-    sidebarPrimaryForeground: mode.primaryForeground,
-    sidebarAccent: mode.accent,
-    sidebarAccentForeground: mode.accentForeground,
-    sidebarBorder: mode.border,
-    sidebarRing: mode.ring,
-  })
-  return {
-    ...candidate,
-    version: THEME_DOCUMENT_VERSION,
-    appearance: {
-      light: migrateMode(appearance.light),
-      dark: migrateMode(appearance.dark),
-    },
-    typography: {
-      ...typography,
-      mono: "'SFMono-Regular', 'Cascadia Code', ui-monospace, monospace",
-    },
+  let candidate = input as Record<string, unknown>
+  if (candidate.version === 1) {
+    const appearance = candidate.appearance as
+      | { light?: Record<string, unknown>; dark?: Record<string, unknown> }
+      | undefined
+    const typography = candidate.typography as Record<string, unknown> | undefined
+    if (!appearance?.light || !appearance.dark || !typography) return input
+    const migrateMode = (mode: Record<string, unknown>) => ({
+      ...mode,
+      sidebar: mode.card,
+      sidebarForeground: mode.foreground,
+      sidebarPrimary: mode.primary,
+      sidebarPrimaryForeground: mode.primaryForeground,
+      sidebarAccent: mode.accent,
+      sidebarAccentForeground: mode.accentForeground,
+      sidebarBorder: mode.border,
+      sidebarRing: mode.ring,
+    })
+    candidate = {
+      ...candidate,
+      version: 2,
+      appearance: {
+        light: migrateMode(appearance.light),
+        dark: migrateMode(appearance.dark),
+      },
+      typography: {
+        ...typography,
+        mono: "'SFMono-Regular', 'Cascadia Code', ui-monospace, monospace",
+      },
+    }
   }
+  if (candidate.version === 2) {
+    const typography = candidate.typography as Record<string, unknown> | undefined
+    if (
+      !typography ||
+      typeof typography.body !== 'string' ||
+      typeof typography.heading !== 'string'
+    ) {
+      return input
+    }
+    candidate = {
+      ...candidate,
+      version: 3,
+      typography: {
+        body: { family: typography.body, tracking: '0', leading: '1.5' },
+        heading: { family: typography.heading, tracking: '-0.01em', leading: '1.2', weight: 600 },
+        mono: typography.mono,
+      },
+    }
+  }
+  if (candidate.version === 3) {
+    const typography = candidate.typography as Record<string, unknown> | undefined
+    const body = typography?.body as Record<string, unknown> | undefined
+    if (!typography || !body) return input
+    candidate = {
+      ...candidate,
+      version: 4,
+      typography: {
+        ...typography,
+        body: { ...body, weight: 400 },
+      },
+    }
+  }
+  if (candidate.version === 4) {
+    candidate = { ...candidate, version: THEME_DOCUMENT_VERSION }
+    delete candidate.generation
+  }
+  return candidate
 }
 
 function record(value: unknown, label: string): Record<string, unknown> {
@@ -220,12 +320,171 @@ function exactKeys(value: Record<string, unknown>, expected: readonly string[], 
   }
 }
 
+function boundedNumber(value: unknown, label: string, minimum: number, maximum: number): number {
+  if (typeof value !== 'number' || !Number.isFinite(value) || value < minimum || value > maximum) {
+    throw new ThemeDocumentError(`${label} is invalid.`)
+  }
+  return value
+}
+
+function exactInteger(value: unknown, expected: number, label: string): number {
+  if (value !== expected) throw new ThemeDocumentError(`${label} is unsupported.`)
+  return expected
+}
+
+function branchList(value: unknown, label: string): readonly GeneratorBranch[] {
+  if (!Array.isArray(value) || value.length > generatorBranches.length) {
+    throw new ThemeDocumentError(`${label} is invalid.`)
+  }
+  const branches = value.map((branch) => {
+    if (typeof branch !== 'string' || !generatorBranches.includes(branch as GeneratorBranch)) {
+      throw new ThemeDocumentError(`${label} is invalid.`)
+    }
+    return branch as GeneratorBranch
+  })
+  if (new Set(branches).size !== branches.length) {
+    throw new ThemeDocumentError(`${label} contains a duplicate branch.`)
+  }
+  return [...branches].sort()
+}
+
+function themeDna(value: unknown, label: string): ThemeDNA {
+  const candidate = record(value, label)
+  exactKeys(candidate, ['palette', 'typography', 'geometry'], label)
+  const palette = record(candidate.palette, `${label}.palette`)
+  exactKeys(
+    palette,
+    ['hue', 'relation', 'colorfulness', 'contrast', 'tint', 'warmth'],
+    `${label}.palette`,
+  )
+  const relation = palette.relation
+  if (
+    relation !== 'tonal' &&
+    relation !== 'analogous' &&
+    relation !== 'complementary' &&
+    relation !== 'split'
+  ) {
+    throw new ThemeDocumentError(`${label}.palette.relation is invalid.`)
+  }
+  const typography = record(candidate.typography, `${label}.typography`)
+  exactKeys(typography, ['contrast', 'compactness'], `${label}.typography`)
+  const geometry = record(candidate.geometry, `${label}.geometry`)
+  exactKeys(geometry, ['density', 'roundness', 'elevation'], `${label}.geometry`)
+  return {
+    palette: {
+      hue: boundedNumber(palette.hue, `${label}.palette.hue`, 0, 359.999_999_999),
+      relation,
+      colorfulness: boundedNumber(palette.colorfulness, `${label}.palette.colorfulness`, 0, 1),
+      contrast: boundedNumber(palette.contrast, `${label}.palette.contrast`, 0, 1),
+      tint: boundedNumber(palette.tint, `${label}.palette.tint`, 0, 1),
+      warmth: boundedNumber(palette.warmth, `${label}.palette.warmth`, -1, 1),
+    },
+    typography: {
+      contrast: boundedNumber(typography.contrast, `${label}.typography.contrast`, 0, 1),
+      compactness: boundedNumber(typography.compactness, `${label}.typography.compactness`, 0, 1),
+    },
+    geometry: {
+      density: boundedNumber(geometry.density, `${label}.geometry.density`, 0, 1),
+      roundness: boundedNumber(geometry.roundness, `${label}.geometry.roundness`, 0, 1),
+      elevation: boundedNumber(geometry.elevation, `${label}.geometry.elevation`, 0, 1),
+    },
+  }
+}
+
+function generatorLineage(value: unknown, label: string): GeneratorLineage {
+  const candidate = record(value, label)
+  if (candidate.kind === 'new-direction') {
+    exactKeys(candidate, ['kind'], label)
+    return { kind: 'new-direction' }
+  }
+  if (candidate.kind === 'variation') {
+    exactKeys(candidate, ['kind', 'parentSeed'], label)
+    return {
+      kind: 'variation',
+      parentSeed: text(candidate.parentSeed, `${label}.parentSeed`, generatorSeedPattern, 32, 32),
+    }
+  }
+  if (candidate.kind === 'fallback') {
+    exactKeys(candidate, ['kind', 'failedAttempts'], label)
+    if (candidate.failedAttempts !== 12) {
+      throw new ThemeDocumentError(`${label}.failedAttempts is invalid.`)
+    }
+    return { kind: 'fallback', failedAttempts: 12 }
+  }
+  throw new ThemeDocumentError(`${label}.kind is invalid.`)
+}
+
+function generatorMetadata(value: unknown, label: string): GeneratorMetadata {
+  const candidate = record(value, label)
+  exactKeys(
+    candidate,
+    [
+      'kind',
+      'version',
+      'engineVersion',
+      'fontCatalogVersion',
+      'seed',
+      'derivationSeeds',
+      'dna',
+      'locks',
+      'editedBranches',
+      'lineage',
+    ],
+    label,
+  )
+  if (candidate.kind !== 'astrale.theme-generation') {
+    throw new ThemeDocumentError(`${label}.kind is invalid.`)
+  }
+  return {
+    kind: 'astrale.theme-generation',
+    version: exactInteger(candidate.version, THEME_GENERATOR_VERSION, `${label}.version`) as 1,
+    engineVersion: exactInteger(
+      candidate.engineVersion,
+      THEME_GENERATOR_ENGINE_VERSION,
+      `${label}.engineVersion`,
+    ) as 1,
+    fontCatalogVersion: exactInteger(
+      candidate.fontCatalogVersion,
+      THEME_FONT_CATALOG_VERSION,
+      `${label}.fontCatalogVersion`,
+    ) as 1,
+    seed: text(candidate.seed, `${label}.seed`, generatorSeedPattern, 32, 32),
+    derivationSeeds: (() => {
+      const seeds = record(candidate.derivationSeeds, `${label}.derivationSeeds`)
+      exactKeys(seeds, generatorBranches, `${label}.derivationSeeds`)
+      return Object.fromEntries(
+        generatorBranches.map((branch) => [
+          branch,
+          text(seeds[branch], `${label}.derivationSeeds.${branch}`, generatorSeedPattern, 32, 32),
+        ]),
+      ) as Record<GeneratorBranch, string>
+    })(),
+    dna: themeDna(candidate.dna, `${label}.dna`),
+    locks: branchList(candidate.locks, `${label}.locks`),
+    editedBranches: branchList(candidate.editedBranches, `${label}.editedBranches`),
+    lineage: generatorLineage(candidate.lineage, `${label}.lineage`),
+  }
+}
+
 function text(value: unknown, label: string, pattern: RegExp, minimum = 1, maximum = 240): string {
   if (
     typeof value !== 'string' ||
     value.length < minimum ||
     value.length > maximum ||
     !pattern.test(value)
+  ) {
+    throw new ThemeDocumentError(`${label} is invalid.`)
+  }
+  return value
+}
+
+function fontWeight(value: unknown, label: string): number {
+  if (
+    typeof value !== 'number' ||
+    !Number.isInteger(value) ||
+    value < 100 ||
+    value > 900 ||
+    value % 100 !== 0
   ) {
     throw new ThemeDocumentError(`${label} is invalid.`)
   }
@@ -322,23 +581,21 @@ function mode(value: unknown, label: string): ThemeMode {
 
 export function parseThemeDocument(input: unknown): ThemeDocument {
   const candidate = record(migrateThemeDocument(input), 'theme')
-  exactKeys(
-    candidate,
-    [
-      '$schema',
-      'version',
-      'name',
-      'label',
-      'description',
-      'appearance',
-      'typography',
-      'geometry',
-      'density',
-      'effects',
-      'motion',
-    ],
-    'theme',
-  )
+  const rootKeys = [
+    '$schema',
+    'version',
+    'name',
+    'label',
+    'description',
+    'appearance',
+    'typography',
+    'geometry',
+    'density',
+    'effects',
+    'motion',
+    ...(candidate.generation === undefined ? [] : ['generation']),
+  ]
+  exactKeys(candidate, rootKeys, 'theme')
   if (candidate.$schema !== schemaUrl) {
     throw new ThemeDocumentError('theme.$schema is not the Astrale theme schema.')
   }
@@ -349,6 +606,14 @@ export function parseThemeDocument(input: unknown): ThemeDocument {
   exactKeys(appearance, ['light', 'dark'], 'theme.appearance')
   const typography = record(candidate.typography, 'theme.typography')
   exactKeys(typography, ['body', 'heading', 'mono'], 'theme.typography')
+  const bodyTypography = record(typography.body, 'theme.typography.body')
+  exactKeys(bodyTypography, ['family', 'tracking', 'leading', 'weight'], 'theme.typography.body')
+  const headingTypography = record(typography.heading, 'theme.typography.heading')
+  exactKeys(
+    headingTypography,
+    ['family', 'tracking', 'leading', 'weight'],
+    'theme.typography.heading',
+  )
   const geometry = record(candidate.geometry, 'theme.geometry')
   exactKeys(geometry, ['radius', 'panelRadius'], 'theme.geometry')
   const density = record(candidate.density, 'theme.density')
@@ -369,8 +634,42 @@ export function parseThemeDocument(input: unknown): ThemeDocument {
       dark: mode(appearance.dark, 'theme.appearance.dark'),
     },
     typography: {
-      body: text(typography.body, 'theme.typography.body', fontPattern),
-      heading: text(typography.heading, 'theme.typography.heading', fontPattern),
+      body: {
+        family: text(bodyTypography.family, 'theme.typography.body.family', fontPattern),
+        tracking: text(
+          bodyTypography.tracking,
+          'theme.typography.body.tracking',
+          trackingPattern,
+          1,
+          24,
+        ),
+        leading: text(
+          bodyTypography.leading,
+          'theme.typography.body.leading',
+          leadingPattern,
+          1,
+          24,
+        ),
+        weight: fontWeight(bodyTypography.weight, 'theme.typography.body.weight'),
+      },
+      heading: {
+        family: text(headingTypography.family, 'theme.typography.heading.family', fontPattern),
+        tracking: text(
+          headingTypography.tracking,
+          'theme.typography.heading.tracking',
+          trackingPattern,
+          1,
+          24,
+        ),
+        leading: text(
+          headingTypography.leading,
+          'theme.typography.heading.leading',
+          leadingPattern,
+          1,
+          24,
+        ),
+        weight: fontWeight(headingTypography.weight, 'theme.typography.heading.weight'),
+      },
       mono: text(typography.mono, 'theme.typography.mono', fontPattern),
     },
     geometry: {
@@ -406,6 +705,9 @@ export function parseThemeDocument(input: unknown): ThemeDocument {
       fast: text(motion.fast, 'theme.motion.fast', durationPattern, 1, 24),
       standard: text(motion.standard, 'theme.motion.standard', durationPattern, 1, 24),
     },
+    ...(candidate.generation === undefined
+      ? {}
+      : { generation: generatorMetadata(candidate.generation, 'theme.generation') }),
   }
 }
 
@@ -425,25 +727,49 @@ export function serializeThemeDocument(theme: ThemeDocument): string {
   return JSON.stringify(parseThemeDocument(theme), null, 2) + '\n'
 }
 
-function variables(theme: ThemeDocument, selectedMode: 'light' | 'dark'): string[] {
+function admittedThemeStyleProperties(
+  theme: ThemeDocument,
+  selectedMode: 'light' | 'dark',
+): Readonly<Record<string, string>> {
   const colors = theme.appearance[selectedMode]
-  return [
-    ...themeColorTokens.map((token) => `  --ui-${cssNames[token]}: ${colors[token]};`),
-    `  --ui-radius: ${theme.geometry.radius};`,
-    `  --ui-radius-panel: ${theme.geometry.panelRadius};`,
-    `  --ui-control-height: ${theme.density.control};`,
-    `  --ui-control-height-sm: ${theme.density.controlSmall};`,
-    `  --ui-control-height-lg: ${theme.density.controlLarge};`,
-    `  --ui-font-body: ${theme.typography.body};`,
-    `  --ui-font-heading: ${theme.typography.heading};`,
-    `  --ui-font-mono: ${theme.typography.mono};`,
-    `  --ui-shadow-control: ${theme.effects.controlShadow};`,
-    theme.effects.panelShadow.includes(',')
-      ? `  --ui-shadow-panel:\n    ${theme.effects.panelShadow};`
-      : `  --ui-shadow-panel: ${theme.effects.panelShadow};`,
-    `  --ui-motion-fast: ${theme.motion.fast};`,
-    `  --ui-motion-standard: ${theme.motion.standard};`,
-  ]
+  return {
+    ...Object.fromEntries(
+      themeColorTokens.map((token) => [`--ui-${cssNames[token]}`, colors[token]]),
+    ),
+    '--ui-radius': theme.geometry.radius,
+    '--ui-radius-panel': theme.geometry.panelRadius,
+    '--ui-control-height': theme.density.control,
+    '--ui-control-height-sm': theme.density.controlSmall,
+    '--ui-control-height-lg': theme.density.controlLarge,
+    '--ui-font-body': theme.typography.body.family,
+    '--ui-font-heading': theme.typography.heading.family,
+    '--ui-font-mono': theme.typography.mono,
+    '--ui-tracking-body': theme.typography.body.tracking,
+    '--ui-tracking-heading': theme.typography.heading.tracking,
+    '--ui-leading-body': theme.typography.body.leading,
+    '--ui-leading-heading': theme.typography.heading.leading,
+    '--ui-weight-body': String(theme.typography.body.weight),
+    '--ui-weight-heading': String(theme.typography.heading.weight),
+    '--ui-shadow-control': theme.effects.controlShadow,
+    '--ui-shadow-panel': theme.effects.panelShadow,
+    '--ui-motion-fast': theme.motion.fast,
+    '--ui-motion-standard': theme.motion.standard,
+  }
+}
+
+export function themeStyleProperties(
+  input: ThemeDocument,
+  selectedMode: 'light' | 'dark',
+): Readonly<Record<string, string>> {
+  return admittedThemeStyleProperties(parseThemeDocument(input), selectedMode)
+}
+
+function variables(theme: ThemeDocument, selectedMode: 'light' | 'dark'): string[] {
+  return Object.entries(admittedThemeStyleProperties(theme, selectedMode)).map(([name, value]) =>
+    name === '--ui-shadow-panel' && value.includes(',')
+      ? `  ${name}:\n    ${value};`
+      : `  ${name}: ${value};`,
+  )
 }
 
 export function renderThemeCss(input: ThemeDocument): string {

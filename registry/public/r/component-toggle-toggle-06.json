@@ -13,7 +13,7 @@
       "path": "source/components/toggle/toggle-06/toggle-06.tsx",
       "content": "import { useState } from 'react'\nimport { Toggle } from '@astrale-os/ui/toggle'\nimport { ArrowBigUpIcon, StarIcon } from \"lucide-react\"\n\nconst ToggleTextPattern = () => {\n  const [vote, setVote] = useState(false)\n  const [star, setStar] = useState(false)\n\n  return (\n    <div className='flex flex-wrap items-center justify-center gap-2'>\n      <Toggle variant='outline' aria-label='Like' pressed={vote} onPressedChange={setVote}>\n        <ArrowBigUpIcon className='group-aria-pressed/toggle:fill-foreground' />\n        Upvote {vote ? 28 : 27}\n      </Toggle>\n      <Toggle variant='outline' aria-label='Star' pressed={star} onPressedChange={setStar}>\n        <StarIcon className='group-aria-pressed/toggle:fill-foreground' />\n        Github {star ? 1262 : 1261}\n      </Toggle>\n    </div>\n  )\n}\n\nexport default ToggleTextPattern\n",
       "type": "registry:component",
-      "target": "components/astrale/component/toggle/toggle-06.tsx"
+      "target": "components/astrale/components/toggle/toggle-06.tsx"
     }
   ],
   "meta": {

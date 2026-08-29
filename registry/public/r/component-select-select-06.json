@@ -12,7 +12,7 @@
       "path": "source/components/select/select-06/select-06.tsx",
       "content": "import { useId } from 'react'\n\nimport { Label } from '@astrale-os/ui/label'\nimport { NativeSelect, NativeSelectOption } from '@astrale-os/ui/native-select'\n\nconst NativeSelectRequiredDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id} className='gap-1'>\n        Required native select <span className='text-destructive'>*</span>\n      </Label>\n      <NativeSelect id={id} required>\n        <NativeSelectOption value='1'>Action</NativeSelectOption>\n        <NativeSelectOption value='2'>Comedy</NativeSelectOption>\n        <NativeSelectOption value='3'>Romance</NativeSelectOption>\n        <NativeSelectOption value='4'>Thriller</NativeSelectOption>\n      </NativeSelect>\n    </div>\n  )\n}\n\nexport default NativeSelectRequiredDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/select/select-06.tsx"
+      "target": "components/astrale/components/select/select-06.tsx"
     }
   ],
   "meta": {

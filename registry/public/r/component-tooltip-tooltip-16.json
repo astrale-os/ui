@@ -13,7 +13,7 @@
       "path": "source/components/tooltip/tooltip-16/tooltip-16.tsx",
       "content": "import { AnimatedTooltip } from '@/components/ui/motion-tooltip'\n\nconst avatars = [\n  {\n    image: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-3.png',\n    fallback: 'HL',\n    name: 'Howard Lloyd',\n    designation: 'Product Manager'\n  },\n  {\n    image: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-6.png',\n    fallback: 'OS',\n    name: 'Olivia Sparks',\n    designation: 'Software Engineer'\n  },\n  {\n    image: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-5.png',\n    fallback: 'HR',\n    name: 'Hallie Richards',\n    designation: 'UI/UX Designer'\n  },\n  {\n    image: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-16.png',\n    fallback: 'JW',\n    name: 'Jenny Wilson',\n    designation: 'Junior Developer'\n  }\n]\n\nconst AnimatedTooltipDemo = () => {\n  return (\n    <div className='space-y-4'>\n      <div className='flex w-full flex-row items-center justify-center'>\n        <AnimatedTooltip items={avatars} />\n      </div>\n      <p className='text-muted-foreground text-xs'>\n        Inspired by{' '}\n        <a\n          className='hover:text-foreground underline'\n          href='https://ui.aceternity.com/components/animated-tooltip'\n          target='_blank'\n          rel='noopener noreferrer'\n        >\n          Aceternity UI\n        </a>\n      </p>\n    </div>\n  )\n}\n\nexport default AnimatedTooltipDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/tooltip/tooltip-16.tsx"
+      "target": "components/astrale/components/tooltip/tooltip-16.tsx"
     },
     {
       "path": "source/components/tooltip/tooltip-16/support/components/ui/motion-tooltip.tsx",

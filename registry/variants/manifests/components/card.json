@@ -13,7 +13,7 @@
         {
           "path": "card-01.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/card/card-01.tsx"
+          "target": "components/astrale/components/card/card-01.tsx"
         }
       ],
       "meta": {
@@ -33,7 +33,7 @@
         {
           "path": "card-02.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/card/card-02.tsx"
+          "target": "components/astrale/components/card/card-02.tsx"
         }
       ],
       "meta": {
@@ -53,7 +53,7 @@
         {
           "path": "card-03.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/card/card-03.tsx"
+          "target": "components/astrale/components/card/card-03.tsx"
         }
       ],
       "meta": {
@@ -73,7 +73,7 @@
         {
           "path": "card-04.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/card/card-04.tsx"
+          "target": "components/astrale/components/card/card-04.tsx"
         }
       ],
       "meta": {
@@ -93,7 +93,7 @@
         {
           "path": "card-05.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/card/card-05.tsx"
+          "target": "components/astrale/components/card/card-05.tsx"
         }
       ],
       "meta": {
@@ -113,7 +113,7 @@
         {
           "path": "card-06.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/card/card-06.tsx"
+          "target": "components/astrale/components/card/card-06.tsx"
         }
       ],
       "meta": {
@@ -133,7 +133,7 @@
         {
           "path": "card-07.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/card/card-07.tsx"
+          "target": "components/astrale/components/card/card-07.tsx"
         }
       ],
       "meta": {
@@ -153,7 +153,7 @@
         {
           "path": "card-08.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/card/card-08.tsx"
+          "target": "components/astrale/components/card/card-08.tsx"
         }
       ],
       "meta": {
@@ -173,7 +173,7 @@
         {
           "path": "card-09.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/card/card-09.tsx"
+          "target": "components/astrale/components/card/card-09.tsx"
         }
       ],
       "meta": {
@@ -193,7 +193,7 @@
         {
           "path": "card-10.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/card/card-10.tsx"
+          "target": "components/astrale/components/card/card-10.tsx"
         }
       ],
       "meta": {
@@ -213,7 +213,7 @@
         {
           "path": "card-11.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/card/card-11.tsx"
+          "target": "components/astrale/components/card/card-11.tsx"
         },
         {
           "path": "support/assets/svg/heart.tsx",
@@ -243,7 +243,7 @@
         {
           "path": "card-12.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/card/card-12.tsx"
+          "target": "components/astrale/components/card/card-12.tsx"
         },
         {
           "path": "support/assets/svg/heart.tsx",
@@ -273,7 +273,7 @@
         {
           "path": "card-13.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/card/card-13.tsx"
+          "target": "components/astrale/components/card/card-13.tsx"
         },
         {
           "path": "support/components/ui/rating.tsx",
@@ -298,7 +298,7 @@
         {
           "path": "card-14.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/card/card-14.tsx"
+          "target": "components/astrale/components/card/card-14.tsx"
         }
       ],
       "meta": {
@@ -318,7 +318,7 @@
         {
           "path": "card-15.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/card/card-15.tsx"
+          "target": "components/astrale/components/card/card-15.tsx"
         }
       ],
       "meta": {
@@ -338,7 +338,7 @@
         {
           "path": "card-16.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/card/card-16.tsx"
+          "target": "components/astrale/components/card/card-16.tsx"
         }
       ],
       "meta": {
@@ -358,7 +358,7 @@
         {
           "path": "card-17.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/card/card-17.tsx"
+          "target": "components/astrale/components/card/card-17.tsx"
         }
       ],
       "meta": {

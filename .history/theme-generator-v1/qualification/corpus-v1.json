@@ -1,0 +1,46 @@
+{
+  "engineVersion": 1,
+  "fontCatalogVersion": 1,
+  "seeds": 10000,
+  "relationCounts": {
+    "analogous": 2480,
+    "complementary": 2540,
+    "split": 2474,
+    "tonal": 2506
+  },
+  "hueBins": [832, 843, 829, 814, 830, 824, 936, 822, 820, 841, 840, 769],
+  "bodyFamilies": 4,
+  "headingFamilies": 4,
+  "terminalFamilies": 1,
+  "headingWeights": [600, 700],
+  "pairClasses": {
+    "serif/serif": 1987,
+    "sans/sans": 1841,
+    "serif/sans": 2988,
+    "sans/serif": 3184
+  },
+  "uniqueDocuments": 10000,
+  "uniquePrimaryOutputs": 9986,
+  "uniqueGeometryOutputs": 9997,
+  "axisQuartiles": [
+    [2595, 4211, 2661, 533],
+    [328, 2163, 4363, 3146],
+    [4710, 4226, 1011, 53],
+    [2523, 2508, 2458, 2511],
+    [1441, 3597, 3570, 1392],
+    [1294, 3808, 3665, 1233],
+    [1238, 3691, 3767, 1304],
+    [2111, 3856, 3172, 861],
+    [3889, 4201, 1726, 184],
+    [2504, 2468, 2578, 2450]
+  ],
+  "retries": 30,
+  "rejectedAttempts": 30,
+  "fallbacks": 0,
+  "p95Milliseconds": 5.031,
+  "variationP95Milliseconds": 5.223,
+  "medianVariationDnaDistance": 0.059,
+  "p10NewDirectionDnaDistance": 0.2152,
+  "medianVariationThemeDistance": 0.0328,
+  "p10NewDirectionThemeDistance": 0.108
+}

@@ -11,7 +11,7 @@
       "path": "registry/patterns/date-picker/range.tsx",
       "content": "import { cn } from '@astrale-os/ui/class-name'\nimport { Input } from '@astrale-os/ui/input'\nexport type DatePickerRangeValue = { start?: string; end?: string }\nexport function DatePickerRange({\n  className,\n  style,\n  value,\n  onValueChange,\n}: {\n  className?: string\n  style?: React.CSSProperties\n\n  value: DatePickerRangeValue\n  onValueChange(value: DatePickerRangeValue): void\n}) {\n  return (\n    <fieldset\n      data-slot=\"pattern-date-picker-range\"\n      style={style}\n      className={cn('grid gap-3 sm:grid-cols-2', className)}\n    >\n      <legend data-slot=\"patterns-date-picker-range-legend\" className=\"sr-only\">\n        Date range\n      </legend>\n      <label data-slot=\"patterns-date-picker-range-label\">\n        Start\n        <Input\n          type=\"date\"\n          value={value.start ?? ''}\n          max={value.end}\n          onChange={(event) => onValueChange({ ...value, start: event.currentTarget.value })}\n        />\n      </label>\n      <label data-slot=\"patterns-date-picker-range-label\">\n        End\n        <Input\n          type=\"date\"\n          value={value.end ?? ''}\n          min={value.start}\n          onChange={(event) => onValueChange({ ...value, end: event.currentTarget.value })}\n        />\n      </label>\n    </fieldset>\n  )\n}\n",
       "type": "registry:component",
-      "target": "components/astrale/pattern/date-picker/range.tsx"
+      "target": "components/astrale/components/date-picker/range.tsx"
     }
   ],
   "meta": {

@@ -13,7 +13,7 @@
         {
           "path": "stepper-01.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/stepper/stepper-01.tsx"
+          "target": "components/astrale/components/stepper/stepper-01.tsx"
         },
         {
           "path": "support/components/ui/stepper.tsx",
@@ -38,7 +38,7 @@
         {
           "path": "stepper-02.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/stepper/stepper-02.tsx"
+          "target": "components/astrale/components/stepper/stepper-02.tsx"
         },
         {
           "path": "support/components/ui/stepper.tsx",
@@ -63,7 +63,7 @@
         {
           "path": "stepper-03.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/stepper/stepper-03.tsx"
+          "target": "components/astrale/components/stepper/stepper-03.tsx"
         },
         {
           "path": "support/components/ui/stepper.tsx",
@@ -88,7 +88,7 @@
         {
           "path": "stepper-04.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/stepper/stepper-04.tsx"
+          "target": "components/astrale/components/stepper/stepper-04.tsx"
         },
         {
           "path": "support/components/ui/stepper.tsx",
@@ -113,7 +113,7 @@
         {
           "path": "stepper-05.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/stepper/stepper-05.tsx"
+          "target": "components/astrale/components/stepper/stepper-05.tsx"
         },
         {
           "path": "support/components/ui/stepper.tsx",
@@ -138,7 +138,7 @@
         {
           "path": "stepper-06.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/stepper/stepper-06.tsx"
+          "target": "components/astrale/components/stepper/stepper-06.tsx"
         },
         {
           "path": "support/components/ui/stepper.tsx",
@@ -168,7 +168,7 @@
         {
           "path": "stepper-07.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/stepper/stepper-07.tsx"
+          "target": "components/astrale/components/stepper/stepper-07.tsx"
         },
         {
           "path": "support/components/ui/stepper.tsx",
@@ -198,7 +198,7 @@
         {
           "path": "stepper-08.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/stepper/stepper-08.tsx"
+          "target": "components/astrale/components/stepper/stepper-08.tsx"
         },
         {
           "path": "support/components/ui/stepper.tsx",
@@ -228,7 +228,7 @@
         {
           "path": "stepper-09.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/stepper/stepper-09.tsx"
+          "target": "components/astrale/components/stepper/stepper-09.tsx"
         },
         {
           "path": "support/components/ui/stepper.tsx",
@@ -261,7 +261,7 @@
         {
           "path": "stepper-10.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/stepper/stepper-10.tsx"
+          "target": "components/astrale/components/stepper/stepper-10.tsx"
         },
         {
           "path": "support/components/ui/stepper.tsx",
@@ -291,7 +291,7 @@
         {
           "path": "stepper-11.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/stepper/stepper-11.tsx"
+          "target": "components/astrale/components/stepper/stepper-11.tsx"
         },
         {
           "path": "support/components/ui/stepper.tsx",
@@ -321,7 +321,7 @@
         {
           "path": "stepper-12.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/stepper/stepper-12.tsx"
+          "target": "components/astrale/components/stepper/stepper-12.tsx"
         },
         {
           "path": "support/components/ui/stepper.tsx",

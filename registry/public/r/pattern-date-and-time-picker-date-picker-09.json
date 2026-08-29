@@ -12,7 +12,7 @@
       "path": "source/patterns/date-and-time-picker/date-picker-09/date-picker-09.tsx",
       "content": "import { Input } from '@astrale-os/ui/input'\nimport { Label } from '@astrale-os/ui/label'\nimport { Clock8Icon } from \"lucide-react\"\n\nconst TimePickerWithIconDemo = () => {\n  return (\n    <div className='flex w-full max-w-xs flex-col gap-2'>\n      <Label htmlFor='timepicker' className='px-1'>\n        Time input with start icon\n      </Label>\n      <div className='relative'>\n        <div className='text-muted-foreground pointer-events-none absolute inset-y-0 left-0 flex items-center justify-center pl-3 peer-disabled:opacity-50'>\n          <Clock8Icon className='size-4' />\n          <span className='sr-only'>User</span>\n        </div>\n        <Input\n          type='time'\n          id='time-picker'\n          step='1'\n          defaultValue='08:30:00'\n          className='peer bg-background appearance-none pl-9 [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none'\n        />\n      </div>\n    </div>\n  )\n}\n\nexport default TimePickerWithIconDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/pattern/date-and-time-picker/date-picker-09.tsx"
+      "target": "components/astrale/components/date-and-time-picker/date-picker-09.tsx"
     }
   ],
   "meta": {

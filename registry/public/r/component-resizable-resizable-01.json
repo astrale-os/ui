@@ -11,7 +11,7 @@
       "path": "source/components/resizable/resizable-01/resizable-01.tsx",
       "content": "import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from '@astrale-os/ui/resizable'\n\nconst ResizableDemo = () => {\n  return (\n    <ResizablePanelGroup orientation='horizontal' className='min-h-75 rounded-2xl border'>\n      <ResizablePanel defaultSize='50%'>\n        <div className='flex h-50 items-center justify-center p-6'>\n          <span className='font-semibold'>One</span>\n        </div>\n      </ResizablePanel>\n      <ResizableHandle withHandle />\n      <ResizablePanel defaultSize='50%'>\n        <ResizablePanelGroup orientation='vertical'>\n          <ResizablePanel defaultSize='25%'>\n            <div className='flex h-full items-center justify-center p-6'>\n              <span className='font-semibold'>Two</span>\n            </div>\n          </ResizablePanel>\n          <ResizableHandle withHandle />\n          <ResizablePanel defaultSize='75%'>\n            <div className='flex h-full items-center justify-center p-6'>\n              <span className='font-semibold'>Three</span>\n            </div>\n          </ResizablePanel>\n        </ResizablePanelGroup>\n      </ResizablePanel>\n    </ResizablePanelGroup>\n  )\n}\n\nexport default ResizableDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/resizable/resizable-01.tsx"
+      "target": "components/astrale/components/resizable/resizable-01.tsx"
     }
   ],
   "meta": {

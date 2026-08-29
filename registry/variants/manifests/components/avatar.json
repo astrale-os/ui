@@ -13,7 +13,7 @@
         {
           "path": "avatar-01.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/avatar/avatar-01.tsx"
+          "target": "components/astrale/components/avatar/avatar-01.tsx"
         }
       ],
       "meta": {
@@ -33,7 +33,7 @@
         {
           "path": "avatar-02.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/avatar/avatar-02.tsx"
+          "target": "components/astrale/components/avatar/avatar-02.tsx"
         }
       ],
       "meta": {
@@ -53,7 +53,7 @@
         {
           "path": "avatar-03.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/avatar/avatar-03.tsx"
+          "target": "components/astrale/components/avatar/avatar-03.tsx"
         }
       ],
       "meta": {
@@ -73,7 +73,7 @@
         {
           "path": "avatar-04.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/avatar/avatar-04.tsx"
+          "target": "components/astrale/components/avatar/avatar-04.tsx"
         }
       ],
       "meta": {
@@ -93,7 +93,7 @@
         {
           "path": "avatar-05.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/avatar/avatar-05.tsx"
+          "target": "components/astrale/components/avatar/avatar-05.tsx"
         }
       ],
       "meta": {
@@ -113,7 +113,7 @@
         {
           "path": "avatar-06.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/avatar/avatar-06.tsx"
+          "target": "components/astrale/components/avatar/avatar-06.tsx"
         }
       ],
       "meta": {
@@ -133,7 +133,7 @@
         {
           "path": "avatar-07.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/avatar/avatar-07.tsx"
+          "target": "components/astrale/components/avatar/avatar-07.tsx"
         }
       ],
       "meta": {
@@ -153,7 +153,7 @@
         {
           "path": "avatar-08.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/avatar/avatar-08.tsx"
+          "target": "components/astrale/components/avatar/avatar-08.tsx"
         }
       ],
       "meta": {
@@ -173,7 +173,7 @@
         {
           "path": "avatar-09.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/avatar/avatar-09.tsx"
+          "target": "components/astrale/components/avatar/avatar-09.tsx"
         }
       ],
       "meta": {
@@ -193,7 +193,7 @@
         {
           "path": "avatar-10.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/avatar/avatar-10.tsx"
+          "target": "components/astrale/components/avatar/avatar-10.tsx"
         }
       ],
       "meta": {
@@ -213,7 +213,7 @@
         {
           "path": "avatar-11.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/avatar/avatar-11.tsx"
+          "target": "components/astrale/components/avatar/avatar-11.tsx"
         }
       ],
       "meta": {
@@ -233,7 +233,7 @@
         {
           "path": "avatar-12.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/avatar/avatar-12.tsx"
+          "target": "components/astrale/components/avatar/avatar-12.tsx"
         },
         {
           "path": "support/assets/svg/badge-check.tsx",
@@ -258,7 +258,7 @@
         {
           "path": "avatar-13.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/avatar/avatar-13.tsx"
+          "target": "components/astrale/components/avatar/avatar-13.tsx"
         }
       ],
       "meta": {
@@ -278,7 +278,7 @@
         {
           "path": "avatar-14.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/avatar/avatar-14.tsx"
+          "target": "components/astrale/components/avatar/avatar-14.tsx"
         }
       ],
       "meta": {
@@ -298,7 +298,7 @@
         {
           "path": "avatar-15.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/avatar/avatar-15.tsx"
+          "target": "components/astrale/components/avatar/avatar-15.tsx"
         }
       ],
       "meta": {
@@ -318,7 +318,7 @@
         {
           "path": "avatar-16.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/avatar/avatar-16.tsx"
+          "target": "components/astrale/components/avatar/avatar-16.tsx"
         }
       ],
       "meta": {
@@ -338,7 +338,7 @@
         {
           "path": "avatar-17.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/avatar/avatar-17.tsx"
+          "target": "components/astrale/components/avatar/avatar-17.tsx"
         }
       ],
       "meta": {
@@ -358,7 +358,7 @@
         {
           "path": "avatar-18.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/avatar/avatar-18.tsx"
+          "target": "components/astrale/components/avatar/avatar-18.tsx"
         }
       ],
       "meta": {
@@ -378,7 +378,7 @@
         {
           "path": "avatar-19.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/avatar/avatar-19.tsx"
+          "target": "components/astrale/components/avatar/avatar-19.tsx"
         }
       ],
       "meta": {
@@ -398,7 +398,7 @@
         {
           "path": "avatar-20.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/avatar/avatar-20.tsx"
+          "target": "components/astrale/components/avatar/avatar-20.tsx"
         }
       ],
       "meta": {
@@ -418,7 +418,7 @@
         {
           "path": "avatar-21.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/avatar/avatar-21.tsx"
+          "target": "components/astrale/components/avatar/avatar-21.tsx"
         }
       ],
       "meta": {

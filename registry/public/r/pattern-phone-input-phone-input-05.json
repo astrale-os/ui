@@ -15,7 +15,7 @@
       "path": "source/patterns/phone-input/phone-input-05/phone-input-05.tsx",
       "content": "import { PhoneInput } from '@/components/ui/phone-input'\nimport { Label } from '@astrale-os/ui/label'\n\nconst PhoneInputRounded = () => {\n  return (\n    <div className='space-y-2'>\n      <Label htmlFor='phone'>Rounded Phone Input</Label>\n      <PhoneInput\n        id='phone'\n        placeholder='Enter contact number'\n        triggerClassName='rounded-l-full'\n        inputClassName='rounded-r-full rounded-l-none'\n      />\n    </div>\n  )\n}\n\nexport default PhoneInputRounded\n",
       "type": "registry:component",
-      "target": "components/astrale/pattern/phone-input/phone-input-05.tsx"
+      "target": "components/astrale/components/phone-input/phone-input-05.tsx"
     },
     {
       "path": "source/patterns/phone-input/phone-input-05/support/components/ui/phone-input.tsx",

@@ -14,7 +14,7 @@
       "path": "source/components/rating/rating-04/rating-04.tsx",
       "content": "'use client'\n\nimport { useState } from 'react'\n\nimport { Rating } from '@/components/ui/rating'\n\nconst RatingSizeDemo = () => {\n  const [xs, setXs] = useState(2)\n  const [s, setS] = useState(3)\n  const [m, setM] = useState(2)\n  const [l, setL] = useState(3)\n\n  return (\n    <div className='grid grid-cols-2 gap-6'>\n      <div className='flex flex-col items-start gap-3'>\n        <div className='text-sm font-medium'>Extra Small</div>\n        <Rating size={16} precision={0.5} value={xs} onValueChange={setXs} aria-label='Rating Extra Small' />\n      </div>\n      <div className='flex flex-col items-start gap-3'>\n        <div className='text-sm font-medium'>Small</div>\n        <Rating size={20} precision={0.5} value={s} onValueChange={setS} aria-label='Rating Small' />\n      </div>\n\n      <div className='flex flex-col items-start gap-3'>\n        <div className='text-sm font-medium'>Medium</div>\n        <Rating size={24} precision={0.5} value={m} onValueChange={setM} aria-label='Rating Medium' />\n      </div>\n      <div className='flex flex-col items-start gap-3'>\n        <div className='text-sm font-medium'>Large</div>\n        <Rating size={28} precision={0.5} value={l} onValueChange={setL} aria-label='Rating Large' />\n      </div>\n    </div>\n  )\n}\n\nexport default RatingSizeDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/rating/rating-04.tsx"
+      "target": "components/astrale/components/rating/rating-04.tsx"
     },
     {
       "path": "source/components/rating/rating-04/support/components/ui/rating.tsx",

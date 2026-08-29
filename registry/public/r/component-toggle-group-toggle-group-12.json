@@ -12,7 +12,7 @@
       "path": "source/components/toggle-group/toggle-group-12/toggle-group-12.tsx",
       "content": "import { ToggleGroup, ToggleGroupItem } from '@astrale-os/ui/toggle-group'\nimport { MonitorIcon, TabletIcon, SmartphoneIcon, SquareArrowOutUpRightIcon } from \"lucide-react\"\n\nconst ToggleGroupLayout = () => {\n  return (\n    <div className='flex items-center justify-center'>\n      <ToggleGroup defaultValue={['2']} size='lg' variant='outline' spacing={0}>\n        <ToggleGroupItem value='1' aria-label='chart line'>\n          <MonitorIcon\n          />\n        </ToggleGroupItem>\n        <ToggleGroupItem value='2' aria-label='chart column'>\n          <TabletIcon\n          />\n        </ToggleGroupItem>\n        <ToggleGroupItem value='3' aria-label='chart pie'>\n          <SmartphoneIcon\n          />\n        </ToggleGroupItem>\n        <ToggleGroupItem value='4' aria-label='chart scatter'>\n          <SquareArrowOutUpRightIcon\n          />\n        </ToggleGroupItem>\n      </ToggleGroup>\n    </div>\n  )\n}\n\nexport default ToggleGroupLayout\n",
       "type": "registry:component",
-      "target": "components/astrale/component/toggle-group/toggle-group-12.tsx"
+      "target": "components/astrale/components/toggle-group/toggle-group-12.tsx"
     }
   ],
   "meta": {

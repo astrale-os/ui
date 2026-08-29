@@ -11,7 +11,7 @@
       "path": "source/components/button/button-27/button-27.tsx",
       "content": "import { Avatar, AvatarFallback, AvatarImage } from '@astrale-os/ui/avatar'\nimport { Button } from '@astrale-os/ui/button'\n\nconst ButtonAvatarDemo = () => {\n  return (\n    <Button className='hover:bg-primary/90 rounded-full pl-2'>\n      <Avatar className='size-5'>\n        <AvatarImage src='https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-5.png' alt='Hallie Richards' />\n        <AvatarFallback className='text-foreground text-xs'>HR</AvatarFallback>\n      </Avatar>\n      @hallierichards\n    </Button>\n  )\n}\n\nexport default ButtonAvatarDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/button/button-27.tsx"
+      "target": "components/astrale/components/button/button-27.tsx"
     }
   ],
   "meta": {

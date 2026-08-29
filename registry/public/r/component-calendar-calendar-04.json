@@ -14,7 +14,7 @@
       "path": "source/components/calendar/calendar-04/calendar-04.tsx",
       "content": "import { useState } from 'react'\n\nimport { type DateRange } from 'react-day-picker'\n\nimport { Calendar } from '@/components/ui/calendar'\n\nconst CalendarRangeCalendarMultiMonthDemo = () => {\n  const [dateRange, setDateRange] = useState<DateRange | undefined>({\n    from: new Date(2025, 4, 22),\n    to: new Date(2025, 5, 17)\n  })\n\n  return (\n    <div>\n      <Calendar\n        mode='range'\n        defaultMonth={dateRange?.from}\n        selected={dateRange}\n        onSelect={setDateRange}\n        numberOfMonths={2}\n        className='rounded-lg border'\n      />\n      <p className='text-muted-foreground mt-3 text-center text-xs' role='region'>\n        Multi month calendar with range selection\n      </p>\n    </div>\n  )\n}\n\nexport default CalendarRangeCalendarMultiMonthDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/calendar/calendar-04.tsx"
+      "target": "components/astrale/components/calendar/calendar-04.tsx"
     },
     {
       "path": "source/components/calendar/calendar-04/support/components/ui/calendar.tsx",

@@ -12,7 +12,7 @@
       "path": "source/components/textarea/textarea-21/textarea-21.tsx",
       "content": "import { useId } from 'react'\n\nimport { Label } from '@astrale-os/ui/label'\nimport { Textarea } from '@astrale-os/ui/textarea'\n\nconst TextareaDisabledDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>Disabled textarea</Label>\n      <Textarea placeholder='Type your feedback here' disabled id={id} />\n    </div>\n  )\n}\n\nexport default TextareaDisabledDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/textarea/textarea-21.tsx"
+      "target": "components/astrale/components/textarea/textarea-21.tsx"
     }
   ],
   "meta": {

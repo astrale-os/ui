@@ -12,7 +12,7 @@
       "path": "source/patterns/list/list-04/list-04.tsx",
       "content": "import { CircleArrowRightIcon } from \"lucide-react\";\n\nconst ListIcon = () => {\n  return (\n    <div className='w-full max-w-sm space-y-2'>\n      <ul className='space-y-3'>\n        <li className='flex items-center gap-2'>\n          <CircleArrowRightIcon className='size-5' />\n          <p>Login to Shadcn Studio</p>\n        </li>\n        <li className='flex items-center gap-2'>\n          <CircleArrowRightIcon className='size-5' />\n          <p>Choose your desired component</p>\n        </li>\n        <li className='flex items-center gap-2'>\n          <CircleArrowRightIcon className='size-5' />\n          <p>Use and install in your project</p>\n        </li>\n      </ul>\n    </div>\n  )\n}\n\nexport default ListIcon\n",
       "type": "registry:component",
-      "target": "components/astrale/pattern/list/list-04.tsx"
+      "target": "components/astrale/components/list/list-04.tsx"
     }
   ],
   "meta": {

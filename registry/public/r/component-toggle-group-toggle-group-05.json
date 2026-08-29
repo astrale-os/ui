@@ -12,7 +12,7 @@
       "path": "source/components/toggle-group/toggle-group-05/toggle-group-05.tsx",
       "content": "import { ToggleGroup, ToggleGroupItem } from '@astrale-os/ui/toggle-group'\nimport { Columns2Icon, LayoutGridIcon, ListIcon } from \"lucide-react\"\n\nconst ToggleGroupVertical = () => {\n  return (\n    <ToggleGroup variant='outline' orientation='vertical' defaultValue={['layout']} spacing={0}>\n      <ToggleGroupItem value='col' aria-label='Toggle columns'>\n        <Columns2Icon\n        />\n      </ToggleGroupItem>\n      <ToggleGroupItem value='layout' aria-label='Toggle layout'>\n        <LayoutGridIcon\n        />\n      </ToggleGroupItem>\n      <ToggleGroupItem value='list' aria-label='Toggle list'>\n        <ListIcon\n        />\n      </ToggleGroupItem>\n    </ToggleGroup>\n  )\n}\n\nexport default ToggleGroupVertical\n",
       "type": "registry:component",
-      "target": "components/astrale/component/toggle-group/toggle-group-05.tsx"
+      "target": "components/astrale/components/toggle-group/toggle-group-05.tsx"
     }
   ],
   "meta": {

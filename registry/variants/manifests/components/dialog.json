@@ -13,7 +13,7 @@
         {
           "path": "dialog-01.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/dialog/dialog-01.tsx"
+          "target": "components/astrale/components/dialog/dialog-01.tsx"
         }
       ],
       "meta": {
@@ -33,7 +33,7 @@
         {
           "path": "dialog-02.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/dialog/dialog-02.tsx"
+          "target": "components/astrale/components/dialog/dialog-02.tsx"
         }
       ],
       "meta": {
@@ -53,7 +53,7 @@
         {
           "path": "dialog-03.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/dialog/dialog-03.tsx"
+          "target": "components/astrale/components/dialog/dialog-03.tsx"
         }
       ],
       "meta": {
@@ -73,7 +73,7 @@
         {
           "path": "dialog-04.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/dialog/dialog-04.tsx"
+          "target": "components/astrale/components/dialog/dialog-04.tsx"
         }
       ],
       "meta": {
@@ -93,7 +93,7 @@
         {
           "path": "dialog-05.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/dialog/dialog-05.tsx"
+          "target": "components/astrale/components/dialog/dialog-05.tsx"
         }
       ],
       "meta": {
@@ -113,7 +113,7 @@
         {
           "path": "dialog-06.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/dialog/dialog-06.tsx"
+          "target": "components/astrale/components/dialog/dialog-06.tsx"
         }
       ],
       "meta": {
@@ -133,7 +133,7 @@
         {
           "path": "dialog-07.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/dialog/dialog-07.tsx"
+          "target": "components/astrale/components/dialog/dialog-07.tsx"
         }
       ],
       "meta": {
@@ -153,7 +153,7 @@
         {
           "path": "dialog-08.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/dialog/dialog-08.tsx"
+          "target": "components/astrale/components/dialog/dialog-08.tsx"
         }
       ],
       "meta": {
@@ -173,7 +173,7 @@
         {
           "path": "dialog-09.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/dialog/dialog-09.tsx"
+          "target": "components/astrale/components/dialog/dialog-09.tsx"
         }
       ],
       "meta": {
@@ -193,7 +193,7 @@
         {
           "path": "dialog-10.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/dialog/dialog-10.tsx"
+          "target": "components/astrale/components/dialog/dialog-10.tsx"
         }
       ],
       "meta": {
@@ -213,7 +213,7 @@
         {
           "path": "dialog-11.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/dialog/dialog-11.tsx"
+          "target": "components/astrale/components/dialog/dialog-11.tsx"
         }
       ],
       "meta": {
@@ -238,7 +238,7 @@
         {
           "path": "dialog-12.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/dialog/dialog-12.tsx"
+          "target": "components/astrale/components/dialog/dialog-12.tsx"
         }
       ],
       "meta": {
@@ -258,7 +258,7 @@
         {
           "path": "dialog-13.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/dialog/dialog-13.tsx"
+          "target": "components/astrale/components/dialog/dialog-13.tsx"
         }
       ],
       "meta": {
@@ -278,7 +278,7 @@
         {
           "path": "dialog-14.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/dialog/dialog-14.tsx"
+          "target": "components/astrale/components/dialog/dialog-14.tsx"
         }
       ],
       "meta": {
@@ -298,7 +298,7 @@
         {
           "path": "dialog-15.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/dialog/dialog-15.tsx"
+          "target": "components/astrale/components/dialog/dialog-15.tsx"
         }
       ],
       "meta": {
@@ -318,7 +318,7 @@
         {
           "path": "dialog-16.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/dialog/dialog-16.tsx"
+          "target": "components/astrale/components/dialog/dialog-16.tsx"
         }
       ],
       "meta": {
@@ -338,7 +338,7 @@
         {
           "path": "dialog-17.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/dialog/dialog-17.tsx"
+          "target": "components/astrale/components/dialog/dialog-17.tsx"
         }
       ],
       "meta": {
@@ -358,7 +358,7 @@
         {
           "path": "dialog-18.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/dialog/dialog-18.tsx"
+          "target": "components/astrale/components/dialog/dialog-18.tsx"
         }
       ],
       "meta": {
@@ -378,7 +378,7 @@
         {
           "path": "dialog-19.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/dialog/dialog-19.tsx"
+          "target": "components/astrale/components/dialog/dialog-19.tsx"
         }
       ],
       "meta": {
@@ -398,7 +398,7 @@
         {
           "path": "dialog-20.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/dialog/dialog-20.tsx"
+          "target": "components/astrale/components/dialog/dialog-20.tsx"
         }
       ],
       "meta": {
@@ -418,7 +418,7 @@
         {
           "path": "dialog-21.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/dialog/dialog-21.tsx"
+          "target": "components/astrale/components/dialog/dialog-21.tsx"
         }
       ],
       "meta": {
@@ -438,7 +438,7 @@
         {
           "path": "dialog-22.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/dialog/dialog-22.tsx"
+          "target": "components/astrale/components/dialog/dialog-22.tsx"
         }
       ],
       "meta": {
@@ -458,7 +458,7 @@
         {
           "path": "dialog-23.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/dialog/dialog-23.tsx"
+          "target": "components/astrale/components/dialog/dialog-23.tsx"
         }
       ],
       "meta": {
@@ -478,7 +478,7 @@
         {
           "path": "dialog-24.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/dialog/dialog-24.tsx"
+          "target": "components/astrale/components/dialog/dialog-24.tsx"
         }
       ],
       "meta": {
@@ -498,7 +498,7 @@
         {
           "path": "dialog-25.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/dialog/dialog-25.tsx"
+          "target": "components/astrale/components/dialog/dialog-25.tsx"
         }
       ],
       "meta": {
@@ -518,7 +518,7 @@
         {
           "path": "dialog-26.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/dialog/dialog-26.tsx"
+          "target": "components/astrale/components/dialog/dialog-26.tsx"
         }
       ],
       "meta": {

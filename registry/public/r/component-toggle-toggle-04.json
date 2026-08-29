@@ -11,7 +11,7 @@
       "path": "source/components/toggle/toggle-04/toggle-04.tsx",
       "content": "import { Toggle } from '@astrale-os/ui/toggle'\n\nconst ToggleDisable = () => {\n  return (\n    <div className='flex flex-col items-center gap-4'>\n      <div className='flex flex-wrap items-center gap-2 rounded-md p-2'>\n        <Toggle aria-label='Toggle able'>Able</Toggle>\n        <Toggle aria-label='Toggle disabled' disabled>\n          Disabled\n        </Toggle>\n      </div>\n    </div>\n  )\n}\n\nexport default ToggleDisable\n",
       "type": "registry:component",
-      "target": "components/astrale/component/toggle/toggle-04.tsx"
+      "target": "components/astrale/components/toggle/toggle-04.tsx"
     }
   ],
   "meta": {

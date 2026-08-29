@@ -12,7 +12,7 @@
       "path": "source/components/checkbox/checkbox-14/checkbox-14.tsx",
       "content": "import { Checkbox } from '@astrale-os/ui/checkbox'\nimport { Label } from '@astrale-os/ui/label'\nimport { CodeIcon, ChartPieIcon, PaletteIcon } from \"lucide-react\"\n\nconst skills = [\n  {\n    label: 'Web Development',\n    icon: (\n      <CodeIcon\n      />\n    )\n  },\n  {\n    label: 'Data Analysis',\n    icon: (\n      <ChartPieIcon\n      />\n    )\n  },\n  {\n    label: 'Graphic Design',\n    icon: (\n      <PaletteIcon\n      />\n    )\n  }\n]\n\nconst CheckboxListGroupDemo = () => {\n  return (\n    <ul className='flex w-full flex-col divide-y rounded-md border'>\n      {skills.map(({ label, icon }) => (\n        <li key={label}>\n          <Label htmlFor={label} className='flex items-center justify-between gap-2 px-5 py-3'>\n            <span className='flex items-center gap-2 *:[svg]:size-4'>\n              {icon} {label}\n            </span>\n            <Checkbox id={label} />\n          </Label>\n        </li>\n      ))}\n    </ul>\n  )\n}\n\nexport default CheckboxListGroupDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/checkbox/checkbox-14.tsx"
+      "target": "components/astrale/components/checkbox/checkbox-14.tsx"
     }
   ],
   "meta": {

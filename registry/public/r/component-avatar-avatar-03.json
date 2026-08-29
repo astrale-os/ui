@@ -11,7 +11,7 @@
       "path": "source/components/avatar/avatar-03/avatar-03.tsx",
       "content": "import { Avatar, AvatarFallback, AvatarImage } from '@astrale-os/ui/avatar'\n\nconst AvatarRoundedDemo = () => {\n  return (\n    <Avatar className='rounded-sm after:rounded-[inherit]'>\n      <AvatarImage\n        src='https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-5.png'\n        alt='Hallie Richards'\n        className='rounded-sm'\n      />\n      <AvatarFallback>HR</AvatarFallback>\n    </Avatar>\n  )\n}\n\nexport default AvatarRoundedDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/avatar/avatar-03.tsx"
+      "target": "components/astrale/components/avatar/avatar-03.tsx"
     }
   ],
   "meta": {

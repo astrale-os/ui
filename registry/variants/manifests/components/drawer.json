@@ -13,7 +13,7 @@
         {
           "path": "drawer-01.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/drawer/drawer-01.tsx"
+          "target": "components/astrale/components/drawer/drawer-01.tsx"
         }
       ],
       "meta": {
@@ -38,7 +38,7 @@
         {
           "path": "drawer-02.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/drawer/drawer-02.tsx"
+          "target": "components/astrale/components/drawer/drawer-02.tsx"
         }
       ],
       "meta": {
@@ -58,7 +58,7 @@
         {
           "path": "drawer-03.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/drawer/drawer-03.tsx"
+          "target": "components/astrale/components/drawer/drawer-03.tsx"
         }
       ],
       "meta": {
@@ -78,7 +78,7 @@
         {
           "path": "drawer-04.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/drawer/drawer-04.tsx"
+          "target": "components/astrale/components/drawer/drawer-04.tsx"
         }
       ],
       "meta": {
@@ -98,7 +98,7 @@
         {
           "path": "drawer-05.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/drawer/drawer-05.tsx"
+          "target": "components/astrale/components/drawer/drawer-05.tsx"
         }
       ],
       "meta": {
@@ -118,7 +118,7 @@
         {
           "path": "drawer-06.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/drawer/drawer-06.tsx"
+          "target": "components/astrale/components/drawer/drawer-06.tsx"
         }
       ],
       "meta": {
@@ -138,7 +138,7 @@
         {
           "path": "drawer-07.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/drawer/drawer-07.tsx"
+          "target": "components/astrale/components/drawer/drawer-07.tsx"
         }
       ],
       "meta": {
@@ -158,7 +158,7 @@
         {
           "path": "drawer-08.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/drawer/drawer-08.tsx"
+          "target": "components/astrale/components/drawer/drawer-08.tsx"
         }
       ],
       "meta": {
@@ -178,7 +178,7 @@
         {
           "path": "drawer-09.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/drawer/drawer-09.tsx"
+          "target": "components/astrale/components/drawer/drawer-09.tsx"
         }
       ],
       "meta": {
@@ -198,7 +198,7 @@
         {
           "path": "drawer-10.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/drawer/drawer-10.tsx"
+          "target": "components/astrale/components/drawer/drawer-10.tsx"
         }
       ],
       "meta": {
@@ -218,7 +218,7 @@
         {
           "path": "drawer-11.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/drawer/drawer-11.tsx"
+          "target": "components/astrale/components/drawer/drawer-11.tsx"
         }
       ],
       "meta": {
@@ -238,7 +238,7 @@
         {
           "path": "drawer-12.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/drawer/drawer-12.tsx"
+          "target": "components/astrale/components/drawer/drawer-12.tsx"
         }
       ],
       "meta": {
@@ -258,7 +258,7 @@
         {
           "path": "drawer-13.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/drawer/drawer-13.tsx"
+          "target": "components/astrale/components/drawer/drawer-13.tsx"
         }
       ],
       "meta": {
@@ -278,7 +278,7 @@
         {
           "path": "drawer-14.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/drawer/drawer-14.tsx"
+          "target": "components/astrale/components/drawer/drawer-14.tsx"
         }
       ],
       "meta": {
@@ -298,7 +298,7 @@
         {
           "path": "drawer-15.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/drawer/drawer-15.tsx"
+          "target": "components/astrale/components/drawer/drawer-15.tsx"
         }
       ],
       "meta": {

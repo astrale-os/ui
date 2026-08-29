@@ -11,7 +11,7 @@
       "path": "source/components/card/card-08/card-08.tsx",
       "content": "import { Card, CardContent, CardHeader, CardTitle } from '@astrale-os/ui/card'\n\nconst CardSoftDemo = () => {\n  return (\n    <Card className='bg-primary/20 max-w-md gap-2'>\n      <CardHeader>\n        <CardTitle>Design Throwdown</CardTitle>\n      </CardHeader>\n      <CardContent>\n        Where passion, pressure, and pixels collide - push your creativity to the edge and show what you are made of.\n      </CardContent>\n    </Card>\n  )\n}\n\nexport default CardSoftDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/card/card-08.tsx"
+      "target": "components/astrale/components/card/card-08.tsx"
     }
   ],
   "meta": {

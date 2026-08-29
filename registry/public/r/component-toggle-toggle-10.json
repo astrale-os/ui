@@ -12,7 +12,7 @@
       "path": "source/components/toggle/toggle-10/toggle-10.tsx",
       "content": "import { useState } from 'react'\n\nimport { Toggle } from '@astrale-os/ui/toggle'\n\nconst ToggleText = () => {\n  const [isRTL, setIsRTL] = useState(false)\n  const [isOn, setIsOn] = useState(false)\n\n  return (\n    <div className='flex flex-wrap items-center justify-center gap-2'>\n      <Toggle aria-label='rtl-ltr' onClick={() => setIsRTL(!isRTL)}>\n        {isRTL ? 'RTL' : 'LTR'}\n      </Toggle>\n      <Toggle aria-label='on-off' onClick={() => setIsOn(!isOn)}>\n        {isOn ? 'ON' : 'OFF'}\n      </Toggle>\n    </div>\n  )\n}\n\nexport default ToggleText\n",
       "type": "registry:component",
-      "target": "components/astrale/component/toggle/toggle-10.tsx"
+      "target": "components/astrale/components/toggle/toggle-10.tsx"
     }
   ],
   "meta": {

@@ -13,7 +13,7 @@
       "path": "source/components/slider/slider-16/slider-16.tsx",
       "content": "'use client'\n\nimport { useState } from 'react'\nimport { Slider } from '@astrale-os/ui/slider'\nimport { SquareIcon, CircleIcon } from \"lucide-react\"\n\nconst SliderRadiusDemo = () => {\n  const [radius, setRadius] = useState(12)\n\n  return (\n    <div className='mx-auto flex w-full max-w-xs flex-col items-center gap-8'>\n      {/* Real-time Preview Shape */}\n      <div\n        className='bg-primary/10 flex aspect-square w-28 items-center justify-center transition-all duration-300'\n        style={{ borderRadius: `${radius}px` }}\n      >\n        <span className='text-sm font-medium tabular-nums'>{radius}px</span>\n      </div>\n\n      {/* Control Area */}\n      <div className='flex w-full items-center gap-4'>\n        <SquareIcon className='text-muted-foreground size-5 shrink-0' />\n        <Slider\n          value={radius}\n          onValueChange={val => setRadius(val as number)}\n          max={64}\n          step={1}\n          className='flex-1 cursor-pointer'\n          aria-label='Adjust corner radius'\n        />\n        <CircleIcon className='text-muted-foreground size-5 shrink-0' />\n      </div>\n    </div>\n  )\n}\n\nexport default SliderRadiusDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/slider/slider-16.tsx"
+      "target": "components/astrale/components/slider/slider-16.tsx"
     }
   ],
   "meta": {

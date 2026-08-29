@@ -13,7 +13,7 @@
         {
           "path": "compact-command.tsx",
           "type": "registry:component",
-          "target": "components/astrale/block/application-shell/compact-command.tsx"
+          "target": "components/astrale/components/application-shell/compact-command.tsx"
         }
       ],
       "meta": {
@@ -31,7 +31,7 @@
         {
           "path": "responsive-workspace.tsx",
           "type": "registry:component",
-          "target": "components/astrale/block/application-shell/responsive-workspace.tsx"
+          "target": "components/astrale/components/application-shell/responsive-workspace.tsx"
         }
       ],
       "meta": {
@@ -49,7 +49,7 @@
         {
           "path": "sidebar-header.tsx",
           "type": "registry:component",
-          "target": "components/astrale/block/application-shell/sidebar-header.tsx"
+          "target": "components/astrale/components/application-shell/sidebar-header.tsx"
         }
       ],
       "meta": {

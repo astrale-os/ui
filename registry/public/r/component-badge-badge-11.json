@@ -12,7 +12,7 @@
       "path": "source/components/badge/badge-11/badge-11.tsx",
       "content": "import { Badge } from '@astrale-os/ui/badge'\nimport { ArrowRightIcon } from \"lucide-react\"\n\nconst BadgeLinkDemo = () => {\n  return (\n    <Badge render={<a href='#' />} className='focus-visible:ring-ring/50 focus-visible:ring-2 focus-visible:outline-0'>\n      Link{' '}\n      <ArrowRightIcon className='size-3' />\n    </Badge>\n  )\n}\n\nexport default BadgeLinkDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/badge/badge-11.tsx"
+      "target": "components/astrale/components/badge/badge-11.tsx"
     }
   ],
   "meta": {

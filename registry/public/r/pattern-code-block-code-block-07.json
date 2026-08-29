@@ -14,7 +14,7 @@
       "path": "source/patterns/code-block/code-block-07/code-block-07.tsx",
       "content": "import { CodeBlock } from '@/components/ui/code-block'\n\nconst pnpm = `pnpm dlx shadcn@latest add @ss-components/code-block-07`\nconst npm = `npx shadcn@latest add @ss-components/code-block-07`\nconst yarn = `yarn shadcn@latest add @ss-components/code-block-07`\nconst bun = `bunx --bun shadcn@latest add @ss-components/code-block-07`\n\nconst CodeBlockMultipleTabs = () => {\n  return (\n    <CodeBlock\n      className='w-full max-w-xl'\n      files={[\n        { filename: 'pnpm', code: pnpm, language: 'bash' },\n        { filename: 'npm', code: npm, language: 'bash' },\n        { filename: 'yarn', code: yarn, language: 'bash' },\n        { filename: 'bun', code: bun, language: 'bash' }\n      ]}\n    />\n  )\n}\n\nexport default CodeBlockMultipleTabs\n",
       "type": "registry:component",
-      "target": "components/astrale/pattern/code-block/code-block-07.tsx"
+      "target": "components/astrale/components/code-block/code-block-07.tsx"
     },
     {
       "path": "source/patterns/code-block/code-block-07/support/components/ui/code-block.tsx",

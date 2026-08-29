@@ -11,7 +11,7 @@
       "path": "source/components/skeleton/skeleton-04/skeleton-04.tsx",
       "content": "import { Card, CardContent } from '@astrale-os/ui/card'\nimport { Skeleton } from '@astrale-os/ui/skeleton'\n\nconst SkeletonForm = () => {\n  return (\n    <Card className='w-full max-w-xs'>\n      <CardContent className='space-y-4'>\n        <div className='flex flex-col gap-3'>\n          <Skeleton className='h-4 w-24' />\n          <div className='flex items-center gap-2'>\n            <Skeleton className='h-8 w-full' />\n            <Skeleton className='h-8 w-full' />\n          </div>\n        </div>\n        <div className='flex flex-col gap-3'>\n          <Skeleton className='h-4 w-20' />\n          <Skeleton className='h-8 w-full' />\n        </div>\n        <div className='flex flex-col gap-3'>\n          <Skeleton className='h-4 w-24' />\n          <Skeleton className='h-8 w-full' />\n        </div>\n        <Skeleton className='h-8 w-24' />\n      </CardContent>\n    </Card>\n  )\n}\n\nexport default SkeletonForm\n",
       "type": "registry:component",
-      "target": "components/astrale/component/skeleton/skeleton-04.tsx"
+      "target": "components/astrale/components/skeleton/skeleton-04.tsx"
     }
   ],
   "meta": {

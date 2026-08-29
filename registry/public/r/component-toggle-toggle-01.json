@@ -12,7 +12,7 @@
       "path": "source/components/toggle/toggle-01/toggle-01.tsx",
       "content": "import { Toggle } from '@astrale-os/ui/toggle'\nimport { BookmarkIcon } from \"lucide-react\"\n\nconst ToggleDemo = () => {\n  return (\n    <Toggle aria-label='Toggle bookmark' variant='outline'>\n      <BookmarkIcon className='group-aria-pressed/toggle:fill-foreground' />\n      Bookmark\n    </Toggle>\n  )\n}\n\nexport default ToggleDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/toggle/toggle-01.tsx"
+      "target": "components/astrale/components/toggle/toggle-01.tsx"
     }
   ],
   "meta": {

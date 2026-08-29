@@ -14,7 +14,7 @@
       "path": "source/components/calendar/calendar-06/calendar-06.tsx",
       "content": "import { useState } from 'react'\n\nimport { Calendar } from '@/components/ui/calendar'\n\nconst CalendarDisableDayDemo = () => {\n  const [date, setDate] = useState<Date | undefined>(new Date(2025, 5, 18))\n\n  return (\n    <div>\n      <Calendar\n        mode='single'\n        defaultMonth={date}\n        selected={date}\n        onSelect={setDate}\n        disabled={{\n          before: new Date(2025, 5, 12)\n        }}\n        className='rounded-lg border'\n      />\n      <p className='text-muted-foreground mt-3 text-center text-xs' role='region'>\n        Disabled day calendar\n      </p>\n    </div>\n  )\n}\n\nexport default CalendarDisableDayDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/calendar/calendar-06.tsx"
+      "target": "components/astrale/components/calendar/calendar-06.tsx"
     },
     {
       "path": "source/components/calendar/calendar-06/support/components/ui/calendar.tsx",

@@ -15,7 +15,7 @@
       "path": "source/patterns/phone-input/phone-input-03/phone-input-03.tsx",
       "content": "import { PhoneInput } from '@/components/ui/phone-input'\n\nconst PhoneInputSizes = () => {\n  return (\n    <div className='space-y-4'>\n      <PhoneInput placeholder='Small Input' variant='sm' defaultCountry='US' />\n      <PhoneInput placeholder='Large Input' variant='lg' defaultCountry='US' />\n    </div>\n  )\n}\n\nexport default PhoneInputSizes\n",
       "type": "registry:component",
-      "target": "components/astrale/pattern/phone-input/phone-input-03.tsx"
+      "target": "components/astrale/components/phone-input/phone-input-03.tsx"
     },
     {
       "path": "source/patterns/phone-input/phone-input-03/support/components/ui/phone-input.tsx",

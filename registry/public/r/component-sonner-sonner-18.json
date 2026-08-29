@@ -12,7 +12,7 @@
       "path": "source/components/sonner/sonner-18/sonner-18.tsx",
       "content": "'use client'\n\nimport { toast } from 'sonner'\n\nimport { Button } from '@astrale-os/ui/button'\n\nconst SolidSuccessSonnerDemo = () => {\n  return (\n    <Button\n      variant='outline'\n      onClick={() =>\n        toast.success('Action completed successfully!', {\n          style: {\n            '--normal-bg': 'light-dark(var(--color-green-600), var(--color-green-400))',\n            '--normal-text': 'var(--color-white)',\n            '--normal-border': 'light-dark(var(--color-green-600), var(--color-green-400))'\n          } as React.CSSProperties\n        })\n      }\n    >\n      Solid Success Toast\n    </Button>\n  )\n}\n\nexport default SolidSuccessSonnerDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/sonner/sonner-18.tsx"
+      "target": "components/astrale/components/sonner/sonner-18.tsx"
     }
   ],
   "meta": {

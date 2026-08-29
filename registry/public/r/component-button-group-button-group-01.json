@@ -12,7 +12,7 @@
       "path": "source/components/button-group/button-group-01/button-group-01.tsx",
       "content": "import { Button } from '@astrale-os/ui/button'\nimport { ButtonGroup } from '@astrale-os/ui/button-group'\nimport { DownloadIcon } from \"lucide-react\"\n\nconst ButtonGroupDownloadDemo = () => {\n  return (\n    <ButtonGroup>\n      <Button variant='outline'>\n        <DownloadIcon\n        />\n        Download\n      </Button>\n      <Button variant='outline'>15K</Button>\n    </ButtonGroup>\n  )\n}\n\nexport default ButtonGroupDownloadDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/button-group/button-group-01.tsx"
+      "target": "components/astrale/components/button-group/button-group-01.tsx"
     }
   ],
   "meta": {

@@ -28,7 +28,10 @@
     "query": "repository command palette keyboard shortcuts",
     "relevant": ["pattern/command/command-03"]
   },
-  { "query": "warm paper theme", "relevant": ["theme/atelier"] },
+  {
+    "query": "quiet mineral orbital blue theme",
+    "relevant": ["theme/observatory"]
+  },
   {
     "query": "multi step questionnaire",
     "relevant": ["pattern/questionnaire/multi-step"]

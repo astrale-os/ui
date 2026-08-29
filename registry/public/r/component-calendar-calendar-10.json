@@ -14,7 +14,7 @@
       "path": "source/components/calendar/calendar-10/calendar-10.tsx",
       "content": "import { useState } from 'react'\n\nimport { Calendar } from '@/components/ui/calendar'\n\nconst CalendarVariableSizeDemo = () => {\n  const [date, setDate] = useState<Date | undefined>(new Date())\n\n  return (\n    <div>\n      <Calendar\n        mode='single'\n        selected={date}\n        onSelect={setDate}\n        className='rounded-lg border [--cell-size:--spacing(11)] md:[--cell-size:--spacing(13)]'\n      />\n      <p className='text-muted-foreground mt-3 text-center text-xs' role='region'>\n        Variable size calendar\n      </p>\n    </div>\n  )\n}\n\nexport default CalendarVariableSizeDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/calendar/calendar-10.tsx"
+      "target": "components/astrale/components/calendar/calendar-10.tsx"
     },
     {
       "path": "source/components/calendar/calendar-10/support/components/ui/calendar.tsx",

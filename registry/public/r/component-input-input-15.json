@@ -13,7 +13,7 @@
       "path": "source/components/input/input-15/input-15.tsx",
       "content": "import { useId } from 'react'\nimport { InputGroup, InputGroupAddon, InputGroupInput } from '@astrale-os/ui/input-group'\nimport { Label } from '@astrale-os/ui/label'\nimport { MailIcon } from \"lucide-react\"\n\nconst InputEndIconDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>Input with end icon</Label>\n      <InputGroup>\n        <InputGroupInput id={id} placeholder='Email address' />\n        <InputGroupAddon align='inline-end'>\n          <MailIcon className='size-4' />\n        </InputGroupAddon>\n      </InputGroup>\n    </div>\n  )\n}\n\nexport default InputEndIconDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/input/input-15.tsx"
+      "target": "components/astrale/components/input/input-15.tsx"
     }
   ],
   "meta": {

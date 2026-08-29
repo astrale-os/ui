@@ -11,7 +11,7 @@
       "path": "source/components/separator/separator-14/separator-14.tsx",
       "content": "import { Button } from '@astrale-os/ui/button'\nimport { Separator } from '@astrale-os/ui/separator'\n\nconst SeparatorButtonDemo = () => {\n  return (\n    <div className='flex w-fit flex-col items-center justify-center gap-4'>\n      <Button variant='outline' size='lg' className='border-primary text-primary w-full'>\n        <img\n          src='https://cdn.shadcnstudio.com/ss-assets/brand-logo/twitter-icon.png?width=20&height=20&format=auto'\n          alt='X Icon'\n          className='size-5 dark:invert'\n        />\n        <span className='flex flex-1 justify-center'>Continue with X</span>\n      </Button>\n\n      <Separator />\n\n      <Button variant='outline' size='lg' className='border-primary text-primary'>\n        <img\n          src='https://cdn.shadcnstudio.com/ss-assets/brand-logo/github-icon.png?width=20&height=20&format=auto'\n          alt='GitHub Icon'\n          className='size-5 dark:invert'\n        />\n        <span className='flex flex-1 justify-center'>Continue with GitHub</span>\n      </Button>\n    </div>\n  )\n}\n\nexport default SeparatorButtonDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/separator/separator-14.tsx"
+      "target": "components/astrale/components/separator/separator-14.tsx"
     }
   ],
   "meta": {

@@ -1,10 +1,15 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
+import type { ThemeGenerationResult } from '../../../tooling/theme-generator/index.js'
+
+import observatorySource from '../../../registry/themes/observatory.astrale-theme.json'
 import {
   parseThemeDocument,
   parseThemeDocumentText,
   renderThemeCss,
   serializeThemeDocument,
+  generatorBranches,
+  type GeneratorBranch,
   type ThemeColorToken,
   type ThemeDocument,
 } from '../../../tooling/theme-document/index.js'
@@ -12,14 +17,7 @@ import {
 const STORAGE_KEY = 'astrale-ui-playground:themes:v2'
 const MAX_HISTORY = 50
 
-const starterModules = import.meta.glob('../../../registry/themes/*.astrale-theme.json', {
-  eager: true,
-  import: 'default',
-}) as Record<string, unknown>
-
-export const starterThemes = Object.values(starterModules)
-  .map((source) => parseThemeDocument(source))
-  .sort((left, right) => left.label.localeCompare(right.label))
+export const defaultTheme = parseThemeDocument(observatorySource)
 
 type Timeline = {
   past: ThemeDocument[]
@@ -53,24 +51,51 @@ function writeSavedThemes(themes: ThemeDocument[]) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(themes))
 }
 
+function nextSeed(): string {
+  return [...globalThis.crypto.getRandomValues(new Uint8Array(16))]
+    .map((value) => value.toString(16).padStart(2, '0'))
+    .join('')
+}
+
+function markEdited(theme: ThemeDocument, branch: GeneratorBranch): ThemeDocument {
+  if (!theme.generation || theme.generation.editedBranches.includes(branch)) return theme
+  return {
+    ...theme,
+    generation: {
+      ...theme.generation,
+      editedBranches: [...theme.generation.editedBranches, branch].sort(),
+    },
+  }
+}
+
 export function useThemeWorkspace() {
   const [timeline, setTimeline] = useState<Timeline>({
     past: [],
-    present: copy(starterThemes.find((theme) => theme.name === 'observatory')!),
+    present: copy(defaultTheme),
     future: [],
   })
   const [savedThemes, setSavedThemes] = useState<ThemeDocument[]>([])
+  const [bootstrapLocks, setBootstrapLocks] = useState<readonly GeneratorBranch[]>([])
 
   useEffect(() => setSavedThemes(readSavedThemes()), [])
 
-  const commit = useCallback((next: ThemeDocument) => {
-    const admitted = parseThemeDocument(next)
-    setTimeline((current) => ({
-      past: [...current.past, current.present].slice(-MAX_HISTORY),
-      present: admitted,
-      future: [],
-    }))
+  const commitAdmitted = useCallback((admitted: ThemeDocument) => {
+    setTimeline((current) => {
+      if (serializeThemeDocument(current.present) === serializeThemeDocument(admitted)) {
+        return current
+      }
+      return {
+        past: [...current.past, current.present].slice(-MAX_HISTORY),
+        present: admitted,
+        future: [],
+      }
+    })
   }, [])
+
+  const commit = useCallback(
+    (next: ThemeDocument) => commitAdmitted(parseThemeDocument(next)),
+    [commitAdmitted],
+  )
 
   const undo = useCallback(() => {
     setTimeline((current) => {
@@ -98,6 +123,7 @@ export function useThemeWorkspace() {
 
   const load = useCallback((theme: ThemeDocument) => {
     setTimeline({ past: [], present: copy(theme), future: [] })
+    setBootstrapLocks([])
   }, [])
 
   const setIdentity = useCallback(
@@ -109,63 +135,91 @@ export function useThemeWorkspace() {
 
   const setColor = useCallback(
     (mode: 'light' | 'dark', token: ThemeColorToken, value: string) => {
-      commit({
-        ...timeline.present,
-        appearance: {
-          ...timeline.present.appearance,
-          [mode]: { ...timeline.present.appearance[mode], [token]: value },
-        },
-      })
+      commit(
+        markEdited(
+          {
+            ...timeline.present,
+            appearance: {
+              ...timeline.present.appearance,
+              [mode]: { ...timeline.present.appearance[mode], [token]: value },
+            },
+          },
+          'palette',
+        ),
+      )
     },
     [commit, timeline.present],
   )
 
   const setValue = useCallback(
-    <Section extends 'typography' | 'geometry' | 'density' | 'effects' | 'motion'>(
+    <
+      Section extends 'typography' | 'geometry' | 'density' | 'effects' | 'motion',
+      Field extends keyof ThemeDocument[Section],
+    >(
       section: Section,
-      field: keyof ThemeDocument[Section],
-      value: string,
+      field: Field,
+      value: ThemeDocument[Section][Field],
     ) => {
-      commit({
-        ...timeline.present,
-        [section]: { ...timeline.present[section], [field]: value },
-      })
+      const branch: GeneratorBranch = section === 'typography' ? 'typography' : 'geometry'
+      commit(
+        markEdited(
+          {
+            ...timeline.present,
+            [section]: { ...timeline.present[section], [field]: value },
+          },
+          branch,
+        ),
+      )
     },
     [commit, timeline.present],
   )
 
-  const randomize = useCallback(() => {
-    const hue = Math.floor(Math.random() * 360)
-    const complement = (hue + 145) % 360
-    const accent = (hue + 72) % 360
-    commit({
-      ...timeline.present,
-      appearance: {
-        light: {
-          ...timeline.present.appearance.light,
-          primary: `oklch(0.52 0.18 ${hue})`,
-          ring: `oklch(0.58 0.15 ${hue})`,
-          accent: `oklch(0.88 0.09 ${accent})`,
-          chart1: `oklch(0.58 0.18 ${hue})`,
-          chart2: `oklch(0.66 0.15 ${complement})`,
-          chart3: `oklch(0.72 0.16 ${accent})`,
-          chart4: `oklch(0.62 0.18 ${(hue + 215) % 360})`,
-          chart5: `oklch(0.57 0.15 ${(hue + 292) % 360})`,
-        },
-        dark: {
-          ...timeline.present.appearance.dark,
-          primary: `oklch(0.74 0.14 ${hue})`,
-          ring: `oklch(0.7 0.13 ${hue})`,
-          accent: `oklch(0.42 0.1 ${accent})`,
-          chart1: `oklch(0.7 0.16 ${hue})`,
-          chart2: `oklch(0.72 0.14 ${complement})`,
-          chart3: `oklch(0.76 0.15 ${accent})`,
-          chart4: `oklch(0.71 0.16 ${(hue + 215) % 360})`,
-          chart5: `oklch(0.69 0.14 ${(hue + 292) % 360})`,
-        },
-      },
-    })
-  }, [commit, timeline.present])
+  const locks = timeline.present.generation?.locks ?? bootstrapLocks
+
+  const toggleLock = useCallback(
+    (branch: GeneratorBranch) => {
+      const next = locks.includes(branch)
+        ? locks.filter((candidate) => candidate !== branch)
+        : [...locks, branch].sort()
+      if (timeline.present.generation) {
+        commit({
+          ...timeline.present,
+          generation: { ...timeline.present.generation, locks: next },
+        })
+      } else {
+        setBootstrapLocks(next)
+      }
+    },
+    [commit, locks, timeline.present],
+  )
+
+  const generate = useCallback(
+    async (kind: 'variation' | 'new-direction'): Promise<ThemeGenerationResult> => {
+      if (kind === 'variation' && !timeline.present.generation) {
+        return {
+          kind: 'failure',
+          code: 'variation-unavailable',
+          message: 'Create a new direction before requesting a variation.',
+        }
+      }
+      const request =
+        kind === 'variation'
+          ? {
+              kind,
+              theme: timeline.present as ThemeDocument & {
+                generation: NonNullable<ThemeDocument['generation']>
+              },
+              seed: nextSeed(),
+              locks,
+            }
+          : { kind: 'new-direction' as const, theme: timeline.present, seed: nextSeed(), locks }
+      const { generateTheme } = await import('../../../tooling/theme-generator/index.js')
+      const result = generateTheme(request)
+      if (result.kind === 'generated' || result.kind === 'fallback') commitAdmitted(result.theme)
+      return result
+    },
+    [commitAdmitted, locks, timeline.present],
+  )
 
   const save = useCallback(() => {
     const next = [
@@ -187,8 +241,15 @@ export function useThemeWorkspace() {
   )
 
   const importText = useCallback(
-    (source: string) => {
+    async (source: string) => {
       const imported = parseThemeDocumentText(source)
+      if (imported.generation) {
+        const { validateGeneratorProvenance } =
+          await import('../../../tooling/theme-generator/index.js')
+        const provenance = validateGeneratorProvenance(imported)
+        if (!provenance.ok)
+          throw new Error(provenance.reasons[0] ?? 'Generated theme provenance is invalid.')
+      }
       load(imported)
       return imported
     },
@@ -197,7 +258,6 @@ export function useThemeWorkspace() {
 
   return {
     theme: timeline.present,
-    css: useMemo(() => renderThemeCss(timeline.present), [timeline.present]),
     savedThemes,
     canUndo: timeline.past.length > 0,
     canRedo: timeline.future.length > 0,
@@ -207,11 +267,20 @@ export function useThemeWorkspace() {
     setIdentity,
     setColor,
     setValue,
-    randomize,
+    locks,
+    generatorBranches,
+    toggleLock,
+    variationAvailable:
+      Boolean(timeline.present.generation) &&
+      timeline.present.generation?.lineage.kind !== 'fallback',
+    generationDisabled: locks.length === generatorBranches.length,
+    variation: () => generate('variation'),
+    newDirection: () => generate('new-direction'),
     save,
     removeSaved,
     importText,
     serialize: () => serializeThemeDocument(timeline.present),
+    serializeCss: () => renderThemeCss(timeline.present),
   }
 }
 

@@ -12,7 +12,7 @@
       "path": "source/components/button/button-42/button-42.tsx",
       "content": "import * as motion from 'motion/react-client'\n\nimport { Button } from '@astrale-os/ui/button'\n\nconst ButtonTapAnimationDemo = () => {\n  return (\n    <Button\n      render={<motion.button whileTap={{ scale: 0.85 }} />}\n      className='transition-none active:translate-y-0'\n      nativeButton={true}\n    >\n      Tap Animation\n    </Button>\n  )\n}\n\nexport default ButtonTapAnimationDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/button/button-42.tsx"
+      "target": "components/astrale/components/button/button-42.tsx"
     }
   ],
   "meta": {

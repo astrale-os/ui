@@ -11,7 +11,7 @@
       "path": "source/patterns/list/list-03/list-03.tsx",
       "content": "import { Separator } from '@astrale-os/ui/separator'\n\nconst ItemsList = () => {\n  return (\n    <div className='w-full max-w-sm space-y-2'>\n      <dl className='flex items-center justify-between'>\n        <dt>Item 1</dt>\n        <dd className='text-muted-foreground'>Value 1</dd>\n      </dl>\n      <Separator />\n      <dl className='flex items-center justify-between'>\n        <dt>Item 2</dt>\n        <dd className='text-muted-foreground'>Value 2</dd>\n      </dl>\n      <Separator />\n      <dl className='flex items-center justify-between'>\n        <dt>Item 3</dt>\n        <dd className='text-muted-foreground'>Value 3</dd>\n      </dl>\n    </div>\n  )\n}\n\nexport default ItemsList\n",
       "type": "registry:component",
-      "target": "components/astrale/pattern/list/list-03.tsx"
+      "target": "components/astrale/components/list/list-03.tsx"
     }
   ],
   "meta": {

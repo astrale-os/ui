@@ -12,7 +12,7 @@
       "path": "source/components/alert/alert-15/alert-15.tsx",
       "content": "import { Alert, AlertTitle } from '@astrale-os/ui/alert'\nimport { TriangleAlertIcon } from \"lucide-react\"\n\nconst AlertPureDestructiveDemo = () => {\n  return (\n    <Alert variant='destructive' className='border-destructive *:[svg]:row-span-1'>\n      <TriangleAlertIcon\n      />\n      <AlertTitle>Unable to process your payment.</AlertTitle>\n    </Alert>\n  )\n}\n\nexport default AlertPureDestructiveDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/alert/alert-15.tsx"
+      "target": "components/astrale/components/alert/alert-15.tsx"
     }
   ],
   "meta": {

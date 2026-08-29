@@ -11,7 +11,7 @@
       "path": "source/components/button/button-06/button-06.tsx",
       "content": "import { Button } from '@astrale-os/ui/button'\n\nconst ButtonActionsDemo = () => {\n  return (\n    <div className='flex flex-wrap items-center gap-4'>\n      <Button variant='secondary'>Cancel</Button>\n      <Button>Save Changes</Button>\n    </div>\n  )\n}\n\nexport default ButtonActionsDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/button/button-06.tsx"
+      "target": "components/astrale/components/button/button-06.tsx"
     }
   ],
   "meta": {

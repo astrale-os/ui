@@ -13,7 +13,7 @@
       "path": "source/components/button/button-55/button-55.tsx",
       "content": "import { GlassButton } from '@/components/ui/glass-button'\n\nconst GlassButtonDemo = () => {\n  return (\n    <div className='flex size-full items-center justify-center rounded-xl bg-gray-800'>\n      <GlassButton>Glass Button</GlassButton>\n    </div>\n  )\n}\n\nexport default GlassButtonDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/button/button-55.tsx"
+      "target": "components/astrale/components/button/button-55.tsx"
     },
     {
       "path": "source/components/button/button-55/support/components/ui/glass-button.tsx",

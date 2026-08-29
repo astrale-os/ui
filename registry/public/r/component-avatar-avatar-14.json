@@ -11,7 +11,7 @@
       "path": "source/components/avatar/avatar-14/avatar-14.tsx",
       "content": "import { Avatar, AvatarGroupCount, AvatarGroup, AvatarFallback, AvatarImage } from '@astrale-os/ui/avatar'\n\nconst avatars = [\n  {\n    src: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-3.png',\n    fallback: 'OS',\n    name: 'Olivia Sparks'\n  },\n  {\n    src: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-6.png',\n    fallback: 'HL',\n    name: 'Howard Lloyd'\n  },\n  {\n    src: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-5.png',\n    fallback: 'HR',\n    name: 'Hallie Richards'\n  }\n]\n\nconst AvatarGroupMaxDemo = () => {\n  return (\n    <AvatarGroup>\n      {avatars.map((avatar, index) => (\n        <Avatar key={index} className='ring-background ring-2'>\n          <AvatarImage src={avatar.src} alt={avatar.name} />\n          <AvatarFallback>{avatar.fallback}</AvatarFallback>\n        </Avatar>\n      ))}\n      <AvatarGroupCount>+9</AvatarGroupCount>\n    </AvatarGroup>\n  )\n}\n\nexport default AvatarGroupMaxDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/avatar/avatar-14.tsx"
+      "target": "components/astrale/components/avatar/avatar-14.tsx"
     }
   ],
   "meta": {

@@ -13,7 +13,7 @@
         {
           "path": "popover-01.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/popover/popover-01.tsx"
+          "target": "components/astrale/components/popover/popover-01.tsx"
         }
       ],
       "meta": {
@@ -33,7 +33,7 @@
         {
           "path": "popover-02.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/popover/popover-02.tsx"
+          "target": "components/astrale/components/popover/popover-02.tsx"
         }
       ],
       "meta": {
@@ -53,7 +53,7 @@
         {
           "path": "popover-03.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/popover/popover-03.tsx"
+          "target": "components/astrale/components/popover/popover-03.tsx"
         }
       ],
       "meta": {
@@ -73,7 +73,7 @@
         {
           "path": "popover-04.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/popover/popover-04.tsx"
+          "target": "components/astrale/components/popover/popover-04.tsx"
         }
       ],
       "meta": {
@@ -93,7 +93,7 @@
         {
           "path": "popover-05.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/popover/popover-05.tsx"
+          "target": "components/astrale/components/popover/popover-05.tsx"
         }
       ],
       "meta": {
@@ -113,7 +113,7 @@
         {
           "path": "popover-06.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/popover/popover-06.tsx"
+          "target": "components/astrale/components/popover/popover-06.tsx"
         }
       ],
       "meta": {
@@ -133,7 +133,7 @@
         {
           "path": "popover-07.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/popover/popover-07.tsx"
+          "target": "components/astrale/components/popover/popover-07.tsx"
         }
       ],
       "meta": {
@@ -153,7 +153,7 @@
         {
           "path": "popover-08.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/popover/popover-08.tsx"
+          "target": "components/astrale/components/popover/popover-08.tsx"
         }
       ],
       "meta": {
@@ -173,7 +173,7 @@
         {
           "path": "popover-09.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/popover/popover-09.tsx"
+          "target": "components/astrale/components/popover/popover-09.tsx"
         }
       ],
       "meta": {
@@ -193,7 +193,7 @@
         {
           "path": "popover-10.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/popover/popover-10.tsx"
+          "target": "components/astrale/components/popover/popover-10.tsx"
         }
       ],
       "meta": {
@@ -213,7 +213,7 @@
         {
           "path": "popover-11.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/popover/popover-11.tsx"
+          "target": "components/astrale/components/popover/popover-11.tsx"
         }
       ],
       "meta": {
@@ -233,7 +233,7 @@
         {
           "path": "popover-12.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/popover/popover-12.tsx"
+          "target": "components/astrale/components/popover/popover-12.tsx"
         }
       ],
       "meta": {
@@ -253,7 +253,7 @@
         {
           "path": "popover-13.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/popover/popover-13.tsx"
+          "target": "components/astrale/components/popover/popover-13.tsx"
         }
       ],
       "meta": {
@@ -273,7 +273,7 @@
         {
           "path": "popover-14.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/popover/popover-14.tsx"
+          "target": "components/astrale/components/popover/popover-14.tsx"
         }
       ],
       "meta": {
@@ -293,7 +293,7 @@
         {
           "path": "popover-15.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/popover/popover-15.tsx"
+          "target": "components/astrale/components/popover/popover-15.tsx"
         }
       ],
       "meta": {

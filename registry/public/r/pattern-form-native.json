@@ -11,7 +11,7 @@
       "path": "registry/patterns/form/native.tsx",
       "content": "import { Button } from '@astrale-os/ui/button'\nimport { Input } from '@astrale-os/ui/input'\nexport function NativeForm({\n  className,\n  style,\n  value,\n  error,\n  submitting,\n  onValueChange,\n  onSubmit,\n}: {\n  className?: string\n  style?: React.CSSProperties\n\n  value: string\n  error?: string\n  submitting?: boolean\n  onValueChange(value: string): void\n  onSubmit(): void\n}) {\n  const errorId = 'astrale-native-form-error'\n  return (\n    <form\n      data-slot=\"pattern-form-native\"\n      className={className}\n      style={style}\n      onSubmit={(event) => {\n        event.preventDefault()\n        onSubmit()\n      }}\n    >\n      <label data-slot=\"patterns-form-native-label\" className=\"grid gap-1\">\n        Workspace name\n        <Input\n          required\n          value={value}\n          aria-invalid={Boolean(error)}\n          aria-describedby={error ? errorId : undefined}\n          onChange={(event) => onValueChange(event.currentTarget.value)}\n        />\n      </label>\n      {error && (\n        <p data-slot=\"patterns-form-native-p\" id={errorId} role=\"alert\">\n          {error}\n        </p>\n      )}\n      <Button type=\"submit\" disabled={submitting}>\n        {submitting ? 'Saving…' : 'Save'}\n      </Button>\n    </form>\n  )\n}\n",
       "type": "registry:component",
-      "target": "components/astrale/pattern/form/native.tsx"
+      "target": "components/astrale/components/form/native.tsx"
     }
   ],
   "meta": {

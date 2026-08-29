@@ -11,7 +11,7 @@
       "path": "source/components/typography/typography-03/typography-03.tsx",
       "content": "const TypographyH3Demo = () => {\n  return <h3 className='text-2xl font-semibold max-sm:w-full'>h3 - A Small Revolt</h3>\n}\n\nexport default TypographyH3Demo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/typography/typography-03.tsx"
+      "target": "components/astrale/components/typography/typography-03.tsx"
     }
   ],
   "meta": {

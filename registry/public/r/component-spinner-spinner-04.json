@@ -11,7 +11,7 @@
       "path": "source/components/spinner/spinner-04/spinner-04.tsx",
       "content": "import { Spinner } from '@astrale-os/ui/spinner'\n\nconst SpinnerColorDemo = () => {\n  return (\n    <div className='flex items-center gap-6'>\n      <Spinner className='size-6 text-sky-600 dark:text-sky-400' />\n      <Spinner className='size-6 text-amber-600 dark:text-amber-400' />\n      <Spinner className='text-destructive size-6' />\n      <Spinner className='size-6 text-green-600 dark:text-green-400' />\n    </div>\n  )\n}\n\nexport default SpinnerColorDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/spinner/spinner-04.tsx"
+      "target": "components/astrale/components/spinner/spinner-04.tsx"
     }
   ],
   "meta": {

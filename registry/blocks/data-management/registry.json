@@ -13,7 +13,7 @@
         {
           "path": "collection-browser.tsx",
           "type": "registry:component",
-          "target": "components/astrale/block/data-management/collection-browser.tsx"
+          "target": "components/astrale/components/data-management/collection-browser.tsx"
         }
       ],
       "meta": {
@@ -31,7 +31,7 @@
         {
           "path": "details-panel.tsx",
           "type": "registry:component",
-          "target": "components/astrale/block/data-management/details-panel.tsx"
+          "target": "components/astrale/components/data-management/details-panel.tsx"
         }
       ],
       "meta": {
@@ -49,7 +49,7 @@
         {
           "path": "editor.tsx",
           "type": "registry:component",
-          "target": "components/astrale/block/data-management/editor.tsx"
+          "target": "components/astrale/components/data-management/editor.tsx"
         }
       ],
       "meta": {

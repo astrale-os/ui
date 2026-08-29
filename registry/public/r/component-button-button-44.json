@@ -14,7 +14,7 @@
       "path": "source/components/button/button-44/button-44.tsx",
       "content": "import { BounceButton } from '@/components/ui/bounce-button'\n\nconst ButtonBounceHoverDemo = () => {\n  return <BounceButton>Bounce Button</BounceButton>\n}\n\nexport default ButtonBounceHoverDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/button/button-44.tsx"
+      "target": "components/astrale/components/button/button-44.tsx"
     },
     {
       "path": "source/components/button/button-44/support/components/ui/bounce-button.tsx",

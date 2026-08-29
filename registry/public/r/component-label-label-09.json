@@ -11,7 +11,7 @@
       "path": "source/components/label/label-09/label-09.tsx",
       "content": "import { Button } from '@astrale-os/ui/button'\nimport { Input } from '@astrale-os/ui/input'\nimport { Label } from '@astrale-os/ui/label'\n\nconst LabelForm = () => {\n  return (\n    <div className='w-full max-w-sm space-y-4'>\n      <div className='space-y-2'>\n        <Label htmlFor='name'>Name</Label>\n        <Input id='name' placeholder='Enter your name' />\n      </div>\n      <div className='space-y-2'>\n        <Label htmlFor='email'>Email</Label>\n        <Input id='email' placeholder='Enter your email' />\n      </div>\n      <Button type='submit' className='w-full'>\n        Submit\n      </Button>\n    </div>\n  )\n}\n\nexport default LabelForm\n",
       "type": "registry:component",
-      "target": "components/astrale/component/label/label-09.tsx"
+      "target": "components/astrale/components/label/label-09.tsx"
     }
   ],
   "meta": {

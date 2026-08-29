@@ -11,7 +11,7 @@
       "path": "source/components/dialog/dialog-01/dialog-01.tsx",
       "content": "import {\n  AlertDialog,\n  AlertDialogAction,\n  AlertDialogCancel,\n  AlertDialogContent,\n  AlertDialogDescription,\n  AlertDialogFooter,\n  AlertDialogHeader,\n  AlertDialogTitle,\n  AlertDialogTrigger\n} from '@astrale-os/ui/alert-dialog'\nimport { Button } from '@astrale-os/ui/button'\n\nconst AlertDialogDemo = () => {\n  return (\n    <AlertDialog>\n      <AlertDialogTrigger render={<Button variant='outline' />}>Alert Dialog</AlertDialogTrigger>\n      <AlertDialogContent>\n        <AlertDialogHeader>\n          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>\n          <AlertDialogDescription>\n            This action cannot be undone. This will permanently delete your account and remove your data from our\n            servers.\n          </AlertDialogDescription>\n        </AlertDialogHeader>\n        <AlertDialogFooter>\n          <AlertDialogCancel>Cancel</AlertDialogCancel>\n          <AlertDialogAction>Continue</AlertDialogAction>\n        </AlertDialogFooter>\n      </AlertDialogContent>\n    </AlertDialog>\n  )\n}\n\nexport default AlertDialogDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/dialog/dialog-01.tsx"
+      "target": "components/astrale/components/dialog/dialog-01.tsx"
     }
   ],
   "meta": {

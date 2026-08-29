@@ -11,7 +11,7 @@
       "path": "source/components/typography/typography-04/typography-04.tsx",
       "content": "const TypographyH4Demo = () => {\n  return <h4 className='text-xl font-semibold'>h4 - Quiet Streets, Brighter Mornings</h4>\n}\n\nexport default TypographyH4Demo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/typography/typography-04.tsx"
+      "target": "components/astrale/components/typography/typography-04.tsx"
     }
   ],
   "meta": {

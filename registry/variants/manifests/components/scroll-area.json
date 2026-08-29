@@ -13,7 +13,7 @@
         {
           "path": "scroll-area-01.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/scroll-area/scroll-area-01.tsx"
+          "target": "components/astrale/components/scroll-area/scroll-area-01.tsx"
         }
       ],
       "meta": {
@@ -33,7 +33,7 @@
         {
           "path": "scroll-area-02.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/scroll-area/scroll-area-02.tsx"
+          "target": "components/astrale/components/scroll-area/scroll-area-02.tsx"
         }
       ],
       "meta": {
@@ -53,7 +53,7 @@
         {
           "path": "scroll-area-03.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/scroll-area/scroll-area-03.tsx"
+          "target": "components/astrale/components/scroll-area/scroll-area-03.tsx"
         }
       ],
       "meta": {
@@ -73,7 +73,7 @@
         {
           "path": "scroll-area-04.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/scroll-area/scroll-area-04.tsx"
+          "target": "components/astrale/components/scroll-area/scroll-area-04.tsx"
         }
       ],
       "meta": {
@@ -93,7 +93,7 @@
         {
           "path": "scroll-area-05.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/scroll-area/scroll-area-05.tsx"
+          "target": "components/astrale/components/scroll-area/scroll-area-05.tsx"
         }
       ],
       "meta": {
@@ -113,7 +113,7 @@
         {
           "path": "scroll-area-06.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/scroll-area/scroll-area-06.tsx"
+          "target": "components/astrale/components/scroll-area/scroll-area-06.tsx"
         }
       ],
       "meta": {

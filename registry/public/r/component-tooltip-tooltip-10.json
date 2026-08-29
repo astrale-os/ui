@@ -11,7 +11,7 @@
       "path": "source/components/tooltip/tooltip-10/tooltip-10.tsx",
       "content": "import { Badge } from '@astrale-os/ui/badge'\nimport { Button } from '@astrale-os/ui/button'\nimport { Tooltip, TooltipContent, TooltipTrigger } from '@astrale-os/ui/tooltip'\n\nconst TooltipBadgeDemo = () => {\n  return (\n    <Tooltip>\n      <TooltipTrigger\n        render={\n          <Button variant='outline' size='sm'>\n            Badge\n          </Button>\n        }\n      />\n      <TooltipContent>\n        <div className='flex items-center gap-2'>\n          <p>Team plan: $99/month per user.</p>\n          <Badge variant='secondary' className='px-1.5 py-px'>\n            Trending\n          </Badge>\n        </div>\n      </TooltipContent>\n    </Tooltip>\n  )\n}\n\nexport default TooltipBadgeDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/tooltip/tooltip-10.tsx"
+      "target": "components/astrale/components/tooltip/tooltip-10.tsx"
     }
   ],
   "meta": {

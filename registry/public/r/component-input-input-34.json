@@ -12,7 +12,7 @@
       "path": "source/components/input/input-34/input-34.tsx",
       "content": "import { useId, useState, type ChangeEvent } from 'react'\n\nimport { InputGroup, InputGroupAddon, InputGroupInput } from '@astrale-os/ui/input-group'\nimport { Label } from '@astrale-os/ui/label'\n\nconst maxLength = 50\nconst initialValue = ''\n\nconst InputCharacterLimitDemo = () => {\n  const [value, setValue] = useState(initialValue)\n  const [characterCount, setCharacterCount] = useState(initialValue.length)\n\n  const id = useId()\n\n  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {\n    if (e.target.value.length <= maxLength) {\n      setValue(e.target.value)\n      setCharacterCount(e.target.value.length)\n    }\n  }\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>Input with character limit</Label>\n      <InputGroup>\n        <InputGroupInput\n          id={id}\n          type='text'\n          placeholder='Username'\n          value={value}\n          maxLength={maxLength}\n          onChange={handleChange}\n        />\n        <InputGroupAddon align='inline-end'>\n          <span className='text-muted-foreground pointer-events-none text-xs tabular-nums'>\n            {characterCount}/{maxLength}\n          </span>\n        </InputGroupAddon>\n      </InputGroup>\n    </div>\n  )\n}\n\nexport default InputCharacterLimitDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/input/input-34.tsx"
+      "target": "components/astrale/components/input/input-34.tsx"
     }
   ],
   "meta": {

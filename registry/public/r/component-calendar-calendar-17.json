@@ -14,7 +14,7 @@
       "path": "source/components/calendar/calendar-17/calendar-17.tsx",
       "content": "'use client'\n\nimport { useState } from 'react'\n\nimport { Calendar } from '@/components/ui/calendar'\n\nconst CalendarWeekNumberDemo = () => {\n  const [date, setDate] = useState<Date | undefined>(new Date())\n\n  return (\n    <div>\n      <Calendar\n        mode='single'\n        defaultMonth={date}\n        selected={date}\n        onSelect={setDate}\n        className='rounded-lg border shadow-sm'\n        showWeekNumber\n      />\n      <p className='text-muted-foreground mt-4 text-center text-xs' role='region'>\n        Week number calendar\n      </p>\n    </div>\n  )\n}\n\nexport default CalendarWeekNumberDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/calendar/calendar-17.tsx"
+      "target": "components/astrale/components/calendar/calendar-17.tsx"
     },
     {
       "path": "source/components/calendar/calendar-17/support/components/ui/calendar.tsx",

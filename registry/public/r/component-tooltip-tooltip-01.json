@@ -11,7 +11,7 @@
       "path": "source/components/tooltip/tooltip-01/tooltip-01.tsx",
       "content": "import { Button } from '@astrale-os/ui/button'\nimport { Tooltip, TooltipContent, TooltipTrigger } from '@astrale-os/ui/tooltip'\n\nconst TooltipDemo = () => {\n  return (\n    <Tooltip>\n      <TooltipTrigger\n        render={\n          <Button variant='outline' size='sm'>\n            Default\n          </Button>\n        }\n      />\n      <TooltipContent>\n        <p>This is a simple tooltip</p>\n      </TooltipContent>\n    </Tooltip>\n  )\n}\n\nexport default TooltipDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/tooltip/tooltip-01.tsx"
+      "target": "components/astrale/components/tooltip/tooltip-01.tsx"
     }
   ],
   "meta": {

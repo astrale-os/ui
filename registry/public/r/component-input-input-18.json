@@ -12,7 +12,7 @@
       "path": "source/components/input/input-18/input-18.tsx",
       "content": "import { useId } from 'react'\n\nimport { InputGroup, InputGroupAddon, InputGroupInput } from '@astrale-os/ui/input-group'\nimport { Label } from '@astrale-os/ui/label'\n\nconst InputTextAddOnsDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>Input with text add-ons</Label>\n      <InputGroup className='max-w-xs'>\n        <InputGroupAddon className='text-foreground font-normal'>https://</InputGroupAddon>\n        <InputGroupInput id={id} placeholder='shadcnstudio' />\n        <InputGroupAddon align='inline-end' className='text-foreground font-normal'>\n          .com\n        </InputGroupAddon>\n      </InputGroup>\n    </div>\n  )\n}\n\nexport default InputTextAddOnsDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/input/input-18.tsx"
+      "target": "components/astrale/components/input/input-18.tsx"
     }
   ],
   "meta": {

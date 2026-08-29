@@ -11,7 +11,7 @@
       "path": "source/components/spinner/spinner-08/spinner-08.tsx",
       "content": "import { Card, CardContent } from '@astrale-os/ui/card'\nimport { Spinner } from '@astrale-os/ui/spinner'\n\nconst SpinnerBlurDemo = () => {\n  return (\n    <Card className='relative w-full max-w-xs'>\n      <CardContent className='space-y-3 p-4'>\n        <h3 className='text-sm font-medium'>Dashboard Overview</h3>\n        <p className='text-muted-foreground text-sm'>Monthly revenue and user statistics for the current period.</p>\n        <div className='grid grid-cols-2 gap-4'>\n          <div className='rounded-md border p-3'>\n            <p className='text-muted-foreground text-xs'>Revenue</p>\n            <p className='text-lg font-medium'>$12,450</p>\n          </div>\n          <div className='rounded-md border p-3'>\n            <p className='text-muted-foreground text-xs'>Users</p>\n            <p className='text-lg font-medium'>1,234</p>\n          </div>\n        </div>\n      </CardContent>\n      {/* Overlay */}\n      <Card className='bg-background/80 absolute inset-0 z-10 flex items-center justify-center backdrop-blur-xs'>\n        <CardContent className='flex grow flex-col items-center justify-center gap-2'>\n          <Spinner className='size-5 opacity-60' />\n          <p className='text-muted-foreground text-sm font-medium'>Loading...</p>\n        </CardContent>\n      </Card>\n    </Card>\n  )\n}\n\nexport default SpinnerBlurDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/spinner/spinner-08.tsx"
+      "target": "components/astrale/components/spinner/spinner-08.tsx"
     }
   ],
   "meta": {

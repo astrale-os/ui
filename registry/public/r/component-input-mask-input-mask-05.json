@@ -13,7 +13,7 @@
       "path": "source/components/input-mask/input-mask-05/input-mask-05.tsx",
       "content": "import { useId } from 'react'\n\nimport { usePaymentInputs } from 'react-payment-inputs'\n\nimport { Input } from '@astrale-os/ui/input'\nimport { Label } from '@astrale-os/ui/label'\n\nconst InputCVCCodeDemo = () => {\n  const id = useId()\n  const { getCVCProps } = usePaymentInputs()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>CVC code</Label>\n      <Input {...getCVCProps()} id={id} />\n      <p className='text-muted-foreground text-xs'>\n        Built with{' '}\n        <a\n          className='hover:text-foreground underline'\n          href='https://github.com/medipass/react-payment-inputs'\n          target='_blank'\n          rel='noopener noreferrer'\n        >\n          React Payment Inputs\n        </a>\n      </p>\n    </div>\n  )\n}\n\nexport default InputCVCCodeDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/input-mask/input-mask-05.tsx"
+      "target": "components/astrale/components/input-mask/input-mask-05.tsx"
     }
   ],
   "meta": {

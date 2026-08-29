@@ -12,7 +12,7 @@
       "path": "source/components/input/input-03/input-03.tsx",
       "content": "import { useId } from 'react'\n\nimport { Input } from '@astrale-os/ui/input'\nimport { Label } from '@astrale-os/ui/label'\n\nconst InputRequiredDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id} className='gap-1'>\n        Required input <span className='text-destructive'>*</span>\n      </Label>\n      <Input id={id} type='email' placeholder='Email address' required />\n    </div>\n  )\n}\n\nexport default InputRequiredDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/input/input-03.tsx"
+      "target": "components/astrale/components/input/input-03.tsx"
     }
   ],
   "meta": {

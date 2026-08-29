@@ -13,7 +13,7 @@
       "path": "source/components/button-group/button-group-15/button-group-15.tsx",
       "content": "import * as motion from 'motion/react-client'\nimport { Button } from '@astrale-os/ui/button'\nimport { ButtonGroup } from '@astrale-os/ui/button-group'\nimport { ChevronLeftIcon, ChevronRightIcon } from \"lucide-react\"\n\nconst ButtonGroupScaleDemo = () => {\n  return (\n    <ButtonGroup className='*:border-primary *:not-last:border-r-primary-foreground/30 *:bg-clip-border'>\n      <Button className='transition-none active:translate-y-0' render={<motion.button whileTap={{ scale: 0.9 }} />}>\n        <ChevronLeftIcon\n        />\n        Previous\n      </Button>\n      <Button className='transition-none active:translate-y-0' render={<motion.button whileTap={{ scale: 0.9 }} />}>\n        Next\n        <ChevronRightIcon\n        />\n      </Button>\n    </ButtonGroup>\n  )\n}\n\nexport default ButtonGroupScaleDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/button-group/button-group-15.tsx"
+      "target": "components/astrale/components/button-group/button-group-15.tsx"
     }
   ],
   "meta": {

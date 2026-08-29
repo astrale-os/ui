@@ -15,7 +15,7 @@
       "path": "source/patterns/phone-input/phone-input-06/phone-input-06.tsx",
       "content": "import { PhoneInput } from '@/components/ui/phone-input'\nimport { Label } from '@astrale-os/ui/label'\n\nconst PhoneInputWithHelperText = () => {\n  return (\n    <div className='space-y-2'>\n      <Label htmlFor='phone'>Phone Input with helper text</Label>\n      <PhoneInput id='phone' placeholder='Enter contact number' />\n      <p className='text-muted-foreground text-xs'>We&apos;ll never share your phone number with anyone else.</p>\n    </div>\n  )\n}\n\nexport default PhoneInputWithHelperText\n",
       "type": "registry:component",
-      "target": "components/astrale/pattern/phone-input/phone-input-06.tsx"
+      "target": "components/astrale/components/phone-input/phone-input-06.tsx"
     },
     {
       "path": "source/patterns/phone-input/phone-input-06/support/components/ui/phone-input.tsx",

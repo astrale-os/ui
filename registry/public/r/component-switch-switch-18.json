@@ -12,7 +12,7 @@
       "path": "source/components/switch/switch-18/switch-18.tsx",
       "content": "import { Label } from '@astrale-os/ui/label'\nimport { Switch } from '@astrale-os/ui/switch'\nimport { CodeIcon, ChartPieIcon, PaletteIcon } from \"lucide-react\"\n\nconst skills = [\n  {\n    label: 'Web Development',\n    icon: (\n      <CodeIcon\n      />\n    )\n  },\n  {\n    label: 'Data Analysis',\n    icon: (\n      <ChartPieIcon\n      />\n    )\n  },\n  {\n    label: 'Graphic Design',\n    icon: (\n      <PaletteIcon\n      />\n    )\n  }\n]\n\nconst SwitchListGroupDemo = () => {\n  return (\n    <fieldset className='w-full max-w-96 space-y-4'>\n      <legend className='text-foreground text-sm leading-none font-medium'>Switch to your preferred field: </legend>\n      <ul className='flex w-full flex-col divide-y rounded-md border'>\n        {skills.map(({ label, icon }) => (\n          <li key={label}>\n            <Label htmlFor={label} className='flex items-center justify-between gap-2 px-5 py-3'>\n              <span className='flex items-center gap-2 *:[svg]:size-4'>\n                {icon} {label}\n              </span>\n              <Switch id={label} />\n            </Label>\n          </li>\n        ))}\n      </ul>\n    </fieldset>\n  )\n}\n\nexport default SwitchListGroupDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/switch/switch-18.tsx"
+      "target": "components/astrale/components/switch/switch-18.tsx"
     }
   ],
   "meta": {

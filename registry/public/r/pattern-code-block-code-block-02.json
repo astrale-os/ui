@@ -14,7 +14,7 @@
       "path": "source/patterns/code-block/code-block-02/code-block-02.tsx",
       "content": "import { CodeBlock } from '@/components/ui/code-block'\n\nconst code = `import { Button } from \"@/components/ui/button\"\n\nexport default function MiniCard() {\n  return (\n    <Card className=\"w-60 p-4\">\n      <CardContent className=\"flex flex-col gap-3\">\n        <p className=\"text-sm text-muted-foreground\">Random</p>\n        <Button onClick={() => alert(Math.random())}>\n          Generate\n        </Button>\n      </CardContent>\n    </Card>\n  )\n}`\n\nconst CodeBlockWithScroll = () => {\n  return <CodeBlock code={code} language='tsx' filename='number-generator' showLineNumbers />\n}\n\nexport default CodeBlockWithScroll\n",
       "type": "registry:component",
-      "target": "components/astrale/pattern/code-block/code-block-02.tsx"
+      "target": "components/astrale/components/code-block/code-block-02.tsx"
     },
     {
       "path": "source/patterns/code-block/code-block-02/support/components/ui/code-block.tsx",

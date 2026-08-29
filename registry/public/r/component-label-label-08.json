@@ -11,7 +11,7 @@
       "path": "source/components/label/label-08/label-08.tsx",
       "content": "import { Label } from '@astrale-os/ui/label'\nimport { Switch } from '@astrale-os/ui/switch'\n\nconst SwitchLabelDemo = () => {\n  return (\n    <div className='flex items-center space-x-2'>\n      <Switch id='do-not-disturb' />\n      <Label htmlFor='do-not-disturb'>Do Not Disturb</Label>\n    </div>\n  )\n}\n\nexport default SwitchLabelDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/label/label-08.tsx"
+      "target": "components/astrale/components/label/label-08.tsx"
     }
   ],
   "meta": {

@@ -14,7 +14,7 @@
       "path": "source/components/switch/switch-19/switch-19.tsx",
       "content": "import { Label } from '@astrale-os/ui/label'\nimport { Switch } from '@/components/ui/motion-switch'\n\nconst SwitchAnimatedDemo = () => {\n  return (\n    <div className='flex flex-col gap-3'>\n      <div className='flex items-center space-x-2'>\n        <Switch aria-label='Animated small switch' size='sm' id='small-switch' />\n        <Label htmlFor='small-switch'>Small switch</Label>\n      </div>\n      <div className='flex items-center space-x-2'>\n        <Switch aria-label='Animated medium switch' size='md' id='medium-switch' />\n        <Label htmlFor='medium-switch'>Medium switch</Label>\n      </div>\n      <div className='flex items-center space-x-2'>\n        <Switch aria-label='Animated large switch' size='lg' id='large-switch' />\n        <Label htmlFor='large-switch'>Large switch</Label>\n      </div>\n    </div>\n  )\n}\n\nexport default SwitchAnimatedDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/switch/switch-19.tsx"
+      "target": "components/astrale/components/switch/switch-19.tsx"
     },
     {
       "path": "source/components/switch/switch-19/support/components/ui/motion-switch.tsx",

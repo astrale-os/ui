@@ -12,7 +12,7 @@
       "path": "source/components/tooltip/tooltip-11/tooltip-11.tsx",
       "content": "import { Button } from '@astrale-os/ui/button'\nimport { HoverCard, HoverCardContent, HoverCardTrigger } from '@astrale-os/ui/hover-card'\nimport { ChevronRightIcon } from \"lucide-react\"\n\nconst HoverCardMediaDemo = () => {\n  return (\n    <HoverCard>\n      <HoverCardTrigger delay={0} closeDelay={0} render={<Button variant='link'>Hover Card Media</Button>} />\n      <HoverCardContent>\n        <div className='space-y-2'>\n          <img\n            src='https://lp-cms-production.imgix.net/2021-01/GettyRF_450207051.jpg?width=232'\n            alt='Content'\n            className='w-full rounded'\n          />\n          <div className='space-y-1'>\n            <p className='text-sm font-medium'>About Himalayas</p>\n            <p className='text-muted-foreground text-xs'>\n              The Great Himalayan mountain ranges in the Indian sub-continent region.{' '}\n              <a\n                href='https://en.wikipedia.org/wiki/Himalayas'\n                target='_blank'\n                rel='noopener noreferrer'\n                className='hover:text-foreground flex w-fit underline'\n              >\n                Read more\n                <ChevronRightIcon className='size-4' />\n              </a>\n            </p>\n          </div>\n        </div>\n      </HoverCardContent>\n    </HoverCard>\n  )\n}\n\nexport default HoverCardMediaDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/tooltip/tooltip-11.tsx"
+      "target": "components/astrale/components/tooltip/tooltip-11.tsx"
     }
   ],
   "meta": {

@@ -12,7 +12,7 @@
       "path": "source/components/button/button-16/button-16.tsx",
       "content": "import { Button } from '@astrale-os/ui/button'\nimport { ArrowLeftIcon } from \"lucide-react\"\n\nconst ButtonGhostDemo = () => {\n  return (\n    <Button variant='ghost' className='group'>\n      <ArrowLeftIcon className='transition-transform duration-200 group-hover:-translate-x-0.5' />\n      Go to settings\n    </Button>\n  )\n}\n\nexport default ButtonGhostDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/button/button-16.tsx"
+      "target": "components/astrale/components/button/button-16.tsx"
     }
   ],
   "meta": {

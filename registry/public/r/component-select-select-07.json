@@ -12,7 +12,7 @@
       "path": "source/components/select/select-07/select-07.tsx",
       "content": "import { useId } from 'react'\n\nimport { Label } from '@astrale-os/ui/label'\nimport { NativeSelect, NativeSelectOptGroup, NativeSelectOption } from '@astrale-os/ui/native-select'\n\nconst NativeSelectWithOptionGroupsDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>Native select with option groups</Label>\n      <NativeSelect id={id}>\n        <NativeSelectOptGroup label='Frontend Technologies'>\n          <NativeSelectOption value='1'>HTML</NativeSelectOption>\n          <NativeSelectOption value='2'>CSS</NativeSelectOption>\n          <NativeSelectOption value='3'>JavaScript</NativeSelectOption>\n        </NativeSelectOptGroup>\n        <NativeSelectOptGroup label='Backend Technologies'>\n          <NativeSelectOption value='4'>Node.js</NativeSelectOption>\n          <NativeSelectOption value='5'>Python</NativeSelectOption>\n          <NativeSelectOption value='6'>Java</NativeSelectOption>\n        </NativeSelectOptGroup>\n      </NativeSelect>\n    </div>\n  )\n}\n\nexport default NativeSelectWithOptionGroupsDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/select/select-07.tsx"
+      "target": "components/astrale/components/select/select-07.tsx"
     }
   ],
   "meta": {

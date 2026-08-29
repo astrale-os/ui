@@ -11,7 +11,7 @@
       "path": "source/components/button/button-02/button-02.tsx",
       "content": "import { Button } from '@astrale-os/ui/button'\n\nconst ButtonDisabledDemo = () => {\n  return <Button disabled>Verify Email</Button>\n}\n\nexport default ButtonDisabledDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/button/button-02.tsx"
+      "target": "components/astrale/components/button/button-02.tsx"
     }
   ],
   "meta": {

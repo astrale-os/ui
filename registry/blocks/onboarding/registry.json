@@ -13,7 +13,7 @@
         {
           "path": "empty-first-value.tsx",
           "type": "registry:component",
-          "target": "components/astrale/block/onboarding/empty-first-value.tsx"
+          "target": "components/astrale/components/onboarding/empty-first-value.tsx"
         }
       ],
       "meta": {
@@ -31,7 +31,7 @@
         {
           "path": "multi-step.tsx",
           "type": "registry:component",
-          "target": "components/astrale/block/onboarding/multi-step.tsx"
+          "target": "components/astrale/components/onboarding/multi-step.tsx"
         }
       ],
       "meta": {
@@ -49,7 +49,7 @@
         {
           "path": "welcome.tsx",
           "type": "registry:component",
-          "target": "components/astrale/block/onboarding/welcome.tsx"
+          "target": "components/astrale/components/onboarding/welcome.tsx"
         }
       ],
       "meta": {

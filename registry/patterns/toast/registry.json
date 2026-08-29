@@ -13,7 +13,7 @@
         {
           "path": "basic-provider.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/toast/basic-provider.tsx"
+          "target": "components/astrale/components/toast/basic-provider.tsx"
         }
       ],
       "meta": {
@@ -31,7 +31,7 @@
         {
           "path": "controlled-queue.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/toast/controlled-queue.tsx"
+          "target": "components/astrale/components/toast/controlled-queue.tsx"
         }
       ],
       "meta": {

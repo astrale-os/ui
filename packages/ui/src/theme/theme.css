@@ -48,6 +48,12 @@
   --ui-font-body: 'Avenir Next', 'Segoe UI Variable', ui-sans-serif, sans-serif;
   --ui-font-heading: 'Iowan Old Style', 'Palatino Linotype', ui-serif, serif;
   --ui-font-mono: 'SFMono-Regular', 'Cascadia Code', ui-monospace, monospace;
+  --ui-tracking-body: 0;
+  --ui-tracking-heading: -0.01em;
+  --ui-leading-body: 1.5;
+  --ui-leading-heading: 1.2;
+  --ui-weight-body: 400;
+  --ui-weight-heading: 600;
   --ui-shadow-control: 0 1px 2px oklch(0.19 0.016 255 / 0.08);
   --ui-shadow-panel: 0 18px 55px oklch(0.19 0.016 255 / 0.1);
   --ui-motion-fast: 120ms;
@@ -94,12 +100,22 @@
   --font-sans: var(--ui-font-body);
   --font-serif: var(--ui-font-heading);
   --font-mono: var(--ui-font-mono);
+  --font-weight-normal: var(--ui-weight-body);
   --shadow-xs: var(--ui-shadow-control);
   --shadow-sm: var(--ui-shadow-control);
 }
 
 :where([data-slot]) {
   font-family: var(--ui-font-body);
+  font-weight: var(--ui-weight-body);
+  letter-spacing: var(--ui-tracking-body);
+  line-height: var(--ui-leading-body);
+}
+
+/* Typography roles outrank local text-size utility defaults while remaining token-driven. */
+[data-slot][data-slot] {
+  letter-spacing: var(--ui-tracking-body);
+  line-height: var(--ui-leading-body);
 }
 
 :where([data-slot='card'], [data-slot='dialog-content'], [data-slot='sheet-content']) {
@@ -124,8 +140,13 @@
   min-height: var(--ui-control-height-lg);
 }
 
-:where([data-slot='card-title'], [data-slot='dialog-title'], [data-slot='sheet-title']) {
+[data-slot='card-title'][data-slot='card-title'],
+[data-slot='dialog-title'][data-slot='dialog-title'],
+[data-slot='sheet-title'][data-slot='sheet-title'] {
   font-family: var(--ui-font-heading);
+  font-weight: var(--ui-weight-heading);
+  letter-spacing: var(--ui-tracking-heading);
+  line-height: var(--ui-leading-heading);
 }
 
 :where([data-slot='kbd']) {

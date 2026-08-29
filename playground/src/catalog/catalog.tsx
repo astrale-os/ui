@@ -222,9 +222,7 @@ export function Catalog() {
         return
       if (
         !commandOpen &&
-        document.querySelector(
-          '[data-slot="dialog-content"][data-open], [data-slot="drawer-popup"][data-open], [data-slot="sheet-content"][data-open]',
-        )
+        document.querySelector('[role="dialog"][data-open], [data-slot="sheet-content"][data-open]')
       )
         return
       event.preventDefault()

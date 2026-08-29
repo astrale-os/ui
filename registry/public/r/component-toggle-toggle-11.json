@@ -13,7 +13,7 @@
       "path": "source/components/toggle/toggle-11/toggle-11.tsx",
       "content": "'use client'\n\nimport { useState } from 'react'\nimport { Toggle } from '@astrale-os/ui/toggle'\nimport { VolumeOffIcon, Volume2Icon } from \"lucide-react\"\n\nconst ToggleIconText = () => {\n  const [muted, setMuted] = useState(false)\n\n  return (\n    <div className='flex flex-wrap items-center justify-center'>\n      <Toggle size='lg' variant='outline' aria-label='Toggle mute' pressed={muted} onPressedChange={setMuted}>\n        {muted ? (\n          <VolumeOffIcon\n          />\n        ) : (\n          <Volume2Icon\n          />\n        )}\n        {muted ? 'Muted' : 'Sound'}\n      </Toggle>\n    </div>\n  )\n}\n\nexport default ToggleIconText\n",
       "type": "registry:component",
-      "target": "components/astrale/component/toggle/toggle-11.tsx"
+      "target": "components/astrale/components/toggle/toggle-11.tsx"
     }
   ],
   "meta": {

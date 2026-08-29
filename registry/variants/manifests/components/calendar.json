@@ -18,7 +18,7 @@
         {
           "path": "calendar-01.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/calendar/calendar-01.tsx"
+          "target": "components/astrale/components/calendar/calendar-01.tsx"
         },
         {
           "path": "support/components/ui/calendar.tsx",
@@ -48,7 +48,7 @@
         {
           "path": "calendar-02.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/calendar/calendar-02.tsx"
+          "target": "components/astrale/components/calendar/calendar-02.tsx"
         },
         {
           "path": "support/components/ui/calendar.tsx",
@@ -78,7 +78,7 @@
         {
           "path": "calendar-03.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/calendar/calendar-03.tsx"
+          "target": "components/astrale/components/calendar/calendar-03.tsx"
         },
         {
           "path": "support/components/ui/calendar.tsx",
@@ -108,7 +108,7 @@
         {
           "path": "calendar-04.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/calendar/calendar-04.tsx"
+          "target": "components/astrale/components/calendar/calendar-04.tsx"
         },
         {
           "path": "support/components/ui/calendar.tsx",
@@ -138,7 +138,7 @@
         {
           "path": "calendar-05.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/calendar/calendar-05.tsx"
+          "target": "components/astrale/components/calendar/calendar-05.tsx"
         },
         {
           "path": "support/components/ui/calendar.tsx",
@@ -168,7 +168,7 @@
         {
           "path": "calendar-06.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/calendar/calendar-06.tsx"
+          "target": "components/astrale/components/calendar/calendar-06.tsx"
         },
         {
           "path": "support/components/ui/calendar.tsx",
@@ -198,7 +198,7 @@
         {
           "path": "calendar-07.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/calendar/calendar-07.tsx"
+          "target": "components/astrale/components/calendar/calendar-07.tsx"
         },
         {
           "path": "support/components/ui/calendar.tsx",
@@ -228,7 +228,7 @@
         {
           "path": "calendar-08.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/calendar/calendar-08.tsx"
+          "target": "components/astrale/components/calendar/calendar-08.tsx"
         },
         {
           "path": "support/components/ui/calendar.tsx",
@@ -258,7 +258,7 @@
         {
           "path": "calendar-09.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/calendar/calendar-09.tsx"
+          "target": "components/astrale/components/calendar/calendar-09.tsx"
         },
         {
           "path": "support/components/ui/calendar.tsx",
@@ -288,7 +288,7 @@
         {
           "path": "calendar-10.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/calendar/calendar-10.tsx"
+          "target": "components/astrale/components/calendar/calendar-10.tsx"
         },
         {
           "path": "support/components/ui/calendar.tsx",
@@ -319,7 +319,7 @@
         {
           "path": "calendar-11.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/calendar/calendar-11.tsx"
+          "target": "components/astrale/components/calendar/calendar-11.tsx"
         },
         {
           "path": "support/components/ui/calendar.tsx",
@@ -349,7 +349,7 @@
         {
           "path": "calendar-12.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/calendar/calendar-12.tsx"
+          "target": "components/astrale/components/calendar/calendar-12.tsx"
         },
         {
           "path": "support/components/ui/calendar.tsx",
@@ -379,7 +379,7 @@
         {
           "path": "calendar-13.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/calendar/calendar-13.tsx"
+          "target": "components/astrale/components/calendar/calendar-13.tsx"
         },
         {
           "path": "support/components/ui/calendar.tsx",
@@ -409,7 +409,7 @@
         {
           "path": "calendar-14.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/calendar/calendar-14.tsx"
+          "target": "components/astrale/components/calendar/calendar-14.tsx"
         },
         {
           "path": "support/components/ui/calendar.tsx",
@@ -439,7 +439,7 @@
         {
           "path": "calendar-15.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/calendar/calendar-15.tsx"
+          "target": "components/astrale/components/calendar/calendar-15.tsx"
         },
         {
           "path": "support/components/ui/calendar.tsx",
@@ -469,7 +469,7 @@
         {
           "path": "calendar-16.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/calendar/calendar-16.tsx"
+          "target": "components/astrale/components/calendar/calendar-16.tsx"
         },
         {
           "path": "support/components/ui/calendar.tsx",
@@ -499,7 +499,7 @@
         {
           "path": "calendar-17.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/calendar/calendar-17.tsx"
+          "target": "components/astrale/components/calendar/calendar-17.tsx"
         },
         {
           "path": "support/components/ui/calendar.tsx",
@@ -529,7 +529,7 @@
         {
           "path": "calendar-18.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/calendar/calendar-18.tsx"
+          "target": "components/astrale/components/calendar/calendar-18.tsx"
         },
         {
           "path": "support/components/ui/calendar.tsx",
@@ -560,7 +560,7 @@
         {
           "path": "calendar-19.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/calendar/calendar-19.tsx"
+          "target": "components/astrale/components/calendar/calendar-19.tsx"
         },
         {
           "path": "support/components/ui/calendar.tsx",
@@ -590,7 +590,7 @@
         {
           "path": "calendar-20.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/calendar/calendar-20.tsx"
+          "target": "components/astrale/components/calendar/calendar-20.tsx"
         },
         {
           "path": "support/components/ui/calendar.tsx",
@@ -621,7 +621,7 @@
         {
           "path": "calendar-21.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/calendar/calendar-21.tsx"
+          "target": "components/astrale/components/calendar/calendar-21.tsx"
         },
         {
           "path": "support/components/ui/calendar.tsx",
@@ -652,7 +652,7 @@
         {
           "path": "calendar-22.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/calendar/calendar-22.tsx"
+          "target": "components/astrale/components/calendar/calendar-22.tsx"
         },
         {
           "path": "support/components/ui/calendar.tsx",
@@ -683,7 +683,7 @@
         {
           "path": "calendar-23.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/calendar/calendar-23.tsx"
+          "target": "components/astrale/components/calendar/calendar-23.tsx"
         },
         {
           "path": "support/components/ui/calendar.tsx",
@@ -713,7 +713,7 @@
         {
           "path": "calendar-24.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/calendar/calendar-24.tsx"
+          "target": "components/astrale/components/calendar/calendar-24.tsx"
         },
         {
           "path": "support/components/ui/calendar.tsx",
@@ -743,7 +743,7 @@
         {
           "path": "calendar-25.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/calendar/calendar-25.tsx"
+          "target": "components/astrale/components/calendar/calendar-25.tsx"
         },
         {
           "path": "support/components/ui/calendar.tsx",

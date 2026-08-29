@@ -15,7 +15,7 @@
       "path": "source/components/button-group/button-group-13/button-group-13.tsx",
       "content": "import { ButtonGroup } from '@astrale-os/ui/button-group'\nimport { RippleButton } from '@/components/ui/ripple-button'\nimport { InboxIcon, ArchiveIcon, SendHorizonalIcon } from \"lucide-react\"\n\nconst ButtonGroupRippleDemo = () => {\n  return (\n    <ButtonGroup>\n      <RippleButton variant='outline'>\n        <InboxIcon\n        />\n        Inbox\n      </RippleButton>\n      <RippleButton variant='outline'>\n        <ArchiveIcon\n        />\n        Archived\n      </RippleButton>\n      <RippleButton variant='outline'>\n        <SendHorizonalIcon\n        />\n        Sent\n      </RippleButton>\n    </ButtonGroup>\n  )\n}\n\nexport default ButtonGroupRippleDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/button-group/button-group-13.tsx"
+      "target": "components/astrale/components/button-group/button-group-13.tsx"
     },
     {
       "path": "source/components/button-group/button-group-13/support/components/ui/ripple-button.tsx",

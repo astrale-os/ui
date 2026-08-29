@@ -15,7 +15,7 @@
       "path": "source/patterns/phone-input/phone-input-08/phone-input-08.tsx",
       "content": "import { PhoneInput } from '@/components/ui/phone-input'\nimport { Label } from '@astrale-os/ui/label'\n\nconst PhoneInputWithDefaultValue = () => {\n  return (\n    <div className='space-y-2'>\n      <Label htmlFor='phone'>Invalid Phone Input</Label>\n      <PhoneInput aria-invalid='true' value='+12125551234' placeholder='Enter phone number' />\n      <p className='text-destructive text-xs'>Please enter a valid phone number.</p>\n    </div>\n  )\n}\n\nexport default PhoneInputWithDefaultValue\n",
       "type": "registry:component",
-      "target": "components/astrale/pattern/phone-input/phone-input-08.tsx"
+      "target": "components/astrale/components/phone-input/phone-input-08.tsx"
     },
     {
       "path": "source/patterns/phone-input/phone-input-08/support/components/ui/phone-input.tsx",

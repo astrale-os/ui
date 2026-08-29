@@ -88,7 +88,8 @@ async function readFamilyItems() {
       source.includes.map(async (include) => {
         const manifestPath = path.join('registry', include.replace(/^\.\//u, ''))
         const manifest = JSON.parse(await readFile(manifestPath, 'utf8'))
-        assert.ok(manifest.items.length >= 2, `${include} must be a real family`)
+        const minimumItems = include === './themes/registry.json' ? 1 : 2
+        assert.ok(manifest.items.length >= minimumItems, `${include} must expose owned items`)
         return manifest.items.map((item) => ({
           ...item,
           declaredPath: path.join(path.dirname(manifestPath), item.files[0].path),
@@ -124,6 +125,18 @@ test('registry aggregation explicitly owns every family and exact item once', as
     new Set(root.items.map((item) => item.meta.canonicalAddress)).size,
     root.items.length,
   )
+  const targetSources = new Map()
+  for (const item of familyItems) {
+    for (let index = 0; index < item.files.length; index += 1) {
+      const file = item.files[index]
+      const sources = targetSources.get(file.target) ?? new Set()
+      sources.add((await readFile(item.declaredPaths[index])).toString('hex'))
+      targetSources.set(file.target, sources)
+    }
+  }
+  for (const [target, sources] of targetSources) {
+    assert.equal(sources.size, 1, `${target} must have one exact source across all owning items`)
+  }
 })
 
 test('every registry item is independently bounded, controlled, and safe to install', async () => {
@@ -152,15 +165,17 @@ test('every registry item is independently bounded, controlled, and safe to inst
           ? /[a-z0-9-]+\.tsx?$/u
           : /^(?:[a-z0-9-]+\/)?[a-z0-9-]+\.tsx?$/u,
     )
-    assert.match(
-      file.target,
-      isTheme
-        ? /^components\/astrale\/theme\//u
-        : /^components\/astrale\/(?:component|pattern|block)\//u,
-    )
     for (let index = 0; index < item.files.length; index += 1) {
       assertSafeRelative(item.files[index].path)
       assertSafeRelative(item.files[index].target)
+      assert.match(
+        item.files[index].target,
+        isTheme
+          ? /^components\/astrale\/theme\//u
+          : index === 0
+            ? /^components\/astrale\/components\//u
+            : /^(?:components\/(?:astrale\/components|ui)|hooks|lib|utils|assets)\//u,
+      )
       await stat(item.declaredPaths[index])
     }
 
@@ -276,7 +291,7 @@ test('every registry item is independently bounded, controlled, and safe to inst
 test('registry guards reject traversal and observe every executable import form', () => {
   for (const target of [
     '../escape.tsx',
-    'components/astrale/pattern/../../escape.tsx',
+    'components/astrale/components/../../escape.tsx',
     '/tmp/x',
     'C:\\x',
   ]) {
@@ -314,22 +329,10 @@ test('registry inventory covers all locked V1 families and block compositions', 
       family,
     )
   }
-  for (const required of [
-    'theme/art-deco',
-    'theme/atelier',
-    'theme/claude',
-    'theme/clean-slate',
-    'theme/ghibli-studio',
-    'theme/marshmallow',
-    'theme/marvel',
-    'theme/modern-minimal',
-    'theme/neo-brutalism',
-    'theme/observatory',
-    'theme/spotify',
-    'theme/terminal',
-  ]) {
-    assert.ok(addresses.has(required), required)
-  }
+  assert.deepEqual(
+    [...addresses].filter((address) => address.startsWith('theme/')),
+    ['theme/observatory'],
+  )
   for (const required of [
     'block/application-shell/sidebar-header',
     'block/application-shell/compact-command',

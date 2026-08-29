@@ -13,7 +13,7 @@
       "path": "source/patterns/stepper/stepper-06/stepper-06.tsx",
       "content": "import {\n  Stepper,\n  StepperItem,\n  StepperTrigger,\n  StepperIndicator,\n  StepperSeparator,\n  StepperNav\n} from '@/components/ui/stepper'\n\nconst steps = [\n  { id: '1', description: 'This is the first step' },\n  { id: '2', description: 'This is the second step' },\n  { id: '3', description: 'This is the third step' }\n]\n\nconst StepperInlineDescriptionDemo = () => {\n  return (\n    <Stepper steps={steps} className='flex items-center max-md:w-xs md:w-full md:max-w-2xl'>\n      <StepperNav>\n        {steps.map(step => (\n          <StepperItem key={step.id} stepId={step.id}>\n            <StepperTrigger>\n              <StepperIndicator variant='outline'>{steps.indexOf(step) + 1}</StepperIndicator>\n            </StepperTrigger>\n            <StepperSeparator />\n          </StepperItem>\n        ))}\n      </StepperNav>\n    </Stepper>\n  )\n}\n\nexport default StepperInlineDescriptionDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/pattern/stepper/stepper-06.tsx"
+      "target": "components/astrale/components/stepper/stepper-06.tsx"
     },
     {
       "path": "source/patterns/stepper/stepper-06/support/components/ui/stepper.tsx",

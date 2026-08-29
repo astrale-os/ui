@@ -14,7 +14,7 @@
       "path": "source/patterns/code-block/code-block-03/code-block-03.tsx",
       "content": "import { CodeBlock } from '@/components/ui/code-block'\n\nconst code = `import { Button } from \"@/components/ui/button\"\n\nexport default function Button() {\n  return <Button size=\"sm\">Shadcn/ui</Button>\n}`\n\nconst CodeBlockCustomBg = () => {\n  return <CodeBlock code={code} language='tsx' filename='button' panelClassName='bg-primary/20' showLineNumbers />\n}\n\nexport default CodeBlockCustomBg\n",
       "type": "registry:component",
-      "target": "components/astrale/pattern/code-block/code-block-03.tsx"
+      "target": "components/astrale/components/code-block/code-block-03.tsx"
     },
     {
       "path": "source/patterns/code-block/code-block-03/support/components/ui/code-block.tsx",

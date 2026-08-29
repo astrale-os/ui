@@ -12,7 +12,7 @@
       "path": "source/components/button/button-35/button-35.tsx",
       "content": "import { Badge } from '@astrale-os/ui/badge'\nimport { Button } from '@astrale-os/ui/button'\nimport { MailCheckIcon } from \"lucide-react\"\n\nconst IconButtonBadgeDemo = () => {\n  return (\n    <Button variant='outline' size='icon' className='relative'>\n      <MailCheckIcon\n      />\n      <span className='sr-only'>Messages</span>\n      <Badge variant='destructive' className='absolute -top-2.5 -right-2.5 min-w-5 px-1 tabular-nums'>\n        8\n      </Badge>\n    </Button>\n  )\n}\n\nexport default IconButtonBadgeDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/button/button-35.tsx"
+      "target": "components/astrale/components/button/button-35.tsx"
     }
   ],
   "meta": {

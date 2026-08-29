@@ -12,7 +12,7 @@
       "path": "source/components/sonner/sonner-04/sonner-04.tsx",
       "content": "import { toast } from 'sonner'\n\nimport { Avatar, AvatarFallback, AvatarImage } from '@astrale-os/ui/avatar'\nimport { Button } from '@astrale-os/ui/button'\n\nconst SonnerWithAvatarDemo = () => {\n  return (\n    <Button\n      variant='outline'\n      onClick={() =>\n        toast(\n          <div className='flex items-center gap-2'>\n            <Avatar>\n              <AvatarImage src='https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-5.png' alt='Hallie Richards' />\n              <AvatarFallback className='text-xs'>HR</AvatarFallback>\n            </Avatar>\n            Hey Henry Richer, your profile is now up to date!\n          </div>\n        )\n      }\n    >\n      Toast with avatar\n    </Button>\n  )\n}\n\nexport default SonnerWithAvatarDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/sonner/sonner-04.tsx"
+      "target": "components/astrale/components/sonner/sonner-04.tsx"
     }
   ],
   "meta": {

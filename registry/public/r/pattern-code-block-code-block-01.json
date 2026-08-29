@@ -14,7 +14,7 @@
       "path": "source/patterns/code-block/code-block-01/code-block-01.tsx",
       "content": "import { CodeBlock } from '@/components/ui/code-block'\n\nconst code = `import { Button } from \"@/components/ui/button\"\n\nexport function MyComponent() {\n  return <Button>Click me</Button>\n}`\n\nconst CodeBlockDemo = () => {\n  return <CodeBlock code={code} language='tsx' />\n}\n\nexport default CodeBlockDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/pattern/code-block/code-block-01.tsx"
+      "target": "components/astrale/components/code-block/code-block-01.tsx"
     },
     {
       "path": "source/patterns/code-block/code-block-01/support/components/ui/code-block.tsx",

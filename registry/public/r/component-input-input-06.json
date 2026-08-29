@@ -11,7 +11,7 @@
       "path": "source/components/input/input-06/input-06.tsx",
       "content": "import { Input } from '@astrale-os/ui/input'\n\nconst InputSizesDemo = () => {\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Input type='text' placeholder='Extra Small input' className='h-6' />\n      <Input type='text' placeholder='Small input' className='h-7' />\n      <Input type='text' placeholder='Medium input' />\n      <Input type='text' placeholder='Large input' className='h-9' />\n    </div>\n  )\n}\n\nexport default InputSizesDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/input/input-06.tsx"
+      "target": "components/astrale/components/input/input-06.tsx"
     }
   ],
   "meta": {

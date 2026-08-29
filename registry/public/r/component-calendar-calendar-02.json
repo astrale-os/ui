@@ -14,7 +14,7 @@
       "path": "source/components/calendar/calendar-02/calendar-02.tsx",
       "content": "import { useState } from 'react'\n\nimport { Calendar } from '@/components/ui/calendar'\n\nconst CalendarMultiMonthDemo = () => {\n  const [date, setDate] = useState<Date | undefined>(new Date())\n\n  return (\n    <div>\n      <Calendar\n        mode='single'\n        defaultMonth={date}\n        numberOfMonths={2}\n        selected={date}\n        onSelect={setDate}\n        className='rounded-lg border'\n      />\n      <p className='text-muted-foreground mt-4 text-center text-xs' role='region'>\n        Multi month calendar\n      </p>\n    </div>\n  )\n}\n\nexport default CalendarMultiMonthDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/calendar/calendar-02.tsx"
+      "target": "components/astrale/components/calendar/calendar-02.tsx"
     },
     {
       "path": "source/components/calendar/calendar-02/support/components/ui/calendar.tsx",

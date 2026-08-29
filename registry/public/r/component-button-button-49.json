@@ -14,7 +14,7 @@
       "path": "source/components/button/button-49/button-49.tsx",
       "content": "import { CraftButton, CraftButtonIcon, CraftButtonLabel } from '@/components/ui/craft-button'\nimport { ArrowUpRightIcon } from \"lucide-react\"\n\nconst CraftButtonDemo = () => {\n  return (\n    <CraftButton>\n      <CraftButtonLabel>Click me</CraftButtonLabel>\n      <CraftButtonIcon>\n        <ArrowUpRightIcon className='size-3 stroke-2 transition-transform duration-500 group-hover/button:rotate-45' />\n      </CraftButtonIcon>\n    </CraftButton>\n  )\n}\n\nexport default CraftButtonDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/button/button-49.tsx"
+      "target": "components/astrale/components/button/button-49.tsx"
     },
     {
       "path": "source/components/button/button-49/support/components/ui/craft-button.tsx",

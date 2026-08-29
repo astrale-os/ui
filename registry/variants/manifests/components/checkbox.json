@@ -13,7 +13,7 @@
         {
           "path": "checkbox-01.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/checkbox/checkbox-01.tsx"
+          "target": "components/astrale/components/checkbox/checkbox-01.tsx"
         }
       ],
       "meta": {
@@ -39,7 +39,7 @@
         {
           "path": "checkbox-02.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/checkbox/checkbox-02.tsx"
+          "target": "components/astrale/components/checkbox/checkbox-02.tsx"
         }
       ],
       "meta": {
@@ -59,7 +59,7 @@
         {
           "path": "checkbox-03.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/checkbox/checkbox-03.tsx"
+          "target": "components/astrale/components/checkbox/checkbox-03.tsx"
         }
       ],
       "meta": {
@@ -79,7 +79,7 @@
         {
           "path": "checkbox-04.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/checkbox/checkbox-04.tsx"
+          "target": "components/astrale/components/checkbox/checkbox-04.tsx"
         }
       ],
       "meta": {
@@ -99,7 +99,7 @@
         {
           "path": "checkbox-05.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/checkbox/checkbox-05.tsx"
+          "target": "components/astrale/components/checkbox/checkbox-05.tsx"
         }
       ],
       "meta": {
@@ -119,7 +119,7 @@
         {
           "path": "checkbox-06.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/checkbox/checkbox-06.tsx"
+          "target": "components/astrale/components/checkbox/checkbox-06.tsx"
         }
       ],
       "meta": {
@@ -139,7 +139,7 @@
         {
           "path": "checkbox-07.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/checkbox/checkbox-07.tsx"
+          "target": "components/astrale/components/checkbox/checkbox-07.tsx"
         }
       ],
       "meta": {
@@ -159,7 +159,7 @@
         {
           "path": "checkbox-08.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/checkbox/checkbox-08.tsx"
+          "target": "components/astrale/components/checkbox/checkbox-08.tsx"
         }
       ],
       "meta": {
@@ -179,7 +179,7 @@
         {
           "path": "checkbox-09.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/checkbox/checkbox-09.tsx"
+          "target": "components/astrale/components/checkbox/checkbox-09.tsx"
         }
       ],
       "meta": {
@@ -199,7 +199,7 @@
         {
           "path": "checkbox-10.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/checkbox/checkbox-10.tsx"
+          "target": "components/astrale/components/checkbox/checkbox-10.tsx"
         }
       ],
       "meta": {
@@ -224,7 +224,7 @@
         {
           "path": "checkbox-11.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/checkbox/checkbox-11.tsx"
+          "target": "components/astrale/components/checkbox/checkbox-11.tsx"
         }
       ],
       "meta": {
@@ -249,7 +249,7 @@
         {
           "path": "checkbox-12.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/checkbox/checkbox-12.tsx"
+          "target": "components/astrale/components/checkbox/checkbox-12.tsx"
         }
       ],
       "meta": {
@@ -269,7 +269,7 @@
         {
           "path": "checkbox-13.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/checkbox/checkbox-13.tsx"
+          "target": "components/astrale/components/checkbox/checkbox-13.tsx"
         }
       ],
       "meta": {
@@ -289,7 +289,7 @@
         {
           "path": "checkbox-14.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/checkbox/checkbox-14.tsx"
+          "target": "components/astrale/components/checkbox/checkbox-14.tsx"
         }
       ],
       "meta": {
@@ -315,7 +315,7 @@
         {
           "path": "checkbox-15.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/checkbox/checkbox-15.tsx"
+          "target": "components/astrale/components/checkbox/checkbox-15.tsx"
         }
       ],
       "meta": {
@@ -335,7 +335,7 @@
         {
           "path": "checkbox-16.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/checkbox/checkbox-16.tsx"
+          "target": "components/astrale/components/checkbox/checkbox-16.tsx"
         }
       ],
       "meta": {
@@ -361,7 +361,7 @@
         {
           "path": "checkbox-17.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/checkbox/checkbox-17.tsx"
+          "target": "components/astrale/components/checkbox/checkbox-17.tsx"
         },
         {
           "path": "support/components/ui/motion-checkbox.tsx",
@@ -392,7 +392,7 @@
         {
           "path": "checkbox-18.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/checkbox/checkbox-18.tsx"
+          "target": "components/astrale/components/checkbox/checkbox-18.tsx"
         },
         {
           "path": "support/components/ui/motion-checkbox.tsx",
@@ -417,7 +417,7 @@
         {
           "path": "checkbox-19.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/checkbox/checkbox-19.tsx"
+          "target": "components/astrale/components/checkbox/checkbox-19.tsx"
         }
       ],
       "meta": {

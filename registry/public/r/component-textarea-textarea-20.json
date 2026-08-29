@@ -12,7 +12,7 @@
       "path": "source/components/textarea/textarea-20/textarea-20.tsx",
       "content": "import { useId } from 'react'\n\nimport { Label } from '@astrale-os/ui/label'\nimport { Textarea } from '@astrale-os/ui/textarea'\n\nconst TextareaReadOnlyDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>Read only textarea</Label>\n      <Textarea\n        className='read-only:bg-muted'\n        defaultValue='Read only text'\n        placeholder='Type your feedback here'\n        id={id}\n        readOnly\n      />\n    </div>\n  )\n}\n\nexport default TextareaReadOnlyDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/textarea/textarea-20.tsx"
+      "target": "components/astrale/components/textarea/textarea-20.tsx"
     }
   ],
   "meta": {

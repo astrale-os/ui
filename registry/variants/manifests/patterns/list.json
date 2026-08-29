@@ -13,7 +13,7 @@
         {
           "path": "list-01.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/list/list-01.tsx"
+          "target": "components/astrale/components/list/list-01.tsx"
         }
       ],
       "meta": {
@@ -33,7 +33,7 @@
         {
           "path": "list-02.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/list/list-02.tsx"
+          "target": "components/astrale/components/list/list-02.tsx"
         }
       ],
       "meta": {
@@ -53,7 +53,7 @@
         {
           "path": "list-03.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/list/list-03.tsx"
+          "target": "components/astrale/components/list/list-03.tsx"
         }
       ],
       "meta": {
@@ -73,7 +73,7 @@
         {
           "path": "list-04.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/list/list-04.tsx"
+          "target": "components/astrale/components/list/list-04.tsx"
         }
       ],
       "meta": {
@@ -93,7 +93,7 @@
         {
           "path": "list-05.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/list/list-05.tsx"
+          "target": "components/astrale/components/list/list-05.tsx"
         }
       ],
       "meta": {
@@ -113,7 +113,7 @@
         {
           "path": "list-06.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/list/list-06.tsx"
+          "target": "components/astrale/components/list/list-06.tsx"
         }
       ],
       "meta": {
@@ -133,7 +133,7 @@
         {
           "path": "list-07.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/list/list-07.tsx"
+          "target": "components/astrale/components/list/list-07.tsx"
         }
       ],
       "meta": {
@@ -153,7 +153,7 @@
         {
           "path": "list-08.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/list/list-08.tsx"
+          "target": "components/astrale/components/list/list-08.tsx"
         }
       ],
       "meta": {
@@ -178,7 +178,7 @@
         {
           "path": "list-09.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/list/list-09.tsx"
+          "target": "components/astrale/components/list/list-09.tsx"
         }
       ],
       "meta": {
@@ -198,7 +198,7 @@
         {
           "path": "list-10.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/list/list-10.tsx"
+          "target": "components/astrale/components/list/list-10.tsx"
         }
       ],
       "meta": {

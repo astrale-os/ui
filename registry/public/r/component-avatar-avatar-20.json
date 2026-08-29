@@ -11,7 +11,7 @@
       "path": "source/components/avatar/avatar-20/avatar-20.tsx",
       "content": "import { Avatar, AvatarGroup, AvatarFallback, AvatarImage } from '@astrale-os/ui/avatar'\n\nconst avatars = [\n  {\n    src: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-3.png',\n    fallback: 'OS',\n    name: 'Olivia Sparks'\n  },\n  {\n    src: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-6.png',\n    fallback: 'HL',\n    name: 'Howard Lloyd'\n  },\n  {\n    src: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-5.png',\n    fallback: 'HR',\n    name: 'Hallie Richards'\n  },\n  {\n    src: 'https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-16.png',\n    fallback: 'JW',\n    name: 'Jenny Wilson'\n  }\n]\n\nconst AvatarGroupOutlineDemo = () => {\n  return (\n    <div className='bg-background flex w-fit items-center rounded-full border p-1 shadow-sm'>\n      <AvatarGroup>\n        {avatars.map((avatar, index) => (\n          <Avatar key={index} className='ring-background ring-2'>\n            <AvatarImage src={avatar.src} alt={avatar.name} />\n            <AvatarFallback className='text-xs'>{avatar.fallback}</AvatarFallback>\n          </Avatar>\n        ))}\n      </AvatarGroup>\n      <span className='hover:text-foreground bg-transparent px-1.5 ring-0'>+3</span>\n    </div>\n  )\n}\n\nexport default AvatarGroupOutlineDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/avatar/avatar-20.tsx"
+      "target": "components/astrale/components/avatar/avatar-20.tsx"
     }
   ],
   "meta": {

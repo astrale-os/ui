@@ -13,7 +13,7 @@
         {
           "path": "article.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/typography/article.tsx"
+          "target": "components/astrale/components/typography/article.tsx"
         }
       ],
       "meta": {
@@ -31,7 +31,7 @@
         {
           "path": "dense-data.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/typography/dense-data.tsx"
+          "target": "components/astrale/components/typography/dense-data.tsx"
         }
       ],
       "meta": {

@@ -13,7 +13,7 @@
         {
           "path": "tooltip-01.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tooltip/tooltip-01.tsx"
+          "target": "components/astrale/components/tooltip/tooltip-01.tsx"
         }
       ],
       "meta": {
@@ -33,7 +33,7 @@
         {
           "path": "tooltip-02.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tooltip/tooltip-02.tsx"
+          "target": "components/astrale/components/tooltip/tooltip-02.tsx"
         }
       ],
       "meta": {
@@ -53,7 +53,7 @@
         {
           "path": "tooltip-03.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tooltip/tooltip-03.tsx"
+          "target": "components/astrale/components/tooltip/tooltip-03.tsx"
         }
       ],
       "meta": {
@@ -73,7 +73,7 @@
         {
           "path": "tooltip-04.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tooltip/tooltip-04.tsx"
+          "target": "components/astrale/components/tooltip/tooltip-04.tsx"
         }
       ],
       "meta": {
@@ -93,7 +93,7 @@
         {
           "path": "tooltip-05.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tooltip/tooltip-05.tsx"
+          "target": "components/astrale/components/tooltip/tooltip-05.tsx"
         }
       ],
       "meta": {
@@ -113,7 +113,7 @@
         {
           "path": "tooltip-06.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tooltip/tooltip-06.tsx"
+          "target": "components/astrale/components/tooltip/tooltip-06.tsx"
         }
       ],
       "meta": {
@@ -133,7 +133,7 @@
         {
           "path": "tooltip-07.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tooltip/tooltip-07.tsx"
+          "target": "components/astrale/components/tooltip/tooltip-07.tsx"
         }
       ],
       "meta": {
@@ -153,7 +153,7 @@
         {
           "path": "tooltip-08.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tooltip/tooltip-08.tsx"
+          "target": "components/astrale/components/tooltip/tooltip-08.tsx"
         }
       ],
       "meta": {
@@ -173,7 +173,7 @@
         {
           "path": "tooltip-09.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tooltip/tooltip-09.tsx"
+          "target": "components/astrale/components/tooltip/tooltip-09.tsx"
         }
       ],
       "meta": {
@@ -193,7 +193,7 @@
         {
           "path": "tooltip-10.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tooltip/tooltip-10.tsx"
+          "target": "components/astrale/components/tooltip/tooltip-10.tsx"
         }
       ],
       "meta": {
@@ -213,7 +213,7 @@
         {
           "path": "tooltip-11.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tooltip/tooltip-11.tsx"
+          "target": "components/astrale/components/tooltip/tooltip-11.tsx"
         }
       ],
       "meta": {
@@ -233,7 +233,7 @@
         {
           "path": "tooltip-12.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tooltip/tooltip-12.tsx"
+          "target": "components/astrale/components/tooltip/tooltip-12.tsx"
         }
       ],
       "meta": {
@@ -253,7 +253,7 @@
         {
           "path": "tooltip-13.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tooltip/tooltip-13.tsx"
+          "target": "components/astrale/components/tooltip/tooltip-13.tsx"
         }
       ],
       "meta": {
@@ -273,7 +273,7 @@
         {
           "path": "tooltip-14.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tooltip/tooltip-14.tsx"
+          "target": "components/astrale/components/tooltip/tooltip-14.tsx"
         }
       ],
       "meta": {
@@ -293,7 +293,7 @@
         {
           "path": "tooltip-15.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tooltip/tooltip-15.tsx"
+          "target": "components/astrale/components/tooltip/tooltip-15.tsx"
         }
       ],
       "meta": {
@@ -313,7 +313,7 @@
         {
           "path": "tooltip-16.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tooltip/tooltip-16.tsx"
+          "target": "components/astrale/components/tooltip/tooltip-16.tsx"
         },
         {
           "path": "support/components/ui/motion-tooltip.tsx",
@@ -343,7 +343,7 @@
         {
           "path": "tooltip-17.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/tooltip/tooltip-17.tsx"
+          "target": "components/astrale/components/tooltip/tooltip-17.tsx"
         },
         {
           "path": "support/components/ui/global-tooltip.tsx",

@@ -11,7 +11,7 @@
       "path": "source/components/skeleton/skeleton-01/skeleton-01.tsx",
       "content": "import { Skeleton } from '@astrale-os/ui/skeleton'\n\nconst SkeletonDemo = () => {\n  return (\n    <div className='flex items-center gap-4'>\n      <Skeleton className='size-12 rounded-full' />\n      <div className='space-y-2'>\n        <Skeleton className='h-4 w-62.5' />\n        <Skeleton className='h-4 w-50' />\n      </div>\n    </div>\n  )\n}\n\nexport default SkeletonDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/skeleton/skeleton-01.tsx"
+      "target": "components/astrale/components/skeleton/skeleton-01.tsx"
     }
   ],
   "meta": {

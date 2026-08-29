@@ -19,7 +19,8 @@
     "../packages/ui/previews/**/*.tsx",
     "../registry/**/*.fixture.ts",
     "../registry/**/*.preview.tsx",
-    "../tooling/theme-document/**/*.ts"
+    "../tooling/theme-document/**/*.ts",
+    "../tooling/theme-generator/**/*.ts"
   ],
   "exclude": ["../registry/variants/source"]
 }

@@ -13,7 +13,7 @@
         {
           "path": "range-basic.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/calendar/range-basic.tsx"
+          "target": "components/astrale/components/calendar/range-basic.tsx"
         }
       ],
       "meta": {
@@ -31,7 +31,7 @@
         {
           "path": "single-basic.tsx",
           "type": "registry:component",
-          "target": "components/astrale/pattern/calendar/single-basic.tsx"
+          "target": "components/astrale/components/calendar/single-basic.tsx"
         }
       ],
       "meta": {

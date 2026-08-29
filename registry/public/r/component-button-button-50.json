@@ -13,7 +13,7 @@
       "path": "source/components/button/button-50/button-50.tsx",
       "content": "import { PrimarySwipeButton } from '@/components/ui/swipe-button'\n\nconst PrimarySwipeButtonDemo = () => {\n  return <PrimarySwipeButton>Swipe Button</PrimarySwipeButton>\n}\n\nexport default PrimarySwipeButtonDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/button/button-50.tsx"
+      "target": "components/astrale/components/button/button-50.tsx"
     },
     {
       "path": "source/components/button/button-50/support/components/ui/swipe-button.tsx",

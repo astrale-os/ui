@@ -11,7 +11,7 @@
       "path": "source/components/tooltip/tooltip-03/tooltip-03.tsx",
       "content": "import { Button } from '@astrale-os/ui/button'\nimport { Tooltip, TooltipContent, TooltipTrigger } from '@astrale-os/ui/tooltip'\n\nconst TooltipNoArrowDemo = () => {\n  return (\n    <Tooltip>\n      <TooltipTrigger\n        render={\n          <Button variant='outline' size='sm'>\n            No arrow\n          </Button>\n        }\n      />\n      <TooltipContent className='*:last:invisible'>\n        <p>This tooltip don&apos;t have arrow</p>\n      </TooltipContent>\n    </Tooltip>\n  )\n}\n\nexport default TooltipNoArrowDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/tooltip/tooltip-03.tsx"
+      "target": "components/astrale/components/tooltip/tooltip-03.tsx"
     }
   ],
   "meta": {

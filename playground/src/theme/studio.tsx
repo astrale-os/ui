@@ -6,9 +6,6 @@ import {
   Button,
   Card,
   CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
   CardTitle,
   Field,
   FieldDescription,
@@ -22,7 +19,6 @@ import {
   SelectTrigger,
   SelectValue,
   Separator,
-  Slider,
   Tabs,
   TabsContent,
   TabsList,
@@ -32,17 +28,21 @@ import {
   ToggleGroupItem,
   toast,
 } from '@astrale-os/ui'
+import { Slider as SliderPrimitive } from '@base-ui/react/slider'
 import { formatHex, parse } from 'culori'
 import { useEffect, useMemo, useRef, useState, type ChangeEvent, type ComponentProps } from 'react'
 
+import { ColorArea } from '../../../registry/components/color-picker/color-area.js'
+import { ColorField as PickerColorField } from '../../../registry/components/color-picker/color-field.js'
 import { ColorPicker } from '../../../registry/components/color-picker/color-picker.js'
+import { ColorSlider } from '../../../registry/components/color-picker/color-slider.js'
 import {
-  serializeThemeDocument,
-  themeColorTokens,
   type ThemeColorToken,
   type ThemeDocument,
+  type ThemeTypographyRole,
 } from '../../../tooling/theme-document/index.js'
-import { starterThemes, type ThemeWorkspace } from './workspace.js'
+import { generatorFontCatalog } from '../../../tooling/theme-generator/font-catalog.js'
+import { defaultTheme, type ThemeWorkspace } from './workspace.js'
 
 const colorLabels: Record<ThemeColorToken, string> = {
   background: 'Background',
@@ -125,9 +125,45 @@ const colorGroups: Array<{ label: string; tokens: ThemeColorToken[] }> = [
   { label: 'Chart colors', tokens: ['chart1', 'chart2', 'chart3', 'chart4', 'chart5'] },
 ]
 
-const bodyFonts = [...new Set(starterThemes.map((theme) => theme.typography.body))]
-const headingFonts = [...new Set(starterThemes.map((theme) => theme.typography.heading))]
-const monoFonts = [...new Set(starterThemes.map((theme) => theme.typography.mono))]
+const fontItems = generatorFontCatalog
+  .filter(
+    (font) =>
+      font.roles.some((role) => role === 'body') || font.roles.some((role) => role === 'heading'),
+  )
+  .map((font) => ({
+    label: `${font.label} · ${font.kind[0]?.toUpperCase()}${font.kind.slice(1)}`,
+    value: font.family,
+  }))
+const monoItems = generatorFontCatalog
+  .filter((font) => font.roles.some((role) => role === 'terminal'))
+  .map((font) => ({ label: `${font.label} · Mono`, value: font.family }))
+const COLOR_PREVIEW_DEBOUNCE_MS = 250
+
+function ThemePaletteIcon({ theme }: { theme: ThemeDocument }) {
+  const colors = [
+    theme.appearance.light.background,
+    theme.appearance.light.primary,
+    theme.appearance.dark.background,
+    theme.appearance.dark.primary,
+  ]
+  return (
+    <span className="theme-palette-icon" data-slot="theme-palette-icon" aria-hidden="true">
+      {colors.map((color, index) => (
+        <span key={index} style={{ backgroundColor: color }} />
+      ))}
+    </span>
+  )
+}
+
+function ThemeChoiceLabel({ theme, saved = false }: { theme: ThemeDocument; saved?: boolean }) {
+  return (
+    <>
+      <ThemePaletteIcon theme={theme} />
+      <span>{theme.label}</span>
+      {saved && <span className="theme-choice-kind">Saved</span>}
+    </>
+  )
+}
 
 function download(name: string, type: string, source: string) {
   const url = URL.createObjectURL(new Blob([source], { type }))
@@ -151,16 +187,346 @@ async function copy(source: string, message: string) {
   }
 }
 
-function selectItems(values: string[]) {
-  return values.map((value) => ({ label: value.split(',')[0]!.replaceAll("'", ''), value }))
+function ThemeSelectField({
+  id,
+  label,
+  items,
+  value,
+  onChange,
+}: {
+  id: string
+  label: string
+  items: Array<{ label: string; value: string }>
+  value: string
+  onChange(value: string): void
+}) {
+  return (
+    <Field>
+      <FieldLabel htmlFor={id}>{label}</FieldLabel>
+      <Select
+        modal={false}
+        items={items}
+        value={value}
+        onValueChange={(next) => {
+          if (next) onChange(next)
+        }}
+      >
+        <SelectTrigger id={id}>
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent alignItemWithTrigger={false}>
+          <SelectGroup>
+            {items.map((item) => (
+              <SelectItem key={item.value} value={item.value}>
+                {item.label}
+              </SelectItem>
+            ))}
+          </SelectGroup>
+        </SelectContent>
+      </Select>
+    </Field>
+  )
 }
 
 function firstSliderValue(value: number | readonly number[]) {
   return typeof value === 'number' ? value : value[0]!
 }
 
+function clamp(value: number, minimum: number, maximum: number) {
+  return Math.min(maximum, Math.max(minimum, value))
+}
+
+function formatTracking(value: number) {
+  if (Math.abs(value) < 0.0005) return '0'
+  return `${Number(value.toFixed(3))}em`
+}
+
+function formatLeading(value: number) {
+  return String(Number(value.toFixed(2)))
+}
+
+function formatRem(value: number) {
+  return `${value.toFixed(2)}rem`
+}
+
+function formatMilliseconds(value: number) {
+  return `${Math.round(value)}ms`
+}
+
+function ThemeSlider({
+  label,
+  value,
+  min,
+  max,
+  step,
+  format,
+  onValueChange,
+  onValueCommitted,
+  onPreviewStarted,
+  onPreviewCanceled,
+}: {
+  label: string
+  value: number
+  min: number
+  max: number
+  step: number
+  format(value: number): string
+  onValueChange(value: number): void
+  onValueCommitted(value: number): void
+  onPreviewStarted(): void
+  onPreviewCanceled(): void
+}) {
+  return (
+    <SliderPrimitive.Root
+      className="data-horizontal:w-full"
+      data-slot="slider"
+      value={[value]}
+      min={min}
+      max={max}
+      step={step}
+      thumbAlignment="edge"
+      onValueChange={(next) => onValueChange(firstSliderValue(next))}
+      onValueCommitted={(next) => onValueCommitted(firstSliderValue(next))}
+      onPointerDown={onPreviewStarted}
+      onPointerCancel={onPreviewCanceled}
+    >
+      <SliderPrimitive.Control className="relative flex w-full touch-none items-center select-none">
+        <SliderPrimitive.Track
+          data-slot="slider-track"
+          className="relative h-1 w-full grow overflow-hidden rounded-full bg-muted select-none"
+        >
+          <SliderPrimitive.Indicator
+            data-slot="slider-range"
+            className="h-full bg-primary select-none"
+          />
+        </SliderPrimitive.Track>
+        <SliderPrimitive.Thumb
+          data-slot="slider-thumb"
+          getAriaLabel={() => label}
+          getAriaValueText={(_formatted, next) => format(next)}
+          className="relative block size-3 shrink-0 rounded-full border border-ring bg-white ring-ring/50 transition-[color,box-shadow] select-none after:absolute after:-inset-2 hover:ring-3 focus-visible:ring-3 focus-visible:outline-hidden active:ring-3"
+        />
+      </SliderPrimitive.Control>
+    </SliderPrimitive.Root>
+  )
+}
+
+function ThemeRangeField({
+  label,
+  value,
+  cssVariable,
+  minimum,
+  maximum,
+  step,
+  format,
+  onCommit,
+}: {
+  label: string
+  value: string
+  cssVariable: string
+  minimum: number
+  maximum: number
+  step: number
+  format(value: number): string
+  onCommit(value: string): void
+}) {
+  const numericValue = clamp(Number.parseFloat(value), minimum, maximum)
+  const [draft, setDraft] = useState(numericValue)
+  const previewFrame = useRef<number | null>(null)
+  const canceledPreview = useRef(false)
+  const committedValue = useRef(value)
+  committedValue.current = value
+
+  useEffect(() => {
+    if (previewFrame.current !== null) cancelAnimationFrame(previewFrame.current)
+    previewFrame.current = null
+    setDraft(numericValue)
+    document.documentElement.style.setProperty(cssVariable, value)
+  }, [cssVariable, numericValue, value])
+  useEffect(
+    () => () => {
+      if (previewFrame.current !== null) cancelAnimationFrame(previewFrame.current)
+      document.documentElement.style.setProperty(cssVariable, committedValue.current)
+    },
+    [cssVariable],
+  )
+
+  function preview(next: number) {
+    setDraft(next)
+    if (previewFrame.current !== null) cancelAnimationFrame(previewFrame.current)
+    previewFrame.current = requestAnimationFrame(() => {
+      previewFrame.current = null
+      document.documentElement.style.setProperty(cssVariable, format(next))
+    })
+  }
+
+  function commit(next: number) {
+    if (previewFrame.current !== null) cancelAnimationFrame(previewFrame.current)
+    previewFrame.current = null
+    if (canceledPreview.current) {
+      canceledPreview.current = false
+      const committed = committedValue.current
+      setDraft(clamp(Number.parseFloat(committed), minimum, maximum))
+      document.documentElement.style.setProperty(cssVariable, committed)
+      return
+    }
+    const formatted = format(next)
+    document.documentElement.style.setProperty(cssVariable, formatted)
+    onCommit(formatted)
+  }
+
+  function cancelPreview() {
+    canceledPreview.current = true
+    if (previewFrame.current !== null) cancelAnimationFrame(previewFrame.current)
+    previewFrame.current = null
+    const committed = committedValue.current
+    setDraft(clamp(Number.parseFloat(committed), minimum, maximum))
+    document.documentElement.style.setProperty(cssVariable, committed)
+  }
+
+  return (
+    <Field data-slot="theme-range-field">
+      <FieldLabel className="theme-range-label">
+        <span className="theme-range-heading">
+          <span>{label}</span>
+          <output>{format(draft)}</output>
+        </span>
+        <ThemeSlider
+          label={label}
+          value={draft}
+          min={minimum}
+          max={maximum}
+          step={step}
+          format={format}
+          onValueChange={preview}
+          onValueCommitted={commit}
+          onPreviewStarted={() => {
+            canceledPreview.current = false
+          }}
+          onPreviewCanceled={cancelPreview}
+        />
+      </FieldLabel>
+    </Field>
+  )
+}
+
+function TypographyRoleSection({
+  role,
+  title,
+  workspace,
+}: {
+  role: 'heading' | 'body'
+  title: string
+  workspace: ThemeWorkspace
+}) {
+  const typography = workspace.theme.typography[role]
+  const selectedFont = generatorFontCatalog.find((font) => font.family === typography.family)
+  const weightItems = (selectedFont?.weights ?? [typography.weight]).map((weight) => ({
+    label: String(weight),
+    value: String(weight),
+  }))
+  const update = (changes: Partial<ThemeTypographyRole>) =>
+    workspace.setValue('typography', role, { ...typography, ...changes })
+  const id = `typography-${role}`
+
+  return (
+    <section className="theme-typography-section" aria-labelledby={id}>
+      <header className="theme-typography-section-header">
+        <h3 id={id}>{title}</h3>
+      </header>
+      <div className="theme-typography-controls">
+        <ThemeSelectField
+          id={`${role}-font`}
+          label={`${title} font`}
+          items={fontItems}
+          value={typography.family}
+          onChange={(family) => {
+            const font = generatorFontCatalog.find((candidate) => candidate.family === family)
+            const weights: readonly number[] = font?.weights ?? []
+            const weight = weights.includes(typography.weight)
+              ? typography.weight
+              : weights.reduce(
+                  (best, candidate) =>
+                    Math.abs(candidate - typography.weight) < Math.abs(best - typography.weight)
+                      ? candidate
+                      : best,
+                  weights[0] ?? typography.weight,
+                )
+            update({ family, weight })
+          }}
+        />
+        <ThemeSelectField
+          id={`${role}-weight`}
+          label={`${title} weight`}
+          items={weightItems}
+          value={String(typography.weight)}
+          onChange={(weight) => update({ weight: Number(weight) })}
+        />
+        <ThemeRangeField
+          label={`${title} letter spacing`}
+          value={typography.tracking}
+          cssVariable={`--ui-tracking-${role}`}
+          minimum={-0.04}
+          maximum={0.04}
+          step={0.005}
+          format={formatTracking}
+          onCommit={(tracking) => update({ tracking })}
+        />
+        <ThemeRangeField
+          label={`${title} line height`}
+          value={typography.leading}
+          cssVariable={`--ui-leading-${role}`}
+          minimum={1}
+          maximum={2}
+          step={0.05}
+          format={formatLeading}
+          onCommit={(leading) => update({ leading })}
+        />
+      </div>
+      <div className="theme-typography-specimen" data-role={role}>
+        {role === 'heading' ? (
+          <CardTitle>Heading preview</CardTitle>
+        ) : (
+          <p data-slot="theme-typography-body">Body preview</p>
+        )}
+      </div>
+    </section>
+  )
+}
+
+function TerminalTypographySection({ workspace }: { workspace: ThemeWorkspace }) {
+  return (
+    <section className="theme-typography-section" aria-labelledby="typography-terminal">
+      <header className="theme-typography-section-header">
+        <h3 id="typography-terminal">Terminal</h3>
+      </header>
+      <div className="theme-typography-controls" data-terminal>
+        <ThemeSelectField
+          id="mono-font"
+          label="Terminal font"
+          items={monoItems}
+          value={workspace.theme.typography.mono}
+          onChange={(family) => workspace.setValue('typography', 'mono', family)}
+        />
+      </div>
+      <div className="theme-typography-specimen" data-role="terminal">
+        <code className="font-mono" data-slot="theme-typography-mono">
+          pnpm astrale ui add theme/observatory
+        </code>
+      </div>
+    </section>
+  )
+}
+
 function pickerColor(value: string) {
   return formatHex(parse(value)) ?? '#000000'
+}
+
+function colorStyleProperty(token: ThemeColorToken) {
+  return `--ui-${token
+    .replaceAll(/([a-z])([A-Z])/gu, '$1-$2')
+    .replaceAll(/([a-z])(\d+)$/gu, '$1-$2')
+    .toLowerCase()}`
 }
 
 function DraftInput({
@@ -239,16 +605,86 @@ function ColorField({
   onChange: (value: string) => void
 }) {
   const value = theme.appearance[mode][token]
+  const [draft, setDraft] = useState(value)
+  const pendingCommit = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const previewFrame = useRef<number | null>(null)
+  const latestOnChange = useRef(onChange)
+  const committedValue = useRef(value)
+  const styleProperty = colorStyleProperty(token)
+  committedValue.current = value
+
+  useEffect(() => {
+    latestOnChange.current = onChange
+  }, [onChange])
+
+  useEffect(() => {
+    if (pendingCommit.current) clearTimeout(pendingCommit.current)
+    if (previewFrame.current !== null) cancelAnimationFrame(previewFrame.current)
+    pendingCommit.current = null
+    previewFrame.current = null
+    setDraft(value)
+  }, [value])
+
+  useEffect(
+    () => () => {
+      if (pendingCommit.current) clearTimeout(pendingCommit.current)
+      if (previewFrame.current !== null) cancelAnimationFrame(previewFrame.current)
+      document.documentElement.style.setProperty(styleProperty, committedValue.current)
+    },
+    [styleProperty],
+  )
+
+  function applyPreview(next: string) {
+    if (previewFrame.current !== null) cancelAnimationFrame(previewFrame.current)
+    previewFrame.current = requestAnimationFrame(() => {
+      previewFrame.current = null
+      document.documentElement.style.setProperty(styleProperty, next)
+    })
+  }
+
+  function commit(next: string) {
+    if (pendingCommit.current) clearTimeout(pendingCommit.current)
+    if (previewFrame.current !== null) cancelAnimationFrame(previewFrame.current)
+    pendingCommit.current = null
+    previewFrame.current = null
+    setDraft(next)
+    document.documentElement.style.setProperty(styleProperty, next)
+    latestOnChange.current(next)
+  }
+
+  function preview(next: string) {
+    setDraft(next)
+    applyPreview(next)
+    if (pendingCommit.current) clearTimeout(pendingCommit.current)
+    pendingCommit.current = setTimeout(() => {
+      pendingCommit.current = null
+      latestOnChange.current(next)
+    }, COLOR_PREVIEW_DEBOUNCE_MS)
+  }
+
   return (
     <Field orientation="responsive" data-slot="theme-color-field">
       <FieldLabel htmlFor={`${mode}-${token}`}>{colorLabels[token]}</FieldLabel>
       <div className="theme-color-control" data-slot="theme-color-control">
         <ColorPicker
           label={`Pick ${colorLabels[token]}`}
-          value={pickerColor(value)}
-          onChange={(color) => onChange(color.toString('hex'))}
-        />
-        <DraftInput id={`${mode}-${token}`} value={value} onCommit={onChange} spellCheck={false} />
+          value={pickerColor(draft)}
+          onChange={(color) => preview(color.toString('hex'))}
+        >
+          <ColorArea
+            colorSpace="hsb"
+            xChannel="saturation"
+            yChannel="brightness"
+            onChangeEnd={(color) => commit(color.toString('hex'))}
+          />
+          <ColorSlider
+            colorSpace="hsb"
+            channel="hue"
+            onChangeEnd={(color) => commit(color.toString('hex'))}
+          />
+          <PickerColorField label="Hex" />
+        </ColorPicker>
+        <DraftInput id={`${mode}-${token}`} value={draft} onCommit={commit} spellCheck={false} />
       </div>
     </Field>
   )
@@ -264,19 +700,27 @@ export function ThemeStudio({
   onModeChange: (mode: 'light' | 'dark') => void
 }) {
   const fileInput = useRef<HTMLInputElement>(null)
-  const starterItems = useMemo(
-    () => starterThemes.map((theme) => ({ label: theme.label, value: theme.name })),
-    [],
+  const [selectedThemeChoice, setSelectedThemeChoice] = useState('default:observatory')
+  const [generationPending, setGenerationPending] = useState(false)
+  const themeChoices = useMemo(
+    () => [
+      {
+        label: defaultTheme.label,
+        value: 'default:observatory',
+        theme: defaultTheme,
+        saved: false,
+      },
+      ...workspace.savedThemes.map((theme) => ({
+        label: `${theme.label} Saved`,
+        value: `saved:${theme.name}`,
+        theme,
+        saved: true,
+      })),
+    ],
+    [workspace.savedThemes],
   )
-  const savedItems = workspace.savedThemes.map((theme) => ({
-    label: theme.label,
-    value: theme.name,
-  }))
-  const published = starterThemes.some(
-    (theme) =>
-      theme.name === workspace.theme.name &&
-      serializeThemeDocument(theme) === serializeThemeDocument(workspace.theme),
-  )
+  const selectedChoice = themeChoices.find((choice) => choice.value === selectedThemeChoice)
+  const published = selectedThemeChoice === 'default:observatory' && !workspace.canUndo
   const command = published
     ? `astrale ui add theme/${workspace.theme.name}`
     : `astrale ui add ./${workspace.theme.name}.css`
@@ -286,7 +730,8 @@ export function ThemeStudio({
     const file = input.files?.[0]
     if (!file) return
     try {
-      const theme = workspace.importText(await file.text())
+      const theme = await workspace.importText(await file.text())
+      setSelectedThemeChoice('imported')
       toast.add({ title: `${theme.label} imported`, type: 'success' })
     } catch (error) {
       toast.add({
@@ -296,6 +741,25 @@ export function ThemeStudio({
       })
     } finally {
       input.value = ''
+    }
+  }
+
+  async function runGeneration(kind: 'variation' | 'new-direction') {
+    if (generationPending) return
+    setGenerationPending(true)
+    try {
+      const result =
+        kind === 'variation' ? await workspace.variation() : await workspace.newDirection()
+      if (result.kind === 'failure') {
+        toast.add({ title: 'Theme generation failed', description: result.message, type: 'error' })
+      } else if (result.kind === 'fallback') {
+        toast.add({
+          title: 'A safe fallback was used; try a new direction.',
+          type: 'warning',
+        })
+      }
+    } finally {
+      setGenerationPending(false)
     }
   }
 
@@ -338,27 +802,29 @@ export function ThemeStudio({
             </ToggleGroup>
           </Field>
           <Field>
-            <FieldLabel htmlFor="starter-theme">Starter</FieldLabel>
+            <FieldLabel htmlFor="theme-choice">Theme</FieldLabel>
             <Select
-              items={starterItems}
-              value={
-                starterThemes.some((theme) => theme.name === workspace.theme.name)
-                  ? workspace.theme.name
-                  : null
-              }
+              modal={false}
+              items={themeChoices}
+              value={selectedChoice?.value ?? null}
               onValueChange={(value) => {
-                const selected = starterThemes.find((theme) => theme.name === value)
-                if (selected) workspace.load(selected)
+                const selected = themeChoices.find((choice) => choice.value === value)
+                if (selected) {
+                  setSelectedThemeChoice(selected.value)
+                  workspace.load(selected.theme)
+                }
               }}
             >
-              <SelectTrigger id="starter-theme">
-                <SelectValue>{(value) => value ?? 'Custom theme'}</SelectValue>
+              <SelectTrigger id="theme-choice" className="theme-choice-trigger">
+                <SelectValue>
+                  <ThemeChoiceLabel theme={workspace.theme} saved={selectedChoice?.saved} />
+                </SelectValue>
               </SelectTrigger>
               <SelectContent alignItemWithTrigger={false}>
                 <SelectGroup>
-                  {starterItems.map((item) => (
-                    <SelectItem key={item.value} value={item.value}>
-                      {item.label}
+                  {themeChoices.map((choice) => (
+                    <SelectItem key={choice.value} value={choice.value}>
+                      <ThemeChoiceLabel theme={choice.theme} saved={choice.saved} />
                     </SelectItem>
                   ))}
                 </SelectGroup>
@@ -376,9 +842,6 @@ export function ThemeStudio({
             />
             <Button variant="outline" onClick={() => fileInput.current?.click()}>
               Import
-            </Button>
-            <Button variant="outline" onClick={workspace.randomize}>
-              Randomize
             </Button>
             <Button
               onClick={() => {
@@ -400,31 +863,59 @@ export function ThemeStudio({
               Save theme
             </Button>
           </div>
-          {savedItems.length > 0 && (
-            <Field>
-              <FieldLabel htmlFor="saved-theme">Saved themes</FieldLabel>
-              <Select
-                items={savedItems}
-                onValueChange={(value) => {
-                  const selected = workspace.savedThemes.find((theme) => theme.name === value)
-                  if (selected) workspace.load(selected)
-                }}
+          <div className="theme-generation-panel">
+            <div className="theme-generation-actions">
+              <Button
+                variant="outline"
+                disabled={
+                  generationPending || !workspace.variationAvailable || workspace.generationDisabled
+                }
+                title={
+                  workspace.variationAvailable
+                    ? undefined
+                    : 'Create a new direction before requesting a variation.'
+                }
+                onClick={() => runGeneration('variation')}
               >
-                <SelectTrigger id="saved-theme">
-                  <SelectValue>{(value) => value ?? 'Choose a saved theme'}</SelectValue>
-                </SelectTrigger>
-                <SelectContent alignItemWithTrigger={false}>
-                  <SelectGroup>
-                    {savedItems.map((item) => (
-                      <SelectItem key={item.value} value={item.value}>
-                        {item.label}
-                      </SelectItem>
-                    ))}
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            </Field>
-          )}
+                Variation
+              </Button>
+              <Button
+                variant="outline"
+                disabled={generationPending || workspace.generationDisabled}
+                onClick={() => runGeneration('new-direction')}
+              >
+                New direction
+              </Button>
+            </div>
+            <span className="theme-generation-lock-label">Keep</span>
+            <div className="theme-generation-locks" role="group" aria-label="Keep theme properties">
+              {workspace.generatorBranches.map((branch) => {
+                const label =
+                  branch === 'palette' ? 'Colors' : branch[0]?.toUpperCase() + branch.slice(1)
+                const locked = workspace.locks.includes(branch)
+                const edited = workspace.theme.generation?.editedBranches.includes(branch)
+                return (
+                  <Button
+                    key={branch}
+                    variant="outline"
+                    size="sm"
+                    aria-pressed={locked}
+                    aria-label={`${label} ${locked ? 'locked' : 'unlocked'}${edited ? ', edited' : ''}`}
+                    onClick={() => workspace.toggleLock(branch)}
+                  >
+                    <span>{label}</span>
+                    {(locked || edited) && (
+                      <span className="theme-generation-lock-state">
+                        {[locked ? 'Locked' : '', edited ? 'Edited' : '']
+                          .filter(Boolean)
+                          .join(' · ')}
+                      </span>
+                    )}
+                  </Button>
+                )
+              })}
+            </div>
+          </div>
         </FieldGroup>
 
         <Separator />
@@ -459,184 +950,70 @@ export function ThemeStudio({
             </Accordion>
           </TabsContent>
           <TabsContent value="type">
-            <FieldGroup className="theme-tab-panel">
-              <Field>
-                <FieldLabel htmlFor="heading-font">Sans-serif font (heading)</FieldLabel>
-                <Select
-                  items={selectItems(headingFonts)}
-                  value={workspace.theme.typography.heading}
-                  onValueChange={(value) => {
-                    if (value) workspace.setValue('typography', 'heading', value)
-                  }}
-                >
-                  <SelectTrigger id="heading-font">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent alignItemWithTrigger={false}>
-                    <SelectGroup>
-                      {selectItems(headingFonts).map((item) => (
-                        <SelectItem key={item.value} value={item.value}>
-                          {item.label}
-                        </SelectItem>
-                      ))}
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              </Field>
-              <Field>
-                <FieldLabel htmlFor="body-font">Serif font (body)</FieldLabel>
-                <Select
-                  items={selectItems(bodyFonts)}
-                  value={workspace.theme.typography.body}
-                  onValueChange={(value) => {
-                    if (value) workspace.setValue('typography', 'body', value)
-                  }}
-                >
-                  <SelectTrigger id="body-font">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent alignItemWithTrigger={false}>
-                    <SelectGroup>
-                      {selectItems(bodyFonts).map((item) => (
-                        <SelectItem key={item.value} value={item.value}>
-                          {item.label}
-                        </SelectItem>
-                      ))}
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              </Field>
-              <Field>
-                <FieldLabel htmlFor="mono-font">Monospace font (code and terminal)</FieldLabel>
-                <Select
-                  items={selectItems(monoFonts)}
-                  value={workspace.theme.typography.mono}
-                  onValueChange={(value) => {
-                    if (value) workspace.setValue('typography', 'mono', value)
-                  }}
-                >
-                  <SelectTrigger id="mono-font">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent alignItemWithTrigger={false}>
-                    <SelectGroup>
-                      {selectItems(monoFonts).map((item) => (
-                        <SelectItem key={item.value} value={item.value}>
-                          {item.label}
-                        </SelectItem>
-                      ))}
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              </Field>
-              <Card size="sm">
-                <CardHeader>
-                  <CardTitle>The observable becomes operable.</CardTitle>
-                  <CardDescription>Aa Bb Cc · 0123456789 · Schema revision 42</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <code data-slot="theme-typography-mono">pnpm astrale ui add theme</code>
-                </CardContent>
-              </Card>
-            </FieldGroup>
+            <div className="theme-tab-panel theme-typography-panel">
+              <TypographyRoleSection role="heading" title="Heading" workspace={workspace} />
+              <TypographyRoleSection role="body" title="Body" workspace={workspace} />
+              <TerminalTypographySection workspace={workspace} />
+            </div>
           </TabsContent>
           <TabsContent value="other">
             <FieldGroup className="theme-tab-panel">
-              <Field>
-                <FieldLabel>
-                  Corner radius
-                  <Slider
-                    value={[Number.parseFloat(workspace.theme.geometry.radius)]}
-                    min={0}
-                    max={1.5}
-                    step={0.05}
-                    onValueChange={(value) =>
-                      workspace.setValue(
-                        'geometry',
-                        'radius',
-                        `${firstSliderValue(value).toFixed(2)}rem`,
-                      )
-                    }
-                  />
-                </FieldLabel>
-                <FieldDescription>{workspace.theme.geometry.radius}</FieldDescription>
-              </Field>
-              <Field>
-                <FieldLabel>
-                  Panel radius
-                  <Slider
-                    value={[Number.parseFloat(workspace.theme.geometry.panelRadius)]}
-                    min={0}
-                    max={2}
-                    step={0.05}
-                    onValueChange={(value) =>
-                      workspace.setValue(
-                        'geometry',
-                        'panelRadius',
-                        `${firstSliderValue(value).toFixed(2)}rem`,
-                      )
-                    }
-                  />
-                </FieldLabel>
-                <FieldDescription>{workspace.theme.geometry.panelRadius}</FieldDescription>
-              </Field>
-              <Field>
-                <FieldLabel>
-                  Control height
-                  <Slider
-                    value={[Number.parseFloat(workspace.theme.density.control)]}
-                    min={1.75}
-                    max={3}
-                    step={0.05}
-                    onValueChange={(value) =>
-                      workspace.setValue(
-                        'density',
-                        'control',
-                        `${firstSliderValue(value).toFixed(2)}rem`,
-                      )
-                    }
-                  />
-                </FieldLabel>
-                <FieldDescription>{workspace.theme.density.control}</FieldDescription>
-              </Field>
-              <Field>
-                <FieldLabel>
-                  Small control height
-                  <Slider
-                    value={[Number.parseFloat(workspace.theme.density.controlSmall)]}
-                    min={1.5}
-                    max={2.75}
-                    step={0.05}
-                    onValueChange={(value) =>
-                      workspace.setValue(
-                        'density',
-                        'controlSmall',
-                        `${firstSliderValue(value).toFixed(2)}rem`,
-                      )
-                    }
-                  />
-                </FieldLabel>
-                <FieldDescription>{workspace.theme.density.controlSmall}</FieldDescription>
-              </Field>
-              <Field>
-                <FieldLabel>
-                  Large control height
-                  <Slider
-                    value={[Number.parseFloat(workspace.theme.density.controlLarge)]}
-                    min={2}
-                    max={3.5}
-                    step={0.05}
-                    onValueChange={(value) =>
-                      workspace.setValue(
-                        'density',
-                        'controlLarge',
-                        `${firstSliderValue(value).toFixed(2)}rem`,
-                      )
-                    }
-                  />
-                </FieldLabel>
-                <FieldDescription>{workspace.theme.density.controlLarge}</FieldDescription>
-              </Field>
+              <ThemeRangeField
+                label="Corner radius"
+                value={workspace.theme.geometry.radius}
+                cssVariable="--ui-radius"
+                minimum={0}
+                maximum={1.5}
+                step={0.05}
+                format={formatRem}
+                onCommit={(radius) => workspace.setValue('geometry', 'radius', radius)}
+              />
+              <ThemeRangeField
+                label="Panel radius"
+                value={workspace.theme.geometry.panelRadius}
+                cssVariable="--ui-radius-panel"
+                minimum={0}
+                maximum={2}
+                step={0.05}
+                format={formatRem}
+                onCommit={(panelRadius) =>
+                  workspace.setValue('geometry', 'panelRadius', panelRadius)
+                }
+              />
+              <ThemeRangeField
+                label="Control height"
+                value={workspace.theme.density.control}
+                cssVariable="--ui-control-height"
+                minimum={1.75}
+                maximum={3}
+                step={0.05}
+                format={formatRem}
+                onCommit={(control) => workspace.setValue('density', 'control', control)}
+              />
+              <ThemeRangeField
+                label="Small control height"
+                value={workspace.theme.density.controlSmall}
+                cssVariable="--ui-control-height-sm"
+                minimum={1.5}
+                maximum={2.75}
+                step={0.05}
+                format={formatRem}
+                onCommit={(controlSmall) =>
+                  workspace.setValue('density', 'controlSmall', controlSmall)
+                }
+              />
+              <ThemeRangeField
+                label="Large control height"
+                value={workspace.theme.density.controlLarge}
+                cssVariable="--ui-control-height-lg"
+                minimum={2}
+                maximum={3.5}
+                step={0.05}
+                format={formatRem}
+                onCommit={(controlLarge) =>
+                  workspace.setValue('density', 'controlLarge', controlLarge)
+                }
+              />
               <Field>
                 <FieldLabel htmlFor="control-shadow">Control shadow</FieldLabel>
                 <DraftInput
@@ -653,36 +1030,26 @@ export function ThemeStudio({
                   onCommit={(value) => workspace.setValue('effects', 'panelShadow', value)}
                 />
               </Field>
-              <Field>
-                <FieldLabel>
-                  Fast motion
-                  <Slider
-                    value={[Number.parseFloat(workspace.theme.motion.fast)]}
-                    min={0}
-                    max={300}
-                    step={10}
-                    onValueChange={(value) =>
-                      workspace.setValue('motion', 'fast', `${firstSliderValue(value)}ms`)
-                    }
-                  />
-                </FieldLabel>
-                <FieldDescription>{workspace.theme.motion.fast}</FieldDescription>
-              </Field>
-              <Field>
-                <FieldLabel>
-                  Standard motion
-                  <Slider
-                    value={[Number.parseFloat(workspace.theme.motion.standard)]}
-                    min={0}
-                    max={500}
-                    step={10}
-                    onValueChange={(value) =>
-                      workspace.setValue('motion', 'standard', `${firstSliderValue(value)}ms`)
-                    }
-                  />
-                </FieldLabel>
-                <FieldDescription>{workspace.theme.motion.standard}</FieldDescription>
-              </Field>
+              <ThemeRangeField
+                label="Fast motion"
+                value={workspace.theme.motion.fast}
+                cssVariable="--ui-motion-fast"
+                minimum={0}
+                maximum={300}
+                step={10}
+                format={formatMilliseconds}
+                onCommit={(fast) => workspace.setValue('motion', 'fast', fast)}
+              />
+              <ThemeRangeField
+                label="Standard motion"
+                value={workspace.theme.motion.standard}
+                cssVariable="--ui-motion-standard"
+                minimum={0}
+                maximum={500}
+                step={10}
+                format={formatMilliseconds}
+                onCommit={(standard) => workspace.setValue('motion', 'standard', standard)}
+              />
             </FieldGroup>
           </TabsContent>
           <TabsContent value="export">
@@ -726,7 +1093,10 @@ export function ThemeStudio({
                 <Button onClick={() => copy(command, 'Install command copied')}>
                   Copy command
                 </Button>
-                <Button variant="outline" onClick={() => copy(workspace.css, 'Theme CSS copied')}>
+                <Button
+                  variant="outline"
+                  onClick={() => copy(workspace.serializeCss(), 'Theme CSS copied')}
+                >
                   Copy CSS
                 </Button>
                 <Button
@@ -743,7 +1113,9 @@ export function ThemeStudio({
                 </Button>
                 <Button
                   variant="outline"
-                  onClick={() => download(`${workspace.theme.name}.css`, 'text/css', workspace.css)}
+                  onClick={() =>
+                    download(`${workspace.theme.name}.css`, 'text/css', workspace.serializeCss())
+                  }
                 >
                   Download CSS
                 </Button>
@@ -752,9 +1124,6 @@ export function ThemeStudio({
           </TabsContent>
         </Tabs>
       </CardContent>
-      <CardFooter>
-        <span>{themeColorTokens.length} color tokens · light and dark · consumer-owned output</span>
-      </CardFooter>
     </Card>
   )
 }

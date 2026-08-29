@@ -14,7 +14,7 @@
       "path": "source/components/rating/rating-02/rating-02.tsx",
       "content": "import { useState } from 'react'\n\nimport { Rating } from '@/components/ui/rating'\n\nconst RatingHalfStarDemo = () => {\n  const [starCount, setStarCount] = useState(2.5)\n\n  return (\n    <div className='flex w-full max-w-xs items-center justify-center'>\n      <Rating size={24} precision={0.5} value={starCount} onValueChange={setStarCount} />\n    </div>\n  )\n}\n\nexport default RatingHalfStarDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/rating/rating-02.tsx"
+      "target": "components/astrale/components/rating/rating-02.tsx"
     },
     {
       "path": "source/components/rating/rating-02/support/components/ui/rating.tsx",

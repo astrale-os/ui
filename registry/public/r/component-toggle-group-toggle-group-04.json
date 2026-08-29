@@ -11,7 +11,7 @@
       "path": "source/components/toggle-group/toggle-group-04/toggle-group-04.tsx",
       "content": "import { ToggleGroup, ToggleGroupItem } from '@astrale-os/ui/toggle-group'\n\nconst ToggleGroupSpacing = () => {\n  return (\n    <ToggleGroup size='sm' defaultValue={['top']} variant='outline'>\n      <ToggleGroupItem value='top' aria-label='Toggle top'>\n        Top\n      </ToggleGroupItem>\n      <ToggleGroupItem value='bottom' aria-label='Toggle bottom'>\n        Bottom\n      </ToggleGroupItem>\n      <ToggleGroupItem value='left' aria-label='Toggle left'>\n        Left\n      </ToggleGroupItem>\n      <ToggleGroupItem value='right' aria-label='Toggle right'>\n        Right\n      </ToggleGroupItem>\n    </ToggleGroup>\n  )\n}\n\nexport default ToggleGroupSpacing\n",
       "type": "registry:component",
-      "target": "components/astrale/component/toggle-group/toggle-group-04.tsx"
+      "target": "components/astrale/components/toggle-group/toggle-group-04.tsx"
     }
   ],
   "meta": {

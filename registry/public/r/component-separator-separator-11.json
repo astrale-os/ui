@@ -11,7 +11,7 @@
       "path": "source/components/separator/separator-11/separator-11.tsx",
       "content": "import { Separator } from '@astrale-os/ui/separator'\n\nconst SeparatorStylesDemo = () => {\n  return (\n    <div className='w-full max-w-sm'>\n      <div className='space-y-4'>\n        <h4 className='text-base font-medium'>Solid Thickness</h4>\n        <div className='flex flex-col gap-2'>\n          <div className='space-y-2'>\n            <p className='text-muted-foreground text-sm'>1px (Default)</p>\n            <Separator />\n          </div>\n          <div className='space-y-2'>\n            <p className='text-muted-foreground text-sm'>2px</p>\n            <Separator className='data-horizontal:h-0.5' />\n          </div>\n          <div className='space-y-2'>\n            <p className='text-muted-foreground text-sm'>4px</p>\n            <Separator className='data-horizontal:h-1' />\n          </div>\n        </div>\n      </div>\n    </div>\n  )\n}\n\nexport default SeparatorStylesDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/separator/separator-11.tsx"
+      "target": "components/astrale/components/separator/separator-11.tsx"
     }
   ],
   "meta": {

@@ -12,7 +12,7 @@
       "path": "source/components/alert/alert-01/alert-01.tsx",
       "content": "import { Alert, AlertTitle } from '@astrale-os/ui/alert'\nimport { CircleAlertIcon } from \"lucide-react\"\n\nconst AlertDemo = () => {\n  return (\n    <Alert className='*:[svg]:row-span-1'>\n      <CircleAlertIcon\n      />\n      <AlertTitle>New message!</AlertTitle>\n    </Alert>\n  )\n}\n\nexport default AlertDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/alert/alert-01.tsx"
+      "target": "components/astrale/components/alert/alert-01.tsx"
     }
   ],
   "meta": {

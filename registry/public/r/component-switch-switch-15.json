@@ -13,7 +13,7 @@
       "path": "source/components/switch/switch-15/switch-15.tsx",
       "content": "import { useId } from 'react'\nimport { Label } from '@astrale-os/ui/label'\nimport { Switch } from '@astrale-os/ui/switch'\nimport { DatabaseIcon } from \"lucide-react\"\n\nconst SwitchCardDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='border-input has-data-checked:border-primary/50 relative flex w-full items-start gap-2 rounded-md border p-4 shadow-xs outline-none'>\n      <Switch id={id} size='sm' className='order-1' aria-describedby={`${id}-description`} />\n      <div className='flex grow items-center gap-3'>\n        <DatabaseIcon className='size-6' />\n        <div className='grid grow gap-2'>\n          <Label htmlFor={id}>Backup</Label>\n          <p id={`${id}-description`} className='text-muted-foreground text-xs'>\n            Backup every file from your project.\n          </p>\n        </div>\n      </div>\n    </div>\n  )\n}\n\nexport default SwitchCardDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/switch/switch-15.tsx"
+      "target": "components/astrale/components/switch/switch-15.tsx"
     }
   ],
   "meta": {

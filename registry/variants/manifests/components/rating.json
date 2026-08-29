@@ -18,7 +18,7 @@
         {
           "path": "rating-01.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/rating/rating-01.tsx"
+          "target": "components/astrale/components/rating/rating-01.tsx"
         },
         {
           "path": "support/components/ui/rating.tsx",
@@ -48,7 +48,7 @@
         {
           "path": "rating-02.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/rating/rating-02.tsx"
+          "target": "components/astrale/components/rating/rating-02.tsx"
         },
         {
           "path": "support/components/ui/rating.tsx",
@@ -78,7 +78,7 @@
         {
           "path": "rating-03.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/rating/rating-03.tsx"
+          "target": "components/astrale/components/rating/rating-03.tsx"
         },
         {
           "path": "support/components/ui/rating.tsx",
@@ -108,7 +108,7 @@
         {
           "path": "rating-04.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/rating/rating-04.tsx"
+          "target": "components/astrale/components/rating/rating-04.tsx"
         },
         {
           "path": "support/components/ui/rating.tsx",
@@ -138,7 +138,7 @@
         {
           "path": "rating-05.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/rating/rating-05.tsx"
+          "target": "components/astrale/components/rating/rating-05.tsx"
         },
         {
           "path": "support/components/ui/rating.tsx",
@@ -168,7 +168,7 @@
         {
           "path": "rating-06.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/rating/rating-06.tsx"
+          "target": "components/astrale/components/rating/rating-06.tsx"
         },
         {
           "path": "support/components/ui/rating.tsx",
@@ -198,7 +198,7 @@
         {
           "path": "rating-07.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/rating/rating-07.tsx"
+          "target": "components/astrale/components/rating/rating-07.tsx"
         },
         {
           "path": "support/components/ui/rating.tsx",
@@ -228,7 +228,7 @@
         {
           "path": "rating-08.tsx",
           "type": "registry:component",
-          "target": "components/astrale/component/rating/rating-08.tsx"
+          "target": "components/astrale/components/rating/rating-08.tsx"
         },
         {
           "path": "support/components/ui/rating.tsx",

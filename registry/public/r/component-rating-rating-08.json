@@ -14,7 +14,7 @@
       "path": "source/components/rating/rating-08/rating-08.tsx",
       "content": "'use client'\n\nimport { useState } from 'react'\n\nimport { Button } from '@astrale-os/ui/button'\n\nconst EMOJIS = ['😡', '☹️', '😐', '🙂', '😍']\nconst LABELS = ['Terrible', 'Bad', 'Okay', 'Good', 'Excellent']\n\nconst RatingEmojiDemo = () => {\n  const [value, setValue] = useState<number | null>(null)\n\n  return (\n    <div className='w-full max-w-xs'>\n      <h3 className='mb-3 text-center text-sm font-medium'>How was your experience?</h3>\n\n      <div className='flex items-center justify-center gap-3'>\n        {EMOJIS.map((emoji, i) => {\n          const idx = i + 1\n\n          return (\n            <Button\n              key={emoji}\n              size='icon-lg'\n              variant='outline'\n              onClick={() => setValue(idx)}\n              className='size-10 text-2xl'\n            >\n              {emoji}\n            </Button>\n          )\n        })}\n      </div>\n\n      <div className='text-muted-foreground mt-3 min-h-5 text-center text-sm font-medium'>\n        {value ? LABELS[value - 1] : ''}\n      </div>\n    </div>\n  )\n}\n\nexport default RatingEmojiDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/rating/rating-08.tsx"
+      "target": "components/astrale/components/rating/rating-08.tsx"
     },
     {
       "path": "source/components/rating/rating-08/support/components/ui/rating.tsx",

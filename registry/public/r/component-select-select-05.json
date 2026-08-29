@@ -12,7 +12,7 @@
       "path": "source/components/select/select-05/select-05.tsx",
       "content": "import { useId } from 'react'\n\nimport { Label } from '@astrale-os/ui/label'\nimport { NativeSelect, NativeSelectOption } from '@astrale-os/ui/native-select'\n\nconst NativeSelectWithErrorDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>Native select with error</Label>\n      <NativeSelect id={id} aria-invalid>\n        <NativeSelectOption value='1'>IST (Indian Standard Time)</NativeSelectOption>\n        <NativeSelectOption value='2'>EST (Eastern Standard Time)</NativeSelectOption>\n        <NativeSelectOption value='3'>PST (Pacific Standard Time)</NativeSelectOption>\n        <NativeSelectOption value='4'>GMT (Greenwich Mean Time)</NativeSelectOption>\n      </NativeSelect>\n      <p className='text-destructive mt-2 text-xs' role='alert' aria-live='polite'>\n        Selected option is invalid\n      </p>\n    </div>\n  )\n}\n\nexport default NativeSelectWithErrorDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/select/select-05.tsx"
+      "target": "components/astrale/components/select/select-05.tsx"
     }
   ],
   "meta": {

@@ -11,7 +11,7 @@
       "path": "source/components/typography/typography-13/typography-13.tsx",
       "content": "const TypographyGradientDemo = () => {\n  return (\n    <p className='from-primary/40 to-primary bg-linear-to-r bg-clip-text text-4xl font-semibold text-transparent'>\n      Gradient - Dawn light in a single line\n    </p>\n  )\n}\n\nexport default TypographyGradientDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/typography/typography-13.tsx"
+      "target": "components/astrale/components/typography/typography-13.tsx"
     }
   ],
   "meta": {

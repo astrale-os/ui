@@ -12,7 +12,7 @@
       "path": "source/components/checkbox/checkbox-01/checkbox-01.tsx",
       "content": "import { useId } from 'react'\n\nimport { Checkbox } from '@astrale-os/ui/checkbox'\nimport { Label } from '@astrale-os/ui/label'\n\nconst CheckboxDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='flex items-center gap-2'>\n      <Checkbox id={id} />\n      <Label htmlFor={id}>Accept terms and conditions</Label>\n    </div>\n  )\n}\n\nexport default CheckboxDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/checkbox/checkbox-01.tsx"
+      "target": "components/astrale/components/checkbox/checkbox-01.tsx"
     }
   ],
   "meta": {

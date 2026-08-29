@@ -12,7 +12,7 @@
       "path": "source/components/input/input-29/input-29.tsx",
       "content": "import { useId } from 'react'\n\nimport { ButtonGroup } from '@astrale-os/ui/button-group'\nimport { Input } from '@astrale-os/ui/input'\nimport { Label } from '@astrale-os/ui/label'\nimport { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@astrale-os/ui/select'\n\nconst items = [\n  { label: '.com', value: '.com' },\n  { label: '.org', value: '.org' },\n  { label: '.net', value: '.net' }\n]\n\nconst InputEndSelectDemo = () => {\n  const id = useId()\n\n  return (\n    <div className='w-full max-w-xs space-y-2'>\n      <Label htmlFor={id}>Input with end select</Label>\n      <ButtonGroup className='w-full'>\n        <Input id={id} type='text' placeholder='shadcnstudio' />\n        <Select items={items} defaultValue='.com'>\n          <SelectTrigger id={id}>\n            <SelectValue />\n          </SelectTrigger>\n          <SelectContent>\n            {items.map(item => (\n              <SelectItem key={item.value} value={item.value} className='pr-2 [&_svg]:hidden'>\n                {item.label}\n              </SelectItem>\n            ))}\n          </SelectContent>\n        </Select>\n      </ButtonGroup>\n    </div>\n  )\n}\n\nexport default InputEndSelectDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/input/input-29.tsx"
+      "target": "components/astrale/components/input/input-29.tsx"
     }
   ],
   "meta": {

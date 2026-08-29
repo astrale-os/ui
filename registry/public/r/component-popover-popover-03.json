@@ -12,7 +12,7 @@
       "path": "source/components/popover/popover-03/popover-03.tsx",
       "content": "import { Badge } from '@astrale-os/ui/badge'\nimport { Button } from '@astrale-os/ui/button'\nimport { Popover, PopoverContent, PopoverTrigger } from '@astrale-os/ui/popover'\nimport { DollarSignIcon } from \"lucide-react\"\n\nconst PopoverPricingDemo = () => {\n  return (\n    <Popover>\n      <PopoverTrigger render={<Button variant='outline' size='icon' />}>\n        <DollarSignIcon\n        />\n        <span className='sr-only'>Pricing details</span>\n      </PopoverTrigger>\n      <PopoverContent className='w-80'>\n        <div className='flex flex-col gap-2.5'>\n          <div className='flex items-center justify-between'>\n            <span className='text-lg font-semibold'>Enterprise Plan</span>\n            <span className='text-sm font-medium'>$49.99/month</span>\n          </div>\n          <p className='text-sm'>\n            Get unlimited access to all features including AI-powered analytics, custom branding, priority support, and\n            advanced team collaboration tools.\n          </p>\n          <div className='flex items-center gap-2'>\n            <Badge variant='destructive' className='rounded-sm px-1.5 py-px text-xs'>\n              Limited Offer\n            </Badge>\n            <span className='text-muted-foreground text-xs'>20% discount on annual plan</span>\n          </div>\n        </div>\n      </PopoverContent>\n    </Popover>\n  )\n}\n\nexport default PopoverPricingDemo\n",
       "type": "registry:component",
-      "target": "components/astrale/component/popover/popover-03.tsx"
+      "target": "components/astrale/components/popover/popover-03.tsx"
     }
   ],
   "meta": {
