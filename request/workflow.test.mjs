@@ -224,8 +224,8 @@ git apply --index --binary --whitespace=nowarn "$patch"
   )
   assert.equal(
     qualify.steps.find((step) => step.name === 'Regenerate repository-owned derived artifacts').run,
-    `pnpm registry:build
-pnpm format
+    `pnpm format
+pnpm registry:build
 `,
   )
   assert.equal(
