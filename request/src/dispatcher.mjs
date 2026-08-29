@@ -162,6 +162,7 @@ export function createUiRequestDispatcher(options) {
     ) {
       return { kind: 'updated', record: current.record, run: dispatched.run }
     }
+    await sleep(limits.pollIntervalMs, signal)
     return observe(current, signal, maximumWait)
   }
 
