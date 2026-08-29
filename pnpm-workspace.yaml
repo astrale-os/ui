@@ -23,6 +23,7 @@ verifyDepsBeforeRun: false
 
 # Allowlist of packages permitted to run install scripts (supply-chain hardening).
 allowBuilds:
+  '@anthropic-ai/claude-code': false
   '@parcel/watcher': false
   better-sqlite3: true
   cbor-extract: true

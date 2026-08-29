@@ -73,23 +73,29 @@ jobs:
             git checkout -B "$INPUT_BRANCH" "refs/remotes/origin/$INPUT_BASE_REF"
           fi
           echo "baseline_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
-      - name: Implement the accepted request with Claude Code
-        uses: anthropics/claude-code-action/base-action@a874e9ecd7bb36efdad65429c6b35815f5a08f10 # v1, 2026-08-28
+      - uses: astrale-os/config/.github/actions/setup@8e2e2abd0320be0c2f64033916519ab3b66c7dd7
         with:
-          prompt: ${{ inputs.objective }}
-          use_foundry: 'true'
-          claude_args: |
-            --bare
-            --model claude-opus-5
-            --effort low
-            --permission-mode acceptEdits
-            --allowedTools Read,Edit,Write,Glob,Grep,WebFetch,WebSearch
-            --no-session-persistence
-            --max-budget-usd 20
+          node-version: 24
+          frozen-lockfile: 'true'
+      - name: Implement the accepted request with Claude Code
         env:
-          ANTHROPIC_FOUNDRY_RESOURCE: ${{ secrets.ANTHROPIC_FOUNDRY_RESOURCE }}
+          INPUT_OBJECTIVE: ${{ inputs.objective }}
+          CLAUDE_CODE_USE_FOUNDRY: '1'
+          ANTHROPIC_FOUNDRY_BASE_URL: ${{ secrets.ANTHROPIC_FOUNDRY_BASE_URL }}
           ANTHROPIC_FOUNDRY_API_KEY: ${{ secrets.ANTHROPIC_FOUNDRY_API_KEY }}
           ANTHROPIC_DEFAULT_OPUS_MODEL: claude-opus-5
+        run: |
+          set -euo pipefail
+          node --input-type=module -e 'const url = new URL(process.env.ANTHROPIC_FOUNDRY_BASE_URL); if (url.protocol !== "https:" || url.username || url.password || url.search || url.hash || url.pathname !== "/anthropic") process.exit(1); console.log("Foundry base URL admitted.")'
+          printf '%s' "$INPUT_OBJECTIVE" | node node_modules/@anthropic-ai/claude-code/cli-wrapper.cjs \
+            --bare \
+            --model claude-opus-5 \
+            --effort low \
+            --permission-mode acceptEdits \
+            --allowedTools Read,Edit,Write,Glob,Grep,WebFetch,WebSearch \
+            --no-session-persistence \
+            --max-budget-usd 20 \
+            --print
       - name: Encode the candidate as inert patch evidence
         run: |
           set -euo pipefail
