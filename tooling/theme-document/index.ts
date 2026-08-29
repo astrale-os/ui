@@ -1,7 +1,7 @@
 export const THEME_DOCUMENT_VERSION = 5 as const
 export const THEME_DOCUMENT_MAX_BYTES = 131_072
 export const THEME_GENERATOR_VERSION = 1 as const
-export const THEME_GENERATOR_ENGINE_VERSION = 1 as const
+export const THEME_GENERATOR_ENGINE_VERSION = 2 as const
 export const THEME_FONT_CATALOG_VERSION = 1 as const
 
 export const themeColorTokens = [
@@ -442,7 +442,7 @@ function generatorMetadata(value: unknown, label: string): GeneratorMetadata {
       candidate.engineVersion,
       THEME_GENERATOR_ENGINE_VERSION,
       `${label}.engineVersion`,
-    ) as 1,
+    ) as 2,
     fontCatalogVersion: exactInteger(
       candidate.fontCatalogVersion,
       THEME_FONT_CATALOG_VERSION,

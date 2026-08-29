@@ -3,7 +3,6 @@ import userEvent from '@testing-library/user-event'
 import { afterEach, describe, expect, test } from 'vitest'
 
 import { SignInCard } from '../blocks/authentication/sign-in-card.js'
-import { AppearanceSettings } from '../blocks/settings/appearance.js'
 import {
   StatusHeatmap,
   StatusHeatmapBlock,
@@ -13,36 +12,11 @@ import {
   StatusHeatmapStat,
 } from '../components/status-heatmap/status-heatmap.js'
 import { HorizontalCarousel } from '../patterns/carousel/horizontal-controlled.js'
-import { ChartLineBasic } from '../patterns/chart/line-basic.js'
 import { ComboboxSingleBasic } from '../patterns/combobox/single-basic.js'
 
 afterEach(cleanup)
 
 describe('owned registry compositions', () => {
-  test('chart preserves its upstream token expression and accepts host class and token control', () => {
-    const { rerender } = render(
-      <ChartLineBasic
-        data={[
-          { label: 'Intake', value: 18 },
-          { label: 'Public beta', value: 100 },
-        ]}
-      />,
-    )
-    const line = document.querySelector('[data-slot="patterns-chart-line-basic-polyline"]')
-    expect(line).toHaveAttribute('stroke', 'var(--color-chart-1, var(--ui-chart-1))')
-
-    rerender(
-      <ChartLineBasic
-        className="host-chart"
-        style={{ '--color-chart-1': 'var(--ui-primary)' } as React.CSSProperties}
-        data={[{ label: 'Qualified', value: 100 }]}
-      />,
-    )
-    const root = document.querySelector('[data-slot="pattern-chart-line-basic"]')
-    expect(root).toHaveClass('host-chart')
-    expect(root).toHaveStyle({ '--color-chart-1': 'var(--ui-primary)' })
-  })
-
   test('combobox instances keep unique relationships and inject query and selection state', async () => {
     const user = userEvent.setup()
     const changes: string[] = []
@@ -173,23 +147,6 @@ describe('owned registry compositions', () => {
     expect(changes).toEqual([['email', 'first@example.testa']])
     await user.click(submitters[0]!)
     expect(submits).toBe(1)
-  })
-
-  test('settings blocks inject toggles and persistence without ambient effects', async () => {
-    const user = userEvent.setup()
-    const toggles: Array<[string, boolean]> = []
-    let saves = 0
-    render(
-      <AppearanceSettings
-        values={{ compact: false, motion: true }}
-        onToggle={(id, value) => toggles.push([id, value])}
-        onSave={() => saves++}
-      />,
-    )
-    await user.click(screen.getByRole('switch', { name: 'Compact density' }))
-    expect(toggles).toEqual([['compact', true]])
-    await user.click(screen.getByRole('button', { name: 'Save changes' }))
-    expect(saves).toBe(1)
   })
 
   test('status heatmap keeps its upstream anatomy, labels, and cell interaction', async () => {

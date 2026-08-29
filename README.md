@@ -52,7 +52,7 @@ Install consumer-owned compositions without adding them to the runtime package:
 astrale ui search "editable chart with export"
 astrale ui search "line chart" --json
 astrale ui add component/chart component/sidebar
-astrale ui add pattern/chart/line-basic block/dashboard/overview
+astrale ui add pattern/calendar/range-basic block/dashboard/overview
 astrale ui add theme/observatory
 astrale ui add @ss-components/input-02
 astrale ui doctor

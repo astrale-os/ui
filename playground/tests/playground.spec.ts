@@ -164,11 +164,6 @@ test('playground exposes every public runtime owner and complete visual registry
   await expect(
     page.locator('#catalog-group-component-button [data-preview-address]').first(),
   ).toHaveAttribute('data-preview-address', 'component/button')
-  await selectCatalogKind(page, 'Blocks')
-  await expect(page.locator('[data-preview-address="block/settings/team"]')).toHaveAttribute(
-    'data-preview-status',
-    'idle',
-  )
   await selectCatalogKind(page, 'Components')
   const viewport = await page.evaluate(() => ({
     innerWidth,
@@ -219,23 +214,6 @@ test('playground exposes every public runtime owner and complete visual registry
     .toBe(true)
 
   await selectCatalogKind(page, 'Blocks')
-  const team = await loadPreview(page, 'block/settings/team')
-  const teamLayout = await team.evaluate((element) => {
-    const content = element.querySelector(':scope > [data-slot="card-content"]')!
-    const block = content.querySelector('[data-slot="block-settings-team"]')!
-    const contentRect = content.getBoundingClientRect()
-    const blockRect = block.getBoundingClientRect()
-    return {
-      width: Math.round(blockRect.width),
-      contentWidth: Math.round(contentRect.width),
-      maxWidth: getComputedStyle(block).maxWidth,
-      leftGap: Math.round(blockRect.left - contentRect.left),
-      rightGap: Math.round(contentRect.right - blockRect.right),
-    }
-  })
-  expect(teamLayout.maxWidth).toBe('672px')
-  expect(teamLayout.width).toBe(Math.min(672, teamLayout.contentWidth - 24))
-  expect(Math.abs(teamLayout.leftGap - teamLayout.rightGap)).toBeLessThanOrEqual(1)
   const signInLayout = await loadPreview(page, 'block/authentication/sign-in-card')
   const signInGeometry = await signInLayout.evaluate((element) => {
     const content = element.querySelector(':scope > [data-slot="card-content"]')!
@@ -323,13 +301,13 @@ test('catalog loads previews near the viewport once and preserves loaded state',
     if (request.url().includes('.preview.tsx')) previewRequests.push(request.url())
   })
   await page.goto('/')
-  await selectCatalogKind(page, 'Blocks')
+  await selectCatalogKind(page, 'Components')
 
-  const distant = page.locator('[data-preview-address="block/settings/team"]')
+  const distant = page.locator('[data-preview-address="component/tooltip"]')
   await expect(distant).toHaveAttribute('data-preview-status', 'idle')
-  expect(previewRequests.some((url) => url.includes('/team.preview.tsx'))).toBe(false)
-  await loadPreview(page, 'block/settings/team')
-  expect(previewRequests.filter((url) => url.includes('/team.preview.tsx'))).toHaveLength(1)
+  expect(previewRequests.some((url) => url.includes('/tooltip.preview.tsx'))).toBe(false)
+  await loadPreview(page, 'component/tooltip')
+  expect(previewRequests.filter((url) => url.includes('/tooltip.preview.tsx'))).toHaveLength(1)
 
   await selectCatalogKind(page, 'Components')
   const select = await loadPreview(page, 'component/select')
@@ -339,7 +317,7 @@ test('catalog loads previews near the viewport once and preserves loaded state',
   await select.scrollIntoViewIfNeeded()
   await expect(select).toHaveAttribute('data-preview-status', 'ready')
   await expect(select.getByRole('combobox', { name: 'Environment' })).toContainText('Staging')
-  expect(previewRequests.filter((url) => url.includes('/team.preview.tsx'))).toHaveLength(1)
+  expect(previewRequests.filter((url) => url.includes('/tooltip.preview.tsx'))).toHaveLength(1)
   await openThemeCustomizer(page)
   await page.getByRole('button', { name: 'Dark', exact: true }).click()
   await page.getByRole('button', { name: 'Close', exact: true }).click()
@@ -574,43 +552,39 @@ test('return anchor survives a delayed lazy block resolving above it', async ({
     testInfo.project.name !== 'desktop',
     'The delayed geometry contract is viewport-neutral.',
   )
-  let releaseWorkspace: (() => void) | undefined
-  const workspaceRelease = new Promise<void>((resolve) => {
-    releaseWorkspace = resolve
+  let releaseSignUp: (() => void) | undefined
+  const signUpRelease = new Promise<void>((resolve) => {
+    releaseSignUp = resolve
   })
-  await page.route(/\/responsive-workspace\.preview\.tsx(?:\?|$)/u, async (route) => {
-    await workspaceRelease
+  await page.route(/\/sign-up-card\.preview\.tsx(?:\?|$)/u, async (route) => {
+    await signUpRelease
     await route.continue()
   })
   await page.goto('/')
   await selectCatalogKind(page, 'Blocks')
-  const delayed = page.locator(
-    '[data-preview-address="block/application-shell/responsive-workspace"]',
-  )
+  const delayed = page.locator('[data-preview-address="block/authentication/sign-up-card"]')
   await expect(delayed).toHaveAttribute('data-preview-status', 'loading')
   const loadingHeight = await delayed.evaluate((element) => element.getBoundingClientRect().height)
 
-  const authentication = page.locator('#catalog-group-block-authentication')
-  await authentication.scrollIntoViewIfNeeded()
-  const viewAuthentication = authentication.getByRole('button', { name: 'View family' })
-  await viewAuthentication.scrollIntoViewIfNeeded()
-  await viewAuthentication.focus()
-  const expectedTop = await authentication.evaluate(
-    (element) => element.getBoundingClientRect().top,
-  )
-  await viewAuthentication.press('Enter')
+  const dashboard = page.locator('#catalog-group-block-dashboard')
+  await dashboard.scrollIntoViewIfNeeded()
+  const viewDashboard = dashboard.getByRole('button', { name: 'View family' })
+  await viewDashboard.scrollIntoViewIfNeeded()
+  await viewDashboard.focus()
+  const expectedTop = await dashboard.evaluate((element) => element.getBoundingClientRect().top)
+  await viewDashboard.press('Enter')
   await page.getByRole('button', { name: 'Back' }).click()
   await expect
-    .poll(() => authentication.evaluate((element) => element.getBoundingClientRect().top))
+    .poll(() => dashboard.evaluate((element) => element.getBoundingClientRect().top))
     .toBeCloseTo(expectedTop, 0)
 
   await page.waitForTimeout(350)
-  releaseWorkspace?.()
+  releaseSignUp?.()
   await expect(delayed).toHaveAttribute('data-preview-status', 'ready')
   const readyHeight = await delayed.evaluate((element) => element.getBoundingClientRect().height)
-  expect(readyHeight).toBeGreaterThan(loadingHeight + 100)
+  expect(readyHeight).toBeGreaterThan(loadingHeight + 64)
   await expect
-    .poll(() => authentication.evaluate((element) => element.getBoundingClientRect().top))
+    .poll(() => dashboard.evaluate((element) => element.getBoundingClientRect().top))
     .toBeCloseTo(expectedTop, 0)
 })
 
@@ -719,12 +693,6 @@ test('representative patterns and blocks keep controlled state without product n
   await expect(page.getByRole('option', { name: 'Open Domain' })).toHaveCount(0)
   await page.keyboard.press('Escape')
 
-  await page.goto('/?family=pattern%2Fdata-table')
-  const table = await loadPreview(page, 'pattern/data-table/server-controlled')
-  await expect(table.getByText('Page 1 of 3')).toBeVisible()
-  await interactWithoutNavigation(() => table.getByRole('button', { name: 'Next' }).click())
-  await expect(table.getByText('Page 2 of 3')).toBeVisible()
-
   await page.goto('/?family=pattern%2Fform')
   const wizard = await loadPreview(page, 'pattern/form/wizard-controlled')
   await interactWithoutNavigation(() => wizard.getByRole('button', { name: 'Continue' }).click())
@@ -737,13 +705,6 @@ test('representative patterns and blocks keep controlled state without product n
   await interactWithoutNavigation(() => toast.getByRole('button', { name: 'Dismiss' }).click())
   await expect(toast.getByText('Revision ready')).toHaveCount(0)
 
-  await page.goto('/?family=pattern%2Fsidebar')
-  const sidebar = await loadPreview(page, 'pattern/sidebar/mobile-controlled')
-  await sidebar.getByRole('button', { name: 'Open navigation' }).click()
-  await expect(page.getByRole('dialog', { name: 'Navigation' })).toBeVisible()
-  await page.getByRole('button', { name: 'Catalog' }).click()
-  await expect(page.getByRole('dialog', { name: 'Navigation' })).toBeHidden()
-
   await page.goto('/?family=block%2Fauthentication')
   const signIn = await loadPreview(page, 'block/authentication/sign-in-card')
   const email = signIn.getByRole('textbox', { name: 'Email' })
@@ -752,13 +713,6 @@ test('representative patterns and blocks keep controlled state without product n
   await interactWithoutNavigation(() =>
     signIn.getByRole('button', { name: 'Sign in', exact: true }).click(),
   )
-
-  await page.goto('/?family=block%2Fsettings')
-  const notifications = await loadPreview(page, 'block/settings/notifications')
-  const updates = notifications.getByRole('switch', { name: 'Product updates' })
-  await expect(updates).toHaveAttribute('aria-checked', 'false')
-  await updates.click()
-  await expect(updates).toHaveAttribute('aria-checked', 'true')
 })
 
 test('invalid catalog addresses have an accessible empty state', async ({ page }) => {
@@ -788,13 +742,13 @@ test('loading and readiness expose stable accessible canvas semantics', async ({
   const holdModule = new Promise<void>((resolve) => {
     releaseModule = resolve
   })
-  await page.route(/\/team\.preview\.tsx(?:\?|$)/u, async (route) => {
+  await page.route(/\/operations\.preview\.tsx(?:\?|$)/u, async (route) => {
     await holdModule
     await route.continue()
   })
   await page.goto('/')
   await selectCatalogKind(page, 'Blocks')
-  const preview = page.locator('[data-preview-address="block/settings/team"]')
+  const preview = page.locator('[data-preview-address="block/dashboard/operations"]')
   const labelledBy = await preview.getAttribute('aria-labelledby')
   expect(labelledBy).toBeTruthy()
   await expect(page.locator(`#${labelledBy}`)).toHaveCount(1)
@@ -1170,6 +1124,21 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
   await expect(typographyLock).toContainText('Edited')
   await expect.poll(primaryValue).not.toBe('oklch(0.62 0.2 145)')
   const firstGeneratedPrimary = await primaryValue()
+  const generatedButtonForeground = await page
+    .getByRole('button', { name: 'Customize theme' })
+    .evaluate((button) => {
+      const root = button.closest('[data-slot="ui-playground"]')
+      if (!root) throw new Error('Theme root is missing.')
+      return {
+        background: getComputedStyle(button).backgroundColor,
+        backgroundToken: getComputedStyle(root).getPropertyValue('--ui-primary').trim(),
+        rendered: getComputedStyle(button).color,
+        token: getComputedStyle(root).getPropertyValue('--ui-primary-foreground').trim(),
+      }
+    })
+  expect(generatedButtonForeground.token).toMatch(/^oklch\((?:0|1) 0 /u)
+  expect(generatedButtonForeground.background).toBe(generatedButtonForeground.backgroundToken)
+  expect(generatedButtonForeground.rendered).toBe(generatedButtonForeground.token)
   const generatedContrast = await new AxeBuilder({ page })
     .include('[data-slot="ui-playground"]')
     .withRules(['color-contrast'])
@@ -1190,7 +1159,7 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
   expect(generatedDocument.generation).toMatchObject({
     kind: 'astrale.theme-generation',
     version: 1,
-    engineVersion: 1,
+    engineVersion: 2,
     fontCatalogVersion: 1,
     locks: ['typography'],
     editedBranches: ['typography'],
@@ -1391,6 +1360,32 @@ test('generated provenance, locks, and edited branches survive save, reload, exp
 
   await page.getByRole('combobox', { name: 'Theme' }).click()
   await page.getByRole('option', { name: 'Observatory', exact: true }).click()
+  const rejected = JSON.parse(exported)
+  rejected.generation.engineVersion = 1
+  await page.getByLabel('Import theme document').setInputFiles({
+    name: 'generated-engine-v1.astrale-theme.json',
+    mimeType: 'application/json',
+    buffer: Buffer.from(JSON.stringify(rejected)),
+  })
+  const rejectedToast = page.getByRole('dialog', { name: 'Theme import rejected' })
+  await expect(rejectedToast).toContainText('theme.generation.engineVersion is unsupported')
+  await expect(page.getByLabel('Import theme document')).toHaveValue('')
+  await expect(studio.getByRole('button', { name: 'Variation' })).toBeDisabled()
+  await expect
+    .poll(() =>
+      page
+        .locator('[data-slot="ui-playground"]')
+        .evaluate((element) => getComputedStyle(element).getPropertyValue('--ui-primary').trim()),
+    )
+    .toBe('oklch(0.36 0.14 251)')
+  await expect
+    .poll(() =>
+      page.evaluate(() => {
+        const themes = JSON.parse(localStorage.getItem('astrale-ui-playground:themes:v2') ?? '[]')
+        return themes[0]?.generation?.engineVersion
+      }),
+    )
+    .toBe(2)
   await page.getByLabel('Import theme document').setInputFiles({
     name: 'generated.astrale-theme.json',
     mimeType: 'application/json',

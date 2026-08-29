@@ -1,26 +1,5 @@
 [
   {
-    "address": "block/application-shell/compact-command",
-    "title": "Block · Application Shell · Compact Command",
-    "classification": "block",
-    "family": "application-shell",
-    "variantCount": 3
-  },
-  {
-    "address": "block/application-shell/responsive-workspace",
-    "title": "Block · Application Shell · Responsive Workspace",
-    "classification": "block",
-    "family": "application-shell",
-    "variantCount": 3
-  },
-  {
-    "address": "block/application-shell/sidebar-header",
-    "title": "Block · Application Shell · Sidebar Header",
-    "classification": "block",
-    "family": "application-shell",
-    "variantCount": 3
-  },
-  {
     "address": "block/authentication/recovery",
     "title": "Block · Authentication · Recovery",
     "classification": "block",
@@ -49,27 +28,6 @@
     "variantCount": 4
   },
   {
-    "address": "block/communication/composer",
-    "title": "Block · Communication · Composer",
-    "classification": "block",
-    "family": "communication",
-    "variantCount": 3
-  },
-  {
-    "address": "block/communication/conversation",
-    "title": "Block · Communication · Conversation",
-    "classification": "block",
-    "family": "communication",
-    "variantCount": 3
-  },
-  {
-    "address": "block/communication/inbox",
-    "title": "Block · Communication · Inbox",
-    "classification": "block",
-    "family": "communication",
-    "variantCount": 3
-  },
-  {
     "address": "block/dashboard/analytics",
     "title": "Block · Dashboard · Analytics",
     "classification": "block",
@@ -88,27 +46,6 @@
     "title": "Block · Dashboard · Overview",
     "classification": "block",
     "family": "dashboard",
-    "variantCount": 3
-  },
-  {
-    "address": "block/data-management/collection-browser",
-    "title": "Block · Data Management · Collection Browser",
-    "classification": "block",
-    "family": "data-management",
-    "variantCount": 3
-  },
-  {
-    "address": "block/data-management/details-panel",
-    "title": "Block · Data Management · Details Panel",
-    "classification": "block",
-    "family": "data-management",
-    "variantCount": 3
-  },
-  {
-    "address": "block/data-management/editor",
-    "title": "Block · Data Management · Editor",
-    "classification": "block",
-    "family": "data-management",
     "variantCount": 3
   },
   {
@@ -228,55 +165,6 @@
     "title": "kanban 4",
     "classification": "block",
     "family": "kanban",
-    "variantCount": 4
-  },
-  {
-    "address": "block/onboarding/empty-first-value",
-    "title": "Block · Onboarding · Empty First Value",
-    "classification": "block",
-    "family": "onboarding",
-    "variantCount": 3
-  },
-  {
-    "address": "block/onboarding/multi-step",
-    "title": "Block · Onboarding · Multi Step",
-    "classification": "block",
-    "family": "onboarding",
-    "variantCount": 3
-  },
-  {
-    "address": "block/onboarding/welcome",
-    "title": "Block · Onboarding · Welcome",
-    "classification": "block",
-    "family": "onboarding",
-    "variantCount": 3
-  },
-  {
-    "address": "block/settings/appearance",
-    "title": "Block · Settings · Appearance",
-    "classification": "block",
-    "family": "settings",
-    "variantCount": 4
-  },
-  {
-    "address": "block/settings/notifications",
-    "title": "Block · Settings · Notifications",
-    "classification": "block",
-    "family": "settings",
-    "variantCount": 4
-  },
-  {
-    "address": "block/settings/profile",
-    "title": "Block · Settings · Profile",
-    "classification": "block",
-    "family": "settings",
-    "variantCount": 4
-  },
-  {
-    "address": "block/settings/team",
-    "title": "Block · Settings · Team",
-    "classification": "block",
-    "family": "settings",
     "variantCount": 4
   },
   {
@@ -5789,20 +5677,6 @@
     "variantCount": 14
   },
   {
-    "address": "pattern/chart/bar-basic",
-    "title": "Pattern · Chart · Bar Basic",
-    "classification": "pattern",
-    "family": "chart",
-    "variantCount": 2
-  },
-  {
-    "address": "pattern/chart/line-basic",
-    "title": "Pattern · Chart · Line Basic",
-    "classification": "pattern",
-    "family": "chart",
-    "variantCount": 2
-  },
-  {
     "address": "pattern/code-block/code-block-01",
     "title": "Code Block 1",
     "classification": "pattern",
@@ -6076,20 +5950,6 @@
     "variantCount": 14
   },
   {
-    "address": "pattern/data-table/basic",
-    "title": "Pattern · Data Table · Basic",
-    "classification": "pattern",
-    "family": "data-table",
-    "variantCount": 2
-  },
-  {
-    "address": "pattern/data-table/server-controlled",
-    "title": "Pattern · Data Table · Server Controlled",
-    "classification": "pattern",
-    "family": "data-table",
-    "variantCount": 2
-  },
-  {
     "address": "pattern/date-and-time-picker/date-picker-01",
     "title": "Date Picker 1",
     "classification": "pattern",
@@ -6199,84 +6059,77 @@
     "title": "Form 1",
     "classification": "pattern",
     "family": "form",
-    "variantCount": 12
+    "variantCount": 11
   },
   {
     "address": "pattern/form/form-02",
     "title": "Form 2",
     "classification": "pattern",
     "family": "form",
-    "variantCount": 12
+    "variantCount": 11
   },
   {
     "address": "pattern/form/form-03",
     "title": "Form 3",
     "classification": "pattern",
     "family": "form",
-    "variantCount": 12
+    "variantCount": 11
   },
   {
     "address": "pattern/form/form-04",
     "title": "Form 4",
     "classification": "pattern",
     "family": "form",
-    "variantCount": 12
+    "variantCount": 11
   },
   {
     "address": "pattern/form/form-05",
     "title": "Form 5",
     "classification": "pattern",
     "family": "form",
-    "variantCount": 12
+    "variantCount": 11
   },
   {
     "address": "pattern/form/form-06",
     "title": "Form 6",
     "classification": "pattern",
     "family": "form",
-    "variantCount": 12
+    "variantCount": 11
   },
   {
     "address": "pattern/form/form-07",
     "title": "Form 7",
     "classification": "pattern",
     "family": "form",
-    "variantCount": 12
+    "variantCount": 11
   },
   {
     "address": "pattern/form/form-08",
     "title": "Form 8",
     "classification": "pattern",
     "family": "form",
-    "variantCount": 12
+    "variantCount": 11
   },
   {
     "address": "pattern/form/form-09",
     "title": "Form 9",
     "classification": "pattern",
     "family": "form",
-    "variantCount": 12
+    "variantCount": 11
   },
   {
     "address": "pattern/form/form-10",
     "title": "Form 10",
     "classification": "pattern",
     "family": "form",
-    "variantCount": 12
-  },
-  {
-    "address": "pattern/form/native",
-    "title": "Pattern · Form · Native",
-    "classification": "pattern",
-    "family": "form",
-    "variantCount": 12
+    "variantCount": 11
   },
   {
     "address": "pattern/form/wizard-controlled",
     "title": "Pattern · Form · Wizard Controlled",
     "classification": "pattern",
     "family": "form",
-    "variantCount": 12
+    "variantCount": 11
   },
   {
     "address": "pattern/list/list-01",
@@ -6594,34 +6447,6 @@
     "variantCount": 9
   },
   {
-    "address": "pattern/questionnaire/multi-step",
-    "title": "Pattern · Questionnaire · Multi Step",
-    "classification": "pattern",
-    "family": "questionnaire",
-    "variantCount": 2
-  },
-  {
-    "address": "pattern/questionnaire/single-page",
-    "title": "Pattern · Questionnaire · Single Page",
-    "classification": "pattern",
-    "family": "questionnaire",
-    "variantCount": 2
-  },
-  {
-    "address": "pattern/sidebar/application",
-    "title": "Pattern · Sidebar · Application",
-    "classification": "pattern",
-    "family": "sidebar",
-    "variantCount": 2
-  },
-  {
-    "address": "pattern/sidebar/mobile-controlled",
-    "title": "Pattern · Sidebar · Mobile Controlled",
-    "classification": "pattern",
-    "family": "sidebar",
-    "variantCount": 2
-  },
-  {
     "address": "pattern/sortable/sortable-01",
     "title": "Sortable 1",
     "classification": "pattern",
@@ -6752,20 +6577,6 @@
     "title": "Pattern · Toast · Controlled Queue",
     "classification": "pattern",
     "family": "toast",
-    "variantCount": 2
-  },
-  {
-    "address": "pattern/typography/article",
-    "title": "Pattern · Typography · Article",
-    "classification": "pattern",
-    "family": "typography",
-    "variantCount": 2
-  },
-  {
-    "address": "pattern/typography/dense-data",
-    "title": "Pattern · Typography · Dense Data",
-    "classification": "pattern",
-    "family": "typography",
     "variantCount": 2
   },
   {

@@ -24,6 +24,7 @@ import {
   perceptualLightness,
   solveForeground,
   solveForegroundForSurfaces,
+  solveOnColorForeground,
   solveVisibleColor,
   type OklchColor,
 } from './color.js'
@@ -219,9 +220,9 @@ function deriveMode(
     hues.anchor,
     lerp(0.075, 0.225, dna.colorfulness),
     3,
-    light ? lerp(0.58, 0.38, dna.contrast) : lerp(0.64, 0.79, dna.contrast),
+    light ? lerp(0.58, 0.38, dna.contrast) : lerp(0.47, 0.62, dna.contrast),
   )
-  const destructive = solveVisibleColor(background, 28, 0.19, 3, light ? 0.48 : 0.68)
+  const destructive = solveVisibleColor(background, 28, 0.19, 3, light ? 0.48 : 0.54)
   const border = solveVisibleColor(
     background,
     surfaceHue,
@@ -278,6 +279,10 @@ function deriveMode(
     3,
     light ? 0.58 : 0.7,
   )
+  const primaryForeground = solveOnColorForeground(primary)
+  const secondaryForeground = solveOnColorForeground(secondary)
+  const accentForeground = solveOnColorForeground(accent)
+  const destructiveForeground = solveOnColorForeground(destructive)
   return {
     background: color(background),
     foreground: color(foreground),
@@ -286,15 +291,15 @@ function deriveMode(
     popover: color(popover),
     popoverForeground: color(solveForeground(popover, desiredTextContrast)),
     primary: color(primary),
-    primaryForeground: color(solveForeground(primary, 4.5)),
+    primaryForeground: color(primaryForeground),
     secondary: color(secondary),
-    secondaryForeground: color(solveForeground(secondary, 4.5)),
+    secondaryForeground: color(secondaryForeground),
     muted: color(muted),
     mutedForeground: color(mutedForeground),
     accent: color(accent),
-    accentForeground: color(solveForeground(accent, 4.5)),
+    accentForeground: color(accentForeground),
     destructive: color(destructive),
-    destructiveForeground: color(solveForeground(destructive, 4.5)),
+    destructiveForeground: color(destructiveForeground),
     border: color(border),
     input: color(input),
     ring: color(ring),
@@ -306,9 +311,9 @@ function deriveMode(
     sidebar: color(sidebar),
     sidebarForeground: color(sidebarForeground),
     sidebarPrimary: color(primary),
-    sidebarPrimaryForeground: color(solveForeground(primary, 4.5)),
+    sidebarPrimaryForeground: color(primaryForeground),
     sidebarAccent: color(accent),
-    sidebarAccentForeground: color(solveForeground(accent, 4.5)),
+    sidebarAccentForeground: color(accentForeground),
     sidebarBorder: color(sidebarBorder),
     sidebarRing: color(sidebarRing),
   }
@@ -544,18 +549,22 @@ function assembleTheme(
   })
 }
 
+const onColorPairs = [
+  ['primary', 'primaryForeground'],
+  ['secondary', 'secondaryForeground'],
+  ['accent', 'accentForeground'],
+  ['destructive', 'destructiveForeground'],
+  ['sidebarPrimary', 'sidebarPrimaryForeground'],
+  ['sidebarAccent', 'sidebarAccentForeground'],
+] as const satisfies readonly (readonly [keyof ThemeMode, keyof ThemeMode])[]
+
 const textPairs = [
   ['background', 'foreground'],
   ['card', 'cardForeground'],
   ['popover', 'popoverForeground'],
-  ['primary', 'primaryForeground'],
-  ['secondary', 'secondaryForeground'],
+  ...onColorPairs,
   ['muted', 'mutedForeground'],
-  ['accent', 'accentForeground'],
-  ['destructive', 'destructiveForeground'],
   ['sidebar', 'sidebarForeground'],
-  ['sidebarPrimary', 'sidebarPrimaryForeground'],
-  ['sidebarAccent', 'sidebarAccentForeground'],
 ] as const satisfies readonly (readonly [keyof ThemeMode, keyof ThemeMode])[]
 
 export function admitGeneratedTheme(
@@ -587,6 +596,15 @@ export function admitGeneratedTheme(
       const ratio = cssContrastRatio(mode[surface], mode[foreground])
       if (ratio === undefined || ratio < 4.5) {
         reasons.push(`${modeName}.${foreground} must contrast with ${surface} by 4.5:1.`)
+      }
+    }
+    for (const [, foreground] of onColorPairs) {
+      const parsed = parseCssColor(mode[foreground])
+      const channels = parsed ? [parsed.r, parsed.g, parsed.b] : []
+      const black = channels.length === 3 && channels.every((channel) => channel <= 0.001)
+      const white = channels.length === 3 && channels.every((channel) => channel >= 0.999)
+      if (!black && !white) {
+        reasons.push(`${modeName}.${foreground} must be white or black on-color text.`)
       }
     }
     for (const [token, surface] of [

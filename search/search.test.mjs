@@ -243,7 +243,21 @@ test('partition generation exercises serialized descriptors with retrieval parit
     metadataValues: layout.metadataFiles.map(decode),
   }
   assert.ok(partitions.termValues.length > 32)
-  assert.ok(partitions.metadataValues.length > 100)
+  assert.ok(partitions.metadataValues.length > 1)
+  assert.ok(partitions.metadataValues.every((part) => part.length > 0))
+  const reconstructedMetadata = partitions.metadataValues.flatMap((part, partId) =>
+    part.map(([documentId, metadata]) => ({ documentId, metadata, partId })),
+  )
+  assert.equal(reconstructedMetadata.length, index.documents.length)
+  assert.deepEqual(
+    reconstructedMetadata.map(({ documentId }) => documentId).sort((left, right) => left - right),
+    Array.from({ length: index.documents.length }, (_, documentId) => documentId),
+  )
+  for (const { documentId, metadata, partId } of reconstructedMetadata) {
+    const { lengths: _lengths, ...expectedMetadata } = index.documents[documentId]
+    assert.deepEqual(metadata, expectedMetadata)
+    assert.equal(partitions.documentMetadataParts[documentId], partId)
+  }
   for (const descriptor of [...layout.termFiles, ...layout.metadataFiles]) {
     assert.ok(descriptor.bytes <= 18 * 1_024)
   }
