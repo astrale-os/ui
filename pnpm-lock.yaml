@@ -124,6 +124,9 @@ importers:
       '@commitlint/config-conventional':
         specifier: 21.2.2
         version: 21.2.2
+      ajv:
+        specifier: 8.20.0
+        version: 8.20.0
       husky:
         specifier: ~9.1.7
         version: 9.1.7
@@ -139,6 +142,9 @@ importers:
       typescript:
         specifier: 7.0.2
         version: 7.0.2
+      yaml:
+        specifier: 2.9.0
+        version: 2.9.0
 
   packages/ui:
     dependencies:
@@ -7229,8 +7235,7 @@ snapshots:
 
   y18n@5.0.8: {}
 
-  yaml@2.9.0:
-    optional: true
+  yaml@2.9.0: {}
 
   yargs-parser@22.0.0: {}
 

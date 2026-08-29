@@ -1,0 +1,212 @@
+name: UI Request Claude Code Worker
+
+run-name: 'Astrale attempt: ${{ inputs.attempt }}'
+
+on:
+  workflow_dispatch:
+    inputs:
+      attempt:
+        description: Exact reserved attempt identity published as this run name.
+        required: true
+        type: string
+      request:
+        description: Accepted Astrale UI request issue URL.
+        required: true
+        type: string
+      base_ref:
+        description: Base branch the proposal targets.
+        required: true
+        type: string
+      branch:
+        description: Deterministic working branch, or the existing pull-request head for a revision.
+        required: true
+        type: string
+      objective:
+        description: Complete provider-independent instruction compiled by the trusted request owner.
+        required: true
+        type: string
+      pull_request:
+        description: Existing pull request URL for a revision; empty for an initial proposal.
+        required: false
+        default: ''
+        type: string
+
+concurrency:
+  group: ui-request-claude-code-${{ inputs.branch }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  propose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    environment: ui-request-agent
+    outputs:
+      baseline_sha: ${{ steps.prepare.outputs.baseline_sha }}
+    env:
+      NODE_VERSION: '24'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+          persist-credentials: 'false'
+      - name: Prepare the deterministic working branch
+        id: prepare
+        env:
+          INPUT_BASE_REF: ${{ inputs.base_ref }}
+          INPUT_BRANCH: ${{ inputs.branch }}
+          INPUT_PULL_REQUEST: ${{ inputs.pull_request }}
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin "refs/heads/$INPUT_BASE_REF:refs/remotes/origin/$INPUT_BASE_REF"
+          if [ -n "$INPUT_PULL_REQUEST" ]; then
+            git ls-remote --exit-code --heads origin "$INPUT_BRANCH" >/dev/null
+            git fetch --no-tags origin "refs/heads/$INPUT_BRANCH:refs/remotes/origin/$INPUT_BRANCH"
+            git checkout -B "$INPUT_BRANCH" "refs/remotes/origin/$INPUT_BRANCH"
+          else
+            if git ls-remote --exit-code --heads origin "$INPUT_BRANCH" >/dev/null; then
+              echo "An initial attempt cannot adopt a pre-existing deterministic branch." >&2
+              exit 1
+            fi
+            git checkout -B "$INPUT_BRANCH" "refs/remotes/origin/$INPUT_BASE_REF"
+          fi
+          echo "baseline_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+      - name: Implement the accepted request with Claude Code
+        uses: anthropics/claude-code-action/base-action@a874e9ecd7bb36efdad65429c6b35815f5a08f10 # v1, 2026-08-28
+        with:
+          prompt: ${{ inputs.objective }}
+          use_foundry: 'true'
+          claude_args: |
+            --bare
+            --model claude-opus-5
+            --effort low
+            --permission-mode acceptEdits
+            --allowedTools Read,Edit,Write,Glob,Grep,WebFetch,WebSearch
+            --no-session-persistence
+            --max-budget-usd 20
+        env:
+          ANTHROPIC_FOUNDRY_RESOURCE: ${{ secrets.ANTHROPIC_FOUNDRY_RESOURCE }}
+          ANTHROPIC_FOUNDRY_API_KEY: ${{ secrets.ANTHROPIC_FOUNDRY_API_KEY }}
+          ANTHROPIC_DEFAULT_OPUS_MODEL: claude-opus-5
+      - name: Encode the candidate as inert patch evidence
+        run: |
+          set -euo pipefail
+          git -c core.hooksPath=/dev/null add -A
+          if git diff --cached --quiet --; then
+            echo "The attempt produced no reviewable change." >&2
+            exit 1
+          fi
+          patch="$RUNNER_TEMP/ui-request-candidate.patch"
+          git diff --cached --binary --full-index --no-ext-diff --no-textconv -- > "$patch"
+          size="$(wc -c < "$patch" | tr -d ' ')"
+          test "$size" -gt 0
+          test "$size" -le 16777216
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: ui-request-candidate-${{ github.run_id }}
+          path: ${{ runner.temp }}/ui-request-candidate.patch
+          if-no-files-found: error
+          retention-days: 1
+
+  qualify:
+    needs: propose
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ needs.propose.outputs.baseline_sha }}
+          persist-credentials: 'false'
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: ui-request-candidate-${{ github.run_id }}
+          path: ${{ runner.temp }}/ui-request-candidate
+      - name: Apply the inert candidate patch
+        run: |
+          set -euo pipefail
+          patch="$RUNNER_TEMP/ui-request-candidate/ui-request-candidate.patch"
+          test -f "$patch"
+          test "$(wc -c < "$patch" | tr -d ' ')" -le 16777216
+          git apply --check --index --binary --whitespace=nowarn "$patch"
+          git apply --index --binary --whitespace=nowarn "$patch"
+      - uses: astrale-os/config/.github/actions/setup@8e2e2abd0320be0c2f64033916519ab3b66c7dd7
+        with:
+          node-version: 24
+          frozen-lockfile: 'true'
+      - name: Qualify the candidate without publication authority
+        run: pnpm check
+
+  publish:
+    needs: [propose, qualify]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: ui-request-agent
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ needs.propose.outputs.baseline_sha }}
+          persist-credentials: 'false'
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: ui-request-candidate-${{ github.run_id }}
+          path: ${{ runner.temp }}/ui-request-candidate
+      - name: Apply the qualified inert patch
+        run: |
+          set -euo pipefail
+          patch="$RUNNER_TEMP/ui-request-candidate/ui-request-candidate.patch"
+          test -f "$patch"
+          test "$(wc -c < "$patch" | tr -d ' ')" -le 16777216
+          git apply --check --index --binary --whitespace=nowarn "$patch"
+          git apply --index --binary --whitespace=nowarn "$patch"
+      - name: Commit the qualified candidate without credentials
+        env:
+          INPUT_ATTEMPT: ${{ inputs.attempt }}
+        run: |
+          set -euo pipefail
+          git -c core.hooksPath=/dev/null \
+            -c commit.gpgSign=false \
+            -c user.name='github-actions[bot]' \
+            -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
+            commit -m "feat(request): $INPUT_ATTEMPT"
+      - name: Publish exactly one pull request for this attempt
+        env:
+          GH_TOKEN: ${{ secrets.UI_REQUEST_GITHUB_TOKEN }}
+          INPUT_ATTEMPT: ${{ inputs.attempt }}
+          INPUT_BASE_REF: ${{ inputs.base_ref }}
+          INPUT_BRANCH: ${{ inputs.branch }}
+          INPUT_PULL_REQUEST: ${{ inputs.pull_request }}
+          INPUT_REQUEST: ${{ inputs.request }}
+        run: |
+          set -euo pipefail
+          git remote set-url origin "https://github.com/$GITHUB_REPOSITORY.git"
+          gh auth setup-git
+          if [ -n "$INPUT_PULL_REQUEST" ]; then
+            number="${INPUT_PULL_REQUEST##*/}"
+            proposal="$(gh api "repos/$GITHUB_REPOSITORY/pulls/$number")"
+            test "$(jq -r .html_url <<< "$proposal")" = "$INPUT_PULL_REQUEST"
+            test "$(jq -r .state <<< "$proposal")" = "open"
+            test "$(jq -r '.merged_at // empty' <<< "$proposal")" = ""
+            test "$(jq -r .base.ref <<< "$proposal")" = "$INPUT_BASE_REF"
+            test "$(jq -r .head.ref <<< "$proposal")" = "$INPUT_BRANCH"
+            test "$(jq -r .head.repo.full_name <<< "$proposal")" = "$GITHUB_REPOSITORY"
+          else
+            test "$(gh pr list --head "$INPUT_BRANCH" --state open --json url --jq 'length')" = "0"
+          fi
+          git -c core.hooksPath=/dev/null push origin "HEAD:refs/heads/$INPUT_BRANCH"
+          count="$(gh pr list --head "$INPUT_BRANCH" --state open --json url --jq 'length')"
+          if [ "$count" -gt 1 ]; then
+            echo "The working branch has more than one open pull request." >&2
+            exit 1
+          fi
+          existing="$(gh pr list --head "$INPUT_BRANCH" --state open --json url --jq '.[0].url // empty')"
+          if [ -n "$INPUT_PULL_REQUEST" ] && [ "$existing" != "$INPUT_PULL_REQUEST" ]; then
+            echo "The revision branch does not resolve to its admitted pull request." >&2
+            exit 1
+          fi
+          if [ -z "$INPUT_PULL_REQUEST" ] && [ -z "$existing" ]; then
+            gh pr create --base "$INPUT_BASE_REF" --head "$INPUT_BRANCH" \
+              --title "feat(request): $INPUT_ATTEMPT" \
+              --body "Resolves $INPUT_REQUEST. This pull request is an untrusted proposal that its existing review, CI, and publication owners still gate."
+          fi

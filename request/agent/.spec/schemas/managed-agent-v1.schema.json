@@ -1,0 +1,267 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://astrale.ai/spec/ui/request/managed-agent/v1",
+  "title": "Astrale UI managed-agent V1",
+  "description": "Provider-neutral persisted payloads and operation results. AbortSignal is transport-only.",
+  "$defs": {
+    "repositoryUrl": {
+      "type": "string",
+      "pattern": "^https://github\\.com/[^/\\s]+/[^/\\s]+$",
+      "x-maxUtf8Bytes": 4096
+    },
+    "issueUrl": {
+      "type": "string",
+      "pattern": "^https://github\\.com/[^/\\s]+/[^/\\s]+/issues/[1-9][0-9]*$",
+      "x-maxUtf8Bytes": 4096
+    },
+    "pullRequestUrl": {
+      "type": "string",
+      "pattern": "^https://github\\.com/[^/\\s]+/[^/\\s]+/pull/[1-9][0-9]*$",
+      "x-maxUtf8Bytes": 4096
+    },
+    "target": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "repository", "baseRef"],
+          "properties": {
+            "kind": { "const": "repository" },
+            "repository": { "$ref": "#/$defs/repositoryUrl" },
+            "baseRef": { "type": "string", "minLength": 1, "x-maxUtf8Bytes": 1024 }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "pullRequest"],
+          "properties": {
+            "kind": { "const": "pull-request" },
+            "pullRequest": { "$ref": "#/$defs/pullRequestUrl" }
+          }
+        }
+      ]
+    },
+    "job": {
+      "type": "object",
+      "additionalProperties": false,
+      "x-sameGitHubRepository": true,
+      "required": ["request", "objective", "target"],
+      "properties": {
+        "request": { "$ref": "#/$defs/issueUrl" },
+        "objective": {
+          "type": "string",
+          "minLength": 1,
+          "x-maxUtf8Bytes": 65536
+        },
+        "target": { "$ref": "#/$defs/target" }
+      }
+    },
+    "runRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["provider", "id"],
+      "properties": {
+        "provider": { "type": "string", "minLength": 1, "x-maxUtf8Bytes": 128 },
+        "id": { "type": "string", "minLength": 1, "x-maxUtf8Bytes": 2048 }
+      }
+    },
+    "failure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "message", "retry"],
+      "properties": {
+        "code": {
+          "enum": [
+            "AGENT_AUTH_REQUIRED",
+            "AGENT_PERMISSION_DENIED",
+            "AGENT_QUOTA_EXHAUSTED",
+            "AGENT_INVALID_JOB",
+            "AGENT_NOT_FOUND",
+            "AGENT_UNAVAILABLE",
+            "AGENT_OUTCOME_UNKNOWN",
+            "AGENT_PROTOCOL_INCOMPATIBLE"
+          ]
+        },
+        "message": { "type": "string", "minLength": 1, "x-maxUtf8Bytes": 2048 },
+        "retry": { "enum": ["safe", "after-change", "unsafe"] }
+      }
+    },
+    "run": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ref", "state", "createdAt", "updatedAt"],
+      "properties": {
+        "ref": { "$ref": "#/$defs/runRef" },
+        "state": {
+          "enum": [
+            "queued",
+            "running",
+            "waiting-for-input",
+            "waiting-for-approval",
+            "blocked",
+            "succeeded",
+            "failed",
+            "cancelled",
+            "expired"
+          ]
+        },
+        "providerUrl": {
+          "type": "string",
+          "pattern": "^https://(?![^/\\s]*@)[^\\s]+$",
+          "x-safeHttpsUrl": true,
+          "x-maxUtf8Bytes": 4096
+        },
+        "branch": { "type": "string", "minLength": 1, "x-maxUtf8Bytes": 4096 },
+        "pullRequest": { "$ref": "#/$defs/pullRequestUrl" },
+        "createdAt": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{3})?Z$",
+          "x-isoUtcTimestamp": true
+        },
+        "updatedAt": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{3})?Z$",
+          "x-isoUtcTimestamp": true
+        },
+        "reason": { "type": "string", "minLength": 1, "x-maxUtf8Bytes": 2048 },
+        "failure": { "$ref": "#/$defs/failure" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "state": { "const": "succeeded" } } },
+          "then": { "required": ["pullRequest"] }
+        },
+        {
+          "if": {
+            "properties": {
+              "state": {
+                "enum": ["waiting-for-input", "waiting-for-approval", "blocked"]
+              }
+            }
+          },
+          "then": { "required": ["reason"] },
+          "else": { "not": { "required": ["reason"] } }
+        },
+        {
+          "if": { "properties": { "state": { "enum": ["failed", "expired"] } } },
+          "then": { "required": ["failure"] },
+          "else": { "not": { "required": ["failure"] } }
+        }
+      ]
+    },
+    "operationFailure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "failure"],
+      "properties": {
+        "kind": { "const": "failed" },
+        "failure": { "$ref": "#/$defs/failure" }
+      }
+    },
+    "dispatchResult": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "run"],
+          "properties": {
+            "kind": { "const": "accepted" },
+            "run": { "$ref": "#/$defs/run" }
+          }
+        },
+        { "$ref": "#/$defs/operationFailure" }
+      ]
+    },
+    "observeResult": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "run"],
+          "properties": {
+            "kind": { "const": "observed" },
+            "run": { "$ref": "#/$defs/run" }
+          }
+        },
+        { "$ref": "#/$defs/operationFailure" }
+      ]
+    },
+    "reconcileResult": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "run"],
+          "properties": {
+            "kind": { "const": "found" },
+            "run": { "$ref": "#/$defs/run" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind"],
+          "properties": { "kind": { "enum": ["absent", "ambiguous"] } }
+        },
+        { "$ref": "#/$defs/operationFailure" }
+      ]
+    },
+    "cancelResult": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "run"],
+          "properties": {
+            "kind": { "const": "cancelled" },
+            "run": {
+              "allOf": [
+                { "$ref": "#/$defs/run" },
+                { "type": "object", "properties": { "state": { "const": "cancelled" } } }
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "run"],
+          "properties": {
+            "kind": { "enum": ["requested", "unsupported"] },
+            "run": { "$ref": "#/$defs/run" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "run"],
+          "properties": {
+            "kind": { "const": "already-terminal" },
+            "run": {
+              "allOf": [
+                { "$ref": "#/$defs/run" },
+                {
+                  "type": "object",
+                  "properties": {
+                    "state": { "enum": ["succeeded", "failed", "cancelled", "expired"] }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        { "$ref": "#/$defs/operationFailure" }
+      ]
+    }
+  },
+  "anyOf": [
+    { "$ref": "#/$defs/job" },
+    { "$ref": "#/$defs/runRef" },
+    { "$ref": "#/$defs/run" },
+    { "$ref": "#/$defs/dispatchResult" },
+    { "$ref": "#/$defs/observeResult" },
+    { "$ref": "#/$defs/reconcileResult" },
+    { "$ref": "#/$defs/cancelResult" }
+  ]
+}

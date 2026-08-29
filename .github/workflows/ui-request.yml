@@ -1,0 +1,76 @@
+name: UI Request Agent
+
+on:
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: Accepted Astrale UI request issue number.
+        required: true
+        type: string
+      operation:
+        description: Reconcile/start, revise a successful PR, or cancel the current run.
+        required: true
+        default: run
+        type: choice
+        options:
+          - run
+          - reconcile
+          - revise
+          - cancel
+
+concurrency:
+  group: ui-request-${{ fromJSON(inputs.issue_number) }}
+  cancel-in-progress: false
+
+permissions:
+  actions: write
+  contents: read
+  issues: write
+  pull-requests: read
+
+jobs:
+  request:
+    runs-on: ubuntu-latest
+    timeout-minutes: 100
+    environment: ui-request-agent
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: 'false'
+      - uses: astrale-os/config/.github/actions/setup@8e2e2abd0320be0c2f64033916519ab3b66c7dd7
+        with:
+          node-version: 24
+          frozen-lockfile: 'true'
+      - name: Dispatch or reconcile through Azure Claude Code
+        if: vars.UI_REQUEST_AGENT_PROVIDER == '' || vars.UI_REQUEST_AGENT_PROVIDER == 'github-actions-claude-code'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          INPUT_ISSUE_NUMBER: ${{ inputs.issue_number }}
+          INPUT_OPERATION: ${{ inputs.operation }}
+          UI_REQUEST_AGENT_PROVIDER: github-actions-claude-code
+        run: pnpm request:run --issue "$INPUT_ISSUE_NUMBER" --operation "$INPUT_OPERATION"
+      - name: Dispatch or reconcile through GitHub Copilot
+        if: vars.UI_REQUEST_AGENT_PROVIDER == 'github-copilot'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          COPILOT_AGENT_TOKEN: ${{ secrets.COPILOT_AGENT_TOKEN }}
+          INPUT_ISSUE_NUMBER: ${{ inputs.issue_number }}
+          INPUT_OPERATION: ${{ inputs.operation }}
+          UI_REQUEST_AGENT_PROVIDER: github-copilot
+        run: pnpm request:run --issue "$INPUT_ISSUE_NUMBER" --operation "$INPUT_OPERATION"
+      - name: Dispatch or reconcile through Cursor
+        if: vars.UI_REQUEST_AGENT_PROVIDER == 'cursor'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          CURSOR_API_KEY: ${{ secrets.CURSOR_API_KEY }}
+          INPUT_ISSUE_NUMBER: ${{ inputs.issue_number }}
+          INPUT_OPERATION: ${{ inputs.operation }}
+          UI_REQUEST_AGENT_PROVIDER: cursor
+        run: pnpm request:run --issue "$INPUT_ISSUE_NUMBER" --operation "$INPUT_OPERATION"
+      - name: Reject unsupported provider configuration
+        if: vars.UI_REQUEST_AGENT_PROVIDER != '' && vars.UI_REQUEST_AGENT_PROVIDER != 'github-actions-claude-code' && vars.UI_REQUEST_AGENT_PROVIDER != 'github-copilot' && vars.UI_REQUEST_AGENT_PROVIDER != 'cursor'
+        env:
+          CONFIGURED_PROVIDER: ${{ vars.UI_REQUEST_AGENT_PROVIDER }}
+        run: |
+          echo "Unsupported UI_REQUEST_AGENT_PROVIDER: $CONFIGURED_PROVIDER" >&2
+          exit 1
