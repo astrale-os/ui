@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.3.0-beta.15](https://github.com/astrale-os/ui/compare/v0.3.0-beta.14...v0.3.0-beta.15) (2026-08-29)
+
+
+### Features
+
+* **request:** ui-request:68:attempt:8 ([#76](https://github.com/astrale-os/ui/issues/76)) ([e47398e](https://github.com/astrale-os/ui/commit/e47398e7693e89b02aeaecca162371ff4d1b75bc))
+
+
+### Bug Fixes
+
+* **request:** bridge immutable source evidence ([#72](https://github.com/astrale-os/ui/issues/72)) ([f30be94](https://github.com/astrale-os/ui/commit/f30be9483b516e2e9c92be99edd7cf65c359f46d))
+* **request:** build after candidate formatting ([#75](https://github.com/astrale-os/ui/issues/75)) ([e73e931](https://github.com/astrale-os/ui/commit/e73e931e6f3a4029b3e35f5a862008a0676106bc))
+* **request:** format qualified candidates ([#74](https://github.com/astrale-os/ui/issues/74)) ([08c752a](https://github.com/astrale-os/ui/commit/08c752a510911d42ab0bede3a8649907f75ef21d))
+* **request:** qualify generated agent artifacts ([#69](https://github.com/astrale-os/ui/issues/69)) ([debfce0](https://github.com/astrale-os/ui/commit/debfce045ef5a7e296e559e457c0f58d7217aaa3))
+* **request:** use compatible source schema ([#73](https://github.com/astrale-os/ui/issues/73)) ([bba5520](https://github.com/astrale-os/ui/commit/bba5520df55bb9d412a005000917c4f1f3eeb50e))
+
 ## [0.3.0-beta.14](https://github.com/astrale-os/ui/compare/v0.3.0-beta.13...v0.3.0-beta.14) (2026-08-29)
 
 
