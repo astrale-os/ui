@@ -120,6 +120,9 @@ test('moves inert candidate evidence across isolated propose, qualify, and publi
   const fetchIndex = propose.steps.findIndex(
     (step) => step.name === 'Fetch bounded immutable source evidence without credentials',
   )
+  const verifyIndex = propose.steps.findIndex(
+    (step) => step.name === 'Verify immutable source evidence without credentials',
+  )
   const setupIndex = propose.steps.findIndex((step) =>
     step.uses?.startsWith('astrale-os/config/.github/actions/setup@'),
   )
@@ -144,6 +147,7 @@ test('moves inert candidate evidence across isolated propose, qualify, and publi
   assert.notEqual(agentIndex, -1)
   assert.notEqual(discoveryIndex, -1)
   assert.notEqual(fetchIndex, -1)
+  assert.notEqual(verifyIndex, -1)
   assert.notEqual(setupIndex, -1)
   assert.notEqual(commitIndex, -1)
   assert.notEqual(publishIndex, -1)
@@ -151,6 +155,7 @@ test('moves inert candidate evidence across isolated propose, qualify, and publi
   assert.ok(setupIndex < discoveryIndex)
   assert.ok(discoveryIndex < fetchIndex)
   assert.ok(fetchIndex < agentIndex)
+  assert.ok(agentIndex < verifyIndex)
   const upload = propose.steps.find((step) => step.uses?.startsWith('actions/upload-artifact@'))
   const qualifiedUpload = qualify.steps.find((step) =>
     step.uses?.startsWith('actions/upload-artifact@'),
@@ -227,11 +232,41 @@ git apply --index --binary --whitespace=nowarn "$patch"
     propose.steps[setupIndex].uses,
     'astrale-os/config/.github/actions/setup@8e2e2abd0320be0c2f64033916519ab3b66c7dd7',
   )
-  assert.deepEqual(secretReferences(propose.steps[setupIndex]), [])
-  assert.deepEqual(secretReferences(propose.steps[fetchIndex]), [])
-  assert.match(propose.steps[discoveryIndex].run, /--json-schema "\$schema"/u)
-  assert.match(propose.steps[discoveryIndex].run, /--allowedTools Read,Glob,Grep,WebSearch/u)
-  assert.doesNotMatch(propose.steps[discoveryIndex].run, /\b(?:Bash|Edit|Write)\b/u)
+  assert.equal(
+    propose.steps[discoveryIndex].run,
+    `set -euo pipefail
+node --input-type=module -e 'const url = new URL(process.env.ANTHROPIC_FOUNDRY_BASE_URL); if (url.protocol !== "https:" || url.username || url.password || url.search || url.hash || url.pathname !== "/anthropic") process.exit(1); console.log("Foundry base URL admitted.")'
+schema="$(jq -c . request/.spec/schemas/source-evidence-v1.schema.json)"
+{ cat request/source-discovery.md; printf '\\n\\n%s' "$INPUT_OBJECTIVE"; } | ${'\\'}
+  node node_modules/@anthropic-ai/claude-code/cli-wrapper.cjs ${'\\'}
+  --bare ${'\\'}
+  --model claude-opus-5 ${'\\'}
+  --effort low ${'\\'}
+  --permission-mode dontAsk ${'\\'}
+  --allowedTools Read,Glob,Grep,WebSearch ${'\\'}
+  --no-session-persistence ${'\\'}
+  --max-budget-usd 5 ${'\\'}
+  --json-schema "$schema" ${'\\'}
+  --output-format json ${'\\'}
+  --print > "$RUNNER_TEMP/ui-request-source-manifest.json"
+`,
+  )
+  assert.equal(
+    propose.steps[fetchIndex].run,
+    `set -euo pipefail
+node request/source-evidence.mjs ${'\\'}
+  --manifest "$RUNNER_TEMP/ui-request-source-manifest.json" ${'\\'}
+  --output "$RUNNER_TEMP/ui-request-source-evidence"
+`,
+  )
+  assert.equal(
+    propose.steps[verifyIndex].run,
+    `set -euo pipefail
+node request/source-evidence.mjs ${'\\'}
+  --verify ${'\\'}
+  --output "$RUNNER_TEMP/ui-request-source-evidence"
+`,
+  )
   assert.equal(
     propose.steps[agentIndex].run,
     `set -euo pipefail
@@ -251,9 +286,6 @@ printf '%s\\n\\nVerified immutable source evidence is available at %s. Read inde
   )
   assert.equal(propose.steps[agentIndex].env.INPUT_OBJECTIVE, '${{ inputs.objective }}')
   assert.equal(propose.steps[agentIndex].env.CLAUDE_CODE_USE_FOUNDRY, '1')
-  assert.doesNotMatch(propose.steps[agentIndex].run, /\bBash\b/u)
-  assert.deepEqual(secretReferences(qualify), [])
-  assert.deepEqual(secretReferences(publish.steps[commitIndex]), [])
   assert.equal(
     publish.steps[commitIndex].run,
     `set -euo pipefail

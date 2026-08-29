@@ -128,6 +128,12 @@ jobs:
             --no-session-persistence \
             --max-budget-usd 20 \
             --print
+      - name: Verify immutable source evidence without credentials
+        run: |
+          set -euo pipefail
+          node request/source-evidence.mjs \
+            --verify \
+            --output "$RUNNER_TEMP/ui-request-source-evidence"
       - name: Encode the candidate as inert patch evidence
         run: |
           set -euo pipefail
