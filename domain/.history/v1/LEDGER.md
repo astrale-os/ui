@@ -19,7 +19,7 @@
 | D13 | The Application explicitly requires Kernel Query and Mutation; Runtime graph access is not implied by installation. | live correction | `application.ts` and composition test |
 | D14 | The Domain-self session owns the internal idempotency ledger; `ownerId` scopes the indexed key while the ownership edge retains caller-facing policy. | live correction | Request Schema, Query, and replay proof |
 | D15 | Receipt confirmation is one machine-derived transition with one auxiliary property delta in the same Node update. | live correction | SDK transition contract and realized Mutation AST |
-| D16 | The first Domain package release starts at `0.1.0` under the UI repository's independent `domain` release component. | release correction | Release Please package and tag configuration |
+| D16 | `domain/` is a private source workspace: it builds, packages declarations, deploys through its adapter, and installs by observed deployment URL without npm or Release Please authority. | release correction | private manifest, single-package release contract, deployment configuration |
 | D17 | The UI repository owns this Domain at `domain/`; the general Domains repository must contain no copy or parallel release authority. | ownership correction | relocation PRs and closed-set repository searches |
 
 ## Open and deferred questions
@@ -33,7 +33,7 @@
 | Q05 | Runtime secrets supply a repository-scoped token and repository coordinate; the Provider owns bounded marker reconciliation. | resolved |
 | Q06 | When does semantic/private/shared search justify a Domain Function and derived index? | search admission gate |
 | Q07 | The Domain creates the GitHub issue directly; trusted agent triage remains repository-owned. | resolved |
-| Q08 | Bootstrap `@astrale-domains/ui@0.0.0` once, then hand versioning and publication to the UI repository's `domain` Release Please component and `publish-domain.yml` trusted-publisher workflow. | resolved |
+| Q08 | The Domain has no npm bootstrap or package release; the UI repository releases only `@astrale-os/ui`, while Domain deployment and Kernel installation remain explicit lifecycle stages. | resolved |
 
 None of Q01-Q08 authorizes expanding the V1 graph model.
 
@@ -41,6 +41,7 @@ None of Q01-Q08 authorizes expanding the V1 graph model.
 
 - [x] Scaffolded from the current beta `create-astrale-domain` release without workspace links.
 - [x] Package uses exact current SDK and Cloudflare adapter beta versions.
+- [x] The Domain workspace is private and has no npm, tag, or independent Release Please authority.
 - [x] Schema has one bounded context with shallow exports and one file per semantic owner.
 - [x] Ownership, authority, trust, alternatives, and deferred scope are recorded.
 - [x] Submission lifecycle is explicit and exhaustively tested.
@@ -86,6 +87,7 @@ for the full sequence.
 | Check | Result | Evidence |
 | --- | --- | --- |
 | repository relocation | pass | the 59 tracked files from `astrale-os/domains:ui/` were copied mechanically; the only content deltas before qualification were repository/release metadata, the exact Zod pin, its lockfile specifier, and this ledger |
+| private release ownership | pass | one public package remains (`@astrale-os/ui`); `domain/package.json` is private, retains only the declaration-output `publishConfig` projection required by `astrale-domain package`, has no registry, access mode, or `prepack`, and no Domain publish workflow or Release Please component exists |
 | clean standalone install | pass | `pnpm --dir domain install --frozen-lockfile`; the nearest `domain/pnpm-workspace.yaml` owns the standalone lock and unchanged supply-chain policy |
 | dependency provenance | pass | SDK `0.5.0-beta.79`, adapter `0.5.0-beta.82`; no `link:`, `workspace:`, or `file:` resolution |
 | standalone lock supply-chain policy | pass | PR #125's first isolated run exposed a locally cached fresh-resolution lock; the lock was rebuilt from the already-admitted root cohort, deduplicated to the UI closure, and reverified with the unchanged seven-day policy across 308 entries |

@@ -1,17 +1,16 @@
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
-import { access, readFile } from 'node:fs/promises'
+import { access, readFile, readdir } from 'node:fs/promises'
 import test from 'node:test'
+import { parse as parseYaml } from 'yaml'
 
 const configSha = '8e2e2abd0320be0c2f64033916519ab3b66c7dd7'
 
 test('pins supported CI and release workflow dependencies', async () => {
-  const [ci, release, publish, publishDomain] = await Promise.all(
-    ['ci', 'release', 'publish', 'publish-domain'].map((name) =>
-      readFile(`.github/workflows/${name}.yml`, 'utf8'),
-    ),
+  const [ci, release, publish] = await Promise.all(
+    ['ci', 'release', 'publish'].map((name) => readFile(`.github/workflows/${name}.yml`, 'utf8')),
   )
-  for (const workflow of [ci, release, publish, publishDomain]) {
+  for (const workflow of [ci, release, publish]) {
     const actionReferences = [...workflow.matchAll(/^\s*-?\s*uses:\s*([^\s#]+)/gmu)].map(
       (match) => match[1],
     )
@@ -22,9 +21,7 @@ test('pins supported CI and release workflow dependencies', async () => {
     assert.doesNotMatch(workflow, /NPM_TOKEN|NODE_AUTH_TOKEN|secrets\./u)
   }
   const configRefs = [
-    ...[ci, release, publish, publishDomain]
-      .join('\n')
-      .matchAll(/astrale-os\/config\/.+@([0-9a-f]{40})/gu),
+    ...[ci, release, publish].join('\n').matchAll(/astrale-os\/config\/.+@([0-9a-f]{40})/gu),
   ]
   assert.ok(configRefs.length > 0)
   assert.deepEqual([...new Set(configRefs.map((match) => match[1]))], [configSha])
@@ -73,32 +70,171 @@ test('pins supported CI and release workflow dependencies', async () => {
   )
 })
 
-test('publishes the runtime and Domain from their exact independent Release Please commits', async () => {
-  const [release, publish, publishDomain] = await Promise.all([
+test('publishes only the runtime while the control-plane Domain stays private', async () => {
+  const [release, publish] = await Promise.all([
     readFile('.github/workflows/release.yml', 'utf8'),
     readFile('.github/workflows/publish.yml', 'utf8'),
-    readFile('.github/workflows/publish-domain.yml', 'utf8'),
   ])
   const manifest = JSON.parse(await readFile('packages/ui/package.json', 'utf8'))
   const domainManifest = JSON.parse(await readFile('domain/package.json', 'utf8'))
   const rootManifest = JSON.parse(await readFile('package.json', 'utf8'))
   const releaseConfig = JSON.parse(await readFile('.release-please-config.json', 'utf8'))
   const releaseManifest = JSON.parse(await readFile('.release-please-manifest.json', 'utf8'))
-
-  assert.match(release, /needs\.release\.outputs\.created == 'true'/u)
-  assert.match(release, /paths_released: \$\{\{ steps\.release\.outputs\.paths_released \}\}/u)
-  assert.match(release, /contains\(fromJSON\(needs\.release\.outputs\.paths_released\), '\.'\)/u)
-  assert.match(
-    release,
-    /contains\(fromJSON\(needs\.release\.outputs\.paths_released\), 'domain'\)/u,
+  const releaseDocument = parseYaml(release)
+  const publishDocument = parseYaml(publish)
+  const workflowFiles = (await readdir('.github/workflows'))
+    .filter((file) => /\.ya?ml$/u.test(file))
+    .toSorted()
+  const workflowEntries = await Promise.all(
+    workflowFiles.map(async (file) => {
+      const source = await readFile(`.github/workflows/${file}`, 'utf8')
+      return { file, source, document: parseYaml(source) }
+    }),
   )
-  assert.match(release, /search-contract:\s*\n\s+needs: release/u)
+  const workflowCorpus = workflowEntries
+    .map(({ file, source }) => `# ${file}\n${source}`)
+    .join('\n')
+  const workflowSteps = workflowEntries.flatMap(({ file, document }) =>
+    Object.entries(document.jobs ?? {}).flatMap(([job, definition]) =>
+      (definition.steps ?? []).map((step) => ({ file, job, step })),
+    ),
+  )
+  assert.deepEqual(
+    workflowEntries.flatMap(({ file, document }) =>
+      Object.entries(document.jobs ?? {}).flatMap(([job, definition]) =>
+        definition.uses ? [{ file, job, uses: definition.uses }] : [],
+      ),
+    ),
+    [],
+  )
+  for (const { file, document } of workflowEntries) {
+    assert.notEqual(document.permissions, 'write-all', file)
+    if (document.permissions && typeof document.permissions === 'object') {
+      assert.notEqual(document.permissions['id-token'], 'write', file)
+      assert.notEqual(document.permissions.packages, 'write', file)
+      assert.notEqual(document.permissions.contents, 'write', file)
+    }
+    for (const [job, definition] of Object.entries(document.jobs ?? {})) {
+      assert.notEqual(definition.permissions, 'write-all', `${file}:${job}`)
+    }
+  }
+  assert.deepEqual(
+    [...new Set(workflowSteps.flatMap(({ step }) => (step.uses ? [step.uses] : [])))].toSorted(),
+    [
+      'actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1',
+      'actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294',
+      'actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c',
+      'actions/setup-node@820762786026740c76f36085b0efc47a31fe5020',
+      'actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a',
+      `astrale-os/config/.github/actions/publish/mirror-npm-to-github@${configSha}`,
+      `astrale-os/config/.github/actions/publish/packages@${configSha}`,
+      `astrale-os/config/.github/actions/release@${configSha}`,
+      `astrale-os/config/.github/actions/setup@${configSha}`,
+      'github/codeql-action/analyze@db488ddef3bf6cb639b32c2e9a7c0a7ea8271d28',
+      'github/codeql-action/init@db488ddef3bf6cb639b32c2e9a7c0a7ea8271d28',
+      'oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6',
+      'pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86',
+    ],
+  )
+  assert.doesNotMatch(workflowCorpus, /NPM_TOKEN|NODE_AUTH_TOKEN/u)
+  assert.deepEqual(
+    workflowEntries.flatMap(({ file, document }) =>
+      Object.entries(document.jobs ?? {}).flatMap(([job, definition]) => {
+        const contents = definition.permissions?.contents
+        const idToken = definition.permissions?.['id-token']
+        const packages = definition.permissions?.packages
+        return contents === 'write' || idToken === 'write' || packages === 'write'
+          ? [{ file, job, contents, idToken, packages }]
+          : []
+      }),
+    ),
+    [
+      {
+        file: 'publish.yml',
+        job: 'publish',
+        contents: 'read',
+        idToken: 'write',
+        packages: undefined,
+      },
+      {
+        file: 'publish.yml',
+        job: 'mirror',
+        contents: 'read',
+        idToken: undefined,
+        packages: 'write',
+      },
+      {
+        file: 'release.yml',
+        job: 'release',
+        contents: 'write',
+        idToken: undefined,
+        packages: undefined,
+      },
+    ],
+  )
+  assert.doesNotMatch(workflowCorpus, /@astrale-domains\/ui|domain-v|publish-domain/u)
+  assert.deepEqual(
+    workflowSteps
+      .filter(({ step }) => step.uses?.includes('/actions/release@'))
+      .map(({ file, job, step }) => ({ file, job, uses: step.uses, with: step.with })),
+    [
+      {
+        file: 'release.yml',
+        job: 'release',
+        uses: `astrale-os/config/.github/actions/release@${configSha}`,
+        with: { token: '${{ github.token }}' },
+      },
+    ],
+  )
+  assert.deepEqual(
+    workflowSteps
+      .filter(({ step }) => step.uses?.includes('/publish/'))
+      .map(({ file, job, step }) => ({
+        file,
+        job,
+        uses: step.uses,
+        dirs: step.with?.dirs,
+        repository: step.with?.repository,
+        mirrorPublicPackages: step.with?.['mirror-public-packages'],
+      })),
+    [
+      {
+        file: 'publish.yml',
+        job: 'publish',
+        uses: `astrale-os/config/.github/actions/publish/packages@${configSha}`,
+        dirs: 'packages/ui',
+        repository: undefined,
+        mirrorPublicPackages: 'false',
+      },
+      {
+        file: 'publish.yml',
+        job: 'mirror',
+        uses: `astrale-os/config/.github/actions/publish/mirror-npm-to-github@${configSha}`,
+        dirs: 'packages/ui',
+        repository: 'astrale-os/ui',
+        mirrorPublicPackages: undefined,
+      },
+    ],
+  )
+  for (const { file, job, step } of workflowSteps) {
+    if (typeof step.run !== 'string') continue
+    assert.doesNotMatch(
+      step.run,
+      /\b(?:npm|pnpm|yarn)\b[\s\S]{0,200}\bpublish\b/u,
+      `${file}:${job}`,
+    )
+    assert.doesNotMatch(
+      step.run,
+      /\b(?:npm|pnpm|yarn)\b[^\n]*(?:\bpkg\b[^\n]*\bprivate\b|\bprivate\b[^\n]*\bpkg\b)/u,
+      `${file}:${job}`,
+    )
+  }
+
   assert.match(release, /search-contract:[\s\S]*?ref:\s*\$\{\{ github\.sha \}\}/u)
   assert.match(
     release,
     /Admit the exact released UI through the current CLI consumer[\s\S]*?qualification:ui-search/u,
   )
-  assert.match(release, /publish:\s*\n\s+needs: \[release, search-contract\]/u)
   assert.match(release, /ref:\s*\$\{\{ github\.sha \}\}/u)
   assert.match(release, /PUBLISH_SHA:\s*\$\{\{ github\.sha \}\}/u)
   assert.match(release, /publish_tag="v\$\{publish_version\}"/u)
@@ -107,54 +243,11 @@ test('publishes the runtime and Domain from their exact independent Release Plea
   assert.match(release, /-f expected-version="\$publish_version"/u)
   assert.match(release, /--ref "\$publish_tag"/u)
   assert.match(release, /gh run watch "\$run_id"/u)
-  assert.match(release, /publish-domain:\s*\n\s+needs: release/u)
-  assert.match(release, /publish_tag="domain-v\$\{publish_version\}"/u)
-  assert.match(release, /gh workflow run publish-domain\.yml/u)
-  assert.match(publish, /workflow_dispatch/u)
-  assert.doesNotMatch(publish, /push:\s*\n\s+tags:/u)
-  assert.match(publish, /id-token:\s*write/u)
-  assert.match(publish, /permissions:\s*\n\s+contents:\s*read\s*\n\s+id-token:\s*write/u)
-  assert.doesNotMatch(publish, /npm-token:/u)
-  assert.match(publish, /environment:\s*npm/u)
-  assert.match(publish, /ref:\s*\$\{\{ inputs\.expected-sha \}\}/u)
-  assert.match(publish, /fetch-depth:\s*0/u)
-  assert.match(publish, /persist-credentials:\s*'false'/u)
-  assert.match(publish, /git rev-parse/u)
-  assert.match(publish, /refs\/tags\/v\$\{EXPECTED_VERSION\}/u)
-  assert.match(publish, /git merge-base --is-ancestor/u)
-  assert.match(
-    publish,
-    /gh api "repos\/\$\{GITHUB_REPOSITORY\}\/releases\/tags\/v\$\{EXPECTED_VERSION\}"/u,
-  )
-  assert.match(publish, /publish\/packages@8e2e2abd0320be0c2f64033916519ab3b66c7dd7/u)
-  assert.match(publish, /dirs:\s*packages\/ui/u)
-  assert.match(publish, /mirror-public-packages:\s*'false'/u)
-  assert.match(
-    publish,
-    /build-command:\s*pnpm --filter @astrale-os\/ui-playground exec playwright install --with-deps chromium && pnpm qualify/u,
-  )
-  assert.match(publish, /prerelease-tag:\s*auto/u)
-  assert.match(publish, /run:\s*pnpm qualify:publication/u)
-  assert.match(publish, /actions\/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a/u)
-  assert.match(publish, /mirror:\s*\n\s+needs:\s*publish/u)
-  assert.match(publish, /packages:\s*write/u)
-  assert.match(publish, /publish\/mirror-npm-to-github@8e2e2abd0320be0c2f64033916519ab3b66c7dd7/u)
-  assert.match(publish, /repository:\s*astrale-os\/ui/u)
-  assert.match(publishDomain, /workflow_dispatch/u)
-  assert.match(publishDomain, /id-token:\s*write/u)
-  assert.doesNotMatch(publishDomain, /(?:npm-token:|NPM_TOKEN|NODE_AUTH_TOKEN|secrets\.)/u)
-  assert.match(publishDomain, /environment:\s*npm/u)
-  assert.match(publishDomain, /ref:\s*\$\{\{ inputs\.expected-sha \}\}/u)
-  assert.match(publishDomain, /refs\/tags\/domain-v\$\{EXPECTED_VERSION\}/u)
-  assert.match(publishDomain, /releases\/tags\/domain-v\$\{EXPECTED_VERSION\}/u)
-  assert.match(publishDomain, /publish\/packages@8e2e2abd0320be0c2f64033916519ab3b66c7dd7/u)
-  assert.match(publishDomain, /dirs:\s*domain/u)
-  assert.match(publishDomain, /mirror-public-packages:\s*'false'/u)
-  assert.match(publishDomain, /pnpm --dir domain install --frozen-lockfile/u)
-  assert.match(publishDomain, /npm dist-tag ls @astrale-domains\/ui/u)
-  assert.match(publishDomain, /await import\('@astrale-domains\/ui'\)/u)
-  assert.deepEqual(Object.keys(releaseConfig.packages), ['.', 'domain'])
-  assert.deepEqual(Object.keys(releaseManifest), ['.', 'domain'])
+  assert.deepEqual(Object.keys(releaseConfig.packages), ['.'])
+  assert.deepEqual(Object.keys(releaseManifest), ['.'])
+  assert.equal(releaseConfig['include-component-in-tag'], false)
+  assert.equal(releaseConfig.packages['.'].component, 'ui')
+  assert.equal(releaseConfig.packages['.']['package-name'], '@astrale-os/ui')
   assert.equal(releaseConfig.packages['.']['changelog-path'], 'packages/ui/CHANGELOG.md')
   assert.deepEqual(releaseConfig.packages['.']['exclude-paths'], ['.history', '.release', 'domain'])
   assert.deepEqual(releaseConfig.packages['.']['extra-files'], [
@@ -168,28 +261,157 @@ test('publishes the runtime and Domain from their exact independent Release Plea
   assert.equal(releaseConfig.prerelease, true)
   assert.equal(releaseConfig['prerelease-type'], 'beta')
   assert.equal(releaseConfig['always-update'], true)
-  assert.deepEqual(releaseConfig.packages.domain, {
-    component: 'domain',
-    'package-name': '@astrale-domains/ui',
-    versioning: 'default',
-    prerelease: false,
-    'include-component-in-tag': true,
-    'initial-version': '0.1.0',
+  assert.deepEqual(releaseDocument.jobs.release.outputs, {
+    created: '${{ steps.release.outputs.releases_created }}',
+    releases_created: '${{ steps.release.outputs.releases_created }}',
+    prs_created: '${{ steps.release.outputs.prs_created }}',
+    release_prs: '${{ steps.release.outputs.prs }}',
+  })
+  assert.deepEqual(releaseDocument.permissions, { contents: 'read' })
+  assert.deepEqual(releaseDocument.jobs.release.permissions, {
+    actions: 'write',
+    contents: 'write',
+    'pull-requests': 'write',
+  })
+  assert.deepEqual(
+    releaseDocument.jobs.release.steps.map((step) => ({
+      id: step.id,
+      uses: step.uses,
+      with: step.with,
+    })),
+    [
+      {
+        id: undefined,
+        uses: 'actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1',
+        with: undefined,
+      },
+      {
+        id: 'release',
+        uses: `astrale-os/config/.github/actions/release@${configSha}`,
+        with: { token: '${{ github.token }}' },
+      },
+    ],
+  )
+  assert.equal(releaseDocument.jobs['search-contract'].needs, 'release')
+  assert.equal(
+    releaseDocument.jobs['search-contract'].if,
+    "needs.release.outputs.created == 'true'",
+  )
+  assert.deepEqual(releaseDocument.jobs.publish.needs, ['release', 'search-contract'])
+  assert.equal(releaseDocument.jobs.publish.if, "needs.release.outputs.created == 'true'")
+  assert.deepEqual(releaseDocument.jobs.publish.permissions, {
+    actions: 'write',
+    contents: 'read',
+  })
+  assert.deepEqual(Object.keys(publishDocument.on), ['workflow_dispatch'])
+  assert.deepEqual(Object.keys(publishDocument.on.workflow_dispatch.inputs).toSorted(), [
+    'expected-sha',
+    'expected-version',
+  ])
+  for (const input of Object.values(publishDocument.on.workflow_dispatch.inputs)) {
+    assert.equal(input.required, true)
+    assert.equal(input.type, 'string')
+  }
+  assert.deepEqual(publishDocument.jobs.publish.permissions, {
+    contents: 'read',
+    'id-token': 'write',
+  })
+  assert.deepEqual(publishDocument.jobs.mirror.permissions, {
+    contents: 'read',
+    packages: 'write',
+  })
+  const publishSteps = publishDocument.jobs.publish.steps
+  const mirrorSteps = publishDocument.jobs.mirror.steps
+  assert.deepEqual(
+    publishSteps.map((step) => ({ uses: step.uses, name: step.name })),
+    [
+      {
+        uses: 'actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1',
+        name: undefined,
+      },
+      { uses: undefined, name: 'Admit exact release commit' },
+      {
+        uses: `astrale-os/config/.github/actions/publish/packages@${configSha}`,
+        name: undefined,
+      },
+      { uses: undefined, name: 'Qualify exact public npm publication' },
+      {
+        uses: 'actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a',
+        name: undefined,
+      },
+    ],
+  )
+  assert.deepEqual(publishSteps[0].with, {
+    ref: '${{ inputs.expected-sha }}',
+    'fetch-depth': 0,
+    'persist-credentials': 'false',
+  })
+  assert.deepEqual(publishSteps[1].env, {
+    EXPECTED_SHA: '${{ inputs.expected-sha }}',
+    EXPECTED_VERSION: '${{ inputs.expected-version }}',
+    GH_TOKEN: '${{ github.token }}',
+  })
+  assert.equal(
+    publishSteps[1].run,
+    `[[ "$EXPECTED_SHA" =~ ^[0-9a-f]{40}$ ]]
+[[ "$EXPECTED_VERSION" =~ ^[0-9]+\\.[0-9]+\\.[0-9]+-beta\\.[0-9]+$ ]]
+test "$(git rev-parse HEAD)" = "$EXPECTED_SHA"
+test "$(node -p "require('./packages/ui/package.json').version")" = "$EXPECTED_VERSION"
+test "$(git rev-parse "refs/tags/v\${EXPECTED_VERSION}^{commit}")" = "$EXPECTED_SHA"
+git merge-base --is-ancestor "$EXPECTED_SHA" origin/main
+test "$(gh api "repos/\${GITHUB_REPOSITORY}/releases/tags/v\${EXPECTED_VERSION}" --jq .tag_name)" = "v\${EXPECTED_VERSION}"
+`,
+  )
+  assert.deepEqual(publishSteps[2].with, {
+    dirs: 'packages/ui',
+    'mirror-public-packages': 'false',
+    'install-command': 'pnpm install --frozen-lockfile',
+    'build-command':
+      'pnpm --filter @astrale-os/ui-playground exec playwright install --with-deps chromium && pnpm qualify',
+    'prerelease-tag': 'auto',
+  })
+  assert.deepEqual(publishSteps[3].env, { EXPECTED_SHA: '${{ inputs.expected-sha }}' })
+  assert.equal(publishSteps[3].run, 'pnpm qualify:publication')
+  assert.equal(publishSteps[4].if, 'always()')
+  assert.deepEqual(publishSteps[4].with, {
+    name: 'public-npm-publication',
+    path: 'artifacts/publication/**',
+  })
+  assert.equal(publishDocument.jobs.mirror.needs, 'publish')
+  assert.deepEqual(
+    mirrorSteps.map((step) => step.uses),
+    [
+      'actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1',
+      `astrale-os/config/.github/actions/publish/mirror-npm-to-github@${configSha}`,
+    ],
+  )
+  assert.deepEqual(mirrorSteps[0].with, {
+    ref: '${{ inputs.expected-sha }}',
+    'persist-credentials': 'false',
+  })
+  assert.deepEqual(mirrorSteps[1].with, {
+    dirs: 'packages/ui',
+    'github-token': '${{ github.token }}',
+    repository: 'astrale-os/ui',
   })
   assert.match(manifest.version, /^\d+\.\d+\.\d+-beta\.\d+$/u)
   assert.equal(rootManifest.version, manifest.version)
   assert.equal(releaseManifest['.'], manifest.version)
-  assert.equal(releaseManifest.domain, domainManifest.version)
   assert.equal(rootManifest.scripts['qualify:publication'], 'node scripts/qualify-publication.mjs')
   assert.equal(manifest.name, '@astrale-os/ui')
   assert.equal(manifest.publishConfig.registry, 'https://registry.npmjs.org')
   assert.equal(manifest.publishConfig.access, 'public')
   assert.equal(domainManifest.name, '@astrale-domains/ui')
-  assert.match(domainManifest.version, /^\d+\.\d+\.\d+$/u)
+  assert.equal(domainManifest.private, true)
   assert.equal(domainManifest.repository.url, 'git+https://github.com/astrale-os/ui.git')
   assert.equal(domainManifest.repository.directory, 'domain')
-  assert.equal(domainManifest.publishConfig.registry, 'https://registry.npmjs.org/')
-  assert.equal(domainManifest.publishConfig.access, 'public')
+  assert.deepEqual(Object.keys(domainManifest.publishConfig).toSorted(), [
+    'exports',
+    'imports',
+    'main',
+    'types',
+  ])
+  assert.equal(domainManifest.scripts.prepack, undefined)
 })
 
 test('declares one credential-free public registry policy for local package operations', async () => {

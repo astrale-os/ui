@@ -19,14 +19,6 @@
           "jsonpath": "$.version"
         }
       ]
-    },
-    "domain": {
-      "component": "domain",
-      "package-name": "@astrale-domains/ui",
-      "versioning": "default",
-      "prerelease": false,
-      "include-component-in-tag": true,
-      "initial-version": "0.1.0"
     }
   },
   "changelog-sections": [

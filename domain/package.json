@@ -1,6 +1,7 @@
 {
   "name": "@astrale-domains/ui",
   "version": "0.0.0",
+  "private": true,
   "description": "Astrale UI control-plane Domain",
   "repository": {
     "type": "git",
@@ -67,9 +68,7 @@
         "import": "./dist/schema/index.js"
       },
       "./package.json": "./package.json"
-    },
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
+    }
   },
   "scripts": {
     "dev": "astrale-domain dev",
@@ -78,7 +77,6 @@
     "lint": "astrale-domain lint",
     "lint:fix": "astrale-domain lint --fix",
     "package": "astrale-domain package",
-    "prepack": "pnpm run package",
     "typecheck": "tsc --noEmit",
     "test": "vitest run --config vitest.config.ts",
     "prod": "astrale-domain deploy prod"

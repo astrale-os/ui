@@ -117,9 +117,10 @@ Shadcn is an intake provider rather than a permanent public API; provider addres
 packed-package consumer and tree-shaking budget, the playground build, and Chromium
 accessibility/interaction tests.
 
-The runtime remains one Release Please component with `v<version>` tags. The independent Domain
-component uses `domain-v<version>` tags. Each trusted workflow admits its exact tag, SHA, and package
-version before public npm publication; neither contains a token fallback.
+`@astrale-os/ui` is the repository's only Release Please component and public npm package, using
+`v<version>` tags. Its trusted workflow admits the exact tag, SHA, and package version before public
+npm publication and contains no token fallback. The private `domain/` workspace is built and deployed
+directly; operators install its observed deployment URL into each target Kernel.
 
 ## License
 
