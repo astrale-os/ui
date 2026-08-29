@@ -591,6 +591,80 @@ test('includes only bounded maintainer discussion in chronological accepted cont
   )
 })
 
+test('recovers missing association metadata through bounded collaborator permission checks', async () => {
+  const permissionCalls = new Map()
+  const store = createGitHubRequestStore({
+    token: 'github-secret',
+    owner: 'astrale-os',
+    repo: 'ui',
+    fetch: async (url) => {
+      if (url.endsWith('/issues/123')) {
+        return json({
+          number: 123,
+          title: issue.title,
+          body: issue.body,
+          html_url: issue.url,
+          state: 'open',
+        })
+      }
+      const permissionMatch = new URL(url).pathname.match(
+        /^\/repos\/astrale-os\/ui\/collaborators\/([^/]+)\/permission$/u,
+      )
+      if (permissionMatch) {
+        const login = decodeURIComponent(permissionMatch[1])
+        permissionCalls.set(login, (permissionCalls.get(login) ?? 0) + 1)
+        if (login === 'fallback-writer') return json({ permission: 'write' })
+        if (login === 'fallback-reader') return json({ permission: 'read' })
+        return json({ message: 'Not Found' }, 404)
+      }
+      if (url.includes('/repos/astrale-os/ui/issues/123/comments?')) {
+        return json([
+          {
+            ...githubComment(10, 'First accepted fallback.'),
+            user: { login: 'fallback-writer', type: 'User' },
+            author_association: undefined,
+          },
+          {
+            ...githubComment(20, 'Second accepted fallback.'),
+            user: { login: 'fallback-writer', type: 'User' },
+            author_association: undefined,
+          },
+          {
+            ...githubComment(30, 'Read-only instruction.'),
+            user: { login: 'fallback-reader', type: 'User' },
+            author_association: undefined,
+          },
+          {
+            ...githubComment(40, 'Outside instruction.'),
+            user: { login: 'outside-user', type: 'User' },
+            author_association: undefined,
+          },
+          {
+            ...githubComment(50, 'Explicitly untrusted instruction.'),
+            user: { login: 'known-outsider', type: 'User' },
+            author_association: 'NONE',
+          },
+        ])
+      }
+      throw new Error(`Unexpected request: ${url}`)
+    },
+  })
+
+  const request = await store.getRequest(123)
+  assert.deepEqual(
+    request.issue.comments.map(({ id, author, association }) => ({ id, author, association })),
+    [
+      { id: 10, author: 'fallback-writer', association: 'COLLABORATOR' },
+      { id: 20, author: 'fallback-writer', association: 'COLLABORATOR' },
+    ],
+  )
+  assert.deepEqual(Object.fromEntries(permissionCalls), {
+    'fallback-writer': 1,
+    'fallback-reader': 1,
+    'outside-user': 1,
+  })
+})
+
 test('enforces accepted maintainer comment count and UTF-8 body bounds', async () => {
   const exactCount = await githubStoreForComments(
     Array.from({ length: 50 }, (_, index) => githubComment(index + 1, 'x')),

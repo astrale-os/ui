@@ -192,7 +192,8 @@ test('production runner invokes Cursor cancellation without dispatching another 
       return json([
         {
           id: 91,
-          user: { login: 'github-actions[bot]' },
+          user: { login: 'github-actions[bot]', type: 'Bot' },
+          author_association: 'CONTRIBUTOR',
           body: renderRecordComment(record),
         },
       ])

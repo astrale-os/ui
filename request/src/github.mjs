@@ -7,14 +7,22 @@ import { hasRecordMarker, parseRecordComment, renderRecordComment } from './reco
 
 const acceptedAssociations = new Set(['OWNER', 'MEMBER', 'COLLABORATOR'])
 
-function acceptedComment(value) {
+async function acceptedComment(value, resolveWritePermission) {
   if (
     !value ||
     typeof value !== 'object' ||
     !Number.isSafeInteger(value.id) ||
     value.id < 1 ||
-    value.user?.type === 'Bot' ||
-    !acceptedAssociations.has(value.author_association)
+    value.user?.type === 'Bot'
+  ) {
+    return null
+  }
+  const associationAccepted = acceptedAssociations.has(value.author_association)
+  if (
+    !associationAccepted &&
+    value.author_association !== undefined &&
+    value.author_association !== null &&
+    value.author_association !== ''
   ) {
     return null
   }
@@ -29,10 +37,11 @@ function acceptedComment(value) {
   ) {
     throw new TypeError('GitHub accepted maintainer comment is malformed')
   }
+  if (!associationAccepted && !(await resolveWritePermission(value.user.login))) return null
   return {
     id: value.id,
     author: value.user.login,
-    association: value.author_association,
+    association: associationAccepted ? value.author_association : 'COLLABORATOR',
     createdAt: value.created_at,
     updatedAt: value.updated_at,
     body: value.body,
@@ -78,7 +87,7 @@ export function createGitHubRequestStore(options) {
     throw new TypeError('GitHub repository is required')
 
   async function request(path, init = {}) {
-    const { signal, ...requestInit } = init
+    const { allowNotFound = false, signal, ...requestInit } = init
     const response = await fetchImplementation(`https://api.github.com${path}`, {
       ...requestInit,
       signal: operationSignal(signal, operationTimeoutMs),
@@ -91,6 +100,7 @@ export function createGitHubRequestStore(options) {
       },
     })
     const body = await readBoundedJson(response)
+    if (allowNotFound && response.status === 404) return null
     if (!response.ok) throw new Error(`GitHub request store failed with HTTP ${response.status}`)
     return body
   }
@@ -122,6 +132,22 @@ export function createGitHubRequestStore(options) {
       }
       let found = null
       const accepted = []
+      const commentPermissions = new Map()
+      function hasWritePermission(login) {
+        if (!commentPermissions.has(login)) {
+          commentPermissions.set(
+            login,
+            request(
+              `/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/collaborators/${encodeURIComponent(login)}/permission`,
+              { allowNotFound: true, signal },
+            ).then(
+              (permission) =>
+                permission !== null && ['admin', 'write'].includes(permission?.permission),
+            ),
+          )
+        }
+        return commentPermissions.get(login)
+      }
       let complete = false
       for (let page = 1; page <= limits.maxRecordCommentPages; page += 1) {
         const comments = await request(
@@ -148,7 +174,7 @@ export function createGitHubRequestStore(options) {
               found = { commentId: comment.id, record }
             }
           }
-          const eligible = acceptedComment(comment)
+          const eligible = await acceptedComment(comment, hasWritePermission)
           if (eligible) accepted.push(eligible)
         }
         if (comments.length < 10) {

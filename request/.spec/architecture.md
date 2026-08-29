@@ -3,7 +3,9 @@
 The GitHub issue body owns the initial human request. Bounded chronological comments from repository
 owners, members, and collaborators refine that intent; public and bot comments never enter the
 agent objective. A single trusted machine comment owns the current managed attempt binding and its
-exact accepted-comment snapshot.
+exact accepted-comment snapshot. GitHub association metadata is authoritative when present; if the
+workflow token receives no association, one cached permission lookup for that author may admit only
+write or admin authority for the current request read.
 
 ```mermaid
 flowchart LR
