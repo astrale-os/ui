@@ -20,6 +20,7 @@ jobs:
     outputs:
       created: ${{ steps.release.outputs.releases_created }}
       releases_created: ${{ steps.release.outputs.releases_created }}
+      paths_released: ${{ steps.release.outputs.paths_released }}
       prs_created: ${{ steps.release.outputs.prs_created }}
       release_prs: ${{ steps.release.outputs.prs }}
     steps:
@@ -86,7 +87,7 @@ jobs:
 
   search-contract:
     needs: release
-    if: needs.release.outputs.created == 'true'
+    if: needs.release.outputs.created == 'true' && contains(fromJSON(needs.release.outputs.paths_released), '.')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -122,7 +123,7 @@ jobs:
 
   publish:
     needs: [release, search-contract]
-    if: needs.release.outputs.created == 'true'
+    if: needs.release.outputs.created == 'true' && contains(fromJSON(needs.release.outputs.paths_released), '.')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -140,5 +141,28 @@ jobs:
           run_id="${run_url##*/}"
           case "$run_id" in
             ''|*[!0-9]*) echo "publish dispatch did not return an exact run id" >&2; exit 1 ;;
+          esac
+          gh run watch "$run_id" --repo "$GITHUB_REPOSITORY" --compact --exit-status
+
+  publish-domain:
+    needs: release
+    if: needs.release.outputs.created == 'true' && contains(fromJSON(needs.release.outputs.paths_released), 'domain')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: 'false'
+      - name: Dispatch trusted Domain Publish workflow
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PUBLISH_SHA: ${{ github.sha }}
+        run: |
+          publish_version="$(node -p "require('./domain/package.json').version")"
+          publish_tag="domain-v${publish_version}"
+          run_url="$(gh workflow run publish-domain.yml --repo "$GITHUB_REPOSITORY" --ref "$publish_tag" -f expected-sha="$PUBLISH_SHA" -f expected-version="$publish_version")"
+          run_id="${run_url##*/}"
+          case "$run_id" in
+            ''|*[!0-9]*) echo "workflow dispatch did not return an exact run id" >&2; exit 1 ;;
           esac
           gh run watch "$run_id" --repo "$GITHUB_REPOSITORY" --compact --exit-status

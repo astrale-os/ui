@@ -1,0 +1,109 @@
+{
+  "name": "@astrale-domains/ui",
+  "version": "0.0.0",
+  "description": "Astrale UI control-plane Domain",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/astrale-os/ui.git",
+    "directory": "domain"
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "main": "./schema/index.ts",
+  "types": "./schema/index.ts",
+  "imports": {
+    "#actions": "./actions/index.ts",
+    "#actions/*": "./actions/*/index.ts",
+    "#integrations": "./integrations/index.ts",
+    "#integrations/*": "./integrations/*/index.ts",
+    "#migrations": "./migrations/index.ts",
+    "#migrations/*": "./migrations/*/index.ts",
+    "#mutations": "./mutations/index.ts",
+    "#mutations/*": "./mutations/*/index.ts",
+    "#queries": "./queries/index.ts",
+    "#queries/*": "./queries/*/index.ts",
+    "#routes": "./routes/index.ts",
+    "#routes/*": "./routes/*/index.ts",
+    "#providers": "./providers/index.ts",
+    "#providers/*": "./providers/*/index.ts",
+    "#rules": "./rules/index.ts",
+    "#rules/*": "./rules/*/index.ts",
+    "#schema": "./schema/index.ts",
+    "#schema/*": "./schema/*/index.ts",
+    "#scripts": "./scripts/index.ts",
+    "#scripts/*": "./scripts/*/index.ts",
+    "#states": "./states/index.ts",
+    "#states/*": "./states/*/index.ts",
+    "#tests": "./tests/index.ts",
+    "#tests/*": "./tests/*/index.ts",
+    "#ui": "./ui/index.ts",
+    "#ui/*": "./ui/*/index.ts",
+    "#utils": "./utils/index.ts",
+    "#utils/*": "./utils/*/index.ts",
+    "#views": "./views/index.ts",
+    "#views/*": "./views/*/index.ts",
+    "#workflows": "./workflows/index.ts",
+    "#workflows/*": "./workflows/*/index.ts"
+  },
+  "exports": {
+    ".": {
+      "types": "./schema/index.ts",
+      "import": "./schema/index.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "main": "./dist/schema/index.js",
+    "types": "./dist/schema/index.d.ts",
+    "imports": {
+      "#schema": "./dist/schema/index.js",
+      "#schema/*": "./dist/schema/*/index.js"
+    },
+    "exports": {
+      ".": {
+        "types": "./dist/schema/index.d.ts",
+        "import": "./dist/schema/index.js"
+      },
+      "./package.json": "./package.json"
+    },
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "scripts": {
+    "dev": "astrale-domain dev",
+    "deploy": "astrale-domain deploy",
+    "build": "astrale-domain build",
+    "lint": "astrale-domain lint",
+    "lint:fix": "astrale-domain lint --fix",
+    "package": "astrale-domain package",
+    "prepack": "pnpm run package",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --config vitest.config.ts",
+    "prod": "astrale-domain deploy prod"
+  },
+  "dependencies": {
+    "@astrale-os/sdk": "0.5.0-beta.79",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@astrale-os/adapter-cloudflare": "0.5.0-beta.82",
+    "@astrale-os/ox": ">=0.1.4 <1.0.0",
+    "@types/node": "^22.0.0",
+    "bun": "1.4.0",
+    "oxlint": "1.79.0",
+    "typescript": "7.0.2",
+    "vitest": "^4.1.10"
+  },
+  "engines": {
+    "node": ">=22.13"
+  },
+  "packageManager": "pnpm@12.0.0",
+  "trustedDependencies": [
+    "bun",
+    "esbuild",
+    "sharp",
+    "workerd"
+  ]
+}

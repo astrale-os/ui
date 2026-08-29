@@ -36,6 +36,7 @@
     "search:benchmark": "node --expose-gc search/benchmark.mjs",
     "request:check": "node --test request/agent/*.test.mjs request/agent/adapters/*.test.mjs request/*.test.mjs && tsc --noEmit --strict --skipLibCheck --target ES2022 --module NodeNext --moduleResolution NodeNext request/.spec/api.d.ts request/.spec/limits.ts request/.spec/laws.ts request/.spec/states/request.ts request/agent/.spec/api.d.ts request/agent/.spec/capabilities.ts request/agent/.spec/laws.ts request/agent/.spec/limits.ts request/agent/.spec/states/run.ts request/agent/.spec/examples/dispatch.ts",
     "request:run": "node request/run.mjs",
+    "domain:check": "pnpm --dir domain typecheck && pnpm --dir domain test && pnpm --dir domain lint && pnpm --dir domain build && pnpm --dir domain package",
     "studio:registry:build": "pnpm studio:registry && pnpm registry:build && node scripts/registry-variants/check-registry-build.mjs",
     "studio:typecheck": "pnpm registry:typecheck && pnpm playground:typecheck",
     "studio:typecheck:non-drawer": "pnpm registry:typecheck && pnpm playground:typecheck",
@@ -54,7 +55,7 @@
     "playground:test:production": "pnpm --filter @astrale-os/ui-playground build:public && node scripts/verify-playground-chunks.mjs --public && pnpm --filter @astrale-os/ui-playground test:production",
     "package:qualify": "node scripts/qualify-package.mjs",
     "qualify:publication": "node scripts/qualify-publication.mjs",
-    "check": "pnpm build && pnpm format:check && pnpm lint && pnpm typecheck && pnpm test:contracts && pnpm test:playground-unit && pnpm search:check && pnpm request:check && pnpm catalog:check && pnpm registry:check && pnpm playground:typecheck",
+    "check": "pnpm build && pnpm format:check && pnpm lint && pnpm typecheck && pnpm test:contracts && pnpm test:playground-unit && pnpm search:check && pnpm request:check && pnpm domain:check && pnpm catalog:check && pnpm registry:check && pnpm playground:typecheck",
     "qualify": "pnpm check && pnpm test:components && pnpm test:registry-behavior && pnpm test:security && pnpm build && pnpm registry:build && pnpm package:qualify && pnpm registry:qualify && pnpm playground:build && pnpm playground:test && pnpm playground:test:production",
     "prepare": "husky"
   },

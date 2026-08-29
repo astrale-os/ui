@@ -2,6 +2,7 @@ packages:
   - 'packages/*'
   - 'registry'
   - 'playground'
+  - 'domain'
 
 linkWorkspacePackages: true
 strictPeerDependencies: true
@@ -25,6 +26,7 @@ verifyDepsBeforeRun: false
 allowBuilds:
   '@anthropic-ai/claude-code': false
   '@parcel/watcher': false
+  bun: true
   better-sqlite3: true
   cbor-extract: true
   esbuild: true
