@@ -24,6 +24,12 @@ const reactAriaProvenance = JSON.parse(
     'utf8',
   ),
 )
+const heatmapProvenance = JSON.parse(
+  await readFile(
+    'tooling/upstream/providers/heatmap/6cdef1109364760536410d5325ac0d1af451196e/status-heatmap/provenance.json',
+    'utf8',
+  ),
+)
 const owners = new Map(
   provenance.components
     .filter((component) => component.disposition === 'owned-runtime')
@@ -223,6 +229,47 @@ test('the React Aria color picker differs only by owned imports and formatting',
     })
     assert.equal(formatted.status, 0, formatted.stderr)
     for (const filename of Object.keys(reactAriaProvenance.files)) {
+      assert.equal(
+        await readFile(path.join(temporary, 'implementation', filename), 'utf8'),
+        await readFile(path.join(temporary, 'source', filename), 'utf8'),
+        `${filename} contains a non-import upstream change`,
+      )
+    }
+  } finally {
+    await rm(temporary, { recursive: true })
+  }
+})
+
+test('the status heatmap differs only by owned imports and formatting', async () => {
+  assert.equal(heatmapProvenance.adaptation, 'imports-only')
+  assert.equal(
+    digest(
+      await readFile(
+        'tooling/upstream/providers/heatmap/6cdef1109364760536410d5325ac0d1af451196e/status-heatmap/LICENSE',
+        'utf8',
+      ),
+    ),
+    heatmapProvenance.licenseDigest,
+  )
+  const temporary = await mkdtemp(path.join(tmpdir(), 'astrale-status-heatmap-fidelity-'))
+  try {
+    for (const [filename, file] of Object.entries(heatmapProvenance.files)) {
+      const source = await readFile(file.source, 'utf8')
+      assert.equal(digest(source), file.sourceDigest)
+      const implementation = (await readFile(file.implementation, 'utf8')).replaceAll(
+        "'@astrale-os/ui/class-name'",
+        "'@/lib/utils'",
+      )
+      await mkdir(path.join(temporary, 'source'), { recursive: true })
+      await mkdir(path.join(temporary, 'implementation'), { recursive: true })
+      await writeFile(path.join(temporary, 'source', filename), source)
+      await writeFile(path.join(temporary, 'implementation', filename), implementation)
+    }
+    const formatted = spawnSync('pnpm', ['exec', 'oxfmt', '--write', temporary], {
+      encoding: 'utf8',
+    })
+    assert.equal(formatted.status, 0, formatted.stderr)
+    for (const filename of Object.keys(heatmapProvenance.files)) {
       assert.equal(
         await readFile(path.join(temporary, 'implementation', filename), 'utf8'),
         await readFile(path.join(temporary, 'source', filename), 'utf8'),

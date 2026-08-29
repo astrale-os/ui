@@ -4,6 +4,14 @@ import { afterEach, describe, expect, test } from 'vitest'
 
 import { SignInCard } from '../blocks/authentication/sign-in-card.js'
 import { AppearanceSettings } from '../blocks/settings/appearance.js'
+import {
+  StatusHeatmap,
+  StatusHeatmapBlock,
+  StatusHeatmapBody,
+  StatusHeatmapFooter,
+  StatusHeatmapLegend,
+  StatusHeatmapStat,
+} from '../components/status-heatmap/status-heatmap.js'
 import { HorizontalCarousel } from '../patterns/carousel/horizontal-controlled.js'
 import { ChartLineBasic } from '../patterns/chart/line-basic.js'
 import { ComboboxSingleBasic } from '../patterns/combobox/single-basic.js'
@@ -182,5 +190,49 @@ describe('owned registry compositions', () => {
     expect(toggles).toEqual([['compact', true]])
     await user.click(screen.getByRole('button', { name: 'Save changes' }))
     expect(saves).toBe(1)
+  })
+
+  test('status heatmap keeps its upstream anatomy, labels, and cell interaction', async () => {
+    const user = userEvent.setup()
+    const clicked: string[] = []
+    render(
+      <StatusHeatmap
+        data={[
+          { date: '2026-05-01', value: 3 },
+          { date: '2026-05-02', value: 2 },
+          { date: '2026-05-03', value: 1 },
+        ]}
+      >
+        <StatusHeatmapBody>
+          {({ activity, dayIndex }) => (
+            <StatusHeatmapBlock
+              activity={activity}
+              dayIndex={dayIndex}
+              onCellClick={(cell) => clicked.push(cell.date)}
+            />
+          )}
+        </StatusHeatmapBody>
+        <StatusHeatmapFooter>
+          <StatusHeatmapStat />
+          <StatusHeatmapLegend />
+        </StatusHeatmapFooter>
+      </StatusHeatmap>,
+    )
+    expect(document.querySelector('[data-slot="status-heatmap"]')).toBeInTheDocument()
+    expect(screen.getByRole('img', { name: 'Status heatmap' })).toBeInTheDocument()
+    expect(document.querySelectorAll('[data-slot="status-heatmap-block"]')).toHaveLength(3)
+    expect(document.querySelector('[data-slot="status-heatmap-stat"]')).toHaveTextContent(
+      '1 days healthy',
+    )
+    expect(
+      within(document.querySelector<HTMLElement>('[data-slot="status-heatmap-legend"]')!).getByText(
+        'Degraded',
+      ),
+    ).toBeInTheDocument()
+
+    const cells = screen.getAllByRole('button')
+    expect(cells[2]).toHaveAttribute('aria-label', '2026-05-03: Critical')
+    await user.click(cells[0]!)
+    expect(clicked).toEqual(['2026-05-01'])
   })
 })

@@ -18,6 +18,22 @@ const reactAriaProvenance = JSON.parse(
     'utf8',
   ),
 )
+const heatmapProvenance = JSON.parse(
+  await readFile(
+    'tooling/upstream/providers/heatmap/6cdef1109364760536410d5325ac0d1af451196e/status-heatmap/provenance.json',
+    'utf8',
+  ),
+)
+const externalProviders = new Map([
+  [
+    '@react-aria',
+    { provenance: reactAriaProvenance, address: 'component/color-picker', fileCount: 10 },
+  ],
+  [
+    '@heatmap',
+    { provenance: heatmapProvenance, address: 'component/status-heatmap', fileCount: 1 },
+  ],
+])
 const registryPackage = JSON.parse(await readFile('registry/package.json', 'utf8'))
 
 function packageName(specifier) {
@@ -182,11 +198,12 @@ test('every registry item is independently bounded, controlled, and safe to inst
         assert.equal(item.meta.canonicalAddress, upstream.owner)
         assert.equal(item.declaredPath, upstream.implementation)
       } else {
-        assert.equal(item.meta.provider, '@react-aria')
-        assert.equal(item.meta.upstreamAddress, reactAriaProvenance.upstreamAddress)
-        assert.equal(item.meta.upstreamDigest, reactAriaProvenance.sourceDigest)
-        assert.equal(item.meta.canonicalAddress, 'component/color-picker')
-        assert.equal(item.files.length, 10)
+        const external = externalProviders.get(item.meta.provider)
+        assert.ok(external, `${item.name} has no proven external provider`)
+        assert.equal(item.meta.upstreamAddress, external.provenance.upstreamAddress)
+        assert.equal(item.meta.upstreamDigest, external.provenance.sourceDigest)
+        assert.equal(item.meta.canonicalAddress, external.address)
+        assert.equal(item.files.length, external.fileCount)
       }
       assert.equal(item.meta.adaptation, 'imports-only')
       const itemSources = await Promise.all(

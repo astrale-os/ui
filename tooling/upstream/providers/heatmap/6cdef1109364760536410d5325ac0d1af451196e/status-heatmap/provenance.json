@@ -1,0 +1,21 @@
+{
+  "provider": "@heatmap",
+  "upstreamAddress": "@heatmap/status-heatmap",
+  "repository": "https://github.com/rutopio/shadcn-heatmap",
+  "revision": "6cdef1109364760536410d5325ac0d1af451196e",
+  "resolvedAt": "2026-08-29",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/rutopio/shadcn-heatmap/blob/6cdef1109364760536410d5325ac0d1af451196e/LICENSE",
+  "licenseDigest": "sha256:f2470ae5d50c93ffd91bfc7af81e91f62222f63a51d117dccf28f31f6f78ff88",
+  "owner": "component/status-heatmap",
+  "adaptation": "imports-only",
+  "sourceDigest": "sha256:1bbb1e191988f48a63a290ad149f3c1d744a36ef1305c875f89fc347aa26ed45",
+  "files": {
+    "status-heatmap.tsx": {
+      "url": "https://raw.githubusercontent.com/rutopio/shadcn-heatmap/6cdef1109364760536410d5325ac0d1af451196e/src/components/heatmap/status-heatmap.tsx",
+      "source": "tooling/upstream/providers/heatmap/6cdef1109364760536410d5325ac0d1af451196e/status-heatmap/status-heatmap.tsx",
+      "implementation": "registry/components/status-heatmap/status-heatmap.tsx",
+      "sourceDigest": "sha256:1bbb1e191988f48a63a290ad149f3c1d744a36ef1305c875f89fc347aa26ed45"
+    }
+  }
+}
