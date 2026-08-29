@@ -79,4 +79,4 @@
       and owns the installed source.
 - [ ] Publication occurs only through the existing release workflow and is separately verified.
 - [x] Final adversarial semantic and test-quality reviews have no unresolved local Critical or High
-      gap; unavailable live-provider credentials remain an explicit external evidence gate.
+      gap; the selected live provider completed the disposable workflow-to-PR qualification.

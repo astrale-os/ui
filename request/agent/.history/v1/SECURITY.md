@@ -23,10 +23,10 @@ the managed agent may propose code but cannot accept, merge, publish, release, o
 
 The GitHub and provider identities must not be able to merge a PR or bypass required checks.
 
-The selected worker pins the Claude Code base action to an immutable revision, disables Bash, does
-not load repository customizations, and permits only read/edit/write/search tools. Candidate checks
-run in a fresh credential-free job; commit, push, and PR creation are fixed steps in another fresh
-job that never executes candidate-controlled package code or git hooks.
+The selected worker locks the exact Claude Code CLI package, disables Bash, does not load repository
+customizations, and permits only read/edit/write/search tools. Candidate checks run in a fresh
+credential-free job; commit, push, and PR creation are fixed steps in another fresh job that never
+executes candidate-controlled package code or git hooks.
 
 ## Prompt and source safety
 
