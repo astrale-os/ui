@@ -137,8 +137,6 @@ const fontItems = generatorFontCatalog
 const monoItems = generatorFontCatalog
   .filter((font) => font.roles.some((role) => role === 'terminal'))
   .map((font) => ({ label: `${font.label} · Mono`, value: font.family }))
-const COLOR_PREVIEW_DEBOUNCE_MS = 250
-
 function ThemePaletteIcon({ theme }: { theme: ThemeDocument }) {
   const colors = [
     theme.appearance.light.background,
@@ -606,7 +604,6 @@ function ColorField({
 }) {
   const value = theme.appearance[mode][token]
   const [draft, setDraft] = useState(value)
-  const pendingCommit = useRef<ReturnType<typeof setTimeout> | null>(null)
   const previewFrame = useRef<number | null>(null)
   const latestOnChange = useRef(onChange)
   const committedValue = useRef(value)
@@ -618,16 +615,13 @@ function ColorField({
   }, [onChange])
 
   useEffect(() => {
-    if (pendingCommit.current) clearTimeout(pendingCommit.current)
     if (previewFrame.current !== null) cancelAnimationFrame(previewFrame.current)
-    pendingCommit.current = null
     previewFrame.current = null
     setDraft(value)
   }, [value])
 
   useEffect(
     () => () => {
-      if (pendingCommit.current) clearTimeout(pendingCommit.current)
       if (previewFrame.current !== null) cancelAnimationFrame(previewFrame.current)
       document.documentElement.style.setProperty(styleProperty, committedValue.current)
     },
@@ -643,9 +637,7 @@ function ColorField({
   }
 
   function commit(next: string) {
-    if (pendingCommit.current) clearTimeout(pendingCommit.current)
     if (previewFrame.current !== null) cancelAnimationFrame(previewFrame.current)
-    pendingCommit.current = null
     previewFrame.current = null
     setDraft(next)
     document.documentElement.style.setProperty(styleProperty, next)
@@ -655,11 +647,6 @@ function ColorField({
   function preview(next: string) {
     setDraft(next)
     applyPreview(next)
-    if (pendingCommit.current) clearTimeout(pendingCommit.current)
-    pendingCommit.current = setTimeout(() => {
-      pendingCommit.current = null
-      latestOnChange.current(next)
-    }, COLOR_PREVIEW_DEBOUNCE_MS)
   }
 
   return (

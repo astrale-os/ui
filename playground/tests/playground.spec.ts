@@ -1462,7 +1462,7 @@ test('saved version 3 themes migrate to the complete typography model', async ({
         return [saved[0]?.version, saved[0]?.typography?.body?.weight]
       }),
     )
-    .toEqual([4, 400])
+    .toEqual([5, 400])
 })
 
 test('invalid storage and save failures stay contained', async ({ page }) => {
