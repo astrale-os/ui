@@ -1,6 +1,6 @@
 # ADR: UI ecosystem control plane
 
-- Status: ratified and implemented; release qualification in progress
+- Status: ratified and implemented
 - Scope: V1 architecture, Schema, and Runtime
 - Origin: `ui.astrale.ai`
 - Package: `@astrale-domains/ui`
@@ -165,6 +165,8 @@ storage, not graph nodes, and the response must preserve the existing UI search 
 
 - The UI package remains independent of the SDK and Domain.
 - The CLI may depend on the Domain client without pulling UI runtime code into applications.
+- The Domain remains a private source-owned workspace package; repository qualification and
+  deployment do not require a parallel npm release or tag authority.
 - GitHub outages or ambiguous responses are represented explicitly instead of duplicated blindly.
 - Provider and agent choices can change without changing the public Schema.
 - Deployment and real issue creation remain separate operational evidence; source qualification
