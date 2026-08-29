@@ -3,9 +3,9 @@
   "version": 1,
   "status": "locked",
   "product": "Astrale Theme Generator V1",
-  "prdVersion": "1.0.0",
+  "prdVersion": "1.1.0",
   "document": "PRD.md",
-  "sha256": "f0bf5c7d667c9572378663a29d52d3496552b7c42902ef9a75325d234f005c61",
-  "lockedAt": "2026-08-29",
+  "sha256": "a9a5a14f7bf67d3c2c7a26ee5d91a964d44b12fe664b9c739c35953dffbb9efb",
+  "lockedAt": "2026-08-30",
   "changePolicy": "Increment the PRD version or create a successor, repeat the adversarial review, and write a new digest."
 }

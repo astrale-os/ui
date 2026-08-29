@@ -240,7 +240,7 @@
       "properties": {
         "kind": { "const": "astrale.theme-generation" },
         "version": { "const": 1 },
-        "engineVersion": { "const": 1 },
+        "engineVersion": { "const": 2 },
         "fontCatalogVersion": { "const": 1 },
         "seed": { "$ref": "#/$defs/generatorSeed" },
         "derivationSeeds": {

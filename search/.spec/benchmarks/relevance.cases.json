@@ -33,8 +33,8 @@
     "relevant": ["theme/observatory"]
   },
   {
-    "query": "multi step questionnaire",
-    "relevant": ["pattern/questionnaire/multi-step"]
+    "query": "multi step form wizard",
+    "relevant": ["pattern/form/wizard-controlled"]
   },
   {
     "query": "timezone selector with real timezone data",

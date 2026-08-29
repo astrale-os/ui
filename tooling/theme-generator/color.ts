@@ -249,6 +249,34 @@ export function solveForeground(background: OklchColor, desiredContrast: number)
   ).color
 }
 
+/**
+ * Chooses text and icon color for a filled semantic control.
+ *
+ * Unlike ordinary surface text, an on-color foreground is a white-or-black
+ * decision rather than the nearest gray that happens to clear WCAG. White is
+ * preferred when it passes because it is the conventional treatment for
+ * saturated action fills; black remains available for light fills. Rendered
+ * sRGB contrast is authoritative.
+ */
+export function solveOnColorForeground(background: OklchColor, minimumContrast = 4.5): OklchColor {
+  const mappedBackground = gamutMap(background)
+  const backgroundRgb = oklchToSrgb(mappedBackground)
+  const hue = mappedBackground.h
+  const targetContrast = minimumContrast + 0.05
+  const candidates = [
+    { l: 1, c: 0, h: hue },
+    { l: 0, c: 0, h: hue },
+  ].map((color) => ({
+    color,
+    contrast: contrastRatio(oklchToSrgb(color), backgroundRgb),
+  }))
+  const preferred = candidates.find((candidate) => candidate.contrast >= targetContrast)
+  if (preferred) return preferred.color
+  return candidates.reduce((best, candidate) =>
+    candidate.contrast > best.contrast ? candidate : best,
+  ).color
+}
+
 export function solveForegroundForSurfaces(
   backgrounds: readonly OklchColor[],
   desiredContrast: number,

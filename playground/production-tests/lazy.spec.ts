@@ -5,8 +5,8 @@ const manifest = JSON.parse(readFileSync('dist/.vite/manifest.json', 'utf8')) as
   string,
   { file: string }
 >
-const teamChunk = Object.entries(manifest).find(([source]) =>
-  source.endsWith('/registry/blocks/settings/team.preview.tsx'),
+const operationsChunk = Object.entries(manifest).find(([source]) =>
+  source.endsWith('/registry/blocks/dashboard/operations.preview.tsx'),
 )?.[1].file
 const buttonChunk = Object.entries(manifest).find(([source]) =>
   source.endsWith('/packages/ui/previews/button/button.preview.tsx'),
@@ -37,19 +37,19 @@ test('production chunks stay isolated, load near the viewport once, and preserve
   page,
 }) => {
   test.setTimeout(60_000)
-  expect(teamChunk).toBeTruthy()
+  expect(operationsChunk).toBeTruthy()
   expect(buttonChunk).toBeTruthy()
   const requests: string[] = []
-  let releaseTeam: (() => void) | undefined
-  let teamWasRequested = false
-  const teamRelease = new Promise<void>((resolve) => {
-    releaseTeam = resolve
+  let releaseOperations: (() => void) | undefined
+  let operationsWasRequested = false
+  const operationsRelease = new Promise<void>((resolve) => {
+    releaseOperations = resolve
   })
   await page.route('**/*', async (route) => {
     const requested = new URL(route.request().url()).pathname.slice(1)
-    if (requested === teamChunk) {
-      teamWasRequested = true
-      await teamRelease
+    if (requested === operationsChunk) {
+      operationsWasRequested = true
+      await operationsRelease
     }
     await route.continue()
   })
@@ -62,16 +62,16 @@ test('production chunks stay isolated, load near the viewport once, and preserve
     'aria-selected',
     'true',
   )
-  const distant = page.locator('[data-preview-address="block/settings/team"]')
+  const distant = page.locator('[data-preview-address="block/dashboard/operations"]')
   await expect(distant).toHaveAttribute('data-preview-status', 'idle')
-  expect(requests).not.toContain(teamChunk)
+  expect(requests).not.toContain(operationsChunk)
   const reservedHeight = await distant.evaluate((element) => element.getBoundingClientRect().height)
   expect(reservedHeight).toBeGreaterThan(100)
 
   await page.evaluate(() => {
     document.documentElement.style.scrollBehavior = 'auto'
   })
-  for (let step = 0; step < 200 && !teamWasRequested; step += 1) {
+  for (let step = 0; step < 200 && !operationsWasRequested; step += 1) {
     await page.evaluate(() => scrollBy({ top: innerHeight / 4, behavior: 'auto' }))
     await page.waitForTimeout(16)
   }
@@ -82,7 +82,7 @@ test('production chunks stay isolated, load near the viewport once, and preserve
     scrollMax: document.documentElement.scrollHeight - innerHeight,
     viewport: innerHeight,
   }))
-  expect(teamWasRequested, JSON.stringify(approached)).toBe(true)
+  expect(operationsWasRequested, JSON.stringify(approached)).toBe(true)
   await expect(distant).toHaveAttribute('data-preview-status', 'loading')
   const loadingGeometry = await distant.evaluate((element) => ({
     height: element.getBoundingClientRect().height,
@@ -91,17 +91,17 @@ test('production chunks stay isolated, load near the viewport once, and preserve
   }))
   expect(loadingGeometry.top).toBeGreaterThan(loadingGeometry.viewport)
   const loadingScroll = await page.evaluate(() => scrollY)
-  releaseTeam?.()
+  releaseOperations?.()
   await expect(distant).toHaveAttribute('data-preview-status', 'ready', { timeout: 15_000 })
-  expect(requests.filter((request) => request === teamChunk)).toHaveLength(1)
+  expect(requests.filter((request) => request === operationsChunk)).toHaveLength(1)
   await expect.poll(() => page.evaluate(() => scrollY)).toBeCloseTo(loadingScroll, 0)
   const readyHeight = await distant.evaluate((element) => element.getBoundingClientRect().height)
   expect(Math.abs(readyHeight - loadingGeometry.height)).toBeLessThan(64)
   await page
-    .locator('[data-preview-address="block/application-shell/compact-command"]')
+    .locator('[data-preview-address="block/authentication/sign-in-card"]')
     .scrollIntoViewIfNeeded()
   await distant.scrollIntoViewIfNeeded()
-  expect(requests.filter((request) => request === teamChunk)).toHaveLength(1)
+  expect(requests.filter((request) => request === operationsChunk)).toHaveLength(1)
 
   const isolatedContext = await browser.newContext()
   const isolatedPage = await isolatedContext.newPage()
@@ -116,6 +116,6 @@ test('production chunks stay isolated, load near the viewport once, and preserve
     'ready',
   )
   expect(isolatedRequests).toContain(buttonChunk)
-  expect(isolatedRequests).not.toContain(teamChunk)
+  expect(isolatedRequests).not.toContain(operationsChunk)
   await isolatedContext.close()
 })

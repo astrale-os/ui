@@ -35,7 +35,7 @@ test('the filesystem checker admits a closed catalog with named scenes and an ex
   try {
     await Promise.all([
       mkdir(path.join(root, 'packages/ui/previews/button'), { recursive: true }),
-      mkdir(path.join(root, 'registry/patterns/chart'), { recursive: true }),
+      mkdir(path.join(root, 'registry/patterns/calendar'), { recursive: true }),
       mkdir(path.join(root, 'registry'), { recursive: true }),
     ])
     await Promise.all([
@@ -48,8 +48,8 @@ test('the filesystem checker admits a closed catalog with named scenes and an ex
         JSON.stringify({
           items: [
             {
-              name: 'pattern-chart-line-basic',
-              meta: { canonicalAddress: 'pattern/chart/line-basic' },
+              name: 'pattern-calendar-single-basic',
+              meta: { canonicalAddress: 'pattern/calendar/single-basic' },
               files: [],
             },
             { name: 'theme-astrale', meta: { canonicalAddress: 'theme/astrale' }, files: [] },
@@ -58,7 +58,7 @@ test('the filesystem checker admits a closed catalog with named scenes and an ex
       ),
       writeFile(path.join(root, 'packages/ui/previews/button/button.preview.tsx'), ''),
       writeFile(path.join(root, 'packages/ui/previews/button/button.variants.preview.tsx'), ''),
-      writeFile(path.join(root, 'registry/patterns/chart/line-basic.preview.tsx'), ''),
+      writeFile(path.join(root, 'registry/patterns/calendar/single-basic.preview.tsx'), ''),
     ])
     const result = await checkCatalogPreviews(root)
     assert.equal(result.expected, 2)
@@ -75,11 +75,11 @@ test('preview paths derive canonical item and named scene identity', () => {
     canonical: true,
     file: 'packages/ui/previews/button/button.preview.tsx',
   })
-  assert.deepEqual(previewIdentity('registry/patterns/chart/line-basic.empty.preview.tsx'), {
-    address: 'pattern/chart/line-basic',
+  assert.deepEqual(previewIdentity('registry/patterns/calendar/single-basic.empty.preview.tsx'), {
+    address: 'pattern/calendar/single-basic',
     scene: 'empty',
     canonical: false,
-    file: 'registry/patterns/chart/line-basic.empty.preview.tsx',
+    file: 'registry/patterns/calendar/single-basic.empty.preview.tsx',
   })
   assert.deepEqual(previewIdentity('registry/blocks/dashboard/overview.preview.tsx'), {
     address: 'block/dashboard/overview',
@@ -93,9 +93,9 @@ test('preview paths reject mismatched, malformed, and ownerless files', () => {
   for (const file of [
     'packages/ui/previews/button/input.preview.tsx',
     'registry/components/chart/carousel.preview.tsx',
-    'registry/patterns/chart/line-basic.bad_scene.preview.tsx',
-    'registry/patterns/chart/nested/line-basic.preview.tsx',
-    'registry/patterns/chart/line-basic.default.preview.tsx',
+    'registry/patterns/calendar/single-basic.bad_scene.preview.tsx',
+    'registry/patterns/calendar/nested/single-basic.preview.tsx',
+    'registry/patterns/calendar/single-basic.default.preview.tsx',
     'playground/src/button.preview.tsx',
   ]) {
     assert.throws(() => previewIdentity(file), { name: 'AssertionError' })
@@ -108,13 +108,13 @@ test('catalog closure aggregates malformed paths with all other contract failure
     registry: { items: [] },
     previews: [
       'packages/ui/previews/button/button.default.preview.tsx',
-      'registry/patterns/chart/nested/line-basic.preview.tsx',
+      'registry/patterns/calendar/nested/single-basic.preview.tsx',
     ],
   })
   assert.equal(result.identities.length, 0)
   assert.deepEqual(result.problems, [
     'Do not spell the canonical scene: packages/ui/previews/button/button.default.preview.tsx',
-    'Preview is outside an admitted owner: registry/patterns/chart/nested/line-basic.preview.tsx',
+    'Preview is outside an admitted owner: registry/patterns/calendar/nested/single-basic.preview.tsx',
     'Missing canonical preview: component/button',
   ])
 })
@@ -132,9 +132,9 @@ test('catalog closure reports missing, duplicate, orphaned, and distributed prev
   const registry = {
     items: [
       {
-        name: 'pattern-chart-line-basic',
-        meta: { canonicalAddress: 'pattern/chart/line-basic' },
-        files: [{ path: 'line-basic.preview.tsx' }],
+        name: 'pattern-calendar-single-basic',
+        meta: { canonicalAddress: 'pattern/calendar/single-basic' },
+        files: [{ path: 'single-basic.preview.tsx' }],
       },
     ],
   }
@@ -143,7 +143,7 @@ test('catalog closure reports missing, duplicate, orphaned, and distributed prev
     registry,
     previews: [
       'packages/ui/previews/button/button.preview.tsx',
-      'registry/patterns/chart/line-basic.empty.preview.tsx',
+      'registry/patterns/calendar/single-basic.empty.preview.tsx',
       'registry/blocks/dashboard/overview.preview.tsx',
       'registry/blocks/dashboard/overview.preview.tsx',
     ],
@@ -153,7 +153,7 @@ test('catalog closure reports missing, duplicate, orphaned, and distributed prev
     'Orphan preview block/dashboard/overview#default: registry/blocks/dashboard/overview.preview.tsx',
     'Duplicate preview block/dashboard/overview#default: registry/blocks/dashboard/overview.preview.tsx and registry/blocks/dashboard/overview.preview.tsx',
     'Orphan preview block/dashboard/overview#default: registry/blocks/dashboard/overview.preview.tsx',
-    'Missing canonical preview: pattern/chart/line-basic',
-    'Registry item pattern-chart-line-basic distributes private catalog file line-basic.preview.tsx',
+    'Missing canonical preview: pattern/calendar/single-basic',
+    'Registry item pattern-calendar-single-basic distributes private catalog file single-basic.preview.tsx',
   ])
 })

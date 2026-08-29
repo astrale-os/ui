@@ -7,11 +7,23 @@ import {
   type ThemeDNA,
   type ThemeDocument,
 } from '../../../tooling/theme-document/index.js'
-import { perceptualDistance } from '../../../tooling/theme-generator/color.js'
+import {
+  cssContrastRatio,
+  parseCssOklch,
+  perceptualDistance,
+} from '../../../tooling/theme-generator/color.js'
 import { generateTheme, generatorFontCatalog } from '../../../tooling/theme-generator/index.js'
 
 const enabled = process.env.ASTRALE_THEME_GENERATOR_CORPUS === '1'
 const observatory = parseThemeDocument(observatorySource)
+const onColorPairs = [
+  ['primary', 'primaryForeground'],
+  ['secondary', 'secondaryForeground'],
+  ['accent', 'accentForeground'],
+  ['destructive', 'destructiveForeground'],
+  ['sidebarPrimary', 'sidebarPrimaryForeground'],
+  ['sidebarAccent', 'sidebarAccentForeground'],
+] as const
 
 function seed(index: number): string {
   return index.toString(16).padStart(32, '0')
@@ -85,6 +97,24 @@ describe('theme generator qualification corpus', () => {
       const primaryOutputs = new Set<string>()
       const geometryOutputs = new Set<string>()
       const axisQuartiles = Array.from({ length: 10 }, () => [0, 0, 0, 0])
+      const onColorPolarityCounts = { dark: 0, light: 0 }
+      const onColorMetrics: Record<
+        string,
+        {
+          dark: number
+          light: number
+          invalid: number
+          endpoints: number
+          minimumContrast: number
+        }
+      > = Object.fromEntries(
+        (['light', 'dark'] as const).flatMap((mode) =>
+          onColorPairs.map(([surface, foreground]) => [
+            `${mode}.${surface}/${foreground}`,
+            { dark: 0, light: 0, invalid: 0, endpoints: 0, minimumContrast: 21 },
+          ]),
+        ),
+      )
       const durations: number[] = []
       let retries = 0
       let rejectedAttempts = 0
@@ -121,6 +151,31 @@ describe('theme generator qualification corpus', () => {
             motion: theme.motion,
           }),
         )
+        for (const mode of ['light', 'dark'] as const) {
+          for (const [surface, foreground] of onColorPairs) {
+            const color = parseCssOklch(theme.appearance[mode][foreground])
+            if (!color) throw new Error(`${mode}.${foreground} is not OKLCH.`)
+            const key = `${mode}.${surface}/${foreground}`
+            const metric = onColorMetrics[key]
+            if (!metric) throw new Error(`Missing on-color metric ${key}.`)
+            const contrast = cssContrastRatio(
+              theme.appearance[mode][surface],
+              theme.appearance[mode][foreground],
+            )
+            if (contrast === undefined) throw new Error(`${key} contrast is unavailable.`)
+            metric.minimumContrast = Math.min(metric.minimumContrast, contrast)
+            if (color.l === 0 || color.l === 1) metric.endpoints += 1
+            if (color.l === 1 && color.c === 0) {
+              metric.light += 1
+              onColorPolarityCounts.light += 1
+            } else if (color.l === 0 && color.c === 0) {
+              metric.dark += 1
+              onColorPolarityCounts.dark += 1
+            } else {
+              metric.invalid += 1
+            }
+          }
+        }
         const dna = theme.generation.dna
         const axes = [
           dna.palette.colorfulness,
@@ -165,6 +220,17 @@ describe('theme generator qualification corpus', () => {
         ),
       ).toBe(true)
       expect(largestPairShare).toBeLessThanOrEqual(0.65)
+      const onColorTotal = onColorPolarityCounts.dark + onColorPolarityCounts.light
+      expect(onColorPolarityCounts.dark / onColorTotal).toBeGreaterThanOrEqual(0.2)
+      expect(onColorPolarityCounts.light / onColorTotal).toBeGreaterThanOrEqual(0.2)
+      expect(Object.values(onColorMetrics).every((metric) => metric.invalid === 0)).toBe(true)
+      expect(Object.values(onColorMetrics).every((metric) => metric.minimumContrast >= 4.5)).toBe(
+        true,
+      )
+      const darkPrimary = onColorMetrics['dark.primary/primaryForeground']
+      if (!darkPrimary) throw new Error('Dark primary polarity metric is missing.')
+      expect(darkPrimary.dark / 10_000).toBeGreaterThanOrEqual(0.25)
+      expect(darkPrimary.light / 10_000).toBeGreaterThanOrEqual(0.25)
       expect(retries).toBeLessThanOrEqual(rejectedAttempts)
       expect(rejectedAttempts / 10_000).toBeLessThanOrEqual(0.05)
       expect(fallbacks / 10_000).toBeLessThanOrEqual(0.005)
@@ -225,6 +291,16 @@ describe('theme generator qualification corpus', () => {
           uniquePrimaryOutputs: primaryOutputs.size,
           uniqueGeometryOutputs: geometryOutputs.size,
           axisQuartiles,
+          onColorPolarityCounts,
+          onColorMetrics: Object.fromEntries(
+            Object.entries(onColorMetrics).map(([key, metric]) => [
+              key,
+              {
+                ...metric,
+                minimumContrast: Number(metric.minimumContrast.toFixed(4)),
+              },
+            ]),
+          ),
           retries,
           rejectedAttempts,
           fallbacks,

@@ -16,7 +16,11 @@ import {
   gamutMap,
   inSrgbGamut,
   parseCssColor,
+  parseCssOklch,
   perceptualDistance,
+  perceptualLightness,
+  solveForeground,
+  solveOnColorForeground,
 } from '../../../tooling/theme-generator/color.js'
 import {
   admitGeneratedTheme,
@@ -66,11 +70,89 @@ describe('theme generator', () => {
     ).toEqual(first)
   })
 
-  test('locks engine V1 to a canonical serialized output digest', () => {
+  test('locks engine V2 to a canonical serialized output digest', () => {
     const digest = createHash('sha256')
       .update(serializeThemeDocument(generatedTheme()))
       .digest('hex')
-    expect(digest).toBe('895ac2cb137fbe148ddc56ed98f8d5fb486686bca28f716c54a42a455c15b298')
+    expect(digest).toBe('fafdb10f11e5af92ff3d69fdc412f4b617fdcfd8fbf234e07b6657247ebdb21f')
+  })
+
+  test('uses high-contrast white or black text for semantic fills', () => {
+    const cases = [
+      { background: { l: 0.34, c: 0.16, h: 250 }, expected: 'light' },
+      { background: { l: 0.82, c: 0.12, h: 80 }, expected: 'dark' },
+      { background: { l: 0.57, c: 0.18, h: 145 }, expected: 'dark' },
+    ] as const
+    for (const { background, expected } of cases) {
+      const foreground = solveOnColorForeground(background)
+      expect(foreground.l).toBe(expected === 'light' ? 1 : 0)
+      expect(
+        cssContrastRatio(formatOklch(gamutMap(background)), formatOklch(foreground)),
+      ).toBeGreaterThanOrEqual(4.5)
+    }
+  })
+
+  test('preserves contrast after token serialization across the polarity crossover', () => {
+    for (const hue of [0, 60, 120, 180, 240, 300]) {
+      for (const chroma of [0, 0.08, 0.2]) {
+        for (let step = 50; step <= 950; step += 1) {
+          const background = { l: step / 1000, c: chroma, h: hue }
+          const foreground = solveOnColorForeground(background)
+          expect(
+            cssContrastRatio(formatOklch(gamutMap(background)), formatOklch(gamutMap(foreground))),
+          ).toBeGreaterThanOrEqual(4.5)
+        }
+      }
+    }
+    expect(solveOnColorForeground({ l: 0.56, c: 0, h: 0 })).toEqual({ l: 1, c: 0, h: 0 })
+    expect(solveOnColorForeground({ l: 0.57, c: 0, h: 0 })).toEqual({ l: 0, c: 0, h: 0 })
+  })
+
+  test('keeps every generated semantic foreground white or black and exercises both polarities', () => {
+    const pairs = [
+      ['primary', 'primaryForeground'],
+      ['secondary', 'secondaryForeground'],
+      ['accent', 'accentForeground'],
+      ['destructive', 'destructiveForeground'],
+      ['sidebarPrimary', 'sidebarPrimaryForeground'],
+      ['sidebarAccent', 'sidebarAccentForeground'],
+    ] as const
+    const polarities = new Set<string>()
+    const darkPrimaryPolarities = new Set<string>()
+    for (let index = 0; index < 256; index += 1) {
+      const result = generateTheme({
+        kind: 'new-direction',
+        theme: observatory,
+        seed: index.toString(16).padStart(32, '0'),
+        locks: [],
+      })
+      if (result.kind === 'failure') throw new Error(result.message)
+      for (const mode of ['light', 'dark'] as const) {
+        for (const [surface, foreground] of pairs) {
+          const foregroundColor = parseCssOklch(result.theme.appearance[mode][foreground])
+          expect(foregroundColor).toBeDefined()
+          expect(foregroundColor?.l === 0 || foregroundColor?.l === 1).toBe(true)
+          expect(
+            cssContrastRatio(
+              result.theme.appearance[mode][surface],
+              result.theme.appearance[mode][foreground],
+            ),
+          ).toBeGreaterThanOrEqual(4.5)
+          polarities.add((foregroundColor?.l ?? 0) >= 0.94 ? 'light' : 'dark')
+          if (mode === 'dark' && foreground === 'primaryForeground') {
+            darkPrimaryPolarities.add(foregroundColor?.l === 1 ? 'light' : 'dark')
+          }
+        }
+        expect(result.theme.appearance[mode].sidebarPrimaryForeground).toBe(
+          result.theme.appearance[mode].primaryForeground,
+        )
+        expect(result.theme.appearance[mode].sidebarAccentForeground).toBe(
+          result.theme.appearance[mode].accentForeground,
+        )
+      }
+    }
+    expect(polarities).toEqual(new Set(['light', 'dark']))
+    expect(darkPrimaryPolarities).toEqual(new Set(['light', 'dark']))
   })
 
   test('does not leak prior theme tokens into any unlocked branch', () => {
@@ -290,7 +372,7 @@ describe('theme generator', () => {
     const { generation: _generation, ...plain } = generated
     expect(renderThemeCss(generated)).toBe(renderThemeCss(parseThemeDocument(plain)))
     for (const generation of [
-      { ...generated.generation, engineVersion: 2 },
+      { ...generated.generation, engineVersion: 1 },
       { ...generated.generation, seed: 'ABCDEF0123456789ABCDEF0123456789' },
       { ...generated.generation, locks: ['palette', 'palette'] },
       {
@@ -312,7 +394,27 @@ describe('theme generator', () => {
   test('rejects transparent colors, wrong font roles, broken surfaces, and invalid geometry', () => {
     const generated = generatedTheme()
     const { generation: _generation, ...plain } = generated
+    const primary = parseCssOklch(plain.appearance.light.primary)
+    if (!primary) throw new Error('Generated primary must be OKLCH.')
+    const thresholdGray = formatOklch(solveForeground(primary, 4.5))
+    expect(cssContrastRatio(plain.appearance.light.primary, thresholdGray)).toBeGreaterThanOrEqual(
+      4.5,
+    )
+    const thresholdLightness = perceptualLightness(thresholdGray)
+    expect(
+      thresholdLightness !== undefined && thresholdLightness > 0.22 && thresholdLightness < 0.94,
+    ).toBe(true)
     const candidates = [
+      {
+        reason: 'light.primaryForeground must be white or black on-color text',
+        theme: {
+          ...plain,
+          appearance: {
+            ...plain.appearance,
+            light: { ...plain.appearance.light, primaryForeground: thresholdGray },
+          },
+        },
+      },
       {
         reason: 'must be opaque',
         theme: {
@@ -371,6 +473,51 @@ describe('theme generator', () => {
     for (const { theme, reason } of candidates) {
       expect(admitGeneratedTheme(parseThemeDocument(theme)).reasons).toEqual(
         expect.arrayContaining([expect.stringContaining(reason)]),
+      )
+    }
+  })
+
+  test('enforces on-color admission independently for every semantic pair and mode', () => {
+    const generated = generatedTheme()
+    const { generation: _generation, ...plain } = generated
+    const pairs = [
+      ['primary', 'primaryForeground'],
+      ['secondary', 'secondaryForeground'],
+      ['accent', 'accentForeground'],
+      ['destructive', 'destructiveForeground'],
+      ['sidebarPrimary', 'sidebarPrimaryForeground'],
+      ['sidebarAccent', 'sidebarAccentForeground'],
+    ] as const
+    const middle = 'oklch(0.55 0 0)'
+    expect(cssContrastRatio('oklch(1 0 0)', middle)).toBeGreaterThanOrEqual(4.5)
+    for (const mode of ['light', 'dark'] as const) {
+      for (const [surface, foreground] of pairs) {
+        const candidate = parseThemeDocument({
+          ...plain,
+          appearance: {
+            ...plain.appearance,
+            [mode]: {
+              ...plain.appearance[mode],
+              [surface]: 'oklch(1 0 0)',
+              [foreground]: middle,
+            },
+          },
+        })
+        expect(admitGeneratedTheme(candidate).reasons).toContain(
+          `${mode}.${foreground} must be white or black on-color text.`,
+        )
+      }
+    }
+    for (const foreground of ['oklch(0.16 0 0)', 'oklch(0.985 0 0)']) {
+      const candidate = parseThemeDocument({
+        ...plain,
+        appearance: {
+          ...plain.appearance,
+          light: { ...plain.appearance.light, primaryForeground: foreground },
+        },
+      })
+      expect(admitGeneratedTheme(candidate).reasons).toContain(
+        'light.primaryForeground must be white or black on-color text.',
       )
     }
   })

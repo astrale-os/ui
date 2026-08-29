@@ -197,7 +197,7 @@ test('JSON Schema and TypeScript agree on generator metadata admission boundarie
     generation: {
       kind: 'astrale.theme-generation',
       version: 1,
-      engineVersion: 1,
+      engineVersion: 2,
       fontCatalogVersion: 1,
       seed: '0123456789abcdef0123456789abcdef',
       derivationSeeds: {
@@ -223,33 +223,57 @@ test('JSON Schema and TypeScript agree on generator metadata admission boundarie
     },
   }
   const candidates = [
-    generated,
-    { ...generated, generation: { ...generated.generation, engineVersion: 2 } },
-    { ...generated, generation: { ...generated.generation, seed: 'ABCDEF' } },
-    { ...generated, generation: { ...generated.generation, locks: ['palette', 'palette'] } },
+    { candidate: generated, expected: true },
     {
-      ...generated,
-      generation: {
-        ...generated.generation,
-        dna: {
-          ...generated.generation.dna,
-          palette: { ...generated.generation.dna.palette, hue: 360 },
+      candidate: { ...generated, generation: { ...generated.generation, engineVersion: 1 } },
+      expected: false,
+    },
+    {
+      candidate: { ...generated, generation: { ...generated.generation, seed: 'ABCDEF' } },
+      expected: false,
+    },
+    {
+      candidate: {
+        ...generated,
+        generation: { ...generated.generation, locks: ['palette', 'palette'] },
+      },
+      expected: false,
+    },
+    {
+      candidate: {
+        ...generated,
+        generation: {
+          ...generated.generation,
+          dna: {
+            ...generated.generation.dna,
+            palette: { ...generated.generation.dna.palette, hue: 360 },
+          },
         },
       },
+      expected: false,
     },
     {
-      ...generated,
-      generation: { ...generated.generation, lineage: { kind: 'fallback', failedAttempts: 11 } },
-    },
-    {
-      ...generated,
-      generation: {
-        ...generated.generation,
-        derivationSeeds: { ...generated.generation.derivationSeeds, surprise: '0'.repeat(32) },
+      candidate: {
+        ...generated,
+        generation: {
+          ...generated.generation,
+          lineage: { kind: 'fallback', failedAttempts: 11 },
+        },
       },
+      expected: false,
+    },
+    {
+      candidate: {
+        ...generated,
+        generation: {
+          ...generated.generation,
+          derivationSeeds: { ...generated.generation.derivationSeeds, surprise: '0'.repeat(32) },
+        },
+      },
+      expected: false,
     },
   ]
-  for (const candidate of candidates) {
+  for (const { candidate, expected } of candidates) {
     const schemaAccepted = validate(candidate)
     let runtimeAccepted = true
     try {
@@ -257,7 +281,8 @@ test('JSON Schema and TypeScript agree on generator metadata admission boundarie
     } catch {
       runtimeAccepted = false
     }
-    assert.equal(runtimeAccepted, schemaAccepted, JSON.stringify(validate.errors))
+    assert.equal(schemaAccepted, expected, JSON.stringify(validate.errors))
+    assert.equal(runtimeAccepted, expected)
   }
 })
 

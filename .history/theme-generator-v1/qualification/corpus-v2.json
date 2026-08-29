@@ -1,0 +1,136 @@
+{
+  "engineVersion": 2,
+  "fontCatalogVersion": 1,
+  "seeds": 10000,
+  "relationCounts": {
+    "analogous": 2480,
+    "complementary": 2540,
+    "split": 2474,
+    "tonal": 2506
+  },
+  "hueBins": [832, 843, 829, 814, 830, 824, 936, 822, 820, 841, 840, 769],
+  "bodyFamilies": 4,
+  "headingFamilies": 4,
+  "terminalFamilies": 1,
+  "headingWeights": [600, 700],
+  "pairClasses": {
+    "serif/serif": 1987,
+    "sans/sans": 1841,
+    "serif/sans": 2988,
+    "sans/serif": 3184
+  },
+  "uniqueDocuments": 10000,
+  "uniquePrimaryOutputs": 9958,
+  "uniqueGeometryOutputs": 9997,
+  "axisQuartiles": [
+    [2595, 4211, 2661, 533],
+    [328, 2163, 4363, 3146],
+    [4710, 4226, 1011, 53],
+    [2523, 2508, 2458, 2511],
+    [1441, 3597, 3570, 1392],
+    [1294, 3808, 3665, 1233],
+    [1238, 3691, 3767, 1304],
+    [2111, 3856, 3172, 861],
+    [3889, 4201, 1726, 184],
+    [2504, 2468, 2578, 2450]
+  ],
+  "onColorPolarityCounts": {
+    "dark": 39910,
+    "light": 80090
+  },
+  "onColorMetrics": {
+    "light.primary/primaryForeground": {
+      "dark": 18,
+      "light": 9982,
+      "invalid": 0,
+      "endpoints": 10000,
+      "minimumContrast": 4.5561
+    },
+    "light.secondary/secondaryForeground": {
+      "dark": 10000,
+      "light": 0,
+      "invalid": 0,
+      "endpoints": 10000,
+      "minimumContrast": 16.5874
+    },
+    "light.accent/accentForeground": {
+      "dark": 10000,
+      "light": 0,
+      "invalid": 0,
+      "endpoints": 10000,
+      "minimumContrast": 12.764
+    },
+    "light.destructive/destructiveForeground": {
+      "dark": 0,
+      "light": 10000,
+      "invalid": 0,
+      "endpoints": 10000,
+      "minimumContrast": 7.2935
+    },
+    "light.sidebarPrimary/sidebarPrimaryForeground": {
+      "dark": 18,
+      "light": 9982,
+      "invalid": 0,
+      "endpoints": 10000,
+      "minimumContrast": 4.5561
+    },
+    "light.sidebarAccent/sidebarAccentForeground": {
+      "dark": 10000,
+      "light": 0,
+      "invalid": 0,
+      "endpoints": 10000,
+      "minimumContrast": 12.764
+    },
+    "dark.primary/primaryForeground": {
+      "dark": 4937,
+      "light": 5063,
+      "invalid": 0,
+      "endpoints": 10000,
+      "minimumContrast": 4.5498
+    },
+    "dark.secondary/secondaryForeground": {
+      "dark": 0,
+      "light": 10000,
+      "invalid": 0,
+      "endpoints": 10000,
+      "minimumContrast": 15.2929
+    },
+    "dark.accent/accentForeground": {
+      "dark": 0,
+      "light": 10000,
+      "invalid": 0,
+      "endpoints": 10000,
+      "minimumContrast": 9.3255
+    },
+    "dark.destructive/destructiveForeground": {
+      "dark": 0,
+      "light": 10000,
+      "invalid": 0,
+      "endpoints": 10000,
+      "minimumContrast": 5.4509
+    },
+    "dark.sidebarPrimary/sidebarPrimaryForeground": {
+      "dark": 4937,
+      "light": 5063,
+      "invalid": 0,
+      "endpoints": 10000,
+      "minimumContrast": 4.5498
+    },
+    "dark.sidebarAccent/sidebarAccentForeground": {
+      "dark": 0,
+      "light": 10000,
+      "invalid": 0,
+      "endpoints": 10000,
+      "minimumContrast": 9.3255
+    }
+  },
+  "retries": 30,
+  "rejectedAttempts": 30,
+  "fallbacks": 0,
+  "p95Milliseconds": 3.778,
+  "variationP95Milliseconds": 4.177,
+  "medianVariationDnaDistance": 0.059,
+  "p10NewDirectionDnaDistance": 0.2152,
+  "medianVariationThemeDistance": 0.0328,
+  "p10NewDirectionThemeDistance": 0.1075
+}

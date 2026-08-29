@@ -4,11 +4,11 @@
 | --- | --- |
 | Status | LOCKED |
 | Product | Astrale UI playground theme customizer |
-| PRD version | 1.0.0 |
+| PRD version | 1.1.0 |
 | Generator contract | `astrale-theme-generator` version 1 |
-| Date | 2026-08-29 |
+| Date | 2026-08-30 |
 | Owners | UI theme tooling and playground |
-| Review | Adversarial product, lifecycle, portability, performance, and evidence pass complete |
+| Review | Adversarial product, lifecycle, portability, performance, engine V2, and evidence pass complete |
 
 ## 1. Executive decision
 
@@ -232,7 +232,7 @@ type GeneratorBranch = 'palette' | 'typography' | 'geometry'
 type GeneratorMetadata = {
   kind: 'astrale.theme-generation'
   version: 1
-  engineVersion: 1
+  engineVersion: 2
   fontCatalogVersion: 1
   seed: string
   derivationSeed: string
@@ -404,27 +404,35 @@ Palette contrast determines desired contrast, not a random foreground lightness:
 desiredTextContrast = lerp(5.0, 8.5, dna.palette.contrast)
 ```
 
-For every semantic text pair, the generator chooses a dark or light foreground candidate and solves
-foreground lightness until it meets the desired ratio or the nearest valid ratio above the hard
-floor. If the primary/destructive background cannot support its foreground, the solver adjusts the
-background lightness within its semantic envelope before rejecting the attempt.
+Ordinary surface text may solve foreground lightness to the nearest valid ratio above the hard
+floor. Filled semantic controls use a separate on-color policy: choose white or black using contrast
+calculated from the rendered sRGB colors. White is preferred when it clears the floor with safety
+margin; black is selected for fills too light to support white. Mid-lightness threshold gray is not
+an admitted on-color foreground. Dark-mode primary derivation spans both sides of that polarity
+boundary so the generator produces white text often without making it the only valid treatment.
+
+This on-color correction changes deterministic palette derivation and therefore advances
+`engineVersion` from 1 to 2. Generator contract version and font-catalog version remain 1; exported
+engine V1 documents remain token-stable artifacts but their provenance is unsupported by the V2
+runtime until an explicit migrator exists.
 
 Hard V1 admission checks are:
 
 1. ThemeDocument schema and TypeScript admission pass.
-2. Every ordinary text/background semantic pair is at least 4.5:1 without rounding.
-3. Large-display-only pairs may use 3:1 only when the runtime contract proves they are never used for
+2. Every ordinary text/background semantic pair is at least 4.5:1 using emitted rendered colors.
+3. Every filled semantic foreground is white or black in addition to meeting 4.5:1.
+4. Large-display-only pairs may use 3:1 only when the runtime contract proves they are never used for
    ordinary text; V1 otherwise treats them as ordinary text.
-4. Focus indicators and required interactive boundaries are at least 3:1 against adjacent surfaces.
-5. Surface ordering and minimum deltas remain coherent in both modes.
-6. Every emitted color is in sRGB gamut after mapping.
-7. Primary, accent, destructive, and chart colors remain within their semantic hue/chroma bounds.
-8. Chart colors meet the root canvas contrast floor and a defined minimum perceptual separation from
+5. Focus indicators and required interactive boundaries are at least 3:1 against adjacent surfaces.
+6. Surface ordering and minimum deltas remain coherent in both modes.
+7. Every emitted color is in sRGB gamut after mapping.
+8. Primary, accent, destructive, and chart colors remain within their semantic hue/chroma bounds.
+9. Chart colors meet the root canvas contrast floor and a defined minimum perceptual separation from
    immediate neighbors; charts never rely on color alone in runtime components.
-9. Font IDs exist, stacks are available from the curated catalog, and selected weights are supported.
-10. Typography, geometry, density, shadows, and motion remain within the current ThemeDocument and
+10. Font IDs exist, stacks are available from the curated catalog, and selected weights are supported.
+11. Typography, geometry, density, shadows, and motion remain within the current ThemeDocument and
     runtime-supported ranges.
-11. Locked concrete branches also satisfy generation admission; an invalid locked branch fails the
+12. Locked concrete branches also satisfy generation admission; an invalid locked branch fails the
     action instead of being silently changed.
 
 The implementation specification must single-source the exact semantic pair matrix, surface delta,

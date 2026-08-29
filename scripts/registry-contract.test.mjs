@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict'
-import { readFile, stat } from 'node:fs/promises'
+import { readdir, readFile, stat } from 'node:fs/promises'
 import path from 'node:path'
 import test from 'node:test'
 
@@ -35,6 +35,47 @@ const externalProviders = new Map([
   ],
 ])
 const registryPackage = JSON.parse(await readFile('registry/package.json', 'utf8'))
+const removedCanonicalAddresses = [
+  'block/application-shell/compact-command',
+  'block/application-shell/responsive-workspace',
+  'block/application-shell/sidebar-header',
+  'block/communication/composer',
+  'block/communication/conversation',
+  'block/communication/inbox',
+  'block/data-management/collection-browser',
+  'block/data-management/details-panel',
+  'block/data-management/editor',
+  'block/onboarding/empty-first-value',
+  'block/onboarding/multi-step',
+  'block/onboarding/welcome',
+  'block/settings/appearance',
+  'block/settings/notifications',
+  'block/settings/profile',
+  'block/settings/team',
+  'pattern/chart/bar-basic',
+  'pattern/chart/line-basic',
+  'pattern/data-table/basic',
+  'pattern/data-table/server-controlled',
+  'pattern/form/native',
+  'pattern/questionnaire/multi-step',
+  'pattern/questionnaire/single-page',
+  'pattern/sidebar/application',
+  'pattern/sidebar/mobile-controlled',
+  'pattern/typography/article',
+  'pattern/typography/dense-data',
+]
+
+async function filesUnder(root) {
+  const entries = await readdir(root, { withFileTypes: true })
+  return (
+    await Promise.all(
+      entries.map((entry) => {
+        const current = path.join(root, entry.name)
+        return entry.isDirectory() ? filesUnder(current) : [current]
+      }),
+    )
+  ).flat()
+}
 
 function packageName(specifier) {
   return specifier.startsWith('@')
@@ -88,8 +129,11 @@ async function readFamilyItems() {
       source.includes.map(async (include) => {
         const manifestPath = path.join('registry', include.replace(/^\.\//u, ''))
         const manifest = JSON.parse(await readFile(manifestPath, 'utf8'))
-        const minimumItems = include === './themes/registry.json' ? 1 : 2
-        assert.ok(manifest.items.length >= minimumItems, `${include} must expose owned items`)
+        const singleton = new Set(['./patterns/form/registry.json', './themes/registry.json'])
+        assert.ok(
+          manifest.items.length >= (singleton.has(include) ? 1 : 2),
+          `${include} must expose owned items`,
+        )
         return manifest.items.map((item) => ({
           ...item,
           declaredPath: path.join(path.dirname(manifestPath), item.files[0].path),
@@ -262,14 +306,7 @@ test('every registry item is independently bounded, controlled, and safe to inst
       )
     }
     assert.doesNotMatch(itemSource, /Object\.(?:freeze|seal)|as const satisfies Readonly/u)
-    const presentationOnly = new Set([
-      'pattern/chart/line-basic',
-      'pattern/chart/bar-basic',
-      'pattern/data-table/basic',
-      'pattern/message/bubble-basic',
-      'pattern/typography/article',
-      'pattern/typography/dense-data',
-    ])
+    const presentationOnly = new Set(['pattern/message/bubble-basic'])
     if (!presentationOnly.has(item.meta.canonicalAddress)) {
       const declaredActions = [
         ...itemSource.matchAll(/\b(on[A-Z][A-Za-z]+)\??\s*\([^)]*\)\s*:/gu),
@@ -305,60 +342,89 @@ test('registry guards reject traversal and observe every executable import form'
   )
 })
 
-test('registry inventory covers all locked V1 families and block compositions', async () => {
+test('registry inventory is the exact retained pattern and block catalog', async () => {
   const root = JSON.parse(await readFile(rootPath, 'utf8'))
-  const addresses = new Set(root.items.map((item) => item.meta.canonicalAddress))
-  const patternFamilies = [
-    'calendar',
-    'carousel',
-    'chart',
-    'combobox',
-    'command-palette',
-    'data-table',
-    'date-picker',
-    'form',
-    'message',
-    'questionnaire',
-    'sidebar',
-    'toast',
-    'typography',
-  ]
-  for (const family of patternFamilies) {
-    assert.ok(
-      [...addresses].filter((address) => address.startsWith(`pattern/${family}/`)).length >= 2,
-      family,
-    )
-  }
+  const addresses = root.items.map((item) => item.meta.canonicalAddress)
   assert.deepEqual(
-    [...addresses].filter((address) => address.startsWith('theme/')),
+    addresses.filter((address) => address.startsWith('theme/')),
     ['theme/observatory'],
   )
-  for (const required of [
-    'block/application-shell/sidebar-header',
-    'block/application-shell/compact-command',
-    'block/application-shell/responsive-workspace',
-    'block/authentication/sign-in-card',
-    'block/authentication/sign-up-card',
-    'block/authentication/recovery',
-    'block/authentication/verification',
-    'block/communication/inbox',
-    'block/communication/conversation',
-    'block/communication/composer',
-    'block/dashboard/overview',
-    'block/dashboard/analytics',
-    'block/dashboard/operations',
-    'block/data-management/collection-browser',
-    'block/data-management/details-panel',
-    'block/data-management/editor',
-    'block/onboarding/welcome',
-    'block/onboarding/multi-step',
-    'block/onboarding/empty-first-value',
-    'block/settings/profile',
-    'block/settings/appearance',
-    'block/settings/team',
-    'block/settings/notifications',
+  assert.deepEqual(
+    root.items
+      .filter(
+        (item) =>
+          item.meta.provider !== '@astrale-os/ui' &&
+          /^(?:pattern|block)\//u.test(item.meta.canonicalAddress),
+      )
+      .map((item) => item.meta.canonicalAddress)
+      .sort(),
+    [
+      'block/authentication/sign-in-card',
+      'block/authentication/sign-up-card',
+      'block/authentication/recovery',
+      'block/authentication/verification',
+      'block/dashboard/overview',
+      'block/dashboard/analytics',
+      'block/dashboard/operations',
+      'pattern/calendar/range-basic',
+      'pattern/calendar/single-basic',
+      'pattern/carousel/horizontal-controlled',
+      'pattern/carousel/vertical-controlled',
+      'pattern/combobox/multiple',
+      'pattern/combobox/single-basic',
+      'pattern/command-palette/controlled',
+      'pattern/command-palette/dialog-basic',
+      'pattern/date-picker/range',
+      'pattern/date-picker/single',
+      'pattern/form/wizard-controlled',
+      'pattern/message/bubble-basic',
+      'pattern/message/thread',
+      'pattern/toast/basic-provider',
+      'pattern/toast/controlled-queue',
+    ].sort(),
+  )
+  for (const removed of removedCanonicalAddresses) assert.equal(addresses.includes(removed), false)
+})
+
+test('registry source tree is closed to included manifests and declared implementations', async () => {
+  const source = JSON.parse(await readFile(sourcePath, 'utf8'))
+  const includedCompositionManifests = source.includes
+    .filter((include) => /^\.\/(?:blocks|patterns)\//u.test(include))
+    .map((include) => path.join('registry', include.replace(/^\.\//u, '')))
+    .sort()
+  const compositionFiles = [
+    ...(await filesUnder('registry/blocks')),
+    ...(await filesUnder('registry/patterns')),
+  ]
+  assert.deepEqual(
+    compositionFiles.filter((file) => file.endsWith('/registry.json')).sort(),
+    includedCompositionManifests,
+  )
+  const declaredImplementations = (await readFamilyItems())
+    .filter((item) => /^(?:registry\/blocks|registry\/patterns)\//u.test(item.declaredPath))
+    .flatMap((item) => item.declaredPaths)
+    .sort()
+  assert.deepEqual(
+    compositionFiles
+      .filter((file) => file.endsWith('.tsx') && !file.endsWith('.preview.tsx'))
+      .sort(),
+    declaredImplementations,
+  )
+  for (const removedRoot of [
+    'registry/blocks/application-shell',
+    'registry/blocks/communication',
+    'registry/blocks/data-management',
+    'registry/blocks/onboarding',
+    'registry/blocks/settings',
+    'registry/patterns/chart',
+    'registry/patterns/data-table',
+    'registry/patterns/questionnaire',
+    'registry/patterns/sidebar',
+    'registry/patterns/typography',
+    'registry/patterns/form/native.tsx',
+    'registry/patterns/form/native.preview.tsx',
   ]) {
-    assert.ok(addresses.has(required), required)
+    await assert.rejects(stat(removedRoot), { code: 'ENOENT' })
   }
 })
 
@@ -378,5 +444,25 @@ test('every built install item is exact current source rather than stale generat
       assert.equal(built.files[index].target, item.files[index].target)
       assert.equal(built.files[index].content, await readFile(item.declaredPaths[index], 'utf8'))
     }
+  }
+})
+
+test('public registry leaves are the exact built catalog with no removed endpoint', async () => {
+  const root = JSON.parse(await readFile(rootPath, 'utf8'))
+  const base = JSON.parse(await readFile('registry/base/registry.json', 'utf8'))
+  const publicRegistry = JSON.parse(await readFile('registry/public/r/registry.json', 'utf8'))
+  assert.deepEqual(publicRegistry, root)
+  assert.deepEqual(
+    (await readdir('registry/public/r')).filter((file) => file.endsWith('.json')).sort(),
+    [
+      ...base.items.map((item) => `${item.name}.json`),
+      ...root.items.map((item) => `${item.name}.json`),
+      'registry.json',
+    ].sort(),
+  )
+  for (const address of removedCanonicalAddresses) {
+    await assert.rejects(stat(`registry/public/r/${address.replaceAll('/', '-')}.json`), {
+      code: 'ENOENT',
+    })
   }
 })
