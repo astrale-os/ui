@@ -5,6 +5,28 @@ import test from 'node:test'
 
 const configSha = '8e2e2abd0320be0c2f64033916519ab3b66c7dd7'
 
+function parseStableVersion(value) {
+  const match = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)$/u.exec(value)
+  assert.ok(match, `expected canonical stable version, received ${value}`)
+  return match.slice(1).map(Number)
+}
+
+function compareVersions(left, right) {
+  for (let index = 0; index < left.length; index += 1) {
+    if (left[index] !== right[index]) return left[index] - right[index]
+  }
+  return 0
+}
+
+function workflowJob(workflow, name) {
+  const marker = `  ${name}:\n`
+  const start = workflow.indexOf(marker)
+  assert.notEqual(start, -1, `expected ${name} workflow job`)
+  const remainder = workflow.slice(start + marker.length)
+  const next = remainder.search(/^  [a-zA-Z0-9_-]+:\n/mu)
+  return next === -1 ? workflow.slice(start) : workflow.slice(start, start + marker.length + next)
+}
+
 test('pins supported CI and release workflow dependencies', async () => {
   const [ci, release, publish, publishDomain] = await Promise.all(
     ['ci', 'release', 'publish', 'publish-domain'].map((name) =>
@@ -84,6 +106,8 @@ test('publishes the runtime and Domain from their exact independent Release Plea
   const rootManifest = JSON.parse(await readFile('package.json', 'utf8'))
   const releaseConfig = JSON.parse(await readFile('.release-please-config.json', 'utf8'))
   const releaseManifest = JSON.parse(await readFile('.release-please-manifest.json', 'utf8'))
+  const publishJob = workflowJob(release, 'publish')
+  const publishDomainJob = workflowJob(release, 'publish-domain')
 
   assert.match(release, /needs\.release\.outputs\.created == 'true'/u)
   assert.match(release, /paths_released: \$\{\{ steps\.release\.outputs\.paths_released \}\}/u)
@@ -98,18 +122,32 @@ test('publishes the runtime and Domain from their exact independent Release Plea
     release,
     /Admit the exact released UI through the current CLI consumer[\s\S]*?qualification:ui-search/u,
   )
-  assert.match(release, /publish:\s*\n\s+needs: \[release, search-contract\]/u)
-  assert.match(release, /ref:\s*\$\{\{ github\.sha \}\}/u)
-  assert.match(release, /PUBLISH_SHA:\s*\$\{\{ github\.sha \}\}/u)
-  assert.match(release, /publish_tag="v\$\{publish_version\}"/u)
-  assert.match(release, /gh workflow run publish\.yml/u)
-  assert.match(release, /-f expected-sha="\$PUBLISH_SHA"/u)
-  assert.match(release, /-f expected-version="\$publish_version"/u)
-  assert.match(release, /--ref "\$publish_tag"/u)
-  assert.match(release, /gh run watch "\$run_id"/u)
-  assert.match(release, /publish-domain:\s*\n\s+needs: release/u)
-  assert.match(release, /publish_tag="domain-v\$\{publish_version\}"/u)
-  assert.match(release, /gh workflow run publish-domain\.yml/u)
+  assert.match(publishJob, /needs: \[release, search-contract\]/u)
+  assert.match(publishJob, /ref:\s*\$\{\{ github\.sha \}\}/u)
+  assert.match(publishJob, /PUBLISH_SHA:\s*\$\{\{ github\.sha \}\}/u)
+  assert.match(
+    publishJob,
+    /publish_version="\$\(node -p "require\('\.\/packages\/ui\/package\.json'\)\.version"\)"/u,
+  )
+  assert.match(publishJob, /publish_tag="v\$\{publish_version\}"/u)
+  assert.match(publishJob, /gh workflow run publish\.yml/u)
+  assert.match(publishJob, /-f expected-sha="\$PUBLISH_SHA"/u)
+  assert.match(publishJob, /-f expected-version="\$publish_version"/u)
+  assert.match(publishJob, /--ref "\$publish_tag"/u)
+  assert.match(publishJob, /gh run watch "\$run_id"/u)
+  assert.match(publishDomainJob, /needs: release/u)
+  assert.match(publishDomainJob, /ref:\s*\$\{\{ github\.sha \}\}/u)
+  assert.match(publishDomainJob, /PUBLISH_SHA:\s*\$\{\{ github\.sha \}\}/u)
+  assert.match(
+    publishDomainJob,
+    /publish_version="\$\(node -p "require\('\.\/domain\/package\.json'\)\.version"\)"/u,
+  )
+  assert.match(publishDomainJob, /publish_tag="domain-v\$\{publish_version\}"/u)
+  assert.match(publishDomainJob, /gh workflow run publish-domain\.yml/u)
+  assert.match(publishDomainJob, /-f expected-sha="\$PUBLISH_SHA"/u)
+  assert.match(publishDomainJob, /-f expected-version="\$publish_version"/u)
+  assert.match(publishDomainJob, /--ref "\$publish_tag"/u)
+  assert.match(publishDomainJob, /gh run watch "\$run_id"/u)
   assert.match(publish, /workflow_dispatch/u)
   assert.doesNotMatch(publish, /push:\s*\n\s+tags:/u)
   assert.match(publish, /id-token:\s*write/u)
@@ -119,12 +157,19 @@ test('publishes the runtime and Domain from their exact independent Release Plea
   assert.match(publish, /ref:\s*\$\{\{ inputs\.expected-sha \}\}/u)
   assert.match(publish, /fetch-depth:\s*0/u)
   assert.match(publish, /persist-credentials:\s*'false'/u)
-  assert.match(publish, /git rev-parse/u)
-  assert.match(publish, /refs\/tags\/v\$\{EXPECTED_VERSION\}/u)
-  assert.match(publish, /git merge-base --is-ancestor/u)
+  assert.match(publish, /test "\$\(git rev-parse HEAD\)" = "\$EXPECTED_SHA"/u)
   assert.match(
     publish,
-    /gh api "repos\/\$\{GITHUB_REPOSITORY\}\/releases\/tags\/v\$\{EXPECTED_VERSION\}"/u,
+    /test "\$\(node -p "require\('\.\/packages\/ui\/package\.json'\)\.version"\)" = "\$EXPECTED_VERSION"/u,
+  )
+  assert.match(
+    publish,
+    /test "\$\(git rev-parse "refs\/tags\/v\$\{EXPECTED_VERSION\}\^\{commit\}"\)" = "\$EXPECTED_SHA"/u,
+  )
+  assert.match(publish, /git merge-base --is-ancestor "\$EXPECTED_SHA" origin\/main/u)
+  assert.match(
+    publish,
+    /test "\$\(gh api "repos\/\$\{GITHUB_REPOSITORY\}\/releases\/tags\/v\$\{EXPECTED_VERSION\}" --jq \.tag_name\)" = "v\$\{EXPECTED_VERSION\}"/u,
   )
   assert.match(publish, /publish\/packages@8e2e2abd0320be0c2f64033916519ab3b66c7dd7/u)
   assert.match(publish, /dirs:\s*packages\/ui/u)
@@ -145,8 +190,20 @@ test('publishes the runtime and Domain from their exact independent Release Plea
   assert.doesNotMatch(publishDomain, /(?:npm-token:|NPM_TOKEN|NODE_AUTH_TOKEN|secrets\.)/u)
   assert.match(publishDomain, /environment:\s*npm/u)
   assert.match(publishDomain, /ref:\s*\$\{\{ inputs\.expected-sha \}\}/u)
-  assert.match(publishDomain, /refs\/tags\/domain-v\$\{EXPECTED_VERSION\}/u)
-  assert.match(publishDomain, /releases\/tags\/domain-v\$\{EXPECTED_VERSION\}/u)
+  assert.match(publishDomain, /test "\$\(git rev-parse HEAD\)" = "\$EXPECTED_SHA"/u)
+  assert.match(
+    publishDomain,
+    /test "\$\(node -p "require\('\.\/domain\/package\.json'\)\.version"\)" = "\$EXPECTED_VERSION"/u,
+  )
+  assert.match(
+    publishDomain,
+    /test "\$\(git rev-parse "refs\/tags\/domain-v\$\{EXPECTED_VERSION\}\^\{commit\}"\)" = "\$EXPECTED_SHA"/u,
+  )
+  assert.match(publishDomain, /git merge-base --is-ancestor "\$EXPECTED_SHA" origin\/main/u)
+  assert.match(
+    publishDomain,
+    /test "\$\(gh api "repos\/\$\{GITHUB_REPOSITORY\}\/releases\/tags\/domain-v\$\{EXPECTED_VERSION\}" --jq \.tag_name\)" = "domain-v\$\{EXPECTED_VERSION\}"/u,
+  )
   assert.match(publishDomain, /publish\/packages@8e2e2abd0320be0c2f64033916519ab3b66c7dd7/u)
   assert.match(publishDomain, /dirs:\s*domain/u)
   assert.match(publishDomain, /mirror-public-packages:\s*'false'/u)
@@ -185,7 +242,11 @@ test('publishes the runtime and Domain from their exact independent Release Plea
   assert.equal(manifest.publishConfig.registry, 'https://registry.npmjs.org')
   assert.equal(manifest.publishConfig.access, 'public')
   assert.equal(domainManifest.name, '@astrale-domains/ui')
-  assert.match(domainManifest.version, /^\d+\.\d+\.\d+$/u)
+  const domainVersion = parseStableVersion(domainManifest.version)
+  const initialDomainVersion = parseStableVersion(releaseConfig.packages.domain['initial-version'])
+  assert.ok(
+    domainManifest.version === '0.0.0' || compareVersions(domainVersion, initialDomainVersion) >= 0,
+  )
   assert.equal(domainManifest.repository.url, 'git+https://github.com/astrale-os/ui.git')
   assert.equal(domainManifest.repository.directory, 'domain')
   assert.equal(domainManifest.publishConfig.registry, 'https://registry.npmjs.org/')
