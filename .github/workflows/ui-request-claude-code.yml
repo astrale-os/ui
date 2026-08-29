@@ -90,7 +90,7 @@ jobs:
           printf '%s' "$INPUT_OBJECTIVE" | node node_modules/@anthropic-ai/claude-code/cli-wrapper.cjs \
             --bare \
             --model claude-opus-5 \
-            --effort low \
+            --effort medium \
             --permission-mode acceptEdits \
             --allowedTools Read,Edit,Write,Glob,Grep,WebFetch,WebSearch \
             --no-session-persistence \
@@ -141,8 +141,25 @@ jobs:
         with:
           node-version: 24
           frozen-lockfile: 'true'
+      - name: Regenerate repository-owned derived artifacts
+        run: pnpm registry:build
       - name: Qualify the candidate without publication authority
         run: pnpm check
+      - name: Encode the qualified candidate as inert patch evidence
+        run: |
+          set -euo pipefail
+          git -c core.hooksPath=/dev/null add -A
+          patch="$RUNNER_TEMP/ui-request-qualified.patch"
+          git diff --cached --binary --full-index --no-ext-diff --no-textconv -- > "$patch"
+          size="$(wc -c < "$patch" | tr -d ' ')"
+          test "$size" -gt 0
+          test "$size" -le 16777216
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: ui-request-qualified-${{ github.run_id }}
+          path: ${{ runner.temp }}/ui-request-qualified.patch
+          if-no-files-found: error
+          retention-days: 1
 
   publish:
     needs: [propose, qualify]
@@ -156,12 +173,12 @@ jobs:
           persist-credentials: 'false'
       - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
-          name: ui-request-candidate-${{ github.run_id }}
-          path: ${{ runner.temp }}/ui-request-candidate
+          name: ui-request-qualified-${{ github.run_id }}
+          path: ${{ runner.temp }}/ui-request-qualified
       - name: Apply the qualified inert patch
         run: |
           set -euo pipefail
-          patch="$RUNNER_TEMP/ui-request-candidate/ui-request-candidate.patch"
+          patch="$RUNNER_TEMP/ui-request-qualified/ui-request-qualified.patch"
           test -f "$patch"
           test "$(wc -c < "$patch" | tr -d ' ')" -le 16777216
           git apply --check --index --binary --whitespace=nowarn "$patch"
