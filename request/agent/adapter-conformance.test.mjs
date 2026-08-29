@@ -88,7 +88,7 @@ function githubActionsClaudeCodeHarness() {
     name: 'UI Request Claude Code Worker',
     display_title: 'Astrale attempt: attempt',
     event: 'workflow_dispatch',
-    path: '.github/workflows/ui-request-claude-code.yml@main',
+    path: '.github/workflows/ui-request-claude-code.yml',
     head_branch: 'main',
     actor: { login: 'github-actions[bot]' },
     triggering_actor: { login: 'github-actions[bot]' },
