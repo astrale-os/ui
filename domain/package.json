@@ -1,6 +1,6 @@
 {
   "name": "@astrale-domains/ui",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Astrale UI control-plane Domain",
   "repository": {
     "type": "git",
