@@ -4,6 +4,28 @@
   "homepage": "https://github.com/astrale-os/ui",
   "items": [
     {
+      "name": "component-animated-number",
+      "type": "registry:component",
+      "title": "Component · animated-number",
+      "description": "Exact @motion-primitives/animated-number source with import-only Astrale adaptation.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "motion@^13.1.0"],
+      "files": [
+        {
+          "path": "registry/components/animated-number/animated-number.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/components/animated-number.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "component/animated-number",
+        "ownership": "consumer-source",
+        "provider": "@motion-primitives",
+        "upstreamAddress": "@motion-primitives/animated-number",
+        "upstreamDigest": "sha256:3b4a9f3262cb79527fba01a76576e920e340137f0643bf34a7732f7f8b1ff792",
+        "adaptation": "imports-only"
+      }
+    },
+    {
       "name": "component-attachment",
       "type": "registry:component",
       "title": "Component · attachment",

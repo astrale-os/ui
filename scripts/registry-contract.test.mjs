@@ -24,6 +24,12 @@ const heatmapProvenance = JSON.parse(
     'utf8',
   ),
 )
+const motionPrimitivesProvenance = JSON.parse(
+  await readFile(
+    'tooling/upstream/providers/motion-primitives/92586e62a951eb9b6bfd1cc7c8a4e6e2ab6ba17d/animated-number/provenance.json',
+    'utf8',
+  ),
+)
 const externalProviders = new Map([
   [
     '@react-aria',
@@ -32,6 +38,14 @@ const externalProviders = new Map([
   [
     '@heatmap',
     { provenance: heatmapProvenance, address: 'component/status-heatmap', fileCount: 1 },
+  ],
+  [
+    '@motion-primitives',
+    {
+      provenance: motionPrimitivesProvenance,
+      address: 'component/animated-number',
+      fileCount: 1,
+    },
   ],
 ])
 const registryPackage = JSON.parse(await readFile('registry/package.json', 'utf8'))

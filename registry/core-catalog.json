@@ -490,6 +490,14 @@
     "variantCount": 30
   },
   {
+    "address": "component/animated-number",
+    "title": "Component · animated-number",
+    "classification": "component",
+    "family": "animated-number",
+    "source": "@motion-primitives/animated-number",
+    "variantCount": 1
+  },
+  {
     "address": "component/aspect-ratio/aspect-ratio-01",
     "title": "Aspect Ratio 1",
     "classification": "component",

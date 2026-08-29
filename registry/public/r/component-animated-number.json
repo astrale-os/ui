@@ -1,0 +1,27 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "component-animated-number",
+  "title": "Component · animated-number",
+  "description": "Exact @motion-primitives/animated-number source with import-only Astrale adaptation.",
+  "dependencies": [
+    "@astrale-os/ui@^0.3.0-beta.0",
+    "motion@^13.1.0"
+  ],
+  "files": [
+    {
+      "path": "registry/components/animated-number/animated-number.tsx",
+      "content": "'use client'\nimport type { JSX } from 'react'\n\nimport { cn } from '@astrale-os/ui/class-name'\nimport { motion, type SpringOptions, useSpring, useTransform } from 'motion/react'\nimport { useEffect } from 'react'\n\nexport type AnimatedNumberProps = {\n  value: number\n  className?: string\n  springOptions?: SpringOptions\n  as?: React.ElementType\n}\n\nexport function AnimatedNumber({\n  value,\n  className,\n  springOptions,\n  as = 'span',\n}: AnimatedNumberProps) {\n  const MotionComponent = motion.create(as as keyof JSX.IntrinsicElements)\n\n  const spring = useSpring(value, springOptions)\n  const display = useTransform(spring, (current) => Math.round(current).toLocaleString())\n\n  useEffect(() => {\n    spring.set(value)\n  }, [spring, value])\n\n  return <MotionComponent className={cn('tabular-nums', className)}>{display}</MotionComponent>\n}\n",
+      "type": "registry:component",
+      "target": "components/astrale/components/animated-number.tsx"
+    }
+  ],
+  "meta": {
+    "canonicalAddress": "component/animated-number",
+    "ownership": "consumer-source",
+    "provider": "@motion-primitives",
+    "upstreamAddress": "@motion-primitives/animated-number",
+    "upstreamDigest": "sha256:3b4a9f3262cb79527fba01a76576e920e340137f0643bf34a7732f7f8b1ff792",
+    "adaptation": "imports-only"
+  },
+  "type": "registry:component"
+}

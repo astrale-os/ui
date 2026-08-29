@@ -3,6 +3,8 @@ import userEvent from '@testing-library/user-event'
 import { afterEach, describe, expect, test } from 'vitest'
 
 import { SignInCard } from '../blocks/authentication/sign-in-card.js'
+import { AnimatedNumber } from '../components/animated-number/animated-number.js'
+import AnimatedNumberCounter from '../components/animated-number/animated-number.preview.js'
 import {
   StatusHeatmap,
   StatusHeatmapBlock,
@@ -191,5 +193,28 @@ describe('owned registry compositions', () => {
     expect(cells[2]).toHaveAttribute('aria-label', '2026-05-03: Critical')
     await user.click(cells[0]!)
     expect(clicked).toEqual(['2026-05-01'])
+  })
+
+  test('animated number keeps its upstream element, class, and localized display', () => {
+    const { rerender } = render(<AnimatedNumber value={1000} />)
+    const span = document.querySelector('span')
+    expect(span).toHaveClass('tabular-nums')
+    expect(span).toHaveTextContent('1,000')
+
+    rerender(<AnimatedNumber as="div" className="host-number" value={1000} />)
+    const host = document.querySelector('div.host-number')
+    expect(host).toHaveClass('tabular-nums')
+    expect(host).toHaveTextContent('1,000')
+  })
+
+  test('animated number preview exposes controls that change the number', async () => {
+    const user = userEvent.setup()
+    render(<AnimatedNumberCounter />)
+    expect(screen.getByLabelText('Decrement')).toBeInTheDocument()
+    const increment = screen.getByLabelText('Increment')
+    expect(document.querySelector('.tabular-nums')).toHaveTextContent('1,000')
+
+    await user.click(increment)
+    await screen.findByText('1,100', undefined, { timeout: 5000 })
   })
 })

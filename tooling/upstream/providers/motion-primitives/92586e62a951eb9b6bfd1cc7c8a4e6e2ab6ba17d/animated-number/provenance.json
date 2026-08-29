@@ -1,0 +1,30 @@
+{
+  "provider": "@motion-primitives",
+  "upstreamAddress": "@motion-primitives/animated-number",
+  "repository": "https://github.com/ibelick/motion-primitives",
+  "revision": "92586e62a951eb9b6bfd1cc7c8a4e6e2ab6ba17d",
+  "resolvedAt": "2026-08-29",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/ibelick/motion-primitives/blob/92586e62a951eb9b6bfd1cc7c8a4e6e2ab6ba17d/LICENCE.md",
+  "licenseDigest": "sha256:f668f5ef3635eb906f10b1eea9a32e449eb6e1a183ab6879ef6d56c0980dd2f3",
+  "owner": "component/animated-number",
+  "adaptation": "imports-only",
+  "sourceDigest": "sha256:3b4a9f3262cb79527fba01a76576e920e340137f0643bf34a7732f7f8b1ff792",
+  "files": {
+    "animated-number.tsx": {
+      "url": "https://raw.githubusercontent.com/ibelick/motion-primitives/92586e62a951eb9b6bfd1cc7c8a4e6e2ab6ba17d/components/core/animated-number.tsx",
+      "source": "tooling/upstream/providers/motion-primitives/92586e62a951eb9b6bfd1cc7c8a4e6e2ab6ba17d/animated-number/animated-number.tsx",
+      "implementation": "registry/components/animated-number/animated-number.tsx",
+      "sourceDigest": "sha256:3b4a9f3262cb79527fba01a76576e920e340137f0643bf34a7732f7f8b1ff792"
+    }
+  },
+  "examples": {
+    "animated-number-counter.tsx": {
+      "url": "https://raw.githubusercontent.com/ibelick/motion-primitives/92586e62a951eb9b6bfd1cc7c8a4e6e2ab6ba17d/app/docs/animated-number/animated-number-counter.tsx",
+      "source": "tooling/upstream/providers/motion-primitives/92586e62a951eb9b6bfd1cc7c8a4e6e2ab6ba17d/animated-number/animated-number-counter.tsx",
+      "implementation": "registry/components/animated-number/animated-number.preview.tsx",
+      "sourceDigest": "sha256:24a838d6a4562cca5f91163c90ebfbc8e2a2fba11c7d93434d84fa01cdf2ee55"
+    }
+  },
+  "licenseFile": "tooling/upstream/providers/motion-primitives/92586e62a951eb9b6bfd1cc7c8a4e6e2ab6ba17d/animated-number/LICENCE.md"
+}

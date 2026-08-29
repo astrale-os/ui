@@ -30,6 +30,11 @@ const heatmapProvenance = JSON.parse(
     'utf8',
   ),
 )
+const motionPrimitivesRoot =
+  'tooling/upstream/providers/motion-primitives/92586e62a951eb9b6bfd1cc7c8a4e6e2ab6ba17d/animated-number'
+const motionPrimitivesProvenance = JSON.parse(
+  await readFile(`${motionPrimitivesRoot}/provenance.json`, 'utf8'),
+)
 const owners = new Map(
   provenance.components
     .filter((component) => component.disposition === 'owned-runtime')
@@ -270,6 +275,57 @@ test('the status heatmap differs only by owned imports and formatting', async ()
     })
     assert.equal(formatted.status, 0, formatted.stderr)
     for (const filename of Object.keys(heatmapProvenance.files)) {
+      assert.equal(
+        await readFile(path.join(temporary, 'implementation', filename), 'utf8'),
+        await readFile(path.join(temporary, 'source', filename), 'utf8'),
+        `${filename} contains a non-import upstream change`,
+      )
+    }
+  } finally {
+    await rm(temporary, { recursive: true })
+  }
+})
+
+test('the animated number differs only by owned imports and formatting', async () => {
+  assert.equal(motionPrimitivesProvenance.adaptation, 'imports-only')
+  assert.equal(
+    digest(await readFile(motionPrimitivesProvenance.licenseFile, 'utf8')),
+    motionPrimitivesProvenance.licenseDigest,
+  )
+  const temporary = await mkdtemp(path.join(tmpdir(), 'astrale-animated-number-fidelity-'))
+  const restore = new Map([
+    [
+      'animated-number.tsx',
+      (implementation) =>
+        implementation
+          .replace("import type { JSX } from 'react'\n\n", '')
+          .replace('motion, type SpringOptions,', 'motion, SpringOptions,')
+          .replaceAll("'@astrale-os/ui/class-name'", "'@/lib/utils'"),
+    ],
+    [
+      'animated-number-counter.tsx',
+      (implementation) =>
+        implementation
+          .slice(0, implementation.indexOf('\nexport default AnimatedNumberCounter\n') + 1)
+          .replaceAll("'./animated-number.js'", "'@/components/core/animated-number'"),
+    ],
+  ])
+  try {
+    const files = { ...motionPrimitivesProvenance.files, ...motionPrimitivesProvenance.examples }
+    for (const [filename, file] of Object.entries(files)) {
+      const source = await readFile(file.source, 'utf8')
+      assert.equal(digest(source), file.sourceDigest)
+      const implementation = restore.get(filename)(await readFile(file.implementation, 'utf8'))
+      await mkdir(path.join(temporary, 'source'), { recursive: true })
+      await mkdir(path.join(temporary, 'implementation'), { recursive: true })
+      await writeFile(path.join(temporary, 'source', filename), source)
+      await writeFile(path.join(temporary, 'implementation', filename), implementation)
+    }
+    const formatted = spawnSync('pnpm', ['exec', 'oxfmt', '--write', temporary], {
+      encoding: 'utf8',
+    })
+    assert.equal(formatted.status, 0, formatted.stderr)
+    for (const filename of Object.keys(files)) {
       assert.equal(
         await readFile(path.join(temporary, 'implementation', filename), 'utf8'),
         await readFile(path.join(temporary, 'source', filename), 'utf8'),
