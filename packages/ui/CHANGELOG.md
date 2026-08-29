@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.3.0-beta.14](https://github.com/astrale-os/ui/compare/v0.3.0-beta.13...v0.3.0-beta.14) (2026-08-29)
+
+
+### Features
+
+* **request:** add managed UI request agent ([#52](https://github.com/astrale-os/ui/issues/52)) ([3348461](https://github.com/astrale-os/ui/commit/3348461194b72fa39027dabe0727f1629ac3c8a2))
+
+
+### Bug Fixes
+
+* **ui:** admit current Actions workflow paths ([#55](https://github.com/astrale-os/ui/issues/55)) ([b861d38](https://github.com/astrale-os/ui/commit/b861d38d21c3bdf313b5f6fd434dbe859fa71dae))
+* **ui:** run locked Claude Code CLI ([#57](https://github.com/astrale-os/ui/issues/57)) ([8eeb08e](https://github.com/astrale-os/ui/commit/8eeb08e11e1e8aaf5a36e2caf2eb3a03641578ff))
+* **ui:** wait before first request observation ([#56](https://github.com/astrale-os/ui/issues/56)) ([9bd6e62](https://github.com/astrale-os/ui/commit/9bd6e622fe349928a664cf13a48e50b483df5f0e))
+
+
+### Documentation
+
+* **request:** record managed agent live proof ([#60](https://github.com/astrale-os/ui/issues/60)) ([b0e181c](https://github.com/astrale-os/ui/commit/b0e181cc919fc6b94aa854f09b892915cc471290))
+
 ## [0.3.0-beta.13](https://github.com/astrale-os/ui/compare/v0.3.0-beta.12...v0.3.0-beta.13) (2026-08-28)
 
 
