@@ -111,7 +111,7 @@ function assertWorkflowRunIdentity(workflowRun, identity) {
     workflowRun.run_attempt !== identity.runAttempt ||
     workflowRun.event !== 'workflow_dispatch' ||
     workflowRun.display_title !== attemptMarker(identity.attempt) ||
-    workflowRun.path !== `.github/workflows/${workflowFile}@${identity.workflowRef}` ||
+    workflowRun.path !== `.github/workflows/${workflowFile}` ||
     workflowRun.head_branch !== identity.workflowRef ||
     workflowRun.actor?.login !== identity.workflowActor ||
     workflowRun.triggering_actor?.login !== identity.workflowActor ||
@@ -335,7 +335,7 @@ export function createGitHubActionsClaudeCodeAgent(options) {
         if (
           workflowRun.display_title === marker &&
           workflowRun.event === 'workflow_dispatch' &&
-          workflowRun.path === `.github/workflows/${workflowFile}@${workflowRef}` &&
+          workflowRun.path === `.github/workflows/${workflowFile}` &&
           workflowRun.head_branch === workflowRef &&
           workflowRun.actor?.login === workflowActor &&
           workflowRun.triggering_actor?.login === workflowActor

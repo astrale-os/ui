@@ -19,7 +19,7 @@ function workflowRun(overrides = {}) {
     name: 'UI Request Claude Code Worker',
     display_title: attemptMarker('attempt'),
     event: 'workflow_dispatch',
-    path: '.github/workflows/ui-request-claude-code.yml@main',
+    path: '.github/workflows/ui-request-claude-code.yml',
     head_branch: 'main',
     actor: { login: 'github-actions[bot]' },
     triggering_actor: { login: 'github-actions[bot]' },
@@ -350,7 +350,7 @@ test('reconciliation ignores matching titles from another actor or workflow ref'
         workflow_runs: [
           workflowRun({ actor: { login: 'maintainer' } }),
           workflowRun({ triggering_actor: { login: 'maintainer' } }),
-          workflowRun({ path: '.github/workflows/ui-request-claude-code.yml@other' }),
+          workflowRun({ path: '.github/workflows/another-workflow.yml' }),
           workflowRun({ head_branch: 'other' }),
         ],
       })
