@@ -19,16 +19,13 @@ async function acceptedComment(value, resolveWritePermission) {
   }
   const associationAccepted = acceptedAssociations.has(value.author_association)
   if (
-    !associationAccepted &&
-    value.author_association !== undefined &&
-    value.author_association !== null &&
-    value.author_association !== ''
+    typeof value.user?.login !== 'string' ||
+    value.user.login.length === 0 ||
+    (!associationAccepted && !(await resolveWritePermission(value.user.login)))
   ) {
     return null
   }
   if (
-    typeof value.user?.login !== 'string' ||
-    value.user.login.length === 0 ||
     typeof value.body !== 'string' ||
     typeof value.created_at !== 'string' ||
     typeof value.updated_at !== 'string' ||
@@ -37,7 +34,6 @@ async function acceptedComment(value, resolveWritePermission) {
   ) {
     throw new TypeError('GitHub accepted maintainer comment is malformed')
   }
-  if (!associationAccepted && !(await resolveWritePermission(value.user.login))) return null
   return {
     id: value.id,
     author: value.user.login,

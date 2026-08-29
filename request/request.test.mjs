@@ -591,7 +591,7 @@ test('includes only bounded maintainer discussion in chronological accepted cont
   )
 })
 
-test('recovers missing association metadata through bounded collaborator permission checks', async () => {
+test('recovers untrusted association metadata through exact collaborator permission checks', async () => {
   const permissionCalls = new Map()
   const store = createGitHubRequestStore({
     token: 'github-secret',
@@ -622,7 +622,7 @@ test('recovers missing association metadata through bounded collaborator permiss
           {
             ...githubComment(10, 'First accepted fallback.'),
             user: { login: 'fallback-writer', type: 'User' },
-            author_association: undefined,
+            author_association: 'CONTRIBUTOR',
           },
           {
             ...githubComment(20, 'Second accepted fallback.'),
@@ -662,6 +662,7 @@ test('recovers missing association metadata through bounded collaborator permiss
     'fallback-writer': 1,
     'fallback-reader': 1,
     'outside-user': 1,
+    'known-outsider': 1,
   })
 })
 
@@ -856,6 +857,7 @@ test('accepts the machine record only from the configured trusted GitHub actor',
 
 test('fails closed when trusted-record discovery exceeds the bounded comment scan', async () => {
   let pages = 0
+  let permissionCalls = 0
   const store = createGitHubRequestStore({
     token: 'github-secret',
     owner: 'astrale-os',
@@ -869,6 +871,10 @@ test('fails closed when trusted-record discovery exceeds the bounded comment sca
           html_url: issue.url,
           state: 'open',
         })
+      }
+      if (url.endsWith('/collaborators/untrusted-user/permission')) {
+        permissionCalls += 1
+        return json({ message: 'Not Found' }, 404)
       }
       pages += 1
       return json(
@@ -887,6 +893,7 @@ test('fails closed when trusted-record discovery exceeds the bounded comment sca
     /GitHub issue comments exceed the admitted scan bound/u,
   )
   assert.equal(pages, 10)
+  assert.equal(permissionCalls, 1)
 })
 
 test('fails closed when the trusted actor comment contains a malformed machine marker', async () => {
