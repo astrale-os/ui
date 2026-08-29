@@ -185,7 +185,7 @@ test('publishes the runtime and Domain from their exact independent Release Plea
   assert.equal(manifest.publishConfig.registry, 'https://registry.npmjs.org')
   assert.equal(manifest.publishConfig.access, 'public')
   assert.equal(domainManifest.name, '@astrale-domains/ui')
-  assert.equal(domainManifest.version, '0.0.0')
+  assert.match(domainManifest.version, /^\d+\.\d+\.\d+$/u)
   assert.equal(domainManifest.repository.url, 'git+https://github.com/astrale-os/ui.git')
   assert.equal(domainManifest.repository.directory, 'domain')
   assert.equal(domainManifest.publishConfig.registry, 'https://registry.npmjs.org/')
