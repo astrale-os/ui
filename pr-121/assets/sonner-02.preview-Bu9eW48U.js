@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{ct as t}from"./index--bzeSA28.js";import{n}from"./dist-DbAiZ5ns.js";var r=e(),i=()=>(0,r.jsx)(t,{variant:`outline`,onClick:()=>n(`Event is created`,{description:`Friday, August 15, 2025 at 9:00 AM`}),children:`Toast with description`}),a={source:`@astrale-os/ui`};export{i as default,a as preview};

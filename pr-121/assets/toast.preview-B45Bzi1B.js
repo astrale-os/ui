@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{ct as t,q as n}from"./index--bzeSA28.js";var r=e(),i={canvas:`compact`,source:`@shadcn/toast`};function a(){return(0,r.jsx)(t,{variant:`outline`,onClick:()=>n.add({title:`Theme saved`,description:`Ready to reuse.`,type:`success`}),children:`Send toast`})}export{a as default,i as preview};

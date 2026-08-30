@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{D as t,O as n,T as r}from"./index-Dqoyqgku.js";var i=e(),a={canvas:`compact`,source:`@shadcn/alert`};function o(){return(0,i.jsxs)(r,{children:[(0,i.jsx)(n,{children:`Revision ready`}),(0,i.jsx)(t,{children:`Every declared Function has qualified.`})]})}export{o as default,a as preview};

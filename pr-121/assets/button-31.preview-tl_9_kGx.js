@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{t}from"./bookmark-D8m7fs_9.js";import{ct as n}from"./index-Dqoyqgku.js";var r=e(),i=()=>(0,r.jsxs)(n,{variant:`outline`,size:`icon`,children:[(0,r.jsx)(t,{}),(0,r.jsx)(`span`,{className:`sr-only`,children:`Bookmark`})]}),a={source:`@astrale-os/ui`};export{i as default,a as preview};

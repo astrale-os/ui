@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{ct as t}from"./index--bzeSA28.js";var n=e(),r=()=>(0,n.jsxs)(`div`,{className:`flex flex-wrap items-center gap-4`,children:[(0,n.jsx)(t,{variant:`secondary`,children:`Cancel`}),(0,n.jsx)(t,{children:`Save Changes`})]}),i={source:`@astrale-os/ui`};export{r as default,i as preview};

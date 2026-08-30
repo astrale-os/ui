@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{t}from"./circle-alert-1yL3Ohnu.js";import{O as n,T as r}from"./index--bzeSA28.js";var i=e(),a=()=>(0,i.jsxs)(r,{className:`*:[svg]:row-span-1`,children:[(0,i.jsx)(t,{}),(0,i.jsx)(n,{children:`New message!`})]}),o={source:`@astrale-os/ui`};export{a as default,o as preview};

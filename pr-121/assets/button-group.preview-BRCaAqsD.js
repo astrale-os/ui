@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{n as t,t as n}from"./button-group-nyJ7IsMS.js";import{ct as r}from"./index-Dqoyqgku.js";var i=e(),a={canvas:`compact`,source:`@shadcn/button-group`};function o(){return(0,i.jsxs)(n,{children:[(0,i.jsx)(r,{variant:`outline`,children:`Preview`}),(0,i.jsx)(t,{children:`⌘ K`})]})}export{o as default,a as preview};

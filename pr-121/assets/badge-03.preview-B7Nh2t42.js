@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{R as t}from"./index--bzeSA28.js";var n=e(),r=()=>(0,n.jsx)(t,{variant:`destructive`,children:`Destructive`}),i={source:`@astrale-os/ui`};export{r as default,i as preview};

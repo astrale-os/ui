@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{w as t}from"./index-Dqoyqgku.js";var n=e(),r={source:`@shadcn/skeleton`};function i(){return(0,n.jsxs)(`div`,{className:`stack`,children:[(0,n.jsx)(t,{className:`h-5 w-3/4`}),(0,n.jsx)(t,{className:`h-5 w-1/2`})]})}export{i as default,r as preview};

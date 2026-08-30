@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{t}from"./arrow-right-DkUMoHqj.js";import{ct as n}from"./index-Dqoyqgku.js";var r=e(),i=()=>(0,r.jsxs)(n,{className:`group`,children:[`Get In Touch`,(0,r.jsx)(t,{className:`transition-transform duration-200 group-hover:translate-x-0.5`})]}),a={source:`@astrale-os/ui`};export{i as default,a as preview};

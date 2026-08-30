@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{ct as t}from"./index--bzeSA28.js";var n=e(),r=()=>(0,n.jsx)(t,{disabled:!0,children:`Verify Email`}),i={source:`@astrale-os/ui`};export{r as default,i as preview};

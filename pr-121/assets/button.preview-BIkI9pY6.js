@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{ct as t}from"./index-Dqoyqgku.js";var n=e(),r={canvas:`compact`,source:`@shadcn/button`};function i(){return(0,n.jsx)(t,{children:`Continue`})}export{i as default,r as preview};

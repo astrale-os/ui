@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{t}from"./progress-C61zIR-q.js";var n=e(),r={source:`@shadcn/progress`};function i(){return(0,n.jsx)(t,{value:72,"aria-label":`Release qualification`})}export{i as default,r as preview};
