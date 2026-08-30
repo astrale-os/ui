@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.0-beta.25](https://github.com/astrale-os/ui/compare/v0.3.0-beta.24...v0.3.0-beta.25) (2026-08-30)
+
+
+### Bug Fixes
+
+* **domain:** adopt function requirements ([#152](https://github.com/astrale-os/ui/issues/152)) ([5bd98b0](https://github.com/astrale-os/ui/commit/5bd98b02ad0025eaec1215defe7f8ac2dece739d))
+* **ui:** bound playground preview rendering ([#150](https://github.com/astrale-os/ui/issues/150)) ([a9c1496](https://github.com/astrale-os/ui/commit/a9c1496b0381b396b297fa6000bc829207740a35))
+
 ## [0.3.0-beta.24](https://github.com/astrale-os/ui/compare/v0.3.0-beta.23...v0.3.0-beta.24) (2026-08-30)
 
 
