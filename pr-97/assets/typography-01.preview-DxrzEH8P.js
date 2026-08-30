@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-Cx0BB4qO.js";var t=e(),n=()=>(0,t.jsx)(`h1`,{className:`text-3xl font-extrabold text-balance md:text-4xl`,children:`h1 - A New Dawn of Silent Laughter`}),r={source:`@astrale-os/ui`};export{n as default,r as preview};

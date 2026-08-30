@@ -1,0 +1,1 @@
+import{o as e,s as t}from"./popupStateMapping-CdJvGm1v.js";function n(){return new t({open:!1,transitionStatus:void 0,floatingElement:null,referenceElement:null,triggerElements:new e,floatingId:void 0,syncOnly:!1,nested:!1,onOpenChange:void 0})}export{n as t};

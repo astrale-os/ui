@@ -1,0 +1,1 @@
+import{i as e}from"./jsx-runtime-Cx0BB4qO.js";import{t}from"./react-3BKWdGy3.js";import{n}from"./useIsoLayoutEffect-ncyBa8sy.js";var r=e(t(),1),i=0;function a(e,t=`mui`){let[n,a]=r.useState(e),o=e||n;return r.useEffect(()=>{n??(i+=1,a(`${t}-${i}`))},[n,t]),o}var o=n.useId;function s(e,t){if(o!==void 0){let n=o();return e??(t?`${t}-${n}`:n)}return a(e,t)}export{s as t};

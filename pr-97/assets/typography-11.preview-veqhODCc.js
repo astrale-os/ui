@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-Cx0BB4qO.js";var t=e(),n=()=>(0,t.jsx)(`div`,{className:`text-sm leading-none font-medium max-sm:w-full`,children:`small - user@example.com`}),r={source:`@astrale-os/ui`};export{n as default,r as preview};

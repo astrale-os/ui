@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{t}from"./toggle-qCQN3qL4.js";var n=e(),r={canvas:`compact`,source:`@shadcn/toggle`};function i(){return(0,n.jsx)(t,{variant:`outline`,defaultPressed:!0,children:`Pin telemetry`})}export{i as default,r as preview};

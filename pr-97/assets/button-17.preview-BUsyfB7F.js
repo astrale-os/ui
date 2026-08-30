@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{Q as t,ct as n}from"./index-BUXE9DNJ.js";var r=e(),i=()=>(0,r.jsxs)(n,{disabled:!0,children:[(0,r.jsx)(t,{className:`animate-spin`}),`Loading`]}),a={source:`@astrale-os/ui`};export{i as default,a as preview};

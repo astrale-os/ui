@@ -1,0 +1,1 @@
+import{n as e,r as t,t as n}from"./feature-bundle-Odw2M-ch.js";function r(e,n){if(typeof Proxy>`u`)return t;let r=new Map,i=(r,i)=>t(r,i,e,n);return new Proxy((e,t)=>i(e,t),{get:(a,o)=>o===`create`?i:(r.has(o)||r.set(o,t(o,void 0,e,n)),r.get(o))})}var i=r(n,e);export{i as t};

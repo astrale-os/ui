@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{t}from"./slider-n32I175j.js";var n=e(),r=()=>(0,n.jsx)(t,{defaultValue:50,max:100,step:1,orientation:`vertical`}),i={source:`@astrale-os/ui`};export{r as default,i as preview};

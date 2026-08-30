@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "previews": [
+    {
+      "id": "component/status-heatmap#default",
+      "address": "component/status-heatmap",
+      "scene": "default",
+      "screenshot": "screenshots/component-status-heatmap-default-75ace7e9aa6e.png"
+    },
+    {
+      "id": "component/status-heatmap#incident-recovery",
+      "address": "component/status-heatmap",
+      "scene": "incident-recovery",
+      "screenshot": "screenshots/component-status-heatmap-incident-recovery-ede47a642502.png"
+    }
+  ]
+}

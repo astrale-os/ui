@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{t}from"./switch-rQjGGmGA.js";var n=e(),r=()=>(0,n.jsx)(t,{"aria-label":`Square switch`,className:`rounded-xs [&_span]:rounded-xs`}),i={source:`@astrale-os/ui`};export{r as default,i as preview};
