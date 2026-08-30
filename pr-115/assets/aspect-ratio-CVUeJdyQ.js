@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{ut as t}from"./index-BXISv_yX.js";var n=e();function r({ratio:e,className:r,...i}){return(0,n.jsx)(`div`,{"data-slot":`aspect-ratio`,style:{"--ratio":e},className:t(`relative aspect-(--ratio)`,r),...i})}export{r as t};

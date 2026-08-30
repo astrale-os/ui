@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{t}from"./circle-alert-1yL3Ohnu.js";import{D as n,O as r,T as i}from"./index-BXISv_yX.js";var a=e(),o=()=>(0,a.jsxs)(i,{children:[(0,a.jsx)(t,{}),(0,a.jsx)(r,{children:`Creating your account`}),(0,a.jsx)(n,{children:`Fill in your details to get started.`})]}),s={source:`@astrale-os/ui`};export{o as default,s as preview};

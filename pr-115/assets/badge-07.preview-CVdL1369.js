@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{R as t}from"./index-BXISv_yX.js";var n=e(),r=()=>(0,n.jsx)(t,{className:`h-5 min-w-5 px-1 tabular-nums`,children:`8`}),i={source:`@astrale-os/ui`};export{r as default,i as preview};

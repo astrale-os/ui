@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{n as t,r as n}from"./secrets.fixture-DvVMi2Yt.js";var r=e();function i(){return(0,r.jsx)(n,{...t})}var a={canvas:`wide`,source:`https://raw.githubusercontent.com/durgeshityaar/chadcn-ui/9f92a7134a2df98b249f455104137780ebf958a0/apps/web/content/blocks/cloud/env-variables/feature-rich.tsx`};export{i as default,a as preview};

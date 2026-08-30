@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{t}from"./switch-BkCPtZ4Q.js";var n=e(),r=()=>(0,n.jsx)(t,{"aria-label":`Mini switch`,className:`[&_span]:border-input border-none data-[size=default]:h-3 [&_span]:border [&_span]:group-data-[size=default]/switch:size-4.5`}),i={source:`@astrale-os/ui`};export{r as default,i as preview};
