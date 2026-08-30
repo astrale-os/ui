@@ -1,5 +1,35 @@
 # Changelog
 
+## [0.3.0-beta.21](https://github.com/astrale-os/ui/compare/v0.3.0-beta.20...v0.3.0-beta.21) (2026-08-30)
+
+
+### Features
+
+* **request:** accelerate managed UI delivery ([#128](https://github.com/astrale-os/ui/issues/128)) ([6b66b97](https://github.com/astrale-os/ui/commit/6b66b9788fc5c2e03f0970251cf1215f2b1b4757))
+* **request:** ui-request:104:attempt:6 ([#135](https://github.com/astrale-os/ui/issues/135)) ([5aafd7e](https://github.com/astrale-os/ui/commit/5aafd7e9807fae4775656ca71106e96d8ad57f0d))
+
+
+### Bug Fixes
+
+* **playground:** isolate React optimizer caches ([#127](https://github.com/astrale-os/ui/issues/127)) ([6cbc297](https://github.com/astrale-os/ui/commit/6cbc29739c1d8ddfd98eb1aa28109d8ba43920cd))
+* **registry:** stabilize status monitor tooltips ([#125](https://github.com/astrale-os/ui/issues/125)) ([c645831](https://github.com/astrale-os/ui/commit/c645831f9b3db7b7f85214d42c0c4cd55a4d5d68))
+* **ui:** admit Codex workflow permissions ([#129](https://github.com/astrale-os/ui/issues/129)) ([9290982](https://github.com/astrale-os/ui/commit/9290982cea6be7b29934b5f6797fe36c601f3851))
+* **ui:** admit descendant checkpoint verification ([#133](https://github.com/astrale-os/ui/issues/133)) ([01ce4c1](https://github.com/astrale-os/ui/commit/01ce4c1eae5a09e6c56623d4243c8cc0098656d1))
+* **ui:** bind checkpoints to stable objectives ([#138](https://github.com/astrale-os/ui/issues/138)) ([bff04e2](https://github.com/astrale-os/ui/commit/bff04e26d1949a4d9c37573ce8fb3ac222a88399))
+* **ui:** correct Codex sandbox preflight ([#134](https://github.com/astrale-os/ui/issues/134)) ([d66b602](https://github.com/astrale-os/ui/commit/d66b6023c77557656b50fc6143f1238375003cc4))
+* **ui:** dispatch release qualification directly ([#142](https://github.com/astrale-os/ui/issues/142)) ([56bba45](https://github.com/astrale-os/ui/commit/56bba452e37424188fa110cc486fec71ef199efe))
+* **ui:** escalate empty Luna candidates ([#130](https://github.com/astrale-os/ui/issues/130)) ([cb8e7d0](https://github.com/astrale-os/ui/commit/cb8e7d029cfe4d24768ffff99cbba74802908ae1))
+* **ui:** make request intake extensible ([#132](https://github.com/astrale-os/ui/issues/132)) ([fbff00e](https://github.com/astrale-os/ui/commit/fbff00e103d73635aaf2ffefbc184749495ac8f5))
+* **ui:** prepare Codex Linux sandbox ([#131](https://github.com/astrale-os/ui/issues/131)) ([23c0640](https://github.com/astrale-os/ui/commit/23c0640374609614dccefe2ced4e6ef1c4755039))
+* **ui:** preserve themed control heights ([#139](https://github.com/astrale-os/ui/issues/139)) ([9f55088](https://github.com/astrale-os/ui/commit/9f55088c433c0b1ca7ab921859b4230a04cdb4ac))
+* **ui:** resume qualified request checkpoints ([#137](https://github.com/astrale-os/ui/issues/137)) ([cc356f9](https://github.com/astrale-os/ui/commit/cc356f99afa3c7350df02945d8c20e341286495e))
+* **ui:** resume revisions from published candidates ([#136](https://github.com/astrale-os/ui/issues/136)) ([f1ce439](https://github.com/astrale-os/ui/commit/f1ce4395f650555699d797b243d629f1ffb21e63))
+
+
+### Documentation
+
+* record UI request V2 canary ([#141](https://github.com/astrale-os/ui/issues/141)) ([bdf56ce](https://github.com/astrale-os/ui/commit/bdf56ced5b4c4d1339ffafd5d31dfba5fc2aca6f))
+
 ## [0.3.0-beta.20](https://github.com/astrale-os/ui/compare/v0.3.0-beta.19...v0.3.0-beta.20) (2026-08-30)
 
 
