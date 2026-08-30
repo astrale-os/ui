@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ui.astrale.ai/schemas/upstream-intake-ledger.schema.json",
+  "title": "Astrale UI upstream intake ledger",
+  "type": "object",
+  "required": ["version", "entries"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "version": { "const": 1 },
+    "entries": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/entry" }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "entry": {
+      "type": "object",
+      "required": [
+        "provider",
+        "address",
+        "documentation",
+        "consideredAt",
+        "purpose",
+        "decision",
+        "duplicateReview"
+      ],
+      "properties": {
+        "provider": { "type": "string", "minLength": 1 },
+        "address": { "type": "string", "pattern": "^https://" },
+        "documentation": { "type": "string", "pattern": "^https://" },
+        "repository": { "type": "string", "pattern": "^https://" },
+        "revision": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "sourceDigest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "license": { "type": "string", "minLength": 1 },
+        "consideredAt": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+        "purpose": { "type": "string", "minLength": 1 },
+        "decision": {
+          "oneOf": [
+            { "$ref": "#/$defs/admitted" },
+            { "$ref": "#/$defs/rejected" },
+            { "$ref": "#/$defs/deferred" }
+          ]
+        },
+        "duplicateReview": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["address", "relationship", "rationale"],
+            "properties": {
+              "address": { "type": "string", "minLength": 1 },
+              "relationship": {
+                "enum": ["distinct", "overlapping", "duplicate", "supersedes"]
+              },
+              "rationale": { "type": "string", "minLength": 1 }
+            },
+            "additionalProperties": false
+          }
+        },
+        "proof": { "type": "string", "minLength": 1 },
+        "adaptation": {
+          "type": "object",
+          "required": ["mode", "changes"],
+          "properties": {
+            "mode": { "enum": ["none", "imports-only", "astrale-revision"] },
+            "changes": {
+              "type": "array",
+              "items": { "type": "string", "minLength": 1 }
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": { "decision": { "properties": { "status": { "const": "admitted" } } } }
+          },
+          "then": {
+            "required": ["repository", "revision", "sourceDigest", "license", "proof", "adaptation"]
+          }
+        }
+      ]
+    },
+    "admitted": {
+      "type": "object",
+      "required": ["status", "classification", "owner", "rationale"],
+      "properties": {
+        "status": { "const": "admitted" },
+        "classification": { "enum": ["component", "pattern", "block", "theme"] },
+        "owner": { "type": "string", "minLength": 1 },
+        "rationale": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "rejected": {
+      "type": "object",
+      "required": ["status", "reason", "rationale"],
+      "properties": {
+        "status": { "const": "rejected" },
+        "reason": {
+          "enum": [
+            "duplicate",
+            "low-value",
+            "low-quality",
+            "irrelevant",
+            "incompatible",
+            "unsafe",
+            "license",
+            "unavailable"
+          ]
+        },
+        "rationale": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "deferred": {
+      "type": "object",
+      "required": ["status", "rationale"],
+      "properties": {
+        "status": { "const": "deferred" },
+        "rationale": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    }
+  }
+}

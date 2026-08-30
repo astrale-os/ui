@@ -30,6 +30,12 @@ const heatmapProvenance = JSON.parse(
     'utf8',
   ),
 )
+const statusMonitorProvenance = JSON.parse(
+  await readFile(
+    'tooling/upstream/providers/8starlabs/763f9b6f27d2ded9967d62b099e66768994dd68c/status-monitor/provenance.json',
+    'utf8',
+  ),
+)
 const owners = new Map(
   provenance.components
     .filter((component) => component.disposition === 'owned-runtime')
@@ -274,6 +280,200 @@ test('the status heatmap differs only by owned imports and formatting', async ()
         await readFile(path.join(temporary, 'implementation', filename), 'utf8'),
         await readFile(path.join(temporary, 'source', filename), 'utf8'),
         `${filename} contains a non-import upstream change`,
+      )
+    }
+  } finally {
+    await rm(temporary, { recursive: true })
+  }
+})
+
+test('the 8StarLabs status monitor has only the declared Astrale adaptation', async () => {
+  assert.equal(statusMonitorProvenance.adaptation, 'astrale-revision')
+  const providerRoot =
+    'tooling/upstream/providers/8starlabs/763f9b6f27d2ded9967d62b099e66768994dd68c/status-monitor'
+  assert.equal(
+    digest(await readFile(`${providerRoot}/LICENSE.md`, 'utf8')),
+    statusMonitorProvenance.licenseDigest,
+  )
+  assert.equal(
+    digest(await readFile(`${providerRoot}/registry-item.json`, 'utf8')),
+    statusMonitorProvenance.registryItemDigest,
+  )
+  const temporary = await mkdtemp(path.join(tmpdir(), 'astrale-status-monitor-fidelity-'))
+  try {
+    for (const [filename, file] of Object.entries(statusMonitorProvenance.files)) {
+      const source = await readFile(file.source, 'utf8')
+      assert.equal(digest(source), file.sourceDigest)
+      const implementationSource = await readFile(file.implementation, 'utf8')
+      const replaceDeclared = (value, from, to, label) => {
+        assert.equal(value.split(from).length - 1, 1, `${label} adaptation is not exact`)
+        return value.replace(from, to)
+      }
+      const adaptedTimestamp = `function formatTimestamp(timestamp: AppStatusData['timestamp'], unit: 'days' | 'hours') {
+  if (!timestamp) return undefined
+
+  if (timestamp instanceof Date) {
+    return new Intl.DateTimeFormat('en-US', {
+      month: 'short',
+      day: '2-digit',
+      year: 'numeric',
+      ...(unit === 'hours' ? { hour: '2-digit', minute: '2-digit', timeZoneName: 'short' } : {}),
+    }).format(timestamp)
+  }
+
+  return timestamp
+}`
+      const upstreamTimestamp = `function formatTimestamp(timestamp: AppStatusData['timestamp']) {
+  if (!timestamp) return undefined
+
+  if (timestamp instanceof Date) {
+    return new Intl.DateTimeFormat('en-US', {
+      month: 'short',
+      day: '2-digit',
+      year: 'numeric',
+    }).format(timestamp)
+  }
+
+  return timestamp
+}`
+      const adaptedUptime = `  const uptimeLabel = useMemo(() => {
+    const validStatuses = visibleStatuses.filter((status) => status.status !== 'empty')
+    if (validStatuses.length === 0) return 'N/A'
+
+    const normalCount = validStatuses.filter((status) => status.status === 'normal').length
+    return \`${'${parseFloat(((normalCount / validStatuses.length) * 100).toFixed(2))}'}%\`
+  }, [visibleStatuses])
+`
+      const upstreamUptime = `  const uptimePercentage = useMemo(() => {
+    const validStatuses = statuses.filter((s) => s.status !== 'empty')
+    if (validStatuses.length === 0) return 100
+
+    const normalCount = validStatuses.filter((s) => s.status === 'normal').length
+    return parseFloat(((normalCount / validStatuses.length) * 100).toFixed(2))
+  }, [statuses])
+
+`
+      let implementation = implementationSource
+      implementation = replaceDeclared(
+        implementation,
+        "'@astrale-os/ui/tooltip'",
+        "'@/registry/8starlabs-ui/ui/tooltip'",
+        'tooltip import',
+      )
+      implementation = replaceDeclared(
+        implementation,
+        "'@astrale-os/ui/class-name'",
+        "'@/lib/utils'",
+        'class-name import',
+      )
+      implementation = replaceDeclared(
+        implementation,
+        adaptedTimestamp,
+        upstreamTimestamp,
+        'hour timestamp',
+      )
+      implementation = replaceDeclared(implementation, adaptedUptime, '', 'visible uptime')
+      implementation = replaceDeclared(
+        implementation,
+        '  const paddedStatuses = useMemo(() => {',
+        `${upstreamUptime}  const paddedStatuses = useMemo(() => {`,
+        'upstream uptime placement',
+      )
+      implementation = replaceDeclared(
+        implementation,
+        '{uptimeLabel} uptime',
+        '{uptimePercentage}% uptime',
+        'uptime label',
+      )
+      implementation = replaceDeclared(
+        implementation,
+        'formatTimestamp(item.timestamp, unit)',
+        'formatTimestamp(item.timestamp)',
+        'timestamp unit',
+      )
+      implementation = replaceDeclared(
+        implementation,
+        "import React, { useEffect, useId, useMemo, useRef, useState } from 'react'",
+        "import React, { useEffect, useMemo, useRef, useState } from 'react'",
+        'stable id import',
+      )
+      implementation = replaceDeclared(
+        implementation,
+        '  const statusMonitorId = useId()\n',
+        '',
+        'stable monitor id',
+      )
+      implementation = replaceDeclared(
+        implementation,
+        '  const [pressedStatus, setPressedStatus] = useState<number | null>(null)\n',
+        '',
+        'press state',
+      )
+      implementation = replaceDeclared(
+        implementation,
+        '              const triggerId = `${statusMonitorId}-status-${index}`\n' +
+          '              const tooltipId = `${triggerId}-description`\n',
+        '',
+        'description ids',
+      )
+      implementation = replaceDeclared(
+        implementation,
+        `                <Tooltip
+                  key={index}
+                  open={pressedStatus === index}
+                  triggerId={triggerId}
+                  onOpenChange={(open) => {
+                    setPressedStatus(open ? index : null)
+                  }}
+                >`,
+        '                <Tooltip key={index}>',
+        'press-controlled tooltip',
+      )
+      implementation = replaceDeclared(
+        implementation,
+        `                      <button
+                        id={triggerId}
+                        type="button"`,
+        '                      <div',
+        'button trigger',
+      )
+      implementation = replaceDeclared(
+        implementation,
+        "'h-full w-[5px] border-0 p-0 transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'",
+        "'h-full w-[5px] transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'",
+        'button reset',
+      )
+      implementation = replaceDeclared(
+        implementation,
+        `                        aria-label={label}
+                        aria-describedby={tooltipId}
+                        onClick={() => {
+                          setPressedStatus((current) => (current === index ? null : index))
+                        }}`,
+        `                        tabIndex={0}
+                        aria-label={label}`,
+        'operable trigger semantics',
+      )
+      implementation = replaceDeclared(
+        implementation,
+        '                  <TooltipContent\n                    id={tooltipId}',
+        '                  <TooltipContent',
+        'tooltip description id',
+      )
+      await mkdir(path.join(temporary, 'source'), { recursive: true })
+      await mkdir(path.join(temporary, 'implementation'), { recursive: true })
+      await writeFile(path.join(temporary, 'source', filename), source)
+      await writeFile(path.join(temporary, 'implementation', filename), implementation)
+    }
+    const formatted = spawnSync('pnpm', ['exec', 'oxfmt', '--write', temporary], {
+      encoding: 'utf8',
+    })
+    assert.equal(formatted.status, 0, formatted.stderr)
+    for (const filename of Object.keys(statusMonitorProvenance.files)) {
+      assert.equal(
+        await readFile(path.join(temporary, 'implementation', filename), 'utf8'),
+        await readFile(path.join(temporary, 'source', filename), 'utf8'),
+        `${filename} contains an undeclared upstream change`,
       )
     }
   } finally {

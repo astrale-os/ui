@@ -760,6 +760,61 @@ test('loading and readiness expose stable accessible canvas semantics', async ({
   await expect(preview).not.toHaveAttribute('aria-busy', 'true')
 })
 
+test('status monitor presents responsive availability and incident details', async ({ page }) => {
+  await page.goto('/')
+  const sections = page.getByLabel('Catalog sections')
+  await sections.getByRole('tab', { name: 'Blocks' }).click()
+  await expect(sections.getByRole('tab', { name: 'Blocks' })).toHaveAttribute(
+    'aria-selected',
+    'true',
+  )
+  const preview = await loadPreview(page, 'block/observability/status-monitor')
+
+  await expect(preview.getByText('API availability')).toBeVisible()
+  const initialSlots = page.viewportSize()!.width < 640 ? 30 : 90
+  const initialUptime = initialSlots === 90 ? '93.33% uptime' : '90% uptime'
+  await expect(preview.getByText(initialUptime)).toBeVisible()
+  await expect(preview.locator('button[aria-label]')).toHaveCount(initialSlots)
+
+  const incident = preview.getByLabel('Jul 03, 2026: Error')
+  if (page.viewportSize()!.width >= 640) {
+    await preview.getByLabel('Jul 02, 2026: Normal').focus()
+    await page.keyboard.press('Tab')
+    await expect(incident).toBeFocused()
+    await expect(
+      page.getByText('API requests failed while traffic shifted to the recovery pool.'),
+    ).toBeVisible()
+    const tooltip = page.locator(`#${await incident.getAttribute('aria-describedby')}`)
+    await expect(tooltip).toContainText(
+      'API requests failed while traffic shifted to the recovery pool.',
+    )
+    await page.keyboard.press('Escape')
+    await expect(tooltip).not.toBeVisible()
+  } else {
+    await incident.tap()
+    await expect(
+      page.getByText('API requests failed while traffic shifted to the recovery pool.'),
+    ).toBeVisible()
+    await incident.tap()
+    await expect(
+      page.getByText('API requests failed while traffic shifted to the recovery pool.'),
+    ).not.toBeVisible()
+  }
+
+  const contrast = await new AxeBuilder({ page })
+    .include('[data-preview-address="block/observability/status-monitor"]')
+    .analyze()
+  expect(contrast.violations).toEqual([])
+
+  await page.setViewportSize({ width: 560, height: 844 })
+  await expect(preview.locator('button[aria-label]')).toHaveCount(60)
+  await expect(preview.getByText('91.67% uptime')).toBeVisible()
+
+  await page.setViewportSize({ width: 390, height: 844 })
+  await expect(preview.locator('button[aria-label]')).toHaveCount(30)
+  await expect(preview.getByText('90% uptime')).toBeVisible()
+})
+
 test('catalog specimens own their interaction without navigating the playground', async ({
   page,
 }) => {

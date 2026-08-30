@@ -1,0 +1,29 @@
+{
+  "provider": "@8starlabs",
+  "upstreamAddress": "https://ui.8starlabs.com/r/status-monitor.json",
+  "documentation": "https://ui.8starlabs.com/docs/components/status-monitor",
+  "repository": "https://github.com/8starlabs/ui",
+  "revision": "763f9b6f27d2ded9967d62b099e66768994dd68c",
+  "resolvedAt": "2026-08-30",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/8starlabs/ui/blob/763f9b6f27d2ded9967d62b099e66768994dd68c/LICENSE.md",
+  "licenseDigest": "sha256:392075473ac3a5da2de1035e5dd31e7079518eb0af322e6bed332ed0d7f277f0",
+  "owner": "block/observability/status-monitor",
+  "adaptation": "astrale-revision",
+  "adaptationNotes": [
+    "Repoint provider-local tooltip and class-name imports to Astrale public entrypoints.",
+    "Render each labelled status segment as an interactive button with a stable described-by relationship and press-controlled incident detail.",
+    "Scope uptime to the visible responsive window and report N/A when that window has no telemetry.",
+    "Include clock time and time zone in Date labels when the timeline unit is hours."
+  ],
+  "sourceDigest": "sha256:66302173eee665403f1fdb6b2522694607596b9e623eabddf32061b2a73d39bb",
+  "registryItemDigest": "sha256:0287d7347c47283ce44dd0b53c626bb13422de8742de84973817049906e18032",
+  "files": {
+    "status-monitor.tsx": {
+      "url": "https://raw.githubusercontent.com/8starlabs/ui/763f9b6f27d2ded9967d62b099e66768994dd68c/registry/8starlabs-ui/blocks/status-monitor.tsx",
+      "source": "tooling/upstream/providers/8starlabs/763f9b6f27d2ded9967d62b099e66768994dd68c/status-monitor/status-monitor.tsx",
+      "implementation": "registry/blocks/observability/status-monitor.tsx",
+      "sourceDigest": "sha256:66302173eee665403f1fdb6b2522694607596b9e623eabddf32061b2a73d39bb"
+    }
+  }
+}
