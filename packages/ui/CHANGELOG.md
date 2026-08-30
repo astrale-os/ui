@@ -1,5 +1,30 @@
 # Changelog
 
+## [0.3.0-beta.17](https://github.com/astrale-os/ui/compare/v0.3.0-beta.16...v0.3.0-beta.17) (2026-08-30)
+
+
+### Features
+
+* add observability status monitor block ([#94](https://github.com/astrale-os/ui/issues/94)) ([a3524d0](https://github.com/astrale-os/ui/commit/a3524d0292bbec086df81a9358f4ae2064723356))
+* **request:** add visual PR review loop ([#95](https://github.com/astrale-os/ui/issues/95)) ([672181c](https://github.com/astrale-os/ui/commit/672181c63bd109b34d907e9f5249348803227ebd))
+* **request:** ui-request:96:attempt:1 ([#97](https://github.com/astrale-os/ui/issues/97)) ([f4b417f](https://github.com/astrale-os/ui/commit/f4b417f9764a71934f332b66952f13dbf78fb847))
+* **theme:** add deterministic theme generator ([#84](https://github.com/astrale-os/ui/issues/84)) ([eaf3666](https://github.com/astrale-os/ui/commit/eaf3666cb7fc33f00830c6b0465f64c1e7442c09))
+
+
+### Bug Fixes
+
+* harden generated theme contrast and prune the catalog ([#91](https://github.com/astrale-os/ui/issues/91)) ([b79a2e9](https://github.com/astrale-os/ui/commit/b79a2e95e64e0fe3c94feafc92996c28299e7e1c))
+* **request:** recover maintainer comment authority ([#88](https://github.com/astrale-os/ui/issues/88)) ([1a6f48d](https://github.com/astrale-os/ui/commit/1a6f48d4e266090995d313d3a773091124d955f8))
+* **request:** verify unexpected comment associations ([#89](https://github.com/astrale-os/ui/issues/89)) ([bf0d167](https://github.com/astrale-os/ui/commit/bf0d167356b2df2f45f7253d172936b72eaf958b))
+* **ui:** allow request PR label consumption ([#98](https://github.com/astrale-os/ui/issues/98)) ([a0c68c3](https://github.com/astrale-os/ui/commit/a0c68c318fe84fba808df48be314ad0efc41215c))
+* **ui:** run Pages cleanup in its repository ([#99](https://github.com/astrale-os/ui/issues/99)) ([a91ae05](https://github.com/astrale-os/ui/commit/a91ae052650eed64d573b817d817e89ac9550809))
+
+
+### Documentation
+
+* close UI request loop evidence ([#100](https://github.com/astrale-os/ui/issues/100)) ([e70b6f5](https://github.com/astrale-os/ui/commit/e70b6f5dd0187e49083bc35b5192d04d2744b415))
+* record label-driven request proof ([#93](https://github.com/astrale-os/ui/issues/93)) ([dbead3d](https://github.com/astrale-os/ui/commit/dbead3d939ceee89410193ae707b74b328fbfd2d))
+
 ## [0.3.0-beta.16](https://github.com/astrale-os/ui/compare/v0.3.0-beta.15...v0.3.0-beta.16) (2026-08-29)
 
 
