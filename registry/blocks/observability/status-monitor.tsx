@@ -174,6 +174,7 @@ export default function StatusMonitor({
               return (
                 <Tooltip
                   key={index}
+                  disableHoverablePopup
                   open={pressedStatus === index}
                   onOpenChange={(open) => {
                     setPressedStatus(open ? index : null)
