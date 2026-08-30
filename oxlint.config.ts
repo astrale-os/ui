@@ -26,14 +26,11 @@ export default defineConfig({
     '**/*.gen.tsx',
     'registry/variants/source/**',
     'registry/variants/support/**',
+    'tooling/upstream/providers/**',
   ],
   overrides: [
     {
-      files: [
-        'packages/ui/src/**/index.tsx',
-        'registry/components/**/*.{ts,tsx}',
-        'tooling/upstream/providers/**/*.{ts,tsx}',
-      ],
+      files: ['packages/ui/src/**/index.tsx', 'registry/components/**/*.{ts,tsx}'],
       rules: {
         eqeqeq: 'off',
         'prefer-const': 'off',
