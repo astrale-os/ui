@@ -386,9 +386,94 @@ test('the 8StarLabs status monitor has only the declared Astrale adaptation', as
       )
       implementation = replaceDeclared(
         implementation,
+        'useEffect, useId, useMemo',
+        'useEffect, useMemo',
+        'shared tooltip trigger id import',
+      )
+      implementation = replaceDeclared(
+        implementation,
+        `interface StatusSelection {
+  absoluteIndex: number
+  item: AppStatusData
+  source: AppStatusData[]
+}
+
+`,
+        '',
+        'shared tooltip selection',
+      )
+      implementation = replaceDeclared(
+        implementation,
+        `function getVisibleSelectionIndex(
+  selection: StatusSelection | null,
+  statuses: AppStatusData[],
+  visibleSlots: number,
+) {
+  if (
+    !selection ||
+    selection.source !== statuses ||
+    statuses[selection.absoluteIndex] !== selection.item
+  )
+    return null
+  const visibleIndex = selection.absoluteIndex - (statuses.length - visibleSlots)
+  return visibleIndex >= 0 && visibleIndex < visibleSlots ? visibleIndex : null
+}
+
+`,
+        '',
+        'shared tooltip selection projection',
+      )
+      implementation = replaceDeclared(
+        implementation,
         adaptedTimestamp,
         upstreamTimestamp,
         'hour timestamp',
+      )
+      implementation = replaceDeclared(
+        implementation,
+        '  const [activeStatus, setActiveStatus] = useState<StatusSelection | null>(null)\n',
+        '',
+        'shared tooltip active status',
+      )
+      implementation = replaceDeclared(
+        implementation,
+        '  const triggerIdPrefix = useId()\n',
+        '',
+        'shared tooltip trigger id',
+      )
+      implementation = replaceDeclared(
+        implementation,
+        '  const pressedStatusRef = useRef<StatusSelection | null>(null)\n',
+        '',
+        'shared tooltip pressed status',
+      )
+      implementation = replaceDeclared(
+        implementation,
+        '  const visibleSlotsRef = useRef<number>(MIN_VISIBLE_SLOTS)\n',
+        '',
+        'responsive tooltip reset ref',
+      )
+      implementation = replaceDeclared(
+        implementation,
+        '  const activeStatusIndex = getVisibleSelectionIndex(activeStatus, paddedStatuses, visibleSlots)\n',
+        '',
+        'shared tooltip visible selection',
+      )
+      implementation = replaceDeclared(
+        implementation,
+        `    const updateVisibleSlots = () => {
+      const nextVisibleSlots = calculateNumDisplayableBars(container.getBoundingClientRect().width)
+      if (nextVisibleSlots === visibleSlotsRef.current) return
+
+      visibleSlotsRef.current = nextVisibleSlots
+      pressedStatusRef.current = null
+      setActiveStatus(null)
+      setVisibleSlots(nextVisibleSlots)
+    }`,
+        `    const updateVisibleSlots = () => {
+      setVisibleSlots(calculateNumDisplayableBars(container.getBoundingClientRect().width))
+    }`,
+        'responsive tooltip reset',
       )
       implementation = replaceDeclared(implementation, adaptedUptime, '', 'visible uptime')
       implementation = replaceDeclared(
@@ -403,53 +488,26 @@ test('the 8StarLabs status monitor has only the declared Astrale adaptation', as
         '{uptimePercentage}% uptime',
         'uptime label',
       )
-      implementation = replaceDeclared(
-        implementation,
-        'formatTimestamp(item.timestamp, unit)',
-        'formatTimestamp(item.timestamp)',
-        'timestamp unit',
+      const statusBarsStart = '        {/* Status Bars Container */}'
+      const statusBarsEnd = '        {/* Footer: Timeline Legend */}'
+      const adaptedStatusBars = implementation.slice(
+        implementation.indexOf(statusBarsStart),
+        implementation.indexOf(statusBarsEnd),
+      )
+      assert.equal(
+        digest(adaptedStatusBars),
+        'sha256:47dab63ee9a52836064219d67dba9e957b3dd5d01057599d275f73a93c72b553',
+        'shared tooltip architecture adaptation is not exact',
+      )
+      const upstreamStatusBars = source.slice(
+        source.indexOf(statusBarsStart),
+        source.indexOf(statusBarsEnd),
       )
       implementation = replaceDeclared(
         implementation,
-        '  const [pressedStatus, setPressedStatus] = useState<number | null>(null)\n',
-        '',
-        'press state',
-      )
-      implementation = replaceDeclared(
-        implementation,
-        `                <Tooltip
-                  key={index}
-                  disableHoverablePopup
-                  open={pressedStatus === index}
-                  onOpenChange={(open) => {
-                    setPressedStatus(open ? index : null)
-                  }}
-                >`,
-        '                <Tooltip key={index}>',
-        'press-controlled tooltip',
-      )
-      implementation = replaceDeclared(
-        implementation,
-        `                      <button
-                        type="button"`,
-        '                      <div',
-        'button trigger',
-      )
-      implementation = replaceDeclared(
-        implementation,
-        "'h-full w-[5px] border-0 p-0 transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'",
-        "'h-full w-[5px] transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2'",
-        'button reset',
-      )
-      implementation = replaceDeclared(
-        implementation,
-        `                        aria-label={\`${'${label}'}. ${'${item.info ?? config.defaultInfo}'}\`}
-                        onClick={() => {
-                          setPressedStatus((current) => (current === index ? null : index))
-                        }}`,
-        `                        tabIndex={0}
-                        aria-label={label}`,
-        'operable trigger semantics',
+        adaptedStatusBars,
+        upstreamStatusBars,
+        'shared tooltip architecture',
       )
       await mkdir(path.join(temporary, 'source'), { recursive: true })
       await mkdir(path.join(temporary, 'implementation'), { recursive: true })
