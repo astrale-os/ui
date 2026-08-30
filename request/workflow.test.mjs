@@ -206,6 +206,11 @@ function executeRestoredCandidate(script, { alreadyPresent }) {
     }
   } else {
     writeFileSync(tracked, 'base\n')
+    const refresh = spawnSync('git', ['update-index', '--refresh'], {
+      cwd: workspace,
+      encoding: 'utf8',
+    })
+    assert.equal(refresh.status, 0, refresh.stderr)
   }
   try {
     const result = spawnSync('/bin/bash', ['-c', script], {
@@ -990,7 +995,7 @@ test('pins the isolated Luna worker and preserves recoverable work across SLO br
   assert.equal(parsedCodexWorkflow.jobs.worker.with.worker, 'codex')
   assert.equal(parsedCodexWorkflow.jobs.worker.secrets, 'inherit')
   assert.match(codexConfiguration, /^model = "gpt-5\.6-luna"$/mu)
-  assert.match(codexConfiguration, /^model_reasoning_effort = "max"$/mu)
+  assert.match(codexConfiguration, /^model_reasoning_effort = "medium"$/mu)
   assert.match(codexConfiguration, /^wire_api = "responses"$/mu)
   assert.match(codexConfiguration, /^network_access = false$/mu)
   assert.match(
@@ -1000,13 +1005,25 @@ test('pins the isolated Luna worker and preserves recoverable work across SLO br
   const codexStep = parsedWorkerWorkflow.jobs.propose.steps.find(
     (step) => step.name === 'Implement the accepted request with Codex Luna',
   )
+  const codexDiscoveryStep = parsedWorkerWorkflow.jobs.propose.steps.find(
+    (step) => step.name === 'Discover immutable public source evidence with Codex Luna',
+  )
+  assert.match(codexDiscoveryStep.run, /model_reasoning_effort="low"/u)
   assert.equal(codexStep.env.AZURE_OPENAI_API_KEY, '${{ secrets.AZURE_API_KEY }}')
+  assert.equal(
+    codexStep.if,
+    "inputs.worker == 'codex' && steps.restore.outputs.candidate_resumed != 'true'",
+  )
   assert.equal('GITHUB_TOKEN' in codexStep.env, false)
   assert.match(codexStep.run, /--sandbox workspace-write/u)
   assert.match(codexStep.run, /--ephemeral/u)
   assert.doesNotMatch(codexStep.run, /dangerously|mcp|plugin/iu)
   const classificationStep = parsedWorkerWorkflow.jobs.propose.steps.find(
     (step) => step.name === 'Classify Codex implementation outcome',
+  )
+  assert.equal(
+    classificationStep.if,
+    "inputs.worker == 'codex' && steps.restore.outputs.candidate_resumed != 'true'",
   )
   assert.deepEqual(
     executeCodexClassification(classificationStep.run, { outcome: 'success', changed: true })
@@ -1040,12 +1057,15 @@ test('pins the isolated Luna worker and preserves recoverable work across SLO br
   assert.match(encodeCheckpoint.run, /cp "\$patch" "\$checkpoint\/candidate\.patch"/u)
   assert.match(encodeCheckpoint.run, /source-evidence\.tgz/u)
   assert.match(encodeCheckpoint.run, /candidate-checkpoint\.mjs create/u)
+  assert.match(encodeCheckpoint.run, /effort=medium/u)
   const restoreCheckpoint = parsedWorkerWorkflow.jobs.propose.steps.find(
     (step) => step.name === 'Restore the latest compatible cumulative checkpoint',
   )
   assert.match(restoreCheckpoint.run, /prior_objective/u)
   assert.match(restoreCheckpoint.run, /prior_escalation/u)
   assert.match(restoreCheckpoint.run, /git merge-base --is-ancestor/u)
+  assert.match(restoreCheckpoint.run, /candidate_resumed=true/u)
+  assert.match(restoreCheckpoint.run, /candidate_resumed=false/u)
   assert.doesNotMatch(restoreCheckpoint.run, /candidate-checkpoint\.mjs verify[^]*--base-sha/u)
   const applyRestoredCheckpoint = parsedWorkerWorkflow.jobs.propose.steps.find(
     (step) => step.name === 'Apply the restored candidate after base-controlled toolchain setup',
@@ -1093,6 +1113,8 @@ test('pins the isolated Luna worker and preserves recoverable work across SLO br
   const admission = parsedWorkerWorkflow.jobs.qualify.steps.find(
     (step) => step.name === 'Reject candidate changes to trusted control-plane programs',
   )
+  assert.match(admission.run, /git cat-file -e "\$INPUT_PROPOSAL_BASE_SHA\^\{commit\}"/u)
+  assert.match(admission.run, /git fetch --no-tags --depth=1 origin/u)
   assert.match(admission.run, /\.github\//u)
   assert.match(admission.run, /JSON\.stringify\(base\.scripts\)/u)
   const baseFallbackUpload = parsedWorkerWorkflow.jobs.qualify.steps.find(

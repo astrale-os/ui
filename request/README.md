@@ -37,8 +37,9 @@ revision replaces the PR's hosted playground, deterministic screenshots, deploym
 comment at the exact qualified commit.
 
 The default route dispatches the credential-separated `UI Request Codex Worker` with GPT-5.6 Luna
-at maximum effort. Azure Foundry credentials serve only the model transport and are filtered from
-its shell; implementation network access is disabled. Candidate code runs only in a separate
+at medium effort; source discovery uses low effort. Azure Foundry credentials serve only the model
+transport and are filtered from its shell; implementation network access is disabled. Candidate
+code runs only in a separate
 credential-free qualification job, and `UI_REQUEST_GITHUB_TOKEN` exists only in a fresh
 non-executing publisher job. One eligible failure may use Opus once. Authentication, permission,
 quota, rate-limit, and unknown outcomes never escalate.
