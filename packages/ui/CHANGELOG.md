@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0-beta.22](https://github.com/astrale-os/ui/compare/v0.3.0-beta.21...v0.3.0-beta.22) (2026-08-30)
+
+
+### Bug Fixes
+
+* **ui:** rebind dispatched qualification receipts ([#143](https://github.com/astrale-os/ui/issues/143)) ([0c5233a](https://github.com/astrale-os/ui/commit/0c5233a681a920d6c19666762e7e317f1a40899a))
+
 ## [0.3.0-beta.21](https://github.com/astrale-os/ui/compare/v0.3.0-beta.20...v0.3.0-beta.21) (2026-08-30)
 
 
