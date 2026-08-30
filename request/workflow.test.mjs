@@ -170,6 +170,65 @@ function executeCodexClassification(script, { outcome, changed = false, events =
   }
 }
 
+function executeRestoredCandidate(script, { alreadyPresent }) {
+  const directory = mkdtempSync(path.join(tmpdir(), 'ui-request-restored-candidate-'))
+  const workspace = path.join(directory, 'workspace')
+  const checkpoint = path.join(directory, 'ui-request-restored-checkpoint')
+  mkdirSync(workspace)
+  mkdirSync(checkpoint)
+  const tracked = path.join(workspace, 'candidate.txt')
+  writeFileSync(tracked, 'base\n')
+  for (const args of [
+    ['init', '-q'],
+    ['config', 'user.name', 'fixture'],
+    ['config', 'user.email', 'fixture@example.com'],
+    ['add', 'candidate.txt'],
+    ['commit', '-qm', 'base'],
+  ]) {
+    const result = spawnSync('git', args, { cwd: workspace, encoding: 'utf8' })
+    assert.equal(result.status, 0, result.stderr)
+  }
+  writeFileSync(tracked, 'candidate\n')
+  const patch = spawnSync(
+    'git',
+    ['diff', '--binary', '--full-index', '--no-ext-diff', '--no-textconv', '--'],
+    { cwd: workspace, encoding: 'utf8' },
+  )
+  assert.equal(patch.status, 0, patch.stderr)
+  writeFileSync(path.join(checkpoint, 'candidate.patch'), patch.stdout)
+  if (alreadyPresent) {
+    for (const args of [
+      ['add', 'candidate.txt'],
+      ['commit', '-qm', 'candidate'],
+    ]) {
+      const result = spawnSync('git', args, { cwd: workspace, encoding: 'utf8' })
+      assert.equal(result.status, 0, result.stderr)
+    }
+  } else {
+    writeFileSync(tracked, 'base\n')
+  }
+  try {
+    const result = spawnSync('/bin/bash', ['-c', script], {
+      cwd: workspace,
+      encoding: 'utf8',
+      env: { ...process.env, RUNNER_TEMP: directory },
+    })
+    const cached = spawnSync('git', ['diff', '--cached', '--'], {
+      cwd: workspace,
+      encoding: 'utf8',
+    })
+    assert.equal(cached.status, 0, cached.stderr)
+    return {
+      status: result.status,
+      stdout: result.stdout,
+      stderr: result.stderr,
+      cached: cached.stdout,
+    }
+  } finally {
+    rmSync(directory, { recursive: true, force: true })
+  }
+}
+
 function executeCleanupShell(script) {
   const directory = mkdtempSync(path.join(tmpdir(), 'ui-request-cleanup-'))
   const runner = path.join(directory, 'runner')
@@ -991,7 +1050,19 @@ test('pins the isolated Luna worker and preserves recoverable work across SLO br
   const applyRestoredCheckpoint = parsedWorkerWorkflow.jobs.propose.steps.find(
     (step) => step.name === 'Apply the restored candidate after base-controlled toolchain setup',
   )
+  assert.match(applyRestoredCheckpoint.run, /git apply --reverse --check --binary/u)
   assert.match(applyRestoredCheckpoint.run, /git apply --check --index --binary/u)
+  const initialRestore = executeRestoredCandidate(applyRestoredCheckpoint.run, {
+    alreadyPresent: false,
+  })
+  assert.equal(initialRestore.status, 0, initialRestore.stderr)
+  assert.match(initialRestore.cached, /\+candidate/u)
+  const revisionRestore = executeRestoredCandidate(applyRestoredCheckpoint.run, {
+    alreadyPresent: true,
+  })
+  assert.equal(revisionRestore.status, 0, revisionRestore.stderr)
+  assert.equal(revisionRestore.cached, '')
+  assert.match(revisionRestore.stdout, /already present on the admitted proposal branch/u)
   const failedCheckpointUpload = parsedWorkerWorkflow.jobs.qualify.steps.find(
     (step) => step.with?.path === '${{ runner.temp }}/ui-request-failed-checkpoint',
   )
