@@ -1,0 +1,36 @@
+{
+  "provider": "@wardian",
+  "upstreamAddress": "https://raw.githubusercontent.com/wardian-app/Wardian/0ae5b57a2229f7c98711d646b837be744748c6cc/src/features/automations/ScheduleEditor.tsx",
+  "documentation": "https://github.com/wardian-app/Wardian/tree/0ae5b57a2229f7c98711d646b837be744748c6cc/src/features/automations",
+  "repository": "https://github.com/wardian-app/Wardian",
+  "revision": "0ae5b57a2229f7c98711d646b837be744748c6cc",
+  "resolvedAt": "2026-08-30",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/wardian-app/Wardian/blob/0ae5b57a2229f7c98711d646b837be744748c6cc/LICENSE",
+  "licenseDigest": "sha256:760c53a7163e6c5baa60b2a90e45f4dc991edc7cf5005509aa7eca580fdc2743",
+  "owner": "block/scheduling/schedule-editor",
+  "adaptation": "astrale-revision",
+  "adaptationNotes": [
+    "Declare the upstream ScheduleDefinition contract inside the owned module because the provider-local automation type module is outside the accepted source set, and route the supporting timezone import to the owned relative module.",
+    "Map the provider-local wardian palette variables and utilities onto the equivalent Astrale semantic tokens one for one: input background to muted, text to foreground, accent to primary, accent-on-surface to primary-foreground, error to destructive, border to border, and muted-neutral to muted-foreground.",
+    "Expose the host boundary as the upstream controlled value with an injected onChange action, an optional IANA zones list, and an optional locale, and keep the upstream compact property.",
+    "Compose the supporting MIT ascentspark recurrence and timezone behavior: the two-way host value resync, the parse fallback that retains the last valid recurrence, the polite rule preview region, the Days of week group, the Ends radiogroup, the weekday pressed state, and the IANA timezone select.",
+    "Bind every upstream label to its control through generated identifiers so each cadence, interval, weekday, month-day, time, timezone, and end-condition control is named for keyboard and assistive technology.",
+    "Allow the upstream interval, weekday, and end-condition rows to wrap so no control is clipped at 390px.",
+    "Apply repository formatting without changing layout, classes, CSS, DOM anatomy, copy, states, or interactions."
+  ],
+  "sourceDigest": "sha256:f43fd6519a2010aab42ce0ea9c8fe211296a51d25caa148836358b0bd0baaed5",
+  "files": {
+    "ScheduleEditor.tsx": {
+      "url": "https://raw.githubusercontent.com/wardian-app/Wardian/0ae5b57a2229f7c98711d646b837be744748c6cc/src/features/automations/ScheduleEditor.tsx",
+      "source": "tooling/upstream/providers/wardian/0ae5b57a2229f7c98711d646b837be744748c6cc/schedule-editor/ScheduleEditor.tsx",
+      "implementation": "registry/blocks/scheduling/schedule-editor/schedule-editor.tsx",
+      "sourceDigest": "sha256:f43fd6519a2010aab42ce0ea9c8fe211296a51d25caa148836358b0bd0baaed5"
+    },
+    "LICENSE": {
+      "url": "https://raw.githubusercontent.com/wardian-app/Wardian/0ae5b57a2229f7c98711d646b837be744748c6cc/LICENSE",
+      "source": "tooling/upstream/providers/wardian/0ae5b57a2229f7c98711d646b837be744748c6cc/schedule-editor/LICENSE",
+      "sourceDigest": "sha256:760c53a7163e6c5baa60b2a90e45f4dc991edc7cf5005509aa7eca580fdc2743"
+    }
+  }
+}

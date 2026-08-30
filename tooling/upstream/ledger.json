@@ -39,6 +39,46 @@
       }
     },
     {
+      "provider": "@ascentspark",
+      "address": "https://raw.githubusercontent.com/ascentspark/react-calendar/39041349e5ab0ac54202ffd17193b6860696a8b1/packages/react-calendar/src/components/recurrence-editor/recurrence-editor.tsx",
+      "documentation": "https://github.com/ascentspark/react-calendar/tree/39041349e5ab0ac54202ffd17193b6860696a8b1/packages/react-calendar/src/components",
+      "repository": "https://github.com/ascentspark/react-calendar",
+      "revision": "39041349e5ab0ac54202ffd17193b6860696a8b1",
+      "sourceDigest": "sha256:93b07e892b37d17fa552e3ef70c627ddc8d112b9010dd76ebd71b54110fc78b7",
+      "license": "MIT",
+      "consideredAt": "2026-08-30",
+      "purpose": "IANA timezone selection, recurrence validation, host-controlled values, and keyboard semantics for a recurrence editor.",
+      "decision": {
+        "status": "admitted",
+        "classification": "block",
+        "owner": "block/scheduling/schedule-editor",
+        "rationale": "Retained as the supporting authority for the exact timezone, recurrence validation, and keyboard behavior that the primary Wardian schedule surface does not own."
+      },
+      "duplicateReview": [
+        {
+          "address": "block/scheduling/schedule-editor",
+          "relationship": "overlapping",
+          "rationale": "The primary product surface is the MIT Wardian schedule editor. This MIT source contributes only the timezone picker, the retained last valid recurrence, and the group and radiogroup semantics inside that surface."
+        },
+        {
+          "address": "pattern/date-picker/single",
+          "relationship": "distinct",
+          "rationale": "The date picker selects one calendar date. This source contributes recurrence and time zone semantics for a repeating schedule."
+        }
+      ],
+      "proof": "tooling/upstream/providers/ascentspark/39041349e5ab0ac54202ffd17193b6860696a8b1/schedule-editor/provenance.json",
+      "adaptation": {
+        "mode": "astrale-revision",
+        "changes": [
+          "Adopt the timezone picker verbatim as an owned module with its cal-timezone-picker anatomy, cal-tzp classes, hoisted component-scoped style element, default IANA zone list, host zones and locale inputs, GMT offset option labels, and Time zone accessible name.",
+          "Map the picker's cal-* style variables onto the equivalent Astrale semantic tokens one for one and keep every declared fallback.",
+          "Accept an optional identifier on the picker select so the primary surface can bind it to its own label.",
+          "Adopt from the recurrence editor the two-way value resync against the host prop, the parse fallback that retains the last valid recurrence, the cal-rec__preview polite region with its no recurrence text, the Days of week group, the aria-pressed weekday buttons, and the Ends radiogroup.",
+          "Do not vendor the RRULE adapter: the primary Wardian surface owns the schedule value, so the adopted behavior operates on that value rather than on a serialized rule string."
+        ]
+      }
+    },
+    {
       "provider": "@chadcn",
       "address": "https://raw.githubusercontent.com/durgeshityaar/chadcn-ui/9f92a7134a2df98b249f455104137780ebf958a0/apps/web/content/blocks/cloud/env-variables/feature-rich.tsx",
       "documentation": "https://github.com/durgeshityaar/chadcn-ui/tree/9f92a7134a2df98b249f455104137780ebf958a0/apps/web/content/blocks/cloud/env-variables",
@@ -159,6 +199,48 @@
           "Adopt the tab separated timestamp, level, service, and message copy text.",
           "Adopt the stream error banner classes and the Stream error: prefix.",
           "Invert the upstream scroll target because the primary surface renders newest entries first."
+        ]
+      }
+    },
+    {
+      "provider": "@wardian",
+      "address": "https://raw.githubusercontent.com/wardian-app/Wardian/0ae5b57a2229f7c98711d646b837be744748c6cc/src/features/automations/ScheduleEditor.tsx",
+      "documentation": "https://github.com/wardian-app/Wardian/tree/0ae5b57a2229f7c98711d646b837be744748c6cc/src/features/automations",
+      "repository": "https://github.com/wardian-app/Wardian",
+      "revision": "0ae5b57a2229f7c98711d646b837be744748c6cc",
+      "sourceDigest": "sha256:f43fd6519a2010aab42ce0ea9c8fe211296a51d25caa148836358b0bd0baaed5",
+      "license": "MIT",
+      "consideredAt": "2026-08-30",
+      "purpose": "Recurrence and schedule builder with cadence selection, interval, weekday, month-day, and one-time controls, local time, and end conditions.",
+      "decision": {
+        "status": "admitted",
+        "classification": "block",
+        "owner": "block/scheduling/schedule-editor",
+        "rationale": "Retained as the primary product surface: it owns the cadence list, the cadence-specific controls, the end conditions, the layout, the classes, and the copy the request describes."
+      },
+      "duplicateReview": [
+        {
+          "address": "pattern/date-picker/range",
+          "relationship": "distinct",
+          "rationale": "The date picker patterns select calendar dates. This source builds a repeating schedule definition."
+        },
+        {
+          "address": "pattern/form/wizard-controlled",
+          "relationship": "distinct",
+          "rationale": "The wizard pattern owns multi-step form navigation, not cadence-specific schedule controls."
+        }
+      ],
+      "proof": "tooling/upstream/providers/wardian/0ae5b57a2229f7c98711d646b837be744748c6cc/schedule-editor/provenance.json",
+      "adaptation": {
+        "mode": "astrale-revision",
+        "changes": [
+          "Declare the schedule definition and the host props as exported types because the upstream file imported them from an application-owned module.",
+          "Map the upstream Wardian palette classes onto the equivalent Astrale semantic tokens one for one and keep every layout, spacing, size, and copy class.",
+          "Keep the value and change callback as the host boundary and add optional zones and locale inputs for the composed timezone control.",
+          "Compose the supporting MIT recurrence behavior: retained last valid value, validation exposure, group and radiogroup naming, and the polite summary region.",
+          "Compose the supporting timezone picker as an owned row of the surface and pass it a stable identifier from the surface's field scope.",
+          "Allow the interval, weekday, and end-condition rows to wrap so the complete editor stays reachable at 390 px.",
+          "Apply repository formatting."
         ]
       }
     }
