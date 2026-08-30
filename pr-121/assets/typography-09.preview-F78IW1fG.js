@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-Cx0BB4qO.js";var t=e(),n=()=>(0,t.jsx)(`code`,{className:`bg-muted rounded-md px-1 py-0.5 font-mono text-sm font-semibold`,children:`@radix-ui/react-tooltip`}),r={source:`@astrale-os/ui`};export{n as default,r as preview};

@@ -1,1 +1,0 @@
-var e=Array.from({length:21},(e,t)=>({iso:`2026-09-${String(t+1).padStart(2,`0`)}`,label:String(t+1)}));export{e as t};

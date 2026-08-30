@@ -1,1 +1,0 @@
-function e(){return typeof navigator>`u`?{userAgent:``,platform:``,maxTouchPoints:0}:{userAgent:navigator.userAgent,platform:navigator.platform??``,maxTouchPoints:navigator.maxTouchPoints??0}}var{userAgent:t,platform:n,maxTouchPoints:r}=e(),i=t.toLowerCase(),a=n.toLowerCase();export{i as n,r,a as t};

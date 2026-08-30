@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{ct as t}from"./index--bzeSA28.js";import{t as n}from"./elements-DwnfQcqn.js";var r=e(),i=()=>(0,r.jsx)(t,{render:(0,r.jsx)(n,{whileTap:{scale:.85}}),className:`transition-none active:translate-y-0`,nativeButton:!0,children:`Tap Animation`}),a={source:`@astrale-os/ui`};export{i as default,a as preview};

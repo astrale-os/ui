@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{t}from"./separator-BGndCmNm.js";var n=e(),r={source:`@shadcn/separator`};function i(){return(0,n.jsxs)(`div`,{className:`stack`,children:[(0,n.jsx)(`span`,{children:`Current generation`}),(0,n.jsx)(t,{}),(0,n.jsx)(`span`,{children:`Previous generation`})]})}export{i as default,r as preview};

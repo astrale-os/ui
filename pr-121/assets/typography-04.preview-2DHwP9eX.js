@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-Cx0BB4qO.js";var t=e(),n=()=>(0,t.jsx)(`h4`,{className:`text-xl font-semibold`,children:`h4 - Quiet Streets, Brighter Mornings`}),r={source:`@astrale-os/ui`};export{n as default,r as preview};

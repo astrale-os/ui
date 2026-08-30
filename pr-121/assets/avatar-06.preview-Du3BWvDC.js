@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{t}from"./house-zQdheDFY.js";import{r as n,t as r}from"./avatar-DVHeWCYD.js";var i=e(),a=()=>(0,i.jsx)(r,{className:`after:border-indigo-500/10`,children:(0,i.jsx)(n,{className:`bg-indigo-500/10 text-indigo-500`,children:(0,i.jsx)(t,{className:`size-4`})})}),o={source:`@astrale-os/ui`};export{a as default,o as preview};

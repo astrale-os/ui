@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{t}from"./input-DrAWUPcm.js";var n=e(),r=()=>(0,n.jsx)(t,{type:`email`,placeholder:`Email address`,className:`max-w-xs`}),i={source:`@astrale-os/ui`};export{r as default,i as preview};

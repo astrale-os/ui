@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-Cx0BB4qO.js";var t=e(),n=()=>(0,t.jsx)(`h3`,{className:`text-2xl font-semibold max-sm:w-full`,children:`h3 - A Small Revolt`}),r={source:`@astrale-os/ui`};export{n as default,r as preview};

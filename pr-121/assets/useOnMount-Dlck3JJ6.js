@@ -1,1 +1,0 @@
-import{i as e}from"./jsx-runtime-Cx0BB4qO.js";import{t}from"./react-3BKWdGy3.js";import{r as n}from"./useRenderElement-DA5B_qKT.js";var r=e(t(),1);function i(e){r.useEffect(e,n)}export{i as t};
