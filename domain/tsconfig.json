@@ -26,8 +26,6 @@
       "#schema/*": ["./schema/*/index.ts"],
       "#scripts": ["./scripts/index.ts"],
       "#scripts/*": ["./scripts/*/index.ts"],
-      "#states": ["./states/index.ts"],
-      "#states/*": ["./states/*/index.ts"],
       "#tests": ["./tests/index.ts"],
       "#tests/*": ["./tests/*/index.ts"],
       "#ui": ["./ui/index.ts"],
@@ -49,7 +47,6 @@
   },
   "include": [
     "schema",
-    "states",
     "rules",
     "queries",
     "routes",

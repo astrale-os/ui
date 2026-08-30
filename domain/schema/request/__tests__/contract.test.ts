@@ -70,7 +70,7 @@ describe('Request contract', () => {
       target: {
         role: 'request',
         accepts: [{ origin: 'ui.astrale.ai', kind: 'class', name: 'Request' }],
-        incoming: '1',
+        incoming: '0..1',
       },
     })
     expect(ownership.policies.traverse).toEqual([

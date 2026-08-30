@@ -29,7 +29,7 @@ one authenticated `request` Function contract.
 
 The Domain retains only durable control-plane facts:
 
-- the caller's exact Astrale Identity, as both the ownership edge and the indexed owner coordinate;
+- the caller's exact Astrale Identity as the indexed owner coordinate;
 - the request intent supplied to the Function;
 - a caller-provided idempotency key;
 - the submission lifecycle; and
@@ -62,8 +62,8 @@ request({ intent, idempotencyKey })
 
 `request` requires an authenticated Astrale caller. The caller never supplies a GitHub token. The
 Request Submission Integration uses Domain-owned credentials and must reconcile an uncertain external
-submission before retrying. The exact Identity owns every `Request`, and no other caller may read
-or traverse it.
+submission before retrying. The callable is the receipt boundary: Requests remain Domain-private
+unless an explicit observation grant is materialized, and no such grant is created by V1.
 
 `conflict` is a Function result, not a persisted submission state. It means the same owner already
 used the supplied idempotency key for another intent; no graph or provider effect occurs.
@@ -82,8 +82,8 @@ accepted, implemented, or released. Those facts remain at their source.
 
 The Runtime proves these persistence laws atomically:
 
-1. every Request has exactly one `request_owned_by` Identity edge whose source equals its
-   `ownerId` coordinate;
+1. every Request retains the exact caller Identity in its required `ownerId` coordinate, and every
+   state mutation atomically matches that same coordinate;
 2. one Identity and idempotency key resolve to at most one Request within the ratified retention
    scope;
 3. a `submitted` Request has exactly one valid `collaborationUrl`, and other states do not claim a
@@ -94,7 +94,7 @@ The implementation crosses the external effect boundary in this order:
 
 ```text
 read caller-owned key
-  -> create Request + owner edge atomically when absent
+  -> create one Domain-private Request atomically when absent
   -> reserve outcome-unknown before GitHub can observe a write
   -> submit one issue
   -> atomically confirm collaborationUrl or record an explicit provider rejection
@@ -134,8 +134,8 @@ version `2026-03-10` with bounded response reads and bounded reconciliation pagi
 marker is never sufficient reconciliation evidence without that exact actor.
 
 The Application explicitly requires Kernel Query and Mutation. The Workflow reads its internal
-idempotency ledger with Domain-self authority and scopes the lookup by `ownerId`; caller-facing
-visibility remains governed by the ownership edge. Confirmation uses one machine-derived transition
+idempotency ledger with Domain-self authority and scopes the lookup and every state transition by
+`ownerId`; V1 creates no caller-facing observation grant. Confirmation uses one machine-derived transition
 whose auxiliary collaboration URL is committed in the same Node update.
 
 The GitHub issue is the handoff to the existing repository automation. Agent execution and PR
