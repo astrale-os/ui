@@ -546,6 +546,7 @@ test('moves inert candidate evidence across isolated propose, qualify, and publi
   assert.deepEqual(publish.needs, ['propose', 'qualify'])
   assert.equal(checkouts[1].with.ref, '${{ needs.propose.outputs.baseline_sha }}')
   assert.equal(checkouts[2].with.ref, checkouts[1].with.ref)
+  assert.equal(propose.outputs.proposal_base_sha, '${{ steps.prepare.outputs.proposal_base_sha }}')
   assert.notEqual(agentIndex, -1)
   assert.notEqual(discoveryIndex, -1)
   assert.notEqual(fetchIndex, -1)
@@ -601,10 +602,15 @@ test('moves inert candidate evidence across isolated propose, qualify, and publi
   assert.equal(previewUpload.with['retention-days'], 14)
   assert.equal(previewDownload.with.path, '${{ runner.temp }}/ui-request-preview')
   assert.match(qualify.steps[previewBuildIndex].run, /capture-request-previews\.mjs/u)
+  assert.equal(
+    qualify.steps[previewBuildIndex].env.INPUT_PROPOSAL_BASE_SHA,
+    '${{ needs.propose.outputs.proposal_base_sha }}',
+  )
   assert.match(
     qualify.steps[previewBuildIndex].run,
     /\$RUNNER_TEMP\/ui-request-base\/request\/preview-plan\.mjs/u,
   )
+  assert.match(qualify.steps[previewBuildIndex].run, /--base "\$INPUT_PROPOSAL_BASE_SHA"/u)
   assert.match(qualify.steps[previewBuildIndex].run, /ASTRALE_PLAYGROUND_RELATIVE_BASE=1/u)
   assert.equal(
     publish.steps[preservePublisherIndex].run,
@@ -770,6 +776,7 @@ else
   git checkout -B "$INPUT_BRANCH" "refs/remotes/origin/$INPUT_BASE_REF"
 fi
 echo "baseline_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+echo "proposal_base_sha=$(git merge-base HEAD refs/remotes/origin/$INPUT_BASE_REF)" >> "$GITHUB_OUTPUT"
 `,
   )
   const workerSecrets = secretReferences(parsedWorkerWorkflow).filter(({ value }) =>

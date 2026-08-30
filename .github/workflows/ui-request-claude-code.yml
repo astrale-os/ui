@@ -45,6 +45,7 @@ jobs:
     environment: ui-request-agent
     outputs:
       baseline_sha: ${{ steps.prepare.outputs.baseline_sha }}
+      proposal_base_sha: ${{ steps.prepare.outputs.proposal_base_sha }}
     env:
       NODE_VERSION: '24'
     steps:
@@ -73,6 +74,7 @@ jobs:
             git checkout -B "$INPUT_BRANCH" "refs/remotes/origin/$INPUT_BASE_REF"
           fi
           echo "baseline_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          echo "proposal_base_sha=$(git merge-base HEAD refs/remotes/origin/$INPUT_BASE_REF)" >> "$GITHUB_OUTPUT"
       - uses: astrale-os/config/.github/actions/setup@8e2e2abd0320be0c2f64033916519ab3b66c7dd7
         with:
           node-version: 24
@@ -195,12 +197,15 @@ jobs:
         run: pnpm check && pnpm test:registry-behavior
       - name: Build changed preview evidence without publication authority
         env:
-          INPUT_BASELINE_SHA: ${{ needs.propose.outputs.baseline_sha }}
+          INPUT_PROPOSAL_BASE_SHA: ${{ needs.propose.outputs.proposal_base_sha }}
         run: |
           set -euo pipefail
           evidence="$RUNNER_TEMP/ui-request-preview"
+          if ! git cat-file -e "$INPUT_PROPOSAL_BASE_SHA^{commit}" 2>/dev/null; then
+            git fetch --no-tags --depth=1 origin "$INPUT_PROPOSAL_BASE_SHA"
+          fi
           node "$RUNNER_TEMP/ui-request-base/request/preview-plan.mjs" \
-            --base "$INPUT_BASELINE_SHA" \
+            --base "$INPUT_PROPOSAL_BASE_SHA" \
             --output "$evidence/manifest.json"
           ASTRALE_PLAYGROUND_RELATIVE_BASE=1 pnpm playground:build
           pnpm --filter @astrale-os/ui-playground exec playwright install --with-deps chromium
