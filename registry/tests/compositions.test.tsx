@@ -4,7 +4,8 @@ import { afterEach, describe, expect, test, vi } from 'vitest'
 
 import { SignInCard } from '../blocks/authentication/sign-in-card.js'
 import StatusMonitor from '../blocks/observability/status-monitor.js'
-import { EnvVariables } from '../blocks/secrets/env-variables.js'
+import { type EnvVar, EnvVariables } from '../blocks/secrets/env-variables.js'
+import { secretManagerRejectedActions } from '../blocks/secrets/secrets.fixture.js'
 import {
   StatusHeatmap,
   StatusHeatmapBlock,
@@ -454,5 +455,59 @@ describe('owned registry compositions', () => {
     expect(screen.getByRole('status')).not.toHaveTextContent('campaign-secret')
     expect(screen.queryByLabelText('Value of CAMPAIGN_TOKEN')).not.toBeInTheDocument()
     expect(screen.getByText('No variables found.')).toBeVisible()
+  })
+
+  test('environment variable type badges keep their visible labels', () => {
+    render(<EnvVariables />)
+
+    for (const label of ['URL', 'Secret', 'Bool', 'Num', 'Str']) {
+      expect(screen.getAllByText(label).length).toBeGreaterThan(0)
+    }
+  })
+
+  test('the secret manager error fixture refuses every action without echoing a value', async () => {
+    const variable: EnvVar = {
+      id: 1,
+      key: 'CAMPAIGN_TOKEN',
+      value: 'campaign-secret',
+      environments: ['production'],
+      type: 'secret',
+      group: 'general',
+      encrypted: true,
+      lastModifiedBy: 'You',
+      lastModifiedAt: 'just now',
+      linked: false,
+    }
+
+    for (const action of [
+      secretManagerRejectedActions.onCreateVariable,
+      secretManagerRejectedActions.onUpdateVariable,
+      secretManagerRejectedActions.onDeleteVariable,
+      secretManagerRejectedActions.onCopyValue,
+    ]) {
+      const failure = await action(variable).then(
+        () => null,
+        (error: unknown) => error,
+      )
+      expect(failure).toBeInstanceOf(Error)
+      expect(String(failure)).not.toContain('campaign-secret')
+    }
+  })
+
+  test('environment variables surface the rejected fixture through the live status region', async () => {
+    const user = userEvent.setup()
+    render(<EnvVariables defaultVariables={[]} {...secretManagerRejectedActions} />)
+
+    await user.click(screen.getByRole('button', { name: 'Add Variable' }))
+    await user.type(screen.getByLabelText('Key'), 'CAMPAIGN_TOKEN')
+    await user.type(screen.getByLabelText('Value'), 'campaign-secret')
+    await user.click(screen.getByRole('button', { name: 'Save' }))
+
+    expect(screen.getByRole('status')).toHaveTextContent('Adding variable…')
+    await waitFor(() => {
+      expect(screen.getByRole('status')).toHaveTextContent('Could not add the variable.')
+    })
+    expect(screen.getByRole('status')).not.toHaveTextContent('campaign-secret')
+    expect(screen.queryByLabelText('Value of CAMPAIGN_TOKEN')).not.toBeInTheDocument()
   })
 })

@@ -15,6 +15,11 @@ async function writeToClipboard(value: string) {
   }
 }
 
+const refuse = async () => {
+  await acknowledge()
+  throw new Error('The secret store refused this request.')
+}
+
 export const secretManagerActions = {
   async onCreateVariable(_variable: EnvVar) {
     await acknowledge()
@@ -28,5 +33,20 @@ export const secretManagerActions = {
   async onCopyValue(variable: EnvVar) {
     await acknowledge()
     await writeToClipboard(variable.value)
+  },
+}
+
+export const secretManagerRejectedActions = {
+  async onCreateVariable(_variable: EnvVar) {
+    await refuse()
+  },
+  async onUpdateVariable(_variable: EnvVar) {
+    await refuse()
+  },
+  async onDeleteVariable(_variable: EnvVar) {
+    await refuse()
+  },
+  async onCopyValue(_variable: EnvVar) {
+    await refuse()
   },
 }

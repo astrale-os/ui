@@ -80,6 +80,7 @@
           "Report pending, success, and error outcomes in one polite live region that never contains a secret value.",
           "Name the group filter, search field, masked value inputs, reveal controls, row action triggers, and form fields.",
           "Scope the upstream fixed row, toolbar, and filter geometry to the sm breakpoint and allow wrapping so no control is clipped at 390px.",
+          "Map the upstream hard-coded type chip palette onto the existing Astrale Badge variants so the visible URL, Secret, Bool, Num, and Str labels keep their token contrast.",
           "Apply repository formatting without changing layout, classes, CSS, DOM anatomy, copy, states, or interactions."
         ]
       }

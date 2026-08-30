@@ -532,6 +532,47 @@ const declaredEnvVariableEdits = [
   ],
   ['exported record type', ['export interface EnvVar {'], ['interface EnvVar {']],
   [
+    'type badge token mapping',
+    [
+      "type TypeBadgeVariant = 'default' | 'secondary' | 'destructive' | 'outline' | 'ghost'",
+      '',
+      'const typeConfig: Record<VarType, { label: string; variant: TypeBadgeVariant }> = {',
+      "  url: { label: 'URL', variant: 'outline' },",
+      "  secret: { label: 'Secret', variant: 'destructive' },",
+      "  boolean: { label: 'Bool', variant: 'secondary' },",
+      "  number: { label: 'Num', variant: 'default' },",
+      "  string: { label: 'Str', variant: 'ghost' },",
+      '}',
+    ],
+    [
+      'const typeConfig: Record<VarType, { label: string; color: string }> = {',
+      "  url: { label: 'URL', color: 'text-blue-600 bg-blue-50 dark:text-blue-400 dark:bg-blue-950' },",
+      "  secret: { label: 'Secret', color: 'text-red-600 bg-red-50 dark:text-red-400 dark:bg-red-950' },",
+      "  boolean: { label: 'Bool', color: 'text-amber-600 bg-amber-50 dark:text-amber-400 dark:bg-amber-950' },",
+      "  number: { label: 'Num', color: 'text-emerald-600 bg-emerald-50 dark:text-emerald-400 dark:bg-emerald-950' },",
+      "  string: { label: 'Str', color: 'text-purple-600 bg-purple-50 dark:text-purple-400 dark:bg-purple-950' },",
+      '}',
+    ],
+  ],
+  [
+    'type badge token rendering',
+    [
+      '                                    <Badge',
+      '                                      variant={typeConfig[envVar.type].variant}',
+      '                                      className="text-[10px]"',
+      '                                    >',
+      '                                      {typeConfig[envVar.type].label}',
+      '                                    </Badge>',
+    ],
+    [
+      '                                    <span',
+      '                                      className={`inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-medium ${typeConfig[envVar.type].color}`}',
+      '                                    >',
+      '                                      {typeConfig[envVar.type].label}',
+      '                                    </span>',
+    ],
+  ],
+  [
     'host data and action boundary',
     [
       'export interface EnvVariablesProps {',

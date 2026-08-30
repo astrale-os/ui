@@ -958,6 +958,59 @@ test('environment variables add, update, copy, and delete through host actions',
   await expect(preview.getByLabel('Value of CAMPAIGN_TOKEN')).toHaveCount(0)
 })
 
+test('environment variables rejected-actions scene reports failures without leaking a value', async ({
+  page,
+}) => {
+  await page.goto('/?family=block%2Fsecrets')
+  const preview = await loadPreview(page, 'block/secrets/env-variables', 'rejected-actions')
+  const status = preview.locator('p[role="status"]')
+
+  await preview.getByRole('button', { name: 'Actions for DATABASE_URL' }).click()
+  await page.getByRole('menuitem', { name: 'Copy Value' }).click()
+  await expect(status).toHaveText('Could not copy the value of DATABASE_URL.')
+  await expect(status).not.toContainText('postgresql://')
+
+  await preview.getByRole('button', { name: 'Actions for DATABASE_URL' }).click()
+  await page.getByRole('menuitem', { name: 'Delete' }).click()
+  const confirmation = page.getByRole('alertdialog')
+  await expect(confirmation).not.toContainText('postgresql://')
+  await confirmation.getByRole('button', { name: 'Delete' }).click()
+  await expect(status).toHaveText('Could not delete DATABASE_URL.')
+  await expect(preview.getByLabel('Value of DATABASE_URL')).toHaveCount(1)
+
+  await preview.getByRole('button', { name: 'Add Variable' }).click()
+  await preview.getByLabel('Key', { exact: true }).fill('CAMPAIGN_TOKEN')
+  await preview.getByLabel('Value', { exact: true }).fill('campaign-secret')
+  await preview.getByRole('button', { name: 'Save', exact: true }).click()
+  await expect(status).toHaveText('Could not add the variable.')
+  await expect(status).not.toContainText('campaign-secret')
+  await expect(preview.getByLabel('Value of CAMPAIGN_TOKEN')).toHaveCount(0)
+
+  const canonical = await loadPreview(page, 'block/secrets/env-variables')
+  await canonical.getByRole('button', { name: 'Actions for DATABASE_URL' }).click()
+  await page.getByRole('menuitem', { name: 'Copy Value' }).click()
+  await expect(canonical.locator('p[role="status"]')).toHaveText(
+    'Copied the value of DATABASE_URL to the clipboard.',
+  )
+})
+
+test('environment variable type badges keep token contrast and visible labels', async ({
+  page,
+}) => {
+  await page.goto('/?family=block%2Fsecrets')
+  const preview = await loadPreview(page, 'block/secrets/env-variables')
+
+  for (const label of ['URL', 'Secret', 'Bool', 'Num', 'Str']) {
+    await expect(preview.getByText(label, { exact: true }).first()).toBeVisible()
+  }
+
+  const contrast = await new AxeBuilder({ page })
+    .include('[data-preview-address="block/secrets/env-variables"][data-preview-scene="default"]')
+    .withRules(['color-contrast'])
+    .analyze()
+  expect(contrast.violations).toEqual([])
+})
+
 test('catalog specimens own their interaction without navigating the playground', async ({
   page,
 }) => {
