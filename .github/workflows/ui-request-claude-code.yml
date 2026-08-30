@@ -183,7 +183,7 @@ jobs:
             sudo apparmor_parser -r /etc/apparmor.d/bwrap-userns-restrict
           fi
           test "$(command -v bwrap)" = /usr/bin/bwrap
-          pnpm exec codex sandbox linux -- /bin/true
+          pnpm exec codex sandbox -- /bin/true
       - name: Preserve the base-controlled qualification planner
         run: cp scripts/plan-ci.mjs "$RUNNER_TEMP/ui-request-plan-ci.mjs"
       - name: Apply the restored candidate after base-controlled toolchain setup
@@ -212,7 +212,6 @@ jobs:
             --permission-mode dontAsk \
             --allowedTools Read,Glob,Grep,WebSearch \
             --no-session-persistence \
-            --max-budget-usd 5 \
             --json-schema "$schema" \
             --output-format json \
             --print > "$RUNNER_TEMP/ui-request-source-manifest.json"
@@ -264,7 +263,6 @@ jobs:
             --allowedTools Read,Edit,Write,Glob,Grep \
             --add-dir "$SOURCE_EVIDENCE_ROOT" \
             --no-session-persistence \
-            --max-budget-usd 20 \
             --print
       - name: Implement the accepted request with Codex Luna
         if: inputs.worker == 'codex'
@@ -331,7 +329,6 @@ jobs:
             --allowedTools Read,Edit,Write,Glob,Grep \
             --add-dir "$SOURCE_EVIDENCE_ROOT" \
             --no-session-persistence \
-            --max-budget-usd 20 \
             --print
       - name: Verify immutable source evidence without credentials
         if: always()
@@ -540,7 +537,6 @@ jobs:
             --allowedTools Read,Edit,Write,Glob,Grep \
             --add-dir "$source_root" \
             --no-session-persistence \
-            --max-budget-usd 20 \
             --print
       - name: Requalify the escalated candidate
         if: inputs.worker == 'codex' && needs.propose.outputs.escalated != 'true' && steps.primary_qualification.outcome == 'failure'
