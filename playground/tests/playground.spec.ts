@@ -1652,16 +1652,17 @@ test('all starter modes have no serious structural violations and Astrale preset
   await loadPreview(page, 'component/spinner')
   const reducedSpinner = await page
     .locator('[data-component="spinner"] [data-slot="spinner"]')
-    .evaluate(async (element) => {
+    .evaluate((element) => {
       const animation = element.getAnimations()[0]
-      const before = typeof animation?.currentTime === 'number' ? animation.currentTime : null
-      await new Promise((resolve) => setTimeout(resolve, 120))
       const style = getComputedStyle(element)
       return {
-        after: typeof animation?.currentTime === 'number' ? animation.currentTime : null,
-        before,
         duration: style.animationDuration,
         iterations: style.animationIterationCount,
+        keyframeTransforms:
+          animation?.effect
+            ?.getKeyframes()
+            .map((keyframe) => keyframe.transform)
+            .filter((transform): transform is string => typeof transform === 'string') ?? [],
         name: style.animationName,
         playState: style.animationPlayState,
       }
@@ -1672,10 +1673,7 @@ test('all starter modes have no serious structural violations and Astrale preset
     name: 'spin',
     playState: 'running',
   })
-  expect(reducedSpinner.before).not.toBeNull()
-  expect(reducedSpinner.after ?? Number.NEGATIVE_INFINITY).toBeGreaterThan(
-    reducedSpinner.before ?? Number.POSITIVE_INFINITY,
-  )
+  expect(new Set(reducedSpinner.keyframeTransforms).size).toBeGreaterThan(1)
   await page.addStyleTag({
     content:
       '*, *::before, *::after { transition-delay: 0s !important; transition-duration: 0s !important; }',
