@@ -886,7 +886,7 @@ test('recovers untrusted association metadata through exact collaborator permiss
   })
 })
 
-test('enforces accepted maintainer comment count and UTF-8 body bounds', async () => {
+test('enforces accepted maintainer comment count, body, and aggregate UTF-8 bounds', async () => {
   const exactCount = await githubStoreForComments(
     Array.from({ length: 50 }, (_, index) => githubComment(index + 1, 'x')),
   ).getRequest(123)
@@ -903,7 +903,18 @@ test('enforces accepted maintainer comment count and UTF-8 body bounds', async (
   assert.equal(exactBytes.issue.comments[0].body, exactUtf8Body)
   await assert.rejects(
     githubStoreForComments([githubComment(1, `${exactUtf8Body}x`)]).getRequest(123),
-    /comments exceed the admitted size/u,
+    /comment exceeds the admitted size/u,
+  )
+
+  const exactDiscussion = await githubStoreForComments(
+    Array.from({ length: 4 }, (_, index) => githubComment(index + 1, exactUtf8Body)),
+  ).getRequest(123)
+  assert.equal(exactDiscussion.issue.comments.length, 4)
+  await assert.rejects(
+    githubStoreForComments(
+      Array.from({ length: 5 }, (_, index) => githubComment(index + 1, 'x'.repeat(7 * 1024))),
+    ).getRequest(123),
+    /discussion exceeds the admitted size/u,
   )
 })
 
