@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{t}from"./bookmark-D8m7fs_9.js";import{t as n}from"./toggle-BlrxZPgx.js";var r=e(),i=()=>(0,r.jsxs)(n,{"aria-label":`Toggle bookmark`,variant:`outline`,children:[(0,r.jsx)(t,{className:`group-aria-pressed/toggle:fill-foreground`}),`Bookmark`]}),a={source:`@astrale-os/ui`};export{i as default,a as preview};

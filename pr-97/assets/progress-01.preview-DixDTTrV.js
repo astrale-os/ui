@@ -1,1 +1,0 @@
-import{i as e,t}from"./jsx-runtime-Cx0BB4qO.js";import{t as n}from"./react-3BKWdGy3.js";import{t as r}from"./progress-C3onRbFD.js";var i=e(n(),1),a=t(),o=()=>{let[e,t]=(0,i.useState)(0);return(0,i.useEffect)(()=>{let e=setTimeout(()=>t(50),500);return()=>clearTimeout(e)},[]),(0,a.jsx)(r,{value:e,className:`w-full`})},s={source:`@astrale-os/ui`};export{o as default,s as preview};

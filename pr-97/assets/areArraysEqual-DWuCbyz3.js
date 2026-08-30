@@ -1,1 +1,0 @@
-function e(e,t,n=(e,t)=>e===t){return e.length===t.length&&e.every((e,r)=>n(e,t[r]))}export{e as t};

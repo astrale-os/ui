@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{ct as t}from"./index-Bmt69Hya.js";var n=e(),r=()=>(0,n.jsx)(t,{className:`ring-offset-background hover:ring-primary/90 transition-all duration-300 hover:ring-2 hover:ring-offset-2`,children:`Ring Hover`}),i={source:`@astrale-os/ui`};export{r as default,i as preview};

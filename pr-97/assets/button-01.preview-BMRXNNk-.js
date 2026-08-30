@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{ct as t}from"./index-Bmt69Hya.js";var n=e(),r=()=>(0,n.jsx)(t,{children:`Button`}),i={source:`@astrale-os/ui`};export{r as default,i as preview};

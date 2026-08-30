@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{O as t,T as n,Y as r}from"./index-Bmt69Hya.js";var i=e(),a=()=>(0,i.jsxs)(n,{variant:`destructive`,className:`*:[svg]:row-span-1`,children:[(0,i.jsx)(r,{}),(0,i.jsx)(t,{children:`Something went wrong!`})]}),o={source:`@astrale-os/ui`};export{a as default,o as preview};
