@@ -33,10 +33,15 @@ jobs:
           set -euo pipefail
           [[ "$INPUT_MAIN_SHA" =~ ^[0-9a-f]{40}$ ]]
           git merge-base --is-ancestor "$INPUT_MAIN_SHA" HEAD
-          pull="$(gh api "repos/$GITHUB_REPOSITORY/commits/$INPUT_MAIN_SHA/pulls" --jq '[.[] | select(.merged_at != null)] | sort_by(.merged_at) | last // empty')"
+          pull=''
+          for _attempt in $(seq 1 15); do
+            pull="$(gh api "repos/$GITHUB_REPOSITORY/commits/$INPUT_MAIN_SHA/pulls" --jq '[.[] | select(.merged_at != null)] | sort_by(.merged_at) | last // empty')"
+            if [ -n "$pull" ]; then break; fi
+            sleep 2
+          done
           if [ -z "$pull" ]; then
-            echo 'No merged pull request owns this commit; no receipt can be rebound.'
-            exit 0
+            echo 'Merged pull request association was not observed; no receipt can be rebound.' >&2
+            exit 1
           fi
           head_sha="$(jq -r .head.sha <<< "$pull")"
           git fetch --no-tags --depth=1 origin "$head_sha"
