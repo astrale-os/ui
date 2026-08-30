@@ -4,9 +4,19 @@ on:
   pull_request:
     types:
       - labeled
+  workflow_dispatch:
+    inputs:
+      pull_request:
+        description: Open same-repository pull request to qualify.
+        required: true
+        type: string
+      expected_revision:
+        description: Exact pull request head SHA to bind.
+        required: true
+        type: string
 
 concurrency:
-  group: ui-merge-ready-${{ github.event.pull_request.number }}-${{ github.event.pull_request.head.sha }}
+  group: ui-merge-ready-${{ inputs.pull_request || github.event.pull_request.number }}-${{ inputs.expected_revision || github.event.pull_request.head.sha }}
   cancel-in-progress: false
 
 permissions:
@@ -14,7 +24,7 @@ permissions:
 
 jobs:
   gate:
-    if: github.event.label.name == 'ui:merge-ready' && github.event.pull_request.state == 'open'
+    if: github.event_name == 'workflow_dispatch' || (github.event.label.name == 'ui:merge-ready' && github.event.pull_request.state == 'open')
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -29,12 +39,21 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           INPUT_ACTOR: ${{ github.actor }}
           INPUT_ACTOR_TYPE: ${{ github.event.sender.type }}
-          INPUT_REVISION: ${{ github.event.pull_request.head.sha }}
-          INPUT_HEAD_REF: ${{ github.event.pull_request.head.ref }}
-          INPUT_AUTHOR: ${{ github.event.pull_request.user.login }}
+          INPUT_PULL_REQUEST: ${{ inputs.pull_request || github.event.pull_request.number }}
+          INPUT_EXPECTED_REVISION: ${{ inputs.expected_revision || github.event.pull_request.head.sha }}
         run: |
           set -euo pipefail
           echo "started_ms=$(date +%s%3N)" >> "$GITHUB_OUTPUT"
+          [[ "$INPUT_PULL_REQUEST" =~ ^[1-9][0-9]*$ ]]
+          [[ "$INPUT_EXPECTED_REVISION" =~ ^[0-9a-f]{40}$ ]]
+          proposal="$(gh api "repos/$GITHUB_REPOSITORY/pulls/$INPUT_PULL_REQUEST")"
+          test "$(jq -r .state <<< "$proposal")" = open
+          test "$(jq -r '.labels | any(.name == "ui:merge-ready")' <<< "$proposal")" = true
+          test "$(jq -r .head.repo.full_name <<< "$proposal")" = "$GITHUB_REPOSITORY"
+          INPUT_REVISION="$(jq -r .head.sha <<< "$proposal")"
+          INPUT_HEAD_REF="$(jq -r .head.ref <<< "$proposal")"
+          INPUT_AUTHOR="$(jq -r .user.login <<< "$proposal")"
+          test "$INPUT_REVISION" = "$INPUT_EXPECTED_REVISION"
           if [ "$INPUT_ACTOR_TYPE" = User ]; then
             permission="$(gh api "repos/$GITHUB_REPOSITORY/collaborators/$INPUT_ACTOR/permission" --jq .permission)"
             case "$permission" in admin|write) ;; *) exit 1 ;; esac
@@ -43,7 +62,6 @@ jobs:
             case "$INPUT_AUTHOR" in 'github-actions[bot]'|'release-please[bot]') ;; *) exit 1 ;; esac
             case "$INPUT_HEAD_REF" in release-please--branches--main*) ;; *) exit 1 ;; esac
           fi
-          [[ "$INPUT_REVISION" =~ ^[0-9a-f]{40}$ ]]
           echo "revision=$INPUT_REVISION" >> "$GITHUB_OUTPUT"
 
   package:

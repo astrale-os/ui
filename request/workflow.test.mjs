@@ -37,6 +37,14 @@ const codexWorkflow = await readFile(
   new URL('../.github/workflows/ui-request-codex.yml', import.meta.url),
   'utf8',
 )
+const mergeReadyWorkflow = await readFile(
+  new URL('../.github/workflows/merge-ready.yml', import.meta.url),
+  'utf8',
+)
+const releaseWorkflow = await readFile(
+  new URL('../.github/workflows/release.yml', import.meta.url),
+  'utf8',
+)
 const codexConfiguration = await readFile(new URL('./codex/config.toml', import.meta.url), 'utf8')
 const packageManifest = JSON.parse(
   await readFile(new URL('../package.json', import.meta.url), 'utf8'),
@@ -53,6 +61,8 @@ const workspacePolicy = parse(
 const parsedWorkflow = parse(workflow)
 const parsedWorkerWorkflow = parse(workerWorkflow)
 const parsedCodexWorkflow = parse(codexWorkflow)
+const parsedMergeReadyWorkflow = parse(mergeReadyWorkflow)
+const parsedReleaseWorkflow = parse(releaseWorkflow)
 
 function secretReferences(value, path = [], found = []) {
   if (typeof value === 'string') {
@@ -407,6 +417,41 @@ test('keeps selection trusted and routes exact credentials through mutually excl
       .with.ref,
     '${{ github.event.repository.default_branch }}',
   )
+})
+
+test('dispatches release qualification through an exact admitted merge-ready revision', () => {
+  assert.deepEqual(Object.keys(parsedMergeReadyWorkflow.on.workflow_dispatch.inputs), [
+    'pull_request',
+    'expected_revision',
+  ])
+  const gate = parsedMergeReadyWorkflow.jobs.gate
+  const admit = gate.steps.find(
+    (step) => step.name === 'Admit a maintainer-owned exact proposal revision',
+  )
+  assert.equal(
+    gate.if,
+    "github.event_name == 'workflow_dispatch' || (github.event.label.name == 'ui:merge-ready' && github.event.pull_request.state == 'open')",
+  )
+  assert.equal(
+    admit.env.INPUT_PULL_REQUEST,
+    '${{ inputs.pull_request || github.event.pull_request.number }}',
+  )
+  assert.equal(
+    admit.env.INPUT_EXPECTED_REVISION,
+    '${{ inputs.expected_revision || github.event.pull_request.head.sha }}',
+  )
+  assert.match(admit.run, /repos\/\$GITHUB_REPOSITORY\/pulls\/\$INPUT_PULL_REQUEST/u)
+  assert.match(admit.run, /\.head\.repo\.full_name/u)
+  assert.match(admit.run, /test "\$INPUT_REVISION" = "\$INPUT_EXPECTED_REVISION"/u)
+
+  const dispatch = parsedReleaseWorkflow.jobs.qualify.steps.find(
+    (step) => step.name === 'Qualify the generated release PR revision',
+  )
+  assert.match(dispatch.run, /gh workflow run merge-ready\.yml/u)
+  assert.match(dispatch.run, /-f pull_request="\$number"/u)
+  assert.match(dispatch.run, /-f expected_revision="\$revision"/u)
+  assert.match(dispatch.run, /run_id="\$\{run_url##\*\/\}"/u)
+  assert.doesNotMatch(dispatch.run, /labels\/ui%3Amerge-ready/u)
 })
 
 test('starts only from an authorized ui:ready issue or bound proposal label and consumes it', () => {
