@@ -147,8 +147,12 @@ jobs:
           node request/candidate-checkpoint.mjs verify \
             --manifest "$checkpoint/checkpoint.json" \
             --root "$checkpoint" \
-            --request "$INPUT_REQUEST" \
-            --base-sha "$INPUT_BASE_SHA" >/dev/null
+            --request "$INPUT_REQUEST" >/dev/null
+          prior_base="$(jq -r .baseSha "$checkpoint/checkpoint.json")"
+          if ! git merge-base --is-ancestor "$prior_base" "$INPUT_BASE_SHA"; then
+            echo 'The checkpoint base is not an ancestor of the admitted base; operator input is required.' >&2
+            exit 1
+          fi
           prior_objective="$(jq -r .objectiveSha256 "$checkpoint/checkpoint.json")"
           prior_escalation="$(jq -r .worker.escalation "$checkpoint/checkpoint.json")"
           if [ "$prior_objective" = "$INPUT_OBJECTIVE_SHA256" ]; then

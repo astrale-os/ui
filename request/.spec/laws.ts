@@ -60,7 +60,7 @@ export const uiRequestLaws = {
   checkpointContinuation: {
     id: 'REQ-CANDIDATE-CONTINUE',
     statement:
-      'A valid cumulative checkpoint is the sole continuation authority after interruption or failed qualification; an expired, base-mismatched, request-mismatched, or tampered checkpoint requires operator input and is never silently reconstructed. A newly accepted objective may retain the patch but must discard and reacquire objective-specific source evidence and reset escalation.',
+      'A valid cumulative checkpoint is the sole continuation authority after interruption or failed qualification; an expired, request-mismatched, tampered, non-descendant-base, or no-longer-applicable checkpoint requires operator input and is never silently reconstructed. Unrelated descendant base commits may retain the patch. A newly accepted objective may retain that patch but must discard and reacquire objective-specific source evidence and reset escalation.',
   },
   boundedEscalation: {
     id: 'REQ-AGENT-ESCALATION-BOUND',

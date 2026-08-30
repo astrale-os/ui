@@ -986,6 +986,8 @@ test('pins the isolated Luna worker and preserves recoverable work across SLO br
   )
   assert.match(restoreCheckpoint.run, /prior_objective/u)
   assert.match(restoreCheckpoint.run, /prior_escalation/u)
+  assert.match(restoreCheckpoint.run, /git merge-base --is-ancestor/u)
+  assert.doesNotMatch(restoreCheckpoint.run, /candidate-checkpoint\.mjs verify[^]*--base-sha/u)
   const applyRestoredCheckpoint = parsedWorkerWorkflow.jobs.propose.steps.find(
     (step) => step.name === 'Apply the restored candidate after base-controlled toolchain setup',
   )

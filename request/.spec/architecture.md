@@ -53,8 +53,9 @@ and model selection remain private adapter concerns and do not enter the managed
 
 Every non-empty candidate is represented by a digest-bound cumulative checkpoint retained for 30
 days. A compatible checkpoint is applied before further editing. Tampering, expiry, request drift,
-or base mismatch stops automatic continuation for operator input; reconstruction from prompt alone
-is not a recovery path. A newly accepted objective retains the cumulative patch while reacquiring
+non-descendant base drift, or a patch that no longer applies stops automatic continuation for
+operator input; reconstruction from prompt alone is not a recovery path. Unrelated descendant base
+commits may retain the cumulative patch. A newly accepted objective retains that patch while reacquiring
 its own immutable source evidence and resetting escalation. Target and hard latency values are
 observations only. A breach never cancels work or discards its checkpoint.
 
