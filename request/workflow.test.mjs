@@ -45,6 +45,14 @@ const releaseWorkflow = await readFile(
   new URL('../.github/workflows/release.yml', import.meta.url),
   'utf8',
 )
+const rebindWorkflow = await readFile(
+  new URL('../.github/workflows/rebind-qualification-receipt.yml', import.meta.url),
+  'utf8',
+)
+const publishWorkflow = await readFile(
+  new URL('../.github/workflows/publish.yml', import.meta.url),
+  'utf8',
+)
 const codexConfiguration = await readFile(new URL('./codex/config.toml', import.meta.url), 'utf8')
 const packageManifest = JSON.parse(
   await readFile(new URL('../package.json', import.meta.url), 'utf8'),
@@ -63,6 +71,8 @@ const parsedWorkerWorkflow = parse(workerWorkflow)
 const parsedCodexWorkflow = parse(codexWorkflow)
 const parsedMergeReadyWorkflow = parse(mergeReadyWorkflow)
 const parsedReleaseWorkflow = parse(releaseWorkflow)
+const parsedRebindWorkflow = parse(rebindWorkflow)
+const parsedPublishWorkflow = parse(publishWorkflow)
 
 function secretReferences(value, path = [], found = []) {
   if (typeof value === 'string') {
@@ -452,6 +462,33 @@ test('dispatches release qualification through an exact admitted merge-ready rev
   assert.match(dispatch.run, /-f expected_revision="\$revision"/u)
   assert.match(dispatch.run, /run_id="\$\{run_url##\*\/\}"/u)
   assert.doesNotMatch(dispatch.run, /labels\/ui%3Amerge-ready/u)
+})
+
+test('rebinds exact receipts from pull-request and admitted dispatch qualification', () => {
+  assert.deepEqual(Object.keys(parsedRebindWorkflow.on.workflow_dispatch.inputs), ['main_sha'])
+  const job = parsedRebindWorkflow.jobs.rebind
+  const rebind = job.steps.find(
+    (step) => step.name === 'Rebind same-tree accepted evidence to the exact main commit',
+  )
+  const upload = job.steps.find((step) => step.uses?.startsWith('actions/upload-artifact@'))
+  assert.equal(job.env.TARGET_MAIN_SHA, '${{ inputs.main_sha || github.sha }}')
+  assert.equal(rebind.env.INPUT_MAIN_SHA, '${{ env.TARGET_MAIN_SHA }}')
+  assert.match(rebind.run, /git merge-base --is-ancestor "\$INPUT_MAIN_SHA" HEAD/u)
+  assert.match(rebind.run, /pull_request\) test .*\.head_sha/u)
+  assert.match(rebind.run, /workflow_dispatch\) test .*\.head_branch/u)
+  assert.match(rebind.run, /verify-envelope/u)
+  assert.equal(upload.with.name, 'qualification-receipt-${{ env.TARGET_MAIN_SHA }}')
+})
+
+test('publishes through exact push or backfilled main-history rebind receipts', () => {
+  const fetchReceipt = parsedPublishWorkflow.jobs.publish.steps.find(
+    (step) => step.name === 'Fetch the exact accepted qualification receipt',
+  )
+  assert.match(fetchReceipt.run, /\.github\/workflows\/rebind-qualification-receipt\.yml/u)
+  assert.match(fetchReceipt.run, /push\) test .*\.head_sha/u)
+  assert.match(fetchReceipt.run, /workflow_dispatch\) test .*\.head_branch/u)
+  assert.match(fetchReceipt.run, /verify-envelope/u)
+  assert.match(fetchReceipt.run, /--commit "\$EXPECTED_SHA"/u)
 })
 
 test('starts only from an authorized ui:ready issue or bound proposal label and consumes it', () => {

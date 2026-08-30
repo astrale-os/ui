@@ -64,9 +64,12 @@ jobs:
           run_id="$(jq -r .workflow_run.id <<< "$artifact")"
           run="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$run_id")"
           test "$(jq -r .path <<< "$run")" = '.github/workflows/rebind-qualification-receipt.yml'
-          test "$(jq -r .event <<< "$run")" = push
           test "$(jq -r .conclusion <<< "$run")" = success
-          test "$(jq -r .head_sha <<< "$run")" = "$EXPECTED_SHA"
+          case "$(jq -r .event <<< "$run")" in
+            push) test "$(jq -r .head_sha <<< "$run")" = "$EXPECTED_SHA" ;;
+            workflow_dispatch) test "$(jq -r .head_branch <<< "$run")" = main ;;
+            *) echo 'Qualification rebind came from an unsupported workflow event.' >&2; exit 1 ;;
+          esac
           gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$(jq -r .id <<< "$artifact")/zip" > "$RUNNER_TEMP/receipt.zip"
           unzip -q "$RUNNER_TEMP/receipt.zip" -d "$RUNNER_TEMP/receipt"
           cp "$RUNNER_TEMP/receipt/qualification-receipt.json" qualification-receipt.json
