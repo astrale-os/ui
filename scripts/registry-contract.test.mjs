@@ -36,6 +36,12 @@ const envVariablesProvenance = JSON.parse(
     'utf8',
   ),
 )
+const logViewerProvenance = JSON.parse(
+  await readFile(
+    'tooling/upstream/providers/logpilot/a0ac783c7dc6c579714f960731a2392043185dc6/log-viewer/provenance.json',
+    'utf8',
+  ),
+)
 const externalProviders = new Map([
   [
     '@react-aria',
@@ -59,6 +65,14 @@ const externalProviders = new Map([
       provenance: envVariablesProvenance,
       address: 'block/secrets/env-variables',
       fileCount: 1,
+    },
+  ],
+  [
+    '@logpilot',
+    {
+      provenance: logViewerProvenance,
+      address: 'block/observability/log-viewer',
+      fileCount: 6,
     },
   ],
 ])
@@ -406,6 +420,7 @@ test('registry inventory is the exact retained pattern and block catalog', async
       'block/dashboard/overview',
       'block/dashboard/analytics',
       'block/dashboard/operations',
+      'block/observability/log-viewer',
       'block/observability/status-monitor',
       'block/secrets/env-variables',
       'pattern/calendar/range-basic',
@@ -448,7 +463,10 @@ test('registry source tree is closed to included manifests and declared implemen
     .sort()
   assert.deepEqual(
     compositionFiles
-      .filter((file) => file.endsWith('.tsx') && !file.endsWith('.preview.tsx'))
+      .filter(
+        (file) =>
+          /\.tsx?$/u.test(file) && !file.endsWith('.preview.tsx') && !file.endsWith('.fixture.ts'),
+      )
       .sort(),
     declaredImplementations,
   )

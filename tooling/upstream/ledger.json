@@ -84,6 +84,83 @@
           "Apply repository formatting without changing layout, classes, CSS, DOM anatomy, copy, states, or interactions."
         ]
       }
+    },
+    {
+      "provider": "@logpilot",
+      "address": "https://raw.githubusercontent.com/Reckless98/logpilot/a0ac783c7dc6c579714f960731a2392043185dc6/src/components/log-viewer.tsx",
+      "documentation": "https://github.com/Reckless98/logpilot/tree/a0ac783c7dc6c579714f960731a2392043185dc6/src/components",
+      "repository": "https://github.com/Reckless98/logpilot",
+      "revision": "a0ac783c7dc6c579714f960731a2392043185dc6",
+      "sourceDigest": "sha256:f80d25e146d3642ff7aeeb64ad081d957aa6b1e18d6ffa688a35a7b6df08734e",
+      "license": "MIT",
+      "consideredAt": "2026-08-30",
+      "purpose": "Live application log stream with severity and service filtering, text search, time range, live tail, expandable entries, copy and export, and empty and loading states.",
+      "decision": {
+        "status": "admitted",
+        "classification": "block",
+        "owner": "block/observability/log-viewer",
+        "rationale": "A dense operational log stream with severity filtering, pause and resume of a live tail, follow behavior, and per-entry detail is a distinct product journey that no retained Astrale composition owns."
+      },
+      "duplicateReview": [
+        {
+          "address": "block/observability/status-monitor",
+          "relationship": "distinct",
+          "rationale": "Status Monitor owns aggregated availability history. This block owns the individual log record stream, its filters, and its live tail."
+        },
+        {
+          "address": "block/dashboard/operations",
+          "relationship": "distinct",
+          "rationale": "The operations dashboard summarizes metrics. This block owns the raw event stream and its reading, filtering, and export journey."
+        }
+      ],
+      "proof": "tooling/upstream/providers/logpilot/a0ac783c7dc6c579714f960731a2392043185dc6/log-viewer/provenance.json",
+      "adaptation": {
+        "mode": "astrale-revision",
+        "changes": [
+          "Repoint the provider-local module imports to the owned relative log-viewer modules and the @astrale-os/ui public entrypoints.",
+          "Drop the upstream modules outside the accepted source set: mock data, the JSON payload tree, the sidebar inspector, the heatmap, the paste dialog, and the saved filter dialog, with the controls that only open them.",
+          "Expose a typed host boundary of default logs, loading, stream error, and optional live entry, copy, and export actions instead of the upstream generated mock data.",
+          "Report pending, success, and error outcomes of the injected actions in one polite live region that never contains log text.",
+          "Adopt the Apache-2.0 Rivet follow-tail toggle, tab separated copy text, and stream error banner as the supporting authority for those behaviors.",
+          "Name the search clear control, the level toggles, the live tail control, the service and time selects, and every icon control, and expose the row expansion state.",
+          "Allow the upstream toolbar row to wrap so no control is clipped at 390px.",
+          "Apply repository formatting without changing layout, classes, CSS, DOM anatomy, copy, states, or interactions."
+        ]
+      }
+    },
+    {
+      "provider": "@rivet",
+      "address": "https://raw.githubusercontent.com/rivet-dev/actors/b5cac54a50103c0739b618f519ce32778119c3b4/frontend/packages/components/src/logs-view.tsx",
+      "documentation": "https://github.com/rivet-dev/actors/tree/b5cac54a50103c0739b618f519ce32778119c3b4/frontend/packages/components/src",
+      "repository": "https://github.com/rivet-dev/actors",
+      "revision": "b5cac54a50103c0739b618f519ce32778119c3b4",
+      "sourceDigest": "sha256:3ac70889f7710041b11d2fde218c24cd209d8e263898ab71ad33cd99e166cf78",
+      "license": "Apache-2.0",
+      "consideredAt": "2026-08-30",
+      "purpose": "Follow-tail behavior, clipboard and download of the visible log text, and a stream error banner for a live log stream.",
+      "decision": {
+        "status": "admitted",
+        "classification": "block",
+        "owner": "block/observability/log-viewer",
+        "rationale": "Retained as the supporting authority for the exact follow-tail, copy, and stream error behavior that the primary Logpilot surface does not own."
+      },
+      "duplicateReview": [
+        {
+          "address": "block/observability/log-viewer",
+          "relationship": "overlapping",
+          "rationale": "The primary product surface is the MIT Logpilot source set. This Apache-2.0 source contributes only the follow-tail, copy, and stream error behavior inside that surface."
+        }
+      ],
+      "proof": "tooling/upstream/providers/rivet/b5cac54a50103c0739b618f519ce32778119c3b4/log-viewer/provenance.json",
+      "adaptation": {
+        "mode": "astrale-revision",
+        "changes": [
+          "Adopt the follow toggle with its Toggle follow logs accessible name, Follow logs title, empty-stream disabled state, and animation-frame scroll to the newest entry.",
+          "Adopt the tab separated timestamp, level, service, and message copy text.",
+          "Adopt the stream error banner classes and the Stream error: prefix.",
+          "Invert the upstream scroll target because the primary surface renders newest entries first."
+        ]
+      }
     }
   ]
 }

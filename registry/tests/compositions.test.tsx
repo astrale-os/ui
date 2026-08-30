@@ -1,8 +1,16 @@
-import { act, cleanup, render, screen, waitFor, within } from '@testing-library/react'
+import { act, cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { afterEach, describe, expect, test, vi } from 'vitest'
 
+import type { LogEntry } from '../blocks/observability/log-viewer/types.js'
+
 import { SignInCard } from '../blocks/authentication/sign-in-card.js'
+import { LogViewer } from '../blocks/observability/log-viewer/log-viewer.js'
+import {
+  applicationLogStream,
+  logStreamLatency,
+  logStreamRejectedActions,
+} from '../blocks/observability/observability.fixture.js'
 import StatusMonitor from '../blocks/observability/status-monitor.js'
 import { type EnvVar, EnvVariables } from '../blocks/secrets/env-variables.js'
 import { secretManagerRejectedActions } from '../blocks/secrets/secrets.fixture.js'
@@ -19,9 +27,21 @@ import { ComboboxSingleBasic } from '../patterns/combobox/single-basic.js'
 
 afterEach(() => {
   cleanup()
+  vi.useRealTimers()
   vi.restoreAllMocks()
   vi.unstubAllGlobals()
 })
+
+// jsdom does not implement scrolling, and the log viewer follow effect scrolls its viewport.
+function stubViewportScroll() {
+  const scrollTo = vi.fn()
+  Object.defineProperty(Element.prototype, 'scrollTo', {
+    configurable: true,
+    writable: true,
+    value: scrollTo,
+  })
+  return scrollTo
+}
 
 describe('owned registry compositions', () => {
   test('combobox instances keep unique relationships and inject query and selection state', async () => {
@@ -511,5 +531,236 @@ describe('owned registry compositions', () => {
     })
     expect(screen.getByRole('status')).not.toHaveTextContent('campaign-secret')
     expect(screen.queryByLabelText('Value of CAMPAIGN_TOKEN')).not.toBeInTheDocument()
+  })
+
+  test('the log viewer filters the rendered rows by severity and by search text', async () => {
+    stubViewportScroll()
+    const user = userEvent.setup()
+    render(<LogViewer defaultLogs={applicationLogStream} />)
+
+    expect(screen.getByText('GET /v1/deployments completed in 42ms')).toBeVisible()
+    expect(screen.getByText('8 entries')).toBeVisible()
+
+    await user.click(screen.getByRole('button', { name: 'ERROR' }))
+
+    expect(screen.getByRole('button', { name: 'ERROR' })).toHaveAttribute('aria-pressed', 'true')
+    expect(screen.getByText('Token exchange rejected for tenant acme-eu')).toBeVisible()
+    expect(screen.queryByText('GET /v1/deployments completed in 42ms')).not.toBeInTheDocument()
+
+    await user.click(screen.getByRole('button', { name: 'Clear filters' }))
+    await user.type(screen.getByPlaceholderText('Search logs...'), 'routing table')
+
+    expect(screen.getByText('Routing table reloaded with 12 upstreams')).toBeVisible()
+    expect(screen.queryByText('Token exchange rejected for tenant acme-eu')).not.toBeInTheDocument()
+
+    await user.click(screen.getByRole('button', { name: 'Clear search' }))
+
+    expect(screen.getByText('Token exchange rejected for tenant acme-eu')).toBeVisible()
+  })
+
+  test('the log viewer appends a live tail entry on resume and stops appending on pause', async () => {
+    stubViewportScroll()
+    vi.useFakeTimers()
+    let appended = 0
+    render(
+      <LogViewer
+        defaultLogs={applicationLogStream}
+        onNextLiveEntry={(): LogEntry => {
+          appended += 1
+          return {
+            id: `live-${appended}`,
+            timestamp: new Date(),
+            level: 'INFO',
+            service: 'Gateway',
+            message: `Live tail entry ${appended}`,
+          }
+        }}
+      />,
+    )
+
+    fireEvent.click(screen.getByRole('button', { name: 'Live Tail' }))
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(2500)
+    })
+
+    expect(screen.getByText('Live tail entry 1')).toBeVisible()
+    expect(screen.getByRole('button', { name: 'Tailing' })).toHaveAttribute('aria-pressed', 'true')
+
+    fireEvent.click(screen.getByRole('button', { name: 'Tailing' }))
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(10_000)
+    })
+
+    expect(appended).toBe(1)
+    expect(screen.queryByText('Live tail entry 2')).not.toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Live Tail' })).toHaveAttribute(
+      'aria-pressed',
+      'false',
+    )
+  })
+
+  test('the log viewer reports a rejected live tail entry without adding a row', async () => {
+    stubViewportScroll()
+    vi.useFakeTimers()
+    render(
+      <LogViewer
+        defaultLogs={applicationLogStream}
+        onNextLiveEntry={logStreamRejectedActions.onNextLiveEntry}
+      />,
+    )
+
+    fireEvent.click(screen.getByRole('button', { name: 'Live Tail' }))
+    await act(async () => {
+      await vi.advanceTimersByTimeAsync(2500 + logStreamLatency)
+    })
+
+    expect(screen.getByRole('status')).toHaveTextContent('Could not append the next log entry.')
+    expect(screen.getByText('8 entries')).toBeVisible()
+  })
+
+  test('the log viewer follows the newest entry without stealing focus', async () => {
+    const scrollTo = stubViewportScroll()
+    const user = userEvent.setup()
+    render(<LogViewer defaultLogs={applicationLogStream} />)
+
+    const followToggle = screen.getByRole('button', { name: 'Toggle follow logs' })
+    expect(followToggle).toHaveAttribute('aria-pressed', 'true')
+
+    const search = screen.getByPlaceholderText('Search logs...')
+    await user.click(search)
+    await user.type(search, 'gateway')
+
+    await waitFor(() => {
+      expect(scrollTo).toHaveBeenCalled()
+    })
+    expect(search).toHaveFocus()
+
+    await user.click(followToggle)
+    expect(followToggle).toHaveAttribute('aria-pressed', 'false')
+    expect(followToggle).toHaveFocus()
+
+    scrollTo.mockClear()
+    await user.keyboard(' ')
+    expect(followToggle).toHaveAttribute('aria-pressed', 'true')
+    expect(followToggle).toHaveFocus()
+    await waitFor(() => {
+      expect(scrollTo).toHaveBeenCalled()
+    })
+  })
+
+  test('the log viewer copies the visible filtered logs and reports a value-free outcome', async () => {
+    stubViewportScroll()
+    const user = userEvent.setup()
+    render(<LogViewer defaultLogs={applicationLogStream} />)
+
+    await user.click(screen.getByRole('button', { name: 'ERROR' }))
+    await user.click(screen.getByRole('button', { name: 'Copy' }))
+
+    await waitFor(() => {
+      expect(screen.getByRole('status')).toHaveTextContent('Copied 1 log entries to the clipboard.')
+    })
+    expect(screen.getByRole('status')).not.toHaveTextContent('Token exchange rejected')
+
+    const copied = await navigator.clipboard.readText()
+    expect(copied).toContain('Token exchange rejected for tenant acme-eu')
+    expect(copied).toContain('ERROR\tAuth')
+    expect(copied).not.toContain('GET /v1/deployments completed in 42ms')
+  })
+
+  test('the log viewer surfaces rejected copy and export actions through the live status region', async () => {
+    stubViewportScroll()
+    const user = userEvent.setup()
+    render(<LogViewer defaultLogs={applicationLogStream} {...logStreamRejectedActions} />)
+
+    await user.click(screen.getByRole('button', { name: 'Copy' }))
+    expect(screen.getByRole('status')).toHaveTextContent('Copying logs…')
+    await waitFor(() => {
+      expect(screen.getByRole('status')).toHaveTextContent('Could not copy the visible logs.')
+    })
+
+    await user.click(screen.getByRole('button', { name: 'Export filtered logs' }))
+    expect(screen.getByRole('status')).toHaveTextContent('Exporting logs…')
+    await waitFor(() => {
+      expect(screen.getByRole('status')).toHaveTextContent('Could not export the visible logs.')
+    })
+    expect(screen.getByRole('status')).not.toHaveTextContent('Token exchange rejected')
+  })
+
+  test('the log stream error fixture refuses every action without echoing log text', async () => {
+    const attempts: (() => Promise<unknown>)[] = [
+      logStreamRejectedActions.onNextLiveEntry,
+      () => logStreamRejectedActions.onCopyLogs(applicationLogStream),
+      () => logStreamRejectedActions.onExportLogs(applicationLogStream),
+    ]
+
+    for (const attempt of attempts) {
+      const failure = await attempt().then(
+        () => null,
+        (error: unknown) => error,
+      )
+      expect(failure).toBeInstanceOf(Error)
+      expect(String(failure)).toBe('Error: The log stream refused this request.')
+      expect(String(failure)).not.toContain('Token exchange rejected')
+    }
+  })
+
+  test('the log viewer observes loading, stream error, and empty states independently', () => {
+    stubViewportScroll()
+    const loading = render(<LogViewer defaultLogs={applicationLogStream} isLoading />)
+
+    expect(screen.getByText('Generating log data…')).toBeVisible()
+    expect(screen.queryByRole('button', { name: 'Copy' })).not.toBeInTheDocument()
+    loading.unmount()
+
+    const disconnected = render(
+      <LogViewer
+        defaultLogs={applicationLogStream}
+        streamError="disconnected from the log gateway"
+      />,
+    )
+
+    expect(screen.getByText('Stream error: disconnected from the log gateway')).toBeVisible()
+    expect(screen.getByText('GET /v1/deployments completed in 42ms')).toBeVisible()
+    disconnected.unmount()
+
+    render(<LogViewer defaultLogs={[]} />)
+
+    expect(screen.getByText('No log entries match your filters')).toBeVisible()
+    expect(
+      screen.queryByText('Stream error: disconnected from the log gateway'),
+    ).not.toBeInTheDocument()
+    expect(screen.getByText('0 entries')).toBeVisible()
+    expect(screen.getByRole('button', { name: 'Toggle follow logs' })).toBeDisabled()
+  })
+
+  test('every log viewer control exposes an accessible name', async () => {
+    stubViewportScroll()
+    const user = userEvent.setup()
+    render(<LogViewer defaultLogs={applicationLogStream} />)
+
+    for (const name of [
+      'Live Tail',
+      'Copy',
+      'Export filtered logs',
+      'Toggle follow logs',
+      'DEBUG',
+      'INFO',
+      'WARN',
+      'ERROR',
+      'FATAL',
+    ]) {
+      expect(screen.getByRole('button', { name })).toBeVisible()
+    }
+
+    expect(screen.getByLabelText('Service')).toHaveValue('all')
+    expect(screen.getByLabelText('Time')).toHaveValue('24h')
+
+    await user.type(screen.getByPlaceholderText('Search logs...'), 'gateway')
+    expect(screen.getByRole('button', { name: 'Clear search' })).toBeVisible()
+
+    const rows = screen.getAllByRole('button', { expanded: false })
+    expect(rows.length).toBeGreaterThan(0)
+    await user.click(rows[0])
+    expect(screen.getAllByRole('button', { expanded: true }).length).toBe(1)
   })
 })

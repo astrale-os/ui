@@ -42,6 +42,18 @@ const envVariablesProvenance = JSON.parse(
     'utf8',
   ),
 )
+const logViewerProvenance = JSON.parse(
+  await readFile(
+    'tooling/upstream/providers/logpilot/a0ac783c7dc6c579714f960731a2392043185dc6/log-viewer/provenance.json',
+    'utf8',
+  ),
+)
+const logViewerSupportProvenance = JSON.parse(
+  await readFile(
+    'tooling/upstream/providers/rivet/b5cac54a50103c0739b618f519ce32778119c3b4/log-viewer/provenance.json',
+    'utf8',
+  ),
+)
 const owners = new Map(
   provenance.components
     .filter((component) => component.disposition === 'owned-runtime')
@@ -905,4 +917,720 @@ test('the chadcn environment variables block has only the declared Astrale adapt
   } finally {
     await rm(temporary, { recursive: true })
   }
+})
+
+const declaredLogViewerRegions = {
+  'log-viewer.tsx': [
+    ['follow tail', ['', '  // Follow tail effect'], ['', '  // Handlers']],
+    [
+      'stream error and host action feedback',
+      ['', '      {/* Stream error */}'],
+      ['', '      {/* Main content */}'],
+    ],
+  ],
+}
+
+const declaredLogViewerEdits = {
+  'log-utils.ts': [
+    [
+      'module imports',
+      [
+        "import { isAfter, subDays, subHours } from 'date-fns'",
+        '',
+        "import type { LogEntry, LogLevel, ServiceName, TimeRange } from './types.js'",
+      ],
+      [
+        'import { subHours, subDays, isAfter } from "date-fns";',
+        'import type { LogEntry, LogLevel, ServiceName, TimeRange } from "./types";',
+      ],
+    ],
+  ],
+  'log-entry-row.tsx': [
+    [
+      'module imports',
+      [
+        "import { cn } from '@astrale-os/ui/class-name'",
+        "import { format } from 'date-fns'",
+        "import { ChevronDown, ChevronRight } from 'lucide-react'",
+        "import { memo, useCallback } from 'react'",
+        '',
+        "import type { LogEntry } from './types.js'",
+        '',
+        "import { LEVEL_COLORS, SERVICE_COLORS } from './types.js'",
+      ],
+      [
+        'import { memo, useCallback } from "react";',
+        'import { format } from "date-fns";',
+        'import { ChevronRight, ChevronDown } from "lucide-react";',
+        'import { cn } from "@/lib/utils";',
+        'import { LEVEL_COLORS, SERVICE_COLORS } from "@/lib/types";',
+        'import type { LogEntry } from "@/lib/types";',
+        'import { JsonTree } from "./json-tree";',
+      ],
+    ],
+    [
+      'row expansion state',
+      ['        onClick={handleClick}', '        aria-expanded={isExpanded}'],
+      ['        onClick={handleClick}'],
+    ],
+    [
+      'json payload detail',
+      ['          {/* Stack trace */}'],
+      [
+        '          {/* JSON payload */}',
+        '          {entry.payload && (',
+        '            <div>',
+        '              <div className="text-[10px] uppercase tracking-wider text-zinc-600 mb-1">',
+        '                Payload',
+        '              </div>',
+        '              <div className="bg-zinc-900/80 rounded p-2 overflow-x-auto">',
+        '                <JsonTree data={entry.payload} defaultExpanded />',
+        '              </div>',
+        '            </div>',
+        '          )}',
+        '',
+        '          {/* Stack trace */}',
+      ],
+    ],
+  ],
+  'log-list.tsx': [
+    [
+      'module imports',
+      [
+        "import { format, isSameDay } from 'date-fns'",
+        "import { useMemo } from 'react'",
+        '',
+        "import type { LogEntry } from './types.js'",
+        '',
+        "import { LogEntryRow } from './log-entry-row.js'",
+      ],
+      [
+        'import { useMemo } from "react";',
+        'import { format, isSameDay } from "date-fns";',
+        'import type { LogEntry } from "@/lib/types";',
+        'import { LogEntryRow } from "./log-entry-row";',
+      ],
+    ],
+    [
+      'viewport boundary',
+      [
+        '  onSelect: (entry: LogEntry) => void',
+        '  viewportRef?: React.Ref<HTMLDivElement>',
+        '  onViewportScroll?: (viewport: HTMLDivElement) => void',
+        '}',
+      ],
+      ['  onSelect: (entry: LogEntry) => void;', '}'],
+    ],
+    [
+      'viewport parameters',
+      ['  onSelect,', '  viewportRef,', '  onViewportScroll,', '}: LogListProps) {'],
+      ['  onSelect,', '}: LogListProps) {'],
+    ],
+    [
+      'observable scroll viewport',
+      [
+        '    <div',
+        '      ref={viewportRef}',
+        '      onScroll={(event) => onViewportScroll?.(event.currentTarget)}',
+        '      className="flex-1 overflow-y-auto min-h-0"',
+        '    >',
+      ],
+      ['    <div className="flex-1 overflow-y-auto min-h-0">'],
+    ],
+  ],
+  'top-bar.tsx': [
+    [
+      'module imports',
+      [
+        "import { Button } from '@astrale-os/ui/button'",
+        "import { cn } from '@astrale-os/ui/class-name'",
+        "import { Toggle } from '@astrale-os/ui/toggle'",
+        "import { ArrowDownToLine, Copy, Download, Pause, Play, Search, X } from 'lucide-react'",
+        "import { useCallback } from 'react'",
+        '',
+        "import type { LogLevel, ServiceName, TimeRange } from './types.js'",
+        '',
+        "import { ALL_LEVELS, ALL_SERVICES, LEVEL_COLORS, TIME_RANGE_LABELS } from './types.js'",
+      ],
+      [
+        'import { useCallback } from "react";',
+        'import {',
+        '  Search,',
+        '  X,',
+        '  Play,',
+        '  Pause,',
+        '  PanelRightOpen,',
+        '  PanelRightClose,',
+        '  Download,',
+        '  Upload,',
+        '  Bookmark,',
+        '} from "lucide-react";',
+        'import { Button } from "@/components/ui/button";',
+        'import { cn } from "@/lib/utils";',
+        'import {',
+        '  ALL_LEVELS,',
+        '  ALL_SERVICES,',
+        '  LEVEL_COLORS,',
+        '  TIME_RANGE_LABELS,',
+        '} from "@/lib/types";',
+        'import type { LogLevel, ServiceName, TimeRange } from "@/lib/types";',
+      ],
+    ],
+    [
+      'host boundary properties',
+      [
+        '  onToggleLiveTail: () => void',
+        '  follow: boolean',
+        '  onFollowChange: (follow: boolean) => void',
+        '  isEmpty: boolean',
+        '  onClearFilters: () => void',
+        '  onCopy: () => void',
+        '  onExport: () => void',
+      ],
+      [
+        '  onToggleLiveTail: () => void;',
+        '  sidebarOpen: boolean;',
+        '  onToggleSidebar: () => void;',
+        '  onClearFilters: () => void;',
+        '  onExport: () => void;',
+        '  onOpenPaste: () => void;',
+        '  onOpenSavedFilters: () => void;',
+      ],
+    ],
+    [
+      'host boundary parameters',
+      [
+        '  onToggleLiveTail,',
+        '  follow,',
+        '  onFollowChange,',
+        '  isEmpty,',
+        '  onClearFilters,',
+        '  onCopy,',
+        '  onExport,',
+      ],
+      [
+        '  onToggleLiveTail,',
+        '  sidebarOpen,',
+        '  onToggleSidebar,',
+        '  onClearFilters,',
+        '  onExport,',
+        '  onOpenPaste,',
+        '  onOpenSavedFilters,',
+      ],
+    ],
+    [
+      'wrapped action row',
+      ['      <div className="flex flex-wrap items-center gap-2 px-3 py-2">'],
+      ['      <div className="flex items-center gap-2 px-3 py-2">'],
+    ],
+    [
+      'search clear name',
+      [
+        "              onClick={() => onSearchChange('')}",
+        '              aria-label="Clear search"',
+      ],
+      ['              onClick={() => onSearchChange("")}'],
+    ],
+    [
+      'live tail pressed state',
+      ['          onClick={onToggleLiveTail}', '          aria-pressed={liveTail}'],
+      ['          onClick={onToggleLiveTail}'],
+    ],
+    [
+      'copy, export, and follow controls',
+      [
+        '        <Button variant="ghost" size="icon-sm" onClick={onCopy} aria-label="Copy" title="Copy">',
+        '          <Copy className="size-3.5" />',
+        '        </Button>',
+        '        <Button',
+        '          variant="ghost"',
+        '          size="icon-sm"',
+        '          onClick={onExport}',
+        '          aria-label="Export filtered logs"',
+        '          title="Export filtered logs"',
+        '        >',
+        '          <Download className="size-3.5" />',
+        '        </Button>',
+        '',
+        '        <div className="h-4 w-px bg-zinc-800" />',
+        '',
+        '        {/* Follow logs */}',
+        '        <Toggle',
+        '          onPressedChange={onFollowChange}',
+        '          pressed={isEmpty ? false : follow}',
+        '          disabled={isEmpty}',
+        '          variant="outline"',
+        '          size="sm"',
+        '          aria-label="Toggle follow logs"',
+        '          title="Follow logs"',
+        '        >',
+        '          <ArrowDownToLine className="size-4" />',
+        '        </Toggle>',
+      ],
+      [
+        '        <Button variant="ghost" size="icon-sm" onClick={onOpenPaste} title="Import logs">',
+        '          <Upload className="size-3.5" />',
+        '        </Button>',
+        '        <Button variant="ghost" size="icon-sm" onClick={onExport} title="Export filtered logs">',
+        '          <Download className="size-3.5" />',
+        '        </Button>',
+        '        <Button',
+        '          variant="ghost"',
+        '          size="icon-sm"',
+        '          onClick={onOpenSavedFilters}',
+        '          title="Saved filters"',
+        '        >',
+        '          <Bookmark className="size-3.5" />',
+        '        </Button>',
+        '',
+        '        <div className="h-4 w-px bg-zinc-800" />',
+        '',
+        '        {/* Sidebar toggle */}',
+        '        <Button',
+        '          variant={sidebarOpen ? "secondary" : "ghost"}',
+        '          size="icon-sm"',
+        '          onClick={onToggleSidebar}',
+        '          title={sidebarOpen ? "Close inspector" : "Open inspector"}',
+        '        >',
+        '          {sidebarOpen ? (',
+        '            <PanelRightClose className="size-3.5" />',
+        '          ) : (',
+        '            <PanelRightOpen className="size-3.5" />',
+        '          )}',
+        '        </Button>',
+      ],
+    ],
+    [
+      'level toggle pressed state',
+      [
+        '                onClick={() => onToggleLevel(level)}',
+        '                aria-pressed={isActive}',
+      ],
+      ['                onClick={() => onToggleLevel(level)}'],
+    ],
+    [
+      'service filter name',
+      ['          onChange={handleServiceSelect}', '          aria-label="Service"'],
+      ['          onChange={handleServiceSelect}'],
+    ],
+    [
+      'time filter name',
+      ['          onChange={handleTimeRangeSelect}', '          aria-label="Time"'],
+      ['          onChange={handleTimeRangeSelect}'],
+    ],
+  ],
+  'log-viewer.tsx': [
+    [
+      'module imports',
+      [
+        "import { Spinner } from '@astrale-os/ui/spinner'",
+        "import { Radar, TriangleAlert } from 'lucide-react'",
+        "import { useCallback, useEffect, useMemo, useRef, useState } from 'react'",
+        '',
+        "import type { LogEntry, LogLevel, ServiceName, TimeRange } from './types.js'",
+        '',
+        "import { LogList } from './log-list.js'",
+        "import { exportLogsAsJson, filterLogs } from './log-utils.js'",
+        "import { TopBar } from './top-bar.js'",
+      ],
+      [
+        'import { useState, useEffect, useCallback, useMemo, useRef } from "react";',
+        'import { Radar } from "lucide-react";',
+        'import type { LogEntry, LogLevel, ServiceName, TimeRange, SavedFilter } from "@/lib/types";',
+        'import { generateMockLogs, generateLiveTailEntry } from "@/lib/mock-data";',
+        'import { filterLogs, exportLogsAsJson } from "@/lib/log-utils";',
+        'import { TopBar } from "./top-bar";',
+        'import { LogList } from "./log-list";',
+        'import { SidebarInspector } from "./sidebar-inspector";',
+        'import { Heatmap } from "./heatmap";',
+        'import { PasteDialog } from "./paste-dialog";',
+        'import { SavedFiltersDialog } from "./saved-filters-dialog";',
+      ],
+    ],
+    [
+      'host data boundary',
+      [
+        'export interface LogViewerProps {',
+        '  defaultLogs?: LogEntry[]',
+        '  isLoading?: boolean',
+        '  streamError?: string | null',
+        '  onNextLiveEntry?(): Promise<LogEntry> | LogEntry',
+        '  onCopyLogs?(logs: LogEntry[]): Promise<void> | void',
+        '  onExportLogs?(logs: LogEntry[]): Promise<void> | void',
+        '}',
+        '',
+        'export function LogViewer({',
+        '  defaultLogs = [],',
+        '  isLoading = false,',
+        '  streamError = null,',
+        '  onNextLiveEntry,',
+        '  onCopyLogs,',
+        '  onExportLogs,',
+        '}: LogViewerProps = {}) {',
+        '  // Core state',
+        '  const [logs, setLogs] = useState<LogEntry[]>(defaultLogs)',
+      ],
+      [
+        'export function LogViewer() {',
+        '  // Core state',
+        '  const [logs, setLogs] = useState<LogEntry[]>([]);',
+        '  const [isLoading, setIsLoading] = useState(true);',
+      ],
+    ],
+    [
+      'host action state and injected live entries',
+      [
+        '  const [liveTail, setLiveTail] = useState(false)',
+        '  const [follow, setFollow] = useState(true)',
+        '',
+        '  // Host action state',
+        '  const [pendingMessage, setPendingMessage] = useState<string | null>(null)',
+        "  const [status, setStatus] = useState<{ tone: 'success' | 'error'; message: string } | null>(null)",
+        '',
+        '  // Live tail interval ref',
+        '  const liveTailRef = useRef<ReturnType<typeof setInterval> | null>(null)',
+        '',
+        '  // Follow tail viewport ref',
+        '  const viewport = useRef<HTMLDivElement>(null)',
+        '',
+        '  const runAction = useCallback(',
+        '    async (',
+        '      busyMessage: string,',
+        '      successMessage: string,',
+        '      errorMessage: string,',
+        '      perform: () => Promise<void> | void,',
+        '    ) => {',
+        '      setPendingMessage(busyMessage)',
+        '      setStatus(null)',
+        '      try {',
+        '        await perform()',
+        "        setStatus({ tone: 'success', message: successMessage })",
+        '      } catch {',
+        "        setStatus({ tone: 'error', message: errorMessage })",
+        '      } finally {',
+        '        setPendingMessage(null)',
+        '      }',
+        '    },',
+        '    [],',
+        '  )',
+        '',
+        '  const appendLiveEntry = useCallback(async () => {',
+        '    if (!onNextLiveEntry) return',
+        '    try {',
+        '      const newEntry = await onNextLiveEntry()',
+        '      setLogs((prev) => [newEntry, ...prev])',
+        '    } catch {',
+        "      setStatus({ tone: 'error', message: 'Could not append the next log entry.' })",
+        '    }',
+        '  }, [onNextLiveEntry])',
+        '',
+        '  // Live tail effect',
+        '  useEffect(() => {',
+        '    if (liveTail) {',
+        '      liveTailRef.current = setInterval(() => {',
+        '        void appendLiveEntry()',
+        '      }, 2500)',
+      ],
+      [
+        '  const [sidebarOpen, setSidebarOpen] = useState(false);',
+        '  const [liveTail, setLiveTail] = useState(false);',
+        '',
+        '  // Dialog state',
+        '  const [pasteDialogOpen, setPasteDialogOpen] = useState(false);',
+        '  const [savedFiltersOpen, setSavedFiltersOpen] = useState(false);',
+        '',
+        '  // Live tail interval ref',
+        '  const liveTailRef = useRef<ReturnType<typeof setInterval> | null>(null);',
+        '',
+        '  // Generate mock data on mount',
+        '  useEffect(() => {',
+        '    const data = generateMockLogs(600);',
+        '    setLogs(data);',
+        '    setIsLoading(false);',
+        '  }, []);',
+        '',
+        '  // Live tail effect',
+        '  useEffect(() => {',
+        '    if (liveTail) {',
+        '      liveTailRef.current = setInterval(() => {',
+        '        const newEntry = generateLiveTailEntry();',
+        '        setLogs((prev) => [newEntry, ...prev]);',
+        '      }, 2500);',
+      ],
+    ],
+    ['live tail effect dependencies', ['  }, [liveTail, appendLiveEntry])'], ['  }, [liveTail]);']],
+    [
+      'selection without the sidebar inspector',
+      ['    setSelectedEntry((prev) => (prev?.id === entry.id ? null : entry))', '  }, [])'],
+      [
+        '    setSelectedEntry((prev) => (prev?.id === entry.id ? null : entry));',
+        '    setSidebarOpen(true);',
+        '  }, []);',
+      ],
+    ],
+    [
+      'injected copy and export actions',
+      [
+        '  const getLogsText = useCallback(',
+        '    () =>',
+        '      filteredLogs',
+        "        .map((e) => [e.timestamp.toISOString(), e.level, e.service, e.message].join('\\t'))",
+        "        .join('\\n'),",
+        '    [filteredLogs],',
+        '  )',
+        '',
+        '  const handleCopy = useCallback(async () => {',
+        '    await runAction(',
+        "      'Copying logs…',",
+        '      `Copied ${filteredLogs.length} log entries to the clipboard.`,',
+        "      'Could not copy the visible logs.',",
+        '      () => (onCopyLogs ? onCopyLogs(filteredLogs) : navigator.clipboard.writeText(getLogsText())),',
+        '    )',
+        '  }, [filteredLogs, getLogsText, onCopyLogs, runAction])',
+        '',
+        '  const handleExport = useCallback(async () => {',
+        '    await runAction(',
+        "      'Exporting logs…',",
+        '      `Exported ${filteredLogs.length} log entries.`,',
+        "      'Could not export the visible logs.',",
+        '      () => {',
+        '        if (onExportLogs) return onExportLogs(filteredLogs)',
+        '        const json = exportLogsAsJson(filteredLogs)',
+        "        const blob = new Blob([json], { type: 'application/json' })",
+        '        const url = URL.createObjectURL(blob)',
+        "        const a = document.createElement('a')",
+        '        a.href = url',
+        '        a.download = `logpilot-export-${new Date().toISOString().slice(0, 19)}.json`',
+        '        a.click()',
+        '        URL.revokeObjectURL(url)',
+        '      },',
+        '    )',
+        '  }, [filteredLogs, onExportLogs, runAction])',
+      ],
+      [
+        '  const handleExport = useCallback(() => {',
+        '    const json = exportLogsAsJson(filteredLogs);',
+        '    const blob = new Blob([json], { type: "application/json" });',
+        '    const url = URL.createObjectURL(blob);',
+        '    const a = document.createElement("a");',
+        '    a.href = url;',
+        '    a.download = `logpilot-export-${new Date().toISOString().slice(0, 19)}.json`;',
+        '    a.click();',
+        '    URL.revokeObjectURL(url);',
+        '  }, [filteredLogs]);',
+        '',
+        '  const handleImport = useCallback((entries: LogEntry[]) => {',
+        '    setLogs((prev) => {',
+        '      const merged = [...entries, ...prev];',
+        '      merged.sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime());',
+        '      return merged;',
+        '    });',
+        '  }, []);',
+        '',
+        '  const handleApplyFilter = useCallback((filter: SavedFilter) => {',
+        '    setActiveLevels(new Set(filter.levels));',
+        '    setActiveServices(new Set(filter.services));',
+        '    setTimeRange(filter.timeRange);',
+        '    setSearchQuery(filter.searchQuery);',
+        '  }, []);',
+        '',
+        '  const handleToggleSidebar = useCallback(() => {',
+        '    setSidebarOpen((prev) => !prev);',
+        '  }, []);',
+      ],
+    ],
+    [
+      'value-free status projection',
+      [
+        '  const handleToggleLiveTail = useCallback(() => {',
+        '    setLiveTail((prev) => !prev)',
+        '  }, [])',
+        '',
+        "  const statusMessage = status === null ? '' : status.message",
+        "  const statusToneClass = status?.tone === 'error' ? 'text-red-400' : 'text-zinc-400'",
+      ],
+      [
+        '  const handleToggleLiveTail = useCallback(() => {',
+        '    setLiveTail((prev) => !prev);',
+        '  }, []);',
+        '',
+        '  const handleCloseSidebar = useCallback(() => {',
+        '    setSidebarOpen(false);',
+        '    setSelectedEntry(null);',
+        '  }, []);',
+      ],
+    ],
+    [
+      'top bar host wiring',
+      [
+        '        onToggleLiveTail={handleToggleLiveTail}',
+        '        follow={follow}',
+        '        onFollowChange={setFollow}',
+        '        isEmpty={filteredLogs.length === 0}',
+        '        onClearFilters={handleClearFilters}',
+        '        onCopy={() => void handleCopy()}',
+        '        onExport={() => void handleExport()}',
+      ],
+      [
+        '        onToggleLiveTail={handleToggleLiveTail}',
+        '        sidebarOpen={sidebarOpen}',
+        '        onToggleSidebar={handleToggleSidebar}',
+        '        onClearFilters={handleClearFilters}',
+        '        onExport={handleExport}',
+        '        onOpenPaste={() => setPasteDialogOpen(true)}',
+        '        onOpenSavedFilters={() => setSavedFiltersOpen(true)}',
+      ],
+    ],
+    [
+      'log list viewport wiring',
+      [
+        '          onSelect={handleSelect}',
+        '          viewportRef={viewport}',
+        '          onViewportScroll={handleViewportScroll}',
+        '        />',
+        '      </div>',
+        '    </div>',
+        '  )',
+        '}',
+      ],
+      [
+        '          onSelect={handleSelect}',
+        '        />',
+        '',
+        '        {/* Sidebar */}',
+        '        {sidebarOpen && (',
+        '          <div className="w-80 xl:w-96 border-l border-zinc-800 bg-zinc-950/90 shrink-0 hidden md:block">',
+        '            <SidebarInspector',
+        '              selectedEntry={selectedEntry}',
+        '              allLogs={filteredLogs}',
+        '              onClose={handleCloseSidebar}',
+        '            />',
+        '          </div>',
+        '        )}',
+        '      </div>',
+        '',
+        '      {/* Heatmap */}',
+        '      <Heatmap logs={logs} />',
+        '',
+        '      {/* Dialogs */}',
+        '      <PasteDialog',
+        '        open={pasteDialogOpen}',
+        '        onOpenChange={setPasteDialogOpen}',
+        '        onImport={handleImport}',
+        '      />',
+        '',
+        '      <SavedFiltersDialog',
+        '        open={savedFiltersOpen}',
+        '        onOpenChange={setSavedFiltersOpen}',
+        '        currentLevels={activeLevels}',
+        '        currentServices={activeServices}',
+        '        currentTimeRange={timeRange}',
+        '        currentSearch={searchQuery}',
+        '        onApplyFilter={handleApplyFilter}',
+        '      />',
+        '    </div>',
+        '  );',
+        '}',
+      ],
+    ],
+  ],
+}
+
+test('the Logpilot log viewer has only the declared Astrale adaptation', async () => {
+  assert.equal(logViewerProvenance.adaptation, 'astrale-revision')
+  const providerRoot =
+    'tooling/upstream/providers/logpilot/a0ac783c7dc6c579714f960731a2392043185dc6/log-viewer'
+  assert.equal(
+    digest(await readFile(`${providerRoot}/LICENSE`, 'utf8')),
+    logViewerProvenance.licenseDigest,
+  )
+  const temporary = await mkdtemp(path.join(tmpdir(), 'astrale-log-viewer-fidelity-'))
+  try {
+    for (const [filename, file] of Object.entries(logViewerProvenance.files)) {
+      if (!file.implementation) continue
+      const source = await readFile(file.source, 'utf8')
+      assert.equal(digest(source), file.sourceDigest)
+      const replaceDeclared = (value, from, to, label) => {
+        assert.equal(value.split(from).length - 1, 1, `${filename} ${label} is not exact`)
+        return value.replace(from, to)
+      }
+      const removeDeclaredRegion = (value, start, end, label) => {
+        assert.equal(value.split(start).length - 1, 1, `${filename} ${label} start is not exact`)
+        assert.equal(value.split(end).length - 1, 1, `${filename} ${label} end is not exact`)
+        return value.slice(0, value.indexOf(start)) + value.slice(value.indexOf(end))
+      }
+      let implementation = await readFile(file.implementation, 'utf8')
+      for (const [label, start, end] of declaredLogViewerRegions[filename] ?? []) {
+        implementation = removeDeclaredRegion(
+          implementation,
+          start.join('\n'),
+          end.join('\n'),
+          label,
+        )
+      }
+      for (const [label, adapted, upstream] of declaredLogViewerEdits[filename] ?? []) {
+        implementation = replaceDeclared(
+          implementation,
+          adapted.join('\n'),
+          upstream.join('\n'),
+          label,
+        )
+      }
+      assert.equal(
+        implementation.split("'@astrale-os/ui/").length - 1,
+        0,
+        `${filename} keeps an undeclared routed runtime import`,
+      )
+      await mkdir(path.join(temporary, 'source'), { recursive: true })
+      await mkdir(path.join(temporary, 'implementation'), { recursive: true })
+      await writeFile(path.join(temporary, 'source', filename), source)
+      await writeFile(path.join(temporary, 'implementation', filename), implementation)
+    }
+    const formatted = spawnSync('pnpm', ['exec', 'oxfmt', '--write', temporary], {
+      encoding: 'utf8',
+    })
+    assert.equal(formatted.status, 0, formatted.stderr)
+    for (const [filename, file] of Object.entries(logViewerProvenance.files)) {
+      if (!file.implementation) continue
+      assert.equal(
+        await readFile(path.join(temporary, 'implementation', filename), 'utf8'),
+        await readFile(path.join(temporary, 'source', filename), 'utf8'),
+        `${filename} contains an undeclared upstream change`,
+      )
+    }
+  } finally {
+    await rm(temporary, { recursive: true })
+  }
+})
+
+test('the supporting Rivet log behaviors are vendored and reproduced verbatim', async () => {
+  const providerRoot =
+    'tooling/upstream/providers/rivet/b5cac54a50103c0739b618f519ce32778119c3b4/log-viewer'
+  assert.equal(logViewerSupportProvenance.license, 'Apache-2.0')
+  assert.equal(
+    digest(await readFile(`${providerRoot}/LICENSE`, 'utf8')),
+    logViewerSupportProvenance.licenseDigest,
+  )
+  for (const file of Object.values(logViewerSupportProvenance.files)) {
+    assert.equal(digest(await readFile(file.source, 'utf8')), file.sourceDigest)
+  }
+  const logsView = await readFile(`${providerRoot}/logs-view.tsx`, 'utf8')
+  const deploymentLogs = await readFile(`${providerRoot}/deployment-logs.tsx`, 'utf8')
+  const topBar = await readFile('registry/blocks/observability/log-viewer/top-bar.tsx', 'utf8')
+  const composition = await readFile(
+    'registry/blocks/observability/log-viewer/log-viewer.tsx',
+    'utf8',
+  )
+  for (const fragment of ['aria-label="Toggle follow logs"', 'Follow logs']) {
+    assert.ok(logsView.includes(fragment), `upstream follow authority lost ${fragment}`)
+    assert.ok(topBar.includes(fragment), `adapted follow control lost ${fragment}`)
+  }
+  const banner =
+    'flex items-center gap-2 px-4 py-2 bg-destructive/20 text-destructive-foreground text-xs border-b border-destructive/40 shrink-0'
+  assert.ok(deploymentLogs.includes(banner))
+  assert.ok(composition.includes(banner))
+  assert.ok(deploymentLogs.includes('Stream error: {streamError}'))
+  assert.ok(composition.includes('Stream error: {streamError}'))
+  assert.ok(deploymentLogs.includes('navigator.clipboard.writeText'))
+  assert.ok(composition.includes('navigator.clipboard.writeText'))
 })

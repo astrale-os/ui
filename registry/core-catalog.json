@@ -168,12 +168,20 @@
     "variantCount": 4
   },
   {
+    "address": "block/observability/log-viewer",
+    "title": "Block · Observability · Log Viewer",
+    "classification": "block",
+    "family": "observability",
+    "source": "https://raw.githubusercontent.com/Reckless98/logpilot/a0ac783c7dc6c579714f960731a2392043185dc6/src/components/log-viewer.tsx",
+    "variantCount": 2
+  },
+  {
     "address": "block/observability/status-monitor",
     "title": "Block · Observability · Status Monitor",
     "classification": "block",
     "family": "observability",
     "source": "https://ui.8starlabs.com/r/status-monitor.json",
-    "variantCount": 1
+    "variantCount": 2
   },
   {
     "address": "block/secrets/env-variables",

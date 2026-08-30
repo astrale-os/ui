@@ -1,0 +1,67 @@
+{
+  "provider": "@logpilot",
+  "upstreamAddress": "https://raw.githubusercontent.com/Reckless98/logpilot/a0ac783c7dc6c579714f960731a2392043185dc6/src/components/log-viewer.tsx",
+  "documentation": "https://github.com/Reckless98/logpilot/tree/a0ac783c7dc6c579714f960731a2392043185dc6/src/components",
+  "repository": "https://github.com/Reckless98/logpilot",
+  "revision": "a0ac783c7dc6c579714f960731a2392043185dc6",
+  "resolvedAt": "2026-08-30",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/Reckless98/logpilot/blob/a0ac783c7dc6c579714f960731a2392043185dc6/LICENSE",
+  "licenseDigest": "sha256:75edafb53acf2016d532c72eafa2e172e86a287f5ba87b1def5af4eb55706b38",
+  "owner": "block/observability/log-viewer",
+  "adaptation": "astrale-revision",
+  "adaptationNotes": [
+    "Repoint the provider-local module imports to the owned relative log-viewer modules and the Astrale public entrypoints.",
+    "Drop the upstream modules that are outside the accepted source set: mock data, the JSON payload tree, the sidebar inspector, the heatmap, the paste dialog, and the saved filter dialog, with the controls that only open them.",
+    "Expose a typed host boundary of default logs, loading, stream error, and optional live entry, copy, and export actions instead of the upstream generated mock data.",
+    "Report pending, success, and error outcomes of the injected copy, export, and live entry actions in one polite live region that never contains log text.",
+    "Adopt the Apache-2.0 Rivet follow-tail toggle, tab separated copy text, and stream error banner as the supporting authority for those behaviors.",
+    "Name the search clear control, the level toggles, the live tail control, the service and time selects, and every icon control, and expose the row expansion state.",
+    "Allow the upstream toolbar row to wrap so no control is clipped at 390px.",
+    "Apply repository formatting without changing visual behavior, classes, anatomy, defaults, or copy."
+  ],
+  "sourceDigest": "sha256:f80d25e146d3642ff7aeeb64ad081d957aa6b1e18d6ffa688a35a7b6df08734e",
+  "files": {
+    "log-viewer.tsx": {
+      "url": "https://raw.githubusercontent.com/Reckless98/logpilot/a0ac783c7dc6c579714f960731a2392043185dc6/src/components/log-viewer.tsx",
+      "source": "tooling/upstream/providers/logpilot/a0ac783c7dc6c579714f960731a2392043185dc6/log-viewer/log-viewer.tsx",
+      "implementation": "registry/blocks/observability/log-viewer/log-viewer.tsx",
+      "sourceDigest": "sha256:f80d25e146d3642ff7aeeb64ad081d957aa6b1e18d6ffa688a35a7b6df08734e"
+    },
+    "top-bar.tsx": {
+      "url": "https://raw.githubusercontent.com/Reckless98/logpilot/a0ac783c7dc6c579714f960731a2392043185dc6/src/components/top-bar.tsx",
+      "source": "tooling/upstream/providers/logpilot/a0ac783c7dc6c579714f960731a2392043185dc6/log-viewer/top-bar.tsx",
+      "implementation": "registry/blocks/observability/log-viewer/top-bar.tsx",
+      "sourceDigest": "sha256:d0ea8374e5aaec745c83c9304057951b729db266551e137dce50fbb564209ea4"
+    },
+    "log-list.tsx": {
+      "url": "https://raw.githubusercontent.com/Reckless98/logpilot/a0ac783c7dc6c579714f960731a2392043185dc6/src/components/log-list.tsx",
+      "source": "tooling/upstream/providers/logpilot/a0ac783c7dc6c579714f960731a2392043185dc6/log-viewer/log-list.tsx",
+      "implementation": "registry/blocks/observability/log-viewer/log-list.tsx",
+      "sourceDigest": "sha256:2c36cf122edbe0ffdf5c1fee207894245b6ef1cb36724a836806a90bb5f076eb"
+    },
+    "log-entry-row.tsx": {
+      "url": "https://raw.githubusercontent.com/Reckless98/logpilot/a0ac783c7dc6c579714f960731a2392043185dc6/src/components/log-entry-row.tsx",
+      "source": "tooling/upstream/providers/logpilot/a0ac783c7dc6c579714f960731a2392043185dc6/log-viewer/log-entry-row.tsx",
+      "implementation": "registry/blocks/observability/log-viewer/log-entry-row.tsx",
+      "sourceDigest": "sha256:8caef1cd77dc5dbf208c6cdeac5d1ef9fbf24cf0e554ecdfbd0f6faf582e87b7"
+    },
+    "log-utils.ts": {
+      "url": "https://raw.githubusercontent.com/Reckless98/logpilot/a0ac783c7dc6c579714f960731a2392043185dc6/src/lib/log-utils.ts",
+      "source": "tooling/upstream/providers/logpilot/a0ac783c7dc6c579714f960731a2392043185dc6/log-viewer/log-utils.ts",
+      "implementation": "registry/blocks/observability/log-viewer/log-utils.ts",
+      "sourceDigest": "sha256:bb0f1e0b038b593d8ac11f00d87e0f8f6d8531ce439bfc6d2ea6e317a8d88ec5"
+    },
+    "types.ts": {
+      "url": "https://raw.githubusercontent.com/Reckless98/logpilot/a0ac783c7dc6c579714f960731a2392043185dc6/src/lib/types.ts",
+      "source": "tooling/upstream/providers/logpilot/a0ac783c7dc6c579714f960731a2392043185dc6/log-viewer/types.ts",
+      "implementation": "registry/blocks/observability/log-viewer/types.ts",
+      "sourceDigest": "sha256:53ffa45070a1c038715a1bbddf569a83abb5724fa962f8ff9426fa612ef8dfe0"
+    },
+    "LICENSE": {
+      "url": "https://raw.githubusercontent.com/Reckless98/logpilot/a0ac783c7dc6c579714f960731a2392043185dc6/LICENSE",
+      "source": "tooling/upstream/providers/logpilot/a0ac783c7dc6c579714f960731a2392043185dc6/log-viewer/LICENSE",
+      "sourceDigest": "sha256:75edafb53acf2016d532c72eafa2e172e86a287f5ba87b1def5af4eb55706b38"
+    }
+  }
+}
