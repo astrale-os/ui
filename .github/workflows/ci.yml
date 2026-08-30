@@ -15,7 +15,26 @@ permissions:
   contents: read
 
 jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      scope: ${{ steps.plan.outputs.scope }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+      - name: Derive the smallest safe qualification scope
+        id: plan
+        env:
+          INPUT_BASE: ${{ github.event.pull_request.base.sha }}
+        run: |
+          set -euo pipefail
+          base="${INPUT_BASE:-$(git rev-parse HEAD^ 2>/dev/null || git rev-parse HEAD)}"
+          node scripts/plan-ci.mjs --base "$base" --output "$RUNNER_TEMP/ci-plan.json"
+          echo "scope=$(jq -r .plan "$RUNNER_TEMP/ci-plan.json")" >> "$GITHUB_OUTPUT"
+
   contracts:
+    needs: plan
     name: Contracts (Node ${{ matrix.node-version }})
     runs-on: ubuntu-latest
     strategy:
@@ -28,9 +47,27 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           frozen-lockfile: 'true'
-      - run: pnpm check
+      - name: Run the diff-appropriate contract gate
+        env:
+          CI_SCOPE: ${{ needs.plan.outputs.scope }}
+        run: |
+          case "$CI_SCOPE" in
+            docs-only) pnpm format:check ;;
+            request-tooling) pnpm format:check && pnpm lint && pnpm request:check ;;
+            family-scoped)
+              pnpm format:check
+              pnpm lint
+              pnpm typecheck
+              pnpm request:check
+              pnpm registry:check
+              pnpm playground:typecheck
+              ;;
+            global-ui) pnpm check ;;
+          esac
 
   package-and-registry:
+    needs: plan
+    if: needs.plan.outputs.scope == 'family-scoped' || needs.plan.outputs.scope == 'global-ui'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -55,6 +92,8 @@ jobs:
             registry/public/r/**
 
   domain:
+    needs: plan
+    if: needs.plan.outputs.scope == 'global-ui'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -74,6 +113,8 @@ jobs:
       - run: pnpm --dir domain package
 
   security:
+    needs: plan
+    if: needs.plan.outputs.scope == 'global-ui'
     runs-on: ubuntu-latest
     permissions:
       actions: read
@@ -104,6 +145,7 @@ jobs:
           path: artifacts/security/**
 
   dependency-review:
+    needs: plan
     if: github.event_name == 'pull_request' && github.event.repository.private == false
     runs-on: ubuntu-latest
     permissions:
@@ -117,6 +159,8 @@ jobs:
           allow-dependencies-licenses: pkg:npm/victory-vendor@37.3.6
 
   playground:
+    needs: plan
+    if: needs.plan.outputs.scope == 'family-scoped' || needs.plan.outputs.scope == 'global-ui'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -125,10 +169,8 @@ jobs:
           node-version: 26
           frozen-lockfile: 'true'
       - run: pnpm build
-      - run: pnpm --filter @astrale-os/ui-playground exec playwright install --with-deps chromium
       - run: pnpm playground:build
-      - run: pnpm playground:test
-      - run: pnpm playground:test:production
+      - run: pnpm test:playground-unit
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         if: always()
         with:
@@ -138,6 +180,7 @@ jobs:
             artifacts/playground/**
 
   commitlint:
+    needs: plan
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
     steps:

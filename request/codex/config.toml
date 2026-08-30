@@ -1,0 +1,19 @@
+model = "gpt-5.6-luna"
+model_provider = "azure"
+model_reasoning_effort = "max"
+model_reasoning_summary = "none"
+model_verbosity = "low"
+web_search = "disabled"
+
+[model_providers.azure]
+name = "Azure Foundry"
+base_url = "https://astrale-tech-sandbox-resource.services.ai.azure.com/openai/v1/"
+wire_api = "responses"
+env_http_headers = { "api-key" = "AZURE_OPENAI_API_KEY" }
+
+[sandbox_workspace_write]
+network_access = false
+
+[shell_environment_policy]
+inherit = "core"
+exclude = ["AZURE_OPENAI_API_KEY", "GITHUB_TOKEN", "GH_TOKEN", "UI_REQUEST_GITHUB_TOKEN"]

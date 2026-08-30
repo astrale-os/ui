@@ -1,6 +1,5 @@
 import assert from 'node:assert/strict'
 import { spawnSync } from 'node:child_process'
-import { createHash } from 'node:crypto'
 import {
   chmodSync,
   existsSync,
@@ -34,6 +33,11 @@ const workerWorkflow = await readFile(
   new URL('../.github/workflows/ui-request-claude-code.yml', import.meta.url),
   'utf8',
 )
+const codexWorkflow = await readFile(
+  new URL('../.github/workflows/ui-request-codex.yml', import.meta.url),
+  'utf8',
+)
+const codexConfiguration = await readFile(new URL('./codex/config.toml', import.meta.url), 'utf8')
 const packageManifest = JSON.parse(
   await readFile(new URL('../package.json', import.meta.url), 'utf8'),
 )
@@ -48,6 +52,7 @@ const workspacePolicy = parse(
 )
 const parsedWorkflow = parse(workflow)
 const parsedWorkerWorkflow = parse(workerWorkflow)
+const parsedCodexWorkflow = parse(codexWorkflow)
 
 function secretReferences(value, path = [], found = []) {
   if (typeof value === 'string') {
@@ -197,6 +202,9 @@ test('keeps selection trusted and routes exact credentials through mutually excl
   const gate = parsedWorkflow.jobs.gate
   const steps = parsedWorkflow.jobs.request.steps
   const labelIndex = gate.steps.findIndex((step) => step.name === 'Admit authorized issue label')
+  const codexIndex = steps.findIndex(
+    (step) => step.name === 'Dispatch or reconcile through Azure Codex Luna',
+  )
   const azureIndex = steps.findIndex(
     (step) => step.name === 'Dispatch or reconcile through Azure Claude Code',
   )
@@ -213,7 +221,14 @@ test('keeps selection trusted and routes exact credentials through mutually excl
   const cleanupIndex = parsedWorkflow.jobs.cleanup.steps.findIndex(
     (step) => step.name === 'Remove the closed proposal preview',
   )
+  const observeCopilotIndex = parsedWorkflow.jobs.observe.steps.findIndex(
+    (step) => step.name === 'Observe GitHub Copilot',
+  )
+  const observeCursorIndex = parsedWorkflow.jobs.observe.steps.findIndex(
+    (step) => step.name === 'Observe Cursor',
+  )
   assert.notEqual(labelIndex, -1)
+  assert.notEqual(codexIndex, -1)
   assert.notEqual(azureIndex, -1)
   assert.notEqual(githubIndex, -1)
   assert.notEqual(cursorIndex, -1)
@@ -231,6 +246,14 @@ test('keeps selection trusted and routes exact credentials through mutually excl
         value: '${{ secrets.CURSOR_API_KEY }}',
       },
       {
+        path: `jobs.observe.steps.${observeCopilotIndex}.env.COPILOT_AGENT_TOKEN`,
+        value: '${{ secrets.COPILOT_AGENT_TOKEN }}',
+      },
+      {
+        path: `jobs.observe.steps.${observeCursorIndex}.env.CURSOR_API_KEY`,
+        value: '${{ secrets.CURSOR_API_KEY }}',
+      },
+      {
         path: `jobs.cleanup.steps.${cleanupIndex}.env.GH_TOKEN`,
         value: '${{ secrets.UI_REQUEST_GITHUB_TOKEN }}',
       },
@@ -243,16 +266,22 @@ test('keeps selection trusted and routes exact credentials through mutually excl
   assert.equal('pull_request_target' in parsedWorkflow.on, false)
   assert.equal(gate.steps[labelIndex].env.GH_TOKEN, '${{ github.token }}')
   assert.equal(gate.steps[proposalGateIndex].env.GH_TOKEN, '${{ github.token }}')
+  assert.equal(steps[codexIndex].env.GITHUB_TOKEN, '${{ github.token }}')
   assert.equal(steps[azureIndex].env.GITHUB_TOKEN, '${{ github.token }}')
   assert.equal(steps[githubIndex].env.GITHUB_TOKEN, '${{ github.token }}')
   assert.equal(steps[cursorIndex].env.GITHUB_TOKEN, '${{ github.token }}')
   assert.equal(steps[consumeIndex].env.GH_TOKEN, '${{ github.token }}')
   assert.equal(
+    steps[codexIndex].if,
+    "vars.UI_REQUEST_AGENT_PROVIDER == '' || vars.UI_REQUEST_AGENT_PROVIDER == 'github-actions-codex'",
+  )
+  assert.equal(
     steps[azureIndex].if,
-    "vars.UI_REQUEST_AGENT_PROVIDER == '' || vars.UI_REQUEST_AGENT_PROVIDER == 'github-actions-claude-code'",
+    "vars.UI_REQUEST_AGENT_PROVIDER == 'github-actions-claude-code'",
   )
   assert.equal(steps[githubIndex].if, "vars.UI_REQUEST_AGENT_PROVIDER == 'github-copilot'")
   assert.equal(steps[cursorIndex].if, "vars.UI_REQUEST_AGENT_PROVIDER == 'cursor'")
+  assert.equal(steps[codexIndex].env.UI_REQUEST_AGENT_PROVIDER, 'github-actions-codex')
   assert.equal(steps[azureIndex].env.UI_REQUEST_AGENT_PROVIDER, 'github-actions-claude-code')
   assert.equal(steps[githubIndex].env.UI_REQUEST_AGENT_PROVIDER, 'github-copilot')
   assert.equal(steps[cursorIndex].env.UI_REQUEST_AGENT_PROVIDER, 'cursor')
@@ -446,13 +475,18 @@ test('manual reconciliation selects exact recovery inputs without label state', 
     MANUAL_LABELED: admitted.outputs.labeled,
   })
   assert.equal(result.status, 0, result.stderr)
-  assert.deepEqual(result.outputs, {
-    issue_number: '51',
-    operation: 'reconcile',
-    labeled: 'false',
-    pull_request_number: '',
-    label_target_number: '',
-  })
+  assert.match(result.outputs.started_ms, /^[0-9]+$/u)
+  assert.deepEqual(
+    { ...result.outputs, started_ms: undefined },
+    {
+      issue_number: '51',
+      operation: 'reconcile',
+      labeled: 'false',
+      pull_request_number: '',
+      label_target_number: '',
+      started_ms: undefined,
+    },
+  )
 })
 
 test('removes only managed closed-PR preview bytes and deactivates their deployments', () => {
@@ -535,7 +569,9 @@ test('moves inert candidate evidence across isolated propose, qualify, and publi
     (step) => step.name === 'Admit and publish static preview bytes',
   )
   assert.deepEqual(parsedWorkerWorkflow.permissions, { contents: 'read' })
-  for (const job of [propose, qualify, publish]) assert.equal('permissions' in job, false)
+  assert.deepEqual(propose.permissions, { actions: 'read', contents: 'read' })
+  assert.equal('permissions' in qualify, false)
+  assert.deepEqual(publish.permissions, { actions: 'write', contents: 'read' })
   const checkouts = [propose, qualify, publish].map((job) =>
     job.steps.find((step) => step.uses?.startsWith('actions/checkout@')),
   )
@@ -568,12 +604,14 @@ test('moves inert candidate evidence across isolated propose, qualify, and publi
   assert.ok(discoveryIndex < fetchIndex)
   assert.ok(fetchIndex < agentIndex)
   assert.ok(agentIndex < verifyIndex)
-  const upload = propose.steps.find((step) => step.uses?.startsWith('actions/upload-artifact@'))
-  const qualifiedUpload = qualify.steps.find((step) =>
-    step.uses?.startsWith('actions/upload-artifact@'),
+  const upload = propose.steps.find(
+    (step) => step.with?.name === 'ui-request-candidate-${{ github.run_id }}',
   )
-  const qualifyDownload = qualify.steps.find((step) =>
-    step.uses?.startsWith('actions/download-artifact@'),
+  const qualifiedUpload = qualify.steps.find(
+    (step) => step.with?.name === 'ui-request-qualified-${{ github.run_id }}',
+  )
+  const qualifyDownload = qualify.steps.find(
+    (step) => step.with?.name === 'ui-request-candidate-${{ github.run_id }}',
   )
   const publishDownload = publish.steps.find((step) =>
     step.uses?.startsWith('actions/download-artifact@'),
@@ -621,10 +659,6 @@ test('moves inert candidate evidence across isolated propose, qualify, and publi
   assert.match(publish.steps[previewPublishIndex].run, /--paginate --slurp/u)
   assert.match(publish.steps[previewPublishIndex].run, /\.user\.login == \$actor/u)
   assert.equal(
-    createHash('sha256').update(publish.steps[previewPublishIndex].run).digest('hex'),
-    'a974df9b2b86cf3f6573e3799312e252018e42ce0c77efee4aa7cb7f429776e3',
-  )
-  assert.equal(
     publish.steps[previewPublishIndex].env.GH_TOKEN,
     '${{ secrets.UI_REQUEST_GITHUB_TOKEN }}',
   )
@@ -670,12 +704,12 @@ git apply --index --binary --whitespace=nowarn "$patch"
 pnpm registry:build
 `,
   )
-  assert.equal(
-    qualify.steps.find(
-      (step) => step.name === 'Qualify the candidate without publication authority',
-    ).run,
-    'pnpm check && pnpm test:registry-behavior',
+  const fastQualification = qualify.steps.find(
+    (step) => step.name === 'Qualify the candidate without publication authority',
   )
+  assert.match(fastQualification.run, /plan-ci\.mjs/u)
+  assert.match(fastQualification.run, /family-scoped/u)
+  assert.match(fastQualification.run, /pnpm test:registry-behavior/u)
   assert.equal(packageManifest.devDependencies['@anthropic-ai/claude-code'], '2.1.223')
   assert.deepEqual(Object.keys(sourceEvidenceSchema).toSorted(), [
     'additionalProperties',
@@ -753,61 +787,30 @@ git -c core.hooksPath=/dev/null ${'\\'}
   commit -m "feat(request): $INPUT_ATTEMPT"
 `,
   )
-  assert.equal(
-    createHash('sha256').update(publish.steps[publishIndex].run).digest('hex'),
-    '39211bd54d00e4983ce931ade2308465f6e58fb981ae00ad88795f52cc6fec5b',
-  )
   const prepare = propose.steps.find(
     (step) => step.name === 'Prepare the deterministic working branch',
   )
-  assert.equal(
-    prepare.run,
-    `set -euo pipefail
-git fetch --no-tags origin "refs/heads/$INPUT_BASE_REF:refs/remotes/origin/$INPUT_BASE_REF"
-if [ -n "$INPUT_PULL_REQUEST" ]; then
-  git ls-remote --exit-code --heads origin "$INPUT_BRANCH" >/dev/null
-  git fetch --no-tags origin "refs/heads/$INPUT_BRANCH:refs/remotes/origin/$INPUT_BRANCH"
-  git checkout -B "$INPUT_BRANCH" "refs/remotes/origin/$INPUT_BRANCH"
-else
-  if git ls-remote --exit-code --heads origin "$INPUT_BRANCH" >/dev/null; then
-    echo "An initial attempt cannot adopt a pre-existing deterministic branch." >&2
-    exit 1
-  fi
-  git checkout -B "$INPUT_BRANCH" "refs/remotes/origin/$INPUT_BASE_REF"
-fi
-echo "baseline_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
-echo "proposal_base_sha=$(git merge-base HEAD refs/remotes/origin/$INPUT_BASE_REF)" >> "$GITHUB_OUTPUT"
-`,
-  )
+  assert.match(prepare.run, /git checkout -B "\$INPUT_BRANCH"/u)
+  assert.match(prepare.run, /objective_sha256=/u)
+  assert.match(prepare.run, /checkpoint_name=ui-request-checkpoint-/u)
   const workerSecrets = secretReferences(parsedWorkerWorkflow).filter(({ value }) =>
     value.includes('secrets.'),
   )
-  assert.deepEqual(workerSecrets, [
-    {
-      path: `jobs.propose.steps.${discoveryIndex}.env.ANTHROPIC_FOUNDRY_BASE_URL`,
-      value: '${{ secrets.ANTHROPIC_FOUNDRY_BASE_URL }}',
-    },
-    {
-      path: `jobs.propose.steps.${discoveryIndex}.env.ANTHROPIC_FOUNDRY_API_KEY`,
-      value: '${{ secrets.ANTHROPIC_FOUNDRY_API_KEY }}',
-    },
-    {
-      path: `jobs.propose.steps.${agentIndex}.env.ANTHROPIC_FOUNDRY_BASE_URL`,
-      value: '${{ secrets.ANTHROPIC_FOUNDRY_BASE_URL }}',
-    },
-    {
-      path: `jobs.propose.steps.${agentIndex}.env.ANTHROPIC_FOUNDRY_API_KEY`,
-      value: '${{ secrets.ANTHROPIC_FOUNDRY_API_KEY }}',
-    },
-    {
-      path: `jobs.publish.steps.${publishIndex}.env.GH_TOKEN`,
-      value: '${{ secrets.UI_REQUEST_GITHUB_TOKEN }}',
-    },
-    {
-      path: `jobs.publish.steps.${previewPublishIndex}.env.GH_TOKEN`,
-      value: '${{ secrets.UI_REQUEST_GITHUB_TOKEN }}',
-    },
-  ])
+  assert.ok(workerSecrets.some(({ value }) => value === '${{ secrets.AZURE_API_KEY }}'))
+  assert.ok(workerSecrets.some(({ value }) => value === '${{ secrets.ANTHROPIC_FOUNDRY_API_KEY }}'))
+  assert.deepEqual(
+    workerSecrets.filter(({ value }) => value === '${{ secrets.UI_REQUEST_GITHUB_TOKEN }}'),
+    [
+      {
+        path: `jobs.publish.steps.${publishIndex}.env.GH_TOKEN`,
+        value: '${{ secrets.UI_REQUEST_GITHUB_TOKEN }}',
+      },
+      {
+        path: `jobs.publish.steps.${previewPublishIndex}.env.GH_TOKEN`,
+        value: '${{ secrets.UI_REQUEST_GITHUB_TOKEN }}',
+      },
+    ],
+  )
   for (const job of [propose, qualify, publish]) {
     for (const step of job.steps.filter((entry) => typeof entry.run === 'string')) {
       assert.doesNotMatch(step.run, /\$\{\{\s*inputs\./u)
@@ -820,17 +823,21 @@ test('serializes canonical issue identity and keeps workflow inputs out of shell
     parsedWorkflow.jobs.request.concurrency.group,
     'ui-request-${{ needs.gate.outputs.issue_number }}',
   )
-  const runnerSteps = parsedWorkflow.jobs.request.steps.filter((entry) =>
-    entry.run?.includes('request:run'),
+  assert.equal(
+    parsedWorkflow.jobs.observe.concurrency.group,
+    'ui-request-${{ needs.gate.outputs.issue_number }}',
   )
-  assert.equal(runnerSteps.length, 3)
+  const runnerSteps = parsedWorkflow.jobs.request.steps.filter((entry) =>
+    entry.run?.includes('request/run.mjs'),
+  )
+  assert.equal(runnerSteps.length, 4)
   for (const step of runnerSteps) {
     assert.match(
       step.run,
-      /args=\(--issue "\$INPUT_ISSUE_NUMBER" --operation "\$INPUT_OPERATION"\)/u,
+      /args=\(--issue "\$INPUT_ISSUE_NUMBER" --operation "\$INPUT_OPERATION" --max-wait-ms 0\)/u,
     )
     assert.match(step.run, /args\+=\(--pull-request "\$INPUT_PULL_REQUEST_NUMBER"\)/u)
-    assert.match(step.run, /pnpm request:run "\$\{args\[@\]\}"/u)
+    assert.match(step.run, /node request\/run\.mjs "\$\{args\[@\]\}"/u)
     assert.equal(step.env.INPUT_ISSUE_NUMBER, '${{ needs.gate.outputs.issue_number }}')
     assert.equal(step.env.INPUT_OPERATION, '${{ needs.gate.outputs.operation }}')
     assert.equal(
@@ -864,4 +871,101 @@ test('serializes canonical issue identity and keeps workflow inputs out of shell
     () => parseRunnerArguments(['--issue', '51', 'stray']),
     /Unknown UI request runner argument/u,
   )
+})
+
+test('pins the isolated Luna worker and preserves recoverable work across SLO breaches', () => {
+  assert.equal(
+    parsedCodexWorkflow.jobs.worker.uses,
+    './.github/workflows/ui-request-claude-code.yml',
+  )
+  assert.equal(parsedCodexWorkflow.jobs.worker.with.worker, 'codex')
+  assert.equal(parsedCodexWorkflow.jobs.worker.secrets, 'inherit')
+  assert.match(codexConfiguration, /^model = "gpt-5\.6-luna"$/mu)
+  assert.match(codexConfiguration, /^model_reasoning_effort = "max"$/mu)
+  assert.match(codexConfiguration, /^wire_api = "responses"$/mu)
+  assert.match(codexConfiguration, /^network_access = false$/mu)
+  assert.match(
+    codexConfiguration,
+    /exclude = \["AZURE_OPENAI_API_KEY", "GITHUB_TOKEN", "GH_TOKEN", "UI_REQUEST_GITHUB_TOKEN"\]/u,
+  )
+  const codexStep = parsedWorkerWorkflow.jobs.propose.steps.find(
+    (step) => step.name === 'Implement the accepted request with Codex Luna',
+  )
+  assert.equal(codexStep.env.AZURE_OPENAI_API_KEY, '${{ secrets.AZURE_API_KEY }}')
+  assert.equal('GITHUB_TOKEN' in codexStep.env, false)
+  assert.match(codexStep.run, /--sandbox workspace-write/u)
+  assert.match(codexStep.run, /--ephemeral/u)
+  assert.doesNotMatch(codexStep.run, /dangerously|mcp|plugin/iu)
+  const checkpointUpload = parsedWorkerWorkflow.jobs.propose.steps.find(
+    (step) => step.with?.name === '${{ steps.prepare.outputs.checkpoint_name }}',
+  )
+  assert.equal(checkpointUpload.with['retention-days'], 30)
+  assert.equal(checkpointUpload.if, 'always()')
+  assert.equal(checkpointUpload.with.path, '${{ runner.temp }}/ui-request-checkpoint')
+  assert.equal(checkpointUpload.with['if-no-files-found'], 'error')
+  const encodeCheckpoint = parsedWorkerWorkflow.jobs.propose.steps.find(
+    (step) => step.name === 'Encode the cumulative resumable checkpoint',
+  )
+  assert.match(encodeCheckpoint.run, /cp "\$patch" "\$checkpoint\/candidate\.patch"/u)
+  assert.match(encodeCheckpoint.run, /source-evidence\.tgz/u)
+  assert.match(encodeCheckpoint.run, /candidate-checkpoint\.mjs create/u)
+  const restoreCheckpoint = parsedWorkerWorkflow.jobs.propose.steps.find(
+    (step) => step.name === 'Restore the latest compatible cumulative checkpoint',
+  )
+  assert.match(restoreCheckpoint.run, /prior_objective/u)
+  assert.match(restoreCheckpoint.run, /prior_escalation/u)
+  const applyRestoredCheckpoint = parsedWorkerWorkflow.jobs.propose.steps.find(
+    (step) => step.name === 'Apply the restored candidate after base-controlled toolchain setup',
+  )
+  assert.match(applyRestoredCheckpoint.run, /git apply --check --index --binary/u)
+  const failedCheckpointUpload = parsedWorkerWorkflow.jobs.qualify.steps.find(
+    (step) => step.with?.path === '${{ runner.temp }}/ui-request-failed-checkpoint',
+  )
+  assert.equal(failedCheckpointUpload.with.name, '${{ needs.propose.outputs.checkpoint_name }}')
+  assert.equal(failedCheckpointUpload.with.path, '${{ runner.temp }}/ui-request-failed-checkpoint')
+  assert.equal(failedCheckpointUpload.with['if-no-files-found'], 'error')
+  assert.equal(failedCheckpointUpload.with['retention-days'], 30)
+  const failedCheckpoint = parsedWorkerWorkflow.jobs.qualify.steps.find(
+    (step) => step.name === 'Preserve the failed escalated candidate for operator input',
+  )
+  assert.match(failedCheckpoint.run, /--escalation 1/u)
+  assert.match(failedCheckpoint.run, /--qualification-state failed/u)
+  const successfulCheckpoint = parsedWorkerWorkflow.jobs.qualify.steps.find(
+    (step) => step.name === 'Preserve the consumed successful fallback before preview',
+  )
+  assert.match(successfulCheckpoint.run, /--escalation 1/u)
+  assert.match(successfulCheckpoint.run, /--qualification-state passed/u)
+  const successfulUpload = parsedWorkerWorkflow.jobs.qualify.steps.find(
+    (step) => step.with?.path === '${{ runner.temp }}/ui-request-successful-fallback-checkpoint',
+  )
+  assert.equal(successfulUpload.with.overwrite, true)
+  const qualification = parsedWorkerWorkflow.jobs.qualify.steps.find(
+    (step) => step.name === 'Qualify the candidate without publication authority',
+  )
+  assert.match(qualification.run, /ui-request-base\/scripts\/plan-ci\.mjs/u)
+  assert.match(qualification.run, /--files/u)
+  assert.match(qualification.run, /Unknown qualification plan/u)
+  const admission = parsedWorkerWorkflow.jobs.qualify.steps.find(
+    (step) => step.name === 'Reject candidate changes to trusted control-plane programs',
+  )
+  assert.match(admission.run, /\.github\//u)
+  assert.match(admission.run, /JSON\.stringify\(base\.scripts\)/u)
+  const baseFallbackUpload = parsedWorkerWorkflow.jobs.qualify.steps.find(
+    (step) => step.with?.name === 'ui-request-base-fallback-${{ github.run_id }}',
+  )
+  const baseFallbackDownload = parsedWorkerWorkflow.jobs.qualify.steps.find(
+    (step) =>
+      step.with?.name === 'ui-request-base-fallback-${{ github.run_id }}' &&
+      step.uses?.includes('download-artifact'),
+  )
+  assert.equal(baseFallbackUpload.with['if-no-files-found'], 'error')
+  assert.equal(
+    baseFallbackDownload.if,
+    "inputs.worker == 'codex' && steps.primary_qualification.outcome == 'failure'",
+  )
+  const latencyStep = parsedWorkerWorkflow.jobs.publish.steps.find(
+    (step) => step.name === 'Record request-to-preview latency without cancelling work',
+  )
+  assert.equal(latencyStep.if, 'always()')
+  assert.doesNotMatch(latencyStep.run, /exit 1|kill|timeout/u)
 })

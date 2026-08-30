@@ -3,6 +3,31 @@ name: UI Request Claude Code Worker
 run-name: 'Astrale attempt: ${{ inputs.attempt }}'
 
 on:
+  workflow_call:
+    inputs:
+      attempt:
+        required: true
+        type: string
+      request:
+        required: true
+        type: string
+      base_ref:
+        required: true
+        type: string
+      branch:
+        required: true
+        type: string
+      objective:
+        required: true
+        type: string
+      pull_request:
+        required: false
+        default: ''
+        type: string
+      worker:
+        required: false
+        default: opus
+        type: string
   workflow_dispatch:
     inputs:
       attempt:
@@ -30,6 +55,14 @@ on:
         required: false
         default: ''
         type: string
+      worker:
+        description: Private worker selection; managed-agent callers omit it.
+        required: false
+        default: opus
+        type: choice
+        options:
+          - opus
+          - codex
 
 concurrency:
   group: ui-request-claude-code-${{ inputs.branch }}
@@ -43,9 +76,16 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 90
     environment: ui-request-agent
+    permissions:
+      actions: read
+      contents: read
     outputs:
       baseline_sha: ${{ steps.prepare.outputs.baseline_sha }}
       proposal_base_sha: ${{ steps.prepare.outputs.proposal_base_sha }}
+      objective_sha256: ${{ steps.prepare.outputs.objective_sha256 }}
+      checkpoint_name: ${{ steps.prepare.outputs.checkpoint_name }}
+      escalated: ${{ steps.classify_codex.outputs.escalate }}
+      started_ms: ${{ steps.prepare.outputs.started_ms }}
     env:
       NODE_VERSION: '24'
     steps:
@@ -59,8 +99,11 @@ jobs:
           INPUT_BASE_REF: ${{ inputs.base_ref }}
           INPUT_BRANCH: ${{ inputs.branch }}
           INPUT_PULL_REQUEST: ${{ inputs.pull_request }}
+          INPUT_OBJECTIVE: ${{ inputs.objective }}
+          INPUT_REQUEST: ${{ inputs.request }}
         run: |
           set -euo pipefail
+          echo "started_ms=$(date +%s%3N)" >> "$GITHUB_OUTPUT"
           git fetch --no-tags origin "refs/heads/$INPUT_BASE_REF:refs/remotes/origin/$INPUT_BASE_REF"
           if [ -n "$INPUT_PULL_REQUEST" ]; then
             git ls-remote --exit-code --heads origin "$INPUT_BRANCH" >/dev/null
@@ -74,12 +117,66 @@ jobs:
             git checkout -B "$INPUT_BRANCH" "refs/remotes/origin/$INPUT_BASE_REF"
           fi
           echo "baseline_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
-          echo "proposal_base_sha=$(git merge-base HEAD refs/remotes/origin/$INPUT_BASE_REF)" >> "$GITHUB_OUTPUT"
+          echo "proposal_base_sha=$(git merge-base HEAD "refs/remotes/origin/$INPUT_BASE_REF")" >> "$GITHUB_OUTPUT"
+          objective_sha256="$(printf '%s' "$INPUT_OBJECTIVE" | sha256sum | cut -d' ' -f1)"
+          issue="${INPUT_REQUEST##*/}"
+          case "$issue" in ''|*[!0-9]*) exit 1 ;; esac
+          echo "objective_sha256=$objective_sha256" >> "$GITHUB_OUTPUT"
+          echo "checkpoint_name=ui-request-checkpoint-$issue" >> "$GITHUB_OUTPUT"
+      - name: Restore the latest compatible cumulative checkpoint
+        id: restore
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CHECKPOINT_NAME: ${{ steps.prepare.outputs.checkpoint_name }}
+          INPUT_OBJECTIVE_SHA256: ${{ steps.prepare.outputs.objective_sha256 }}
+          INPUT_BASE_SHA: ${{ steps.prepare.outputs.baseline_sha }}
+          INPUT_REQUEST: ${{ inputs.request }}
+        run: |
+          set -euo pipefail
+          checkpoint="$RUNNER_TEMP/ui-request-restored-checkpoint"
+          artifact="$(gh api "repos/$GITHUB_REPOSITORY/actions/artifacts?name=$CHECKPOINT_NAME&per_page=100" \
+            --jq '[.artifacts[] | select(.expired == false)] | sort_by(.created_at) | last // empty')"
+          if [ -z "$artifact" ]; then
+            echo 'restored=false' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          artifact_id="$(jq -r .id <<< "$artifact")"
+          mkdir -p "$checkpoint"
+          gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$artifact_id/zip" > "$RUNNER_TEMP/checkpoint.zip"
+          unzip -q "$RUNNER_TEMP/checkpoint.zip" -d "$checkpoint"
+          node request/candidate-checkpoint.mjs verify \
+            --manifest "$checkpoint/checkpoint.json" \
+            --root "$checkpoint" \
+            --request "$INPUT_REQUEST" \
+            --base-sha "$INPUT_BASE_SHA" >/dev/null
+          prior_objective="$(jq -r .objectiveSha256 "$checkpoint/checkpoint.json")"
+          prior_escalation="$(jq -r .worker.escalation "$checkpoint/checkpoint.json")"
+          if [ "$prior_objective" = "$INPUT_OBJECTIVE_SHA256" ]; then
+            if [ "$prior_escalation" = 1 ]; then
+              echo 'The unchanged objective already consumed its sole fallback; operator input is required.' >&2
+              exit 1
+            fi
+            mkdir -p "$RUNNER_TEMP/ui-request-source-evidence"
+            tar -xzf "$checkpoint/source-evidence.tgz" -C "$RUNNER_TEMP/ui-request-source-evidence"
+            echo 'source_restored=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'source_restored=false' >> "$GITHUB_OUTPUT"
+          fi
+          echo 'restored=true' >> "$GITHUB_OUTPUT"
       - uses: astrale-os/config/.github/actions/setup@8e2e2abd0320be0c2f64033916519ab3b66c7dd7
         with:
           node-version: 24
           frozen-lockfile: 'true'
+      - name: Preserve the base-controlled qualification planner
+        run: cp scripts/plan-ci.mjs "$RUNNER_TEMP/ui-request-plan-ci.mjs"
+      - name: Apply the restored candidate after base-controlled toolchain setup
+        if: steps.restore.outputs.restored == 'true'
+        run: |
+          patch="$RUNNER_TEMP/ui-request-restored-checkpoint/candidate.patch"
+          git apply --check --index --binary --whitespace=nowarn "$patch"
+          git apply --index --binary --whitespace=nowarn "$patch"
       - name: Discover immutable public source evidence with Claude Code
+        if: inputs.worker == 'opus' && steps.restore.outputs.source_restored != 'true'
         env:
           INPUT_OBJECTIVE: ${{ inputs.objective }}
           CLAUDE_CODE_USE_FOUNDRY: '1'
@@ -102,13 +199,35 @@ jobs:
             --json-schema "$schema" \
             --output-format json \
             --print > "$RUNNER_TEMP/ui-request-source-manifest.json"
+      - name: Discover immutable public source evidence with Codex Luna
+        if: inputs.worker == 'codex' && steps.restore.outputs.source_restored != 'true'
+        env:
+          INPUT_OBJECTIVE: ${{ inputs.objective }}
+          AZURE_OPENAI_API_KEY: ${{ secrets.AZURE_API_KEY }}
+          CODEX_HOME: ${{ runner.temp }}/codex-home
+        run: |
+          set -euo pipefail
+          mkdir -p "$CODEX_HOME"
+          cp request/codex/config.toml "$CODEX_HOME/config.toml"
+          { cat request/source-discovery.md; printf '\n\n%s' "$INPUT_OBJECTIVE"; } | \
+            pnpm exec codex exec \
+              --strict-config \
+              --ephemeral \
+              --sandbox read-only \
+              --skip-git-repo-check \
+              -c 'web_search="live"' \
+              --output-schema request/.spec/schemas/source-evidence-v1.schema.json \
+              --output-last-message "$RUNNER_TEMP/ui-request-source-manifest.json" \
+              --json - > "$RUNNER_TEMP/ui-request-source-events.jsonl"
       - name: Fetch bounded immutable source evidence without credentials
+        if: steps.restore.outputs.source_restored != 'true'
         run: |
           set -euo pipefail
           node request/source-evidence.mjs \
             --manifest "$RUNNER_TEMP/ui-request-source-manifest.json" \
             --output "$RUNNER_TEMP/ui-request-source-evidence"
       - name: Implement the accepted request with Claude Code
+        if: inputs.worker == 'opus'
         env:
           INPUT_OBJECTIVE: ${{ inputs.objective }}
           SOURCE_EVIDENCE_ROOT: ${{ runner.temp }}/ui-request-source-evidence
@@ -130,13 +249,76 @@ jobs:
             --no-session-persistence \
             --max-budget-usd 20 \
             --print
+      - name: Implement the accepted request with Codex Luna
+        if: inputs.worker == 'codex'
+        id: codex_implementation
+        continue-on-error: true
+        env:
+          INPUT_OBJECTIVE: ${{ inputs.objective }}
+          SOURCE_EVIDENCE_ROOT: ${{ runner.temp }}/ui-request-source-evidence
+          AZURE_OPENAI_API_KEY: ${{ secrets.AZURE_API_KEY }}
+          CODEX_HOME: ${{ runner.temp }}/codex-home
+        run: |
+          set -euo pipefail
+          test -f "$CODEX_HOME/config.toml"
+          {
+            cat request/codex/implementation.md
+            printf '\n\n%s\n\nVerified source evidence root: %s\n' \
+              "$INPUT_OBJECTIVE" "$SOURCE_EVIDENCE_ROOT"
+          } | pnpm exec codex exec \
+              --strict-config \
+              --ephemeral \
+              --sandbox workspace-write \
+              --output-last-message "$RUNNER_TEMP/ui-request-codex-summary.md" \
+              --json - > "$RUNNER_TEMP/ui-request-codex-events.jsonl"
+      - name: Classify Codex implementation failure
+        id: classify_codex
+        if: inputs.worker == 'codex'
+        env:
+          CODEX_OUTCOME: ${{ steps.codex_implementation.outcome }}
+        run: |
+          set -euo pipefail
+          if [ "$CODEX_OUTCOME" = success ]; then
+            echo 'escalate=false' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          if grep -Eiq '(^|[^0-9])(401|403|429)([^0-9]|$)|authenticat|permission|quota|rate.?limit' \
+            "$RUNNER_TEMP/ui-request-codex-events.jsonl" 2>/dev/null; then
+            echo 'Codex failed at an authentication, permission, quota, or rate boundary; provider escalation is forbidden.' >&2
+            exit 1
+          fi
+          echo 'escalate=true' >> "$GITHUB_OUTPUT"
+      - name: Escalate one failed Codex implementation to Opus
+        if: inputs.worker == 'codex' && steps.classify_codex.outputs.escalate == 'true'
+        env:
+          INPUT_OBJECTIVE: ${{ inputs.objective }}
+          SOURCE_EVIDENCE_ROOT: ${{ runner.temp }}/ui-request-source-evidence
+          CLAUDE_CODE_USE_FOUNDRY: '1'
+          ANTHROPIC_FOUNDRY_BASE_URL: ${{ secrets.ANTHROPIC_FOUNDRY_BASE_URL }}
+          ANTHROPIC_FOUNDRY_API_KEY: ${{ secrets.ANTHROPIC_FOUNDRY_API_KEY }}
+          ANTHROPIC_DEFAULT_OPUS_MODEL: claude-opus-5
+        run: |
+          set -euo pipefail
+          printf '%s\n\nContinue from the current partial candidate. The fast worker failed for an eligible implementation reason, so this is the sole fallback for the unchanged objective. Read the verified evidence at %s and preserve authoritative source classes, DOM, and behavior.' "$INPUT_OBJECTIVE" "$SOURCE_EVIDENCE_ROOT" | \
+            node node_modules/@anthropic-ai/claude-code/cli-wrapper.cjs \
+            --bare \
+            --model claude-opus-5 \
+            --effort medium \
+            --permission-mode acceptEdits \
+            --allowedTools Read,Edit,Write,Glob,Grep \
+            --add-dir "$SOURCE_EVIDENCE_ROOT" \
+            --no-session-persistence \
+            --max-budget-usd 20 \
+            --print
       - name: Verify immutable source evidence without credentials
+        if: always()
         run: |
           set -euo pipefail
           node request/source-evidence.mjs \
             --verify \
             --output "$RUNNER_TEMP/ui-request-source-evidence"
       - name: Encode the candidate as inert patch evidence
+        if: always()
         run: |
           set -euo pipefail
           git -c core.hooksPath=/dev/null add -A
@@ -149,6 +331,60 @@ jobs:
           size="$(wc -c < "$patch" | tr -d ' ')"
           test "$size" -gt 0
           test "$size" -le 16777216
+      - name: Encode the cumulative resumable checkpoint
+        if: always()
+        env:
+          INPUT_ATTEMPT: ${{ inputs.attempt }}
+          INPUT_REQUEST: ${{ inputs.request }}
+          INPUT_OBJECTIVE_SHA256: ${{ steps.prepare.outputs.objective_sha256 }}
+          INPUT_BASE_SHA: ${{ steps.prepare.outputs.baseline_sha }}
+          INPUT_WORKER: ${{ inputs.worker }}
+        run: |
+          set -euo pipefail
+          patch="$RUNNER_TEMP/ui-request-candidate.patch"
+          test -s "$patch"
+          checkpoint="$RUNNER_TEMP/ui-request-checkpoint"
+          mkdir -p "$checkpoint"
+          cp "$patch" "$checkpoint/candidate.patch"
+          tar -czf "$checkpoint/source-evidence.tgz" -C "$RUNNER_TEMP/ui-request-source-evidence" .
+          plan="$(node "$RUNNER_TEMP/ui-request-plan-ci.mjs" --files "$(git diff --cached --name-only --diff-filter=ACMRD)" | jq -r .plan)"
+          if [ "$INPUT_WORKER" = codex ] && [ "${{ steps.classify_codex.outputs.escalate }}" != true ]; then
+            provider=github-actions-codex
+            model=gpt-5.6-luna
+            effort=max
+            escalation=0
+          else
+            provider=github-actions-claude-code
+            model=claude-opus-5
+            effort=medium
+            escalation=1
+          fi
+          created_at="$(date -u +'%Y-%m-%dT%H:%M:%S.000Z')"
+          expires_at="$(date -u -d '+30 days' +'%Y-%m-%dT%H:%M:%S.000Z')"
+          node request/candidate-checkpoint.mjs create \
+            --root "$checkpoint" \
+            --request "$INPUT_REQUEST" \
+            --attempt "$INPUT_ATTEMPT" \
+            --objective-sha256 "$INPUT_OBJECTIVE_SHA256" \
+            --base-sha "$INPUT_BASE_SHA" \
+            --patch candidate.patch \
+            --source-evidence source-evidence.tgz \
+            --provider "$provider" \
+            --model "$model" \
+            --reasoning-effort "$effort" \
+            --escalation "$escalation" \
+            --qualification-state pending \
+            --plan "$plan" \
+            --created-at "$created_at" \
+            --expires-at "$expires_at" \
+            --output "$checkpoint/checkpoint.json"
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        if: always()
+        with:
+          name: ${{ steps.prepare.outputs.checkpoint_name }}
+          path: ${{ runner.temp }}/ui-request-checkpoint
+          if-no-files-found: error
+          retention-days: 30
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: ui-request-candidate-${{ github.run_id }}
@@ -160,6 +396,9 @@ jobs:
     needs: propose
     runs-on: ubuntu-latest
     timeout-minutes: 45
+    environment: ui-request-agent
+    outputs:
+      fallback_used: ${{ needs.propose.outputs.escalated == 'true' || steps.fallback_qualification.outcome == 'success' }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
@@ -168,15 +407,33 @@ jobs:
       - name: Preserve base-controlled visual evidence programs
         run: |
           base="$RUNNER_TEMP/ui-request-base"
-          mkdir -p "$base/request/.spec" "$base/playground/scripts"
+          mkdir -p "$base/request/.spec" "$base/playground/scripts" "$base/scripts"
+          cp package.json "$base/package.json"
           cp request/preview-plan.mjs "$base/request/preview-plan.mjs"
           cp request/.spec/limits.ts "$base/request/.spec/limits.ts"
           cp playground/scripts/capture-request-previews.mjs \
             "$base/playground/scripts/capture-request-previews.mjs"
+          cp scripts/plan-ci.mjs "$base/scripts/plan-ci.mjs"
+      - uses: astrale-os/config/.github/actions/setup@8e2e2abd0320be0c2f64033916519ab3b66c7dd7
+        with:
+          node-version: 24
+          frozen-lockfile: 'true'
+      - name: Encode the base-controlled fallback worker before candidate installation
+        run: tar -czf "$RUNNER_TEMP/ui-request-claude-code.tgz" -C node_modules/@anthropic-ai/claude-code .
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: ui-request-base-fallback-${{ github.run_id }}
+          path: ${{ runner.temp }}/ui-request-claude-code.tgz
+          if-no-files-found: error
+          retention-days: 1
       - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           name: ui-request-candidate-${{ github.run_id }}
           path: ${{ runner.temp }}/ui-request-candidate
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: ${{ needs.propose.outputs.checkpoint_name }}
+          path: ${{ runner.temp }}/ui-request-checkpoint
       - name: Apply the inert candidate patch
         run: |
           set -euo pipefail
@@ -185,16 +442,194 @@ jobs:
           test "$(wc -c < "$patch" | tr -d ' ')" -le 16777216
           git apply --check --index --binary --whitespace=nowarn "$patch"
           git apply --index --binary --whitespace=nowarn "$patch"
-      - uses: astrale-os/config/.github/actions/setup@8e2e2abd0320be0c2f64033916519ab3b66c7dd7
-        with:
-          node-version: 24
-          frozen-lockfile: 'true'
+      - name: Reject candidate changes to trusted control-plane programs
+        env:
+          INPUT_PROPOSAL_BASE_SHA: ${{ needs.propose.outputs.proposal_base_sha }}
+        run: |
+          set -euo pipefail
+          changed="$(git diff --name-only --diff-filter=ACMRD "$INPUT_PROPOSAL_BASE_SHA")"
+          if grep -Eq '^(\.github/|\.release/|request/|scripts/|playground/tests/|playground/playwright[^/]*\.config\.)' <<< "$changed"; then
+            echo 'A UI candidate may not edit trusted request, workflow, release, planner, or browser-evidence programs.' >&2
+            exit 1
+          fi
+          node --input-type=module -e '
+            import { readFileSync } from "node:fs"
+            const base = JSON.parse(readFileSync(process.argv[1], "utf8"))
+            const candidate = JSON.parse(readFileSync(process.argv[2], "utf8"))
+            if (JSON.stringify(base.scripts) !== JSON.stringify(candidate.scripts)) process.exit(1)
+          ' "$RUNNER_TEMP/ui-request-base/package.json" package.json
+      - name: Install candidate dependencies without credentials
+        run: pnpm install --frozen-lockfile
       - name: Regenerate repository-owned derived artifacts
         run: |
           pnpm format
           pnpm registry:build
       - name: Qualify the candidate without publication authority
-        run: pnpm check && pnpm test:registry-behavior
+        id: primary_qualification
+        continue-on-error: ${{ inputs.worker == 'codex' }}
+        run: |
+          set -euo pipefail
+          plan="$(node "$RUNNER_TEMP/ui-request-base/scripts/plan-ci.mjs" --files "$(git diff --name-only --diff-filter=ACMRD "${{ needs.propose.outputs.proposal_base_sha }}")" | jq -r .plan)"
+          case "$plan" in
+            docs-only|request-tooling)
+              pnpm request:check
+              ;;
+            family-scoped)
+              pnpm request:check
+              pnpm registry:typecheck
+              pnpm test:registry-behavior
+              pnpm playground:typecheck
+              ;;
+            global-ui)
+              pnpm check
+              pnpm test:registry-behavior
+              ;;
+            *) echo "Unknown qualification plan: $plan" >&2; exit 1 ;;
+          esac
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        if: inputs.worker == 'codex' && steps.primary_qualification.outcome == 'failure'
+        with:
+          name: ui-request-base-fallback-${{ github.run_id }}
+          path: ${{ runner.temp }}/ui-request-base-fallback
+      - name: Escalate one failed Codex qualification to Opus
+        if: inputs.worker == 'codex' && needs.propose.outputs.escalated != 'true' && steps.primary_qualification.outcome == 'failure'
+        env:
+          INPUT_OBJECTIVE: ${{ inputs.objective }}
+          SOURCE_EVIDENCE_ARCHIVE: ${{ runner.temp }}/ui-request-checkpoint/source-evidence.tgz
+          ANTHROPIC_FOUNDRY_BASE_URL: ${{ secrets.ANTHROPIC_FOUNDRY_BASE_URL }}
+          ANTHROPIC_FOUNDRY_API_KEY: ${{ secrets.ANTHROPIC_FOUNDRY_API_KEY }}
+          CLAUDE_CODE_USE_FOUNDRY: '1'
+          ANTHROPIC_DEFAULT_OPUS_MODEL: claude-opus-5
+        run: |
+          set -euo pipefail
+          source_root="$RUNNER_TEMP/ui-request-source-evidence"
+          fallback_root="$RUNNER_TEMP/ui-request-claude-code"
+          mkdir -p "$source_root"
+          mkdir -p "$fallback_root"
+          tar -xzf "$SOURCE_EVIDENCE_ARCHIVE" -C "$source_root"
+          tar -xzf "$RUNNER_TEMP/ui-request-base-fallback/ui-request-claude-code.tgz" -C "$fallback_root"
+          printf '%s\n\nThe fast worker produced the current candidate, but its deterministic fast qualification failed. Repair that candidate without redesigning it. Read the verified evidence at %s, preserve authoritative source classes and behavior, and run focused checks. This is the sole allowed escalation for the unchanged objective.' "$INPUT_OBJECTIVE" "$source_root" | \
+            node "$fallback_root/cli-wrapper.cjs" \
+            --bare \
+            --model claude-opus-5 \
+            --effort medium \
+            --permission-mode acceptEdits \
+            --allowedTools Read,Edit,Write,Glob,Grep \
+            --add-dir "$source_root" \
+            --no-session-persistence \
+            --max-budget-usd 20 \
+            --print
+      - name: Requalify the escalated candidate
+        if: inputs.worker == 'codex' && needs.propose.outputs.escalated != 'true' && steps.primary_qualification.outcome == 'failure'
+        id: fallback_qualification
+        run: |
+          set -euo pipefail
+          pnpm format
+          pnpm registry:build
+          plan="$(node "$RUNNER_TEMP/ui-request-base/scripts/plan-ci.mjs" --files "$(git diff --name-only --diff-filter=ACMRD "${{ needs.propose.outputs.proposal_base_sha }}")" | jq -r .plan)"
+          case "$plan" in
+            docs-only|request-tooling) pnpm request:check ;;
+            family-scoped)
+              pnpm request:check
+              pnpm registry:typecheck
+              pnpm test:registry-behavior
+              pnpm playground:typecheck
+              ;;
+            global-ui) pnpm check && pnpm test:registry-behavior ;;
+            *) echo "Unknown qualification plan: $plan" >&2; exit 1 ;;
+          esac
+      - name: Preserve the consumed successful fallback before preview
+        if: inputs.worker == 'codex' && steps.fallback_qualification.outcome == 'success'
+        env:
+          INPUT_ATTEMPT: ${{ inputs.attempt }}
+          INPUT_REQUEST: ${{ inputs.request }}
+          INPUT_OBJECTIVE_SHA256: ${{ needs.propose.outputs.objective_sha256 }}
+          INPUT_BASE_SHA: ${{ needs.propose.outputs.baseline_sha }}
+        run: |
+          set -euo pipefail
+          checkpoint="$RUNNER_TEMP/ui-request-successful-fallback-checkpoint"
+          mkdir -p "$checkpoint"
+          git -c core.hooksPath=/dev/null add -A
+          git diff --cached --binary --full-index --no-ext-diff --no-textconv -- > "$checkpoint/candidate.patch"
+          test -s "$checkpoint/candidate.patch"
+          cp "$RUNNER_TEMP/ui-request-checkpoint/source-evidence.tgz" "$checkpoint/source-evidence.tgz"
+          plan="$(node "$RUNNER_TEMP/ui-request-base/scripts/plan-ci.mjs" --files "$(git diff --name-only --diff-filter=ACMRD "$INPUT_BASE_SHA")" | jq -r .plan)"
+          created_at="$(date -u +'%Y-%m-%dT%H:%M:%S.000Z')"
+          expires_at="$(date -u -d '+30 days' +'%Y-%m-%dT%H:%M:%S.000Z')"
+          node request/candidate-checkpoint.mjs create \
+            --root "$checkpoint" \
+            --request "$INPUT_REQUEST" \
+            --attempt "$INPUT_ATTEMPT" \
+            --objective-sha256 "$INPUT_OBJECTIVE_SHA256" \
+            --base-sha "$INPUT_BASE_SHA" \
+            --patch candidate.patch \
+            --source-evidence source-evidence.tgz \
+            --provider github-actions-claude-code \
+            --model claude-opus-5 \
+            --reasoning-effort medium \
+            --escalation 1 \
+            --qualification-state passed \
+            --plan "$plan" \
+            --created-at "$created_at" \
+            --expires-at "$expires_at" \
+            --output "$checkpoint/checkpoint.json"
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        if: inputs.worker == 'codex' && steps.fallback_qualification.outcome == 'success'
+        with:
+          name: ${{ needs.propose.outputs.checkpoint_name }}
+          path: ${{ runner.temp }}/ui-request-successful-fallback-checkpoint
+          if-no-files-found: error
+          retention-days: 30
+          overwrite: true
+      - name: Reject a second escalation for the unchanged objective
+        if: inputs.worker == 'codex' && needs.propose.outputs.escalated == 'true' && steps.primary_qualification.outcome == 'failure'
+        run: |
+          echo 'The sole fallback was already consumed during implementation; preserving the checkpoint for operator input.' >&2
+          exit 1
+      - name: Preserve the failed escalated candidate for operator input
+        if: always() && inputs.worker == 'codex' && steps.primary_qualification.outcome == 'failure' && steps.fallback_qualification.outcome != 'success'
+        env:
+          INPUT_ATTEMPT: ${{ inputs.attempt }}
+          INPUT_REQUEST: ${{ inputs.request }}
+          INPUT_OBJECTIVE_SHA256: ${{ needs.propose.outputs.objective_sha256 }}
+          INPUT_BASE_SHA: ${{ needs.propose.outputs.baseline_sha }}
+        run: |
+          set -euo pipefail
+          checkpoint="$RUNNER_TEMP/ui-request-failed-checkpoint"
+          mkdir -p "$checkpoint"
+          git -c core.hooksPath=/dev/null add -A
+          git diff --cached --binary --full-index --no-ext-diff --no-textconv -- > "$checkpoint/candidate.patch"
+          test -s "$checkpoint/candidate.patch"
+          cp "$RUNNER_TEMP/ui-request-checkpoint/source-evidence.tgz" "$checkpoint/source-evidence.tgz"
+          plan="$(node "$RUNNER_TEMP/ui-request-base/scripts/plan-ci.mjs" --files "$(git diff --name-only --diff-filter=ACMRD "$INPUT_BASE_SHA")" | jq -r .plan)"
+          created_at="$(date -u +'%Y-%m-%dT%H:%M:%S.000Z')"
+          expires_at="$(date -u -d '+30 days' +'%Y-%m-%dT%H:%M:%S.000Z')"
+          node request/candidate-checkpoint.mjs create \
+            --root "$checkpoint" \
+            --request "$INPUT_REQUEST" \
+            --attempt "$INPUT_ATTEMPT" \
+            --objective-sha256 "$INPUT_OBJECTIVE_SHA256" \
+            --base-sha "$INPUT_BASE_SHA" \
+            --patch candidate.patch \
+            --source-evidence source-evidence.tgz \
+            --provider github-actions-claude-code \
+            --model claude-opus-5 \
+            --reasoning-effort medium \
+            --escalation 1 \
+            --qualification-state failed \
+            --plan "$plan" \
+            --diagnostic 'The sole fallback failed deterministic qualification.' \
+            --created-at "$created_at" \
+            --expires-at "$expires_at" \
+            --output "$checkpoint/checkpoint.json"
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        if: always() && inputs.worker == 'codex' && steps.primary_qualification.outcome == 'failure' && steps.fallback_qualification.outcome != 'success'
+        with:
+          name: ${{ needs.propose.outputs.checkpoint_name }}
+          path: ${{ runner.temp }}/ui-request-failed-checkpoint
+          if-no-files-found: error
+          retention-days: 30
+          overwrite: true
       - name: Build changed preview evidence without publication authority
         env:
           INPUT_PROPOSAL_BASE_SHA: ${{ needs.propose.outputs.proposal_base_sha }}
@@ -256,6 +691,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     environment: ui-request-agent
+    permissions:
+      actions: write
+      contents: read
     concurrency:
       group: ui-request-preview-publication
       cancel-in-progress: false
@@ -383,7 +821,7 @@ jobs:
           git -C "$pages" push origin HEAD:refs/heads/gh-pages
 
           available=false
-          for attempt in $(seq 1 90); do
+          for _attempt in $(seq 1 90); do
             observed="$(curl --fail --silent --show-error "$origin/_evidence/revision" 2>/dev/null || true)"
             preview_id="$(jq -r '.previews[0].id' "$evidence/manifest.json")"
             encoded_preview="$(jq -rn --arg value "$preview_id" '$value | @uri')"
@@ -429,3 +867,21 @@ jobs:
             gh api --method POST "repos/$GITHUB_REPOSITORY/issues/$INPUT_PULL_REQUEST_NUMBER/comments" \
               --input - <<< "{\"body\":$body}" >/dev/null
           fi
+      - name: Record request-to-preview latency without cancelling work
+        if: always()
+        env:
+          INPUT_STARTED_MS: ${{ needs.propose.outputs.started_ms }}
+          INPUT_PULL_REQUEST: ${{ inputs.pull_request }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/ui-request-latency"
+          elapsed="$(( $(date +%s%3N) - INPUT_STARTED_MS ))"
+          phase=warm-proposal
+          if [ -n "$INPUT_PULL_REQUEST" ]; then phase=revision; fi
+          node request/latency.mjs "$phase" "$elapsed" "$RUNNER_TEMP/ui-request-latency/observation.json"
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        if: always()
+        with:
+          name: ui-request-latency-${{ github.run_id }}
+          path: ${{ runner.temp }}/ui-request-latency/observation.json
+          if-no-files-found: warn
+          retention-days: 90

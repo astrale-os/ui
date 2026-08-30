@@ -4,6 +4,7 @@ import { pathToFileURL } from 'node:url'
 
 import { createCursorAgent } from './agent/adapters/cursor.mjs'
 import { createGitHubActionsClaudeCodeAgent } from './agent/adapters/github-actions-claude-code.mjs'
+import { createGitHubActionsCodexAgent } from './agent/adapters/github-actions-codex.mjs'
 import { createGitHubCopilotAgent } from './agent/adapters/github-copilot.mjs'
 import { createUiRequestDispatcher } from './src/dispatcher.mjs'
 import { createGitHubRequestStore } from './src/github.mjs'
@@ -59,6 +60,13 @@ function requiredEnvironment(environment, name) {
 }
 
 function composition(provider, environment, fetchImplementation) {
+  if (provider === 'github-actions-codex') {
+    return createGitHubActionsCodexAgent({
+      token: requiredEnvironment(environment, 'GITHUB_TOKEN'),
+      fetch: fetchImplementation,
+      workflowRef: environment.UI_REQUEST_AGENT_WORKFLOW_REF ?? 'main',
+    })
+  }
   if (provider === 'github-actions-claude-code') {
     return createGitHubActionsClaudeCodeAgent({
       token: requiredEnvironment(environment, 'GITHUB_TOKEN'),
@@ -90,7 +98,7 @@ export async function runUiRequestAutomation(options = {}) {
     throw new Error('GITHUB_REPOSITORY must be owner/repository')
   }
   const { issue, operation, maximumWait, pullRequest } = parseRunnerArguments(argv)
-  const provider = environment.UI_REQUEST_AGENT_PROVIDER ?? 'github-actions-claude-code'
+  const provider = environment.UI_REQUEST_AGENT_PROVIDER ?? 'github-actions-codex'
   const store = createGitHubRequestStore({
     token: requiredEnvironment(environment, 'GITHUB_TOKEN'),
     owner: repository[0],

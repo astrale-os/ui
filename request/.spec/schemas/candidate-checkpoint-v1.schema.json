@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.astrale.ai/ui/request/candidate-checkpoint-v1",
+  "title": "Astrale UI request candidate checkpoint v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "request",
+    "issue",
+    "attempt",
+    "objectiveSha256",
+    "baseSha",
+    "patch",
+    "sourceEvidence",
+    "worker",
+    "qualification",
+    "timestamps"
+  ],
+  "properties": {
+    "version": { "const": 1 },
+    "request": {
+      "type": "string",
+      "pattern": "^https://github\\.com/[^/\\s]+/[^/\\s]+/issues/[1-9][0-9]*$"
+    },
+    "issue": { "type": "integer", "minimum": 1 },
+    "attempt": { "type": "string", "minLength": 1, "maxLength": 255 },
+    "objectiveSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "baseSha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "patch": { "$ref": "#/$defs/fileDigest" },
+    "sourceEvidence": {
+      "oneOf": [{ "type": "null" }, { "$ref": "#/$defs/fileDigest" }]
+    },
+    "worker": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["provider", "model", "reasoningEffort", "escalation"],
+      "properties": {
+        "provider": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "model": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "reasoningEffort": {
+          "enum": ["none", "low", "medium", "high", "xhigh", "max"]
+        },
+        "escalation": { "type": "integer", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "qualification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "plan"],
+      "properties": {
+        "state": { "enum": ["pending", "passed", "failed"] },
+        "plan": { "enum": ["docs-only", "request-tooling", "family-scoped", "global-ui"] },
+        "diagnostic": { "type": "string", "maxLength": 8192 }
+      }
+    },
+    "timestamps": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["createdAt", "updatedAt", "expiresAt"],
+      "properties": {
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" },
+        "expiresAt": { "type": "string", "format": "date-time" }
+      }
+    }
+  },
+  "$defs": {
+    "fileDigest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "bytes"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1, "maxLength": 255 },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "bytes": { "type": "integer", "minimum": 1, "maximum": 16777216 }
+      }
+    }
+  }
+}

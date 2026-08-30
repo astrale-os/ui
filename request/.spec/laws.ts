@@ -57,4 +57,24 @@ export const uiRequestLaws = {
     statement:
       'One authorized ui:ready label resolves to initial work, observation, or revision from the trusted attempt record without creating a parallel writer.',
   },
+  checkpointContinuation: {
+    id: 'REQ-CANDIDATE-CONTINUE',
+    statement:
+      'A valid cumulative checkpoint is the sole continuation authority after interruption or failed qualification; an expired, base-mismatched, request-mismatched, or tampered checkpoint requires operator input and is never silently reconstructed. A newly accepted objective may retain the patch but must discard and reacquire objective-specific source evidence and reset escalation.',
+  },
+  boundedEscalation: {
+    id: 'REQ-AGENT-ESCALATION-BOUND',
+    statement:
+      'One unchanged objective may use the fast worker and at most one qualified fallback worker; permission, authentication, quota, and unknown-outcome failures never trigger provider escalation.',
+  },
+  fastGateIsNotAcceptance: {
+    id: 'REQ-QUALIFY-FAST-NOT-ACCEPT',
+    statement:
+      'A revision fast gate proves only its diff-derived scope; merge-ready acceptance requires one full qualification receipt for the exact proposal commit and tree.',
+  },
+  latencyBreachesPreserveWork: {
+    id: 'REQ-LATENCY-PRESERVE',
+    statement:
+      'Crossing a target or hard latency reporting threshold records an SLO breach but never requests cancellation, invalidates candidate work, or removes the latest recoverable checkpoint.',
+  },
 } as const

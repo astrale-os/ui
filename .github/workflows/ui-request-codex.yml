@@ -1,0 +1,42 @@
+name: UI Request Codex Worker
+
+run-name: 'Astrale attempt: ${{ inputs.attempt }}'
+
+on:
+  workflow_dispatch:
+    inputs:
+      attempt:
+        required: true
+        type: string
+      request:
+        required: true
+        type: string
+      base_ref:
+        required: true
+        type: string
+      branch:
+        required: true
+        type: string
+      objective:
+        required: true
+        type: string
+      pull_request:
+        required: false
+        default: ''
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  worker:
+    uses: ./.github/workflows/ui-request-claude-code.yml
+    with:
+      attempt: ${{ inputs.attempt }}
+      request: ${{ inputs.request }}
+      base_ref: ${{ inputs.base_ref }}
+      branch: ${{ inputs.branch }}
+      objective: ${{ inputs.objective }}
+      pull_request: ${{ inputs.pull_request }}
+      worker: codex
+    secrets: inherit

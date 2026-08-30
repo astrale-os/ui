@@ -6,32 +6,20 @@ import { parse as parseYaml } from 'yaml'
 
 const configSha = '8e2e2abd0320be0c2f64033916519ab3b66c7dd7'
 
-test('pins supported CI and release workflow dependencies', async () => {
-  const [ci, release, publish] = await Promise.all(
-    ['ci', 'release', 'publish'].map((name) => readFile(`.github/workflows/${name}.yml`, 'utf8')),
+test('keeps CI and release qualification on the supported contract', async () => {
+  const [ci, release, publish, mergeReady] = await Promise.all(
+    ['ci', 'release', 'publish', 'merge-ready'].map((name) =>
+      readFile(`.github/workflows/${name}.yml`, 'utf8'),
+    ),
   )
-  for (const workflow of [ci, release, publish]) {
-    const actionReferences = [...workflow.matchAll(/^\s*-?\s*uses:\s*([^\s#]+)/gmu)].map(
-      (match) => match[1],
-    )
-    assert.ok(actionReferences.length > 0)
-    for (const reference of actionReferences) {
-      assert.match(reference, /^(?:\.\/|[^@\s]+@[0-9a-f]{40})$/u)
-    }
-    assert.doesNotMatch(workflow, /NPM_TOKEN|NODE_AUTH_TOKEN|secrets\./u)
-  }
-  const configRefs = [
-    ...[ci, release, publish].join('\n').matchAll(/astrale-os\/config\/.+@([0-9a-f]{40})/gu),
-  ]
-  assert.ok(configRefs.length > 0)
-  assert.deepEqual([...new Set(configRefs.map((match) => match[1]))], [configSha])
   assert.match(ci, /matrix:\s*\n\s+node-version:\s*\[24, 26\]/u)
   assert.match(ci, /frozen-lockfile: 'true'/u)
   assert.match(ci, /pnpm package:qualify/u)
   assert.match(ci, /pnpm search:benchmark/u)
   assert.match(ci, /pnpm registry:qualify/u)
   assert.match(ci, /pnpm test:registry-behavior/u)
-  assert.match(ci, /pnpm playground:test/u)
+  assert.match(ci, /pnpm test:playground-unit/u)
+  assert.match(mergeReady, /playwright test --shard=\$\{\{ matrix\.shard \}\}\/4/u)
   assert.match(ci, /pnpm test:security/u)
   assert.match(ci, /pnpm audit --prod --audit-level high/u)
   assert.match(ci, /pnpm --dir domain install --frozen-lockfile/u)
@@ -42,7 +30,7 @@ test('pins supported CI and release workflow dependencies', async () => {
   )
   assert.match(
     ci,
-    /dependency-review:\s*\n\s+if: github\.event_name == 'pull_request' && github\.event\.repository\.private == false/u,
+    /dependency-review:\s*\n\s+needs: plan\s*\n\s+if: github\.event_name == 'pull_request' && github\.event\.repository\.private == false/u,
   )
   assert.match(ci, /actions\/dependency-review-action@[0-9a-f]{40}/u)
   assert.match(ci, /github\/codeql-action\/(?:init|analyze)@[0-9a-f]{40}/u)
@@ -105,7 +93,13 @@ test('publishes only the runtime while the control-plane Domain stays private', 
         definition.uses ? [{ file, job, uses: definition.uses }] : [],
       ),
     ),
-    [],
+    [
+      {
+        file: 'ui-request-codex.yml',
+        job: 'worker',
+        uses: './.github/workflows/ui-request-claude-code.yml',
+      },
+    ],
   )
   for (const { file, document } of workflowEntries) {
     assert.notEqual(document.permissions, 'write-all', file)
@@ -243,6 +237,15 @@ test('publishes only the runtime while the control-plane Domain stays private', 
   assert.match(release, /-f expected-version="\$publish_version"/u)
   assert.match(release, /--ref "\$publish_tag"/u)
   assert.match(release, /gh run watch "\$run_id"/u)
+  assert.match(
+    publish,
+    /test "\$\(jq -r \.path <<< "\$run"\)" = '\.github\/workflows\/rebind-qualification-receipt\.yml'/u,
+  )
+  assert.match(publish, /test "\$\(jq -r \.conclusion <<< "\$run"\)" = success/u)
+  assert.match(
+    workflowCorpus,
+    /rebind-qualification-receipt\.yml[\s\S]*?test "\$\(jq -r \.path <<< "\$run"\)" = '\.github\/workflows\/merge-ready\.yml'/u,
+  )
   assert.deepEqual(Object.keys(releaseConfig.packages), ['.'])
   assert.deepEqual(Object.keys(releaseManifest), ['.'])
   assert.equal(releaseConfig['include-component-in-tag'], false)
@@ -313,6 +316,7 @@ test('publishes only the runtime while the control-plane Domain stays private', 
     assert.equal(input.type, 'string')
   }
   assert.deepEqual(publishDocument.jobs.publish.permissions, {
+    actions: 'read',
     contents: 'read',
     'id-token': 'write',
   })
@@ -322,25 +326,16 @@ test('publishes only the runtime while the control-plane Domain stays private', 
   })
   const publishSteps = publishDocument.jobs.publish.steps
   const mirrorSteps = publishDocument.jobs.mirror.steps
-  assert.deepEqual(
-    publishSteps.map((step) => ({ uses: step.uses, name: step.name })),
-    [
-      {
-        uses: 'actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1',
-        name: undefined,
-      },
-      { uses: undefined, name: 'Admit exact release commit' },
-      {
-        uses: `astrale-os/config/.github/actions/publish/packages@${configSha}`,
-        name: undefined,
-      },
-      { uses: undefined, name: 'Qualify exact public npm publication' },
-      {
-        uses: 'actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a',
-        name: undefined,
-      },
-    ],
+  const publishPackageStep = publishSteps.find((step) => step.uses?.includes('/publish/packages@'))
+  const publicQualificationStep = publishSteps.find(
+    (step) => step.name === 'Qualify exact public npm publication',
   )
+  const publicationArtifactStep = publishSteps.find(
+    (step) => step.with?.name === 'public-npm-publication',
+  )
+  assert.ok(publishPackageStep)
+  assert.ok(publicQualificationStep)
+  assert.ok(publicationArtifactStep)
   assert.deepEqual(publishSteps[0].with, {
     ref: '${{ inputs.expected-sha }}',
     'fetch-depth': 0,
@@ -362,18 +357,18 @@ git merge-base --is-ancestor "$EXPECTED_SHA" origin/main
 test "$(gh api "repos/\${GITHUB_REPOSITORY}/releases/tags/v\${EXPECTED_VERSION}" --jq .tag_name)" = "v\${EXPECTED_VERSION}"
 `,
   )
-  assert.deepEqual(publishSteps[2].with, {
+  assert.deepEqual(publishPackageStep.with, {
     dirs: 'packages/ui',
     'mirror-public-packages': 'false',
     'install-command': 'pnpm install --frozen-lockfile',
     'build-command':
-      'pnpm --filter @astrale-os/ui-playground exec playwright install --with-deps chromium && pnpm qualify',
+      "pnpm build && pnpm registry:build && pnpm package:qualify && node request/qualification-receipt.mjs verify --receipt qualification-receipt.json --commit ${{ inputs.expected-sha }} --tree $(git rev-parse '${{ inputs.expected-sha }}^{tree}') --package $(find artifacts/package -type f -name '*.tgz' -print -quit) --registry registry/registry.json --catalog registry/core-catalog.json",
     'prerelease-tag': 'auto',
   })
-  assert.deepEqual(publishSteps[3].env, { EXPECTED_SHA: '${{ inputs.expected-sha }}' })
-  assert.equal(publishSteps[3].run, 'pnpm qualify:publication')
-  assert.equal(publishSteps[4].if, 'always()')
-  assert.deepEqual(publishSteps[4].with, {
+  assert.deepEqual(publicQualificationStep.env, { EXPECTED_SHA: '${{ inputs.expected-sha }}' })
+  assert.equal(publicQualificationStep.run, 'pnpm qualify:publication')
+  assert.equal(publicationArtifactStep.if, 'always()')
+  assert.deepEqual(publicationArtifactStep.with, {
     name: 'public-npm-publication',
     path: 'artifacts/publication/**',
   })

@@ -1,0 +1,177 @@
+name: UI Merge-ready Qualification
+
+on:
+  pull_request:
+    types:
+      - labeled
+
+concurrency:
+  group: ui-merge-ready-${{ github.event.pull_request.number }}-${{ github.event.pull_request.head.sha }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  gate:
+    if: github.event.label.name == 'ui:merge-ready' && github.event.pull_request.state == 'open'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+    outputs:
+      revision: ${{ steps.admit.outputs.revision }}
+      started_ms: ${{ steps.admit.outputs.started_ms }}
+    steps:
+      - name: Admit a maintainer-owned exact proposal revision
+        id: admit
+        env:
+          GH_TOKEN: ${{ github.token }}
+          INPUT_ACTOR: ${{ github.actor }}
+          INPUT_ACTOR_TYPE: ${{ github.event.sender.type }}
+          INPUT_REVISION: ${{ github.event.pull_request.head.sha }}
+          INPUT_HEAD_REF: ${{ github.event.pull_request.head.ref }}
+          INPUT_AUTHOR: ${{ github.event.pull_request.user.login }}
+        run: |
+          set -euo pipefail
+          echo "started_ms=$(date +%s%3N)" >> "$GITHUB_OUTPUT"
+          if [ "$INPUT_ACTOR_TYPE" = User ]; then
+            permission="$(gh api "repos/$GITHUB_REPOSITORY/collaborators/$INPUT_ACTOR/permission" --jq .permission)"
+            case "$permission" in admin|write) ;; *) exit 1 ;; esac
+          else
+            test "$INPUT_ACTOR" = 'github-actions[bot]'
+            case "$INPUT_AUTHOR" in 'github-actions[bot]'|'release-please[bot]') ;; *) exit 1 ;; esac
+            case "$INPUT_HEAD_REF" in release-please--branches--main*) ;; *) exit 1 ;; esac
+          fi
+          [[ "$INPUT_REVISION" =~ ^[0-9a-f]{40}$ ]]
+          echo "revision=$INPUT_REVISION" >> "$GITHUB_OUTPUT"
+
+  package:
+    needs: gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ needs.gate.outputs.revision }}
+          persist-credentials: 'false'
+      - uses: astrale-os/config/.github/actions/setup@8e2e2abd0320be0c2f64033916519ab3b66c7dd7
+        with:
+          node-version: 24
+          frozen-lockfile: 'true'
+      - name: Run the complete non-browser qualification
+        run: |
+          pnpm check
+          pnpm test:components
+          pnpm test:registry-behavior
+          pnpm test:security
+          pnpm registry:build
+          pnpm package:qualify
+          pnpm registry:qualify
+      - name: Assemble exact receipt inputs
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/merge-ready
+          package="$(find artifacts/package -type f -name '*.tgz' -print -quit)"
+          test -n "$package"
+          cp "$package" artifacts/merge-ready/package.tgz
+          cp registry/registry.json artifacts/merge-ready/registry.json
+          cp registry/core-catalog.json artifacts/merge-ready/catalog.json
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: merge-ready-inputs-${{ needs.gate.outputs.revision }}
+          path: artifacts/merge-ready
+          if-no-files-found: error
+          retention-days: 30
+
+  browser:
+    needs: gate
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ needs.gate.outputs.revision }}
+          persist-credentials: 'false'
+      - uses: astrale-os/config/.github/actions/setup@8e2e2abd0320be0c2f64033916519ab3b66c7dd7
+        with:
+          node-version: 24
+          frozen-lockfile: 'true'
+      - run: pnpm build
+      - run: pnpm --filter @astrale-os/ui-playground exec playwright install --with-deps chromium
+      - run: pnpm playground:build
+      - name: Run exhaustive browser shard ${{ matrix.shard }}/4
+        run: pnpm --filter @astrale-os/ui-playground exec playwright test --shard=${{ matrix.shard }}/4
+      - name: Record the successful shard
+        run: |
+          mkdir -p artifacts/merge-ready-shard
+          printf '{"index":%s,"total":4,"state":"passed"}\n' '${{ matrix.shard }}' > artifacts/merge-ready-shard/shard.json
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        if: always()
+        with:
+          name: merge-ready-browser-${{ matrix.shard }}-${{ needs.gate.outputs.revision }}
+          path: |
+            artifacts/merge-ready-shard
+            artifacts/playground/playwright
+            playground/playwright-report
+          if-no-files-found: warn
+          retention-days: 30
+
+  qualification:
+    name: Merge-ready qualification
+    needs: [gate, package, browser]
+    if: always() && needs.gate.result == 'success' && needs.package.result == 'success' && needs.browser.result == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ needs.gate.outputs.revision }}
+          persist-credentials: 'false'
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          pattern: merge-ready-*-${{ needs.gate.outputs.revision }}
+          path: ${{ runner.temp }}/merge-ready
+      - uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6
+        with:
+          version: 12.0.0
+      - name: Issue the exact-revision qualification receipt
+        env:
+          INPUT_REVISION: ${{ needs.gate.outputs.revision }}
+        run: |
+          set -euo pipefail
+          test "$(find "$RUNNER_TEMP/merge-ready" -name shard.json -exec cat {} \; | jq -s 'map(.index) | unique | sort == [1,2,3,4]')" = true
+          tree="$(git rev-parse "$INPUT_REVISION^{tree}")"
+          qualified_at="$(date -u +'%Y-%m-%dT%H:%M:%S.000Z')"
+          node request/qualification-receipt.mjs create \
+            --commit "$INPUT_REVISION" \
+            --tree "$tree" \
+            --package "$(find "$RUNNER_TEMP/merge-ready" -name package.tgz -print -quit)" \
+            --registry "$(find "$RUNNER_TEMP/merge-ready" -name registry.json -print -quit)" \
+            --catalog "$(find "$RUNNER_TEMP/merge-ready" -name catalog.json -print -quit)" \
+            --node "$(node --version)" \
+            --pnpm "$(pnpm --version)" \
+            --playwright "$(node -p "require('./playground/package.json').devDependencies['@playwright/test']")" \
+            --qualified-at "$qualified_at" \
+            --output qualification-receipt.json
+      - name: Record merge-ready latency without cancelling work
+        if: always()
+        env:
+          INPUT_STARTED_MS: ${{ needs.gate.outputs.started_ms }}
+        run: |
+          elapsed="$(( $(date +%s%3N) - INPUT_STARTED_MS ))"
+          node request/latency.mjs merge-ready "$elapsed" merge-ready-latency.json
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: qualification-receipt-${{ needs.gate.outputs.revision }}
+          path: qualification-receipt.json
+          if-no-files-found: error
+          retention-days: 90
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        if: always()
+        with:
+          name: merge-ready-latency-${{ needs.gate.outputs.revision }}
+          path: merge-ready-latency.json
+          if-no-files-found: warn
+          retention-days: 90

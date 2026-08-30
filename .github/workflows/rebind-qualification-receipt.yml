@@ -1,0 +1,64 @@
+name: Rebind Qualification Receipt
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  actions: read
+  contents: read
+  pull-requests: read
+
+jobs:
+  rebind:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+          persist-credentials: 'false'
+      - name: Rebind same-tree accepted evidence to the exact main commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+          INPUT_MAIN_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          pull="$(gh api "repos/$GITHUB_REPOSITORY/commits/$INPUT_MAIN_SHA/pulls" --jq '[.[] | select(.merged_at != null)] | sort_by(.merged_at) | last // empty')"
+          if [ -z "$pull" ]; then
+            echo 'No merged pull request owns this commit; no receipt can be rebound.'
+            exit 0
+          fi
+          head_sha="$(jq -r .head.sha <<< "$pull")"
+          git fetch --no-tags --depth=1 origin "$head_sha"
+          main_tree="$(git rev-parse "$INPUT_MAIN_SHA^{tree}")"
+          head_tree="$(git rev-parse "$head_sha^{tree}")"
+          if [ "$main_tree" != "$head_tree" ]; then
+            echo 'Merge tree differs from the accepted proposal tree; a fresh qualification is required.' >&2
+            exit 1
+          fi
+          artifact="$(gh api "repos/$GITHUB_REPOSITORY/actions/artifacts?name=qualification-receipt-$head_sha&per_page=100" --jq '[.artifacts[] | select(.expired == false)] | sort_by(.created_at) | last // empty')"
+          if [ -z "$artifact" ]; then
+            echo 'No exact-head qualification receipt exists; leaving this commit without reusable evidence.'
+            exit 0
+          fi
+          run_id="$(jq -r .workflow_run.id <<< "$artifact")"
+          run="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$run_id")"
+          test "$(jq -r .path <<< "$run")" = '.github/workflows/merge-ready.yml'
+          test "$(jq -r .event <<< "$run")" = pull_request
+          test "$(jq -r .conclusion <<< "$run")" = success
+          test "$(jq -r .head_sha <<< "$run")" = "$head_sha"
+          gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$(jq -r .id <<< "$artifact")/zip" > "$RUNNER_TEMP/receipt.zip"
+          unzip -q "$RUNNER_TEMP/receipt.zip" -d "$RUNNER_TEMP/receipt"
+          receipt="$RUNNER_TEMP/receipt/qualification-receipt.json"
+          node request/qualification-receipt.mjs verify-envelope \
+            --receipt "$receipt" \
+            --commit "$head_sha" \
+            --tree "$main_tree" >/dev/null
+          jq --arg commit "$INPUT_MAIN_SHA" '.commitSha = $commit' "$receipt" > qualification-receipt.json
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        if: hashFiles('qualification-receipt.json') != ''
+        with:
+          name: qualification-receipt-${{ github.sha }}
+          path: qualification-receipt.json
+          if-no-files-found: error
+          retention-days: 90

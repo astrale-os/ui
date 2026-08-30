@@ -3,6 +3,7 @@ import test from 'node:test'
 
 import { createCursorAgent } from './adapters/cursor.mjs'
 import { createGitHubActionsClaudeCodeAgent } from './adapters/github-actions-claude-code.mjs'
+import { createGitHubActionsCodexAgent } from './adapters/github-actions-codex.mjs'
 import { createGitHubCopilotAgent } from './adapters/github-copilot.mjs'
 import { job, json, repository } from './test-helpers.mjs'
 
@@ -80,7 +81,7 @@ function cursorHarness() {
   }
 }
 
-function githubActionsClaudeCodeHarness() {
+function githubActionsHarness({ provider, workflow, createAgent }) {
   let calls = 0
   const run = {
     id: 771,
@@ -88,7 +89,7 @@ function githubActionsClaudeCodeHarness() {
     name: 'UI Request Claude Code Worker',
     display_title: 'Astrale attempt: attempt',
     event: 'workflow_dispatch',
-    path: '.github/workflows/ui-request-claude-code.yml',
+    path: `.github/workflows/${workflow}`,
     head_branch: 'main',
     actor: { login: 'github-actions[bot]' },
     triggering_actor: { login: 'github-actions[bot]' },
@@ -111,9 +112,9 @@ function githubActionsClaudeCodeHarness() {
     throw new Error(`Unexpected request: ${init.method ?? 'GET'} ${url}`)
   }
   return {
-    provider: 'github-actions-claude-code',
+    provider,
     create: () =>
-      createGitHubActionsClaudeCodeAgent({
+      createAgent({
         token: 'token',
         fetch,
         now: () => '2026-08-28T10:00:00Z',
@@ -122,7 +123,26 @@ function githubActionsClaudeCodeHarness() {
   }
 }
 
-for (const createHarness of [githubHarness, cursorHarness, githubActionsClaudeCodeHarness]) {
+const githubActionsClaudeCodeHarness = () =>
+  githubActionsHarness({
+    provider: 'github-actions-claude-code',
+    workflow: 'ui-request-claude-code.yml',
+    createAgent: createGitHubActionsClaudeCodeAgent,
+  })
+
+const githubActionsCodexHarness = () =>
+  githubActionsHarness({
+    provider: 'github-actions-codex',
+    workflow: 'ui-request-codex.yml',
+    createAgent: createGitHubActionsCodexAgent,
+  })
+
+for (const createHarness of [
+  githubHarness,
+  cursorHarness,
+  githubActionsClaudeCodeHarness,
+  githubActionsCodexHarness,
+]) {
   const name = createHarness().provider
   test(`${name} satisfies the shared restart, proposal, admission, and reconciliation contract`, async () => {
     const harness = createHarness()

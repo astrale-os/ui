@@ -24,7 +24,12 @@ function githubStoreResponse(url, init) {
   return null
 }
 
-for (const provider of ['github-copilot', 'cursor', 'github-actions-claude-code']) {
+for (const provider of [
+  'github-copilot',
+  'cursor',
+  'github-actions-claude-code',
+  'github-actions-codex',
+]) {
   test(`production runner composes ${provider} through the real store and dispatcher`, async () => {
     let output = ''
     let agentRequest
@@ -34,7 +39,7 @@ for (const provider of ['github-copilot', 'cursor', 'github-actions-claude-code'
       const store = githubStoreResponse(url, init)
       if (store) return store
       agentRequest = { url, method: init.method, body: JSON.parse(init.body) }
-      if (provider === 'github-actions-claude-code') {
+      if (provider.startsWith('github-actions-')) {
         return json({
           workflow_run_id: 771,
           run_url: 'https://api.github.com/repos/astrale-os/ui/actions/runs/771',

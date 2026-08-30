@@ -42,6 +42,7 @@ jobs:
       labeled: ${{ steps.input.outputs.labeled }}
       pull_request_number: ${{ steps.input.outputs.pull_request_number }}
       label_target_number: ${{ steps.input.outputs.label_target_number }}
+      started_ms: ${{ steps.input.outputs.started_ms }}
     steps:
       - name: Admit manual request operation
         id: manual
@@ -150,6 +151,7 @@ jobs:
           echo "labeled=$labeled" >> "$GITHUB_OUTPUT"
           echo "pull_request_number=$pull_request_number" >> "$GITHUB_OUTPUT"
           echo "label_target_number=$label_target_number" >> "$GITHUB_OUTPUT"
+          echo "started_ms=$(node -p 'Date.now()')" >> "$GITHUB_OUTPUT"
 
   request:
     needs: gate
@@ -169,12 +171,20 @@ jobs:
         with:
           ref: ${{ github.event.repository.default_branch }}
           persist-credentials: 'false'
-      - uses: astrale-os/config/.github/actions/setup@8e2e2abd0320be0c2f64033916519ab3b66c7dd7
-        with:
-          node-version: 24
-          frozen-lockfile: 'true'
+      - name: Dispatch or reconcile through Azure Codex Luna
+        if: vars.UI_REQUEST_AGENT_PROVIDER == '' || vars.UI_REQUEST_AGENT_PROVIDER == 'github-actions-codex'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          INPUT_ISSUE_NUMBER: ${{ needs.gate.outputs.issue_number }}
+          INPUT_OPERATION: ${{ needs.gate.outputs.operation }}
+          INPUT_PULL_REQUEST_NUMBER: ${{ needs.gate.outputs.pull_request_number }}
+          UI_REQUEST_AGENT_PROVIDER: github-actions-codex
+        run: |
+          args=(--issue "$INPUT_ISSUE_NUMBER" --operation "$INPUT_OPERATION" --max-wait-ms 0)
+          if [ -n "$INPUT_PULL_REQUEST_NUMBER" ]; then args+=(--pull-request "$INPUT_PULL_REQUEST_NUMBER"); fi
+          node request/run.mjs "${args[@]}"
       - name: Dispatch or reconcile through Azure Claude Code
-        if: vars.UI_REQUEST_AGENT_PROVIDER == '' || vars.UI_REQUEST_AGENT_PROVIDER == 'github-actions-claude-code'
+        if: vars.UI_REQUEST_AGENT_PROVIDER == 'github-actions-claude-code'
         env:
           GITHUB_TOKEN: ${{ github.token }}
           INPUT_ISSUE_NUMBER: ${{ needs.gate.outputs.issue_number }}
@@ -182,9 +192,9 @@ jobs:
           INPUT_PULL_REQUEST_NUMBER: ${{ needs.gate.outputs.pull_request_number }}
           UI_REQUEST_AGENT_PROVIDER: github-actions-claude-code
         run: |
-          args=(--issue "$INPUT_ISSUE_NUMBER" --operation "$INPUT_OPERATION")
+          args=(--issue "$INPUT_ISSUE_NUMBER" --operation "$INPUT_OPERATION" --max-wait-ms 0)
           if [ -n "$INPUT_PULL_REQUEST_NUMBER" ]; then args+=(--pull-request "$INPUT_PULL_REQUEST_NUMBER"); fi
-          pnpm request:run "${args[@]}"
+          node request/run.mjs "${args[@]}"
       - name: Dispatch or reconcile through GitHub Copilot
         if: vars.UI_REQUEST_AGENT_PROVIDER == 'github-copilot'
         env:
@@ -195,9 +205,9 @@ jobs:
           INPUT_PULL_REQUEST_NUMBER: ${{ needs.gate.outputs.pull_request_number }}
           UI_REQUEST_AGENT_PROVIDER: github-copilot
         run: |
-          args=(--issue "$INPUT_ISSUE_NUMBER" --operation "$INPUT_OPERATION")
+          args=(--issue "$INPUT_ISSUE_NUMBER" --operation "$INPUT_OPERATION" --max-wait-ms 0)
           if [ -n "$INPUT_PULL_REQUEST_NUMBER" ]; then args+=(--pull-request "$INPUT_PULL_REQUEST_NUMBER"); fi
-          pnpm request:run "${args[@]}"
+          node request/run.mjs "${args[@]}"
       - name: Dispatch or reconcile through Cursor
         if: vars.UI_REQUEST_AGENT_PROVIDER == 'cursor'
         env:
@@ -208,22 +218,85 @@ jobs:
           INPUT_PULL_REQUEST_NUMBER: ${{ needs.gate.outputs.pull_request_number }}
           UI_REQUEST_AGENT_PROVIDER: cursor
         run: |
-          args=(--issue "$INPUT_ISSUE_NUMBER" --operation "$INPUT_OPERATION")
+          args=(--issue "$INPUT_ISSUE_NUMBER" --operation "$INPUT_OPERATION" --max-wait-ms 0)
           if [ -n "$INPUT_PULL_REQUEST_NUMBER" ]; then args+=(--pull-request "$INPUT_PULL_REQUEST_NUMBER"); fi
-          pnpm request:run "${args[@]}"
+          node request/run.mjs "${args[@]}"
       - name: Reject unsupported provider configuration
-        if: vars.UI_REQUEST_AGENT_PROVIDER != '' && vars.UI_REQUEST_AGENT_PROVIDER != 'github-actions-claude-code' && vars.UI_REQUEST_AGENT_PROVIDER != 'github-copilot' && vars.UI_REQUEST_AGENT_PROVIDER != 'cursor'
+        if: vars.UI_REQUEST_AGENT_PROVIDER != '' && vars.UI_REQUEST_AGENT_PROVIDER != 'github-actions-codex' && vars.UI_REQUEST_AGENT_PROVIDER != 'github-actions-claude-code' && vars.UI_REQUEST_AGENT_PROVIDER != 'github-copilot' && vars.UI_REQUEST_AGENT_PROVIDER != 'cursor'
         env:
           CONFIGURED_PROVIDER: ${{ vars.UI_REQUEST_AGENT_PROVIDER }}
         run: |
           echo "Unsupported UI_REQUEST_AGENT_PROVIDER: $CONFIGURED_PROVIDER" >&2
           exit 1
+      - name: Record admission latency without cancelling the dispatched work
+        if: always()
+        env:
+          INPUT_STARTED_MS: ${{ needs.gate.outputs.started_ms }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/ui-request-admission"
+          elapsed="$(( $(date +%s%3N) - INPUT_STARTED_MS ))"
+          node request/latency.mjs admission "$elapsed" "$RUNNER_TEMP/ui-request-admission/observation.json"
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        if: always()
+        with:
+          name: ui-request-admission-${{ github.run_id }}
+          path: ${{ runner.temp }}/ui-request-admission/observation.json
+          if-no-files-found: warn
+          retention-days: 90
       - name: Consume accepted request label
         if: success() && needs.gate.outputs.labeled == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
           INPUT_LABEL_TARGET_NUMBER: ${{ needs.gate.outputs.label_target_number }}
         run: gh api --method DELETE "repos/$GITHUB_REPOSITORY/issues/$INPUT_LABEL_TARGET_NUMBER/labels/ui%3Aready"
+
+  observe:
+    needs: [gate, request]
+    runs-on: ubuntu-latest
+    timeout-minutes: 100
+    environment: ui-request-agent
+    concurrency:
+      group: ui-request-${{ needs.gate.outputs.issue_number }}
+      cancel-in-progress: false
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          persist-credentials: 'false'
+      - name: Observe Azure Codex Luna
+        if: vars.UI_REQUEST_AGENT_PROVIDER == '' || vars.UI_REQUEST_AGENT_PROVIDER == 'github-actions-codex'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          INPUT_ISSUE_NUMBER: ${{ needs.gate.outputs.issue_number }}
+          UI_REQUEST_AGENT_PROVIDER: github-actions-codex
+        run: node request/run.mjs --issue "$INPUT_ISSUE_NUMBER" --operation run
+      - name: Observe Azure Claude Code
+        if: vars.UI_REQUEST_AGENT_PROVIDER == 'github-actions-claude-code'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          INPUT_ISSUE_NUMBER: ${{ needs.gate.outputs.issue_number }}
+          UI_REQUEST_AGENT_PROVIDER: github-actions-claude-code
+        run: node request/run.mjs --issue "$INPUT_ISSUE_NUMBER" --operation run
+      - name: Observe GitHub Copilot
+        if: vars.UI_REQUEST_AGENT_PROVIDER == 'github-copilot'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          COPILOT_AGENT_TOKEN: ${{ secrets.COPILOT_AGENT_TOKEN }}
+          INPUT_ISSUE_NUMBER: ${{ needs.gate.outputs.issue_number }}
+          UI_REQUEST_AGENT_PROVIDER: github-copilot
+        run: node request/run.mjs --issue "$INPUT_ISSUE_NUMBER" --operation run
+      - name: Observe Cursor
+        if: vars.UI_REQUEST_AGENT_PROVIDER == 'cursor'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          CURSOR_API_KEY: ${{ secrets.CURSOR_API_KEY }}
+          INPUT_ISSUE_NUMBER: ${{ needs.gate.outputs.issue_number }}
+          UI_REQUEST_AGENT_PROVIDER: cursor
+        run: node request/run.mjs --issue "$INPUT_ISSUE_NUMBER" --operation run
 
   cleanup:
     if: github.event_name == 'pull_request' && github.event.action == 'closed' && startsWith(github.event.pull_request.head.ref, 'astrale/ui-request-')
