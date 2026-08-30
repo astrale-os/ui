@@ -46,6 +46,17 @@ test('round-trips one cumulative checkpoint with exact digests', async () => {
   assert.deepEqual(verified, checkpoint)
 })
 
+test('can return the signed base for a trusted descendant-ancestry check', async () => {
+  const { root, manifest, checkpoint } = await fixture()
+  const verified = await verifyCandidateCheckpoint({
+    root,
+    manifest,
+    request: checkpoint.request,
+    now: new Date('2026-08-31T00:00:00.000Z'),
+  })
+  assert.equal(verified.baseSha, checkpoint.baseSha)
+})
+
 test('rejects tampering, expiry, objective drift, and base mismatch', async () => {
   const { root, manifest } = await fixture()
   await writeFile(path.join(root, 'candidate.patch'), 'tampered')
