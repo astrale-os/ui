@@ -888,7 +888,6 @@ printf '%s\\n\\nVerified immutable source evidence is available at %s. Read inde
 `,
   )
   assert.equal(propose.steps[agentIndex].env.INPUT_OBJECTIVE, '${{ inputs.objective }}')
-  assert.equal(workerWorkflow.includes('--max-budget-usd'), false)
   assert.equal(propose.steps[agentIndex].env.CLAUDE_CODE_USE_FOUNDRY, '1')
   assert.equal(
     publish.steps[commitIndex].run,

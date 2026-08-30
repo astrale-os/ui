@@ -4,6 +4,10 @@ import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 
 import {
+  adaptShadcnControlSizing,
+  shadcnControlRevision,
+} from '../tooling/upstream/adapters/shadcn-control-sizing.mjs'
+import {
   adaptShadcnComponent,
   adaptShadcnRegistryComponent,
 } from '../tooling/upstream/adapters/shadcn.mjs'
@@ -109,7 +113,10 @@ for (const name of emittedNames) {
   const targetPath = registryOwned
     ? path.join('registry/components', name, `${name}.tsx`)
     : path.join('packages/ui/src', owner, 'index.tsx')
-  const adapted = registryOwned ? adaptShadcnRegistryComponent(source) : adapt(source)
+  const adapted = registryOwned
+    ? adaptShadcnRegistryComponent(source)
+    : adaptShadcnControlSizing(name, adapt(source))
+  const revision = shadcnControlRevision(name)
 
   await mkdir(path.dirname(targetPath), { recursive: true })
   await writeFile(targetPath, adapted)
@@ -122,7 +129,8 @@ for (const name of emittedNames) {
     sourceDigest: digest(source),
     owner: registryOwned ? `component/${name}` : `@astrale-os/ui/${name}`,
     implementation: targetPath,
-    adaptation: 'imports-only',
+    adaptation: revision?.adaptation ?? 'imports-only',
+    ...(revision ? { adaptationNotes: revision.notes } : {}),
     disposition: registryOwned ? 'owned-registry-component' : 'owned-runtime',
   })
 }

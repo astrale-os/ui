@@ -101,6 +101,128 @@ test('every workbook-defined Studio variant lazy-loads without a module or rende
   expect(browserErrors).toEqual([])
 })
 
+test('control height tokens survive composed slots and keep grouped controls aligned', async ({
+  page,
+}) => {
+  await page.goto('/?preview=component%2Fbutton-group%2Fbutton-group-11%23default')
+  const buttonGroupPreview = page.locator(
+    '[data-preview-address="component/button-group/button-group-11"]',
+  )
+  await expect(buttonGroupPreview).toHaveAttribute('data-preview-status', 'ready')
+  const groupedButtons = buttonGroupPreview.locator('[data-slot="button-group"] > button')
+  await expect(groupedButtons).toHaveCount(2)
+  expect(
+    await groupedButtons.evaluateAll((buttons) =>
+      buttons.map((button, index) => {
+        const bounds = button.getBoundingClientRect()
+        return {
+          height: bounds.height,
+          square: index === 0 ? null : bounds.width === bounds.height,
+          size: button.getAttribute('data-size'),
+          slot: button.getAttribute('data-slot'),
+        }
+      }),
+    ),
+  ).toEqual([
+    { height: 36, square: null, size: 'default', slot: 'button' },
+    { height: 36, square: true, size: 'icon', slot: 'dropdown-menu-trigger' },
+  ])
+
+  await buttonGroupPreview.evaluate((element) => {
+    const preview = element as HTMLElement
+    preview.style.setProperty('--ui-control-height', '3rem')
+  })
+  await expect
+    .poll(() =>
+      groupedButtons.evaluateAll((buttons) =>
+        buttons.map((button, index) => {
+          const bounds = button.getBoundingClientRect()
+          return {
+            height: bounds.height,
+            square: index === 0 ? null : bounds.width === bounds.height,
+          }
+        }),
+      ),
+    )
+    .toEqual([
+      { height: 48, square: null },
+      { height: 48, square: true },
+    ])
+
+  for (const sizeCase of [
+    {
+      address: 'component/button/button-07',
+      expectedHeight: 48,
+      size: 'lg',
+      token: '--ui-control-height-lg',
+      value: '3rem',
+    },
+    {
+      address: 'component/button/button-08',
+      expectedHeight: 40,
+      size: 'sm',
+      token: '--ui-control-height-sm',
+      value: '2.5rem',
+    },
+    {
+      address: 'component/button/button-09',
+      expectedHeight: 24,
+      size: 'xs',
+    },
+  ] as const) {
+    await page.goto(`/?preview=${encodeURIComponent(`${sizeCase.address}#default`)}`)
+    const preview = page.locator(`[data-preview-address="${sizeCase.address}"]`)
+    await expect(preview).toHaveAttribute('data-preview-status', 'ready')
+    if (sizeCase.token !== undefined && sizeCase.value !== undefined) {
+      await preview.evaluate((element, { token, value }) => {
+        const preview = element as HTMLElement
+        preview.style.setProperty(token, value)
+      }, sizeCase)
+    }
+    const button = preview.locator('button')
+    await expect(button).toHaveAttribute('data-size', sizeCase.size)
+    await expect
+      .poll(() => button.evaluate((element) => element.getBoundingClientRect().height))
+      .toBe(sizeCase.expectedHeight)
+  }
+
+  await page.goto('/?preview=component%2Finput-group%23default')
+  const inputGroupPreview = page.locator('[data-preview-address="component/input-group"]')
+  await expect(inputGroupPreview).toHaveAttribute('data-preview-status', 'ready')
+  const inputGroup = inputGroupPreview.locator('[data-slot="input-group"]')
+  await inputGroupPreview.evaluate((element) => {
+    const preview = element as HTMLElement
+    preview.style.setProperty('--ui-control-height', '3rem')
+  })
+  await expect
+    .poll(() =>
+      inputGroup.evaluate((element) => ({
+        action: element.querySelector('button')!.getBoundingClientRect().height,
+        group: element.getBoundingClientRect().height,
+        input: element.querySelector('input')!.getBoundingClientRect().height,
+      })),
+    )
+    .toEqual({ action: 24, group: 48, input: 48 })
+
+  for (const controlCase of [
+    { address: 'component/input', slot: 'input' },
+    { address: 'component/select', slot: 'select-trigger' },
+    { address: 'component/native-select', slot: 'native-select' },
+  ] as const) {
+    await page.goto(`/?preview=${encodeURIComponent(`${controlCase.address}#default`)}`)
+    const preview = page.locator(`[data-preview-address="${controlCase.address}"]`)
+    await expect(preview).toHaveAttribute('data-preview-status', 'ready')
+    await preview.evaluate((element) => {
+      const preview = element as HTMLElement
+      preview.style.setProperty('--ui-control-height', '3rem')
+    })
+    const control = preview.locator(`[data-slot="${controlCase.slot}"]`)
+    await expect
+      .poll(() => control.evaluate((element) => element.getBoundingClientRect().height))
+      .toBe(48)
+  }
+})
+
 test('search metadata finds an unloaded item, intent prefetches its family, and selection loads only that preview', async ({
   page,
 }) => {

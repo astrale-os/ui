@@ -13,6 +13,7 @@ import {
 } from './disclosure/accordion/index.js'
 import { createToastManager, Toaster } from './feedback/toast/index.js'
 import { Checkbox } from './input/checkbox/index.js'
+import { InputGroup, InputGroupButton, InputGroupInput } from './input/input-group/index.js'
 import { Input } from './input/input/index.js'
 import { NativeSelect } from './input/native-select/index.js'
 import { Select, SelectTrigger, SelectValue } from './input/select/index.js'
@@ -57,6 +58,26 @@ describe('runtime owners', () => {
     expect(activations).toBe(1)
   })
 
+  test('button size tokens survive semantic trigger composition', () => {
+    render(
+      <>
+        <Button size="sm">Small action</Button>
+        <Dialog>
+          <DialogTrigger render={<Button size="icon" />} aria-label="Open settings" />
+        </Dialog>
+      </>,
+    )
+
+    expect(screen.getByRole('button', { name: 'Small action' })).toHaveAttribute('data-size', 'sm')
+    expect(screen.getByRole('button', { name: 'Small action' })).toHaveClass(
+      'h-(--ui-control-height-sm)',
+    )
+    const trigger = screen.getByRole('button', { name: 'Open settings' })
+    expect(trigger).toHaveAttribute('data-slot', 'dialog-trigger')
+    expect(trigger).toHaveAttribute('data-size', 'icon')
+    expect(trigger).toHaveClass('size-(--ui-control-height)')
+  })
+
   test('input keeps native labeling, invalid, disabled, and value semantics', () => {
     render(
       <label>
@@ -68,6 +89,29 @@ describe('runtime owners', () => {
     expect(input).toBeDisabled()
     expect(input).toHaveAttribute('aria-invalid', 'true')
     expect(input).toHaveValue('Astrale')
+    expect(input).toHaveClass('h-(--ui-control-height)')
+  })
+
+  test('input groups keep tokenized control sizing with locally smaller actions', () => {
+    const { container } = render(
+      <InputGroup>
+        <InputGroupInput aria-label="Graph path" />
+        <InputGroupButton>Copy</InputGroupButton>
+      </InputGroup>,
+    )
+
+    expect(container.querySelector('[data-slot="input-group"]')).toHaveClass(
+      'h-(--ui-control-height)',
+    )
+    expect(screen.getByRole('textbox', { name: 'Graph path' })).toHaveAttribute(
+      'data-slot',
+      'input-group-control',
+    )
+    expect(screen.getByRole('textbox', { name: 'Graph path' })).toHaveClass(
+      'h-(--ui-control-height)',
+    )
+    expect(screen.getByRole('button', { name: 'Copy' })).toHaveAttribute('data-size', 'xs')
+    expect(screen.getByRole('button', { name: 'Copy' })).toHaveClass('h-6')
   })
 
   test('slider keeps scalar controlled and uncontrolled state to one thumb', () => {
@@ -117,8 +161,13 @@ describe('runtime owners', () => {
     expect(container.querySelector('[data-slot="switch-thumb"]')).toBeInTheDocument()
     expect(container.querySelector('[data-slot="table-container"]')).toBeInTheDocument()
     expect(container.querySelector('[data-slot="table"]')).toHaveClass('host-table')
+    expect(container.querySelector('[data-slot="select-trigger"]')).toHaveAttribute(
+      'data-size',
+      'default',
+    )
     expect(container.querySelector('[data-slot="select-trigger"]')).toHaveClass(
       'host-select-trigger',
+      'data-[size=default]:h-(--ui-control-height)',
     )
     expect(container.querySelector('[data-slot="native-select-wrapper"]')).toHaveClass(
       'host-native-select',
@@ -126,6 +175,9 @@ describe('runtime owners', () => {
     expect(screen.getByRole('combobox', { name: 'Environment' })).toHaveAttribute(
       'data-slot',
       'native-select',
+    )
+    expect(screen.getByRole('combobox', { name: 'Environment' })).toHaveClass(
+      'h-(--ui-control-height)',
     )
   })
 
