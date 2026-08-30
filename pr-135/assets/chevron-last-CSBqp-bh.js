@@ -1,0 +1,1 @@
+import{t as e}from"./createLucideIcon-DMASS5FJ.js";var t=e(`chevron-first`,[[`path`,{d:`m17 18-6-6 6-6`,key:`1yerx2`}],[`path`,{d:`M7 6v12`,key:`1p53r6`}]]),n=e(`chevron-last`,[[`path`,{d:`m7 18 6-6-6-6`,key:`lwmzdw`}],[`path`,{d:`M17 6v12`,key:`1o0aio`}]]);export{t as n,n as t};

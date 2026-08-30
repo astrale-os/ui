@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-Cx0BB4qO.js";var t=e(),n=()=>(0,t.jsx)(`p`,{className:`from-primary/40 to-primary bg-linear-to-r bg-clip-text text-4xl font-semibold text-transparent`,children:`Gradient - Dawn light in a single line`}),r={source:`@astrale-os/ui`};export{n as default,r as preview};

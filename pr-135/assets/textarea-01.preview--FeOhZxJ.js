@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{t}from"./textarea-C62SQYLf.js";var n=e(),r=()=>(0,n.jsx)(t,{placeholder:`Type your message here.`,className:`w-full max-w-xs`}),i={source:`@astrale-os/ui`};export{r as default,i as preview};

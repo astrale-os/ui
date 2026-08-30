@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "previews": [
+    {
+      "id": "block/scheduling/schedule-editor#default",
+      "address": "block/scheduling/schedule-editor",
+      "scene": "default",
+      "screenshot": "screenshots/block-scheduling-schedule-editor-default-40022fad7a3c.png"
+    },
+    {
+      "id": "block/scheduling/schedule-editor#incomplete",
+      "address": "block/scheduling/schedule-editor",
+      "scene": "incomplete",
+      "screenshot": "screenshots/block-scheduling-schedule-editor-incomplete-d98c13736c55.png"
+    }
+  ]
+}

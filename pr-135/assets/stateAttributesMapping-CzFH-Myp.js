@@ -1,0 +1,1 @@
+var e=function(e){return e.startingStyle=`data-starting-style`,e.endingStyle=`data-ending-style`,e}({}),t={"data-starting-style":``},n={"data-ending-style":``},r={transitionStatus(e){return e===`starting`?t:e===`ending`?n:null}};export{r as n,e as t};

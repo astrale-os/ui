@@ -1,0 +1,1 @@
+import{i as e}from"./jsx-runtime-Cx0BB4qO.js";import{t}from"./react-3BKWdGy3.js";import{t as n}from"./useIsoLayoutEffect-ncyBa8sy.js";import{t as r}from"./useStableCallback-BpP56Uye.js";var i=e(t(),1);function a(e,t){let a=i.useRef(e),o=r(t);n(()=>{a.current!==e&&o(a.current),a.current=e},[e,o])}export{a as t};

@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{ct as t,tt as n}from"./index-BMFGxOWo.js";var r=e(),i=()=>(0,r.jsxs)(t,{variant:`ghost`,className:`group`,children:[(0,r.jsx)(n,{className:`transition-transform duration-200 group-hover:-translate-x-0.5`}),`Go to settings`]}),a={source:`@astrale-os/ui`};export{i as default,a as preview};
