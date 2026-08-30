@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0-beta.18](https://github.com/astrale-os/ui/compare/v0.3.0-beta.17...v0.3.0-beta.18) (2026-08-30)
+
+
+### Documentation
+
+* track UI campaign and harden spinner proof ([#101](https://github.com/astrale-os/ui/issues/101)) ([f57719d](https://github.com/astrale-os/ui/commit/f57719d633c75b116dfa19ab8a83eb967df17093))
+
 ## [0.3.0-beta.17](https://github.com/astrale-os/ui/compare/v0.3.0-beta.16...v0.3.0-beta.17) (2026-08-30)
 
 
