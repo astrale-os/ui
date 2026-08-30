@@ -905,7 +905,9 @@ test('environment variables keep every control reachable at a mobile width', asy
     expect(box.x + box.width).toBeLessThanOrEqual(bounds.x + bounds.width + 1)
   }
   await expect(preview.getByLabel('Filter by group')).toBeVisible()
-  await expect(preview.getByLabel('Value of DATABASE_URL')).toBeVisible()
+  await expect(
+    preview.getByRole('textbox', { name: 'Value of DATABASE_URL', exact: true }),
+  ).toBeVisible()
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= document.documentElement.clientWidth,
@@ -924,11 +926,13 @@ test('environment variables add, update, copy, and delete through host actions',
   await preview.getByRole('button', { name: 'Add Variable' }).click()
   await preview.getByLabel('Key', { exact: true }).fill('CAMPAIGN_TOKEN')
   await preview.getByLabel('Value', { exact: true }).fill('campaign-secret')
-  await preview.getByLabel('production', { exact: true }).click()
+  await preview.getByRole('checkbox', { name: 'production' }).click()
   await preview.getByRole('button', { name: 'Save', exact: true }).click()
   await expect(status).toHaveText('Added CAMPAIGN_TOKEN.')
   await expect(status).not.toContainText('campaign-secret')
-  await expect(preview.getByLabel('Value of CAMPAIGN_TOKEN')).toHaveValue('••••••••••••••••')
+  await expect(
+    preview.getByRole('textbox', { name: 'Value of CAMPAIGN_TOKEN', exact: true }),
+  ).toHaveValue('••••••••••••••••')
 
   await preview.getByRole('button', { name: 'Actions for CAMPAIGN_TOKEN' }).click()
   await page.getByRole('menuitem', { name: 'Edit' }).click()
@@ -949,13 +953,17 @@ test('environment variables add, update, copy, and delete through host actions',
   await expect(confirmation).toContainText('CAMPAIGN_TOKEN')
   await expect(confirmation).not.toContainText('rotated-secret')
   await confirmation.getByRole('button', { name: 'Cancel' }).click()
-  await expect(preview.getByLabel('Value of CAMPAIGN_TOKEN')).toHaveCount(1)
+  await expect(
+    preview.getByRole('textbox', { name: 'Value of CAMPAIGN_TOKEN', exact: true }),
+  ).toHaveCount(1)
 
   await preview.getByRole('button', { name: 'Actions for CAMPAIGN_TOKEN' }).click()
   await page.getByRole('menuitem', { name: 'Delete' }).click()
   await page.getByRole('alertdialog').getByRole('button', { name: 'Delete' }).click()
   await expect(status).toHaveText('Deleted CAMPAIGN_TOKEN.')
-  await expect(preview.getByLabel('Value of CAMPAIGN_TOKEN')).toHaveCount(0)
+  await expect(
+    preview.getByRole('textbox', { name: 'Value of CAMPAIGN_TOKEN', exact: true }),
+  ).toHaveCount(0)
 })
 
 test('environment variables rejected-actions scene reports failures without leaking a value', async ({
@@ -976,7 +984,9 @@ test('environment variables rejected-actions scene reports failures without leak
   await expect(confirmation).not.toContainText('postgresql://')
   await confirmation.getByRole('button', { name: 'Delete' }).click()
   await expect(status).toHaveText('Could not delete DATABASE_URL.')
-  await expect(preview.getByLabel('Value of DATABASE_URL')).toHaveCount(1)
+  await expect(
+    preview.getByRole('textbox', { name: 'Value of DATABASE_URL', exact: true }),
+  ).toHaveCount(1)
 
   await preview.getByRole('button', { name: 'Add Variable' }).click()
   await preview.getByLabel('Key', { exact: true }).fill('CAMPAIGN_TOKEN')
@@ -984,7 +994,9 @@ test('environment variables rejected-actions scene reports failures without leak
   await preview.getByRole('button', { name: 'Save', exact: true }).click()
   await expect(status).toHaveText('Could not add the variable.')
   await expect(status).not.toContainText('campaign-secret')
-  await expect(preview.getByLabel('Value of CAMPAIGN_TOKEN')).toHaveCount(0)
+  await expect(
+    preview.getByRole('textbox', { name: 'Value of CAMPAIGN_TOKEN', exact: true }),
+  ).toHaveCount(0)
 
   const canonical = await loadPreview(page, 'block/secrets/env-variables')
   await canonical.getByRole('button', { name: 'Actions for DATABASE_URL' }).click()
