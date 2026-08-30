@@ -30,6 +30,12 @@ const statusMonitorProvenance = JSON.parse(
     'utf8',
   ),
 )
+const envVariablesProvenance = JSON.parse(
+  await readFile(
+    'tooling/upstream/providers/chadcn/9f92a7134a2df98b249f455104137780ebf958a0/env-variables/provenance.json',
+    'utf8',
+  ),
+)
 const externalProviders = new Map([
   [
     '@react-aria',
@@ -44,6 +50,14 @@ const externalProviders = new Map([
     {
       provenance: statusMonitorProvenance,
       address: 'block/observability/status-monitor',
+      fileCount: 1,
+    },
+  ],
+  [
+    '@chadcn',
+    {
+      provenance: envVariablesProvenance,
+      address: 'block/secrets/env-variables',
       fileCount: 1,
     },
   ],
@@ -393,6 +407,7 @@ test('registry inventory is the exact retained pattern and block catalog', async
       'block/dashboard/analytics',
       'block/dashboard/operations',
       'block/observability/status-monitor',
+      'block/secrets/env-variables',
       'pattern/calendar/range-basic',
       'pattern/calendar/single-basic',
       'pattern/carousel/horizontal-controlled',

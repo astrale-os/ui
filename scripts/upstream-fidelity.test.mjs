@@ -36,6 +36,12 @@ const statusMonitorProvenance = JSON.parse(
     'utf8',
   ),
 )
+const envVariablesProvenance = JSON.parse(
+  await readFile(
+    'tooling/upstream/providers/chadcn/9f92a7134a2df98b249f455104137780ebf958a0/env-variables/provenance.json',
+    'utf8',
+  ),
+)
 const owners = new Map(
   provenance.components
     .filter((component) => component.disposition === 'owned-runtime')
@@ -442,6 +448,454 @@ test('the 8StarLabs status monitor has only the declared Astrale adaptation', as
     })
     assert.equal(formatted.status, 0, formatted.stderr)
     for (const filename of Object.keys(statusMonitorProvenance.files)) {
+      assert.equal(
+        await readFile(path.join(temporary, 'implementation', filename), 'utf8'),
+        await readFile(path.join(temporary, 'source', filename), 'utf8'),
+        `${filename} contains an undeclared upstream change`,
+      )
+    }
+  } finally {
+    await rm(temporary, { recursive: true })
+  }
+})
+
+const declaredEnvVariableRegions = [
+  [
+    'alert dialog import',
+    ['import {', '  AlertDialog,'],
+    ["import { Badge } from '@astrale-os/ui/badge'"],
+  ],
+  ['host actions', ['', '  const runAction = async ('], ['', '  return (']],
+  [
+    'live status region',
+    ['', '      <p', '        role="status"'],
+    ['', '', '      {showImport && ('],
+  ],
+  [
+    'delete confirmation',
+    ['', '      <AlertDialog', '        open={deleteTarget !== null}'],
+    ['    </div>', '  )', '}'],
+  ],
+]
+
+const declaredEnvVariableEdits = [
+  [
+    'unreferenced card imports',
+    ["import { Card, CardContent } from '@astrale-os/ui/card'"],
+    ["import { Card, CardContent, CardHeader, CardTitle } from '@astrale-os/ui/card'"],
+  ],
+  [
+    'unreferenced icon imports',
+    ['  Clock,', '  ToggleLeft,', '  KeyRound,'],
+    ['  Clock,', '  Hash,', '  ToggleLeft,', '  Globe,', '  KeyRound,'],
+  ],
+  [
+    'spinner import',
+    [
+      "import { Separator } from '@astrale-os/ui/separator'",
+      "import { Spinner } from '@astrale-os/ui/spinner'",
+    ],
+    ["import { Separator } from '@astrale-os/ui/separator'"],
+  ],
+  [
+    'stable field identifiers import',
+    ["import { useId, useState } from 'react'"],
+    ["import { useState } from 'react'"],
+  ],
+  ['exported record type', ['export interface EnvVar {'], ['interface EnvVar {']],
+  [
+    'type badge token mapping',
+    [
+      "type TypeBadgeVariant = 'default' | 'secondary' | 'destructive' | 'outline' | 'ghost'",
+      '',
+      'const typeConfig: Record<VarType, { label: string; variant: TypeBadgeVariant }> = {',
+      "  url: { label: 'URL', variant: 'outline' },",
+      "  secret: { label: 'Secret', variant: 'destructive' },",
+      "  boolean: { label: 'Bool', variant: 'secondary' },",
+      "  number: { label: 'Num', variant: 'default' },",
+      "  string: { label: 'Str', variant: 'ghost' },",
+      '}',
+    ],
+    [
+      'const typeConfig: Record<VarType, { label: string; color: string }> = {',
+      "  url: { label: 'URL', color: 'text-blue-600 bg-blue-50 dark:text-blue-400 dark:bg-blue-950' },",
+      "  secret: { label: 'Secret', color: 'text-red-600 bg-red-50 dark:text-red-400 dark:bg-red-950' },",
+      "  boolean: { label: 'Bool', color: 'text-amber-600 bg-amber-50 dark:text-amber-400 dark:bg-amber-950' },",
+      "  number: { label: 'Num', color: 'text-emerald-600 bg-emerald-50 dark:text-emerald-400 dark:bg-emerald-950' },",
+      "  string: { label: 'Str', color: 'text-purple-600 bg-purple-50 dark:text-purple-400 dark:bg-purple-950' },",
+      '}',
+    ],
+  ],
+  [
+    'type badge token rendering',
+    [
+      '                                    <Badge',
+      '                                      variant={typeConfig[envVar.type].variant}',
+      '                                      className="text-[10px]"',
+      '                                    >',
+      '                                      {typeConfig[envVar.type].label}',
+      '                                    </Badge>',
+    ],
+    [
+      '                                    <span',
+      '                                      className={`inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-medium ${typeConfig[envVar.type].color}`}',
+      '                                    >',
+      '                                      {typeConfig[envVar.type].label}',
+      '                                    </span>',
+    ],
+  ],
+  [
+    'host data and action boundary',
+    [
+      'export interface EnvVariablesProps {',
+      '  defaultVariables?: EnvVar[]',
+      '  onCreateVariable?(variable: EnvVar): Promise<void> | void',
+      '  onUpdateVariable?(variable: EnvVar): Promise<void> | void',
+      '  onDeleteVariable?(variable: EnvVar): Promise<void> | void',
+      '  onCopyValue?(variable: EnvVar): Promise<void> | void',
+      '}',
+      '',
+      'export function EnvVariables({',
+      '  defaultVariables = allVariables,',
+      '  onCreateVariable,',
+      '  onUpdateVariable,',
+      '  onDeleteVariable,',
+      '  onCopyValue,',
+      '}: EnvVariablesProps = {}) {',
+      '  const [variables, setVariables] = useState<EnvVar[]>(defaultVariables)',
+      '  const [editingId, setEditingId] = useState<number | null>(null)',
+      '  const [deleteTarget, setDeleteTarget] = useState<EnvVar | null>(null)',
+      '  const [pendingMessage, setPendingMessage] = useState<string | null>(null)',
+      "  const [status, setStatus] = useState<{ tone: 'success' | 'error'; message: string } | null>(null)",
+      '  const fieldId = useId()',
+    ],
+    ['export function EnvVariables() {', '  const [variables] = useState<EnvVar[]>(allVariables)'],
+  ],
+  [
+    'wrapped heading row',
+    ['      <div className="flex flex-wrap items-start justify-between gap-2">'],
+    ['      <div className="flex items-start justify-between">'],
+  ],
+  [
+    'wrapped toolbar row',
+    [
+      '      <div className="flex flex-wrap items-center gap-2">',
+      '        <Button variant="outline" size="sm" onClick={() => setShowImport(!showImport)}>',
+    ],
+    [
+      '      <div className="flex items-center gap-2">',
+      '        <Button variant="outline" size="sm" onClick={() => setShowImport(!showImport)}>',
+    ],
+  ],
+  [
+    'add variable form reset',
+    [
+      '        <Button',
+      '          size="sm"',
+      '          onClick={() => {',
+      '            setEditingId(null)',
+      "            setNewKey('')",
+      "            setNewValue('')",
+      "            setNewEnvs(['development'])",
+      '            setNewEncrypted(false)',
+      '            setShowAddForm(true)',
+      '          }}',
+      '        >',
+    ],
+    ['        <Button size="sm" onClick={() => setShowAddForm(true)}>'],
+  ],
+  [
+    'import field label',
+    [
+      '            <Label htmlFor={`${fieldId}-import`} className="text-xs">',
+      '              Paste your .env file contents below',
+      '            </Label>',
+      '            <Textarea',
+      '              id={`${fieldId}-import`}',
+    ],
+    [
+      '            <Label className="text-xs">Paste your .env file contents below</Label>',
+      '            <Textarea',
+    ],
+  ],
+  [
+    'update form heading',
+    [
+      '            <h3 className="mb-3 text-sm font-medium">',
+      "              {editingId === null ? 'New Variable' : 'Edit Variable'}",
+      '            </h3>',
+    ],
+    ['            <h3 className="mb-3 text-sm font-medium">New Variable</h3>'],
+  ],
+  [
+    'key field label',
+    [
+      '                <Label htmlFor={`${fieldId}-key`} className="text-xs">',
+      '                  Key',
+      '                </Label>',
+      '                <Input',
+      '                  id={`${fieldId}-key`}',
+    ],
+    ['                <Label className="text-xs">Key</Label>', '                <Input'],
+  ],
+  [
+    'value field label',
+    [
+      '                <Label htmlFor={`${fieldId}-value`} className="text-xs">',
+      '                  Value',
+      '                </Label>',
+      '                <Input',
+      '                  id={`${fieldId}-value`}',
+    ],
+    ['                <Label className="text-xs">Value</Label>', '                <Input'],
+  ],
+  [
+    'wrapped form options row',
+    ['            <div className="mt-3 flex flex-wrap items-center gap-6">'],
+    ['            <div className="mt-3 flex items-center gap-6">'],
+  ],
+  [
+    'form cancel resets the edited variable',
+    [
+      '              <Button',
+      '                variant="ghost"',
+      '                size="sm"',
+      '                onClick={() => {',
+      '                  setEditingId(null)',
+      '                  resetForm()',
+      '                }}',
+      '              >',
+      '                <X size={14} className="mr-1" />',
+    ],
+    [
+      '              <Button variant="ghost" size="sm" onClick={resetForm}>',
+      '                <X size={14} className="mr-1" />',
+    ],
+  ],
+  [
+    'form save action',
+    [
+      '              <Button',
+      '                size="sm"',
+      '                disabled={pendingMessage !== null}',
+      '                onClick={() => void handleSave()}',
+      '              >',
+    ],
+    ['              <Button size="sm">'],
+  ],
+  [
+    'wrapped tab row',
+    ['        <div className="flex flex-wrap items-center justify-between gap-4">'],
+    ['        <div className="flex items-center justify-between gap-4">'],
+  ],
+  [
+    'wrapped filter row',
+    ['          <div className="flex flex-wrap items-center gap-2">', '            <Select'],
+    ['          <div className="flex items-center gap-2">', '            <Select'],
+  ],
+  [
+    'group filter narrowing',
+    [
+      '            <Select',
+      '              value={groupFilter}',
+      '              onValueChange={(value) => {',
+      '                if (value !== null) setGroupFilter(value)',
+      '              }}',
+      '            >',
+    ],
+    ['            <Select value={groupFilter} onValueChange={setGroupFilter}>'],
+  ],
+  [
+    'group filter name',
+    ['              <SelectTrigger aria-label="Filter by group" className="w-[140px] text-sm">'],
+    ['              <SelectTrigger className="w-[140px] text-sm">'],
+  ],
+  [
+    'search field name',
+    [
+      '              <Input',
+      '                aria-label="Filter variables"',
+      '                placeholder="Filter variables..."',
+    ],
+    ['              <Input', '                placeholder="Filter variables..."'],
+  ],
+  [
+    'bulk field label',
+    [
+      '                  <Label htmlFor={`${fieldId}-bulk-${env}`} className="text-xs">',
+      '                    Raw .env format ({env})',
+      '                  </Label>',
+      '                  <Textarea',
+      '                    id={`${fieldId}-bulk-${env}`}',
+    ],
+    [
+      '                  <Label className="text-xs">Raw .env format ({env})</Label>',
+      '                  <Textarea',
+    ],
+  ],
+  [
+    'wrapped variable row',
+    [
+      '                                <div className="flex flex-wrap items-center gap-3">',
+      '                                  <div className="sm:min-w-[180px]">',
+    ],
+    [
+      '                                <div className="flex items-center gap-3">',
+      '                                  <div className="min-w-[180px]">',
+    ],
+  ],
+  [
+    'wrapped value column',
+    [
+      '                                  <div className="flex flex-1 basis-full items-center gap-1.5 sm:basis-auto">',
+    ],
+    ['                                  <div className="flex flex-1 items-center gap-1.5">'],
+  ],
+  [
+    'value field name',
+    [
+      '                                      readOnly',
+      '                                      aria-label={`Value of ${envVar.key}`}',
+    ],
+    ['                                      readOnly'],
+  ],
+  [
+    'reveal control name',
+    [
+      '                                      size="icon"',
+      '                                      aria-label={',
+      '                                        revealed[envVar.id]',
+      '                                          ? `Hide value of ${envVar.key}`',
+      '                                          : `Reveal value of ${envVar.key}`',
+      '                                      }',
+      '                                      aria-pressed={Boolean(revealed[envVar.id])}',
+      '                                      className="shrink-0"',
+      '                                      onClick={() => toggleReveal(envVar.id)}',
+    ],
+    [
+      '                                      size="icon"',
+      '                                      className="shrink-0"',
+      '                                      onClick={() => toggleReveal(envVar.id)}',
+    ],
+  ],
+  [
+    'wrapped badge column',
+    [
+      '                                  <div className="flex shrink-0 flex-wrap items-center gap-1.5">',
+    ],
+    ['                                  <div className="flex shrink-0 items-center gap-1.5">'],
+  ],
+  [
+    'menu trigger render and name',
+    [
+      '                                    <DropdownMenuTrigger',
+      '                                      render={',
+      '                                        <Button',
+      '                                          variant="ghost"',
+      '                                          size="icon"',
+      '                                          aria-label={`Actions for ${envVar.key}`}',
+      '                                          className="shrink-0"',
+      '                                        >',
+      '                                          <MoreVertical size={14} />',
+      '                                        </Button>',
+      '                                      }',
+      '                                    />',
+    ],
+    [
+      '                                    <DropdownMenuTrigger asChild>',
+      '                                      <Button variant="ghost" size="icon" className="shrink-0">',
+      '                                        <MoreVertical size={14} />',
+      '                                      </Button>',
+      '                                    </DropdownMenuTrigger>',
+    ],
+  ],
+  [
+    'edit action',
+    ['                                      <DropdownMenuItem onClick={() => handleEdit(envVar)}>'],
+    ['                                      <DropdownMenuItem>'],
+  ],
+  [
+    'copy action',
+    [
+      '                                      <DropdownMenuItem onClick={() => void handleCopy(envVar)}>',
+    ],
+    ['                                      <DropdownMenuItem>'],
+  ],
+  [
+    'delete action',
+    [
+      '                                      <DropdownMenuItem',
+      '                                        className="text-destructive"',
+      '                                        onClick={() => setDeleteTarget(envVar)}',
+      '                                      >',
+    ],
+    ['                                      <DropdownMenuItem className="text-destructive">'],
+  ],
+  [
+    'wrapped variable footer',
+    [
+      '                                <div className="text-muted-foreground mt-1.5 flex flex-wrap items-center gap-3 text-[11px] sm:pl-[180px]">',
+    ],
+    [
+      '                                <div className="text-muted-foreground mt-1.5 flex items-center gap-3 pl-[180px] text-[11px]">',
+    ],
+  ],
+]
+
+test('the chadcn environment variables block has only the declared Astrale adaptation', async () => {
+  assert.equal(envVariablesProvenance.adaptation, 'astrale-revision')
+  const providerRoot =
+    'tooling/upstream/providers/chadcn/9f92a7134a2df98b249f455104137780ebf958a0/env-variables'
+  assert.equal(
+    digest(await readFile(`${providerRoot}/LICENSE-package.json`, 'utf8')),
+    envVariablesProvenance.licenseDigest,
+  )
+  const temporary = await mkdtemp(path.join(tmpdir(), 'astrale-env-variables-fidelity-'))
+  try {
+    for (const [filename, file] of Object.entries(envVariablesProvenance.files)) {
+      if (!file.implementation) continue
+      const source = await readFile(file.source, 'utf8')
+      assert.equal(digest(source), file.sourceDigest)
+      const replaceDeclared = (value, from, to, label) => {
+        assert.equal(value.split(from).length - 1, 1, `${label} adaptation is not exact`)
+        return value.replace(from, to)
+      }
+      const removeDeclaredRegion = (value, start, end, label) => {
+        assert.equal(value.split(start).length - 1, 1, `${label} region start is not exact`)
+        assert.equal(value.split(end).length - 1, 1, `${label} region end is not exact`)
+        return value.slice(0, value.indexOf(start)) + value.slice(value.indexOf(end))
+      }
+      let implementation = await readFile(file.implementation, 'utf8')
+      for (const [label, start, end] of declaredEnvVariableRegions) {
+        implementation = removeDeclaredRegion(
+          implementation,
+          start.join('\n'),
+          end.join('\n'),
+          label,
+        )
+      }
+      for (const [label, adapted, upstream] of declaredEnvVariableEdits) {
+        implementation = replaceDeclared(
+          implementation,
+          adapted.join('\n'),
+          upstream.join('\n'),
+          label,
+        )
+      }
+      const routedImports = implementation.split("'@astrale-os/ui/").length - 1
+      assert.equal(routedImports, 12, 'routed component imports are not the declared adaptation')
+      implementation = implementation.replaceAll("'@astrale-os/ui/", "'@/components/ui/")
+      await mkdir(path.join(temporary, 'source'), { recursive: true })
+      await mkdir(path.join(temporary, 'implementation'), { recursive: true })
+      await writeFile(path.join(temporary, 'source', filename), source)
+      await writeFile(path.join(temporary, 'implementation', filename), implementation)
+    }
+    const formatted = spawnSync('pnpm', ['exec', 'oxfmt', '--write', temporary], {
+      encoding: 'utf8',
+    })
+    assert.equal(formatted.status, 0, formatted.stderr)
+    for (const [filename, file] of Object.entries(envVariablesProvenance.files)) {
+      if (!file.implementation) continue
       assert.equal(
         await readFile(path.join(temporary, 'implementation', filename), 'utf8'),
         await readFile(path.join(temporary, 'source', filename), 'utf8'),
