@@ -3,6 +3,12 @@ name: Rebind Qualification Receipt
 on:
   push:
     branches: [main]
+  workflow_dispatch:
+    inputs:
+      main_sha:
+        description: Exact merged main commit to rebind.
+        required: true
+        type: string
 
 permissions:
   actions: read
@@ -12,6 +18,8 @@ permissions:
 jobs:
   rebind:
     runs-on: ubuntu-latest
+    env:
+      TARGET_MAIN_SHA: ${{ inputs.main_sha || github.sha }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
@@ -20,9 +28,11 @@ jobs:
       - name: Rebind same-tree accepted evidence to the exact main commit
         env:
           GH_TOKEN: ${{ github.token }}
-          INPUT_MAIN_SHA: ${{ github.sha }}
+          INPUT_MAIN_SHA: ${{ env.TARGET_MAIN_SHA }}
         run: |
           set -euo pipefail
+          [[ "$INPUT_MAIN_SHA" =~ ^[0-9a-f]{40}$ ]]
+          git merge-base --is-ancestor "$INPUT_MAIN_SHA" HEAD
           pull="$(gh api "repos/$GITHUB_REPOSITORY/commits/$INPUT_MAIN_SHA/pulls" --jq '[.[] | select(.merged_at != null)] | sort_by(.merged_at) | last // empty')"
           if [ -z "$pull" ]; then
             echo 'No merged pull request owns this commit; no receipt can be rebound.'
@@ -44,9 +54,12 @@ jobs:
           run_id="$(jq -r .workflow_run.id <<< "$artifact")"
           run="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$run_id")"
           test "$(jq -r .path <<< "$run")" = '.github/workflows/merge-ready.yml'
-          test "$(jq -r .event <<< "$run")" = pull_request
           test "$(jq -r .conclusion <<< "$run")" = success
-          test "$(jq -r .head_sha <<< "$run")" = "$head_sha"
+          case "$(jq -r .event <<< "$run")" in
+            pull_request) test "$(jq -r .head_sha <<< "$run")" = "$head_sha" ;;
+            workflow_dispatch) test "$(jq -r .head_branch <<< "$run")" = main ;;
+            *) echo 'Qualification receipt came from an unsupported workflow event.' >&2; exit 1 ;;
+          esac
           gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$(jq -r .id <<< "$artifact")/zip" > "$RUNNER_TEMP/receipt.zip"
           unzip -q "$RUNNER_TEMP/receipt.zip" -d "$RUNNER_TEMP/receipt"
           receipt="$RUNNER_TEMP/receipt/qualification-receipt.json"
@@ -58,7 +71,7 @@ jobs:
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         if: hashFiles('qualification-receipt.json') != ''
         with:
-          name: qualification-receipt-${{ github.sha }}
+          name: qualification-receipt-${{ env.TARGET_MAIN_SHA }}
           path: qualification-receipt.json
           if-no-files-found: error
           retention-days: 90
