@@ -1659,8 +1659,7 @@ test('all starter modes have no serious structural violations and Astrale preset
         duration: style.animationDuration,
         iterations: style.animationIterationCount,
         keyframeTransforms:
-          animation?.effect
-            ?.getKeyframes()
+          (animation?.effect instanceof KeyframeEffect ? animation.effect.getKeyframes() : [])
             .map((keyframe) => keyframe.transform)
             .filter((transform): transform is string => typeof transform === 'string') ?? [],
         name: style.animationName,
