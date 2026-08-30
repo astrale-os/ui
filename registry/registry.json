@@ -541,6 +541,28 @@
       }
     },
     {
+      "name": "block-observability-status-monitor",
+      "type": "registry:block",
+      "title": "Block · Observability · Status Monitor",
+      "description": "Responsive service availability history with uptime and incident details.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
+      "files": [
+        {
+          "path": "registry/blocks/observability/status-monitor.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/components/observability/status-monitor.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "block/observability/status-monitor",
+        "ownership": "consumer-source",
+        "provider": "@8starlabs",
+        "upstreamAddress": "https://ui.8starlabs.com/r/status-monitor.json",
+        "upstreamDigest": "sha256:66302173eee665403f1fdb6b2522694607596b9e623eabddf32061b2a73d39bb",
+        "adaptation": "astrale-revision"
+      }
+    },
+    {
       "name": "pattern-calendar-range-basic",
       "type": "registry:block",
       "title": "Pattern · Calendar · Range Basic",

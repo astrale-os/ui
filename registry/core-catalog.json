@@ -168,6 +168,14 @@
     "variantCount": 4
   },
   {
+    "address": "block/observability/status-monitor",
+    "title": "Block · Observability · Status Monitor",
+    "classification": "block",
+    "family": "observability",
+    "source": "https://ui.8starlabs.com/r/status-monitor.json",
+    "variantCount": 1
+  },
+  {
     "address": "component/accordion/accordion-01",
     "title": "Accordion 1",
     "classification": "component",

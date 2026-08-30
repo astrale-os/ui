@@ -1,8 +1,9 @@
-import { cleanup, render, screen, within } from '@testing-library/react'
+import { act, cleanup, render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { afterEach, describe, expect, test } from 'vitest'
+import { afterEach, describe, expect, test, vi } from 'vitest'
 
 import { SignInCard } from '../blocks/authentication/sign-in-card.js'
+import StatusMonitor from '../blocks/observability/status-monitor.js'
 import {
   StatusHeatmap,
   StatusHeatmapBlock,
@@ -14,7 +15,11 @@ import {
 import { HorizontalCarousel } from '../patterns/carousel/horizontal-controlled.js'
 import { ComboboxSingleBasic } from '../patterns/combobox/single-basic.js'
 
-afterEach(cleanup)
+afterEach(() => {
+  cleanup()
+  vi.restoreAllMocks()
+  vi.unstubAllGlobals()
+})
 
 describe('owned registry compositions', () => {
   test('combobox instances keep unique relationships and inject query and selection state', async () => {
@@ -191,5 +196,116 @@ describe('owned registry compositions', () => {
     expect(cells[2]).toHaveAttribute('aria-label', '2026-05-03: Critical')
     await user.click(cells[0]!)
     expect(clicked).toEqual(['2026-05-01'])
+  })
+
+  test('status monitor exposes recent availability, uptime, accessible statuses, and responsive windows', async () => {
+    const observers: Array<{
+      callback: ResizeObserverCallback
+      elements: Element[]
+    }> = []
+    vi.stubGlobal(
+      'ResizeObserver',
+      class {
+        entry: (typeof observers)[number]
+        constructor(callback: ResizeObserverCallback) {
+          this.entry = { callback, elements: [] }
+          observers.push(this.entry)
+        }
+        observe(element: Element) {
+          this.entry.elements.push(element)
+        }
+        disconnect() {}
+        unobserve() {}
+      },
+    )
+    let width = 640
+    vi.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockImplementation(
+      () => ({ width }) as DOMRect,
+    )
+    const statuses = [
+      { status: 'normal' as const, timestamp: 'May 01, 2026' },
+      {
+        status: 'warning' as const,
+        timestamp: 'May 02, 2026',
+        info: 'Latency exceeded the expected threshold.',
+      },
+      {
+        status: 'error' as const,
+        timestamp: 'May 03, 2026',
+        info: 'API requests failed during failover.',
+      },
+      { status: 'empty' as const, timestamp: 'May 04, 2026' },
+    ]
+    const { container } = render(
+      <StatusMonitor
+        className="host-status-monitor"
+        statuses={statuses}
+        title="API availability"
+      />,
+    )
+
+    expect(screen.getByText('API availability')).toBeVisible()
+    expect(screen.getByText('33.33% uptime')).toBeVisible()
+    expect(container.firstElementChild).toHaveClass('host-status-monitor')
+    await waitFor(() => expect(container.querySelectorAll('button[aria-label]')).toHaveLength(90))
+
+    expect(screen.getByLabelText('May 03, 2026: Error')).toHaveAttribute('type', 'button')
+    const root = container.firstElementChild!
+    const monitorObserver = observers.find(({ elements }) => elements.includes(root))
+    expect(monitorObserver).toBeDefined()
+
+    width = 418
+    await act(() => monitorObserver?.callback([], {} as ResizeObserver))
+    await waitFor(() => expect(container.querySelectorAll('button[aria-label]')).toHaveLength(60))
+
+    width = 207
+    await act(() => monitorObserver?.callback([], {} as ResizeObserver))
+    await waitFor(() => expect(container.querySelectorAll('button[aria-label]')).toHaveLength(30))
+  })
+
+  test('status monitor scopes uptime to the visible window and distinguishes no data and hours', async () => {
+    vi.stubGlobal(
+      'ResizeObserver',
+      class {
+        constructor(private callback: ResizeObserverCallback) {}
+        observe() {
+          this.callback([], this as unknown as ResizeObserver)
+        }
+        disconnect() {}
+        unobserve() {}
+      },
+    )
+    vi.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockImplementation(
+      () => ({ width: 640 }) as DOMRect,
+    )
+    const statuses = Array.from({ length: 100 }, (_, index) => ({
+      status: index < 10 ? ('error' as const) : ('normal' as const),
+      timestamp: `Period ${index + 1}`,
+    }))
+    const { container, rerender } = render(<StatusMonitor statuses={statuses} />)
+
+    await waitFor(() => expect(container.querySelectorAll('button[aria-label]')).toHaveLength(90))
+    expect(screen.getByText('100% uptime')).toBeVisible()
+
+    rerender(
+      <StatusMonitor statuses={Array.from({ length: 90 }, () => ({ status: 'empty' as const }))} />,
+    )
+    expect(screen.getByText('N/A uptime')).toBeVisible()
+
+    rerender(
+      <StatusMonitor
+        unit="hours"
+        statuses={[
+          { status: 'normal', timestamp: new Date('2026-05-03T03:00:00Z') },
+          { status: 'normal', timestamp: new Date('2026-05-03T04:00:00Z') },
+        ]}
+      />,
+    )
+    const hourlyLabels = [...container.querySelectorAll<HTMLElement>('button[aria-label]')]
+      .map((element) => element.getAttribute('aria-label'))
+      .filter((label) => label !== 'No data')
+    expect(hourlyLabels).toHaveLength(2)
+    expect(new Set(hourlyLabels).size).toBe(2)
+    expect(hourlyLabels.every((label) => /\d{1,2}:\d{2}/u.test(label!))).toBe(true)
   })
 })

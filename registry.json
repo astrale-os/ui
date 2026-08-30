@@ -7,6 +7,7 @@
     "registry/components/registry.json",
     "registry/blocks/authentication/registry.json",
     "registry/blocks/dashboard/registry.json",
+    "registry/blocks/observability/registry.json",
     "registry/patterns/calendar/registry.json",
     "registry/patterns/carousel/registry.json",
     "registry/patterns/combobox/registry.json",

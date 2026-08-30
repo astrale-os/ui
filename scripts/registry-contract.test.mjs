@@ -24,6 +24,12 @@ const heatmapProvenance = JSON.parse(
     'utf8',
   ),
 )
+const statusMonitorProvenance = JSON.parse(
+  await readFile(
+    'tooling/upstream/providers/8starlabs/763f9b6f27d2ded9967d62b099e66768994dd68c/status-monitor/provenance.json',
+    'utf8',
+  ),
+)
 const externalProviders = new Map([
   [
     '@react-aria',
@@ -32,6 +38,14 @@ const externalProviders = new Map([
   [
     '@heatmap',
     { provenance: heatmapProvenance, address: 'component/status-heatmap', fileCount: 1 },
+  ],
+  [
+    '@8starlabs',
+    {
+      provenance: statusMonitorProvenance,
+      address: 'block/observability/status-monitor',
+      fileCount: 1,
+    },
   ],
 ])
 const registryPackage = JSON.parse(await readFile('registry/package.json', 'utf8'))
@@ -129,9 +143,13 @@ async function readFamilyItems() {
       source.includes.map(async (include) => {
         const manifestPath = path.join('registry', include.replace(/^\.\//u, ''))
         const manifest = JSON.parse(await readFile(manifestPath, 'utf8'))
-        const singleton = new Set(['./patterns/form/registry.json', './themes/registry.json'])
+        const singleton =
+          new Set(['./patterns/form/registry.json', './themes/registry.json']).has(include) ||
+          (manifest.items.length === 1 &&
+            manifest.items[0]?.meta?.provider &&
+            manifest.items[0].meta.provider !== '@astrale-os/ui')
         assert.ok(
-          manifest.items.length >= (singleton.has(include) ? 1 : 2),
+          manifest.items.length >= (singleton ? 1 : 2),
           `${include} must expose owned items`,
         )
         return manifest.items.map((item) => ({
@@ -248,23 +266,31 @@ test('every registry item is independently bounded, controlled, and safe to inst
       assert.ok(item.dependencies.includes('@astrale-os/ui@^0.3.0-beta.0'))
       continue
     }
-    if (isComponent) {
-      if (item.meta.provider === '@shadcn') {
-        const upstream = provenanceByAddress.get(item.meta.upstreamAddress)
-        assert.ok(upstream, `${item.name} has no exact provenance owner`)
-        assert.equal(item.meta.upstreamAddress, `@shadcn/${item.meta.canonicalAddress.slice(10)}`)
-        assert.equal(item.meta.upstreamDigest, upstream.sourceDigest)
-        assert.equal(item.meta.canonicalAddress, upstream.owner)
-        assert.equal(item.declaredPath, upstream.implementation)
-      } else {
-        const external = externalProviders.get(item.meta.provider)
-        assert.ok(external, `${item.name} has no proven external provider`)
-        assert.equal(item.meta.upstreamAddress, external.provenance.upstreamAddress)
-        assert.equal(item.meta.upstreamDigest, external.provenance.sourceDigest)
-        assert.equal(item.meta.canonicalAddress, external.address)
-        assert.equal(item.files.length, external.fileCount)
-      }
+    if (isComponent && item.meta.provider === '@shadcn') {
+      const upstream = provenanceByAddress.get(item.meta.upstreamAddress)
+      assert.ok(upstream, `${item.name} has no exact provenance owner`)
+      assert.equal(item.meta.upstreamAddress, `@shadcn/${item.meta.canonicalAddress.slice(10)}`)
+      assert.equal(item.meta.upstreamDigest, upstream.sourceDigest)
+      assert.equal(item.meta.canonicalAddress, upstream.owner)
+      assert.equal(item.declaredPath, upstream.implementation)
       assert.equal(item.meta.adaptation, 'imports-only')
+      const itemSources = await Promise.all(
+        item.declaredPaths.map((declaredPath) => readFile(declaredPath, 'utf8')),
+      )
+      const styling = item.css
+        ? Object.keys(item.css).flatMap((rule) => /["']([^"']+)["']/u.exec(rule)?.[1] ?? [])
+        : []
+      assert.deepEqual(item.dependencies, componentDependencies(itemSources.join('\n'), styling))
+      continue
+    }
+    if (item.meta.provider && item.meta.provider !== '@astrale-os/ui') {
+      const external = externalProviders.get(item.meta.provider)
+      assert.ok(external, `${item.name} has no proven external provider`)
+      assert.equal(item.meta.upstreamAddress, external.provenance.upstreamAddress)
+      assert.equal(item.meta.upstreamDigest, external.provenance.sourceDigest)
+      assert.equal(item.meta.canonicalAddress, external.address)
+      assert.equal(item.files.length, external.fileCount)
+      assert.equal(item.meta.adaptation, external.provenance.adaptation ?? 'imports-only')
       const itemSources = await Promise.all(
         item.declaredPaths.map((declaredPath) => readFile(declaredPath, 'utf8')),
       )
@@ -366,6 +392,7 @@ test('registry inventory is the exact retained pattern and block catalog', async
       'block/dashboard/overview',
       'block/dashboard/analytics',
       'block/dashboard/operations',
+      'block/observability/status-monitor',
       'pattern/calendar/range-basic',
       'pattern/calendar/single-basic',
       'pattern/carousel/horizontal-controlled',
