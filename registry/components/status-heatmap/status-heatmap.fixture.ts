@@ -13,10 +13,13 @@ export const statusHeatmapActivity: StatusActivity[] = Array.from({ length: 90 }
   }
 })
 
-// Thirty days of API history: two separated incident intervals followed by a recovered interval.
-// Days 6-9 and 17-19 are incidents; days 20-29 are the explicit recovered run.
-const incidentDegradedDays = new Set([6, 9, 17, 19])
-const incidentCriticalDays = new Set([7, 8, 18])
+// Thirty days of API history (2026-08-01 through 2026-08-30): two separated incident intervals
+// followed by an explicit recovered interval.
+// First incident: 2026-08-07 through 2026-08-10 (days 6-9).
+// Second incident: 2026-08-17 through 2026-08-20 (days 16-19), ending Critical on 2026-08-20.
+// Recovered interval: 2026-08-21 through 2026-08-30 (days 20-29), leaving 22 healthy days.
+const incidentDegradedDays = new Set([6, 9, 16, 17])
+const incidentCriticalDays = new Set([7, 8, 18, 19])
 
 export const statusHeatmapIncidentRecoveryActivity: StatusActivity[] = Array.from(
   { length: 30 },
