@@ -19,4 +19,4 @@
 - [x] Hard latency values are non-cancelling SLO observations.
 - [x] Five-run baseline recorded.
 - [x] Live CLI-to-domain canary completed and cleaned up.
-- [ ] Beta release verified on public npm and GitHub Packages.
+- [x] Beta release verified on public npm and GitHub Packages.
