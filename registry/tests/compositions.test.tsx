@@ -355,4 +355,104 @@ describe('owned registry compositions', () => {
     expect(textarea.value).toContain('DATABASE_URL=postgresql://user:pass@db.example.com:5432/mydb')
     expect(textarea.value).not.toContain('••••••••••••••••')
   })
+
+  test('environment variables name every secret control for assistive technology', async () => {
+    const user = userEvent.setup()
+    render(<EnvVariables />)
+
+    expect(screen.getByLabelText('Filter by group')).toBeVisible()
+    expect(screen.getByLabelText('Filter variables')).toBeVisible()
+    expect(screen.getByLabelText('Value of DATABASE_URL')).toHaveValue('••••••••••••••••')
+    expect(screen.getByRole('button', { name: 'Actions for DATABASE_URL' })).toBeVisible()
+
+    const reveal = screen.getByRole('button', { name: 'Reveal value of DATABASE_URL' })
+    expect(reveal).toHaveAttribute('aria-pressed', 'false')
+    await user.click(reveal)
+    expect(screen.getByRole('button', { name: 'Hide value of DATABASE_URL' })).toHaveAttribute(
+      'aria-pressed',
+      'true',
+    )
+    expect(screen.getByLabelText('Value of DATABASE_URL')).toHaveValue(
+      'postgresql://user:pass@db.example.com:5432/mydb',
+    )
+  })
+
+  test('environment variables add a variable through the injected create action', async () => {
+    const user = userEvent.setup()
+    const created: { key: string; value: string; environments: string[] }[] = []
+    render(
+      <EnvVariables
+        defaultVariables={[]}
+        onCreateVariable={(variable) => {
+          created.push({
+            key: variable.key,
+            value: variable.value,
+            environments: variable.environments,
+          })
+        }}
+      />,
+    )
+
+    await user.click(screen.getByRole('button', { name: 'Add Variable' }))
+    await user.type(screen.getByLabelText('Key'), 'CAMPAIGN_TOKEN')
+    await user.type(screen.getByLabelText('Value'), 'campaign-secret')
+    await user.click(screen.getByLabelText('production'))
+    await user.click(screen.getByRole('button', { name: 'Save' }))
+
+    expect(created).toEqual([
+      {
+        key: 'CAMPAIGN_TOKEN',
+        value: 'campaign-secret',
+        environments: ['development', 'production'],
+      },
+    ])
+    await waitFor(() => {
+      expect(screen.getByRole('status')).toHaveTextContent('Added CAMPAIGN_TOKEN.')
+    })
+    expect(screen.getByRole('status')).not.toHaveTextContent('campaign-secret')
+    expect(screen.getByLabelText('Value of CAMPAIGN_TOKEN')).toHaveValue('••••••••••••••••')
+  })
+
+  test('environment variables refuse an unnamed variable without calling the host', async () => {
+    const user = userEvent.setup()
+    const created: string[] = []
+    render(
+      <EnvVariables
+        defaultVariables={[]}
+        onCreateVariable={(variable) => {
+          created.push(variable.key)
+        }}
+      />,
+    )
+
+    await user.click(screen.getByRole('button', { name: 'Add Variable' }))
+    await user.type(screen.getByLabelText('Value'), 'campaign-secret')
+    await user.click(screen.getByRole('button', { name: 'Save' }))
+
+    expect(created).toEqual([])
+    expect(screen.getByRole('status')).toHaveTextContent('Enter a variable name before saving.')
+    expect(screen.getByRole('status')).not.toHaveTextContent('campaign-secret')
+  })
+
+  test('environment variables report a rejected host action without changing the inventory', async () => {
+    const user = userEvent.setup()
+    render(
+      <EnvVariables
+        defaultVariables={[]}
+        onCreateVariable={() => Promise.reject(new Error('rejected'))}
+      />,
+    )
+
+    await user.click(screen.getByRole('button', { name: 'Add Variable' }))
+    await user.type(screen.getByLabelText('Key'), 'CAMPAIGN_TOKEN')
+    await user.type(screen.getByLabelText('Value'), 'campaign-secret')
+    await user.click(screen.getByRole('button', { name: 'Save' }))
+
+    await waitFor(() => {
+      expect(screen.getByRole('status')).toHaveTextContent('Could not add the variable.')
+    })
+    expect(screen.getByRole('status')).not.toHaveTextContent('campaign-secret')
+    expect(screen.queryByLabelText('Value of CAMPAIGN_TOKEN')).not.toBeInTheDocument()
+    expect(screen.getByText('No variables found.')).toBeVisible()
+  })
 })

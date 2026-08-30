@@ -1,5 +1,15 @@
 'use client'
 
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@astrale-os/ui/alert-dialog'
 import { Badge } from '@astrale-os/ui/badge'
 import { Button } from '@astrale-os/ui/button'
 import { Card, CardContent } from '@astrale-os/ui/card'
@@ -20,6 +30,7 @@ import {
   SelectValue,
 } from '@astrale-os/ui/select'
 import { Separator } from '@astrale-os/ui/separator'
+import { Spinner } from '@astrale-os/ui/spinner'
 import { Switch } from '@astrale-os/ui/switch'
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@astrale-os/ui/tabs'
 import { Textarea } from '@astrale-os/ui/textarea'
@@ -45,12 +56,12 @@ import {
   Database,
   Settings2,
 } from 'lucide-react'
-import { useState } from 'react'
+import { useId, useState } from 'react'
 
 type VarType = 'url' | 'secret' | 'boolean' | 'number' | 'string'
 type VarGroup = 'database' | 'api-keys' | 'feature-flags' | 'general'
 
-interface EnvVar {
+export interface EnvVar {
   id: number
   key: string
   value: string
@@ -307,8 +318,27 @@ const envBadgeVariant = (env: string) => {
   }
 }
 
-export function EnvVariables() {
-  const [variables] = useState<EnvVar[]>(allVariables)
+export interface EnvVariablesProps {
+  defaultVariables?: EnvVar[]
+  onCreateVariable?(variable: EnvVar): Promise<void> | void
+  onUpdateVariable?(variable: EnvVar): Promise<void> | void
+  onDeleteVariable?(variable: EnvVar): Promise<void> | void
+  onCopyValue?(variable: EnvVar): Promise<void> | void
+}
+
+export function EnvVariables({
+  defaultVariables = allVariables,
+  onCreateVariable,
+  onUpdateVariable,
+  onDeleteVariable,
+  onCopyValue,
+}: EnvVariablesProps = {}) {
+  const [variables, setVariables] = useState<EnvVar[]>(defaultVariables)
+  const [editingId, setEditingId] = useState<number | null>(null)
+  const [deleteTarget, setDeleteTarget] = useState<EnvVar | null>(null)
+  const [pendingMessage, setPendingMessage] = useState<string | null>(null)
+  const [status, setStatus] = useState<{ tone: 'success' | 'error'; message: string } | null>(null)
+  const fieldId = useId()
   const [revealed, setRevealed] = useState<Record<number, boolean>>({})
   const [search, setSearch] = useState('')
   const [activeTab, setActiveTab] = useState('production')
@@ -362,9 +392,104 @@ export function EnvVariables() {
     setNewEnvs((prev) => (prev.includes(env) ? prev.filter((e) => e !== env) : [...prev, env]))
   }
 
+  const runAction = async (
+    busyMessage: string,
+    successMessage: string,
+    errorMessage: string,
+    perform: () => Promise<void> | void,
+    apply: () => void,
+  ) => {
+    setPendingMessage(busyMessage)
+    setStatus(null)
+    try {
+      await perform()
+      apply()
+      setStatus({ tone: 'success', message: successMessage })
+    } catch {
+      setStatus({ tone: 'error', message: errorMessage })
+    } finally {
+      setPendingMessage(null)
+    }
+  }
+
+  const handleSave = async () => {
+    const key = newKey.trim()
+    if (key === '') {
+      setStatus({ tone: 'error', message: 'Enter a variable name before saving.' })
+      return
+    }
+    const editing = editingId === null ? undefined : variables.find((v) => v.id === editingId)
+    const newType: VarType = newEncrypted ? 'secret' : 'string'
+    const variable: EnvVar = {
+      id: editing ? editing.id : Math.max(0, ...variables.map((v) => v.id)) + 1,
+      key,
+      value: newValue,
+      environments: newEnvs,
+      type: editing ? editing.type : newType,
+      group: editing ? editing.group : 'general',
+      encrypted: newEncrypted,
+      lastModifiedBy: 'You',
+      lastModifiedAt: 'just now',
+      linked: editing ? editing.linked : false,
+    }
+    await runAction(
+      editing ? 'Updating variable…' : 'Adding variable…',
+      editing ? `Updated ${key}.` : `Added ${key}.`,
+      editing ? 'Could not update the variable.' : 'Could not add the variable.',
+      () => (editing ? onUpdateVariable?.(variable) : onCreateVariable?.(variable)),
+      () => {
+        setVariables((prev) =>
+          editing ? prev.map((v) => (v.id === variable.id ? variable : v)) : [...prev, variable],
+        )
+        setEditingId(null)
+        resetForm()
+      },
+    )
+  }
+
+  const handleEdit = (envVar: EnvVar) => {
+    setEditingId(envVar.id)
+    setShowAddForm(true)
+    setNewKey(envVar.key)
+    setNewValue(envVar.value)
+    setNewEnvs(envVar.environments)
+    setNewEncrypted(envVar.encrypted)
+    setStatus(null)
+  }
+
+  const handleCopy = async (envVar: EnvVar) => {
+    await runAction(
+      'Copying value…',
+      `Copied the value of ${envVar.key} to the clipboard.`,
+      `Could not copy the value of ${envVar.key}.`,
+      () => (onCopyValue ? onCopyValue(envVar) : navigator.clipboard.writeText(envVar.value)),
+      () => undefined,
+    )
+  }
+
+  const handleDelete = async (envVar: EnvVar) => {
+    setDeleteTarget(null)
+    await runAction(
+      'Deleting variable…',
+      `Deleted ${envVar.key}.`,
+      `Could not delete ${envVar.key}.`,
+      () => onDeleteVariable?.(envVar),
+      () => {
+        setVariables((prev) => prev.filter((v) => v.id !== envVar.id))
+        if (editingId === envVar.id) {
+          setEditingId(null)
+          resetForm()
+        }
+      },
+    )
+  }
+
+  const statusMessage = status === null ? '' : status.message
+  const statusToneClass = status?.tone === 'error' ? 'text-destructive' : 'text-muted-foreground'
+
   return (
     <div className="mx-auto w-full max-w-3xl p-6">
-      <div className="flex items-start justify-between">
+      <div className="flex flex-wrap items-start justify-between gap-2">
         <div className="flex items-center gap-3">
           <div>
             <h2 className="flex items-center gap-2 text-lg font-semibold">
@@ -389,7 +514,7 @@ export function EnvVariables() {
       </div>
       <Separator className="my-4" />
 
-      <div className="flex items-center gap-2">
+      <div className="flex flex-wrap items-center gap-2">
         <Button variant="outline" size="sm" onClick={() => setShowImport(!showImport)}>
           <Upload size={14} className="mr-2" />
           Import .env
@@ -398,17 +523,45 @@ export function EnvVariables() {
           <Download size={14} className="mr-2" />
           Export .env
         </Button>
-        <Button size="sm" onClick={() => setShowAddForm(true)}>
+        <Button
+          size="sm"
+          onClick={() => {
+            setEditingId(null)
+            setNewKey('')
+            setNewValue('')
+            setNewEnvs(['development'])
+            setNewEncrypted(false)
+            setShowAddForm(true)
+          }}
+        >
           <Plus size={14} className="mr-2" />
           Add Variable
         </Button>
       </div>
 
+      <p
+        role="status"
+        aria-live="polite"
+        className={`mt-2 flex items-center gap-1.5 text-sm ${statusToneClass}`}
+      >
+        {pendingMessage === null ? (
+          statusMessage
+        ) : (
+          <>
+            <Spinner aria-hidden className="size-3.5" />
+            {pendingMessage}
+          </>
+        )}
+      </p>
+
       {showImport && (
         <Card className="mt-4 py-0 shadow-none">
           <CardContent className="p-4">
-            <Label className="text-xs">Paste your .env file contents below</Label>
+            <Label htmlFor={`${fieldId}-import`} className="text-xs">
+              Paste your .env file contents below
+            </Label>
             <Textarea
+              id={`${fieldId}-import`}
               placeholder={'DATABASE_URL=postgresql://...\nAPI_KEY=sk_live_...'}
               value={importText}
               onChange={(e) => setImportText(e.target.value)}
@@ -434,11 +587,16 @@ export function EnvVariables() {
       {showAddForm && (
         <Card className="mt-4 py-0 shadow-none">
           <CardContent className="p-4">
-            <h3 className="mb-3 text-sm font-medium">New Variable</h3>
+            <h3 className="mb-3 text-sm font-medium">
+              {editingId === null ? 'New Variable' : 'Edit Variable'}
+            </h3>
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <Label className="text-xs">Key</Label>
+                <Label htmlFor={`${fieldId}-key`} className="text-xs">
+                  Key
+                </Label>
                 <Input
+                  id={`${fieldId}-key`}
                   placeholder="VARIABLE_NAME"
                   value={newKey}
                   onChange={(e) => setNewKey(e.target.value)}
@@ -446,8 +604,11 @@ export function EnvVariables() {
                 />
               </div>
               <div>
-                <Label className="text-xs">Value</Label>
+                <Label htmlFor={`${fieldId}-value`} className="text-xs">
+                  Value
+                </Label>
                 <Input
+                  id={`${fieldId}-value`}
                   placeholder="value"
                   value={newValue}
                   onChange={(e) => setNewValue(e.target.value)}
@@ -455,7 +616,7 @@ export function EnvVariables() {
                 />
               </div>
             </div>
-            <div className="mt-3 flex items-center gap-6">
+            <div className="mt-3 flex flex-wrap items-center gap-6">
               <div>
                 <Label className="text-xs">Environments</Label>
                 <div className="mt-1 flex gap-2">
@@ -485,11 +646,22 @@ export function EnvVariables() {
               </div>
             </div>
             <div className="mt-3 flex justify-end gap-2">
-              <Button variant="ghost" size="sm" onClick={resetForm}>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => {
+                  setEditingId(null)
+                  resetForm()
+                }}
+              >
                 <X size={14} className="mr-1" />
                 Cancel
               </Button>
-              <Button size="sm">
+              <Button
+                size="sm"
+                disabled={pendingMessage !== null}
+                onClick={() => void handleSave()}
+              >
                 <Save size={14} className="mr-1" />
                 Save
               </Button>
@@ -501,20 +673,20 @@ export function EnvVariables() {
       <Separator className="my-4" />
 
       <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <div className="flex items-center justify-between gap-4">
+        <div className="flex flex-wrap items-center justify-between gap-4">
           <TabsList>
             <TabsTrigger value="production">Production</TabsTrigger>
             <TabsTrigger value="preview">Preview</TabsTrigger>
             <TabsTrigger value="development">Development</TabsTrigger>
           </TabsList>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <Select
               value={groupFilter}
               onValueChange={(value) => {
                 if (value !== null) setGroupFilter(value)
               }}
             >
-              <SelectTrigger className="w-[140px] text-sm">
+              <SelectTrigger aria-label="Filter by group" className="w-[140px] text-sm">
                 <SelectValue placeholder="All Groups" />
               </SelectTrigger>
               <SelectContent>
@@ -531,6 +703,7 @@ export function EnvVariables() {
                 className="text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2"
               />
               <Input
+                aria-label="Filter variables"
                 placeholder="Filter variables..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
@@ -545,8 +718,11 @@ export function EnvVariables() {
             {bulkEditMode ? (
               <Card className="py-0 shadow-none">
                 <CardContent className="p-4">
-                  <Label className="text-xs">Raw .env format ({env})</Label>
+                  <Label htmlFor={`${fieldId}-bulk-${env}`} className="text-xs">
+                    Raw .env format ({env})
+                  </Label>
                   <Textarea
+                    id={`${fieldId}-bulk-${env}`}
                     defaultValue={bulkText}
                     className="mt-2 min-h-[300px] font-mono text-sm"
                   />
@@ -580,8 +756,8 @@ export function EnvVariables() {
                           {vars.map((envVar) => (
                             <Card key={envVar.id} className="rounded-lg py-0 shadow-none">
                               <CardContent className="p-3">
-                                <div className="flex items-center gap-3">
-                                  <div className="min-w-[180px]">
+                                <div className="flex flex-wrap items-center gap-3">
+                                  <div className="sm:min-w-[180px]">
                                     <div className="flex items-center gap-2">
                                       <span className="font-mono text-sm font-medium">
                                         {envVar.key}
@@ -591,7 +767,7 @@ export function EnvVariables() {
                                       )}
                                     </div>
                                   </div>
-                                  <div className="flex flex-1 items-center gap-1.5">
+                                  <div className="flex flex-1 basis-full items-center gap-1.5 sm:basis-auto">
                                     <span
                                       className={`inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-medium ${typeConfig[envVar.type].color}`}
                                     >
@@ -599,6 +775,7 @@ export function EnvVariables() {
                                     </span>
                                     <Input
                                       readOnly
+                                      aria-label={`Value of ${envVar.key}`}
                                       value={
                                         revealed[envVar.id] ? envVar.value : '••••••••••••••••'
                                       }
@@ -607,6 +784,12 @@ export function EnvVariables() {
                                     <Button
                                       variant="ghost"
                                       size="icon"
+                                      aria-label={
+                                        revealed[envVar.id]
+                                          ? `Hide value of ${envVar.key}`
+                                          : `Reveal value of ${envVar.key}`
+                                      }
+                                      aria-pressed={Boolean(revealed[envVar.id])}
                                       className="shrink-0"
                                       onClick={() => toggleReveal(envVar.id)}
                                     >
@@ -617,7 +800,7 @@ export function EnvVariables() {
                                       )}
                                     </Button>
                                   </div>
-                                  <div className="flex shrink-0 items-center gap-1.5">
+                                  <div className="flex shrink-0 flex-wrap items-center gap-1.5">
                                     {envVar.encrypted ? (
                                       <Badge variant="default" className="gap-1 text-[10px]">
                                         <Lock size={10} />
@@ -642,28 +825,36 @@ export function EnvVariables() {
                                   <DropdownMenu>
                                     <DropdownMenuTrigger
                                       render={
-                                        <Button variant="ghost" size="icon" className="shrink-0">
+                                        <Button
+                                          variant="ghost"
+                                          size="icon"
+                                          aria-label={`Actions for ${envVar.key}`}
+                                          className="shrink-0"
+                                        >
                                           <MoreVertical size={14} />
                                         </Button>
                                       }
                                     />
                                     <DropdownMenuContent align="end">
-                                      <DropdownMenuItem>
+                                      <DropdownMenuItem onClick={() => handleEdit(envVar)}>
                                         <Pencil size={14} className="mr-2" />
                                         Edit
                                       </DropdownMenuItem>
-                                      <DropdownMenuItem>
+                                      <DropdownMenuItem onClick={() => void handleCopy(envVar)}>
                                         <Copy size={14} className="mr-2" />
                                         Copy Value
                                       </DropdownMenuItem>
-                                      <DropdownMenuItem className="text-destructive">
+                                      <DropdownMenuItem
+                                        className="text-destructive"
+                                        onClick={() => setDeleteTarget(envVar)}
+                                      >
                                         <Trash2 size={14} className="mr-2" />
                                         Delete
                                       </DropdownMenuItem>
                                     </DropdownMenuContent>
                                   </DropdownMenu>
                                 </div>
-                                <div className="text-muted-foreground mt-1.5 flex items-center gap-3 pl-[180px] text-[11px]">
+                                <div className="text-muted-foreground mt-1.5 flex flex-wrap items-center gap-3 text-[11px] sm:pl-[180px]">
                                   <span className="flex items-center gap-1">
                                     <Clock size={10} />
                                     Modified by {envVar.lastModifiedBy} {envVar.lastModifiedAt}
@@ -690,6 +881,36 @@ export function EnvVariables() {
           Save Changes
         </Button>
       </div>
+
+      <AlertDialog
+        open={deleteTarget !== null}
+        onOpenChange={(open) => {
+          if (!open) setDeleteTarget(null)
+        }}
+      >
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Delete variable?</AlertDialogTitle>
+            <AlertDialogDescription>
+              {deleteTarget === null
+                ? ''
+                : `${deleteTarget.key} is removed from every environment it is set in. This cannot be undone.`}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              variant="destructive"
+              onClick={() => {
+                if (deleteTarget !== null) void handleDelete(deleteTarget)
+              }}
+            >
+              <Trash2 size={14} className="mr-2" />
+              Delete
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   )
 }

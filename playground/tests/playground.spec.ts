@@ -884,6 +884,80 @@ test('environment variables mask stored secrets until an explicit reveal', async
   }
 })
 
+test('environment variables keep every control reachable at a mobile width', async ({ page }) => {
+  await page.goto('/')
+  await selectCatalogKind(page, 'Blocks')
+  const preview = await loadPreview(page, 'block/secrets/env-variables')
+  await page.setViewportSize({ width: 390, height: 844 })
+
+  const bounds = (await preview.boundingBox())!
+  for (const name of [
+    'Import .env',
+    'Export .env',
+    'Add Variable',
+    'Reveal value of DATABASE_URL',
+    'Actions for DATABASE_URL',
+  ]) {
+    const control = preview.getByRole('button', { name, exact: true }).first()
+    await expect(control).toBeVisible()
+    const box = (await control.boundingBox())!
+    expect(box.x).toBeGreaterThanOrEqual(bounds.x - 1)
+    expect(box.x + box.width).toBeLessThanOrEqual(bounds.x + bounds.width + 1)
+  }
+  await expect(preview.getByLabel('Filter by group')).toBeVisible()
+  await expect(preview.getByLabel('Value of DATABASE_URL')).toBeVisible()
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= document.documentElement.clientWidth,
+    ),
+  ).toBe(true)
+})
+
+test('environment variables add, update, copy, and delete through host actions', async ({
+  page,
+}) => {
+  await page.goto('/')
+  await selectCatalogKind(page, 'Blocks')
+  const preview = await loadPreview(page, 'block/secrets/env-variables')
+  const status = preview.locator('p[role="status"]')
+
+  await preview.getByRole('button', { name: 'Add Variable' }).click()
+  await preview.getByLabel('Key', { exact: true }).fill('CAMPAIGN_TOKEN')
+  await preview.getByLabel('Value', { exact: true }).fill('campaign-secret')
+  await preview.getByLabel('production', { exact: true }).click()
+  await preview.getByRole('button', { name: 'Save', exact: true }).click()
+  await expect(status).toHaveText('Added CAMPAIGN_TOKEN.')
+  await expect(status).not.toContainText('campaign-secret')
+  await expect(preview.getByLabel('Value of CAMPAIGN_TOKEN')).toHaveValue('••••••••••••••••')
+
+  await preview.getByRole('button', { name: 'Actions for CAMPAIGN_TOKEN' }).click()
+  await page.getByRole('menuitem', { name: 'Edit' }).click()
+  await expect(preview.getByRole('heading', { name: 'Edit Variable' })).toBeVisible()
+  await preview.getByLabel('Value', { exact: true }).fill('rotated-secret')
+  await preview.getByRole('button', { name: 'Save', exact: true }).click()
+  await expect(status).toHaveText('Updated CAMPAIGN_TOKEN.')
+  await expect(status).not.toContainText('rotated-secret')
+
+  await preview.getByRole('button', { name: 'Actions for CAMPAIGN_TOKEN' }).click()
+  await page.getByRole('menuitem', { name: 'Copy Value' }).click()
+  await expect(status).toHaveText('Copied the value of CAMPAIGN_TOKEN to the clipboard.')
+  await expect(status).not.toContainText('rotated-secret')
+
+  await preview.getByRole('button', { name: 'Actions for CAMPAIGN_TOKEN' }).click()
+  await page.getByRole('menuitem', { name: 'Delete' }).click()
+  const confirmation = page.getByRole('alertdialog')
+  await expect(confirmation).toContainText('CAMPAIGN_TOKEN')
+  await expect(confirmation).not.toContainText('rotated-secret')
+  await confirmation.getByRole('button', { name: 'Cancel' }).click()
+  await expect(preview.getByLabel('Value of CAMPAIGN_TOKEN')).toHaveCount(1)
+
+  await preview.getByRole('button', { name: 'Actions for CAMPAIGN_TOKEN' }).click()
+  await page.getByRole('menuitem', { name: 'Delete' }).click()
+  await page.getByRole('alertdialog').getByRole('button', { name: 'Delete' }).click()
+  await expect(status).toHaveText('Deleted CAMPAIGN_TOKEN.')
+  await expect(preview.getByLabel('Value of CAMPAIGN_TOKEN')).toHaveCount(0)
+})
+
 test('catalog specimens own their interaction without navigating the playground', async ({
   page,
 }) => {

@@ -14,7 +14,13 @@
     "Repoint the provider-local component imports to the Astrale public entrypoints.",
     "Drop the upstream imports that this file never references so the adapted product source satisfies the repository unused-binding rule.",
     "Narrow the Base UI group filter value before calling the existing string state setter.",
-    "Render the Base UI dropdown menu trigger through render instead of the provider asChild property."
+    "Render the Base UI dropdown menu trigger through render instead of the provider asChild property.",
+    "Expose a typed host boundary of default variables and optional create, update, delete, and copy actions.",
+    "Wire the upstream Save, Edit, Copy Value, and Delete controls to those actions with local inventory updates.",
+    "Confirm the upstream Delete action through the owned alert dialog, naming only the variable key.",
+    "Report pending, success, and error outcomes in one polite live region that never contains a secret value.",
+    "Name the group filter, search field, masked value inputs, reveal controls, row action triggers, and form fields.",
+    "Scope the upstream fixed row, toolbar, and filter geometry to the sm breakpoint and allow wrapping so no control is clipped at 390px."
   ],
   "sourceDigest": "sha256:7aa264c65f94dd21a1124e59c53ba33fd7e0d873fe9bc0f1145bcb90fdcac4da",
   "files": {

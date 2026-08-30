@@ -1,7 +1,8 @@
 import { EnvVariables } from './env-variables.js'
+import { secretManagerActions } from './secrets.fixture.js'
 
 export default function EnvVariablesPreview() {
-  return <EnvVariables />
+  return <EnvVariables {...secretManagerActions} />
 }
 
 export const preview = {
