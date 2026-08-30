@@ -3,7 +3,7 @@
 import { cn } from '@astrale-os/ui/class-name'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@astrale-os/ui/tooltip'
 import { AlertTriangleIcon, CheckCircle2Icon, CircleOffIcon, XCircleIcon } from 'lucide-react'
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { useEffect, useId, useMemo, useRef, useState } from 'react'
 
 type AppStatus = 'normal' | 'warning' | 'error' | 'empty'
 
@@ -26,6 +26,12 @@ interface AppStatusConfigData {
   barClassName: string
   textClassName: string
   Icon: React.ComponentType<React.SVGProps<SVGSVGElement>>
+}
+
+interface StatusSelection {
+  absoluteIndex: number
+  item: AppStatusData
+  source: AppStatusData[]
 }
 
 const statusConfig = {
@@ -72,6 +78,21 @@ function calculateNumDisplayableBars(width: number) {
   return SLOT_COUNTS.find((slots) => width >= getTimelineWidth(slots)) ?? 30
 }
 
+function getVisibleSelectionIndex(
+  selection: StatusSelection | null,
+  statuses: AppStatusData[],
+  visibleSlots: number,
+) {
+  if (
+    !selection ||
+    selection.source !== statuses ||
+    statuses[selection.absoluteIndex] !== selection.item
+  )
+    return null
+  const visibleIndex = selection.absoluteIndex - (statuses.length - visibleSlots)
+  return visibleIndex >= 0 && visibleIndex < visibleSlots ? visibleIndex : null
+}
+
 function formatTimestamp(timestamp: AppStatusData['timestamp'], unit: 'days' | 'hours') {
   if (!timestamp) return undefined
 
@@ -95,9 +116,12 @@ export default function StatusMonitor({
   className,
   ...props
 }: StatusMonitorProps) {
+  const triggerIdPrefix = useId()
   const containerRef = useRef<HTMLDivElement>(null)
+  const pressedStatusRef = useRef<StatusSelection | null>(null)
+  const visibleSlotsRef = useRef<number>(MIN_VISIBLE_SLOTS)
   const [visibleSlots, setVisibleSlots] = useState<number>(MIN_VISIBLE_SLOTS)
-  const [pressedStatus, setPressedStatus] = useState<number | null>(null)
+  const [activeStatus, setActiveStatus] = useState<StatusSelection | null>(null)
 
   const paddedStatuses = useMemo(() => {
     const padCount = 90 - statuses.length
@@ -118,6 +142,7 @@ export default function StatusMonitor({
     const normalCount = validStatuses.filter((status) => status.status === 'normal').length
     return `${parseFloat(((normalCount / validStatuses.length) * 100).toFixed(2))}%`
   }, [visibleStatuses])
+  const activeStatusIndex = getVisibleSelectionIndex(activeStatus, paddedStatuses, visibleSlots)
   const timelineWidth = getTimelineWidth(visibleSlots)
 
   useEffect(() => {
@@ -125,7 +150,13 @@ export default function StatusMonitor({
     if (!container) return
 
     const updateVisibleSlots = () => {
-      setVisibleSlots(calculateNumDisplayableBars(container.getBoundingClientRect().width))
+      const nextVisibleSlots = calculateNumDisplayableBars(container.getBoundingClientRect().width)
+      if (nextVisibleSlots === visibleSlotsRef.current) return
+
+      visibleSlotsRef.current = nextVisibleSlots
+      pressedStatusRef.current = null
+      setActiveStatus(null)
+      setVisibleSlots(nextVisibleSlots)
     }
 
     updateVisibleSlots()
@@ -153,34 +184,46 @@ export default function StatusMonitor({
 
         {/* Status Bars Container */}
         <TooltipProvider>
-          <div
-            className="grid h-8 gap-0.5"
-            style={{
-              gridTemplateColumns: `repeat(${visibleSlots}, ${BAR_WIDTH_PX}px)`,
+          <Tooltip
+            disableHoverablePopup
+            open={activeStatusIndex !== null}
+            triggerId={
+              activeStatusIndex === null ? null : `${triggerIdPrefix}-status-${activeStatusIndex}`
+            }
+            onOpenChange={(open, details) => {
+              if (open) return
+              if (details.reason === 'trigger-hover' || details.reason === 'trigger-focus') return
+              pressedStatusRef.current = null
+              setActiveStatus(null)
             }}
           >
-            {visibleStatuses.map((item, index) => {
-              const config = statusConfig[item.status]
-              const Icon = config.Icon
-              const timestamp = formatTimestamp(item.timestamp, unit)
-              const label = timestamp ? `${timestamp}: ${config.label}` : config.label
-              const edgeClassName = [
-                index === 0 ? 'rounded-l-sm' : '',
-                index === visibleStatuses.length - 1 ? 'rounded-r-sm' : '',
-              ]
-                .filter(Boolean)
-                .join(' ')
+            <div
+              className="grid h-8 gap-0.5"
+              style={{
+                gridTemplateColumns: `repeat(${visibleSlots}, ${BAR_WIDTH_PX}px)`,
+              }}
+            >
+              {visibleStatuses.map((item, index) => {
+                const config = statusConfig[item.status]
+                const timestamp = formatTimestamp(item.timestamp, unit)
+                const label = timestamp ? `${timestamp}: ${config.label}` : config.label
+                const selection = {
+                  absoluteIndex: paddedStatuses.length - visibleStatuses.length + index,
+                  item,
+                  source: paddedStatuses,
+                }
+                const edgeClassName = [
+                  index === 0 ? 'rounded-l-sm' : '',
+                  index === visibleStatuses.length - 1 ? 'rounded-r-sm' : '',
+                ]
+                  .filter(Boolean)
+                  .join(' ')
 
-              return (
-                <Tooltip
-                  key={index}
-                  disableHoverablePopup
-                  open={pressedStatus === index}
-                  onOpenChange={(open) => {
-                    setPressedStatus(open ? index : null)
-                  }}
-                >
+                return (
                   <TooltipTrigger
+                    key={index}
+                    id={`${triggerIdPrefix}-status-${index}`}
+                    closeOnClick={false}
                     render={
                       <button
                         type="button"
@@ -190,35 +233,55 @@ export default function StatusMonitor({
                           config.barClassName,
                         )}
                         aria-label={`${label}. ${item.info ?? config.defaultInfo}`}
+                        onPointerEnter={() => setActiveStatus(selection)}
+                        onPointerLeave={() => {
+                          if (pressedStatusRef.current === null) setActiveStatus(null)
+                        }}
+                        onFocus={() => setActiveStatus(selection)}
+                        onBlur={() => {
+                          if (pressedStatusRef.current === null) setActiveStatus(null)
+                        }}
                         onClick={() => {
-                          setPressedStatus((current) => (current === index ? null : index))
+                          const nextPressedStatus =
+                            pressedStatusRef.current?.absoluteIndex === selection.absoluteIndex &&
+                            pressedStatusRef.current.item === selection.item
+                              ? null
+                              : selection
+                          pressedStatusRef.current = nextPressedStatus
+                          setActiveStatus(nextPressedStatus)
                         }}
                       />
                     }
                   />
-                  <TooltipContent
-                    side="bottom"
-                    sideOffset={8}
-                    className="data-[state=delayed-open]:animate-none data-open:animate-none data-closed:animate-none"
-                  >
-                    <div className="text-sm space-y-1 p-1">
-                      <div className="flex items-center gap-2">
-                        <Icon
-                          className={`size-4 shrink-0 ${config.textClassName}`}
-                          aria-hidden="true"
-                        />
-                        <span className={`font-bold ${config.textClassName}`}>{config.label}</span>
-                      </div>
-                      {timestamp ? <div className="text-background/70">{timestamp}</div> : null}
-                      <div className="leading-snug text-background/80">
-                        {item.info ?? config.defaultInfo}
-                      </div>
+                )
+              })}
+            </div>
+            {(() => {
+              const item = activeStatus?.item
+              if (!item) return null
+
+              const config = statusConfig[item.status]
+              const timestamp = formatTimestamp(item.timestamp, unit)
+              const Icon = config.Icon
+              return (
+                <TooltipContent side="bottom" sideOffset={8}>
+                  <div className="text-sm space-y-1 p-1">
+                    <div className="flex items-center gap-2">
+                      <Icon
+                        className={`size-4 shrink-0 ${config.textClassName}`}
+                        aria-hidden="true"
+                      />
+                      <span className={`font-bold ${config.textClassName}`}>{config.label}</span>
                     </div>
-                  </TooltipContent>
-                </Tooltip>
+                    {timestamp ? <div className="text-background/70">{timestamp}</div> : null}
+                    <div className="leading-snug text-background/80">
+                      {item.info ?? config.defaultInfo}
+                    </div>
+                  </div>
+                </TooltipContent>
               )
-            })}
-          </div>
+            })()}
+          </Tooltip>
         </TooltipProvider>
 
         {/* Footer: Timeline Legend */}

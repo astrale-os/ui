@@ -804,13 +804,14 @@ test('status monitor presents responsive availability and incident details', asy
   const preview = await loadPreview(page, 'block/observability/status-monitor')
 
   await expect(preview.getByText('API availability')).toBeVisible()
-  const initialSlots = page.viewportSize()!.width < 640 ? 30 : 90
+  const isDesktop = page.viewportSize()!.width >= 640
+  const initialSlots = isDesktop ? 90 : 30
   const initialUptime = initialSlots === 90 ? '93.33% uptime' : '90% uptime'
   await expect(preview.getByText(initialUptime)).toBeVisible()
   await expect(preview.locator('button[aria-label]')).toHaveCount(initialSlots)
 
   const incident = preview.getByLabel('Jul 03, 2026: Error')
-  if (page.viewportSize()!.width >= 640) {
+  if (isDesktop) {
     await incident.hover()
     const tooltip = page.locator('[data-slot="tooltip-content"]')
     await expect(tooltip).toContainText(
@@ -823,6 +824,20 @@ test('status monitor presents responsive availability and incident details', asy
       tooltipBox!.y + tooltipBox!.height / 2,
     )
     await expect(tooltip).not.toBeVisible()
+
+    const statusSegments = preview.locator('button[aria-label]')
+    const statusSegmentBoxes = await statusSegments.evaluateAll((segments) =>
+      segments.slice(0, 12).map((segment) => {
+        const box = segment.getBoundingClientRect()
+        return { x: box.x, y: box.y, width: box.width, height: box.height }
+      }),
+    )
+    for (const box of statusSegmentBoxes) {
+      await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2)
+    }
+    const finalSegmentBox = statusSegmentBoxes.at(-1)!
+    await page.mouse.move(finalSegmentBox.x, finalSegmentBox.y - 40)
+    await expect(page.locator('[data-slot="tooltip-content"]')).toHaveCount(0)
 
     await preview.getByLabel('Jul 02, 2026: Normal').focus()
     await page.keyboard.press('Tab')
@@ -851,13 +866,26 @@ test('status monitor presents responsive availability and incident details', asy
     .analyze()
   expect(contrast.violations).toEqual([])
 
+  if (isDesktop) {
+    await preview.getByLabel('May 19, 2026: Warning').click()
+    await page.mouse.move(1, 1)
+    await expect(page.getByText('Elevated latency affected a subset of requests.')).toBeVisible()
+  }
+
   await page.setViewportSize({ width: 560, height: 844 })
+  await expect(page.locator('[data-slot="tooltip-content"]')).toHaveCount(0)
   await expect(preview.locator('button[aria-label]')).toHaveCount(60)
   await expect(preview.getByText('91.67% uptime')).toBeVisible()
 
   await page.setViewportSize({ width: 390, height: 844 })
   await expect(preview.locator('button[aria-label]')).toHaveCount(30)
   await expect(preview.getByText('90% uptime')).toBeVisible()
+
+  if (isDesktop) {
+    await page.setViewportSize({ width: 1440, height: 1000 })
+    await expect(preview.locator('button[aria-label]')).toHaveCount(90)
+    await expect(page.locator('[data-slot="tooltip-content"]')).toHaveCount(0)
+  }
 })
 
 test('log viewer filters the stream, then pauses and resumes the live tail', async ({ page }) => {

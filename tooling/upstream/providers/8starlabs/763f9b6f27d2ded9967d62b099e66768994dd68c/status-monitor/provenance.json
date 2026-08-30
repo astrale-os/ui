@@ -12,8 +12,12 @@
   "adaptation": "astrale-revision",
   "adaptationNotes": [
     "Repoint provider-local tooltip and class-name imports to Astrale public entrypoints.",
-    "Render each labelled status segment as an interactive button whose accessible name matches Base UI's visual-only tooltip guidance, with press-controlled incident detail.",
+    "Render each labelled status segment as an interactive button whose accessible name matches Base UI's visual-only tooltip guidance, with hover, focus, and touch incident detail.",
     "Close pointer-opened incident detail when the pointer leaves its status segment instead of keeping the non-interactive popup hoverable.",
+    "Preserve Base UI's tooltip enter and exit animations so rapid cross-segment hovering completes popup presence cleanup.",
+    "Use one shared tooltip root for every status segment so rapid cross-segment hovering cannot accumulate popup portals.",
+    "Own transient pointer and focus closure on each trigger so delayed primitive close notifications cannot cancel a newly active status.",
+    "Bind active incident detail to its absolute status record so responsive window changes never reassign it to another timestamp.",
     "Scope uptime to the visible responsive window and report N/A when that window has no telemetry.",
     "Include clock time and time zone in Date labels when the timeline unit is hours."
   ],
