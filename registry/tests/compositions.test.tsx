@@ -397,7 +397,7 @@ describe('owned registry compositions', () => {
     await user.click(screen.getByRole('button', { name: 'Add Variable' }))
     await user.type(screen.getByLabelText('Key'), 'CAMPAIGN_TOKEN')
     await user.type(screen.getByLabelText('Value'), 'campaign-secret')
-    await user.click(screen.getByLabelText('production'))
+    await user.click(screen.getByRole('checkbox', { name: 'production' }))
     await user.click(screen.getByRole('button', { name: 'Save' }))
 
     expect(created).toEqual([
