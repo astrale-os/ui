@@ -668,7 +668,7 @@ pnpm registry:build
     qualify.steps.find(
       (step) => step.name === 'Qualify the candidate without publication authority',
     ).run,
-    'pnpm check',
+    'pnpm check && pnpm test:registry-behavior',
   )
   assert.equal(packageManifest.devDependencies['@anthropic-ai/claude-code'], '2.1.223')
   assert.deepEqual(Object.keys(sourceEvidenceSchema).toSorted(), [

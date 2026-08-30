@@ -192,7 +192,7 @@ jobs:
           pnpm format
           pnpm registry:build
       - name: Qualify the candidate without publication authority
-        run: pnpm check
+        run: pnpm check && pnpm test:registry-behavior
       - name: Build changed preview evidence without publication authority
         env:
           INPUT_BASELINE_SHA: ${{ needs.propose.outputs.baseline_sha }}
