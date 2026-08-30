@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{k as t}from"./index-zcvx3Vaz.js";var n=e(),r={canvas:`compact`,source:`@shadcn/kbd`};function i(){return(0,n.jsxs)(`div`,{className:`inline-cluster`,children:[(0,n.jsx)(t,{children:`⌘`}),(0,n.jsx)(t,{children:`K`}),(0,n.jsx)(`span`,{children:`opens the command surface`})]})}export{i as default,r as preview};

@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{t}from"./input-DhIjplbI.js";var n=e(),r={source:`@shadcn/input`};function i(){return(0,n.jsx)(t,{"aria-label":`Domain path`,defaultValue:`/:observatory.astrale.ai`})}export{i as default,r as preview};

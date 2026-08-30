@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{n as t,r as n,t as r}from"./bubble-CbxztU3G.js";var i=e(),a={source:`@shadcn/bubble`};function o(){return(0,i.jsx)(n,{children:(0,i.jsx)(r,{variant:`muted`,children:(0,i.jsx)(t,{children:`Runtime source matches its provider proof.`})})})}export{o as default,a as preview};

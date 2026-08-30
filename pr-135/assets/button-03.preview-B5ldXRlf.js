@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{t}from"./star-BJE53v6l.js";import{ct as n}from"./index-zcvx3Vaz.js";var r=e(),i=()=>(0,r.jsxs)(n,{className:`rounded-full`,children:[(0,r.jsx)(t,{}),`Star`]}),a={source:`@astrale-os/ui`};export{i as default,a as preview};

@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{r as t,t as n}from"./native-select-B3Yycl2n.js";var r=e(),i={source:`@shadcn/native-select`};function a(){return(0,r.jsxs)(n,{"aria-label":`Output format`,defaultValue:`json`,children:[(0,r.jsx)(t,{value:`json`,children:`JSON`}),(0,r.jsx)(t,{value:`yaml`,children:`YAML`})]})}export{a as default,i as preview};

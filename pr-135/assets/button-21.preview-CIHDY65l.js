@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{t}from"./mail-check-C2m1fVd8.js";import{R as n,ct as r}from"./index-zcvx3Vaz.js";var i=e(),a=()=>(0,i.jsxs)(r,{variant:`outline`,children:[(0,i.jsx)(t,{}),`Messages`,(0,i.jsx)(n,{variant:`destructive`,className:`px-1.5 py-px`,children:`99+`})]}),o={source:`@astrale-os/ui`};export{a as default,o as preview};
