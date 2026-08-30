@@ -3,7 +3,7 @@
 import { cn } from '@astrale-os/ui/class-name'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@astrale-os/ui/tooltip'
 import { AlertTriangleIcon, CheckCircle2Icon, CircleOffIcon, XCircleIcon } from 'lucide-react'
-import React, { useEffect, useId, useMemo, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 
 type AppStatus = 'normal' | 'warning' | 'error' | 'empty'
 
@@ -95,7 +95,6 @@ export default function StatusMonitor({
   className,
   ...props
 }: StatusMonitorProps) {
-  const statusMonitorId = useId()
   const containerRef = useRef<HTMLDivElement>(null)
   const [visibleSlots, setVisibleSlots] = useState<number>(MIN_VISIBLE_SLOTS)
   const [pressedStatus, setPressedStatus] = useState<number | null>(null)
@@ -165,8 +164,6 @@ export default function StatusMonitor({
               const Icon = config.Icon
               const timestamp = formatTimestamp(item.timestamp, unit)
               const label = timestamp ? `${timestamp}: ${config.label}` : config.label
-              const triggerId = `${statusMonitorId}-status-${index}`
-              const tooltipId = `${triggerId}-description`
               const edgeClassName = [
                 index === 0 ? 'rounded-l-sm' : '',
                 index === visibleStatuses.length - 1 ? 'rounded-r-sm' : '',
@@ -178,7 +175,6 @@ export default function StatusMonitor({
                 <Tooltip
                   key={index}
                   open={pressedStatus === index}
-                  triggerId={triggerId}
                   onOpenChange={(open) => {
                     setPressedStatus(open ? index : null)
                   }}
@@ -186,15 +182,13 @@ export default function StatusMonitor({
                   <TooltipTrigger
                     render={
                       <button
-                        id={triggerId}
                         type="button"
                         className={cn(
                           'h-full w-[5px] border-0 p-0 transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
                           edgeClassName,
                           config.barClassName,
                         )}
-                        aria-label={label}
-                        aria-describedby={tooltipId}
+                        aria-label={`${label}. ${item.info ?? config.defaultInfo}`}
                         onClick={() => {
                           setPressedStatus((current) => (current === index ? null : index))
                         }}
@@ -202,7 +196,6 @@ export default function StatusMonitor({
                     }
                   />
                   <TooltipContent
-                    id={tooltipId}
                     side="bottom"
                     sideOffset={8}
                     className="data-[state=delayed-open]:animate-none data-open:animate-none data-closed:animate-none"

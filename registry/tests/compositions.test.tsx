@@ -249,7 +249,9 @@ describe('owned registry compositions', () => {
     expect(container.firstElementChild).toHaveClass('host-status-monitor')
     await waitFor(() => expect(container.querySelectorAll('button[aria-label]')).toHaveLength(90))
 
-    expect(screen.getByLabelText('May 03, 2026: Error')).toHaveAttribute('type', 'button')
+    expect(
+      screen.getByLabelText('May 03, 2026: Error. API requests failed during failover.'),
+    ).toHaveAttribute('type', 'button')
     const root = container.firstElementChild!
     const monitorObserver = observers.find(({ elements }) => elements.includes(root))
     expect(monitorObserver).toBeDefined()
@@ -303,7 +305,7 @@ describe('owned registry compositions', () => {
     )
     const hourlyLabels = [...container.querySelectorAll<HTMLElement>('button[aria-label]')]
       .map((element) => element.getAttribute('aria-label'))
-      .filter((label) => label !== 'No data')
+      .filter((label) => !label?.startsWith('No data.'))
     expect(hourlyLabels).toHaveLength(2)
     expect(new Set(hourlyLabels).size).toBe(2)
     expect(hourlyLabels.every((label) => /\d{1,2}:\d{2}/u.test(label!))).toBe(true)
