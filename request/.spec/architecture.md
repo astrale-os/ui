@@ -45,19 +45,25 @@ the issue, label gate, CLI, dispatcher, job, and persisted record remain provide
 request data may direct product intent but cannot alter repository policy, provenance admission,
 credential separation, tools, or qualification.
 
-The default private worker is pinned Codex with GPT-5.6 Luna at maximum reasoning effort. It sees
+The default private worker is pinned Codex with GPT-5.6 Luna at medium reasoning effort, while its
+bounded source-discovery pass uses low effort. It sees
 neither GitHub authority nor publication credentials, and implementation shell commands have no
 network access. One eligible implementation or qualification failure may continue through Opus;
 authentication, permission, quota, rate-limit, and unknown-outcome failures never escalate. Provider
 and model selection remain private adapter concerns and do not enter the managed-agent Port.
 
 Every non-empty candidate is represented by a digest-bound cumulative checkpoint retained for 30
-days. A compatible checkpoint is applied before further editing. Tampering, expiry, request drift,
-non-descendant base drift, or a patch that no longer applies stops automatic continuation for
-operator input; reconstruction from prompt alone is not a recovery path. Unrelated descendant base
-commits may retain the cumulative patch. A newly accepted objective retains that patch while reacquiring
-its own immutable source evidence and resetting escalation. Target and hard latency values are
+days. A compatible checkpoint is applied before further editing; an exact-objective pending
+candidate resumes directly at qualification without repeating model work. Tampering, expiry,
+request drift, non-descendant base drift, or a patch that no longer applies stops automatic
+continuation for operator input; reconstruction from prompt alone is not a recovery path. Unrelated
+descendant base commits may retain the cumulative patch. A newly accepted objective retains that
+patch while reacquiring its own immutable source evidence and resetting escalation. Target and hard latency values are
 observations only. A breach never cancels work or discards its checkpoint.
+
+Checkpoint compatibility binds the stable digest of the accepted objective supplied by the trusted
+coordinator. Attempt-specific prompt framing and idempotency markers cannot manufacture objective
+drift.
 
 Candidate source is installed, fast-tested, rendered, and screenshotted in a credential-free job.
 A separate publisher receives only the qualified patch and bounded static preview artifact. It may

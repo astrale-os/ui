@@ -170,6 +170,70 @@ function executeCodexClassification(script, { outcome, changed = false, events =
   }
 }
 
+function executeRestoredCandidate(script, { alreadyPresent }) {
+  const directory = mkdtempSync(path.join(tmpdir(), 'ui-request-restored-candidate-'))
+  const workspace = path.join(directory, 'workspace')
+  const checkpoint = path.join(directory, 'ui-request-restored-checkpoint')
+  mkdirSync(workspace)
+  mkdirSync(checkpoint)
+  const tracked = path.join(workspace, 'candidate.txt')
+  writeFileSync(tracked, 'base\n')
+  for (const args of [
+    ['init', '-q'],
+    ['config', 'user.name', 'fixture'],
+    ['config', 'user.email', 'fixture@example.com'],
+    ['add', 'candidate.txt'],
+    ['commit', '-qm', 'base'],
+  ]) {
+    const result = spawnSync('git', args, { cwd: workspace, encoding: 'utf8' })
+    assert.equal(result.status, 0, result.stderr)
+  }
+  writeFileSync(tracked, 'candidate\n')
+  const patch = spawnSync(
+    'git',
+    ['diff', '--binary', '--full-index', '--no-ext-diff', '--no-textconv', '--'],
+    { cwd: workspace, encoding: 'utf8' },
+  )
+  assert.equal(patch.status, 0, patch.stderr)
+  writeFileSync(path.join(checkpoint, 'candidate.patch'), patch.stdout)
+  if (alreadyPresent) {
+    for (const args of [
+      ['add', 'candidate.txt'],
+      ['commit', '-qm', 'candidate'],
+    ]) {
+      const result = spawnSync('git', args, { cwd: workspace, encoding: 'utf8' })
+      assert.equal(result.status, 0, result.stderr)
+    }
+  } else {
+    writeFileSync(tracked, 'base\n')
+    const refresh = spawnSync('git', ['update-index', '--refresh'], {
+      cwd: workspace,
+      encoding: 'utf8',
+    })
+    assert.equal(refresh.status, 0, refresh.stderr)
+  }
+  try {
+    const result = spawnSync('/bin/bash', ['-c', script], {
+      cwd: workspace,
+      encoding: 'utf8',
+      env: { ...process.env, RUNNER_TEMP: directory },
+    })
+    const cached = spawnSync('git', ['diff', '--cached', '--'], {
+      cwd: workspace,
+      encoding: 'utf8',
+    })
+    assert.equal(cached.status, 0, cached.stderr)
+    return {
+      status: result.status,
+      stdout: result.stdout,
+      stderr: result.stderr,
+      cached: cached.stdout,
+    }
+  } finally {
+    rmSync(directory, { recursive: true, force: true })
+  }
+}
+
 function executeCleanupShell(script) {
   const directory = mkdtempSync(path.join(tmpdir(), 'ui-request-cleanup-'))
   const runner = path.join(directory, 'runner')
@@ -840,7 +904,10 @@ git -c core.hooksPath=/dev/null ${'\\'}
     (step) => step.name === 'Prepare the deterministic working branch',
   )
   assert.match(prepare.run, /git checkout -B "\$INPUT_BRANCH"/u)
-  assert.match(prepare.run, /objective_sha256=/u)
+  assert.equal(prepare.env.INPUT_OBJECTIVE_SHA256, '${{ inputs.objective_sha256 }}')
+  assert.match(prepare.run, /\^\[0-9a-f\]\{64\}\$/u)
+  assert.match(prepare.run, /objective_sha256=\$INPUT_OBJECTIVE_SHA256/u)
+  assert.doesNotMatch(prepare.run, /sha256sum/u)
   assert.match(prepare.run, /checkpoint_name=ui-request-checkpoint-/u)
   const workerSecrets = secretReferences(parsedWorkerWorkflow).filter(({ value }) =>
     value.includes('secrets.'),
@@ -929,9 +996,13 @@ test('pins the isolated Luna worker and preserves recoverable work across SLO br
     './.github/workflows/ui-request-claude-code.yml',
   )
   assert.equal(parsedCodexWorkflow.jobs.worker.with.worker, 'codex')
+  assert.equal(
+    parsedCodexWorkflow.jobs.worker.with.objective_sha256,
+    '${{ inputs.objective_sha256 }}',
+  )
   assert.equal(parsedCodexWorkflow.jobs.worker.secrets, 'inherit')
   assert.match(codexConfiguration, /^model = "gpt-5\.6-luna"$/mu)
-  assert.match(codexConfiguration, /^model_reasoning_effort = "max"$/mu)
+  assert.match(codexConfiguration, /^model_reasoning_effort = "medium"$/mu)
   assert.match(codexConfiguration, /^wire_api = "responses"$/mu)
   assert.match(codexConfiguration, /^network_access = false$/mu)
   assert.match(
@@ -941,13 +1012,25 @@ test('pins the isolated Luna worker and preserves recoverable work across SLO br
   const codexStep = parsedWorkerWorkflow.jobs.propose.steps.find(
     (step) => step.name === 'Implement the accepted request with Codex Luna',
   )
+  const codexDiscoveryStep = parsedWorkerWorkflow.jobs.propose.steps.find(
+    (step) => step.name === 'Discover immutable public source evidence with Codex Luna',
+  )
+  assert.match(codexDiscoveryStep.run, /model_reasoning_effort="low"/u)
   assert.equal(codexStep.env.AZURE_OPENAI_API_KEY, '${{ secrets.AZURE_API_KEY }}')
+  assert.equal(
+    codexStep.if,
+    "inputs.worker == 'codex' && steps.restore.outputs.candidate_resumed != 'true'",
+  )
   assert.equal('GITHUB_TOKEN' in codexStep.env, false)
   assert.match(codexStep.run, /--sandbox workspace-write/u)
   assert.match(codexStep.run, /--ephemeral/u)
   assert.doesNotMatch(codexStep.run, /dangerously|mcp|plugin/iu)
   const classificationStep = parsedWorkerWorkflow.jobs.propose.steps.find(
     (step) => step.name === 'Classify Codex implementation outcome',
+  )
+  assert.equal(
+    classificationStep.if,
+    "inputs.worker == 'codex' && steps.restore.outputs.candidate_resumed != 'true'",
   )
   assert.deepEqual(
     executeCodexClassification(classificationStep.run, { outcome: 'success', changed: true })
@@ -981,17 +1064,32 @@ test('pins the isolated Luna worker and preserves recoverable work across SLO br
   assert.match(encodeCheckpoint.run, /cp "\$patch" "\$checkpoint\/candidate\.patch"/u)
   assert.match(encodeCheckpoint.run, /source-evidence\.tgz/u)
   assert.match(encodeCheckpoint.run, /candidate-checkpoint\.mjs create/u)
+  assert.match(encodeCheckpoint.run, /effort=medium/u)
   const restoreCheckpoint = parsedWorkerWorkflow.jobs.propose.steps.find(
     (step) => step.name === 'Restore the latest compatible cumulative checkpoint',
   )
   assert.match(restoreCheckpoint.run, /prior_objective/u)
   assert.match(restoreCheckpoint.run, /prior_escalation/u)
   assert.match(restoreCheckpoint.run, /git merge-base --is-ancestor/u)
+  assert.match(restoreCheckpoint.run, /candidate_resumed=true/u)
+  assert.match(restoreCheckpoint.run, /candidate_resumed=false/u)
   assert.doesNotMatch(restoreCheckpoint.run, /candidate-checkpoint\.mjs verify[^]*--base-sha/u)
   const applyRestoredCheckpoint = parsedWorkerWorkflow.jobs.propose.steps.find(
     (step) => step.name === 'Apply the restored candidate after base-controlled toolchain setup',
   )
+  assert.match(applyRestoredCheckpoint.run, /git apply --reverse --check --binary/u)
   assert.match(applyRestoredCheckpoint.run, /git apply --check --index --binary/u)
+  const initialRestore = executeRestoredCandidate(applyRestoredCheckpoint.run, {
+    alreadyPresent: false,
+  })
+  assert.equal(initialRestore.status, 0, initialRestore.stderr)
+  assert.match(initialRestore.cached, /\+candidate/u)
+  const revisionRestore = executeRestoredCandidate(applyRestoredCheckpoint.run, {
+    alreadyPresent: true,
+  })
+  assert.equal(revisionRestore.status, 0, revisionRestore.stderr)
+  assert.equal(revisionRestore.cached, '')
+  assert.match(revisionRestore.stdout, /already present on the admitted proposal branch/u)
   const failedCheckpointUpload = parsedWorkerWorkflow.jobs.qualify.steps.find(
     (step) => step.with?.path === '${{ runner.temp }}/ui-request-failed-checkpoint',
   )
@@ -1022,6 +1120,8 @@ test('pins the isolated Luna worker and preserves recoverable work across SLO br
   const admission = parsedWorkerWorkflow.jobs.qualify.steps.find(
     (step) => step.name === 'Reject candidate changes to trusted control-plane programs',
   )
+  assert.match(admission.run, /git cat-file -e "\$INPUT_PROPOSAL_BASE_SHA\^\{commit\}"/u)
+  assert.match(admission.run, /git fetch --no-tags --depth=1 origin/u)
   assert.match(admission.run, /\.github\//u)
   assert.match(admission.run, /JSON\.stringify\(base\.scripts\)/u)
   const baseFallbackUpload = parsedWorkerWorkflow.jobs.qualify.steps.find(

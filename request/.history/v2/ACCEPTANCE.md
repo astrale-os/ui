@@ -2,11 +2,13 @@
 
 - [x] Provider-neutral managed-agent Port remains unchanged.
 - [x] Codex adapter targets a dedicated workflow and exact run identity.
-- [x] GPT-5.6 Luna uses maximum reasoning through pinned Codex 0.151.0.
+- [x] GPT-5.6 Luna uses medium implementation reasoning and low source-discovery reasoning through pinned Codex 0.151.0.
 - [x] Model shell environment excludes GitHub and Azure credentials.
 - [x] Implementation network access is disabled.
 - [x] One eligible Opus escalation is enforced; authority and quota failures do not escalate.
 - [x] Cumulative patch and source evidence use a 30-day digest-bound checkpoint.
+- [x] An exact-objective pending checkpoint resumes at qualification without repeating model work.
+- [x] Checkpoint compatibility uses the stable accepted-objective digest, not attempt-specific prompt framing.
 - [x] Expiry, tampering, request drift, non-descendant base drift, and a no-longer-applicable patch reject automatic reconstruction; unrelated descendant base commits retain the patch, while a newly accepted objective reacquires source evidence.
 - [x] Regular CI derives docs-only, request-tooling, family-scoped, or global-ui scope.
 - [x] `ui:merge-ready` is maintainer-gated and binds full evidence to one exact revision.

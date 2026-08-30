@@ -20,6 +20,9 @@ on:
       objective:
         required: true
         type: string
+      objective_sha256:
+        required: true
+        type: string
       pull_request:
         required: false
         default: ''
@@ -48,6 +51,10 @@ on:
         type: string
       objective:
         description: Complete provider-independent instruction compiled by the trusted request owner.
+        required: true
+        type: string
+      objective_sha256:
+        description: Stable digest of the accepted objective before attempt-specific prompt framing.
         required: true
         type: string
       pull_request:
@@ -99,7 +106,7 @@ jobs:
           INPUT_BASE_REF: ${{ inputs.base_ref }}
           INPUT_BRANCH: ${{ inputs.branch }}
           INPUT_PULL_REQUEST: ${{ inputs.pull_request }}
-          INPUT_OBJECTIVE: ${{ inputs.objective }}
+          INPUT_OBJECTIVE_SHA256: ${{ inputs.objective_sha256 }}
           INPUT_REQUEST: ${{ inputs.request }}
         run: |
           set -euo pipefail
@@ -118,10 +125,13 @@ jobs:
           fi
           echo "baseline_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
           echo "proposal_base_sha=$(git merge-base HEAD "refs/remotes/origin/$INPUT_BASE_REF")" >> "$GITHUB_OUTPUT"
-          objective_sha256="$(printf '%s' "$INPUT_OBJECTIVE" | sha256sum | cut -d' ' -f1)"
+          if [[ ! "$INPUT_OBJECTIVE_SHA256" =~ ^[0-9a-f]{64}$ ]]; then
+            echo 'The accepted objective digest is malformed.' >&2
+            exit 1
+          fi
           issue="${INPUT_REQUEST##*/}"
           case "$issue" in ''|*[!0-9]*) exit 1 ;; esac
-          echo "objective_sha256=$objective_sha256" >> "$GITHUB_OUTPUT"
+          echo "objective_sha256=$INPUT_OBJECTIVE_SHA256" >> "$GITHUB_OUTPUT"
           echo "checkpoint_name=ui-request-checkpoint-$issue" >> "$GITHUB_OUTPUT"
       - name: Restore the latest compatible cumulative checkpoint
         id: restore
@@ -138,6 +148,7 @@ jobs:
             --jq '[.artifacts[] | select(.expired == false)] | sort_by(.created_at) | last // empty')"
           if [ -z "$artifact" ]; then
             echo 'restored=false' >> "$GITHUB_OUTPUT"
+            echo 'candidate_resumed=false' >> "$GITHUB_OUTPUT"
             exit 0
           fi
           artifact_id="$(jq -r .id <<< "$artifact")"
@@ -163,8 +174,10 @@ jobs:
             mkdir -p "$RUNNER_TEMP/ui-request-source-evidence"
             tar -xzf "$checkpoint/source-evidence.tgz" -C "$RUNNER_TEMP/ui-request-source-evidence"
             echo 'source_restored=true' >> "$GITHUB_OUTPUT"
+            echo 'candidate_resumed=true' >> "$GITHUB_OUTPUT"
           else
             echo 'source_restored=false' >> "$GITHUB_OUTPUT"
+            echo 'candidate_resumed=false' >> "$GITHUB_OUTPUT"
           fi
           echo 'restored=true' >> "$GITHUB_OUTPUT"
       - uses: astrale-os/config/.github/actions/setup@8e2e2abd0320be0c2f64033916519ab3b66c7dd7
@@ -189,9 +202,14 @@ jobs:
       - name: Apply the restored candidate after base-controlled toolchain setup
         if: steps.restore.outputs.restored == 'true'
         run: |
+          set -euo pipefail
           patch="$RUNNER_TEMP/ui-request-restored-checkpoint/candidate.patch"
-          git apply --check --index --binary --whitespace=nowarn "$patch"
-          git apply --index --binary --whitespace=nowarn "$patch"
+          if git apply --reverse --check --binary --whitespace=nowarn "$patch"; then
+            echo 'The restored candidate is already present on the admitted proposal branch.'
+          else
+            git apply --check --index --binary --whitespace=nowarn "$patch"
+            git apply --index --binary --whitespace=nowarn "$patch"
+          fi
       - name: Discover immutable public source evidence with Claude Code
         if: inputs.worker == 'opus' && steps.restore.outputs.source_restored != 'true'
         env:
@@ -231,6 +249,7 @@ jobs:
               --ephemeral \
               --sandbox read-only \
               --skip-git-repo-check \
+              -c 'model_reasoning_effort="low"' \
               -c 'web_search="live"' \
               --output-schema request/.spec/schemas/source-evidence-v1.schema.json \
               --output-last-message "$RUNNER_TEMP/ui-request-source-manifest.json" \
@@ -243,7 +262,7 @@ jobs:
             --manifest "$RUNNER_TEMP/ui-request-source-manifest.json" \
             --output "$RUNNER_TEMP/ui-request-source-evidence"
       - name: Implement the accepted request with Claude Code
-        if: inputs.worker == 'opus'
+        if: inputs.worker == 'opus' && steps.restore.outputs.candidate_resumed != 'true'
         env:
           INPUT_OBJECTIVE: ${{ inputs.objective }}
           SOURCE_EVIDENCE_ROOT: ${{ runner.temp }}/ui-request-source-evidence
@@ -265,7 +284,7 @@ jobs:
             --no-session-persistence \
             --print
       - name: Implement the accepted request with Codex Luna
-        if: inputs.worker == 'codex'
+        if: inputs.worker == 'codex' && steps.restore.outputs.candidate_resumed != 'true'
         id: codex_implementation
         continue-on-error: true
         env:
@@ -288,7 +307,7 @@ jobs:
               --json - > "$RUNNER_TEMP/ui-request-codex-events.jsonl"
       - name: Classify Codex implementation outcome
         id: classify_codex
-        if: inputs.worker == 'codex'
+        if: inputs.worker == 'codex' && steps.restore.outputs.candidate_resumed != 'true'
         env:
           CODEX_OUTCOME: ${{ steps.codex_implementation.outcome }}
         run: |
@@ -371,7 +390,7 @@ jobs:
           if [ "$INPUT_WORKER" = codex ] && [ "${{ steps.classify_codex.outputs.escalate }}" != true ]; then
             provider=github-actions-codex
             model=gpt-5.6-luna
-            effort=max
+            effort=medium
             escalation=0
           else
             provider=github-actions-claude-code
@@ -467,6 +486,9 @@ jobs:
           INPUT_PROPOSAL_BASE_SHA: ${{ needs.propose.outputs.proposal_base_sha }}
         run: |
           set -euo pipefail
+          if ! git cat-file -e "$INPUT_PROPOSAL_BASE_SHA^{commit}" 2>/dev/null; then
+            git fetch --no-tags --depth=1 origin "$INPUT_PROPOSAL_BASE_SHA"
+          fi
           changed="$(git diff --name-only --diff-filter=ACMRD "$INPUT_PROPOSAL_BASE_SHA")"
           if grep -Eq '^(\.github/|\.release/|request/|scripts/|playground/tests/|playground/playwright[^/]*\.config\.)' <<< "$changed"; then
             echo 'A UI candidate may not edit trusted request, workflow, release, planner, or browser-evidence programs.' >&2

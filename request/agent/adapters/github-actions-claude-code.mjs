@@ -446,6 +446,7 @@ export function createGitHubActionsWorkerAgent(options) {
         base_ref: target.baseRef,
         branch: target.branch,
         objective: normalizedPrompt(job, idempotencyKey),
+        objective_sha256: createHash('sha256').update(job.objective, 'utf8').digest('hex'),
         pull_request: target.pullRequest ?? '',
       }
       if (utf8Bytes(JSON.stringify(inputs)) > limits.maxWorkflowDispatchInputsUtf8Bytes) {
