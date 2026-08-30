@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{o as t,r as n,t as r}from"./avatar-zUSr5MkR.js";var i=e(),a=()=>(0,i.jsxs)(r,{className:`ring-ring ring-2`,children:[(0,i.jsx)(t,{src:`https://cdn.shadcnstudio.com/ss-assets/avatar/avatar-5.png`,alt:`Hallie Richards`}),(0,i.jsx)(n,{children:`HR`})]}),o={source:`@astrale-os/ui`};export{a as default,o as preview};

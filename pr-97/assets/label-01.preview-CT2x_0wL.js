@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{t}from"./checkbox-Dl1yxX-8.js";import{t as n}from"./label-Cpqzagod.js";var r=e(),i=()=>(0,r.jsxs)(`div`,{className:`flex gap-2`,children:[(0,r.jsx)(t,{id:`terms`}),(0,r.jsx)(n,{htmlFor:`terms`,children:`Accept terms and conditions`})]}),a={source:`@astrale-os/ui`};export{i as default,a as preview};

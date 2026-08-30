@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{t}from"./star-BJE53v6l.js";import{R as n}from"./index-BUXE9DNJ.js";var r=e(),i=()=>(0,r.jsxs)(n,{children:[(0,r.jsx)(t,{className:`size-3`}),`With Icon`]}),a={source:`@astrale-os/ui`};export{i as default,a as preview};

@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{t}from"./label-CfPEHNf2.js";import{t as n}from"./switch-rQjGGmGA.js";var r=e(),i=()=>(0,r.jsxs)(`div`,{className:`flex items-center space-x-2`,children:[(0,r.jsx)(n,{id:`do-not-disturb`}),(0,r.jsx)(t,{htmlFor:`do-not-disturb`,children:`Do Not Disturb`})]}),a={source:`@astrale-os/ui`};export{i as default,a as preview};

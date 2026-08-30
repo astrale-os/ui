@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{t}from"./spinner-D9wcxaU1.js";import{ct as n}from"./index-BUXE9DNJ.js";var r=e(),i={canvas:`compact`,source:`@shadcn/spinner`};function a(){return(0,r.jsxs)(n,{disabled:!0,children:[(0,r.jsx)(t,{"data-icon":`inline-start`}),`Qualifying`]})}export{a as default,i as preview};
