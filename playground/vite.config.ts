@@ -1,5 +1,6 @@
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
+import { createHash } from 'node:crypto'
 import { existsSync, readFileSync } from 'node:fs'
 import { fileURLToPath, URL } from 'node:url'
 import { defineConfig, normalizePath, type Plugin } from 'vite'
@@ -13,6 +14,13 @@ type PlaygroundPackageDocument = {
 }
 
 const uiRoot = new URL('../packages/ui/', import.meta.url)
+const checkoutId = createHash('sha256')
+  .update(fileURLToPath(new URL('../', import.meta.url)))
+  .digest('hex')
+  .slice(0, 12)
+const cacheDir = fileURLToPath(
+  new URL(`./node_modules/.vite-astrale-${checkoutId}`, import.meta.url),
+)
 const catalogModule = normalizePath(
   fileURLToPath(new URL('./src/catalog/previews.ts', import.meta.url)),
 )
@@ -94,6 +102,10 @@ const publicSourceAliases = Object.entries(uiPackage.exports).flatMap(([entrypoi
 
 export default defineConfig(({ mode }) => ({
   base: process.env.ASTRALE_PLAYGROUND_RELATIVE_BASE === '1' ? './' : '/',
+  // Namespace optimized dependencies by checkout. Contributors commonly share node_modules
+  // between worktrees; Vite's default node_modules/.vite location then lets concurrent
+  // servers replace one another's React graph.
+  cacheDir,
   plugins: [variantSupportResolver(), tailwindcss(), react(), catalogPreviewFileWatcher()],
   // Next's client-only Link/Image entrypoints inspect this compile-time value.
   // Variant source remains copy-owned; this is playground runtime plumbing.
