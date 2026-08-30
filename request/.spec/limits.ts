@@ -2,6 +2,7 @@ export const uiRequestLimits = {
   maxIssueBodyUtf8Bytes: 48 * 1024,
   maxAcceptedCommentCount: 50,
   maxAcceptedCommentBodyUtf8Bytes: 8 * 1024,
+  maxAcceptedDiscussionUtf8Bytes: 32 * 1024,
   maxPreviewCount: 64,
   maxPreviewArtifactFiles: 8_192,
   maxPreviewArtifactBytes: 128 * 1024 * 1024,

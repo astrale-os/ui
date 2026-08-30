@@ -77,12 +77,19 @@ function admittedComments(comments, selectedDiscussionIds, selectedLegacyIds) {
   if (selected.length > limits.maxAcceptedCommentCount) {
     throw new TypeError('Accepted maintainer comments exceed the admitted count')
   }
+  if (
+    selected.some(
+      (comment) => Buffer.byteLength(comment.body, 'utf8') > limits.maxAcceptedCommentBodyUtf8Bytes,
+    )
+  ) {
+    throw new TypeError('An accepted maintainer comment exceeds the admitted size')
+  }
   const totalBodyBytes = selected.reduce(
     (total, comment) => total + Buffer.byteLength(comment.body, 'utf8'),
     0,
   )
-  if (totalBodyBytes > limits.maxAcceptedCommentBodyUtf8Bytes) {
-    throw new TypeError('Accepted maintainer comments exceed the admitted size')
+  if (totalBodyBytes > limits.maxAcceptedDiscussionUtf8Bytes) {
+    throw new TypeError('Accepted maintainer discussion exceeds the admitted size')
   }
   return selected
 }
