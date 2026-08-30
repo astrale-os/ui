@@ -267,7 +267,7 @@ test('keeps selection trusted and routes exact credentials through mutually excl
     actions: 'write',
     contents: 'read',
     issues: 'write',
-    'pull-requests': 'read',
+    'pull-requests': 'write',
   })
   assert.equal(
     parsedWorkflow.jobs.request.steps.find((step) => step.uses?.startsWith('actions/checkout@'))
