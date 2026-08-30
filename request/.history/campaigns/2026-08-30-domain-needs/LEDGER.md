@@ -54,7 +54,8 @@ Each row closes only after all of the following are recorded:
 
 | ID | State | Defect | Resolution evidence |
 | --- | --- | --- | --- |
-| PD-01 | active | The previously installed `ui.astrale.ai` Worker and Kernel callable disappeared, so the public prefix returned Kernel code `3001`. | New signing identity retained, Cloudflare Worker deployed, Admin catalog publication restored; Kernel installation waits for the externally provisioning `bryan` instance. |
+| PD-01 | closed | The previously installed `ui.astrale.ai` Worker and Kernel callable disappeared, so the public prefix returned Kernel code `3001`. | New signing identity retained; Cloudflare Worker deployed; Admin catalog publication restored; the interrupted Admin provisioning operation was safely replayed with its retained operation ID; UI installed on ready instance `bryan`. |
+| PD-02 | correction in PR #101 | Beta.17 publication stopped because a moving spinner could be sampled at an identical transform even though CSS reported `spin`/`running`. | Motion proof observes advancement of the Web Animations clock while retaining the production spinner and its transform behavior. |
 
 ## Evidence log
 
@@ -63,3 +64,4 @@ Each row closes only after all of the following are recorded:
 | 2026-08-30 02:41 | Release PR #85 merged as `14e3ffe5`; beta.17 release and exact search-contract qualification started. |
 | 2026-08-30 02:48 | Cloudflare deployment `d59dd19e-2425-45c8-a004-0fcb1cc1ae92` served a healthy `ui.astrale.ai` Publication; first adapter readiness observation encountered local negative-DNS cache after the provider effect. |
 | 2026-08-30 02:54 | Admin catalog entry `@2e2270fa-738a-4c9a-953b-4bb40310eb7c` published for `ui.astrale.ai`; target instance reported `provisioning/reserve-tenant`. |
+| 2026-08-30 02:59 | Replaying retained operation `cli.instance.create.06cbe067-adc6-46ee-9728-2958e6c122ae` advanced the same Instance to `ready`; catalog install then succeeded. |
