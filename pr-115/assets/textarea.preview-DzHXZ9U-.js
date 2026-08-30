@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{t}from"./textarea-D1r2_6qM.js";var n=e(),r={source:`@shadcn/textarea`};function i(){return(0,n.jsx)(t,{"aria-label":`Release note`,defaultValue:`Revision qualified and ready.`})}export{i as default,r as preview};

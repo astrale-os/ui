@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "previews": [
+    {
+      "id": "block/secrets/env-variables#default",
+      "address": "block/secrets/env-variables",
+      "scene": "default",
+      "screenshot": "screenshots/block-secrets-env-variables-default-ff6c7b0b11a4.png"
+    }
+  ]
+}

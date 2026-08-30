@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{r as t,t as n}from"./avatar-uPMYD5im.js";var r=e(),i=()=>(0,r.jsx)(n,{children:(0,r.jsx)(t,{children:`HR`})}),a={source:`@astrale-os/ui`};export{i as default,a as preview};

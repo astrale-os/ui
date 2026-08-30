@@ -1,0 +1,1 @@
+import{i as e}from"./jsx-runtime-Cx0BB4qO.js";import{t}from"./react-3BKWdGy3.js";var n=e(t(),1),r={...n},i=typeof document<`u`?n.useLayoutEffect:()=>{};export{r as n,i as t};

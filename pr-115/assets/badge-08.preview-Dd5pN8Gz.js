@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{R as t}from"./index-Bwij8Xjf.js";var n=e(),r=()=>(0,n.jsx)(t,{className:`h-6 px-3 py-1`,children:`Large`}),i={source:`@astrale-os/ui`};export{r as default,i as preview};
