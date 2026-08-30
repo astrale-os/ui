@@ -2,7 +2,7 @@ export const uiRequestLaws = {
   acceptedDiscussionSnapshot: {
     id: 'REQ-AGENT-DISCUSSION-SNAPSHOT',
     statement:
-      'Each attempt includes the issue body and bounded eligible maintainer comments selected before reservation; later comments can affect only a later attempt.',
+      'Each attempt includes the issue body and a bounded chronological snapshot of eligible issue and bound pull-request discussion selected before reservation; later discussion can affect only a later attempt.',
   },
   acceptedDiscussionAuthority: {
     id: 'REQ-AGENT-DISCUSSION-AUTHORITY',
@@ -36,6 +36,21 @@ export const uiRequestLaws = {
   reviewIsFreshRun: {
     id: 'REQ-AGENT-REVIEW-RUN',
     statement: 'A review revision is a fresh normalized run targeting the existing proposal PR.',
+  },
+  proposalEvidenceMatchesRevision: {
+    id: 'REQ-PREVIEW-REVISION',
+    statement:
+      'The pull request evidence comment, screenshots, deployment, and direct preview links identify the exact qualified proposal revision they render.',
+  },
+  previewBytesAreInert: {
+    id: 'REQ-PREVIEW-INERT-PUBLISH',
+    statement:
+      'Candidate code builds and renders without publication credentials; the publisher admits and transfers bounded static bytes without executing them.',
+  },
+  reviewTargetsBoundProposal: {
+    id: 'REQ-REVIEW-BOUND-PROPOSAL',
+    statement:
+      'A pull-request ui:ready signal may revise only the open same-repository proposal already bound to its originating request record.',
   },
   readyLabelIsOneWriter: {
     id: 'REQ-AGENT-READY-ONE-WRITER',

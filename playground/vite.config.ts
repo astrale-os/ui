@@ -93,6 +93,7 @@ const publicSourceAliases = Object.entries(uiPackage.exports).flatMap(([entrypoi
 })
 
 export default defineConfig(({ mode }) => ({
+  base: process.env.ASTRALE_PLAYGROUND_RELATIVE_BASE === '1' ? './' : '/',
   plugins: [variantSupportResolver(), tailwindcss(), react(), catalogPreviewFileWatcher()],
   // Next's client-only Link/Image entrypoints inspect this compile-time value.
   // Variant source remains copy-owned; this is playground runtime plumbing.

@@ -33,6 +33,15 @@
       "uniqueItems": true,
       "items": { "type": "integer", "minimum": 1 }
     },
+    "acceptedDiscussionIds": {
+      "type": "array",
+      "maxItems": 50,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^(?:issue-comment|pull-request-comment|pull-request-review|pull-request-review-comment):[1-9][0-9]*$"
+      }
+    },
     "provider": { "type": "string", "minLength": 1 },
     "state": {
       "enum": [
@@ -88,7 +97,12 @@
   },
   "allOf": [
     {
-      "if": { "properties": { "state": { "const": "reserved" } } },
+      "not": {
+        "required": ["acceptedCommentIds", "acceptedDiscussionIds"]
+      }
+    },
+    {
+      "if": { "type": "object", "properties": { "state": { "const": "reserved" } } },
       "then": {
         "not": {
           "anyOf": [{ "required": ["run"] }, { "required": ["failure"] }]
@@ -96,16 +110,20 @@
       }
     },
     {
-      "if": { "properties": { "state": { "const": "succeeded" } } },
+      "if": { "type": "object", "properties": { "state": { "const": "succeeded" } } },
       "then": { "required": ["run", "pullRequest"] }
     },
     {
-      "if": { "properties": { "state": { "const": "outcome-unknown" } } },
+      "if": {
+        "type": "object",
+        "properties": { "state": { "const": "outcome-unknown" } }
+      },
       "then": {
         "required": ["failure"],
         "not": { "required": ["run"] },
         "properties": {
           "failure": {
+            "type": "object",
             "properties": {
               "code": { "const": "AGENT_OUTCOME_UNKNOWN" },
               "retry": { "const": "unsafe" }
@@ -116,6 +134,7 @@
     },
     {
       "if": {
+        "type": "object",
         "properties": {
           "state": {
             "enum": [

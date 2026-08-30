@@ -11,7 +11,7 @@ function objectiveFor(issue, operation, pullRequest) {
     request: issue.url,
     title: issue.title,
     body: issue.body,
-    maintainerComments: issue.comments,
+    maintainerDiscussion: issue.comments,
   }
   return [
     'Implement this accepted Astrale UI request as one reviewable pull request.',
@@ -138,7 +138,9 @@ export function createUiRequestDispatcher(options) {
       operation,
       idempotencyKey,
       objectiveSha256: objectiveDigest(objective),
-      acceptedCommentIds: issue.comments.map((comment) => comment.id),
+      acceptedDiscussionIds: issue.comments.map(
+        (comment) => comment.discussionId ?? `issue-comment:${comment.id}`,
+      ),
       provider: agent.descriptor.provider,
       state: 'reserved',
       ...(pullRequest ? { pullRequest } : {}),
@@ -295,6 +297,17 @@ export function createUiRequestDispatcher(options) {
           undefined,
           undefined,
           binding.record,
+        )
+      }
+      if (
+        execution.pullRequest !== undefined &&
+        binding?.record.pullRequest !== execution.pullRequest
+      ) {
+        return failed(
+          'The labeled pull request is not the proposal bound to this UI request.',
+          undefined,
+          undefined,
+          binding?.record,
         )
       }
       if (operation === 'auto') {

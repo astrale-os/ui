@@ -1,6 +1,15 @@
 import assert from 'node:assert/strict'
 import { spawnSync } from 'node:child_process'
-import { chmodSync, existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { createHash } from 'node:crypto'
+import {
+  chmodSync,
+  existsSync,
+  mkdirSync,
+  mkdtempSync,
+  readFileSync,
+  rmSync,
+  writeFileSync,
+} from 'node:fs'
 import { readFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
@@ -83,7 +92,10 @@ function executeWorkflowShell(script, environment = {}, fakeGitHub = false) {
       `#!/bin/sh
 printf '%s\n' "$*" >> "$FAKE_GH_LOG"
 if [ "\${FAKE_GH_FAIL:-}" = '1' ]; then exit 1; fi
-printf '%s\n' "\${FAKE_GH_PERMISSION:-}"
+case "$*" in
+  *"/pulls/"*) printf '%s\n' "\${FAKE_GH_PROPOSAL:-}" ;;
+  *) printf '%s\n' "\${FAKE_GH_PERMISSION:-}" ;;
+esac
 `,
     )
     chmodSync(gh, 0o755)
@@ -114,6 +126,63 @@ printf '%s\n' "\${FAKE_GH_PERMISSION:-}"
   }
 }
 
+function executeCleanupShell(script) {
+  const directory = mkdtempSync(path.join(tmpdir(), 'ui-request-cleanup-'))
+  const runner = path.join(directory, 'runner')
+  const pages = path.join(runner, 'ui-request-pages')
+  const target = path.join(pages, 'pr-77')
+  const sibling = path.join(pages, 'pr-78')
+  const githubLog = path.join(directory, 'gh.log')
+  const gitLog = path.join(directory, 'git.log')
+  mkdirSync(target, { recursive: true })
+  mkdirSync(sibling, { recursive: true })
+  writeFileSync(path.join(target, 'index.html'), 'remove')
+  writeFileSync(path.join(sibling, 'index.html'), 'preserve')
+  writeFileSync(
+    path.join(directory, 'gh'),
+    `#!/bin/sh
+printf '%s\n' "$*" >> "$FAKE_GH_LOG"
+case "$*" in
+  *"/pulls/77"*) printf '%s\n' '{"head":{"ref":"astrale/ui-request-123-attempt-1-fixture","repo":{"full_name":"astrale-os/ui"}}}' ;;
+  *"deployments?environment="*) printf '%s\n' '[[{"id":9},{"id":10}]]' ;;
+esac
+`,
+  )
+  writeFileSync(
+    path.join(directory, 'git'),
+    `#!/bin/sh
+printf '%s\n' "$*" >> "$FAKE_GIT_LOG"
+exit 0
+`,
+  )
+  chmodSync(path.join(directory, 'gh'), 0o755)
+  chmodSync(path.join(directory, 'git'), 0o755)
+  try {
+    const result = spawnSync('/bin/bash', ['-c', script], {
+      encoding: 'utf8',
+      env: {
+        ...process.env,
+        FAKE_GH_LOG: githubLog,
+        FAKE_GIT_LOG: gitLog,
+        GITHUB_REPOSITORY: 'astrale-os/ui',
+        INPUT_PULL_REQUEST_NUMBER: '77',
+        RUNNER_TEMP: runner,
+        PATH: `${directory}:${process.env.PATH}`,
+      },
+    })
+    return {
+      status: result.status,
+      stderr: result.stderr,
+      targetExists: existsSync(target),
+      siblingExists: existsSync(sibling),
+      githubCalls: readFileSync(githubLog, 'utf8').trim().split('\n').filter(Boolean),
+      gitCalls: readFileSync(gitLog, 'utf8').trim().split('\n').filter(Boolean),
+    }
+  } finally {
+    rmSync(directory, { recursive: true, force: true })
+  }
+}
+
 test('keeps the public request form free of provider and implementation taxonomy', () => {
   assert.match(form, /\n\s+- type: textarea\n\s+id: need\n/u)
   assert.match(form, /attachments are public/u)
@@ -137,54 +206,46 @@ test('keeps selection trusted and routes exact credentials through mutually excl
     (step) => step.name === 'Dispatch or reconcile through Cursor',
   )
   const consumeIndex = steps.findIndex((step) => step.name === 'Consume accepted request label')
+  const proposalGateIndex = gate.steps.findIndex(
+    (step) => step.name === 'Admit authorized proposal label',
+  )
+  const cleanupIndex = parsedWorkflow.jobs.cleanup.steps.findIndex(
+    (step) => step.name === 'Remove the closed proposal preview',
+  )
   assert.notEqual(labelIndex, -1)
   assert.notEqual(azureIndex, -1)
   assert.notEqual(githubIndex, -1)
   assert.notEqual(cursorIndex, -1)
   assert.notEqual(consumeIndex, -1)
-  assert.deepEqual(secretReferences(parsedWorkflow), [
-    {
-      path: `jobs.gate.steps.${labelIndex}.env.GH_TOKEN`,
-      value: '${{ github.token }}',
-    },
-    {
-      path: `jobs.gate.steps.${labelIndex}.env.INPUT_ACTOR`,
-      value: '${{ github.actor }}',
-    },
-    {
-      path: `jobs.gate.steps.${labelIndex}.env.INPUT_ACTOR_TYPE`,
-      value: '${{ github.event.sender.type }}',
-    },
-    {
-      path: `jobs.gate.steps.${labelIndex}.env.INPUT_ISSUE_NUMBER`,
-      value: '${{ github.event.issue.number }}',
-    },
-    {
-      path: `jobs.request.steps.${azureIndex}.env.GITHUB_TOKEN`,
-      value: '${{ github.token }}',
-    },
-    {
-      path: `jobs.request.steps.${githubIndex}.env.GITHUB_TOKEN`,
-      value: '${{ github.token }}',
-    },
-    {
-      path: `jobs.request.steps.${githubIndex}.env.COPILOT_AGENT_TOKEN`,
-      value: '${{ secrets.COPILOT_AGENT_TOKEN }}',
-    },
-    {
-      path: `jobs.request.steps.${cursorIndex}.env.GITHUB_TOKEN`,
-      value: '${{ github.token }}',
-    },
-    {
-      path: `jobs.request.steps.${cursorIndex}.env.CURSOR_API_KEY`,
-      value: '${{ secrets.CURSOR_API_KEY }}',
-    },
-    {
-      path: `jobs.request.steps.${consumeIndex}.env.GH_TOKEN`,
-      value: '${{ github.token }}',
-    },
-  ])
+  const references = secretReferences(parsedWorkflow)
+  assert.deepEqual(
+    references.filter(({ value }) => value.includes('secrets.')),
+    [
+      {
+        path: `jobs.request.steps.${githubIndex}.env.COPILOT_AGENT_TOKEN`,
+        value: '${{ secrets.COPILOT_AGENT_TOKEN }}',
+      },
+      {
+        path: `jobs.request.steps.${cursorIndex}.env.CURSOR_API_KEY`,
+        value: '${{ secrets.CURSOR_API_KEY }}',
+      },
+      {
+        path: `jobs.cleanup.steps.${cleanupIndex}.env.GH_TOKEN`,
+        value: '${{ secrets.UI_REQUEST_GITHUB_TOKEN }}',
+      },
+    ],
+  )
+  assert.ok(references.some(({ path }) => path === `jobs.gate.steps.${labelIndex}.env.GH_TOKEN`))
+  assert.ok(
+    references.some(({ path }) => path === `jobs.request.steps.${consumeIndex}.env.GH_TOKEN`),
+  )
   assert.equal('pull_request_target' in parsedWorkflow.on, false)
+  assert.equal(gate.steps[labelIndex].env.GH_TOKEN, '${{ github.token }}')
+  assert.equal(gate.steps[proposalGateIndex].env.GH_TOKEN, '${{ github.token }}')
+  assert.equal(steps[azureIndex].env.GITHUB_TOKEN, '${{ github.token }}')
+  assert.equal(steps[githubIndex].env.GITHUB_TOKEN, '${{ github.token }}')
+  assert.equal(steps[cursorIndex].env.GITHUB_TOKEN, '${{ github.token }}')
+  assert.equal(steps[consumeIndex].env.GH_TOKEN, '${{ github.token }}')
   assert.equal(
     steps[azureIndex].if,
     "vars.UI_REQUEST_AGENT_PROVIDER == '' || vars.UI_REQUEST_AGENT_PROVIDER == 'github-actions-claude-code'",
@@ -196,7 +257,11 @@ test('keeps selection trusted and routes exact credentials through mutually excl
   assert.equal(steps[cursorIndex].env.UI_REQUEST_AGENT_PROVIDER, 'cursor')
   assert.deepEqual(parsedWorkflow.permissions, { contents: 'read' })
   assert.equal('environment' in gate, false)
-  assert.deepEqual(gate.permissions, { contents: 'read', issues: 'read' })
+  assert.deepEqual(gate.permissions, {
+    contents: 'read',
+    issues: 'read',
+    'pull-requests': 'read',
+  })
   assert.equal(parsedWorkflow.jobs.request.environment, 'ui-request-agent')
   assert.deepEqual(parsedWorkflow.jobs.request.permissions, {
     actions: 'write',
@@ -204,13 +269,19 @@ test('keeps selection trusted and routes exact credentials through mutually excl
     issues: 'write',
     'pull-requests': 'read',
   })
+  assert.equal(
+    parsedWorkflow.jobs.request.steps.find((step) => step.uses?.startsWith('actions/checkout@'))
+      .with.ref,
+    '${{ github.event.repository.default_branch }}',
+  )
 })
 
-test('starts only from the authorized ui:ready issue label and consumes it after admission', () => {
+test('starts only from an authorized ui:ready issue or bound proposal label and consumes it', () => {
   assert.deepEqual(parsedWorkflow.on.issues.types, ['labeled'])
+  assert.deepEqual(parsedWorkflow.on.pull_request.types, ['labeled', 'closed'])
   assert.equal(
     parsedWorkflow.jobs.gate.if,
-    "github.event_name == 'workflow_dispatch' || (github.event.label.name == 'ui:ready' && github.event.issue.state == 'open')",
+    "github.event_name == 'workflow_dispatch' || (github.event.label.name == 'ui:ready' && ((github.event_name == 'issues' && github.event.issue.state == 'open') || (github.event_name == 'pull_request' && github.event.pull_request.state == 'open')))",
   )
   const label = parsedWorkflow.jobs.gate.steps.find(
     (step) => step.name === 'Admit authorized issue label',
@@ -238,11 +309,62 @@ test('starts only from the authorized ui:ready issue label and consumes it after
       issue_number: '123',
       operation: 'auto',
       labeled: 'true',
+      pull_request_number: '',
+      label_target_number: '123',
     })
     assert.deepEqual(admitted.githubCalls, [
       'api repos/astrale-os/ui/collaborators/maintainer/permission --jq .permission',
     ])
   }
+  const proposal = parsedWorkflow.jobs.gate.steps.find(
+    (step) => step.name === 'Admit authorized proposal label',
+  )
+  const admittedProposal = executeWorkflowShell(
+    proposal.run,
+    {
+      FAKE_GH_PERMISSION: 'write',
+      FAKE_GH_PROPOSAL: JSON.stringify({
+        state: 'open',
+        base: { ref: 'main' },
+        head: {
+          ref: 'astrale/ui-request-123-attempt-1-fixture',
+          repo: { full_name: 'astrale-os/ui' },
+        },
+        body: 'Resolves https://github.com/astrale-os/ui/issues/123. Proposal.',
+      }),
+      GITHUB_REPOSITORY: 'astrale-os/ui',
+      INPUT_ACTOR: 'maintainer',
+      INPUT_ACTOR_TYPE: 'User',
+      INPUT_PULL_REQUEST_NUMBER: '77',
+    },
+    true,
+  )
+  assert.equal(admittedProposal.status, 0, admittedProposal.stderr)
+  assert.deepEqual(admittedProposal.outputs, {
+    issue_number: '123',
+    operation: 'auto',
+    labeled: 'true',
+    pull_request_number: '77',
+    label_target_number: '77',
+  })
+  const wrongProposal = executeWorkflowShell(
+    proposal.run,
+    {
+      FAKE_GH_PERMISSION: 'write',
+      FAKE_GH_PROPOSAL: JSON.stringify({
+        state: 'open',
+        base: { ref: 'main' },
+        head: { ref: 'feature/unbound', repo: { full_name: 'astrale-os/ui' } },
+        body: 'Resolves https://github.com/astrale-os/ui/issues/123. Proposal.',
+      }),
+      GITHUB_REPOSITORY: 'astrale-os/ui',
+      INPUT_ACTOR: 'maintainer',
+      INPUT_ACTOR_TYPE: 'User',
+      INPUT_PULL_REQUEST_NUMBER: '77',
+    },
+    true,
+  )
+  assert.notEqual(wrongProposal.status, 0)
   for (const permission of ['read', 'triage', 'none', 'malformed']) {
     const denied = executeWorkflowShell(
       label.run,
@@ -286,13 +408,13 @@ test('starts only from the authorized ui:ready issue label and consumes it after
     consume.run,
     {
       GITHUB_REPOSITORY: 'astrale-os/ui',
-      INPUT_ISSUE_NUMBER: '123',
+      INPUT_LABEL_TARGET_NUMBER: '77',
     },
     true,
   )
   assert.equal(consumed.status, 0, consumed.stderr)
   assert.deepEqual(consumed.githubCalls, [
-    'api --method DELETE repos/astrale-os/ui/issues/123/labels/ui%3Aready',
+    'api --method DELETE repos/astrale-os/ui/issues/77/labels/ui%3Aready',
   ])
 })
 
@@ -309,19 +431,63 @@ test('manual reconciliation selects exact recovery inputs without label state', 
   })
   assert.equal(admitted.status, 0, admitted.stderr)
   const result = executeWorkflowShell(selected.run, {
-    LABEL_ISSUE_NUMBER: '',
-    LABEL_OPERATION: '',
-    LABEL_TRIGGERED: '',
+    ISSUE_NUMBER: '',
+    ISSUE_OPERATION: '',
+    ISSUE_LABELED: '',
+    ISSUE_LABEL_TARGET: '',
+    PROPOSAL_ISSUE_NUMBER: '',
+    PROPOSAL_OPERATION: '',
+    PROPOSAL_LABELED: '',
+    PROPOSAL_NUMBER: '',
+    PROPOSAL_LABEL_TARGET: '',
     MANUAL_ISSUE_NUMBER: admitted.outputs.issue_number,
     MANUAL_OPERATION: admitted.outputs.operation,
-    MANUAL_TRIGGERED: admitted.outputs.labeled,
+    MANUAL_LABELED: admitted.outputs.labeled,
   })
   assert.equal(result.status, 0, result.stderr)
   assert.deepEqual(result.outputs, {
     issue_number: '51',
     operation: 'reconcile',
     labeled: 'false',
+    pull_request_number: '',
+    label_target_number: '',
   })
+})
+
+test('removes only managed closed-PR preview bytes and deactivates their deployments', () => {
+  const cleanup = parsedWorkflow.jobs.cleanup
+  assert.equal(
+    cleanup.if,
+    "github.event_name == 'pull_request' && github.event.action == 'closed' && startsWith(github.event.pull_request.head.ref, 'astrale/ui-request-')",
+  )
+  assert.equal(cleanup.concurrency.group, 'ui-request-preview-publication')
+  assert.equal(cleanup.concurrency['cancel-in-progress'], false)
+  assert.deepEqual(cleanup.permissions, {
+    contents: 'read',
+    deployments: 'write',
+    'pull-requests': 'read',
+  })
+  const remove = cleanup.steps.find((step) => step.name === 'Remove the closed proposal preview')
+  assert.equal(remove.env.GH_TOKEN, '${{ secrets.UI_REQUEST_GITHUB_TOKEN }}')
+  assert.match(remove.run, /target="\$pages\/pr-\$INPUT_PULL_REQUEST_NUMBER"/u)
+  assert.match(remove.run, /state=inactive/u)
+  assert.doesNotMatch(remove.run, /\b(?:pnpm|npm|node)\b/u)
+  assert.equal(
+    cleanup.steps.some((step) => step.uses?.startsWith('actions/checkout@')),
+    false,
+  )
+  const executed = executeCleanupShell(remove.run)
+  assert.equal(executed.status, 0, executed.stderr)
+  assert.equal(executed.targetExists, false)
+  assert.equal(executed.siblingExists, true)
+  assert.ok(executed.gitCalls.some((call) => call.endsWith('push origin HEAD:refs/heads/gh-pages')))
+  assert.deepEqual(
+    executed.githubCalls.filter((call) => call.includes('/statuses')),
+    [9, 10].map(
+      (id) =>
+        `api --method POST repos/astrale-os/ui/deployments/${id}/statuses -f state=inactive -f description=Proposal closed; preview removed`,
+    ),
+  )
 })
 
 test('moves inert candidate evidence across isolated propose, qualify, and publish jobs', () => {
@@ -349,6 +515,18 @@ test('moves inert candidate evidence across isolated propose, qualify, and publi
   const commitIndex = publish.steps.findIndex(
     (step) => step.name === 'Commit the qualified candidate without credentials',
   )
+  const previewBuildIndex = qualify.steps.findIndex(
+    (step) => step.name === 'Build changed preview evidence without publication authority',
+  )
+  const preserveVisualIndex = qualify.steps.findIndex(
+    (step) => step.name === 'Preserve base-controlled visual evidence programs',
+  )
+  const preservePublisherIndex = publish.steps.findIndex(
+    (step) => step.name === 'Preserve the base-controlled preview admission program',
+  )
+  const previewPublishIndex = publish.steps.findIndex(
+    (step) => step.name === 'Admit and publish static preview bytes',
+  )
   assert.deepEqual(parsedWorkerWorkflow.permissions, { contents: 'read' })
   for (const job of [propose, qualify, publish]) assert.equal('permissions' in job, false)
   const checkouts = [propose, qualify, publish].map((job) =>
@@ -368,7 +546,16 @@ test('moves inert candidate evidence across isolated propose, qualify, and publi
   assert.notEqual(setupIndex, -1)
   assert.notEqual(commitIndex, -1)
   assert.notEqual(publishIndex, -1)
+  assert.notEqual(previewBuildIndex, -1)
+  assert.notEqual(preserveVisualIndex, -1)
+  assert.notEqual(preservePublisherIndex, -1)
+  assert.notEqual(previewPublishIndex, -1)
   assert.ok(commitIndex < publishIndex)
+  assert.ok(publishIndex < previewPublishIndex)
+  assert.ok(
+    preserveVisualIndex <
+      qualify.steps.findIndex((step) => step.name === 'Apply the inert candidate patch'),
+  )
   assert.ok(setupIndex < discoveryIndex)
   assert.ok(discoveryIndex < fetchIndex)
   assert.ok(fetchIndex < agentIndex)
@@ -382,6 +569,12 @@ test('moves inert candidate evidence across isolated propose, qualify, and publi
   )
   const publishDownload = publish.steps.find((step) =>
     step.uses?.startsWith('actions/download-artifact@'),
+  )
+  const previewUpload = qualify.steps.find(
+    (step) => step.with?.name === 'ui-request-preview-${{ github.run_id }}',
+  )
+  const previewDownload = publish.steps.find(
+    (step) => step.with?.name === 'ui-request-preview-${{ github.run_id }}',
   )
   assert.equal(upload.uses, 'actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a')
   assert.equal(upload.with.path, '${{ runner.temp }}/ui-request-candidate.patch')
@@ -397,6 +590,31 @@ test('moves inert candidate evidence across isolated propose, qualify, and publi
   assert.equal(qualifiedUpload.with.path, '${{ runner.temp }}/ui-request-qualified.patch')
   assert.equal(publishDownload.with.name, qualifiedUpload.with.name)
   assert.equal(publishDownload.with.path, '${{ runner.temp }}/ui-request-qualified')
+  assert.equal(previewUpload.with.path, '${{ runner.temp }}/ui-request-preview')
+  assert.equal(previewUpload.with['retention-days'], 14)
+  assert.equal(previewDownload.with.path, '${{ runner.temp }}/ui-request-preview')
+  assert.match(qualify.steps[previewBuildIndex].run, /capture-request-previews\.mjs/u)
+  assert.match(
+    qualify.steps[previewBuildIndex].run,
+    /\$RUNNER_TEMP\/ui-request-base\/request\/preview-plan\.mjs/u,
+  )
+  assert.match(qualify.steps[previewBuildIndex].run, /ASTRALE_PLAYGROUND_RELATIVE_BASE=1/u)
+  assert.equal(
+    publish.steps[preservePublisherIndex].run,
+    'cp request/preview-publisher.mjs "$RUNNER_TEMP/ui-request-preview-publisher.mjs"',
+  )
+  assert.match(publish.steps[previewPublishIndex].run, /_evidence\/revision/u)
+  assert.match(publish.steps[previewPublishIndex].run, /astrale-ui-request-preview:v1/u)
+  assert.match(publish.steps[previewPublishIndex].run, /--paginate --slurp/u)
+  assert.match(publish.steps[previewPublishIndex].run, /\.user\.login == \$actor/u)
+  assert.equal(
+    createHash('sha256').update(publish.steps[previewPublishIndex].run).digest('hex'),
+    'a974df9b2b86cf3f6573e3799312e252018e42ce0c77efee4aa7cb7f429776e3',
+  )
+  assert.equal(
+    publish.steps[previewPublishIndex].env.GH_TOKEN,
+    '${{ secrets.UI_REQUEST_GITHUB_TOKEN }}',
+  )
   assert.equal(
     propose.steps.find((step) => step.name === 'Encode the candidate as inert patch evidence').run,
     `set -euo pipefail
@@ -523,39 +741,8 @@ git -c core.hooksPath=/dev/null ${'\\'}
 `,
   )
   assert.equal(
-    publish.steps[publishIndex].run,
-    `set -euo pipefail
-git remote set-url origin "https://github.com/$GITHUB_REPOSITORY.git"
-gh auth setup-git
-if [ -n "$INPUT_PULL_REQUEST" ]; then
-  number="\${INPUT_PULL_REQUEST##*/}"
-  proposal="$(gh api "repos/$GITHUB_REPOSITORY/pulls/$number")"
-  test "$(jq -r .html_url <<< "$proposal")" = "$INPUT_PULL_REQUEST"
-  test "$(jq -r .state <<< "$proposal")" = "open"
-  test "$(jq -r '.merged_at // empty' <<< "$proposal")" = ""
-  test "$(jq -r .base.ref <<< "$proposal")" = "$INPUT_BASE_REF"
-  test "$(jq -r .head.ref <<< "$proposal")" = "$INPUT_BRANCH"
-  test "$(jq -r .head.repo.full_name <<< "$proposal")" = "$GITHUB_REPOSITORY"
-else
-  test "$(gh pr list --head "$INPUT_BRANCH" --state open --json url --jq 'length')" = "0"
-fi
-git -c core.hooksPath=/dev/null push origin "HEAD:refs/heads/$INPUT_BRANCH"
-count="$(gh pr list --head "$INPUT_BRANCH" --state open --json url --jq 'length')"
-if [ "$count" -gt 1 ]; then
-  echo "The working branch has more than one open pull request." >&2
-  exit 1
-fi
-existing="$(gh pr list --head "$INPUT_BRANCH" --state open --json url --jq '.[0].url // empty')"
-if [ -n "$INPUT_PULL_REQUEST" ] && [ "$existing" != "$INPUT_PULL_REQUEST" ]; then
-  echo "The revision branch does not resolve to its admitted pull request." >&2
-  exit 1
-fi
-if [ -z "$INPUT_PULL_REQUEST" ] && [ -z "$existing" ]; then
-  gh pr create --base "$INPUT_BASE_REF" --head "$INPUT_BRANCH" ${'\\'}
-    --title "feat(request): $INPUT_ATTEMPT" ${'\\'}
-    --body "Resolves $INPUT_REQUEST. This pull request is an untrusted proposal that its existing review, CI, and publication owners still gate."
-fi
-`,
+    createHash('sha256').update(publish.steps[publishIndex].run).digest('hex'),
+    '39211bd54d00e4983ce931ade2308465f6e58fb981ae00ad88795f52cc6fec5b',
   )
   const prepare = propose.steps.find(
     (step) => step.name === 'Prepare the deterministic working branch',
@@ -578,7 +765,10 @@ fi
 echo "baseline_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 `,
   )
-  assert.deepEqual(secretReferences(parsedWorkerWorkflow), [
+  const workerSecrets = secretReferences(parsedWorkerWorkflow).filter(({ value }) =>
+    value.includes('secrets.'),
+  )
+  assert.deepEqual(workerSecrets, [
     {
       path: `jobs.propose.steps.${discoveryIndex}.env.ANTHROPIC_FOUNDRY_BASE_URL`,
       value: '${{ secrets.ANTHROPIC_FOUNDRY_BASE_URL }}',
@@ -599,6 +789,10 @@ echo "baseline_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
       path: `jobs.publish.steps.${publishIndex}.env.GH_TOKEN`,
       value: '${{ secrets.UI_REQUEST_GITHUB_TOKEN }}',
     },
+    {
+      path: `jobs.publish.steps.${previewPublishIndex}.env.GH_TOKEN`,
+      value: '${{ secrets.UI_REQUEST_GITHUB_TOKEN }}',
+    },
   ])
   for (const job of [propose, qualify, publish]) {
     for (const step of job.steps.filter((entry) => typeof entry.run === 'string')) {
@@ -609,18 +803,26 @@ echo "baseline_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
 test('serializes canonical issue identity and keeps workflow inputs out of shell source', () => {
   assert.equal(
-    parsedWorkflow.concurrency.group,
-    "ui-request-${{ fromJSON(format('{0}', github.event.issue.number || inputs.issue_number)) }}",
+    parsedWorkflow.jobs.request.concurrency.group,
+    'ui-request-${{ needs.gate.outputs.issue_number }}',
   )
-  for (const step of parsedWorkflow.jobs.request.steps.filter((entry) =>
+  const runnerSteps = parsedWorkflow.jobs.request.steps.filter((entry) =>
     entry.run?.includes('request:run'),
-  )) {
-    assert.equal(
+  )
+  assert.equal(runnerSteps.length, 3)
+  for (const step of runnerSteps) {
+    assert.match(
       step.run,
-      'pnpm request:run --issue "$INPUT_ISSUE_NUMBER" --operation "$INPUT_OPERATION"',
+      /args=\(--issue "\$INPUT_ISSUE_NUMBER" --operation "\$INPUT_OPERATION"\)/u,
     )
+    assert.match(step.run, /args\+=\(--pull-request "\$INPUT_PULL_REQUEST_NUMBER"\)/u)
+    assert.match(step.run, /pnpm request:run "\$\{args\[@\]\}"/u)
     assert.equal(step.env.INPUT_ISSUE_NUMBER, '${{ needs.gate.outputs.issue_number }}')
     assert.equal(step.env.INPUT_OPERATION, '${{ needs.gate.outputs.operation }}')
+    assert.equal(
+      step.env.INPUT_PULL_REQUEST_NUMBER,
+      '${{ needs.gate.outputs.pull_request_number }}',
+    )
     assert.doesNotMatch(step.run, /\$\{\{/u)
   }
   assert.deepEqual(parseRunnerArguments(['--issue', '51']), {
@@ -633,6 +835,10 @@ test('serializes canonical issue identity and keeps workflow inputs out of shell
     operation: 'auto',
     maximumWait: 90 * 60 * 1000,
   })
+  assert.deepEqual(
+    parseRunnerArguments(['--issue', '51', '--operation', 'auto', '--pull-request', '77']),
+    { issue: 51, operation: 'auto', maximumWait: 90 * 60 * 1000, pullRequest: '77' },
+  )
   for (const alias of ['051', '5.1e1', '+51', '51.0']) {
     assert.throws(() => parseRunnerArguments(['--issue', alias]), /canonical positive/u)
   }

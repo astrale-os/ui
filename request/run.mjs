@@ -30,7 +30,7 @@ function canonicalInteger(value, name, { allowZero = false } = {}) {
 }
 
 export function parseRunnerArguments(argv) {
-  const admitted = new Set(['--issue', '--operation', '--max-wait-ms'])
+  const admitted = new Set(['--issue', '--operation', '--max-wait-ms', '--pull-request'])
   for (let index = 0; index < argv.length; index += 2) {
     const name = argv[index]
     if (!admitted.has(name)) throw new Error(`Unknown UI request runner argument: ${name}`)
@@ -47,7 +47,9 @@ export function parseRunnerArguments(argv) {
     '--max-wait-ms',
     { allowZero: true },
   )
-  return { issue, operation, maximumWait }
+  const pullRequest = argument(argv, '--pull-request')
+  if (pullRequest !== undefined) canonicalInteger(pullRequest, '--pull-request')
+  return { issue, operation, maximumWait, ...(pullRequest ? { pullRequest } : {}) }
 }
 
 function requiredEnvironment(environment, name) {
@@ -87,7 +89,7 @@ export async function runUiRequestAutomation(options = {}) {
   if (repository.length !== 2 || repository.some((part) => !part)) {
     throw new Error('GITHUB_REPOSITORY must be owner/repository')
   }
-  const { issue, operation, maximumWait } = parseRunnerArguments(argv)
+  const { issue, operation, maximumWait, pullRequest } = parseRunnerArguments(argv)
   const provider = environment.UI_REQUEST_AGENT_PROVIDER ?? 'github-actions-claude-code'
   const store = createGitHubRequestStore({
     token: requiredEnvironment(environment, 'GITHUB_TOKEN'),
@@ -102,7 +104,13 @@ export async function runUiRequestAutomation(options = {}) {
     ...(options.now ? { now: options.now } : {}),
     ...(options.sleep ? { sleep: options.sleep } : {}),
   })
-  const result = await dispatcher.execute(issue, operation, { maxWaitMs: maximumWait })
+  const expectedPullRequest = pullRequest
+    ? `https://github.com/${repository.join('/')}/pull/${pullRequest}`
+    : undefined
+  const result = await dispatcher.execute(issue, operation, {
+    maxWaitMs: maximumWait,
+    ...(expectedPullRequest ? { pullRequest: expectedPullRequest } : {}),
+  })
   const output = `${JSON.stringify(result, null, 2)}\n`
   ;(options.write ?? ((value) => process.stdout.write(value)))(output)
   return { result, exitCode: result.kind === 'failed' ? 1 : 0 }

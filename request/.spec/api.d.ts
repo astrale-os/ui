@@ -8,6 +8,22 @@ import type {
 
 export type UiRequestOperation = 'auto' | 'run' | 'reconcile' | 'revise' | 'cancel'
 
+export type UiRequestDiscussionId =
+  | `issue-comment:${number}`
+  | `pull-request-comment:${number}`
+  | `pull-request-review:${number}`
+  | `pull-request-review-comment:${number}`
+
+export type UiRequestPreviewEvidence = {
+  readonly version: 1
+  readonly previews: readonly {
+    readonly id: string
+    readonly address: string
+    readonly scene: string
+    readonly screenshot: `screenshots/${string}.png`
+  }[]
+}
+
 export type UiRequestAttemptRecord = {
   readonly version: 1
   readonly request: GitHubIssueUrl
@@ -16,7 +32,9 @@ export type UiRequestAttemptRecord = {
   readonly operation: 'initial' | 'revision'
   readonly idempotencyKey: string
   readonly objectiveSha256: string
+  /** Legacy issue-only snapshot retained for records written before PR-native review. */
   readonly acceptedCommentIds?: readonly number[]
+  readonly acceptedDiscussionIds?: readonly UiRequestDiscussionId[]
   readonly provider: string
   readonly state: 'reserved' | 'outcome-unknown' | ManagedAgentRun['state']
   readonly run?: ManagedAgentRunRef

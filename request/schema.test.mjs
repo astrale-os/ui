@@ -16,6 +16,7 @@ import {
 } from './agent/src/model.mjs'
 import { job } from './agent/test-helpers.mjs'
 import {
+  acceptUiRequestRecord,
   failureCodeValues,
   recordKeyValues,
   recordOperationValues,
@@ -30,6 +31,21 @@ const managedSchema = JSON.parse(
   await readFile(new URL('./agent/.spec/schemas/managed-agent-v1.schema.json', import.meta.url)),
 )
 const ajv = new Ajv2020({ allErrors: true, strict: true, strictRequired: false })
+ajv.addFormat('uri', {
+  type: 'string',
+  validate: (value) => {
+    try {
+      new URL(value)
+      return true
+    } catch {
+      return false
+    }
+  },
+})
+ajv.addFormat('date-time', {
+  type: 'string',
+  validate: (value) => Number.isFinite(Date.parse(value)),
+})
 ajv.addKeyword({
   keyword: 'x-maxUtf8Bytes',
   type: 'string',
@@ -91,20 +107,52 @@ test('keeps the schema object keys and enumerations closed against runtime admis
     schema.required,
     recordKeyValues.filter(
       (key) =>
-        !['acceptedCommentIds', 'run', 'providerUrl', 'pullRequest', 'failure'].includes(key),
+        ![
+          'acceptedCommentIds',
+          'acceptedDiscussionIds',
+          'run',
+          'providerUrl',
+          'pullRequest',
+          'failure',
+        ].includes(key),
     ),
   )
   assert.deepEqual(schema.allOf[0], {
-    if: { properties: { state: { const: 'reserved' } } },
-    then: { not: { anyOf: [{ required: ['run'] }, { required: ['failure'] }] } },
+    not: { required: ['acceptedCommentIds', 'acceptedDiscussionIds'] },
   })
   assert.deepEqual(schema.allOf[1], {
-    if: { properties: { state: { const: 'succeeded' } } },
+    if: { type: 'object', properties: { state: { const: 'reserved' } } },
+    then: { not: { anyOf: [{ required: ['run'] }, { required: ['failure'] }] } },
+  })
+  assert.deepEqual(schema.allOf[2], {
+    if: { type: 'object', properties: { state: { const: 'succeeded' } } },
     then: { required: ['run', 'pullRequest'] },
   })
-  assert.deepEqual(schema.allOf[2].then.required, ['failure'])
-  assert.deepEqual(schema.allOf[2].then.not, { required: ['run'] })
-  assert.deepEqual(schema.allOf[3].then.required, ['run'])
+  assert.deepEqual(schema.allOf[3].then.required, ['failure'])
+  assert.deepEqual(schema.allOf[3].then.not, { required: ['run'] })
+  assert.deepEqual(schema.allOf[4].then.required, ['run'])
+})
+
+test('keeps legacy and namespaced discussion snapshots mutually exclusive in schema and runtime', () => {
+  const validate = ajv.compile(schema)
+  const record = {
+    version: 1,
+    request: 'https://github.com/astrale-os/ui/issues/51',
+    issue: 51,
+    attempt: 1,
+    operation: 'initial',
+    idempotencyKey: 'ui-request:51:attempt:1',
+    objectiveSha256: 'a'.repeat(64),
+    acceptedDiscussionIds: ['issue-comment:1'],
+    provider: 'fixture',
+    state: 'reserved',
+    updatedAt: '2026-08-30T00:00:00Z',
+  }
+  assert.equal(validate(record), true, JSON.stringify(validate.errors))
+  assert.deepEqual(acceptUiRequestRecord(record), record)
+  const ambiguous = { ...record, acceptedCommentIds: [1] }
+  assert.equal(validate(ambiguous), false)
+  assert.throws(() => acceptUiRequestRecord(ambiguous), /discussion snapshot/u)
 })
 
 test('keeps managed job, run, failure, and retry vocabulary closed across schema and runtime', () => {

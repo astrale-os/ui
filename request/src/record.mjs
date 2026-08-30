@@ -39,6 +39,7 @@ export const recordKeyValues = Object.freeze([
   'idempotencyKey',
   'objectiveSha256',
   'acceptedCommentIds',
+  'acceptedDiscussionIds',
   'provider',
   'state',
   'run',
@@ -103,6 +104,23 @@ export function acceptUiRequestRecord(value) {
       new Set(value.acceptedCommentIds).size !== value.acceptedCommentIds.length
     ) {
       throw new TypeError('managed request accepted comment snapshot is malformed')
+    }
+  }
+  if (value.acceptedDiscussionIds !== undefined) {
+    if (
+      !Array.isArray(value.acceptedDiscussionIds) ||
+      value.acceptedDiscussionIds.length > limits.maxAcceptedCommentCount ||
+      value.acceptedDiscussionIds.some(
+        (discussionId) =>
+          typeof discussionId !== 'string' ||
+          !/^(?:issue-comment|pull-request-comment|pull-request-review|pull-request-review-comment):[1-9][0-9]*$/u.test(
+            discussionId,
+          ),
+      ) ||
+      new Set(value.acceptedDiscussionIds).size !== value.acceptedDiscussionIds.length ||
+      value.acceptedCommentIds !== undefined
+    ) {
+      throw new TypeError('managed request accepted discussion snapshot is malformed')
     }
   }
   if (value.providerUrl !== undefined) {
