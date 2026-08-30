@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0-beta.20](https://github.com/astrale-os/ui/compare/v0.3.0-beta.19...v0.3.0-beta.20) (2026-08-30)
+
+
+### Bug Fixes
+
+* **ui:** close status tooltip on pointer leave ([#122](https://github.com/astrale-os/ui/issues/122)) ([7a69f09](https://github.com/astrale-os/ui/commit/7a69f093496ed44bfb2e88b0ddb73f9a516ba104))
+
 ## [0.3.0-beta.19](https://github.com/astrale-os/ui/compare/v0.3.0-beta.18...v0.3.0-beta.19) (2026-08-30)
 
 
