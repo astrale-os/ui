@@ -10,9 +10,6 @@ export const ManageRequest = policy({
 
 export const TraverseOwnedRequest = policy({
   description: 'A Request observation grant is visible only to its granted Identity.',
-  match: ({ allOf, edge, source, subject, target }) =>
-    allOf(
-      edge({ source: subject, class: () => request_owned_by, target }),
-      edge({ source, class: () => request_owned_by, target }),
-    ),
+  match: ({ edge, subject, target }) =>
+    edge({ source: subject, class: () => request_owned_by, target }),
 })

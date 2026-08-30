@@ -78,18 +78,9 @@ describe('Request contract', () => {
     ])
     expect(domain.policies.TraverseOwnedRequest.expression).toEqual({
       match: {
-        allOf: [
-          {
-            source: { kind: 'source' },
-            class: { origin: 'ui.astrale.ai', kind: 'class', name: 'request_owned_by' },
-            target: { kind: 'target' },
-          },
-          {
-            source: { kind: 'subject' },
-            class: { origin: 'ui.astrale.ai', kind: 'class', name: 'request_owned_by' },
-            target: { kind: 'target' },
-          },
-        ],
+        source: { kind: 'subject' },
+        class: { origin: 'ui.astrale.ai', kind: 'class', name: 'request_owned_by' },
+        target: { kind: 'target' },
       },
     })
 
