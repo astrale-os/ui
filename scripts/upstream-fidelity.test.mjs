@@ -419,6 +419,7 @@ test('the 8StarLabs status monitor has only the declared Astrale adaptation', as
         implementation,
         `                <Tooltip
                   key={index}
+                  disableHoverablePopup
                   open={pressedStatus === index}
                   onOpenChange={(open) => {
                     setPressedStatus(open ? index : null)

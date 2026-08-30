@@ -13,6 +13,7 @@
   "adaptationNotes": [
     "Repoint provider-local tooltip and class-name imports to Astrale public entrypoints.",
     "Render each labelled status segment as an interactive button whose accessible name matches Base UI's visual-only tooltip guidance, with press-controlled incident detail.",
+    "Close pointer-opened incident detail when the pointer leaves its status segment instead of keeping the non-interactive popup hoverable.",
     "Scope uptime to the visible responsive window and report N/A when that window has no telemetry.",
     "Include clock time and time zone in Date labels when the timeline unit is hours."
   ],

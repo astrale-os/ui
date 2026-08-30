@@ -811,13 +811,25 @@ test('status monitor presents responsive availability and incident details', asy
 
   const incident = preview.getByLabel('Jul 03, 2026: Error')
   if (page.viewportSize()!.width >= 640) {
+    await incident.hover()
+    const tooltip = page.locator('[data-slot="tooltip-content"]')
+    await expect(tooltip).toContainText(
+      'API requests failed while traffic shifted to the recovery pool.',
+    )
+    const tooltipBox = await tooltip.boundingBox()
+    expect(tooltipBox).not.toBeNull()
+    await page.mouse.move(
+      tooltipBox!.x + tooltipBox!.width / 2,
+      tooltipBox!.y + tooltipBox!.height / 2,
+    )
+    await expect(tooltip).not.toBeVisible()
+
     await preview.getByLabel('Jul 02, 2026: Normal').focus()
     await page.keyboard.press('Tab')
     await expect(incident).toBeFocused()
     await expect(
       page.getByText('API requests failed while traffic shifted to the recovery pool.'),
     ).toBeVisible()
-    const tooltip = page.locator('[data-slot="tooltip-content"]')
     await expect(tooltip).toContainText(
       'API requests failed while traffic shifted to the recovery pool.',
     )
