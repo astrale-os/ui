@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0-beta.24](https://github.com/astrale-os/ui/compare/v0.3.0-beta.23...v0.3.0-beta.24) (2026-08-30)
+
+
+### Documentation
+
+* close UI request V2 release ledger ([#148](https://github.com/astrale-os/ui/issues/148)) ([fdd710b](https://github.com/astrale-os/ui/commit/fdd710b9343154649ae10c408275debca17d272b))
+
 ## [0.3.0-beta.23](https://github.com/astrale-os/ui/compare/v0.3.0-beta.22...v0.3.0-beta.23) (2026-08-30)
 
 
