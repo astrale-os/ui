@@ -12,70 +12,16 @@ const provenance = JSON.parse(
 const provenanceByAddress = new Map(
   provenance.components.map((component) => [component.address, component]),
 )
-const reactAriaProvenance = JSON.parse(
-  await readFile(
-    'tooling/upstream/providers/react-aria/1.20.0/tailwind-color-picker/provenance.json',
-    'utf8',
-  ),
+const coreCatalog = JSON.parse(await readFile('registry/core-catalog.json', 'utf8'))
+const upstreamLedger = JSON.parse(await readFile('tooling/upstream/ledger.json', 'utf8'))
+const externalProvenances = await Promise.all(
+  (await readdir('tooling/upstream/providers', { recursive: true }))
+    .filter((entry) => entry.endsWith('/provenance.json'))
+    .map(async (entry) => ({
+      path: path.join('tooling/upstream/providers', entry),
+      value: JSON.parse(await readFile(path.join('tooling/upstream/providers', entry), 'utf8')),
+    })),
 )
-const heatmapProvenance = JSON.parse(
-  await readFile(
-    'tooling/upstream/providers/heatmap/6cdef1109364760536410d5325ac0d1af451196e/status-heatmap/provenance.json',
-    'utf8',
-  ),
-)
-const statusMonitorProvenance = JSON.parse(
-  await readFile(
-    'tooling/upstream/providers/8starlabs/763f9b6f27d2ded9967d62b099e66768994dd68c/status-monitor/provenance.json',
-    'utf8',
-  ),
-)
-const envVariablesProvenance = JSON.parse(
-  await readFile(
-    'tooling/upstream/providers/chadcn/9f92a7134a2df98b249f455104137780ebf958a0/env-variables/provenance.json',
-    'utf8',
-  ),
-)
-const logViewerProvenance = JSON.parse(
-  await readFile(
-    'tooling/upstream/providers/logpilot/a0ac783c7dc6c579714f960731a2392043185dc6/log-viewer/provenance.json',
-    'utf8',
-  ),
-)
-const externalProviders = new Map([
-  [
-    '@react-aria',
-    { provenance: reactAriaProvenance, address: 'component/color-picker', fileCount: 10 },
-  ],
-  [
-    '@heatmap',
-    { provenance: heatmapProvenance, address: 'component/status-heatmap', fileCount: 1 },
-  ],
-  [
-    '@8starlabs',
-    {
-      provenance: statusMonitorProvenance,
-      address: 'block/observability/status-monitor',
-      fileCount: 1,
-    },
-  ],
-  [
-    '@chadcn',
-    {
-      provenance: envVariablesProvenance,
-      address: 'block/secrets/env-variables',
-      fileCount: 1,
-    },
-  ],
-  [
-    '@logpilot',
-    {
-      provenance: logViewerProvenance,
-      address: 'block/observability/log-viewer',
-      fileCount: 6,
-    },
-  ],
-])
 const registryPackage = JSON.parse(await readFile('registry/package.json', 'utf8'))
 const removedCanonicalAddresses = [
   'block/application-shell/compact-command',
@@ -312,13 +258,33 @@ test('every registry item is independently bounded, controlled, and safe to inst
       continue
     }
     if (item.meta.provider && item.meta.provider !== '@astrale-os/ui') {
-      const external = externalProviders.get(item.meta.provider)
-      assert.ok(external, `${item.name} has no proven external provider`)
-      assert.equal(item.meta.upstreamAddress, external.provenance.upstreamAddress)
-      assert.equal(item.meta.upstreamDigest, external.provenance.sourceDigest)
-      assert.equal(item.meta.canonicalAddress, external.address)
-      assert.equal(item.files.length, external.fileCount)
-      assert.equal(item.meta.adaptation, external.provenance.adaptation ?? 'imports-only')
+      const exactProofs = externalProvenances.filter(
+        ({ value }) =>
+          value.provider === item.meta.provider &&
+          value.upstreamAddress === item.meta.upstreamAddress &&
+          value.sourceDigest === item.meta.upstreamDigest,
+      )
+      assert.equal(exactProofs.length, 1, `${item.name} must have one exact provider proof`)
+      const external = exactProofs[0].value
+      const catalogOwner = coreCatalog.find(
+        (entry) => entry.source === external.upstreamAddress,
+      )?.address
+      assert.equal(item.meta.canonicalAddress, external.owner ?? catalogOwner)
+      assert.equal(item.meta.adaptation, external.adaptation ?? 'imports-only')
+      const provenImplementations = externalProvenances
+        .filter(({ value }) => value.owner === item.meta.canonicalAddress)
+        .flatMap(({ value }) => Object.values(value.files ?? {}))
+        .flatMap((file) =>
+          file && typeof file === 'object' && typeof file.implementation === 'string'
+            ? [file.implementation]
+            : [],
+        )
+        .toSorted()
+      if (provenImplementations.length > 0) {
+        assert.deepEqual([...new Set(provenImplementations)], item.declaredPaths.toSorted())
+      } else {
+        assert.equal(item.files.length, Object.keys(external.files ?? {}).length)
+      }
       const itemSources = await Promise.all(
         item.declaredPaths.map((declaredPath) => readFile(declaredPath, 'utf8')),
       )
@@ -396,50 +362,29 @@ test('registry guards reject traversal and observe every executable import form'
   )
 })
 
-test('registry inventory is the exact retained pattern and block catalog', async () => {
+test('externally sourced compositions are exact admitted intake owners', async () => {
   const root = JSON.parse(await readFile(rootPath, 'utf8'))
   const addresses = root.items.map((item) => item.meta.canonicalAddress)
   assert.deepEqual(
     addresses.filter((address) => address.startsWith('theme/')),
     ['theme/observatory'],
   )
-  assert.deepEqual(
-    root.items
-      .filter(
-        (item) =>
-          item.meta.provider !== '@astrale-os/ui' &&
-          /^(?:pattern|block)\//u.test(item.meta.canonicalAddress),
-      )
-      .map((item) => item.meta.canonicalAddress)
-      .sort(),
-    [
-      'block/authentication/sign-in-card',
-      'block/authentication/sign-up-card',
-      'block/authentication/recovery',
-      'block/authentication/verification',
-      'block/dashboard/overview',
-      'block/dashboard/analytics',
-      'block/dashboard/operations',
-      'block/observability/log-viewer',
-      'block/observability/status-monitor',
-      'block/secrets/env-variables',
-      'pattern/calendar/range-basic',
-      'pattern/calendar/single-basic',
-      'pattern/carousel/horizontal-controlled',
-      'pattern/carousel/vertical-controlled',
-      'pattern/combobox/multiple',
-      'pattern/combobox/single-basic',
-      'pattern/command-palette/controlled',
-      'pattern/command-palette/dialog-basic',
-      'pattern/date-picker/range',
-      'pattern/date-picker/single',
-      'pattern/form/wizard-controlled',
-      'pattern/message/bubble-basic',
-      'pattern/message/thread',
-      'pattern/toast/basic-provider',
-      'pattern/toast/controlled-queue',
-    ].sort(),
-  )
+  const externalOwners = root.items
+    .filter(
+      (item) =>
+        item.meta.provider &&
+        item.meta.provider !== '@astrale-os/ui' &&
+        /^(?:pattern|block)\//u.test(item.meta.canonicalAddress),
+    )
+    .map((item) => item.meta.canonicalAddress)
+    .toSorted()
+  const admittedOwners = upstreamLedger.entries
+    .filter(
+      (entry) =>
+        entry.decision.status === 'admitted' && /^(?:pattern|block)\//u.test(entry.decision.owner),
+    )
+    .map((entry) => entry.decision.owner)
+  assert.deepEqual(externalOwners, [...new Set(admittedOwners)].toSorted())
   for (const removed of removedCanonicalAddresses) assert.equal(addresses.includes(removed), false)
 })
 

@@ -7,7 +7,7 @@
 - [x] Implementation network access is disabled.
 - [x] One eligible Opus escalation is enforced; authority and quota failures do not escalate.
 - [x] Cumulative patch and source evidence use a 30-day digest-bound checkpoint.
-- [x] Expiry, tampering, request drift, and base mismatch reject automatic reconstruction; a newly accepted objective preserves only the patch and reacquires source evidence.
+- [x] Expiry, tampering, request drift, non-descendant base drift, and a no-longer-applicable patch reject automatic reconstruction; unrelated descendant base commits retain the patch, while a newly accepted objective reacquires source evidence.
 - [x] Regular CI derives docs-only, request-tooling, family-scoped, or global-ui scope.
 - [x] `ui:merge-ready` is maintainer-gated and binds full evidence to one exact revision.
 - [x] Browser qualification is split into four stable shards.
