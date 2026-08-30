@@ -817,7 +817,7 @@ test('status monitor presents responsive availability and incident details', asy
     await expect(
       page.getByText('API requests failed while traffic shifted to the recovery pool.'),
     ).toBeVisible()
-    const tooltip = page.locator(`#${await incident.getAttribute('aria-describedby')}`)
+    const tooltip = page.locator('[data-slot="tooltip-content"]')
     await expect(tooltip).toContainText(
       'API requests failed while traffic shifted to the recovery pool.',
     )

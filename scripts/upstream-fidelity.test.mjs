@@ -393,35 +393,15 @@ test('the 8StarLabs status monitor has only the declared Astrale adaptation', as
       )
       implementation = replaceDeclared(
         implementation,
-        "import React, { useEffect, useId, useMemo, useRef, useState } from 'react'",
-        "import React, { useEffect, useMemo, useRef, useState } from 'react'",
-        'stable id import',
-      )
-      implementation = replaceDeclared(
-        implementation,
-        '  const statusMonitorId = useId()\n',
-        '',
-        'stable monitor id',
-      )
-      implementation = replaceDeclared(
-        implementation,
         '  const [pressedStatus, setPressedStatus] = useState<number | null>(null)\n',
         '',
         'press state',
       )
       implementation = replaceDeclared(
         implementation,
-        '              const triggerId = `${statusMonitorId}-status-${index}`\n' +
-          '              const tooltipId = `${triggerId}-description`\n',
-        '',
-        'description ids',
-      )
-      implementation = replaceDeclared(
-        implementation,
         `                <Tooltip
                   key={index}
                   open={pressedStatus === index}
-                  triggerId={triggerId}
                   onOpenChange={(open) => {
                     setPressedStatus(open ? index : null)
                   }}
@@ -432,7 +412,6 @@ test('the 8StarLabs status monitor has only the declared Astrale adaptation', as
       implementation = replaceDeclared(
         implementation,
         `                      <button
-                        id={triggerId}
                         type="button"`,
         '                      <div',
         'button trigger',
@@ -445,20 +424,13 @@ test('the 8StarLabs status monitor has only the declared Astrale adaptation', as
       )
       implementation = replaceDeclared(
         implementation,
-        `                        aria-label={label}
-                        aria-describedby={tooltipId}
+        `                        aria-label={\`${'${label}'}. ${'${item.info ?? config.defaultInfo}'}\`}
                         onClick={() => {
                           setPressedStatus((current) => (current === index ? null : index))
                         }}`,
         `                        tabIndex={0}
                         aria-label={label}`,
         'operable trigger semantics',
-      )
-      implementation = replaceDeclared(
-        implementation,
-        '                  <TooltipContent\n                    id={tooltipId}',
-        '                  <TooltipContent',
-        'tooltip description id',
       )
       await mkdir(path.join(temporary, 'source'), { recursive: true })
       await mkdir(path.join(temporary, 'implementation'), { recursive: true })
