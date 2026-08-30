@@ -1,1 +1,0 @@
-import{n as e}from"./shared-Arf_fccI.js";var t=typeof CSS<`u`&&!!CSS.supports?.(`-webkit-backdrop-filter:none`),n=!t&&e.includes(`firefox`);!t&&e.includes(`chrom`);export{t as n,n as t};

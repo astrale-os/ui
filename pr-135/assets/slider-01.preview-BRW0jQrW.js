@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{t}from"./slider-CKoUzI7s.js";var n=e(),r=()=>(0,n.jsx)(t,{defaultValue:75,max:100,step:1,className:`mx-auto w-full max-w-xs`}),i={source:`@astrale-os/ui`};export{r as default,i as preview};

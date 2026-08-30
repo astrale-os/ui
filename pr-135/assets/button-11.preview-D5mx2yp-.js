@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{ct as t}from"./index-zcvx3Vaz.js";var n=e(),r=()=>(0,n.jsx)(t,{className:`from-primary via-primary/60 to-primary border-0 bg-transparent bg-linear-to-r bg-size-[200%_auto] hover:bg-transparent hover:bg-position-[99%_center]`,children:`Get Started`}),i={source:`@astrale-os/ui`};export{r as default,i as preview};
