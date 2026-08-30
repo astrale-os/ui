@@ -1,1 +1,0 @@
-var e=[{id:`components`,title:`Components`,description:`Runtime owners and exact behavior.`},{id:`patterns`,title:`Patterns`,description:`Controlled application compositions.`},{id:`blocks`,title:`Blocks`,description:`Complete consumer-owned surfaces.`}];export{e as t};

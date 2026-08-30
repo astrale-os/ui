@@ -1,1 +1,0 @@
-import{t as e}from"./useId-DiQEPBS8.js";function t(t){return e(t,`base-ui`)}export{t};

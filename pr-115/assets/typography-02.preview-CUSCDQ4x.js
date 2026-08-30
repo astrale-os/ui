@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-Cx0BB4qO.js";var t=e(),n=()=>(0,t.jsx)(`h2`,{className:`text-3xl font-semibold`,children:`h2 - Citizens of the Sunlit Vale`}),r={source:`@astrale-os/ui`};export{n as default,r as preview};
