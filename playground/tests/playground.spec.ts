@@ -293,7 +293,7 @@ test('theme runtime stays isolated from catalog size and projects only changed p
   ])
 })
 
-test('catalog loads previews near the viewport once and preserves loaded state', async ({
+test('catalog loads previews once, preserves near state, and resets parked state', async ({
   page,
 }) => {
   const previewRequests: string[] = []
@@ -322,6 +322,17 @@ test('catalog loads previews near the viewport once and preserves loaded state',
   await page.getByRole('button', { name: 'Dark', exact: true }).click()
   await page.getByRole('button', { name: 'Close', exact: true }).click()
   await expect(select.getByRole('combobox', { name: 'Environment' })).toContainText('Staging')
+
+  const mountedHeight = await select.evaluate((element) => element.getBoundingClientRect().height)
+  await page.evaluate(() => scrollTo({ top: document.documentElement.scrollHeight }))
+  await expect(select).not.toHaveAttribute('data-preview-mounted', 'true', { timeout: 5_000 })
+  await expect
+    .poll(() => select.evaluate((element) => element.getBoundingClientRect().height))
+    .toBeCloseTo(mountedHeight, 0)
+  await select.scrollIntoViewIfNeeded()
+  await expect(select).toHaveAttribute('data-preview-mounted', 'true')
+  await expect(select.getByRole('combobox', { name: 'Environment' })).toContainText('Production')
+  expect(previewRequests.filter((url) => url.includes('/select.preview.tsx'))).toHaveLength(1)
 
   await page.goto('/?family=component%2Fbutton')
   expect(await page.locator('[data-preview-address]').count()).toBeGreaterThan(1)
@@ -600,6 +611,7 @@ test('every canonical preview mounts without page or console failures', async ({
   })
   await page.goto('/')
   let ready = 0
+  let peakMounted = 0
   for (const kind of ['Components', 'Patterns', 'Blocks'] as const) {
     await selectCatalogKind(page, kind)
     const previews = page.locator('[data-preview-address]')
@@ -609,10 +621,15 @@ test('every canonical preview mounts without page or console failures', async ({
       await preview.scrollIntoViewIfNeeded()
       await expect(preview).toHaveAttribute('data-preview-status', 'ready', { timeout: 10_000 })
       await expect(preview.getByText('Preview unavailable')).toHaveCount(0)
+      peakMounted = Math.max(
+        peakMounted,
+        await page.locator('[data-preview-mounted="true"]').count(),
+      )
       ready += 1
     }
   }
   expect(ready).toBe(expectedCanonicalAddresses.length)
+  expect(peakMounted).toBeLessThanOrEqual(page.viewportSize()!.width >= 640 ? 64 : 32)
   expect(pageErrors).toEqual([])
   expect(consoleProblems).toEqual([])
   const width = await page.evaluate(() => ({
