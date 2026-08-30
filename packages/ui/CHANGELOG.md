@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.3.0-beta.19](https://github.com/astrale-os/ui/compare/v0.3.0-beta.18...v0.3.0-beta.19) (2026-08-30)
+
+
+### Features
+
+* **registry:** add source-faithful live log viewer ([#121](https://github.com/astrale-os/ui/issues/121)) ([2acc36f](https://github.com/astrale-os/ui/commit/2acc36f62d6d4376c2d24ca80e6b192a46e4b6c6))
+* **request:** ui-request:102:attempt:4 ([#115](https://github.com/astrale-os/ui/issues/115)) ([7fdef81](https://github.com/astrale-os/ui/commit/7fdef8124dd97680a8de01b83c02c9411936e90b))
+
+
+### Bug Fixes
+
+* exclude immutable source evidence from lint ([#113](https://github.com/astrale-os/ui/issues/113)) ([f7f29c4](https://github.com/astrale-os/ui/commit/f7f29c440e4230a4972852dc451b46f4742a1502))
+* **request:** require observable acceptance proof ([#116](https://github.com/astrale-os/ui/issues/116)) ([89c4951](https://github.com/astrale-os/ui/commit/89c49515dd3a0cf3000435f3e973856ea0aab0aa))
+* **ui:** align status tooltip ownership ([#120](https://github.com/astrale-os/ui/issues/120)) ([dfe482e](https://github.com/astrale-os/ui/commit/dfe482ec012425de85a2a80032f5f7e755172c94))
+* **ui:** preserve bounded request iterations ([#119](https://github.com/astrale-os/ui/issues/119)) ([8953688](https://github.com/astrale-os/ui/commit/89536880e4ca40b6235458999e9e8e57149e2ceb))
+* **ui:** preserve cumulative request previews ([#118](https://github.com/astrale-os/ui/issues/118)) ([9b939b1](https://github.com/astrale-os/ui/commit/9b939b110224a84279aebada708cb805a6cd2134))
+* **ui:** qualify registry behavior before publication ([#117](https://github.com/astrale-os/ui/issues/117)) ([cc67abe](https://github.com/astrale-os/ui/commit/cc67abe081ae2fb5a63439066625f37925ded03e))
+
 ## [0.3.0-beta.18](https://github.com/astrale-os/ui/compare/v0.3.0-beta.17...v0.3.0-beta.18) (2026-08-30)
 
 
