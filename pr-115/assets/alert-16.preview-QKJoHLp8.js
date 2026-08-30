@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{O as t,T as n}from"./index-BXISv_yX.js";var r=e(),i=()=>(0,r.jsx)(n,{children:(0,r.jsx)(t,{children:`New message!`})}),a={source:`@astrale-os/ui`};export{i as default,a as preview};

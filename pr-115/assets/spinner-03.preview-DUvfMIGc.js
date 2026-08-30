@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{t}from"./spinner-CUUeSJx2.js";var n=e(),r=()=>(0,n.jsxs)(`div`,{className:`flex items-center gap-6`,children:[(0,n.jsx)(t,{className:`size-3`}),(0,n.jsx)(t,{className:`size-4`}),(0,n.jsx)(t,{className:`size-6`}),(0,n.jsx)(t,{className:`size-8`})]}),i={source:`@astrale-os/ui`};export{r as default,i as preview};

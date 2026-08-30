@@ -1,1 +1,0 @@
-import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{O as t,T as n,Y as r}from"./index-Bwij8Xjf.js";var i=e(),a=()=>(0,i.jsxs)(n,{variant:`destructive`,className:`border-destructive *:[svg]:row-span-1`,children:[(0,i.jsx)(r,{}),(0,i.jsx)(t,{children:`Unable to process your payment.`})]}),o={source:`@astrale-os/ui`};export{a as default,o as preview};

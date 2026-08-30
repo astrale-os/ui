@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{t}from"./aspect-ratio-CVUeJdyQ.js";var n=e(),r={canvas:`wide`,source:`@shadcn/aspect-ratio`};function i(){return(0,n.jsx)(t,{ratio:16/9,className:`aspect-specimen`,children:(0,n.jsx)(`span`,{children:`16:9 preview surface`})})}export{i as default,r as preview};
