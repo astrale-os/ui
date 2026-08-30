@@ -1,24 +1,28 @@
 # Ratification gate
 
-Status: **managed-execution slice implemented; broader Request V1 not ratified**.
+Status: **managed PR review and visual-evidence slice ratified; UI Domain submission deployment
+currently unavailable**.
 
 The public draft command, GitHub form, durable attempt record, serialized trusted workflow,
 provider-neutral dispatcher, and managed-agent Port were authorized and promoted into production
 tooling. Their exact current contract lives in `request/.spec` and `request/agent/.spec`; this
 historical folder is not runtime authority.
 
-The broader source-research, provenance/license admission, deterministic adaptation checker,
-candidate CI, visual evidence, live preview, and review-comment automation described by Request V1
-remain candidate work. They must not be inferred from the managed-execution implementation.
+Source-first research, immutable evidence admission, credential-separated proposal/qualification/
+publication, revision-bound screenshots, an isolated live playground, bounded trusted issue and PR
+discussion, and same-PR revisions are production tooling. Request issue #96 and merged PR #97 prove
+the complete GitHub collaboration slice through two qualified agent attempts and one real merge.
 
 ## Remaining production evidence
 
-- [ ] A GitHub Copilot task reaches one disposable PR with the configured production credential.
-- [ ] A Cursor task reaches one disposable PR with an independently configured credential.
-- [ ] The broader intake/provenance/preview acceptance items are implemented and qualified.
-- [ ] Exact live revisions, environments, commands, outputs, and cleanup are recorded in the
-      ledger.
+- [ ] The deployed `ui.astrale.ai` Domain is restored and reinstalled on the active Instance; its
+      current callable returns Kernel code `3001` and the prior hostname no longer resolves.
+- [ ] GitHub Copilot and Cursor each repeat the already shared adapter contract with live provider
+      credentials; fixture parity is not live portability evidence.
+- [ ] The broader retained intake-record and automatic license-policy candidates are separately
+      ratified if they remain necessary after real source-backed requests.
+- [x] Exact live issue, PR, attempts, revisions, browser observations, CI, merge, and cleanup defects
+      are recorded in the ledger.
 
-Current live evidence is deliberately narrower: GitHub list/read/reconciliation succeeded, start
-returned HTTP 412, and no Cursor credential was available. Fixture qualification is retained as
-fixture qualification, not presented as live delivery.
+The GitHub collaboration slice is live. The public CLI-to-Domain submission prefix is not currently
+live and is not inferred from direct GitHub issue creation.
