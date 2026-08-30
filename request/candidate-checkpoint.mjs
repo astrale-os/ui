@@ -202,7 +202,9 @@ export async function verifyCandidateCheckpoint(options) {
   if (options.objectiveSha256 && manifest.objectiveSha256 !== options.objectiveSha256) {
     throw new Error('checkpoint objective does not match the admitted request')
   }
-  if (manifest.baseSha !== options.baseSha) throw new Error('checkpoint base does not match')
+  if (options.baseSha && manifest.baseSha !== options.baseSha) {
+    throw new Error('checkpoint base does not match')
+  }
   if (Date.parse(manifest.timestamps?.expiresAt) <= options.now.getTime()) {
     throw new Error('checkpoint expired; operator input is required')
   }
@@ -255,7 +257,7 @@ async function main(argv) {
       root: required(argv, '--root'),
       request: required(argv, '--request'),
       objectiveSha256: argument(argv, '--objective-sha256'),
-      baseSha: required(argv, '--base-sha'),
+      baseSha: argument(argv, '--base-sha'),
       now: new Date(argument(argv, '--now', new Date().toISOString())),
     })
     process.stdout.write(`${JSON.stringify(checkpoint)}\n`)
