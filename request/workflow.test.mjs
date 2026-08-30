@@ -571,7 +571,7 @@ test('moves inert candidate evidence across isolated propose, qualify, and publi
   assert.deepEqual(parsedWorkerWorkflow.permissions, { contents: 'read' })
   assert.deepEqual(propose.permissions, { actions: 'read', contents: 'read' })
   assert.equal('permissions' in qualify, false)
-  assert.deepEqual(publish.permissions, { actions: 'write', contents: 'read' })
+  assert.deepEqual(publish.permissions, { actions: 'read', contents: 'read' })
   const checkouts = [propose, qualify, publish].map((job) =>
     job.steps.find((step) => step.uses?.startsWith('actions/checkout@')),
   )
@@ -874,6 +874,7 @@ test('serializes canonical issue identity and keeps workflow inputs out of shell
 })
 
 test('pins the isolated Luna worker and preserves recoverable work across SLO breaches', () => {
+  assert.deepEqual(parsedCodexWorkflow.permissions, { actions: 'read', contents: 'read' })
   assert.equal(
     parsedCodexWorkflow.jobs.worker.uses,
     './.github/workflows/ui-request-claude-code.yml',

@@ -692,7 +692,7 @@ jobs:
     timeout-minutes: 20
     environment: ui-request-agent
     permissions:
-      actions: write
+      actions: read
       contents: read
     concurrency:
       group: ui-request-preview-publication
