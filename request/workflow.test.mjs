@@ -649,7 +649,8 @@ test('moves inert candidate evidence across isolated propose, qualify, and publi
   assert.equal(propose.steps[codexSandboxIndex].if, "inputs.worker == 'codex'")
   assert.match(propose.steps[codexSandboxIndex].run, /apt-get install --yes bubblewrap/u)
   assert.match(propose.steps[codexSandboxIndex].run, /bwrap-userns-restrict/u)
-  assert.match(propose.steps[codexSandboxIndex].run, /codex sandbox linux -- \/bin\/true/u)
+  assert.match(propose.steps[codexSandboxIndex].run, /codex sandbox -- \/bin\/true/u)
+  assert.doesNotMatch(propose.steps[codexSandboxIndex].run, /codex sandbox linux/u)
   assert.ok(discoveryIndex < fetchIndex)
   assert.ok(fetchIndex < agentIndex)
   assert.ok(agentIndex < verifyIndex)
@@ -785,7 +786,6 @@ schema="$(jq -c . request/.spec/schemas/source-evidence-v1.schema.json)"
   --permission-mode dontAsk ${'\\'}
   --allowedTools Read,Glob,Grep,WebSearch ${'\\'}
   --no-session-persistence ${'\\'}
-  --max-budget-usd 5 ${'\\'}
   --json-schema "$schema" ${'\\'}
   --output-format json ${'\\'}
   --print > "$RUNNER_TEMP/ui-request-source-manifest.json"
@@ -820,11 +820,11 @@ printf '%s\\n\\nVerified immutable source evidence is available at %s. Read inde
   --allowedTools Read,Edit,Write,Glob,Grep ${'\\'}
   --add-dir "$SOURCE_EVIDENCE_ROOT" ${'\\'}
   --no-session-persistence ${'\\'}
-  --max-budget-usd 20 ${'\\'}
   --print
 `,
   )
   assert.equal(propose.steps[agentIndex].env.INPUT_OBJECTIVE, '${{ inputs.objective }}')
+  assert.equal(workerWorkflow.includes('--max-budget-usd'), false)
   assert.equal(propose.steps[agentIndex].env.CLAUDE_CODE_USE_FOUNDRY, '1')
   assert.equal(
     publish.steps[commitIndex].run,
