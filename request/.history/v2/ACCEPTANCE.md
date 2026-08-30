@@ -17,6 +17,6 @@
 - [x] Same-tree merges can rebind evidence; different trees fail closed.
 - [x] Trusted publish removes browser installation and exhaustive qualification.
 - [x] Hard latency values are non-cancelling SLO observations.
-- [ ] Five-run baseline recorded.
-- [ ] Live CLI-to-domain canary completed and cleaned up.
+- [x] Five-run baseline recorded.
+- [x] Live CLI-to-domain canary completed and cleaned up.
 - [ ] Beta release verified on public npm and GitHub Packages.

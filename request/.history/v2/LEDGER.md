@@ -2,13 +2,13 @@
 
 | Evidence | State | Observation |
 | --- | --- | --- |
-| Contract and schema checks | pending | Run after formatting. |
+| Contract and schema checks | passed | `pnpm request:check` passed all 139 request, adapter, checkpoint, workflow, schema, and TypeScript checks after the final cleanup; PR #135 regular CI also passed every selected package, registry, security, Domain, playground, and Node 24/26 contract gate on exact head `0da95b3e`. |
 | Luna Azure POC | passed | 2026-08-30: pinned Codex 0.151.0, configured `gpt-5.6-luna` / max, Azure Responses completed an exact workspace edit in 13.1 s. Child shell asserted Azure and GitHub credential names absent. Disposable fixture removed. |
 | Live max-effort revision observation | failed SLO | Attempt 8 spent 12m39s in proposal (about 7m30s source discovery plus about 4m30s implementation) for one accessibility-only revision, breaching the non-cancelling 6m revision hard value. The preserved candidate remained intact. Default implementation effort is now medium and discovery is low; deterministic qualification and the sole Opus repair remain unchanged. |
 | Stable checkpoint objective | fixed | Attempt 9 showed that checkpoint digests used the attempt-framed normalized prompt while the coordinator tracked the accepted objective, preventing an exact retry from resuming. The adapter now carries the stable accepted-objective SHA-256 as a distinct trusted workflow input. |
 | Fast gate baseline 1–5 | passed | Local warm request-tooling workload: 3,458 / 3,443 / 3,374 / 3,299 / 3,168 ms; median 3,374 ms, observed p95 3,458 ms. All within the 90 s target; every observation carried `cancellationRequested: false`. |
-| Full four-shard qualification | pending | Run on the implementation PR exact head. |
-| Qualification receipt | pending | Verify exact commit/tree/artifact digests. |
-| Same-tree receipt rebind | pending | Verify against merged main SHA. |
+| Full four-shard qualification | passed | Run `33320083623` qualified exact PR #135 head `0da95b3e`: shard 1 5m13s, shard 2 4m55s, shard 3 1m11s, shard 4 1m06s, package 4m58s, and merge-ready composition 15s. |
+| Qualification receipt | passed | Run `33320083623` published `qualification-receipt-0da95b3e742740ea3d096d1034700e5a0cf62134` as artifact `9734694262`, binding the exact accepted commit/tree, package, registry, catalog, toolchain, and four shard records. |
+| Same-tree receipt rebind | passed | Squash merge `5aafd7e9807fae4775656ca71106e96d8ad57f0d` has tree `f4cee1d04b66eca81668e2053f91ec5d21c5c23d`, exactly equal to accepted head `0da95b3e`'s tree. Run `33320360769` verified the source receipt and published rebound artifact `9734700507`. |
 | Trusted package publish | pending | Verify npm beta, provenance, and GitHub mirror. |
-| Live canary | pending | CLI request → issue → Luna → PR preview → comment revision → acceptance → merge → cleanup → beta. |
+| Live canary | passed through cleanup | Domain request `b0337d12-bd0a-4645-ba6b-c3fadeff981a` created issue #104. Luna attempt 9 run `33318725553` completed proposal in 3m07s, qualification in 1m59s, and publication in 36s without Opus fallback; it updated PR #135 with the accepted accessibility revision. Hosted desktop/mobile review exercised invalid recurrence, recovery, cadence, timezone, controlled host state, live-region semantics, and 390 px containment without browser errors. PR #135 merged as `5aafd7e9`, issue #104 closed automatically, cleanup run `33320361154` made both deployments inactive, and the revision URL returns HTTP 404. Beta publication is tracked separately below. |
