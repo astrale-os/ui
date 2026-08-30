@@ -762,6 +762,35 @@ test('loading and readiness expose stable accessible canvas semantics', async ({
   await expect(preview).not.toHaveAttribute('aria-busy', 'true')
 })
 
+test('status heatmap incident-recovery scene tells the 30-day operational story', async ({
+  page,
+}) => {
+  await page.goto('/?family=component%2Fstatus-heatmap')
+  const preview = await loadPreview(page, 'component/status-heatmap', 'incident-recovery')
+
+  const heatmap = preview.getByRole('img', { name: 'API status heatmap, last 30 days' })
+  await expect(heatmap).toBeVisible()
+  await expect(preview.locator('[data-slot="status-heatmap-block"]')).toHaveCount(30)
+
+  const values = await preview
+    .locator('[data-slot="status-heatmap-block"]')
+    .evaluateAll((elements) => elements.map((element) => element.getAttribute('data-value')))
+  expect(values.slice(6, 10)).toEqual(['2', '1', '1', '2'])
+  expect(values.slice(17, 20)).toEqual(['2', '1', '2'])
+  expect(values.slice(10, 17)).toEqual(Array.from({ length: 7 }, () => '3'))
+  expect(values.slice(20)).toEqual(Array.from({ length: 10 }, () => '3'))
+
+  await expect(preview.getByLabel('2026-08-08: Critical')).toHaveCount(1)
+  await expect(preview.getByLabel('2026-08-19: Critical')).toHaveCount(1)
+  await expect(preview.getByLabel('2026-08-30: Healthy')).toHaveCount(1)
+  await expect(preview.locator('[data-slot="status-heatmap-stat"]')).toHaveText('23 days healthy')
+  await expect(preview.getByLabel('API status legend')).toBeVisible()
+
+  const canonical = await loadPreview(page, 'component/status-heatmap')
+  await expect(canonical.getByRole('img', { name: 'Status heatmap' })).toBeVisible()
+  await expect(canonical.locator('[data-slot="status-heatmap-block"]')).toHaveCount(90)
+})
+
 test('status monitor presents responsive availability and incident details', async ({ page }) => {
   await page.goto('/')
   const sections = page.getByLabel('Catalog sections')
