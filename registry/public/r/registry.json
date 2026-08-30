@@ -588,6 +588,31 @@
       }
     },
     {
+      "name": "block-secrets-env-variables",
+      "type": "registry:block",
+      "title": "Block · Secrets · Environment Variables",
+      "description": "Masked environment variable and secret manager with reveal, copy, edit, and bulk flows.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0",
+        "lucide-react@1.32.0"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/secrets/env-variables.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/components/secrets/env-variables.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "block/secrets/env-variables",
+        "ownership": "consumer-source",
+        "provider": "@chadcn",
+        "upstreamAddress": "https://raw.githubusercontent.com/durgeshityaar/chadcn-ui/9f92a7134a2df98b249f455104137780ebf958a0/apps/web/content/blocks/cloud/env-variables/feature-rich.tsx",
+        "upstreamDigest": "sha256:7aa264c65f94dd21a1124e59c53ba33fd7e0d873fe9bc0f1145bcb90fdcac4da",
+        "adaptation": "astrale-revision"
+      }
+    },
+    {
       "name": "pattern-calendar-range-basic",
       "type": "registry:block",
       "title": "Pattern · Calendar · Range Basic",

@@ -1,0 +1,33 @@
+{
+  "provider": "@chadcn",
+  "upstreamAddress": "https://raw.githubusercontent.com/durgeshityaar/chadcn-ui/9f92a7134a2df98b249f455104137780ebf958a0/apps/web/content/blocks/cloud/env-variables/feature-rich.tsx",
+  "documentation": "https://github.com/durgeshityaar/chadcn-ui/tree/9f92a7134a2df98b249f455104137780ebf958a0/apps/web/content/blocks/cloud/env-variables",
+  "repository": "https://github.com/durgeshityaar/chadcn-ui",
+  "revision": "9f92a7134a2df98b249f455104137780ebf958a0",
+  "resolvedAt": "2026-08-30",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/durgeshityaar/chadcn-ui/blob/9f92a7134a2df98b249f455104137780ebf958a0/package.json",
+  "licenseDigest": "sha256:0e71faf3ef573b1b5dcac61f6df902e79f62ab0b29dc059d9bac7686c38f6795",
+  "owner": "block/secrets/env-variables",
+  "adaptation": "astrale-revision",
+  "adaptationNotes": [
+    "Repoint the provider-local component imports to the Astrale public entrypoints.",
+    "Drop the upstream imports that this file never references so the adapted product source satisfies the repository unused-binding rule.",
+    "Narrow the Base UI group filter value before calling the existing string state setter.",
+    "Render the Base UI dropdown menu trigger through render instead of the provider asChild property."
+  ],
+  "sourceDigest": "sha256:7aa264c65f94dd21a1124e59c53ba33fd7e0d873fe9bc0f1145bcb90fdcac4da",
+  "files": {
+    "feature-rich.tsx": {
+      "url": "https://raw.githubusercontent.com/durgeshityaar/chadcn-ui/9f92a7134a2df98b249f455104137780ebf958a0/apps/web/content/blocks/cloud/env-variables/feature-rich.tsx",
+      "source": "tooling/upstream/providers/chadcn/9f92a7134a2df98b249f455104137780ebf958a0/env-variables/feature-rich.tsx",
+      "implementation": "registry/blocks/secrets/env-variables.tsx",
+      "sourceDigest": "sha256:7aa264c65f94dd21a1124e59c53ba33fd7e0d873fe9bc0f1145bcb90fdcac4da"
+    },
+    "LICENSE-package.json": {
+      "url": "https://raw.githubusercontent.com/durgeshityaar/chadcn-ui/9f92a7134a2df98b249f455104137780ebf958a0/package.json",
+      "source": "tooling/upstream/providers/chadcn/9f92a7134a2df98b249f455104137780ebf958a0/env-variables/LICENSE-package.json",
+      "sourceDigest": "sha256:0e71faf3ef573b1b5dcac61f6df902e79f62ab0b29dc059d9bac7686c38f6795"
+    }
+  }
+}

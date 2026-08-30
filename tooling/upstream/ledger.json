@@ -37,6 +37,46 @@
           "Apply repository formatting without changing visual behavior, classes, anatomy, defaults, or props."
         ]
       }
+    },
+    {
+      "provider": "@chadcn",
+      "address": "https://raw.githubusercontent.com/durgeshityaar/chadcn-ui/9f92a7134a2df98b249f455104137780ebf958a0/apps/web/content/blocks/cloud/env-variables/feature-rich.tsx",
+      "documentation": "https://github.com/durgeshityaar/chadcn-ui/tree/9f92a7134a2df98b249f455104137780ebf958a0/apps/web/content/blocks/cloud/env-variables",
+      "repository": "https://github.com/durgeshityaar/chadcn-ui",
+      "revision": "9f92a7134a2df98b249f455104137780ebf958a0",
+      "sourceDigest": "sha256:7aa264c65f94dd21a1124e59c53ba33fd7e0d873fe9bc0f1145bcb90fdcac4da",
+      "license": "MIT",
+      "consideredAt": "2026-08-30",
+      "purpose": "Environment variable and secret management with masked values, reveal and copy controls, per-environment scoping, add, bulk edit, import and export flows.",
+      "decision": {
+        "status": "admitted",
+        "classification": "block",
+        "owner": "block/secrets/env-variables",
+        "rationale": "Masked secret handling with explicit reveal, grouped and environment-scoped inventory, and add, bulk edit, import, and export journeys is a distinct product surface that no retained Astrale composition owns."
+      },
+      "duplicateReview": [
+        {
+          "address": "block/dashboard/operations",
+          "relationship": "distinct",
+          "rationale": "The operations dashboard reports service telemetry. This block owns the configuration journey of storing, masking, revealing, and editing environment values."
+        },
+        {
+          "address": "pattern/form/wizard-controlled",
+          "relationship": "distinct",
+          "rationale": "The controlled wizard is a generic multi-step form pattern. This block owns an opinionated secret inventory whose values stay masked until an explicit reveal."
+        }
+      ],
+      "proof": "tooling/upstream/providers/chadcn/9f92a7134a2df98b249f455104137780ebf958a0/env-variables/provenance.json",
+      "adaptation": {
+        "mode": "astrale-revision",
+        "changes": [
+          "Route every provider-local component import to its @astrale-os/ui public entrypoint.",
+          "Drop the Card header, Hash, and Globe imports that the upstream file declares but never references so the adapted product source satisfies the repository unused-binding rule.",
+          "Narrow the Base UI group filter value to a non-null string before calling the existing string state setter.",
+          "Render the Base UI dropdown menu trigger through render instead of the provider asChild property.",
+          "Apply repository formatting without changing layout, classes, CSS, DOM anatomy, copy, states, or interactions."
+        ]
+      }
     }
   ]
 }

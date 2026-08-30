@@ -4,6 +4,7 @@ import { afterEach, describe, expect, test, vi } from 'vitest'
 
 import { SignInCard } from '../blocks/authentication/sign-in-card.js'
 import StatusMonitor from '../blocks/observability/status-monitor.js'
+import { EnvVariables } from '../blocks/secrets/env-variables.js'
 import {
   StatusHeatmap,
   StatusHeatmapBlock,
@@ -307,5 +308,51 @@ describe('owned registry compositions', () => {
     expect(hourlyLabels).toHaveLength(2)
     expect(new Set(hourlyLabels).size).toBe(2)
     expect(hourlyLabels.every((label) => /\d{1,2}:\d{2}/u.test(label!))).toBe(true)
+  })
+
+  test('environment variables keep values masked until an explicit reveal', async () => {
+    const user = userEvent.setup()
+    const { container } = render(<EnvVariables />)
+
+    const secretInputs = () => [...container.querySelectorAll<HTMLInputElement>('input[readonly]')]
+    expect(secretInputs().length).toBeGreaterThan(0)
+    expect(secretInputs().every((input) => input.value === '••••••••••••••••')).toBe(true)
+
+    await user.click(secretInputs()[0]!.nextElementSibling as HTMLElement)
+    expect(secretInputs()[0]!.value).toBe('postgresql://user:pass@db.example.com:5432/mydb')
+    expect(
+      secretInputs()
+        .slice(1)
+        .every((input) => input.value === '••••••••••••••••'),
+    ).toBe(true)
+
+    await user.click(secretInputs()[0]!.nextElementSibling as HTMLElement)
+    expect(secretInputs()[0]!.value).toBe('••••••••••••••••')
+  })
+
+  test('environment variables filter the inventory and report an empty result', async () => {
+    const user = userEvent.setup()
+    render(<EnvVariables />)
+
+    expect(screen.getByText('DATABASE_URL')).toBeVisible()
+    const filter = screen.getByPlaceholderText('Filter variables...')
+
+    await user.type(filter, 'stripe')
+    expect(screen.getByText('STRIPE_SECRET_KEY')).toBeVisible()
+    expect(screen.queryByText('DATABASE_URL')).not.toBeInTheDocument()
+
+    await user.clear(filter)
+    await user.type(filter, 'no-such-variable')
+    expect(screen.getByText('No variables found.')).toBeVisible()
+  })
+
+  test('environment variables expose the raw bulk edit surface for the active environment', async () => {
+    const user = userEvent.setup()
+    const { container } = render(<EnvVariables />)
+
+    await user.click(screen.getByRole('switch'))
+    const textarea = container.querySelector('textarea')!
+    expect(textarea.value).toContain('DATABASE_URL=postgresql://user:pass@db.example.com:5432/mydb')
+    expect(textarea.value).not.toContain('••••••••••••••••')
   })
 })

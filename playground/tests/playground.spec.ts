@@ -848,6 +848,42 @@ test('status monitor presents responsive availability and incident details', asy
   await expect(preview.getByText('90% uptime')).toBeVisible()
 })
 
+test('environment variables mask stored secrets until an explicit reveal', async ({ page }) => {
+  await page.goto('/')
+  await selectCatalogKind(page, 'Blocks')
+  const preview = await loadPreview(page, 'block/secrets/env-variables')
+
+  await expect(preview.getByRole('heading', { name: /Environment Variables/u })).toBeVisible()
+  const values = preview.locator('input[readonly]')
+  await expect(values.first()).toHaveValue('••••••••••••••••')
+  const reveals = preview.locator('input[readonly] + button')
+
+  await reveals.first().click()
+  await expect(values.first()).toHaveValue('postgresql://user:pass@db.example.com:5432/mydb')
+  await expect(values.nth(1)).toHaveValue('••••••••••••••••')
+  await reveals.first().click()
+  await expect(values.first()).toHaveValue('••••••••••••••••')
+
+  const filter = preview.getByPlaceholder('Filter variables...')
+  await filter.fill('stripe')
+  await expect(preview.getByText('STRIPE_SECRET_KEY', { exact: true })).toBeVisible()
+  await expect(preview.getByText('DATABASE_URL', { exact: true })).toHaveCount(0)
+  await filter.fill('no-such-variable')
+  await expect(preview.getByText('No variables found.')).toBeVisible()
+  await filter.fill('')
+  await expect(preview.getByText('DATABASE_URL', { exact: true })).toBeVisible()
+
+  await preview.getByRole('tab', { name: 'Development' }).click()
+  await expect(preview.getByText('REDIS_URL', { exact: true })).toBeVisible()
+  await expect(preview.getByText('DATABASE_POOL_SIZE', { exact: true })).toHaveCount(0)
+
+  for (const width of [1280, 390]) {
+    await page.setViewportSize({ width, height: 844 })
+    await expect(preview.getByRole('heading', { name: /Environment Variables/u })).toBeVisible()
+    await expect(values.first()).toHaveValue('••••••••••••••••')
+  }
+})
+
 test('catalog specimens own their interaction without navigating the playground', async ({
   page,
 }) => {

@@ -176,6 +176,14 @@
     "variantCount": 1
   },
   {
+    "address": "block/secrets/env-variables",
+    "title": "Block · Secrets · Environment Variables",
+    "classification": "block",
+    "family": "secrets",
+    "source": "https://raw.githubusercontent.com/durgeshityaar/chadcn-ui/9f92a7134a2df98b249f455104137780ebf958a0/apps/web/content/blocks/cloud/env-variables/feature-rich.tsx",
+    "variantCount": 1
+  },
+  {
     "address": "component/accordion/accordion-01",
     "title": "Accordion 1",
     "classification": "component",

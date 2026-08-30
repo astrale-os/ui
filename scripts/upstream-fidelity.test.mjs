@@ -36,6 +36,12 @@ const statusMonitorProvenance = JSON.parse(
     'utf8',
   ),
 )
+const envVariablesProvenance = JSON.parse(
+  await readFile(
+    'tooling/upstream/providers/chadcn/9f92a7134a2df98b249f455104137780ebf958a0/env-variables/provenance.json',
+    'utf8',
+  ),
+)
 const owners = new Map(
   provenance.components
     .filter((component) => component.disposition === 'owned-runtime')
@@ -470,6 +476,94 @@ test('the 8StarLabs status monitor has only the declared Astrale adaptation', as
     })
     assert.equal(formatted.status, 0, formatted.stderr)
     for (const filename of Object.keys(statusMonitorProvenance.files)) {
+      assert.equal(
+        await readFile(path.join(temporary, 'implementation', filename), 'utf8'),
+        await readFile(path.join(temporary, 'source', filename), 'utf8'),
+        `${filename} contains an undeclared upstream change`,
+      )
+    }
+  } finally {
+    await rm(temporary, { recursive: true })
+  }
+})
+
+test('the chadcn environment variables block has only the declared Astrale adaptation', async () => {
+  assert.equal(envVariablesProvenance.adaptation, 'astrale-revision')
+  const providerRoot =
+    'tooling/upstream/providers/chadcn/9f92a7134a2df98b249f455104137780ebf958a0/env-variables'
+  assert.equal(
+    digest(await readFile(`${providerRoot}/LICENSE-package.json`, 'utf8')),
+    envVariablesProvenance.licenseDigest,
+  )
+  const temporary = await mkdtemp(path.join(tmpdir(), 'astrale-env-variables-fidelity-'))
+  try {
+    for (const [filename, file] of Object.entries(envVariablesProvenance.files)) {
+      if (!file.implementation) continue
+      const source = await readFile(file.source, 'utf8')
+      assert.equal(digest(source), file.sourceDigest)
+      const replaceDeclared = (value, from, to, label) => {
+        assert.equal(value.split(from).length - 1, 1, `${label} adaptation is not exact`)
+        return value.replace(from, to)
+      }
+      const adaptedSelect = `            <Select
+              value={groupFilter}
+              onValueChange={(value) => {
+                if (value !== null) setGroupFilter(value)
+              }}
+            >`
+      const upstreamSelect =
+        '            <Select value={groupFilter} onValueChange={setGroupFilter}>'
+      const adaptedTrigger = `                                    <DropdownMenuTrigger
+                                      render={
+                                        <Button variant="ghost" size="icon" className="shrink-0">
+                                          <MoreVertical size={14} />
+                                        </Button>
+                                      }
+                                    />`
+      const upstreamTrigger = `                                    <DropdownMenuTrigger asChild>
+                                      <Button variant="ghost" size="icon" className="shrink-0">
+                                        <MoreVertical size={14} />
+                                      </Button>
+                                    </DropdownMenuTrigger>`
+      let implementation = await readFile(file.implementation, 'utf8')
+      implementation = replaceDeclared(
+        implementation,
+        "import { Card, CardContent } from '@astrale-os/ui/card'",
+        "import { Card, CardContent, CardHeader, CardTitle } from '@astrale-os/ui/card'",
+        'unreferenced card imports',
+      )
+      implementation = replaceDeclared(
+        implementation,
+        '  Clock,\n  ToggleLeft,\n  KeyRound,\n',
+        '  Clock,\n  Hash,\n  ToggleLeft,\n  Globe,\n  KeyRound,\n',
+        'unreferenced icon imports',
+      )
+      implementation = replaceDeclared(
+        implementation,
+        adaptedSelect,
+        upstreamSelect,
+        'group filter narrowing',
+      )
+      implementation = replaceDeclared(
+        implementation,
+        adaptedTrigger,
+        upstreamTrigger,
+        'menu trigger render',
+      )
+      const routedImports = implementation.split("'@astrale-os/ui/").length - 1
+      assert.equal(routedImports, 12, 'routed component imports are not the declared adaptation')
+      implementation = implementation.replaceAll("'@astrale-os/ui/", "'@/components/ui/")
+      await mkdir(path.join(temporary, 'source'), { recursive: true })
+      await mkdir(path.join(temporary, 'implementation'), { recursive: true })
+      await writeFile(path.join(temporary, 'source', filename), source)
+      await writeFile(path.join(temporary, 'implementation', filename), implementation)
+    }
+    const formatted = spawnSync('pnpm', ['exec', 'oxfmt', '--write', temporary], {
+      encoding: 'utf8',
+    })
+    assert.equal(formatted.status, 0, formatted.stderr)
+    for (const [filename, file] of Object.entries(envVariablesProvenance.files)) {
+      if (!file.implementation) continue
       assert.equal(
         await readFile(path.join(temporary, 'implementation', filename), 'utf8'),
         await readFile(path.join(temporary, 'source', filename), 'utf8'),
