@@ -55,14 +55,9 @@ jobs:
           proposal="$(gh pr list --repo "$GITHUB_REPOSITORY" --head "$RELEASE_PR_HEAD" --state open --json number,headRefOid --jq 'if length == 1 then .[0] else error("release proposal is not unique") end')"
           number="$(jq -r .number <<< "$proposal")"
           revision="$(jq -r .headRefOid <<< "$proposal")"
-          gh api --method DELETE "repos/$GITHUB_REPOSITORY/issues/$number/labels/ui%3Amerge-ready" >/dev/null 2>&1 || true
           gh pr edit "$number" --repo "$GITHUB_REPOSITORY" --add-label 'ui:merge-ready'
-          run_id=''
-          for _attempt in $(seq 1 30); do
-            run_id="$(gh run list --repo "$GITHUB_REPOSITORY" --workflow merge-ready.yml --event pull_request --limit 20 --json databaseId,headSha --jq "map(select(.headSha == \"$revision\")) | first.databaseId // empty")"
-            if [ -n "$run_id" ]; then break; fi
-            sleep 2
-          done
+          run_url="$(gh workflow run merge-ready.yml --repo "$GITHUB_REPOSITORY" --ref main -f pull_request="$number" -f expected_revision="$revision")"
+          run_id="${run_url##*/}"
           case "$run_id" in ''|*[!0-9]*) echo 'merge-ready run was not observed' >&2; exit 1 ;; esac
           gh run watch "$run_id" --repo "$GITHUB_REPOSITORY" --compact --exit-status
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
