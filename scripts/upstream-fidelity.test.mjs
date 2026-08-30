@@ -6,6 +6,11 @@ import { tmpdir } from 'node:os'
 import path from 'node:path'
 import test from 'node:test'
 
+import {
+  restoreShadcnControlSizing,
+  shadcnControlRevision,
+} from '../tooling/upstream/adapters/shadcn-control-sizing.mjs'
+
 const provenance = JSON.parse(
   await readFile('tooling/upstream/providers/shadcn/4.18.0/base-nova/provenance.json', 'utf8'),
 )
@@ -68,6 +73,16 @@ function digest(content) {
 }
 
 function restoreUpstreamImports(content, component, upstream) {
+  const name = component.address.slice('@shadcn/'.length)
+  const revision = shadcnControlRevision(name)
+  if (revision) {
+    assert.equal(component.adaptation, revision.adaptation)
+    assert.deepEqual(component.adaptationNotes, revision.notes)
+    content = restoreShadcnControlSizing(name, content)
+  } else {
+    assert.equal(component.adaptation, 'imports-only')
+    assert.equal(component.adaptationNotes, undefined)
+  }
   let restored = content
     .replaceAll("'@astrale-os/ui/class-name'", "'@/lib/utils'")
     .replaceAll("'#astrale-ui/class-name'", "'@/lib/utils'")
@@ -81,7 +96,6 @@ function restoreUpstreamImports(content, component, upstream) {
   if (reactImport && !restored.includes("import * as React from 'react'")) {
     restored = reactImport + restored
   }
-  assert.equal(component.adaptation, 'imports-only')
   return restored
 }
 
@@ -118,7 +132,7 @@ test('every emitted Base Nova UI source is owned and form is explicitly fileless
   assert.equal(provenance.aliases[0].disposition, 'no-files-for-profile')
 })
 
-test('owned bodies differ from upstream only by independently reversed imports and formatting', async () => {
+test('owned bodies match upstream after reversing declared adaptations and imports', async () => {
   const temporary = await mkdtemp(path.join(tmpdir(), 'astrale-ui-fidelity-'))
   try {
     for (const component of provenance.components) {

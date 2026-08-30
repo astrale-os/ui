@@ -175,7 +175,12 @@
       "sourceDigest": "sha256:d14549ab3ba7a9d5d1f424c2599233bffa0b317121abf3b6efa2fb902d5e2781",
       "owner": "@astrale-os/ui/button",
       "implementation": "packages/ui/src/action/button/index.tsx",
-      "adaptation": "imports-only",
+      "adaptation": "astrale-revision",
+      "adaptationNotes": [
+        "Bind default, small, large, and icon dimensions to the public Astrale control-height tokens so render-composed buttons keep themed geometry.",
+        "Expose the admitted Button size as data-size after semantic trigger composition.",
+        "Bind control transition duration to the Astrale fast motion token."
+      ],
       "disposition": "owned-runtime"
     },
     {
@@ -481,7 +486,10 @@
       "sourceDigest": "sha256:f7d6ecff9a4d631feeaf401c02bb87e26ddb38131c55d15a43b9290747390847",
       "owner": "@astrale-os/ui/input",
       "implementation": "packages/ui/src/input/input/index.tsx",
-      "adaptation": "imports-only",
+      "adaptation": "astrale-revision",
+      "adaptationNotes": [
+        "Bind the Input height and transition duration to the public Astrale control and motion tokens so composed input slots retain themed geometry."
+      ],
       "disposition": "owned-runtime"
     },
     {
@@ -498,7 +506,11 @@
       "sourceDigest": "sha256:80aa50078def5811cb80ceaee2e9f75472ea00b3e4966abf757f207716f645fb",
       "owner": "@astrale-os/ui/input-group",
       "implementation": "packages/ui/src/input/input-group/index.tsx",
-      "adaptation": "imports-only",
+      "adaptation": "astrale-revision",
+      "adaptationNotes": [
+        "Bind the Input Group wrapper height and transition duration to the public Astrale control and motion tokens.",
+        "Route the Input Group action size through Button so its local compact variants keep their intended dimensions without a slot-based minimum."
+      ],
       "disposition": "owned-runtime"
     },
     {
@@ -651,7 +663,10 @@
       "sourceDigest": "sha256:0010395c3c1cbedf60c47e52df4417a7a66944f0a85c8f9304ee900a2493648f",
       "owner": "@astrale-os/ui/native-select",
       "implementation": "packages/ui/src/input/native-select/index.tsx",
-      "adaptation": "imports-only",
+      "adaptation": "astrale-revision",
+      "adaptationNotes": [
+        "Bind default and small Native Select heights and transition duration to the public Astrale control and motion tokens."
+      ],
       "disposition": "owned-runtime"
     },
     {
@@ -804,7 +819,10 @@
       "sourceDigest": "sha256:ca3bd1b370ea67b84632d435c22d8270752fa6013c06c365162af265e4a0e87e",
       "owner": "@astrale-os/ui/select",
       "implementation": "packages/ui/src/input/select/index.tsx",
-      "adaptation": "imports-only",
+      "adaptation": "astrale-revision",
+      "adaptationNotes": [
+        "Bind default and small Select Trigger heights and transition duration to the public Astrale control and motion tokens."
+      ],
       "disposition": "owned-runtime"
     },
     {
