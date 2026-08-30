@@ -4,6 +4,7 @@ import { afterEach, describe, expect, test } from 'vitest'
 
 import { SignInCard } from '../blocks/authentication/sign-in-card.js'
 import { AnimatedNumber } from '../components/animated-number/animated-number.js'
+import AnimatedNumberPolymorphicPreview from '../components/animated-number/animated-number.polymorphic.preview.js'
 import AnimatedNumberCounter from '../components/animated-number/animated-number.preview.js'
 import {
   StatusHeatmap,
@@ -216,5 +217,16 @@ describe('owned registry compositions', () => {
 
     await user.click(increment)
     await screen.findByText('1,100', undefined, { timeout: 5000 })
+  })
+
+  test('animated number polymorphic scene renders a strong host with the supplied class', async () => {
+    const user = userEvent.setup()
+    render(<AnimatedNumberPolymorphicPreview />)
+    const host = document.querySelector('strong')
+    expect(host).toHaveClass('tabular-nums', 'font-mono')
+    expect(host).toHaveTextContent('1,000')
+
+    await user.click(screen.getByLabelText('Decrement'))
+    await screen.findByText('900', undefined, { timeout: 5000 })
   })
 })
