@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0-beta.23](https://github.com/astrale-os/ui/compare/v0.3.0-beta.22...v0.3.0-beta.23) (2026-08-30)
+
+
+### Bug Fixes
+
+* **ui:** wait for merged PR association ([#146](https://github.com/astrale-os/ui/issues/146)) ([8069c29](https://github.com/astrale-os/ui/commit/8069c297a49b7b356558b173b7614802c604d66b))
+
 ## [0.3.0-beta.22](https://github.com/astrale-os/ui/compare/v0.3.0-beta.21...v0.3.0-beta.22) (2026-08-30)
 
 
