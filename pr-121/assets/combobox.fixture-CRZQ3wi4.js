@@ -1,0 +1,1 @@
+var e=[{id:`production`,label:`Production`},{id:`staging`,label:`Staging`},{id:`preview`,label:`Preview`}];export{e as t};

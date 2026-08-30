@@ -1,0 +1,1 @@
+var e=[{id:`deployments`,label:`Deployments`,value:24,detail:`6 awaiting review`},{id:`calls`,label:`Graph calls`,value:`18.4k`,detail:`99.98% accepted`},{id:`domains`,label:`Domains`,value:7,detail:`All qualified`}];export{e as t};

@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{R as t}from"./index-Dqoyqgku.js";var n=e(),r=()=>(0,n.jsx)(t,{className:`rounded-sm border-transparent bg-linear-to-r from-indigo-500 to-pink-500 bg-size-[105%] bg-center text-white`,children:`Gradient`}),i={source:`@astrale-os/ui`};export{r as default,i as preview};

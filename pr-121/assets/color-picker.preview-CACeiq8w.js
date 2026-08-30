@@ -1,0 +1,1 @@
+import{i as e,t}from"./jsx-runtime-Cx0BB4qO.js";import{t as n}from"./react-3BKWdGy3.js";import{t as r}from"./color-picker-thRvIFGw.js";var i=e(n(),1),a=t();function o(){let[e,t]=(0,i.useState)(`#2563eb`);return(0,a.jsx)(r,{label:e,value:e,onChange:e=>t(e.toString(`hex`))})}var s={canvas:`compact`,source:`@react-aria/tailwind-colorpicker`};export{o as default,s as preview};

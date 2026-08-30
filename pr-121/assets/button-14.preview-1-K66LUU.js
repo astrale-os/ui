@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-Cx0BB4qO.js";import{t}from"./download-DonsKOHR.js";import{ct as n}from"./index-Dqoyqgku.js";var r=e(),i=()=>(0,r.jsxs)(n,{variant:`outline`,className:`border-primary dark:border-primary border-dashed shadow-none`,children:[(0,r.jsx)(t,{}),`Download`]}),a={source:`@astrale-os/ui`};export{i as default,a as preview};

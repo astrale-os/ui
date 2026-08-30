@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-Cx0BB4qO.js";var t=e(),n=()=>(0,t.jsxs)(`span`,{className:`inline-flex w-fit shrink-0 items-center justify-center gap-1 px-2 py-0.5 text-xs font-medium whitespace-nowrap`,children:[(0,t.jsx)(`span`,{className:`bg-primary size-2 rounded-full`,"aria-hidden":`true`}),`Dot Badge`]}),r={source:`@astrale-os/ui`};export{n as default,r as preview};

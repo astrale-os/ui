@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-Cx0BB4qO.js";var t=e(),n=()=>(0,t.jsx)(`blockquote`,{className:`max-w-2xl border-l-2 pl-6 italic`,children:`"In the quiet after repeal, the streets filled with unexpected laughter - small rebellions of joy," she recalled.`}),r={source:`@astrale-os/ui`};export{n as default,r as preview};
