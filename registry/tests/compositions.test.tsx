@@ -1,8 +1,10 @@
 import { act, cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { useState } from 'react'
 import { afterEach, describe, expect, test, vi } from 'vitest'
 
 import type { LogEntry } from '../blocks/observability/log-viewer/types.js'
+import type { ScheduleDefinition } from '../blocks/scheduling/schedule-editor/schedule-editor.js'
 
 import { SignInCard } from '../blocks/authentication/sign-in-card.js'
 import { LogViewer } from '../blocks/observability/log-viewer/log-viewer.js'
@@ -12,6 +14,12 @@ import {
   logStreamRejectedActions,
 } from '../blocks/observability/observability.fixture.js'
 import StatusMonitor from '../blocks/observability/status-monitor.js'
+import { ScheduleEditor } from '../blocks/scheduling/schedule-editor/schedule-editor.js'
+import {
+  incompleteWeeklySchedule,
+  scheduleZones,
+  weeklyDigestSchedule,
+} from '../blocks/scheduling/scheduling.fixture.js'
 import { type EnvVar, EnvVariables } from '../blocks/secrets/env-variables.js'
 import { secretManagerRejectedActions } from '../blocks/secrets/secrets.fixture.js'
 import {
@@ -41,6 +49,30 @@ function stubViewportScroll() {
     value: scrollTo,
   })
   return scrollTo
+}
+
+// The schedule editor is a controlled surface, so its host owns the schedule value.
+function ScheduleEditorHost(props: {
+  initial?: Partial<ScheduleDefinition>
+  onValue?: (value: Partial<ScheduleDefinition>) => void
+}) {
+  const [value, setValue] = useState<Partial<ScheduleDefinition>>(
+    props.initial ?? weeklyDigestSchedule,
+  )
+  return (
+    <ScheduleEditor
+      value={value}
+      onChange={(next) => {
+        setValue(next)
+        props.onValue?.(next)
+      }}
+      zones={scheduleZones}
+    />
+  )
+}
+
+function scheduleSummary(container: HTMLElement): string {
+  return container.querySelector('p.cal-rec__preview:last-of-type')?.textContent ?? ''
 }
 
 describe('owned registry compositions', () => {
@@ -762,5 +794,112 @@ describe('owned registry compositions', () => {
     expect(rows.length).toBeGreaterThan(0)
     await user.click(rows[0])
     expect(screen.getAllByRole('button', { expanded: true }).length).toBe(1)
+  })
+
+  test('the schedule editor reveals the controls of the selected cadence', async () => {
+    const user = userEvent.setup()
+    render(<ScheduleEditorHost />)
+
+    const cadence = screen.getByLabelText('Schedule Type')
+    expect(screen.getByRole('group', { name: 'Days of week' })).toBeVisible()
+
+    await user.selectOptions(cadence, 'interval')
+    expect(screen.getByRole('spinbutton', { name: 'Repeat every' })).toHaveValue(1)
+    expect(screen.getByRole('combobox', { name: 'Repeat every' })).toHaveValue('hours')
+    expect(screen.queryByRole('group', { name: 'Days of week' })).not.toBeInTheDocument()
+
+    await user.selectOptions(cadence, 'monthly')
+    const monthDays = screen.getByRole('group', { name: 'On day(s) of month' })
+    expect(within(monthDays).getByRole('button', { name: '15' })).toBeVisible()
+
+    await user.selectOptions(cadence, 'specific_dates')
+    expect(screen.getByRole('button', { name: 'Add Date' })).toBeVisible()
+
+    await user.selectOptions(cadence, 'one_time')
+    expect(screen.getByLabelText('Date & Time')).toBeVisible()
+    expect(screen.queryByRole('radiogroup', { name: 'Ends' })).not.toBeInTheDocument()
+  })
+
+  test('the schedule editor summarizes the local time and the selected IANA time zone', async () => {
+    const user = userEvent.setup()
+    const { container } = render(<ScheduleEditorHost />)
+
+    expect(scheduleSummary(container)).toContain('Weekly')
+    expect(scheduleSummary(container)).toContain('Repeat on Mon, Wed, Fri')
+    expect(scheduleSummary(container)).toContain('At time 09:00')
+    expect(scheduleSummary(container)).toMatch(/Time zone Europe\/Paris \(GMT[+-]?\d?\)/u)
+    expect(scheduleSummary(container)).toContain('Ends Never')
+
+    fireEvent.change(screen.getByLabelText('At time'), { target: { value: '18:45' } })
+    expect(scheduleSummary(container)).toContain('At time 18:45')
+
+    await user.selectOptions(screen.getByRole('combobox', { name: 'Time zone' }), 'Asia/Tokyo')
+    expect(scheduleSummary(container)).toContain('Time zone Asia/Tokyo (GMT+9)')
+  })
+
+  test('an incomplete recurrence reports itself and keeps the last valid summary', async () => {
+    const user = userEvent.setup()
+    const { container } = render(<ScheduleEditorHost />)
+
+    for (const day of ['Mon', 'Wed', 'Fri']) {
+      await user.click(screen.getByRole('button', { name: day }))
+    }
+
+    const days = screen.getByRole('group', { name: 'Days of week' })
+    expect(days).toHaveAttribute('aria-invalid', 'true')
+    const validation = document.getElementById(days.getAttribute('aria-describedby') ?? '')
+    expect(validation).toHaveTextContent('(no recurrence)')
+    expect(validation).toHaveAttribute('aria-live', 'polite')
+    expect(container.querySelectorAll('[aria-live="polite"]')).toHaveLength(1)
+    expect(scheduleSummary(container)).toContain('Repeat on Fri')
+
+    await user.click(screen.getByRole('button', { name: 'Mon' }))
+    expect(screen.getByRole('group', { name: 'Days of week' })).not.toHaveAttribute('aria-invalid')
+    expect(screen.queryByText('(no recurrence)')).not.toBeInTheDocument()
+    expect(scheduleSummary(container)).toContain('Repeat on Mon')
+  })
+
+  test('the schedule editor exposes the weekday and end-condition controls by name', async () => {
+    const user = userEvent.setup()
+    const { container } = render(<ScheduleEditorHost initial={incompleteWeeklySchedule} />)
+
+    expect(screen.getByText('(no recurrence)')).toBeVisible()
+
+    for (const day of ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']) {
+      expect(screen.getByRole('button', { name: day })).toHaveAttribute('aria-pressed', 'false')
+    }
+
+    screen.getByRole('button', { name: 'Tue' }).focus()
+    await user.keyboard('[Space]')
+    expect(screen.getByRole('button', { name: 'Tue' })).toHaveAttribute('aria-pressed', 'true')
+
+    const ends = screen.getByRole('radiogroup', { name: 'Ends' })
+    expect(within(ends).getByRole('radio', { name: 'Never' })).not.toBeChecked()
+    expect(within(ends).getByRole('radio', { name: 'After' })).toBeChecked()
+    expect(screen.getByRole('spinbutton', { name: 'After' })).toHaveValue(12)
+
+    within(ends).getByRole('radio', { name: 'Never' }).focus()
+    await user.keyboard('[Space]')
+    expect(within(ends).getByRole('radio', { name: 'Never' })).toBeChecked()
+    expect(scheduleSummary(container)).toContain('Ends Never')
+  })
+
+  test('the schedule editor writes every edit back through the host change action', async () => {
+    const user = userEvent.setup()
+    const values: Partial<ScheduleDefinition>[] = []
+    render(<ScheduleEditorHost onValue={(value) => values.push(value)} />)
+
+    await user.click(screen.getByRole('button', { name: 'Sat' }))
+    await user.selectOptions(screen.getByRole('combobox', { name: 'Time zone' }), 'UTC')
+    await user.selectOptions(screen.getByLabelText('Schedule Type'), 'daily')
+
+    expect(values.at(0)?.days_of_week).toEqual(['Mon', 'Wed', 'Fri', 'Sat'])
+    expect(values.at(1)?.timezone).toBe('UTC')
+    expect(values.at(-1)).toMatchObject({
+      schedule_type: 'daily',
+      days_of_week: ['Mon', 'Wed', 'Fri', 'Sat'],
+      timezone: 'UTC',
+      time_of_day: '09:00',
+    })
   })
 })

@@ -1,0 +1,40 @@
+{
+  "provider": "@ascentspark",
+  "upstreamAddress": "https://raw.githubusercontent.com/ascentspark/react-calendar/39041349e5ab0ac54202ffd17193b6860696a8b1/packages/react-calendar/src/components/recurrence-editor/recurrence-editor.tsx",
+  "documentation": "https://github.com/ascentspark/react-calendar/tree/39041349e5ab0ac54202ffd17193b6860696a8b1/packages/react-calendar/src/components",
+  "repository": "https://github.com/ascentspark/react-calendar",
+  "revision": "39041349e5ab0ac54202ffd17193b6860696a8b1",
+  "resolvedAt": "2026-08-30",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/ascentspark/react-calendar/blob/39041349e5ab0ac54202ffd17193b6860696a8b1/LICENSE",
+  "licenseDigest": "sha256:bfdc36f8bda0ad762373a2848897894a32591cd7d74d38574bc39bc75103d265",
+  "owner": "block/scheduling/schedule-editor",
+  "adaptation": "astrale-revision",
+  "adaptationNotes": [
+    "Retained only as the supporting authority for the requested IANA timezone, recurrence serialization and validation, host-controlled values, and keyboard semantics inside the primary Wardian surface.",
+    "Adopt the timezone picker verbatim as an owned module: its cal-timezone-picker anatomy, cal-tzp classes, hoisted component-scoped style element, default IANA zone list, host zones and locale inputs, GMT offset option labels, and Time zone accessible name.",
+    "Map the picker's cal-* style variables onto the equivalent Astrale semantic tokens one for one and keep every declared fallback.",
+    "Adopt from the recurrence editor the two-way value resync against the host prop, the parse fallback that keeps the last valid recurrence instead of discarding it, the cal-rec__preview polite region with its no recurrence text, the Days of week group, the aria-pressed weekday buttons, and the Ends radiogroup.",
+    "Apply the accepted accessibility correction by making the visible no recurrence validation the sole polite announcement while incomplete and restoring the polite summary announcement after recovery, without changing its classes, copy, DOM structure, or controlled-value behavior.",
+    "Do not vendor the RRULE adapter: the primary Wardian surface owns the schedule value, so the adopted behavior operates on that value rather than on a serialized rule string."
+  ],
+  "sourceDigest": "sha256:93b07e892b37d17fa552e3ef70c627ddc8d112b9010dd76ebd71b54110fc78b7",
+  "files": {
+    "recurrence-editor.tsx": {
+      "url": "https://raw.githubusercontent.com/ascentspark/react-calendar/39041349e5ab0ac54202ffd17193b6860696a8b1/packages/react-calendar/src/components/recurrence-editor/recurrence-editor.tsx",
+      "source": "tooling/upstream/providers/ascentspark/39041349e5ab0ac54202ffd17193b6860696a8b1/schedule-editor/recurrence-editor.tsx",
+      "sourceDigest": "sha256:93b07e892b37d17fa552e3ef70c627ddc8d112b9010dd76ebd71b54110fc78b7"
+    },
+    "timezone-picker.tsx": {
+      "url": "https://raw.githubusercontent.com/ascentspark/react-calendar/39041349e5ab0ac54202ffd17193b6860696a8b1/packages/react-calendar/src/components/timezone-picker/timezone-picker.tsx",
+      "source": "tooling/upstream/providers/ascentspark/39041349e5ab0ac54202ffd17193b6860696a8b1/schedule-editor/timezone-picker.tsx",
+      "implementation": "registry/blocks/scheduling/schedule-editor/timezone-picker.tsx",
+      "sourceDigest": "sha256:cc8405bd033787ce4c68c1d1a40771c4c5bbd618f346757f3300f0ed6bd7f01e"
+    },
+    "LICENSE": {
+      "url": "https://raw.githubusercontent.com/ascentspark/react-calendar/39041349e5ab0ac54202ffd17193b6860696a8b1/LICENSE",
+      "source": "tooling/upstream/providers/ascentspark/39041349e5ab0ac54202ffd17193b6860696a8b1/schedule-editor/LICENSE",
+      "sourceDigest": "sha256:bfdc36f8bda0ad762373a2848897894a32591cd7d74d38574bc39bc75103d265"
+    }
+  }
+}

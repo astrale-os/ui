@@ -8,6 +8,7 @@
     "registry/blocks/authentication/registry.json",
     "registry/blocks/dashboard/registry.json",
     "registry/blocks/observability/registry.json",
+    "registry/blocks/scheduling/registry.json",
     "registry/blocks/secrets/registry.json",
     "registry/patterns/calendar/registry.json",
     "registry/patterns/carousel/registry.json",

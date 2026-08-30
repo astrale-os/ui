@@ -639,6 +639,35 @@
       }
     },
     {
+      "name": "block-scheduling-schedule-editor",
+      "type": "registry:block",
+      "title": "Block · Scheduling · Schedule Editor",
+      "description": "Recurrence and schedule builder with cadence, interval, weekday, month-day, local time, IANA timezone, and end conditions.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/scheduling/schedule-editor/schedule-editor.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/components/scheduling/schedule-editor/schedule-editor.tsx"
+        },
+        {
+          "path": "registry/blocks/scheduling/schedule-editor/timezone-picker.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/components/scheduling/schedule-editor/timezone-picker.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "block/scheduling/schedule-editor",
+        "ownership": "consumer-source",
+        "provider": "@wardian",
+        "upstreamAddress": "https://raw.githubusercontent.com/wardian-app/Wardian/0ae5b57a2229f7c98711d646b837be744748c6cc/src/features/automations/ScheduleEditor.tsx",
+        "upstreamDigest": "sha256:f43fd6519a2010aab42ce0ea9c8fe211296a51d25caa148836358b0bd0baaed5",
+        "adaptation": "astrale-revision"
+      }
+    },
+    {
       "name": "block-secrets-env-variables",
       "type": "registry:block",
       "title": "Block · Secrets · Environment Variables",

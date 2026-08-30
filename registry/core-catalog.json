@@ -184,6 +184,14 @@
     "variantCount": 2
   },
   {
+    "address": "block/scheduling/schedule-editor",
+    "title": "Block · Scheduling · Schedule Editor",
+    "classification": "block",
+    "family": "scheduling",
+    "source": "https://raw.githubusercontent.com/wardian-app/Wardian/0ae5b57a2229f7c98711d646b837be744748c6cc/src/features/automations/ScheduleEditor.tsx",
+    "variantCount": 1
+  },
+  {
     "address": "block/secrets/env-variables",
     "title": "Block · Secrets · Environment Variables",
     "classification": "block",
