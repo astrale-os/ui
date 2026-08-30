@@ -254,7 +254,7 @@ jobs:
           pages="$RUNNER_TEMP/ui-request-pages"
           git init "$pages"
           git -C "$pages" remote add origin "https://github.com/$GITHUB_REPOSITORY.git"
-          if git ls-remote --exit-code --heads origin gh-pages >/dev/null; then
+          if git -C "$pages" ls-remote --exit-code --heads origin gh-pages >/dev/null; then
             git -C "$pages" fetch --no-tags origin refs/heads/gh-pages
             git -C "$pages" checkout -B gh-pages FETCH_HEAD
             target="$pages/pr-$INPUT_PULL_REQUEST_NUMBER"

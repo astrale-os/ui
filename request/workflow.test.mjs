@@ -152,6 +152,7 @@ esac
     path.join(directory, 'git'),
     `#!/bin/sh
 printf '%s\n' "$*" >> "$FAKE_GIT_LOG"
+if [ "$1" = 'ls-remote' ]; then exit 31; fi
 exit 0
 `,
   )
@@ -480,6 +481,12 @@ test('removes only managed closed-PR preview bytes and deactivates their deploym
   assert.equal(executed.status, 0, executed.stderr)
   assert.equal(executed.targetExists, false)
   assert.equal(executed.siblingExists, true)
+  assert.ok(
+    executed.gitCalls.some(
+      (call) =>
+        call.startsWith('-C ') && call.endsWith('ls-remote --exit-code --heads origin gh-pages'),
+    ),
+  )
   assert.ok(executed.gitCalls.some((call) => call.endsWith('push origin HEAD:refs/heads/gh-pages')))
   assert.deepEqual(
     executed.githubCalls.filter((call) => call.includes('/statuses')),
