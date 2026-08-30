@@ -189,9 +189,14 @@ jobs:
       - name: Apply the restored candidate after base-controlled toolchain setup
         if: steps.restore.outputs.restored == 'true'
         run: |
+          set -euo pipefail
           patch="$RUNNER_TEMP/ui-request-restored-checkpoint/candidate.patch"
-          git apply --check --index --binary --whitespace=nowarn "$patch"
-          git apply --index --binary --whitespace=nowarn "$patch"
+          if git apply --reverse --check --binary --whitespace=nowarn "$patch"; then
+            echo 'The restored candidate is already present on the admitted proposal branch.'
+          else
+            git apply --check --index --binary --whitespace=nowarn "$patch"
+            git apply --index --binary --whitespace=nowarn "$patch"
+          fi
       - name: Discover immutable public source evidence with Claude Code
         if: inputs.worker == 'opus' && steps.restore.outputs.source_restored != 'true'
         env:
