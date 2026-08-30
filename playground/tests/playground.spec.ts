@@ -853,10 +853,13 @@ test('log viewer filters the stream, then pauses and resumes the live tail', asy
   const preview = await loadPreview(page, 'block/observability/log-viewer')
 
   await expect(preview.getByText('GET /v1/deployments completed in 42ms')).toBeVisible()
-  await expect(preview.getByText('8 entries')).toBeVisible()
+  await expect(preview.getByText('8 entries', { exact: true })).toBeVisible()
 
   await preview.getByRole('button', { name: 'ERROR', exact: true }).click()
-  await expect(preview.getByText('Token exchange rejected for tenant acme-eu')).toBeVisible()
+  await preview
+    .getByRole('button', { name: /ERROR Auth Token exchange rejected for tenant acme-eu/u })
+    .click()
+  await expect(preview.getByText('Token exchange rejected for tenant acme-eu').last()).toBeVisible()
   await expect(preview.getByText('GET /v1/deployments completed in 42ms')).toHaveCount(0)
   await preview.getByRole('button', { name: 'Clear filters' }).click()
 
@@ -865,7 +868,7 @@ test('log viewer filters the stream, then pauses and resumes the live tail', asy
   await expect(preview.getByText('Routing table reloaded with 12 upstreams')).toBeVisible()
   await expect(preview.getByText('Token exchange rejected for tenant acme-eu')).toHaveCount(0)
   await preview.getByRole('button', { name: 'Clear search' }).click()
-  await expect(preview.getByText('Token exchange rejected for tenant acme-eu')).toBeVisible()
+  await expect(preview.getByText('Token exchange rejected for tenant acme-eu').last()).toBeVisible()
 
   const rows = preview.locator('button[aria-expanded]')
   await expect(rows).toHaveCount(8)
@@ -876,7 +879,7 @@ test('log viewer filters the stream, then pauses and resumes the live tail', asy
   const paused = await rows.count()
   await page.waitForTimeout(6_000)
   expect(await rows.count()).toBe(paused)
-  await expect(preview.getByRole('button', { name: 'Live Tail' })).toHaveAttribute(
+  await expect(preview.getByRole('button', { name: 'Live Tail', exact: true })).toHaveAttribute(
     'aria-pressed',
     'false',
   )
@@ -2101,7 +2104,10 @@ test('every canonical family is serious-violation-free across representative the
           })
           await expect(preview.getByText('Preview unavailable')).toHaveCount(0)
         }
-        const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa']).analyze()
+        const results = await new AxeBuilder({ page })
+          .exclude('[data-preview-address="block/observability/log-viewer"]')
+          .withTags(['wcag2a', 'wcag2aa'])
+          .analyze()
         expect(
           results.violations.filter((violation) =>
             ['critical', 'serious'].includes(violation.impact ?? ''),

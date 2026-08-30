@@ -2,7 +2,7 @@ import { LogViewer } from './log-viewer/log-viewer.js'
 
 export default function LogViewerLoadingPreview() {
   return (
-    <div className="flex h-[520px] flex-col">
+    <div className="flex h-[520px] w-full min-w-0 flex-col">
       <LogViewer isLoading />
     </div>
   )

@@ -3,7 +3,7 @@ import { applicationLogStream, logStreamRejectedActions } from './observability.
 
 export default function LogViewerRejectedActionsPreview() {
   return (
-    <div className="flex h-[520px] flex-col">
+    <div className="flex h-[520px] w-full min-w-0 flex-col">
       <LogViewer defaultLogs={applicationLogStream} {...logStreamRejectedActions} />
     </div>
   )

@@ -3,7 +3,7 @@ import { logStreamActions } from './observability.fixture.js'
 
 export default function LogViewerEmptyPreview() {
   return (
-    <div className="flex h-[520px] flex-col">
+    <div className="flex h-[520px] w-full min-w-0 flex-col">
       <LogViewer defaultLogs={[]} {...logStreamActions} />
     </div>
   )
