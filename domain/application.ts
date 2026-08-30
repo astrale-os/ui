@@ -9,5 +9,5 @@ import runtime from './runtime.js'
 export const application = defineApplication({
   schema,
   runtime,
-  requirements: requirements({ callables: [K.functions.query, K.functions.mutate] }),
+  requirements: requirements({ functions: [K.functions.query, K.functions.mutate] }),
 })

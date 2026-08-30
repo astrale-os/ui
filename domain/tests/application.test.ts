@@ -9,7 +9,7 @@ describe('UI application composition', () => {
     expect(application.schema).toBe(schema)
     expect(application.runtime).toBe(runtime)
     expect(application.requirements).toEqual({
-      callables: [K.functions.mutate.key, K.functions.query.key].sort(),
+      functions: [K.functions.mutate.key, K.functions.query.key].sort(),
       classes: [],
     })
   })
