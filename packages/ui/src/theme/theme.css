@@ -122,24 +122,6 @@
   box-shadow: var(--ui-shadow-panel);
 }
 
-:where(
-  [data-slot='button'],
-  [data-slot='input'],
-  [data-slot='select-trigger'],
-  [data-slot='native-select']
-) {
-  min-height: var(--ui-control-height);
-  transition-duration: var(--ui-motion-fast);
-}
-
-:where([data-slot='button'][data-size='sm'], [data-slot='native-select'][data-size='sm']) {
-  min-height: var(--ui-control-height-sm);
-}
-
-:where([data-slot='button'][data-size='lg']) {
-  min-height: var(--ui-control-height-lg);
-}
-
 [data-slot='card-title'][data-slot='card-title'],
 [data-slot='dialog-title'][data-slot='dialog-title'],
 [data-slot='sheet-title'][data-slot='sheet-title'] {
