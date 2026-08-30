@@ -26,6 +26,7 @@ jobs:
     environment: npm
     runs-on: ubuntu-latest
     permissions:
+      actions: read
       contents: read
       id-token: write
     steps:
@@ -47,13 +48,63 @@ jobs:
           test "$(git rev-parse "refs/tags/v${EXPECTED_VERSION}^{commit}")" = "$EXPECTED_SHA"
           git merge-base --is-ancestor "$EXPECTED_SHA" origin/main
           test "$(gh api "repos/${GITHUB_REPOSITORY}/releases/tags/v${EXPECTED_VERSION}" --jq .tag_name)" = "v${EXPECTED_VERSION}"
+      - name: Fetch the exact accepted qualification receipt
+        env:
+          EXPECTED_SHA: ${{ inputs.expected-sha }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          artifact=''
+          for _attempt in $(seq 1 60); do
+            artifact="$(gh api "repos/$GITHUB_REPOSITORY/actions/artifacts?name=qualification-receipt-$EXPECTED_SHA&per_page=100" --jq '[.artifacts[] | select(.expired == false)] | sort_by(.created_at) | last // empty')"
+            if [ -n "$artifact" ]; then break; fi
+            sleep 5
+          done
+          test -n "$artifact"
+          run_id="$(jq -r .workflow_run.id <<< "$artifact")"
+          run="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$run_id")"
+          test "$(jq -r .path <<< "$run")" = '.github/workflows/rebind-qualification-receipt.yml'
+          test "$(jq -r .event <<< "$run")" = push
+          test "$(jq -r .conclusion <<< "$run")" = success
+          test "$(jq -r .head_sha <<< "$run")" = "$EXPECTED_SHA"
+          gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$(jq -r .id <<< "$artifact")/zip" > "$RUNNER_TEMP/receipt.zip"
+          unzip -q "$RUNNER_TEMP/receipt.zip" -d "$RUNNER_TEMP/receipt"
+          cp "$RUNNER_TEMP/receipt/qualification-receipt.json" qualification-receipt.json
+          node request/qualification-receipt.mjs verify-envelope \
+            --receipt qualification-receipt.json \
+            --commit "$EXPECTED_SHA" \
+            --tree "$(git rev-parse "$EXPECTED_SHA^{tree}")" >/dev/null
+      - name: Start release compute observation
+        run: date +%s%3N > "$RUNNER_TEMP/release-compute-start"
       - uses: astrale-os/config/.github/actions/publish/packages@8e2e2abd0320be0c2f64033916519ab3b66c7dd7
         with:
           dirs: packages/ui
           mirror-public-packages: 'false'
           install-command: pnpm install --frozen-lockfile
-          build-command: pnpm --filter @astrale-os/ui-playground exec playwright install --with-deps chromium && pnpm qualify
+          build-command: >-
+            pnpm build &&
+            pnpm registry:build &&
+            pnpm package:qualify &&
+            node request/qualification-receipt.mjs verify
+            --receipt qualification-receipt.json
+            --commit ${{ inputs.expected-sha }}
+            --tree $(git rev-parse '${{ inputs.expected-sha }}^{tree}')
+            --package $(find artifacts/package -type f -name '*.tgz' -print -quit)
+            --registry registry/registry.json
+            --catalog registry/core-catalog.json
           prerelease-tag: auto
+      - name: Record release compute latency without cancelling publication
+        if: always()
+        run: |
+          elapsed="$(( $(date +%s%3N) - $(cat "$RUNNER_TEMP/release-compute-start") ))"
+          node request/latency.mjs release-compute "$elapsed" release-compute-latency.json
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        if: always()
+        with:
+          name: release-compute-latency-${{ inputs.expected-sha }}
+          path: release-compute-latency.json
+          if-no-files-found: warn
+          retention-days: 90
       - name: Qualify exact public npm publication
         env:
           EXPECTED_SHA: ${{ inputs.expected-sha }}

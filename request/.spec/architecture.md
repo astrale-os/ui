@@ -15,8 +15,10 @@ flowchart LR
   D --> S[Trusted attempt comment]
   D --> A[ManagedAgent Port]
   A --> P[Provider adapter]
-  P --> R[Pull request]
-  R --> Q[Credential-free qualification and rendering]
+  P --> C[Cumulative candidate checkpoint]
+  C --> R[Pull request]
+  R --> F[Diff-derived fast gate and preview]
+  F --> Q[Maintainer-owned exact-revision qualification]
   Q --> E[Inert preview publication and evidence comment]
   E --> V[Maintainer visual review]
   V -->|trusted feedback and ui:ready| D
@@ -43,12 +45,33 @@ the issue, label gate, CLI, dispatcher, job, and persisted record remain provide
 request data may direct product intent but cannot alter repository policy, provenance admission,
 credential separation, tools, or qualification.
 
-Candidate source is installed, built, tested, rendered, and screenshotted in a credential-free job.
+The default private worker is pinned Codex with GPT-5.6 Luna at maximum reasoning effort. It sees
+neither GitHub authority nor publication credentials, and implementation shell commands have no
+network access. One eligible implementation or qualification failure may continue through Opus;
+authentication, permission, quota, rate-limit, and unknown-outcome failures never escalate. Provider
+and model selection remain private adapter concerns and do not enter the managed-agent Port.
+
+Every non-empty candidate is represented by a digest-bound cumulative checkpoint retained for 30
+days. A compatible checkpoint is applied before further editing. Tampering, expiry, request drift,
+or base mismatch stops automatic continuation for operator input; reconstruction from prompt alone
+is not a recovery path. A newly accepted objective retains the cumulative patch while reacquiring
+its own immutable source evidence and resetting escalation. Target and hard latency values are
+observations only. A breach never cancels work or discards its checkpoint.
+
+Candidate source is installed, fast-tested, rendered, and screenshotted in a credential-free job.
 A separate publisher receives only the qualified patch and bounded static preview artifact. It may
 commit the qualified patch, transfer static bytes to the dedicated preview origin, create a GitHub
 deployment, and maintain the single proposal evidence comment; it never executes candidate bytes.
 Each proposal revision replaces the same per-PR preview path. Closing the proposal removes that path
 and deactivates its deployment.
+
+Regular revisions use a manifest-derived qualification scope. Only a write-authorized
+`ui:merge-ready` label starts the complete package gate and four browser shards for one exact head
+commit. Their stable aggregator emits a receipt bound to the commit, tree, package, registry,
+catalog, toolchain, and all four successful shards. A same-tree merge may rebind that evidence to the
+resulting main commit; any tree difference requires fresh qualification. Trusted publishing verifies
+the exact receipt and package bytes, then builds and packs only the release package. It never installs
+a browser or reruns exhaustive UI traversal.
 
 This automation is repository tooling. It does not enter the published UI package, registry,
 search artifacts, playground bundle, CLI install graph, or SDK.

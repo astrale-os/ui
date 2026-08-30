@@ -13,8 +13,8 @@ It does not abstract models, prompts, chats, MCP, sandboxes, GitHub, source rese
 merge, or release. Those concepts remain with their existing owners or provider configuration.
 
 The durable contract lives in [`.spec`](./.spec/architecture.md). Thin native-fetch adapters exist
-for GitHub Copilot agent tasks, Cursor Cloud Agents, and a GitHub Actions worker running Claude Code
-on Microsoft Foundry. All three pass the same deterministic restart, admission, one-PR,
+for GitHub Copilot agent tasks, Cursor Cloud Agents, and GitHub Actions workers running Codex or
+Claude Code on Microsoft Foundry. All four pass the same deterministic restart, admission, one-PR,
 cancellation, and reconciliation contract; provider-specific state/failure matrices are qualified
 separately.
 
@@ -43,6 +43,12 @@ never claims remote cancellation.
   credential, transports only a bounded inert patch into a clean qualification job, and applies the
   qualified patch again in a fresh publisher job. The publishing token never shares a job or
   mutable workspace with agent or candidate execution.
+- `github-actions-codex` uses the same exact workflow-run admission and publisher separation while
+  pinning Codex `0.151.0`, GPT-5.6 Luna, maximum reasoning effort, the Azure Responses transport,
+  workspace-write sandboxing, and a network-disabled implementation shell. GitHub and Azure
+  credentials are excluded from model-spawned shell commands. A digest-bound cumulative checkpoint
+  preserves partial work for 30 days, and one eligible failure may continue through the Claude Code
+  worker without changing the provider-neutral Port.
 
 Every provider/store HTTP operation has a 60-second default timeout, response bodies are limited to
 1 MiB, normalized messages to 2 KiB UTF-8, opaque identities to 2 KiB, and provider URLs to 4 KiB.

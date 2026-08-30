@@ -17,6 +17,8 @@ minimumReleaseAgeExclude:
   - '@astrale-domains/*'
   - '@astrale/*'
   - '@jsr/astrale__*'
+  # Ratified exact worker pin; keep the seven-day quarantine for every unrelated package.
+  - '@openai/codex*'
   - 'create-astrale-domain'
 
 # Never install implicitly before `pnpm run` or `pnpm exec`.

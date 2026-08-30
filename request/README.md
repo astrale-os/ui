@@ -15,7 +15,7 @@ The intended boundary is deliberately small:
 ```text
 free-text need -> public GitHub issue and maintainer discussion -> ui:ready
   -> reserved managed attempt -> provider-neutral run
-  -> credential-free qualification and rendering
+  -> resumable candidate checkpoint -> diff-derived qualification and rendering
   -> pull request + screenshots + direct playground deployment
   -> trusted PR discussion -> ui:ready -> same-PR revision
 ```
@@ -36,13 +36,21 @@ Discussion added after an attempt is reserved enters only the next labeled revis
 revision replaces the PR's hosted playground, deterministic screenshots, deployment, and evidence
 comment at the exact qualified commit.
 
-The default route dispatches the
-credential-separated `UI Request Claude Code Worker`: Azure Foundry credentials exist only during
-the proposal job, candidate code runs only in a separate credential-free qualification job, and
-`UI_REQUEST_GITHUB_TOKEN` exists only in a fresh non-executing publisher job.
+The default route dispatches the credential-separated `UI Request Codex Worker` with GPT-5.6 Luna
+at maximum effort. Azure Foundry credentials serve only the model transport and are filtered from
+its shell; implementation network access is disabled. Candidate code runs only in a separate
+credential-free qualification job, and `UI_REQUEST_GITHUB_TOKEN` exists only in a fresh
+non-executing publisher job. One eligible failure may use Opus once. Authentication, permission,
+quota, rate-limit, and unknown outcomes never escalate.
 `UI_REQUEST_AGENT_PROVIDER` may instead select the qualified Copilot or Cursor adapter as trusted
 configuration. Public issues and the CLI never carry those values.
 
 Provider task success means only that one PR exists. Existing CI, provenance/license admission,
 visual review, merge, release, and publication remain authoritative. The preview origin is isolated
 public evidence and carries no production credentials or APIs.
+
+Regular revisions run a generated diff scope. Applying `ui:merge-ready` as a write-authorized
+maintainer runs the exact-revision full gate and four browser shards. Their receipt is reusable only
+for identical package, registry, catalog, and tree bytes; release publication does not reinstall a
+browser or repeat exhaustive traversal. Latency target and hard values are reporting thresholds,
+never cancellation timers.

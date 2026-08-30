@@ -20,9 +20,7 @@ import {
   utf8Bytes,
 } from '../src/model.mjs'
 
-const provider = 'github-actions-claude-code'
 const apiVersion = '2026-03-10'
-const workflowFile = 'ui-request-claude-code.yml'
 
 function protocolFailure(
   message = 'GitHub Actions returned an incompatible workflow-run response.',
@@ -73,7 +71,7 @@ function admitBranchRef(value, name) {
   return value
 }
 
-function runIdentity(ref) {
+function runIdentity(ref, provider) {
   const decoded = decodeRunIdentity(ref.id)
   if (
     typeof decoded.owner !== 'string' ||
@@ -103,7 +101,7 @@ function runIdentity(ref) {
   return decoded
 }
 
-function assertWorkflowRunIdentity(workflowRun, identity) {
+function assertWorkflowRunIdentity(workflowRun, identity, workflowFile) {
   if (
     !workflowRun ||
     typeof workflowRun !== 'object' ||
@@ -123,8 +121,9 @@ function assertWorkflowRunIdentity(workflowRun, identity) {
   }
 }
 
-function normalizeWorkflowRun(workflowRun, identity, pullRequest) {
-  assertWorkflowRunIdentity(workflowRun, identity)
+function normalizeWorkflowRun(workflowRun, identity, pullRequest, configuration) {
+  const { provider, workflowFile, workerName } = configuration
+  assertWorkflowRunIdentity(workflowRun, identity, workflowFile)
   const base = {
     ref: { provider, id: encodeRunIdentity(identity) },
     ...(typeof workflowRun.html_url === 'string'
@@ -155,7 +154,7 @@ function normalizeWorkflowRun(workflowRun, identity, pullRequest) {
     return {
       ...base,
       state: 'expired',
-      failure: failure('AGENT_UNAVAILABLE', 'The Claude Code workflow run timed out.', 'safe'),
+      failure: failure('AGENT_UNAVAILABLE', `The ${workerName} workflow run timed out.`, 'safe'),
     }
   }
   if (workflowRun.conclusion === 'action_required') {
@@ -164,7 +163,7 @@ function normalizeWorkflowRun(workflowRun, identity, pullRequest) {
       state: 'failed',
       failure: failure(
         'AGENT_PERMISSION_DENIED',
-        'The Claude Code workflow run requires a repository approval or action.',
+        `The ${workerName} workflow run requires a repository approval or action.`,
         'after-change',
       ),
     }
@@ -175,7 +174,7 @@ function normalizeWorkflowRun(workflowRun, identity, pullRequest) {
     return {
       ...base,
       state: 'failed',
-      failure: failure('AGENT_UNAVAILABLE', 'The Claude Code workflow run failed.', 'safe'),
+      failure: failure('AGENT_UNAVAILABLE', `The ${workerName} workflow run failed.`, 'safe'),
     }
   }
   if (workflowRun.conclusion === 'success') {
@@ -184,22 +183,34 @@ function normalizeWorkflowRun(workflowRun, identity, pullRequest) {
       ...base,
       state: 'failed',
       failure: protocolFailure(
-        'The Claude Code workflow completed without exactly one intended pull request.',
+        `The ${workerName} workflow completed without exactly one intended pull request.`,
       ),
     }
   }
   throw new TypeError(`Unknown GitHub Actions run conclusion: ${String(workflowRun.conclusion)}`)
 }
 
-export function createGitHubActionsClaudeCodeAgent(options) {
+export function createGitHubActionsWorkerAgent(options) {
+  const provider = options?.provider
+  const workflowFile = options?.workflowFile
+  const workerName = options?.workerName
   const token = options?.token
   const fetchImplementation = options?.fetch ?? globalThis.fetch
   const operationTimeoutMs = options?.operationTimeoutMs ?? limits.providerOperationTimeoutMs
   const workflowRef = admitBranchRef(options?.workflowRef ?? 'main', 'workflowRef')
   const workflowActor = options?.workflowActor ?? 'github-actions[bot]'
   const now = options?.now ?? (() => new Date().toISOString())
+  if (typeof provider !== 'string' || provider.length === 0) {
+    throw new TypeError('GitHub Actions worker provider must be non-empty text')
+  }
+  if (typeof workflowFile !== 'string' || !/^[a-z0-9][a-z0-9-]*\.yml$/u.test(workflowFile)) {
+    throw new TypeError('GitHub Actions worker workflowFile is invalid')
+  }
+  if (typeof workerName !== 'string' || workerName.length === 0) {
+    throw new TypeError('GitHub Actions workerName must be non-empty text')
+  }
   if (typeof token !== 'string' || token.length === 0) {
-    throw new TypeError('GitHub Actions Claude Code adapter requires a workflow-dispatch token')
+    throw new TypeError(`GitHub Actions ${workerName} adapter requires a workflow-dispatch token`)
   }
   if (typeof fetchImplementation !== 'function') throw new TypeError('fetch must be a function')
   if (typeof workflowActor !== 'string' || workflowActor.length === 0) {
@@ -253,7 +264,7 @@ export function createGitHubActionsClaudeCodeAgent(options) {
         if (parsePullRequestUrl(entry.html_url).repository !== repository) {
           return {
             failure: protocolFailure(
-              'The Claude Code workflow branch proposed a pull request in another repository.',
+              `The ${workerName} workflow branch proposed a pull request in another repository.`,
             ),
           }
         }
@@ -278,7 +289,7 @@ export function createGitHubActionsClaudeCodeAgent(options) {
       return { kind: 'failed', failure: httpFailure(result.response.status, 'observe') }
     }
     try {
-      assertWorkflowRunIdentity(result.body, identity)
+      assertWorkflowRunIdentity(result.body, identity, workflowFile)
     } catch (error) {
       return {
         kind: 'failed',
@@ -291,7 +302,11 @@ export function createGitHubActionsClaudeCodeAgent(options) {
       return {
         kind: 'observed',
         run: acceptManagedAgentRun(
-          normalizeWorkflowRun(result.body, identity, proposal.pullRequest),
+          normalizeWorkflowRun(result.body, identity, proposal.pullRequest, {
+            provider,
+            workflowFile,
+            workerName,
+          }),
         ),
       }
     } catch (error) {
@@ -493,7 +508,7 @@ export function createGitHubActionsClaudeCodeAgent(options) {
     async observe(input, operation = {}) {
       let identity
       try {
-        identity = runIdentity(acceptRunRef(input, provider))
+        identity = runIdentity(acceptRunRef(input, provider), provider)
       } catch (error) {
         return invalidJob(error)
       }
@@ -524,7 +539,7 @@ export function createGitHubActionsClaudeCodeAgent(options) {
     async cancel(input, operation = {}) {
       let identity
       try {
-        identity = runIdentity(acceptRunRef(input, provider))
+        identity = runIdentity(acceptRunRef(input, provider), provider)
       } catch (error) {
         return invalidJob(error)
       }
@@ -561,5 +576,14 @@ export function createGitHubActionsClaudeCodeAgent(options) {
         ? { kind: 'cancelled', run: after.run }
         : { kind: 'requested', run: after.run }
     },
+  })
+}
+
+export function createGitHubActionsClaudeCodeAgent(options) {
+  return createGitHubActionsWorkerAgent({
+    ...options,
+    provider: 'github-actions-claude-code',
+    workflowFile: 'ui-request-claude-code.yml',
+    workerName: 'Claude Code',
   })
 }

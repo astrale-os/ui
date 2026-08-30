@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.astrale.ai/ui/request/qualification-receipt-v1",
+  "title": "Astrale UI exact-revision qualification receipt v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "commitSha",
+    "treeSha",
+    "package",
+    "registry",
+    "catalog",
+    "browserShards",
+    "toolchain",
+    "qualifiedAt"
+  ],
+  "properties": {
+    "version": { "const": 1 },
+    "commitSha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "treeSha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "package": { "$ref": "#/$defs/digest" },
+    "registry": { "$ref": "#/$defs/digest" },
+    "catalog": { "$ref": "#/$defs/digest" },
+    "browserShards": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["index", "total", "state"],
+        "properties": {
+          "index": { "type": "integer", "minimum": 1, "maximum": 4 },
+          "total": { "const": 4 },
+          "state": { "const": "passed" }
+        }
+      }
+    },
+    "toolchain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["node", "pnpm", "playwright"],
+      "properties": {
+        "node": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "pnpm": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "playwright": { "type": "string", "minLength": 1, "maxLength": 64 }
+      }
+    },
+    "qualifiedAt": { "type": "string", "format": "date-time" }
+  },
+  "$defs": {
+    "digest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sha256", "bytes"],
+      "properties": {
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "bytes": { "type": "integer", "minimum": 1 }
+      }
+    }
+  }
+}

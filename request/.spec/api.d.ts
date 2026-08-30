@@ -57,3 +57,59 @@ export type UiRequestExecutionFailure = {
 }
 
 export type UiRequestExecutionResult = UiRequestExecution | UiRequestExecutionFailure
+
+export type UiRequestQualificationPlan =
+  | 'docs-only'
+  | 'request-tooling'
+  | 'family-scoped'
+  | 'global-ui'
+
+export type UiRequestCandidateCheckpoint = {
+  readonly version: 1
+  readonly request: GitHubIssueUrl
+  readonly issue: number
+  readonly attempt: string
+  readonly objectiveSha256: string
+  readonly baseSha: string
+  readonly patch: UiRequestArtifactDigest
+  readonly sourceEvidence: UiRequestArtifactDigest | null
+  readonly worker: {
+    readonly provider: string
+    readonly model: string
+    readonly reasoningEffort: 'none' | 'low' | 'medium' | 'high' | 'xhigh' | 'max'
+    readonly escalation: 0 | 1
+  }
+  readonly qualification: {
+    readonly state: 'pending' | 'passed' | 'failed'
+    readonly plan: UiRequestQualificationPlan
+    readonly diagnostic?: string
+  }
+  readonly timestamps: {
+    readonly createdAt: string
+    readonly updatedAt: string
+    readonly expiresAt: string
+  }
+}
+
+export type UiRequestArtifactDigest = {
+  readonly path: string
+  readonly sha256: string
+  readonly bytes: number
+}
+
+export type UiRequestLatencyObservation = {
+  readonly phase:
+    | 'admission'
+    | 'warm-proposal'
+    | 'cold-proposal'
+    | 'revision'
+    | 'fast-gate'
+    | 'merge-ready'
+    | 'release-compute'
+  readonly elapsedMs: number
+  readonly targetMs: number
+  readonly hardMs: number
+  readonly status: 'within-target' | 'target-breached' | 'hard-breached'
+  /** Reporting thresholds never cancel work or invalidate its checkpoint. */
+  readonly cancellationRequested: false
+}
