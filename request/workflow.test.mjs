@@ -589,6 +589,9 @@ test('moves inert candidate evidence across isolated propose, qualify, and publi
   const setupIndex = propose.steps.findIndex((step) =>
     step.uses?.startsWith('astrale-os/config/.github/actions/setup@'),
   )
+  const codexSandboxIndex = propose.steps.findIndex(
+    (step) => step.name === 'Prepare the supported Codex Linux sandbox',
+  )
   const publishIndex = publish.steps.findIndex(
     (step) => step.name === 'Publish exactly one pull request for this attempt',
   )
@@ -627,6 +630,7 @@ test('moves inert candidate evidence across isolated propose, qualify, and publi
   assert.notEqual(fetchIndex, -1)
   assert.notEqual(verifyIndex, -1)
   assert.notEqual(setupIndex, -1)
+  assert.notEqual(codexSandboxIndex, -1)
   assert.notEqual(commitIndex, -1)
   assert.notEqual(publishIndex, -1)
   assert.notEqual(previewBuildIndex, -1)
@@ -640,6 +644,12 @@ test('moves inert candidate evidence across isolated propose, qualify, and publi
       qualify.steps.findIndex((step) => step.name === 'Apply the inert candidate patch'),
   )
   assert.ok(setupIndex < discoveryIndex)
+  assert.ok(setupIndex < codexSandboxIndex)
+  assert.ok(codexSandboxIndex < discoveryIndex)
+  assert.equal(propose.steps[codexSandboxIndex].if, "inputs.worker == 'codex'")
+  assert.match(propose.steps[codexSandboxIndex].run, /apt-get install --yes bubblewrap/u)
+  assert.match(propose.steps[codexSandboxIndex].run, /bwrap-userns-restrict/u)
+  assert.match(propose.steps[codexSandboxIndex].run, /codex sandbox linux -- \/bin\/true/u)
   assert.ok(discoveryIndex < fetchIndex)
   assert.ok(fetchIndex < agentIndex)
   assert.ok(agentIndex < verifyIndex)
