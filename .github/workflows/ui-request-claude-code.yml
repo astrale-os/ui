@@ -271,15 +271,21 @@ jobs:
               --sandbox workspace-write \
               --output-last-message "$RUNNER_TEMP/ui-request-codex-summary.md" \
               --json - > "$RUNNER_TEMP/ui-request-codex-events.jsonl"
-      - name: Classify Codex implementation failure
+      - name: Classify Codex implementation outcome
         id: classify_codex
         if: inputs.worker == 'codex'
         env:
           CODEX_OUTCOME: ${{ steps.codex_implementation.outcome }}
         run: |
           set -euo pipefail
-          if [ "$CODEX_OUTCOME" = success ]; then
+          if [ "$CODEX_OUTCOME" = success ] && [ -n "$(git status --porcelain --untracked-files=all)" ]; then
             echo 'escalate=false' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          if [ "$CODEX_OUTCOME" = success ]; then
+            echo 'Codex completed without a reviewable candidate; the sole fallback may continue.' >&2
+            cat "$RUNNER_TEMP/ui-request-codex-summary.md" >&2 2>/dev/null || true
+            echo 'escalate=true' >> "$GITHUB_OUTPUT"
             exit 0
           fi
           if grep -Eiq '(^|[^0-9])(401|403|429)([^0-9]|$)|authenticat|permission|quota|rate.?limit' \
