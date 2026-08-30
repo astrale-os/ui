@@ -138,6 +138,7 @@ jobs:
             --jq '[.artifacts[] | select(.expired == false)] | sort_by(.created_at) | last // empty')"
           if [ -z "$artifact" ]; then
             echo 'restored=false' >> "$GITHUB_OUTPUT"
+            echo 'candidate_resumed=false' >> "$GITHUB_OUTPUT"
             exit 0
           fi
           artifact_id="$(jq -r .id <<< "$artifact")"
@@ -163,8 +164,10 @@ jobs:
             mkdir -p "$RUNNER_TEMP/ui-request-source-evidence"
             tar -xzf "$checkpoint/source-evidence.tgz" -C "$RUNNER_TEMP/ui-request-source-evidence"
             echo 'source_restored=true' >> "$GITHUB_OUTPUT"
+            echo 'candidate_resumed=true' >> "$GITHUB_OUTPUT"
           else
             echo 'source_restored=false' >> "$GITHUB_OUTPUT"
+            echo 'candidate_resumed=false' >> "$GITHUB_OUTPUT"
           fi
           echo 'restored=true' >> "$GITHUB_OUTPUT"
       - uses: astrale-os/config/.github/actions/setup@8e2e2abd0320be0c2f64033916519ab3b66c7dd7
@@ -236,6 +239,7 @@ jobs:
               --ephemeral \
               --sandbox read-only \
               --skip-git-repo-check \
+              -c 'model_reasoning_effort="low"' \
               -c 'web_search="live"' \
               --output-schema request/.spec/schemas/source-evidence-v1.schema.json \
               --output-last-message "$RUNNER_TEMP/ui-request-source-manifest.json" \
@@ -248,7 +252,7 @@ jobs:
             --manifest "$RUNNER_TEMP/ui-request-source-manifest.json" \
             --output "$RUNNER_TEMP/ui-request-source-evidence"
       - name: Implement the accepted request with Claude Code
-        if: inputs.worker == 'opus'
+        if: inputs.worker == 'opus' && steps.restore.outputs.candidate_resumed != 'true'
         env:
           INPUT_OBJECTIVE: ${{ inputs.objective }}
           SOURCE_EVIDENCE_ROOT: ${{ runner.temp }}/ui-request-source-evidence
@@ -270,7 +274,7 @@ jobs:
             --no-session-persistence \
             --print
       - name: Implement the accepted request with Codex Luna
-        if: inputs.worker == 'codex'
+        if: inputs.worker == 'codex' && steps.restore.outputs.candidate_resumed != 'true'
         id: codex_implementation
         continue-on-error: true
         env:
@@ -293,7 +297,7 @@ jobs:
               --json - > "$RUNNER_TEMP/ui-request-codex-events.jsonl"
       - name: Classify Codex implementation outcome
         id: classify_codex
-        if: inputs.worker == 'codex'
+        if: inputs.worker == 'codex' && steps.restore.outputs.candidate_resumed != 'true'
         env:
           CODEX_OUTCOME: ${{ steps.codex_implementation.outcome }}
         run: |
@@ -376,7 +380,7 @@ jobs:
           if [ "$INPUT_WORKER" = codex ] && [ "${{ steps.classify_codex.outputs.escalate }}" != true ]; then
             provider=github-actions-codex
             model=gpt-5.6-luna
-            effort=max
+            effort=medium
             escalation=0
           else
             provider=github-actions-claude-code
@@ -472,6 +476,9 @@ jobs:
           INPUT_PROPOSAL_BASE_SHA: ${{ needs.propose.outputs.proposal_base_sha }}
         run: |
           set -euo pipefail
+          if ! git cat-file -e "$INPUT_PROPOSAL_BASE_SHA^{commit}" 2>/dev/null; then
+            git fetch --no-tags --depth=1 origin "$INPUT_PROPOSAL_BASE_SHA"
+          fi
           changed="$(git diff --name-only --diff-filter=ACMRD "$INPUT_PROPOSAL_BASE_SHA")"
           if grep -Eq '^(\.github/|\.release/|request/|scripts/|playground/tests/|playground/playwright[^/]*\.config\.)' <<< "$changed"; then
             echo 'A UI candidate may not edit trusted request, workflow, release, planner, or browser-evidence programs.' >&2
