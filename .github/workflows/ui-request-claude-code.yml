@@ -20,6 +20,9 @@ on:
       objective:
         required: true
         type: string
+      objective_sha256:
+        required: true
+        type: string
       pull_request:
         required: false
         default: ''
@@ -48,6 +51,10 @@ on:
         type: string
       objective:
         description: Complete provider-independent instruction compiled by the trusted request owner.
+        required: true
+        type: string
+      objective_sha256:
+        description: Stable digest of the accepted objective before attempt-specific prompt framing.
         required: true
         type: string
       pull_request:
@@ -99,7 +106,7 @@ jobs:
           INPUT_BASE_REF: ${{ inputs.base_ref }}
           INPUT_BRANCH: ${{ inputs.branch }}
           INPUT_PULL_REQUEST: ${{ inputs.pull_request }}
-          INPUT_OBJECTIVE: ${{ inputs.objective }}
+          INPUT_OBJECTIVE_SHA256: ${{ inputs.objective_sha256 }}
           INPUT_REQUEST: ${{ inputs.request }}
         run: |
           set -euo pipefail
@@ -118,10 +125,13 @@ jobs:
           fi
           echo "baseline_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
           echo "proposal_base_sha=$(git merge-base HEAD "refs/remotes/origin/$INPUT_BASE_REF")" >> "$GITHUB_OUTPUT"
-          objective_sha256="$(printf '%s' "$INPUT_OBJECTIVE" | sha256sum | cut -d' ' -f1)"
+          if [[ ! "$INPUT_OBJECTIVE_SHA256" =~ ^[0-9a-f]{64}$ ]]; then
+            echo 'The accepted objective digest is malformed.' >&2
+            exit 1
+          fi
           issue="${INPUT_REQUEST##*/}"
           case "$issue" in ''|*[!0-9]*) exit 1 ;; esac
-          echo "objective_sha256=$objective_sha256" >> "$GITHUB_OUTPUT"
+          echo "objective_sha256=$INPUT_OBJECTIVE_SHA256" >> "$GITHUB_OUTPUT"
           echo "checkpoint_name=ui-request-checkpoint-$issue" >> "$GITHUB_OUTPUT"
       - name: Restore the latest compatible cumulative checkpoint
         id: restore
