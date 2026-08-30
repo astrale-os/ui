@@ -549,11 +549,18 @@ export const ScheduleEditor: React.FC<ScheduleEditorProps> = ({
 
       {/* === SUMMARY AND VALIDATION === */}
       {incomplete && (
-        <p className="cal-rec__preview text-[11px] text-destructive" id={`${field}-validation`}>
+        <p
+          className="cal-rec__preview text-[11px] text-destructive"
+          id={`${field}-validation`}
+          aria-live="polite"
+        >
           <code>(no recurrence)</code>
         </p>
       )}
-      <p className="cal-rec__preview text-[11px] text-muted-foreground" aria-live="polite">
+      <p
+        className="cal-rec__preview text-[11px] text-muted-foreground"
+        aria-live={incomplete ? undefined : 'polite'}
+      >
         <code>{summary || '(no recurrence)'}</code>
       </p>
     </div>

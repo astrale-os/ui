@@ -72,7 +72,7 @@ function ScheduleEditorHost(props: {
 }
 
 function scheduleSummary(container: HTMLElement): string {
-  return container.querySelector('p[aria-live="polite"]')?.textContent ?? ''
+  return container.querySelector('p.cal-rec__preview:last-of-type')?.textContent ?? ''
 }
 
 describe('owned registry compositions', () => {
@@ -849,10 +849,13 @@ describe('owned registry compositions', () => {
     expect(days).toHaveAttribute('aria-invalid', 'true')
     const validation = document.getElementById(days.getAttribute('aria-describedby') ?? '')
     expect(validation).toHaveTextContent('(no recurrence)')
+    expect(validation).toHaveAttribute('aria-live', 'polite')
+    expect(container.querySelectorAll('[aria-live="polite"]')).toHaveLength(1)
     expect(scheduleSummary(container)).toContain('Repeat on Fri')
 
     await user.click(screen.getByRole('button', { name: 'Mon' }))
     expect(screen.getByRole('group', { name: 'Days of week' })).not.toHaveAttribute('aria-invalid')
+    expect(screen.queryByText('(no recurrence)')).not.toBeInTheDocument()
     expect(scheduleSummary(container)).toContain('Repeat on Mon')
   })
 

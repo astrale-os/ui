@@ -15,6 +15,7 @@
     "Adopt the timezone picker verbatim as an owned module: its cal-timezone-picker anatomy, cal-tzp classes, hoisted component-scoped style element, default IANA zone list, host zones and locale inputs, GMT offset option labels, and Time zone accessible name.",
     "Map the picker's cal-* style variables onto the equivalent Astrale semantic tokens one for one and keep every declared fallback.",
     "Adopt from the recurrence editor the two-way value resync against the host prop, the parse fallback that keeps the last valid recurrence instead of discarding it, the cal-rec__preview polite region with its no recurrence text, the Days of week group, the aria-pressed weekday buttons, and the Ends radiogroup.",
+    "Apply the accepted accessibility correction by making the visible no recurrence validation the sole polite announcement while incomplete and restoring the polite summary announcement after recovery, without changing its classes, copy, DOM structure, or controlled-value behavior.",
     "Do not vendor the RRULE adapter: the primary Wardian surface owns the schedule value, so the adopted behavior operates on that value rather than on a serialized rule string."
   ],
   "sourceDigest": "sha256:93b07e892b37d17fa552e3ef70c627ddc8d112b9010dd76ebd71b54110fc78b7",
