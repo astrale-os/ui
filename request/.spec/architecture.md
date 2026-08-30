@@ -61,6 +61,10 @@ descendant base commits may retain the cumulative patch. A newly accepted object
 patch while reacquiring its own immutable source evidence and resetting escalation. Target and hard latency values are
 observations only. A breach never cancels work or discards its checkpoint.
 
+Checkpoint compatibility binds the stable digest of the accepted objective supplied by the trusted
+coordinator. Attempt-specific prompt framing and idempotency markers cannot manufacture objective
+drift.
+
 Candidate source is installed, fast-tested, rendered, and screenshotted in a credential-free job.
 A separate publisher receives only the qualified patch and bounded static preview artifact. It may
 commit the qualified patch, transfer static bytes to the dedicated preview origin, create a GitHub

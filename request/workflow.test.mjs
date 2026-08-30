@@ -904,7 +904,10 @@ git -c core.hooksPath=/dev/null ${'\\'}
     (step) => step.name === 'Prepare the deterministic working branch',
   )
   assert.match(prepare.run, /git checkout -B "\$INPUT_BRANCH"/u)
-  assert.match(prepare.run, /objective_sha256=/u)
+  assert.equal(prepare.env.INPUT_OBJECTIVE_SHA256, '${{ inputs.objective_sha256 }}')
+  assert.match(prepare.run, /\^\[0-9a-f\]\{64\}\$/u)
+  assert.match(prepare.run, /objective_sha256=\$INPUT_OBJECTIVE_SHA256/u)
+  assert.doesNotMatch(prepare.run, /sha256sum/u)
   assert.match(prepare.run, /checkpoint_name=ui-request-checkpoint-/u)
   const workerSecrets = secretReferences(parsedWorkerWorkflow).filter(({ value }) =>
     value.includes('secrets.'),
@@ -993,6 +996,10 @@ test('pins the isolated Luna worker and preserves recoverable work across SLO br
     './.github/workflows/ui-request-claude-code.yml',
   )
   assert.equal(parsedCodexWorkflow.jobs.worker.with.worker, 'codex')
+  assert.equal(
+    parsedCodexWorkflow.jobs.worker.with.objective_sha256,
+    '${{ inputs.objective_sha256 }}',
+  )
   assert.equal(parsedCodexWorkflow.jobs.worker.secrets, 'inherit')
   assert.match(codexConfiguration, /^model = "gpt-5\.6-luna"$/mu)
   assert.match(codexConfiguration, /^model_reasoning_effort = "medium"$/mu)

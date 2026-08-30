@@ -20,6 +20,9 @@ on:
       objective:
         required: true
         type: string
+      objective_sha256:
+        required: true
+        type: string
       pull_request:
         required: false
         default: ''
@@ -38,6 +41,7 @@ jobs:
       base_ref: ${{ inputs.base_ref }}
       branch: ${{ inputs.branch }}
       objective: ${{ inputs.objective }}
+      objective_sha256: ${{ inputs.objective_sha256 }}
       pull_request: ${{ inputs.pull_request }}
       worker: codex
     secrets: inherit

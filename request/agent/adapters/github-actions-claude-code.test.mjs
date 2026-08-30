@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict'
+import { createHash } from 'node:crypto'
 import test from 'node:test'
 
 import { job, json, repository } from '../test-helpers.mjs'
@@ -11,6 +12,7 @@ import {
 const fixedNow = '2026-08-29T10:00:00Z'
 const runId = 771
 const pullRequest = `${repository}/pull/77`
+const objectiveSha256 = createHash('sha256').update(job.objective, 'utf8').digest('hex')
 
 function workflowRun(overrides = {}) {
   return {
@@ -93,6 +95,7 @@ test('dispatch uses the exact workflow run returned by the current GitHub API', 
         '',
         job.objective,
       ].join('\n'),
+      objective_sha256: objectiveSha256,
       pull_request: '',
     },
   })
@@ -252,6 +255,7 @@ test('revision dispatch retains the exact same-repository PR and head branch', a
       '',
       job.objective,
     ].join('\n'),
+    objective_sha256: objectiveSha256,
     pull_request: pullRequest,
   })
 })
