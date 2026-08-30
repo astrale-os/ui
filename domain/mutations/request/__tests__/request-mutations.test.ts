@@ -14,7 +14,7 @@ import {
 } from '../index.js'
 
 describe('Request Mutations', () => {
-  it('creates one Request and owner edge behind an atomic per-owner key precondition', async () => {
+  it('creates one private Request behind an atomic per-owner key precondition', async () => {
     const domain = language.resolve(schema)
     const mutate = mutationClient({ request: NodeId('request') })
     await expect(
@@ -40,20 +40,22 @@ describe('Request Mutations', () => {
             version: 'v6',
             source: {
               kind: 'node',
-              terms: [{ kind: 'path', path: '@owner' }],
+              terms: [{ kind: 'class', class: domain.classes.Request.ref }],
               binding: 'n0',
             },
             steps: [
               {
-                op: 'expand',
-                from: 'n0',
-                via: [domain.classes.request_owned_by.ref],
-                direction: 'outgoing',
-                bindings: { edge: 'e0', node: 'n1' },
+                op: 'filter',
+                binding: 'n0',
+                predicate: {
+                  kind: 'property.equal',
+                  property: domain.classes.Request.properties.ownerId.key,
+                  value: 'owner',
+                },
               },
               {
                 op: 'filter',
-                binding: 'n1',
+                binding: 'n0',
                 predicate: {
                   kind: 'property.equal',
                   property: domain.classes.Request.properties.idempotencyKey.key,
@@ -61,7 +63,7 @@ describe('Request Mutations', () => {
                 },
               },
             ],
-            select: { kind: 'nodes', binding: 'n1', projection: { kind: 'reference' } },
+            select: { kind: 'nodes', binding: 'n0', projection: { kind: 'reference' } },
           },
           equals: { kind: 'node', ids: [] },
         },
@@ -77,13 +79,6 @@ describe('Request Mutations', () => {
             [domain.classes.Request.properties.idempotencyKey.key]: 'request-1',
             [domain.classes.Request.properties.submission.key]: 'pending',
           },
-        },
-        {
-          op: 'edge.create',
-          class: domain.classes.request_owned_by.key,
-          source: '@owner',
-          target: { created: 'request' },
-          props: {},
         },
       ],
     })
@@ -105,16 +100,11 @@ describe('Request Mutations', () => {
           node: '@request',
           class: domain.classes.Request.key,
           props: {
-            equals: { [domain.classes.Request.properties.submission.key]: 'pending' },
+            equals: {
+              [domain.classes.Request.properties.ownerId.key]: 'owner',
+              [domain.classes.Request.properties.submission.key]: 'pending',
+            },
             absent: [domain.classes.Request.properties.collaborationUrl.key],
-          },
-        },
-        {
-          kind: 'edge',
-          edge: {
-            source: '@owner',
-            target: '@request',
-            class: domain.classes.request_owned_by.key,
           },
         },
       ],
@@ -150,16 +140,11 @@ describe('Request Mutations', () => {
           node: '@request',
           class: domain.classes.Request.key,
           props: {
-            equals: { [domain.classes.Request.properties.submission.key]: 'outcome-unknown' },
+            equals: {
+              [domain.classes.Request.properties.ownerId.key]: 'owner',
+              [domain.classes.Request.properties.submission.key]: 'outcome-unknown',
+            },
             absent: [domain.classes.Request.properties.collaborationUrl.key],
-          },
-        },
-        {
-          kind: 'edge',
-          edge: {
-            source: '@owner',
-            target: '@request',
-            class: domain.classes.request_owned_by.key,
           },
         },
       ],
@@ -219,16 +204,11 @@ function transitionDocument(
         node: '@request',
         class: domain.classes.Request.key,
         props: {
-          equals: { [domain.classes.Request.properties.submission.key]: from },
+          equals: {
+            [domain.classes.Request.properties.ownerId.key]: 'owner',
+            [domain.classes.Request.properties.submission.key]: from,
+          },
           absent: [domain.classes.Request.properties.collaborationUrl.key],
-        },
-      },
-      {
-        kind: 'edge',
-        edge: {
-          source: '@owner',
-          target: '@request',
-          class: domain.classes.request_owned_by.key,
         },
       },
     ],

@@ -1,13 +1,12 @@
 import type { NodeId } from '@astrale-os/sdk/graph/node'
 
 import { LocalBinding } from '@astrale-os/sdk/graph'
-import { Path } from '@astrale-os/sdk/graph/path'
 import { defineMutation } from '@astrale-os/sdk/mutation'
 import { Property, Query } from '@astrale-os/sdk/query'
 
 import type { UiSchema } from '#schema'
 
-import { requestSubmission } from '#states/request'
+import { requestSubmission } from '#schema/request/states'
 
 const createdRequest = LocalBinding('request')
 
@@ -27,19 +26,18 @@ export interface CreatedRequest {
 export const createRequest = defineMutation<UiSchema>()((domain) => ({
   id: 'ui.request.create',
   build(input: CreateRequestInput, mutation) {
-    const owned = Query.from({ nodes: [Path.id(input.owner)] }).expand({
-      via: [domain.classes.request_owned_by],
-      direction: 'outgoing',
-    })
-    const duplicate = owned
+    const duplicate = Query.from({ nodes: [domain.classes.Request] })
+      .filter({
+        predicate: Property(domain.classes.Request.properties.ownerId.key).equals(input.owner),
+      })
       .filter({
         predicate: Property(domain.classes.Request.properties.idempotencyKey.key).equals(
           input.idempotencyKey,
         ),
       })
-      .select({ kind: 'nodes', binding: owned.node, projection: { kind: 'reference' } })
+      .select({ kind: 'nodes', projection: { kind: 'reference' } })
     mutation.expect.query({ query: duplicate, equals: { kind: 'node', ids: [] } })
-    const request = mutation.createNode({
+    mutation.createNode({
       as: createdRequest,
       class: domain.classes.Request,
       props: {
@@ -48,11 +46,6 @@ export const createRequest = defineMutation<UiSchema>()((domain) => ({
         idempotencyKey: input.idempotencyKey,
         submission: requestSubmission.initial,
       },
-    })
-    mutation.createEdge({
-      class: domain.classes.request_owned_by,
-      source: Path.id(input.owner),
-      target: request,
     })
   },
   project(result, input): CreatedRequest {

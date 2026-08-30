@@ -1,7 +1,5 @@
 import { K, nodeClass, property, stateProperty } from '@astrale-os/sdk/schema'
 
-import { requestSubmission } from '#states/request'
-
 import {
   requestIdValue,
   collaborationUrlValue,
@@ -9,6 +7,7 @@ import {
   requestIntentValue,
 } from './request-function.js'
 import { ManageRequest } from './request-policies.js'
+import { requestSubmission } from './states/index.js'
 
 export const Request = nodeClass({
   description: 'One idempotent UI capability request and its external collaboration receipt.',

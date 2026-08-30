@@ -17,10 +17,11 @@
 | D11 | Reusing one owner's key for another intent returns `conflict` without effects. | implementation correction | callable and Workflow evidence |
 | D12 | An empty reconciliation scan never authorizes retry; only an explicit provider rejection is retryable. | adversarial correction | Workflow and Provider evidence |
 | D13 | The Application explicitly requires Kernel Query and Mutation; Runtime graph access is not implied by installation. | live correction | `application.ts` and composition test |
-| D14 | The Domain-self session owns the internal idempotency ledger; `ownerId` scopes the indexed key while the ownership edge retains caller-facing policy. | live correction | Request Schema, Query, and replay proof |
+| D14 | The Domain-self session owns the private idempotency ledger; `ownerId` scopes the indexed key and every state transition, while V1 creates no cross-Domain observation edge. | live correction | Request Schema, Mutation AST, Query, and replay proof |
 | D15 | Receipt confirmation is one machine-derived transition with one auxiliary property delta in the same Node update. | live correction | SDK transition contract and realized Mutation AST |
 | D16 | `domain/` is a private source workspace: it builds, packages declarations, deploys through its adapter, and installs by observed deployment URL without npm or Release Please authority. | release correction | private manifest, single-package release contract, deployment configuration |
 | D17 | The UI repository owns this Domain at `domain/`; the general Domains repository must contain no copy or parallel release authority. | ownership correction | relocation PRs and closed-set repository searches |
+| D18 | Caller Identity is retained as a scalar authorization coordinate because a Domain-self mutation cannot resolve a private dependency-owned Shell User as an edge endpoint; the callable remains the receipt boundary. | live correction | managed-instance failure and issue #102 submission proof |
 
 ## Open and deferred questions
 
@@ -74,8 +75,8 @@ None of Q01-Q08 authorizes expanding the V1 graph model.
 | Tool | Version selected |
 | --- | --- |
 | `create-astrale-domain` | `0.3.0-beta.72` |
-| `@astrale-os/sdk` | `0.5.0-beta.79` |
-| `@astrale-os/adapter-cloudflare` | `0.5.0-beta.82` |
+| `@astrale-os/sdk` | `0.5.0-beta.84` |
+| `@astrale-os/adapter-cloudflare` | `0.5.0-beta.87` |
 | Astrale CLI | `1.0.0-beta.54` |
 | package manager | `pnpm@12.0.0` |
 
