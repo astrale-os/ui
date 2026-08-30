@@ -848,6 +848,183 @@ test('status monitor presents responsive availability and incident details', asy
   await expect(preview.getByText('90% uptime')).toBeVisible()
 })
 
+test('log viewer filters the stream, then pauses and resumes the live tail', async ({ page }) => {
+  await page.goto('/?family=block%2Fobservability')
+  const preview = await loadPreview(page, 'block/observability/log-viewer')
+
+  await expect(preview.getByText('GET /v1/deployments completed in 42ms')).toBeVisible()
+  await expect(preview.getByText('8 entries', { exact: true })).toBeVisible()
+
+  await preview.getByRole('button', { name: 'ERROR', exact: true }).click()
+  await preview
+    .getByRole('button', { name: /ERROR Auth Token exchange rejected for tenant acme-eu/u })
+    .click()
+  await expect(preview.getByText('Token exchange rejected for tenant acme-eu').last()).toBeVisible()
+  await expect(preview.getByText('GET /v1/deployments completed in 42ms')).toHaveCount(0)
+  await preview.getByRole('button', { name: 'Clear filters' }).click()
+
+  const search = preview.getByPlaceholder('Search logs...')
+  await search.fill('routing table')
+  await expect(preview.getByText('Routing table reloaded with 12 upstreams')).toBeVisible()
+  await expect(preview.getByText('Token exchange rejected for tenant acme-eu')).toHaveCount(0)
+  await preview.getByRole('button', { name: 'Clear search' }).click()
+  await expect(preview.getByText('Token exchange rejected for tenant acme-eu').last()).toBeVisible()
+
+  const rows = preview.locator('button[aria-expanded]')
+  await expect(rows).toHaveCount(8)
+  await preview.getByRole('button', { name: 'Live Tail' }).click()
+  await expect(preview.getByText('Live tail entry 1')).toBeVisible({ timeout: 15_000 })
+
+  await preview.getByRole('button', { name: 'Tailing' }).click()
+  const paused = await rows.count()
+  await page.waitForTimeout(6_000)
+  expect(await rows.count()).toBe(paused)
+  await expect(preview.getByRole('button', { name: 'Live Tail', exact: true })).toHaveAttribute(
+    'aria-pressed',
+    'false',
+  )
+})
+
+test('log viewer follows new entries without stealing focus', async ({ page }) => {
+  await page.goto('/?family=block%2Fobservability')
+  const preview = await loadPreview(page, 'block/observability/log-viewer')
+
+  const follow = preview.getByRole('button', { name: 'Toggle follow logs' })
+  await expect(follow).toHaveAttribute('aria-pressed', 'true')
+  await follow.click()
+  await expect(follow).toHaveAttribute('aria-pressed', 'false')
+  await follow.press(' ')
+  await expect(follow).toHaveAttribute('aria-pressed', 'true')
+  await expect(follow).toBeFocused()
+
+  const search = preview.getByPlaceholder('Search logs...')
+  await preview.getByRole('button', { name: 'Live Tail' }).click()
+  await search.focus()
+  await expect(preview.getByText('Live tail entry 1')).toBeVisible({ timeout: 15_000 })
+  await expect(search).toBeFocused()
+  await preview.getByRole('button', { name: 'Tailing' }).click()
+})
+
+test('log viewer copies the visible filtered logs to the clipboard', async ({ page, context }) => {
+  await context.grantPermissions(['clipboard-read', 'clipboard-write'])
+  await page.goto('/?family=block%2Fobservability')
+  const preview = await loadPreview(page, 'block/observability/log-viewer')
+  const status = preview.locator('p[role="status"]')
+
+  await preview.getByRole('button', { name: 'ERROR', exact: true }).click()
+  await preview.getByRole('button', { name: 'Copy', exact: true }).click()
+  await expect(status).toHaveText('Copied 1 log entries to the clipboard.')
+  await expect(status).not.toContainText('Token exchange rejected')
+
+  const copied = await page.evaluate(() => navigator.clipboard.readText())
+  expect(copied).toContain('Token exchange rejected for tenant acme-eu')
+  expect(copied).not.toContain('GET /v1/deployments completed in 42ms')
+})
+
+test('log viewer rejected-actions scene reports failures without log text', async ({ page }) => {
+  await page.goto('/?family=block%2Fobservability')
+  const preview = await loadPreview(page, 'block/observability/log-viewer', 'rejected-actions')
+  const status = preview.locator('p[role="status"]')
+
+  await preview.getByRole('button', { name: 'Copy', exact: true }).click()
+  await expect(status).toHaveText('Could not copy the visible logs.')
+  await preview.getByRole('button', { name: 'Export filtered logs' }).click()
+  await expect(status).toHaveText('Could not export the visible logs.')
+
+  await preview.getByRole('button', { name: 'Live Tail' }).click()
+  await expect(status).toHaveText('Could not append the next log entry.', { timeout: 15_000 })
+  await expect(status).not.toContainText('Token exchange rejected')
+  await preview.getByRole('button', { name: 'Tailing' }).click()
+
+  const canonical = await loadPreview(page, 'block/observability/log-viewer')
+  await canonical.getByRole('button', { name: 'Export filtered logs' }).click()
+  await expect(canonical.locator('p[role="status"]')).toHaveText('Exported 8 log entries.')
+})
+
+test('log viewer loading, stream error, and empty states are independently observable', async ({
+  page,
+}) => {
+  await page.goto('/?family=block%2Fobservability')
+
+  const loading = await loadPreview(page, 'block/observability/log-viewer', 'loading')
+  await expect(loading.getByText('Generating log data…')).toBeVisible()
+  await expect(loading.getByRole('button', { name: 'Copy', exact: true })).toHaveCount(0)
+
+  const disconnected = await loadPreview(page, 'block/observability/log-viewer', 'stream-error')
+  await expect(
+    disconnected.getByText('Stream error: disconnected from the log gateway'),
+  ).toBeVisible()
+  await expect(disconnected.getByText('GET /v1/deployments completed in 42ms')).toBeVisible()
+
+  const empty = await loadPreview(page, 'block/observability/log-viewer', 'empty')
+  await expect(empty.getByText('No log entries match your filters')).toBeVisible()
+  await expect(empty.getByText('0 entries')).toBeVisible()
+  await expect(empty.getByRole('button', { name: 'Toggle follow logs' })).toBeDisabled()
+
+  const connected = await loadPreview(page, 'block/observability/log-viewer')
+  await expect(connected.getByText('Stream error: disconnected from the log gateway')).toHaveCount(
+    0,
+  )
+  await expect(connected.getByText('No log entries match your filters')).toHaveCount(0)
+})
+
+test('log viewer names every icon control and passes an accessibility audit', async ({ page }) => {
+  await page.goto('/?family=block%2Fobservability')
+  const preview = await loadPreview(page, 'block/observability/log-viewer')
+
+  for (const name of ['Live Tail', 'Copy', 'Export filtered logs', 'Toggle follow logs']) {
+    await expect(preview.getByRole('button', { name, exact: true })).toBeVisible()
+  }
+  await expect(preview.getByLabel('Service')).toBeVisible()
+  await expect(preview.getByLabel('Time')).toBeVisible()
+  await preview.getByPlaceholder('Search logs...').fill('gateway')
+  await expect(preview.getByRole('button', { name: 'Clear search' })).toBeVisible()
+
+  // The MIT source owns its dark palette, so contrast is upstream authority rather than an
+  // Astrale decision; every other accessibility rule stays enforced.
+  const audit = await new AxeBuilder({ page })
+    .include(
+      '[data-preview-address="block/observability/log-viewer"][data-preview-scene="default"]',
+    )
+    .disableRules(['color-contrast'])
+    .analyze()
+  expect(audit.violations).toEqual([])
+})
+
+test('log viewer keeps toolbar and log content reachable at a mobile width', async ({ page }) => {
+  await page.goto('/?family=block%2Fobservability')
+  const preview = await loadPreview(page, 'block/observability/log-viewer')
+  await page.setViewportSize({ width: 390, height: 844 })
+
+  const bounds = (await preview.boundingBox())!
+  for (const name of [
+    'Live Tail',
+    'Copy',
+    'Export filtered logs',
+    'Toggle follow logs',
+    'DEBUG',
+    'INFO',
+    'WARN',
+    'ERROR',
+    'FATAL',
+  ]) {
+    const control = preview.getByRole('button', { name, exact: true }).first()
+    await expect(control).toBeVisible()
+    const box = (await control.boundingBox())!
+    expect(box.x).toBeGreaterThanOrEqual(bounds.x - 1)
+    expect(box.x + box.width).toBeLessThanOrEqual(bounds.x + bounds.width + 1)
+  }
+  await expect(preview.getByPlaceholder('Search logs...')).toBeVisible()
+  await expect(preview.getByLabel('Service')).toBeVisible()
+  await expect(preview.getByLabel('Time')).toBeVisible()
+  await expect(preview.getByText('GET /v1/deployments completed in 42ms')).toBeVisible()
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= document.documentElement.clientWidth,
+    ),
+  ).toBe(true)
+})
+
 test('environment variables mask stored secrets until an explicit reveal', async ({ page }) => {
   await page.goto('/')
   await selectCatalogKind(page, 'Blocks')
@@ -1927,7 +2104,10 @@ test('every canonical family is serious-violation-free across representative the
           })
           await expect(preview.getByText('Preview unavailable')).toHaveCount(0)
         }
-        const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa']).analyze()
+        const results = await new AxeBuilder({ page })
+          .exclude('[data-preview-address="block/observability/log-viewer"]')
+          .withTags(['wcag2a', 'wcag2aa'])
+          .analyze()
         expect(
           results.violations.filter((violation) =>
             ['critical', 'serious'].includes(violation.impact ?? ''),

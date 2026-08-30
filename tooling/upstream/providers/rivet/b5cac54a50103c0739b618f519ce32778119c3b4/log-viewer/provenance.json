@@ -1,0 +1,38 @@
+{
+  "provider": "@rivet",
+  "upstreamAddress": "https://raw.githubusercontent.com/rivet-dev/actors/b5cac54a50103c0739b618f519ce32778119c3b4/frontend/packages/components/src/logs-view.tsx",
+  "documentation": "https://github.com/rivet-dev/actors/tree/b5cac54a50103c0739b618f519ce32778119c3b4/frontend/packages/components/src",
+  "repository": "https://github.com/rivet-dev/actors",
+  "revision": "b5cac54a50103c0739b618f519ce32778119c3b4",
+  "resolvedAt": "2026-08-30",
+  "license": "Apache-2.0",
+  "licenseUrl": "https://github.com/rivet-dev/actors/blob/b5cac54a50103c0739b618f519ce32778119c3b4/LICENSE",
+  "licenseDigest": "sha256:2c7d79889adad9d9872d0edd71e7199aa0db93c635b6015819843861ec74abd2",
+  "owner": "block/observability/log-viewer",
+  "adaptation": "astrale-revision",
+  "adaptationNotes": [
+    "Retained only as the supporting authority for follow-tail, copy text, and stream error behavior inside the primary Logpilot surface.",
+    "Adopt the follow toggle with its Toggle follow logs accessible name, Follow logs title, empty-stream disabled state, and animation-frame scroll to the newest entry.",
+    "Adopt the tab separated timestamp, level, service, and message copy text.",
+    "Adopt the stream error banner classes and the Stream error: prefix.",
+    "Invert the upstream scroll target because the primary surface renders newest entries first."
+  ],
+  "sourceDigest": "sha256:3ac70889f7710041b11d2fde218c24cd209d8e263898ab71ad33cd99e166cf78",
+  "files": {
+    "logs-view.tsx": {
+      "url": "https://raw.githubusercontent.com/rivet-dev/actors/b5cac54a50103c0739b618f519ce32778119c3b4/frontend/packages/components/src/logs-view.tsx",
+      "source": "tooling/upstream/providers/rivet/b5cac54a50103c0739b618f519ce32778119c3b4/log-viewer/logs-view.tsx",
+      "sourceDigest": "sha256:3ac70889f7710041b11d2fde218c24cd209d8e263898ab71ad33cd99e166cf78"
+    },
+    "deployment-logs.tsx": {
+      "url": "https://raw.githubusercontent.com/rivet-dev/actors/b5cac54a50103c0739b618f519ce32778119c3b4/frontend/src/components/deployment-logs.tsx",
+      "source": "tooling/upstream/providers/rivet/b5cac54a50103c0739b618f519ce32778119c3b4/log-viewer/deployment-logs.tsx",
+      "sourceDigest": "sha256:e491cc41850d60f244be00599719757c251ad6f779c6ec001a11888f04329b7e"
+    },
+    "LICENSE": {
+      "url": "https://raw.githubusercontent.com/rivet-dev/actors/b5cac54a50103c0739b618f519ce32778119c3b4/LICENSE",
+      "source": "tooling/upstream/providers/rivet/b5cac54a50103c0739b618f519ce32778119c3b4/log-viewer/LICENSE",
+      "sourceDigest": "sha256:2c7d79889adad9d9872d0edd71e7199aa0db93c635b6015819843861ec74abd2"
+    }
+  }
+}
