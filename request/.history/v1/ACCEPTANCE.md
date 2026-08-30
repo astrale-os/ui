@@ -66,7 +66,7 @@
       code.
 - [x] Each changed visual preview has deterministic screenshot evidence.
 - [x] The PR exposes an auto-refreshed direct playground URL at the exact candidate preview.
-- [ ] Preview output has no production cookies, bindings, storage, APIs, or credentials and expires
+- [x] Preview output has no production cookies, bindings, storage, APIs, or credentials and expires
       on PR close.
 - [ ] Native playground HMR and direct-link behavior remain green locally.
 
