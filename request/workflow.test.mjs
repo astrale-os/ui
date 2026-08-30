@@ -131,6 +131,45 @@ esac
   }
 }
 
+function executeCodexClassification(script, { outcome, changed = false, events = '' }) {
+  const directory = mkdtempSync(path.join(tmpdir(), 'ui-request-codex-classification-'))
+  const workspace = path.join(directory, 'workspace')
+  mkdirSync(workspace)
+  const output = path.join(directory, 'output')
+  writeFileSync(path.join(workspace, 'base.txt'), 'base\n')
+  for (const args of [
+    ['init', '-q'],
+    ['config', 'user.name', 'fixture'],
+    ['config', 'user.email', 'fixture@example.com'],
+    ['add', 'base.txt'],
+    ['commit', '-qm', 'base'],
+  ]) {
+    const result = spawnSync('git', args, { cwd: workspace, encoding: 'utf8' })
+    assert.equal(result.status, 0, result.stderr)
+  }
+  if (changed) writeFileSync(path.join(workspace, 'candidate.txt'), 'candidate\n')
+  writeFileSync(path.join(directory, 'ui-request-codex-events.jsonl'), events)
+  try {
+    const result = spawnSync('/bin/bash', ['-c', script], {
+      cwd: workspace,
+      encoding: 'utf8',
+      env: {
+        ...process.env,
+        CODEX_OUTCOME: outcome,
+        GITHUB_OUTPUT: output,
+        RUNNER_TEMP: directory,
+      },
+    })
+    return {
+      status: result.status,
+      stderr: result.stderr,
+      outputs: existsSync(output) ? workflowOutputs(readFileSync(output, 'utf8')) : {},
+    }
+  } finally {
+    rmSync(directory, { recursive: true, force: true })
+  }
+}
+
 function executeCleanupShell(script) {
   const directory = mkdtempSync(path.join(tmpdir(), 'ui-request-cleanup-'))
   const runner = path.join(directory, 'runner')
@@ -897,6 +936,28 @@ test('pins the isolated Luna worker and preserves recoverable work across SLO br
   assert.match(codexStep.run, /--sandbox workspace-write/u)
   assert.match(codexStep.run, /--ephemeral/u)
   assert.doesNotMatch(codexStep.run, /dangerously|mcp|plugin/iu)
+  const classificationStep = parsedWorkerWorkflow.jobs.propose.steps.find(
+    (step) => step.name === 'Classify Codex implementation outcome',
+  )
+  assert.deepEqual(
+    executeCodexClassification(classificationStep.run, { outcome: 'success', changed: true })
+      .outputs,
+    { escalate: 'false' },
+  )
+  assert.deepEqual(
+    executeCodexClassification(classificationStep.run, { outcome: 'success' }).outputs,
+    { escalate: 'true' },
+  )
+  assert.deepEqual(
+    executeCodexClassification(classificationStep.run, { outcome: 'failure' }).outputs,
+    { escalate: 'true' },
+  )
+  const authenticationFailure = executeCodexClassification(classificationStep.run, {
+    outcome: 'failure',
+    events: '{"message":"HTTP 401 authentication failed"}\n',
+  })
+  assert.notEqual(authenticationFailure.status, 0)
+  assert.deepEqual(authenticationFailure.outputs, {})
   const checkpointUpload = parsedWorkerWorkflow.jobs.propose.steps.find(
     (step) => step.with?.name === '${{ steps.prepare.outputs.checkpoint_name }}',
   )
