@@ -4,6 +4,10 @@ on:
   issues:
     types:
       - labeled
+  pull_request:
+    types:
+      - labeled
+      - closed
   workflow_dispatch:
     inputs:
       issue_number:
@@ -21,24 +25,23 @@ on:
           - revise
           - cancel
 
-concurrency:
-  group: ui-request-${{ fromJSON(format('{0}', github.event.issue.number || inputs.issue_number)) }}
-  cancel-in-progress: false
-
 permissions:
   contents: read
 
 jobs:
   gate:
-    if: github.event_name == 'workflow_dispatch' || (github.event.label.name == 'ui:ready' && github.event.issue.state == 'open')
+    if: github.event_name == 'workflow_dispatch' || (github.event.label.name == 'ui:ready' && ((github.event_name == 'issues' && github.event.issue.state == 'open') || (github.event_name == 'pull_request' && github.event.pull_request.state == 'open')))
     runs-on: ubuntu-latest
     permissions:
       contents: read
       issues: read
+      pull-requests: read
     outputs:
-      issue_number: ${{ steps.issue.outputs.issue_number }}
-      operation: ${{ steps.issue.outputs.operation }}
-      labeled: ${{ steps.issue.outputs.labeled }}
+      issue_number: ${{ steps.input.outputs.issue_number }}
+      operation: ${{ steps.input.outputs.operation }}
+      labeled: ${{ steps.input.outputs.labeled }}
+      pull_request_number: ${{ steps.input.outputs.pull_request_number }}
+      label_target_number: ${{ steps.input.outputs.label_target_number }}
     steps:
       - name: Admit manual request operation
         id: manual
@@ -50,8 +53,10 @@ jobs:
           echo "issue_number=$INPUT_ISSUE_NUMBER" >> "$GITHUB_OUTPUT"
           echo "operation=$INPUT_OPERATION" >> "$GITHUB_OUTPUT"
           echo 'labeled=false' >> "$GITHUB_OUTPUT"
+          echo 'pull_request_number=' >> "$GITHUB_OUTPUT"
+          echo 'label_target_number=' >> "$GITHUB_OUTPUT"
       - name: Admit authorized issue label
-        id: label
+        id: issue
         if: github.event_name == 'issues'
         env:
           GH_TOKEN: ${{ github.token }}
@@ -72,31 +77,88 @@ jobs:
           echo "issue_number=$INPUT_ISSUE_NUMBER" >> "$GITHUB_OUTPUT"
           echo 'operation=auto' >> "$GITHUB_OUTPUT"
           echo 'labeled=true' >> "$GITHUB_OUTPUT"
-      - name: Select admitted request input
-        id: issue
+          echo 'pull_request_number=' >> "$GITHUB_OUTPUT"
+          echo "label_target_number=$INPUT_ISSUE_NUMBER" >> "$GITHUB_OUTPUT"
+      - name: Admit authorized proposal label
+        id: proposal
+        if: github.event_name == 'pull_request'
         env:
-          LABEL_ISSUE_NUMBER: ${{ steps.label.outputs.issue_number }}
-          LABEL_OPERATION: ${{ steps.label.outputs.operation }}
-          LABEL_TRIGGERED: ${{ steps.label.outputs.labeled }}
+          GH_TOKEN: ${{ github.token }}
+          INPUT_ACTOR: ${{ github.actor }}
+          INPUT_ACTOR_TYPE: ${{ github.event.sender.type }}
+          INPUT_PULL_REQUEST_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          set -euo pipefail
+          test "$INPUT_ACTOR_TYPE" = 'User'
+          permission="$(gh api "repos/$GITHUB_REPOSITORY/collaborators/$INPUT_ACTOR/permission" --jq .permission)"
+          case "$permission" in
+            admin|write) ;;
+            *)
+              echo "ui:ready requires write, maintain, or admin repository permission." >&2
+              exit 1
+              ;;
+          esac
+          proposal="$(gh api "repos/$GITHUB_REPOSITORY/pulls/$INPUT_PULL_REQUEST_NUMBER")"
+          test "$(jq -r .state <<< "$proposal")" = 'open'
+          test "$(jq -r .base.ref <<< "$proposal")" = 'main'
+          test "$(jq -r .head.repo.full_name <<< "$proposal")" = "$GITHUB_REPOSITORY"
+          head_ref="$(jq -r .head.ref <<< "$proposal")"
+          case "$head_ref" in
+            astrale/ui-request-*) ;;
+            *)
+              echo 'Only a managed Astrale UI request proposal can be revised.' >&2
+              exit 1
+              ;;
+          esac
+          body="$(jq -r .body <<< "$proposal")"
+          pattern="Resolves https://github.com/$GITHUB_REPOSITORY/issues/([1-9][0-9]*)\\."
+          if [[ ! "$body" =~ $pattern ]]; then
+            echo 'The proposal does not identify one canonical originating request.' >&2
+            exit 1
+          fi
+          echo "issue_number=${BASH_REMATCH[1]}" >> "$GITHUB_OUTPUT"
+          echo 'operation=auto' >> "$GITHUB_OUTPUT"
+          echo 'labeled=true' >> "$GITHUB_OUTPUT"
+          echo "pull_request_number=$INPUT_PULL_REQUEST_NUMBER" >> "$GITHUB_OUTPUT"
+          echo "label_target_number=$INPUT_PULL_REQUEST_NUMBER" >> "$GITHUB_OUTPUT"
+      - name: Select admitted request input
+        id: input
+        env:
+          ISSUE_NUMBER: ${{ steps.issue.outputs.issue_number }}
+          ISSUE_OPERATION: ${{ steps.issue.outputs.operation }}
+          ISSUE_LABELED: ${{ steps.issue.outputs.labeled }}
+          ISSUE_LABEL_TARGET: ${{ steps.issue.outputs.label_target_number }}
+          PROPOSAL_ISSUE_NUMBER: ${{ steps.proposal.outputs.issue_number }}
+          PROPOSAL_OPERATION: ${{ steps.proposal.outputs.operation }}
+          PROPOSAL_LABELED: ${{ steps.proposal.outputs.labeled }}
+          PROPOSAL_NUMBER: ${{ steps.proposal.outputs.pull_request_number }}
+          PROPOSAL_LABEL_TARGET: ${{ steps.proposal.outputs.label_target_number }}
           MANUAL_ISSUE_NUMBER: ${{ steps.manual.outputs.issue_number }}
           MANUAL_OPERATION: ${{ steps.manual.outputs.operation }}
-          MANUAL_TRIGGERED: ${{ steps.manual.outputs.labeled }}
+          MANUAL_LABELED: ${{ steps.manual.outputs.labeled }}
         run: |
-          issue_number="${LABEL_ISSUE_NUMBER:-$MANUAL_ISSUE_NUMBER}"
-          operation="${LABEL_OPERATION:-$MANUAL_OPERATION}"
-          labeled="${LABEL_TRIGGERED:-$MANUAL_TRIGGERED}"
+          issue_number="${ISSUE_NUMBER:-${PROPOSAL_ISSUE_NUMBER:-$MANUAL_ISSUE_NUMBER}}"
+          operation="${ISSUE_OPERATION:-${PROPOSAL_OPERATION:-$MANUAL_OPERATION}}"
+          labeled="${ISSUE_LABELED:-${PROPOSAL_LABELED:-$MANUAL_LABELED}}"
+          pull_request_number="${PROPOSAL_NUMBER:-}"
+          label_target_number="${ISSUE_LABEL_TARGET:-${PROPOSAL_LABEL_TARGET:-}}"
           test -n "$issue_number"
           test -n "$operation"
           test -n "$labeled"
           echo "issue_number=$issue_number" >> "$GITHUB_OUTPUT"
           echo "operation=$operation" >> "$GITHUB_OUTPUT"
           echo "labeled=$labeled" >> "$GITHUB_OUTPUT"
+          echo "pull_request_number=$pull_request_number" >> "$GITHUB_OUTPUT"
+          echo "label_target_number=$label_target_number" >> "$GITHUB_OUTPUT"
 
   request:
     needs: gate
     runs-on: ubuntu-latest
     timeout-minutes: 100
     environment: ui-request-agent
+    concurrency:
+      group: ui-request-${{ needs.gate.outputs.issue_number }}
+      cancel-in-progress: false
     permissions:
       actions: write
       contents: read
@@ -105,6 +167,7 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
+          ref: ${{ github.event.repository.default_branch }}
           persist-credentials: 'false'
       - uses: astrale-os/config/.github/actions/setup@8e2e2abd0320be0c2f64033916519ab3b66c7dd7
         with:
@@ -116,8 +179,12 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
           INPUT_ISSUE_NUMBER: ${{ needs.gate.outputs.issue_number }}
           INPUT_OPERATION: ${{ needs.gate.outputs.operation }}
+          INPUT_PULL_REQUEST_NUMBER: ${{ needs.gate.outputs.pull_request_number }}
           UI_REQUEST_AGENT_PROVIDER: github-actions-claude-code
-        run: pnpm request:run --issue "$INPUT_ISSUE_NUMBER" --operation "$INPUT_OPERATION"
+        run: |
+          args=(--issue "$INPUT_ISSUE_NUMBER" --operation "$INPUT_OPERATION")
+          if [ -n "$INPUT_PULL_REQUEST_NUMBER" ]; then args+=(--pull-request "$INPUT_PULL_REQUEST_NUMBER"); fi
+          pnpm request:run "${args[@]}"
       - name: Dispatch or reconcile through GitHub Copilot
         if: vars.UI_REQUEST_AGENT_PROVIDER == 'github-copilot'
         env:
@@ -125,8 +192,12 @@ jobs:
           COPILOT_AGENT_TOKEN: ${{ secrets.COPILOT_AGENT_TOKEN }}
           INPUT_ISSUE_NUMBER: ${{ needs.gate.outputs.issue_number }}
           INPUT_OPERATION: ${{ needs.gate.outputs.operation }}
+          INPUT_PULL_REQUEST_NUMBER: ${{ needs.gate.outputs.pull_request_number }}
           UI_REQUEST_AGENT_PROVIDER: github-copilot
-        run: pnpm request:run --issue "$INPUT_ISSUE_NUMBER" --operation "$INPUT_OPERATION"
+        run: |
+          args=(--issue "$INPUT_ISSUE_NUMBER" --operation "$INPUT_OPERATION")
+          if [ -n "$INPUT_PULL_REQUEST_NUMBER" ]; then args+=(--pull-request "$INPUT_PULL_REQUEST_NUMBER"); fi
+          pnpm request:run "${args[@]}"
       - name: Dispatch or reconcile through Cursor
         if: vars.UI_REQUEST_AGENT_PROVIDER == 'cursor'
         env:
@@ -134,8 +205,12 @@ jobs:
           CURSOR_API_KEY: ${{ secrets.CURSOR_API_KEY }}
           INPUT_ISSUE_NUMBER: ${{ needs.gate.outputs.issue_number }}
           INPUT_OPERATION: ${{ needs.gate.outputs.operation }}
+          INPUT_PULL_REQUEST_NUMBER: ${{ needs.gate.outputs.pull_request_number }}
           UI_REQUEST_AGENT_PROVIDER: cursor
-        run: pnpm request:run --issue "$INPUT_ISSUE_NUMBER" --operation "$INPUT_OPERATION"
+        run: |
+          args=(--issue "$INPUT_ISSUE_NUMBER" --operation "$INPUT_OPERATION")
+          if [ -n "$INPUT_PULL_REQUEST_NUMBER" ]; then args+=(--pull-request "$INPUT_PULL_REQUEST_NUMBER"); fi
+          pnpm request:run "${args[@]}"
       - name: Reject unsupported provider configuration
         if: vars.UI_REQUEST_AGENT_PROVIDER != '' && vars.UI_REQUEST_AGENT_PROVIDER != 'github-actions-claude-code' && vars.UI_REQUEST_AGENT_PROVIDER != 'github-copilot' && vars.UI_REQUEST_AGENT_PROVIDER != 'cursor'
         env:
@@ -147,5 +222,55 @@ jobs:
         if: success() && needs.gate.outputs.labeled == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
-          INPUT_ISSUE_NUMBER: ${{ needs.gate.outputs.issue_number }}
-        run: gh api --method DELETE "repos/$GITHUB_REPOSITORY/issues/$INPUT_ISSUE_NUMBER/labels/ui%3Aready"
+          INPUT_LABEL_TARGET_NUMBER: ${{ needs.gate.outputs.label_target_number }}
+        run: gh api --method DELETE "repos/$GITHUB_REPOSITORY/issues/$INPUT_LABEL_TARGET_NUMBER/labels/ui%3Aready"
+
+  cleanup:
+    if: github.event_name == 'pull_request' && github.event.action == 'closed' && startsWith(github.event.pull_request.head.ref, 'astrale/ui-request-')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: ui-request-agent
+    concurrency:
+      group: ui-request-preview-publication
+      cancel-in-progress: false
+    permissions:
+      contents: read
+      deployments: write
+      pull-requests: read
+    steps:
+      - name: Remove the closed proposal preview
+        env:
+          GH_TOKEN: ${{ secrets.UI_REQUEST_GITHUB_TOKEN }}
+          INPUT_PULL_REQUEST_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          set -euo pipefail
+          proposal="$(gh api "repos/$GITHUB_REPOSITORY/pulls/$INPUT_PULL_REQUEST_NUMBER")"
+          test "$(jq -r .head.repo.full_name <<< "$proposal")" = "$GITHUB_REPOSITORY"
+          case "$(jq -r .head.ref <<< "$proposal")" in
+            astrale/ui-request-*) ;;
+            *) exit 1 ;;
+          esac
+          gh auth setup-git
+          pages="$RUNNER_TEMP/ui-request-pages"
+          git init "$pages"
+          git -C "$pages" remote add origin "https://github.com/$GITHUB_REPOSITORY.git"
+          if git ls-remote --exit-code --heads origin gh-pages >/dev/null; then
+            git -C "$pages" fetch --no-tags origin refs/heads/gh-pages
+            git -C "$pages" checkout -B gh-pages FETCH_HEAD
+            target="$pages/pr-$INPUT_PULL_REQUEST_NUMBER"
+            if [ -d "$target" ]; then
+              find "$target" -depth -delete
+              git -C "$pages" add --all
+              git -C "$pages" -c commit.gpgSign=false \
+                -c user.name='github-actions[bot]' \
+                -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
+                commit -m "chore(preview): remove PR $INPUT_PULL_REQUEST_NUMBER"
+              git -C "$pages" push origin HEAD:refs/heads/gh-pages
+            fi
+          fi
+          deployments="$(gh api --paginate --slurp "repos/$GITHUB_REPOSITORY/deployments?environment=ui-request-pr-$INPUT_PULL_REQUEST_NUMBER" | jq 'add // []')"
+          jq -r '.[].id' <<< "$deployments" | while read -r deployment_id; do
+            gh api --method POST "repos/$GITHUB_REPOSITORY/deployments/$deployment_id/statuses" \
+              -f state=inactive \
+              -f description='Proposal closed; preview removed' >/dev/null
+          done

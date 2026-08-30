@@ -13,7 +13,12 @@ export const requestState = {
       requestInput: 'needs-input',
       decline: 'declined',
     },
-    proposed: { merge: 'completed', requestInput: 'needs-input', decline: 'declined' },
+    proposed: {
+      revise: 'proposed',
+      merge: 'completed',
+      requestInput: 'needs-input',
+      decline: 'declined',
+    },
     completed: {},
     declined: {},
   },

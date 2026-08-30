@@ -25,15 +25,20 @@ function memoryStore() {
     writes: [],
     async getRequest(number, options = {}) {
       assert.equal(number, issue.number)
-      const acceptedCommentIds =
+      const acceptedDiscussionIds =
         options.commentMode === 'recorded'
-          ? new Set(this.binding?.record.acceptedCommentIds ?? [])
+          ? new Set(
+              this.binding?.record.acceptedDiscussionIds ??
+                (this.binding?.record.acceptedCommentIds ?? []).map((id) => `issue-comment:${id}`),
+            )
           : null
       return {
         issue: {
           ...this.issue,
-          comments: acceptedCommentIds
-            ? this.issue.comments.filter((comment) => acceptedCommentIds.has(comment.id))
+          comments: acceptedDiscussionIds
+            ? this.issue.comments.filter((comment) =>
+                acceptedDiscussionIds.has(comment.discussionId ?? `issue-comment:${comment.id}`),
+              )
             : this.issue.comments,
         },
         binding: this.binding,
@@ -151,7 +156,7 @@ test('persists the exact reservation before dispatch and survives coordinator re
       operation: 'initial',
       idempotencyKey: 'ui-request:123:attempt:1',
       objectiveSha256: store.binding.record.objectiveSha256,
-      acceptedCommentIds: [],
+      acceptedDiscussionIds: [],
       provider: 'fixture',
       state: 'reserved',
       updatedAt: fixedNow,
@@ -591,6 +596,221 @@ test('includes only bounded maintainer discussion in chronological accepted cont
   )
 })
 
+test('combines trusted issue, PR, review, and inline discussion while excluding preview automation', async () => {
+  const record = {
+    version: 1,
+    request: issue.url,
+    issue: 123,
+    attempt: 1,
+    operation: 'initial',
+    idempotencyKey: 'ui-request:123:attempt:1',
+    objectiveSha256: 'a'.repeat(64),
+    acceptedDiscussionIds: ['issue-comment:10'],
+    provider: 'fixture',
+    state: 'succeeded',
+    run: { provider: 'fixture', id: 'run-1' },
+    pullRequest: `${repository}/pull/77`,
+    updatedAt: fixedNow,
+  }
+  const values = {
+    issue: githubComment(10, 'Issue refinement.'),
+    conversation: githubComment(20, 'PR conversation refinement.'),
+    review: {
+      ...githubComment(30, 'Review summary refinement.'),
+      created_at: undefined,
+      updated_at: undefined,
+      submitted_at: new Date(Date.parse('2026-08-28T10:00:00Z') + 30 * 1000).toISOString(),
+    },
+    inline: {
+      ...githubComment(40, 'Inline refinement.'),
+      path: 'registry/components/example/example.tsx',
+      line: 42,
+    },
+  }
+  const store = createGitHubRequestStore({
+    token: 'github-secret',
+    owner: 'astrale-os',
+    repo: 'ui',
+    fetch: async (url) => {
+      if (url.endsWith('/issues/123')) {
+        return json({
+          number: 123,
+          title: issue.title,
+          body: issue.body,
+          html_url: issue.url,
+          state: 'open',
+        })
+      }
+      if (url.includes('/issues/123/comments?')) {
+        return json([
+          values.issue,
+          {
+            id: 91,
+            user: { login: 'github-actions[bot]', type: 'Bot' },
+            author_association: 'CONTRIBUTOR',
+            body: renderRecordComment(record),
+          },
+        ])
+      }
+      if (url.endsWith('/pulls/77')) {
+        return json({
+          html_url: `${repository}/pull/77`,
+          state: 'open',
+          merged_at: null,
+          base: { ref: 'main' },
+          head: {
+            ref: 'astrale/ui-request-123-attempt-1-fixture',
+            repo: { full_name: 'astrale-os/ui' },
+          },
+        })
+      }
+      if (url.includes('/issues/77/comments?')) {
+        return json([
+          values.conversation,
+          {
+            ...githubComment(21, '<!-- astrale-ui-request-preview:v1 -->\nGenerated evidence.'),
+            user: { login: 'maintainer', type: 'User' },
+          },
+        ])
+      }
+      if (url.includes('/pulls/77/reviews?')) return json([values.review])
+      if (url.includes('/pulls/77/comments?')) return json([values.inline])
+      throw new Error(`Unexpected request: ${url}`)
+    },
+  })
+
+  const request = await store.getRequest(123)
+  assert.deepEqual(
+    request.issue.comments.map(({ discussionId, source, path, line }) => ({
+      discussionId,
+      source,
+      ...(path ? { path } : {}),
+      ...(line ? { line } : {}),
+    })),
+    [
+      { discussionId: 'issue-comment:10', source: 'issue-comment' },
+      { discussionId: 'pull-request-comment:20', source: 'pull-request-comment' },
+      { discussionId: 'pull-request-review:30', source: 'pull-request-review' },
+      {
+        discussionId: 'pull-request-review-comment:40',
+        source: 'pull-request-review-comment',
+        path: 'registry/components/example/example.tsx',
+        line: 42,
+      },
+    ],
+  )
+})
+
+test('revalidates a bound proposal as the same open managed main pull request at dispatch time', async () => {
+  const record = {
+    version: 1,
+    request: issue.url,
+    issue: 123,
+    attempt: 1,
+    operation: 'initial',
+    idempotencyKey: 'ui-request:123:attempt:1',
+    objectiveSha256: 'a'.repeat(64),
+    acceptedDiscussionIds: [],
+    provider: 'fixture',
+    state: 'succeeded',
+    run: { provider: 'fixture', id: 'run-1' },
+    pullRequest: `${repository}/pull/77`,
+    updatedAt: fixedNow,
+  }
+  const validProposal = {
+    html_url: `${repository}/pull/77`,
+    state: 'open',
+    merged_at: null,
+    base: { ref: 'main' },
+    head: {
+      ref: 'astrale/ui-request-123-attempt-1-fixture',
+      repo: { full_name: 'astrale-os/ui' },
+    },
+  }
+  for (const proposal of [
+    { ...validProposal, html_url: `${repository}/pull/78` },
+    { ...validProposal, state: 'closed' },
+    { ...validProposal, merged_at: '2026-08-30T01:00:00Z' },
+    {
+      ...validProposal,
+      base: { ref: 'release' },
+    },
+    {
+      ...validProposal,
+      head: {
+        ref: 'astrale/ui-request-123-attempt-1-fixture',
+        repo: { full_name: 'untrusted/fork' },
+      },
+    },
+    {
+      ...validProposal,
+      head: {
+        ref: 'astrale/ui-request-999-attempt-1-fixture',
+        repo: { full_name: 'astrale-os/ui' },
+      },
+    },
+  ]) {
+    const store = createGitHubRequestStore({
+      token: 'github-secret',
+      owner: 'astrale-os',
+      repo: 'ui',
+      fetch: async (url) => {
+        if (url.endsWith('/issues/123')) {
+          return json({
+            number: 123,
+            title: issue.title,
+            body: issue.body,
+            html_url: issue.url,
+            state: 'open',
+          })
+        }
+        if (url.includes('/issues/123/comments?')) {
+          return json([
+            {
+              id: 91,
+              user: { login: 'github-actions[bot]', type: 'Bot' },
+              body: renderRecordComment(record),
+            },
+          ])
+        }
+        if (url.endsWith('/pulls/77')) return json(proposal)
+        throw new Error(`Unexpected request: ${url}`)
+      },
+    })
+    await assert.rejects(() => store.getRequest(123), /not an admitted managed pull request/u)
+  }
+})
+
+test('rejects a proposal label that does not target the request bound pull request', async () => {
+  const store = memoryStore()
+  store.binding = {
+    commentId: 1,
+    record: {
+      version: 1,
+      request: issue.url,
+      issue: 123,
+      attempt: 1,
+      operation: 'initial',
+      idempotencyKey: 'ui-request:123:attempt:1',
+      objectiveSha256: 'a'.repeat(64),
+      acceptedDiscussionIds: [],
+      provider: 'fixture',
+      state: 'succeeded',
+      run: { provider: 'fixture', id: 'run-1' },
+      pullRequest: `${repository}/pull/77`,
+      updatedAt: fixedNow,
+    },
+  }
+  const agent = fixtureAgent('fixture')
+  const result = await dispatcher(store, agent).execute(123, 'auto', {
+    maxWaitMs: 0,
+    pullRequest: `${repository}/pull/78`,
+  })
+  assert.equal(result.kind, 'failed')
+  assert.match(result.failure.message, /not the proposal bound/u)
+  assert.equal(agent.dispatches.length, 0)
+})
+
 test('recovers untrusted association metadata through exact collaborator permission checks', async () => {
   const permissionCalls = new Map()
   const store = createGitHubRequestStore({
@@ -687,7 +907,7 @@ test('enforces accepted maintainer comment count and UTF-8 body bounds', async (
   )
 })
 
-test('freezes accepted comment ids for reconciliation and excludes later discussion', async () => {
+test('freezes accepted discussion ids for reconciliation and excludes later discussion', async () => {
   const store = memoryStore()
   store.issue.comments = [
     {
@@ -712,7 +932,7 @@ test('freezes accepted comment ids for reconciliation and excludes later discuss
   })
   const subject = dispatcher(store, agent)
   await subject.execute(123, 'run', { maxWaitMs: 0 })
-  assert.deepEqual(store.binding.record.acceptedCommentIds, [10])
+  assert.deepEqual(store.binding.record.acceptedDiscussionIds, ['issue-comment:10'])
   store.binding.record.updatedAt = '2020-01-01T00:00:00Z'
   store.issue.comments.push({
     id: 11,
@@ -888,12 +1108,9 @@ test('fails closed when trusted-record discovery exceeds the bounded comment sca
     },
   })
 
-  await assert.rejects(
-    store.getRequest(123),
-    /GitHub issue comments exceed the admitted scan bound/u,
-  )
+  await assert.rejects(store.getRequest(123), /GitHub discussion exceeds the admitted scan bound/u)
   assert.equal(pages, 10)
-  assert.equal(permissionCalls, 1)
+  assert.equal(permissionCalls, 0)
 })
 
 test('fails closed when the trusted actor comment contains a malformed machine marker', async () => {

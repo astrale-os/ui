@@ -439,7 +439,6 @@ test('command palette searches canonical items and preserves keyboard navigation
   })
   await page.goto('/')
   await page.waitForLoadState('networkidle')
-  const previewRequestBaseline = previewRequests.length
   const trigger = page.getByRole('button', { name: /Search components/u })
   await expect(trigger).toHaveAttribute('aria-keyshortcuts', 'Meta+K Control+K')
   await expect(trigger.locator('[data-slot="kbd"]')).toHaveText('⌘K')
@@ -472,6 +471,9 @@ test('command palette searches canonical items and preserves keyboard navigation
   )
   await expect(palette).toBeVisible()
   await expect(palette.getByRole('option')).toHaveCount(expectedCanonicalAddresses.length)
+  await expect(page.locator('[data-preview-status="loading"]')).toHaveCount(0)
+  await page.waitForLoadState('networkidle')
+  const previewRequestBaseline = previewRequests.length
   const input = palette.getByPlaceholder('Search components, patterns, and blocks…')
   await expect(input).toBeFocused()
   await input.fill('range basic')

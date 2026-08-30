@@ -163,6 +163,14 @@ jobs:
         with:
           ref: ${{ needs.propose.outputs.baseline_sha }}
           persist-credentials: 'false'
+      - name: Preserve base-controlled visual evidence programs
+        run: |
+          base="$RUNNER_TEMP/ui-request-base"
+          mkdir -p "$base/request/.spec" "$base/playground/scripts"
+          cp request/preview-plan.mjs "$base/request/preview-plan.mjs"
+          cp request/.spec/limits.ts "$base/request/.spec/limits.ts"
+          cp playground/scripts/capture-request-previews.mjs \
+            "$base/playground/scripts/capture-request-previews.mjs"
       - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           name: ui-request-candidate-${{ github.run_id }}
@@ -185,6 +193,37 @@ jobs:
           pnpm registry:build
       - name: Qualify the candidate without publication authority
         run: pnpm check
+      - name: Build changed preview evidence without publication authority
+        env:
+          INPUT_BASELINE_SHA: ${{ needs.propose.outputs.baseline_sha }}
+        run: |
+          set -euo pipefail
+          evidence="$RUNNER_TEMP/ui-request-preview"
+          node "$RUNNER_TEMP/ui-request-base/request/preview-plan.mjs" \
+            --base "$INPUT_BASELINE_SHA" \
+            --output "$evidence/manifest.json"
+          ASTRALE_PLAYGROUND_RELATIVE_BASE=1 pnpm playground:build
+          pnpm --filter @astrale-os/ui-playground exec playwright install --with-deps chromium
+          pnpm --filter @astrale-os/ui-playground exec vite preview \
+            --host 127.0.0.1 --port 4176 > "$RUNNER_TEMP/ui-request-preview-server.log" 2>&1 &
+          server_pid="$!"
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+          for attempt in $(seq 1 60); do
+            if curl --fail --silent --show-error http://127.0.0.1:4176/ >/dev/null; then break; fi
+            if [ "$attempt" = 60 ]; then
+              cat "$RUNNER_TEMP/ui-request-preview-server.log" >&2
+              exit 1
+            fi
+            sleep 1
+          done
+          node "$RUNNER_TEMP/ui-request-base/playground/scripts/capture-request-previews.mjs" \
+            --manifest "$evidence/manifest.json" \
+            --origin http://127.0.0.1:4176/
+          kill "$server_pid"
+          wait "$server_pid" 2>/dev/null || true
+          trap - EXIT
+          mkdir -p "$evidence/site"
+          cp -R playground/dist/. "$evidence/site/"
       - name: Encode the qualified candidate as inert patch evidence
         run: |
           set -euo pipefail
@@ -200,21 +239,36 @@ jobs:
           path: ${{ runner.temp }}/ui-request-qualified.patch
           if-no-files-found: error
           retention-days: 1
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: ui-request-preview-${{ github.run_id }}
+          path: ${{ runner.temp }}/ui-request-preview
+          if-no-files-found: error
+          retention-days: 14
 
   publish:
     needs: [propose, qualify]
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
     environment: ui-request-agent
+    concurrency:
+      group: ui-request-preview-publication
+      cancel-in-progress: false
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           ref: ${{ needs.propose.outputs.baseline_sha }}
           persist-credentials: 'false'
+      - name: Preserve the base-controlled preview admission program
+        run: cp request/preview-publisher.mjs "$RUNNER_TEMP/ui-request-preview-publisher.mjs"
       - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
         with:
           name: ui-request-qualified-${{ github.run_id }}
           path: ${{ runner.temp }}/ui-request-qualified
+      - uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8
+        with:
+          name: ui-request-preview-${{ github.run_id }}
+          path: ${{ runner.temp }}/ui-request-preview
       - name: Apply the qualified inert patch
         run: |
           set -euo pipefail
@@ -234,6 +288,7 @@ jobs:
             -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
             commit -m "feat(request): $INPUT_ATTEMPT"
       - name: Publish exactly one pull request for this attempt
+        id: proposal
         env:
           GH_TOKEN: ${{ secrets.UI_REQUEST_GITHUB_TOKEN }}
           INPUT_ATTEMPT: ${{ inputs.attempt }}
@@ -269,7 +324,103 @@ jobs:
             exit 1
           fi
           if [ -z "$INPUT_PULL_REQUEST" ] && [ -z "$existing" ]; then
-            gh pr create --base "$INPUT_BASE_REF" --head "$INPUT_BRANCH" \
+            existing="$(gh pr create --base "$INPUT_BASE_REF" --head "$INPUT_BRANCH" \
               --title "feat(request): $INPUT_ATTEMPT" \
-              --body "Resolves $INPUT_REQUEST. This pull request is an untrusted proposal that its existing review, CI, and publication owners still gate."
+              --body "Resolves $INPUT_REQUEST. This pull request is an untrusted proposal that its existing review, CI, and publication owners still gate.")"
+          fi
+          test -n "$existing"
+          echo "url=$existing" >> "$GITHUB_OUTPUT"
+          echo "number=${existing##*/}" >> "$GITHUB_OUTPUT"
+          echo "revision=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+      - name: Admit and publish static preview bytes
+        env:
+          GH_TOKEN: ${{ secrets.UI_REQUEST_GITHUB_TOKEN }}
+          INPUT_PULL_REQUEST: ${{ steps.proposal.outputs.url }}
+          INPUT_PULL_REQUEST_NUMBER: ${{ steps.proposal.outputs.number }}
+          INPUT_REVISION: ${{ steps.proposal.outputs.revision }}
+        run: |
+          set -euo pipefail
+          evidence="$RUNNER_TEMP/ui-request-preview"
+          origin="https://astrale-os.github.io/ui/pr-$INPUT_PULL_REQUEST_NUMBER"
+          node "$RUNNER_TEMP/ui-request-preview-publisher.mjs" \
+            --root "$evidence" \
+            --origin "$origin" \
+            --pull-request "$INPUT_PULL_REQUEST" \
+            --revision "$INPUT_REVISION" \
+            --run-url "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" \
+            --output "$RUNNER_TEMP/ui-request-preview-comment.md"
+
+          pages="$RUNNER_TEMP/ui-request-pages"
+          mkdir -p "$pages"
+          git -C "$pages" init
+          git -C "$pages" remote add origin "https://github.com/$GITHUB_REPOSITORY.git"
+          if git ls-remote --exit-code --heads origin gh-pages >/dev/null; then
+            git -C "$pages" fetch --no-tags origin refs/heads/gh-pages
+            git -C "$pages" checkout -B gh-pages FETCH_HEAD
+          else
+            git -C "$pages" checkout --orphan gh-pages
+          fi
+          target="$pages/pr-$INPUT_PULL_REQUEST_NUMBER"
+          if [ -e "$target" ]; then
+            find "$target" -depth -mindepth 1 -delete
+          fi
+          mkdir -p "$target/_evidence"
+          cp -R "$evidence/site/." "$target/"
+          cp "$evidence"/screenshots/*.png "$target/_evidence/"
+          cp "$evidence/manifest.json" "$target/_evidence/manifest.json"
+          printf '%s\n' "$INPUT_REVISION" > "$target/_evidence/revision"
+          touch "$pages/.nojekyll"
+          git -C "$pages" add --all
+          git -C "$pages" -c commit.gpgSign=false \
+            -c user.name='github-actions[bot]' \
+            -c user.email='41898282+github-actions[bot]@users.noreply.github.com' \
+            commit -m "chore(preview): PR $INPUT_PULL_REQUEST_NUMBER at $INPUT_REVISION"
+          git -C "$pages" push origin HEAD:refs/heads/gh-pages
+
+          available=false
+          for attempt in $(seq 1 90); do
+            observed="$(curl --fail --silent --show-error "$origin/_evidence/revision" 2>/dev/null || true)"
+            preview_id="$(jq -r '.previews[0].id' "$evidence/manifest.json")"
+            encoded_preview="$(jq -rn --arg value "$preview_id" '$value | @uri')"
+            index="$(curl --fail --silent --show-error "$origin/?preview=$encoded_preview&revision=$INPUT_REVISION" 2>/dev/null || true)"
+            if [ "$observed" = "$INPUT_REVISION" ] && grep -Fq "<meta name=\"astrale-ui-request-revision\" content=\"$INPUT_REVISION\">" <<< "$index"; then
+              available=true
+              break
+            fi
+            sleep 5
+          done
+          test "$available" = true
+          while read -r screenshot; do
+            name="${screenshot##*/}"
+            downloaded="$RUNNER_TEMP/ui-request-published-$name"
+            curl --fail --silent --show-error \
+              "$origin/_evidence/$name?revision=$INPUT_REVISION" > "$downloaded"
+            cmp "$evidence/$screenshot" "$downloaded"
+          done < <(jq -r '.previews[].screenshot' "$evidence/manifest.json")
+
+          deployment="$(jq -n \
+            --arg ref "$INPUT_REVISION" \
+            --arg environment "ui-request-pr-$INPUT_PULL_REQUEST_NUMBER" \
+            '{ref:$ref, environment:$environment, description:"Astrale UI request playground preview", auto_merge:false, required_contexts:[], transient_environment:true, production_environment:false}' | \
+            gh api --method POST "repos/$GITHUB_REPOSITORY/deployments" --input -)"
+          deployment_id="$(jq -r .id <<< "$deployment")"
+          test "$deployment_id" != null
+          gh api --method POST "repos/$GITHUB_REPOSITORY/deployments/$deployment_id/statuses" \
+            -f state=success \
+            -f environment_url="$origin/" \
+            -f log_url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" \
+            -f description="Qualified playground preview is ready" >/dev/null
+
+          publisher_actor="$(gh api user --jq .login)"
+          comments="$(gh api --paginate --slurp "repos/$GITHUB_REPOSITORY/issues/$INPUT_PULL_REQUEST_NUMBER/comments" | jq 'add // []')"
+          ids="$(jq -r --arg actor "$publisher_actor" '.[] | select(.user.login == $actor and (.body | contains("<!-- astrale-ui-request-preview:v1 -->"))) | .id' <<< "$comments")"
+          test "$(printf '%s\n' "$ids" | sed '/^$/d' | wc -l | tr -d ' ')" -le 1
+          comment_id="$(printf '%s\n' "$ids" | sed '/^$/d')"
+          body="$(jq -Rs . < "$RUNNER_TEMP/ui-request-preview-comment.md")"
+          if [ -n "$comment_id" ]; then
+            gh api --method PATCH "repos/$GITHUB_REPOSITORY/issues/comments/$comment_id" \
+              --input - <<< "{\"body\":$body}" >/dev/null
+          else
+            gh api --method POST "repos/$GITHUB_REPOSITORY/issues/$INPUT_PULL_REQUEST_NUMBER/comments" \
+              --input - <<< "{\"body\":$body}" >/dev/null
           fi

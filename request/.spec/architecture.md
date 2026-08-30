@@ -1,9 +1,10 @@
 # UI request automation architecture
 
-The GitHub issue body owns the initial human request. Bounded chronological comments from repository
-owners, members, and collaborators refine that intent; public and bot comments never enter the
-agent objective. A single trusted machine comment owns the current managed attempt binding and its
-exact accepted-comment snapshot. An owner, member, or collaborator association is admitted directly;
+The GitHub issue body owns the initial human request. Bounded chronological comments and reviews
+from repository owners, members, and collaborators refine that intent on the issue and its bound
+pull request; public and bot discussion never enters the agent objective. A single trusted machine
+comment owns the current managed attempt binding and its exact accepted-discussion snapshot. An owner,
+member, or collaborator association is admitted directly;
 every other non-bot association requires one cached permission lookup that may admit only write or
 admin authority for the current request read.
 
@@ -15,18 +16,22 @@ flowchart LR
   D --> A[ManagedAgent Port]
   A --> P[Provider adapter]
   P --> R[Pull request]
-  R --> C[Existing CI, preview, and review]
+  R --> Q[Credential-free qualification and rendering]
+  Q --> E[Inert preview publication and evidence comment]
+  E --> V[Maintainer visual review]
+  V -->|trusted feedback and ui:ready| D
 ```
 
 `ui:ready` is a consumable execution signal, not status authority. An actor with write, maintain, or
-admin repository permission may apply it; the trusted record determines whether the action starts,
-observes, or revises work. Manual dispatch remains the recovery surface for reconciliation and
-cancellation.
+admin repository permission may apply it to the request issue or its bound open proposal; the
+trusted record determines whether the action starts, observes, or revises work. A proposal label is
+admitted only when its exact URL matches the request record. Manual dispatch remains the recovery
+surface for reconciliation and cancellation.
 
 GitHub Actions concurrency over the canonical numeric issue identity is the production
 serialization boundary; the dispatcher does not claim to provide a cross-process compare-and-swap
-over GitHub comments. The accepted comment identifiers and objective digest freeze one attempt;
-later comments can enter only a later attempt. The record remains sufficient
+over GitHub comments. The accepted discussion identifiers and objective digest freeze one attempt;
+later discussion can enter only a later attempt. The record remains sufficient
 to resume observation after process or workflow restart. A reservation without a known run or an
 `AGENT_OUTCOME_UNKNOWN` result remains blocked for operator reconciliation; it never creates a
 second writer automatically. After the settlement bound, explicit `reconcile` may bind the one
@@ -37,6 +42,13 @@ Provider-specific credential composition is isolated to mutually exclusive trust
 the issue, label gate, CLI, dispatcher, job, and persisted record remain provider-neutral. Accepted
 request data may direct product intent but cannot alter repository policy, provenance admission,
 credential separation, tools, or qualification.
+
+Candidate source is installed, built, tested, rendered, and screenshotted in a credential-free job.
+A separate publisher receives only the qualified patch and bounded static preview artifact. It may
+commit the qualified patch, transfer static bytes to the dedicated preview origin, create a GitHub
+deployment, and maintain the single proposal evidence comment; it never executes candidate bytes.
+Each proposal revision replaces the same per-PR preview path. Closing the proposal removes that path
+and deactivates its deployment.
 
 This automation is repository tooling. It does not enter the published UI package, registry,
 search artifacts, playground bundle, CLI install graph, or SDK.
