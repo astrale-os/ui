@@ -1,5 +1,5 @@
+import { requestWorkflow } from '#functions/request'
 import { requestSubmission } from '#integrations/request-submission'
-import { requestWorkflow } from '#workflows/request'
 
 import { application, runtime, schema } from '../../index.js'
 
@@ -9,8 +9,7 @@ describe('application composition', () => {
   it('keeps authored Application and Runtime composition exact', () => {
     expect(application.schema).toBe(schema)
     expect(application.runtime).toBe(runtime)
-    expect(runtime.actions).toEqual([])
-    expect(runtime.workflows).toEqual([requestWorkflow])
+    expect(runtime.functions).toEqual([requestWorkflow])
     expect(runtime.integrations).toEqual({ requestSubmission })
     expect(application.frontend).toBeUndefined()
   })

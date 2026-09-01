@@ -5,13 +5,13 @@ import { defineRuntime } from '@astrale-os/sdk/runtime'
 
 import type { schema } from '#schema'
 
+import { requestWorkflow } from '#functions/request'
 import { integrations } from '#integrations'
 import {
   createGitHubRequestSubmissionProvider,
   githubRequestSubmissionConfigurationFromEnvironment,
   type GitHubRequestSubmissionEnvironment,
 } from '#providers/github'
-import { requestWorkflow } from '#workflows/request'
 
 export type Environment = GitHubRequestSubmissionEnvironment
 
@@ -29,8 +29,7 @@ const runtime: Runtime<
     } satisfies Providers<typeof integrations>
     return { providers }
   },
-  actions: [],
-  workflows: [requestWorkflow],
+  functions: [requestWorkflow],
 })
 
 export default runtime

@@ -11,7 +11,7 @@ queries/         caller-owned Request observation
 mutations/       atomic Request identity and lifecycle commits
 integrations/    provider-neutral external submission boundary
 providers/       GitHub boundary implementation and environment admission
-workflows/       crash-safe request orchestration
+functions/       crash-safe request Workflow
 runtime.ts       exact Workflow and Provider composition
 application.ts   Schema and Runtime composition
 tests/           cross-layer executable evidence
