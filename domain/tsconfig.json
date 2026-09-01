@@ -6,8 +6,8 @@
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "types": ["node", "vitest/globals"],
     "paths": {
-      "#actions": ["./actions/index.ts"],
-      "#actions/*": ["./actions/*/index.ts"],
+      "#functions": ["./functions/index.ts"],
+      "#functions/*": ["./functions/*/index.ts"],
       "#integrations": ["./integrations/index.ts"],
       "#integrations/*": ["./integrations/*/index.ts"],
       "#migrations": ["./migrations/index.ts"],
@@ -33,9 +33,7 @@
       "#utils": ["./utils/index.ts"],
       "#utils/*": ["./utils/*/index.ts"],
       "#views": ["./views/index.ts"],
-      "#views/*": ["./views/*/index.ts"],
-      "#workflows": ["./workflows/index.ts"],
-      "#workflows/*": ["./workflows/*/index.ts"]
+      "#views/*": ["./views/*/index.ts"]
     },
     "strict": true,
     "noEmit": true,
@@ -51,9 +49,8 @@
     "queries",
     "routes",
     "mutations",
-    "workflows",
+    "functions",
     "migrations",
-    "actions",
     "integrations",
     "providers",
     "utils",

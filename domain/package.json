@@ -15,8 +15,8 @@
   "main": "./schema/index.ts",
   "types": "./schema/index.ts",
   "imports": {
-    "#actions": "./actions/index.ts",
-    "#actions/*": "./actions/*/index.ts",
+    "#functions": "./functions/index.ts",
+    "#functions/*": "./functions/*/index.ts",
     "#integrations": "./integrations/index.ts",
     "#integrations/*": "./integrations/*/index.ts",
     "#migrations": "./migrations/index.ts",
@@ -42,9 +42,7 @@
     "#utils": "./utils/index.ts",
     "#utils/*": "./utils/*/index.ts",
     "#views": "./views/index.ts",
-    "#views/*": "./views/*/index.ts",
-    "#workflows": "./workflows/index.ts",
-    "#workflows/*": "./workflows/*/index.ts"
+    "#views/*": "./views/*/index.ts"
   },
   "exports": {
     ".": {
@@ -80,11 +78,11 @@
     "prod": "astrale-domain deploy prod"
   },
   "dependencies": {
-    "@astrale-os/sdk": "0.5.0-beta.95",
+    "@astrale-os/sdk": "0.5.0-beta.99",
     "zod": "4.4.3"
   },
   "devDependencies": {
-    "@astrale-os/adapter-cloudflare": "0.5.0-beta.98",
+    "@astrale-os/adapter-cloudflare": "0.5.0-beta.102",
     "@astrale-os/ox": ">=0.1.4 <1.0.0",
     "@types/node": "^22.0.0",
     "bun": "1.4.0",
