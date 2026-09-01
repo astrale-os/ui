@@ -11,6 +11,7 @@ describe('UI application composition', () => {
     expect(application.requirements).toEqual({
       functions: [K.functions.mutate.key, K.functions.query.key].sort(),
       classes: [],
+      profiles: [],
     })
   })
 })
