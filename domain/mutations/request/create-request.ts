@@ -6,7 +6,7 @@ import { Property, Query } from '@astrale-os/sdk/query'
 
 import type { UiSchema } from '#schema'
 
-import { requestSubmission } from '#schema/request/states'
+import { requestSubmission } from '#schema/modules/request/states'
 
 const createdRequest = LocalBinding('request')
 

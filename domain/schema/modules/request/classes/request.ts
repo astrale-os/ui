@@ -1,17 +1,18 @@
-import { K, nodeClass, property, stateProperty } from '@astrale-os/sdk/schema'
+import { K, classIcon, nodeClass, property, stateProperty } from '@astrale-os/sdk/schema'
+import { Inbox } from '@astrale-os/sdk/schema/icons'
 
 import {
   requestIdValue,
   collaborationUrlValue,
   requestIdempotencyKeyValue,
   requestIntentValue,
-} from './request-function.js'
-import { ManageRequest } from './request-policies.js'
-import { requestSubmission } from './states/index.js'
+} from '../functions/request.js'
+import { ManageRequest } from '../policies/request.js'
+import { requestSubmission } from '../states/index.js'
 
 export const Request = nodeClass({
   description: 'One idempotent UI capability request and its external collaboration receipt.',
-  icon: 'inbox',
+  icon: classIcon.lucide(Inbox),
   extends: [K.classes.Timestamped],
   properties: {
     ownerId: requestIdValue,
