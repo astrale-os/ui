@@ -3,7 +3,7 @@ import type { Node } from '@astrale-os/sdk/graph/node'
 import { NodeId } from '@astrale-os/sdk/graph/node'
 
 import type { UiDomain } from '#schema'
-import type { RequestSubmission } from '#schema/request/states'
+import type { RequestSubmission } from '#schema/modules/request/states'
 
 interface RequestRecordBase {
   readonly id: NodeId
