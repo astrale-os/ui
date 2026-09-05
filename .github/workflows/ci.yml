@@ -56,6 +56,7 @@ jobs:
             domain-only) pnpm format:check && pnpm domain:check ;;
             request-tooling) pnpm format:check && pnpm lint && pnpm request:check ;;
             family-scoped)
+              pnpm build
               pnpm format:check
               pnpm lint
               pnpm typecheck
