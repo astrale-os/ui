@@ -110,15 +110,15 @@ importers:
   .:
     dependencies:
       '@astrale-os/sdk':
-        specifier: 0.5.0-beta.114
-        version: 0.5.0-beta.114(@astrale-os/ox@0.1.4(oxfmt@0.64.0)(oxlint@1.79.0))(msgpackr@2.0.5)(oxlint@1.79.0)(zod@4.4.3)
+        specifier: 0.5.0-beta.115
+        version: 0.5.0-beta.115(@astrale-os/ox@0.1.4(oxfmt@0.64.0)(oxlint@1.79.0))(msgpackr@2.0.5)(oxlint@1.79.0)(zod@4.4.3)
       zod:
         specifier: 4.4.3
         version: 4.4.3
     devDependencies:
       '@astrale-os/adapter-cloudflare':
-        specifier: 0.5.0-beta.117
-        version: 0.5.0-beta.117(@astrale-os/ox@0.1.4(oxfmt@0.64.0)(oxlint@1.79.0))(@cloudflare/workers-types@5.20260821.1)(msgpackr@2.0.5)(oxlint@1.79.0)(zod@4.4.3)
+        specifier: 0.5.0-beta.118
+        version: 0.5.0-beta.118(@astrale-os/ox@0.1.4(oxfmt@0.64.0)(oxlint@1.79.0))(@cloudflare/workers-types@5.20260821.1)(msgpackr@2.0.5)(oxlint@1.79.0)(zod@4.4.3)
       '@astrale-os/ox':
         specifier: '>=0.1.4 <1.0.0'
         version: 0.1.4(oxfmt@0.64.0)(oxlint@1.79.0)
@@ -148,8 +148,8 @@ packages:
     resolution: {integrity: sha512-93Z1N+BQNXysodoicpOIyNh2drHfz/CTf9nnT0FEx72GJcIiwgydD7tGAr78j41LsYn3hlRn+LdGPuBLn1Bl8Q==, tarball: https://registry.npmjs.org/@asamuzakjp/dom-selector/-/dom-selector-8.3.2.tgz}
     engines: {node: ^22.13.0 || >=24.0.0}
 
-  '@astrale-os/adapter-cloudflare@0.5.0-beta.117':
-    resolution: {integrity: sha512-JippI2Q7GoXOqH5mPPBotRWvsKjaFRIqVHw5wrRWFngJAMO45y+Y98lWq3dfhyaArXQ87p+mKwEqZ/1IXyYhwg==, tarball: https://registry.npmjs.org/@astrale-os/adapter-cloudflare/-/adapter-cloudflare-0.5.0-beta.117.tgz}
+  '@astrale-os/adapter-cloudflare@0.5.0-beta.118':
+    resolution: {integrity: sha512-ZVYPZs9T9K9DUK781CakI6cy6O1oJdg8MePEqnh2Ck17M7XEkgv+ObTVh5qj64pmLv9Lt8ePP6Jsc36MGB4MhA==, tarball: https://registry.npmjs.org/@astrale-os/adapter-cloudflare/-/adapter-cloudflare-0.5.0-beta.118.tgz}
     engines: {node: '>=22'}
 
   '@astrale-os/kernel-client@0.6.0-beta.49':
@@ -180,8 +180,8 @@ packages:
       oxfmt: '>=0.63.0 <1'
       oxlint: '>=1.78.0 <2'
 
-  '@astrale-os/sdk@0.5.0-beta.114':
-    resolution: {integrity: sha512-9Wq1uRubBdYBPAPF1/1abW6xh4RWRnyBEtTQlOagfJaBy74z24zAcPjzoD/3yb9La3AsqsoQgQdDImeQV54adg==, tarball: https://registry.npmjs.org/@astrale-os/sdk/-/sdk-0.5.0-beta.114.tgz}
+  '@astrale-os/sdk@0.5.0-beta.115':
+    resolution: {integrity: sha512-Wou0GKtNYo6BsWAp3gHwrM37S9kCokDwUIhiEHXsNvq7zb5POTc1CcZuQGIyH7P2GxZi5I6OrRgL2+QIXQIMog==, tarball: https://registry.npmjs.org/@astrale-os/sdk/-/sdk-0.5.0-beta.115.tgz}
     engines: {node: '>=22'}
     hasBin: true
     peerDependencies:
@@ -1863,9 +1863,9 @@ snapshots:
       lru-cache: 11.5.2
     optional: true
 
-  '@astrale-os/adapter-cloudflare@0.5.0-beta.117(@astrale-os/ox@0.1.4(oxfmt@0.64.0)(oxlint@1.79.0))(@cloudflare/workers-types@5.20260821.1)(msgpackr@2.0.5)(oxlint@1.79.0)(zod@4.4.3)':
+  '@astrale-os/adapter-cloudflare@0.5.0-beta.118(@astrale-os/ox@0.1.4(oxfmt@0.64.0)(oxlint@1.79.0))(@cloudflare/workers-types@5.20260821.1)(msgpackr@2.0.5)(oxlint@1.79.0)(zod@4.4.3)':
     dependencies:
-      '@astrale-os/sdk': 0.5.0-beta.114(@astrale-os/ox@0.1.4(oxfmt@0.64.0)(oxlint@1.79.0))(msgpackr@2.0.5)(oxlint@1.79.0)(zod@4.4.3)
+      '@astrale-os/sdk': 0.5.0-beta.115(@astrale-os/ox@0.1.4(oxfmt@0.64.0)(oxlint@1.79.0))(msgpackr@2.0.5)(oxlint@1.79.0)(zod@4.4.3)
       '@noble/hashes': 2.3.0
       hono: 4.13.2
       jose: 6.2.9
@@ -1929,7 +1929,7 @@ snapshots:
       oxfmt: 0.64.0
       oxlint: 1.79.0
 
-  '@astrale-os/sdk@0.5.0-beta.114(@astrale-os/ox@0.1.4(oxfmt@0.64.0)(oxlint@1.79.0))(msgpackr@2.0.5)(oxlint@1.79.0)(zod@4.4.3)':
+  '@astrale-os/sdk@0.5.0-beta.115(@astrale-os/ox@0.1.4(oxfmt@0.64.0)(oxlint@1.79.0))(msgpackr@2.0.5)(oxlint@1.79.0)(zod@4.4.3)':
     dependencies:
       '@astrale-os/kernel-client': 0.6.0-beta.49(zod@4.4.3)
       '@astrale-os/kernel-core': 0.9.0-beta.37(zod@4.4.3)
