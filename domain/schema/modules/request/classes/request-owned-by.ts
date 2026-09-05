@@ -1,6 +1,6 @@
 import { K, edgeClass } from '@astrale-os/sdk/schema'
 
-import { TraverseOwnedRequest } from '../policies/request.js'
+import { TraverseOwnedRequest } from '../policies/index.js'
 import { Request } from './request.js'
 
 export const request_owned_by = edgeClass.directed({

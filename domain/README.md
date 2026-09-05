@@ -23,7 +23,10 @@ Request identity and submission receipt. GitHub collaboration remains external. 
 [the V1 ADR](./.history/v1/ADR.md).
 
 Copy `.env.example` to `.env.dev`, supply one repository-scoped GitHub credential, and run
-`pnpm dev`. The credential requires Issues write access to the configured repository; callers never
+`pnpm dev`. This watches and remotely deploys the `development` Environment; it starts no local
+Worker or tunnel and installs on no Kernel. `pnpm prod` remains the explicit one-shot production
+deployment. Stopping development leaves its remote Worker running. The credential requires Issues
+write access to the configured repository; callers never
 supply or observe it. `pnpm build` verifies exact callable and Provider composition without
 deploying.
 
