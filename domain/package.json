@@ -33,8 +33,6 @@
     "#rules/*": "./rules/*/index.ts",
     "#schema": "./schema/index.ts",
     "#schema/*": "./schema/*/index.ts",
-    "#scripts": "./scripts/index.ts",
-    "#scripts/*": "./scripts/*/index.ts",
     "#tests": "./tests/index.ts",
     "#tests/*": "./tests/*/index.ts",
     "#ui": "./ui/index.ts",
@@ -67,7 +65,7 @@
     }
   },
   "scripts": {
-    "dev": "bun scripts/dev/index.ts",
+    "dev": "astrale-domain dev",
     "deploy": "astrale-domain deploy",
     "build": "astrale-domain build",
     "lint": "astrale-domain lint",
