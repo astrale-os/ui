@@ -53,6 +53,7 @@ jobs:
         run: |
           case "$CI_SCOPE" in
             docs-only) pnpm format:check ;;
+            domain-only) pnpm format:check && pnpm domain:check ;;
             request-tooling) pnpm format:check && pnpm lint && pnpm request:check ;;
             family-scoped)
               pnpm format:check
@@ -93,7 +94,7 @@ jobs:
 
   domain:
     needs: plan
-    if: needs.plan.outputs.scope == 'global-ui'
+    if: needs.plan.outputs.scope == 'domain-only' || needs.plan.outputs.scope == 'global-ui'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -114,7 +115,7 @@ jobs:
 
   security:
     needs: plan
-    if: needs.plan.outputs.scope == 'global-ui'
+    if: needs.plan.outputs.scope == 'domain-only' || needs.plan.outputs.scope == 'global-ui'
     runs-on: ubuntu-latest
     permissions:
       actions: read
