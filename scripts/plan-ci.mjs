@@ -8,14 +8,15 @@ const documentation =
   /(?:^|\/)(?:README|CHANGELOG|CONTRIBUTING|SECURITY|LICENSE)(?:\.[^/]*)?$|\.(?:md|mdx|txt)$/iu
 const requestTooling = /^(?:request\/|\.github\/(?:ISSUE_TEMPLATE\/|workflows\/ui-request))/u
 const familyPath = /^registry\/(components|patterns|blocks)\/([^/]+)\//u
-const globalUi =
-  /^(?:packages\/ui\/|playground\/|registry\/variants\/|registry\/registry\.json$|registry\/core-catalog\.json$|themes\/|search\/|scripts\/(?:build|sync|refresh|intake|normalize|registry|catalog|upstream|verify))/u
 
 export function planCi(files) {
   const normalized = [...new Set(files.map((file) => file.trim()).filter(Boolean))].sort()
   if (normalized.length === 0) return { plan: 'docs-only', families: [], files: [] }
   if (normalized.every((file) => documentation.test(file))) {
     return { plan: 'docs-only', families: [], files: normalized }
+  }
+  if (normalized.every((file) => file.startsWith('domain/') || documentation.test(file))) {
+    return { plan: 'domain-only', families: [], files: normalized }
   }
   if (normalized.every((file) => requestTooling.test(file) || documentation.test(file))) {
     return { plan: 'request-tooling', families: [], files: normalized }
@@ -33,7 +34,7 @@ export function planCi(files) {
     return { plan: 'family-scoped', families: [...new Set(families)].sort(), files: normalized }
   }
   return {
-    plan: globalUi.test(normalized.join('\n')) ? 'global-ui' : 'global-ui',
+    plan: 'global-ui',
     families: [],
     files: normalized,
   }

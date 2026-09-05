@@ -49,9 +49,7 @@ describe('Request contract', () => {
       expect(validate(submission, state), state).toEqual([])
     }
     expect(validate(submission, 'accepted')).not.toEqual([])
-    expect(request.policies.read).toEqual([
-      { origin: 'ui.astrale.ai', kind: 'policy', name: 'ManageRequest' },
-    ])
+    expect(request.definition.policies.read).toEqual(schema.policies.ManageRequest.ref)
     expect(domain.policies.ManageRequest.expression).toEqual({
       match: {
         source: { kind: 'subject' },
@@ -73,9 +71,7 @@ describe('Request contract', () => {
         incoming: '0..1',
       },
     })
-    expect(ownership.policies.traverse).toEqual([
-      { origin: 'ui.astrale.ai', kind: 'policy', name: 'TraverseOwnedRequest' },
-    ])
+    expect(ownership.definition.policies.traverse).toEqual(schema.policies.TraverseOwnedRequest.ref)
     expect(domain.policies.TraverseOwnedRequest.expression).toEqual({
       match: {
         source: { kind: 'subject' },
