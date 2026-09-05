@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.3.0-beta.26](https://github.com/astrale-os/ui/compare/v0.3.0-beta.25...v0.3.0-beta.26) (2026-09-05)
+
+
+### Features
+
+* **domain:** adopt deploy-only project environments ([#159](https://github.com/astrale-os/ui/issues/159)) ([1c47433](https://github.com/astrale-os/ui/commit/1c4743383a53c5173f1c489512a5afdbfaa7ac08))
+
+
+### Bug Fixes
+
+* **ci:** qualify UI Domain changes at their owner ([#158](https://github.com/astrale-os/ui/issues/158)) ([9d3ff97](https://github.com/astrale-os/ui/commit/9d3ff977c9c9bf4ec3420670be613127a54f1c42))
+* **ui:** honor Codex release quarantine ([#153](https://github.com/astrale-os/ui/issues/153)) ([0fb4f2c](https://github.com/astrale-os/ui/commit/0fb4f2c7bdb91016de05afc08fd87eb483ebb4c6))
+* **ui:** open calendar preview at its selected month ([#160](https://github.com/astrale-os/ui/issues/160)) ([164b3c4](https://github.com/astrale-os/ui/commit/164b3c47a9371b0f82a0ef0685ecde528d513701))
+
 ## [0.3.0-beta.25](https://github.com/astrale-os/ui/compare/v0.3.0-beta.24...v0.3.0-beta.25) (2026-08-30)
 
 
