@@ -1,6 +1,6 @@
 import type { NodeId } from '@astrale-os/sdk/graph/node'
 
-import { LocalBinding } from '@astrale-os/sdk/graph'
+import { LocalAlias } from '@astrale-os/sdk/graph'
 import { defineMutation } from '@astrale-os/sdk/mutation'
 import { Property, Query } from '@astrale-os/sdk/query'
 
@@ -8,7 +8,7 @@ import type { UiSchema } from '#schema'
 
 import { requestSubmission } from '#schema/request/states'
 
-const createdRequest = LocalBinding('request')
+const createdRequest = LocalAlias('request')
 
 export interface CreateRequestInput {
   readonly owner: NodeId

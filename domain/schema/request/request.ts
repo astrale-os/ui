@@ -1,4 +1,5 @@
-import { K, nodeClass, property, stateProperty } from '@astrale-os/sdk/schema'
+import { K, nodeClass, property, stateProperty, classIcon } from '@astrale-os/sdk/schema'
+import { Inbox } from '@astrale-os/sdk/schema/icons'
 
 import {
   requestIdValue,
@@ -11,7 +12,7 @@ import { requestSubmission } from './states/index.js'
 
 export const Request = nodeClass({
   description: 'One idempotent UI capability request and its external collaboration receipt.',
-  icon: 'inbox',
+  icon: classIcon.lucide(Inbox),
   extends: [K.classes.Timestamped],
   properties: {
     ownerId: requestIdValue,
