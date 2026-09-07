@@ -1,4 +1,3 @@
-import { func } from '@astrale-os/sdk/schema'
 import { z } from 'zod'
 
 export const requestIdValue = z.string().min(1)
@@ -23,10 +22,3 @@ export const requestOutput = z.discriminatedUnion('state', [
   z.strictObject({ state: z.literal('failed'), requestId: requestIdValue }),
   z.strictObject({ state: z.literal('conflict'), requestId: requestIdValue }),
 ])
-
-export const request = func({
-  description: 'Retain one idempotent UI need and expose its collaboration receipt.',
-  auth: 'authenticated',
-  input: requestInput,
-  output: requestOutput,
-})

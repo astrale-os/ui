@@ -19660,15 +19660,11 @@
       "description": "Animated motion carousel with smooth slide transitions powered by the MotionCarousel component.",
       "dependencies": [
         "@astrale-os/ui@^0.3.0-beta.0",
-        "button@^1.1.1",
         "embla-carousel-react@^8.6.0",
         "embla-carousel@^8.6.0",
         "lucide-react@1.32.0",
         "motion@^13.1.0",
         "react@19.2.8"
-      ],
-      "registryDependencies": [
-        "carousel"
       ],
       "files": [
         {

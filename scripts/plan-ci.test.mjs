@@ -32,3 +32,17 @@ test('falls closed to global UI for shared or unknown source', () => {
   assert.equal(planCi(['scripts/mystery.mjs']).plan, 'global-ui')
   assert.equal(planCi(['registry/variants/catalog.json']).plan, 'global-ui')
 })
+
+test('qualifies Domain changes at their owner and keeps mixed or CI changes global', () => {
+  const domain = 'domain/schema/modules/request/__tests__/contract.test.ts'
+  assert.equal(planCi([domain, 'domain/pnpm-lock.yaml', 'README.md']).plan, 'domain-only')
+  for (const shared of [
+    'request/run.mjs',
+    'registry/components/button/button-01.tsx',
+    'packages/ui/src/index.ts',
+    'pnpm-lock.yaml',
+    '.github/workflows/ci.yml',
+    'scripts/plan-ci.mjs',
+  ])
+    assert.equal(planCi([domain, shared]).plan, 'global-ui')
+})

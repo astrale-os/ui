@@ -7,7 +7,7 @@ const providerWrangler = {
   compatibility_flags: ['global_fetch_strictly_public'],
 } as const
 
-/** Direct provider deployment; installation is explicit on each target Kernel. */
+/** Remote deployment only. Kernel installation is an explicit consumer operation. */
 export default defineProject({
   application,
   environments: {

@@ -8,7 +8,7 @@ import {
   TraverseOwnedRequest,
   request,
   request_owned_by,
-} from '#schema/request'
+} from '#schema/modules/request'
 
 export const ORIGIN = 'ui.astrale.ai' as const
 

@@ -3,7 +3,7 @@ node_modules/
 
 # Generated plumbing (worker entry, wrangler config, identity, spec)
 .astrale/
-.domain-studio/.cache/
+.domain-studio/
 
 # Worker dev + build artifacts
 .dev.vars
