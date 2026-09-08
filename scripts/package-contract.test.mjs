@@ -192,7 +192,22 @@ test('the exact shadcn support layer maps orientation shorthand to Base UI state
 test('theme has an opt-in reset and all public presets own the same character vocabulary', async () => {
   const theme = await readFile(`${packageRoot}/src/theme/theme.css`, 'utf8')
   const reset = await readFile(`${packageRoot}/src/theme/reset.css`, 'utf8')
-  assert.match(theme, /@import 'tailwindcss\/utilities\.css' source\(none\);/u)
+  const tailwind = await readFile(`${packageRoot}/src/theme/tailwind.css`, 'utf8')
+  // Component rules compile below consumer utilities; the Tailwind contract ships uncompiled.
+  assert.match(theme, /@import 'tailwindcss\/utilities\.css' layer\(components\) source\(none\);/u)
+  assert.match(theme, /@import '\.\/tailwind\.css';/u)
+  assert.doesNotMatch(theme, /@theme inline/u)
+  assert.match(cssBlock(theme, '@layer components'), /:where\(\[data-slot\]\)/u)
+  assert.match(tailwind, /@custom-variant dark \(&:where\(\.dark, \.dark \*\)\);/u)
+  const contract = cssBlock(tailwind, '@theme inline')
+  for (const mapping of [
+    '--color-background: var(--ui-background)',
+    '--color-border: var(--ui-border)',
+    '--radius-lg: var(--ui-radius)',
+    '--font-serif: var(--ui-font-heading)',
+  ]) {
+    assert.ok(contract.includes(mapping), `tailwind.css contract must map ${mapping}`)
+  }
   assert.match(theme, /@source '\.\.\/\*\*\/\*\.\{ts,tsx\}';/u)
   assert.doesNotMatch(theme, /tailwindcss\/preflight/u)
   assert.doesNotMatch(theme, /@import\s+["']\.\/reset/u)

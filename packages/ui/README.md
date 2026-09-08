@@ -9,7 +9,13 @@ pnpm add @astrale-os/ui
 ```css
 @import '@astrale-os/ui/theme.css';
 @import '@astrale-os/ui/presets/astrale.css';
+@import '@astrale-os/ui/tailwind.css';
 ```
+
+`tailwind.css` is the Tailwind CSS v4 contract for your own markup: it maps `bg-background`,
+`border-border`, `font-serif`, `rounded-lg`… and the class-based `dark:` variant onto the `--ui-*`
+tokens of the active preset. `theme.css` ships precompiled, with component rules in
+`@layer components` so that your utilities always win.
 
 ```tsx
 import { Button, Card, CardContent, CardHeader, CardTitle } from '@astrale-os/ui'

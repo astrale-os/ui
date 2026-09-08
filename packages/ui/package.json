@@ -296,6 +296,7 @@
       "default": "./dist/overlay/tooltip/index.js"
     },
     "./theme.css": "./dist/theme.css",
+    "./tailwind.css": "./dist/tailwind.css",
     "./reset.css": "./dist/reset.css",
     "./presets/astrale.css": "./dist/presets/astrale.css",
     "./presets/compact.css": "./dist/presets/compact.css",
