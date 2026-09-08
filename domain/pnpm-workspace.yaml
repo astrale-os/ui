@@ -33,3 +33,9 @@ minimumReleaseAgeExclude:
 
 # Never install implicitly before `pnpm run` or `pnpm exec`.
 verifyDepsBeforeRun: false
+
+# Types imported by published declarations.
+packageExtensions:
+  'miniflare@5.20260811.1-alpha':
+    dependencies:
+      '@cloudflare/workers-types': '5.20260817.1'

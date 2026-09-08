@@ -1,12 +1,13 @@
 import assert from 'node:assert/strict'
 import { spawnSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
-import { mkdtemp, mkdir, readFile, readdir, rm, stat, writeFile } from 'node:fs/promises'
+import { mkdtemp, mkdir, readFile, readdir, realpath, rm, stat, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { Readable, Writable } from 'node:stream'
 import { pipeline } from 'node:stream/promises'
 import { createGzip } from 'node:zlib'
+import { parse, stringify } from 'yaml'
 
 const root = process.cwd()
 const packageRoot = path.join(root, 'packages/ui')
@@ -18,7 +19,11 @@ function run(file, args, cwd = root) {
     cwd,
     encoding: 'utf8',
     stdio: 'pipe',
-    env: { ...process.env, NPM_CONFIG_CACHE: path.join(temporary, 'npm-cache') },
+    env: {
+      ...process.env,
+      PNPM_CONFIG_VIRTUAL_STORE_TYPE: 'global',
+      NPM_CONFIG_CACHE: path.join(temporary, 'npm-cache'),
+    },
   })
   if (result.status !== 0) {
     throw new Error(`${file} ${args.join(' ')} failed\n${result.stdout}\n${result.stderr}`)
@@ -103,9 +108,10 @@ try {
     false,
   )
   await writeFile(path.join(artifactDirectory, 'pack-files.txt'), entries.join('\n') + '\n')
-  const npmPackDryRun = JSON.parse(
+  const npmPackResult = JSON.parse(
     run('npm', ['pack', '--dry-run', '--json', '--ignore-scripts'], packageRoot),
   )
+  const npmPackDryRun = Array.isArray(npmPackResult) ? npmPackResult : Object.values(npmPackResult)
   assert.equal(npmPackDryRun.length, 1)
   const dryRunFiles = npmPackDryRun[0].files.map(({ path: file }) => file).toSorted()
   const archiveFiles = entries
@@ -141,6 +147,18 @@ try {
     path.join(consumer, '.npmrc'),
     'registry=https://registry.npmjs.org/\n@astrale-os:registry=https://registry.npmjs.org/\n',
   )
+  // Exercise published declarations outside the consumer's ancestor node_modules.
+  // Reuse only upstream fixes: this test must rely on our packed manifest's peer.
+  const workspace = parse(await readFile(path.join(root, 'pnpm-workspace.yaml'), 'utf8'))
+  const upstreamExtensions = Object.fromEntries(
+    Object.entries(workspace.packageExtensions ?? {}).filter(
+      ([name]) => name !== '@astrale-os/ui' && !name.startsWith('@astrale-os/ui@'),
+    ),
+  )
+  await writeFile(
+    path.join(consumer, 'pnpm-workspace.yaml'),
+    stringify({ virtualStoreType: 'global', packageExtensions: upstreamExtensions }),
+  )
   const pnpmInstallStarted = performance.now()
   run(
     'pnpm',
@@ -155,6 +173,10 @@ try {
       '@types/react-dom@19.2.3',
     ],
     consumer,
+  )
+  assert.ok(
+    (await realpath(path.join(consumer, 'node_modules/@astrale-os/ui'))).includes('/links/'),
+    'packed UI must be loaded from the global virtual store',
   )
   const pnpmInstallMilliseconds = Math.round(performance.now() - pnpmInstallStarted)
   await writeFile(

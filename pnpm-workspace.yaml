@@ -35,3 +35,85 @@ allowBuilds:
   protobufjs: true
   sharp: true
   workerd: true
+
+# Published declarations must resolve their own imports in the global virtual store.
+# Remove each version-scoped extension when its upstream manifest is corrected.
+packageExtensions:
+  '@floating-ui/react-dom@2.1.9':
+    peerDependencies:
+      '@types/react': '>=16.8.0 <20'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+  '@testing-library/jest-dom@7.0.1':
+    dependencies:
+      '@types/aria-query': '^5.0.4'
+  'cmdk@1.1.1':
+    peerDependencies:
+      '@types/react': '^18 || ^19'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+  'input-otp@1.5.0':
+    peerDependencies:
+      '@types/react': '>=16.8.0 <20'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+  'react-resizable-panels@4.12.3':
+    peerDependencies:
+      '@types/react': '^18 || ^19'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+  'miniflare@5.20260811.1-alpha':
+    dependencies:
+      '@cloudflare/workers-types': '5.20260817.1'
+  '@react-types/shared@3.36.1':
+    peerDependencies:
+      '@types/react': '>=16.8.0 <20'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+  'lucide-react@1.32.0':
+    peerDependencies:
+      '@types/react': '>=16.8.0 <20'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+  'next-themes@0.4.6':
+    peerDependencies:
+      '@types/react': '>=16.8.0 <20'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+  'react-aria-components@1.20.0':
+    peerDependencies:
+      '@types/react': '>=16.8.0 <20'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+  'react-aria@3.51.0':
+    peerDependencies:
+      '@types/react': '>=16.8.0 <20'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+  'react-stately@3.49.0':
+    peerDependencies:
+      '@types/react': '>=16.8.0 <20'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+  'recharts@3.8.0':
+    peerDependencies:
+      '@types/react': '>=16.8.0 <20'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+  'react-resizable-panels@4.12.4':
+    peerDependencies:
+      '@types/react': '^18 || ^19'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
