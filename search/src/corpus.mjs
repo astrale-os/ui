@@ -15,6 +15,7 @@ const nonvisualExports = new Set([
   './package.json',
   './reset.css',
   './theme.css',
+  './tailwind.css',
   './presets/astrale.css',
   './presets/compact.css',
   './presets/expressive.css',

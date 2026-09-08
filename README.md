@@ -24,12 +24,17 @@ pnpm add @astrale-os/ui
 astrale ui init --preset astrale
 ```
 
-Import the semantic theme and one character preset:
+Import the semantic theme, one character preset, and the Tailwind contract for your own markup:
 
 ```css
 @import '@astrale-os/ui/theme.css';
 @import '@astrale-os/ui/presets/astrale.css';
+@import '@astrale-os/ui/tailwind.css';
 ```
+
+`tailwind.css` restates the `@theme inline` mapping (`bg-background`, `border-border`,
+`font-serif`, radii, class-based `dark:`) on the `--ui-*` tokens; the precompiled `theme.css`
+keeps its component rules in `@layer components`, below your `utilities` layer.
 
 The exact pinned Tailwind Preflight is deliberately opt-in through the reset:
 

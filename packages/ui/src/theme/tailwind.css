@@ -1,0 +1,57 @@
+/*
+  Tailwind CSS v4 contract for applications that compose their own markup with Astrale UI
+  semantics. `theme.css` ships precompiled, so this file is the only place where a consumer
+  build learns that `bg-background`, `border-border`, `font-serif`, `rounded-lg`… resolve to
+  the `--ui-*` tokens of the active preset. Import it next to `theme.css`:
+
+    @import '@astrale-os/ui/theme.css';
+    @import '@astrale-os/ui/presets/astrale.css';
+    @import '@astrale-os/ui/tailwind.css';
+*/
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --color-background: var(--ui-background);
+  --color-foreground: var(--ui-foreground);
+  --color-card: var(--ui-card);
+  --color-card-foreground: var(--ui-card-foreground);
+  --color-popover: var(--ui-popover);
+  --color-popover-foreground: var(--ui-popover-foreground);
+  --color-primary: var(--ui-primary);
+  --color-primary-foreground: var(--ui-primary-foreground);
+  --color-secondary: var(--ui-secondary);
+  --color-secondary-foreground: var(--ui-secondary-foreground);
+  --color-muted: var(--ui-muted);
+  --color-muted-foreground: var(--ui-muted-foreground);
+  --color-accent: var(--ui-accent);
+  --color-accent-foreground: var(--ui-accent-foreground);
+  --color-destructive: var(--ui-destructive);
+  --color-destructive-foreground: var(--ui-destructive-foreground);
+  --color-border: var(--ui-border);
+  --color-input: var(--ui-input);
+  --color-ring: var(--ui-ring);
+  --color-chart-1: var(--ui-chart-1);
+  --color-chart-2: var(--ui-chart-2);
+  --color-chart-3: var(--ui-chart-3);
+  --color-chart-4: var(--ui-chart-4);
+  --color-chart-5: var(--ui-chart-5);
+  --color-sidebar: var(--ui-sidebar);
+  --color-sidebar-foreground: var(--ui-sidebar-foreground);
+  --color-sidebar-primary: var(--ui-sidebar-primary);
+  --color-sidebar-primary-foreground: var(--ui-sidebar-primary-foreground);
+  --color-sidebar-accent: var(--ui-sidebar-accent);
+  --color-sidebar-accent-foreground: var(--ui-sidebar-accent-foreground);
+  --color-sidebar-border: var(--ui-sidebar-border);
+  --color-sidebar-ring: var(--ui-sidebar-ring);
+  --radius-sm: calc(var(--ui-radius) - 0.25rem);
+  --radius-md: calc(var(--ui-radius) - 0.125rem);
+  --radius-lg: var(--ui-radius);
+  --radius-xl: var(--ui-radius-panel);
+  --font-sans: var(--ui-font-body);
+  --font-serif: var(--ui-font-heading);
+  --font-heading: var(--ui-font-heading);
+  --font-mono: var(--ui-font-mono);
+  --font-weight-normal: var(--ui-weight-body);
+  --shadow-xs: var(--ui-shadow-control);
+  --shadow-sm: var(--ui-shadow-control);
+}

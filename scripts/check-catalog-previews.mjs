@@ -53,6 +53,7 @@ function visualRuntimeAddresses(packageDocument) {
     './package.json',
     './reset.css',
     './theme.css',
+    './tailwind.css',
     './presets/astrale.css',
     './presets/compact.css',
     './presets/expressive.css',

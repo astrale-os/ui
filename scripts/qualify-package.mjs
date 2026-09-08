@@ -299,6 +299,18 @@ try {
     npmConsumer,
   )
 
+  const packedTheme = await readFile(path.join(extracted, 'package/dist/theme.css'), 'utf8')
+  const packedTailwind = await readFile(path.join(extracted, 'package/dist/tailwind.css'), 'utf8')
+  assert.ok(
+    packedTheme.includes('@layer components{'),
+    'packed theme.css must keep component rules inside @layer components',
+  )
+  assert.ok(!packedTheme.includes('@theme'), 'packed theme.css must stay precompiled')
+  assert.ok(
+    packedTailwind.includes('@theme inline') &&
+      packedTailwind.includes('--color-background: var(--ui-background)'),
+    'packed tailwind.css must ship the uncompiled Tailwind contract',
+  )
   const packedFiles = await fileSizes(path.join(extracted, 'package'))
   const largestFiles = packedFiles.toSorted((left, right) => right.bytes - left.bytes).slice(0, 10)
   const report = {
@@ -311,6 +323,7 @@ try {
     unpackedBytes: await size(path.join(extracted, 'package')),
     themeCssBytes: (await stat(path.join(extracted, 'package/dist/theme.css'))).size,
     resetCssBytes: (await stat(path.join(extracted, 'package/dist/reset.css'))).size,
+    tailwindCssBytes: (await stat(path.join(extracted, 'package/dist/tailwind.css'))).size,
     rootButtonBundleBytes: bundle.length,
     rootButtonBundleGzipBytes: await gzipSize(bundle),
     dialogBundleBytes: dialogBundle.length,

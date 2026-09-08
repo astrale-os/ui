@@ -38,7 +38,8 @@
   --ui-motion-standard: 120ms;
 }
 
-:root.dark,
+.dark,
+.dark [data-ui-preset='compact'],
 [data-ui-preset='compact'].dark {
   color-scheme: dark;
   --ui-background: oklch(0.13 0.015 220);
