@@ -171,7 +171,7 @@ try {
             tailwindcss: '4.3.3',
             typescript: '7.0.2',
           },
-          packageManager: 'pnpm@12.0.0',
+          packageManager: 'pnpm@12.1.0',
         },
         null,
         2,

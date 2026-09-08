@@ -47,7 +47,7 @@ test('keeps CI and release qualification on the supported contract', async () =>
   assert.equal(
     [
       ...release.matchAll(
-        /uses: pnpm\/action-setup@[0-9a-f]{40}[^\n]*\n\s+with:\s*\n\s+version: 12\.0\.0/gu,
+        /uses: pnpm\/action-setup@[0-9a-f]{40}[^\n]*\n\s+with:\s*\n\s+version: 12\.1\.0/gu,
       ),
     ].length,
     2,

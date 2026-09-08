@@ -18,10 +18,7 @@ Claude Code on Microsoft Foundry. All four pass the same deterministic restart, 
 cancellation, and reconciliation contract; provider-specific state/failure matrices are qualified
 separately.
 
-The Azure deployment, Claude Code Foundry transport, and complete Actions-worker-to-PR journey have
-been exercised live from the default branch through one disposable request and ordinary PR CI.
-GitHub Copilot task creation remains unqualified because the configured account/repository returned
-HTTP 412, and no Cursor credential is configured.
+GitHub Copilot task creation remains unqualified, and no Cursor credential is configured.
 
 Provider models, chats, sessions, tools, MCP, environments, secrets, streams, cost units, and raw
 payloads remain private. The only operations are dispatch, observe, reconcile an uncertain start,
@@ -44,7 +41,7 @@ never claims remote cancellation.
   qualified patch again in a fresh publisher job. The publishing token never shares a job or
   mutable workspace with agent or candidate execution.
 - `github-actions-codex` uses the same exact workflow-run admission and publisher separation while
-  pinning Codex `0.151.0`, GPT-5.6 Luna, maximum reasoning effort, the Azure Responses transport,
+  pinning Codex `0.149.1`, GPT-5.6 Luna, medium reasoning effort, the Azure Responses transport,
   workspace-write sandboxing, and a network-disabled implementation shell. GitHub and Azure
   credentials are excluded from model-spawned shell commands. A digest-bound cumulative checkpoint
   preserves partial work for 30 days, and one eligible failure may continue through the Claude Code

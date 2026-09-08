@@ -24,7 +24,7 @@ test('binds qualification evidence to the exact commit, tree, and artifact bytes
     registryFile: files.registry,
     catalogFile: files.catalog,
     browserShards: [1, 2, 3, 4].map((index) => ({ index, total: 4, state: 'passed' })),
-    toolchain: { node: '24.7.0', pnpm: '12.0.0', playwright: '1.61.1' },
+    toolchain: { node: '24.7.0', pnpm: '12.1.0', playwright: '1.61.1' },
     qualifiedAt: '2026-08-30T00:00:00.000Z',
   })
   const manifest = path.join(root, 'receipt.json')

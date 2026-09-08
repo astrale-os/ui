@@ -19,10 +19,9 @@ Add a `states/<lifecycle>/` owner only when an application entity has a finite p
 with real illegal transitions. Declare it once with `stateMachine`, use `machine.stateSchema` in
 Schema, initialize with `machine.initial`, and persist allowed decisions through
 `mutation.transition`. Keep guards, authority, provider effects, retries, and deletion outside
-the relation. The scaffold configures `#states` aliases but deliberately generates no empty States
-layer.
+the relation. There is no top-level States layer or `#states` alias.
 
-`pnpm pack` runs the single `astrale-domain package` journey. The published package exposes its
+`pnpm package` runs the single `astrale-domain package` journey. The published package exposes its
 Schema contract at the package root. Runtime, handlers, Providers, frontend code, and deployment
 adapters remain implementation inputs and are not published. Do not add a parallel build or
 declaration-rewrite script.

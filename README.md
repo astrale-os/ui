@@ -19,8 +19,6 @@ the complete semantic token vocabulary in editable CSS.
 
 ## Install
 
-After the Public UI V1 beta release:
-
 ```bash
 pnpm add @astrale-os/ui
 astrale ui init --preset astrale
@@ -54,7 +52,6 @@ astrale ui search "line chart" --json
 astrale ui add component/chart component/sidebar
 astrale ui add pattern/calendar/range-basic block/dashboard/overview
 astrale ui add theme/observatory
-astrale ui add @ss-components/input-02
 astrale ui doctor
 ```
 
@@ -100,7 +97,7 @@ for the UI ecosystem's authenticated request coordination and SDK-backed graph b
 ## Development
 
 ```bash
-pnpm install --frozen-lockfile
+./setup.sh
 pnpm playground:dev
 pnpm check
 pnpm qualify

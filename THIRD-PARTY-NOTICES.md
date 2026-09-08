@@ -27,7 +27,7 @@ reproduces the timezone picker, recurrence validation, and keyboard semantics of
 upstream bytes and their licenses are preserved under
 `tooling/upstream/providers/wardian/` and `tooling/upstream/providers/ascentspark/`.
 
-The runtime package composes focused React libraries including Radix UI, cmdk, Input OTP,
-react-resizable-panels, and Vaul. Their licenses and notices remain available in their distributed
+The runtime package composes focused React libraries including Base UI, cmdk, Input OTP, and
+react-resizable-panels. Their licenses and notices remain available in their distributed
 packages. This file records copied or adapted source; ordinary dependency licenses are additionally
 checked from the exact release lockfile during qualification.

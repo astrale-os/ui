@@ -6,7 +6,6 @@ registry database, catalog, installer, or implementation agent.
 
 ```text
 schema/          public Domain contract
-states/          semantic lifecycle authority used by Schema
 queries/         caller-owned Request observation
 mutations/       atomic Request identity and lifecycle commits
 integrations/    provider-neutral external submission boundary
