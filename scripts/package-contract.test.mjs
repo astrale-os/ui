@@ -205,6 +205,7 @@ test('theme has an opt-in reset and all public presets own the same character vo
     '--color-border: var(--ui-border)',
     '--radius-lg: var(--ui-radius)',
     '--font-serif: var(--ui-font-heading)',
+    '--font-heading: var(--ui-font-heading)',
   ]) {
     assert.ok(contract.includes(mapping), `tailwind.css contract must map ${mapping}`)
   }

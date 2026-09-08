@@ -14,8 +14,9 @@ pnpm add @astrale-os/ui
 
 `tailwind.css` is the Tailwind CSS v4 contract for your own markup: it maps `bg-background`,
 `border-border`, `font-serif`, `rounded-lg`… and the class-based `dark:` variant onto the `--ui-*`
-tokens of the active preset. `theme.css` ships precompiled, with component rules in
-`@layer components` so that your utilities always win.
+tokens of the active preset, and defines `font-heading` for titles. `theme.css` ships precompiled, with
+component rules in `@layer components` so that your utilities always win. Dark mode is class-based:
+put `dark` on `<html>` or on any subtree, presets follow.
 
 ```tsx
 import { Button, Card, CardContent, CardHeader, CardTitle } from '@astrale-os/ui'

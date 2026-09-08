@@ -49,6 +49,7 @@
   --radius-xl: var(--ui-radius-panel);
   --font-sans: var(--ui-font-body);
   --font-serif: var(--ui-font-heading);
+  --font-heading: var(--ui-font-heading);
   --font-mono: var(--ui-font-mono);
   --font-weight-normal: var(--ui-weight-body);
   --shadow-xs: var(--ui-shadow-control);
