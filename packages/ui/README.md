@@ -39,5 +39,6 @@ Use flat subpaths such as `@astrale-os/ui/button` for the narrowest import. Depe
 components, higher-level patterns, and blocks are installed as application-owned source with
 `astrale ui add`.
 
-`reset.css` is optional and contains the pinned Tailwind Preflight required by upstream defaults.
+`reset.css` is optional and contains the pinned Tailwind Preflight required by upstream defaults,
+layered under `base` so component defaults, utilities, and your own unlayered CSS win over it.
 `theme.css` never installs that global reset implicitly.

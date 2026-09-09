@@ -1,23 +1,26 @@
-* {
-  box-sizing: border-box;
-}
+/* Element-level resets stay in `base` so component defaults and utilities keep winning. */
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
 
-html {
-  scroll-behavior: smooth;
-}
+  html {
+    scroll-behavior: smooth;
+  }
 
-body {
-  margin: 0;
-  background: var(--ui-background);
-  color: var(--ui-foreground);
-  font-family: var(--ui-font-body);
-}
+  body {
+    margin: 0;
+    background: var(--ui-background);
+    color: var(--ui-foreground);
+    font-family: var(--ui-font-body);
+  }
 
-button,
-input,
-select,
-textarea {
-  font: inherit;
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
 }
 
 .playground-root {
