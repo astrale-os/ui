@@ -12,6 +12,8 @@ case "${1:-}" in
   '') ;;
   *) agent_die 'Usage: setup_repo.sh [--check]' ;;
 esac
+# Request workflow contract tests execute their checked-in jq filters.
+if ! command -v jq >/dev/null 2>&1; then agent_system_install jq; fi
 agent_ensure_node
 agent_ensure_bun
 agent_install_repo

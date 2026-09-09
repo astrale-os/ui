@@ -8,7 +8,8 @@ AGENT_HARNESSES=codex bash scripts/setup/agent/verify.sh
 ```
 
 Use `claude` or `codex,claude` for skill destinations. Node comes from `.nvmrc`,
-pnpm from the root `package.json#packageManager`. Root installation prepares the
+pnpm from the root `package.json#packageManager`. Setup also installs jq when missing for the request workflow contract tests.
+Root installation prepares the
 library, registry, playground and Domain with the checked-in native build policy.
 Setup preloads the Domain's separately pinned pnpm for direct Domain commands.
 Setup builds the library because consumers resolve its dist exports. Browser-on

@@ -13,6 +13,7 @@ cd "$AGENT_REPO_ROOT"
 export npm_config_manage_package_manager_versions=false
 [[ "$(node --version)" == "v$(agent_node_version)" ]] || agent_die 'Node does not match .nvmrc'
 [[ "$(pnpm --version)" == "$(agent_pnpm_version)" ]] || agent_die 'pnpm does not match packageManager'
+jq --version
 node --version
 pnpm --version
 bun --version

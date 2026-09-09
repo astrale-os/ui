@@ -70,6 +70,7 @@ function fixture(t) {
       },
     )
   }
+  executable('jq', 'echo jq-fixture')
   function mock(body) {
     fs.appendFileSync(path.join(scripts, 'lib/common.sh'), '\n' + body)
   }
