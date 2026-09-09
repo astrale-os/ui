@@ -48,6 +48,15 @@ test('keeps CI and release qualification on the supported contract', async () =>
   // A repeated `version:` input could drift and trigger pnpm's own version switch instead.
   const { packageManager } = JSON.parse(await readFile('package.json', 'utf8'))
   assert.match(packageManager, /^pnpm@\d+\.\d+\.\d+$/u)
+  // The release jobs check the UI out under `ui-release`, so the pin is read from there.
+  assert.equal(
+    [
+      ...release.matchAll(
+        /uses: pnpm\/action-setup@[0-9a-f]{40}[^\n]*\n\s+with:\s*\n(?:\s+#[^\n]*\n)?\s+package_json_file: ui-release\/package\.json/gu,
+      ),
+    ].length,
+    2,
+  )
   assert.equal([...release.matchAll(/uses: pnpm\/action-setup@[0-9a-f]{40}/gu)].length, 2)
   for (const workflow of [ci, release, publish, mergeReady]) {
     assert.doesNotMatch(
