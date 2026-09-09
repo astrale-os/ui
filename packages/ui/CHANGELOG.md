@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.3.0-beta.26](https://github.com/astrale-os/ui/compare/v0.3.0-beta.25...v0.3.0-beta.26) (2026-09-08)
+
+
+### Features
+
+* **domain:** adopt deploy-only project environments ([#159](https://github.com/astrale-os/ui/issues/159)) ([1c47433](https://github.com/astrale-os/ui/commit/1c4743383a53c5173f1c489512a5afdbfaa7ac08))
+
+
+### Bug Fixes
+
+* **ci:** qualify UI Domain changes at their owner ([#158](https://github.com/astrale-os/ui/issues/158)) ([9d3ff97](https://github.com/astrale-os/ui/commit/9d3ff977c9c9bf4ec3420670be613127a54f1c42))
+* **domain:** consume compact inferred SDK schemas ([#163](https://github.com/astrale-os/ui/issues/163)) ([bf7c2e3](https://github.com/astrale-os/ui/commit/bf7c2e3016b5b1fcab6abd6ecb054257b95758e4))
+* **domain:** consume executable contract Method releases ([#164](https://github.com/astrale-os/ui/issues/164)) ([ff2aa88](https://github.com/astrale-os/ui/commit/ff2aa88d6bc675bba9130839d9cf9a0fd4956ed8))
+* **ui:** align Domain core requirements with published SDK ([#161](https://github.com/astrale-os/ui/issues/161)) ([e4712e8](https://github.com/astrale-os/ui/commit/e4712e81ea474aa73b2f4fd5885ae2fd28772379))
+* **ui:** honor Codex release quarantine ([#153](https://github.com/astrale-os/ui/issues/153)) ([0fb4f2c](https://github.com/astrale-os/ui/commit/0fb4f2c7bdb91016de05afc08fd87eb483ebb4c6))
+* **ui:** open calendar preview at its selected month ([#160](https://github.com/astrale-os/ui/issues/160)) ([164b3c4](https://github.com/astrale-os/ui/commit/164b3c47a9371b0f82a0ef0685ecde528d513701))
+* **ui:** publish the Tailwind contract and layer compiled component rules ([#166](https://github.com/astrale-os/ui/issues/166)) ([365ee36](https://github.com/astrale-os/ui/commit/365ee36753d25f87aeccee2436701fee0bddf50d))
+
 ## [0.3.0-beta.25](https://github.com/astrale-os/ui/compare/v0.3.0-beta.24...v0.3.0-beta.25) (2026-08-30)
 
 
