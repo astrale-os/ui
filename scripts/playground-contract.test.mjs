@@ -36,7 +36,7 @@ test('the playground dev route keeps every public UI entrypoint source-owned', a
   )
   assert.equal(
     playwrightConfig.webServer.command,
-    'pnpm --workspace-root playground:dev --host 127.0.0.1 --port 4173',
+    'pnpm --workspace-root build && pnpm exec vite --host 127.0.0.1 --port 4173',
   )
   assert.deepEqual(playgroundConfig.server.forwardConsole, {
     unhandledErrors: false,
