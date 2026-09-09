@@ -11,5 +11,5 @@ Astrale OS is a graph-based operating system. This autonomous repository is the 
 ## Browser verification
 
 - For quick UI smoke checks, load the `agent-browser` skill and use the `agent-browser` CLI.
-- For repeatable checks or regression tests, use Playwright through the `webapp-testing` skill.
+- For repeatable checks or regression tests, use repository-local Playwright tests when available. The `webapp-testing` skill is optional; cloud setup supplies `agent-browser` and `chrome-devtools-cli`.
 - For deep browser diagnosis, load the `chrome-devtools-cli` skill and use the Chrome DevTools CLI.
