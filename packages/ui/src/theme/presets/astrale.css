@@ -38,7 +38,7 @@
   --ui-motion-standard: 180ms;
 }
 
-.dark,
+:root.dark,
 .dark [data-ui-preset='astrale'],
 [data-ui-preset='astrale'].dark {
   color-scheme: dark;

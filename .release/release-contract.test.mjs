@@ -44,14 +44,17 @@ test('keeps CI and release qualification on the supported contract', async () =>
   )
   assert.match(release, /repository: astrale-os\/cli/u)
   assert.match(release, /ref: main/u)
-  assert.equal(
-    [
-      ...release.matchAll(
-        /uses: pnpm\/action-setup@[0-9a-f]{40}[^\n]*\n\s+with:\s*\n\s+version: 12\.1\.0/gu,
-      ),
-    ].length,
-    2,
-  )
+  // The pnpm version has one source: the exact `packageManager` pin, which pnpm/action-setup reads.
+  // A repeated `version:` input could drift and trigger pnpm's own version switch instead.
+  const { packageManager } = JSON.parse(await readFile('package.json', 'utf8'))
+  assert.match(packageManager, /^pnpm@\d+\.\d+\.\d+$/u)
+  assert.equal([...release.matchAll(/uses: pnpm\/action-setup@[0-9a-f]{40}/gu)].length, 2)
+  for (const workflow of [ci, release, publish, mergeReady]) {
+    assert.doesNotMatch(
+      workflow,
+      /uses: pnpm\/action-setup@[0-9a-f]{40}[^\n]*\n\s+with:\s*\n\s+version:/u,
+    )
+  }
   assert.match(
     release,
     /pnpm --dir cli-consumer qualification:ui-search "\$GITHUB_WORKSPACE\/ui-release"/u,

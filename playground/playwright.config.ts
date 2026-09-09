@@ -8,9 +8,12 @@ export default defineConfig({
   testIgnore: studioProviderCatalog ? [] : ['studio-variants.spec.ts'],
   outputDir: '../artifacts/playground/playwright',
   webServer: {
+    // The long-lived server is started through `pnpm exec`, never through `pnpm --filter`:
+    // pnpm 12.1 runs filtered scripts in their own process group, so the server would survive
+    // Playwright's process-group kill and keep the runner waiting on its stdio forever.
     command: studioProviderCatalog
       ? `pnpm exec vite preview --host 127.0.0.1 --port ${port}`
-      : `pnpm --workspace-root playground:dev --host 127.0.0.1 --port ${port}`,
+      : `pnpm --workspace-root build && pnpm exec vite --host 127.0.0.1 --port ${port}`,
     port,
     reuseExistingServer: studioProviderCatalog ? false : !process.env.CI,
     env: { ASTRALE_STUDIO_CATALOG: process.env.ASTRALE_STUDIO_CATALOG ?? '0' },

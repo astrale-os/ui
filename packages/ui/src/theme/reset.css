@@ -1,34 +1,39 @@
-@import './preflight.css';
+/* The reset is layered under `base`: component defaults and compiled utilities (`components`),
+   consumer utilities, and any unlayered consumer CSS all win over it. */
+@layer theme, base, components, utilities;
+@import './preflight.css' layer(base);
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
 
-* {
-  border-color: var(--ui-border);
-  outline-color: color-mix(in oklab, var(--ui-ring) 50%, transparent);
-}
+  * {
+    border-color: var(--ui-border);
+    outline-color: color-mix(in oklab, var(--ui-ring) 50%, transparent);
+  }
 
-html {
-  text-size-adjust: 100%;
-}
+  html {
+    text-size-adjust: 100%;
+  }
 
-body {
-  margin: 0;
-  background: var(--ui-background);
-  color: var(--ui-foreground);
-  font-family: var(--ui-font-body);
-  letter-spacing: var(--ui-tracking-body);
-  line-height: var(--ui-leading-body);
-  text-rendering: optimizeLegibility;
-}
+  body {
+    margin: 0;
+    background: var(--ui-background);
+    color: var(--ui-foreground);
+    font-family: var(--ui-font-body);
+    letter-spacing: var(--ui-tracking-body);
+    line-height: var(--ui-leading-body);
+    text-rendering: optimizeLegibility;
+  }
 
-button,
-input,
-optgroup,
-select,
-textarea {
-  font: inherit;
+  button,
+  input,
+  optgroup,
+  select,
+  textarea {
+    font: inherit;
+  }
 }
