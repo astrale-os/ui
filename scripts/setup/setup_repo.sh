@@ -18,7 +18,14 @@ agent_ensure_node
 agent_ensure_bun
 agent_install_repo
 # Direct Domain commands select its own pnpm pin; warm that runtime while network is available.
-env npm_config_manage_package_manager_versions=true pnpm --dir domain --version
+if [[ "$AGENT_SETUP_TOOLS" == check ]]; then
+  # Check the existing secondary runtime without pnpm's implicit download.
+  expected="$(node -p "require('./domain/package.json').packageManager.split('@')[1].split('+')[0]")"
+  actual="$(cd domain && COREPACK_ENABLE_NETWORK=0 npm_config_manage_package_manager_versions=false pnpm --version 2>/dev/null || true)"
+  [[ "$actual" == "$expected" ]] || agent_die "Prepare Domain pnpm $expected locally before rerunning setup"
+else
+  env npm_config_manage_package_manager_versions=true pnpm --dir domain --version
+fi
 # Consumers resolve the library's published dist exports during typechecks.
 pnpm run build
 # Project E2E uses its own pinned Playwright, independently of global browser tools.

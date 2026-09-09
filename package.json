@@ -59,8 +59,9 @@
     "check": "pnpm build && pnpm format:check && pnpm lint && pnpm typecheck && pnpm test:contracts && pnpm test:playground-unit && pnpm search:check && pnpm request:check && pnpm domain:check && pnpm catalog:check && pnpm registry:check && pnpm playground:typecheck",
     "qualify": "pnpm check && pnpm theme-generator:qualify && pnpm test:components && pnpm test:registry-behavior && pnpm test:security && pnpm build && pnpm registry:build && pnpm package:qualify && pnpm registry:qualify && pnpm playground:build && pnpm playground:test && pnpm playground:test:production",
     "prepare": "husky",
-    "setup": "bash scripts/setup/agent/setup.sh",
-    "verify:agent-setup": "bash scripts/setup/agent/verify.sh"
+    "setup": "bash scripts/setup/setup.sh",
+    "verify:agent-setup": "bash scripts/setup/verify.sh",
+    "setup:local": "AGENT_SETUP_TOOLS=check bash scripts/setup/setup.sh"
   },
   "devDependencies": {
     "@anthropic-ai/claude-code": "2.1.223",
