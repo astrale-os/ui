@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0-beta.29](https://github.com/astrale-os/ui/compare/v0.3.0-beta.28...v0.3.0-beta.29) (2026-09-09)
+
+
+### Bug Fixes
+
+* **deps:** patch the next and sharp advisories in the playground ([#172](https://github.com/astrale-os/ui/issues/172)) ([5cc36bc](https://github.com/astrale-os/ui/commit/5cc36bccb7c3178f845a4655f4c8c9ad9ac10d99))
+
 ## [0.3.0-beta.28](https://github.com/astrale-os/ui/compare/v0.3.0-beta.27...v0.3.0-beta.28) (2026-09-09)
 
 
