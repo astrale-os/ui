@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0-beta.27](https://github.com/astrale-os/ui/compare/v0.3.0-beta.26...v0.3.0-beta.27) (2026-09-09)
+
+
+### Bug Fixes
+
+* unblock the browser qualification and restore the playground cascade ([#167](https://github.com/astrale-os/ui/issues/167)) ([f21ac0c](https://github.com/astrale-os/ui/commit/f21ac0c2d82ab462254fb1c29e5f08ab15b7b049))
+
 ## [0.3.0-beta.26](https://github.com/astrale-os/ui/compare/v0.3.0-beta.25...v0.3.0-beta.26) (2026-09-08)
 
 
