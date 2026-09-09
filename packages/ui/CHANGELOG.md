@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0-beta.28](https://github.com/astrale-os/ui/compare/v0.3.0-beta.27...v0.3.0-beta.28) (2026-09-09)
+
+
+### Bug Fixes
+
+* **ci:** read the pnpm version from the release checkout ([#169](https://github.com/astrale-os/ui/issues/169)) ([8015266](https://github.com/astrale-os/ui/commit/80152663a5ef2683f43a0f095b7e335bf9546363))
+
 ## [0.3.0-beta.27](https://github.com/astrale-os/ui/compare/v0.3.0-beta.26...v0.3.0-beta.27) (2026-09-09)
 
 
