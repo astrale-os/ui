@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.3.0-beta.30](https://github.com/astrale-os/ui/compare/v0.3.0-beta.29...v0.3.0-beta.30) (2026-09-09)
+
+
+### Features
+
+* **ci:** unify local and cloud setup ([#174](https://github.com/astrale-os/ui/issues/174)) ([802ff31](https://github.com/astrale-os/ui/commit/802ff31dac25e8d1a2433f1b21dd7393669c2421))
+
+
+### Bug Fixes
+
+* **ci:** remove redundant CLI consumer job ([#177](https://github.com/astrale-os/ui/issues/177)) ([806437d](https://github.com/astrale-os/ui/commit/806437d435e704cc48025fd60c5d3c8c9cd7919c))
+* **ci:** restore pnpm 12.1 and qualify CLI installation ([#176](https://github.com/astrale-os/ui/issues/176)) ([058be44](https://github.com/astrale-os/ui/commit/058be44f3fbb9974821b890540978ed8ae20eef6))
+* **deps:** consume the Worker-safe SDK 0.5.0-beta.136 ([#178](https://github.com/astrale-os/ui/issues/178)) ([49809d0](https://github.com/astrale-os/ui/commit/49809d02ee6f2160c9cc3f6ab0eeee13db188cf4))
+
 ## [0.3.0-beta.29](https://github.com/astrale-os/ui/compare/v0.3.0-beta.28...v0.3.0-beta.29) (2026-09-09)
 
 
