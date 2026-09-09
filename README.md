@@ -102,7 +102,7 @@ for the UI ecosystem's authenticated request coordination and SDK-backed graph b
 ## Development
 
 ```bash
-bash scripts/setup/agent/setup.sh
+bash scripts/setup/setup.sh
 pnpm playground:dev
 pnpm check
 pnpm qualify
@@ -128,4 +128,4 @@ directly; operators install its observed deployment URL into each target Kernel.
 
 MIT
 
-See [agent setup](scripts/setup/agent/README.md) for cloud preparation and verification.
+See [agent setup](scripts/setup/README.md) for cloud preparation and verification.
