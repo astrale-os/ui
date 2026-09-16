@@ -83,7 +83,7 @@
     "@astrale-os/adapter-cloudflare": "0.5.0-beta.139",
     "@astrale-os/ox": ">=0.1.4 <1.0.0",
     "@types/node": "^22.0.0",
-    "bun": "1.4.0",
+    "bun": "1.4.2",
     "oxlint": "1.79.0",
     "typescript": "7.0.2",
     "vitest": "^4.1.10"
