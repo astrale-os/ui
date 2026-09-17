@@ -8,7 +8,7 @@ run_mode = "concurrent"
 # --strictPort fails loudly rather than sliding to the next port and serving a worktree
 # you are not looking at.
 [scripts.run.playground]
-available_in = [ "local" ]
+available_in = ["local"]
 command = 'pnpm build && pnpm --filter @astrale-os/ui-playground exec vite --port "$CONDUCTOR_PORT" --strictPort'
 default = true
 icon = "play"
