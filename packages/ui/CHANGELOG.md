@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0-beta.31](https://github.com/astrale-os/ui/compare/v0.3.0-beta.30...v0.3.0-beta.31) (2026-09-18)
+
+
+### Bug Fixes
+
+* **conductor:** format the run script array ([fe073af](https://github.com/astrale-os/ui/commit/fe073afb700b2a57ea1ad890e3424c89aa85d3c6))
+
 ## [0.3.0-beta.30](https://github.com/astrale-os/ui/compare/v0.3.0-beta.29...v0.3.0-beta.30) (2026-09-09)
 
 
