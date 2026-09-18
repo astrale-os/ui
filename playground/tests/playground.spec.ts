@@ -2006,9 +2006,12 @@ test('representative overlays and disclosures are keyboard operable', async ({ p
   await page.keyboard.press('Enter')
   await expect(page.getByLabel('Theme generator')).toBeVisible()
   const inspector = page.getByRole('dialog', { name: 'Theme customizer' })
+  const closeButton = inspector.getByRole('button', { name: 'Close' })
+  // The panel can be visible while its Close button is still transitioning from hidden.
+  await expect(closeButton).toBeVisible()
   await expect(customizerTrigger).toBeFocused()
   await page.keyboard.press('Tab')
-  await expect(inspector.getByRole('button', { name: 'Close' })).toBeFocused()
+  await expect(closeButton).toBeFocused()
   await page.keyboard.press('Escape')
   await expect(page.getByLabel('Theme generator')).not.toBeVisible()
   await expect(customizerTrigger).toBeFocused()
