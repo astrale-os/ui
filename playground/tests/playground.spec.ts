@@ -1431,6 +1431,76 @@ test('typography sliders preview during one gesture and commit one history entry
   await expect.poll(cssValue).toBe(committed)
 })
 
+test('neutral controls retain contrast when card and popover text differ from foreground', async ({
+  page,
+}) => {
+  test.setTimeout(60_000)
+  await page.goto('/')
+  await openThemeCustomizer(page)
+  await page.getByRole('button', { name: 'Dark', exact: true }).click()
+  // Palette from the failed mobile qualification on 2026-09-18. Its card/popover
+  // text passes on those surfaces, but fails on the translucent input background.
+  const theme = structuredClone(starterThemeDocuments.find((theme) => theme.name === 'observatory'))
+  theme.name = 'control-contrast'
+  theme.label = 'Control contrast'
+  Object.assign(theme.appearance.dark, {
+    background: 'oklch(0.1614 0.0038 254.64)',
+    foreground: 'oklch(0.7757 0 254.64)',
+    card: 'oklch(0.1994 0.0038 254.64)',
+    cardForeground: 'oklch(0.6471 0.0007 254.64)',
+    popover: 'oklch(0.2134 0.0038 254.64)',
+    popoverForeground: 'oklch(0.655 0.0007 254.64)',
+    input: 'oklch(0.5 0.0138 254.64)',
+    mutedForeground: 'oklch(0.7399 0 254.64)',
+  })
+  await page.getByLabel('Import theme document').setInputFiles({
+    name: 'control-contrast.astrale-theme.json',
+    mimeType: 'application/json',
+    buffer: Buffer.from(JSON.stringify(theme)),
+  })
+  await expect(page.locator('[data-slot="ui-playground"]')).toHaveAttribute(
+    'data-ui-theme',
+    'control-contrast',
+  )
+  // This regression checks the settled palette; the theme-editing test below
+  // independently waits for real transitions to reach their target colors.
+  await page.addStyleTag({ content: '*, *::before, *::after { transition: none !important; }' })
+  const studioContrast = await new AxeBuilder({ page })
+    .include('[data-slot="ui-playground"]')
+    .withRules(['color-contrast'])
+    .analyze()
+  expect.soft(studioContrast.violations, 'controls on card and popover surfaces').toEqual([])
+  await page.getByRole('button', { name: 'Close', exact: true }).click()
+
+  for (const component of [
+    'input',
+    'input-group',
+    'input-otp',
+    'select',
+    'native-select',
+    'textarea',
+  ]) {
+    const preview = await loadPreview(page, 'component/' + component)
+    await preview.focus()
+    await expect(preview).toHaveAttribute('data-preview-mounted', 'true')
+    if (component === 'input-otp') {
+      await preview.getByRole('textbox', { name: 'Verification code' }).fill('123456')
+      await preview.focus()
+    }
+    const contrast = () =>
+      new AxeBuilder({ page })
+        .include('[data-preview-address="component/' + component + '"]')
+        .withRules(['color-contrast'])
+        .analyze()
+    expect.soft((await contrast()).violations, component).toEqual([])
+    if (['select', 'native-select'].includes(component)) {
+      const control = preview.getByRole('combobox')
+      await control.hover()
+      expect.soft((await contrast()).violations, component + ' hovered').toEqual([])
+    }
+  }
+})
+
 test('theme editing, mode, history, saving, import, and export remain live', async ({
   context,
   page,
@@ -1625,21 +1695,23 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
   await expect(typographyLock).toContainText('Edited')
   await expect.poll(primaryValue).not.toBe('oklch(0.62 0.2 145)')
   const firstGeneratedPrimary = await primaryValue()
-  const generatedButtonForeground = await page
-    .getByRole('button', { name: 'Customize theme' })
-    .evaluate((button) => {
-      const root = button.closest('[data-slot="ui-playground"]')
-      if (!root) throw new Error('Theme root is missing.')
-      return {
-        background: getComputedStyle(button).backgroundColor,
-        backgroundToken: getComputedStyle(root).getPropertyValue('--ui-primary').trim(),
-        rendered: getComputedStyle(button).color,
-        token: getComputedStyle(root).getPropertyValue('--ui-primary-foreground').trim(),
-      }
-    })
-  expect(generatedButtonForeground.token).toMatch(/^oklch\((?:0|1) 0 /u)
-  expect(generatedButtonForeground.background).toBe(generatedButtonForeground.backgroundToken)
-  expect(generatedButtonForeground.rendered).toBe(generatedButtonForeground.token)
+  await expect(async () => {
+    const generatedButtonForeground = await page
+      .getByRole('button', { name: 'Customize theme' })
+      .evaluate((button) => {
+        const root = button.closest('[data-slot="ui-playground"]')
+        if (!root) throw new Error('Theme root is missing.')
+        return {
+          background: getComputedStyle(button).backgroundColor,
+          backgroundToken: getComputedStyle(root).getPropertyValue('--ui-primary').trim(),
+          rendered: getComputedStyle(button).color,
+          token: getComputedStyle(root).getPropertyValue('--ui-primary-foreground').trim(),
+        }
+      })
+    expect(generatedButtonForeground.token).toMatch(/^oklch\((?:0|1) 0 /u)
+    expect(generatedButtonForeground.background).toBe(generatedButtonForeground.backgroundToken)
+    expect(generatedButtonForeground.rendered).toBe(generatedButtonForeground.token)
+  }).toPass({ timeout: 5_000 })
   const generatedContrast = await new AxeBuilder({ page })
     .include('[data-slot="ui-playground"]')
     .withRules(['color-contrast'])
