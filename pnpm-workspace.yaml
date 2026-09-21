@@ -13,6 +13,10 @@ minimumReleaseAgeStrict: true
 minimumReleaseAgeIgnoreMissingTime: false
 trustLockfile: false
 minimumReleaseAgeExclude:
+  # Vitest 5.0.1 fixes broken public type declarations in 5.0.0.
+  - 'vitest@5.0.1'
+  - '@vitest/mocker@5.0.1'
+  - '@vitest/spy@5.0.1'
   - '@astrale-os/*'
   - '@astrale-domains/*'
   - '@astrale/*'

@@ -3,9 +3,10 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "noEmit": true,
-    "types": ["vitest/globals", "@testing-library/jest-dom"]
+    "types": ["vitest/globals"]
   },
   "include": [
+    "vitest.setup.ts",
     "components/**/*.ts",
     "components/**/*.tsx",
     "patterns/**/*.ts",
