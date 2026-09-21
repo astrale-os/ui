@@ -41,3 +41,6 @@ pnpm-debug.log*
 # Local files
 *.local
 .internal/
+
+# Vitest reports and test artifacts
+.vitest/

@@ -6,9 +6,10 @@
     "paths": {
       "@/*": ["../registry/variants/support/*"]
     },
-    "types": ["vitest/globals", "@testing-library/jest-dom"]
+    "types": ["vitest/globals"]
   },
   "include": [
+    "vitest.setup.ts",
     "src",
     "vite.config.ts",
     "playwright.config.ts",
