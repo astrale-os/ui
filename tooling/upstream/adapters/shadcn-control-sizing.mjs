@@ -5,6 +5,7 @@ const revisions = new Map([
     'button',
     {
       notes: [
+        'Bind neutral control text to the foreground token instead of inheriting card or popover text across a different input surface.',
         'Bind default, small, large, and icon dimensions to the public Astrale control-height tokens so render-composed buttons keep themed geometry.',
         'Expose the admitted Button size as data-size after semantic trigger composition.',
         'Bind control transition duration to the Astrale fast motion token.',
@@ -30,6 +31,10 @@ const revisions = new Map([
           'data-slot="button"\n      className=',
           'data-slot="button"\n      data-size={size}\n      className=',
         ],
+        [
+          'border-border bg-background hover:bg-muted',
+          'border-border bg-background text-foreground hover:bg-muted',
+        ],
       ],
     },
   ],
@@ -37,6 +42,7 @@ const revisions = new Map([
     'input',
     {
       notes: [
+        'Bind neutral control text to the foreground token instead of inheriting card or popover text across a different input surface.',
         'Bind the Input height and transition duration to the public Astrale control and motion tokens so composed input slots retain themed geometry.',
       ],
       replacements: [
@@ -44,6 +50,7 @@ const revisions = new Map([
           'h-8 w-full min-w-0 rounded-lg border border-input bg-transparent px-2.5 py-1 text-base transition-colors outline-none',
           'h-(--ui-control-height) w-full min-w-0 rounded-lg border border-input bg-transparent px-2.5 py-1 text-base transition-colors duration-[var(--ui-motion-fast)] outline-none',
         ],
+        ['py-1 text-base transition-colors', 'py-1 text-base text-foreground transition-colors'],
       ],
     },
   ],
@@ -51,6 +58,7 @@ const revisions = new Map([
     'input-group',
     {
       notes: [
+        'Bind neutral control text to the foreground token instead of inheriting card or popover text across a different input surface.',
         'Bind the Input Group wrapper height and transition duration to the public Astrale control and motion tokens.',
         'Route the Input Group action size through Button so its local compact variants keep their intended dimensions without a slot-based minimum.',
       ],
@@ -63,6 +71,10 @@ const revisions = new Map([
           'type={type}\n      data-size={size}\n      variant={variant}',
           'type={type}\n      variant={variant}\n      size={size}',
         ],
+        [
+          'border border-input transition-colors',
+          'border border-input text-foreground transition-colors',
+        ],
       ],
     },
   ],
@@ -70,6 +82,7 @@ const revisions = new Map([
     'native-select',
     {
       notes: [
+        'Bind neutral control text to the foreground token instead of inheriting card or popover text across a different input surface.',
         'Bind default and small Native Select heights and transition duration to the public Astrale control and motion tokens.',
       ],
       replacements: [
@@ -78,6 +91,7 @@ const revisions = new Map([
           'h-(--ui-control-height) w-full min-w-0 appearance-none rounded-lg border border-input bg-transparent py-1 pr-8 pl-2.5 text-sm transition-colors duration-[var(--ui-motion-fast)] outline-none',
         ],
         ['data-[size=sm]:h-7', 'data-[size=sm]:h-(--ui-control-height-sm)'],
+        ['pl-2.5 text-sm transition-colors', 'pl-2.5 text-sm text-foreground transition-colors'],
       ],
     },
   ],
@@ -85,6 +99,7 @@ const revisions = new Map([
     'select',
     {
       notes: [
+        'Bind neutral control text to the foreground token instead of inheriting card or popover text across a different input surface.',
         'Bind default and small Select Trigger heights and transition duration to the public Astrale control and motion tokens.',
       ],
       replacements: [
@@ -95,6 +110,32 @@ const revisions = new Map([
         [
           'data-[size=default]:h-8 data-[size=sm]:h-7',
           'data-[size=default]:h-(--ui-control-height) data-[size=sm]:h-(--ui-control-height-sm)',
+        ],
+        ['pl-2.5 text-sm whitespace-nowrap', 'pl-2.5 text-sm text-foreground whitespace-nowrap'],
+      ],
+    },
+  ],
+  [
+    'textarea',
+    {
+      notes: [
+        'Bind neutral control text to the foreground token instead of inheriting card or popover text across a different input surface.',
+      ],
+      replacements: [
+        ['py-2 text-base transition-colors', 'py-2 text-base text-foreground transition-colors'],
+      ],
+    },
+  ],
+  [
+    'input-otp',
+    {
+      notes: [
+        'Bind neutral control text to the foreground token instead of inheriting card or popover text across a different input surface.',
+      ],
+      replacements: [
+        [
+          'border-input text-sm transition-all',
+          'border-input text-sm text-foreground transition-all',
         ],
       ],
     },

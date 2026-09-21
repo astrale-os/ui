@@ -177,6 +177,7 @@
       "implementation": "packages/ui/src/action/button/index.tsx",
       "adaptation": "astrale-revision",
       "adaptationNotes": [
+        "Bind neutral control text to the foreground token instead of inheriting card or popover text across a different input surface.",
         "Bind default, small, large, and icon dimensions to the public Astrale control-height tokens so render-composed buttons keep themed geometry.",
         "Expose the admitted Button size as data-size after semantic trigger composition.",
         "Bind control transition duration to the Astrale fast motion token."
@@ -488,6 +489,7 @@
       "implementation": "packages/ui/src/input/input/index.tsx",
       "adaptation": "astrale-revision",
       "adaptationNotes": [
+        "Bind neutral control text to the foreground token instead of inheriting card or popover text across a different input surface.",
         "Bind the Input height and transition duration to the public Astrale control and motion tokens so composed input slots retain themed geometry."
       ],
       "disposition": "owned-runtime"
@@ -508,6 +510,7 @@
       "implementation": "packages/ui/src/input/input-group/index.tsx",
       "adaptation": "astrale-revision",
       "adaptationNotes": [
+        "Bind neutral control text to the foreground token instead of inheriting card or popover text across a different input surface.",
         "Bind the Input Group wrapper height and transition duration to the public Astrale control and motion tokens.",
         "Route the Input Group action size through Button so its local compact variants keep their intended dimensions without a slot-based minimum."
       ],
@@ -527,8 +530,11 @@
       "sourceDigest": "sha256:d010504eeb4982e5fd0e535111d81813829997b3c979b49592be2b4a510f3525",
       "owner": "@astrale-os/ui/input-otp",
       "implementation": "packages/ui/src/input/input-otp/index.tsx",
-      "adaptation": "imports-only",
-      "disposition": "owned-runtime"
+      "adaptation": "astrale-revision",
+      "disposition": "owned-runtime",
+      "adaptationNotes": [
+        "Bind neutral control text to the foreground token instead of inheriting card or popover text across a different input surface."
+      ]
     },
     {
       "provider": "@shadcn",
@@ -665,6 +671,7 @@
       "implementation": "packages/ui/src/input/native-select/index.tsx",
       "adaptation": "astrale-revision",
       "adaptationNotes": [
+        "Bind neutral control text to the foreground token instead of inheriting card or popover text across a different input surface.",
         "Bind default and small Native Select heights and transition duration to the public Astrale control and motion tokens."
       ],
       "disposition": "owned-runtime"
@@ -821,6 +828,7 @@
       "implementation": "packages/ui/src/input/select/index.tsx",
       "adaptation": "astrale-revision",
       "adaptationNotes": [
+        "Bind neutral control text to the foreground token instead of inheriting card or popover text across a different input surface.",
         "Bind default and small Select Trigger heights and transition duration to the public Astrale control and motion tokens."
       ],
       "disposition": "owned-runtime"
@@ -1009,8 +1017,11 @@
       "sourceDigest": "sha256:58b58d84fc54ba5f4ca46937870c619349fd9eccc4d494250ac7bc73a94e05e9",
       "owner": "@astrale-os/ui/textarea",
       "implementation": "packages/ui/src/input/textarea/index.tsx",
-      "adaptation": "imports-only",
-      "disposition": "owned-runtime"
+      "adaptation": "astrale-revision",
+      "disposition": "owned-runtime",
+      "adaptationNotes": [
+        "Bind neutral control text to the foreground token instead of inheriting card or popover text across a different input surface."
+      ]
     },
     {
       "provider": "@shadcn",
