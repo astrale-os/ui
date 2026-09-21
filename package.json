@@ -66,7 +66,7 @@
   "devDependencies": {
     "@anthropic-ai/claude-code": "2.1.223",
     "@astrale/commitlint-config": "jsr:@astrale/commitlint-config@~2.0.5",
-    "@astrale/typescript-config": "jsr:@astrale/typescript-config@~1.1.0",
+    "@astrale/typescript-config": "jsr:@astrale/typescript-config@~2.0.0",
     "@babel/parser": "8.0.4",
     "@commitlint/cli": "21.2.2",
     "@commitlint/config-conventional": "21.2.2",

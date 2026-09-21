@@ -9,10 +9,6 @@ type UiPackageDocument = {
   exports: Record<string, string | { import?: string }>
 }
 
-type PlaygroundPackageDocument = {
-  dependencies?: Record<string, string>
-}
-
 const uiRoot = new URL('../packages/ui/', import.meta.url)
 const checkoutId = createHash('sha256')
   .update(fileURLToPath(new URL('../', import.meta.url)))
@@ -77,12 +73,6 @@ function variantSupportResolver(): Plugin {
 const uiPackage = JSON.parse(
   readFileSync(new URL('package.json', uiRoot), 'utf8'),
 ) as UiPackageDocument
-const playgroundPackage = JSON.parse(
-  readFileSync(new URL('package.json', import.meta.url), 'utf8'),
-) as PlaygroundPackageDocument
-const playgroundDependencyOwners = Object.keys(playgroundPackage.dependencies ?? {}).filter(
-  (dependency) => dependency !== '@astrale-os/ui',
-)
 
 const publicSourceAliases = Object.entries(uiPackage.exports).flatMap(([entrypoint, target]) => {
   const importPath = typeof target === 'string' ? undefined : target.import
@@ -116,9 +106,6 @@ export default defineConfig(({ mode }) => ({
     ),
   },
   resolve: {
-    // Variant source lives outside the Vite root. Resolve every explicitly declared host
-    // dependency from the playground rather than searching upward from an item source file.
-    dedupe: playgroundDependencyOwners,
     alias: [
       {
         find: /^@astrale-os\/ui\/theme\.css$/u,
