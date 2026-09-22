@@ -40,6 +40,7 @@ pnpm-debug.log*
 
 # Local files
 *.local
+.conductor/settings.local.toml
 .internal/
 
 # Vitest reports and test artifacts
