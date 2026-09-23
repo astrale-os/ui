@@ -23,7 +23,7 @@ export const requestWorkflow = defineWorkflow<UiSchema, typeof integrations>()(
     const read = (id: string) =>
       step.run(id, () =>
         graph.self.query(requestByOwnerAndKey, {
-          owner: caller.principal,
+          owner: caller.identity,
           idempotencyKey: input.idempotencyKey,
         }),
       )
@@ -33,7 +33,7 @@ export const requestWorkflow = defineWorkflow<UiSchema, typeof integrations>()(
       try {
         current = await step.run('create-request', () =>
           mutate(createRequest, {
-            owner: caller.principal,
+            owner: caller.identity,
             intent: input.intent,
             idempotencyKey: input.idempotencyKey,
           }),
@@ -76,7 +76,7 @@ export const requestWorkflow = defineWorkflow<UiSchema, typeof integrations>()(
             await step.run('confirm-submission-after-reconciliation', () =>
               mutate(confirmRequestSubmission, {
                 requestId: current.id,
-                owner: caller.principal,
+                owner: caller.identity,
                 collaborationUrl: collaborationUrl(reconciliation.collaborationUrl),
               }),
             )
@@ -103,7 +103,7 @@ export const requestWorkflow = defineWorkflow<UiSchema, typeof integrations>()(
       if (current.submission === 'failed') {
         try {
           await step.run('retry-submission', () =>
-            mutate(retryRequestSubmission, { requestId: current.id, owner: caller.principal }),
+            mutate(retryRequestSubmission, { requestId: current.id, owner: caller.identity }),
           )
           current = { ...current, submission: 'pending' }
         } catch (cause) {
@@ -116,7 +116,7 @@ export const requestWorkflow = defineWorkflow<UiSchema, typeof integrations>()(
 
       try {
         await step.run('reserve-submission', () =>
-          mutate(reserveRequestSubmission, { requestId: current.id, owner: caller.principal }),
+          mutate(reserveRequestSubmission, { requestId: current.id, owner: caller.identity }),
         )
       } catch (cause) {
         const concurrent = await read('read-request-after-reservation-conflict')
@@ -134,7 +134,7 @@ export const requestWorkflow = defineWorkflow<UiSchema, typeof integrations>()(
           await step.run('confirm-submission-after-create', () =>
             mutate(confirmRequestSubmission, {
               requestId: current.id,
-              owner: caller.principal,
+              owner: caller.identity,
               collaborationUrl: admittedUrl,
             }),
           )
@@ -152,7 +152,7 @@ export const requestWorkflow = defineWorkflow<UiSchema, typeof integrations>()(
       }
       if (submission.kind === 'rejected') {
         await step.run('fail-rejected-submission', () =>
-          mutate(failRequestSubmission, { requestId: current.id, owner: caller.principal }),
+          mutate(failRequestSubmission, { requestId: current.id, owner: caller.identity }),
         )
         return { state: 'failed' as const, requestId: current.id }
       }
