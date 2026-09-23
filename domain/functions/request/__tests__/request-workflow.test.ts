@@ -13,6 +13,8 @@ import { requestByOwnerAndKey, type RequestRecord } from '#queries/request'
 import { requestWorkflow } from '../index.js'
 
 const owner = NodeId('owner')
+// Under Domain token exchange the executing principal is the UI Domain, not the requesting caller.
+const uiDomain = NodeId('ui-domain')
 const requestId = NodeId('request')
 const input = { intent: 'API status monitor', idempotencyKey: 'request-1' }
 const collaborationUrl = 'https://github.com/astrale-os/ui/issues/42'
@@ -52,6 +54,21 @@ describe('request Workflow', () => {
       },
     ])
     expect(effects.submit).toHaveBeenCalledExactlyOnceWith({ requestId, intent: input.intent })
+  })
+
+  it('owns and deduplicates a request by the caller Identity, never the executing Domain', async () => {
+    const effects = harness()
+    await expect(requestWorkflow.run(effects.context())).resolves.toMatchObject({
+      state: 'submitted',
+    })
+    expect(effects.queries).toEqual([
+      { definition: requestByOwnerAndKey, input: { owner, idempotencyKey: input.idempotencyKey } },
+    ])
+    expect(effects.mutations).not.toHaveLength(0)
+    for (const mutation of effects.mutations) {
+      expect(mutation.input).toMatchObject({ owner })
+      expect(Object.values(mutation.input as object)).not.toContain(uiDomain)
+    }
   })
 
   it('replays an already submitted receipt without another graph or provider effect', async () => {
@@ -340,7 +357,7 @@ function harness(
         return result
       }
       return {
-        caller: { principal: owner },
+        caller: { identity: owner, principal: uiDomain },
         input,
         graph: { self: { query } },
         async mutate(definition: unknown, value: unknown) {
