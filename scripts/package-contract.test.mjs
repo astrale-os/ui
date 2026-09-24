@@ -191,13 +191,32 @@ test('the exact shadcn support layer maps orientation shorthand to Base UI state
 
 test('theme has an opt-in reset and all public presets own the same character vocabulary', async () => {
   const theme = await readFile(`${packageRoot}/src/theme/theme.css`, 'utf8')
+  const tokens = await readFile(`${packageRoot}/src/theme/tokens.css`, 'utf8')
+  const source = await readFile(`${packageRoot}/src/theme/source.css`, 'utf8')
   const reset = await readFile(`${packageRoot}/src/theme/reset.css`, 'utf8')
   const tailwind = await readFile(`${packageRoot}/src/theme/tailwind.css`, 'utf8')
   // Component rules compile below consumer utilities; the Tailwind contract ships uncompiled.
   assert.match(theme, /@import 'tailwindcss\/utilities\.css' layer\(components\) source\(none\);/u)
   assert.match(theme, /@import '\.\/tailwind\.css';/u)
+  assert.match(theme, /@import '\.\/tokens\.css';/u)
   assert.doesNotMatch(theme, /@theme inline/u)
-  assert.match(cssBlock(theme, '@layer components'), /:where\(\[data-slot\]\)/u)
+  // Tokens and component-owned rules are plain CSS, shared by both entries.
+  assert.match(tokens, /^@layer theme, base, components, utilities;$/mu)
+  assert.match(cssBlock(tokens, '@layer components'), /:where\(\[data-slot\]\)/u)
+  assert.doesNotMatch(tokens, /@import|@source|@theme|@utility|@custom-variant/u)
+  // The source entry hands the consumer's Tailwind the package's vocabulary and sources, and never
+  // brings compiled utilities or a second `utilities` import of its own.
+  for (const line of [
+    "@import 'tw-animate-css';",
+    "@import './shadcn-tailwind.css';",
+    "@import './tailwind.css';",
+    "@import './tokens.css';",
+    "@source '../**/*.{ts,tsx}';",
+  ]) {
+    assert.ok(source.includes(line), `source.css must declare ${line}`)
+  }
+  assert.doesNotMatch(source, /^@import 'tailwindcss/mu)
+  assert.doesNotMatch(source, /^@import '\.\/theme\.css'/mu)
   assert.match(tailwind, /@custom-variant dark \(&:where\(\.dark, \.dark \*\)\);/u)
   const contract = cssBlock(tailwind, '@theme inline')
   for (const mapping of [
@@ -212,7 +231,7 @@ test('theme has an opt-in reset and all public presets own the same character vo
   assert.match(theme, /@source '\.\.\/\*\*\/\*\.\{ts,tsx\}';/u)
   assert.doesNotMatch(theme, /tailwindcss\/preflight/u)
   assert.doesNotMatch(theme, /@import\s+["']\.\/reset/u)
-  const bodyTypography = cssBlock(theme, ':where([data-slot])')
+  const bodyTypography = cssBlock(tokens, ':where([data-slot])')
   assert.match(bodyTypography, /font-weight:\s*var\(--ui-weight-body\)/u)
   assert.doesNotMatch(bodyTypography, /!important/u)
   // The reset is opt-in and layered under `base`, below component defaults and utilities.
@@ -230,7 +249,7 @@ test('theme has an opt-in reset and all public presets own the same character vo
     'border-color: var(--ui-border)',
     'outline-color: color-mix(in oklab, var(--ui-ring) 50%, transparent)',
   ])
-  const reducedMotion = cssBlock(theme, '@media (prefers-reduced-motion: reduce)')
+  const reducedMotion = cssBlock(tokens, '@media (prefers-reduced-motion: reduce)')
   const slotMotion = cssBlock(reducedMotion, ":where([data-slot]:not([data-slot='spinner']))")
   assert.deepEqual(
     [...slotMotion.matchAll(/(?:animation|transition)-duration:\s*[^;]+/gu)].map(

@@ -1,0 +1,20 @@
+/*
+  Tailwind CSS v4 source entry, for applications that build their own stylesheet with Tailwind:
+
+    @import 'tailwindcss';
+    @import '@astrale-os/ui/source.css';
+    @import '@astrale-os/ui/presets/astrale.css';
+
+  Instead of the precompiled `theme.css`, the application's Tailwind compiles the package's
+  classes itself, in one build with its own: every state variant (`hover:`, `data-open:`,
+  `data-selected:`...) then comes after its base utility in the same layer, whatever utilities the
+  application also uses. It brings the package's variant and animation vocabulary, the `--ui-*`
+  contract of `tailwind.css`, the tokens and component-owned rules of `tokens.css`, and the source
+  path of the components. Do not import `theme.css` or `tailwind.css` next to it.
+*/
+@import 'tw-animate-css';
+@import './shadcn-tailwind.css';
+@import './tailwind.css';
+@import './tokens.css';
+
+@source '../**/*.{ts,tsx}';

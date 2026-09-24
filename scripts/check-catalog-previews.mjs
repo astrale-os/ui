@@ -54,6 +54,8 @@ function visualRuntimeAddresses(packageDocument) {
     './reset.css',
     './theme.css',
     './tailwind.css',
+    './source.css',
+    './tokens.css',
     './presets/astrale.css',
     './presets/compact.css',
     './presets/expressive.css',
