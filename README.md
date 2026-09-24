@@ -36,6 +36,22 @@ Import the semantic theme, one character preset, and the Tailwind contract for y
 `font-serif`, radii, class-based `dark:`) on the `--ui-*` tokens; the precompiled `theme.css`
 keeps its component rules in `@layer components`, below your `utilities` layer.
 
+Applications that build their own stylesheet with Tailwind CSS v4 import the source entry instead.
+Their Tailwind then compiles the components' classes in the same build as their own, so a component's
+state variant (`hover:`, `data-open:`, `data-selected:`...) always comes after its base utility,
+even when the application uses that utility too:
+
+```css
+@import 'tailwindcss';
+@import '@astrale-os/ui/source.css';
+@import '@astrale-os/ui/presets/astrale.css';
+```
+
+`source.css` brings the package's variants and animations, the `tailwind.css` contract, the tokens
+and component-owned rules, and the path of the components for Tailwind to scan. It replaces
+`theme.css` and `tailwind.css`: do not import them next to it. `tokens.css` alone holds the `--ui-*`
+tokens and component defaults, for plain CSS that reads the tokens without the components.
+
 The exact pinned Tailwind Preflight is deliberately opt-in through the reset:
 
 ```css

@@ -143,6 +143,61 @@ test('a Tailwind consumer gets the semantic contract and wins the cascade over c
   }
 })
 
+test('a Tailwind consumer compiling the package from source keeps every state variant after its base utility', () => {
+  const workspace = mkdtempSync(path.join(packageRoot, '.theme-consumer-'))
+  try {
+    const consumer = path.join(workspace, 'consumer.css')
+    writeFileSync(
+      consumer,
+      [
+        `@import '${tailwindEntry}' source(none);`,
+        `@import '${path.join(packageRoot, 'src/theme/source.css')}';`,
+        `@import '${path.join(packageRoot, 'src/theme/presets/astrale.css')}';`,
+        // The consumer's own markup uses base utilities the components also carry.
+        `@source inline("bg-background opacity-0 text-base");`,
+        '',
+      ].join('\n'),
+    )
+    const css = compile(consumer, path.join(workspace, 'consumer.out.css'))
+    assert.match(css, /@layer theme, base, components, utilities;/u)
+
+    // The precompiled entry lost these: the consumer's copy of the base utility sat in a later layer
+    // than the package's variant. Compiled in one build, both share `utilities`, variant last.
+    for (const [base, variant] of [
+      ['.bg-background', '.hover\\:bg-muted'],
+      ['.opacity-0', '.group-data-\\[checked\\=true\\]\\/command-item\\:opacity-100'],
+      ['.text-base', '.md\\:text-sm'],
+    ]) {
+      const [baseRule] = rules(css, base)
+      const [variantRule] = rules(css, variant)
+      assert.ok(baseRule && variantRule, `${base} and ${variant} must both be generated`)
+      assert.equal(baseRule.layer, 'utilities')
+      assert.equal(variantRule.layer, 'utilities')
+      assert.ok(
+        css.indexOf(`${variant}`) > css.indexOf(`${base} {`),
+        `${variant} must come after ${base}`,
+      )
+    }
+
+    // The package's own variants keep their meaning: cmdk marks unselected items `false`.
+    const [selected] = rules(css, '.data-selected\\:bg-muted')
+    assert.match(selected?.selector ?? '', /\[data-selected="true"\]/u)
+    assert.ok(rules(css, '.data-open\\:animate-in').length > 0, 'animation vocabulary must compile')
+
+    // No compiled utility is shipped: the package's classes exist once, in the consumer's layer.
+    assert.deepEqual(
+      rules(css, '.bg-card').map((rule) => rule.layer),
+      ['utilities'],
+    )
+    assert.equal(rules(css, ':where([data-slot])')[0]?.layer, 'components')
+    const tokens = rules(css, ':root').find((rule) => /--ui-background/u.test(rule.body))
+    assert.equal(tokens?.layer, null, 'preset tokens must stay outside every layer')
+    assert.match(rules(css, '.bg-background')[0]?.body ?? '', /var\(--ui-background\)/u)
+  } finally {
+    rmSync(workspace, { recursive: true, force: true })
+  }
+})
+
 test('every preset scopes its dark tokens to the document root or to the preset element', () => {
   for (const name of ['astrale', 'compact', 'expressive']) {
     const preset = readFileSync(path.join(packageRoot, `src/theme/presets/${name}.css`), 'utf8')

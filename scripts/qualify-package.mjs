@@ -311,6 +311,19 @@ try {
       packedTailwind.includes('--color-background: var(--ui-background)'),
     'packed tailwind.css must ship the uncompiled Tailwind contract',
   )
+  // The source entry resolves everything it imports next to itself and scans the published modules.
+  const packedSource = await readFile(path.join(extracted, 'package/dist/source.css'), 'utf8')
+  for (const file of ['tw-animate.css', 'shadcn-tailwind.css', 'tailwind.css', 'tokens.css']) {
+    assert.ok(
+      packedSource.includes(`@import './${file}';`),
+      `packed source.css must import ${file}`,
+    )
+    await stat(path.join(extracted, 'package/dist', file))
+  }
+  assert.ok(
+    packedSource.includes("@source './**/*.js';") && !packedSource.includes('tw-animate-css'),
+    'packed source.css must scan the published modules and import no unpublished package',
+  )
   const packedFiles = await fileSizes(path.join(extracted, 'package'))
   const largestFiles = packedFiles.toSorted((left, right) => right.bytes - left.bytes).slice(0, 10)
   const report = {
@@ -324,6 +337,7 @@ try {
     themeCssBytes: (await stat(path.join(extracted, 'package/dist/theme.css'))).size,
     resetCssBytes: (await stat(path.join(extracted, 'package/dist/reset.css'))).size,
     tailwindCssBytes: (await stat(path.join(extracted, 'package/dist/tailwind.css'))).size,
+    sourceCssBytes: (await stat(path.join(extracted, 'package/dist/source.css'))).size,
     rootButtonBundleBytes: bundle.length,
     rootButtonBundleGzipBytes: await gzipSize(bundle),
     dialogBundleBytes: dialogBundle.length,
