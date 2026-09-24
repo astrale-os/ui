@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.3.0-beta.32](https://github.com/astrale-os/ui/compare/v0.3.0-beta.31...v0.3.0-beta.32) (2026-09-24)
+
+
+### Features
+
+* **styles:** add a Tailwind source entry that compiles components with the app ([#186](https://github.com/astrale-os/ui/issues/186)) ([31868b6](https://github.com/astrale-os/ui/commit/31868b60c5d51869f213f6aec95bb3a03b76914d))
+
+
+### Bug Fixes
+
+* **playground:** declare dependencies without forced dedupe ([a2f881a](https://github.com/astrale-os/ui/commit/a2f881a0f3344545b2527338d950e62d51b72454))
+
 ## [0.3.0-beta.31](https://github.com/astrale-os/ui/compare/v0.3.0-beta.30...v0.3.0-beta.31) (2026-09-21)
 
 
