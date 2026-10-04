@@ -8,8 +8,8 @@ blockExoticSubdeps: true
 lockfileIncludeTarballUrl: true
 
 # pnpm blocks dependency build scripts by default; these need their postinstall
-# to run (workerd is wrangler's runtime — without it `pnpm dev`/`pnpm run deploy prod`
-# fails).
+# to run (workerd is wrangler's runtime — wrangler bundles every `pnpm build` and
+# `pnpm run deploy <environment>`).
 allowBuilds:
   bun: true
   esbuild: true
