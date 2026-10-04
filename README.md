@@ -137,8 +137,10 @@ accessibility/interaction tests.
 
 `@astrale-os/ui` is the repository's only Release Please component and public npm package, using
 `v<version>` tags. Its trusted workflow admits the exact tag, SHA, and package version before public
-npm publication and contains no token fallback. The private `domain/` workspace is built and deployed
-directly; operators install its observed deployment URL into each target Kernel.
+npm publication and contains no token fallback. The private `domain/` workspace deploys each release
+as one immutable deployment in the platform dispatch namespace (`pnpm --dir domain run deploy
+<environment>`); operators install a printed deployment URL into each target Kernel
+(`domain/README.md`).
 
 ## License
 

@@ -1,4 +1,3 @@
-import { run } from '@astrale-os/sdk/cli'
 /**
  * The namespace deploy fixture's process: `astrale-domain deploy` of the ui Domain against a fake
  * Cloudflare account, run in this process under Bun with the copied Project as working directory
@@ -7,6 +6,8 @@ import { run } from '@astrale-os/sdk/cli'
  * the same release again, then deploys development, and writes what each run printed and what the
  * fake account holds to the report file the test names.
  */
+
+import { run } from '@astrale-os/sdk/cli'
 import { compile } from '@astrale-os/sdk/deployment/build'
 import { createHash } from 'node:crypto'
 import { writeFileSync } from 'node:fs'

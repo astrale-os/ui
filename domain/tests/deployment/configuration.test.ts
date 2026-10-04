@@ -6,7 +6,11 @@ import { ORIGIN } from '../../schema/schema.js'
 
 /** The platform dispatch namespace every platform Domain deploys into (D4). */
 const PLATFORM_NAMESPACE = { name: 'astrale-platform', routingDomain: 'platform.astrale.ai' }
-/** The adapter-cloudflare parameters that select the legacy direct mode (CT33 `legacy-direct`). */
+/**
+ * The adapter-cloudflare parameters that select the legacy direct mode (CT33 `legacy-direct`). The
+ * SDK's selector is internal; namespace-deploy.test.ts runs the real `astrale-domain deploy`, which
+ * selects the canonical mode for both Environments.
+ */
 const DIRECT_PARAMETERS = ['route', 'workerName', 'identityIssuer', 'addressing', 'signingIdentity']
 /** The secret names the request-submission Provider reads (`.env.example`). */
 const SECRETS = ['GITHUB_ACTOR', 'GITHUB_OWNER', 'GITHUB_REPOSITORY', 'GITHUB_TOKEN']
@@ -36,7 +40,8 @@ describe('ui Domain deployment configuration', () => {
       expect(typeof deployment.adapter.deployRelease).toBe('function')
       expect(parameters.namespace).toEqual(PLATFORM_NAMESPACE)
       for (const name of DIRECT_PARAMETERS) expect(parameters[name]).toBeUndefined()
-      // An immutable deployment runs no cron of its own and binds only its frozen configuration.
+      // No wrangler overlay: the generated runtime sets global_fetch_strictly_public itself, which
+      // the frozen configuration test below asserts.
       expect(parameters.wrangler).toBeUndefined()
       expect(parameters.secrets).toBe(SECRETS_FILES[environment])
     },
