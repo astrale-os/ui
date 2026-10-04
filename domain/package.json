@@ -65,15 +65,13 @@
     }
   },
   "scripts": {
-    "dev": "astrale-domain dev",
     "deploy": "astrale-domain deploy",
     "build": "astrale-domain build",
     "lint": "astrale-domain lint",
     "lint:fix": "astrale-domain lint --fix",
     "package": "astrale-domain package",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run --config vitest.config.ts",
-    "prod": "astrale-domain deploy prod"
+    "test": "vitest run --config vitest.config.ts"
   },
   "dependencies": {
     "@astrale-os/sdk": "0.6.0-beta.17",
