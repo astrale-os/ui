@@ -1,4 +1,9 @@
 import { deploymentLine } from '@astrale-os/sdk/deployment/address'
+import { spawnSync } from 'node:child_process'
+import { existsSync, readFileSync, readdirSync } from 'node:fs'
+import { createRequire } from 'node:module'
+import { dirname, join } from 'node:path'
+import { fileURLToPath } from 'node:url'
 
 import project from '../../astrale.config.js'
 import manifest from '../../package.json' with { type: 'json' }
@@ -20,6 +25,7 @@ const SECRETS_FILES: Readonly<Record<string, string>> = {
   production: '.env.prod',
 }
 const SIGNAL = new AbortController().signal
+const projectDir = fileURLToPath(new URL('../..', import.meta.url))
 
 const environments = Object.entries(project.environments)
 
@@ -71,7 +77,11 @@ describe('ui Domain deployment configuration', () => {
         secrets: SECRETS,
       })
       expect(configuration.vars).toEqual({})
-      expect(configuration.bindings).toEqual({ services: [], secrets: SECRETS })
+      expect(configuration.bindings).toEqual({
+        services: [],
+        dispatchNamespaces: [],
+        secrets: SECRETS,
+      })
       expect(configuration.router).toBe(false)
       // The GitHub Provider's subrequests keep the public-fetch flag the direct mode set by hand.
       expect(configuration.runtime.compatibilityFlags).toEqual(
@@ -86,4 +96,57 @@ describe('ui Domain deployment configuration', () => {
     expect(scripts).not.toHaveProperty('dev')
     expect(scripts).not.toHaveProperty('prod')
   })
+
+  it.each(['prod', 'beta'])(
+    'refuses `astrale-domain deploy %s` as an unknown Environment before any effect',
+    (environment) => {
+      const result = withoutEffects(() => astraleDomain(['deploy', environment]))
+      expect(result.status).toBe(1)
+      expect(result.stderr).toContain(
+        `Project has no Environment ${environment}; known Environments: development, production.`,
+      )
+      expect(result.stdout).toBe('')
+    },
+    120_000,
+  )
+
+  it.each(['development', 'production'])(
+    'refuses `astrale-domain dev %s`: the Environment deploys immutable deployments',
+    (environment) => {
+      const result = withoutEffects(() => astraleDomain(['dev', environment]))
+      expect(result.status).toBe(1)
+      expect(result.stderr).toContain(
+        `\`astrale-domain dev\` serves only legacy direct-mode Environments, and ${environment} ` +
+          'deploys immutable deployments.',
+      )
+      expect(result.stdout).toBe('')
+    },
+    120_000,
+  )
 })
+
+/** Run one command and prove it left the Project's deploy state as it found it. */
+function withoutEffects<Result>(command: () => Result): Result {
+  const state = join(projectDir, '.astrale')
+  const before = existsSync(state) ? readdirSync(state).sort() : undefined
+  const result = command()
+  expect(existsSync(state) ? readdirSync(state).sort() : undefined).toEqual(before)
+  return result
+}
+
+/** The installed SDK's `astrale-domain`, run in this Project without Cloudflare credentials. */
+function astraleDomain(argv: readonly string[]) {
+  const manifestPath = createRequire(import.meta.url).resolve('@astrale-os/sdk/package.json')
+  const { bin } = JSON.parse(readFileSync(manifestPath, 'utf8')) as {
+    readonly bin: { readonly 'astrale-domain': string }
+  }
+  return spawnSync(
+    process.execPath,
+    [join(dirname(manifestPath), bin['astrale-domain']), ...argv],
+    {
+      cwd: projectDir,
+      encoding: 'utf8',
+      env: { ...process.env, CLOUDFLARE_API_TOKEN: '', CLOUDFLARE_ACCOUNT_ID: '' },
+    },
+  )
+}

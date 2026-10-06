@@ -3,8 +3,9 @@
  * Cloudflare account, run in this process under Bun with the copied Project as working directory
  * (namespace-deploy.test.ts starts it). `fetch` is the fake account's for the whole process, so
  * no deploy step can reach a real host. It deploys production, rotates a secret value and deploys
- * the same release again, then deploys development, and writes what each run printed and what the
- * fake account holds to the report file the test names.
+ * the same release again, then deploys development, reads what the production deployment serves,
+ * and writes what each run printed and what the fake account holds to the report file the test
+ * names.
  */
 
 import { run } from '@astrale-os/sdk/cli'
@@ -13,8 +14,8 @@ import { createHash } from 'node:crypto'
 import { writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 
-import { application } from '../../../application.js'
 import project from '../../../astrale.config.js'
+import { domain } from '../../../domain.js'
 import runtime from '../../../runtime.js'
 import { FakeCloudflare } from './fake-cloudflare.js'
 
@@ -36,7 +37,7 @@ const fake = new FakeCloudflare({
   namespace: NAMESPACE,
   routingDomain: ROUTING_DOMAIN,
   routingKvTitle: routingKvTitle(NAMESPACE),
-  build: compile(application),
+  build: compile(domain),
   runtime,
 })
 globalThis.fetch = Object.assign(fake.fetch, { preconnect: () => {} }) as typeof fetch
@@ -48,11 +49,21 @@ const runs = [
   ),
   await deploy(['deploy', 'development', '--json']),
 ]
+const production = parse(runs[0]!.stdout)
+const served =
+  production === undefined
+    ? undefined
+    : {
+        release: await read(`${production.url}/.well-known/astrale/release.json`),
+        deployment: await read(`${production.url}/.well-known/astrale/deployment.json`),
+        openid: await read(`${production.url}/.well-known/openid-configuration`),
+      }
 
 writeFileSync(
   report,
   JSON.stringify({
     runs,
+    served,
     requests: fake.requests,
     routing: Object.fromEntries(fake.routing),
     scripts: [...fake.scripts].map(([name, script]) => ({ name, ...script })),
@@ -75,6 +86,20 @@ async function deploy(argv: readonly string[], before?: () => void) {
     return { argv, exitCode: -1, stdout: chunks.join(''), error: String(cause) }
   } finally {
     process.stdout.write = write
+  }
+}
+
+/** One document the deployment serves, as the platform dispatcher answers it. */
+async function read(url: string) {
+  const response = await fetch(url)
+  return { status: response.status, body: await response.text() }
+}
+
+function parse(stdout: string): { readonly url: string } | undefined {
+  try {
+    return JSON.parse(stdout) as { readonly url: string }
+  } catch {
+    return undefined
   }
 }
 
