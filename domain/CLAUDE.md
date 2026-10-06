@@ -11,7 +11,7 @@ npx skills add astrale-os/cli -g
 This scaffold is intentionally minimal. React and custom projects include one schema-declared
 application View to prove frontend delivery; `--frontend none` is callable-only. Start each real
 behavior in its semantic submodule, keep owners explicit, put focused tests in `__tests__`, use
-registered package `#` imports across owners, and keep `runtime.ts` and `application.ts` limited to
+registered package `#` imports across owners, and keep `runtime.ts` and `domain.ts` limited to
 their exact composition responsibilities.
 Actions perform one semantic asynchronous operation; Workflows name every explicit multi-step operation.
 

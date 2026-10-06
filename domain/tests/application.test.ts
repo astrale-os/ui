@@ -1,14 +1,14 @@
 import { K } from '@astrale-os/sdk/schema'
 
-import { application } from '../application.js'
+import { domain } from '../domain.js'
 import runtime from '../runtime.js'
 import { schema } from '../schema/index.js'
 
-describe('UI application composition', () => {
+describe('UI Domain definition', () => {
   it('retains the graph capabilities required by its Request workflow', () => {
-    expect(application.schema).toBe(schema)
-    expect(application.runtime).toBe(runtime)
-    expect(application.requirements).toEqual({
+    expect(domain.schema).toBe(schema)
+    expect(domain.runtime).toBe(runtime)
+    expect(domain.requirements).toEqual({
       functions: [K.functions.mutate.key, K.functions.query.key].sort(),
       classes: [],
       core: [],
