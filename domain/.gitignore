@@ -1,7 +1,7 @@
 # Deps
 node_modules/
 
-# Generated plumbing (worker entry, wrangler config, identity, spec)
+# Generated plumbing (worker entry, wrangler config, spec)
 .astrale/
 .domain-studio/
 

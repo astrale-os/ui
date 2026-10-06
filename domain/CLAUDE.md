@@ -11,7 +11,7 @@ npx skills add astrale-os/cli -g
 This scaffold is intentionally minimal. React and custom projects include one schema-declared
 application View to prove frontend delivery; `--frontend none` is callable-only. Start each real
 behavior in its semantic submodule, keep owners explicit, put focused tests in `__tests__`, use
-registered package `#` imports across owners, and keep `runtime.ts` and `application.ts` limited to
+registered package `#` imports across owners, and keep `runtime.ts` and `domain.ts` limited to
 their exact composition responsibilities.
 Actions perform one semantic asynchronous operation; Workflows name every explicit multi-step operation.
 
@@ -26,11 +26,10 @@ Schema contract at the package root. Runtime, handlers, Providers, frontend code
 adapters remain implementation inputs and are not published. Do not add a parallel build or
 declaration-rewrite script.
 
-`pnpm dev` owns the complete development session. With the managed Astrale adapter it acquires
-private ingress, starts Worker and optional Vite hot reload, reconciles the Domain installation on
-the configured or active instance, and opens the View when one exists. Stop closes only local
-processes; it retains the installation and local reconciliation evidence for the next run. Do not
-add a parallel tunnel, install loop, frontend watcher, or automatic shutdown uninstall.
+`pnpm run deploy <environment>` makes one immutable deployment of the current release in the
+platform dispatch namespace and prints its URL; it never installs. `astrale domain install <url>`
+installs that URL as an explicit consumer operation. This Domain has no development session: do not
+add a `dev` script, a stable-target Environment, a tunnel or an install loop.
 
 Domain projects do not contain `.spec` directories. Do not add one: public SDK types, package
 facades, the Domain knowledge rules, and executable tests are the contract guardrails. Import Core
