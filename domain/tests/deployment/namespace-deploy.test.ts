@@ -50,8 +50,18 @@ interface Run {
   readonly error?: string
 }
 
+interface Served {
+  readonly status: number
+  readonly body: string
+}
+
 interface Report {
   readonly runs: readonly Run[]
+  readonly served?: {
+    readonly release: Served
+    readonly deployment: Served
+    readonly openid: Served
+  }
   readonly requests: readonly RecordedRequest[]
   readonly routing: Readonly<Record<string, string>>
   readonly scripts: readonly (FakeScript & { readonly name: string })[]
@@ -131,6 +141,8 @@ describe('astrale-domain deploy of the ui Domain', () => {
     expect(result.commit).toMatchObject({ dirty: false })
     // The canonical mode: no deprecation of the legacy direct mode was printed.
     expect(stderr).not.toMatch(/legacy direct|deprecated/iu)
+    expect(stderr).toContain(`Deployment: ${label} · created`)
+    expect(stderr).toContain('Ready: deployment verified')
 
     const uploads = report.requests.filter(
       (request) => request.method === 'PUT' && request.path === `${SCRIPTS}${label}`,
@@ -162,6 +174,16 @@ describe('astrale-domain deploy of the ui Domain', () => {
     })
     const summary = acceptPlatformDeploymentSummary(JSON.parse(report.routing[`summary:${label}`]!))
     expect(summary).toMatchObject({ owner: 'platform', id: label, state: 'active' })
+  })
+
+  it('serves its own release at its URL, which is its issuer', () => {
+    const result = deployResult(report.runs[0]!)
+    expect(report.served?.release.status).toBe(200)
+    expect(report.served?.deployment.status).toBe(200)
+    expect(report.served?.openid.status).toBe(200)
+    const openid = JSON.parse(report.served!.openid.body) as { readonly issuer: string }
+    expect(openid.issuer).toBe(result.url)
+    expect(report.served!.release.body).toContain(`${result.url}/invoke`)
   })
 
   it('reuses the production deployment of the same release and rewrites its secrets in place', () => {
