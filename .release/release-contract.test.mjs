@@ -491,7 +491,7 @@ test('tracks the strict lock policy and pinned repository toolchain', async () =
       .length,
     1,
   )
-  assert.equal(root.devDependencies.oxfmt, '0.63.0')
+  assert.equal(root.devDependencies.oxfmt, '0.67.0')
   assert.equal(root.devDependencies.oxlint, '1.78.0')
 })
 

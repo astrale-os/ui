@@ -17,6 +17,8 @@ minimumReleaseAgeExclude:
   - 'vitest@5.0.1'
   - '@vitest/mocker@5.0.1'
   - '@vitest/spy@5.0.1'
+  # source-map-js 1.2.2 (2026-09-30) patches GHSA-68fv-2mgg-jv7q (high), reached via next > postcss.
+  - 'source-map-js@1.2.2'
   - '@astrale-os/*'
   - '@astrale-domains/*'
   - '@astrale/*'
