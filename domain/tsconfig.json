@@ -53,7 +53,7 @@
     "providers",
     "utils",
     "tests",
-    "application.ts",
+    "domain.ts",
     "runtime.ts",
     "index.ts",
     "astrale.config.ts"

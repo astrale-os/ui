@@ -1,17 +1,17 @@
 import { requestWorkflow } from '#functions/request'
 import { requestSubmission } from '#integrations/request-submission'
 
-import { application, runtime, schema } from '../../index.js'
+import { domain, runtime, schema } from '../../index.js'
 
 afterEach(() => vi.unstubAllGlobals())
 
-describe('application composition', () => {
-  it('keeps authored Application and Runtime composition exact', () => {
-    expect(application.schema).toBe(schema)
-    expect(application.runtime).toBe(runtime)
+describe('Domain definition', () => {
+  it('keeps the authored Domain definition and Runtime composition exact', () => {
+    expect(domain.schema).toBe(schema)
+    expect(domain.runtime).toBe(runtime)
     expect(runtime.functions).toEqual([requestWorkflow])
     expect(runtime.integrations).toEqual({ requestSubmission })
-    expect(application.frontend).toBeUndefined()
+    expect(domain.frontend).toBeUndefined()
   })
 
   it('routes the complete Runtime environment into the exact Provider', async () => {

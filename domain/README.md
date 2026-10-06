@@ -12,7 +12,7 @@ integrations/    provider-neutral external submission boundary
 providers/       GitHub boundary implementation and environment admission
 functions/       crash-safe request Workflow
 runtime.ts       exact Workflow and Provider composition
-application.ts   Schema and Runtime composition
+domain.ts        Schema and Runtime composition (Domain definition)
 tests/           cross-layer executable evidence
 .history/v1/     ADR, decisions, questions, and phase gates
 ```
