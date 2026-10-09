@@ -27,10 +27,7 @@ function memoryStore() {
       assert.equal(number, issue.number)
       const acceptedDiscussionIds =
         options.commentMode === 'recorded'
-          ? new Set(
-              this.binding?.record.acceptedDiscussionIds ??
-                (this.binding?.record.acceptedCommentIds ?? []).map((id) => `issue-comment:${id}`),
-            )
+          ? new Set(this.binding?.record.acceptedDiscussionIds ?? [])
           : null
       return {
         issue: {
@@ -337,7 +334,7 @@ test('requires the original provider for unknown-outcome reconciliation', async 
       operation: 'initial',
       idempotencyKey: 'ui-request:123:attempt:1',
       objectiveSha256: 'a'.repeat(64),
-      acceptedCommentIds: [],
+      acceptedDiscussionIds: [],
       provider: 'first',
       state: 'outcome-unknown',
       failure: {
@@ -521,7 +518,7 @@ test('round-trips one bounded machine record through the visible GitHub comment'
     operation: 'initial',
     idempotencyKey: 'ui-request:123:attempt:1',
     objectiveSha256: 'a'.repeat(64),
-    acceptedCommentIds: [7, 9],
+    acceptedDiscussionIds: ['issue-comment:7', 'issue-comment:9'],
     provider: 'fixture',
     state: 'succeeded',
     run: { provider: 'fixture', id: 'run' },
@@ -1018,7 +1015,7 @@ test('smart operation starts initial work and revises an existing terminal propo
       operation: 'initial',
       idempotencyKey: 'ui-request:123:attempt:1',
       objectiveSha256: 'a'.repeat(64),
-      acceptedCommentIds: [],
+      acceptedDiscussionIds: [],
       provider: 'fixture',
       state: 'succeeded',
       run: { provider: 'fixture', id: 'fixture-run' },

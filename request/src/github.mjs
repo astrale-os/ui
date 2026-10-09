@@ -54,7 +54,7 @@ async function acceptedComment(value, resolveWritePermission, source) {
   }
 }
 
-function admittedComments(comments, selectedDiscussionIds, selectedLegacyIds) {
+function admittedComments(comments, selectedDiscussionIds) {
   const ordered = comments.toSorted(
     (left, right) => Date.parse(left.createdAt) - Date.parse(right.createdAt) || left.id - right.id,
   )
@@ -65,15 +65,7 @@ function admittedComments(comments, selectedDiscussionIds, selectedLegacyIds) {
           throw new TypeError('A reserved accepted maintainer discussion is unavailable')
         return comment
       })
-    : selectedLegacyIds
-      ? selectedLegacyIds.map((id) => {
-          const comment = ordered.find(
-            (entry) => entry.source === 'issue-comment' && entry.id === id,
-          )
-          if (!comment) throw new TypeError('A reserved accepted maintainer comment is unavailable')
-          return comment
-        })
-      : ordered
+    : ordered
   if (selected.length > limits.maxAcceptedCommentCount) {
     throw new TypeError('Accepted maintainer comments exceed the admitted count')
   }
@@ -250,17 +242,13 @@ export function createGitHubRequestStore(options) {
 
       const selectedDiscussionIds =
         commentMode === 'recorded' ? found?.record.acceptedDiscussionIds : undefined
-      const selectedLegacyIds =
-        commentMode === 'recorded' && !selectedDiscussionIds
-          ? (found?.record.acceptedCommentIds ?? [])
-          : undefined
       return {
         issue: {
           number: issue,
           title: body.title,
           body: body.body,
           url: body.html_url,
-          comments: admittedComments(accepted, selectedDiscussionIds, selectedLegacyIds),
+          comments: admittedComments(accepted, selectedDiscussionIds),
         },
         binding: found,
       }
