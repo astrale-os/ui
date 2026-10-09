@@ -32,8 +32,6 @@ export type UiRequestAttemptRecord = {
   readonly operation: 'initial' | 'revision'
   readonly idempotencyKey: string
   readonly objectiveSha256: string
-  /** Legacy issue-only snapshot retained for records written before PR-native review. */
-  readonly acceptedCommentIds?: readonly number[]
   readonly acceptedDiscussionIds?: readonly UiRequestDiscussionId[]
   readonly provider: string
   readonly state: 'reserved' | 'outcome-unknown' | ManagedAgentRun['state']

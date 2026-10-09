@@ -12,14 +12,19 @@ import { ORIGIN } from '../../schema/schema.js'
 /** The platform dispatch namespace every platform Domain deploys into (D4). */
 const PLATFORM_NAMESPACE = { name: 'astrale-platform', routingDomain: 'platform.astrale.ai' }
 /**
- * The adapter-cloudflare parameters that select the legacy direct mode (CT33 `legacy-direct`). The
- * SDK's selector is internal; namespace-deploy.test.ts runs the real `astrale-domain deploy`, which
- * selects the canonical mode for both Environments.
+ * Parameters outside the namespace deployment contract. The real namespace-deploy test exercises
+ * the deployment adapter for both Environments.
  */
-const DIRECT_PARAMETERS = ['route', 'workerName', 'identityIssuer', 'addressing', 'signingIdentity']
+const UNSUPPORTED_PARAMETERS = [
+  'route',
+  'workerName',
+  'identityIssuer',
+  'addressing',
+  'signingIdentity',
+]
 /** The secret names the request-submission Provider reads (`.env.example`). */
 const SECRETS = ['GITHUB_ACTOR', 'GITHUB_OWNER', 'GITHUB_REPOSITORY', 'GITHUB_TOKEN']
-/** The gitignored secrets file of each Environment; the names the direct mode already used. */
+/** The gitignored secrets file of each Environment. */
 const SECRETS_FILES: Readonly<Record<string, string>> = {
   development: '.env.dev',
   production: '.env.prod',
@@ -31,8 +36,6 @@ const environments = Object.entries(project.environments)
 
 describe('ui Domain deployment configuration', () => {
   it('deploys only to the development and production namespace Environments', () => {
-    // The direct `prod` Environment is gone: the stable Worker ui.astrale.ai keeps its deployed
-    // code and is never redeployed from main (AM-75).
     expect(Object.keys(project.environments).sort()).toEqual(['development', 'production'])
   })
 
@@ -45,7 +48,7 @@ describe('ui Domain deployment configuration', () => {
       expect(deployment.adapter.name).toBe('cloudflare')
       expect(typeof deployment.adapter.deployRelease).toBe('function')
       expect(parameters.namespace).toEqual(PLATFORM_NAMESPACE)
-      for (const name of DIRECT_PARAMETERS) expect(parameters[name]).toBeUndefined()
+      for (const name of UNSUPPORTED_PARAMETERS) expect(parameters[name]).toBeUndefined()
       // No wrangler overlay: the generated runtime sets global_fetch_strictly_public itself, which
       // the frozen configuration test below asserts.
       expect(parameters.wrangler).toBeUndefined()
@@ -83,7 +86,7 @@ describe('ui Domain deployment configuration', () => {
         secrets: SECRETS,
       })
       expect(configuration.router).toBe(false)
-      // The GitHub Provider's subrequests keep the public-fetch flag the direct mode set by hand.
+      // Provider subrequests are restricted to public destinations.
       expect(configuration.runtime.compatibilityFlags).toEqual(
         expect.arrayContaining(['nodejs_compat', 'global_fetch_strictly_public']),
       )
@@ -104,20 +107,6 @@ describe('ui Domain deployment configuration', () => {
       expect(result.status).toBe(1)
       expect(result.stderr).toContain(
         `Project has no Environment ${environment}; known Environments: development, production.`,
-      )
-      expect(result.stdout).toBe('')
-    },
-    120_000,
-  )
-
-  it.each(['development', 'production'])(
-    'refuses `astrale-domain dev %s`: the Environment deploys immutable deployments',
-    (environment) => {
-      const result = withoutEffects(() => astraleDomain(['dev', environment]))
-      expect(result.status).toBe(1)
-      expect(result.stderr).toContain(
-        `\`astrale-domain dev\` serves only legacy direct-mode Environments, and ${environment} ` +
-          'deploys immutable deployments.',
       )
       expect(result.stdout).toBe('')
     },
