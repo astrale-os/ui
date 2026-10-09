@@ -49,13 +49,10 @@ Host. Installations that pin the stable Worker move by an explicit, consented in
    `CLOUDFLARE_API_TOKEN` for the platform namespace (provisioned by OPS-1). Keep `url` and
    `release.digest`.
 2. Inventory, read-only. For each instance of the astrale Host:
-   `astrale introspect ui.astrale.ai -i <instance> --json`. A `publication.identity.issuer` of
-   `https://ui.astrale.ai` pins the stable Worker; `DOMAIN_NOT_INSTALLED` means there is nothing
-   to move. The Host must run a Kernel that lists installed releases and records issuer consent
-   (K11b); an older Kernel refuses the consent below (`KERNEL_RELEASE_UNSUPPORTED`). Also read the
-   Fleet catalog, `astrale domain list --json`: an entry for `ui.astrale.ai` whose `url` is the
-   stable Worker keeps sending catalog installs there. Record it as a separate follow-up; this
-   runbook does not change it.
+   `astrale domain list -i <instance> --json`. Record the installed issuer and release pin;
+   `DOMAIN_NOT_INSTALLED` means there is nothing to move. Deployments installed on the replacement
+   Host must serve a verified Release v4. Old stable Workers and the Fleet catalog are no longer
+   installation sources.
 3. Install with consent to the issuer change. The stable Worker and the deployment are on
    different lines, so consent names the origin:
    `astrale domain install <url> --allow-issuer-change=ui.astrale.ai -i <instance>`. Without it,
@@ -65,11 +62,10 @@ Host. Installations that pin the stable Worker move by an explicit, consented in
 4. Verify: `<url>/.well-known/astrale/release.json` serves the kept release digest, and the
    install report names `<url>` as the issuer of `ui.astrale.ai` on that instance. Do not call
    the request function to check: it opens real GitHub issues.
-5. Roll back if needed by reinstalling the stable Worker, which still serves unchanged:
-   `astrale domain install https://ui.astrale.ai --allow-issuer-change=ui.astrale.ai -i <instance>`.
-   This move back to a legacy `domain.json` source is not yet proven for this Domain. Before the
-   first production instance, rehearse steps 3 to 5 on a local Host that runs the same Kernel,
-   with a source that serves the stable Worker's `domain.json`.
+5. Roll back by reinstalling a previously verified immutable deployment URL:
+   `astrale domain install <previous-deployment-url> --allow-issuer-change=ui.astrale.ai -i <instance>`.
+   Verify that its `release.json` still serves the recorded digest before installing. Rehearse
+   the upgrade and rollback on a local Host running the same Kernel before production cutover.
 
 Domain projects intentionally own no parallel `.spec` tree: authored `schema/` is the normative
 Domain contract and `.history/` retains temporal design evidence. Import authoring contracts through semantic

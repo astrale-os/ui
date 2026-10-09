@@ -13,6 +13,7 @@ import {
 export const ORIGIN = 'ui.astrale.ai' as const
 
 export const schema = defineSchema(ORIGIN, {
+  name: 'UI',
   dependencies: { kernel: KernelSchema },
   classes: { Request, request_owned_by },
   policies: { ManageRequest, TraverseOwnedRequest },

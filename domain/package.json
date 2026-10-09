@@ -74,11 +74,11 @@
     "test": "vitest run --config vitest.config.ts"
   },
   "dependencies": {
-    "@astrale-os/sdk": "0.6.0-beta.17",
+    "@astrale-os/sdk": "0.6.0-beta.24",
     "zod": "4.4.3"
   },
   "devDependencies": {
-    "@astrale-os/adapter-cloudflare": "0.5.0-beta.172",
+    "@astrale-os/adapter-cloudflare": "0.5.0-beta.179",
     "@astrale-os/ox": ">=0.1.4 <1.0.0",
     "@types/node": "^22.0.0",
     "bun": "1.4.2",

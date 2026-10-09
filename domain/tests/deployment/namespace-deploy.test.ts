@@ -2,7 +2,6 @@ import type { DeployResultV1 } from '@astrale-os/sdk/cli'
 
 import {
   acceptDeploymentRecord,
-  acceptPlatformDeploymentSummary,
   deploymentLine,
   deploymentUrl,
 } from '@astrale-os/sdk/deployment/address'
@@ -172,8 +171,7 @@ describe('astrale-domain deploy of the ui Domain', () => {
       releaseDigest: result.release!.digest,
       buildDigest: result.build!.digest,
     })
-    const summary = acceptPlatformDeploymentSummary(JSON.parse(report.routing[`summary:${label}`]!))
-    expect(summary).toMatchObject({ owner: 'platform', id: label, state: 'active' })
+    expect(report.routing).not.toHaveProperty(`summary:${label}`)
   })
 
   it('serves its own release at its URL, which is its issuer', () => {
@@ -242,7 +240,7 @@ describe('astrale-domain deploy of the ui Domain', () => {
     }
     const keys = Object.keys(report.routing).sort()
     const labels = report.scripts.map(({ name }) => name).sort()
-    expect(keys).toEqual(labels.flatMap((label) => [`record:${label}`, `summary:${label}`]).sort())
+    expect(keys).toEqual(labels.map((label) => `record:${label}`).sort())
   })
 })
 

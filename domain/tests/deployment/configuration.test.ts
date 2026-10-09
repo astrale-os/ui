@@ -76,6 +76,7 @@ describe('ui Domain deployment configuration', () => {
         environment,
         secrets: SECRETS,
       })
+      if (!('bindings' in configuration)) throw new Error('Expected namespace configuration.')
       expect(configuration.vars).toEqual({})
       expect(configuration.bindings).toEqual({
         services: [],
@@ -114,11 +115,8 @@ describe('ui Domain deployment configuration', () => {
     'refuses `astrale-domain dev %s`: the Environment deploys immutable deployments',
     (environment) => {
       const result = withoutEffects(() => astraleDomain(['dev', environment]))
-      expect(result.status).toBe(1)
-      expect(result.stderr).toContain(
-        `\`astrale-domain dev\` serves only legacy direct-mode Environments, and ${environment} ` +
-          'deploys immutable deployments.',
-      )
+      expect(result.status).toBe(2)
+      expect(result.stderr).toContain('Unknown command "dev".')
       expect(result.stdout).toBe('')
     },
     120_000,
