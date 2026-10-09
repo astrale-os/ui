@@ -113,33 +113,23 @@ test('keeps the schema object keys and enumerations closed against runtime admis
     schema.required,
     recordKeyValues.filter(
       (key) =>
-        ![
-          'acceptedCommentIds',
-          'acceptedDiscussionIds',
-          'run',
-          'providerUrl',
-          'pullRequest',
-          'failure',
-        ].includes(key),
+        !['acceptedDiscussionIds', 'run', 'providerUrl', 'pullRequest', 'failure'].includes(key),
     ),
   )
   assert.deepEqual(schema.allOf[0], {
-    not: { required: ['acceptedCommentIds', 'acceptedDiscussionIds'] },
-  })
-  assert.deepEqual(schema.allOf[1], {
     if: { type: 'object', properties: { state: { const: 'reserved' } } },
     then: { not: { anyOf: [{ required: ['run'] }, { required: ['failure'] }] } },
   })
-  assert.deepEqual(schema.allOf[2], {
+  assert.deepEqual(schema.allOf[1], {
     if: { type: 'object', properties: { state: { const: 'succeeded' } } },
     then: { required: ['run', 'pullRequest'] },
   })
-  assert.deepEqual(schema.allOf[3].then.required, ['failure'])
-  assert.deepEqual(schema.allOf[3].then.not, { required: ['run'] })
-  assert.deepEqual(schema.allOf[4].then.required, ['run'])
+  assert.deepEqual(schema.allOf[2].then.required, ['failure'])
+  assert.deepEqual(schema.allOf[2].then.not, { required: ['run'] })
+  assert.deepEqual(schema.allOf[3].then.required, ['run'])
 })
 
-test('keeps legacy and namespaced discussion snapshots mutually exclusive in schema and runtime', () => {
+test('admits namespaced discussion snapshots and refuses retired numeric snapshots', () => {
   const validate = ajv.compile(schema)
   const record = {
     version: 1,
@@ -158,7 +148,7 @@ test('keeps legacy and namespaced discussion snapshots mutually exclusive in sch
   assert.deepEqual(acceptUiRequestRecord(record), record)
   const ambiguous = { ...record, acceptedCommentIds: [1] }
   assert.equal(validate(ambiguous), false)
-  assert.throws(() => acceptUiRequestRecord(ambiguous), /discussion snapshot/u)
+  assert.throws(() => acceptUiRequestRecord(ambiguous), /unknown field/u)
 })
 
 test('keeps managed job, run, failure, and retry vocabulary closed across schema and runtime', () => {

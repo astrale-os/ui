@@ -38,7 +38,6 @@ export const recordKeyValues = Object.freeze([
   'operation',
   'idempotencyKey',
   'objectiveSha256',
-  'acceptedCommentIds',
   'acceptedDiscussionIds',
   'provider',
   'state',
@@ -94,18 +93,6 @@ export function acceptUiRequestRecord(value) {
       throw new TypeError('managed request run reference is malformed')
     }
   }
-  if (value.acceptedCommentIds !== undefined) {
-    if (
-      !Array.isArray(value.acceptedCommentIds) ||
-      value.acceptedCommentIds.length > limits.maxAcceptedCommentCount ||
-      value.acceptedCommentIds.some(
-        (commentId) => !Number.isSafeInteger(commentId) || commentId < 1,
-      ) ||
-      new Set(value.acceptedCommentIds).size !== value.acceptedCommentIds.length
-    ) {
-      throw new TypeError('managed request accepted comment snapshot is malformed')
-    }
-  }
   if (value.acceptedDiscussionIds !== undefined) {
     if (
       !Array.isArray(value.acceptedDiscussionIds) ||
@@ -117,8 +104,7 @@ export function acceptUiRequestRecord(value) {
             discussionId,
           ),
       ) ||
-      new Set(value.acceptedDiscussionIds).size !== value.acceptedDiscussionIds.length ||
-      value.acceptedCommentIds !== undefined
+      new Set(value.acceptedDiscussionIds).size !== value.acceptedDiscussionIds.length
     ) {
       throw new TypeError('managed request accepted discussion snapshot is malformed')
     }
