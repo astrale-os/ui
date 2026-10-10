@@ -1,5 +1,26 @@
 # Changelog
 
+## [1.0.0-beta.32](https://github.com/astrale-os/ui/compare/v0.3.0-beta.32...v1.0.0-beta.32) (2026-10-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* **utils:** retire numeric request snapshots and old deployment paths ([#191](https://github.com/astrale-os/ui/issues/191))
+
+### refactor
+
+* **utils:** retire numeric request snapshots and old deployment paths ([#191](https://github.com/astrale-os/ui/issues/191)) ([e99cc9d](https://github.com/astrale-os/ui/commit/e99cc9dc58ad39834b34fda3b55e217c8fb7b3a0))
+
+
+### Features
+
+* **domain:** deploy the ui Domain as immutable releases in the platform namespace ([#187](https://github.com/astrale-os/ui/issues/187)) ([019f2f1](https://github.com/astrale-os/ui/commit/019f2f1265c6699898f946d9d660c7242c357676))
+
+
+### Bug Fixes
+
+* **deps:** patch the next, fast-uri, source-map-js and tinypool advisories ([#188](https://github.com/astrale-os/ui/issues/188)) ([87b7fd0](https://github.com/astrale-os/ui/commit/87b7fd05552a4afff1efbd82019617ba63b43e46))
+
 ## [0.3.0-beta.32](https://github.com/astrale-os/ui/compare/v0.3.0-beta.31...v0.3.0-beta.32) (2026-09-24)
 
 
