@@ -19,8 +19,6 @@
     "#functions/*": "./functions/*/index.ts",
     "#integrations": "./integrations/index.ts",
     "#integrations/*": "./integrations/*/index.ts",
-    "#migrations": "./migrations/index.ts",
-    "#migrations/*": "./migrations/*/index.ts",
     "#mutations": "./mutations/index.ts",
     "#mutations/*": "./mutations/*/index.ts",
     "#queries": "./queries/index.ts",
