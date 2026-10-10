@@ -79,6 +79,7 @@ describe('ui Domain deployment configuration', () => {
         environment,
         secrets: SECRETS,
       })
+      if (!('bindings' in configuration)) throw new Error('Expected namespace configuration.')
       expect(configuration.vars).toEqual({})
       expect(configuration.bindings).toEqual({
         services: [],

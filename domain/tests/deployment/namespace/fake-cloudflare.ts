@@ -6,7 +6,6 @@ import {
   deploymentSettings,
   generatedCloudflareWorkerEntry,
   runtimeBindings,
-  withDirectIssuer,
 } from '@astrale-os/adapter-cloudflare/worker'
 import { cloudflareFrontDoor } from '@astrale-os/adapter-cloudflare/worker/front'
 import { generatedMaterial } from '@astrale-os/sdk/deployment/build'
@@ -68,6 +67,7 @@ interface KvNamespace {
  * refused, so a deploy that tried to reach anything else fails instead of leaving the process.
  */
 export class FakeCloudflare {
+  private readonly kvMetadata = new Map<string, unknown>()
   readonly requests: RecordedRequest[] = []
   readonly scripts = new Map<string, FakeScript>()
   private readonly kvs: KvNamespace[]
@@ -164,6 +164,13 @@ export class FakeCloudflare {
         { page: 1, per_page: 1000, total_pages: 1, total_count: this.kvs.length },
       )
     }
+    const metadataKey = /\/storage\/kv\/namespaces\/([^/]+)\/metadata\/(.+)$/u.exec(url.pathname)
+    if (metadataKey !== null && request.method === 'GET') {
+      const namespace = this.kvs.find((candidate) => candidate.id === metadataKey[1])
+      const key = decodeURIComponent(metadataKey[2]!)
+      if (!namespace?.values.has(key)) return failure(404, 10009, 'key not found')
+      return envelope(this.kvMetadata.get(`${namespace.id}:${key}`) ?? null)
+    }
     const kv = /\/storage\/kv\/namespaces\/([^/]+)\/values\/(.+)$/u.exec(url.pathname)
     if (kv !== null) {
       const namespace = this.kvs.find((candidate) => candidate.id === kv[1])
@@ -176,7 +183,19 @@ export class FakeCloudflare {
           : new Response(value, { status: 200 })
       }
       if (request.method === 'PUT') {
-        namespace.values.set(key, await request.text())
+        if (request.headers.get('content-type')?.startsWith('multipart/form-data')) {
+          const form = await request.formData()
+          const value = form.get('value')!
+          const metadata = form.get('metadata')!
+          namespace.values.set(key, typeof value === 'string' ? value : await value.text())
+          this.kvMetadata.set(
+            `${namespace.id}:${key}`,
+            JSON.parse(typeof metadata === 'string' ? metadata : await metadata.text()),
+          )
+        } else {
+          namespace.values.set(key, await request.text())
+          this.kvMetadata.delete(`${namespace.id}:${key}`)
+        }
         return envelope(null)
       }
     }
@@ -306,7 +325,7 @@ class Isolate {
       load: async () => ({ runtime, material: generatedMaterial(build) }),
       privateKey: (env) => decodeSigningIdentity(env.ASTRALE_SIGNING_IDENTITY),
       resolveEnvironment: runtimeBindings,
-      settings: withDirectIssuer(deploymentSettings),
+      settings: deploymentSettings,
       selfBinding: (env) => env.SELF,
     })
     const environment: Record<string, unknown> = {}
