@@ -107,6 +107,7 @@ test('the workspace separates its public runtime package from its control-plane 
       ([subpath, target]) =>
         subpath.startsWith('./') &&
         subpath !== './class-name' &&
+        subpath !== './brand' &&
         target &&
         typeof target === 'object' &&
         typeof target.import === 'string' &&

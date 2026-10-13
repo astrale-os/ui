@@ -12,6 +12,8 @@ export const repositoryRoot = fileURLToPath(new URL('../..', import.meta.url))
 const nonvisualExports = new Set([
   '.',
   './class-name',
+  // The Astrale logo is brand identity, not a component to discover.
+  './brand',
   './package.json',
   './reset.css',
   './theme.css',

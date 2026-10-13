@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { afterEach, describe, expect, test } from 'vitest'
 
 import { Button } from './action/button/index.js'
+import { AstraleLogo, AstraleMark, AstraleWordmark } from './brand/index.js'
 import { cn } from './class-name.js'
 import { Table } from './content/table/index.js'
 import {
@@ -301,5 +302,27 @@ describe('runtime owners', () => {
     expect(within(toastRoot).getByText('Unable to save')).toBeVisible()
     expect(within(toastRoot).getByText('Try the operation again.')).toBeVisible()
     expect(document.querySelector('[data-slot="toast-viewport"]')).toBeInTheDocument()
+  })
+
+  test('brand marks are named images drawn in the surrounding text color', () => {
+    render(
+      <>
+        <AstraleMark />
+        <AstraleWordmark />
+        <AstraleLogo />
+        <AstraleLogo layout="stacked" aria-hidden="true" />
+      </>,
+    )
+
+    const images = screen.getAllByRole('img', { name: 'Astrale' })
+    expect(images.map((image) => image.getAttribute('data-slot'))).toEqual([
+      'astrale-mark',
+      'astrale-wordmark',
+      'astrale-logo',
+    ])
+    for (const image of images) expect(image).toHaveAttribute('fill', 'currentColor')
+    const stacked = document.querySelector('[data-layout="stacked"]')
+    expect(stacked).toHaveAttribute('viewBox', '0 0 135.51 132.63')
+    expect(stacked?.querySelectorAll('path')).toHaveLength(2)
   })
 })

@@ -70,6 +70,11 @@
       "import": "./dist/content/badge/index.js",
       "default": "./dist/content/badge/index.js"
     },
+    "./brand": {
+      "types": "./dist/brand/index.d.ts",
+      "import": "./dist/brand/index.js",
+      "default": "./dist/brand/index.js"
+    },
     "./breadcrumb": {
       "types": "./dist/navigation/breadcrumb/index.d.ts",
       "import": "./dist/navigation/breadcrumb/index.js",
