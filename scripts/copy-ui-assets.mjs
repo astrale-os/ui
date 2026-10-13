@@ -12,6 +12,9 @@ await cp(new URL('src/theme/shadcn-tailwind.css', root), new URL('shadcn-tailwin
 for (const preset of ['astrale', 'compact', 'expressive']) {
   await cp(new URL(`src/theme/presets/${preset}.css`, root), new URL(`presets/${preset}.css`, dist))
 }
+// Presets reference their webfonts as `../fonts/…`, which resolves the same from `src/theme/presets/`
+// and from `dist/presets/`.
+await cp(new URL('src/theme/fonts/', root), new URL('fonts/', dist), { recursive: true })
 
 // `source.css` is published with what it imports next to it: the animation vocabulary the
 // precompiled theme was built with (its package exports the stylesheet under the `style` condition
