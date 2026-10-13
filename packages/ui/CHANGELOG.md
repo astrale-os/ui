@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.0-beta.33](https://github.com/astrale-os/ui/compare/v1.0.0-beta.32...v1.0.0-beta.33) (2026-10-13)
+
+
+### Features
+
+* **ui:** add success, info, and warning status tokens and Badge variants ([#195](https://github.com/astrale-os/ui/issues/195)) ([3ca46a3](https://github.com/astrale-os/ui/commit/3ca46a3fa96dff960183afdbf8e0f371e900d814))
+* **ui:** adopt the landing page typography and palette in the astrale preset ([#193](https://github.com/astrale-os/ui/issues/193)) ([960e8a8](https://github.com/astrale-os/ui/commit/960e8a8d196440a83a7558b0743a85790beb4d80))
+
 ## [1.0.0-beta.32](https://github.com/astrale-os/ui/compare/v0.3.0-beta.32...v1.0.0-beta.32) (2026-10-10)
 
 
