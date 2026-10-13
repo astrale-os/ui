@@ -8,7 +8,9 @@ import {
   parseThemeDocumentText,
   renderThemeCss,
   serializeThemeDocument,
+  statusColorDefaults,
   themeColorTokens,
+  themeStatusColorTokens,
   themeDocumentPatternSources,
   themeStyleProperties,
   ThemeDocumentError,
@@ -33,7 +35,7 @@ test('portable schema and TypeScript admission own the same complete color vocab
   const mode = schema.$defs.mode
   assert.deepEqual(mode.required.toSorted(), [...themeColorTokens].toSorted())
   assert.deepEqual(Object.keys(mode.properties).toSorted(), [...themeColorTokens].toSorted())
-  assert.equal(schema.properties.version.const, 5)
+  assert.equal(schema.properties.version.const, 6)
   assert.deepEqual(schema.properties.typography.required.toSorted(), ['body', 'heading', 'mono'])
   assert.deepEqual(schema.$defs.typographyRole.required.toSorted(), [
     'family',
@@ -107,6 +109,8 @@ test('every starter round-trips and projects to exact consumer-owned light and d
       '--ui-background',
       '--ui-primary',
       '--ui-chart-5',
+      '--ui-success',
+      '--ui-warning-foreground',
       '--ui-sidebar-accent',
       '--ui-font-mono',
       '--ui-tracking-heading',
@@ -119,7 +123,7 @@ test('every starter round-trips and projects to exact consumer-owned light and d
   }
 })
 
-test('version 1 through 4 saved themes migrate deterministically without fabricated provenance', async () => {
+test('version 1 through 5 saved themes migrate deterministically without fabricated provenance', async () => {
   const current = (await themes()).find(({ theme }) => theme.name === 'observatory').theme
   const legacy = structuredClone(current)
   legacy.version = 1
@@ -142,7 +146,7 @@ test('version 1 through 4 saved themes migrate deterministically without fabrica
     }
   }
   const migrated = parseThemeDocument(legacy)
-  assert.equal(migrated.version, 5)
+  assert.equal(migrated.version, 6)
   assert.equal(migrated.appearance.light.sidebar, current.appearance.light.card)
   assert.equal(migrated.appearance.dark.sidebarAccent, current.appearance.dark.accent)
   assert.deepEqual(migrated.typography, {
@@ -184,8 +188,23 @@ test('version 1 through 4 saved themes migrate deterministically without fabrica
   const version4 = structuredClone(current)
   version4.version = 4
   const migratedVersion4 = parseThemeDocument(version4)
-  assert.equal(migratedVersion4.version, 5)
+  assert.equal(migratedVersion4.version, 6)
   assert.equal(migratedVersion4.generation, undefined)
+
+  const version5 = structuredClone(current)
+  version5.version = 5
+  version5.generation = { kind: 'astrale.theme-generation', engineVersion: 2 }
+  for (const mode of ['light', 'dark']) {
+    for (const token of themeStatusColorTokens) delete version5.appearance[mode][token]
+  }
+  const migratedVersion5 = parseThemeDocument(version5)
+  assert.equal(migratedVersion5.version, 6)
+  assert.equal(migratedVersion5.generation, undefined)
+  for (const mode of ['light', 'dark']) {
+    for (const token of themeStatusColorTokens) {
+      assert.equal(migratedVersion5.appearance[mode][token], statusColorDefaults[mode][token])
+    }
+  }
 })
 
 test('JSON Schema and TypeScript agree on generator metadata admission boundaries', async () => {
@@ -197,7 +216,7 @@ test('JSON Schema and TypeScript agree on generator metadata admission boundarie
     generation: {
       kind: 'astrale.theme-generation',
       version: 1,
-      engineVersion: 2,
+      engineVersion: 3,
       fontCatalogVersion: 1,
       seed: '0123456789abcdef0123456789abcdef',
       derivationSeeds: {

@@ -24,6 +24,11 @@ export const themeGeneratorLaws = [
       'A failed generation action leaves document, provenance, locks, history, persistence, and preview unchanged.',
   },
   {
+    id: 'THEME-GEN-STATUS-FIXED-HUE',
+    statement:
+      'Success, info, and warning keep fixed semantic hues independent of palette DNA, consume no randomness, read as text on the background at the text contrast minimum, and carry white or black on-color foregrounds.',
+  },
+  {
     id: 'THEME-GEN-TOKENS-AUTHORITATIVE',
     statement:
       'ThemeDocument tokens remain render authority; generator metadata is provenance and never overrides them.',

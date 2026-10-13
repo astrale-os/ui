@@ -124,8 +124,11 @@
       "sourceDigest": "sha256:968b0403af74a785c9408ca69a677235e49d0c80b2c27fb9858ad421a8778c7d",
       "owner": "@astrale-os/ui/badge",
       "implementation": "packages/ui/src/content/badge/index.tsx",
-      "adaptation": "imports-only",
-      "disposition": "owned-runtime"
+      "adaptation": "astrale-revision",
+      "disposition": "owned-runtime",
+      "adaptationNotes": [
+        "Add success, info, and warning variants with the soft treatment of destructive, bound to the Astrale status color tokens."
+      ]
     },
     {
       "provider": "@shadcn",

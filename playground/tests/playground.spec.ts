@@ -1732,7 +1732,7 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
   expect(generatedDocument.generation).toMatchObject({
     kind: 'astrale.theme-generation',
     version: 1,
-    engineVersion: 2,
+    engineVersion: 3,
     fontCatalogVersion: 1,
     locks: ['typography'],
     editedBranches: ['typography'],
@@ -1819,7 +1819,7 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
   expect(download.suggestedFilename()).toBe('observatory.astrale-theme.json')
   const exported = JSON.parse(await downloadText(download))
   expect(exported).toMatchObject({
-    version: 5,
+    version: 6,
     name: 'observatory',
     appearance: { dark: { primary: 'oklch(0.62 0.2 145)' } },
     typography: {
