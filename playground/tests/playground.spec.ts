@@ -1958,7 +1958,7 @@ test('generated provenance, locks, and edited branches survive save, reload, exp
         return themes[0]?.generation?.engineVersion
       }),
     )
-    .toBe(2)
+    .toBe(3)
   await page.getByLabel('Import theme document').setInputFiles({
     name: 'generated.astrale-theme.json',
     mimeType: 'application/json',
@@ -2030,7 +2030,7 @@ test('saved version 3 themes migrate to the complete typography model', async ({
         return [saved[0]?.version, saved[0]?.typography?.body?.weight]
       }),
     )
-    .toEqual([5, 400])
+    .toEqual([6, 400])
 })
 
 test('invalid storage and save failures stay contained', async ({ page }) => {
