@@ -223,6 +223,10 @@ function deriveMode(
     light ? lerp(0.58, 0.38, dna.contrast) : lerp(0.47, 0.62, dna.contrast),
   )
   const destructive = solveVisibleColor(background, 28, 0.19, 3, light ? 0.48 : 0.54)
+  // Status colors keep fixed semantic hues and read as text on soft tints, hence the 4.5 floor.
+  const success = solveVisibleColor(background, 155, light ? 0.13 : 0.12, 4.5, light ? 0.48 : 0.76)
+  const info = solveVisibleColor(background, 251, light ? 0.15 : 0.12, 4.5, light ? 0.48 : 0.76)
+  const warning = solveVisibleColor(background, 72, light ? 0.15 : 0.13, 4.5, light ? 0.49 : 0.82)
   const border = solveVisibleColor(
     background,
     surfaceHue,
@@ -283,6 +287,9 @@ function deriveMode(
   const secondaryForeground = solveOnColorForeground(secondary)
   const accentForeground = solveOnColorForeground(accent)
   const destructiveForeground = solveOnColorForeground(destructive)
+  const successForeground = solveOnColorForeground(success)
+  const infoForeground = solveOnColorForeground(info)
+  const warningForeground = solveOnColorForeground(warning)
   return {
     background: color(background),
     foreground: color(foreground),
@@ -300,6 +307,12 @@ function deriveMode(
     accentForeground: color(accentForeground),
     destructive: color(destructive),
     destructiveForeground: color(destructiveForeground),
+    success: color(success),
+    successForeground: color(successForeground),
+    info: color(info),
+    infoForeground: color(infoForeground),
+    warning: color(warning),
+    warningForeground: color(warningForeground),
     border: color(border),
     input: color(input),
     ring: color(ring),
@@ -554,6 +567,9 @@ const onColorPairs = [
   ['secondary', 'secondaryForeground'],
   ['accent', 'accentForeground'],
   ['destructive', 'destructiveForeground'],
+  ['success', 'successForeground'],
+  ['info', 'infoForeground'],
+  ['warning', 'warningForeground'],
   ['sidebarPrimary', 'sidebarPrimaryForeground'],
   ['sidebarAccent', 'sidebarAccentForeground'],
 ] as const satisfies readonly (readonly [keyof ThemeMode, keyof ThemeMode])[]
@@ -605,6 +621,12 @@ export function admitGeneratedTheme(
       const white = channels.length === 3 && channels.every((channel) => channel >= 0.999)
       if (!black && !white) {
         reasons.push(`${modeName}.${foreground} must be white or black on-color text.`)
+      }
+    }
+    for (const token of ['success', 'info', 'warning'] as const) {
+      const ratio = cssContrastRatio(mode[token], mode.background)
+      if (ratio === undefined || ratio < 4.5) {
+        reasons.push(`${modeName}.${token} must contrast with background by 4.5:1.`)
       }
     }
     for (const [token, surface] of [
@@ -670,7 +692,7 @@ export function admitGeneratedTheme(
     const distance = Math.abs(left - right) % 360
     return Math.min(distance, 360 - distance)
   }
-  for (const token of ['primary', 'accent', 'destructive'] as const) {
+  for (const token of ['primary', 'accent', 'destructive', 'success', 'info', 'warning'] as const) {
     const light = parseCssOklch(admitted.appearance.light[token])
     const dark = parseCssOklch(admitted.appearance.dark[token])
     if (!light || !dark || hueDistance(light.h, dark.h) > 2) {

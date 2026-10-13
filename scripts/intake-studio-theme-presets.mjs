@@ -3,7 +3,11 @@ import { createHash } from 'node:crypto'
 import { mkdir, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 
-import { serializeThemeDocument } from '../tooling/theme-document/index.ts'
+import {
+  serializeThemeDocument,
+  statusColorDefaults,
+  THEME_DOCUMENT_VERSION,
+} from '../tooling/theme-document/index.ts'
 
 const names = [
   'art-deco',
@@ -119,13 +123,14 @@ function project(source) {
 
   return {
     $schema: schema,
-    version: 5,
+    version: THEME_DOCUMENT_VERSION,
     name: source.name,
     label: label(source.name),
     description: `Shadcn Studio ${label(source.name)} preset, mechanically projected to Astrale theme tokens.`,
     appearance: {
-      light: colorMode(light, light),
-      dark: colorMode(light, dark),
+      // Studio presets declare no status colors; they take the fixed semantic defaults.
+      light: { ...colorMode(light, light), ...statusColorDefaults.light },
+      dark: { ...colorMode(light, dark), ...statusColorDefaults.dark },
     },
     typography: {
       body: {

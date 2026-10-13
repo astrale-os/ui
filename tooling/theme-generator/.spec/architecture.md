@@ -9,7 +9,7 @@ playground workspace
   -> seeded branch-independent grammar
   -> palette / typography / geometry derivation
   -> generated-theme admission
-  -> one complete ThemeDocument V5 result
+  -> one complete ThemeDocument V6 result
   -> existing CSS-variable preview and history
 ```
 

@@ -70,11 +70,11 @@ describe('theme generator', () => {
     ).toEqual(first)
   })
 
-  test('locks engine V2 to a canonical serialized output digest', () => {
+  test('locks engine V3 to a canonical serialized output digest', () => {
     const digest = createHash('sha256')
       .update(serializeThemeDocument(generatedTheme()))
       .digest('hex')
-    expect(digest).toBe('fafdb10f11e5af92ff3d69fdc412f4b617fdcfd8fbf234e07b6657247ebdb21f')
+    expect(digest).toBe('27b1bd2e615ba7dba5eb33effa8018ed94322add85d9107af6f06ddbce3d3588')
   })
 
   test('uses high-contrast white or black text for semantic fills', () => {
@@ -114,6 +114,9 @@ describe('theme generator', () => {
       ['secondary', 'secondaryForeground'],
       ['accent', 'accentForeground'],
       ['destructive', 'destructiveForeground'],
+      ['success', 'successForeground'],
+      ['info', 'infoForeground'],
+      ['warning', 'warningForeground'],
       ['sidebarPrimary', 'sidebarPrimaryForeground'],
       ['sidebarAccent', 'sidebarAccentForeground'],
     ] as const
@@ -485,6 +488,9 @@ describe('theme generator', () => {
       ['secondary', 'secondaryForeground'],
       ['accent', 'accentForeground'],
       ['destructive', 'destructiveForeground'],
+      ['success', 'successForeground'],
+      ['info', 'infoForeground'],
+      ['warning', 'warningForeground'],
       ['sidebarPrimary', 'sidebarPrimaryForeground'],
       ['sidebarAccent', 'sidebarAccentForeground'],
     ] as const

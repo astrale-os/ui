@@ -33,7 +33,7 @@ Import the semantic theme, one character preset, and the Tailwind contract for y
 ```
 
 `tailwind.css` restates the `@theme inline` mapping (`bg-background`, `border-border`,
-`font-serif`, radii, class-based `dark:`) on the `--ui-*` tokens; the precompiled `theme.css`
+`bg-success`, `text-warning`, `font-serif`, radii, class-based `dark:`) on the `--ui-*` tokens; the precompiled `theme.css`
 keeps its component rules in `@layer components`, below your `utilities` layer.
 
 Applications that build their own stylesheet with Tailwind CSS v4 import the source entry instead.

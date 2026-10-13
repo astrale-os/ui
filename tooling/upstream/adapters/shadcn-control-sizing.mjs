@@ -2,6 +2,25 @@ import assert from 'node:assert/strict'
 
 const revisions = new Map([
   [
+    'badge',
+    {
+      notes: [
+        'Add success, info, and warning variants with the soft treatment of destructive, bound to the Astrale status color tokens.',
+      ],
+      replacements: [
+        [
+          "[a]:hover:bg-destructive/20',\n",
+          "[a]:hover:bg-destructive/20',\n" +
+            '        success:\n' +
+            "          'bg-success/10 text-success focus-visible:ring-success/20 dark:bg-success/20 dark:focus-visible:ring-success/40 [a]:hover:bg-success/20',\n" +
+            "        info: 'bg-info/10 text-info focus-visible:ring-info/20 dark:bg-info/20 dark:focus-visible:ring-info/40 [a]:hover:bg-info/20',\n" +
+            '        warning:\n' +
+            "          'bg-warning/10 text-warning focus-visible:ring-warning/20 dark:bg-warning/20 dark:focus-visible:ring-warning/40 [a]:hover:bg-warning/20',\n",
+        ],
+      ],
+    },
+  ],
+  [
     'button',
     {
       notes: [

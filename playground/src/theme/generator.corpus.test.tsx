@@ -21,6 +21,9 @@ const onColorPairs = [
   ['secondary', 'secondaryForeground'],
   ['accent', 'accentForeground'],
   ['destructive', 'destructiveForeground'],
+  ['success', 'successForeground'],
+  ['info', 'infoForeground'],
+  ['warning', 'warningForeground'],
   ['sidebarPrimary', 'sidebarPrimaryForeground'],
   ['sidebarAccent', 'sidebarAccentForeground'],
 ] as const

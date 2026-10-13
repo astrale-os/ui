@@ -1,7 +1,7 @@
-export const THEME_DOCUMENT_VERSION = 5 as const
+export const THEME_DOCUMENT_VERSION = 6 as const
 export const THEME_DOCUMENT_MAX_BYTES = 131_072
 export const THEME_GENERATOR_VERSION = 1 as const
-export const THEME_GENERATOR_ENGINE_VERSION = 2 as const
+export const THEME_GENERATOR_ENGINE_VERSION = 3 as const
 export const THEME_FONT_CATALOG_VERSION = 1 as const
 
 export const themeColorTokens = [
@@ -21,6 +21,12 @@ export const themeColorTokens = [
   'accentForeground',
   'destructive',
   'destructiveForeground',
+  'success',
+  'successForeground',
+  'info',
+  'infoForeground',
+  'warning',
+  'warningForeground',
   'border',
   'input',
   'ring',
@@ -41,6 +47,43 @@ export const themeColorTokens = [
 
 export type ThemeColorToken = (typeof themeColorTokens)[number]
 export type ThemeMode = Record<ThemeColorToken, string>
+
+export const themeStatusColorTokens = [
+  'success',
+  'successForeground',
+  'info',
+  'infoForeground',
+  'warning',
+  'warningForeground',
+] as const satisfies readonly ThemeColorToken[]
+
+export type ThemeStatusColorToken = (typeof themeStatusColorTokens)[number]
+
+/**
+ * Status colors keep fixed semantic hues whatever the palette: green success, blue info, amber
+ * warning. These values clear 4.5:1 as text on the light and dark backgrounds of every shipped
+ * preset, and on the soft badge tint drawn over them; they fill documents written before version 6.
+ */
+export const statusColorDefaults: Readonly<
+  Record<'light' | 'dark', Readonly<Record<ThemeStatusColorToken, string>>>
+> = {
+  light: {
+    success: 'oklch(0.48 0.13 155)',
+    successForeground: 'oklch(0.985 0 0)',
+    info: 'oklch(0.48 0.15 251)',
+    infoForeground: 'oklch(0.985 0 0)',
+    warning: 'oklch(0.49 0.15 70)',
+    warningForeground: 'oklch(0.985 0 0)',
+  },
+  dark: {
+    success: 'oklch(0.76 0.12 155)',
+    successForeground: 'oklch(0.15 0.02 255)',
+    info: 'oklch(0.76 0.12 251)',
+    infoForeground: 'oklch(0.15 0.02 255)',
+    warning: 'oklch(0.82 0.13 75)',
+    warningForeground: 'oklch(0.15 0.02 255)',
+  },
+}
 
 export const generatorBranches = ['palette', 'typography', 'geometry'] as const
 export type GeneratorBranch = (typeof generatorBranches)[number]
@@ -181,6 +224,12 @@ const cssNames: Record<ThemeColorToken, string> = {
   accentForeground: 'accent-foreground',
   destructive: 'destructive',
   destructiveForeground: 'destructive-foreground',
+  success: 'success',
+  successForeground: 'success-foreground',
+  info: 'info',
+  infoForeground: 'info-foreground',
+  warning: 'warning',
+  warningForeground: 'warning-foreground',
   border: 'border',
   input: 'input',
   ring: 'ring',
@@ -299,7 +348,23 @@ function migrateThemeDocument(input: unknown): unknown {
     }
   }
   if (candidate.version === 4) {
-    candidate = { ...candidate, version: THEME_DOCUMENT_VERSION }
+    candidate = { ...candidate, version: 5 }
+    delete candidate.generation
+  }
+  if (candidate.version === 5) {
+    const appearance = candidate.appearance as
+      | { light?: Record<string, unknown>; dark?: Record<string, unknown> }
+      | undefined
+    if (!appearance?.light || !appearance.dark) return input
+    candidate = {
+      ...candidate,
+      version: THEME_DOCUMENT_VERSION,
+      appearance: {
+        light: { ...statusColorDefaults.light, ...appearance.light },
+        dark: { ...statusColorDefaults.dark, ...appearance.dark },
+      },
+    }
+    // Generation metadata replays engine V2, which derives no status colors.
     delete candidate.generation
   }
   return candidate
@@ -442,7 +507,7 @@ function generatorMetadata(value: unknown, label: string): GeneratorMetadata {
       candidate.engineVersion,
       THEME_GENERATOR_ENGINE_VERSION,
       `${label}.engineVersion`,
-    ) as 2,
+    ) as 3,
     fontCatalogVersion: exactInteger(
       candidate.fontCatalogVersion,
       THEME_FONT_CATALOG_VERSION,

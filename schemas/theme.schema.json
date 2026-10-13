@@ -21,7 +21,7 @@
     "$schema": {
       "const": "https://raw.githubusercontent.com/astrale-os/ui/main/schemas/theme.schema.json"
     },
-    "version": { "const": 5 },
+    "version": { "const": 6 },
     "name": {
       "type": "string",
       "minLength": 1,
@@ -124,6 +124,12 @@
         "accentForeground",
         "destructive",
         "destructiveForeground",
+        "success",
+        "successForeground",
+        "info",
+        "infoForeground",
+        "warning",
+        "warningForeground",
         "border",
         "input",
         "ring",
@@ -158,6 +164,12 @@
         "accentForeground": { "$ref": "#/$defs/color" },
         "destructive": { "$ref": "#/$defs/color" },
         "destructiveForeground": { "$ref": "#/$defs/color" },
+        "success": { "$ref": "#/$defs/color" },
+        "successForeground": { "$ref": "#/$defs/color" },
+        "info": { "$ref": "#/$defs/color" },
+        "infoForeground": { "$ref": "#/$defs/color" },
+        "warning": { "$ref": "#/$defs/color" },
+        "warningForeground": { "$ref": "#/$defs/color" },
         "border": { "$ref": "#/$defs/color" },
         "input": { "$ref": "#/$defs/color" },
         "ring": { "$ref": "#/$defs/color" },
@@ -240,7 +252,7 @@
       "properties": {
         "kind": { "const": "astrale.theme-generation" },
         "version": { "const": 1 },
-        "engineVersion": { "const": 2 },
+        "engineVersion": { "const": 3 },
         "fontCatalogVersion": { "const": 1 },
         "seed": { "$ref": "#/$defs/generatorSeed" },
         "derivationSeeds": {
