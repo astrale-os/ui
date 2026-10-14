@@ -50,6 +50,8 @@ function visualRuntimeAddresses(packageDocument) {
   const nonvisual = new Set([
     '.',
     './class-name',
+    // The Astrale logo is brand identity, not a catalog component.
+    './brand',
     './package.json',
     './reset.css',
     './theme.css',

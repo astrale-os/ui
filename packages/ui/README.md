@@ -60,3 +60,19 @@ components, higher-level patterns, and blocks are installed as application-owned
 `reset.css` is optional and contains the pinned Tailwind Preflight required by upstream defaults,
 layered under `base` so component defaults, utilities, and your own unlayered CSS win over it.
 `theme.css` never installs that global reset implicitly.
+
+`@astrale-os/ui/brand` draws the Astrale logo in `currentColor`, so it takes the text color of its
+surface in every preset and in dark mode: `AstraleMark` (the symbol), `AstraleWordmark` (the name),
+and `AstraleLogo` (both, `layout="horizontal"` by default or `"stacked"`). Each is an image named
+"Astrale"; pass `aria-hidden` when visible text already names it. Size them with `className`
+(`size-8`, `h-10 w-auto`). The logo and the Astrale name are trademarks of Astrale and, unlike the
+rest of this package, are not licensed under the MIT License. Exports for print, social profiles
+and app icons live in [astrale-os/logo](https://github.com/astrale-os/logo).
+
+```tsx
+import { AstraleLogo } from '@astrale-os/ui/brand'
+
+export function Header() {
+  return <AstraleLogo className="h-7 w-auto text-foreground" />
+}
+```
