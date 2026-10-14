@@ -19,6 +19,8 @@ const runtimeAddresses = Object.entries(uiPackage.exports)
     ([entrypoint, target]) =>
       entrypoint !== '.' &&
       entrypoint !== './class-name' &&
+      // The Astrale logo is brand identity, not a catalog component (see check-catalog-previews).
+      entrypoint !== './brand' &&
       typeof target === 'object' &&
       'import' in target,
   )
