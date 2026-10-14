@@ -120,6 +120,7 @@ const revisions = new Map([
       notes: [
         'Bind neutral control text to the foreground token instead of inheriting card or popover text across a different input surface.',
         'Bind default and small Select Trigger heights and transition duration to the public Astrale control and motion tokens.',
+        'Bind the floating layer to the public --ui-z-floating token (50, the upstream value) so floating elements keep stacking by mount order while the toast viewport sits above them.',
       ],
       replacements: [
         [
@@ -131,6 +132,11 @@ const revisions = new Map([
           'data-[size=default]:h-(--ui-control-height) data-[size=sm]:h-(--ui-control-height-sm)',
         ],
         ['pl-2.5 text-sm whitespace-nowrap', 'pl-2.5 text-sm text-foreground whitespace-nowrap'],
+        ['className="isolate z-50"', 'className="isolate z-(--ui-z-floating)"'],
+        [
+          'isolate z-50 max-h-(--available-height)',
+          'isolate z-(--ui-z-floating) max-h-(--available-height)',
+        ],
       ],
     },
   ],
@@ -156,6 +162,138 @@ const revisions = new Map([
           'border-input text-sm transition-all',
           'border-input text-sm text-foreground transition-all',
         ],
+      ],
+    },
+  ],
+  [
+    'alert-dialog',
+    {
+      notes: [
+        'Bind the floating layer to the public --ui-z-floating token (50, the upstream value) so floating elements keep stacking by mount order while the toast viewport sits above them.',
+      ],
+      replacements: [
+        ['isolate z-50 bg-black/10', 'isolate z-(--ui-z-floating) bg-black/10'],
+        ['left-1/2 z-50 grid', 'left-1/2 z-(--ui-z-floating) grid'],
+      ],
+    },
+  ],
+  [
+    'context-menu',
+    {
+      notes: [
+        'Bind the floating layer to the public --ui-z-floating token (50, the upstream value) so floating elements keep stacking by mount order while the toast viewport sits above them.',
+      ],
+      replacements: [
+        ['isolate z-50 outline-none', 'isolate z-(--ui-z-floating) outline-none'],
+        ["'z-50 max-h-(--available-height)", "'z-(--ui-z-floating) max-h-(--available-height)"],
+      ],
+    },
+  ],
+  [
+    'dialog',
+    {
+      notes: [
+        'Bind the floating layer to the public --ui-z-floating token (50, the upstream value) so floating elements keep stacking by mount order while the toast viewport sits above them.',
+      ],
+      replacements: [
+        ['isolate z-50 bg-black/10', 'isolate z-(--ui-z-floating) bg-black/10'],
+        ['left-1/2 z-50 grid', 'left-1/2 z-(--ui-z-floating) grid'],
+      ],
+    },
+  ],
+  [
+    'drawer',
+    {
+      notes: [
+        'Bind the floating layer to the public --ui-z-floating token (50, the upstream value) so floating elements keep stacking by mount order while the toast viewport sits above them.',
+      ],
+      replacements: [
+        ['inset-0 z-50 min-h-dvh', 'inset-0 z-(--ui-z-floating) min-h-dvh'],
+        ['inset-0 z-50 select-none', 'inset-0 z-(--ui-z-floating) select-none'],
+        ['fixed z-50 m-(--drawer-inset,0px)', 'fixed z-(--ui-z-floating) m-(--drawer-inset,0px)'],
+      ],
+    },
+  ],
+  [
+    'dropdown-menu',
+    {
+      notes: [
+        'Bind the floating layer to the public --ui-z-floating token (50, the upstream value) so floating elements keep stacking by mount order while the toast viewport sits above them.',
+      ],
+      replacements: [
+        ['isolate z-50 outline-none', 'isolate z-(--ui-z-floating) outline-none'],
+        ["'z-50 max-h-(--available-height)", "'z-(--ui-z-floating) max-h-(--available-height)"],
+      ],
+    },
+  ],
+  [
+    'hover-card',
+    {
+      notes: [
+        'Bind the floating layer to the public --ui-z-floating token (50, the upstream value) so floating elements keep stacking by mount order while the toast viewport sits above them.',
+      ],
+      replacements: [
+        ['className="isolate z-50"', 'className="isolate z-(--ui-z-floating)"'],
+        ["'z-50 w-64", "'z-(--ui-z-floating) w-64"],
+      ],
+    },
+  ],
+  [
+    'navigation-menu',
+    {
+      notes: [
+        'Bind the floating layer to the public --ui-z-floating token (50, the upstream value) so floating elements keep stacking by mount order while the toast viewport sits above them.',
+      ],
+      replacements: [
+        [
+          'isolate z-50 h-(--positioner-height)',
+          'isolate z-(--ui-z-floating) h-(--positioner-height)',
+        ],
+      ],
+    },
+  ],
+  [
+    'popover',
+    {
+      notes: [
+        'Bind the floating layer to the public --ui-z-floating token (50, the upstream value) so floating elements keep stacking by mount order while the toast viewport sits above them.',
+      ],
+      replacements: [
+        ['className="isolate z-50"', 'className="isolate z-(--ui-z-floating)"'],
+        ["'z-50 flex", "'z-(--ui-z-floating) flex"],
+      ],
+    },
+  ],
+  [
+    'sheet',
+    {
+      notes: [
+        'Bind the floating layer to the public --ui-z-floating token (50, the upstream value) so floating elements keep stacking by mount order while the toast viewport sits above them.',
+      ],
+      replacements: [
+        ['inset-0 z-50 bg-black/10', 'inset-0 z-(--ui-z-floating) bg-black/10'],
+        ['fixed z-50 flex', 'fixed z-(--ui-z-floating) flex'],
+      ],
+    },
+  ],
+  [
+    'toast',
+    {
+      notes: [
+        'Bind the toast viewport to the public --ui-z-toast token, above --ui-z-floating, so a toast raised while a modal dialog is open renders above its backdrop instead of under it.',
+      ],
+      replacements: [['bottom-4 z-50 mx-auto', 'bottom-4 z-(--ui-z-toast) mx-auto']],
+    },
+  ],
+  [
+    'tooltip',
+    {
+      notes: [
+        'Bind the floating layer to the public --ui-z-floating token (50, the upstream value) so floating elements keep stacking by mount order while the toast viewport sits above them.',
+      ],
+      replacements: [
+        ['className="isolate z-50"', 'className="isolate z-(--ui-z-floating)"'],
+        ["'z-50 inline-flex", "'z-(--ui-z-floating) inline-flex"],
       ],
     },
   ],

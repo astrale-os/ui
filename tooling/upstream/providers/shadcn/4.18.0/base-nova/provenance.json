@@ -56,7 +56,10 @@
       "sourceDigest": "sha256:7abcaccfeb706cdaecc56f02a1b0ccb1be3f26ff2de8cf172a46b2bd550c1987",
       "owner": "@astrale-os/ui/alert-dialog",
       "implementation": "packages/ui/src/overlay/alert-dialog/index.tsx",
-      "adaptation": "imports-only",
+      "adaptation": "astrale-revision",
+      "adaptationNotes": [
+        "Bind the floating layer to the public --ui-z-floating token (50, the upstream value) so floating elements keep stacking by mount order while the toast viewport sits above them."
+      ],
       "disposition": "owned-runtime"
     },
     {
@@ -125,10 +128,10 @@
       "owner": "@astrale-os/ui/badge",
       "implementation": "packages/ui/src/content/badge/index.tsx",
       "adaptation": "astrale-revision",
-      "disposition": "owned-runtime",
       "adaptationNotes": [
         "Add success, info, and warning variants with the soft treatment of destructive, bound to the Astrale status color tokens."
-      ]
+      ],
+      "disposition": "owned-runtime"
     },
     {
       "provider": "@shadcn",
@@ -354,7 +357,10 @@
       "sourceDigest": "sha256:8658b48f25544047357bc809e6f6485d2309e72cf310c521e92430003b0d56a8",
       "owner": "@astrale-os/ui/context-menu",
       "implementation": "packages/ui/src/menu/context-menu/index.tsx",
-      "adaptation": "imports-only",
+      "adaptation": "astrale-revision",
+      "adaptationNotes": [
+        "Bind the floating layer to the public --ui-z-floating token (50, the upstream value) so floating elements keep stacking by mount order while the toast viewport sits above them."
+      ],
       "disposition": "owned-runtime"
     },
     {
@@ -371,7 +377,10 @@
       "sourceDigest": "sha256:ccabf6cc674a68b09d9168904bb46b7c1075a67312cf6f51f3e38b8eeacd2fdb",
       "owner": "@astrale-os/ui/dialog",
       "implementation": "packages/ui/src/overlay/dialog/index.tsx",
-      "adaptation": "imports-only",
+      "adaptation": "astrale-revision",
+      "adaptationNotes": [
+        "Bind the floating layer to the public --ui-z-floating token (50, the upstream value) so floating elements keep stacking by mount order while the toast viewport sits above them."
+      ],
       "disposition": "owned-runtime"
     },
     {
@@ -405,7 +414,10 @@
       "sourceDigest": "sha256:b33d7b911b1a78fb524ee68bf483c4a1f538743ff04b91da56b3dc9b48fa70a6",
       "owner": "@astrale-os/ui/drawer",
       "implementation": "packages/ui/src/overlay/drawer/index.tsx",
-      "adaptation": "imports-only",
+      "adaptation": "astrale-revision",
+      "adaptationNotes": [
+        "Bind the floating layer to the public --ui-z-floating token (50, the upstream value) so floating elements keep stacking by mount order while the toast viewport sits above them."
+      ],
       "disposition": "owned-runtime"
     },
     {
@@ -422,7 +434,10 @@
       "sourceDigest": "sha256:c143e8692f7b899d55c889d2978e3f1d0aef1bf5a83dffe1590a0640aba60044",
       "owner": "@astrale-os/ui/dropdown-menu",
       "implementation": "packages/ui/src/menu/dropdown-menu/index.tsx",
-      "adaptation": "imports-only",
+      "adaptation": "astrale-revision",
+      "adaptationNotes": [
+        "Bind the floating layer to the public --ui-z-floating token (50, the upstream value) so floating elements keep stacking by mount order while the toast viewport sits above them."
+      ],
       "disposition": "owned-runtime"
     },
     {
@@ -473,7 +488,10 @@
       "sourceDigest": "sha256:7e7880883ba91290133e61f8bf1df72547795b8d9f2c13d4a17a51c17540d712",
       "owner": "@astrale-os/ui/hover-card",
       "implementation": "packages/ui/src/overlay/hover-card/index.tsx",
-      "adaptation": "imports-only",
+      "adaptation": "astrale-revision",
+      "adaptationNotes": [
+        "Bind the floating layer to the public --ui-z-floating token (50, the upstream value) so floating elements keep stacking by mount order while the toast viewport sits above them."
+      ],
       "disposition": "owned-runtime"
     },
     {
@@ -534,10 +552,10 @@
       "owner": "@astrale-os/ui/input-otp",
       "implementation": "packages/ui/src/input/input-otp/index.tsx",
       "adaptation": "astrale-revision",
-      "disposition": "owned-runtime",
       "adaptationNotes": [
         "Bind neutral control text to the foreground token instead of inheriting card or popover text across a different input surface."
-      ]
+      ],
+      "disposition": "owned-runtime"
     },
     {
       "provider": "@shadcn",
@@ -693,7 +711,10 @@
       "sourceDigest": "sha256:076ba62c2d4292970470455ab9719badec7fedd74aaaaa40a7955cc366128e97",
       "owner": "@astrale-os/ui/navigation-menu",
       "implementation": "packages/ui/src/navigation/navigation-menu/index.tsx",
-      "adaptation": "imports-only",
+      "adaptation": "astrale-revision",
+      "adaptationNotes": [
+        "Bind the floating layer to the public --ui-z-floating token (50, the upstream value) so floating elements keep stacking by mount order while the toast viewport sits above them."
+      ],
       "disposition": "owned-runtime"
     },
     {
@@ -727,7 +748,10 @@
       "sourceDigest": "sha256:59a0d01d22af44dc9969c3c2aac7cc2f5b712c51ee4c73e8453d81f3d9819ed1",
       "owner": "@astrale-os/ui/popover",
       "implementation": "packages/ui/src/overlay/popover/index.tsx",
-      "adaptation": "imports-only",
+      "adaptation": "astrale-revision",
+      "adaptationNotes": [
+        "Bind the floating layer to the public --ui-z-floating token (50, the upstream value) so floating elements keep stacking by mount order while the toast viewport sits above them."
+      ],
       "disposition": "owned-runtime"
     },
     {
@@ -832,7 +856,8 @@
       "adaptation": "astrale-revision",
       "adaptationNotes": [
         "Bind neutral control text to the foreground token instead of inheriting card or popover text across a different input surface.",
-        "Bind default and small Select Trigger heights and transition duration to the public Astrale control and motion tokens."
+        "Bind default and small Select Trigger heights and transition duration to the public Astrale control and motion tokens.",
+        "Bind the floating layer to the public --ui-z-floating token (50, the upstream value) so floating elements keep stacking by mount order while the toast viewport sits above them."
       ],
       "disposition": "owned-runtime"
     },
@@ -867,7 +892,10 @@
       "sourceDigest": "sha256:e80712ffb97f01a3568523bc67c85823c882e86fb4ec922f5af13831ed3e22fe",
       "owner": "@astrale-os/ui/sheet",
       "implementation": "packages/ui/src/overlay/sheet/index.tsx",
-      "adaptation": "imports-only",
+      "adaptation": "astrale-revision",
+      "adaptationNotes": [
+        "Bind the floating layer to the public --ui-z-floating token (50, the upstream value) so floating elements keep stacking by mount order while the toast viewport sits above them."
+      ],
       "disposition": "owned-runtime"
     },
     {
@@ -1021,10 +1049,10 @@
       "owner": "@astrale-os/ui/textarea",
       "implementation": "packages/ui/src/input/textarea/index.tsx",
       "adaptation": "astrale-revision",
-      "disposition": "owned-runtime",
       "adaptationNotes": [
         "Bind neutral control text to the foreground token instead of inheriting card or popover text across a different input surface."
-      ]
+      ],
+      "disposition": "owned-runtime"
     },
     {
       "provider": "@shadcn",
@@ -1040,7 +1068,10 @@
       "sourceDigest": "sha256:79c101fe4678ae8e14adc3b973fccfdccba157d6b1171dc0489af9d136c8d31d",
       "owner": "@astrale-os/ui/toast",
       "implementation": "packages/ui/src/feedback/toast/index.tsx",
-      "adaptation": "imports-only",
+      "adaptation": "astrale-revision",
+      "adaptationNotes": [
+        "Bind the toast viewport to the public --ui-z-toast token, above --ui-z-floating, so a toast raised while a modal dialog is open renders above its backdrop instead of under it."
+      ],
       "disposition": "owned-runtime"
     },
     {
@@ -1091,7 +1122,10 @@
       "sourceDigest": "sha256:2cea2294d4947b88d815860f64e0b5e0eb47a59bde47cfd194aac2230c923865",
       "owner": "@astrale-os/ui/tooltip",
       "implementation": "packages/ui/src/overlay/tooltip/index.tsx",
-      "adaptation": "imports-only",
+      "adaptation": "astrale-revision",
+      "adaptationNotes": [
+        "Bind the floating layer to the public --ui-z-floating token (50, the upstream value) so floating elements keep stacking by mount order while the toast viewport sits above them."
+      ],
       "disposition": "owned-runtime"
     }
   ],
