@@ -78,6 +78,7 @@ jobs:
             --commit "$EXPECTED_SHA" \
             --tree "$(git rev-parse "$EXPECTED_SHA^{tree}")" >/dev/null
       - name: Start release compute observation
+        id: compute-start
         run: date +%s%3N > "$RUNNER_TEMP/release-compute-start"
       - uses: astrale-os/config/.github/actions/publish/packages@8e2e2abd0320be0c2f64033916519ab3b66c7dd7
         with:
@@ -97,7 +98,7 @@ jobs:
             --catalog registry/core-catalog.json
           prerelease-tag: auto
       - name: Record release compute latency without cancelling publication
-        if: always()
+        if: always() && steps.compute-start.outcome == 'success'
         run: |
           elapsed="$(( $(date +%s%3N) - $(cat "$RUNNER_TEMP/release-compute-start") ))"
           node request/latency.mjs release-compute "$elapsed" release-compute-latency.json
