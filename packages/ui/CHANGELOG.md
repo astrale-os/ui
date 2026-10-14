@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.0.0-beta.37](https://github.com/astrale-os/ui/compare/v1.0.0-beta.36...v1.0.0-beta.37) (2026-10-14)
+
+
+### Features
+
+* **preset:** cool slate dark palette and refined contrast for astrale ([#205](https://github.com/astrale-os/ui/issues/205)) ([3df4827](https://github.com/astrale-os/ui/commit/3df4827fbf54244108ffae3f2419d1cdc5aab5ee))
+
+
+### Bug Fixes
+
+* **components:** keep toasts above modal dialogs ([#206](https://github.com/astrale-os/ui/issues/206)) ([23bedfe](https://github.com/astrale-os/ui/commit/23bedfe63ba0fb61f58fdfbce37cc27122314946))
+
 ## [1.0.0-beta.36](https://github.com/astrale-os/ui/compare/v1.0.0-beta.35...v1.0.0-beta.36) (2026-10-14)
 
 
