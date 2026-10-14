@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0-beta.34](https://github.com/astrale-os/ui/compare/v1.0.0-beta.33...v1.0.0-beta.34) (2026-10-14)
+
+
+### Features
+
+* **ui:** add the Astrale logo under @astrale-os/ui/brand ([#197](https://github.com/astrale-os/ui/issues/197)) ([1185906](https://github.com/astrale-os/ui/commit/1185906106999ac0a3c19ef1b8c1493c62b8df75))
+
 ## [1.0.0-beta.33](https://github.com/astrale-os/ui/compare/v1.0.0-beta.32...v1.0.0-beta.33) (2026-10-13)
 
 
