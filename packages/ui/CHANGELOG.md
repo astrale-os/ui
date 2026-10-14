@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0-beta.36](https://github.com/astrale-os/ui/compare/v1.0.0-beta.35...v1.0.0-beta.36) (2026-10-14)
+
+
+### Bug Fixes
+
+* **ui:** leave the brand entrypoint out of the playground inventory ([#203](https://github.com/astrale-os/ui/issues/203)) ([232c7ee](https://github.com/astrale-os/ui/commit/232c7eef5637ab8167ec333415a46686c7596ac0))
+
 ## [1.0.0-beta.35](https://github.com/astrale-os/ui/compare/v1.0.0-beta.34...v1.0.0-beta.35) (2026-10-14)
 
 
