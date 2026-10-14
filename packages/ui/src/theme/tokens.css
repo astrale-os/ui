@@ -38,14 +38,6 @@
   --ui-chart-3: oklch(0.72 0.16 75);
   --ui-chart-4: oklch(0.63 0.18 25);
   --ui-chart-5: oklch(0.57 0.15 315);
-  --ui-sidebar: var(--ui-card);
-  --ui-sidebar-foreground: var(--ui-foreground);
-  --ui-sidebar-primary: var(--ui-primary);
-  --ui-sidebar-primary-foreground: var(--ui-primary-foreground);
-  --ui-sidebar-accent: var(--ui-accent);
-  --ui-sidebar-accent-foreground: var(--ui-accent-foreground);
-  --ui-sidebar-border: var(--ui-border);
-  --ui-sidebar-ring: var(--ui-ring);
   --ui-radius: 0.7rem;
   --ui-radius-panel: 1rem;
   --ui-control-height: 2.25rem;
@@ -64,6 +56,23 @@
   --ui-shadow-panel: 0 18px 55px oklch(0.19 0.016 255 / 0.1);
   --ui-motion-fast: 120ms;
   --ui-motion-standard: 180ms;
+}
+
+/*
+  Sidebar tokens alias the base tokens. A custom property resolves its var() where it is declared,
+  so they are declared again on every preset scope: a preset applied below the document root then
+  resolves them against its own tokens instead of inheriting the root's values.
+*/
+:root,
+[data-ui-preset] {
+  --ui-sidebar: var(--ui-card);
+  --ui-sidebar-foreground: var(--ui-foreground);
+  --ui-sidebar-primary: var(--ui-primary);
+  --ui-sidebar-primary-foreground: var(--ui-primary-foreground);
+  --ui-sidebar-accent: var(--ui-accent);
+  --ui-sidebar-accent-foreground: var(--ui-accent-foreground);
+  --ui-sidebar-border: var(--ui-border);
+  --ui-sidebar-ring: var(--ui-ring);
 }
 
 /* Component-owned rules live below consumer utilities: `className` overrides always win. */
