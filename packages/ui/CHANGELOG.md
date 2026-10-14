@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0-beta.35](https://github.com/astrale-os/ui/compare/v1.0.0-beta.34...v1.0.0-beta.35) (2026-10-14)
+
+
+### Documentation
+
+* **ui:** hide the brand image inside an already named control ([#201](https://github.com/astrale-os/ui/issues/201)) ([d9cd8d5](https://github.com/astrale-os/ui/commit/d9cd8d5ffc798d3e5508a96e80fd2d95e5de51f2))
+
 ## [1.0.0-beta.34](https://github.com/astrale-os/ui/compare/v1.0.0-beta.33...v1.0.0-beta.34) (2026-10-14)
 
 
