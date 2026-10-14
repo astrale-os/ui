@@ -56,6 +56,10 @@
   --ui-shadow-panel: 0 18px 55px oklch(0.19 0.016 255 / 0.1);
   --ui-motion-fast: 120ms;
   --ui-motion-standard: 180ms;
+  /* Stacking layers. Floating elements share one layer and stack by mount order; the toast
+     viewport sits above it so a toast raised under an open modal stays visible and clickable. */
+  --ui-z-floating: 50;
+  --ui-z-toast: 100;
 }
 
 /*
