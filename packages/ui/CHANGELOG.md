@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0-beta.38](https://github.com/astrale-os/ui/compare/v1.0.0-beta.37...v1.0.0-beta.38) (2026-10-15)
+
+
+### Features
+
+* **ui:** generate the logo, its app icons and brand.astrale.ai from one geometry ([#208](https://github.com/astrale-os/ui/issues/208)) ([03cdca3](https://github.com/astrale-os/ui/commit/03cdca3c1fd76c8beba41985561aad7e336062d1))
+
 ## [1.0.0-beta.37](https://github.com/astrale-os/ui/compare/v1.0.0-beta.36...v1.0.0-beta.37) (2026-10-14)
 
 
