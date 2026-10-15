@@ -84,7 +84,11 @@ const SYMBOL_BOUNDS = { x: 6.16, y: 5.98, width: 87.68, height: 80.14 } as const
 
 export interface LogoOptions {
   readonly lockup: LockupName
-  readonly color: BrandColor
+  /**
+   * A brand color for a file, or `currentColor` for an SVG inlined in a page, where the logo takes
+   * the text color of its surface as the React components do.
+   */
+  readonly color: BrandColor | 'currentColor'
   /** A solid surface behind the lockup, or none. Defaults to none. */
   readonly background?: BrandColor | 'transparent'
   /** Space around the lockup, in lockup units. Defaults to its clear space on a background, 0 without. */
@@ -98,7 +102,7 @@ export function logoSvg({
   background = 'transparent',
   padding,
 }: LogoOptions): string {
-  assertContrast(color, background)
+  if (color !== 'currentColor') assertContrast(color, background)
   const { width, height, shapes, clearSpace } = lockups[lockup] as Lockup
   const space = padding ?? (background === 'transparent' ? 0 : clearSpace)
   const outerWidth = width + 2 * space
@@ -110,7 +114,7 @@ export function logoSvg({
   const drawing = shapes
     .map(
       (shape) =>
-        `<path fill="${brandColors[color]}"${shape.evenOdd ? ' fill-rule="evenodd"' : ''} transform="translate(${round(space)} ${round(space)}) ${shape.transform}" d="${shape.d}"/>`,
+        `<path fill="${color === 'currentColor' ? color : brandColors[color]}"${shape.evenOdd ? ' fill-rule="evenodd"' : ''} transform="translate(${round(space)} ${round(space)}) ${shape.transform}" d="${shape.d}"/>`,
     )
     .join('')
   return svgDocument(outerWidth, outerHeight, surface + drawing)

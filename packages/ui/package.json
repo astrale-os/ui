@@ -75,6 +75,11 @@
       "import": "./dist/brand/index.js",
       "default": "./dist/brand/index.js"
     },
+    "./brand/geometry": {
+      "types": "./dist/brand/geometry.d.ts",
+      "import": "./dist/brand/geometry.js",
+      "default": "./dist/brand/geometry.js"
+    },
     "./brand/icons/*": "./dist/brand/icons/*",
     "./breadcrumb": {
       "types": "./dist/navigation/breadcrumb/index.d.ts",

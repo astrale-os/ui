@@ -40,6 +40,12 @@ test('the committed icon set is drawn from the current geometry and colors', asy
   assert.deepEqual(await checkIcons(), [])
 })
 
+test('an inlined logo takes the text color of its page', () => {
+  const svg = logoSvg({ lockup: 'horizontal', color: 'currentColor' })
+  assert.equal(svg.match(/fill="currentColor"/gu)?.length, 2)
+  assert.doesNotMatch(svg, /<rect/u)
+})
+
 test('a logo never vanishes into its background', () => {
   assert.throws(
     () => logoSvg({ lockup: 'symbol', color: 'blue', background: 'black' }),

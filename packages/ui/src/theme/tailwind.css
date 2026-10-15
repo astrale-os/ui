@@ -61,3 +61,22 @@
   --shadow-xs: var(--ui-shadow-control);
   --shadow-sm: var(--ui-shadow-control);
 }
+
+/*
+  The Astrale loader (`AstraleLoader` in `@astrale-os/ui/brand`): the symbol turns a third of a turn
+  (550ms) and rests (350ms). Its threefold symmetry makes every rest the same pose, so the loop
+  restarting at 0deg is invisible.
+*/
+@theme {
+  --animate-astrale-turn: astrale-turn 900ms infinite;
+  @keyframes astrale-turn {
+    0% {
+      transform: rotate(0deg);
+      animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+    }
+    61.1%,
+    100% {
+      transform: rotate(120deg);
+    }
+  }
+}
