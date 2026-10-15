@@ -31,6 +31,7 @@ import {
   type ReactNode,
 } from 'react'
 
+import { BrandAssets } from '../brand/trigger.js'
 import { componentNames } from './inventory.js'
 import { observeNearViewport, PreviewCanvas } from './preview.js'
 import { prefetchPreviewFamily, previewDescriptors, type PreviewDescriptor } from './previews.js'
@@ -429,6 +430,7 @@ export function Catalog() {
             </ScrollArea>
           </SheetContent>
         </Sheet>
+        <BrandAssets />
         <TabsList aria-label="Catalog sections">
           {catalogKinds.map((kind) => (
             <TabsTrigger key={kind} id={`catalog-tab-${kind}`} value={kind}>

@@ -15,6 +15,7 @@ const retainedExports = Object.entries(packageJson.exports).filter(
     name === '.' ||
     name === './class-name' ||
     name === './brand' ||
+    name === './brand/icons/*' ||
     name.endsWith('.css') ||
     name === './package.json',
 )

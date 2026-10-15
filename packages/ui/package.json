@@ -75,6 +75,7 @@
       "import": "./dist/brand/index.js",
       "default": "./dist/brand/index.js"
     },
+    "./brand/icons/*": "./dist/brand/icons/*",
     "./breadcrumb": {
       "types": "./dist/navigation/breadcrumb/index.d.ts",
       "import": "./dist/navigation/breadcrumb/index.js",

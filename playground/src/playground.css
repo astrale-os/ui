@@ -667,3 +667,46 @@
     scroll-behavior: auto;
   }
 }
+
+/* The brand generator sheet (src/brand/studio.tsx). */
+.brand-studio-sheet {
+  overflow-y: auto;
+}
+
+.brand-studio {
+  display: grid;
+  gap: 1.25rem;
+  padding: 0 1rem 1rem;
+}
+
+.brand-studio-preview {
+  display: grid;
+  place-items: center;
+  min-height: 12rem;
+  border: 1px solid var(--ui-border);
+  border-radius: var(--ui-radius);
+  padding: 1rem;
+}
+
+.brand-studio-preview[data-surface='checkerboard'] {
+  background: repeating-conic-gradient(var(--ui-muted) 0 25%, var(--ui-background) 0 50%) 0 0 / 16px
+    16px;
+}
+
+.brand-studio-preview img {
+  max-width: 100%;
+  max-height: 14rem;
+}
+
+.brand-studio-problem {
+  margin: 0;
+  color: var(--ui-muted-foreground);
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.brand-studio-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
