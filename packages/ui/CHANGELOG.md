@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0-beta.39](https://github.com/astrale-os/ui/compare/v1.0.0-beta.38...v1.0.0-beta.39) (2026-10-15)
+
+
+### Features
+
+* **ui:** add AstraleLoader and a React-free brand geometry entry ([#210](https://github.com/astrale-os/ui/issues/210)) ([ab3dcc3](https://github.com/astrale-os/ui/commit/ab3dcc324a6928543bc2ebc65b9d5d37b39d1663))
+
 ## [1.0.0-beta.38](https://github.com/astrale-os/ui/compare/v1.0.0-beta.37...v1.0.0-beta.38) (2026-10-15)
 
 
