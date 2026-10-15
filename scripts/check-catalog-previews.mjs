@@ -52,6 +52,7 @@ function visualRuntimeAddresses(packageDocument) {
     './class-name',
     // The Astrale logo is brand identity, not a catalog component.
     './brand',
+    './brand/icons/*',
     './package.json',
     './reset.css',
     './theme.css',

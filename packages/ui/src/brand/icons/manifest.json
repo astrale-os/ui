@@ -1,0 +1,85 @@
+{
+  "renderer": "@resvg/resvg-js@2.6.2",
+  "files": {
+    "tile-blue/favicon.svg": {
+      "input": "3556c702c70f11dfe9276991c3d96a46de7ca7bdf313a1eb9caf2d2a648fe076",
+      "output": "2709c7eb23c1589958b6b8139375e34f96ad8ac4bd5abc8a3d3567f6b9fc1b2c"
+    },
+    "tile-blue/favicon-16.png": {
+      "input": "ed0690b417d3d258e70032c176227c62ed45e5ee5c6874098c124593cb3349df",
+      "output": "a8c55dd921956074069614cd23f222fb44a97264d29fd1def71650a3d4bfa5bd"
+    },
+    "tile-blue/favicon-32.png": {
+      "input": "35afc4260567870c5fa2bc37f56159e9f58f056870b300d8db0eb436bdf87ce1",
+      "output": "379c9e95b83c3505b0fad1c8ebf8dc586e85b1075431a7d44b278c47ca13a496"
+    },
+    "tile-blue/favicon-48.png": {
+      "input": "d7c5b41b8bd5ea578e449bd40419a538a2f21010c2eee06a3afcc1e54e792656",
+      "output": "7428f54539569a4ea4d2616716845e939db762e7020cc3731a5c11e1ad4bec09"
+    },
+    "tile-blue/favicon-96.png": {
+      "input": "88f50d188306c0edbd4eac1f0eecf033c7c4bae4da1b9e7f97e6596528a24e9f",
+      "output": "6614831e4c796122e8dcdf95375f96398e1992da15b712d2d42607c2cc146107"
+    },
+    "tile-blue/favicon-192.png": {
+      "input": "b47322ca1906da46ab73cbac5e9dccc7fba6a4011b17c7143ffbb340ddf04533",
+      "output": "f992433312b749e3e61592499a8bdb7a70c03f3b3d89b02ef01479e9ccfec58a"
+    },
+    "tile-blue/favicon-512.png": {
+      "input": "a200820b96828562f79462fed446d20f12c00cded147d991089b8a0399d75f44",
+      "output": "765f0ee3ff5b77ca9a1d07d40f5692f438972031bb213445f012a3bdf0f163f2"
+    },
+    "tile-blue/favicon.ico": {
+      "input": "f628c13dc80ef7eb0b23e6b0dce83894ec92d524b59a300516c154886a8bec5f",
+      "output": "ac2e0165bfa907bf6995e725bb2cda1b00016b35df18422475bc9f2bf98f351e"
+    },
+    "tile-blue/apple-touch-icon.png": {
+      "input": "b35284f67d9c22553df079a574b0a9fbd7b6b58a65b48230f7d85d8fbbefe08a",
+      "output": "11cf10bab8de938068692abef39fff7f4b43c02945fd40b4373607a3798295ae"
+    },
+    "tile-blue/icon.png": {
+      "input": "09de4965860c5cb4eb981dd08912267ec08ab01150b84165df855912b2b8a19f",
+      "output": "fb481a9ab94518892d168d7eb56e6ba802d76cd79f790cacd9231140d0eb25b3"
+    },
+    "tile-blue/icon.icns": {
+      "input": "9632d2ec4c5c50b2b62c51198900f0c241d4446f4a59de4beb137f616202c5a2",
+      "output": "c7c474b102ff573771e8cc854e7c67fafc0826bdb9c7220296821fdad894f662"
+    },
+    "tile-black/favicon.svg": {
+      "input": "13f953e38e8d9e0c92454dada6a6af7bcbd55078d0b6fceff2f9737aec6df51d",
+      "output": "e4aff448a67b4e47ab4b82b5a212f0f8c8f137cb6cd5a99dbcc2644263893ab2"
+    },
+    "tile-black/favicon-16.png": {
+      "input": "ac30758a38f69744c3d7570b630318cbfc2e8dfa9a4ce4295c264b651a44a628",
+      "output": "000cbd8798f4a9cb570d4f1f1365fc45fecbf941f4a813804ac221872d23040f"
+    },
+    "tile-black/favicon-32.png": {
+      "input": "6aeee843ca55f8cb6a2ccbc757e0b4833206b5b93343ca9d265ea9dd885ae2ea",
+      "output": "63ee4eb3c64603f29e35f7280ceaa2e5b92620296df5e5e84d7c2fe68e46404e"
+    },
+    "tile-black/favicon-48.png": {
+      "input": "023b64c86d9f5032b8728494ad3dc26628037f3cbc264edec5092b96de420113",
+      "output": "71b773ea9929c1ae1456073a915f9db356487630aaf779f4db65ff55a746c1e8"
+    },
+    "tile-black/favicon-96.png": {
+      "input": "4b43983a6a3f150a38f8c10a189c61afee5ba65edea6244296718eaffb1b94ef",
+      "output": "5b818673aeef0b0d662acc4ff72fa224900b4b2b6186c2835212b85f75fd9b1f"
+    },
+    "tile-black/favicon-192.png": {
+      "input": "ed1ec1d7ae8d9742a6d3d0ab86e095da90d3bea85244a24ad65e8730c7636a51",
+      "output": "61ca4d0a391a83d690e4e88bf966a80e49ac16e3c1ef545c673ad37c06e40d40"
+    },
+    "tile-black/favicon-512.png": {
+      "input": "59d75b89e72f0c55068f402c81d277eea8a4cb6cb42acdc8150b11516adee9f9",
+      "output": "7d9b3afc59314ff32078cce2f0dcbc904f572e3a25a2a8ce7e836417783358ee"
+    },
+    "tile-black/favicon.ico": {
+      "input": "7b810ab35090b93fded597ce9f31f53d822f9401d8cc4a089f8e15710975994a",
+      "output": "4d2904b0f481fc41c9bbc6f0628ce0a0b99abe34974b414f18272e8d91ce32be"
+    },
+    "tile-black/apple-touch-icon.png": {
+      "input": "bf29e99c3e94ed581e71537eeaba2897325a4c22166bcdc52b57cfcc94d16361",
+      "output": "4e7b38c59db6cfc023541133ad3cf8ab6b7fbec7333516fa0b89a97c3e41fa28"
+    }
+  }
+}

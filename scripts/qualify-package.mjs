@@ -128,7 +128,14 @@ try {
     typeof value === 'string' ? [value] : Object.values(value),
   )
   for (const target of new Set(exportTargets)) {
-    assert.ok(entries.includes('package/' + target.replace(/^\.\//u, '')), target)
+    const packed = 'package/' + target.replace(/^\.\//u, '')
+    // A pattern export (`./brand/icons/*`) must match at least one packed file.
+    if (packed.endsWith('*')) {
+      assert.ok(
+        entries.some((entry) => entry.startsWith(packed.slice(0, -1))),
+        target,
+      )
+    } else assert.ok(entries.includes(packed), target)
   }
 
   const consumer = path.join(temporary, 'pnpm-consumer')
@@ -174,7 +181,10 @@ try {
     ].join('\n') + '\n',
   )
   const moduleSpecifiers = Object.keys(packedManifest.exports)
-    .filter((subpath) => !subpath.endsWith('.css') && subpath !== './package.json')
+    .filter(
+      (subpath) =>
+        !subpath.endsWith('.css') && subpath !== './package.json' && !subpath.includes('*'),
+    )
     .map((subpath) => (subpath === '.' ? '@astrale-os/ui' : '@astrale-os/ui/' + subpath.slice(2)))
   await writeFile(
     path.join(consumer, 'imports.ts'),

@@ -15,6 +15,11 @@ for (const preset of ['astrale', 'compact', 'expressive']) {
 // Presets reference their webfonts as `../fonts/…`, which resolves the same from `src/theme/presets/`
 // and from `dist/presets/`.
 await cp(new URL('src/theme/fonts/', root), new URL('fonts/', dist), { recursive: true })
+// The brand icon set (`pnpm brand:build`), without its manifest, which only `brand:check` reads.
+await cp(new URL('src/brand/icons/', root), new URL('brand/icons/', dist), {
+  recursive: true,
+  filter: (source) => !source.endsWith('manifest.json'),
+})
 
 // `source.css` is published with what it imports next to it: the animation vocabulary the
 // precompiled theme was built with (its package exports the stylesheet under the `style` condition

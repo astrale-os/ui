@@ -1,0 +1,59 @@
+name: Brand site
+
+# Builds brand.astrale.ai from the brand geometry (`pnpm brand:site`) and deploys it when the brand
+# changes on main. The Cloudflare token is a secret of the `brand` environment, which only main may
+# deploy to: no pull request, from a fork or not, can read it. The token is scoped to the
+# `astrale-brand` Worker.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'packages/ui/src/brand/**'
+      - 'brand/**'
+      - '.github/workflows/brand.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: brand-site
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    environment:
+      name: brand
+      url: https://brand.astrale.ai
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: 'false'
+      - uses: astrale-os/config/.github/actions/setup@8e2e2abd0320be0c2f64033916519ab3b66c7dd7
+        with:
+          node-version: 26
+          frozen-lockfile: 'true'
+      - run: pnpm brand:check
+      - run: pnpm brand:site
+      - name: Check the Cloudflare token
+        id: token
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+            echo "::warning::The brand environment has no CLOUDFLARE_API_TOKEN secret: the site was built, not deployed."
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          fi
+      # Wrangler at an exact version, run once: the workspace does not depend on it.
+      - name: Deploy brand.astrale.ai
+        if: steps.token.outputs.configured == 'true'
+        working-directory: brand
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx --yes wrangler@4.123.0 deploy

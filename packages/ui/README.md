@@ -67,8 +67,8 @@ and `AstraleLogo` (both, `layout="horizontal"` by default or `"stacked"`). Each 
 "Astrale"; pass `aria-hidden` when visible text or the surrounding control already names it, such
 as a Home link with its own `aria-label`, so screen readers do not announce the name twice. Size
 them with `className` (`size-8`, `h-10 w-auto`). The logo and the Astrale name are trademarks of
-Astrale and, unlike the rest of this package, are not licensed under the MIT License. Exports for
-print, social profiles and app icons live in [astrale-os/logo](https://github.com/astrale-os/logo).
+Astrale and, unlike the rest of this package, are not licensed under the MIT License. Logo files for
+print, slides and social profiles are on [brand.astrale.ai](https://brand.astrale.ai).
 
 ```tsx
 import { AstraleLogo, AstraleMark } from '@astrale-os/ui/brand'
@@ -84,4 +84,23 @@ export function HomeLink() {
     </a>
   )
 }
+```
+
+Generated files use fixed brand colors instead, exported as `brandColors` (`blue` `#003B82`, the
+preset's light primary; `black`; `white`). The package ships the icons an application serves
+itself under `@astrale-os/ui/brand/icons/`, so a new release updates them everywhere. Copy them at
+build time and serve them from the application's own origin: browsers look for `/favicon.ico` there,
+and MCP clients only trust icons from the server's origin.
+
+| Folder        | Icon                                       | For                         |
+| ------------- | ------------------------------------------ | --------------------------- |
+| `tile-blue/`  | The white symbol on the brand blue         | Astrale applications        |
+| `tile-black/` | The white symbol on black                  | The back-office             |
+
+Each folder holds `favicon.svg`, `favicon.ico` (16, 32, 48), `favicon-{16,32,48,96,192,512}.png`
+and `apple-touch-icon.png` (180, full bleed); `tile-blue/` adds the macOS app icon, `icon.icns`
+and its 1024px `icon.png`.
+
+```ts
+import favicon from '@astrale-os/ui/brand/icons/tile-blue/favicon-32.png'
 ```

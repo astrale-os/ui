@@ -1,0 +1,14 @@
+{
+  // brand.astrale.ai: static files only, built by `pnpm brand:site` into ./dist.
+  // Deployed by .github/workflows/brand.yml when the brand changes on main.
+  "$schema": "https://unpkg.com/wrangler@4.123.0/config-schema.json",
+  "name": "astrale-brand",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page",
+  },
+  "routes": [{ "pattern": "brand.astrale.ai", "custom_domain": true }],
+  "workers_dev": false,
+  "preview_urls": false,
+}

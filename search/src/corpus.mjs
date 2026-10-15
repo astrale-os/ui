@@ -14,6 +14,7 @@ const nonvisualExports = new Set([
   './class-name',
   // The Astrale logo is brand identity, not a component to discover.
   './brand',
+  './brand/icons/*',
   './package.json',
   './reset.css',
   './theme.css',
