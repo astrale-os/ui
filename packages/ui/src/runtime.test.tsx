@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { afterEach, describe, expect, test } from 'vitest'
 
 import { Button } from './action/button/index.js'
-import { AstraleLogo, AstraleMark, AstraleWordmark } from './brand/index.js'
+import { AstraleLoader, AstraleLogo, AstraleMark, AstraleWordmark } from './brand/index.js'
 import { cn } from './class-name.js'
 import { Table } from './content/table/index.js'
 import {
@@ -324,5 +324,17 @@ describe('runtime owners', () => {
     const stacked = document.querySelector('[data-layout="stacked"]')
     expect(stacked).toHaveAttribute('viewBox', '0 0 135.51 132.63')
     expect(stacked?.querySelectorAll('path')).toHaveLength(2)
+  })
+
+  test('the brand loader announces its wait and turns the mark at the page clock phase', () => {
+    render(<AstraleLoader label="Loading View" />)
+
+    const status = screen.getByRole('status')
+    expect(status).toHaveAttribute('data-slot', 'astrale-loader')
+    expect(status).toHaveTextContent('Loading View')
+    const mark = status.querySelector('[data-slot="astrale-mark"]')
+    expect(mark).toHaveAttribute('aria-hidden', 'true')
+    expect(mark).toHaveClass('motion-safe:animate-astrale-turn')
+    expect((mark as SVGElement).style.animationDelay).toMatch(/^-\d+ms$/u)
   })
 })

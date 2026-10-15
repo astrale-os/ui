@@ -86,6 +86,24 @@ export function HomeLink() {
 }
 ```
 
+`AstraleLoader` is the Astrale wait: the symbol turning a third at a time in the muted text color,
+announced as a status named by `label` (`"Loading"` by default). It stays transparent for the first
+400ms of the page, and every loader turns at the page clock's phase, so one that replaces another
+carries on mid-step. Size it with `[&_svg]:size-6` or similar.
+
+```tsx
+import { AstraleLoader } from '@astrale-os/ui/brand'
+
+export function Pending() {
+  return <AstraleLoader label="Loading View" className="flex-1" />
+}
+```
+
+Pages rendered without React (server HTML, static pages) draw the logo from
+`@astrale-os/ui/brand/geometry`, which has no dependencies: `logoSvg({ lockup, color })` returns an
+SVG document (`color: 'currentColor'` for an inline logo that follows the text color),
+`tileSvg(...)` an app icon, and `SYMBOL_PATH` the raw symbol.
+
 Generated files use fixed brand colors instead, exported as `brandColors` (`blue` `#003B82`, the
 preset's light primary; `black`; `white`). The package ships the icons an application serves
 itself under `@astrale-os/ui/brand/icons/`, so a new release updates them everywhere. Copy them at
