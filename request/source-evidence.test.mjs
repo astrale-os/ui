@@ -42,6 +42,7 @@ test('rejects mutable, redirected, widened, duplicate, and escaping evidence', (
     { sources: [{ url: source.replace('raw.githubusercontent.com', 'github.com'), path: 'x' }] },
     { sources: [{ url: `${source}?token=secret`, path: 'x' }] },
     { sources: [{ url: source, path: '../x' }] },
+    { sources: [{ url: source, path: 'upstream/' }] },
     { sources: [{ url: source, path: 'index.json' }] },
     {
       sources: [

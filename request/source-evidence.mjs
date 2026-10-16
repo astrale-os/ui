@@ -284,7 +284,7 @@ function acceptPath(value) {
     !/^[A-Za-z0-9][A-Za-z0-9._/-]*$/.test(value) ||
     value.includes('\\') ||
     path.posix.normalize(value) !== value ||
-    value.split('/').some((part) => part === '.' || part === '..')
+    value.split('/').some((part) => !part || part === '.' || part === '..')
   ) {
     throw new TypeError('source evidence path is invalid')
   }
