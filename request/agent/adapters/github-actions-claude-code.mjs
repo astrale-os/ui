@@ -71,7 +71,7 @@ function admitBranchRef(value, name) {
   return value
 }
 
-function runIdentity(ref, provider) {
+function runIdentity(ref) {
   const decoded = decodeRunIdentity(ref.id)
   if (
     typeof decoded.owner !== 'string' ||
@@ -509,7 +509,7 @@ export function createGitHubActionsWorkerAgent(options) {
     async observe(input, operation = {}) {
       let identity
       try {
-        identity = runIdentity(acceptRunRef(input, provider), provider)
+        identity = runIdentity(acceptRunRef(input, provider))
       } catch (error) {
         return invalidJob(error)
       }
@@ -540,7 +540,7 @@ export function createGitHubActionsWorkerAgent(options) {
     async cancel(input, operation = {}) {
       let identity
       try {
-        identity = runIdentity(acceptRunRef(input, provider), provider)
+        identity = runIdentity(acceptRunRef(input, provider))
       } catch (error) {
         return invalidJob(error)
       }
