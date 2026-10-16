@@ -106,8 +106,9 @@ function parseHue(source: string): number | undefined {
   const value = Number.parseFloat(source)
   if (!Number.isFinite(value)) return undefined
   if (source.endsWith('turn')) return value * 360
-  if (source.endsWith('rad')) return (value * 180) / Math.PI
+  // `grad` before `rad`, which it ends with.
   if (source.endsWith('grad')) return value * 0.9
+  if (source.endsWith('rad')) return (value * 180) / Math.PI
   return value
 }
 
