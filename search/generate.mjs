@@ -2,7 +2,6 @@ import assert from 'node:assert/strict'
 import { createHash } from 'node:crypto'
 import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises'
 import path from 'node:path'
-import { fileURLToPath } from 'node:url'
 
 import { scoringFingerprint, scoringParameters, limits } from './src/config.mjs'
 import { buildSearchDocuments, repositoryRoot } from './src/corpus.mjs'
@@ -85,14 +84,14 @@ export async function buildArtifactSet(options = {}) {
   return { corpus, index, manifest, files }
 }
 
-async function observedFiles(directory, relative = directory) {
+async function observedFiles(directory) {
   const entries = await readdir(directory, { withFileTypes: true }).catch(() => [])
   return (
     await Promise.all(
       entries.map(async (entry) => {
         const target = path.join(directory, entry.name)
         return entry.isDirectory()
-          ? observedFiles(target, relative)
+          ? observedFiles(target)
           : [path.relative(repositoryRoot, target).split(path.sep).join('/')]
       }),
     )

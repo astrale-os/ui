@@ -259,7 +259,6 @@ try {
       for (const file of item.files) {
         assert.ok(file.target)
         const physicalTarget = path.join('src', file.target)
-        const installed = path.join(fixture, physicalTarget)
         assert.ok(
           materialized.includes(physicalTarget),
           `${item.name} did not install ${file.target}; materialized: ${materialized
