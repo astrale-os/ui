@@ -27,9 +27,9 @@
   color-scheme: light;
   --ui-background: oklch(0.985 0.006 82);
   --ui-foreground: oklch(0.19 0.02 255);
-  --ui-card: oklch(0.993 0.004 82);
+  --ui-card: oklch(1 0 0);
   --ui-card-foreground: var(--ui-foreground);
-  --ui-popover: oklch(0.998 0.002 82);
+  --ui-popover: oklch(1 0 0);
   --ui-popover-foreground: var(--ui-foreground);
   --ui-primary: oklch(0.36 0.14 251);
   --ui-primary-foreground: oklch(0.985 0.006 82);
