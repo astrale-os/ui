@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.0.0-beta.40](https://github.com/astrale-os/ui/compare/v1.0.0-beta.39...v1.0.0-beta.40) (2026-10-16)
+
+
+### Features
+
+* **preset:** white cards and menus on the astrale light cream ([#212](https://github.com/astrale-os/ui/issues/212)) ([46799f3](https://github.com/astrale-os/ui/commit/46799f30a3572e21fd9d1b4681f78fea5b84ffd4))
+
+
+### Bug Fixes
+
+* **request:** reject source evidence paths with empty segments ([#216](https://github.com/astrale-os/ui/issues/216)) ([ebe2302](https://github.com/astrale-os/ui/commit/ebe230259c3c9d5703156fee4495ad15680e7f0c))
+* **utils:** read grad hue angles as gradians, not radians, in the theme color parser ([#215](https://github.com/astrale-os/ui/issues/215)) ([cefb703](https://github.com/astrale-os/ui/commit/cefb7039b89e8afc592500b8bec6d71d2ceebf08))
+
 ## [1.0.0-beta.39](https://github.com/astrale-os/ui/compare/v1.0.0-beta.38...v1.0.0-beta.39) (2026-10-15)
 
 
