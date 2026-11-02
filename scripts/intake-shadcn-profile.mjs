@@ -114,7 +114,7 @@ for (const name of emittedNames) {
     ? path.join('registry/components', name, `${name}.tsx`)
     : path.join('packages/ui/src', owner, 'index.tsx')
   const adapted = registryOwned
-    ? adaptShadcnRegistryComponent(source)
+    ? adaptShadcnControlSizing(name, adaptShadcnRegistryComponent(source))
     : adaptShadcnControlSizing(name, adapt(source))
   const revision = shadcnControlRevision(name)
 

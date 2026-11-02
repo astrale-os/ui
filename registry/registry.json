@@ -369,13 +369,8 @@
       "name": "component-sonner",
       "type": "registry:component",
       "title": "Component · sonner",
-      "description": "Exact @shadcn/sonner Base Nova source with import-only Astrale adaptation.",
-      "dependencies": [
-        "@astrale-os/ui@^0.3.0-beta.0",
-        "lucide-react@1.32.0",
-        "next-themes@^0.4.6",
-        "sonner@^2.0.8"
-      ],
+      "description": "@shadcn/sonner Base Nova source with a declared Astrale revision.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "sonner@^2.0.8"],
       "files": [
         {
           "path": "registry/components/sonner/sonner.tsx",
@@ -389,7 +384,7 @@
         "provider": "@shadcn",
         "upstreamAddress": "@shadcn/sonner",
         "upstreamDigest": "sha256:0c729f9f1ada0b0bedd9296710cc257dc43559fa6b8cc40f010d129e8ff85fdd",
-        "adaptation": "imports-only"
+        "adaptation": "astrale-revision"
       }
     },
     {
@@ -19702,7 +19697,7 @@
       "type": "registry:block",
       "title": "Navigation Menu 1",
       "description": "A standard navigation menu featuring a single-column layout with clear titles and supporting descriptions for each item.",
-      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "next@^15.3.3"],
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
       "files": [
         {
           "path": "registry/variants/source/patterns/navigation-menu/navigation-menu-01/navigation-menu-01.tsx",
@@ -19722,7 +19717,7 @@
       "type": "registry:block",
       "title": "Navigation Menu 2",
       "description": "A balanced two-column navigation menu optimized for displaying a larger set of resources with concise descriptions.",
-      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "next@^15.3.3"],
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
       "files": [
         {
           "path": "registry/variants/source/patterns/navigation-menu/navigation-menu-02/navigation-menu-02.tsx",
@@ -19742,7 +19737,7 @@
       "type": "registry:block",
       "title": "Navigation Menu 3",
       "description": "An enhanced navigation menu with integrated icons and status badges, providing visual cues and additional context for each link.",
-      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "next@^15.3.3"],
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
       "files": [
         {
           "path": "registry/variants/source/patterns/navigation-menu/navigation-menu-03/navigation-menu-03.tsx",
@@ -19762,7 +19757,7 @@
       "type": "registry:block",
       "title": "Navigation Menu 4",
       "description": "A structured navigation menu that organizes items into logical sections, using icons and descriptions to guide user exploration.",
-      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "next@^15.3.3"],
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
       "files": [
         {
           "path": "registry/variants/source/patterns/navigation-menu/navigation-menu-04/navigation-menu-04.tsx",
@@ -19782,7 +19777,7 @@
       "type": "registry:block",
       "title": "Navigation Menu 5",
       "description": "A versatile navigation menu combining a functional tool list with a dedicated call-to-action area for improved conversion.",
-      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "next@^15.3.3"],
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
       "files": [
         {
           "path": "registry/variants/source/patterns/navigation-menu/navigation-menu-05/navigation-menu-05.tsx",
@@ -19802,7 +19797,7 @@
       "type": "registry:block",
       "title": "Navigation Menu 6",
       "description": "A rich developer-centric navigation menu featuring a tools grid and a visual sidebar for tutorials or spotlight content.",
-      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "next@^15.3.3"],
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
       "files": [
         {
           "path": "registry/variants/source/patterns/navigation-menu/navigation-menu-06/navigation-menu-06.tsx",
@@ -19822,7 +19817,7 @@
       "type": "registry:block",
       "title": "Navigation Menu 7",
       "description": "A multi-section navigation menu designed for complex information architectures, grouping tools, integrations, and resources.",
-      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "next@^15.3.3"],
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
       "files": [
         {
           "path": "registry/variants/source/patterns/navigation-menu/navigation-menu-07/navigation-menu-07.tsx",
@@ -19842,7 +19837,7 @@
       "type": "registry:block",
       "title": "Navigation Menu 8",
       "description": "An analytics-driven navigation menu that showcases real-time metrics and organized report links in a dashboard-style dropdown.",
-      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "next@^15.3.3"],
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0"],
       "files": [
         {
           "path": "registry/variants/source/patterns/navigation-menu/navigation-menu-08/navigation-menu-08.tsx",
@@ -19862,7 +19857,7 @@
       "type": "registry:block",
       "title": "Navigation Menu 9",
       "description": "A multi-trigger navigation menu providing a clean and organized way to access diverse categories of site content.",
-      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "next@^15.3.3"],
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
       "files": [
         {
           "path": "registry/variants/source/patterns/navigation-menu/navigation-menu-09/navigation-menu-09.tsx",

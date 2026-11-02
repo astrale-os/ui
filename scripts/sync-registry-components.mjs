@@ -82,7 +82,10 @@ for (const component of provenance.components.filter(
     name: `component-${name}`,
     type: 'registry:component',
     title: `Component · ${name}`,
-    description: `Exact @shadcn/${name} Base Nova source with import-only Astrale adaptation.`,
+    description:
+      component.adaptation === 'imports-only'
+        ? `Exact @shadcn/${name} Base Nova source with import-only Astrale adaptation.`
+        : `@shadcn/${name} Base Nova source with a declared Astrale revision.`,
     dependencies: ['@astrale-os/ui@^0.3.0-beta.0', ...externalDependencies(source)],
     files,
     meta: {
