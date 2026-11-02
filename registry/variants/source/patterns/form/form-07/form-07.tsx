@@ -16,7 +16,7 @@ import { CheckCheckIcon } from "lucide-react"
 const formSchema = z.object({
   email: z
     .string({
-      required_error: 'Please select an email.'
+      error: 'Please select an email.'
     })
     .email()
 })

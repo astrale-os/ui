@@ -23,7 +23,7 @@ const formSchema = z.object({
     message: 'Kindly select an issue.'
   }),
   selectedOption: z.enum(['replace', 'refund', 'support'], {
-    required_error: 'Selection of an option is required.'
+    error: 'Selection of an option is required.'
   }),
   message: z.string().min(50, 'Describe your issue using at least 50 characters.')
 })

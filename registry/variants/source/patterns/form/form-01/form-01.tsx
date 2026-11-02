@@ -15,7 +15,7 @@ import { CheckCheckIcon } from "lucide-react"
 // Define the form schema
 const formSchema = z.object({
   selectedOption: z.enum(['share-data', 'do-not-share', 'customize'], {
-    required_error: 'You must select an option.'
+    error: 'You must select an option.'
   })
 })
 

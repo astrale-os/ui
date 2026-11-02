@@ -10,7 +10,7 @@
     "lucide-react@1.32.0",
     "react-hook-form@^7.85.0",
     "react@19.2.8",
-    "zod@3.25.76"
+    "zod@4.6.7"
   ],
   "files": [
     {

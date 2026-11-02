@@ -17,7 +17,7 @@ import { CheckCheckIcon, CalendarIcon } from "lucide-react"
 // Define the form schema
 const formSchema = z.object({
   dob: z.date({
-    required_error: 'A date of birth is required.'
+    error: 'A date of birth is required.'
   })
 })
 
