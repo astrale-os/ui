@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.0-beta.41](https://github.com/astrale-os/ui/compare/v1.0.0-beta.40...v1.0.0-beta.41) (2026-11-02)
+
+
+### Bug Fixes
+
+* **components:** drop the Next.js dependency from registry sources ([#218](https://github.com/astrale-os/ui/issues/218)) ([2ddfd17](https://github.com/astrale-os/ui/commit/2ddfd177d675574e162755375e32d288d1ac8675))
+* **components:** move form patterns to zod 4.6.7 for GHSA-mrhx-c7xc-m3w5 ([#219](https://github.com/astrale-os/ui/issues/219)) ([1db085e](https://github.com/astrale-os/ui/commit/1db085e5ca75c3db222c1908ea3cab2e29ad9d47))
+
 ## [1.0.0-beta.40](https://github.com/astrale-os/ui/compare/v1.0.0-beta.39...v1.0.0-beta.40) (2026-10-16)
 
 
