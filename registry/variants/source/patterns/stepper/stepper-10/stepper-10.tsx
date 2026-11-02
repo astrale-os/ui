@@ -35,7 +35,7 @@ const personalInfoSchema = z.object({
 })
 
 const contactInfoSchema = z.object({
-  email: z.string().email('Invalid email address'),
+  email: z.email('Invalid email address'),
   phone: z.string().min(10, 'Phone number must be at least 10 digits')
 })
 

@@ -46,3 +46,10 @@ allowBuilds:
 # A machine-level global virtual store relocates them outside it and silently
 # breaks type resolution, so pin the per-project store for this workspace.
 virtualStoreType: project
+
+# GHSA-mrhx-c7xc-m3w5 (high): zod < 4.6.6 can exhaust memory validating large
+# arrays. Every published @astrale-os/sdk and @astrale-os/kernel-dsl still pins
+# zod 4.4.3 (a dependency of kernel-dsl, an exact peer of the SDK), so force the
+# patched release across the graph. Drop once those packages allow >= 4.6.6.
+overrides:
+  zod: 4.6.7

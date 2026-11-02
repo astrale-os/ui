@@ -15,7 +15,7 @@ import { CheckCheckIcon } from "lucide-react"
 // Define the form schema
 const formSchema = z.object({
   stepTracker: z.boolean().refine(val => val === true, {
-    message: 'You must enable step tracker to proceed.'
+    error: 'You must enable step tracker to proceed.'
   })
 })
 

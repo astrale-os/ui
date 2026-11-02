@@ -14,11 +14,9 @@ import { CheckCheckIcon } from "lucide-react"
 
 // Define the form schema
 const formSchema = z.object({
-  email: z
-    .string({
-      required_error: 'Please select an email.'
-    })
-    .email()
+  email: z.email({
+    error: issue => (issue.input === undefined ? 'Please select an email.' : undefined)
+  })
 })
 
 type FormValues = z.infer<typeof formSchema>

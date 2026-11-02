@@ -13,7 +13,7 @@ import { CheckCheckIcon } from "lucide-react"
 // Define the form schema
 const formSchema = z.object({
   acceptTerms: z.boolean().refine(val => val === true, {
-    message: 'You must accept the terms and conditions.'
+    error: 'You must accept the terms and conditions.'
   })
 })
 
