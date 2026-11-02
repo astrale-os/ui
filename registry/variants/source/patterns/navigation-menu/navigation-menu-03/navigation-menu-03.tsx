@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { Badge } from '@astrale-os/ui/badge'
 import {
   NavigationMenu,
@@ -83,7 +82,7 @@ const NavigationMenuFeatureDemo = () => (
             <div className='w-100 space-y-1 p-1'>
               {features.map(feature => (
                 <NavigationMenuLink
-                  render={<Link href={feature.href} />}
+                  href={feature.href}
                   key={feature.label}
                   className='flex items-start gap-2 *:[svg]:mt-1 *:[svg]:size-5'
                 >

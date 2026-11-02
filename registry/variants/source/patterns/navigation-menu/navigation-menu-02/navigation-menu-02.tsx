@@ -1,5 +1,3 @@
-import Link from 'next/link'
-
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -52,7 +50,7 @@ const NavigationMenuTwoColumnDemo = () => {
             <NavigationMenuContent>
               <ul className='grid w-100 gap-2 md:w-125 md:grid-cols-2 lg:w-125'>
                 {components.map(component => (
-                  <NavigationMenuLink render={<Link href={component.href} />} key={component.title}>
+                  <NavigationMenuLink href={component.href} key={component.title}>
                     <div className='flex flex-col text-sm'>
                       <div className='font-medium'>{component.title}</div>
                       <div className='text-muted-foreground line-clamp-2'>{component.description}</div>

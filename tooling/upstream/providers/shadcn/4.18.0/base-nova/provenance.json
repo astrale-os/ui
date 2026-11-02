@@ -963,7 +963,10 @@
       "sourceDigest": "sha256:0c729f9f1ada0b0bedd9296710cc257dc43559fa6b8cc40f010d129e8ff85fdd",
       "owner": "component/sonner",
       "implementation": "registry/components/sonner/sonner.tsx",
-      "adaptation": "imports-only",
+      "adaptation": "astrale-revision",
+      "adaptationNotes": [
+        "Pass the system color scheme to Sonner directly instead of reading it through next-themes, so the component no longer depends on the Next.js ecosystem. Without a next-themes provider the upstream code already resolved to the system scheme, and consumers can still override it with the theme prop."
+      ],
       "disposition": "owned-registry-component"
     },
     {

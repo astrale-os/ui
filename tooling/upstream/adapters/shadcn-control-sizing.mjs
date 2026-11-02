@@ -277,6 +277,22 @@ const revisions = new Map([
     },
   ],
   [
+    'sonner',
+    {
+      notes: [
+        'Pass the system color scheme to Sonner directly instead of reading it through next-themes, so the component no longer depends on the Next.js ecosystem. Without a next-themes provider the upstream code already resolved to the system scheme, and consumers can still override it with the theme prop.',
+      ],
+      replacements: [
+        [
+          "} from 'lucide-react'\nimport { useTheme } from 'next-themes'\n",
+          "} from 'lucide-react'\n",
+        ],
+        ["=> {\n  const { theme = 'system' } = useTheme()\n\n  return (", '=> {\n  return ('],
+        ["theme={theme as ToasterProps['theme']}", 'theme="system"'],
+      ],
+    },
+  ],
+  [
     'toast',
     {
       notes: [

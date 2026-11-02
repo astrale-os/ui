@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -116,7 +115,7 @@ const NavigationMenuDevToolDemo = () => (
                   <div className='space-y-1'>
                     {tools.map(feature => (
                       <NavigationMenuLink
-                        render={<Link href={feature.href} />}
+                        href={feature.href}
                         key={feature.label}
                         className='flex items-center gap-2 *:[svg]:size-4'
                       >
@@ -131,7 +130,7 @@ const NavigationMenuDevToolDemo = () => (
                   <div className='space-y-1'>
                     {integrations.map(feature => (
                       <NavigationMenuLink
-                        render={<Link href={feature.href} />}
+                        href={feature.href}
                         key={feature.label}
                         className='flex items-center gap-2 *:[svg]:size-4'
                       >
@@ -146,7 +145,7 @@ const NavigationMenuDevToolDemo = () => (
                   <div className='space-y-1'>
                     {resources.map(resource => (
                       <NavigationMenuLink
-                        render={<Link href={resource.href} />}
+                        href={resource.href}
                         key={resource.label}
                         className='flex items-center gap-2 *:[svg]:size-4'
                       >
@@ -160,7 +159,7 @@ const NavigationMenuDevToolDemo = () => (
                   <h4 className='text-muted-foreground mb-3 text-sm font-medium'>SUPPORT</h4>
                   <div className='space-y-1'>
                     {support.map(item => (
-                      <NavigationMenuLink render={<Link href={item.href} />} key={item.label}>
+                      <NavigationMenuLink href={item.href} key={item.label}>
                         <span className='text-sm font-medium'>{item.label}</span>
                       </NavigationMenuLink>
                     ))}

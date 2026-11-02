@@ -247,7 +247,7 @@ test('every registry item is independently bounded, controlled, and safe to inst
       assert.equal(item.meta.upstreamDigest, upstream.sourceDigest)
       assert.equal(item.meta.canonicalAddress, upstream.owner)
       assert.equal(item.declaredPath, upstream.implementation)
-      assert.equal(item.meta.adaptation, 'imports-only')
+      assert.equal(item.meta.adaptation, upstream.adaptation)
       const itemSources = await Promise.all(
         item.declaredPaths.map((declaredPath) => readFile(declaredPath, 'utf8')),
       )
