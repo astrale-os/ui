@@ -21,7 +21,7 @@ const SheetWithFormDemo = () => {
   const FormSchema = z.object({
     firstName: z.string().min(1, 'First name is required').min(2, 'First name must be at least 2 characters'),
     lastName: z.string().min(1, 'Last name is required').min(2, 'Last name must be at least 2 characters'),
-    email: z.string().min(1, 'Email is required').email({ message: 'Please enter a valid email address.' }),
+    email: z.email({ error: issue => (issue.input ? 'Please enter a valid email address.' : 'Email is required') }),
     mobileNumber: z
       .number({
         error: issue => (issue.input === undefined ? 'Mobile number is required' : 'Please enter a valid number')
