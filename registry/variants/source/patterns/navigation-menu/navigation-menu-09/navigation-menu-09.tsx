@@ -1,5 +1,3 @@
-import Link from 'next/link'
-
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -19,17 +17,17 @@ const NavigationMenuDemo = () => {
             <NavigationMenuContent>
               <ul className='w-50'>
                 <li>
-                  <NavigationMenuLink render={<Link href='#' />}>
+                  <NavigationMenuLink href='#'>
                     <div className='px-1 font-medium'>Introduction</div>
                   </NavigationMenuLink>
                 </li>
                 <li>
-                  <NavigationMenuLink render={<Link href='#' />}>
+                  <NavigationMenuLink href='#'>
                     <div className='px-1 font-medium'>Installation</div>
                   </NavigationMenuLink>
                 </li>
                 <li>
-                  <NavigationMenuLink render={<Link href='#' />}>
+                  <NavigationMenuLink href='#'>
                     <div className='px-1 font-medium'>Quick Start</div>
                   </NavigationMenuLink>
                 </li>
@@ -41,17 +39,17 @@ const NavigationMenuDemo = () => {
             <NavigationMenuContent>
               <ul className='w-50'>
                 <li>
-                  <NavigationMenuLink render={<Link href='#' />}>
+                  <NavigationMenuLink href='#'>
                     <div className='px-1 font-medium'>Alert Dialog</div>
                   </NavigationMenuLink>
                 </li>
                 <li>
-                  <NavigationMenuLink render={<Link href='#' />}>
+                  <NavigationMenuLink href='#'>
                     <div className='px-1 font-medium'>Hover Card</div>
                   </NavigationMenuLink>
                 </li>
                 <li>
-                  <NavigationMenuLink render={<Link href='#' />}>
+                  <NavigationMenuLink href='#'>
                     <div className='px-1 font-medium'>Button</div>
                   </NavigationMenuLink>
                 </li>
@@ -59,7 +57,7 @@ const NavigationMenuDemo = () => {
             </NavigationMenuContent>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <NavigationMenuLink render={<Link href='#' />}>Docs</NavigationMenuLink>
+            <NavigationMenuLink href='#'>Docs</NavigationMenuLink>
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>

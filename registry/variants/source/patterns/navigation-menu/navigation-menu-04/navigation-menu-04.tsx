@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -96,7 +95,7 @@ const NavigationMenuExploreDemo = () => (
                     <div className='space-y-1'>
                       {section.items.map(item => (
                         <NavigationMenuLink
-                          render={<Link href={item.href} />}
+                          href={item.href}
                           key={item.label}
                           className='flex items-start gap-2 *:[svg]:mt-1 *:[svg]:size-4'
                         >

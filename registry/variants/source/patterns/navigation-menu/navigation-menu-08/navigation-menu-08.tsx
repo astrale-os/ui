@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -75,7 +74,7 @@ const NavigationMenuDesignDemo = () => (
                     <div className='flex flex-col gap-1'>
                       {reports.map(r => (
                         <NavigationMenuLink
-                          render={<Link href='#' />}
+                          href='#'
                           key={r.title}
                           className='flex items-center gap-2 py-2 text-sm font-medium *:[svg]:size-4'
                         >
@@ -91,7 +90,7 @@ const NavigationMenuDesignDemo = () => (
                     <div className='flex flex-col gap-1'>
                       {customReports.map(cr => (
                         <NavigationMenuLink
-                          render={<Link href='#' />}
+                          href='#'
                           key={cr.title}
                           className={
                             'flex items-center justify-between rounded-md px-3 py-2 ' +
