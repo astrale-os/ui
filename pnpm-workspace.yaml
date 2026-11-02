@@ -46,3 +46,12 @@ allowBuilds:
 # A machine-level global virtual store relocates them outside it and silently
 # breaks type resolution, so pin the per-project store for this workspace.
 virtualStoreType: project
+
+# GHSA-mrhx-c7xc-m3w5 (high): zod < 4.6.6 can exhaust memory validating large
+# arrays. Every published @astrale-os/kernel-dsl still depends on zod 4.4.3 and
+# @astrale-os/sdk declares it as an exact peer, so pin the patched release under
+# those parents only. A global override would also reach tools run through
+# `pnpm dlx` (shadcn needs zod 3). Drop once those packages allow >= 4.6.6.
+overrides:
+  '@astrale-os/kernel-dsl>zod': 4.6.7
+  '@astrale-os/sdk>zod': 4.6.7

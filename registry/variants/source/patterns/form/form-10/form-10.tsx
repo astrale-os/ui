@@ -18,12 +18,12 @@ import { CheckCheckIcon } from "lucide-react"
 
 // Define the form schema
 const formSchema = z.object({
-  email: z.string().min(1, 'Email is required').email({ message: 'Please enter a valid email address.' }),
+  email: z.email({ error: issue => (issue.input ? 'Please enter a valid email address.' : 'Email is required') }),
   issue: z.string().min(1, {
-    message: 'Kindly select an issue.'
+    error: 'Kindly select an issue.'
   }),
   selectedOption: z.enum(['replace', 'refund', 'support'], {
-    required_error: 'Selection of an option is required.'
+    error: 'Selection of an option is required.'
   }),
   message: z.string().min(50, 'Describe your issue using at least 50 characters.')
 })

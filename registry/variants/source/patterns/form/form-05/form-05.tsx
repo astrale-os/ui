@@ -15,7 +15,7 @@ import { CheckCheckIcon } from "lucide-react"
 // Define the form schema
 const formSchema = z.object({
   pin: z.string().min(6, {
-    message: 'Your one-time password must be 6 characters.'
+    error: 'Your one-time password must be 6 characters.'
   })
 })
 

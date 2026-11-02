@@ -31,7 +31,7 @@ const paymentMethod = [
 
 // Define the form schema
 const formSchema = z.object({
-  method: z.string({ required_error: 'Payment method is required.' })
+  method: z.string({ error: 'Payment method is required.' })
 })
 
 type FormValues = z.infer<typeof formSchema>
