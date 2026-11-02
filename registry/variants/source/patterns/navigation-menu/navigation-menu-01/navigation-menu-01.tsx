@@ -1,5 +1,3 @@
-import Link from 'next/link'
-
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -19,7 +17,7 @@ const NavigationMenuDemo = () => {
             <NavigationMenuContent>
               <ul className='w-80'>
                 <li>
-                  <NavigationMenuLink render={<Link href='#' />}>
+                  <NavigationMenuLink href='#'>
                     <div className='flex flex-col px-1'>
                       <div className='font-medium'>Alert Dialog</div>
                       <div className='text-muted-foreground text-sm'>
@@ -29,7 +27,7 @@ const NavigationMenuDemo = () => {
                   </NavigationMenuLink>
                 </li>
                 <li>
-                  <NavigationMenuLink render={<Link href='#' />}>
+                  <NavigationMenuLink href='#'>
                     <div className='flex flex-col px-1'>
                       <div className='font-medium'>Hover Card</div>
                       <div className='text-muted-foreground text-sm'>

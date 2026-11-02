@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { Button } from '@astrale-os/ui/button'
 import {
   NavigationMenu,
@@ -68,7 +67,7 @@ const NavigationMenuDesignDemo = () => (
                 <div>
                   {products.map(product => (
                     <NavigationMenuLink
-                      render={<Link href={product.href} />}
+                      href={product.href}
                       key={product.label}
                       className='flex flex-row items-start gap-2 *:[svg]:mt-1 *:[svg]:size-5'
                     >

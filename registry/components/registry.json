@@ -369,13 +369,8 @@
       "name": "component-sonner",
       "type": "registry:component",
       "title": "Component · sonner",
-      "description": "Exact @shadcn/sonner Base Nova source with import-only Astrale adaptation.",
-      "dependencies": [
-        "@astrale-os/ui@^0.3.0-beta.0",
-        "lucide-react@1.32.0",
-        "next-themes@^0.4.6",
-        "sonner@^2.0.8"
-      ],
+      "description": "@shadcn/sonner Base Nova source with a declared Astrale revision.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0", "lucide-react@1.32.0", "sonner@^2.0.8"],
       "files": [
         {
           "path": "sonner/sonner.tsx",
@@ -389,7 +384,7 @@
         "provider": "@shadcn",
         "upstreamAddress": "@shadcn/sonner",
         "upstreamDigest": "sha256:0c729f9f1ada0b0bedd9296710cc257dc43559fa6b8cc40f010d129e8ff85fdd",
-        "adaptation": "imports-only"
+        "adaptation": "astrale-revision"
       }
     },
     {
