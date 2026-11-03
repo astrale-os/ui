@@ -465,17 +465,7 @@ test('tracks the strict lock policy and pinned repository toolchain', async () =
   assert.match(workspace, /^minimumReleaseAgeStrict: true$/mu)
   assert.match(workspace, /^minimumReleaseAgeIgnoreMissingTime: false$/mu)
   assert.match(workspace, /^trustLockfile: false$/mu)
-  // An override may only pin, under a named Astrale parent, a patched release
-  // that published Astrale packages do not admit yet (zod: GHSA-mrhx-c7xc-m3w5).
-  // It never redirects a package to another source, and never applies to the
-  // whole graph, where it would also reach tools run through `pnpm dlx`.
-  const securityOverrides = {
-    '@astrale-os/kernel-dsl>zod': '4.6.7',
-    '@astrale-os/sdk>zod': '4.6.7',
-  }
-  for (const [name, version] of Object.entries(parseYaml(workspace).overrides ?? {})) {
-    assert.equal(version, securityOverrides[name], `unexpected pnpm override: ${name}`)
-  }
+  assert.doesNotMatch(workspace, /^overrides:/mu)
   assert.match(lock, /^lockfileVersion:/mu)
   assert.doesNotMatch(lock, /npm\.pkg\.github\.com/u)
   const locatorValues = [...lock.matchAll(/^\s+(?:specifier|version|tarball):\s+([^\s]+)$/gmu)].map(
