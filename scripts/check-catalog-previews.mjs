@@ -54,6 +54,8 @@ function visualRuntimeAddresses(packageDocument) {
     './brand',
     './brand/geometry',
     './brand/icons/*',
+    // A font face string for pages that cannot load the preset, not a catalog component.
+    './fonts/manrope-inline',
     './package.json',
     './reset.css',
     './theme.css',

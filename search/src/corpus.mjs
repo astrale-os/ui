@@ -16,6 +16,8 @@ const nonvisualExports = new Set([
   './brand',
   './brand/geometry',
   './brand/icons/*',
+  // A font face string for pages that cannot load the preset, not a component.
+  './fonts/manrope-inline',
   './package.json',
   './reset.css',
   './theme.css',
