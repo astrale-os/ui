@@ -21,6 +21,8 @@ const runtimeAddresses = Object.entries(uiPackage.exports)
       entrypoint !== './class-name' &&
       // The Astrale logo is brand identity, not a catalog component (see check-catalog-previews).
       !entrypoint.startsWith('./brand') &&
+      // Inline font faces serve pages that cannot load the preset; they are not components.
+      !entrypoint.startsWith('./fonts/') &&
       typeof target === 'object' &&
       'import' in target,
   )
