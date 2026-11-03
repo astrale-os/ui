@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.0.0-beta.42](https://github.com/astrale-os/ui/compare/v1.0.0-beta.41...v1.0.0-beta.42) (2026-11-03)
+
+
+### Features
+
+* **ui:** export the Manrope heading font as an inline [@font-face](https://github.com/font-face) rule ([#227](https://github.com/astrale-os/ui/issues/227)) ([c612da2](https://github.com/astrale-os/ui/commit/c612da26f300d2d776d7a58bcfc14d142dd4ac1f))
+
+
+### Bug Fixes
+
+* move the UI Domain to adapter-cloudflare 0.5.0-beta.207 (Wrangler 4.153) ([#222](https://github.com/astrale-os/ui/issues/222)) ([4a61b83](https://github.com/astrale-os/ui/commit/4a61b83e8effc361308d2ce3d9910110dadde1cc))
+* move to SDK 0.6.0-beta.53 and zod 4.6.7 ([#226](https://github.com/astrale-os/ui/issues/226)) ([959edd7](https://github.com/astrale-os/ui/commit/959edd7026329f4d1e006728007dd5182aa3647d))
+* resolve hono 4.13.14 to clear five moderate advisories ([#224](https://github.com/astrale-os/ui/issues/224)) ([78e14f4](https://github.com/astrale-os/ui/commit/78e14f4e9aaa3dd08c1d4071ebc22eef545dc3f4))
+
 ## [1.0.0-beta.41](https://github.com/astrale-os/ui/compare/v1.0.0-beta.40...v1.0.0-beta.41) (2026-11-02)
 
 
