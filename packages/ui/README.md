@@ -102,7 +102,10 @@ export function Pending() {
 Pages rendered without React (server HTML, static pages) draw the logo from
 `@astrale-os/ui/brand/geometry`, which has no dependencies: `logoSvg({ lockup, color })` returns an
 SVG document (`color: 'currentColor'` for an inline logo that follows the text color),
-`tileSvg(...)` an app icon, and `SYMBOL_PATH` the raw symbol.
+`tileSvg(...)` an app icon, and `SYMBOL_PATH` the raw symbol. When such a page cannot load the
+preset either, `manropeFontFace` from `@astrale-os/ui/fonts/manrope-inline` is the heading font's
+`@font-face` rule with its latin subset inlined (~33 kB); the page's policy then needs
+`font-src data:`.
 
 Generated files use fixed brand colors instead, exported as `brandColors` (`blue` `#003B82`, the
 preset's light primary; `black`; `white`). The package ships the icons an application serves

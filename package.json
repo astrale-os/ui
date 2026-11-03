@@ -25,6 +25,7 @@
     "brand": "node brand/cli.mjs",
     "brand:build": "node brand/build.mjs",
     "brand:check": "node brand/build.mjs --check",
+    "fonts:build": "node scripts/build-inline-fonts.mjs && oxfmt --write packages/ui/src/fonts",
     "brand:site": "node brand/site.mjs",
     "themes:build": "node scripts/build-themes.mjs",
     "themes:check": "node scripts/build-themes.mjs --check",

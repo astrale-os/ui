@@ -32,6 +32,7 @@ The `astrale` preset ships the variable latin and latin-ext subsets of
 distributed under the SIL Open Font License 1.1. The files are taken unmodified from
 `@fontsource-variable/manrope@5.2.8`, and the license is preserved next to them under
 `packages/ui/src/theme/fonts/Manrope-OFL.txt` (`dist/fonts/` once published).
+`packages/ui/src/fonts/manrope-inline.ts` carries the same latin file, base64-encoded and unmodified.
 
 The runtime package composes focused React libraries including Base UI, cmdk, Input OTP, and
 react-resizable-panels. Their licenses and notices remain available in their distributed

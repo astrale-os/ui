@@ -81,6 +81,11 @@
       "default": "./dist/brand/geometry.js"
     },
     "./brand/icons/*": "./dist/brand/icons/*",
+    "./fonts/manrope-inline": {
+      "types": "./dist/fonts/manrope-inline.d.ts",
+      "import": "./dist/fonts/manrope-inline.js",
+      "default": "./dist/fonts/manrope-inline.js"
+    },
     "./breadcrumb": {
       "types": "./dist/navigation/breadcrumb/index.d.ts",
       "import": "./dist/navigation/breadcrumb/index.js",
