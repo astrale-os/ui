@@ -3938,8 +3938,8 @@ packages:
   hast-util-whitespace@3.0.0:
     resolution: {integrity: sha512-88JUN06ipLwsnv+dVn+OIYOvAuvBMy/Qoi6O7mQHxdPXpjy+Cd6xRkWwux7DKO+4sYILtLBRIKgsdpS2gQc7qw==}
 
-  hono@4.13.2:
-    resolution: {integrity: sha512-JydRilDRkYBQMt9qR9U92mXxmbGqsqSn/IKOrh4e7/gEbn+0zSr8igTu0obwJoNGN4sez28DIql7FBHWydoJpA==}
+  hono@4.13.14:
+    resolution: {integrity: sha512-yhRLQ21U6qa9Hsu2N7Qcbh8tE+WKEcoErjIo56LeSGiGXGp9sA7UpE86Ui9uexb61KakiGwuHMn2QdV7w6i6kQ==}
     engines: {node: '>=16.9.0'}
 
   html-encoding-sniffer@6.0.0:
@@ -5127,7 +5127,7 @@ snapshots:
       '@astrale-os/sdk': 0.6.0-beta.52(@astrale-os/ox@0.1.4(oxfmt@0.67.0)(oxlint@1.79.0))(oxlint@1.79.0)(zod@4.6.7)
       '@noble/hashes': 2.3.0
       '@restatedev/restate-sdk-cloudflare-workers': 1.17.0
-      hono: 4.13.2
+      hono: 4.13.14
       jose: 6.2.10
       wrangler: 4.153.0(@types/node@24.19.2)
     transitivePeerDependencies:
@@ -5176,7 +5176,7 @@ snapshots:
       '@astrale-os/kernel-core': 1.0.0-beta.33(zod@4.6.7)
       '@astrale-os/kernel-dsl': 1.0.0-beta.21
       '@astrale-os/kernel-protocol': 1.0.0-beta.33(zod@4.6.7)
-      hono: 4.13.2
+      hono: 4.13.14
     transitivePeerDependencies:
       - zod
 
@@ -5195,7 +5195,7 @@ snapshots:
       '@lucide/icons': 1.34.0
       '@typescript/native-preview': 7.0.0-dev.20260707.2
       cross-spawn: 7.0.6
-      hono: 4.13.2
+      hono: 4.13.14
       jose: 6.2.10
       semver: 7.8.5
       typescript: 6.0.3
@@ -7801,7 +7801,7 @@ snapshots:
     dependencies:
       '@types/hast': 3.0.5
 
-  hono@4.13.2: {}
+  hono@4.13.14: {}
 
   html-encoding-sniffer@6.0.0(@noble/hashes@2.3.0):
     dependencies:
