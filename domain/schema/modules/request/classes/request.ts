@@ -21,5 +21,5 @@ export const Request = nodeClass({
     submission: stateProperty(requestSubmission),
     collaborationUrl: property(collaborationUrlValue, { required: false }),
   },
-  policies: { read: () => ManageRequest },
+  policies: { read: () => ManageRequest, traverse: () => ManageRequest },
 })
