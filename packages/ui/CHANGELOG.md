@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0-beta.43](https://github.com/astrale-os/ui/compare/v1.0.0-beta.42...v1.0.0-beta.43) (2026-11-03)
+
+
+### Bug Fixes
+
+* **ui:** keep the inline Manrope font export out of the component catalog ([#228](https://github.com/astrale-os/ui/issues/228)) ([5a0f88f](https://github.com/astrale-os/ui/commit/5a0f88fbc18c8decab55114f348b76326f49ced3))
+
 ## [1.0.0-beta.42](https://github.com/astrale-os/ui/compare/v1.0.0-beta.41...v1.0.0-beta.42) (2026-11-03)
 
 
