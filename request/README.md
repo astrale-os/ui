@@ -55,3 +55,9 @@ maintainer runs the exact-revision full gate and four browser shards. Their rece
 for identical package, registry, catalog, and tree bytes; release publication does not reinstall a
 browser or repeat exhaustive traversal. Latency target and hard values are reporting thresholds,
 never cancellation timers.
+
+The `UI merge-ready qualification` commit status reports that gate on the pull request: pending
+while it runs, then success or failure. A release pull request gets the status only from its
+qualification, so a ruleset requiring it on `main` keeps the release unmergeable until its receipt
+exists; every other pull request gets success on each push and is held only while a qualification
+it asked for runs.

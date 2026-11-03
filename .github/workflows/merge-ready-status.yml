@@ -1,0 +1,36 @@
+name: UI Merge-ready Status
+
+# `UI merge-ready qualification` is the status a ruleset requires on `main`. Release pull requests
+# get it only from `merge-ready.yml`: pending while it runs, then success or failure, so a release
+# cannot merge before its receipt exists. Every other pull request gets it here, so the requirement
+# does not block it; applying `ui:merge-ready` still sets it pending until that qualification ends.
+#
+# `pull_request_target` lets Dependabot and fork pull requests post the status too. The job checks
+# out nothing and runs no pull request code: it only reads the event's head SHA and branch name.
+
+on:
+  pull_request_target:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+
+jobs:
+  status:
+    if: ${{ !startsWith(github.event.pull_request.head.ref, 'release-please--branches--main') }}
+    runs-on: ubuntu-latest
+    permissions:
+      statuses: write
+    steps:
+      - name: Mark a non-release revision as not requiring qualification
+        env:
+          GH_TOKEN: ${{ github.token }}
+          INPUT_REVISION: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          [[ "$INPUT_REVISION" =~ ^[0-9a-f]{40}$ ]]
+          gh api --method POST "repos/$GITHUB_REPOSITORY/statuses/$INPUT_REVISION" \
+            -f state=success \
+            -f context='UI merge-ready qualification' \
+            -f description='Not a release: qualification optional (apply ui:merge-ready to run it)'

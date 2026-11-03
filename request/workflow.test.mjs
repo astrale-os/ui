@@ -73,6 +73,9 @@ const parsedMergeReadyWorkflow = parse(mergeReadyWorkflow)
 const parsedReleaseWorkflow = parse(releaseWorkflow)
 const parsedRebindWorkflow = parse(rebindWorkflow)
 const parsedPublishWorkflow = parse(publishWorkflow)
+const parsedMergeReadyStatusWorkflow = parse(
+  await readFile(new URL('../.github/workflows/merge-ready-status.yml', import.meta.url), 'utf8'),
+)
 
 function secretReferences(value, path = [], found = []) {
   if (typeof value === 'string') {
@@ -462,6 +465,56 @@ test('dispatches release qualification through an exact admitted merge-ready rev
   assert.match(dispatch.run, /-f expected_revision="\$revision"/u)
   assert.match(dispatch.run, /run_id="\$\{run_url##\*\/\}"/u)
   assert.doesNotMatch(dispatch.run, /labels\/ui%3Amerge-ready/u)
+})
+
+test('holds the required merge-ready status pending until the exact revision is qualified', () => {
+  const context = /-f context='UI merge-ready qualification'/u
+  const gate = parsedMergeReadyWorkflow.jobs.gate
+  const mark = gate.steps.find((step) => step.name === 'Mark the revision as under qualification')
+  assert.equal(gate.permissions.statuses, 'write')
+  assert.ok(
+    gate.steps.indexOf(mark) >
+      gate.steps.findIndex(
+        (step) => step.name === 'Admit a maintainer-owned exact proposal revision',
+      ),
+  )
+  assert.equal(mark.env.INPUT_REVISION, '${{ steps.admit.outputs.revision }}')
+  assert.match(mark.run, /statuses\/\$INPUT_REVISION/u)
+  assert.match(mark.run, /-f state=pending/u)
+  assert.match(mark.run, context)
+
+  const report = parsedMergeReadyWorkflow.jobs.report
+  const settle = report.steps.find(
+    (step) => step.name === "Settle the revision's merge-ready status",
+  )
+  assert.deepEqual(report.needs, ['gate', 'qualification'])
+  assert.equal(report.if, "always() && needs.gate.result == 'success'")
+  assert.deepEqual(report.permissions, { statuses: 'write' })
+  assert.equal(settle.env.INPUT_REVISION, '${{ needs.gate.outputs.revision }}')
+  assert.equal(settle.env.INPUT_RESULT, '${{ needs.qualification.result }}')
+  assert.match(settle.run, /if \[ "\$INPUT_RESULT" = success \]; then\s+state=success/u)
+  assert.match(settle.run, /state=failure/u)
+  assert.match(settle.run, context)
+
+  // Non-release pull requests get the status at once; release pull requests only from qualification.
+  const status = parsedMergeReadyStatusWorkflow.jobs.status
+  assert.deepEqual(parsedMergeReadyStatusWorkflow.on.pull_request_target.types, [
+    'opened',
+    'synchronize',
+    'reopened',
+  ])
+  assert.equal(
+    status.if,
+    "${{ !startsWith(github.event.pull_request.head.ref, 'release-please--branches--main') }}",
+  )
+  assert.deepEqual(status.permissions, { statuses: 'write' })
+  assert.equal(
+    status.steps.some((step) => step.uses),
+    false,
+    'the pull_request_target job must not check out or run pull request code',
+  )
+  assert.match(status.steps[0].run, /-f state=success/u)
+  assert.match(status.steps[0].run, context)
 })
 
 test('rebinds exact receipts from pull-request and admitted dispatch qualification', () => {

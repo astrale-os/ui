@@ -29,6 +29,7 @@ jobs:
     permissions:
       contents: read
       pull-requests: read
+      statuses: write
     outputs:
       revision: ${{ steps.admit.outputs.revision }}
       started_ms: ${{ steps.admit.outputs.started_ms }}
@@ -63,6 +64,20 @@ jobs:
             case "$INPUT_HEAD_REF" in release-please--branches--main*) ;; *) exit 1 ;; esac
           fi
           echo "revision=$INPUT_REVISION" >> "$GITHUB_OUTPUT"
+      # The pull request shows this status (and a ruleset can require it), so nobody merges a
+      # revision whose qualification is still running: a release merged before its receipt exists
+      # cannot publish.
+      - name: Mark the revision as under qualification
+        env:
+          GH_TOKEN: ${{ github.token }}
+          INPUT_REVISION: ${{ steps.admit.outputs.revision }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          gh api --method POST "repos/$GITHUB_REPOSITORY/statuses/$INPUT_REVISION" \
+            -f state=pending \
+            -f context='UI merge-ready qualification' \
+            -f description='Qualification running: do not merge yet' \
+            -f target_url="$RUN_URL"
 
   package:
     needs: gate
@@ -191,3 +206,32 @@ jobs:
           path: merge-ready-latency.json
           if-no-files-found: warn
           retention-days: 90
+
+  report:
+    name: Report merge-ready qualification
+    needs: [gate, qualification]
+    if: always() && needs.gate.result == 'success'
+    runs-on: ubuntu-latest
+    permissions:
+      statuses: write
+    steps:
+      - name: Settle the revision's merge-ready status
+        env:
+          GH_TOKEN: ${{ github.token }}
+          INPUT_REVISION: ${{ needs.gate.outputs.revision }}
+          INPUT_RESULT: ${{ needs.qualification.result }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          if [ "$INPUT_RESULT" = success ]; then
+            state=success
+            description='Qualified: the receipt for this revision exists'
+          else
+            state=failure
+            description="Qualification ${INPUT_RESULT:-incomplete}: fix it, then re-apply ui:merge-ready"
+          fi
+          gh api --method POST "repos/$GITHUB_REPOSITORY/statuses/$INPUT_REVISION" \
+            -f state="$state" \
+            -f context='UI merge-ready qualification' \
+            -f description="$description" \
+            -f target_url="$RUN_URL"
