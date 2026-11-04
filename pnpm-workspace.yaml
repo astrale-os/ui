@@ -13,10 +13,6 @@ minimumReleaseAgeStrict: true
 minimumReleaseAgeIgnoreMissingTime: false
 trustLockfile: false
 minimumReleaseAgeExclude:
-  # Vitest 5.0.1 fixes broken public type declarations in 5.0.0.
-  - 'vitest@5.0.1'
-  - '@vitest/mocker@5.0.1'
-  - '@vitest/spy@5.0.1'
   # source-map-js 1.2.2 (2026-09-30) patches GHSA-68fv-2mgg-jv7q (high), reached via postcss, Tailwind, and jsdom.
   - 'source-map-js@1.2.2'
   - '@astrale-os/*'
