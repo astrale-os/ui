@@ -5,6 +5,8 @@ import test from 'node:test'
 import { parse as parseYaml } from 'yaml'
 
 const configSha = '8e2e2abd0320be0c2f64033916519ab3b66c7dd7'
+// publish/packages moves ahead alone for its 15-minute registry visibility wait (config#67).
+const publishPackagesSha = 'bdc68eca669ad2905920492249985f251389a946'
 
 test('keeps CI and release qualification on the supported contract', async () => {
   const [ci, release, publish, mergeReady] = await Promise.all(
@@ -123,7 +125,7 @@ test('publishes only the runtime while the control-plane Domain stays private', 
       'actions/setup-node@820762786026740c76f36085b0efc47a31fe5020',
       'actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a',
       `astrale-os/config/.github/actions/publish/mirror-npm-to-github@${configSha}`,
-      `astrale-os/config/.github/actions/publish/packages@${configSha}`,
+      `astrale-os/config/.github/actions/publish/packages@${publishPackagesSha}`,
       `astrale-os/config/.github/actions/release@${configSha}`,
       `astrale-os/config/.github/actions/setup@${configSha}`,
       'oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6',
@@ -195,7 +197,7 @@ test('publishes only the runtime while the control-plane Domain stays private', 
       {
         file: 'publish.yml',
         job: 'publish',
-        uses: `astrale-os/config/.github/actions/publish/packages@${configSha}`,
+        uses: `astrale-os/config/.github/actions/publish/packages@${publishPackagesSha}`,
         dirs: 'packages/ui',
         repository: undefined,
         mirrorPublicPackages: 'false',
