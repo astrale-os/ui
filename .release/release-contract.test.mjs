@@ -24,24 +24,14 @@ test('keeps CI and release qualification on the supported contract', async () =>
   assert.match(ci, /pnpm audit --prod --audit-level high/u)
   assert.match(ci, /pnpm --dir domain install --frozen-lockfile/u)
   assert.match(ci, /pnpm --dir domain package/u)
-  assert.match(
-    ci,
-    /security:\s*[\s\S]*?permissions:\s*\n\s+actions:\s*read\s*\n\s+contents:\s*read\s*\n\s+security-events:\s*write/u,
-  )
+  assert.match(ci, /security:\s*[\s\S]*?permissions:\s*\n\s+contents:\s*read\s*\n\s+steps:/u)
   assert.match(
     ci,
     /dependency-review:\s*\n\s+needs: plan\s*\n\s+if: github\.event_name == 'pull_request' && github\.event\.repository\.private == false/u,
   )
   assert.match(ci, /actions\/dependency-review-action@[0-9a-f]{40}/u)
-  assert.match(ci, /github\/codeql-action\/(?:init|analyze)@[0-9a-f]{40}/u)
-  assert.equal(
-    [
-      ...ci.matchAll(
-        /uses: github\/codeql-action\/(?:init|analyze)@[0-9a-f]{40}[^\n]*\n\s+if: github\.event\.repository\.private == false/gu,
-      ),
-    ].length,
-    2,
-  )
+  // CodeQL belongs to GitHub code scanning default setup; an advanced upload from CI is rejected.
+  assert.doesNotMatch(ci, /github\/codeql-action/u)
   assert.match(release, /repository: astrale-os\/cli/u)
   assert.match(release, /ref: main/u)
   // The pnpm version has one source: the exact `packageManager` pin, which pnpm/action-setup reads.
@@ -136,8 +126,6 @@ test('publishes only the runtime while the control-plane Domain stays private', 
       `astrale-os/config/.github/actions/publish/packages@${configSha}`,
       `astrale-os/config/.github/actions/release@${configSha}`,
       `astrale-os/config/.github/actions/setup@${configSha}`,
-      'github/codeql-action/analyze@db488ddef3bf6cb639b32c2e9a7c0a7ea8271d28',
-      'github/codeql-action/init@db488ddef3bf6cb639b32c2e9a7c0a7ea8271d28',
       'oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6',
       'pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86',
     ],
