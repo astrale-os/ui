@@ -76,6 +76,9 @@ const parsedPublishWorkflow = parse(publishWorkflow)
 const parsedMergeReadyStatusWorkflow = parse(
   await readFile(new URL('../.github/workflows/merge-ready-status.yml', import.meta.url), 'utf8'),
 )
+const parsedCiWorkflow = parse(
+  await readFile(new URL('../.github/workflows/ci.yml', import.meta.url), 'utf8'),
+)
 
 function secretReferences(value, path = [], found = []) {
   if (typeof value === 'string') {
@@ -515,6 +518,37 @@ test('holds the required merge-ready status pending until the exact revision is 
   )
   assert.match(status.steps[0].run, /-f state=success/u)
   assert.match(status.steps[0].run, context)
+})
+
+test('reports one required CI result that release qualification stands in for', () => {
+  // CI: one aggregate check over every other job, so the ruleset names a single stable check.
+  const { result, ...jobs } = parsedCiWorkflow.jobs
+  assert.equal(result.name, 'CI result')
+  assert.equal(result.if, 'always()')
+  assert.deepEqual(result.needs.toSorted(), Object.keys(jobs).toSorted())
+  const verdict = result.steps.at(-1)
+  assert.equal(verdict.env.NEEDS, '${{ toJSON(needs) }}')
+  assert.match(verdict.run, /all\(\. == "success" or \. == "skipped"\)/u)
+
+  // Release pull requests: CI waits for approval there, so qualification posts the same context.
+  const admit = parsedMergeReadyWorkflow.jobs.gate.steps.find((step) => step.id === 'admit')
+  assert.equal(
+    parsedMergeReadyWorkflow.jobs.gate.outputs.release,
+    '${{ steps.admit.outputs.release }}',
+  )
+  assert.match(admit.run, /release=false/u)
+  assert.match(
+    admit.run,
+    /'github-actions\[bot\]:release-please--branches--main'\* \| 'release-please\[bot\]:release-please--branches--main'\*\) release=true/u,
+  )
+  const standIn = parsedMergeReadyWorkflow.jobs.report.steps.find(
+    (step) => step.name === 'Stand in for CI on a release revision',
+  )
+  assert.equal(standIn.if, "needs.gate.outputs.release == 'true'")
+  assert.equal(standIn.env.INPUT_REVISION, '${{ needs.gate.outputs.revision }}')
+  assert.equal(standIn.env.INPUT_RESULT, '${{ needs.qualification.result }}')
+  assert.match(standIn.run, /if \[ "\$INPUT_RESULT" = success \]; then\s+state=success/u)
+  assert.match(standIn.run, /-f context='CI result'/u)
 })
 
 test('rebinds exact receipts from pull-request and admitted dispatch qualification', () => {

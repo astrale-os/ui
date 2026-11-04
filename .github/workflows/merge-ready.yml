@@ -33,6 +33,7 @@ jobs:
     outputs:
       revision: ${{ steps.admit.outputs.revision }}
       started_ms: ${{ steps.admit.outputs.started_ms }}
+      release: ${{ steps.admit.outputs.release }}
     steps:
       - name: Admit a maintainer-owned exact proposal revision
         id: admit
@@ -63,7 +64,12 @@ jobs:
             case "$INPUT_AUTHOR" in 'github-actions[bot]'|'release-please[bot]') ;; *) exit 1 ;; esac
             case "$INPUT_HEAD_REF" in release-please--branches--main*) ;; *) exit 1 ;; esac
           fi
+          release=false
+          case "$INPUT_AUTHOR:$INPUT_HEAD_REF" in
+            'github-actions[bot]:release-please--branches--main'* | 'release-please[bot]:release-please--branches--main'*) release=true ;;
+          esac
           echo "revision=$INPUT_REVISION" >> "$GITHUB_OUTPUT"
+          echo "release=$release" >> "$GITHUB_OUTPUT"
       # The pull request shows this status (and a ruleset can require it), so nobody merges a
       # revision whose qualification is still running: a release merged before its receipt exists
       # cannot publish.
@@ -233,5 +239,29 @@ jobs:
           gh api --method POST "repos/$GITHUB_REPOSITORY/statuses/$INPUT_REVISION" \
             -f state="$state" \
             -f context='UI merge-ready qualification' \
+            -f description="$description" \
+            -f target_url="$RUN_URL"
+      # CI waits for approval on release-please pull requests, so it never reports `CI result` there.
+      # Their qualification already runs everything CI does on a release diff, and more, so its
+      # outcome stands in for that required check. Other pull requests get it from CI alone.
+      - name: Stand in for CI on a release revision
+        if: needs.gate.outputs.release == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          INPUT_REVISION: ${{ needs.gate.outputs.revision }}
+          INPUT_RESULT: ${{ needs.qualification.result }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -euo pipefail
+          if [ "$INPUT_RESULT" = success ]; then
+            state=success
+            description='Release qualified: its qualification covers CI'
+          else
+            state=failure
+            description="Release qualification ${INPUT_RESULT:-incomplete}"
+          fi
+          gh api --method POST "repos/$GITHUB_REPOSITORY/statuses/$INPUT_REVISION" \
+            -f state="$state" \
+            -f context='CI result' \
             -f description="$description" \
             -f target_url="$RUN_URL"
