@@ -61,3 +61,8 @@ while it runs, then success or failure. A release pull request gets the status o
 qualification, so a ruleset requiring it on `main` keeps the release unmergeable until its receipt
 exists; every other pull request gets success on each push and is held only while a qualification
 it asked for runs.
+
+`CI result` is the one CI check that ruleset also requires: the last CI job, which fails when any
+other job fails or is cancelled and passes over jobs the plan skipped. CI waits for approval on
+release pull requests, so their qualification posts `CI result` as a commit status instead; it
+covers everything CI checks on a release diff.

@@ -186,3 +186,29 @@ jobs:
         env:
           PR_TITLE: ${{ github.event.pull_request.title }}
         run: printf '%s\n' "$PR_TITLE" | pnpm commitlint
+
+  # The one CI check the `main` ruleset requires, so its name stays stable while the jobs above
+  # change. A job the plan skipped passes; any failure or cancellation fails it. CI waits for
+  # approval on release-please pull requests, so merge-ready.yml posts this same `CI result` as a
+  # commit status once their full qualification has run.
+  result:
+    name: CI result
+    needs:
+      - plan
+      - contracts
+      - package-and-registry
+      - domain
+      - security
+      - dependency-review
+      - playground
+      - commitlint
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require every needed job to succeed or be skipped
+        env:
+          NEEDS: ${{ toJSON(needs) }}
+        run: |
+          set -euo pipefail
+          jq -r 'to_entries[] | "\(.key): \(.value.result)"' <<< "$NEEDS"
+          test "$(jq '[.[].result] | all(. == "success" or . == "skipped")' <<< "$NEEDS")" = true
