@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0-beta.44](https://github.com/astrale-os/ui/compare/v1.0.0-beta.43...v1.0.0-beta.44) (2026-11-04)
+
+
+### Bug Fixes
+
+* **ui:** hold release pull requests unmergeable until their qualification passes ([#230](https://github.com/astrale-os/ui/issues/230)) ([80d0c07](https://github.com/astrale-os/ui/commit/80d0c07fc91cf4555b69b102b2f984b645ea0f24))
+
 ## [1.0.0-beta.43](https://github.com/astrale-os/ui/compare/v1.0.0-beta.42...v1.0.0-beta.43) (2026-11-03)
 
 
