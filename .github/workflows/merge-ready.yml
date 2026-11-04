@@ -93,7 +93,7 @@ jobs:
         with:
           ref: ${{ needs.gate.outputs.revision }}
           persist-credentials: 'false'
-      - uses: astrale-os/config/.github/actions/setup@8e2e2abd0320be0c2f64033916519ab3b66c7dd7
+      - uses: astrale-os/config/.github/actions/setup@bdc68eca669ad2905920492249985f251389a946
         with:
           node-version: 24
           frozen-lockfile: 'true'
@@ -134,7 +134,7 @@ jobs:
         with:
           ref: ${{ needs.gate.outputs.revision }}
           persist-credentials: 'false'
-      - uses: astrale-os/config/.github/actions/setup@8e2e2abd0320be0c2f64033916519ab3b66c7dd7
+      - uses: astrale-os/config/.github/actions/setup@bdc68eca669ad2905920492249985f251389a946
         with:
           node-version: 24
           frozen-lockfile: 'true'

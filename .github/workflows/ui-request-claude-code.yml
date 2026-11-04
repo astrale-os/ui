@@ -180,7 +180,7 @@ jobs:
             echo 'candidate_resumed=false' >> "$GITHUB_OUTPUT"
           fi
           echo 'restored=true' >> "$GITHUB_OUTPUT"
-      - uses: astrale-os/config/.github/actions/setup@8e2e2abd0320be0c2f64033916519ab3b66c7dd7
+      - uses: astrale-os/config/.github/actions/setup@bdc68eca669ad2905920492249985f251389a946
         with:
           node-version: 24
           frozen-lockfile: 'true'
@@ -453,7 +453,7 @@ jobs:
           cp playground/scripts/capture-request-previews.mjs \
             "$base/playground/scripts/capture-request-previews.mjs"
           cp scripts/plan-ci.mjs "$base/scripts/plan-ci.mjs"
-      - uses: astrale-os/config/.github/actions/setup@8e2e2abd0320be0c2f64033916519ab3b66c7dd7
+      - uses: astrale-os/config/.github/actions/setup@bdc68eca669ad2905920492249985f251389a946
         with:
           node-version: 24
           frozen-lockfile: 'true'

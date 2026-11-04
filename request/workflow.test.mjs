@@ -1007,7 +1007,7 @@ pnpm registry:build
   assert.equal(workspacePolicy.allowBuilds['@anthropic-ai/claude-code'], false)
   assert.equal(
     propose.steps[setupIndex].uses,
-    'astrale-os/config/.github/actions/setup@8e2e2abd0320be0c2f64033916519ab3b66c7dd7',
+    'astrale-os/config/.github/actions/setup@bdc68eca669ad2905920492249985f251389a946',
   )
   assert.equal(
     propose.steps[discoveryIndex].run,
