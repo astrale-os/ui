@@ -122,7 +122,6 @@ test('publishes only the runtime while the control-plane Domain stays private', 
       'actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c',
       'actions/setup-node@820762786026740c76f36085b0efc47a31fe5020',
       'actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a',
-      `astrale-os/config/.github/actions/publish/mirror-npm-to-github@${configSha}`,
       `astrale-os/config/.github/actions/publish/packages@${configSha}`,
       `astrale-os/config/.github/actions/release@${configSha}`,
       `astrale-os/config/.github/actions/setup@${configSha}`,
@@ -149,13 +148,6 @@ test('publishes only the runtime while the control-plane Domain stays private', 
         contents: 'read',
         idToken: 'write',
         packages: undefined,
-      },
-      {
-        file: 'publish.yml',
-        job: 'mirror',
-        contents: 'read',
-        idToken: undefined,
-        packages: 'write',
       },
       {
         file: 'release.yml',
@@ -200,16 +192,10 @@ test('publishes only the runtime while the control-plane Domain stays private', 
         repository: undefined,
         mirrorPublicPackages: 'false',
       },
-      {
-        file: 'publish.yml',
-        job: 'mirror',
-        uses: `astrale-os/config/.github/actions/publish/mirror-npm-to-github@${configSha}`,
-        dirs: 'packages/ui',
-        repository: 'astrale-os/ui',
-        mirrorPublicPackages: undefined,
-      },
     ],
   )
+  // npm is the only registry: no job copies the release to GitHub Packages.
+  assert.doesNotMatch(workflowCorpus, /mirror-npm-to-github|npm\.pkg\.github\.com/u)
   for (const { file, job, step } of workflowSteps) {
     if (typeof step.run !== 'string') continue
     assert.doesNotMatch(
@@ -320,12 +306,8 @@ test('publishes only the runtime while the control-plane Domain stays private', 
     contents: 'read',
     'id-token': 'write',
   })
-  assert.deepEqual(publishDocument.jobs.mirror.permissions, {
-    contents: 'read',
-    packages: 'write',
-  })
+  assert.deepEqual(Object.keys(publishDocument.jobs), ['publish'])
   const publishSteps = publishDocument.jobs.publish.steps
-  const mirrorSteps = publishDocument.jobs.mirror.steps
   const publishPackageStep = publishSteps.find((step) => step.uses?.includes('/publish/packages@'))
   const publicQualificationStep = publishSteps.find(
     (step) => step.name === 'Qualify exact public npm publication',
@@ -371,23 +353,6 @@ test "$(gh api "repos/\${GITHUB_REPOSITORY}/releases/tags/v\${EXPECTED_VERSION}"
   assert.deepEqual(publicationArtifactStep.with, {
     name: 'public-npm-publication',
     path: 'artifacts/publication/**',
-  })
-  assert.equal(publishDocument.jobs.mirror.needs, 'publish')
-  assert.deepEqual(
-    mirrorSteps.map((step) => step.uses),
-    [
-      'actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1',
-      `astrale-os/config/.github/actions/publish/mirror-npm-to-github@${configSha}`,
-    ],
-  )
-  assert.deepEqual(mirrorSteps[0].with, {
-    ref: '${{ inputs.expected-sha }}',
-    'persist-credentials': 'false',
-  })
-  assert.deepEqual(mirrorSteps[1].with, {
-    dirs: 'packages/ui',
-    'github-token': '${{ github.token }}',
-    repository: 'astrale-os/ui',
   })
   assert.match(manifest.version, /^\d+\.\d+\.\d+-beta\.\d+$/u)
   assert.equal(rootManifest.version, manifest.version)
