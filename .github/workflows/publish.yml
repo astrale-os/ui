@@ -118,20 +118,3 @@ jobs:
         with:
           name: public-npm-publication
           path: artifacts/publication/**
-
-  mirror:
-    needs: publish
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-        with:
-          ref: ${{ inputs.expected-sha }}
-          persist-credentials: 'false'
-      - uses: astrale-os/config/.github/actions/publish/mirror-npm-to-github@bdc68eca669ad2905920492249985f251389a946
-        with:
-          dirs: packages/ui
-          github-token: ${{ github.token }}
-          repository: astrale-os/ui
