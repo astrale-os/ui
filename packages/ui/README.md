@@ -117,10 +117,15 @@ and MCP clients only trust icons from the server's origin.
 | ------------- | ------------------------------------------ | --------------------------- |
 | `tile-blue/`  | The white symbol on the brand blue         | Astrale applications        |
 | `tile-black/` | The white symbol on black                  | The back-office             |
+| `symbol-blue/`  | The blue symbol, transparent background  | Light surfaces of a client  |
+| `symbol-white/` | The white symbol, transparent background | Dark surfaces of a client   |
 
-Each folder holds `favicon.svg`, `favicon.ico` (16, 32, 48), `favicon-{16,32,48,96,192,512}.png`
+Each tile folder holds `favicon.svg`, `favicon.ico` (16, 32, 48), `favicon-{16,32,48,96,192,512}.png`
 and `apple-touch-icon.png` (180, full bleed); `tile-blue/` adds the macOS app icon, `icon.icns`
-and its 1024px `icon.png`.
+and its 1024px `icon.png`. The symbol folders hold `favicon.svg` and
+`favicon-{16,32,48,96,192,512}.png` only: they are for a client that draws the icon on its own
+surface and picks one per theme, such as MCP `icons` with `theme: 'light'` (blue) and
+`theme: 'dark'` (white).
 
 ```ts
 import favicon from '@astrale-os/ui/brand/icons/tile-blue/favicon-32.png'

@@ -80,6 +80,62 @@
     "tile-black/apple-touch-icon.png": {
       "input": "bf29e99c3e94ed581e71537eeaba2897325a4c22166bcdc52b57cfcc94d16361",
       "output": "4e7b38c59db6cfc023541133ad3cf8ab6b7fbec7333516fa0b89a97c3e41fa28"
+    },
+    "symbol-blue/favicon.svg": {
+      "input": "7202f71578a051b0cfd4788d4f1c0efefef23b6c853712398537768f5e2acab0",
+      "output": "b3f6fa4f21a5bf99d5ef8acb4662baa5305191e7e6d3ca1dc914dcc618fd7387"
+    },
+    "symbol-blue/favicon-16.png": {
+      "input": "7cab550c149d867c84ef3df3a131db1701419e82de0eda9d352c2dda2e50780e",
+      "output": "c5ff7625d9ef4f5c5c48e19897ef12e3b9c12528b6111d4fe257323fea143fa1"
+    },
+    "symbol-blue/favicon-32.png": {
+      "input": "4f0916de2e6faf893640716c606f29cf3d298d983d6783517f0758a1f97c4a76",
+      "output": "66bc855afddaa9e8f780992bf22bb4312be3078e4b412adafca8c5dbf045d2dc"
+    },
+    "symbol-blue/favicon-48.png": {
+      "input": "59daeb3960e0e0a8f7cc64d11fa1bcd6b25541bdb33210491589a0a0bbcdbf2d",
+      "output": "2ed6f1a948d8974f625f9b2567e5baa762b0513bdbcb603b0d0d264bf7c7fa3b"
+    },
+    "symbol-blue/favicon-96.png": {
+      "input": "cf8eae1b1c5f63a9cee53c6b571f475b6c61e57efefbd104f5500ee87f37046d",
+      "output": "6d8a8992d7e0f814b163012749652f151803dc974dcc1ed0e9d122932ae9c0d3"
+    },
+    "symbol-blue/favicon-192.png": {
+      "input": "a516cb3f396f383daf96040fefb697bbc858377152f2b1fce35ba54dfdeec5a5",
+      "output": "e068ae815003ed5d51b1b20afe111b744d2eb3d65e5238aec8602655a0ad3d22"
+    },
+    "symbol-blue/favicon-512.png": {
+      "input": "e38bb914d9d9f68e49d8909a35736d4cdf6f11ce296ef473734455074d48d659",
+      "output": "f2f4c5d9875b1f9d8f1039f2b7b564ee20e5d8fd21dc20292fcb640b0fe69174"
+    },
+    "symbol-white/favicon.svg": {
+      "input": "a0be500df4c713e0e0cc7600464186302092cfd6461aef207246d1f950e72268",
+      "output": "654138dd880e7d5462e30622078da95c3d6bb02c44d694d30dbf6c00c65691da"
+    },
+    "symbol-white/favicon-16.png": {
+      "input": "f286ac88a7b2f42724212eedccc66ce88acbc2f95f0e92b5220c3c2e49c01de7",
+      "output": "ac9d146c70965fbf756b4f2032741cc294733d275125e7b36196e9dd509712e2"
+    },
+    "symbol-white/favicon-32.png": {
+      "input": "6c1475d62bf64ce8c2c4ccbfc95dab43e6644eef6a229d18a14039e9e2c57624",
+      "output": "a66b5450b7f22b1940c72a8d1e7399e8c650fb96a868ea86971160fe740f534f"
+    },
+    "symbol-white/favicon-48.png": {
+      "input": "8e965febb9917e2603e52d2695d0cdfed316b02d5fd31f57937048d797d93b93",
+      "output": "fa6cb3ea04f4815c9ba68b75d03d6d82adc0ab2bfe4503d48c6564131d303e31"
+    },
+    "symbol-white/favicon-96.png": {
+      "input": "2f680edea21a1a394406bacb3d3d4cf353904e827cb732f122689b661d8a658d",
+      "output": "ea02f526cb54e8805fa1ed375795a43061b39e3d73ef2bfc07830448a679fc16"
+    },
+    "symbol-white/favicon-192.png": {
+      "input": "9c3daed6914751684d3bc30e5846422eff2a4aec20abb1fa2fa613a77b7bdcc4",
+      "output": "cd7351a2c6f7d5c32946f1adbedeb293eae3ec896df9b9964d96ac7d58abe70d"
+    },
+    "symbol-white/favicon-512.png": {
+      "input": "654a342c049bd4ba5f14c8a9202e9e0ac9b0815a51795e9f95ea1d66b0e1796e",
+      "output": "39cc557b5db5feb78228363ba819a73c450946667b25e5858763015f5d43ca53"
     }
   }
 }

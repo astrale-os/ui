@@ -69,6 +69,18 @@ test('a logo never vanishes into its background', () => {
   )
 })
 
+test('a symbol icon has no tile, so the client surface shows through', () => {
+  const svg = tileSvg({
+    size: 64,
+    color: 'white',
+    background: 'transparent',
+    radius: 0,
+    glyph: 0.875,
+  })
+  assert.doesNotMatch(svg, /<rect/u)
+  assert.match(svg, /^<svg [^>]*viewBox="0 0 64 64"[^>]*><path fill="#FFFFFF"/u)
+})
+
 test('ICO and ICNS files hold the PNG images they declare', () => {
   const svg = tileSvg({ size: 64, color: 'white', background: 'blue', radius: 0.2, glyph: 0.6 })
   const images = [16, 32].map((side) => png(svg, side))
