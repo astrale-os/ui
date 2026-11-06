@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0-beta.45](https://github.com/astrale-os/ui/compare/v1.0.0-beta.44...v1.0.0-beta.45) (2026-11-06)
+
+
+### Features
+
+* **ui:** publish transparent symbol icons for light and dark themes ([#240](https://github.com/astrale-os/ui/issues/240)) ([f5f4529](https://github.com/astrale-os/ui/commit/f5f4529f8446226d827a3be0a462f0821158420d))
+
 ## [1.0.0-beta.44](https://github.com/astrale-os/ui/compare/v1.0.0-beta.43...v1.0.0-beta.44) (2026-11-04)
 
 
