@@ -231,7 +231,7 @@ ${group('stacked', 'Stacked')}
 ${group('symbol', 'Symbol')}
 ${group('wordmark', 'Name')}
 <section><h2>Social profiles</h2><p>${socialLinks}</p></section>
-<section><h2>App icons</h2><p><strong>Blue tile</strong> (Astrale apps): ${iconLinks('tile-blue')}</p><p><strong>Black tile</strong> (back-office): ${iconLinks('tile-black')}</p></section>
+<section><h2>App icons</h2><p><strong>Blue tile</strong> (Astrale apps): ${iconLinks('tile-blue')}</p><p><strong>Black tile</strong> (back-office): ${iconLinks('tile-black')}</p><p><strong>Blue symbol</strong> (light themes, transparent): ${iconLinks('symbol-blue')}</p><p><strong>White symbol</strong> (dark themes, transparent): ${iconLinks('symbol-white')}</p></section>
 </main>
 <footer>The Astrale logo and name are trademarks of Astrale.</footer>
 </body>

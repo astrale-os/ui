@@ -7,6 +7,9 @@ import { ICNS_TYPES, icns, ico, png } from './raster.mjs'
  *
  * - `tile-blue/`: the white symbol on the brand blue, the icon of the Astrale apps.
  * - `tile-black/`: the white symbol on black, the icon of the back-office.
+ * - `symbol-blue/`, `symbol-white/`: the bare symbol on a transparent background, for a client that
+ *   draws the icon on its own surface and picks it by theme (MCP `icons[].theme`): blue on light
+ *   surfaces, white on dark ones.
  */
 
 /** Favicons and PWA icons: a rounded tile, legible on any tab or home screen. */
@@ -17,6 +20,14 @@ const TOUCH = { radius: 0, glyph: 0.6 }
 const MACOS = { radius: 0.225, glyph: 0.6, inset: 100 }
 
 const FAVICON_SIDES = [16, 32, 48, 96, 192, 512]
+
+/** The bare symbol: no tile, so it fills most of its square, with a margin for antialiasing. */
+const SYMBOL = { radius: 0, glyph: 0.875 }
+
+const symbols = [
+  { folder: 'symbol-blue', color: 'blue' },
+  { folder: 'symbol-white', color: 'white' },
+]
 
 const tiles = [
   { folder: 'tile-blue', color: 'white', background: 'blue', macos: true },
@@ -67,6 +78,21 @@ export function iconSet() {
       input: `${app}icns:${ICNS_TYPES.map(([type, side]) => `${type}=${side}`).join(',')}`,
       render: () => icns(new Map(sides.map((side) => [side, png(app, side)]))),
     })
+  }
+  for (const { folder, color } of symbols) {
+    const favicon = tileSvg({ size: 64, color, background: 'transparent', ...SYMBOL })
+    files.push({
+      path: `${folder}/favicon.svg`,
+      input: favicon,
+      render: () => Buffer.from(favicon),
+    })
+    for (const side of FAVICON_SIDES) {
+      files.push({
+        path: `${folder}/favicon-${side}.png`,
+        input: `${favicon}png:${side}`,
+        render: () => png(favicon, side),
+      })
+    }
   }
   return files
 }

@@ -124,7 +124,8 @@ export interface TileOptions {
   /** Side of the square canvas, in pixels. */
   readonly size: number
   readonly color: BrandColor
-  readonly background: BrandColor
+  /** The tile's color, or none: the bare symbol on a transparent square. */
+  readonly background: BrandColor | 'transparent'
   /** Corner radius over the tile side; 0 draws a square. */
   readonly radius: number
   /** Symbol width over the tile side. */
@@ -133,7 +134,7 @@ export interface TileOptions {
   readonly inset?: number
 }
 
-/** The symbol centred on a solid tile: an app icon or a favicon. */
+/** The symbol centred on a solid tile, or on a transparent square: an app icon or a favicon. */
 export function tileSvg({
   size,
   color,
@@ -148,10 +149,14 @@ export function tileSvg({
   const x = inset + (side - SYMBOL_BOUNDS.width * scale) / 2 - SYMBOL_BOUNDS.x * scale
   const y = inset + (side - SYMBOL_BOUNDS.height * scale) / 2 - SYMBOL_BOUNDS.y * scale
   const corner = radius > 0 ? ` rx="${round(side * radius)}"` : ''
+  const surface =
+    background === 'transparent'
+      ? ''
+      : `<rect x="${round(inset)}" y="${round(inset)}" width="${round(side)}" height="${round(side)}"${corner} fill="${brandColors[background]}"/>`
   return svgDocument(
     size,
     size,
-    `<rect x="${round(inset)}" y="${round(inset)}" width="${round(side)}" height="${round(side)}"${corner} fill="${brandColors[background]}"/>` +
+    surface +
       `<path fill="${brandColors[color]}" fill-rule="evenodd" transform="translate(${round(x)} ${round(y)}) scale(${round(scale, 4)})" d="${SYMBOL_PATH}"/>`,
   )
 }
