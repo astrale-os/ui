@@ -46,7 +46,7 @@ a zip of everything and an index page with the usage rules. Files live under `/v
 
 Cloudflare deploys the site (`brand/wrangler.jsonc`, Worker `astrale-brand`) through Workers
 Builds, connected to this repository: on each push to main that changes `brand/` or
-`packages/ui/src/brand/`, it runs `pnpm install --frozen-lockfile && pnpm brand:site`, then
-`npx wrangler deploy --config brand/wrangler.jsonc`. The build settings live on the Worker in the
+`packages/ui/src/brand/`, it runs `pnpm install --frozen-lockfile && pnpm brand:site` (build variable `NODE_VERSION=26`), then
+`npx --yes wrangler@4.123.0 deploy --config brand/wrangler.jsonc`. The build settings live on the Worker in the
 Cloudflare dashboard (Settings > Build), and no Cloudflare credential is stored in GitHub.
 `.github/workflows/brand.yml` only checks that the site still builds, on pull requests and on main.
