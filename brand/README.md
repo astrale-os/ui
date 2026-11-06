@@ -44,7 +44,9 @@ color and background (SVG, and PNG at the usual widths), social profile formats,
 a zip of everything and an index page with the usage rules. Files live under `/v1/`; bump
 `VERSION` in `site.mjs` whenever a published file changes, so links already shared keep working.
 
-`.github/workflows/brand.yml` deploys the site (`brand/wrangler.jsonc`, Worker `astrale-brand`)
-when the brand changes on main. Its Cloudflare token is the `CLOUDFLARE_API_TOKEN` secret of the
-`brand` environment, which only main can deploy to, and `CLOUDFLARE_ACCOUNT_ID` is a variable of
-the same environment. Without the token, the workflow builds the site and skips the deployment.
+Cloudflare deploys the site (`brand/wrangler.jsonc`, Worker `astrale-brand`) through Workers
+Builds, connected to this repository: on each push to main that changes `brand/` or
+`packages/ui/src/brand/`, it runs `pnpm install --frozen-lockfile && pnpm brand:site` (build variable `NODE_VERSION=26`), then
+`npx --yes wrangler@4.123.0 deploy --config brand/wrangler.jsonc`. The build settings live on the Worker in the
+Cloudflare dashboard (Settings > Build), and no Cloudflare credential is stored in GitHub.
+`.github/workflows/brand.yml` only checks that the site still builds, on pull requests and on main.
