@@ -69,7 +69,7 @@
     "setup:local": "AGENT_SETUP_TOOLS=check bash scripts/setup/setup.sh"
   },
   "devDependencies": {
-    "@anthropic-ai/claude-code": "2.1.223",
+    "@anthropic-ai/claude-code": "2.1.251",
     "@astrale/commitlint-config": "jsr:@astrale/commitlint-config@~2.0.5",
     "@astrale/typescript-config": "jsr:@astrale/typescript-config@~2.0.0",
     "@babel/parser": "8.0.4",
