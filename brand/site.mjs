@@ -222,7 +222,7 @@ code{font-size:.85em}
 <ul>
 <li>Colors: blue <code>${brandColors.blue}</code>, black <code>#000000</code>, white <code>#FFFFFF</code>. Use the blue or black logo on light backgrounds, the white logo on dark ones and on photos.</li>
 <li>Leave clear space around the logo of at least half the symbol's height. The smallest sizes are 16px high for the symbol and 80px wide for the horizontal logo.</li>
-<li>Do not stretch, recolor, outline or shadow the logo, and do not retype the name: it is outlined from Manrope Bold.</li>
+<li>Do not stretch, recolor, outline or shadow the logo, and do not retype the name: it is outlined from Lexend Bold.</li>
 <li>Prefer SVG; PNGs come in the widths below. Links under <code>/${BASE}/</code> never change.</li>
 <li>Applications draw the logo with <code>@astrale-os/ui/brand</code> and ship their icons from <code>@astrale-os/ui/brand/icons/</code>.</li>
 </ul>
