@@ -322,7 +322,7 @@ describe('runtime owners', () => {
     ])
     for (const image of images) expect(image).toHaveAttribute('fill', 'currentColor')
     const stacked = document.querySelector('[data-layout="stacked"]')
-    expect(stacked).toHaveAttribute('viewBox', '0 0 135.51 132.63')
+    expect(stacked).toHaveAttribute('viewBox', '0 0 145.46 133.49')
     expect(stacked?.querySelectorAll('path')).toHaveLength(2)
   })
 
