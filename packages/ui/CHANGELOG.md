@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0-beta.46](https://github.com/astrale-os/ui/compare/v1.0.0-beta.45...v1.0.0-beta.46) (2026-11-16)
+
+
+### Features
+
+* **ui:** set the Astrale wordmark in Lexend Bold ([#244](https://github.com/astrale-os/ui/issues/244)) ([01c4487](https://github.com/astrale-os/ui/commit/01c44875a5dee9ae28342a3b07328d686089ec18))
+
 ## [1.0.0-beta.45](https://github.com/astrale-os/ui/compare/v1.0.0-beta.44...v1.0.0-beta.45) (2026-11-06)
 
 
