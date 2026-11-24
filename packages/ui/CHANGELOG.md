@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.0.0-beta.49](https://github.com/astrale-os/ui/compare/v1.0.0-beta.48...v1.0.0-beta.49) (2026-11-24)
+
+
+### ⚠ BREAKING CHANGES
+
+* **ui:** make Spatial the default theme, with themeable label weight and spacing ([#254](https://github.com/astrale-os/ui/issues/254))
+
+### Features
+
+* **ui:** make Spatial the default theme, with themeable label weight and spacing ([#254](https://github.com/astrale-os/ui/issues/254)) ([a7e6fe6](https://github.com/astrale-os/ui/commit/a7e6fe6f916180b8c898ca86ce78009819c36c2c))
+* **ui:** ship Spatial, Console, and Desktop themes and the depth primitives they need ([#252](https://github.com/astrale-os/ui/issues/252)) ([8191022](https://github.com/astrale-os/ui/commit/819102271179ff61e9b744e3032208b2e1ccbdbd))
+
+
+### Bug Fixes
+
+* **ui:** install every registry item inside components/astrale ([#247](https://github.com/astrale-os/ui/issues/247)) ([4c111b5](https://github.com/astrale-os/ui/commit/4c111b5cffa98c519a2fa0ef3bc81a8d894c22c7))
+
 ## [1.0.0-beta.48](https://github.com/astrale-os/ui/compare/v1.0.0-beta.47...v1.0.0-beta.48) (2026-11-24)
 
 
