@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0-beta.53](https://github.com/astrale-os/ui/compare/v1.0.0-beta.52...v1.0.0-beta.53) (2026-11-24)
+
+
+### Bug Fixes
+
+* **ui:** name the identity finder's whole set Identities, not people ([#262](https://github.com/astrale-os/ui/issues/262)) ([e8e388f](https://github.com/astrale-os/ui/commit/e8e388ffdaf618b0446b18be73f31fb495fabad8))
+
 ## [1.0.0-beta.52](https://github.com/astrale-os/ui/compare/v1.0.0-beta.51...v1.0.0-beta.52) (2026-11-24)
 
 
