@@ -567,6 +567,35 @@ describe('Finder', () => {
     expect(rowNames()).toEqual(['Access', 'Intents', 'No name'])
   })
 
+  test('a new source drops the choices made in the last one, and their refusal', async () => {
+    const onConfirm = vi.fn(() => Promise.reject(new Error('refused')))
+    const props = { onConfirm, onCancel: vi.fn(), ruleDelay: 0, maximum: 2 }
+    const { rerender } = render(
+      <Finder source={createMemoryFinderSource(graph)} {...props}>
+        <Layout />
+      </Finder>,
+    )
+    const user = userEvent.setup()
+    await user.click(await within(domains()).findByRole('option', { name: 'Issues' }))
+    await user.click(await within(table()).findByRole('row', { name: /PRD-87/ }))
+    await user.click(screen.getByRole('button', { name: 'Select' }))
+    const status = screen.getByRole('status', { name: 'Confirmation' })
+    await waitFor(() => expect(status).toHaveTextContent('error'))
+
+    rerender(
+      <Finder source={createMemoryFinderSource(graph)} {...props}>
+        <Layout />
+      </Finder>,
+    )
+    expect(
+      within(screen.getByRole('list', { name: 'Chosen' })).queryAllByRole('listitem'),
+    ).toHaveLength(0)
+    expect(screen.getByRole('button', { name: 'Select' })).toBeDisabled()
+    expect(status).toHaveTextContent('idle')
+    await within(table()).findByRole('row', { name: /PRD-87/ })
+    expect(onConfirm).toHaveBeenCalledTimes(1)
+  })
+
   test('a failed column shows its error with Retry while the others keep working', async () => {
     const memory = createMemoryFinderSource(graph)
     let fail = true

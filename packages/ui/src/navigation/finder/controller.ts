@@ -19,6 +19,10 @@ import {
 export type FinderRegion = 'domains' | 'classes' | 'nodes' | 'filters'
 
 export interface FinderOptions {
+  /**
+   * The graph the Finder reads. Keep one object per graph (memoize it): another object is another
+   * graph, read again from nothing, with none of the Nodes chosen in the last one.
+   */
   readonly source: FinderSource
   /** Class keys the request accepts; each admits every Class that extends it. */
   readonly accepts?: readonly string[]
@@ -172,6 +176,7 @@ const TYPEAHEAD_MILLISECONDS = 700
 const LOAD_AHEAD_ROWS = 8
 const IDLE: FinderConfirmation = Object.freeze({ status: 'idle' })
 const NO_CLASSES: ReadonlyMap<string, FinderClass> = new Map()
+const NO_CHOICES: readonly FinderChoice[] = Object.freeze([])
 const CONFIRMING: FinderConfirmation = Object.freeze({ status: 'confirming' })
 
 function isPromiseLike(value: unknown): value is PromiseLike<void> {
@@ -697,7 +702,12 @@ export function useFinderController(options: FinderOptions): FinderController {
   }, [nodes.items, classIndex, source, remember])
 
   // ── Choice ───────────────────────────────────────────────────────────────────────────────────
-  const [chosen, setChosen] = React.useState<readonly FinderChoice[]>([])
+  // A Node chosen in one source is not a choice in another: a new source starts with none.
+  const [scopedChoices, setScopedChoices] = React.useState<{
+    readonly scope: number
+    readonly items: readonly FinderChoice[]
+  }>(() => ({ scope, items: NO_CHOICES }))
+  const chosen = scopedChoices.scope === scope ? scopedChoices.items : NO_CHOICES
   const maximumReached = chosen.length >= maximum
   const confirmRef = React.useRef(onConfirm)
   confirmRef.current = onConfirm
@@ -706,7 +716,9 @@ export function useFinderController(options: FinderOptions): FinderController {
 
   const chosenRef = React.useRef(chosen)
   chosenRef.current = chosen
-  const [confirmation, setConfirmation] = React.useState<FinderConfirmation>(IDLE)
+  const [answered, setConfirmation] = React.useState<FinderConfirmation>(IDLE)
+  // A refusal answered choices, never none: with no choice (another source) it no longer stands.
+  const confirmation = answered.status === 'error' && chosen.length === 0 ? IDLE : answered
   const confirming = React.useRef(false)
   const submitted = React.useRef(0)
   const submit = React.useCallback((choices: readonly FinderChoice[]) => {
@@ -742,9 +754,13 @@ export function useFinderController(options: FinderOptions): FinderController {
     (change: (current: readonly FinderChoice[]) => readonly FinderChoice[]) => {
       if (confirming.current) return
       setConfirmation((current) => (current.status === 'error' ? IDLE : current))
-      setChosen(change)
+      setScopedChoices((previous) => {
+        const current = previous.scope === scope ? previous.items : NO_CHOICES
+        const next = change(current)
+        return next === current && previous.scope === scope ? previous : { scope, items: next }
+      })
     },
-    [],
+    [scope],
   )
   const cancel = React.useCallback(() => cancelRef.current(), [])
 
