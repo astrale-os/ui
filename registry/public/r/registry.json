@@ -607,6 +607,51 @@
       }
     },
     {
+      "name": "block-finder-identity-browser",
+      "type": "registry:block",
+      "title": "Block · Finder · Identity Browser",
+      "description": "Astrale block/finder/identity-browser; the identity finder as a panel: a search over people, groups, Roles and every other kind of Identity, each kind in its own section, groups and Roles open to their members; over an injected source, each word replaceable for another language.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/finder/identity-browser.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/components/finder/identity-browser.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "block/finder/identity-browser",
+        "ownership": "consumer-source"
+      }
+    },
+    {
+      "name": "block-finder-identity-selector",
+      "type": "registry:block",
+      "title": "Block · Finder · Identity Selector",
+      "description": "Astrale block/finder/identity-selector; the identity finder in a dialog, for a host answering a request to select people, groups or Roles; the source and the answer are injected through props.",
+      "dependencies": [
+        "@astrale-os/ui@^0.3.0-beta.0"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/finder/identity-selector.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/components/finder/identity-selector.tsx"
+        },
+        {
+          "path": "registry/blocks/finder/identity-browser.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/components/finder/identity-browser.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "block/finder/identity-selector",
+        "ownership": "consumer-source"
+      }
+    },
+    {
       "name": "block-observability-status-monitor",
       "type": "registry:block",
       "title": "Block · Observability · Status Monitor",

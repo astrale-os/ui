@@ -166,6 +166,11 @@
       "import": "./dist/navigation/finder/index.js",
       "default": "./dist/navigation/finder/index.js"
     },
+    "./identity-finder": {
+      "types": "./dist/navigation/identity-finder/index.d.ts",
+      "import": "./dist/navigation/identity-finder/index.js",
+      "default": "./dist/navigation/identity-finder/index.js"
+    },
     "./hover-card": {
       "types": "./dist/overlay/hover-card/index.d.ts",
       "import": "./dist/overlay/hover-card/index.js",

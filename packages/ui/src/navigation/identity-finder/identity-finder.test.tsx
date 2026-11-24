@@ -1,0 +1,295 @@
+import { cleanup, render, screen, waitFor, within } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import { afterEach, describe, expect, test, vi } from 'vitest'
+
+import {
+  IdentityFinder,
+  IdentityFinderConfirm,
+  IdentityFinderInput,
+  IdentityFinderList,
+  IdentityFinderOption,
+  createMemoryIdentitySource,
+  useIdentityFinder,
+  type IdentityChoice,
+  type IdentityFinderOptions,
+  type IdentityFinderSource,
+  type IdentityMemoryDirectory,
+} from './index.js'
+
+afterEach(cleanup)
+
+const IDENTITY = 'kernel:class.Identity'
+const ROLE = 'kernel:class.Role'
+const USER = 'shell:class.User'
+const GROUP = 'shell:class.Group'
+const EMPLOYEE = 'people:class.Employee'
+
+const directory: IdentityMemoryDirectory = {
+  kinds: [
+    { key: IDENTITY, name: 'Identity' },
+    { key: USER, name: 'User', extends: [IDENTITY] },
+    { key: EMPLOYEE, name: 'Employee', extends: [USER] },
+    { key: GROUP, name: 'Group', extends: [IDENTITY] },
+    { key: ROLE, name: 'Role', extends: [IDENTITY] },
+  ],
+  identities: [
+    {
+      id: 'u-ada',
+      class: USER,
+      name: 'Ada Lovelace',
+      detail: 'ada@example.com',
+      keywords: ['ada@example.com'],
+    },
+    {
+      id: 'u-alan',
+      class: USER,
+      name: 'Alan Turing',
+      detail: 'alan@example.com',
+      keywords: ['alan@example.com'],
+    },
+    { id: 'u-grace', class: USER, name: 'Grace Hopper', keywords: ['grace@example.com'] },
+    { id: 'u-marc', class: USER, name: 'Marc Davoust', keywords: ['marc@example.com'] },
+    { id: 'u-nameless', class: USER },
+    { id: 'e-linus', class: EMPLOYEE, name: 'Linus Pauling' },
+    { id: 'g-eng', class: GROUP, name: 'Engineering' },
+    { id: 'g-ops', class: GROUP, name: 'Operations' },
+    { id: 'r-admin', class: ROLE, name: 'workspace.admin' },
+  ],
+  memberships: [
+    ['u-ada', 'g-eng'],
+    ['u-alan', 'g-eng'],
+    ['g-ops', 'g-eng'],
+    ['u-grace', 'g-ops'],
+  ],
+}
+
+function Rows() {
+  const finder = useIdentityFinder()
+  return (
+    <>
+      <p data-testid="path">{finder.path.map((identity) => identity.name).join(' › ')}</p>
+      <p data-testid="kind">{finder.kind?.name ?? 'all'}</p>
+      <p data-testid="chosen">{finder.chosen.map((identity) => identity.name).join(', ')}</p>
+      {finder.confirmError === undefined ? null : (
+        <p role="alert">{finder.confirmError === true ? 'failed' : finder.confirmError}</p>
+      )}
+      <IdentityFinderList aria-label="Identities">
+        {finder.rows.map((row) => (
+          <IdentityFinderOption key={row.key} row={row}>
+            {row.type === 'kind'
+              ? `All ${row.kind.name}`
+              : `${row.identity.name ?? 'No name'}${row.unavailable ? ` (${row.unavailable})` : ''}`}
+          </IdentityFinderOption>
+        ))}
+      </IdentityFinderList>
+      <IdentityFinderConfirm>Select</IdentityFinderConfirm>
+    </>
+  )
+}
+
+function renderFinder(
+  options: Partial<IdentityFinderOptions> & { source?: IdentityFinderSource } = {},
+) {
+  const onConfirm = vi.fn<(choices: readonly IdentityChoice[]) => void | Promise<void>>()
+  const onCancel = vi.fn()
+  render(
+    <IdentityFinder
+      source={createMemoryIdentitySource(directory)}
+      onConfirm={onConfirm}
+      onCancel={onCancel}
+      searchDelay={0}
+      sectionSize={2}
+      {...options}
+    >
+      <IdentityFinderInput aria-label="Search" />
+      <Rows />
+    </IdentityFinder>,
+  )
+  return { onConfirm: options.onConfirm ?? onConfirm, onCancel, user: userEvent.setup() }
+}
+
+const options = () =>
+  within(screen.getByRole('listbox', { name: 'Identities' }))
+    .queryAllByRole('option')
+    .map((option) => option.textContent)
+
+describe('identity finder', () => {
+  test('lists every kind together, a few each, people first, with a row to open a fuller kind', async () => {
+    renderFinder()
+    await waitFor(() =>
+      expect(options()).toEqual([
+        'Ada Lovelace',
+        'Alan Turing',
+        'All User',
+        'Linus Pauling',
+        'Engineering',
+        'Operations',
+        'workspace.admin',
+      ]),
+    )
+  })
+
+  test('a Class admits the Classes that extend it', async () => {
+    renderFinder({ accepts: [USER] })
+    await waitFor(() =>
+      expect(options()).toEqual(['Ada Lovelace', 'Alan Turing', 'All User', 'Linus Pauling']),
+    )
+  })
+
+  test('one kind lists alone, page by page, unnamed last and not choosable', async () => {
+    renderFinder({ accepts: [GROUP] })
+    await waitFor(() => expect(options()).toEqual(['Engineering', 'Operations']))
+    cleanup()
+    const { user } = renderFinder({ sectionSize: 2, pageSize: 50 })
+    await waitFor(() => expect(options()).toContain('All User'))
+    await user.click(screen.getByRole('option', { name: 'All User' }))
+    expect(screen.getByTestId('kind').textContent).toBe('User')
+    await waitFor(() =>
+      expect(options()).toEqual([
+        'Ada Lovelace',
+        'Alan Turing',
+        'Grace Hopper',
+        'Marc Davoust',
+        'No name',
+      ]),
+    )
+    expect(screen.getByRole('option', { name: 'No name' }).getAttribute('aria-disabled')).toBe(
+      'true',
+    )
+  })
+
+  test('a search matches the start of any word of a name or an email, ignoring case', async () => {
+    const { user } = renderFinder()
+    await user.type(screen.getByRole('combobox', { name: 'Search' }), 'mar')
+    await waitFor(() => expect(options()).toEqual(['Marc Davoust']))
+    await user.clear(screen.getByRole('combobox', { name: 'Search' }))
+    await user.type(screen.getByRole('combobox', { name: 'Search' }), 'hopper')
+    await waitFor(() => expect(options()).toEqual(['Grace Hopper']))
+  })
+
+  test('opens a group to walk its members, and goes back out', async () => {
+    const { user } = renderFinder({ accepts: [GROUP, USER] })
+    const input = screen.getByRole('combobox', { name: 'Search' })
+    await user.type(input, 'eng')
+    await waitFor(() => expect(options()).toEqual(['Engineering']))
+    await user.keyboard('{ArrowRight}')
+    expect(screen.getByTestId('path').textContent).toBe('Engineering')
+    expect((input as HTMLInputElement).value).toBe('')
+    await waitFor(() => expect(options()).toEqual(['Ada Lovelace', 'Alan Turing', 'Operations']))
+    await user.keyboard('{ArrowDown}{ArrowDown}{ArrowRight}')
+    expect(screen.getByTestId('path').textContent).toBe('Engineering › Operations')
+    await waitFor(() => expect(options()).toEqual(['Grace Hopper']))
+    await user.keyboard('{Backspace}')
+    expect(screen.getByTestId('path').textContent).toBe('Engineering')
+    await user.keyboard('{Escape}')
+    expect(screen.getByTestId('path').textContent).toBe('')
+  })
+
+  test('the arrows walk the rows while the input keeps the focus', async () => {
+    const { user } = renderFinder({ accepts: [GROUP] })
+    const input = screen.getByRole('combobox', { name: 'Search' })
+    await waitFor(() => expect(options()).toEqual(['Engineering', 'Operations']))
+    await user.click(input)
+    const active = () => input.getAttribute('aria-activedescendant')
+    expect(document.getElementById(active()!)?.textContent).toBe('Engineering')
+    await user.keyboard('{ArrowDown}')
+    expect(document.getElementById(active()!)?.textContent).toBe('Operations')
+    await user.keyboard('{ArrowDown}')
+    expect(document.getElementById(active()!)?.textContent).toBe('Operations')
+    expect(document.activeElement).toBe(input)
+  })
+
+  test('with a maximum of one, choosing confirms at once', async () => {
+    const { user, onConfirm } = renderFinder({ accepts: [USER] })
+    await user.type(screen.getByRole('combobox', { name: 'Search' }), 'grace{Enter}')
+    await waitFor(() =>
+      expect(onConfirm).toHaveBeenCalledWith([
+        { id: 'u-grace', class: USER, name: 'Grace Hopper' },
+      ]),
+    )
+  })
+
+  test('with a larger maximum, choices gather until confirmed, up to the maximum', async () => {
+    const { user, onConfirm } = renderFinder({ accepts: [USER], maximum: 2, sectionSize: 10 })
+    await waitFor(() => expect(options()).toContain('Grace Hopper'))
+    await user.click(screen.getByRole('option', { name: 'Ada Lovelace' }))
+    await user.click(screen.getByRole('option', { name: 'Grace Hopper' }))
+    expect(screen.getByRole('option', { name: 'Alan Turing' }).getAttribute('aria-disabled')).toBe(
+      'true',
+    )
+    await user.click(screen.getByRole('option', { name: 'Alan Turing' }))
+    expect(screen.getByTestId('chosen').textContent).toBe('Ada Lovelace, Grace Hopper')
+    await user.click(screen.getByRole('option', { name: 'Ada Lovelace' }))
+    expect(screen.getByTestId('chosen').textContent).toBe('Grace Hopper')
+    await user.click(screen.getByRole('option', { name: 'Marc Davoust' }))
+    await user.click(screen.getByRole('button', { name: 'Select' }))
+    expect(onConfirm).toHaveBeenCalledWith([
+      { id: 'u-grace', class: USER, name: 'Grace Hopper' },
+      { id: 'u-marc', class: USER, name: 'Marc Davoust' },
+    ])
+  })
+
+  test('an unavailable Identity shows why and cannot be chosen', async () => {
+    const { user, onConfirm } = renderFinder({
+      accepts: [GROUP],
+      unavailable: new Map([['g-eng', 'Already a member']]),
+    })
+    await waitFor(() => expect(options()).toContain('Engineering (Already a member)'))
+    await user.click(screen.getByRole('option', { name: 'Engineering (Already a member)' }))
+    expect(onConfirm).not.toHaveBeenCalled()
+  })
+
+  test('a refused confirmation shows its message and keeps the choices', async () => {
+    const onConfirm = vi.fn(async () => {
+      throw new Error('Not readable')
+    })
+    const { user } = renderFinder({ accepts: [USER], maximum: 3, onConfirm, sectionSize: 10 })
+    await waitFor(() => expect(options()).toContain('Ada Lovelace'))
+    await user.click(screen.getByRole('option', { name: 'Ada Lovelace' }))
+    await user.click(screen.getByRole('button', { name: 'Select' }))
+    expect((await screen.findByRole('alert')).textContent).toBe('Not readable')
+    expect(screen.getByTestId('chosen').textContent).toBe('Ada Lovelace')
+  })
+
+  test('Escape clears the text, then cancels', async () => {
+    const { user, onCancel } = renderFinder()
+    await user.type(screen.getByRole('combobox', { name: 'Search' }), 'x')
+    await user.keyboard('{Escape}')
+    expect((screen.getByRole('combobox', { name: 'Search' }) as HTMLInputElement).value).toBe('')
+    expect(onCancel).not.toHaveBeenCalled()
+    await user.keyboard('{Escape}')
+    expect(onCancel).toHaveBeenCalledOnce()
+  })
+
+  test('a failed read shows as an error and a retry reads again', async () => {
+    let fail = true
+    const memory = createMemoryIdentitySource(directory)
+    const source: IdentityFinderSource = {
+      kinds: memory.kinds,
+      identities: async (input) => {
+        if (fail) throw new Error('offline')
+        return memory.identities(input)
+      },
+    }
+    function Status() {
+      const finder = useIdentityFinder()
+      return (
+        <button type="button" onClick={finder.retry}>
+          {finder.list?.status ?? 'none'}
+        </button>
+      )
+    }
+    const user = userEvent.setup()
+    render(
+      <IdentityFinder source={source} accepts={[GROUP]} onConfirm={() => {}} onCancel={() => {}}>
+        <Status />
+        <Rows />
+      </IdentityFinder>,
+    )
+    await screen.findByRole('button', { name: 'error' })
+    fail = false
+    await user.click(screen.getByRole('button', { name: 'error' }))
+    await screen.findByRole('button', { name: 'ready' })
+    expect(options()).toEqual(['Engineering', 'Operations'])
+  })
+})

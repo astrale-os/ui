@@ -6,7 +6,7 @@
     {
       "name": "block-finder-node-browser",
       "type": "registry:block",
-      "title": "Block · Finder · Node Browser",
+      "title": "Block \u00b7 Finder \u00b7 Node Browser",
       "description": "Astrale block/finder/node-browser; the Finder as a panel: Domains, Classes and a Nodes table with filters, preview, path and tray, over an injected source; each word replaceable for another language.",
       "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
       "files": [
@@ -24,7 +24,7 @@
     {
       "name": "block-finder-node-selector",
       "type": "registry:block",
-      "title": "Block · Finder · Node Selector",
+      "title": "Block \u00b7 Finder \u00b7 Node Selector",
       "description": "Astrale block/finder/node-selector; the Finder in a dialog, for a host answering a request to select Nodes; the source and the answer are injected through props.",
       "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
       "files": [
@@ -41,6 +41,47 @@
       ],
       "meta": {
         "canonicalAddress": "block/finder/node-selector",
+        "ownership": "consumer-source"
+      }
+    },
+    {
+      "name": "block-finder-identity-browser",
+      "type": "registry:block",
+      "title": "Block \u00b7 Finder \u00b7 Identity Browser",
+      "description": "Astrale block/finder/identity-browser; the identity finder as a panel: a search over people, groups, Roles and every other kind of Identity, each kind in its own section, groups and Roles open to their members; over an injected source, each word replaceable for another language.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "identity-browser.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/components/finder/identity-browser.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "block/finder/identity-browser",
+        "ownership": "consumer-source"
+      }
+    },
+    {
+      "name": "block-finder-identity-selector",
+      "type": "registry:block",
+      "title": "Block \u00b7 Finder \u00b7 Identity Selector",
+      "description": "Astrale block/finder/identity-selector; the identity finder in a dialog, for a host answering a request to select people, groups or Roles; the source and the answer are injected through props.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "identity-selector.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/components/finder/identity-selector.tsx"
+        },
+        {
+          "path": "identity-browser.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/components/finder/identity-browser.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "block/finder/identity-selector",
         "ownership": "consumer-source"
       }
     }

@@ -9,7 +9,7 @@ const runtimeComponents = provenance.components.filter(
   (component) => component.disposition === 'owned-runtime',
 )
 
-// `./brand` and `./brand/*` (the Astrale logo), `./fonts/*` and `./finder` are owned here, not
+// `./brand` and `./brand/*` (the Astrale logo), `./fonts/*`, `./finder` and `./identity-finder` are owned here, not
 // derived from upstream components.
 const retainedExports = Object.entries(packageJson.exports).filter(
   ([name]) =>
@@ -17,6 +17,7 @@ const retainedExports = Object.entries(packageJson.exports).filter(
     name === './class-name' ||
     name === './brand' ||
     name === './finder' ||
+    name === './identity-finder' ||
     name.startsWith('./brand/') ||
     name.startsWith('./fonts/') ||
     name.endsWith('.css') ||
