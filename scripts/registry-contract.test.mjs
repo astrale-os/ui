@@ -1,5 +1,18 @@
+import { parse } from '@babel/parser'
 import assert from 'node:assert/strict'
-import { readdir, readFile, stat } from 'node:fs/promises'
+import { spawnSync } from 'node:child_process'
+import {
+  mkdir,
+  mkdtemp,
+  readdir,
+  readFile,
+  realpath,
+  rm,
+  stat,
+  symlink,
+  writeFile,
+} from 'node:fs/promises'
+import { tmpdir } from 'node:os'
 import path from 'node:path'
 import test from 'node:test'
 
@@ -25,6 +38,7 @@ const externalProvenances = await Promise.all(
     })),
 )
 const registryPackage = JSON.parse(await readFile('registry/package.json', 'utf8'))
+const runtimePackage = JSON.parse(await readFile('packages/ui/package.json', 'utf8'))
 const removedCanonicalAddresses = [
   'block/application-shell/compact-command',
   'block/application-shell/responsive-workspace',
@@ -73,11 +87,11 @@ function packageName(specifier) {
     : specifier.split('/')[0]
 }
 
-function componentDependencies(source, styling = []) {
+function componentDependencies(specifiers, styling = []) {
   return [
     '@astrale-os/ui@^0.3.0-beta.0',
     ...new Set(
-      [...importSpecifiers(source), ...styling]
+      [...specifiers, ...styling]
         .filter(
           (specifier) =>
             specifier !== 'react' &&
@@ -99,16 +113,133 @@ function componentDependencies(source, styling = []) {
     })
 }
 
-function importSpecifiers(source) {
-  return [
-    ...source.matchAll(/(?:from\s+|import\s*\()\s*['"]([^'"]+)['"]/gu),
-    ...source.matchAll(/^\s*import\s*['"]([^'"]+)['"]/gmu),
-  ].map((match) => match[1])
+const moduleSourceOwners = new Set([
+  'ExportAllDeclaration',
+  'ExportNamedDeclaration',
+  'ImportDeclaration',
+  'ImportExpression',
+  'TSImportType',
+])
+
+// The modules a TypeScript file names, read from its syntax tree: imports and type-only imports,
+// re-exports, `import()` expressions and types, and `import x = require()`. A module named inside a
+// string, such as a code sample, is not a reference. `binds` is false for a side-effect import,
+// which binds no declaration. Any other file (CSS) names no module.
+function moduleReferences(source, file) {
+  if (!/\.tsx?$/u.test(file)) return []
+  const references = []
+  const visit = (node) => {
+    if (Array.isArray(node)) {
+      for (const child of node) visit(child)
+      return
+    }
+    if (typeof node?.type !== 'string') return
+    const named =
+      node.type === 'TSExternalModuleReference'
+        ? node.expression
+        : moduleSourceOwners.has(node.type)
+          ? node.source
+          : undefined
+    if (named?.type === 'StringLiteral') {
+      references.push({
+        specifier: named.value,
+        binds: node.type !== 'ImportDeclaration' || node.specifiers.length > 0,
+      })
+    }
+    for (const [key, child] of Object.entries(node)) {
+      if (key !== 'loc' && child && typeof child === 'object') visit(child)
+    }
+  }
+  visit(
+    parse(source, {
+      sourceType: 'module',
+      plugins: file.endsWith('.tsx') ? ['typescript', 'jsx'] : ['typescript'],
+    }).program,
+  )
+  return references
+}
+
+function importSpecifiers(source, file) {
+  return moduleReferences(source, file).map((reference) => reference.specifier)
+}
+
+async function itemImportSpecifiers(item) {
+  return (
+    await Promise.all(
+      item.declaredPaths.map(async (declaredPath) =>
+        importSpecifiers(await readFile(declaredPath, 'utf8'), declaredPath),
+      ),
+    )
+  ).flat()
 }
 
 // A registry package requirement: an npm name and a version range, never a URL, path, or alias.
 const packageRequirement =
   /^(?:@[a-z0-9][a-z0-9._-]*\/)?[a-z0-9][a-z0-9._-]*@[~^<>=|0-9A-Za-z.* -]+$/u
+
+function requirementName(requirement) {
+  return requirement.slice(0, requirement.lastIndexOf('@'))
+}
+
+// The DefinitelyTyped package that declares an untyped npm package.
+function declarationPackage(name) {
+  return `@types/${name.startsWith('@') ? name.slice(1).replace('/', '__') : name}`
+}
+
+// TypeScript decides whether a module is typed. One import of each specifier is compiled as a strict
+// Vite consumer compiles it, in a project whose node_modules holds only `packages`, linked from the
+// registry workspace that pins the ranges items declare. Returns the specifiers TypeScript resolves
+// to JavaScript without a declaration (TS7016); any other diagnostic fails.
+async function untypedModules(specifiers, packages) {
+  const project = await mkdtemp(path.join(tmpdir(), 'astrale-registry-types-'))
+  try {
+    for (const name of packages) {
+      const link = path.join(project, 'node_modules', name)
+      await mkdir(path.dirname(link), { recursive: true })
+      await symlink(await realpath(path.join('registry/node_modules', name)), link, 'junction')
+    }
+    await writeFile(
+      path.join(project, 'probe.ts'),
+      specifiers
+        .map((specifier, index) => `export * as m${index} from ${JSON.stringify(specifier)}\n`)
+        .join(''),
+    )
+    await writeFile(
+      path.join(project, 'tsconfig.json'),
+      JSON.stringify({
+        compilerOptions: {
+          strict: true,
+          noEmit: true,
+          skipLibCheck: true,
+          target: 'ES2022',
+          module: 'ESNext',
+          moduleResolution: 'Bundler',
+          jsx: 'react-jsx',
+          lib: ['ES2022', 'DOM', 'DOM.Iterable'],
+          types: [],
+        },
+        files: ['probe.ts'],
+      }),
+    )
+    const result = spawnSync(
+      process.execPath,
+      [path.resolve('node_modules/typescript/bin/tsc'), '-p', 'tsconfig.json', '--pretty', 'false'],
+      { cwd: project, encoding: 'utf8' },
+    )
+    assert.ifError(result.error)
+    const diagnostics = result.stdout.split('\n').filter((line) => /\berror TS\d+:/u.test(line))
+    const untyped = new Set()
+    for (const diagnostic of diagnostics) {
+      const match = /^probe\.ts\((\d+),\d+\): error TS7016:/u.exec(diagnostic)
+      assert.ok(match, diagnostic)
+      untyped.add(specifiers[Number(match[1]) - 1])
+    }
+    assert.equal(result.status === 0, diagnostics.length === 0, result.stdout + result.stderr)
+    return untyped
+  } finally {
+    await rm(project, { recursive: true, force: true })
+  }
+}
 
 function assertSafeRelative(target) {
   assert.equal(path.isAbsolute(target), false)
@@ -248,7 +379,10 @@ test('every registry item is independently bounded, controlled, and safe to inst
       item.files.map((file) => file.target.replace(/\.(?:tsx?|css)$/u, '')),
     )
     for (const declaredPath of item.declaredPaths) {
-      for (const specifier of importSpecifiers(await readFile(declaredPath, 'utf8'))) {
+      for (const specifier of importSpecifiers(
+        await readFile(declaredPath, 'utf8'),
+        declaredPath,
+      )) {
         if (!specifier.startsWith('@/components/astrale/')) continue
         assert.ok(
           ownedTargets.has(specifier.slice(2)),
@@ -290,13 +424,13 @@ test('every registry item is independently bounded, controlled, and safe to inst
       assert.equal(item.meta.canonicalAddress, upstream.owner)
       assert.equal(item.declaredPath, upstream.implementation)
       assert.equal(item.meta.adaptation, upstream.adaptation)
-      const itemSources = await Promise.all(
-        item.declaredPaths.map((declaredPath) => readFile(declaredPath, 'utf8')),
-      )
       const styling = item.css
         ? Object.keys(item.css).flatMap((rule) => /["']([^"']+)["']/u.exec(rule)?.[1] ?? [])
         : []
-      assert.deepEqual(item.dependencies, componentDependencies(itemSources.join('\n'), styling))
+      assert.deepEqual(
+        item.dependencies,
+        componentDependencies(await itemImportSpecifiers(item), styling),
+      )
       continue
     }
     if (item.meta.provider && item.meta.provider !== '@astrale-os/ui') {
@@ -327,13 +461,13 @@ test('every registry item is independently bounded, controlled, and safe to inst
       } else {
         assert.equal(item.files.length, Object.keys(external.files ?? {}).length)
       }
-      const itemSources = await Promise.all(
-        item.declaredPaths.map((declaredPath) => readFile(declaredPath, 'utf8')),
-      )
       const styling = item.css
         ? Object.keys(item.css).flatMap((rule) => /["']([^"']+)["']/u.exec(rule)?.[1] ?? [])
         : []
-      assert.deepEqual(item.dependencies, componentDependencies(itemSources.join('\n'), styling))
+      assert.deepEqual(
+        item.dependencies,
+        componentDependencies(await itemImportSpecifiers(item), styling),
+      )
       continue
     }
     assert.deepEqual(item.dependencies, ['@astrale-os/ui@^0.3.0-beta.0'])
@@ -342,7 +476,7 @@ test('every registry item is independently bounded, controlled, and safe to inst
     for (let index = 0; index < item.files.length; index += 1) {
       const declaredPath = item.declaredPaths[index]
       const fileSource = await readFile(declaredPath, 'utf8')
-      for (const specifier of importSpecifiers(fileSource)) {
+      for (const specifier of importSpecifiers(fileSource, declaredPath)) {
         if (specifier.startsWith('.')) {
           const imported = path.join(path.dirname(declaredPath), specifier).replace(/\.js$/u, '')
           assert.ok(
@@ -398,6 +532,87 @@ test('every registry item is independently bounded, controlled, and safe to inst
   }
 })
 
+// An item type-checks in a strict TypeScript consumer with only what it installs. Every npm module
+// its TypeScript binds is a dependency of the item, and a module whose package ships no declarations
+// brings the matching `@types/*` package in the item's devDependencies, at the range the registry
+// workspace pins. Three references carry no such obligation, each for its reason:
+// - Host packages. `@astrale-os/ui` requires its host to provide its peer dependencies, and
+//   `astrale ui init` admits only a React project that declares them. A TypeScript host owns their
+//   declaration packages with them, so an item never re-declares those types.
+// - `@astrale-os/ui` itself, whose manifest declares types for every subpath an item imports.
+// - Side-effect imports and CSS references (`css` rules, `.css` files), which bind no declaration.
+test('every npm module an item binds from TypeScript is installed and typed by the item', async () => {
+  const items = await readFamilyItems()
+  const hostPackages = new Set(Object.keys(runtimePackage.peerDependencies))
+  const itemModules = new Map()
+  const packages = new Set()
+  for (const item of items) {
+    const modules = new Set()
+    for (const declaredPath of item.declaredPaths) {
+      const source = await readFile(declaredPath, 'utf8')
+      for (const { specifier, binds } of moduleReferences(source, declaredPath)) {
+        if (!binds || specifier.startsWith('.') || specifier.startsWith('@/')) continue
+        const name = packageName(specifier)
+        if (hostPackages.has(name)) continue
+        if (name === '@astrale-os/ui') {
+          const subpath = `.${specifier.slice(name.length)}`
+          assert.equal(
+            typeof runtimePackage.exports[subpath]?.types,
+            'string',
+            `${item.name} imports ${specifier}, which ${name} does not export with declarations`,
+          )
+          continue
+        }
+        assert.ok(
+          (item.dependencies ?? []).some((requirement) => requirementName(requirement) === name),
+          `${item.name} imports ${specifier} without depending on ${name}`,
+        )
+        assert.ok(
+          registryPackage.dependencies[name],
+          `registry/package.json must pin ${name}, which ${item.name} imports`,
+        )
+        modules.add(specifier)
+        packages.add(name)
+      }
+    }
+    itemModules.set(item, modules)
+  }
+
+  const allModules = [...new Set([...itemModules.values()].flatMap((modules) => [...modules]))]
+  const untyped = await untypedModules(allModules.toSorted(), [...packages])
+  const typePackages = new Set()
+  for (const [item, modules] of itemModules) {
+    const expected = [
+      ...new Set(
+        [...modules]
+          .filter((specifier) => untyped.has(specifier))
+          .map((specifier) => declarationPackage(packageName(specifier))),
+      ),
+    ]
+      .toSorted()
+      .map((name) => {
+        assert.ok(
+          registryPackage.devDependencies[name],
+          `registry/package.json must pin ${name}, which ${item.name} needs`,
+        )
+        typePackages.add(name)
+        return `${name}@${registryPackage.devDependencies[name]}`
+      })
+    assert.deepEqual(
+      item.devDependencies ?? [],
+      expected,
+      `${item.name} must declare exactly the declaration packages of the untyped modules it imports`,
+    )
+  }
+  if (untyped.size > 0) {
+    assert.deepEqual(
+      [...(await untypedModules([...untyped], [...packages, ...typePackages]))],
+      [],
+      'a declared @types package must type every module of its package that an item imports',
+    )
+  }
+})
+
 test('registry guards reject traversal and observe every executable import form', () => {
   for (const target of [
     '../escape.tsx',
@@ -408,11 +623,31 @@ test('registry guards reject traversal and observe every executable import form'
     assert.throws(() => assertSafeRelative(target))
   }
   assert.deepEqual(
-    importSpecifiers(
-      "import '@evil/side-effect'\nimport value from '@astrale-os/ui/button'\nconst lazy = import('@evil/dynamic')\n",
-    ).sort(),
-    ['@astrale-os/ui/button', '@evil/dynamic', '@evil/side-effect'],
+    moduleReferences(
+      [
+        "import '@evil/side-effect'",
+        "import value from '@astrale-os/ui/button'",
+        "import type { Row } from '@evil/type-only'",
+        "export * from '@evil/re-export'",
+        "import legacy = require('@evil/require')",
+        "type Lazy = typeof import('@evil/type-query')",
+        "const lazy = import('@evil/dynamic')",
+        "const sample = `import Papa from 'papaparse'`",
+        'export const View = () => <pre>{sample}</pre>',
+      ].join('\n'),
+      'guard.tsx',
+    ).toSorted((left, right) => left.specifier.localeCompare(right.specifier)),
+    [
+      { specifier: '@astrale-os/ui/button', binds: true },
+      { specifier: '@evil/dynamic', binds: true },
+      { specifier: '@evil/re-export', binds: true },
+      { specifier: '@evil/require', binds: true },
+      { specifier: '@evil/side-effect', binds: false },
+      { specifier: '@evil/type-only', binds: true },
+      { specifier: '@evil/type-query', binds: true },
+    ],
   )
+  assert.deepEqual(moduleReferences("@import 'tw-animate-css';\n", 'theme.css'), [])
 })
 
 test('externally sourced compositions are exact admitted intake owners', async () => {
@@ -497,6 +732,11 @@ test('every built install item is exact current source rather than stale generat
       assert.equal(built[field], item[field], `${item.name} stale ${field}`)
     }
     assert.deepEqual(built.dependencies, item.dependencies, `${item.name} stale dependencies`)
+    assert.deepEqual(
+      built.devDependencies,
+      item.devDependencies,
+      `${item.name} stale devDependencies`,
+    )
     assert.deepEqual(built.registryDependencies, item.registryDependencies)
     assert.deepEqual(built.css, item.css)
     assert.deepEqual(built.meta, item.meta, `${item.name} stale metadata`)

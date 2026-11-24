@@ -152,12 +152,12 @@ try {
             react: '19.2.8',
             'react-dom': '19.2.8',
           },
+          // A TypeScript React host owns React's declarations; every other declaration package
+          // the items need comes from their own devDependencies.
           devDependencies: {
             '@types/node': '26.4.0',
-            '@types/papaparse': '5.5.2',
             '@types/react': '19.2.18',
             '@types/react-dom': '19.2.3',
-            '@types/react-payment-inputs': '1.1.4',
             tailwindcss: '4.3.3',
             typescript: '7.0.2',
           },

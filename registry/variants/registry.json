@@ -297,6 +297,9 @@
         "papaparse@^5.6.0",
         "react@19.2.8"
       ],
+      "devDependencies": [
+        "@types/papaparse@^5.5.2"
+      ],
       "files": [
         {
           "path": "source/blocks/data-table/data-table-12/data-table-12.tsx",
@@ -6277,6 +6280,9 @@
         "react-payment-inputs@^1.2.0",
         "react@19.2.8"
       ],
+      "devDependencies": [
+        "@types/react-payment-inputs@^1.1.4"
+      ],
       "files": [
         {
           "path": "source/components/collapsible/collapsible-09/collapsible-09.tsx",
@@ -7869,6 +7875,9 @@
         "react-payment-inputs@^1.2.0",
         "react@19.2.8"
       ],
+      "devDependencies": [
+        "@types/react-payment-inputs@^1.1.4"
+      ],
       "files": [
         {
           "path": "source/components/input-mask/input-mask-03/input-mask-03.tsx",
@@ -7892,6 +7901,9 @@
         "@astrale-os/ui@^0.3.0-beta.0",
         "react-payment-inputs@^1.2.0",
         "react@19.2.8"
+      ],
+      "devDependencies": [
+        "@types/react-payment-inputs@^1.1.4"
       ],
       "files": [
         {
@@ -7917,6 +7929,9 @@
         "react-payment-inputs@^1.2.0",
         "react@19.2.8"
       ],
+      "devDependencies": [
+        "@types/react-payment-inputs@^1.1.4"
+      ],
       "files": [
         {
           "path": "source/components/input-mask/input-mask-05/input-mask-05.tsx",
@@ -7941,6 +7956,9 @@
         "lucide-react@1.32.0",
         "react-payment-inputs@^1.2.0",
         "react@19.2.8"
+      ],
+      "devDependencies": [
+        "@types/react-payment-inputs@^1.1.4"
       ],
       "files": [
         {
