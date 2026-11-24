@@ -1,6 +1,8 @@
 import { readFile, readdir, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 
+import { lowercaseElements } from './jsx-elements.mjs'
+
 async function walk(directory) {
   const entries = await readdir(directory, { withFileTypes: true })
   return (
@@ -24,7 +26,7 @@ for (const file of (await walk('registry')).filter((target) => target.endsWith('
     new RegExp(`data-slot="${stem}-([a-z][a-z0-9-]*)-\\d+"`, 'gu'),
     `data-slot="${stem}-$1"`,
   )
-  for (const match of source.matchAll(/<([a-z][a-z0-9-]*)(?=[\s/>])/gu)) {
+  for (const match of lowercaseElements(source)) {
     const position = match.index + match[0].length
     const closing = source.indexOf('>', position)
     if (closing < 0) throw new Error(`Unclosed JSX tag in ${file}`)

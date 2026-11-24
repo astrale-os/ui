@@ -161,6 +161,11 @@
       "import": "./dist/input/field/index.js",
       "default": "./dist/input/field/index.js"
     },
+    "./finder": {
+      "types": "./dist/navigation/finder/index.d.ts",
+      "import": "./dist/navigation/finder/index.js",
+      "default": "./dist/navigation/finder/index.js"
+    },
     "./hover-card": {
       "types": "./dist/overlay/hover-card/index.d.ts",
       "import": "./dist/overlay/hover-card/index.js",

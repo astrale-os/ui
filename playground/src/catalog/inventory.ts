@@ -49,6 +49,7 @@ export const componentGroups = [
       'breadcrumb',
       'collapsible',
       'direction',
+      'finder',
       'navigation-menu',
       'pagination',
       'resizable',

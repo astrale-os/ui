@@ -3,6 +3,8 @@ import { readdir, readFile, stat } from 'node:fs/promises'
 import path from 'node:path'
 import test from 'node:test'
 
+import { lowercaseElements } from './jsx-elements.mjs'
+
 const sourcePath = 'registry/registry.source.json'
 const rootPath = 'registry/registry.json'
 const publicRootPath = 'registry.json'
@@ -295,37 +297,48 @@ test('every registry item is independently bounded, controlled, and safe to inst
       continue
     }
     assert.deepEqual(item.dependencies, ['@astrale-os/ui@^0.3.0-beta.0'])
-    const imports = importSpecifiers(itemSource)
-    assert.equal(
-      imports.every(
-        (specifier) =>
+    // Every file the item installs holds to the same bounds; a relative import must name another
+    // file of the same item, installed beside it.
+    for (let index = 0; index < item.files.length; index += 1) {
+      const declaredPath = item.declaredPaths[index]
+      const fileSource = await readFile(declaredPath, 'utf8')
+      for (const specifier of importSpecifiers(fileSource)) {
+        if (specifier.startsWith('.')) {
+          const imported = path.join(path.dirname(declaredPath), specifier).replace(/\.js$/u, '')
+          assert.ok(
+            item.declaredPaths.some((candidate) => candidate.replace(/\.tsx?$/u, '') === imported),
+            `${item.name} imports ${specifier}, which it does not install`,
+          )
+          continue
+        }
+        assert.ok(
           specifier === 'react' ||
-          specifier === '@astrale-os/ui' ||
-          specifier.startsWith('@astrale-os/ui/'),
-      ),
-      true,
-      `${item.name} imports only public runtime owners`,
-    )
-    assert.doesNotMatch(
-      itemSource,
-      /(?:\bfetch\(|XMLHttpRequest|WebSocket|EventSource|localStorage|sessionStorage|document\.cookie|@astrale-os\/sdk|next\/router|react-router)/u,
-    )
+            specifier === '@astrale-os/ui' ||
+            specifier.startsWith('@astrale-os/ui/'),
+          `${item.name} imports only public runtime owners, not ${specifier}`,
+        )
+      }
+      assert.doesNotMatch(
+        fileSource,
+        /(?:\bfetch\(|XMLHttpRequest|WebSocket|EventSource|localStorage|sessionStorage|document\.cookie|@astrale-os\/sdk|next\/router|react-router)/u,
+      )
+      for (const match of lowercaseElements(fileSource)) {
+        const closing = fileSource.indexOf('>', match.index + match[0].length)
+        assert.ok(closing >= 0)
+        assert.match(
+          fileSource.slice(match.index, closing),
+          /\sdata-slot=["'][^"']+["']/u,
+          `${declaredPath} exposes ${match[1]} as a host-addressable part`,
+        )
+      }
+      assert.doesNotMatch(fileSource, /Object\.(?:freeze|seal)|as const satisfies Readonly/u)
+    }
     assert.match(itemSource, /\bclassName\?: string/u)
     assert.match(itemSource, /\bstyle\?: React\.CSSProperties/u)
     assert.match(
       itemSource,
       new RegExp(`data-slot=["']${item.meta.canonicalAddress.replaceAll('/', '-')}["']`),
     )
-    for (const match of itemSource.matchAll(/<([a-z][a-z0-9-]*)(?=[\s/>])/gu)) {
-      const closing = itemSource.indexOf('>', match.index + match[0].length)
-      assert.ok(closing >= 0)
-      assert.match(
-        itemSource.slice(match.index, closing),
-        /\sdata-slot=["'][^"']+["']/u,
-        `${item.name} exposes ${match[1]} as a host-addressable part`,
-      )
-    }
-    assert.doesNotMatch(itemSource, /Object\.(?:freeze|seal)|as const satisfies Readonly/u)
     const presentationOnly = new Set(['pattern/message/bubble-basic'])
     if (!presentationOnly.has(item.meta.canonicalAddress)) {
       const declaredActions = [
@@ -402,10 +415,14 @@ test('registry source tree is closed to included manifests and declared implemen
     compositionFiles.filter((file) => file.endsWith('/registry.json')).sort(),
     includedCompositionManifests,
   )
-  const declaredImplementations = (await readFamilyItems())
-    .filter((item) => /^(?:registry\/blocks|registry\/patterns)\//u.test(item.declaredPath))
-    .flatMap((item) => item.declaredPaths)
-    .sort()
+  // A file several items install (a shared part) is one implementation.
+  const declaredImplementations = [
+    ...new Set(
+      (await readFamilyItems())
+        .filter((item) => /^(?:registry\/blocks|registry\/patterns)\//u.test(item.declaredPath))
+        .flatMap((item) => item.declaredPaths),
+    ),
+  ].sort()
   assert.deepEqual(
     compositionFiles
       .filter(

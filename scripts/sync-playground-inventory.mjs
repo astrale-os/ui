@@ -18,18 +18,37 @@ const groups = [
   { id: 'menus-overlays', label: 'Menus & overlays', owners: new Set(['menu', 'overlay']) },
 ]
 
+// Every public component entrypoint, upstream or owned here (the Finder), by the source folder that
+// owns it; the class-name helper and the brand are not catalog components.
+const packageJson = JSON.parse(await readFile('packages/ui/package.json', 'utf8'))
+const runtimeComponents = Object.entries(packageJson.exports)
+  .filter(
+    ([name, target]) =>
+      name.startsWith('./') &&
+      name !== './class-name' &&
+      !name.startsWith('./brand') &&
+      typeof target?.import === 'string' &&
+      target.import.endsWith('/index.js'),
+  )
+  .map(([name, target]) => ({
+    name: name.slice(2),
+    owner: target.import.replace(/^\.\/dist\//u, '').split('/')[0],
+  }))
+
 const output = groups.map((group) => ({
   id: group.id,
   label: group.label,
-  components: provenance.components
-    .filter((component) => component.disposition === 'owned-runtime')
-    .filter((component) => {
-      const owner = component.implementation.replace(/^packages\/ui\/src\//u, '').split('/')[0]
-      return group.owners.has(owner)
-    })
-    .map((component) => component.address.slice('@shadcn/'.length))
+  components: runtimeComponents
+    .filter((component) => group.owners.has(component.owner))
+    .map((component) => component.name)
     .toSorted(),
 }))
+const grouped = output.flatMap((group) => group.components)
+for (const component of runtimeComponents) {
+  if (!grouped.includes(component.name)) {
+    throw new Error(`No catalog group owns ${component.owner}/${component.name}.`)
+  }
+}
 
 const registryComponents = provenance.components
   .filter((component) => component.disposition === 'owned-registry-component')

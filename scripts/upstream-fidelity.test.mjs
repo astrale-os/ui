@@ -202,8 +202,12 @@ test('physical snapshots and runtime owners are closed to the proven inventory',
     }
   }
   await walk('packages/ui/src')
-  // Astrale-owned sources with no upstream counterpart: the control icons and the logo.
-  const owned = new Set(['packages/ui/src/icon/index.tsx', 'packages/ui/src/brand/index.tsx'])
+  // Astrale-owned sources with no upstream counterpart: the control icons, the logo and the Finder.
+  const owned = new Set([
+    'packages/ui/src/icon/index.tsx',
+    'packages/ui/src/brand/index.tsx',
+    'packages/ui/src/navigation/finder/index.tsx',
+  ])
   assert.deepEqual(
     sourceFiles.filter((file) => !owned.has(file)).toSorted(),
     [...runtimeImplementations].toSorted(),
