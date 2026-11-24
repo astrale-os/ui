@@ -60,6 +60,8 @@
   --font-weight-normal: var(--ui-weight-body);
   --shadow-xs: var(--ui-shadow-control);
   --shadow-sm: var(--ui-shadow-control);
+  --shadow-md: var(--ui-shadow-overlay);
+  --shadow-lg: var(--ui-shadow-overlay);
 }
 
 /*

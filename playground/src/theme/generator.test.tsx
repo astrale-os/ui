@@ -74,11 +74,11 @@ describe('theme generator', () => {
     ).toEqual(first)
   })
 
-  test('locks engine V3 to a canonical serialized output digest', () => {
+  test('locks engine V4 to a canonical serialized output digest', () => {
     const digest = createHash('sha256')
       .update(serializeThemeDocument(generatedTheme()))
       .digest('hex')
-    expect(digest).toBe('27b1bd2e615ba7dba5eb33effa8018ed94322add85d9107af6f06ddbce3d3588')
+    expect(digest).toBe('03373f11b32b573f442ab78da2453303768c030dc3ef49d2e481d5eb055b7f07')
   })
 
   test('uses high-contrast white or black text for semantic fills', () => {
@@ -752,11 +752,23 @@ describe('theme generator', () => {
       },
       {
         expected: ['geometry'],
-        apply: () => workspace.result.current.setValue('effects', 'controlShadow', 'none'),
+        apply: () => workspace.result.current.setValue('geometry', 'actionRadius', '9999px'),
       },
       {
         expected: ['geometry'],
-        apply: () => workspace.result.current.setValue('effects', 'panelShadow', 'none'),
+        apply: () => workspace.result.current.setEffect('light', 'controlShadow', 'none'),
+      },
+      {
+        expected: ['geometry'],
+        apply: () => workspace.result.current.setEffect('dark', 'panelShadow', 'none'),
+      },
+      {
+        expected: ['geometry'],
+        apply: () => workspace.result.current.setEffect('light', 'overlayShadow', 'none'),
+      },
+      {
+        expected: ['geometry'],
+        apply: () => workspace.result.current.setEffect('dark', 'backdrop', 'oklch(0 0 0 / 0.4)'),
       },
       {
         expected: ['geometry'],

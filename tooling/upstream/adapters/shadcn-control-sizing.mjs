@@ -28,6 +28,7 @@ const revisions = new Map([
         'Bind default, small, large, and icon dimensions to the public Astrale control-height tokens so render-composed buttons keep themed geometry.',
         'Expose the admitted Button size as data-size after semantic trigger composition.',
         'Bind control transition duration to the Astrale fast motion token.',
+        'Bind the button radius to the optional --ui-radius-action token, falling back to the upstream radius of each size while it is unset; a button inside a Button Group keeps the control radius.',
       ],
       replacements: [
         [
@@ -37,13 +38,13 @@ const revisions = new Map([
         ['h-8 gap-1.5 px-2.5', 'h-(--ui-control-height) gap-1.5 px-2.5'],
         [
           'h-7 gap-1 rounded-[min(var(--radius-md),12px)]',
-          'h-(--ui-control-height-sm) gap-1 rounded-[min(var(--radius-md),12px)]',
+          'h-(--ui-control-height-sm) gap-1 rounded-[var(--ui-radius-action,min(var(--radius-md),12px))]',
         ],
         ['h-9 gap-1.5 px-2.5', 'h-(--ui-control-height-lg) gap-1.5 px-2.5'],
         ['size-8', 'size-(--ui-control-height)'],
         [
           'size-7 rounded-[min(var(--radius-md),12px)]',
-          'size-(--ui-control-height-sm) rounded-[min(var(--radius-md),12px)]',
+          'size-(--ui-control-height-sm) rounded-[var(--ui-radius-action,min(var(--radius-md),12px))]',
         ],
         ['size-9', 'size-(--ui-control-height-lg)'],
         [
@@ -53,6 +54,18 @@ const revisions = new Map([
         [
           'border-border bg-background hover:bg-muted',
           'border-border bg-background text-foreground hover:bg-muted',
+        ],
+        [
+          'items-center justify-center rounded-lg border',
+          'items-center justify-center rounded-[var(--ui-radius-action,var(--radius-lg))] in-data-[slot=button-group]:rounded-lg border',
+        ],
+        [
+          'h-6 gap-1 rounded-[min(var(--radius-md),10px)]',
+          'h-6 gap-1 rounded-[var(--ui-radius-action,min(var(--radius-md),10px))]',
+        ],
+        [
+          'size-6 rounded-[min(var(--radius-md),10px)]',
+          'size-6 rounded-[var(--ui-radius-action,min(var(--radius-md),10px))]',
         ],
       ],
     },
@@ -170,10 +183,12 @@ const revisions = new Map([
     {
       notes: [
         'Bind the floating layer to the public --ui-z-floating token (50, the upstream value) so floating elements keep stacking by mount order while the toast viewport sits above them.',
+        'Bind the modal backdrop to the public --ui-backdrop token (black at 10% alpha, the upstream value) so a theme sets the scrim color.',
       ],
       replacements: [
         ['isolate z-50 bg-black/10', 'isolate z-(--ui-z-floating) bg-black/10'],
         ['left-1/2 z-50 grid', 'left-1/2 z-(--ui-z-floating) grid'],
+        ['bg-black/10', 'bg-(--ui-backdrop)'],
       ],
     },
   ],
@@ -194,10 +209,12 @@ const revisions = new Map([
     {
       notes: [
         'Bind the floating layer to the public --ui-z-floating token (50, the upstream value) so floating elements keep stacking by mount order while the toast viewport sits above them.',
+        'Bind the modal backdrop to the public --ui-backdrop token (black at 10% alpha, the upstream value) so a theme sets the scrim color.',
       ],
       replacements: [
         ['isolate z-50 bg-black/10', 'isolate z-(--ui-z-floating) bg-black/10'],
         ['left-1/2 z-50 grid', 'left-1/2 z-(--ui-z-floating) grid'],
+        ['bg-black/10', 'bg-(--ui-backdrop)'],
       ],
     },
   ],
@@ -206,11 +223,13 @@ const revisions = new Map([
     {
       notes: [
         'Bind the floating layer to the public --ui-z-floating token (50, the upstream value) so floating elements keep stacking by mount order while the toast viewport sits above them.',
+        'Bind the modal backdrop to the public --ui-backdrop token (black at 10% alpha, the upstream value) so a theme sets the scrim color.',
       ],
       replacements: [
         ['inset-0 z-50 min-h-dvh', 'inset-0 z-(--ui-z-floating) min-h-dvh'],
         ['inset-0 z-50 select-none', 'inset-0 z-(--ui-z-floating) select-none'],
         ['fixed z-50 m-(--drawer-inset,0px)', 'fixed z-(--ui-z-floating) m-(--drawer-inset,0px)'],
+        ['bg-black/10', 'bg-(--ui-backdrop)'],
       ],
     },
   ],
@@ -269,10 +288,12 @@ const revisions = new Map([
     {
       notes: [
         'Bind the floating layer to the public --ui-z-floating token (50, the upstream value) so floating elements keep stacking by mount order while the toast viewport sits above them.',
+        'Bind the modal backdrop to the public --ui-backdrop token (black at 10% alpha, the upstream value) so a theme sets the scrim color.',
       ],
       replacements: [
         ['inset-0 z-50 bg-black/10', 'inset-0 z-(--ui-z-floating) bg-black/10'],
         ['fixed z-50 flex', 'fixed z-(--ui-z-floating) flex'],
+        ['bg-black/10', 'bg-(--ui-backdrop)'],
       ],
     },
   ],
@@ -299,6 +320,24 @@ const revisions = new Map([
         'Bind the toast viewport to the public --ui-z-toast token, above --ui-z-floating, so a toast raised while a modal dialog is open renders above its backdrop instead of under it.',
       ],
       replacements: [['bottom-4 z-50 mx-auto', 'bottom-4 z-(--ui-z-toast) mx-auto']],
+    },
+  ],
+  [
+    'toggle',
+    {
+      notes: [
+        'Bind the toggle radius to the optional --ui-radius-action token, falling back to the upstream radius of each size while it is unset.',
+      ],
+      replacements: [
+        [
+          'justify-center gap-1 rounded-lg text-sm',
+          'justify-center gap-1 rounded-[var(--ui-radius-action,var(--radius-lg))] text-sm',
+        ],
+        [
+          'h-7 min-w-7 rounded-[min(var(--radius-md),12px)]',
+          'h-7 min-w-7 rounded-[var(--ui-radius-action,min(var(--radius-md),12px))]',
+        ],
+      ],
     },
   ],
   [

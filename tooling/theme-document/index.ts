@@ -1,7 +1,7 @@
-export const THEME_DOCUMENT_VERSION = 6 as const
+export const THEME_DOCUMENT_VERSION = 7 as const
 export const THEME_DOCUMENT_MAX_BYTES = 131_072
 export const THEME_GENERATOR_VERSION = 1 as const
-export const THEME_GENERATOR_ENGINE_VERSION = 3 as const
+export const THEME_GENERATOR_ENGINE_VERSION = 4 as const
 export const THEME_FONT_CATALOG_VERSION = 1 as const
 
 export const themeColorTokens = [
@@ -85,6 +85,26 @@ export const statusColorDefaults: Readonly<
   },
 }
 
+export interface ThemeEffects {
+  /** Resting controls: inputs, outline buttons, and switches. */
+  readonly controlShadow: string
+  /** Panels in the page flow: cards and dialogs. */
+  readonly panelShadow: string
+  /** Floating surfaces: popovers, menus, select lists, hover cards, sheets, and toasts. */
+  readonly overlayShadow: string
+  /** The scrim a modal dialog, sheet, or drawer lays over the page. */
+  readonly backdrop: string
+}
+
+/**
+ * Overlay shadow and backdrop of the runtime tokens, which keep the upstream floating-surface
+ * shadow and scrim; they fill documents written before version 7.
+ */
+export const effectDefaults: Readonly<Pick<ThemeEffects, 'overlayShadow' | 'backdrop'>> = {
+  overlayShadow: '0 4px 6px -1px oklch(0 0 0 / 0.1), 0 2px 4px -2px oklch(0 0 0 / 0.1)',
+  backdrop: 'oklch(0 0 0 / 0.1)',
+}
+
 export const generatorBranches = ['palette', 'typography', 'geometry'] as const
 export type GeneratorBranch = (typeof generatorBranches)[number]
 export type PaletteRelation = 'tonal' | 'analogous' | 'complementary' | 'split'
@@ -152,6 +172,8 @@ export interface ThemeDocument {
   readonly geometry: {
     readonly radius: string
     readonly panelRadius: string
+    /** Radius of standalone buttons and toggles; null derives it from `radius`. */
+    readonly actionRadius: string | null
   }
   readonly density: {
     readonly control: string
@@ -159,8 +181,8 @@ export interface ThemeDocument {
     readonly controlLarge: string
   }
   readonly effects: {
-    readonly controlShadow: string
-    readonly panelShadow: string
+    readonly light: ThemeEffects
+    readonly dark: ThemeEffects
   }
   readonly motion: {
     readonly fast: string
@@ -358,13 +380,28 @@ function migrateThemeDocument(input: unknown): unknown {
     if (!appearance?.light || !appearance.dark) return input
     candidate = {
       ...candidate,
-      version: THEME_DOCUMENT_VERSION,
+      version: 6,
       appearance: {
         light: { ...statusColorDefaults.light, ...appearance.light },
         dark: { ...statusColorDefaults.dark, ...appearance.dark },
       },
     }
     // Generation metadata replays engine V2, which derives no status colors.
+    delete candidate.generation
+  }
+  if (candidate.version === 6) {
+    const geometry = candidate.geometry as Record<string, unknown> | undefined
+    const effects = candidate.effects as Record<string, unknown> | undefined
+    if (!geometry || !effects) return input
+    // Version 6 drew both modes with one set of shadows and the runtime overlay and backdrop.
+    const sharedEffects = { ...effects, ...effectDefaults }
+    candidate = {
+      ...candidate,
+      version: THEME_DOCUMENT_VERSION,
+      geometry: { ...geometry, actionRadius: null },
+      effects: { light: sharedEffects, dark: { ...sharedEffects } },
+    }
+    // Generation metadata replays engine V3, which derives one set of effects for both modes.
     delete candidate.generation
   }
   return candidate
@@ -502,17 +539,21 @@ function generatorMetadata(value: unknown, label: string): GeneratorMetadata {
   }
   return {
     kind: 'astrale.theme-generation',
-    version: exactInteger(candidate.version, THEME_GENERATOR_VERSION, `${label}.version`) as 1,
+    version: exactInteger(
+      candidate.version,
+      THEME_GENERATOR_VERSION,
+      `${label}.version`,
+    ) as typeof THEME_GENERATOR_VERSION,
     engineVersion: exactInteger(
       candidate.engineVersion,
       THEME_GENERATOR_ENGINE_VERSION,
       `${label}.engineVersion`,
-    ) as 3,
+    ) as typeof THEME_GENERATOR_ENGINE_VERSION,
     fontCatalogVersion: exactInteger(
       candidate.fontCatalogVersion,
       THEME_FONT_CATALOG_VERSION,
       `${label}.fontCatalogVersion`,
-    ) as 1,
+    ) as typeof THEME_FONT_CATALOG_VERSION,
     seed: text(candidate.seed, `${label}.seed`, generatorSeedPattern, 32, 32),
     derivationSeeds: (() => {
       const seeds = record(candidate.derivationSeeds, `${label}.derivationSeeds`)
@@ -632,15 +673,34 @@ function semanticShadow(value: string): boolean {
   })
 }
 
+function shadow(value: unknown, label: string): string {
+  const candidate = text(value, label, shadowPattern, 1, 240)
+  if (!semanticShadow(candidate)) throw new ThemeDocumentError(`${label} is invalid.`)
+  return candidate
+}
+
+function color(value: unknown, label: string): string {
+  const candidate = text(value, label, colorPattern, 4, 120)
+  if (!semanticColor(candidate)) throw new ThemeDocumentError(`${label} is invalid.`)
+  return candidate
+}
+
+function modeEffects(value: unknown, label: string): ThemeEffects {
+  const candidate = record(value, label)
+  exactKeys(candidate, ['controlShadow', 'panelShadow', 'overlayShadow', 'backdrop'], label)
+  return {
+    controlShadow: shadow(candidate.controlShadow, `${label}.controlShadow`),
+    panelShadow: shadow(candidate.panelShadow, `${label}.panelShadow`),
+    overlayShadow: shadow(candidate.overlayShadow, `${label}.overlayShadow`),
+    backdrop: color(candidate.backdrop, `${label}.backdrop`),
+  }
+}
+
 function mode(value: unknown, label: string): ThemeMode {
   const candidate = record(value, label)
   exactKeys(candidate, themeColorTokens, label)
   return Object.fromEntries(
-    themeColorTokens.map((token) => {
-      const value = text(candidate[token], `${label}.${token}`, colorPattern, 4, 120)
-      if (!semanticColor(value)) throw new ThemeDocumentError(`${label}.${token} is invalid.`)
-      return [token, value]
-    }),
+    themeColorTokens.map((token) => [token, color(candidate[token], `${label}.${token}`)]),
   ) as ThemeMode
 }
 
@@ -680,11 +740,11 @@ export function parseThemeDocument(input: unknown): ThemeDocument {
     'theme.typography.heading',
   )
   const geometry = record(candidate.geometry, 'theme.geometry')
-  exactKeys(geometry, ['radius', 'panelRadius'], 'theme.geometry')
+  exactKeys(geometry, ['radius', 'panelRadius', 'actionRadius'], 'theme.geometry')
   const density = record(candidate.density, 'theme.density')
   exactKeys(density, ['control', 'controlSmall', 'controlLarge'], 'theme.density')
   const effects = record(candidate.effects, 'theme.effects')
-  exactKeys(effects, ['controlShadow', 'panelShadow'], 'theme.effects')
+  exactKeys(effects, ['light', 'dark'], 'theme.effects')
   const motion = record(candidate.motion, 'theme.motion')
   exactKeys(motion, ['fast', 'standard'], 'theme.motion')
 
@@ -740,32 +800,20 @@ export function parseThemeDocument(input: unknown): ThemeDocument {
     geometry: {
       radius: text(geometry.radius, 'theme.geometry.radius', lengthPattern, 1, 24),
       panelRadius: text(geometry.panelRadius, 'theme.geometry.panelRadius', lengthPattern, 1, 24),
+      actionRadius:
+        geometry.actionRadius === null
+          ? null
+          : text(geometry.actionRadius, 'theme.geometry.actionRadius', lengthPattern, 1, 24),
     },
     density: {
       control: text(density.control, 'theme.density.control', lengthPattern, 1, 24),
       controlSmall: text(density.controlSmall, 'theme.density.controlSmall', lengthPattern, 1, 24),
       controlLarge: text(density.controlLarge, 'theme.density.controlLarge', lengthPattern, 1, 24),
     },
-    effects: (() => {
-      const controlShadow = text(
-        effects.controlShadow,
-        'theme.effects.controlShadow',
-        shadowPattern,
-        1,
-        240,
-      )
-      const panelShadow = text(
-        effects.panelShadow,
-        'theme.effects.panelShadow',
-        shadowPattern,
-        1,
-        240,
-      )
-      if (!semanticShadow(controlShadow) || !semanticShadow(panelShadow)) {
-        throw new ThemeDocumentError('theme.effects contains an invalid shadow.')
-      }
-      return { controlShadow, panelShadow }
-    })(),
+    effects: {
+      light: modeEffects(effects.light, 'theme.effects.light'),
+      dark: modeEffects(effects.dark, 'theme.effects.dark'),
+    },
     motion: {
       fast: text(motion.fast, 'theme.motion.fast', durationPattern, 1, 24),
       standard: text(motion.standard, 'theme.motion.standard', durationPattern, 1, 24),
@@ -797,12 +845,16 @@ function admittedThemeStyleProperties(
   selectedMode: 'light' | 'dark',
 ): Readonly<Record<string, string>> {
   const colors = theme.appearance[selectedMode]
+  const effects = theme.effects[selectedMode]
   return {
     ...Object.fromEntries(
       themeColorTokens.map((token) => [`--ui-${cssNames[token]}`, colors[token]]),
     ),
     '--ui-radius': theme.geometry.radius,
     '--ui-radius-panel': theme.geometry.panelRadius,
+    // `initial` resets an action radius inherited from an enclosing theme, so actions fall back to
+    // the radius they derive from `--ui-radius`.
+    '--ui-radius-action': theme.geometry.actionRadius ?? 'initial',
     '--ui-control-height': theme.density.control,
     '--ui-control-height-sm': theme.density.controlSmall,
     '--ui-control-height-lg': theme.density.controlLarge,
@@ -815,8 +867,10 @@ function admittedThemeStyleProperties(
     '--ui-leading-heading': theme.typography.heading.leading,
     '--ui-weight-body': String(theme.typography.body.weight),
     '--ui-weight-heading': String(theme.typography.heading.weight),
-    '--ui-shadow-control': theme.effects.controlShadow,
-    '--ui-shadow-panel': theme.effects.panelShadow,
+    '--ui-shadow-control': effects.controlShadow,
+    '--ui-shadow-panel': effects.panelShadow,
+    '--ui-shadow-overlay': effects.overlayShadow,
+    '--ui-backdrop': effects.backdrop,
     '--ui-motion-fast': theme.motion.fast,
     '--ui-motion-standard': theme.motion.standard,
   }
@@ -831,7 +885,7 @@ export function themeStyleProperties(
 
 function variables(theme: ThemeDocument, selectedMode: 'light' | 'dark'): string[] {
   return Object.entries(admittedThemeStyleProperties(theme, selectedMode)).map(([name, value]) =>
-    name === '--ui-shadow-panel' && value.includes(',')
+    name.startsWith('--ui-shadow-') && value.includes(',')
       ? `  ${name}:\n    ${value};`
       : `  ${name}: ${value};`,
   )

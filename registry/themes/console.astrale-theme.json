@@ -1,0 +1,132 @@
+{
+  "$schema": "https://raw.githubusercontent.com/astrale-os/ui/main/schemas/theme.schema.json",
+  "version": 7,
+  "name": "console",
+  "label": "Console",
+  "description": "Shell, Issues, and Admin: Geist on neutral paper, ink primary, indigo accent, and hairline elevation.",
+  "appearance": {
+    "light": {
+      "background": "#f6f6f8",
+      "foreground": "#121418",
+      "card": "#ffffff",
+      "cardForeground": "#121418",
+      "popover": "#ffffff",
+      "popoverForeground": "#121418",
+      "primary": "#121418",
+      "primaryForeground": "#ffffff",
+      "secondary": "#f1f1ef",
+      "secondaryForeground": "#464b56",
+      "muted": "#f1f1ef",
+      "mutedForeground": "#62666f",
+      "accent": "#edeffd",
+      "accentForeground": "#3f50c9",
+      "destructive": "#b23330",
+      "destructiveForeground": "#ffffff",
+      "success": "#116e49",
+      "successForeground": "#ffffff",
+      "info": "#4555d6",
+      "infoForeground": "#ffffff",
+      "warning": "#87570f",
+      "warningForeground": "#ffffff",
+      "border": "rgb(17 22 40 / 0.075)",
+      "input": "rgb(17 22 40 / 0.13)",
+      "ring": "rgb(79 98 232 / 0.55)",
+      "chart1": "#4f78e0",
+      "chart2": "#3f9d77",
+      "chart3": "#d68a24",
+      "chart4": "#e5674f",
+      "chart5": "#8a62d6",
+      "sidebar": "#f6f6f8",
+      "sidebarForeground": "#2f333b",
+      "sidebarPrimary": "#121418",
+      "sidebarPrimaryForeground": "#ffffff",
+      "sidebarAccent": "#ffffff",
+      "sidebarAccentForeground": "#121418",
+      "sidebarBorder": "rgb(17 22 40 / 0.075)",
+      "sidebarRing": "rgb(79 98 232 / 0.55)"
+    },
+    "dark": {
+      "background": "#1a1b20",
+      "foreground": "#eceef3",
+      "card": "#1a1b20",
+      "cardForeground": "#eceef3",
+      "popover": "#22232a",
+      "popoverForeground": "#eceef3",
+      "primary": "#eceef3",
+      "primaryForeground": "#1a1b20",
+      "secondary": "#26272e",
+      "secondaryForeground": "#c3c7d1",
+      "muted": "#26272e",
+      "mutedForeground": "#9a9fac",
+      "accent": "#31344a",
+      "accentForeground": "#b4bdff",
+      "destructive": "#f49a96",
+      "destructiveForeground": "#1a1b20",
+      "success": "#3fbf8a",
+      "successForeground": "#1a1b20",
+      "info": "#9eaaff",
+      "infoForeground": "#1a1b20",
+      "warning": "#e0a443",
+      "warningForeground": "#1a1b20",
+      "border": "rgb(255 255 255 / 0.07)",
+      "input": "rgb(255 255 255 / 0.12)",
+      "ring": "rgb(142 155 255 / 0.6)",
+      "chart1": "#7c9bf0",
+      "chart2": "#5fbf98",
+      "chart3": "#e7a54a",
+      "chart4": "#f08a74",
+      "chart5": "#a98ae6",
+      "sidebar": "#1a1b20",
+      "sidebarForeground": "#c3c7d1",
+      "sidebarPrimary": "#eceef3",
+      "sidebarPrimaryForeground": "#1a1b20",
+      "sidebarAccent": "#26272e",
+      "sidebarAccentForeground": "#eceef3",
+      "sidebarBorder": "rgb(255 255 255 / 0.07)",
+      "sidebarRing": "rgb(142 155 255 / 0.6)"
+    }
+  },
+  "typography": {
+    "body": {
+      "family": "'Geist', 'Geist Variable', ui-sans-serif, system-ui, sans-serif",
+      "tracking": "0",
+      "leading": "1.5",
+      "weight": 400
+    },
+    "heading": {
+      "family": "'Geist', 'Geist Variable', ui-sans-serif, system-ui, sans-serif",
+      "tracking": "-0.01em",
+      "leading": "1.25",
+      "weight": 600
+    },
+    "mono": "'Geist Mono', 'Geist Mono Variable', ui-monospace, 'SFMono-Regular', Menlo, monospace"
+  },
+  "geometry": {
+    "radius": "0.5rem",
+    "panelRadius": "0.875rem",
+    "actionRadius": null
+  },
+  "density": {
+    "control": "2.25rem",
+    "controlSmall": "2rem",
+    "controlLarge": "2.5rem"
+  },
+  "effects": {
+    "light": {
+      "controlShadow": "0 1px 2px rgb(0 0 0 / 0.04)",
+      "panelShadow": "0 0 0 0.5px rgb(17 22 40 / 0.08), 0 8px 24px -4px rgb(17 22 40 / 0.14), 0 30px 60px -20px rgb(17 22 40 / 0.22)",
+      "overlayShadow": "0 0 0 0.5px rgb(17 22 40 / 0.08), 0 8px 24px -4px rgb(17 22 40 / 0.14)",
+      "backdrop": "rgb(17 22 40 / 0.24)"
+    },
+    "dark": {
+      "controlShadow": "0 1px 2px rgb(0 0 0 / 0.3)",
+      "panelShadow": "0 0 0 0.5px rgb(255 255 255 / 0.1), 0 8px 24px -4px rgb(0 0 0 / 0.45), 0 30px 60px -20px rgb(0 0 0 / 0.6)",
+      "overlayShadow": "0 0 0 0.5px rgb(255 255 255 / 0.1), 0 8px 24px -4px rgb(0 0 0 / 0.45)",
+      "backdrop": "rgb(0 0 0 / 0.5)"
+    }
+  },
+  "motion": {
+    "fast": "120ms",
+    "standard": "180ms"
+  }
+}

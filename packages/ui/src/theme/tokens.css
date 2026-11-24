@@ -54,6 +54,12 @@
   --ui-weight-heading: 600;
   --ui-shadow-control: 0 1px 2px oklch(0.19 0.016 255 / 0.08);
   --ui-shadow-panel: 0 18px 55px oklch(0.19 0.016 255 / 0.1);
+  /* Floating surfaces: popovers, menus, select lists, hover cards, sheets, and toasts. */
+  --ui-shadow-overlay: 0 4px 6px -1px oklch(0 0 0 / 0.1), 0 2px 4px -2px oklch(0 0 0 / 0.1);
+  /* The scrim a modal dialog, sheet, or drawer lays over the page. */
+  --ui-backdrop: oklch(0 0 0 / 0.1);
+  /* `--ui-radius-action` is unset by default: buttons and toggles then derive their radius from
+     `--ui-radius`. A theme sets it to give standalone actions their own shape, such as a pill. */
   --ui-motion-fast: 120ms;
   --ui-motion-standard: 180ms;
   /* Stacking layers. Floating elements share one layer and stack by mount order; the toast
@@ -94,7 +100,14 @@
     line-height: var(--ui-leading-body);
   }
 
-  :where([data-slot='card'], [data-slot='dialog-content'], [data-slot='sheet-content']) {
+  /*
+    Panels carry the panel shadow under their hairline ring. A ring or shadow utility sets
+    `box-shadow` to Tailwind's composition of `--tw-ring-shadow` and `--tw-shadow`, which outranks
+    this layer, so the panel shadow is declared as `--tw-shadow` too: it then composes with the
+    ring, and a consumer `shadow-*` utility still replaces it.
+  */
+  :where([data-slot='card'], [data-slot='dialog-content'], [data-slot='alert-dialog-content']) {
+    --tw-shadow: var(--ui-shadow-panel);
     box-shadow: var(--ui-shadow-panel);
   }
 

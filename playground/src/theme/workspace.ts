@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from 'react'
 
 import type { ThemeGenerationResult } from '../../../tooling/theme-generator/index.js'
 
-import observatorySource from '../../../registry/themes/observatory.astrale-theme.json'
 import {
   parseThemeDocument,
   parseThemeDocumentText,
@@ -12,12 +11,27 @@ import {
   type GeneratorBranch,
   type ThemeColorToken,
   type ThemeDocument,
+  type ThemeEffects,
 } from '../../../tooling/theme-document/index.js'
 
 const STORAGE_KEY = 'astrale-ui-playground:themes:v2'
 const MAX_HISTORY = 50
 
-export const defaultTheme = parseThemeDocument(observatorySource)
+/** Every theme the registry bundles, the default first and the rest by label. */
+export const bundledThemes: readonly ThemeDocument[] = Object.values(
+  import.meta.glob<unknown>('../../../registry/themes/*.astrale-theme.json', {
+    eager: true,
+    import: 'default',
+  }),
+)
+  .map((source) => parseThemeDocument(source))
+  .sort(
+    (left, right) =>
+      Number(right.name === 'observatory') - Number(left.name === 'observatory') ||
+      left.label.localeCompare(right.label),
+  )
+
+export const defaultTheme = bundledThemes[0]!
 
 type Timeline = {
   past: ThemeDocument[]
@@ -153,7 +167,7 @@ export function useThemeWorkspace() {
 
   const setValue = useCallback(
     <
-      Section extends 'typography' | 'geometry' | 'density' | 'effects' | 'motion',
+      Section extends 'typography' | 'geometry' | 'density' | 'motion',
       Field extends keyof ThemeDocument[Section],
     >(
       section: Section,
@@ -168,6 +182,24 @@ export function useThemeWorkspace() {
             [section]: { ...timeline.present[section], [field]: value },
           },
           branch,
+        ),
+      )
+    },
+    [commit, timeline.present],
+  )
+
+  const setEffect = useCallback(
+    (mode: 'light' | 'dark', field: keyof ThemeEffects, value: string) => {
+      commit(
+        markEdited(
+          {
+            ...timeline.present,
+            effects: {
+              ...timeline.present.effects,
+              [mode]: { ...timeline.present.effects[mode], [field]: value },
+            },
+          },
+          'geometry',
         ),
       )
     },
@@ -267,6 +299,7 @@ export function useThemeWorkspace() {
     setIdentity,
     setColor,
     setValue,
+    setEffect,
     locks,
     generatorBranches,
     toggleLock,

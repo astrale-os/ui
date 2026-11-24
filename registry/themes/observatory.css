@@ -43,6 +43,7 @@
   --ui-sidebar-ring: oklch(0.705 0.015 286.067);
   --ui-radius: 0.7rem;
   --ui-radius-panel: 1rem;
+  --ui-radius-action: initial;
   --ui-control-height: 2.25rem;
   --ui-control-height-sm: 2rem;
   --ui-control-height-lg: 2.5rem;
@@ -57,6 +58,9 @@
   --ui-weight-heading: 600;
   --ui-shadow-control: 0 1px 2px oklch(0.19 0.02 255 / 0.08);
   --ui-shadow-panel: 0 18px 55px oklch(0.19 0.02 255 / 0.1);
+  --ui-shadow-overlay:
+    0 4px 6px -1px oklch(0 0 0 / 0.1), 0 2px 4px -2px oklch(0 0 0 / 0.1);
+  --ui-backdrop: oklch(0 0 0 / 0.1);
   --ui-motion-fast: 120ms;
   --ui-motion-standard: 180ms;
 }
@@ -80,7 +84,7 @@
   --ui-accent: oklch(0.38 0.08 78);
   --ui-accent-foreground: oklch(0.96 0.008 82);
   --ui-destructive: oklch(0.78 0.16 28);
-  --ui-destructive-foreground: oklch(0.98 0 0);
+  --ui-destructive-foreground: oklch(0.15 0.02 255);
   --ui-success: oklch(0.76 0.12 155);
   --ui-success-foreground: oklch(0.15 0.02 255);
   --ui-info: oklch(0.76 0.12 251);
@@ -105,6 +109,7 @@
   --ui-sidebar-ring: oklch(0.552 0.016 285.938);
   --ui-radius: 0.7rem;
   --ui-radius-panel: 1rem;
+  --ui-radius-action: initial;
   --ui-control-height: 2.25rem;
   --ui-control-height-sm: 2rem;
   --ui-control-height-lg: 2.5rem;
@@ -119,6 +124,9 @@
   --ui-weight-heading: 600;
   --ui-shadow-control: 0 1px 2px oklch(0.19 0.02 255 / 0.08);
   --ui-shadow-panel: 0 18px 55px oklch(0.19 0.02 255 / 0.1);
+  --ui-shadow-overlay:
+    0 4px 6px -1px oklch(0 0 0 / 0.1), 0 2px 4px -2px oklch(0 0 0 / 0.1);
+  --ui-backdrop: oklch(0 0 0 / 0.1);
   --ui-motion-fast: 120ms;
   --ui-motion-standard: 180ms;
 }

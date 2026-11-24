@@ -1,0 +1,134 @@
+/* Generated from console.astrale-theme.json. Consumer-owned after installation. */
+:root,
+[data-ui-preset='console'],
+[data-ui-theme='console'] {
+  color-scheme: light;
+  --ui-background: #f6f6f8;
+  --ui-foreground: #121418;
+  --ui-card: #ffffff;
+  --ui-card-foreground: #121418;
+  --ui-popover: #ffffff;
+  --ui-popover-foreground: #121418;
+  --ui-primary: #121418;
+  --ui-primary-foreground: #ffffff;
+  --ui-secondary: #f1f1ef;
+  --ui-secondary-foreground: #464b56;
+  --ui-muted: #f1f1ef;
+  --ui-muted-foreground: #62666f;
+  --ui-accent: #edeffd;
+  --ui-accent-foreground: #3f50c9;
+  --ui-destructive: #b23330;
+  --ui-destructive-foreground: #ffffff;
+  --ui-success: #116e49;
+  --ui-success-foreground: #ffffff;
+  --ui-info: #4555d6;
+  --ui-info-foreground: #ffffff;
+  --ui-warning: #87570f;
+  --ui-warning-foreground: #ffffff;
+  --ui-border: rgb(17 22 40 / 0.075);
+  --ui-input: rgb(17 22 40 / 0.13);
+  --ui-ring: rgb(79 98 232 / 0.55);
+  --ui-chart-1: #4f78e0;
+  --ui-chart-2: #3f9d77;
+  --ui-chart-3: #d68a24;
+  --ui-chart-4: #e5674f;
+  --ui-chart-5: #8a62d6;
+  --ui-sidebar: #f6f6f8;
+  --ui-sidebar-foreground: #2f333b;
+  --ui-sidebar-primary: #121418;
+  --ui-sidebar-primary-foreground: #ffffff;
+  --ui-sidebar-accent: #ffffff;
+  --ui-sidebar-accent-foreground: #121418;
+  --ui-sidebar-border: rgb(17 22 40 / 0.075);
+  --ui-sidebar-ring: rgb(79 98 232 / 0.55);
+  --ui-radius: 0.5rem;
+  --ui-radius-panel: 0.875rem;
+  --ui-radius-action: initial;
+  --ui-control-height: 2.25rem;
+  --ui-control-height-sm: 2rem;
+  --ui-control-height-lg: 2.5rem;
+  --ui-font-body: 'Geist', 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
+  --ui-font-heading: 'Geist', 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
+  --ui-font-mono: 'Geist Mono', 'Geist Mono Variable', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --ui-tracking-body: 0;
+  --ui-tracking-heading: -0.01em;
+  --ui-leading-body: 1.5;
+  --ui-leading-heading: 1.25;
+  --ui-weight-body: 400;
+  --ui-weight-heading: 600;
+  --ui-shadow-control: 0 1px 2px rgb(0 0 0 / 0.04);
+  --ui-shadow-panel:
+    0 0 0 0.5px rgb(17 22 40 / 0.08), 0 8px 24px -4px rgb(17 22 40 / 0.14), 0 30px 60px -20px rgb(17 22 40 / 0.22);
+  --ui-shadow-overlay:
+    0 0 0 0.5px rgb(17 22 40 / 0.08), 0 8px 24px -4px rgb(17 22 40 / 0.14);
+  --ui-backdrop: rgb(17 22 40 / 0.24);
+  --ui-motion-fast: 120ms;
+  --ui-motion-standard: 180ms;
+}
+
+:root.dark,
+[data-ui-preset='console'].dark,
+[data-ui-theme='console'].dark {
+  color-scheme: dark;
+  --ui-background: #1a1b20;
+  --ui-foreground: #eceef3;
+  --ui-card: #1a1b20;
+  --ui-card-foreground: #eceef3;
+  --ui-popover: #22232a;
+  --ui-popover-foreground: #eceef3;
+  --ui-primary: #eceef3;
+  --ui-primary-foreground: #1a1b20;
+  --ui-secondary: #26272e;
+  --ui-secondary-foreground: #c3c7d1;
+  --ui-muted: #26272e;
+  --ui-muted-foreground: #9a9fac;
+  --ui-accent: #31344a;
+  --ui-accent-foreground: #b4bdff;
+  --ui-destructive: #f49a96;
+  --ui-destructive-foreground: #1a1b20;
+  --ui-success: #3fbf8a;
+  --ui-success-foreground: #1a1b20;
+  --ui-info: #9eaaff;
+  --ui-info-foreground: #1a1b20;
+  --ui-warning: #e0a443;
+  --ui-warning-foreground: #1a1b20;
+  --ui-border: rgb(255 255 255 / 0.07);
+  --ui-input: rgb(255 255 255 / 0.12);
+  --ui-ring: rgb(142 155 255 / 0.6);
+  --ui-chart-1: #7c9bf0;
+  --ui-chart-2: #5fbf98;
+  --ui-chart-3: #e7a54a;
+  --ui-chart-4: #f08a74;
+  --ui-chart-5: #a98ae6;
+  --ui-sidebar: #1a1b20;
+  --ui-sidebar-foreground: #c3c7d1;
+  --ui-sidebar-primary: #eceef3;
+  --ui-sidebar-primary-foreground: #1a1b20;
+  --ui-sidebar-accent: #26272e;
+  --ui-sidebar-accent-foreground: #eceef3;
+  --ui-sidebar-border: rgb(255 255 255 / 0.07);
+  --ui-sidebar-ring: rgb(142 155 255 / 0.6);
+  --ui-radius: 0.5rem;
+  --ui-radius-panel: 0.875rem;
+  --ui-radius-action: initial;
+  --ui-control-height: 2.25rem;
+  --ui-control-height-sm: 2rem;
+  --ui-control-height-lg: 2.5rem;
+  --ui-font-body: 'Geist', 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
+  --ui-font-heading: 'Geist', 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
+  --ui-font-mono: 'Geist Mono', 'Geist Mono Variable', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --ui-tracking-body: 0;
+  --ui-tracking-heading: -0.01em;
+  --ui-leading-body: 1.5;
+  --ui-leading-heading: 1.25;
+  --ui-weight-body: 400;
+  --ui-weight-heading: 600;
+  --ui-shadow-control: 0 1px 2px rgb(0 0 0 / 0.3);
+  --ui-shadow-panel:
+    0 0 0 0.5px rgb(255 255 255 / 0.1), 0 8px 24px -4px rgb(0 0 0 / 0.45), 0 30px 60px -20px rgb(0 0 0 / 0.6);
+  --ui-shadow-overlay:
+    0 0 0 0.5px rgb(255 255 255 / 0.1), 0 8px 24px -4px rgb(0 0 0 / 0.45);
+  --ui-backdrop: rgb(0 0 0 / 0.5);
+  --ui-motion-fast: 120ms;
+  --ui-motion-standard: 180ms;
+}

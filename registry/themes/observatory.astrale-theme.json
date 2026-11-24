@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/astrale-os/ui/main/schemas/theme.schema.json",
-  "version": 6,
+  "version": 7,
   "name": "observatory",
   "label": "Observatory",
   "description": "Quiet mineral surfaces, deep orbital blue, and measured editorial typography.",
@@ -61,7 +61,7 @@
       "accent": "oklch(0.38 0.08 78)",
       "accentForeground": "oklch(0.96 0.008 82)",
       "destructive": "oklch(0.78 0.16 28)",
-      "destructiveForeground": "oklch(0.98 0 0)",
+      "destructiveForeground": "oklch(0.15 0.02 255)",
       "success": "oklch(0.76 0.12 155)",
       "successForeground": "oklch(0.15 0.02 255)",
       "info": "oklch(0.76 0.12 251)",
@@ -103,7 +103,8 @@
   },
   "geometry": {
     "radius": "0.7rem",
-    "panelRadius": "1rem"
+    "panelRadius": "1rem",
+    "actionRadius": null
   },
   "density": {
     "control": "2.25rem",
@@ -111,8 +112,18 @@
     "controlLarge": "2.5rem"
   },
   "effects": {
-    "controlShadow": "0 1px 2px oklch(0.19 0.02 255 / 0.08)",
-    "panelShadow": "0 18px 55px oklch(0.19 0.02 255 / 0.1)"
+    "light": {
+      "controlShadow": "0 1px 2px oklch(0.19 0.02 255 / 0.08)",
+      "panelShadow": "0 18px 55px oklch(0.19 0.02 255 / 0.1)",
+      "overlayShadow": "0 4px 6px -1px oklch(0 0 0 / 0.1), 0 2px 4px -2px oklch(0 0 0 / 0.1)",
+      "backdrop": "oklch(0 0 0 / 0.1)"
+    },
+    "dark": {
+      "controlShadow": "0 1px 2px oklch(0.19 0.02 255 / 0.08)",
+      "panelShadow": "0 18px 55px oklch(0.19 0.02 255 / 0.1)",
+      "overlayShadow": "0 4px 6px -1px oklch(0 0 0 / 0.1), 0 2px 4px -2px oklch(0 0 0 / 0.1)",
+      "backdrop": "oklch(0 0 0 / 0.1)"
+    }
   },
   "motion": {
     "fast": "120ms",
