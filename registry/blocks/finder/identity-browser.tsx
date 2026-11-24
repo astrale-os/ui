@@ -392,8 +392,9 @@ function Path() {
 function Results() {
   const finder = useIdentityFinder()
   const m = useContext(Messages)
+  const rowByKey = new Map(finder.rows.map((row) => [row.key, row]))
   const rowsOf = (identities: readonly Identity[]) =>
-    identities.flatMap((identity) => finder.rows.find((row) => row.key === identity.id) ?? [])
+    identities.flatMap((identity) => rowByKey.get(identity.id) ?? [])
 
   // The listbox owns options and groups of options only, and scrolls them; every other line (a
   // note, a failure and its Retry, the next page) shows under it.
@@ -442,7 +443,7 @@ function Results() {
               {section.more ? (
                 <Row
                   row={
-                    finder.rows.find((row) => row.key === `kind:${section.kind.key}`) ?? {
+                    rowByKey.get(`kind:${section.kind.key}`) ?? {
                       type: 'kind',
                       key: `kind:${section.kind.key}`,
                       kind: section.kind,
@@ -479,7 +480,11 @@ function Results() {
         {options}
       </IdentityFinderList>
       {status === null ? null : (
-        <div data-slot="block-finder-identity-browser-status" className="shrink-0 px-2">
+        // Bounded, so that failed kinds never squeeze the listed ones out of sight.
+        <div
+          data-slot="block-finder-identity-browser-status"
+          className="max-h-[45%] shrink-0 overflow-y-auto px-2"
+        >
           {status}
         </div>
       )}

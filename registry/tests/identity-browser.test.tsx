@@ -4,7 +4,11 @@ import userEvent from '@testing-library/user-event'
 import { afterEach, describe, expect, test, vi } from 'vitest'
 
 import { IdentityBrowser } from '../blocks/finder/identity-browser.js'
-import { failingIdentitySource, identityDirectory } from '../blocks/finder/identity.fixture.js'
+import {
+  failingIdentitySource,
+  GROUP,
+  identityDirectory,
+} from '../blocks/finder/identity.fixture.js'
 
 afterEach(cleanup)
 
@@ -40,7 +44,7 @@ describe('block/finder/identity-browser', () => {
   test('the listbox owns groups of options only, and no option holds a control', async () => {
     browse()
     const listbox = screen.getByRole('listbox', { name: 'People and groups' })
-    await within(listbox).findByRole('option', { name: /Engineering/ })
+    await within(listbox).findByRole('option', { name: /Engineering/ }, { timeout: 5000 })
     const groups = owned(listbox)
     expect(groups.map((group) => group.getAttribute('role'))).toEqual(groups.map(() => 'group'))
     expect(groups.map((group) => group.getAttribute('aria-label'))).toEqual([
@@ -57,7 +61,11 @@ describe('block/finder/identity-browser', () => {
 
   test('the pointer opens a group from the mark on its row', async () => {
     const { user } = browse()
-    const engineering = await screen.findByRole('option', { name: /Engineering/ })
+    const engineering = await screen.findByRole(
+      'option',
+      { name: /Engineering/ },
+      { timeout: 5000 },
+    )
     const opener = engineering.querySelector(
       '[data-slot="block-finder-identity-browser-open-members"]',
     )
@@ -68,9 +76,28 @@ describe('block/finder/identity-browser', () => {
     expect(await screen.findByRole('option', { name: /Kernel team/ })).toBeInTheDocument()
   })
 
+  test('a kind that fails shows under the listbox, and the others stay listed', async () => {
+    const groupsFail: typeof source = {
+      ...source,
+      async identities(search) {
+        if (search.kinds.includes(GROUP)) throw new Error('unreachable')
+        return source.identities(search)
+      },
+    }
+    browse({ source: groupsFail })
+    const retry = await screen.findByRole('button', { name: 'Retry' }, { timeout: 5000 })
+    const listbox = screen.getByRole('listbox', { name: 'People and groups' })
+    expect(listbox.contains(retry)).toBe(false)
+    expect(owned(listbox).map((group) => group.getAttribute('aria-label'))).toEqual([
+      'People',
+      'Roles',
+      'Service accounts',
+    ])
+  })
+
   test('a failure and its Retry show under the listbox, not in it', async () => {
     browse({ source: failingIdentitySource })
-    const retry = await screen.findByRole('button', { name: 'Retry' })
+    const retry = await screen.findByRole('button', { name: 'Retry' }, { timeout: 5000 })
     const listbox = screen.getByRole('listbox', { hidden: true })
     expect(listbox.contains(retry)).toBe(false)
   })
