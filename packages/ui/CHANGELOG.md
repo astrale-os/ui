@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0-beta.51](https://github.com/astrale-os/ui/compare/v1.0.0-beta.50...v1.0.0-beta.51) (2026-11-24)
+
+
+### Bug Fixes
+
+* **ui:** declare type packages for registry items that import untyped npm modules ([#258](https://github.com/astrale-os/ui/issues/258)) ([d50096c](https://github.com/astrale-os/ui/commit/d50096c7e7f1af0330bc8951ef9d11ea0455c43d))
+
 ## [1.0.0-beta.50](https://github.com/astrale-os/ui/compare/v1.0.0-beta.49...v1.0.0-beta.50) (2026-11-24)
 
 
