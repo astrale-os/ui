@@ -1435,13 +1435,20 @@ test('catalog specimens own their interaction without navigating the playground'
   await loadPreview(page, 'component/pagination')
   const pagination = page.locator('[data-component="pagination"]')
   await pagination.scrollIntoViewIfNeeded()
-  const before = await page.evaluate(() => ({ href: location.href, scrollY }))
+  // Where the specimen stands on screen, not the page offset: a specimen above that is still
+  // loading grows, and scroll anchoring moves the offset to keep this one in place.
+  const position = () =>
+    pagination.evaluate((element) => ({
+      href: location.href,
+      top: Math.round(element.getBoundingClientRect().top),
+    }))
+  const before = await position()
   await pagination.getByRole('button', { name: '2' }).click()
   await expect(pagination.getByRole('button', { name: '2' })).toHaveAttribute(
     'aria-current',
     'page',
   )
-  await expect.poll(() => page.evaluate(() => ({ href: location.href, scrollY }))).toEqual(before)
+  await expect.poll(position).toEqual(before)
 })
 
 test('typography sliders preview during one gesture and commit one history entry', async ({
