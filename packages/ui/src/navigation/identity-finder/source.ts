@@ -20,7 +20,7 @@ export type IdentityImage = FinderImage
 export interface IdentityKind {
   /** The Class key: stable, passed back in `IdentitySearch.kinds`. */
   readonly key: string
-  /** The Class's name, singular: User, Group, Role. */
+  /** What its Identities are called together: People, Groups, Roles. */
   readonly name: string
   readonly description?: string
   /** Absent: the finder shows one neutral glyph. */
