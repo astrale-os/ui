@@ -5,7 +5,6 @@ import '@astrale-os/ui/reset.css'
 import './playground-theme.css'
 import '@astrale-os/ui/presets/astrale.css'
 
-import './fonts/hanken-grotesk.css'
 import './playground.css'
 import { Playground } from './playground.js'
 

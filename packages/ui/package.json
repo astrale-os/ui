@@ -81,10 +81,10 @@
       "default": "./dist/brand/geometry.js"
     },
     "./brand/icons/*": "./dist/brand/icons/*",
-    "./fonts/manrope-inline": {
-      "types": "./dist/fonts/manrope-inline.d.ts",
-      "import": "./dist/fonts/manrope-inline.js",
-      "default": "./dist/fonts/manrope-inline.js"
+    "./fonts/hanken-grotesk-inline": {
+      "types": "./dist/fonts/hanken-grotesk-inline.d.ts",
+      "import": "./dist/fonts/hanken-grotesk-inline.js",
+      "default": "./dist/fonts/hanken-grotesk-inline.js"
     },
     "./breadcrumb": {
       "types": "./dist/navigation/breadcrumb/index.d.ts",

@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url'
 import uiPackage from '../../packages/ui/package.json' with { type: 'json' }
 import registry from '../../registry/registry.json' with { type: 'json' }
 import {
+  defaultThemeName,
   THEME_DOCUMENT_VERSION,
   THEME_GENERATOR_ENGINE_VERSION,
 } from '../../tooling/theme-document/index.js'
@@ -18,6 +19,11 @@ const starterThemeDocuments = globSync('registry/themes/*.astrale-theme.json', {
 })
   .map((file) => JSON.parse(readFileSync(`${repositoryRoot}/${file}`, 'utf8')))
   .sort((left, right) => left.label.localeCompare(right.label))
+/** The labels of the theme picker's registry themes: the default first, the others by label. */
+const registryThemes: string[] = [
+  ...starterThemeDocuments.filter((theme) => theme.name === defaultThemeName),
+  ...starterThemeDocuments.filter((theme) => theme.name !== defaultThemeName),
+].map((theme) => theme.label)
 
 const runtimeAddresses = Object.entries(uiPackage.exports)
   .filter(
@@ -1636,14 +1642,14 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
     root.evaluate((element) =>
       getComputedStyle(element).getPropertyValue('--ui-sidebar-ring').trim(),
     )
-  await expect.poll(primaryValue).toBe('oklch(0.36 0.14 251)')
-  await expect.poll(ringValue).toBe('oklch(0.705 0.015 286.067)')
+  await expect.poll(primaryValue).toBe('oklch(0.43 0.17 262)')
+  await expect.poll(ringValue).toBe('oklch(0.55 0.16 262)')
 
   await page.getByRole('button', { name: 'Dark', exact: true }).click()
   await expect(root).toHaveClass(/dark/u)
-  await expect.poll(primaryValue).toBe('oklch(0.76 0.13 250)')
-  await expect.poll(ringValue).toBe('oklch(0.552 0.016 285.938)')
-  await expect(root).toHaveAttribute('data-ui-theme', 'observatory')
+  await expect.poll(primaryValue).toBe('oklch(0.76 0.115 262)')
+  await expect.poll(ringValue).toBe('oklch(0.7 0.13 262)')
+  await expect(root).toHaveAttribute('data-ui-theme', 'spatial')
   const paletteDarkPrimary = page
     .getByRole('combobox', { name: 'Theme' })
     .locator('[data-slot="theme-palette-icon"] > span')
@@ -1658,10 +1664,10 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
         ),
     )
     .toEqual([
-      'oklch(0.985 0.006 82)',
-      'oklch(0.36 0.14 251)',
-      'oklch(0.15 0.02 255)',
-      'oklch(0.76 0.13 250)',
+      'oklch(0.952 0.003 258)',
+      'oklch(0.43 0.17 262)',
+      'oklch(0.19 0.006 258)',
+      'oklch(0.76 0.115 262)',
     ])
   await page.getByRole('tab', { name: 'Colors' }).click()
   const primaryToken = page.getByLabel('Primary', { exact: true })
@@ -1677,14 +1683,14 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
     colorAreaBox!.y + colorAreaBox!.height * 0.65,
     { steps: 12 },
   )
-  await expect.poll(primaryValue).not.toBe('oklch(0.76 0.13 250)')
+  await expect.poll(primaryValue).not.toBe('oklch(0.76 0.115 262)')
   await expect(studio.getByRole('button', { name: 'Undo' })).toBeDisabled()
   await page.mouse.up()
   await expect(primaryToken).toHaveValue(/^#/u)
-  await expect.poll(primaryValue).not.toBe('oklch(0.76 0.13 250)')
+  await expect.poll(primaryValue).not.toBe('oklch(0.76 0.115 262)')
   await page.keyboard.press('Escape')
   await studio.getByRole('button', { name: 'Undo' }).click()
-  await expect(primaryToken).toHaveValue('oklch(0.76 0.13 250)')
+  await expect(primaryToken).toHaveValue('oklch(0.76 0.115 262)')
   await primaryToken.fill('oklch(0.62 0.2 145)')
   await primaryToken.blur()
   await expect.poll(primaryValue).toBe('oklch(0.62 0.2 145)')
@@ -1701,8 +1707,8 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
     .toBe('oklch(0.62 0.2 145)')
 
   await studio.getByRole('button', { name: 'Undo' }).click()
-  await expect(primaryToken).toHaveValue('oklch(0.76 0.13 250)')
-  await expect.poll(primaryValue).toBe('oklch(0.76 0.13 250)')
+  await expect(primaryToken).toHaveValue('oklch(0.76 0.115 262)')
+  await expect.poll(primaryValue).toBe('oklch(0.76 0.115 262)')
   await studio.getByRole('button', { name: 'Redo' }).click()
   await expect(page.getByLabel('Primary', { exact: true })).toHaveValue('oklch(0.62 0.2 145)')
   await expect.poll(primaryValue).toBe('oklch(0.62 0.2 145)')
@@ -1724,15 +1730,23 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
     'Body',
     'Terminal',
   ])
-  await expect(page.getByLabel('Body font', { exact: true })).toContainText('Avenir Next · Sans')
-  await expect(page.getByLabel('Heading font', { exact: true })).toContainText(
-    'Iowan Old Style · Serif',
-  )
+  // Spatial's family is the theme's own, outside the generator catalog, and listed by name.
+  for (const field of ['Body font', 'Heading font']) {
+    await expect(
+      page.getByLabel(field, { exact: true }).locator('[data-slot="select-value"]'),
+    ).toHaveText('Hanken Grotesk')
+  }
   const terminalSection = page.locator('.theme-typography-section').filter({
     has: page.getByRole('heading', { name: 'Terminal', exact: true }),
   })
   await expect(terminalSection.getByRole('combobox')).toHaveCount(1)
   await expect(terminalSection.getByRole('slider')).toHaveCount(0)
+  const bodyWeight = page.getByRole('slider', { name: 'Body weight' })
+  const labelWeight = page.getByRole('slider', { name: 'Label weight' })
+  const headingWeight = page.getByRole('slider', { name: 'Heading weight' })
+  await expect(bodyWeight).toHaveAttribute('aria-valuetext', '450')
+  await expect(labelWeight).toHaveAttribute('aria-valuetext', '550')
+  await expect(headingWeight).toHaveAttribute('aria-valuetext', '600')
   await selectFieldOption(page, 'Body font', 'System UI · Sans')
   await expect
     .poll(() =>
@@ -1742,21 +1756,18 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
     )
     .toContain('system-ui')
   await selectFieldOption(page, 'Heading font', 'Charter · Serif')
-  const bodyWeight = page.getByRole('slider', { name: 'Body weight' })
-  const labelWeight = page.getByRole('slider', { name: 'Label weight' })
-  const headingWeight = page.getByRole('slider', { name: 'Heading weight' })
+  // A catalog family takes the nearest weight it declares.
   await expect(bodyWeight).toHaveAttribute('aria-valuetext', '400')
-  await expect(labelWeight).toHaveAttribute('aria-valuetext', '500')
   await expect(headingWeight).toHaveAttribute('aria-valuetext', '600')
   for (const [slider, steps] of [
-    [bodyWeight, 10],
+    [bodyWeight, 15],
     [labelWeight, 5],
     [headingWeight, 10],
   ] as const) {
     for (let step = 0; step < steps; step += 1) await slider.press('ArrowRight')
   }
-  await expect(bodyWeight).toHaveAttribute('aria-valuetext', '500')
-  await expect(labelWeight).toHaveAttribute('aria-valuetext', '550')
+  await expect(bodyWeight).toHaveAttribute('aria-valuetext', '550')
+  await expect(labelWeight).toHaveAttribute('aria-valuetext', '600')
   await expect(headingWeight).toHaveAttribute('aria-valuetext', '700')
   const bodyTracking = page.getByRole('slider', { name: 'Body letter spacing' })
   const bodyLeading = page.getByRole('slider', { name: 'Body line height' })
@@ -1764,7 +1775,7 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
   const headingLeading = page.getByRole('slider', { name: 'Heading line height' })
   await expect(bodyTracking).toHaveAttribute('aria-valuetext', '0')
   await expect(bodyLeading).toHaveAttribute('aria-valuetext', '1.5')
-  await expect(headingTracking).toHaveAttribute('aria-valuetext', '-0.01em')
+  await expect(headingTracking).toHaveAttribute('aria-valuetext', '-0.015em')
   await expect(headingLeading).toHaveAttribute('aria-valuetext', '1.2')
   await bodyTracking.press('ArrowRight')
   await bodyLeading.press('ArrowRight')
@@ -1772,7 +1783,7 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
   await headingLeading.press('ArrowRight')
   await expect(bodyTracking).toHaveAttribute('aria-valuetext', '0.005em')
   await expect(bodyLeading).toHaveAttribute('aria-valuetext', '1.55')
-  await expect(headingTracking).toHaveAttribute('aria-valuetext', '-0.015em')
+  await expect(headingTracking).toHaveAttribute('aria-valuetext', '-0.02em')
   await expect(headingLeading).toHaveAttribute('aria-valuetext', '1.25')
   await selectFieldOption(page, 'Terminal font', 'SFMono Regular · Mono')
   await expect
@@ -1794,7 +1805,7 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
         return [style.fontFamily, style.fontWeight, style.letterSpacing, style.lineHeight]
       }),
     )
-    .toEqual([expect.stringContaining('system-ui'), '500', '0.0624px', '19.344px'])
+    .toEqual([expect.stringContaining('system-ui'), '550', '0.0624px', '19.344px'])
   await expect
     .poll(() =>
       headingSpecimen.evaluate((element) => {
@@ -1802,10 +1813,10 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
         return [style.fontFamily, style.fontWeight, style.letterSpacing, style.lineHeight]
       }),
     )
-    .toEqual([expect.stringContaining('Charter'), '700', '-0.24px', '20px'])
+    .toEqual([expect.stringContaining('Charter'), '700', '-0.32px', '20px'])
   await expect
     .poll(() => labelSpecimen.evaluate((element) => getComputedStyle(element).fontWeight))
-    .toBe('550')
+    .toBe('600')
   await expect
     .poll(() => monoSpecimen.evaluate((element) => getComputedStyle(element).fontFamily))
     .toContain('SFMono-Regular')
@@ -1816,7 +1827,7 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
     .poll(() =>
       root.evaluate((element) => getComputedStyle(element).getPropertyValue('--ui-radius').trim()),
     )
-    .toBe('0.75rem')
+    .toBe('0.7rem')
   await page.getByRole('slider', { name: 'Panel spacing' }).press('ArrowRight')
   await expect
     .poll(() =>
@@ -1824,7 +1835,7 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
         getComputedStyle(element).getPropertyValue('--ui-panel-spacing').trim(),
       ),
     )
-    .toBe('1.05rem')
+    .toBe('1.3rem')
 
   const variation = studio.getByRole('button', { name: 'Variation' })
   await expect(variation).toBeDisabled()
@@ -1894,7 +1905,7 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
   await expect(variation).toBeDisabled()
 
   await studio.getByRole('button', { name: 'Save theme' }).click()
-  const savedToast = page.getByRole('dialog', { name: 'Observatory saved in this browser' })
+  const savedToast = page.getByRole('dialog', { name: 'Spatial saved in this browser' })
   await expect(savedToast).toBeVisible()
   await expect
     .poll(() =>
@@ -1914,36 +1925,36 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
     )
     .toEqual({
       count: 1,
-      name: 'observatory',
+      name: 'spatial',
       primary: 'oklch(0.62 0.2 145)',
       body: "system-ui, -apple-system, 'Segoe UI', sans-serif",
-      bodyWeight: 500,
-      labelWeight: 550,
-      radius: '0.75rem',
-      panelSpacing: '1.05rem',
+      bodyWeight: 550,
+      labelWeight: 600,
+      radius: '0.7rem',
+      panelSpacing: '1.3rem',
     })
 
   await page.reload()
   await openThemeCustomizer(page)
   await page.getByRole('combobox', { name: 'Theme' }).click()
-  await page.getByRole('option', { name: 'Observatory Saved' }).click()
+  await page.getByRole('option', { name: 'Spatial Saved' }).click()
   await page.getByRole('button', { name: 'Dark', exact: true }).click()
-  await expect(root).toHaveAttribute('data-ui-theme', 'observatory')
+  await expect(root).toHaveAttribute('data-ui-theme', 'spatial')
   await expect.poll(primaryValue).toBe('oklch(0.62 0.2 145)')
   await expect
     .poll(() =>
       root.evaluate((element) => getComputedStyle(element).getPropertyValue('--ui-radius').trim()),
     )
-    .toBe('0.75rem')
+    .toBe('0.7rem')
 
   await page.getByRole('tab', { name: 'Export' }).click()
   await expect(page.locator('[data-slot="theme-install-command"]')).toContainText(
-    'astrale ui add ./observatory.css',
+    'astrale ui add ./spatial.css',
   )
   await page.getByRole('button', { name: 'Copy command' }).click()
   await expect
     .poll(() => page.evaluate(() => navigator.clipboard.readText()))
-    .toBe('astrale ui add ./observatory.css')
+    .toBe('astrale ui add ./spatial.css')
   await expect(page.getByRole('dialog', { name: 'Install command copied' })).toBeVisible()
   await expect(page.getByRole('button', { name: 'Close toast' })).toHaveCount(0)
   await page.evaluate(() => {
@@ -1961,45 +1972,45 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
   const downloadPromise = page.waitForEvent('download')
   await page.getByRole('button', { name: 'Download JSON' }).click()
   const download = await downloadPromise
-  expect(download.suggestedFilename()).toBe('observatory.astrale-theme.json')
+  expect(download.suggestedFilename()).toBe('spatial.astrale-theme.json')
   const exported = JSON.parse(await downloadText(download))
   expect(exported).toMatchObject({
     version: THEME_DOCUMENT_VERSION,
-    name: 'observatory',
+    name: 'spatial',
     appearance: { dark: { primary: 'oklch(0.62 0.2 145)' } },
     typography: {
       body: {
         family: "system-ui, -apple-system, 'Segoe UI', sans-serif",
         tracking: '0.005em',
         leading: '1.55',
-        weight: 500,
+        weight: 550,
       },
       heading: {
         family: "Charter, 'Bitstream Charter', 'Sitka Text', Cambria, serif",
-        tracking: '-0.015em',
+        tracking: '-0.02em',
         leading: '1.25',
         weight: 700,
       },
-      label: { weight: 550 },
+      label: { weight: 600 },
       mono: expect.any(String),
     },
-    geometry: { radius: '0.75rem' },
-    density: { panelSpacing: '1.05rem' },
+    geometry: { radius: '0.7rem' },
+    density: { panelSpacing: '1.3rem' },
   })
 
   await page.getByRole('combobox', { name: 'Theme' }).click()
-  await page.getByRole('option', { name: 'Observatory', exact: true }).click()
-  await expect.poll(primaryValue).toBe('oklch(0.76 0.13 250)')
+  await page.getByRole('option', { name: 'Spatial', exact: true }).click()
+  await expect.poll(primaryValue).toBe('oklch(0.76 0.115 262)')
   const importInput = page.getByLabel('Import theme document')
   await importInput.setInputFiles({
-    name: 'observatory.astrale-theme.json',
+    name: 'spatial.astrale-theme.json',
     mimeType: 'application/json',
     buffer: Buffer.from(JSON.stringify(exported)),
   })
-  const importedToast = page.getByRole('dialog', { name: 'Observatory imported' })
+  const importedToast = page.getByRole('dialog', { name: 'Spatial imported' })
   await expect(importedToast).toBeVisible()
   await expect(importInput).toHaveValue('')
-  await expect(root).toHaveAttribute('data-ui-theme', 'observatory')
+  await expect(root).toHaveAttribute('data-ui-theme', 'spatial')
   await expect.poll(primaryValue).toBe('oklch(0.62 0.2 145)')
   await expect
     .poll(() =>
@@ -2012,24 +2023,24 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
     .poll(() =>
       root.evaluate((element) => getComputedStyle(element).getPropertyValue('--ui-radius').trim()),
     )
-    .toBe('0.75rem')
+    .toBe('0.7rem')
   await page.mouse.move(0, 0)
   await expect(importedToast).toBeHidden({ timeout: 10_000 })
 
   const cssDownloadPromise = page.waitForEvent('download')
   await page.getByRole('button', { name: 'Download CSS' }).click()
   const cssDownload = await cssDownloadPromise
-  expect(cssDownload.suggestedFilename()).toBe('observatory.css')
+  expect(cssDownload.suggestedFilename()).toBe('spatial.css')
   const css = await downloadText(cssDownload)
   expect(css).toContain('Consumer-owned after installation.')
   expect(css.match(/--ui-primary: oklch\(0\.62 0\.2 145\);/gu)).toHaveLength(1)
   expect(css).toContain("--ui-font-body: system-ui, -apple-system, 'Segoe UI', sans-serif;")
   expect(css).toContain('--ui-tracking-body: 0.005em;')
-  expect(css).toContain('--ui-weight-body: 500;')
+  expect(css).toContain('--ui-weight-body: 550;')
   expect(css).toContain('--ui-weight-heading: 700;')
-  expect(css).toContain('--ui-weight-label: 550;')
-  expect(css).toContain('--ui-panel-spacing: 1.05rem;')
-  expect(css).toContain('--ui-radius: 0.75rem;')
+  expect(css).toContain('--ui-weight-label: 600;')
+  expect(css).toContain('--ui-panel-spacing: 1.3rem;')
+  expect(css).toContain('--ui-radius: 0.7rem;')
   await expect(page.getByRole('button', { name: 'Close toast' })).toHaveCount(0)
   await testInfo.attach(`theme-studio-${testInfo.project.name}`, {
     body: await page.screenshot(),
@@ -2067,7 +2078,7 @@ test('generated provenance, locks, and edited branches survive save, reload, exp
   await page.reload()
   await openThemeCustomizer(page)
   await page.getByRole('combobox', { name: 'Theme' }).click()
-  await page.getByRole('option', { name: 'Observatory Saved' }).click()
+  await page.getByRole('option', { name: 'Spatial Saved' }).click()
   await expect(studio.getByRole('button', { name: 'Variation' })).toBeEnabled()
   await expect(studio.getByRole('button', { name: /^Typography /u })).toContainText(
     'Locked · Edited',
@@ -2081,7 +2092,7 @@ test('generated provenance, locks, and edited branches survive save, reload, exp
   expect(JSON.parse(exported).generation).toEqual(storedGeneration)
 
   await page.getByRole('combobox', { name: 'Theme' }).click()
-  await page.getByRole('option', { name: 'Observatory', exact: true }).click()
+  await page.getByRole('option', { name: 'Spatial', exact: true }).click()
   const rejected = JSON.parse(exported)
   rejected.generation.engineVersion = 1
   await page.getByLabel('Import theme document').setInputFiles({
@@ -2099,7 +2110,7 @@ test('generated provenance, locks, and edited branches survive save, reload, exp
         .locator('[data-slot="ui-playground"]')
         .evaluate((element) => getComputedStyle(element).getPropertyValue('--ui-primary').trim()),
     )
-    .toBe('oklch(0.36 0.14 251)')
+    .toBe('oklch(0.43 0.17 262)')
   await expect
     .poll(() =>
       page.evaluate(() => {
@@ -2107,7 +2118,7 @@ test('generated provenance, locks, and edited branches survive save, reload, exp
         return themes[0]?.generation?.engineVersion
       }),
     )
-    .toBe(3)
+    .toBe(THEME_GENERATOR_ENGINE_VERSION)
   await page.getByLabel('Import theme document').setInputFiles({
     name: 'generated.astrale-theme.json',
     mimeType: 'application/json',
@@ -2203,7 +2214,7 @@ test('invalid storage and save failures stay contained', async ({ page }) => {
   await expect(page.locator('[data-slot="ui-playground"]')).toBeVisible()
   await openThemeCustomizer(page)
   await page.getByRole('combobox', { name: 'Theme' }).click()
-  await expect(page.getByRole('option')).toHaveCount(1)
+  await expect(page.getByRole('option')).toHaveText(registryThemes)
   await page.keyboard.press('Escape')
 
   await page.evaluate(() => {
@@ -2221,7 +2232,7 @@ test('invalid storage and save failures stay contained', async ({ page }) => {
   const saveFailure = page.getByRole('dialog', { name: 'Theme save failed' })
   await expect(saveFailure).toContainText('Storage unavailable for qualification')
   await page.getByRole('combobox', { name: 'Theme' }).click()
-  await expect(page.getByRole('option')).toHaveCount(1)
+  await expect(page.getByRole('option')).toHaveText(registryThemes)
   await page.keyboard.press('Escape')
   await page.evaluate(() => {
     const storage = Storage.prototype as Storage & { restoreSetItem?: () => void }
@@ -2364,7 +2375,7 @@ test('every canonical family is serious-violation-free across representative the
   page,
 }, testInfo) => {
   test.skip(testInfo.project.name !== 'desktop', 'The semantic theme matrix is viewport-neutral.')
-  const starters = ['Observatory', 'Console', 'Desktop', 'Spatial', 'Spatial Calm']
+  const starters = registryThemes
   test.setTimeout(360_000 * starters.length)
   await page.emulateMedia({ reducedMotion: 'reduce' })
   const pageErrors: string[] = []

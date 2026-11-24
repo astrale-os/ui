@@ -3,7 +3,7 @@ import { readFile, readdir } from 'node:fs/promises'
 import path from 'node:path'
 import test from 'node:test'
 
-import { renderManropeFontFace } from './build-inline-fonts.mjs'
+import { renderHankenGroteskFontFace } from './build-inline-fonts.mjs'
 
 const packageRoot = 'packages/ui'
 const forbiddenRuntimeDependencies = [
@@ -120,12 +120,14 @@ test('the workspace separates its public runtime package from its control-plane 
   assert.deepEqual([...runtimeComponentNames].toSorted(), publicComponents)
 })
 
-test('the inline Manrope font face holds the exact latin file the astrale preset loads', async () => {
-  const { manropeFontFace } = await import('../packages/ui/src/fonts/manrope-inline.ts')
-  assert.equal(manropeFontFace, await renderManropeFontFace(), 'run `pnpm fonts:build`')
+test('the inline Hanken Grotesk font face holds the exact latin file the astrale preset loads', async () => {
+  const { hankenGroteskFontFace } =
+    await import('../packages/ui/src/fonts/hanken-grotesk-inline.ts')
+  assert.equal(hankenGroteskFontFace, await renderHankenGroteskFontFace(), 'run `pnpm fonts:build`')
   const preset = await readFile(`${packageRoot}/src/theme/presets/astrale.css`, 'utf8')
-  assert.match(preset, /url\('\.\.\/fonts\/manrope-latin-wght-normal\.woff2'\)/u)
-  assert.match(preset, /--ui-font-heading:\s*'Manrope'/u)
+  assert.match(preset, /url\('\.\.\/fonts\/hanken-grotesk-latin-wght-normal\.woff2'\)/u)
+  assert.match(preset, /--ui-font-body:\s*'Hanken Grotesk'/u)
+  assert.match(preset, /--ui-font-heading:\s*'Hanken Grotesk'/u)
 })
 
 test('runtime dependencies exclude optional composition and umbrella libraries', async () => {

@@ -6652,33 +6652,5 @@
     "classification": "theme",
     "family": "spatial",
     "variantCount": 1
-  },
-  {
-    "address": "theme/spatial-calm",
-    "title": "Theme · Spatial Calm",
-    "classification": "theme",
-    "family": "spatial-calm",
-    "variantCount": 1
-  },
-  {
-    "address": "theme/spatial-compact",
-    "title": "Theme · Spatial Compact",
-    "classification": "theme",
-    "family": "spatial-compact",
-    "variantCount": 1
-  },
-  {
-    "address": "theme/spatial-crisp",
-    "title": "Theme · Spatial Crisp",
-    "classification": "theme",
-    "family": "spatial-crisp",
-    "variantCount": 1
-  },
-  {
-    "address": "theme/spatial-round",
-    "title": "Theme · Spatial Round",
-    "classification": "theme",
-    "family": "spatial-round",
-    "variantCount": 1
   }
 ]

@@ -4,8 +4,10 @@ import { readFile, readdir } from 'node:fs/promises'
 import test from 'node:test'
 
 import {
+  defaultThemeName,
   parseThemeDocument,
   parseThemeDocumentText,
+  renderPresetCss,
   renderThemeCss,
   effectDefaults,
   serializeThemeDocument,
@@ -100,16 +102,7 @@ test('every starter round-trips and projects to exact consumer-owned light and d
   const documents = await themes()
   assert.deepEqual(
     documents.map(({ theme }) => theme.name),
-    [
-      'console',
-      'desktop',
-      'observatory',
-      'spatial-calm',
-      'spatial-compact',
-      'spatial-crisp',
-      'spatial-round',
-      'spatial',
-    ],
+    ['console', 'desktop', 'observatory', 'spatial'],
   )
   const schema = JSON.parse(await readFile('schemas/theme.schema.json', 'utf8'))
   const validate = new Ajv2020({ strict: false }).compile(schema)
@@ -157,6 +150,63 @@ test('every starter round-trips and projects to exact consumer-owned light and d
     ]) {
       assert.equal(css.match(new RegExp(`${token}:`, 'gu'))?.length, 2)
     }
+  }
+})
+
+/** The `--ui-*` declarations of the first `<selector> {` block, comments dropped and spaces folded. */
+function declarations(css, selector) {
+  const start = css.indexOf(`${selector} {`)
+  assert.notEqual(start, -1, `${selector} block`)
+  const block = css.slice(start, css.indexOf('\n}', start)).replaceAll(/\/\*[\s\S]*?\*\//gu, '')
+  return Object.fromEntries(
+    [...block.matchAll(/(--ui-[a-z0-9-]+):\s*([^;]+);/gu)].map(([, name, value]) => [
+      name,
+      value.replaceAll(/\s+/gu, ' ').trim(),
+    ]),
+  )
+}
+
+test('the astrale preset and the token defaults are the default theme', async () => {
+  const theme = (await themes()).find(({ theme }) => theme.name === defaultThemeName).theme
+  const fontFaces = await readFile('packages/ui/src/theme/fonts/hanken-grotesk.css', 'utf8')
+  assert.equal(
+    await readFile('packages/ui/src/theme/presets/astrale.css', 'utf8'),
+    renderPresetCss(theme, 'astrale', fontFaces),
+    'run `pnpm themes:build`',
+  )
+  // Sidebar tokens alias the base tokens on every preset scope instead.
+  const projected = Object.entries(themeStyleProperties(theme, 'light')).filter(
+    ([name]) => !name.startsWith('--ui-sidebar'),
+  )
+  const defaults = declarations(await readFile('packages/ui/src/theme/tokens.css', 'utf8'), ':root')
+  const resolve = (value) =>
+    value.replace(/^var\((--ui-[a-z0-9-]+)\)$/u, (_, name) => defaults[name])
+  for (const [name, value] of projected) {
+    assert.equal(
+      resolve(defaults[name] ?? ''),
+      value.replaceAll(/\s+/gu, ' '),
+      `tokens.css ${name}`,
+    )
+  }
+})
+
+test('every runtime preset declares every token a theme projects, so none inherits another', async () => {
+  const theme = (await themes()).find(({ theme }) => theme.name === defaultThemeName).theme
+  const tokens = Object.keys(themeStyleProperties(theme, 'light')).filter(
+    (name) => !name.startsWith('--ui-sidebar'),
+  )
+  const presets = 'packages/ui/src/theme/presets'
+  for (const file of await readdir(presets)) {
+    const name = file.replace(/\.css$/u, '')
+    const declared = declarations(
+      await readFile(`${presets}/${file}`, 'utf8'),
+      `[data-ui-preset='${name}']`,
+    )
+    assert.deepEqual(
+      tokens.filter((token) => !(token in declared)),
+      [],
+      file,
+    )
   }
 })
 

@@ -11,7 +11,7 @@ import {
   type RefObject,
 } from 'react'
 
-import { themeStyleProperties } from '../../tooling/theme-document/index.js'
+import { defaultThemeName, themeStyleProperties } from '../../tooling/theme-document/index.js'
 import { Catalog } from './catalog/catalog.js'
 import { useThemeWorkspace } from './theme/workspace.js'
 
@@ -147,7 +147,7 @@ export function Playground() {
       <div
         ref={rootRef}
         data-slot="ui-playground"
-        data-ui-theme="observatory"
+        data-ui-theme={defaultThemeName}
         className="playground-root"
       >
         <div className="playground-layout">

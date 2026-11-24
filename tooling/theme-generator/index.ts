@@ -628,6 +628,29 @@ export function themeTextContrastReasons(theme: ThemeDocument): string[] {
   })
 }
 
+function catalogTypographyReasons(typography: ThemeDocument['typography']): string[] {
+  const reasons: string[] = []
+  for (const [roleName, role] of [
+    ['body', typography.body],
+    ['heading', typography.heading],
+  ] as const) {
+    const font = fontByFamily(role.family)
+    if (!font) reasons.push(`Typography family ${role.family} is not in font catalog v1.`)
+    else if (!font.roles.some((role) => role === roleName))
+      reasons.push(`${font.label} is not eligible for the ${roleName} role.`)
+    else if (!font.weights.includes(role.weight))
+      reasons.push(`${font.label} does not provide weight ${role.weight}.`)
+  }
+  const labelFont = fontByFamily(typography.body.family)
+  if (labelFont && !labelFont.weights.includes(typography.label.weight))
+    reasons.push(`${labelFont.label} does not provide label weight ${typography.label.weight}.`)
+  const terminalFont = fontByFamily(typography.mono)
+  if (!terminalFont) reasons.push('Terminal family is not in font catalog v1.')
+  else if (!terminalFont.roles.some((role) => role === 'terminal'))
+    reasons.push(`${terminalFont.label} is not eligible for the terminal role.`)
+  return reasons
+}
+
 export function admitGeneratedTheme(
   theme: ThemeDocument,
   options: {
@@ -710,29 +733,10 @@ export function admitGeneratedTheme(
     if (!surfaceOrderingValid) reasons.push(`${modeName} surface ordering is invalid.`)
   }
   reasons.push(...themeTextContrastReasons(admitted))
-  // The catalog lists the weights the generator chooses; a locked typography branch keeps the
-  // weights its author set.
-  const authorWeights = (options.locks ?? admitted.generation?.locks ?? []).includes('typography')
-  for (const [roleName, role] of [
-    ['body', admitted.typography.body],
-    ['heading', admitted.typography.heading],
-  ] as const) {
-    const font = fontByFamily(role.family)
-    if (!font) reasons.push(`Typography family ${role.family} is not in font catalog v1.`)
-    else if (!font.roles.some((role) => role === roleName))
-      reasons.push(`${font.label} is not eligible for the ${roleName} role.`)
-    else if (!authorWeights && !font.weights.includes(role.weight))
-      reasons.push(`${font.label} does not provide weight ${role.weight}.`)
-  }
-  const labelFont = fontByFamily(admitted.typography.body.family)
-  if (!authorWeights && labelFont && !labelFont.weights.includes(admitted.typography.label.weight))
-    reasons.push(
-      `${labelFont.label} does not provide label weight ${admitted.typography.label.weight}.`,
-    )
-  const terminalFont = fontByFamily(admitted.typography.mono)
-  if (!terminalFont) reasons.push('Terminal family is not in font catalog v1.')
-  else if (!terminalFont.roles.some((role) => role === 'terminal'))
-    reasons.push(`${terminalFont.label} is not eligible for the terminal role.`)
+  // The catalog lists the families and weights the generator chooses; a locked typography branch
+  // keeps the ones its author set, catalogued or not.
+  if (!(options.locks ?? admitted.generation?.locks ?? []).includes('typography'))
+    reasons.push(...catalogTypographyReasons(admitted.typography))
 
   const hueDistance = (left: number, right: number) => {
     const distance = Math.abs(left - right) % 360

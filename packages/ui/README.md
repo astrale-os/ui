@@ -20,6 +20,10 @@ as the `success`, `info`, and `warning` variants. `theme.css` ships precompiled,
 component rules in `@layer components` so that your utilities always win. Dark mode is class-based:
 put `dark` on `<html>` or on any subtree, presets follow.
 
+`presets/astrale.css` is the default theme, Spatial, in light and dark, with its Hanken Grotesk
+webfont. The tokens default to its light mode, so components render as Spatial until another preset
+or theme overrides them.
+
 Applications that build their own stylesheet with Tailwind CSS v4 import the source entry instead.
 Their Tailwind then compiles the components' classes in the same build as their own, so a component's
 state variant (`hover:`, `data-open:`, `data-selected:`...) always comes after its base utility,
@@ -103,12 +107,12 @@ Pages rendered without React (server HTML, static pages) draw the logo from
 `@astrale-os/ui/brand/geometry`, which has no dependencies: `logoSvg({ lockup, color })` returns an
 SVG document (`color: 'currentColor'` for an inline logo that follows the text color),
 `tileSvg(...)` an app icon, and `SYMBOL_PATH` the raw symbol. When such a page cannot load the
-preset either, `manropeFontFace` from `@astrale-os/ui/fonts/manrope-inline` is the heading font's
-`@font-face` rule with its latin subset inlined (~33 kB); the page's policy then needs
-`font-src data:`.
+preset either, `hankenGroteskFontFace` from `@astrale-os/ui/fonts/hanken-grotesk-inline` is the
+preset typeface's `@font-face` rule with its latin subset inlined (~46 kB); the page's policy then
+needs `font-src data:`.
 
 Generated files use fixed brand colors instead, exported as `brandColors` (`blue` `#003B82`, the
-preset's light primary; `black`; `white`). The package ships the icons an application serves
+brand blue; `black`; `white`). The package ships the icons an application serves
 itself under `@astrale-os/ui/brand/icons/`, so a new release updates them everywhere. Copy them at
 build time and serve them from the application's own origin: browsers look for `/favicon.ico` there,
 and MCP clients only trust icons from the server's origin.

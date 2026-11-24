@@ -215,12 +215,16 @@ function ThemeSelectField({
   value: string
   onChange(value: string): void
 }) {
+  // A theme may name a family the generator's catalog does not list: it stays an option, by name.
+  const options = items.some((item) => item.value === value)
+    ? items
+    : [{ label: (/^\s*['"]?([^'",]+)/u.exec(value)?.[1] ?? value).trim(), value }, ...items]
   return (
     <Field>
       <FieldLabel htmlFor={id}>{label}</FieldLabel>
       <Select
         modal={false}
-        items={items}
+        items={options}
         value={value}
         onValueChange={(next) => {
           if (next) onChange(next)
@@ -231,7 +235,7 @@ function ThemeSelectField({
         </SelectTrigger>
         <SelectContent alignItemWithTrigger={false}>
           <SelectGroup>
-            {items.map((item) => (
+            {options.map((item) => (
               <SelectItem key={item.value} value={item.value}>
                 {item.label}
               </SelectItem>
@@ -261,7 +265,7 @@ function formatLeading(value: number) {
 }
 
 function formatRem(value: number) {
-  return `${value.toFixed(2)}rem`
+  return `${Number(value.toFixed(3))}rem`
 }
 
 function formatWeight(value: number) {
@@ -545,7 +549,7 @@ function TerminalTypographySection({ workspace }: { workspace: ThemeWorkspace })
       </div>
       <div className="theme-typography-specimen" data-role="terminal">
         <code className="font-mono" data-slot="theme-typography-mono">
-          pnpm astrale ui add theme/observatory
+          pnpm astrale ui add theme/spatial
         </code>
       </div>
     </section>

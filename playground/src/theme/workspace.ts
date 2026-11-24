@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from 'react'
 import type { ThemeGenerationResult } from '../../../tooling/theme-generator/index.js'
 
 import {
+  defaultThemeName,
   parseThemeDocument,
   parseThemeDocumentText,
   renderThemeCss,
@@ -27,7 +28,7 @@ export const bundledThemes: readonly ThemeDocument[] = Object.values(
   .map((source) => parseThemeDocument(source))
   .sort(
     (left, right) =>
-      Number(right.name === 'observatory') - Number(left.name === 'observatory') ||
+      Number(right.name === defaultThemeName) - Number(left.name === defaultThemeName) ||
       left.label.localeCompare(right.label),
   )
 

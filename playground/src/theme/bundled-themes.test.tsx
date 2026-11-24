@@ -4,17 +4,13 @@ import { themeTextContrastReasons } from '../../../tooling/theme-generator/index
 import { bundledThemes, defaultTheme } from './workspace.js'
 
 describe('bundled themes', () => {
-  test('lists every registry theme with Observatory as the default', () => {
-    expect(defaultTheme.name).toBe('observatory')
-    expect(bundledThemes.map((theme) => theme.name).sort()).toEqual([
+  test('lists every registry theme with Spatial as the default', () => {
+    expect(defaultTheme.name).toBe('spatial')
+    expect(bundledThemes.map((theme) => theme.name)).toEqual([
+      'spatial',
       'console',
       'desktop',
       'observatory',
-      'spatial',
-      'spatial-calm',
-      'spatial-compact',
-      'spatial-crisp',
-      'spatial-round',
     ])
   })
 

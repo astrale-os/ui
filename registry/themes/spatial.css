@@ -49,8 +49,8 @@
   --ui-control-height-lg: 2.75rem;
   --ui-control-padding: 0.875rem;
   --ui-panel-spacing: 1.25rem;
-  --ui-font-body: 'Hanken Grotesk', 'Hanken Grotesk Variable', 'Manrope', ui-sans-serif, system-ui, sans-serif;
-  --ui-font-heading: 'Hanken Grotesk', 'Hanken Grotesk Variable', 'Manrope', ui-sans-serif, system-ui, sans-serif;
+  --ui-font-body: 'Hanken Grotesk', 'Hanken Grotesk Variable', ui-sans-serif, system-ui, sans-serif;
+  --ui-font-heading: 'Hanken Grotesk', 'Hanken Grotesk Variable', ui-sans-serif, system-ui, sans-serif;
   --ui-font-mono: 'SFMono-Regular', 'Cascadia Code', ui-monospace, monospace;
   --ui-tracking-body: 0;
   --ui-tracking-heading: -0.015em;
@@ -120,8 +120,8 @@
   --ui-control-height-lg: 2.75rem;
   --ui-control-padding: 0.875rem;
   --ui-panel-spacing: 1.25rem;
-  --ui-font-body: 'Hanken Grotesk', 'Hanken Grotesk Variable', 'Manrope', ui-sans-serif, system-ui, sans-serif;
-  --ui-font-heading: 'Hanken Grotesk', 'Hanken Grotesk Variable', 'Manrope', ui-sans-serif, system-ui, sans-serif;
+  --ui-font-body: 'Hanken Grotesk', 'Hanken Grotesk Variable', ui-sans-serif, system-ui, sans-serif;
+  --ui-font-heading: 'Hanken Grotesk', 'Hanken Grotesk Variable', ui-sans-serif, system-ui, sans-serif;
   --ui-font-mono: 'SFMono-Regular', 'Cascadia Code', ui-monospace, monospace;
   --ui-tracking-body: 0;
   --ui-tracking-heading: -0.015em;

@@ -42,6 +42,20 @@
   --ui-shadow-panel: 0 24px 0 -12px oklch(0.58 0.22 28 / 0.22);
   --ui-motion-fast: 150ms;
   --ui-motion-standard: 240ms;
+  /* Shape, density, and type this preset holds itself, whatever theme it is applied under. */
+  --ui-radius-action: initial;
+  --ui-control-padding: 0.625rem;
+  --ui-panel-spacing: 1rem;
+  --ui-font-mono: 'SFMono-Regular', 'Cascadia Code', ui-monospace, monospace;
+  --ui-tracking-body: 0;
+  --ui-tracking-heading: -0.01em;
+  --ui-leading-body: 1.5;
+  --ui-leading-heading: 1.2;
+  --ui-weight-body: 400;
+  --ui-weight-heading: 600;
+  --ui-weight-label: 500;
+  --ui-shadow-overlay: 0 4px 6px -1px oklch(0 0 0 / 0.1), 0 2px 4px -2px oklch(0 0 0 / 0.1);
+  --ui-backdrop: oklch(0 0 0 / 0.1);
 }
 
 :root.dark,

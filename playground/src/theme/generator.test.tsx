@@ -29,7 +29,7 @@ import {
   replayPristineTheme,
   sampleThemeDNA,
 } from '../../../tooling/theme-generator/index.js'
-import { useThemeWorkspace } from './workspace.js'
+import { defaultTheme, useThemeWorkspace } from './workspace.js'
 
 const observatory = parseThemeDocument(observatorySource)
 const seed = '0123456789abcdef0123456789abcdef'
@@ -374,7 +374,7 @@ describe('theme generator', () => {
     expect(serializeThemeDocument(invalid)).toBe(before)
   })
 
-  test('keeps author weights in a locked typography branch and catalog weights elsewhere', () => {
+  test('keeps author typography in a locked typography branch and catalog typography elsewhere', () => {
     const parent = generatedTheme()
     if (!parent.generation) throw new Error('Expected generator provenance.')
     const authored = parseThemeDocument({
@@ -383,6 +383,10 @@ describe('theme generator', () => {
       typography: {
         ...parent.typography,
         body: { ...parent.typography.body, weight: 450 },
+        heading: {
+          ...parent.typography.heading,
+          family: "'Hanken Grotesk', ui-sans-serif, sans-serif",
+        },
         label: { weight: 550 },
       },
     }) as typeof parent & { generation: typeof parent.generation }
@@ -390,6 +394,9 @@ describe('theme generator', () => {
       expect.arrayContaining([
         expect.stringContaining('does not provide weight 450'),
         expect.stringContaining('does not provide label weight 550'),
+        expect.stringContaining(
+          "'Hanken Grotesk', ui-sans-serif, sans-serif is not in font catalog",
+        ),
       ]),
     )
     const result = generateTheme({
@@ -659,11 +666,11 @@ describe('theme generator', () => {
     if (!generated || generated.kind === 'failure') throw new Error('Expected generated theme.')
     expect(workspace.result.current.theme).toBe(generated.theme)
     expect(workspace.result.current.theme.generation?.locks).toEqual(['typography'])
-    expect(workspace.result.current.theme.typography).toEqual(observatory.typography)
+    expect(workspace.result.current.theme.typography).toEqual(defaultTheme.typography)
     expect(workspace.result.current.canUndo).toBe(true)
 
     act(() => workspace.result.current.undo())
-    expect(workspace.result.current.theme).toEqual(observatory)
+    expect(workspace.result.current.theme).toEqual(defaultTheme)
     expect(workspace.result.current.locks).toEqual(['typography'])
     expect(workspace.result.current.canUndo).toBe(false)
   })

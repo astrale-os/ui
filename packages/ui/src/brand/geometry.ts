@@ -19,7 +19,7 @@ export const WORDMARK_PATH =
 
 /**
  * The colors of generated logo files. Interfaces draw the logo in `currentColor` instead, so it
- * takes the text color of its surface. `blue` is the light `--ui-primary` of the astrale preset.
+ * takes the text color of its surface. `blue` is the brand blue, fixed apart from any theme.
  */
 export const brandColors = {
   blue: '#003B82',

@@ -88,13 +88,13 @@
   },
   "typography": {
     "body": {
-      "family": "'Hanken Grotesk', 'Hanken Grotesk Variable', 'Manrope', ui-sans-serif, system-ui, sans-serif",
+      "family": "'Hanken Grotesk', 'Hanken Grotesk Variable', ui-sans-serif, system-ui, sans-serif",
       "tracking": "0",
       "leading": "1.5",
       "weight": 450
     },
     "heading": {
-      "family": "'Hanken Grotesk', 'Hanken Grotesk Variable', 'Manrope', ui-sans-serif, system-ui, sans-serif",
+      "family": "'Hanken Grotesk', 'Hanken Grotesk Variable', ui-sans-serif, system-ui, sans-serif",
       "tracking": "-0.015em",
       "leading": "1.2",
       "weight": 600

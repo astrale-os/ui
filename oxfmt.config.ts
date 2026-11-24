@@ -23,6 +23,7 @@ export default defineConfig({
     'registry/variants/source/**',
     'registry/variants/support/**',
     'registry/themes/*.css',
+    'packages/ui/src/theme/presets/astrale.css',
     'registry/themes/registry.json',
     'playground/test-results/**',
     'playground/playwright-report/**',
