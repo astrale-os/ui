@@ -42,7 +42,7 @@
     "items": {
       "type": "object",
       "propertyNames": {
-        "pattern": "^(?:(?:pattern|block)/[a-z0-9-]+/[a-z0-9-/]+|theme/[a-z][a-z0-9]*(?:-[a-z0-9]+)*)$"
+        "pattern": "^(?:theme/[a-z][a-z0-9]*(?:-[a-z0-9]+)*|(?:component|pattern|block)(?:/[a-z0-9]+(?:-[a-z0-9]+)*)+)$"
       },
       "additionalProperties": {
         "type": "object",
@@ -51,7 +51,7 @@
         "properties": {
           "address": {
             "type": "string",
-            "pattern": "^(?:(?:pattern|block)/[a-z0-9-]+/[a-z0-9-/]+|theme/[a-z][a-z0-9]*(?:-[a-z0-9]+)*)$"
+            "pattern": "^(?:theme/[a-z][a-z0-9]*(?:-[a-z0-9]+)*|(?:component|pattern|block)(?:/[a-z0-9]+(?:-[a-z0-9]+)*)+)$"
           },
           "sourceDigest": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
           "files": {

@@ -183,15 +183,28 @@ test('registry aggregation explicitly owns every family and exact item once', as
 
 test('every registry item is independently bounded, controlled, and safe to install', async () => {
   const items = await readFamilyItems()
+  const lockItems = JSON.parse(await readFile('schemas/ui-lock.schema.json', 'utf8')).properties
+    .items
+  const lockAddresses = [
+    new RegExp(lockItems.propertyNames.pattern, 'u'),
+    new RegExp(lockItems.additionalProperties.properties.address.pattern, 'u'),
+  ]
   for (const item of items) {
     const isTheme = item.meta.canonicalAddress.startsWith('theme/')
     const isComponent = item.meta.canonicalAddress.startsWith('component/')
     const isVariant = item.meta.provider === '@astrale-os/ui'
-    assert.match(item.name, /^(?:component|pattern|block|theme)-[a-z0-9-]+$/u)
+    assert.equal(item.name, item.meta.canonicalAddress.replaceAll('/', '-'))
     assert.match(
       item.meta.canonicalAddress,
-      /^(?:component\/[a-z0-9-]+(?:\/[a-z0-9-]+)?|(?:pattern|block)\/[a-z0-9-]+\/[a-z0-9-/]+|theme\/[a-z0-9-]+)$/u,
+      /^(?:theme\/[a-z][a-z0-9]*(?:-[a-z0-9]+)*|component(?:\/[a-z0-9]+(?:-[a-z0-9]+)*){1,2}|(?:pattern|block)(?:\/[a-z0-9]+(?:-[a-z0-9]+)*){2,})$/u,
     )
+    for (const pattern of lockAddresses) {
+      assert.match(
+        item.meta.canonicalAddress,
+        pattern,
+        `${item.meta.canonicalAddress} must be recordable in astrale-ui.lock.json`,
+      )
+    }
     assert.equal(
       item.type,
       isTheme ? 'registry:theme' : isComponent ? 'registry:component' : 'registry:block',
