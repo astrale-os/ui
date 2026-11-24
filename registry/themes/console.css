@@ -111,30 +111,10 @@
   --ui-sidebar-accent-foreground: #eceef3;
   --ui-sidebar-border: rgb(255 255 255 / 0.07);
   --ui-sidebar-ring: rgb(142 155 255 / 0.6);
-  --ui-radius: 0.5rem;
-  --ui-radius-panel: 0.875rem;
-  --ui-radius-action: initial;
-  --ui-control-height: 2.25rem;
-  --ui-control-height-sm: 2rem;
-  --ui-control-height-lg: 2.5rem;
-  --ui-control-padding: 0.625rem;
-  --ui-panel-spacing: 1rem;
-  --ui-font-body: 'Geist', 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
-  --ui-font-heading: 'Geist', 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
-  --ui-font-mono: 'Geist Mono', 'Geist Mono Variable', ui-monospace, 'SFMono-Regular', Menlo, monospace;
-  --ui-tracking-body: 0;
-  --ui-tracking-heading: -0.01em;
-  --ui-leading-body: 1.5;
-  --ui-leading-heading: 1.25;
-  --ui-weight-body: 400;
-  --ui-weight-heading: 600;
-  --ui-weight-label: 500;
   --ui-shadow-control: 0 1px 2px rgb(0 0 0 / 0.3);
   --ui-shadow-panel:
     0 0 0 0.5px rgb(255 255 255 / 0.1), 0 8px 24px -4px rgb(0 0 0 / 0.45), 0 30px 60px -20px rgb(0 0 0 / 0.6);
   --ui-shadow-overlay:
     0 0 0 0.5px rgb(255 255 255 / 0.1), 0 8px 24px -4px rgb(0 0 0 / 0.45);
   --ui-backdrop: rgb(0 0 0 / 0.5);
-  --ui-motion-fast: 120ms;
-  --ui-motion-standard: 180ms;
 }

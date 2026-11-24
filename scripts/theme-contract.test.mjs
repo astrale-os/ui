@@ -132,24 +132,14 @@ test('every starter round-trips and projects to exact consumer-owned light and d
         )
       }
     }
-    for (const token of [
-      '--ui-background',
-      '--ui-primary',
-      '--ui-chart-5',
-      '--ui-success',
-      '--ui-warning-foreground',
-      '--ui-sidebar-accent',
-      '--ui-font-mono',
-      '--ui-tracking-heading',
-      '--ui-leading-body',
-      '--ui-weight-body',
-      '--ui-weight-heading',
-      '--ui-weight-label',
-      '--ui-control-padding',
-      '--ui-panel-spacing',
-    ]) {
-      assert.equal(css.match(new RegExp(`${token}:`, 'gu'))?.length, 2)
-    }
+    // The dark block holds what the mode changes; the rest stays at the light selector's specificity.
+    const light = themeStyleProperties(theme, 'light')
+    const dark = themeStyleProperties(theme, 'dark')
+    assert.deepEqual(
+      Object.keys(declarations(css, `[data-ui-theme='${theme.name}'].dark`)),
+      Object.keys(dark).filter((name) => dark[name] !== light[name]),
+      file,
+    )
   }
 })
 
@@ -190,23 +180,27 @@ test('the astrale preset and the token defaults are the default theme', async ()
   }
 })
 
-test('every runtime preset declares every token a theme projects, so none inherits another', async () => {
-  const theme = (await themes()).find(({ theme }) => theme.name === defaultThemeName).theme
-  const tokens = Object.keys(themeStyleProperties(theme, 'light')).filter(
-    (name) => !name.startsWith('--ui-sidebar'),
-  )
+test('every runtime preset declares, in each mode, every token the default preset sets there', async () => {
+  // Stacked presets resolve by order in light and by order among dark blocks in dark: a token
+  // one of them leaves out shows another's value through.
   const presets = 'packages/ui/src/theme/presets'
+  async function modes(name) {
+    const css = await readFile(`${presets}/${name}.css`, 'utf8')
+    return {
+      light: declarations(css, `[data-ui-preset='${name}']`),
+      dark: declarations(css, `[data-ui-preset='${name}'].dark`),
+    }
+  }
+  const astrale = await modes('astrale')
   for (const file of await readdir(presets)) {
-    const name = file.replace(/\.css$/u, '')
-    const declared = declarations(
-      await readFile(`${presets}/${file}`, 'utf8'),
-      `[data-ui-preset='${name}']`,
-    )
-    assert.deepEqual(
-      tokens.filter((token) => !(token in declared)),
-      [],
-      file,
-    )
+    const preset = await modes(file.replace(/\.css$/u, ''))
+    for (const mode of ['light', 'dark']) {
+      assert.deepEqual(
+        Object.keys(astrale[mode]).filter((token) => !(token in preset[mode])),
+        [],
+        `${file} ${mode}`,
+      )
+    }
   }
 })
 

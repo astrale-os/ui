@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest'
 
-import { themeTextContrastReasons } from '../../../tooling/theme-generator/index.js'
+import { themeLegibilityReasons } from '../../../tooling/theme-generator/index.js'
 import { bundledThemes, defaultTheme } from './workspace.js'
 
 describe('bundled themes', () => {
@@ -15,9 +15,9 @@ describe('bundled themes', () => {
   })
 
   test.each(bundledThemes.map((theme) => [theme.name, theme] as const))(
-    '%s keeps every text pair and status color legible in both modes',
+    '%s keeps every text pair, status color, and accent mark legible in both modes',
     (_name, theme) => {
-      expect(themeTextContrastReasons(theme)).toEqual([])
+      expect(themeLegibilityReasons(theme)).toEqual([])
     },
   )
 })

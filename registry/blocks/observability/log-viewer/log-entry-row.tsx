@@ -37,7 +37,7 @@ export const LogEntryRow = memo(function LogEntryRow({
   return (
     <div
       className={cn(
-        'border-b border-zinc-800/50 transition-colors duration-100',
+        '@container/log-row border-b border-zinc-800/50 transition-colors duration-100',
         index % 2 === 0 ? 'bg-zinc-950/50' : 'bg-zinc-900/30',
         isSelected && '!bg-blue-500/10 border-l-2 border-l-blue-500',
         !isSelected && 'border-l-2 border-l-transparent',
@@ -49,7 +49,7 @@ export const LogEntryRow = memo(function LogEntryRow({
         type="button"
         onClick={handleClick}
         aria-expanded={isExpanded}
-        className="w-full flex items-center gap-2 px-3 py-1.5 text-left"
+        className="w-full flex items-center gap-x-2 gap-y-1 px-3 py-1.5 text-left @max-sm/log-row:flex-wrap"
       >
         <span className="shrink-0 text-zinc-600">
           {isExpanded ? (
@@ -83,16 +83,19 @@ export const LogEntryRow = memo(function LogEntryRow({
           {entry.service}
         </span>
 
-        <span className="font-mono text-[12px] text-zinc-300 truncate min-w-0">
-          {entry.message}
-        </span>
+        {/* A narrow row gives the message a line of its own, under the timestamp. */}
+        <span className="flex min-w-0 flex-1 items-center gap-2 @max-sm/log-row:basis-full @max-sm/log-row:pl-[22px]">
+          <span className="font-mono text-[12px] text-zinc-300 truncate min-w-0">
+            {entry.message}
+          </span>
 
-        {entry.payload && (
-          <span className="shrink-0 text-[10px] text-zinc-600 font-mono">{'{…}'}</span>
-        )}
-        {entry.stackTrace && (
-          <span className="shrink-0 text-[10px] text-red-500/60 font-mono">⚠ stack</span>
-        )}
+          {entry.payload && (
+            <span className="shrink-0 text-[10px] text-zinc-600 font-mono">{'{…}'}</span>
+          )}
+          {entry.stackTrace && (
+            <span className="shrink-0 text-[10px] text-red-500/60 font-mono">⚠ stack</span>
+          )}
+        </span>
       </button>
 
       {/* Expanded detail */}

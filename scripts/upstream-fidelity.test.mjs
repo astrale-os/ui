@@ -1053,6 +1053,27 @@ const declaredLogViewerEdits = {
       ['        onClick={handleClick}'],
     ],
     [
+      'row width query',
+      ["        '@container/log-row border-b border-zinc-800/50 transition-colors duration-100',"],
+      ['        "border-b border-zinc-800/50 transition-colors duration-100",'],
+    ],
+    [
+      'narrow row wrap',
+      [
+        '        className="w-full flex items-center gap-x-2 gap-y-1 px-3 py-1.5 text-left @max-sm/log-row:flex-wrap"',
+      ],
+      ['        className="w-full flex items-center gap-2 px-3 py-1.5 text-left"'],
+    ],
+    [
+      'message line start',
+      [
+        '        {/* A narrow row gives the message a line of its own, under the timestamp. */}',
+        '        <span className="flex min-w-0 flex-1 items-center gap-2 @max-sm/log-row:basis-full @max-sm/log-row:pl-[22px]">',
+      ],
+      [''],
+    ],
+    ['message line end', ['        </span>', '      </button>'], ['      </button>']],
+    [
       'json payload detail',
       ['          {/* Stack trace */}'],
       [

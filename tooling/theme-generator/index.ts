@@ -605,10 +605,20 @@ const textPairs = [
 ] as const satisfies readonly (readonly [keyof ThemeMode, keyof ThemeMode])[]
 
 /**
- * Text legibility every theme owes its readers, generated or authored: each text color clears
- * 4.5:1 on the surface it is drawn on, and status colors clear 4.5:1 as text on the background.
+ * The surfaces that hold menus, selects, lists, and the Finder, where the accent alone marks the
+ * selected or active item.
  */
-export function themeTextContrastReasons(theme: ThemeDocument): string[] {
+const markedSurfaces = ['card', 'popover'] as const satisfies readonly (keyof ThemeMode)[]
+
+/** The OKLab distance at which a mark stands apart from its surface: a step the eye tells apart. */
+export const minimumMarkDistance = 0.03
+
+/**
+ * Legibility every theme owes its readers, generated or authored: each text color clears 4.5:1
+ * on the surface it is drawn on, status colors clear 4.5:1 as text on the background, and the
+ * accent stands apart from the surfaces where it alone marks an item.
+ */
+export function themeLegibilityReasons(theme: ThemeDocument): string[] {
   return (['light', 'dark'] as const).flatMap((modeName) => {
     const mode = theme.appearance[modeName]
     const reasons: string[] = []
@@ -622,6 +632,14 @@ export function themeTextContrastReasons(theme: ThemeDocument): string[] {
       const ratio = cssContrastRatio(mode[token], mode.background)
       if (ratio === undefined || ratio < 4.5) {
         reasons.push(`${modeName}.${token} must contrast with background by 4.5:1.`)
+      }
+    }
+    for (const surface of markedSurfaces) {
+      const distance = perceptualDistance(mode[surface], mode.accent)
+      if (distance === undefined || distance < minimumMarkDistance) {
+        reasons.push(
+          `${modeName}.accent must stand apart from ${surface} by ${minimumMarkDistance} in OKLab.`,
+        )
       }
     }
     return reasons
@@ -732,7 +750,7 @@ export function admitGeneratedTheme(
           surfaceLightness.sidebar > surfaceLightness.background)
     if (!surfaceOrderingValid) reasons.push(`${modeName} surface ordering is invalid.`)
   }
-  reasons.push(...themeTextContrastReasons(admitted))
+  reasons.push(...themeLegibilityReasons(admitted))
   // The catalog lists the families and weights the generator chooses; a locked typography branch
   // keeps the ones its author set, catalogued or not.
   if (!(options.locks ?? admitted.generation?.locks ?? []).includes('typography'))

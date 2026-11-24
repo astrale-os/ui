@@ -11,6 +11,7 @@ import {
   THEME_GENERATOR_ENGINE_VERSION,
 } from '../../tooling/theme-document/index.js'
 import { perceptualDistance } from '../../tooling/theme-generator/color.js'
+import { minimumMarkDistance } from '../../tooling/theme-generator/index.js'
 import { componentNames } from '../src/catalog/inventory.js'
 
 const repositoryRoot = fileURLToPath(new URL('../..', import.meta.url))
@@ -19,6 +20,7 @@ const starterThemeDocuments = globSync('registry/themes/*.astrale-theme.json', {
 })
   .map((file) => JSON.parse(readFileSync(`${repositoryRoot}/${file}`, 'utf8')))
   .sort((left, right) => left.label.localeCompare(right.label))
+const defaultThemeDocument = starterThemeDocuments.find((theme) => theme.name === defaultThemeName)
 /** The labels of the theme picker's registry themes: the default first, the others by label. */
 const registryThemes: string[] = [
   ...starterThemeDocuments.filter((theme) => theme.name === defaultThemeName),
@@ -218,13 +220,13 @@ test('playground exposes every public runtime owner and complete visual registry
   await expect(chartLine).toBeVisible()
   await expect
     .poll(() =>
-      chartLine.evaluate((element) => {
+      chartLine.evaluate((element, expected) => {
         const root = element.closest('[data-slot="ui-playground"]')
         if (!root) return false
         const styles = getComputedStyle(root)
         const token = styles.getPropertyValue('--ui-chart-1').trim()
-        return token === 'oklch(0.58 0.18 251)' && getComputedStyle(element).stroke === token
-      }),
+        return token === expected && getComputedStyle(element).stroke === token
+      }, defaultThemeDocument.appearance.light.chart1),
     )
     .toBe(true)
 
@@ -234,17 +236,23 @@ test('playground exposes every public runtime owner and complete visual registry
     const content = element.querySelector(':scope > [data-slot="card-content"]')!
     const block = content.querySelector('[data-slot="block-authentication-sign-in-card"]')!
     const contentRect = content.getBoundingClientRect()
+    const contentStyle = getComputedStyle(content)
     const blockRect = block.getBoundingClientRect()
     return {
       width: Math.round(blockRect.width),
-      contentWidth: Math.round(contentRect.width),
+      // The card's inset follows the theme's panel spacing.
+      innerWidth: Math.round(
+        contentRect.width -
+          Number.parseFloat(contentStyle.paddingLeft) -
+          Number.parseFloat(contentStyle.paddingRight),
+      ),
       maxWidth: getComputedStyle(block).maxWidth,
       leftGap: Math.round(blockRect.left - contentRect.left),
       rightGap: Math.round(contentRect.right - blockRect.right),
     }
   })
   expect(signInGeometry.maxWidth).toBe('448px')
-  expect(signInGeometry.width).toBe(Math.min(448, signInGeometry.contentWidth - 24))
+  expect(signInGeometry.width).toBe(Math.min(448, signInGeometry.innerWidth))
   expect(Math.abs(signInGeometry.leftGap - signInGeometry.rightGap)).toBeLessThanOrEqual(1)
   await selectCatalogKind(page, 'Components')
 
@@ -1011,7 +1019,9 @@ test('the Finder marks its place and its active row against its own surface, in 
       else await expect(root).not.toHaveClass(/dark/u)
       const label = `${preset ?? 'playground'} ${mode}`
       for (const item of marked) {
-        await expect.poll(() => distance(item), { message: label }).toBeGreaterThan(0.03)
+        await expect
+          .poll(() => distance(item), { message: label })
+          .toBeGreaterThan(minimumMarkDistance)
       }
       // Whatever a marked item holds stays legible on its mark.
       const audit = await new AxeBuilder({ page })

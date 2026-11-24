@@ -56,6 +56,15 @@
   --ui-weight-label: 500;
   --ui-shadow-overlay: 0 4px 6px -1px oklch(0 0 0 / 0.1), 0 2px 4px -2px oklch(0 0 0 / 0.1);
   --ui-backdrop: oklch(0 0 0 / 0.1);
+  /* The sidebar follows this preset's own surfaces. */
+  --ui-sidebar: var(--ui-card);
+  --ui-sidebar-foreground: var(--ui-foreground);
+  --ui-sidebar-primary: var(--ui-primary);
+  --ui-sidebar-primary-foreground: var(--ui-primary-foreground);
+  --ui-sidebar-accent: var(--ui-accent);
+  --ui-sidebar-accent-foreground: var(--ui-accent-foreground);
+  --ui-sidebar-border: var(--ui-border);
+  --ui-sidebar-ring: var(--ui-ring);
 }
 
 :root.dark,
@@ -89,4 +98,20 @@
   --ui-ring: oklch(0.72 0.18 32);
   --ui-shadow-control: 0 2px 0 oklch(0 0 0 / 0.32);
   --ui-shadow-panel: 0 28px 0 -12px oklch(0.72 0.19 32 / 0.18);
+  /* Restated from the light block, so an earlier preset's dark mode never shows through. */
+  --ui-chart-1: oklch(0.6 0.22 28);
+  --ui-chart-2: oklch(0.7 0.18 115);
+  --ui-chart-3: oklch(0.62 0.17 245);
+  --ui-chart-4: oklch(0.73 0.17 72);
+  --ui-chart-5: oklch(0.58 0.18 330);
+  --ui-sidebar: var(--ui-card);
+  --ui-sidebar-foreground: var(--ui-foreground);
+  --ui-sidebar-primary: var(--ui-primary);
+  --ui-sidebar-primary-foreground: var(--ui-primary-foreground);
+  --ui-sidebar-accent: var(--ui-accent);
+  --ui-sidebar-accent-foreground: var(--ui-accent-foreground);
+  --ui-sidebar-border: var(--ui-border);
+  --ui-sidebar-ring: var(--ui-ring);
+  --ui-shadow-overlay: 0 4px 6px -1px oklch(0 0 0 / 0.1), 0 2px 4px -2px oklch(0 0 0 / 0.1);
+  --ui-backdrop: oklch(0 0 0 / 0.1);
 }

@@ -955,20 +955,27 @@ function variables(theme: ThemeDocument, selectedMode: 'light' | 'dark'): string
   )
 }
 
+/**
+ * Every element a dark selector matches also matches a light selector, so the dark block declares
+ * only what the mode changes. A token the same in both modes keeps the light selector's
+ * specificity, and a preset or theme applied after this one still overrides it in dark mode.
+ */
 function renderModes(
   theme: ThemeDocument,
   lightSelectors: readonly string[],
   darkSelectors: readonly string[],
 ): string[] {
+  const light = variables(theme, 'light')
+  const declaredInLight = new Set(light)
   return [
     lightSelectors.join(',\n') + ' {',
     '  color-scheme: light;',
-    ...variables(theme, 'light'),
+    ...light,
     '}',
     '',
     darkSelectors.join(',\n') + ' {',
     '  color-scheme: dark;',
-    ...variables(theme, 'dark'),
+    ...variables(theme, 'dark').filter((declaration) => !declaredInLight.has(declaration)),
     '}',
     '',
   ]
