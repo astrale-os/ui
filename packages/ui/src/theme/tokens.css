@@ -52,6 +52,8 @@
   --ui-leading-heading: 1.2;
   --ui-weight-body: 400;
   --ui-weight-heading: 600;
+  /* Shadow tokens compose with ring shadows in one `box-shadow` list: a shadowless value is the
+     transparent `0 0 #0000`, never `none`, which would drop the ring with it. */
   --ui-shadow-control: 0 1px 2px oklch(0.19 0.016 255 / 0.08);
   --ui-shadow-panel: 0 18px 55px oklch(0.19 0.016 255 / 0.1);
   /* Floating surfaces: popovers, menus, select lists, hover cards, sheets, and toasts. */

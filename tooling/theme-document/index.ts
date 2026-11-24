@@ -867,13 +867,22 @@ function admittedThemeStyleProperties(
     '--ui-leading-heading': theme.typography.heading.leading,
     '--ui-weight-body': String(theme.typography.body.weight),
     '--ui-weight-heading': String(theme.typography.heading.weight),
-    '--ui-shadow-control': effects.controlShadow,
-    '--ui-shadow-panel': effects.panelShadow,
-    '--ui-shadow-overlay': effects.overlayShadow,
+    '--ui-shadow-control': composableShadow(effects.controlShadow),
+    '--ui-shadow-panel': composableShadow(effects.panelShadow),
+    '--ui-shadow-overlay': composableShadow(effects.overlayShadow),
     '--ui-backdrop': effects.backdrop,
     '--ui-motion-fast': theme.motion.fast,
     '--ui-motion-standard': theme.motion.standard,
   }
+}
+
+/**
+ * Tailwind composes every shadow token with the ring shadows in one `box-shadow` list, where
+ * `none` is invalid and would drop the ring with it. A shadowless effect therefore projects as
+ * the transparent zero shadow Tailwind's own `shadow-none` uses.
+ */
+function composableShadow(value: string): string {
+  return value === 'none' ? '0 0 #0000' : value
 }
 
 export function themeStyleProperties(

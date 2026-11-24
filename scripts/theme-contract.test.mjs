@@ -253,6 +253,32 @@ test('effects project per mode and an unset action radius resets to the componen
   assert.notEqual(spatial.effects.light.backdrop, spatial.effects.dark.backdrop)
 })
 
+test('shadow tokens stay composable with ring shadows in every preset and projected theme', async () => {
+  const observatory = (await themes()).find(({ theme }) => theme.name === 'observatory').theme
+  const shadowless = { controlShadow: 'none', panelShadow: 'none', overlayShadow: 'none' }
+  const theme = {
+    ...observatory,
+    effects: {
+      light: { ...observatory.effects.light, ...shadowless },
+      dark: { ...observatory.effects.dark, ...shadowless },
+    },
+  }
+  for (const mode of ['light', 'dark']) {
+    const properties = themeStyleProperties(theme, mode)
+    for (const token of ['--ui-shadow-control', '--ui-shadow-panel', '--ui-shadow-overlay']) {
+      assert.equal(properties[token], '0 0 #0000', `${mode} ${token}`)
+    }
+  }
+  assert.doesNotMatch(renderThemeCss(theme), /--ui-shadow-[a-z]+:\s*none/u)
+  const presets = 'packages/ui/src/theme/presets'
+  for (const file of [
+    'packages/ui/src/theme/tokens.css',
+    ...(await readdir(presets)).map((name) => `${presets}/${name}`),
+  ]) {
+    assert.doesNotMatch(await readFile(file, 'utf8'), /--ui-shadow-[a-z]+:\s*none/u, file)
+  }
+})
+
 test('JSON Schema and TypeScript agree on generator metadata admission boundaries', async () => {
   const schema = JSON.parse(await readFile('schemas/theme.schema.json', 'utf8'))
   const validate = new Ajv2020({ strict: false }).compile(schema)
