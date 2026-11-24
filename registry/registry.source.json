@@ -6,6 +6,7 @@
     "./components/registry.json",
     "./blocks/authentication/registry.json",
     "./blocks/dashboard/registry.json",
+    "./blocks/finder/registry.json",
     "./blocks/observability/registry.json",
     "./blocks/scheduling/registry.json",
     "./blocks/secrets/registry.json",

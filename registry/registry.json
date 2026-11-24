@@ -536,6 +536,47 @@
       }
     },
     {
+      "name": "block-finder-node-browser",
+      "type": "registry:block",
+      "title": "Block · Finder · Node Browser",
+      "description": "Astrale block/finder/node-browser; the Finder as a panel: Domains, Classes and a Nodes table with filters, preview, path and tray, over an injected source; each word replaceable for another language.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "registry/blocks/finder/node-browser.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/components/finder/node-browser.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "block/finder/node-browser",
+        "ownership": "consumer-source"
+      }
+    },
+    {
+      "name": "block-finder-node-selector",
+      "type": "registry:block",
+      "title": "Block · Finder · Node Selector",
+      "description": "Astrale block/finder/node-selector; the Finder in a dialog, for a host answering a request to select Nodes; the source and the answer are injected through props.",
+      "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
+      "files": [
+        {
+          "path": "registry/blocks/finder/node-selector.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/components/finder/node-selector.tsx"
+        },
+        {
+          "path": "registry/blocks/finder/node-browser.tsx",
+          "type": "registry:component",
+          "target": "components/astrale/components/finder/node-browser.tsx"
+        }
+      ],
+      "meta": {
+        "canonicalAddress": "block/finder/node-selector",
+        "ownership": "consumer-source"
+      }
+    },
+    {
       "name": "block-observability-status-monitor",
       "type": "registry:block",
       "title": "Block · Observability · Status Monitor",

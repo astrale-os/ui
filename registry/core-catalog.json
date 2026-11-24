@@ -140,6 +140,20 @@
     "variantCount": 13
   },
   {
+    "address": "block/finder/node-browser",
+    "title": "Block · Finder · Node Browser",
+    "classification": "block",
+    "family": "finder",
+    "variantCount": 2
+  },
+  {
+    "address": "block/finder/node-selector",
+    "title": "Block · Finder · Node Selector",
+    "classification": "block",
+    "family": "finder",
+    "variantCount": 2
+  },
+  {
     "address": "block/kanban/kanban-01",
     "title": "kanban 1",
     "classification": "block",

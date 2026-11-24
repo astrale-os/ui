@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url'
 
 import uiPackage from '../../packages/ui/package.json' with { type: 'json' }
 import registry from '../../registry/registry.json' with { type: 'json' }
+import { perceptualDistance } from '../../tooling/theme-generator/color.js'
 import { componentNames } from '../src/catalog/inventory.js'
 
 const repositoryRoot = fileURLToPath(new URL('../..', import.meta.url))
@@ -944,6 +945,72 @@ test('log viewer filters the stream, then pauses and resumes the live tail', asy
     'aria-pressed',
     'false',
   )
+})
+
+test('the Finder marks its place and its active row against its own surface, in every theme and mode', async ({
+  page,
+}, testInfo) => {
+  test.skip(testInfo.project.name !== 'desktop', 'Surface colors are viewport-neutral.')
+  await page.goto('/?family=block%2Ffinder')
+  const preview = await loadPreview(page, 'block/finder/node-browser')
+  const row = preview.locator('[data-slot="finder-row"]').first()
+  // Chosen, then put back: the row keeps the cursor without the chosen tint.
+  await row.click()
+  await row.click()
+  await expect(row).toHaveAttribute('data-active', '')
+  await expect(row).not.toHaveAttribute('data-chosen')
+  const marked = [
+    preview.getByRole('listbox', { name: 'Domains' }).getByRole('option', { selected: true }),
+    preview.getByRole('listbox', { name: 'Classes' }).getByRole('option', { selected: true }),
+    row,
+  ]
+  for (const item of marked) await expect(item.first()).toBeVisible()
+  await page.addStyleTag({
+    content:
+      '*, *::before, *::after { transition-delay: 0s !important; transition-duration: 0s !important; }',
+  })
+  // A marked item against the surface it sits on, in OKLab: at least a step the eye tells apart.
+  const distance = (item: (typeof marked)[number]) =>
+    item
+      .first()
+      .evaluate((element) => {
+        let surface = element.parentElement
+        while (surface && getComputedStyle(surface).backgroundColor === 'rgba(0, 0, 0, 0)')
+          surface = surface.parentElement
+        return [
+          getComputedStyle(element).backgroundColor,
+          surface ? getComputedStyle(surface).backgroundColor : '',
+        ] as const
+      })
+      .then(([row, surface]) => perceptualDistance(row, surface) ?? 0)
+  await openThemeCustomizer(page)
+  const root = page.locator('[data-slot="ui-playground"]')
+  // The playground's own theme, then the Astrale preset a host applies to the region it mounts in.
+  for (const preset of [undefined, 'astrale'] as const) {
+    if (preset) {
+      await preview.evaluate(
+        (element, name) => element.setAttribute('data-ui-preset', name),
+        preset,
+      )
+    }
+    for (const mode of ['light', 'dark'] as const) {
+      await page
+        .getByRole('button', { name: mode === 'light' ? 'Light' : 'Dark', exact: true })
+        .click()
+      if (mode === 'dark') await expect(root).toHaveClass(/dark/u)
+      else await expect(root).not.toHaveClass(/dark/u)
+      const label = `${preset ?? 'playground'} ${mode}`
+      for (const item of marked) {
+        await expect.poll(() => distance(item), { message: label }).toBeGreaterThan(0.03)
+      }
+      // Whatever a marked item holds stays legible on its mark.
+      const audit = await new AxeBuilder({ page })
+        .include('[data-preview-address="block/finder/node-browser"]')
+        .withRules(['color-contrast'])
+        .analyze()
+      expect(audit.violations, label).toEqual([])
+    }
+  }
 })
 
 test('log viewer follows new entries without stealing focus', async ({ page }) => {
