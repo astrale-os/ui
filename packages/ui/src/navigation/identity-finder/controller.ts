@@ -6,6 +6,7 @@ import type {
   Identity,
   IdentityChoice,
   IdentityFinderSource,
+  IdentityImage,
   IdentityKind,
   IdentityPage,
 } from './source.js'
@@ -119,6 +120,8 @@ export interface IdentityFinderController {
   confirm(): void
   cancel(): void
   readonly theme?: 'light' | 'dark'
+  /** Its picture: the one its page gave, else the one `source.picture` read, once it lands. */
+  imageOf(identity: Identity): IdentityImage | undefined
   kindOf(classKey: string): IdentityKind | undefined
   /** The id of a row's option element, for `aria-activedescendant`. */
   optionId(key: string): string
@@ -130,6 +133,18 @@ export interface IdentityFinderController {
 }
 
 const NO_UNAVAILABLE: ReadonlyMap<string, string> = new Map()
+
+/** Pictures read at once: a long list does not open dozens of downloads. */
+const PICTURE_READS = 4
+
+interface PictureReads {
+  readonly source: IdentityFinderSource
+  readonly controller: AbortController
+  /** The Identities whose picture was asked, once each per source. */
+  readonly started: Set<string>
+  queue: Identity[]
+  running: number
+}
 
 /** An aborted read's rejection, which the finder ignores. */
 function aborted(signal: AbortSignal): boolean {
@@ -446,6 +461,76 @@ export function useIdentityFinderController(
     ])
   }, [view, list.identities, sections, rowOf])
 
+  // ── Pictures read on demand ──
+  // Each Identity's picture is asked once per source, a few at a time, for the rows shown and the
+  // choices; a read not started yet is dropped when its row goes.
+  const [pictures, setPictures] = React.useState<ReadonlyMap<string, IdentityImage | null>>(
+    () => new Map(),
+  )
+  const pictureReads = React.useRef<PictureReads | null>(null)
+  const wantedPictures = React.useMemo(() => {
+    const wanted = new Map<string, Identity>()
+    const consider = (identity: Identity) => {
+      if (identity.picture === true && identity.image === undefined)
+        wanted.set(identity.id, identity)
+    }
+    for (const row of rows) if (row.type === 'identity') consider(row.identity)
+    for (const identity of chosen) consider(identity)
+    return wanted
+  }, [rows, chosen])
+  const wantedPicturesKey = [...wantedPictures.keys()].join('\n')
+  React.useEffect(() => {
+    const read = source.picture
+    if (read === undefined) return
+    let reads = pictureReads.current
+    // A new source, or a remount after the reads were aborted, starts afresh.
+    if (reads === null || reads.source !== source || reads.controller.signal.aborted) {
+      reads?.controller.abort()
+      reads = {
+        source,
+        controller: new AbortController(),
+        started: new Set(),
+        queue: [],
+        running: 0,
+      }
+      pictureReads.current = reads
+      setPictures(new Map())
+    }
+    const current = reads
+    const { signal } = current.controller
+    current.queue = [...wantedPictures.values()].filter(
+      (identity) => !current.started.has(identity.id),
+    )
+    const settle = (id: string, image: IdentityImage | null) => {
+      if (!signal.aborted) setPictures((held) => new Map(held).set(id, image))
+    }
+    const pump = () => {
+      while (current.running < PICTURE_READS && current.queue.length > 0 && !signal.aborted) {
+        const identity = current.queue.shift()!
+        current.started.add(identity.id)
+        current.running++
+        read
+          .call(source, { identity, signal })
+          .then(
+            (image) => settle(identity.id, image ?? null),
+            () => settle(identity.id, null),
+          )
+          .finally(() => {
+            current.running--
+            pump()
+          })
+      }
+    }
+    pump()
+    // `wantedPicturesKey` names exactly the Identities `wantedPictures` holds.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [source, wantedPicturesKey])
+  React.useEffect(() => () => pictureReads.current?.controller.abort(), [])
+  const imageOf = React.useCallback(
+    (identity: Identity) => identity.image ?? pictures.get(identity.id) ?? undefined,
+    [pictures],
+  )
+
   const [activeKey, setActiveKey] = React.useState<string>()
   const active = rows.some((row) => row.key === activeKey) ? activeKey : rows[0]?.key
   const scrollActive = React.useRef(false)
@@ -648,6 +733,7 @@ export function useIdentityFinderController(
     confirm,
     cancel: onCancel,
     ...(theme === undefined ? {} : { theme }),
+    imageOf,
     kindOf: (classKey) => kindByKey.get(classKey),
     optionId,
     listboxId,

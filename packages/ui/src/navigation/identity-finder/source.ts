@@ -38,6 +38,11 @@ export interface Identity {
   /** A picture; absent, the finder shows the name's initials. */
   readonly image?: IdentityImage
   /**
+   * It has a picture only a further read gives (stored bytes the host downloads): the finder asks
+   * `IdentityFinderSource.picture` for it once its row shows, and shows the initials meanwhile.
+   */
+  readonly picture?: boolean
+  /**
    * Other Identities extend it and the user may read at least one: the finder can open it to list
    * them, as it opens a group or a Role.
    */
@@ -81,6 +86,15 @@ export interface IdentityFinderSource {
       readonly signal: AbortSignal
     },
   ): Promise<IdentityPage>
+  /**
+   * The picture of an Identity its page marked `picture`, or none when it cannot be read. The
+   * finder asks once per Identity it shows, a few at a time; the address stays valid as long as the
+   * source does (an object URL the source revokes when its host is done with it).
+   */
+  picture?(input: {
+    readonly identity: Identity
+    readonly signal: AbortSignal
+  }): Promise<IdentityImage | undefined>
 }
 
 /** An Identity the user confirmed: all a host passes on to the asking View. */

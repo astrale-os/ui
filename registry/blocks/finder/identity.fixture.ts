@@ -91,6 +91,8 @@ export const identityDirectory = {
 export const identitySource: IdentityFinderSource = createMemoryIdentitySource({
   ...identityDirectory,
   latency: 150,
+  // Pictures arrive after their rows, as stored profile pictures do from a Kernel.
+  lazyPictures: true,
 })
 
 /** A source that fails every read, to show the error states. */

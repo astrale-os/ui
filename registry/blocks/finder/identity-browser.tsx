@@ -490,6 +490,11 @@ function Empty() {
   )
 }
 
+/** An avatar's `image`, only when there is one. */
+function imageProps(image: IdentityImage | undefined) {
+  return image === undefined ? {} : { image }
+}
+
 const row =
   'group/row flex min-h-11 cursor-default items-center gap-3 rounded-md px-2 py-1.5 select-none data-active:bg-accent data-active:text-accent-foreground data-disabled:opacity-55'
 
@@ -512,11 +517,12 @@ function Row({ row: item }: { row: IdentityRow }) {
     )
   }
   const { identity } = item
+  const image = finder.imageOf(identity)
   const roundAvatar = item.kind === undefined || finder.kinds.list[0]?.key === item.kind.key
   return (
     <IdentityFinderOption row={item} className={row} title={item.unavailable}>
       <span data-slot="block-finder-identity-browser-avatar-frame" className="relative shrink-0">
-        {identity.image === undefined && !roundAvatar ? (
+        {image === undefined && !roundAvatar ? (
           <span
             data-slot="block-finder-identity-browser-kind-avatar"
             aria-hidden="true"
@@ -527,7 +533,7 @@ function Row({ row: item }: { row: IdentityRow }) {
         ) : (
           <IdentityAvatar
             {...(identity.name === undefined ? {} : { name: identity.name })}
-            {...(identity.image === undefined ? {} : { image: identity.image })}
+            {...imageProps(image)}
             className={cn(
               'grid size-8 place-items-center overflow-hidden bg-muted text-[11px] font-medium text-muted-foreground [&_img]:size-full [&_img]:object-cover',
               roundAvatar ? 'rounded-full' : 'rounded-md',
@@ -761,7 +767,7 @@ function Footer() {
             >
               <IdentityAvatar
                 {...(identity.name === undefined ? {} : { name: identity.name })}
-                {...(identity.image === undefined ? {} : { image: identity.image })}
+                {...imageProps(finder.imageOf(identity))}
                 className="grid size-5 place-items-center overflow-hidden rounded-full bg-muted text-[9px] font-medium text-muted-foreground [&_img]:size-full [&_img]:object-cover"
               />
               <span data-slot="block-finder-identity-browser-chip-name" className="truncate">

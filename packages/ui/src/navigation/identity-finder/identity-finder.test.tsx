@@ -261,6 +261,61 @@ describe('identity finder', () => {
     expect(onCancel).toHaveBeenCalledOnce()
   })
 
+  test('a picture only a further read gives shows once it lands, a few reads at a time', async () => {
+    const people = Array.from({ length: 9 }, (_, index) => ({
+      id: `p-${index}`,
+      class: USER,
+      name: `Person ${index}`,
+      image: { src: `https://pictures.example/${index}.png` },
+    }))
+    const memory = createMemoryIdentitySource({
+      kinds: directory.kinds,
+      identities: people,
+      lazyPictures: true,
+    })
+    let running = 0
+    let most = 0
+    const asked: string[] = []
+    const source: IdentityFinderSource = {
+      kinds: memory.kinds,
+      identities: memory.identities,
+      picture: async (input) => {
+        asked.push(input.identity.id)
+        running++
+        most = Math.max(most, running)
+        await new Promise((resolve) => setTimeout(resolve, 5))
+        running--
+        return memory.picture!(input)
+      },
+    }
+    function Pictures() {
+      const finder = useIdentityFinder()
+      return (
+        <ul>
+          {finder.rows.map((row) =>
+            row.type === 'identity' ? (
+              <li key={row.key} data-testid="picture">
+                {finder.imageOf(row.identity)?.src ?? 'initials'}
+              </li>
+            ) : null,
+          )}
+        </ul>
+      )
+    }
+    render(
+      <IdentityFinder source={source} accepts={[USER]} onConfirm={() => {}} onCancel={() => {}}>
+        <Pictures />
+      </IdentityFinder>,
+    )
+    await waitFor(() =>
+      expect(screen.getAllByTestId('picture').map((item) => item.textContent)).toEqual(
+        people.map((person) => person.image.src),
+      ),
+    )
+    expect(most).toBeLessThanOrEqual(4)
+    expect([...asked].sort()).toEqual(people.map((person) => person.id))
+  })
+
   test('a failed read shows as an error and a retry reads again', async () => {
     let fail = true
     const memory = createMemoryIdentitySource(directory)

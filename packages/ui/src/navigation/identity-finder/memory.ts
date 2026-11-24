@@ -19,6 +19,11 @@ export interface IdentityMemoryDirectory {
   readonly memberships?: readonly (readonly [string, string])[]
   /** Milliseconds each read waits, to show loading states. Default 0. */
   readonly latency?: number
+  /**
+   * Pages mark each picture `picture` instead of giving it, and `picture` reads it, as a host whose
+   * pictures are stored bytes does. Default false.
+   */
+  readonly lazyPictures?: boolean
 }
 
 function wait(milliseconds: number, signal: AbortSignal): Promise<void> {
@@ -50,7 +55,8 @@ function words(value: string): string[] {
 export function createMemoryIdentitySource(
   directory: IdentityMemoryDirectory,
 ): IdentityFinderSource {
-  const { latency = 0 } = directory
+  const { latency = 0, lazyPictures = false } = directory
+  const byId = new Map(directory.identities.map((identity) => [identity.id, identity]))
   const kinds = new Map(directory.kinds.map((kind) => [kind.key, kind]))
   const ancestry = (key: string, seen = new Set<string>()): Set<string> => {
     if (seen.has(key)) return seen
@@ -99,8 +105,9 @@ export function createMemoryIdentitySource(
               .flatMap(words)
               .some((word) => word.startsWith(prefix)),
         )
-        .map(({ keywords: _keywords, ...identity }): Identity => ({
+        .map(({ keywords: _keywords, image, ...identity }): Identity => ({
           ...identity,
+          ...(image === undefined ? {} : lazyPictures ? { picture: true } : { image }),
           ...((membersOf.get(identity.id)?.size ?? 0) > 0 ? { members: true } : {}),
         }))
         .sort(byName)
@@ -108,6 +115,10 @@ export function createMemoryIdentitySource(
       const page = matching.slice(start, start + size)
       const next = start + size < matching.length ? String(start + size) : undefined
       return next === undefined ? { identities: page } : { identities: page, next }
+    },
+    async picture({ identity, signal }) {
+      await wait(latency, signal)
+      return byId.get(identity.id)?.image
     },
   }
 }
