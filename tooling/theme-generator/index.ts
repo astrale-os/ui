@@ -369,12 +369,13 @@ function deriveTypography(dna: ThemeDNA['typography'], seed: string): ThemeDocum
   )
   const formatTracking = (value: number) =>
     Math.abs(value) < 0.0005 ? '0' : `${roundTo(value, 3)}em`
+  const bodyWeight = nearestWeight(body, dna.compactness > 0.78 ? 500 : 400)
   return {
     body: {
       family: body.family,
       tracking: formatTracking(bodyTracking),
       leading: `${roundTo(bodyLeading, 2)}`,
-      weight: nearestWeight(body, dna.compactness > 0.78 ? 500 : 400),
+      weight: bodyWeight,
     },
     heading: {
       family: heading.family,
@@ -382,6 +383,8 @@ function deriveTypography(dna: ThemeDNA['typography'], seed: string): ThemeDocum
       leading: `${roundTo(headingLeading, 2)}`,
       weight: nearestWeight(heading, lerp(600, 700, dna.contrast)),
     },
+    // Labels sit one step above running text in the body family.
+    label: { weight: nearestWeight(body, bodyWeight + 100) },
     mono: terminal.family,
   }
 }
@@ -432,6 +435,10 @@ function deriveGeometry(
       control: rem(control),
       controlSmall: rem(Math.max(1.75, control - 0.25)),
       controlLarge: rem(Math.min(3, control + 0.25)),
+      // Inline padding keeps the upstream proportion to the control height.
+      controlPadding: rem(control * 0.28),
+      // Panels never inset content by less than most of their corner radius.
+      panelSpacing: rem(clamp(Math.max(lerp(1.25, 0.75, dna.density), panelRadius * 0.8), 0.5, 2)),
     },
     effects: { light: modeEffects('light'), dark: modeEffects('dark') },
     motion: {
@@ -623,7 +630,11 @@ export function themeTextContrastReasons(theme: ThemeDocument): string[] {
 
 export function admitGeneratedTheme(
   theme: ThemeDocument,
-  options: { readonly validateProvenance?: boolean } = {},
+  options: {
+    readonly validateProvenance?: boolean
+    /** Branches the author owns; defaults to the locks recorded in the theme's provenance. */
+    readonly locks?: readonly GeneratorBranch[]
+  } = {},
 ): GeneratedThemeAdmission {
   const reasons: string[] = []
   let admitted: ThemeDocument
@@ -699,6 +710,9 @@ export function admitGeneratedTheme(
     if (!surfaceOrderingValid) reasons.push(`${modeName} surface ordering is invalid.`)
   }
   reasons.push(...themeTextContrastReasons(admitted))
+  // The catalog lists the weights the generator chooses; a locked typography branch keeps the
+  // weights its author set.
+  const authorWeights = (options.locks ?? admitted.generation?.locks ?? []).includes('typography')
   for (const [roleName, role] of [
     ['body', admitted.typography.body],
     ['heading', admitted.typography.heading],
@@ -707,9 +721,14 @@ export function admitGeneratedTheme(
     if (!font) reasons.push(`Typography family ${role.family} is not in font catalog v1.`)
     else if (!font.roles.some((role) => role === roleName))
       reasons.push(`${font.label} is not eligible for the ${roleName} role.`)
-    else if (!font.weights.includes(role.weight))
+    else if (!authorWeights && !font.weights.includes(role.weight))
       reasons.push(`${font.label} does not provide weight ${role.weight}.`)
   }
+  const labelFont = fontByFamily(admitted.typography.body.family)
+  if (!authorWeights && labelFont && !labelFont.weights.includes(admitted.typography.label.weight))
+    reasons.push(
+      `${labelFont.label} does not provide label weight ${admitted.typography.label.weight}.`,
+    )
   const terminalFont = fontByFamily(admitted.typography.mono)
   if (!terminalFont) reasons.push('Terminal family is not in font catalog v1.')
   else if (!terminalFont.roles.some((role) => role === 'terminal'))
@@ -741,6 +760,8 @@ export function admitGeneratedTheme(
   const control = Number.parseFloat(admitted.density.control)
   const controlSmall = Number.parseFloat(admitted.density.controlSmall)
   const controlLarge = Number.parseFloat(admitted.density.controlLarge)
+  const controlPadding = Number.parseFloat(admitted.density.controlPadding)
+  const panelSpacing = Number.parseFloat(admitted.density.panelSpacing)
   const fastMotion = Number.parseFloat(admitted.motion.fast)
   const standardMotion = Number.parseFloat(admitted.motion.standard)
   const validShadow = (value: string, maximumLift: number, maximumBlur: number) => {
@@ -765,6 +786,10 @@ export function admitGeneratedTheme(
     control > 3 ||
     controlLarge < control ||
     controlLarge > 3.5 ||
+    controlPadding < 0.25 ||
+    controlPadding > 1.5 ||
+    panelSpacing < 0.5 ||
+    panelSpacing > 2 ||
     fastMotion < 0 ||
     fastMotion > 300 ||
     standardMotion < fastMotion ||
@@ -786,7 +811,7 @@ export function admitGeneratedTheme(
 
 function lockedBranchAdmission(theme: ThemeDocument, locks: readonly GeneratorBranch[]): string[] {
   if (locks.length === 0) return []
-  const admission = admitGeneratedTheme(theme)
+  const admission = admitGeneratedTheme(theme, { locks })
   return admission.reasons.filter((reason) =>
     locks.some((branch) => {
       if (branch === 'palette')

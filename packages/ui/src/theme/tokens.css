@@ -43,6 +43,10 @@
   --ui-control-height: 2.25rem;
   --ui-control-height-sm: 2rem;
   --ui-control-height-lg: 2.5rem;
+  /* Inline padding of buttons, toggles, inputs, and select triggers. */
+  --ui-control-padding: 0.625rem;
+  /* Inset and gap of cards, dialogs, alert dialogs, and sheets. */
+  --ui-panel-spacing: 1rem;
   --ui-font-body: 'Avenir Next', 'Segoe UI Variable', ui-sans-serif, sans-serif;
   --ui-font-heading: 'Iowan Old Style', 'Palatino Linotype', ui-serif, serif;
   --ui-font-mono: 'SFMono-Regular', 'Cascadia Code', ui-monospace, monospace;
@@ -52,6 +56,8 @@
   --ui-leading-heading: 1.2;
   --ui-weight-body: 400;
   --ui-weight-heading: 600;
+  /* Labels set in the body family: buttons, tabs, field labels, badges, menu and table headings. */
+  --ui-weight-label: 500;
   /* Shadow tokens compose with ring shadows in one `box-shadow` list: a shadowless value is the
      transparent `0 0 #0000`, never `none`, which would drop the ring with it. */
   --ui-shadow-control: 0 1px 2px oklch(0.19 0.016 255 / 0.08);

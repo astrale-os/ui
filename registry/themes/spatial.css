@@ -41,28 +41,31 @@
   --ui-sidebar-accent-foreground: oklch(0.18 0.013 258);
   --ui-sidebar-border: oklch(0.875 0.005 258);
   --ui-sidebar-ring: oklch(0.55 0.16 262);
-  --ui-radius: 0.75rem;
-  --ui-radius-panel: 1.25rem;
+  --ui-radius: 0.625rem;
+  --ui-radius-panel: 1rem;
   --ui-radius-action: 9999px;
-  --ui-control-height: 2.5rem;
-  --ui-control-height-sm: 2.25rem;
-  --ui-control-height-lg: 3rem;
+  --ui-control-height: 2.25rem;
+  --ui-control-height-sm: 2rem;
+  --ui-control-height-lg: 2.75rem;
+  --ui-control-padding: 0.875rem;
+  --ui-panel-spacing: 1.25rem;
   --ui-font-body: 'Hanken Grotesk', 'Hanken Grotesk Variable', 'Manrope', ui-sans-serif, system-ui, sans-serif;
   --ui-font-heading: 'Hanken Grotesk', 'Hanken Grotesk Variable', 'Manrope', ui-sans-serif, system-ui, sans-serif;
   --ui-font-mono: 'SFMono-Regular', 'Cascadia Code', ui-monospace, monospace;
   --ui-tracking-body: 0;
-  --ui-tracking-heading: -0.01em;
-  --ui-leading-body: 1.6;
-  --ui-leading-heading: 1.22;
-  --ui-weight-body: 400;
-  --ui-weight-heading: 500;
+  --ui-tracking-heading: -0.015em;
+  --ui-leading-body: 1.5;
+  --ui-leading-heading: 1.2;
+  --ui-weight-body: 450;
+  --ui-weight-heading: 600;
+  --ui-weight-label: 550;
   --ui-shadow-control:
-    inset 0 1px 0 oklch(1 0 0 / 0.85), 1px 2px 3px -1px oklch(0.22 0.02 258 / 0.08);
+    inset 0 1px 0 oklch(1 0 0 / 0.8), 1px 1px 2px -1px oklch(0.22 0.025 258 / 0.08);
   --ui-shadow-panel:
-    inset 0 1px 0 oklch(1 0 0), 2px 4px 8px -3px oklch(0.22 0.025 258 / 0.1), 10px 30px 56px -26px oklch(0.22 0.03 258 / 0.28);
+    inset 0 1px 0 oklch(1 0 0), 1px 2px 4px -2px oklch(0.22 0.025 258 / 0.08), 6px 18px 40px -20px oklch(0.22 0.025 258 / 0.18);
   --ui-shadow-overlay:
-    inset 0 1px 0 oklch(1 0 0), 3px 6px 12px -4px oklch(0.22 0.025 258 / 0.12), 16px 46px 84px -34px oklch(0.22 0.03 258 / 0.36);
-  --ui-backdrop: oklch(0.2 0.01 258 / 0.36);
+    inset 0 1px 0 oklch(1 0 0), 2px 4px 8px -3px oklch(0.22 0.025 258 / 0.1), 12px 32px 64px -28px oklch(0.22 0.025 258 / 0.28);
+  --ui-backdrop: oklch(0.2 0.01 258 / 0.32);
   --ui-motion-fast: 120ms;
   --ui-motion-standard: 180ms;
 }
@@ -109,27 +112,30 @@
   --ui-sidebar-accent-foreground: oklch(0.945 0.004 258);
   --ui-sidebar-border: oklch(0.31 0.008 258);
   --ui-sidebar-ring: oklch(0.7 0.13 262);
-  --ui-radius: 0.75rem;
-  --ui-radius-panel: 1.25rem;
+  --ui-radius: 0.625rem;
+  --ui-radius-panel: 1rem;
   --ui-radius-action: 9999px;
-  --ui-control-height: 2.5rem;
-  --ui-control-height-sm: 2.25rem;
-  --ui-control-height-lg: 3rem;
+  --ui-control-height: 2.25rem;
+  --ui-control-height-sm: 2rem;
+  --ui-control-height-lg: 2.75rem;
+  --ui-control-padding: 0.875rem;
+  --ui-panel-spacing: 1.25rem;
   --ui-font-body: 'Hanken Grotesk', 'Hanken Grotesk Variable', 'Manrope', ui-sans-serif, system-ui, sans-serif;
   --ui-font-heading: 'Hanken Grotesk', 'Hanken Grotesk Variable', 'Manrope', ui-sans-serif, system-ui, sans-serif;
   --ui-font-mono: 'SFMono-Regular', 'Cascadia Code', ui-monospace, monospace;
   --ui-tracking-body: 0;
-  --ui-tracking-heading: -0.01em;
-  --ui-leading-body: 1.6;
-  --ui-leading-heading: 1.22;
-  --ui-weight-body: 400;
-  --ui-weight-heading: 500;
+  --ui-tracking-heading: -0.015em;
+  --ui-leading-body: 1.5;
+  --ui-leading-heading: 1.2;
+  --ui-weight-body: 450;
+  --ui-weight-heading: 600;
+  --ui-weight-label: 550;
   --ui-shadow-control:
-    inset 0 1px 0 oklch(1 0 0 / 0.04), 1px 2px 3px -1px oklch(0 0 0 / 0.3);
+    inset 0 1px 0 oklch(1 0 0 / 0.04), 0 1px 2px oklch(0 0 0 / 0.3);
   --ui-shadow-panel:
-    inset 0 1px 0 oklch(1 0 0 / 0.06), 10px 30px 56px -26px oklch(0 0 0 / 0.6);
+    inset 0 1px 0 oklch(1 0 0 / 0.05), 6px 18px 40px -20px oklch(0 0 0 / 0.5);
   --ui-shadow-overlay:
-    inset 0 1px 0 oklch(1 0 0 / 0.06), 16px 46px 84px -34px oklch(0 0 0 / 0.7);
+    inset 0 1px 0 oklch(1 0 0 / 0.06), 12px 32px 64px -28px oklch(0 0 0 / 0.65);
   --ui-backdrop: oklch(0 0 0 / 0.5);
   --ui-motion-fast: 120ms;
   --ui-motion-standard: 180ms;

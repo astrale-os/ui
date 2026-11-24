@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/astrale-os/ui/main/schemas/theme.schema.json",
-  "version": 7,
+  "version": 8,
   "name": "console",
   "label": "Console",
   "description": "Shell, Issues, and Admin: Geist on neutral paper, ink primary, indigo accent, and hairline elevation.",
@@ -99,6 +99,9 @@
       "leading": "1.25",
       "weight": 600
     },
+    "label": {
+      "weight": 500
+    },
     "mono": "'Geist Mono', 'Geist Mono Variable', ui-monospace, 'SFMono-Regular', Menlo, monospace"
   },
   "geometry": {
@@ -109,7 +112,9 @@
   "density": {
     "control": "2.25rem",
     "controlSmall": "2rem",
-    "controlLarge": "2.5rem"
+    "controlLarge": "2.5rem",
+    "controlPadding": "0.625rem",
+    "panelSpacing": "1rem"
   },
   "effects": {
     "light": {

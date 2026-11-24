@@ -1,9 +1,9 @@
 {
   "$schema": "https://raw.githubusercontent.com/astrale-os/ui/main/schemas/theme.schema.json",
-  "version": 7,
+  "version": 8,
   "name": "spatial",
   "label": "Spatial",
-  "description": "astrale.ai: cool grey sheets lit from the upper left, Hanken Grotesk, pill actions, and layered relief shadows.",
+  "description": "astrale.ai: cool grey sheets lit from the upper left, Hanken Grotesk, pill actions with room, panels inset by their corner radius, and soft relief.",
   "appearance": {
     "light": {
       "background": "oklch(0.952 0.003 258)",
@@ -90,38 +90,43 @@
     "body": {
       "family": "'Hanken Grotesk', 'Hanken Grotesk Variable', 'Manrope', ui-sans-serif, system-ui, sans-serif",
       "tracking": "0",
-      "leading": "1.6",
-      "weight": 400
+      "leading": "1.5",
+      "weight": 450
     },
     "heading": {
       "family": "'Hanken Grotesk', 'Hanken Grotesk Variable', 'Manrope', ui-sans-serif, system-ui, sans-serif",
-      "tracking": "-0.01em",
-      "leading": "1.22",
-      "weight": 500
+      "tracking": "-0.015em",
+      "leading": "1.2",
+      "weight": 600
+    },
+    "label": {
+      "weight": 550
     },
     "mono": "'SFMono-Regular', 'Cascadia Code', ui-monospace, monospace"
   },
   "geometry": {
-    "radius": "0.75rem",
-    "panelRadius": "1.25rem",
+    "radius": "0.625rem",
+    "panelRadius": "1rem",
     "actionRadius": "9999px"
   },
   "density": {
-    "control": "2.5rem",
-    "controlSmall": "2.25rem",
-    "controlLarge": "3rem"
+    "control": "2.25rem",
+    "controlSmall": "2rem",
+    "controlLarge": "2.75rem",
+    "controlPadding": "0.875rem",
+    "panelSpacing": "1.25rem"
   },
   "effects": {
     "light": {
-      "controlShadow": "inset 0 1px 0 oklch(1 0 0 / 0.85), 1px 2px 3px -1px oklch(0.22 0.02 258 / 0.08)",
-      "panelShadow": "inset 0 1px 0 oklch(1 0 0), 2px 4px 8px -3px oklch(0.22 0.025 258 / 0.1), 10px 30px 56px -26px oklch(0.22 0.03 258 / 0.28)",
-      "overlayShadow": "inset 0 1px 0 oklch(1 0 0), 3px 6px 12px -4px oklch(0.22 0.025 258 / 0.12), 16px 46px 84px -34px oklch(0.22 0.03 258 / 0.36)",
-      "backdrop": "oklch(0.2 0.01 258 / 0.36)"
+      "controlShadow": "inset 0 1px 0 oklch(1 0 0 / 0.8), 1px 1px 2px -1px oklch(0.22 0.025 258 / 0.08)",
+      "panelShadow": "inset 0 1px 0 oklch(1 0 0), 1px 2px 4px -2px oklch(0.22 0.025 258 / 0.08), 6px 18px 40px -20px oklch(0.22 0.025 258 / 0.18)",
+      "overlayShadow": "inset 0 1px 0 oklch(1 0 0), 2px 4px 8px -3px oklch(0.22 0.025 258 / 0.1), 12px 32px 64px -28px oklch(0.22 0.025 258 / 0.28)",
+      "backdrop": "oklch(0.2 0.01 258 / 0.32)"
     },
     "dark": {
-      "controlShadow": "inset 0 1px 0 oklch(1 0 0 / 0.04), 1px 2px 3px -1px oklch(0 0 0 / 0.3)",
-      "panelShadow": "inset 0 1px 0 oklch(1 0 0 / 0.06), 10px 30px 56px -26px oklch(0 0 0 / 0.6)",
-      "overlayShadow": "inset 0 1px 0 oklch(1 0 0 / 0.06), 16px 46px 84px -34px oklch(0 0 0 / 0.7)",
+      "controlShadow": "inset 0 1px 0 oklch(1 0 0 / 0.04), 0 1px 2px oklch(0 0 0 / 0.3)",
+      "panelShadow": "inset 0 1px 0 oklch(1 0 0 / 0.05), 6px 18px 40px -20px oklch(0 0 0 / 0.5)",
+      "overlayShadow": "inset 0 1px 0 oklch(1 0 0 / 0.06), 12px 32px 64px -28px oklch(0 0 0 / 0.65)",
       "backdrop": "oklch(0 0 0 / 0.5)"
     }
   },

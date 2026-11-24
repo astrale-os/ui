@@ -5,6 +5,10 @@ import { fileURLToPath } from 'node:url'
 
 import uiPackage from '../../packages/ui/package.json' with { type: 'json' }
 import registry from '../../registry/registry.json' with { type: 'json' }
+import {
+  THEME_DOCUMENT_VERSION,
+  THEME_GENERATOR_ENGINE_VERSION,
+} from '../../tooling/theme-document/index.js'
 import { perceptualDistance } from '../../tooling/theme-generator/color.js'
 import { componentNames } from '../src/catalog/inventory.js'
 
@@ -1738,8 +1742,22 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
     )
     .toContain('system-ui')
   await selectFieldOption(page, 'Heading font', 'Charter · Serif')
-  await selectFieldOption(page, 'Body weight', '500')
-  await selectFieldOption(page, 'Heading weight', '700')
+  const bodyWeight = page.getByRole('slider', { name: 'Body weight' })
+  const labelWeight = page.getByRole('slider', { name: 'Label weight' })
+  const headingWeight = page.getByRole('slider', { name: 'Heading weight' })
+  await expect(bodyWeight).toHaveAttribute('aria-valuetext', '400')
+  await expect(labelWeight).toHaveAttribute('aria-valuetext', '500')
+  await expect(headingWeight).toHaveAttribute('aria-valuetext', '600')
+  for (const [slider, steps] of [
+    [bodyWeight, 10],
+    [labelWeight, 5],
+    [headingWeight, 10],
+  ] as const) {
+    for (let step = 0; step < steps; step += 1) await slider.press('ArrowRight')
+  }
+  await expect(bodyWeight).toHaveAttribute('aria-valuetext', '500')
+  await expect(labelWeight).toHaveAttribute('aria-valuetext', '550')
+  await expect(headingWeight).toHaveAttribute('aria-valuetext', '700')
   const bodyTracking = page.getByRole('slider', { name: 'Body letter spacing' })
   const bodyLeading = page.getByRole('slider', { name: 'Body line height' })
   const headingTracking = page.getByRole('slider', { name: 'Heading letter spacing' })
@@ -1768,6 +1786,7 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
   const bodySpecimen = typographySpecimen.locator('[data-slot="theme-typography-body"]')
   const headingSpecimen = typographySpecimen.locator('[data-slot="card-title"]')
   const monoSpecimen = typographySpecimen.locator('[data-slot="theme-typography-mono"]')
+  const labelSpecimen = typographySpecimen.locator('[data-slot="theme-typography-label"]')
   await expect
     .poll(() =>
       bodySpecimen.evaluate((element) => {
@@ -1785,6 +1804,9 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
     )
     .toEqual([expect.stringContaining('Charter'), '700', '-0.24px', '20px'])
   await expect
+    .poll(() => labelSpecimen.evaluate((element) => getComputedStyle(element).fontWeight))
+    .toBe('550')
+  await expect
     .poll(() => monoSpecimen.evaluate((element) => getComputedStyle(element).fontFamily))
     .toContain('SFMono-Regular')
 
@@ -1795,6 +1817,14 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
       root.evaluate((element) => getComputedStyle(element).getPropertyValue('--ui-radius').trim()),
     )
     .toBe('0.75rem')
+  await page.getByRole('slider', { name: 'Panel spacing' }).press('ArrowRight')
+  await expect
+    .poll(() =>
+      root.evaluate((element) =>
+        getComputedStyle(element).getPropertyValue('--ui-panel-spacing').trim(),
+      ),
+    )
+    .toBe('1.05rem')
 
   const variation = studio.getByRole('button', { name: 'Variation' })
   await expect(variation).toBeDisabled()
@@ -1843,7 +1873,7 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
   expect(generatedDocument.generation).toMatchObject({
     kind: 'astrale.theme-generation',
     version: 1,
-    engineVersion: 3,
+    engineVersion: THEME_GENERATOR_ENGINE_VERSION,
     fontCatalogVersion: 1,
     locks: ['typography'],
     editedBranches: ['typography'],
@@ -1876,7 +1906,9 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
           primary: saved[0]?.appearance?.dark?.primary,
           body: saved[0]?.typography?.body?.family,
           bodyWeight: saved[0]?.typography?.body?.weight,
+          labelWeight: saved[0]?.typography?.label?.weight,
           radius: saved[0]?.geometry?.radius,
+          panelSpacing: saved[0]?.density?.panelSpacing,
         }
       }),
     )
@@ -1886,7 +1918,9 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
       primary: 'oklch(0.62 0.2 145)',
       body: "system-ui, -apple-system, 'Segoe UI', sans-serif",
       bodyWeight: 500,
+      labelWeight: 550,
       radius: '0.75rem',
+      panelSpacing: '1.05rem',
     })
 
   await page.reload()
@@ -1930,7 +1964,7 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
   expect(download.suggestedFilename()).toBe('observatory.astrale-theme.json')
   const exported = JSON.parse(await downloadText(download))
   expect(exported).toMatchObject({
-    version: 6,
+    version: THEME_DOCUMENT_VERSION,
     name: 'observatory',
     appearance: { dark: { primary: 'oklch(0.62 0.2 145)' } },
     typography: {
@@ -1946,9 +1980,11 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
         leading: '1.25',
         weight: 700,
       },
+      label: { weight: 550 },
       mono: expect.any(String),
     },
     geometry: { radius: '0.75rem' },
+    density: { panelSpacing: '1.05rem' },
   })
 
   await page.getByRole('combobox', { name: 'Theme' }).click()
@@ -1991,6 +2027,8 @@ test('theme editing, mode, history, saving, import, and export remain live', asy
   expect(css).toContain('--ui-tracking-body: 0.005em;')
   expect(css).toContain('--ui-weight-body: 500;')
   expect(css).toContain('--ui-weight-heading: 700;')
+  expect(css).toContain('--ui-weight-label: 550;')
+  expect(css).toContain('--ui-panel-spacing: 1.05rem;')
   expect(css).toContain('--ui-radius: 0.75rem;')
   await expect(page.getByRole('button', { name: 'Close toast' })).toHaveCount(0)
   await testInfo.attach(`theme-studio-${testInfo.project.name}`, {
@@ -2119,11 +2157,18 @@ test('phone layout settles without horizontal overflow', async ({ page }) => {
 })
 
 test('saved version 3 themes migrate to the complete typography model', async ({ page }) => {
+  // Version 3 had no body weight, action radius, per-mode effects, label weight, or spacing.
   const legacy = structuredClone(starterThemeDocuments[0]!)
+  const { controlShadow, panelShadow } = legacy.effects.light
   legacy.version = 3
   legacy.name = 'legacy-observatory'
   legacy.label = 'Legacy Observatory'
+  legacy.effects = { controlShadow, panelShadow }
+  delete legacy.geometry.actionRadius
   delete legacy.typography.body.weight
+  delete legacy.typography.label
+  delete legacy.density.controlPadding
+  delete legacy.density.panelSpacing
   await page.addInitScript((theme) => {
     localStorage.setItem('astrale-ui-playground:themes:v2', JSON.stringify([theme]))
   }, legacy)
@@ -2132,7 +2177,10 @@ test('saved version 3 themes migrate to the complete typography model', async ({
   await page.getByRole('combobox', { name: 'Theme' }).click()
   await page.getByRole('option', { name: 'Legacy Observatory Saved' }).click()
   await page.getByRole('tab', { name: 'Typography' }).click()
-  await expect(page.getByLabel('Body weight', { exact: true })).toContainText('400')
+  await expect(page.getByRole('slider', { name: 'Body weight' })).toHaveAttribute(
+    'aria-valuetext',
+    '400',
+  )
   await page.getByRole('button', { name: 'Save theme' }).click()
   await expect
     .poll(() =>
@@ -2141,7 +2189,7 @@ test('saved version 3 themes migrate to the complete typography model', async ({
         return [saved[0]?.version, saved[0]?.typography?.body?.weight]
       }),
     )
-    .toEqual([6, 400])
+    .toEqual([THEME_DOCUMENT_VERSION, 400])
 })
 
 test('invalid storage and save failures stay contained', async ({ page }) => {
@@ -2316,7 +2364,7 @@ test('every canonical family is serious-violation-free across representative the
   page,
 }, testInfo) => {
   test.skip(testInfo.project.name !== 'desktop', 'The semantic theme matrix is viewport-neutral.')
-  const starters = ['Observatory', 'Console', 'Desktop', 'Spatial']
+  const starters = ['Observatory', 'Console', 'Desktop', 'Spatial', 'Spatial Calm']
   test.setTimeout(360_000 * starters.length)
   await page.emulateMedia({ reducedMotion: 'reduce' })
   const pageErrors: string[] = []

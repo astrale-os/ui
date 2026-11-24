@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/astrale-os/ui/main/schemas/theme.schema.json",
-  "version": 7,
+  "version": 8,
   "name": "observatory",
   "label": "Observatory",
   "description": "Quiet mineral surfaces, deep orbital blue, and measured editorial typography.",
@@ -99,6 +99,9 @@
       "leading": "1.2",
       "weight": 600
     },
+    "label": {
+      "weight": 500
+    },
     "mono": "'SFMono-Regular', 'Cascadia Code', ui-monospace, monospace"
   },
   "geometry": {
@@ -109,7 +112,9 @@
   "density": {
     "control": "2.25rem",
     "controlSmall": "2rem",
-    "controlLarge": "2.5rem"
+    "controlLarge": "2.5rem",
+    "controlPadding": "0.625rem",
+    "panelSpacing": "1rem"
   },
   "effects": {
     "light": {

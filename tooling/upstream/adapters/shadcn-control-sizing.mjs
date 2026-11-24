@@ -29,6 +29,7 @@ const revisions = new Map([
         'Expose the admitted Button size as data-size after semantic trigger composition.',
         'Bind control transition duration to the Astrale fast motion token.',
         'Bind the button radius to the optional --ui-radius-action token, falling back to the upstream radius of each size while it is unset; a button inside a Button Group keeps the control radius.',
+        'Bind the inline padding of default, small, and large buttons to the public --ui-control-padding token (0.625rem, the upstream value), keeping the upstream icon-side offset, so a theme gives pill actions room.',
       ],
       replacements: [
         [
@@ -67,6 +68,18 @@ const revisions = new Map([
           'size-6 rounded-[min(var(--radius-md),10px)]',
           'size-6 rounded-[var(--ui-radius-action,min(var(--radius-md),10px))]',
         ],
+        [
+          'h-(--ui-control-height) gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2',
+          'h-(--ui-control-height) gap-1.5 px-(--ui-control-padding) has-data-[icon=inline-end]:pr-[calc(var(--ui-control-padding)-0.125rem)] has-data-[icon=inline-start]:pl-[calc(var(--ui-control-padding)-0.125rem)]',
+        ],
+        [
+          'h-(--ui-control-height-lg) gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2',
+          'h-(--ui-control-height-lg) gap-1.5 px-(--ui-control-padding) has-data-[icon=inline-end]:pr-[calc(var(--ui-control-padding)-0.125rem)] has-data-[icon=inline-start]:pl-[calc(var(--ui-control-padding)-0.125rem)]',
+        ],
+        [
+          'px-2.5 text-[0.8rem] in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5',
+          'px-(--ui-control-padding) text-[0.8rem] in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-[calc(var(--ui-control-padding)-0.25rem)] has-data-[icon=inline-start]:pl-[calc(var(--ui-control-padding)-0.25rem)]',
+        ],
       ],
     },
   ],
@@ -76,6 +89,7 @@ const revisions = new Map([
       notes: [
         'Bind neutral control text to the foreground token instead of inheriting card or popover text across a different input surface.',
         'Bind the Input height and transition duration to the public Astrale control and motion tokens so composed input slots retain themed geometry.',
+        'Bind the inline padding to the public --ui-control-padding token (0.625rem, the upstream value) so text in every control starts at the same inset.',
       ],
       replacements: [
         [
@@ -83,6 +97,10 @@ const revisions = new Map([
           'h-(--ui-control-height) w-full min-w-0 rounded-lg border border-input bg-transparent px-2.5 py-1 text-base transition-colors duration-[var(--ui-motion-fast)] outline-none',
         ],
         ['py-1 text-base transition-colors', 'py-1 text-base text-foreground transition-colors'],
+        [
+          'bg-transparent px-2.5 py-1 text-base',
+          'bg-transparent px-(--ui-control-padding) py-1 text-base',
+        ],
       ],
     },
   ],
@@ -93,6 +111,7 @@ const revisions = new Map([
         'Bind neutral control text to the foreground token instead of inheriting card or popover text across a different input surface.',
         'Bind the Input Group wrapper height and transition duration to the public Astrale control and motion tokens.',
         'Route the Input Group action size through Button so its local compact variants keep their intended dimensions without a slot-based minimum.',
+        'Bind the inline padding of block-aligned addons to the public --ui-control-padding token (0.625rem, the upstream value) so they stay aligned with the input text.',
       ],
       replacements: [
         [
@@ -107,6 +126,8 @@ const revisions = new Map([
           'border border-input transition-colors',
           'border border-input text-foreground transition-colors',
         ],
+        ['justify-start px-2.5 pt-2', 'justify-start px-(--ui-control-padding) pt-2'],
+        ['justify-start px-2.5 pb-2', 'justify-start px-(--ui-control-padding) pb-2'],
       ],
     },
   ],
@@ -116,6 +137,7 @@ const revisions = new Map([
       notes: [
         'Bind neutral control text to the foreground token instead of inheriting card or popover text across a different input surface.',
         'Bind default and small Native Select heights and transition duration to the public Astrale control and motion tokens.',
+        'Bind the inline padding to the public --ui-control-padding token (0.625rem, the upstream value) so text in every control starts at the same inset.',
       ],
       replacements: [
         [
@@ -124,6 +146,7 @@ const revisions = new Map([
         ],
         ['data-[size=sm]:h-7', 'data-[size=sm]:h-(--ui-control-height-sm)'],
         ['pl-2.5 text-sm transition-colors', 'pl-2.5 text-sm text-foreground transition-colors'],
+        ['py-1 pr-8 pl-2.5', 'py-1 pr-8 pl-(--ui-control-padding)'],
       ],
     },
   ],
@@ -134,6 +157,7 @@ const revisions = new Map([
         'Bind neutral control text to the foreground token instead of inheriting card or popover text across a different input surface.',
         'Bind default and small Select Trigger heights and transition duration to the public Astrale control and motion tokens.',
         'Bind the floating layer to the public --ui-z-floating token (50, the upstream value) so floating elements keep stacking by mount order while the toast viewport sits above them.',
+        'Bind the inline padding to the public --ui-control-padding token (0.625rem, the upstream value) so text in every control starts at the same inset. The trigger keeps the upstream offset on its chevron side.',
       ],
       replacements: [
         [
@@ -150,6 +174,10 @@ const revisions = new Map([
           'isolate z-50 max-h-(--available-height)',
           'isolate z-(--ui-z-floating) max-h-(--available-height)',
         ],
+        [
+          'py-2 pr-2 pl-2.5',
+          'py-2 pr-[calc(var(--ui-control-padding)-0.125rem)] pl-(--ui-control-padding)',
+        ],
       ],
     },
   ],
@@ -158,9 +186,11 @@ const revisions = new Map([
     {
       notes: [
         'Bind neutral control text to the foreground token instead of inheriting card or popover text across a different input surface.',
+        'Bind the inline padding to the public --ui-control-padding token (0.625rem, the upstream value) so text in every control starts at the same inset.',
       ],
       replacements: [
         ['py-2 text-base transition-colors', 'py-2 text-base text-foreground transition-colors'],
+        ['px-2.5 py-2 text-base', 'px-(--ui-control-padding) py-2 text-base'],
       ],
     },
   ],
@@ -184,11 +214,35 @@ const revisions = new Map([
       notes: [
         'Bind the floating layer to the public --ui-z-floating token (50, the upstream value) so floating elements keep stacking by mount order while the toast viewport sits above them.',
         'Bind the modal backdrop to the public --ui-backdrop token (black at 10% alpha, the upstream value) so a theme sets the scrim color.',
+        'Bind the panel inset and gap to the public --ui-panel-spacing token (1rem, the upstream value) so a theme sets panel spacing in one place. The footer bleeds by the same amount.',
       ],
       replacements: [
         ['isolate z-50 bg-black/10', 'isolate z-(--ui-z-floating) bg-black/10'],
         ['left-1/2 z-50 grid', 'left-1/2 z-(--ui-z-floating) grid'],
         ['bg-black/10', 'bg-(--ui-backdrop)'],
+        [
+          '-translate-y-1/2 gap-4 rounded-xl bg-popover p-4',
+          '-translate-y-1/2 gap-(--ui-panel-spacing) rounded-xl bg-popover p-(--ui-panel-spacing)',
+        ],
+        [
+          '-mx-4 -mb-4 flex flex-col-reverse gap-2 rounded-b-xl border-t bg-muted/50 p-4',
+          '-mx-(--ui-panel-spacing) -mb-(--ui-panel-spacing) flex flex-col-reverse gap-2 rounded-b-xl border-t bg-muted/50 p-(--ui-panel-spacing)',
+        ],
+      ],
+    },
+  ],
+  [
+    'card',
+    {
+      notes: [
+        'Bind the card spacing to the public --ui-panel-spacing token (1rem, the upstream value); the small size keeps the upstream three quarters of it.',
+      ],
+      replacements: [
+        ['[--card-spacing:--spacing(4)]', '[--card-spacing:var(--ui-panel-spacing)]'],
+        [
+          'data-[size=sm]:[--card-spacing:--spacing(3)]',
+          'data-[size=sm]:[--card-spacing:calc(var(--ui-panel-spacing)*0.75)]',
+        ],
       ],
     },
   ],
@@ -210,11 +264,20 @@ const revisions = new Map([
       notes: [
         'Bind the floating layer to the public --ui-z-floating token (50, the upstream value) so floating elements keep stacking by mount order while the toast viewport sits above them.',
         'Bind the modal backdrop to the public --ui-backdrop token (black at 10% alpha, the upstream value) so a theme sets the scrim color.',
+        'Bind the panel inset and gap to the public --ui-panel-spacing token (1rem, the upstream value) so a theme sets panel spacing in one place. The footer bleeds by the same amount.',
       ],
       replacements: [
         ['isolate z-50 bg-black/10', 'isolate z-(--ui-z-floating) bg-black/10'],
         ['left-1/2 z-50 grid', 'left-1/2 z-(--ui-z-floating) grid'],
         ['bg-black/10', 'bg-(--ui-backdrop)'],
+        [
+          '-translate-y-1/2 gap-4 rounded-xl bg-popover p-4',
+          '-translate-y-1/2 gap-(--ui-panel-spacing) rounded-xl bg-popover p-(--ui-panel-spacing)',
+        ],
+        [
+          '-mx-4 -mb-4 flex flex-col-reverse gap-2 rounded-b-xl border-t bg-muted/50 p-4',
+          '-mx-(--ui-panel-spacing) -mb-(--ui-panel-spacing) flex flex-col-reverse gap-2 rounded-b-xl border-t bg-muted/50 p-(--ui-panel-spacing)',
+        ],
       ],
     },
   ],
@@ -224,12 +287,21 @@ const revisions = new Map([
       notes: [
         'Bind the floating layer to the public --ui-z-floating token (50, the upstream value) so floating elements keep stacking by mount order while the toast viewport sits above them.',
         'Bind the modal backdrop to the public --ui-backdrop token (black at 10% alpha, the upstream value) so a theme sets the scrim color.',
+        'Bind the panel inset and gap to the public --ui-panel-spacing token (1rem, the upstream value) so a theme sets panel spacing in one place.',
       ],
       replacements: [
         ['inset-0 z-50 min-h-dvh', 'inset-0 z-(--ui-z-floating) min-h-dvh'],
         ['inset-0 z-50 select-none', 'inset-0 z-(--ui-z-floating) select-none'],
         ['fixed z-50 m-(--drawer-inset,0px)', 'fixed z-(--ui-z-floating) m-(--drawer-inset,0px)'],
         ['bg-black/10', 'bg-(--ui-backdrop)'],
+        [
+          'flex shrink-0 flex-col gap-0.5 p-4 pb-0',
+          'flex shrink-0 flex-col gap-0.5 p-(--ui-panel-spacing) pb-0',
+        ],
+        [
+          'mt-auto flex shrink-0 flex-col gap-2 p-4 pt-0',
+          'mt-auto flex shrink-0 flex-col gap-2 p-(--ui-panel-spacing) pt-0',
+        ],
       ],
     },
   ],
@@ -289,11 +361,15 @@ const revisions = new Map([
       notes: [
         'Bind the floating layer to the public --ui-z-floating token (50, the upstream value) so floating elements keep stacking by mount order while the toast viewport sits above them.',
         'Bind the modal backdrop to the public --ui-backdrop token (black at 10% alpha, the upstream value) so a theme sets the scrim color.',
+        'Bind the panel inset and gap to the public --ui-panel-spacing token (1rem, the upstream value) so a theme sets panel spacing in one place.',
       ],
       replacements: [
         ['inset-0 z-50 bg-black/10', 'inset-0 z-(--ui-z-floating) bg-black/10'],
         ['fixed z-50 flex', 'fixed z-(--ui-z-floating) flex'],
         ['bg-black/10', 'bg-(--ui-backdrop)'],
+        ['flex flex-col gap-4 bg-popover', 'flex flex-col gap-(--ui-panel-spacing) bg-popover'],
+        ['flex flex-col gap-0.5 p-4', 'flex flex-col gap-0.5 p-(--ui-panel-spacing)'],
+        ['mt-auto flex flex-col gap-2 p-4', 'mt-auto flex flex-col gap-2 p-(--ui-panel-spacing)'],
       ],
     },
   ],

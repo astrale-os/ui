@@ -264,6 +264,10 @@ function formatRem(value: number) {
   return `${value.toFixed(2)}rem`
 }
 
+function formatWeight(value: number) {
+  return String(Math.round(value))
+}
+
 function formatMilliseconds(value: number) {
   return `${Math.round(value)}ms`
 }
@@ -435,11 +439,6 @@ function TypographyRoleSection({
   workspace: ThemeWorkspace
 }) {
   const typography = workspace.theme.typography[role]
-  const selectedFont = generatorFontCatalog.find((font) => font.family === typography.family)
-  const weightItems = (selectedFont?.weights ?? [typography.weight]).map((weight) => ({
-    label: String(weight),
-    value: String(weight),
-  }))
   const update = (changes: Partial<ThemeTypographyRole>) =>
     workspace.setValue('typography', role, { ...typography, ...changes })
   const id = `typography-${role}`
@@ -470,13 +469,30 @@ function TypographyRoleSection({
             update({ family, weight })
           }}
         />
-        <ThemeSelectField
-          id={`${role}-weight`}
+        <ThemeRangeField
           label={`${title} weight`}
-          items={weightItems}
           value={String(typography.weight)}
-          onChange={(weight) => update({ weight: Number(weight) })}
+          cssVariable={`--ui-weight-${role}`}
+          minimum={100}
+          maximum={900}
+          step={10}
+          format={formatWeight}
+          onCommit={(weight) => update({ weight: Number(weight) })}
         />
+        {role === 'body' ? (
+          <ThemeRangeField
+            label="Label weight"
+            value={String(workspace.theme.typography.label.weight)}
+            cssVariable="--ui-weight-label"
+            minimum={100}
+            maximum={900}
+            step={10}
+            format={formatWeight}
+            onCommit={(weight) =>
+              workspace.setValue('typography', 'label', { weight: Number(weight) })
+            }
+          />
+        ) : null}
         <ThemeRangeField
           label={`${title} letter spacing`}
           value={typography.tracking}
@@ -502,7 +518,10 @@ function TypographyRoleSection({
         {role === 'heading' ? (
           <CardTitle>Heading preview</CardTitle>
         ) : (
-          <p data-slot="theme-typography-body">Body preview</p>
+          <>
+            <p data-slot="theme-typography-body">Body preview</p>
+            <p data-slot="theme-typography-label">Label preview</p>
+          </>
         )}
       </div>
     </section>
@@ -1017,6 +1036,30 @@ export function ThemeStudio({
                 format={formatRem}
                 onCommit={(controlLarge) =>
                   workspace.setValue('density', 'controlLarge', controlLarge)
+                }
+              />
+              <ThemeRangeField
+                label="Control padding"
+                value={workspace.theme.density.controlPadding}
+                cssVariable="--ui-control-padding"
+                minimum={0.25}
+                maximum={1.5}
+                step={0.05}
+                format={formatRem}
+                onCommit={(controlPadding) =>
+                  workspace.setValue('density', 'controlPadding', controlPadding)
+                }
+              />
+              <ThemeRangeField
+                label="Panel spacing"
+                value={workspace.theme.density.panelSpacing}
+                cssVariable="--ui-panel-spacing"
+                minimum={0.5}
+                maximum={2}
+                step={0.05}
+                format={formatRem}
+                onCommit={(panelSpacing) =>
+                  workspace.setValue('density', 'panelSpacing', panelSpacing)
                 }
               />
               <Field>

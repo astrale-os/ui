@@ -58,6 +58,7 @@
   --font-heading: var(--ui-font-heading);
   --font-mono: var(--ui-font-mono);
   --font-weight-normal: var(--ui-weight-body);
+  --font-weight-medium: var(--ui-weight-label);
   --shadow-xs: var(--ui-shadow-control);
   --shadow-sm: var(--ui-shadow-control);
   --shadow-md: var(--ui-shadow-overlay);

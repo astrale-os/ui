@@ -380,7 +380,16 @@ test('externally sourced compositions are exact admitted intake owners', async (
   const addresses = root.items.map((item) => item.meta.canonicalAddress)
   assert.deepEqual(
     addresses.filter((address) => address.startsWith('theme/')),
-    ['theme/console', 'theme/desktop', 'theme/observatory', 'theme/spatial'],
+    [
+      'theme/console',
+      'theme/desktop',
+      'theme/observatory',
+      'theme/spatial-calm',
+      'theme/spatial-compact',
+      'theme/spatial-crisp',
+      'theme/spatial-round',
+      'theme/spatial',
+    ],
   )
   const externalOwners = root.items
     .filter(

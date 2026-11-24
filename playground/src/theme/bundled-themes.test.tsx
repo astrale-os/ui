@@ -11,6 +11,10 @@ describe('bundled themes', () => {
       'desktop',
       'observatory',
       'spatial',
+      'spatial-calm',
+      'spatial-compact',
+      'spatial-crisp',
+      'spatial-round',
     ])
   })
 
