@@ -50,6 +50,7 @@ export const componentGroups = [
       'collapsible',
       'direction',
       'finder',
+      'identity-finder',
       'navigation-menu',
       'pagination',
       'resizable',

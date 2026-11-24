@@ -140,18 +140,32 @@
     "variantCount": 13
   },
   {
+    "address": "block/finder/identity-browser",
+    "title": "Block · Finder · Identity Browser",
+    "classification": "block",
+    "family": "finder",
+    "variantCount": 4
+  },
+  {
+    "address": "block/finder/identity-selector",
+    "title": "Block · Finder · Identity Selector",
+    "classification": "block",
+    "family": "finder",
+    "variantCount": 4
+  },
+  {
     "address": "block/finder/node-browser",
     "title": "Block · Finder · Node Browser",
     "classification": "block",
     "family": "finder",
-    "variantCount": 2
+    "variantCount": 4
   },
   {
     "address": "block/finder/node-selector",
     "title": "Block · Finder · Node Selector",
     "classification": "block",
     "family": "finder",
-    "variantCount": 2
+    "variantCount": 4
   },
   {
     "address": "block/kanban/kanban-01",
