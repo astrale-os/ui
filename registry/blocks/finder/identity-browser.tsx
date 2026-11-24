@@ -67,7 +67,6 @@ export interface IdentityBrowserMessages {
   readonly path: string
   readonly back: string
   readonly identities: string
-  readonly open: (name: string) => string
   readonly members: string
   readonly you: string
   readonly noName: string
@@ -100,7 +99,6 @@ export const IDENTITY_BROWSER_MESSAGES: IdentityBrowserMessages = {
   path: 'Opened',
   back: 'Back',
   identities: 'People and groups',
-  open: (name) => `Open ${name}`,
   members: 'Members',
   you: 'You',
   noName: 'No name',
@@ -397,85 +395,113 @@ function Results() {
   const rowsOf = (identities: readonly Identity[]) =>
     identities.flatMap((identity) => finder.rows.find((row) => row.key === identity.id) ?? [])
 
-  let body: React.ReactNode
+  // The listbox owns options and groups of options only, and scrolls them; every other line (a
+  // note, a failure and its Retry, the next page) shows under it.
+  let options: React.ReactNode[] = []
+  let status: React.ReactNode = null
   if (finder.kinds.status === 'error') {
-    body = <Failure retry={finder.retry}>{m.kindsFailed}</Failure>
+    status = <Failure retry={finder.retry}>{m.kindsFailed}</Failure>
   } else if (finder.kinds.status === 'loading' && finder.kinds.list.length === 0) {
-    body = <RowsSkeleton rows={5} />
+    status = <RowsSkeleton rows={5} />
   } else if (finder.kinds.list.length === 0) {
-    body = <Note>{m.nothingReadable}</Note>
+    status = <Note>{m.nothingReadable}</Note>
   } else if (finder.view === 'list' && finder.list) {
     const { list } = finder
-    body =
-      list.status === 'error' ? (
-        <Failure retry={finder.retry}>{m.failed}</Failure>
-      ) : list.status === 'loading' && list.identities.length === 0 ? (
-        <RowsSkeleton rows={6} />
-      ) : list.identities.length === 0 ? (
-        <Empty />
-      ) : (
-        <>
-          {finder.rows.map((row) => (
-            <Row key={row.key} row={row} />
-          ))}
-          {list.more || list.loadingMore || list.moreFailed ? <More /> : null}
-        </>
-      )
+    if (list.status === 'error') status = <Failure retry={finder.retry}>{m.failed}</Failure>
+    else if (list.status === 'loading' && list.identities.length === 0)
+      status = <RowsSkeleton rows={6} />
+    else if (list.identities.length === 0) status = <Empty />
+    else {
+      options = finder.rows.map((row) => <Row key={row.key} row={row} />)
+      if (list.more || list.loadingMore || list.moreFailed) {
+        options.push(<EndOfList key="end" />)
+        status = <More />
+      }
+    }
   } else {
     const settled = finder.sections.every((section) => section.status !== 'loading')
-    body =
-      finder.sections.length === 0 && settled ? (
-        <Empty />
-      ) : (
-        finder.sections.map((section) => (
-          <section
-            key={section.kind.key}
-            data-slot="block-finder-identity-browser-section"
-            role="group"
-            aria-label={m.kind(section.kind)}
-            className="pb-1"
-          >
-            <h3
-              data-slot="block-finder-identity-browser-section-heading"
-              className="sticky top-0 z-1 flex items-center gap-1.5 bg-popover px-3 pt-2 pb-1 text-[11px] font-medium tracking-wide text-muted-foreground uppercase"
-            >
-              <KindIcon icon={section.kind.icon} className="size-3.5" />
-              {m.kind(section.kind)}
-            </h3>
-            {section.status === 'error' ? (
-              <Failure retry={finder.retry}>{m.failed}</Failure>
-            ) : section.status === 'loading' && section.identities.length === 0 ? (
-              <RowsSkeleton rows={2} />
-            ) : (
-              <>
-                {rowsOf(section.identities).map((row) => (
-                  <Row key={row.key} row={row} />
-                ))}
-                {section.more ? (
-                  <Row
-                    row={
-                      finder.rows.find((row) => row.key === `kind:${section.kind.key}`) ?? {
-                        type: 'kind',
-                        key: `kind:${section.kind.key}`,
-                        kind: section.kind,
-                      }
+    if (finder.sections.length === 0 && settled) status = <Empty />
+    options = finder.sections
+      .filter((section) => section.status !== 'error')
+      .map((section) => (
+        <div
+          key={section.kind.key}
+          data-slot="block-finder-identity-browser-section"
+          role="group"
+          aria-label={m.kind(section.kind)}
+          className="pb-1"
+        >
+          <SectionHeading kind={section.kind} hidden />
+          {section.status === 'loading' && section.identities.length === 0 ? (
+            <RowsSkeleton rows={2} />
+          ) : (
+            <>
+              {rowsOf(section.identities).map((row) => (
+                <Row key={row.key} row={row} />
+              ))}
+              {section.more ? (
+                <Row
+                  row={
+                    finder.rows.find((row) => row.key === `kind:${section.kind.key}`) ?? {
+                      type: 'kind',
+                      key: `kind:${section.kind.key}`,
+                      kind: section.kind,
                     }
-                  />
-                ) : null}
-              </>
-            )}
-          </section>
-        ))
-      )
+                  }
+                />
+              ) : null}
+            </>
+          )}
+        </div>
+      ))
+    const failed = finder.sections.filter((section) => section.status === 'error')
+    if (failed.length > 0)
+      status = failed.map((section) => (
+        <div key={section.kind.key} data-slot="block-finder-identity-browser-section-failure">
+          <SectionHeading kind={section.kind} />
+          <Failure retry={finder.retry}>{m.failed}</Failure>
+        </div>
+      ))
   }
 
   return (
-    <IdentityFinderList
-      aria-label={m.identities}
-      className="min-h-0 flex-1 overflow-y-auto border-t px-2 pb-2 outline-none"
+    <div
+      data-slot="block-finder-identity-browser-results"
+      className="flex min-h-0 flex-1 flex-col border-t"
     >
-      {body}
-    </IdentityFinderList>
+      <IdentityFinderList
+        aria-label={m.identities}
+        className={cn(
+          'min-h-0 overflow-y-auto px-2 outline-none',
+          options.length === 0 ? 'hidden' : 'flex-1 pb-2',
+        )}
+      >
+        {options}
+      </IdentityFinderList>
+      {status === null ? null : (
+        <div data-slot="block-finder-identity-browser-status" className="shrink-0 px-2">
+          {status}
+        </div>
+      )}
+    </div>
+  )
+}
+
+/**
+ * A kind's heading over its rows. Inside the listbox the group already bears the kind's name, so
+ * the heading is only seen; over a failure it is read.
+ */
+function SectionHeading({ kind, hidden = false }: { kind: IdentityKind; hidden?: boolean }) {
+  const m = useContext(Messages)
+  return (
+    <div
+      data-slot="block-finder-identity-browser-section-heading"
+      aria-hidden={hidden || undefined}
+      className="sticky top-0 z-1 flex items-center gap-1.5 bg-popover px-3 pt-2 pb-1 text-[11px] font-medium tracking-wide text-muted-foreground uppercase"
+    >
+      <KindIcon icon={kind.icon} className="size-3.5" />
+      {m.kind(kind)}
+    </div>
   )
 }
 
@@ -559,7 +585,8 @@ function Row({ row: item }: { row: IdentityRow }) {
             data-slot="block-finder-identity-browser-row-name"
             className={cn(
               'truncate',
-              identity.name === undefined && 'text-muted-foreground italic',
+              identity.name === undefined &&
+                'text-muted-foreground italic group-data-active/row:text-current',
             )}
           >
             {identity.name === undefined ? m.noName : <Match text={identity.name} />}
@@ -576,7 +603,7 @@ function Row({ row: item }: { row: IdentityRow }) {
         {identity.detail ? (
           <span
             data-slot="block-finder-identity-browser-row-detail"
-            className="truncate text-xs text-muted-foreground"
+            className="truncate text-xs text-muted-foreground group-data-active/row:text-current"
           >
             <Match text={identity.detail} />
           </span>
@@ -585,19 +612,19 @@ function Row({ row: item }: { row: IdentityRow }) {
       {item.unavailable ? (
         <span
           data-slot="block-finder-identity-browser-unavailable-reason"
-          className="shrink-0 text-xs text-muted-foreground"
+          className="shrink-0 text-xs text-muted-foreground group-data-active/row:text-current"
         >
           {item.unavailable}
         </span>
       ) : null}
       {identity.members ? (
-        <button
+        // A pointer's way in only: an option holds no control of its own, and the keyboard opens
+        // the active row with ArrowRight.
+        <span
           data-slot="block-finder-identity-browser-open-members"
-          type="button"
-          tabIndex={-1}
-          aria-label={m.open(identity.name ?? m.noName)}
+          aria-hidden="true"
           title={`${m.members} →`}
-          className={cn(iconButton, 'size-7')}
+          className={cn(iconButton, 'size-7 cursor-pointer')}
           onMouseDown={(event) => event.preventDefault()}
           onClick={(event) => {
             event.preventDefault()
@@ -606,7 +633,7 @@ function Row({ row: item }: { row: IdentityRow }) {
           }}
         >
           <Glyph path={CHEVRON} />
-        </button>
+        </span>
       ) : null}
     </IdentityFinderOption>
   )
@@ -641,15 +668,13 @@ function Match({ text }: { text: string }) {
   )
 }
 
-/** Reads the next page once the end of the list scrolls into view, or on a click. */
-function More() {
+/** Reads the next page once the end of the list scrolls into view; seen by no one. */
+function EndOfList() {
   const finder = useIdentityFinder()
-  const m = useContext(Messages)
   const sentinel = useRef<HTMLDivElement>(null)
   const { loadMore } = finder
-  const list = finder.list
-  // Reaching the end loads the next page; after a failed one, only Retry reads again.
-  const automatic = list !== undefined && !list.moreFailed
+  // After a failed page, only Retry reads again.
+  const automatic = finder.list !== undefined && !finder.list.moreFailed
   useEffect(() => {
     const element = sentinel.current
     if (!automatic || element === null || typeof IntersectionObserver === 'undefined') return
@@ -659,24 +684,35 @@ function More() {
     observer.observe(element)
     return () => observer.disconnect()
   }, [automatic, loadMore])
-  if (list === undefined) return null
   return (
     <div
       ref={sentinel}
-      data-slot="block-finder-identity-browser-more"
-      className="grid place-items-center py-2"
-    >
+      data-slot="block-finder-identity-browser-end"
+      aria-hidden="true"
+      className="h-px"
+    />
+  )
+}
+
+/** The next page: loading, failed with a Retry, or a button that reads it. */
+function More() {
+  const finder = useIdentityFinder()
+  const m = useContext(Messages)
+  const list = finder.list
+  if (list === undefined) return null
+  return (
+    <div data-slot="block-finder-identity-browser-more" className="grid place-items-center py-2">
       {list.loadingMore ? (
         <RowsSkeleton rows={2} />
       ) : list.moreFailed ? (
-        <Failure retry={loadMore}>{m.moreFailed}</Failure>
+        <Failure retry={finder.loadMore}>{m.moreFailed}</Failure>
       ) : (
         <button
           data-slot="block-finder-identity-browser-load-more"
           type="button"
           className={buttonVariants({ variant: 'ghost', size: 'sm' })}
           onMouseDown={(event) => event.preventDefault()}
-          onClick={loadMore}
+          onClick={finder.loadMore}
         >
           {m.loadMore}
         </button>
