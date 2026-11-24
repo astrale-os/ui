@@ -5,6 +5,7 @@ import type {
   FinderOrder,
   FinderRule,
   FinderSource,
+  FinderValueKind,
 } from './source.js'
 
 /** A Class of an in-memory graph: abstract ones are only described, never listed. */
@@ -39,8 +40,15 @@ function wait(milliseconds: number, signal: AbortSignal): Promise<void> {
   })
 }
 
-function compare(left: unknown, right: unknown): number {
+/** Orders two values as the Kernel does: numbers by value, instants in time, text by code point. */
+function compare(left: unknown, right: unknown, kind?: FinderValueKind): number {
   if (typeof left === 'number' && typeof right === 'number') return left - right
+  if (kind === 'instant') {
+    // An ISO 8601 date-time may carry any offset: `13:00+02:00` is before `12:00Z`.
+    const a = Date.parse(String(left))
+    const b = Date.parse(String(right))
+    if (!Number.isNaN(a) && !Number.isNaN(b)) return a - b
+  }
   const a = String(left)
   const b = String(right)
   return a < b ? -1 : a > b ? 1 : 0
@@ -59,6 +67,12 @@ export function createMemoryFinderSource(graph: FinderMemoryGraph): FinderSource
   const all = Object.values(graph.classes).flat()
   const byKey = new Map(all.map((item) => [item.key, item]))
   const nameKeys = new Set(all.flatMap((item) => (item.nameProperty ? [item.nameProperty] : [])))
+  // A property two Classes share has the same key, so one kind per key.
+  const kinds = new Map(
+    all.flatMap((item) =>
+      item.properties.map((property) => [property.key, property.kind] as const),
+    ),
+  )
 
   const ancestry = (key: string, seen = new Set<string>()): Set<string> => {
     if (seen.has(key)) return seen
@@ -86,8 +100,8 @@ export function createMemoryFinderSource(graph: FinderMemoryGraph): FinderSource
       case 'between':
         return (
           present(value) &&
-          (rule.from === undefined || compare(value, rule.from) >= 0) &&
-          (rule.to === undefined || compare(value, rule.to) <= 0)
+          (rule.from === undefined || compare(value, rule.from, kinds.get(rule.property)) >= 0) &&
+          (rule.to === undefined || compare(value, rule.to, kinds.get(rule.property)) <= 0)
         )
     }
   }
@@ -104,7 +118,7 @@ export function createMemoryFinderSource(graph: FinderMemoryGraph): FinderSource
           if (present(a) !== present(b)) return present(a) ? -1 : 1
           continue
         }
-        const difference = compare(a, b)
+        const difference = compare(a, b, kinds.get(key.property))
         if (difference !== 0) return key.direction === 'asc' ? difference : -difference
       }
       return compare(left.id, right.id)

@@ -34,6 +34,7 @@ import {
   type FinderChoice,
   type FinderMemoryGraph,
   type FinderOptions,
+  type FinderRule,
   type FinderSource,
 } from './index.js'
 
@@ -724,5 +725,51 @@ describe('memory source', () => {
       value: 2,
       more: true,
     })
+  })
+
+  test('instants compare in time, whatever their offset', async () => {
+    const AT = 'events:class.Event.property.at'
+    const source = createMemoryFinderSource({
+      domains: [{ id: 'd-events', name: 'Events' }],
+      classes: {
+        'd-events': [
+          {
+            key: 'events:class.Event',
+            name: 'Event',
+            properties: [{ key: AT, label: 'At', kind: 'instant' }],
+          },
+        ],
+      },
+      nodes: [
+        // 11:00 UTC, 12:30 UTC, 10:30 UTC and 12:00 UTC.
+        { id: 'e1', class: 'events:class.Event', values: { [AT]: '2026-11-24T13:00:00+02:00' } },
+        { id: 'e2', class: 'events:class.Event', values: { [AT]: '2026-11-24T12:30:00Z' } },
+        { id: 'e3', class: 'events:class.Event', values: { [AT]: '2026-11-24T09:30:00-01:00' } },
+        { id: 'e4', class: 'events:class.Event', values: { [AT]: '2026-11-24T12:00:00+00:00' } },
+      ],
+    })
+    const signal = new AbortController().signal
+    const read = (rules: FinderRule[]) =>
+      source
+        .nodes({
+          classes: ['events:class.Event'],
+          rules,
+          order: [{ property: AT, direction: 'asc' }],
+          size: 10,
+          signal,
+        })
+        .then((page) => page.nodes.map((node) => node.id))
+    expect(await read([])).toEqual(['e3', 'e1', 'e4', 'e2'])
+    // The bounds are inclusive: 12:00 UTC written another way is still in.
+    expect(
+      await read([
+        {
+          property: AT,
+          operator: 'between',
+          from: '2026-11-24T10:00:00.000Z',
+          to: '2026-11-24T12:00:00.000Z',
+        },
+      ]),
+    ).toEqual(['e3', 'e1', 'e4'])
   })
 })
