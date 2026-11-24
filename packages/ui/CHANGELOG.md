@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0-beta.48](https://github.com/astrale-os/ui/compare/v1.0.0-beta.47...v1.0.0-beta.48) (2026-11-24)
+
+
+### Bug Fixes
+
+* **ui:** stack the Finder's Domains and Classes above the table in a narrow frame ([#250](https://github.com/astrale-os/ui/issues/250)) ([f41e952](https://github.com/astrale-os/ui/commit/f41e95280c09ad991b5e09a11fc1449cc182ccc7))
+
 ## [1.0.0-beta.47](https://github.com/astrale-os/ui/compare/v1.0.0-beta.46...v1.0.0-beta.47) (2026-11-24)
 
 
