@@ -21,7 +21,7 @@
     "$schema": {
       "const": "https://raw.githubusercontent.com/astrale-os/ui/main/schemas/theme.schema.json"
     },
-    "version": { "const": 6 },
+    "version": { "const": 7 },
     "name": {
       "type": "string",
       "minLength": 1,
@@ -61,10 +61,14 @@
     "geometry": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["radius", "panelRadius"],
+      "required": ["radius", "panelRadius", "actionRadius"],
       "properties": {
         "radius": { "$ref": "#/$defs/length" },
-        "panelRadius": { "$ref": "#/$defs/length" }
+        "panelRadius": { "$ref": "#/$defs/length" },
+        "actionRadius": {
+          "description": "Radius of standalone buttons and toggles; null derives it from radius.",
+          "oneOf": [{ "$ref": "#/$defs/length" }, { "type": "null" }]
+        }
       }
     },
     "density": {
@@ -80,10 +84,10 @@
     "effects": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["controlShadow", "panelShadow"],
+      "required": ["light", "dark"],
       "properties": {
-        "controlShadow": { "$ref": "#/$defs/cssValue" },
-        "panelShadow": { "$ref": "#/$defs/cssValue" }
+        "light": { "$ref": "#/$defs/effects" },
+        "dark": { "$ref": "#/$defs/effects" }
       }
     },
     "motion": {
@@ -98,6 +102,17 @@
     "generation": { "$ref": "#/$defs/generatorMetadata" }
   },
   "$defs": {
+    "effects": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["controlShadow", "panelShadow", "overlayShadow", "backdrop"],
+      "properties": {
+        "controlShadow": { "$ref": "#/$defs/cssValue" },
+        "panelShadow": { "$ref": "#/$defs/cssValue" },
+        "overlayShadow": { "$ref": "#/$defs/cssValue" },
+        "backdrop": { "$ref": "#/$defs/color" }
+      }
+    },
     "color": {
       "type": "string",
       "minLength": 4,
@@ -252,7 +267,7 @@
       "properties": {
         "kind": { "const": "astrale.theme-generation" },
         "version": { "const": 1 },
-        "engineVersion": { "const": 3 },
+        "engineVersion": { "const": 4 },
         "fontCatalogVersion": { "const": 1 },
         "seed": { "$ref": "#/$defs/generatorSeed" },
         "derivationSeeds": {

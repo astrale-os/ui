@@ -42,7 +42,7 @@ import {
   type ThemeTypographyRole,
 } from '../../../tooling/theme-document/index.js'
 import { generatorFontCatalog } from '../../../tooling/theme-generator/font-catalog.js'
-import { defaultTheme, type ThemeWorkspace } from './workspace.js'
+import { bundledThemes, defaultTheme, type ThemeWorkspace } from './workspace.js'
 
 const colorLabels: Record<ThemeColorToken, string> = {
   background: 'Background',
@@ -704,16 +704,16 @@ export function ThemeStudio({
   onModeChange: (mode: 'light' | 'dark') => void
 }) {
   const fileInput = useRef<HTMLInputElement>(null)
-  const [selectedThemeChoice, setSelectedThemeChoice] = useState('default:observatory')
+  const [selectedThemeChoice, setSelectedThemeChoice] = useState(`bundled:${defaultTheme.name}`)
   const [generationPending, setGenerationPending] = useState(false)
   const themeChoices = useMemo(
     () => [
-      {
-        label: defaultTheme.label,
-        value: 'default:observatory',
-        theme: defaultTheme,
+      ...bundledThemes.map((theme) => ({
+        label: theme.label,
+        value: `bundled:${theme.name}`,
+        theme,
         saved: false,
-      },
+      })),
       ...workspace.savedThemes.map((theme) => ({
         label: `${theme.label} Saved`,
         value: `saved:${theme.name}`,
@@ -724,7 +724,8 @@ export function ThemeStudio({
     [workspace.savedThemes],
   )
   const selectedChoice = themeChoices.find((choice) => choice.value === selectedThemeChoice)
-  const published = selectedThemeChoice === 'default:observatory' && !workspace.canUndo
+  const published = selectedThemeChoice.startsWith('bundled:') && !workspace.canUndo
+  const effects = workspace.theme.effects[mode]
   const command = published
     ? `astrale ui add theme/${workspace.theme.name}`
     : `astrale ui add ./${workspace.theme.name}.css`
@@ -1019,19 +1020,49 @@ export function ThemeStudio({
                 }
               />
               <Field>
-                <FieldLabel htmlFor="control-shadow">Control shadow</FieldLabel>
+                <FieldLabel htmlFor="action-radius">Action radius</FieldLabel>
+                <DraftInput
+                  id="action-radius"
+                  value={workspace.theme.geometry.actionRadius ?? ''}
+                  placeholder="Follows corner radius"
+                  onCommit={(value) =>
+                    workspace.setValue('geometry', 'actionRadius', value.trim() || null)
+                  }
+                />
+                <FieldDescription>
+                  Buttons and toggles. Leave empty to follow the corner radius; 9999px makes pills.
+                </FieldDescription>
+              </Field>
+              <Field>
+                <FieldLabel htmlFor="control-shadow">Control shadow ({mode})</FieldLabel>
                 <DraftInput
                   id="control-shadow"
-                  value={workspace.theme.effects.controlShadow}
-                  onCommit={(value) => workspace.setValue('effects', 'controlShadow', value)}
+                  value={effects.controlShadow}
+                  onCommit={(value) => workspace.setEffect(mode, 'controlShadow', value)}
                 />
               </Field>
               <Field>
-                <FieldLabel htmlFor="panel-shadow">Panel shadow</FieldLabel>
+                <FieldLabel htmlFor="panel-shadow">Panel shadow ({mode})</FieldLabel>
                 <DraftInput
                   id="panel-shadow"
-                  value={workspace.theme.effects.panelShadow}
-                  onCommit={(value) => workspace.setValue('effects', 'panelShadow', value)}
+                  value={effects.panelShadow}
+                  onCommit={(value) => workspace.setEffect(mode, 'panelShadow', value)}
+                />
+              </Field>
+              <Field>
+                <FieldLabel htmlFor="overlay-shadow">Overlay shadow ({mode})</FieldLabel>
+                <DraftInput
+                  id="overlay-shadow"
+                  value={effects.overlayShadow}
+                  onCommit={(value) => workspace.setEffect(mode, 'overlayShadow', value)}
+                />
+              </Field>
+              <Field>
+                <FieldLabel htmlFor="backdrop">Modal backdrop ({mode})</FieldLabel>
+                <DraftInput
+                  id="backdrop"
+                  value={effects.backdrop}
+                  onCommit={(value) => workspace.setEffect(mode, 'backdrop', value)}
                 />
               </Field>
               <ThemeRangeField

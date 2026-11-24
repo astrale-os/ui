@@ -7,6 +7,7 @@ import {
   parseThemeDocument,
   parseThemeDocumentText,
   renderThemeCss,
+  effectDefaults,
   serializeThemeDocument,
   statusColorDefaults,
   themeColorTokens,
@@ -35,7 +36,7 @@ test('portable schema and TypeScript admission own the same complete color vocab
   const mode = schema.$defs.mode
   assert.deepEqual(mode.required.toSorted(), [...themeColorTokens].toSorted())
   assert.deepEqual(Object.keys(mode.properties).toSorted(), [...themeColorTokens].toSorted())
-  assert.equal(schema.properties.version.const, 6)
+  assert.equal(schema.properties.version.const, 7)
   assert.deepEqual(schema.properties.typography.required.toSorted(), ['body', 'heading', 'mono'])
   assert.deepEqual(schema.$defs.typographyRole.required.toSorted(), [
     'family',
@@ -81,9 +82,12 @@ test('every starter round-trips and projects to exact consumer-owned light and d
   const documents = await themes()
   assert.deepEqual(
     documents.map(({ theme }) => theme.name),
-    ['observatory'],
+    ['console', 'desktop', 'observatory', 'spatial'],
   )
+  const schema = JSON.parse(await readFile('schemas/theme.schema.json', 'utf8'))
+  const validate = new Ajv2020({ strict: false }).compile(schema)
   for (const { file, theme } of documents) {
+    assert.ok(validate(theme), `${file}: ${JSON.stringify(validate.errors)}`)
     assert.deepEqual(parseThemeDocumentText(serializeThemeDocument(theme)), theme)
     const css = renderThemeCss(theme)
     assert.equal(css, await readFile(`${directory}/${theme.name}.css`, 'utf8'), file)
@@ -123,9 +127,19 @@ test('every starter round-trips and projects to exact consumer-owned light and d
   }
 })
 
-test('version 1 through 5 saved themes migrate deterministically without fabricated provenance', async () => {
+/** The theme as version 6 saved it: one set of effects for both modes, no action radius. */
+function asVersion6(theme) {
+  const legacy = structuredClone(theme)
+  legacy.version = 6
+  delete legacy.geometry.actionRadius
+  const { controlShadow, panelShadow } = theme.effects.light
+  legacy.effects = { controlShadow, panelShadow }
+  return legacy
+}
+
+test('version 1 through 6 saved themes migrate deterministically without fabricated provenance', async () => {
   const current = (await themes()).find(({ theme }) => theme.name === 'observatory').theme
-  const legacy = structuredClone(current)
+  const legacy = asVersion6(current)
   legacy.version = 1
   legacy.typography = {
     body: current.typography.body.family,
@@ -146,7 +160,7 @@ test('version 1 through 5 saved themes migrate deterministically without fabrica
     }
   }
   const migrated = parseThemeDocument(legacy)
-  assert.equal(migrated.version, 6)
+  assert.equal(migrated.version, 7)
   assert.equal(migrated.appearance.light.sidebar, current.appearance.light.card)
   assert.equal(migrated.appearance.dark.sidebarAccent, current.appearance.dark.accent)
   assert.deepEqual(migrated.typography, {
@@ -161,7 +175,7 @@ test('version 1 through 5 saved themes migrate deterministically without fabrica
   })
 
   const version2 = {
-    ...current,
+    ...asVersion6(current),
     version: 2,
     typography: {
       body: current.typography.body.family,
@@ -180,30 +194,88 @@ test('version 1 through 5 saved themes migrate deterministically without fabrica
     mono: current.typography.mono,
   })
 
-  const version3 = structuredClone(current)
+  const version3 = asVersion6(current)
   version3.version = 3
   delete version3.typography.body.weight
   assert.deepEqual(parseThemeDocument(version3).typography, current.typography)
 
-  const version4 = structuredClone(current)
+  const version4 = asVersion6(current)
   version4.version = 4
   const migratedVersion4 = parseThemeDocument(version4)
-  assert.equal(migratedVersion4.version, 6)
+  assert.equal(migratedVersion4.version, 7)
   assert.equal(migratedVersion4.generation, undefined)
 
-  const version5 = structuredClone(current)
+  const version5 = asVersion6(current)
   version5.version = 5
   version5.generation = { kind: 'astrale.theme-generation', engineVersion: 2 }
   for (const mode of ['light', 'dark']) {
     for (const token of themeStatusColorTokens) delete version5.appearance[mode][token]
   }
   const migratedVersion5 = parseThemeDocument(version5)
-  assert.equal(migratedVersion5.version, 6)
+  assert.equal(migratedVersion5.version, 7)
   assert.equal(migratedVersion5.generation, undefined)
   for (const mode of ['light', 'dark']) {
     for (const token of themeStatusColorTokens) {
       assert.equal(migratedVersion5.appearance[mode][token], statusColorDefaults[mode][token])
     }
+  }
+
+  const version6 = asVersion6(current)
+  version6.generation = { kind: 'astrale.theme-generation', engineVersion: 3 }
+  const migratedVersion6 = parseThemeDocument(version6)
+  assert.equal(migratedVersion6.version, 7)
+  assert.equal(migratedVersion6.generation, undefined)
+  assert.equal(migratedVersion6.geometry.actionRadius, null)
+  for (const mode of ['light', 'dark']) {
+    assert.deepEqual(migratedVersion6.effects[mode], {
+      controlShadow: version6.effects.controlShadow,
+      panelShadow: version6.effects.panelShadow,
+      ...effectDefaults,
+    })
+  }
+})
+
+test('effects project per mode and an unset action radius resets to the component radius', async () => {
+  const documents = await themes()
+  const spatial = documents.find(({ theme }) => theme.name === 'spatial').theme
+  const observatory = documents.find(({ theme }) => theme.name === 'observatory').theme
+  for (const mode of ['light', 'dark']) {
+    const properties = themeStyleProperties(spatial, mode)
+    assert.equal(properties['--ui-radius-action'], '9999px')
+    assert.equal(properties['--ui-shadow-control'], spatial.effects[mode].controlShadow)
+    assert.equal(properties['--ui-shadow-panel'], spatial.effects[mode].panelShadow)
+    assert.equal(properties['--ui-shadow-overlay'], spatial.effects[mode].overlayShadow)
+    assert.equal(properties['--ui-backdrop'], spatial.effects[mode].backdrop)
+    // `initial` is guaranteed-invalid, so `var(--ui-radius-action, <fallback>)` takes the
+    // fallback and a theme switch never inherits the previous theme's action radius.
+    assert.equal(themeStyleProperties(observatory, mode)['--ui-radius-action'], 'initial')
+  }
+  assert.notEqual(spatial.effects.light.backdrop, spatial.effects.dark.backdrop)
+})
+
+test('shadow tokens stay composable with ring shadows in every preset and projected theme', async () => {
+  const observatory = (await themes()).find(({ theme }) => theme.name === 'observatory').theme
+  const shadowless = { controlShadow: 'none', panelShadow: 'none', overlayShadow: 'none' }
+  const theme = {
+    ...observatory,
+    effects: {
+      light: { ...observatory.effects.light, ...shadowless },
+      dark: { ...observatory.effects.dark, ...shadowless },
+    },
+  }
+  for (const mode of ['light', 'dark']) {
+    const properties = themeStyleProperties(theme, mode)
+    for (const token of ['--ui-shadow-control', '--ui-shadow-panel', '--ui-shadow-overlay']) {
+      assert.equal(properties[token], '0 0 #0000', `${mode} ${token}`)
+    }
+  }
+  assert.doesNotMatch(renderThemeCss(theme), /--ui-shadow-[a-z]+:\s*none/u)
+  const presets = 'packages/ui/src/theme/presets'
+  for (const file of [
+    'packages/ui/src/theme/tokens.css',
+    ...(await readdir(presets)).map((name) => `${presets}/${name}`),
+  ]) {
+    assert.doesNotMatch(await readFile(file, 'utf8'), /--ui-shadow-[a-z]+:\s*none/u, file)
   }
 })
 
@@ -216,7 +288,7 @@ test('JSON Schema and TypeScript agree on generator metadata admission boundarie
     generation: {
       kind: 'astrale.theme-generation',
       version: 1,
-      engineVersion: 3,
+      engineVersion: 4,
       fontCatalogVersion: 1,
       seed: '0123456789abcdef0123456789abcdef',
       derivationSeeds: {
@@ -306,9 +378,7 @@ test('JSON Schema and TypeScript agree on generator metadata admission boundarie
 })
 
 test('admission rejects unknown fields and CSS injection before projection', async () => {
-  const documents = await themes()
-  assert.equal(documents.length, 1)
-  const source = documents[0].theme
+  const source = (await themes()).find(({ theme }) => theme.name === 'observatory').theme
   for (const candidate of [
     { ...source, surprise: true },
     { ...source, name: '../escape' },
@@ -390,8 +460,21 @@ test('admission rejects unknown fields and CSS injection before projection', asy
         light: { ...source.appearance.light, primary: 'oklch(1deg 2deg 3deg)' },
       },
     },
-    { ...source, effects: { ...source.effects, panelShadow: 'definitely-not-a-shadow' } },
-    { ...source, effects: { ...source.effects, panelShadow: '0 2px -3px #000' } },
+    ...['light', 'dark'].flatMap((mode) =>
+      [
+        { panelShadow: 'definitely-not-a-shadow' },
+        { panelShadow: '0 2px -3px #000' },
+        { overlayShadow: 'red; } body { display: none' },
+        { backdrop: 'not-a-color' },
+        { surprise: '0 1px 2px #000' },
+      ].map((patch) => ({
+        ...source,
+        effects: { ...source.effects, [mode]: { ...source.effects[mode], ...patch } },
+      })),
+    ),
+    { ...source, effects: source.effects.light },
+    { ...source, geometry: { ...source.geometry, actionRadius: 'pill' } },
+    { ...source, geometry: { ...source.geometry, actionRadius: undefined } },
   ]) {
     assert.throws(() => parseThemeDocument(candidate), ThemeDocumentError)
   }

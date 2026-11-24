@@ -2316,7 +2316,8 @@ test('every canonical family is serious-violation-free across representative the
   page,
 }, testInfo) => {
   test.skip(testInfo.project.name !== 'desktop', 'The semantic theme matrix is viewport-neutral.')
-  test.setTimeout(360_000)
+  const starters = ['Observatory', 'Console', 'Desktop', 'Spatial']
+  test.setTimeout(360_000 * starters.length)
   await page.emulateMedia({ reducedMotion: 'reduce' })
   const pageErrors: string[] = []
   const consoleProblems: string[] = []
@@ -2326,7 +2327,7 @@ test('every canonical family is serious-violation-free across representative the
   })
   await page.goto('/')
 
-  for (const starter of ['Observatory']) {
+  for (const starter of starters) {
     for (const mode of ['Light', 'Dark']) {
       await openThemeCustomizer(page)
       await page.getByRole('combobox', { name: 'Theme' }).click()
@@ -2351,12 +2352,14 @@ test('every canonical family is serious-violation-free across representative the
           .exclude('[data-preview-address="block/observability/log-viewer"]')
           .withTags(['wcag2a', 'wcag2aa'])
           .analyze()
-        expect(
-          results.violations.filter((violation) =>
-            ['critical', 'serious'].includes(violation.impact ?? ''),
-          ),
-          `${starter} ${mode} ${kind}`,
-        ).toEqual([])
+        expect
+          .soft(
+            results.violations.filter((violation) =>
+              ['critical', 'serious'].includes(violation.impact ?? ''),
+            ),
+            `${starter} ${mode} ${kind}`,
+          )
+          .toEqual([])
       }
     }
   }

@@ -12,6 +12,7 @@ import {
   type PaletteRelation,
   type ThemeDNA,
   type ThemeDocument,
+  type ThemeEffects,
   type ThemeMode,
 } from '../theme-document/index.js'
 import {
@@ -403,23 +404,36 @@ function deriveGeometry(
   const panelLift = lerp(8, 24, dna.elevation)
   const panelBlur = lerp(24, 64, dna.elevation)
   const shadowHue = roundTo(rng.uniform(230, 280), 1)
+  const overlayLift = lerp(4, 14, dna.elevation)
+  const overlayBlur = lerp(12, 36, dna.elevation)
+  // Light shadows carry the ink hue; dark shadows are black and denser so they read on dark grounds.
+  const shade = (selectedMode: 'light' | 'dark', alpha: number) =>
+    selectedMode === 'light'
+      ? `oklch(0.19 0.016 ${shadowHue} / ${roundTo(alpha, 3)})`
+      : `oklch(0 0 0 / ${roundTo(Math.min(0.6, alpha * 2.6), 3)})`
+  const modeEffects = (selectedMode: 'light' | 'dark'): ThemeEffects => ({
+    controlShadow:
+      dna.elevation < 0.08
+        ? 'none'
+        : `0 ${roundTo(lift, 1)}px ${roundTo(blur, 1)}px ${shade(selectedMode, shadowAlpha)}`,
+    panelShadow:
+      dna.elevation < 0.05
+        ? 'none'
+        : `0 ${roundTo(panelLift, 1)}px ${roundTo(panelBlur, 1)}px ${shade(selectedMode, shadowAlpha * 0.85)}`,
+    overlayShadow: `0 ${roundTo(overlayLift, 1)}px ${roundTo(overlayBlur, 1)}px ${shade(selectedMode, lerp(0.1, 0.18, dna.elevation))}`,
+    backdrop:
+      selectedMode === 'light'
+        ? `oklch(0.19 0.016 ${shadowHue} / ${roundTo(lerp(0.1, 0.24, dna.elevation), 3)})`
+        : `oklch(0 0 0 / ${roundTo(lerp(0.36, 0.56, dna.elevation), 3)})`,
+  })
   return {
-    geometry: { radius: rem(radius), panelRadius: rem(panelRadius) },
+    geometry: { radius: rem(radius), panelRadius: rem(panelRadius), actionRadius: null },
     density: {
       control: rem(control),
       controlSmall: rem(Math.max(1.75, control - 0.25)),
       controlLarge: rem(Math.min(3, control + 0.25)),
     },
-    effects: {
-      controlShadow:
-        dna.elevation < 0.08
-          ? 'none'
-          : `0 ${roundTo(lift, 1)}px ${roundTo(blur, 1)}px oklch(0.19 0.016 ${shadowHue} / ${roundTo(shadowAlpha, 3)})`,
-      panelShadow:
-        dna.elevation < 0.05
-          ? 'none'
-          : `0 ${roundTo(panelLift, 1)}px ${roundTo(panelBlur, 1)}px oklch(0.19 0.016 ${shadowHue} / ${roundTo(shadowAlpha * 0.85, 3)})`,
-    },
+    effects: { light: modeEffects('light'), dark: modeEffects('dark') },
     motion: {
       fast: `${Math.round(lerp(105, 145, 1 - dna.density))}ms`,
       standard: `${Math.round(lerp(165, 225, 1 - dna.density))}ms`,
@@ -583,6 +597,30 @@ const textPairs = [
   ['sidebar', 'sidebarForeground'],
 ] as const satisfies readonly (readonly [keyof ThemeMode, keyof ThemeMode])[]
 
+/**
+ * Text legibility every theme owes its readers, generated or authored: each text color clears
+ * 4.5:1 on the surface it is drawn on, and status colors clear 4.5:1 as text on the background.
+ */
+export function themeTextContrastReasons(theme: ThemeDocument): string[] {
+  return (['light', 'dark'] as const).flatMap((modeName) => {
+    const mode = theme.appearance[modeName]
+    const reasons: string[] = []
+    for (const [surface, foreground] of textPairs) {
+      const ratio = cssContrastRatio(mode[surface], mode[foreground])
+      if (ratio === undefined || ratio < 4.5) {
+        reasons.push(`${modeName}.${foreground} must contrast with ${surface} by 4.5:1.`)
+      }
+    }
+    for (const token of ['success', 'info', 'warning'] as const) {
+      const ratio = cssContrastRatio(mode[token], mode.background)
+      if (ratio === undefined || ratio < 4.5) {
+        reasons.push(`${modeName}.${token} must contrast with background by 4.5:1.`)
+      }
+    }
+    return reasons
+  })
+}
+
 export function admitGeneratedTheme(
   theme: ThemeDocument,
   options: { readonly validateProvenance?: boolean } = {},
@@ -608,12 +646,6 @@ export function admitGeneratedTheme(
         reasons.push(`${modeName}.${token} must be opaque for generated-theme admission.`)
       }
     }
-    for (const [surface, foreground] of textPairs) {
-      const ratio = cssContrastRatio(mode[surface], mode[foreground])
-      if (ratio === undefined || ratio < 4.5) {
-        reasons.push(`${modeName}.${foreground} must contrast with ${surface} by 4.5:1.`)
-      }
-    }
     for (const [, foreground] of onColorPairs) {
       const parsed = parseCssColor(mode[foreground])
       const channels = parsed ? [parsed.r, parsed.g, parsed.b] : []
@@ -621,12 +653,6 @@ export function admitGeneratedTheme(
       const white = channels.length === 3 && channels.every((channel) => channel >= 0.999)
       if (!black && !white) {
         reasons.push(`${modeName}.${foreground} must be white or black on-color text.`)
-      }
-    }
-    for (const token of ['success', 'info', 'warning'] as const) {
-      const ratio = cssContrastRatio(mode[token], mode.background)
-      if (ratio === undefined || ratio < 4.5) {
-        reasons.push(`${modeName}.${token} must contrast with background by 4.5:1.`)
       }
     }
     for (const [token, surface] of [
@@ -672,6 +698,7 @@ export function admitGeneratedTheme(
           surfaceLightness.sidebar > surfaceLightness.background)
     if (!surfaceOrderingValid) reasons.push(`${modeName} surface ordering is invalid.`)
   }
+  reasons.push(...themeTextContrastReasons(admitted))
   for (const [roleName, role] of [
     ['body', admitted.typography.body],
     ['heading', admitted.typography.heading],
@@ -742,8 +769,12 @@ export function admitGeneratedTheme(
     fastMotion > 300 ||
     standardMotion < fastMotion ||
     standardMotion > 500 ||
-    !validShadow(admitted.effects.controlShadow, 8, 32) ||
-    !validShadow(admitted.effects.panelShadow, 40, 80)
+    (['light', 'dark'] as const).some(
+      (selectedMode) =>
+        !validShadow(admitted.effects[selectedMode].controlShadow, 8, 32) ||
+        !validShadow(admitted.effects[selectedMode].panelShadow, 40, 80) ||
+        !validShadow(admitted.effects[selectedMode].overlayShadow, 24, 48),
+    )
   ) {
     reasons.push('Generated geometry is outside its admitted range.')
   }

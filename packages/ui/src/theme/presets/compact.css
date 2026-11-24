@@ -38,7 +38,7 @@
   --ui-control-height-lg: 2.25rem;
   --ui-font-body: 'IBM Plex Sans Condensed', 'Arial Narrow', ui-sans-serif, sans-serif;
   --ui-font-heading: 'IBM Plex Mono', 'SFMono-Regular', ui-monospace, monospace;
-  --ui-shadow-control: none;
+  --ui-shadow-control: 0 0 #0000;
   --ui-shadow-panel: 0 1px 0 oklch(0.16 0.015 220 / 0.16);
   --ui-motion-fast: 80ms;
   --ui-motion-standard: 120ms;

@@ -4,6 +4,7 @@ import { mkdir, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 
 import {
+  effectDefaults,
   serializeThemeDocument,
   statusColorDefaults,
   THEME_DOCUMENT_VERSION,
@@ -107,6 +108,18 @@ function colorMode(light, selected) {
   )
 }
 
+/** Studio shadows per mode, the dark mode inheriting any shadow it leaves to the light one. */
+function effects(light, mode) {
+  const shadow = (name) => mode[name] ?? light[name]
+  return {
+    controlShadow: shadow('shadow-xs') ?? shadow('shadow') ?? 'none',
+    panelShadow: shadow('shadow-lg') ?? shadow('shadow') ?? 'none',
+    overlayShadow: shadow('shadow-md') ?? effectDefaults.overlayShadow,
+    // Studio presets declare no scrim; they take the runtime backdrop.
+    backdrop: effectDefaults.backdrop,
+  }
+}
+
 function project(source) {
   const light = source.cssVars.light
   const dark = source.cssVars.dark
@@ -147,12 +160,9 @@ function project(source) {
       },
       mono: fontStack(mono, 'ui-monospace, monospace'),
     },
-    geometry: { radius, panelRadius: radius },
+    geometry: { radius, panelRadius: radius, actionRadius: null },
     density: { control: '2.25rem', controlSmall: '2rem', controlLarge: '2.5rem' },
-    effects: {
-      controlShadow: light['shadow-xs'] ?? light.shadow ?? 'none',
-      panelShadow: light['shadow-lg'] ?? light.shadow ?? 'none',
-    },
+    effects: { light: effects(light, light), dark: effects(light, dark) },
     motion: { fast: '120ms', standard: '180ms' },
   }
 }

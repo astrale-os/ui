@@ -51,11 +51,6 @@ for (const file of sources) {
   })
 }
 
-assert.deepEqual(
-  items.map((item) => item.meta.canonicalAddress),
-  ['theme/observatory'],
-  'Observatory is the only bundled theme',
-)
 const manifest = `${JSON.stringify({ items }, null, 2)}\n`
 const manifestPath = path.join(directory, 'registry.json')
 if (check) {

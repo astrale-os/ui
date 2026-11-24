@@ -6626,10 +6626,31 @@
     "variantCount": 2
   },
   {
+    "address": "theme/console",
+    "title": "Theme · Console",
+    "classification": "theme",
+    "family": "console",
+    "variantCount": 1
+  },
+  {
+    "address": "theme/desktop",
+    "title": "Theme · Desktop",
+    "classification": "theme",
+    "family": "desktop",
+    "variantCount": 1
+  },
+  {
     "address": "theme/observatory",
     "title": "Theme · Observatory",
     "classification": "theme",
     "family": "observatory",
+    "variantCount": 1
+  },
+  {
+    "address": "theme/spatial",
+    "title": "Theme · Spatial",
+    "classification": "theme",
+    "family": "spatial",
     "variantCount": 1
   }
 ]

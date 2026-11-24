@@ -58,7 +58,8 @@
       "implementation": "packages/ui/src/overlay/alert-dialog/index.tsx",
       "adaptation": "astrale-revision",
       "adaptationNotes": [
-        "Bind the floating layer to the public --ui-z-floating token (50, the upstream value) so floating elements keep stacking by mount order while the toast viewport sits above them."
+        "Bind the floating layer to the public --ui-z-floating token (50, the upstream value) so floating elements keep stacking by mount order while the toast viewport sits above them.",
+        "Bind the modal backdrop to the public --ui-backdrop token (black at 10% alpha, the upstream value) so a theme sets the scrim color."
       ],
       "disposition": "owned-runtime"
     },
@@ -186,7 +187,8 @@
         "Bind neutral control text to the foreground token instead of inheriting card or popover text across a different input surface.",
         "Bind default, small, large, and icon dimensions to the public Astrale control-height tokens so render-composed buttons keep themed geometry.",
         "Expose the admitted Button size as data-size after semantic trigger composition.",
-        "Bind control transition duration to the Astrale fast motion token."
+        "Bind control transition duration to the Astrale fast motion token.",
+        "Bind the button radius to the optional --ui-radius-action token, falling back to the upstream radius of each size while it is unset; a button inside a Button Group keeps the control radius."
       ],
       "disposition": "owned-runtime"
     },
@@ -379,7 +381,8 @@
       "implementation": "packages/ui/src/overlay/dialog/index.tsx",
       "adaptation": "astrale-revision",
       "adaptationNotes": [
-        "Bind the floating layer to the public --ui-z-floating token (50, the upstream value) so floating elements keep stacking by mount order while the toast viewport sits above them."
+        "Bind the floating layer to the public --ui-z-floating token (50, the upstream value) so floating elements keep stacking by mount order while the toast viewport sits above them.",
+        "Bind the modal backdrop to the public --ui-backdrop token (black at 10% alpha, the upstream value) so a theme sets the scrim color."
       ],
       "disposition": "owned-runtime"
     },
@@ -416,7 +419,8 @@
       "implementation": "packages/ui/src/overlay/drawer/index.tsx",
       "adaptation": "astrale-revision",
       "adaptationNotes": [
-        "Bind the floating layer to the public --ui-z-floating token (50, the upstream value) so floating elements keep stacking by mount order while the toast viewport sits above them."
+        "Bind the floating layer to the public --ui-z-floating token (50, the upstream value) so floating elements keep stacking by mount order while the toast viewport sits above them.",
+        "Bind the modal backdrop to the public --ui-backdrop token (black at 10% alpha, the upstream value) so a theme sets the scrim color."
       ],
       "disposition": "owned-runtime"
     },
@@ -894,7 +898,8 @@
       "implementation": "packages/ui/src/overlay/sheet/index.tsx",
       "adaptation": "astrale-revision",
       "adaptationNotes": [
-        "Bind the floating layer to the public --ui-z-floating token (50, the upstream value) so floating elements keep stacking by mount order while the toast viewport sits above them."
+        "Bind the floating layer to the public --ui-z-floating token (50, the upstream value) so floating elements keep stacking by mount order while the toast viewport sits above them.",
+        "Bind the modal backdrop to the public --ui-backdrop token (black at 10% alpha, the upstream value) so a theme sets the scrim color."
       ],
       "disposition": "owned-runtime"
     },
@@ -1091,7 +1096,10 @@
       "sourceDigest": "sha256:38b81d3872be232a2617a791069a43e2cc415208e3eff14814324319559fdde9",
       "owner": "@astrale-os/ui/toggle",
       "implementation": "packages/ui/src/action/toggle/index.tsx",
-      "adaptation": "imports-only",
+      "adaptation": "astrale-revision",
+      "adaptationNotes": [
+        "Bind the toggle radius to the optional --ui-radius-action token, falling back to the upstream radius of each size while it is unset."
+      ],
       "disposition": "owned-runtime"
     },
     {

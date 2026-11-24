@@ -1,0 +1,132 @@
+{
+  "$schema": "https://raw.githubusercontent.com/astrale-os/ui/main/schemas/theme.schema.json",
+  "version": 7,
+  "name": "desktop",
+  "label": "Desktop",
+  "description": "The GUI workspace: warm cream chrome, white paper, near-black ink, Astrale blue, and soft card lift.",
+  "appearance": {
+    "light": {
+      "background": "#f2efe9",
+      "foreground": "#14120f",
+      "card": "#ffffff",
+      "cardForeground": "#14120f",
+      "popover": "#ffffff",
+      "popoverForeground": "#14120f",
+      "primary": "#2659c2",
+      "primaryForeground": "#ffffff",
+      "secondary": "#e6e3dd",
+      "secondaryForeground": "#14120f",
+      "muted": "#f1eee9",
+      "mutedForeground": "#5f5b53",
+      "accent": "#e7eefb",
+      "accentForeground": "#1f4ea8",
+      "destructive": "#ab3426",
+      "destructiveForeground": "#ffffff",
+      "success": "oklch(0.48 0.13 155)",
+      "successForeground": "oklch(0.985 0 0)",
+      "info": "oklch(0.48 0.15 251)",
+      "infoForeground": "oklch(0.985 0 0)",
+      "warning": "oklch(0.49 0.15 70)",
+      "warningForeground": "oklch(0.985 0 0)",
+      "border": "#e4ded2",
+      "input": "#d6cfc0",
+      "ring": "#2f6bdd",
+      "chart1": "#2f6bdd",
+      "chart2": "#2f9a72",
+      "chart3": "#d08a2a",
+      "chart4": "#d8503f",
+      "chart5": "#8a62d6",
+      "sidebar": "#f2efe9",
+      "sidebarForeground": "#14120f",
+      "sidebarPrimary": "#2659c2",
+      "sidebarPrimaryForeground": "#ffffff",
+      "sidebarAccent": "#e6e3dd",
+      "sidebarAccentForeground": "#14120f",
+      "sidebarBorder": "#e4ded2",
+      "sidebarRing": "#2f6bdd"
+    },
+    "dark": {
+      "background": "oklch(0.165 0.014 260)",
+      "foreground": "oklch(0.95 0.005 255)",
+      "card": "oklch(0.195 0.016 260)",
+      "cardForeground": "oklch(0.95 0.005 255)",
+      "popover": "oklch(0.235 0.02 260)",
+      "popoverForeground": "oklch(0.95 0.005 255)",
+      "primary": "oklch(0.7 0.14 258)",
+      "primaryForeground": "oklch(0.165 0.014 260)",
+      "secondary": "oklch(0.21 0.014 260)",
+      "secondaryForeground": "oklch(0.95 0.005 255)",
+      "muted": "oklch(0.235 0.02 260)",
+      "mutedForeground": "oklch(0.71 0.018 257)",
+      "accent": "oklch(0.3 0.07 255)",
+      "accentForeground": "oklch(0.95 0.005 255)",
+      "destructive": "oklch(0.75 0.16 25)",
+      "destructiveForeground": "oklch(0.165 0.014 260)",
+      "success": "oklch(0.76 0.12 155)",
+      "successForeground": "oklch(0.15 0.02 255)",
+      "info": "oklch(0.76 0.12 251)",
+      "infoForeground": "oklch(0.15 0.02 255)",
+      "warning": "oklch(0.82 0.13 75)",
+      "warningForeground": "oklch(0.15 0.02 255)",
+      "border": "oklch(0.285 0.017 260)",
+      "input": "oklch(0.35 0.02 260)",
+      "ring": "oklch(0.7 0.14 258)",
+      "chart1": "oklch(0.7 0.14 258)",
+      "chart2": "oklch(0.72 0.11 165)",
+      "chart3": "oklch(0.8 0.13 75)",
+      "chart4": "oklch(0.72 0.17 25)",
+      "chart5": "oklch(0.7 0.13 300)",
+      "sidebar": "oklch(0.165 0.014 260)",
+      "sidebarForeground": "oklch(0.95 0.005 255)",
+      "sidebarPrimary": "oklch(0.7 0.14 258)",
+      "sidebarPrimaryForeground": "oklch(0.165 0.014 260)",
+      "sidebarAccent": "oklch(0.21 0.014 260)",
+      "sidebarAccentForeground": "oklch(0.95 0.005 255)",
+      "sidebarBorder": "oklch(0.285 0.017 260)",
+      "sidebarRing": "oklch(0.7 0.14 258)"
+    }
+  },
+  "typography": {
+    "body": {
+      "family": "'Geist', 'Geist Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif",
+      "tracking": "-0.005em",
+      "leading": "1.5",
+      "weight": 400
+    },
+    "heading": {
+      "family": "'Geist', 'Geist Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif",
+      "tracking": "-0.01em",
+      "leading": "1.25",
+      "weight": 600
+    },
+    "mono": "'Geist Mono', 'Geist Mono Variable', ui-monospace, 'SFMono-Regular', Menlo, monospace"
+  },
+  "geometry": {
+    "radius": "0.625rem",
+    "panelRadius": "0.875rem",
+    "actionRadius": null
+  },
+  "density": {
+    "control": "2.25rem",
+    "controlSmall": "2rem",
+    "controlLarge": "2.5rem"
+  },
+  "effects": {
+    "light": {
+      "controlShadow": "0 1px 2px oklch(0 0 0 / 0.04)",
+      "panelShadow": "0 1px 2px oklch(0 0 0 / 0.04), 0 6px 18px -6px oklch(0 0 0 / 0.12)",
+      "overlayShadow": "0 1px 2px oklch(0 0 0 / 0.05), 0 12px 32px -8px oklch(0 0 0 / 0.18)",
+      "backdrop": "oklch(0.21 0.01 70 / 0.28)"
+    },
+    "dark": {
+      "controlShadow": "0 1px 2px oklch(0 0 0 / 0.3)",
+      "panelShadow": "0 1px 2px oklch(0 0 0 / 0.3), 0 8px 24px -8px oklch(0 0 0 / 0.5)",
+      "overlayShadow": "0 1px 2px oklch(0 0 0 / 0.3), 0 16px 40px -12px oklch(0 0 0 / 0.6)",
+      "backdrop": "oklch(0 0 0 / 0.5)"
+    }
+  },
+  "motion": {
+    "fast": "120ms",
+    "standard": "180ms"
+  }
+}
