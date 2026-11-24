@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0-beta.52](https://github.com/astrale-os/ui/compare/v1.0.0-beta.51...v1.0.0-beta.52) (2026-11-24)
+
+
+### Bug Fixes
+
+* **ui:** use the standard spinner for loading states ([#260](https://github.com/astrale-os/ui/issues/260)) ([1227301](https://github.com/astrale-os/ui/commit/1227301ae1449becaeea5266bc7737f56b9c94f3))
+
 ## [1.0.0-beta.51](https://github.com/astrale-os/ui/compare/v1.0.0-beta.50...v1.0.0-beta.51) (2026-11-24)
 
 
