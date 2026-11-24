@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { cn } from '#astrale-ui/class-name'
 
+import { Spinner } from '../feedback/spinner/index.js'
 import { type LockupName, lockups } from './geometry.js'
 
 /*
@@ -84,8 +85,8 @@ function AstraleLogo({
   )
 }
 
-/** One turn step of `--animate-astrale-turn` (`tailwind.css`). */
-const TURN_STEP_MS = 900
+/** Tailwind's default animate-spin duration. */
+const SPIN_DURATION_MS = 1000
 
 /** A wait this early in the page's life is not perceived as one: the loader stays transparent. */
 const LOADER_HOLD_MS = 400
@@ -104,21 +105,13 @@ function useLoaderShown(): boolean {
   return shown
 }
 
-/**
- * The Astrale loader: the symbol turning a third at a time, in the muted text color. `label` names
- * the wait for screen readers only. It pivots about the symbol's centre, not its box, so each rest
- * of its threefold symmetry lands on the same pose; reduced motion pulses it instead.
- *
- * One wait often replaces another (a route, then its page, then a section). Every loader joins the
- * turn at the page clock's phase and shares one 400ms hold, transparent but still announced, so a
- * replacement carries on mid-step instead of snapping back to 0deg or fading in again.
- */
+/** A standard spinner. Successive loading states share the page's hold and animation phase. */
 function AstraleLoader({
   label = 'Loading',
   className,
   ...props
 }: Omit<React.ComponentProps<'span'>, 'children' | 'role'> & { label?: string }) {
-  const [phase] = useState(() => performance.now() % TURN_STEP_MS)
+  const [phase] = useState(() => performance.now() % SPIN_DURATION_MS)
   const shown = useLoaderShown()
   return (
     <span
@@ -128,10 +121,10 @@ function AstraleLoader({
       {...props}
     >
       <span className={cn('inline-flex transition-opacity duration-200', !shown && 'opacity-0')}>
-        <AstraleMark
+        <Spinner
           aria-hidden
           style={{ animationDelay: `-${Math.round(phase)}ms` }}
-          className="size-8 origin-[50%_54.5%] text-muted-foreground motion-safe:animate-astrale-turn motion-reduce:animate-pulse"
+          className="size-8 text-muted-foreground motion-reduce:animate-none"
         />
       </span>
       <span className="sr-only">{label}</span>

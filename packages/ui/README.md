@@ -90,10 +90,10 @@ export function HomeLink() {
 }
 ```
 
-`AstraleLoader` is the Astrale wait: the symbol turning a third at a time in the muted text color,
+`AstraleLoader` shows a standard circular spinner in the muted text color,
 announced as a status named by `label` (`"Loading"` by default). It stays transparent for the first
 400ms of the page, and every loader turns at the page clock's phase, so one that replaces another
-carries on mid-step. Size it with `[&_svg]:size-6` or similar.
+continues smoothly. It stays still when reduced motion is enabled. Size it with `[&_svg]:size-6` or similar.
 
 ```tsx
 import { AstraleLoader } from '@astrale-os/ui/brand'

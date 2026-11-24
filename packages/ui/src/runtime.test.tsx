@@ -326,15 +326,15 @@ describe('runtime owners', () => {
     expect(stacked?.querySelectorAll('path')).toHaveLength(2)
   })
 
-  test('the brand loader announces its wait and turns the mark at the page clock phase', () => {
+  test('the brand loader announces its wait and spins at the page clock phase', () => {
     render(<AstraleLoader label="Loading View" />)
 
     const status = screen.getByRole('status')
     expect(status).toHaveAttribute('data-slot', 'astrale-loader')
     expect(status).toHaveTextContent('Loading View')
-    const mark = status.querySelector('[data-slot="astrale-mark"]')
-    expect(mark).toHaveAttribute('aria-hidden', 'true')
-    expect(mark).toHaveClass('motion-safe:animate-astrale-turn')
-    expect((mark as SVGElement).style.animationDelay).toMatch(/^-\d+ms$/u)
+    const spinner = status.querySelector('[data-slot="spinner"]')
+    expect(spinner).toHaveAttribute('aria-hidden', 'true')
+    expect(spinner).toHaveClass('animate-spin', 'motion-reduce:animate-none')
+    expect((spinner as SVGElement).style.animationDelay).toMatch(/^-\d+ms$/u)
   })
 })
