@@ -88,8 +88,8 @@ export interface IdentityBrowserMessages {
 }
 
 export const IDENTITY_BROWSER_MESSAGES: IdentityBrowserMessages = {
-  selectOne: 'Select someone',
-  selectMany: 'Select people',
+  selectOne: 'Select an identity',
+  selectMany: 'Select identities',
   search: 'Search by name or email',
   kinds: 'Kinds',
   everyKind: 'All',
@@ -98,7 +98,7 @@ export const IDENTITY_BROWSER_MESSAGES: IdentityBrowserMessages = {
   everyone: 'Everyone',
   path: 'Opened',
   back: 'Back',
-  identities: 'People and groups',
+  identities: 'Identities',
   members: 'Members',
   you: 'You',
   noName: 'No name',
