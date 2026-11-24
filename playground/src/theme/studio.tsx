@@ -215,12 +215,16 @@ function ThemeSelectField({
   value: string
   onChange(value: string): void
 }) {
+  // A theme may name a family the generator's catalog does not list: it stays an option, by name.
+  const options = items.some((item) => item.value === value)
+    ? items
+    : [{ label: (/^\s*['"]?([^'",]+)/u.exec(value)?.[1] ?? value).trim(), value }, ...items]
   return (
     <Field>
       <FieldLabel htmlFor={id}>{label}</FieldLabel>
       <Select
         modal={false}
-        items={items}
+        items={options}
         value={value}
         onValueChange={(next) => {
           if (next) onChange(next)
@@ -231,7 +235,7 @@ function ThemeSelectField({
         </SelectTrigger>
         <SelectContent alignItemWithTrigger={false}>
           <SelectGroup>
-            {items.map((item) => (
+            {options.map((item) => (
               <SelectItem key={item.value} value={item.value}>
                 {item.label}
               </SelectItem>
@@ -261,7 +265,11 @@ function formatLeading(value: number) {
 }
 
 function formatRem(value: number) {
-  return `${value.toFixed(2)}rem`
+  return `${Number(value.toFixed(3))}rem`
+}
+
+function formatWeight(value: number) {
+  return String(Math.round(value))
 }
 
 function formatMilliseconds(value: number) {
@@ -435,11 +443,6 @@ function TypographyRoleSection({
   workspace: ThemeWorkspace
 }) {
   const typography = workspace.theme.typography[role]
-  const selectedFont = generatorFontCatalog.find((font) => font.family === typography.family)
-  const weightItems = (selectedFont?.weights ?? [typography.weight]).map((weight) => ({
-    label: String(weight),
-    value: String(weight),
-  }))
   const update = (changes: Partial<ThemeTypographyRole>) =>
     workspace.setValue('typography', role, { ...typography, ...changes })
   const id = `typography-${role}`
@@ -470,13 +473,30 @@ function TypographyRoleSection({
             update({ family, weight })
           }}
         />
-        <ThemeSelectField
-          id={`${role}-weight`}
+        <ThemeRangeField
           label={`${title} weight`}
-          items={weightItems}
           value={String(typography.weight)}
-          onChange={(weight) => update({ weight: Number(weight) })}
+          cssVariable={`--ui-weight-${role}`}
+          minimum={100}
+          maximum={900}
+          step={10}
+          format={formatWeight}
+          onCommit={(weight) => update({ weight: Number(weight) })}
         />
+        {role === 'body' ? (
+          <ThemeRangeField
+            label="Label weight"
+            value={String(workspace.theme.typography.label.weight)}
+            cssVariable="--ui-weight-label"
+            minimum={100}
+            maximum={900}
+            step={10}
+            format={formatWeight}
+            onCommit={(weight) =>
+              workspace.setValue('typography', 'label', { weight: Number(weight) })
+            }
+          />
+        ) : null}
         <ThemeRangeField
           label={`${title} letter spacing`}
           value={typography.tracking}
@@ -502,7 +522,10 @@ function TypographyRoleSection({
         {role === 'heading' ? (
           <CardTitle>Heading preview</CardTitle>
         ) : (
-          <p data-slot="theme-typography-body">Body preview</p>
+          <>
+            <p data-slot="theme-typography-body">Body preview</p>
+            <p data-slot="theme-typography-label">Label preview</p>
+          </>
         )}
       </div>
     </section>
@@ -526,7 +549,7 @@ function TerminalTypographySection({ workspace }: { workspace: ThemeWorkspace })
       </div>
       <div className="theme-typography-specimen" data-role="terminal">
         <code className="font-mono" data-slot="theme-typography-mono">
-          pnpm astrale ui add theme/observatory
+          pnpm astrale ui add theme/spatial
         </code>
       </div>
     </section>
@@ -1017,6 +1040,30 @@ export function ThemeStudio({
                 format={formatRem}
                 onCommit={(controlLarge) =>
                   workspace.setValue('density', 'controlLarge', controlLarge)
+                }
+              />
+              <ThemeRangeField
+                label="Control padding"
+                value={workspace.theme.density.controlPadding}
+                cssVariable="--ui-control-padding"
+                minimum={0.25}
+                maximum={1.5}
+                step={0.05}
+                format={formatRem}
+                onCommit={(controlPadding) =>
+                  workspace.setValue('density', 'controlPadding', controlPadding)
+                }
+              />
+              <ThemeRangeField
+                label="Panel spacing"
+                value={workspace.theme.density.panelSpacing}
+                cssVariable="--ui-panel-spacing"
+                minimum={0.5}
+                maximum={2}
+                step={0.05}
+                format={formatRem}
+                onCommit={(panelSpacing) =>
+                  workspace.setValue('density', 'panelSpacing', panelSpacing)
                 }
               />
               <Field>

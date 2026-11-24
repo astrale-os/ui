@@ -80,7 +80,7 @@
       "name": "theme-spatial",
       "type": "registry:theme",
       "title": "Theme · Spatial",
-      "description": "astrale.ai: cool grey sheets lit from the upper left, Hanken Grotesk, pill actions, and layered relief shadows.",
+      "description": "astrale.ai: cool grey sheets lit from the upper left, Hanken Grotesk, pill actions with room, panels inset by their corner radius, and soft relief.",
       "dependencies": [
         "@astrale-os/ui@^0.3.0-beta.0"
       ],

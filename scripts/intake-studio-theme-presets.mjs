@@ -6,6 +6,7 @@ import path from 'node:path'
 import {
   effectDefaults,
   serializeThemeDocument,
+  spacingDefaults,
   statusColorDefaults,
   THEME_DOCUMENT_VERSION,
 } from '../tooling/theme-document/index.ts'
@@ -158,10 +159,17 @@ function project(source) {
         leading: '1.2',
         weight: 600,
       },
+      label: { weight: spacingDefaults.labelWeight },
       mono: fontStack(mono, 'ui-monospace, monospace'),
     },
     geometry: { radius, panelRadius: radius, actionRadius: null },
-    density: { control: '2.25rem', controlSmall: '2rem', controlLarge: '2.5rem' },
+    density: {
+      control: '2.25rem',
+      controlSmall: '2rem',
+      controlLarge: '2.5rem',
+      controlPadding: spacingDefaults.controlPadding,
+      panelSpacing: spacingDefaults.panelSpacing,
+    },
     effects: { light: effects(light, light), dark: effects(light, dark) },
     motion: { fast: '120ms', standard: '180ms' },
   }

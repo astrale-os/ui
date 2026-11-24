@@ -4,8 +4,10 @@ import { readFile, readdir } from 'node:fs/promises'
 import test from 'node:test'
 
 import {
+  defaultThemeName,
   parseThemeDocument,
   parseThemeDocumentText,
+  renderPresetCss,
   renderThemeCss,
   effectDefaults,
   serializeThemeDocument,
@@ -14,6 +16,7 @@ import {
   themeStatusColorTokens,
   themeDocumentPatternSources,
   themeStyleProperties,
+  spacingDefaults,
   ThemeDocumentError,
 } from '../tooling/theme-document/index.ts'
 
@@ -36,8 +39,25 @@ test('portable schema and TypeScript admission own the same complete color vocab
   const mode = schema.$defs.mode
   assert.deepEqual(mode.required.toSorted(), [...themeColorTokens].toSorted())
   assert.deepEqual(Object.keys(mode.properties).toSorted(), [...themeColorTokens].toSorted())
-  assert.equal(schema.properties.version.const, 7)
-  assert.deepEqual(schema.properties.typography.required.toSorted(), ['body', 'heading', 'mono'])
+  assert.equal(schema.properties.version.const, 8)
+  assert.deepEqual(schema.properties.typography.required.toSorted(), [
+    'body',
+    'heading',
+    'label',
+    'mono',
+  ])
+  assert.deepEqual(schema.properties.typography.properties.label.required, ['weight'])
+  assert.equal(
+    schema.properties.typography.properties.label.properties.weight.$ref,
+    '#/$defs/fontWeight',
+  )
+  assert.deepEqual(schema.properties.density.required.toSorted(), [
+    'control',
+    'controlLarge',
+    'controlPadding',
+    'controlSmall',
+    'panelSpacing',
+  ])
   assert.deepEqual(schema.$defs.typographyRole.required.toSorted(), [
     'family',
     'leading',
@@ -101,7 +121,10 @@ test('every starter round-trips and projects to exact consumer-owned light and d
       assert.equal(properties['--ui-leading-heading'], theme.typography.heading.leading)
       assert.equal(properties['--ui-weight-body'], String(theme.typography.body.weight))
       assert.equal(properties['--ui-weight-heading'], String(theme.typography.heading.weight))
+      assert.equal(properties['--ui-weight-label'], String(theme.typography.label.weight))
       assert.equal(properties['--ui-radius'], theme.geometry.radius)
+      assert.equal(properties['--ui-control-padding'], theme.density.controlPadding)
+      assert.equal(properties['--ui-panel-spacing'], theme.density.panelSpacing)
       for (const [name, value] of Object.entries(properties)) {
         assert.ok(
           css.includes(`${name}: ${value};`) || css.includes(`${name}:\n    ${value};`),
@@ -109,27 +132,100 @@ test('every starter round-trips and projects to exact consumer-owned light and d
         )
       }
     }
-    for (const token of [
-      '--ui-background',
-      '--ui-primary',
-      '--ui-chart-5',
-      '--ui-success',
-      '--ui-warning-foreground',
-      '--ui-sidebar-accent',
-      '--ui-font-mono',
-      '--ui-tracking-heading',
-      '--ui-leading-body',
-      '--ui-weight-body',
-      '--ui-weight-heading',
-    ]) {
-      assert.equal(css.match(new RegExp(`${token}:`, 'gu'))?.length, 2)
+  }
+})
+
+/** The `--ui-*` declarations of the first `<selector> {` block, comments dropped and spaces folded. */
+function declarations(css, selector) {
+  const start = css.indexOf(`${selector} {`)
+  assert.notEqual(start, -1, `${selector} block`)
+  const block = css.slice(start, css.indexOf('\n}', start)).replaceAll(/\/\*[\s\S]*?\*\//gu, '')
+  return Object.fromEntries(
+    [...block.matchAll(/(--ui-[a-z0-9-]+):\s*([^;]+);/gu)].map(([, name, value]) => [
+      name,
+      value.replaceAll(/\s+/gu, ' ').trim(),
+    ]),
+  )
+}
+
+test('the astrale preset and the token defaults are the default theme', async () => {
+  const theme = (await themes()).find(({ theme }) => theme.name === defaultThemeName).theme
+  const fontFaces = await readFile('packages/ui/src/theme/fonts/hanken-grotesk.css', 'utf8')
+  assert.equal(
+    await readFile('packages/ui/src/theme/presets/astrale.css', 'utf8'),
+    renderPresetCss(theme, 'astrale', fontFaces),
+    'run `pnpm themes:build`',
+  )
+  // Sidebar tokens alias the base tokens on every preset scope instead.
+  const projected = Object.entries(themeStyleProperties(theme, 'light')).filter(
+    ([name]) => !name.startsWith('--ui-sidebar'),
+  )
+  const defaults = declarations(await readFile('packages/ui/src/theme/tokens.css', 'utf8'), ':root')
+  const resolve = (value) =>
+    value.replace(/^var\((--ui-[a-z0-9-]+)\)$/u, (_, name) => defaults[name])
+  for (const [name, value] of projected) {
+    assert.equal(
+      resolve(defaults[name] ?? ''),
+      value.replaceAll(/\s+/gu, ' '),
+      `tokens.css ${name}`,
+    )
+  }
+})
+
+test('a theme or preset applied after another renders as it does alone, in both modes', async () => {
+  // Each sheet declares its tokens in a light block and a dark block, and every element its dark
+  // selector matches also matches its light selector. Under sheets applied in order, a dark-mode
+  // token takes the last dark declaration, else the last light one; a light-mode token takes the
+  // last light declaration.
+  const presets = 'packages/ui/src/theme/presets'
+  const sheets = [
+    ...(await themes()).map(({ theme }) => ({
+      name: `theme ${theme.name}`,
+      css: renderThemeCss(theme),
+      selector: `[data-ui-theme='${theme.name}']`,
+    })),
+    ...(await readdir(presets)).map((file) => ({
+      name: `preset ${file}`,
+      file: `${presets}/${file}`,
+      selector: `[data-ui-preset='${file.replace(/\.css$/u, '')}']`,
+    })),
+  ]
+  for (const sheet of sheets) {
+    const css = sheet.css ?? (await readFile(sheet.file, 'utf8'))
+    sheet.light = declarations(css, sheet.selector)
+    sheet.dark = declarations(css, `${sheet.selector}.dark`)
+  }
+  const resolve = (stack, mode) => {
+    const light = Object.assign({}, ...stack.map((sheet) => sheet.light))
+    return mode === 'light' ? light : Object.assign(light, ...stack.map((sheet) => sheet.dark))
+  }
+  for (const before of sheets) {
+    for (const after of sheets) {
+      if (before === after) continue
+      for (const mode of ['light', 'dark']) {
+        assert.deepEqual(
+          resolve([before, after], mode),
+          resolve([after], mode),
+          `${after.name} after ${before.name}, ${mode}`,
+        )
+      }
     }
   }
 })
 
+/** The theme as version 7 saved it: no label weight, control padding, or panel spacing. */
+function asVersion7(theme) {
+  const legacy = structuredClone(theme)
+  legacy.version = 7
+  delete legacy.typography.label
+  delete legacy.density.controlPadding
+  delete legacy.density.panelSpacing
+  return legacy
+}
+
 /** The theme as version 6 saved it: one set of effects for both modes, no action radius. */
 function asVersion6(theme) {
-  const legacy = structuredClone(theme)
+  const legacy = asVersion7(theme)
   legacy.version = 6
   delete legacy.geometry.actionRadius
   const { controlShadow, panelShadow } = theme.effects.light
@@ -137,7 +233,7 @@ function asVersion6(theme) {
   return legacy
 }
 
-test('version 1 through 6 saved themes migrate deterministically without fabricated provenance', async () => {
+test('version 1 through 7 saved themes migrate deterministically without fabricated provenance', async () => {
   const current = (await themes()).find(({ theme }) => theme.name === 'observatory').theme
   const legacy = asVersion6(current)
   legacy.version = 1
@@ -160,7 +256,7 @@ test('version 1 through 6 saved themes migrate deterministically without fabrica
     }
   }
   const migrated = parseThemeDocument(legacy)
-  assert.equal(migrated.version, 7)
+  assert.equal(migrated.version, 8)
   assert.equal(migrated.appearance.light.sidebar, current.appearance.light.card)
   assert.equal(migrated.appearance.dark.sidebarAccent, current.appearance.dark.accent)
   assert.deepEqual(migrated.typography, {
@@ -171,6 +267,7 @@ test('version 1 through 6 saved themes migrate deterministically without fabrica
       leading: '1.2',
       weight: 600,
     },
+    label: { weight: spacingDefaults.labelWeight },
     mono: "'SFMono-Regular', 'Cascadia Code', ui-monospace, monospace",
   })
 
@@ -191,18 +288,22 @@ test('version 1 through 6 saved themes migrate deterministically without fabrica
       leading: '1.2',
       weight: 600,
     },
+    label: { weight: spacingDefaults.labelWeight },
     mono: current.typography.mono,
   })
 
   const version3 = asVersion6(current)
   version3.version = 3
   delete version3.typography.body.weight
-  assert.deepEqual(parseThemeDocument(version3).typography, current.typography)
+  assert.deepEqual(parseThemeDocument(version3).typography, {
+    ...current.typography,
+    label: { weight: spacingDefaults.labelWeight },
+  })
 
   const version4 = asVersion6(current)
   version4.version = 4
   const migratedVersion4 = parseThemeDocument(version4)
-  assert.equal(migratedVersion4.version, 7)
+  assert.equal(migratedVersion4.version, 8)
   assert.equal(migratedVersion4.generation, undefined)
 
   const version5 = asVersion6(current)
@@ -212,7 +313,7 @@ test('version 1 through 6 saved themes migrate deterministically without fabrica
     for (const token of themeStatusColorTokens) delete version5.appearance[mode][token]
   }
   const migratedVersion5 = parseThemeDocument(version5)
-  assert.equal(migratedVersion5.version, 7)
+  assert.equal(migratedVersion5.version, 8)
   assert.equal(migratedVersion5.generation, undefined)
   for (const mode of ['light', 'dark']) {
     for (const token of themeStatusColorTokens) {
@@ -223,7 +324,7 @@ test('version 1 through 6 saved themes migrate deterministically without fabrica
   const version6 = asVersion6(current)
   version6.generation = { kind: 'astrale.theme-generation', engineVersion: 3 }
   const migratedVersion6 = parseThemeDocument(version6)
-  assert.equal(migratedVersion6.version, 7)
+  assert.equal(migratedVersion6.version, 8)
   assert.equal(migratedVersion6.generation, undefined)
   assert.equal(migratedVersion6.geometry.actionRadius, null)
   for (const mode of ['light', 'dark']) {
@@ -233,6 +334,22 @@ test('version 1 through 6 saved themes migrate deterministically without fabrica
       ...effectDefaults,
     })
   }
+
+  const spatial = (await themes()).find(({ theme }) => theme.name === 'spatial').theme
+  const version7 = asVersion7(spatial)
+  version7.generation = { kind: 'astrale.theme-generation', engineVersion: 4 }
+  const migratedVersion7 = parseThemeDocument(version7)
+  assert.equal(migratedVersion7.version, 8)
+  assert.equal(migratedVersion7.generation, undefined)
+  assert.deepEqual(migratedVersion7.typography, {
+    ...spatial.typography,
+    label: { weight: spacingDefaults.labelWeight },
+  })
+  assert.deepEqual(migratedVersion7.density, {
+    ...spatial.density,
+    controlPadding: spacingDefaults.controlPadding,
+    panelSpacing: spacingDefaults.panelSpacing,
+  })
 })
 
 test('effects project per mode and an unset action radius resets to the component radius', async () => {
@@ -288,7 +405,7 @@ test('JSON Schema and TypeScript agree on generator metadata admission boundarie
     generation: {
       kind: 'astrale.theme-generation',
       version: 1,
-      engineVersion: 4,
+      engineVersion: 5,
       fontCatalogVersion: 1,
       seed: '0123456789abcdef0123456789abcdef',
       derivationSeeds: {
@@ -315,10 +432,10 @@ test('JSON Schema and TypeScript agree on generator metadata admission boundarie
   }
   const candidates = [
     { candidate: generated, expected: true },
-    {
-      candidate: { ...generated, generation: { ...generated.generation, engineVersion: 1 } },
+    ...[1, 4].map((engineVersion) => ({
+      candidate: { ...generated, generation: { ...generated.generation, engineVersion } },
       expected: false,
-    },
+    })),
     {
       candidate: { ...generated, generation: { ...generated.generation, seed: 'ABCDEF' } },
       expected: false,
@@ -400,14 +517,14 @@ test('admission rejects unknown fields and CSS injection before projection', asy
       ...source,
       typography: {
         ...source.typography,
-        body: { ...source.typography.body, weight: 650 },
+        body: { ...source.typography.body, weight: 950 },
       },
     },
     {
       ...source,
       typography: {
         ...source.typography,
-        heading: { ...source.typography.heading, weight: 650 },
+        heading: { ...source.typography.heading, weight: 612.5 },
       },
     },
     {
@@ -431,6 +548,15 @@ test('admission rejects unknown fields and CSS injection before projection', asy
         body: { ...source.typography.body, leading: '3' },
       },
     },
+    ...[{ weight: 50 }, { weight: 550.5 }, { weight: '600' }, { weight: 500, family: 'serif' }].map(
+      (label) => ({ ...source, typography: { ...source.typography, label } }),
+    ),
+    ...[
+      { controlPadding: '1rem; color: red' },
+      { controlPadding: 'wide' },
+      { panelSpacing: '-1rem' },
+      { panelSpacing: undefined },
+    ].map((patch) => ({ ...source, density: { ...source.density, ...patch } })),
     { ...source, label: '<script>' },
     {
       ...source,

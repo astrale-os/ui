@@ -156,7 +156,7 @@ function DrawerHeader({ className, ...props }: React.ComponentProps<'div'>) {
     <div
       data-slot="drawer-header"
       className={cn(
-        'flex shrink-0 flex-col gap-0.5 p-4 pb-0 group-data-[swipe-axis=y]/drawer-popup:text-center md:gap-0.5 md:text-left',
+        'flex shrink-0 flex-col gap-0.5 p-(--ui-panel-spacing) pb-0 group-data-[swipe-axis=y]/drawer-popup:text-center md:gap-0.5 md:text-left',
         className,
       )}
       {...props}
@@ -168,7 +168,7 @@ function DrawerFooter({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
       data-slot="drawer-footer"
-      className={cn('mt-auto flex shrink-0 flex-col gap-2 p-4 pt-0', className)}
+      className={cn('mt-auto flex shrink-0 flex-col gap-2 p-(--ui-panel-spacing) pt-0', className)}
       {...props}
     />
   )

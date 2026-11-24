@@ -59,7 +59,8 @@
       "adaptation": "astrale-revision",
       "adaptationNotes": [
         "Bind the floating layer to the public --ui-z-floating token (50, the upstream value) so floating elements keep stacking by mount order while the toast viewport sits above them.",
-        "Bind the modal backdrop to the public --ui-backdrop token (black at 10% alpha, the upstream value) so a theme sets the scrim color."
+        "Bind the modal backdrop to the public --ui-backdrop token (black at 10% alpha, the upstream value) so a theme sets the scrim color.",
+        "Bind the panel inset and gap to the public --ui-panel-spacing token (1rem, the upstream value) so a theme sets panel spacing in one place. The footer bleeds by the same amount."
       ],
       "disposition": "owned-runtime"
     },
@@ -188,7 +189,8 @@
         "Bind default, small, large, and icon dimensions to the public Astrale control-height tokens so render-composed buttons keep themed geometry.",
         "Expose the admitted Button size as data-size after semantic trigger composition.",
         "Bind control transition duration to the Astrale fast motion token.",
-        "Bind the button radius to the optional --ui-radius-action token, falling back to the upstream radius of each size while it is unset; a button inside a Button Group keeps the control radius."
+        "Bind the button radius to the optional --ui-radius-action token, falling back to the upstream radius of each size while it is unset; a button inside a Button Group keeps the control radius.",
+        "Bind the inline padding of default, small, and large buttons to the public --ui-control-padding token (0.625rem, the upstream value), keeping the upstream icon-side offset, so a theme gives pill actions room."
       ],
       "disposition": "owned-runtime"
     },
@@ -240,7 +242,10 @@
       "sourceDigest": "sha256:d8113cbf964f8d1aadf2649d2944d8bbc6e3cfd49d36746f76868cbc4dde3cfe",
       "owner": "@astrale-os/ui/card",
       "implementation": "packages/ui/src/content/card/index.tsx",
-      "adaptation": "imports-only",
+      "adaptation": "astrale-revision",
+      "adaptationNotes": [
+        "Bind the card spacing to the public --ui-panel-spacing token (1rem, the upstream value); the small size keeps the upstream three quarters of it."
+      ],
       "disposition": "owned-runtime"
     },
     {
@@ -382,7 +387,8 @@
       "adaptation": "astrale-revision",
       "adaptationNotes": [
         "Bind the floating layer to the public --ui-z-floating token (50, the upstream value) so floating elements keep stacking by mount order while the toast viewport sits above them.",
-        "Bind the modal backdrop to the public --ui-backdrop token (black at 10% alpha, the upstream value) so a theme sets the scrim color."
+        "Bind the modal backdrop to the public --ui-backdrop token (black at 10% alpha, the upstream value) so a theme sets the scrim color.",
+        "Bind the panel inset and gap to the public --ui-panel-spacing token (1rem, the upstream value) so a theme sets panel spacing in one place. The footer bleeds by the same amount."
       ],
       "disposition": "owned-runtime"
     },
@@ -420,7 +426,8 @@
       "adaptation": "astrale-revision",
       "adaptationNotes": [
         "Bind the floating layer to the public --ui-z-floating token (50, the upstream value) so floating elements keep stacking by mount order while the toast viewport sits above them.",
-        "Bind the modal backdrop to the public --ui-backdrop token (black at 10% alpha, the upstream value) so a theme sets the scrim color."
+        "Bind the modal backdrop to the public --ui-backdrop token (black at 10% alpha, the upstream value) so a theme sets the scrim color.",
+        "Bind the panel inset and gap to the public --ui-panel-spacing token (1rem, the upstream value) so a theme sets panel spacing in one place."
       ],
       "disposition": "owned-runtime"
     },
@@ -515,7 +522,8 @@
       "adaptation": "astrale-revision",
       "adaptationNotes": [
         "Bind neutral control text to the foreground token instead of inheriting card or popover text across a different input surface.",
-        "Bind the Input height and transition duration to the public Astrale control and motion tokens so composed input slots retain themed geometry."
+        "Bind the Input height and transition duration to the public Astrale control and motion tokens so composed input slots retain themed geometry.",
+        "Bind the inline padding to the public --ui-control-padding token (0.625rem, the upstream value) so text in every control starts at the same inset."
       ],
       "disposition": "owned-runtime"
     },
@@ -537,7 +545,8 @@
       "adaptationNotes": [
         "Bind neutral control text to the foreground token instead of inheriting card or popover text across a different input surface.",
         "Bind the Input Group wrapper height and transition duration to the public Astrale control and motion tokens.",
-        "Route the Input Group action size through Button so its local compact variants keep their intended dimensions without a slot-based minimum."
+        "Route the Input Group action size through Button so its local compact variants keep their intended dimensions without a slot-based minimum.",
+        "Bind the inline padding of block-aligned addons to the public --ui-control-padding token (0.625rem, the upstream value) so they stay aligned with the input text."
       ],
       "disposition": "owned-runtime"
     },
@@ -697,7 +706,8 @@
       "adaptation": "astrale-revision",
       "adaptationNotes": [
         "Bind neutral control text to the foreground token instead of inheriting card or popover text across a different input surface.",
-        "Bind default and small Native Select heights and transition duration to the public Astrale control and motion tokens."
+        "Bind default and small Native Select heights and transition duration to the public Astrale control and motion tokens.",
+        "Bind the inline padding to the public --ui-control-padding token (0.625rem, the upstream value) so text in every control starts at the same inset."
       ],
       "disposition": "owned-runtime"
     },
@@ -861,7 +871,8 @@
       "adaptationNotes": [
         "Bind neutral control text to the foreground token instead of inheriting card or popover text across a different input surface.",
         "Bind default and small Select Trigger heights and transition duration to the public Astrale control and motion tokens.",
-        "Bind the floating layer to the public --ui-z-floating token (50, the upstream value) so floating elements keep stacking by mount order while the toast viewport sits above them."
+        "Bind the floating layer to the public --ui-z-floating token (50, the upstream value) so floating elements keep stacking by mount order while the toast viewport sits above them.",
+        "Bind the inline padding to the public --ui-control-padding token (0.625rem, the upstream value) so text in every control starts at the same inset. The trigger keeps the upstream offset on its chevron side."
       ],
       "disposition": "owned-runtime"
     },
@@ -899,7 +910,8 @@
       "adaptation": "astrale-revision",
       "adaptationNotes": [
         "Bind the floating layer to the public --ui-z-floating token (50, the upstream value) so floating elements keep stacking by mount order while the toast viewport sits above them.",
-        "Bind the modal backdrop to the public --ui-backdrop token (black at 10% alpha, the upstream value) so a theme sets the scrim color."
+        "Bind the modal backdrop to the public --ui-backdrop token (black at 10% alpha, the upstream value) so a theme sets the scrim color.",
+        "Bind the panel inset and gap to the public --ui-panel-spacing token (1rem, the upstream value) so a theme sets panel spacing in one place."
       ],
       "disposition": "owned-runtime"
     },
@@ -1058,7 +1070,8 @@
       "implementation": "packages/ui/src/input/textarea/index.tsx",
       "adaptation": "astrale-revision",
       "adaptationNotes": [
-        "Bind neutral control text to the foreground token instead of inheriting card or popover text across a different input surface."
+        "Bind neutral control text to the foreground token instead of inheriting card or popover text across a different input surface.",
+        "Bind the inline padding to the public --ui-control-padding token (0.625rem, the upstream value) so text in every control starts at the same inset."
       ],
       "disposition": "owned-runtime"
     },

@@ -21,7 +21,7 @@
     "$schema": {
       "const": "https://raw.githubusercontent.com/astrale-os/ui/main/schemas/theme.schema.json"
     },
-    "version": { "const": 7 },
+    "version": { "const": 8 },
     "name": {
       "type": "string",
       "minLength": 1,
@@ -51,10 +51,17 @@
     "typography": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["body", "heading", "mono"],
+      "required": ["body", "heading", "label", "mono"],
       "properties": {
         "body": { "$ref": "#/$defs/typographyRole" },
         "heading": { "$ref": "#/$defs/typographyRole" },
+        "label": {
+          "description": "Labels set in the body family: buttons, tabs, field labels, badges, menu and table headings.",
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["weight"],
+          "properties": { "weight": { "$ref": "#/$defs/fontWeight" } }
+        },
         "mono": { "$ref": "#/$defs/font" }
       }
     },
@@ -74,11 +81,19 @@
     "density": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["control", "controlSmall", "controlLarge"],
+      "required": ["control", "controlSmall", "controlLarge", "controlPadding", "panelSpacing"],
       "properties": {
         "control": { "$ref": "#/$defs/length" },
         "controlSmall": { "$ref": "#/$defs/length" },
-        "controlLarge": { "$ref": "#/$defs/length" }
+        "controlLarge": { "$ref": "#/$defs/length" },
+        "controlPadding": {
+          "description": "Inline padding of buttons, inputs, textareas, and select triggers.",
+          "$ref": "#/$defs/length"
+        },
+        "panelSpacing": {
+          "description": "Inset and gap of cards, dialogs, alert dialogs, sheets, and drawers.",
+          "$ref": "#/$defs/length"
+        }
       }
     },
     "effects": {
@@ -217,9 +232,10 @@
         "family": { "$ref": "#/$defs/font" },
         "tracking": { "$ref": "#/$defs/tracking" },
         "leading": { "$ref": "#/$defs/leading" },
-        "weight": { "type": "integer", "minimum": 100, "maximum": 900, "multipleOf": 100 }
+        "weight": { "$ref": "#/$defs/fontWeight" }
       }
     },
+    "fontWeight": { "type": "integer", "minimum": 100, "maximum": 900 },
     "tracking": {
       "type": "string",
       "pattern": "^(?:0|-?0\\.(?:0(?:[0-3][0-9]*|40*)?)em)$"
@@ -267,7 +283,7 @@
       "properties": {
         "kind": { "const": "astrale.theme-generation" },
         "version": { "const": 1 },
-        "engineVersion": { "const": 4 },
+        "engineVersion": { "const": 5 },
         "fontCatalogVersion": { "const": 1 },
         "seed": { "$ref": "#/$defs/generatorSeed" },
         "derivationSeeds": {

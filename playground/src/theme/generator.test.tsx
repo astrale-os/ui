@@ -29,7 +29,7 @@ import {
   replayPristineTheme,
   sampleThemeDNA,
 } from '../../../tooling/theme-generator/index.js'
-import { useThemeWorkspace } from './workspace.js'
+import { defaultTheme, useThemeWorkspace } from './workspace.js'
 
 const observatory = parseThemeDocument(observatorySource)
 const seed = '0123456789abcdef0123456789abcdef'
@@ -74,11 +74,11 @@ describe('theme generator', () => {
     ).toEqual(first)
   })
 
-  test('locks engine V4 to a canonical serialized output digest', () => {
+  test('locks engine V5 to a canonical serialized output digest', () => {
     const digest = createHash('sha256')
       .update(serializeThemeDocument(generatedTheme()))
       .digest('hex')
-    expect(digest).toBe('03373f11b32b573f442ab78da2453303768c030dc3ef49d2e481d5eb055b7f07')
+    expect(digest).toBe('5f22f3342d79a9096d39b71f514b4c7050e89fbaf3d1b11f74515ed5f5ca46d5')
   })
 
   test('uses high-contrast white or black text for semantic fills', () => {
@@ -374,6 +374,41 @@ describe('theme generator', () => {
     expect(serializeThemeDocument(invalid)).toBe(before)
   })
 
+  test('keeps author typography in a locked typography branch and catalog typography elsewhere', () => {
+    const parent = generatedTheme()
+    if (!parent.generation) throw new Error('Expected generator provenance.')
+    const authored = parseThemeDocument({
+      ...parent,
+      generation: { ...parent.generation, editedBranches: ['typography'] },
+      typography: {
+        ...parent.typography,
+        body: { ...parent.typography.body, weight: 450 },
+        heading: {
+          ...parent.typography.heading,
+          family: "'Hanken Grotesk', ui-sans-serif, sans-serif",
+        },
+        label: { weight: 550 },
+      },
+    }) as typeof parent & { generation: typeof parent.generation }
+    expect(admitGeneratedTheme(authored, { locks: [] }).reasons).toEqual(
+      expect.arrayContaining([
+        expect.stringContaining('does not provide weight 450'),
+        expect.stringContaining('does not provide label weight 550'),
+        expect.stringContaining(
+          "'Hanken Grotesk', ui-sans-serif, sans-serif is not in font catalog",
+        ),
+      ]),
+    )
+    const result = generateTheme({
+      kind: 'variation',
+      theme: authored,
+      seed: '22222222222222222222222222222222',
+      locks: ['typography'],
+    })
+    if (result.kind !== 'generated') throw new Error(`Expected a generated theme: ${result.kind}`)
+    expect(result.theme.typography).toEqual(authored.typography)
+  })
+
   test('keeps provenance out of CSS and rejects malformed or unsupported metadata atomically', () => {
     const generated = generatedTheme()
     const { generation: _generation, ...plain } = generated
@@ -631,11 +666,11 @@ describe('theme generator', () => {
     if (!generated || generated.kind === 'failure') throw new Error('Expected generated theme.')
     expect(workspace.result.current.theme).toBe(generated.theme)
     expect(workspace.result.current.theme.generation?.locks).toEqual(['typography'])
-    expect(workspace.result.current.theme.typography).toEqual(observatory.typography)
+    expect(workspace.result.current.theme.typography).toEqual(defaultTheme.typography)
     expect(workspace.result.current.canUndo).toBe(true)
 
     act(() => workspace.result.current.undo())
-    expect(workspace.result.current.theme).toEqual(observatory)
+    expect(workspace.result.current.theme).toEqual(defaultTheme)
     expect(workspace.result.current.locks).toEqual(['typography'])
     expect(workspace.result.current.canUndo).toBe(false)
   })

@@ -72,7 +72,7 @@ astrale ui search "editable chart with export"
 astrale ui search "line chart" --json
 astrale ui add component/chart component/sidebar
 astrale ui add pattern/calendar/range-basic block/dashboard/overview
-astrale ui add theme/observatory
+astrale ui add theme/spatial
 astrale ui doctor
 ```
 

@@ -42,6 +42,29 @@
   --ui-shadow-panel: 0 1px 0 oklch(0.16 0.015 220 / 0.16);
   --ui-motion-fast: 80ms;
   --ui-motion-standard: 120ms;
+  /* Shape, density, and type this preset holds itself, whatever theme it is applied under. */
+  --ui-radius-action: initial;
+  --ui-control-padding: 0.625rem;
+  --ui-panel-spacing: 1rem;
+  --ui-font-mono: 'SFMono-Regular', 'Cascadia Code', ui-monospace, monospace;
+  --ui-tracking-body: 0;
+  --ui-tracking-heading: -0.01em;
+  --ui-leading-body: 1.5;
+  --ui-leading-heading: 1.2;
+  --ui-weight-body: 400;
+  --ui-weight-heading: 600;
+  --ui-weight-label: 500;
+  --ui-shadow-overlay: 0 4px 6px -1px oklch(0 0 0 / 0.1), 0 2px 4px -2px oklch(0 0 0 / 0.1);
+  --ui-backdrop: oklch(0 0 0 / 0.1);
+  /* The sidebar follows this preset's own surfaces. */
+  --ui-sidebar: var(--ui-card);
+  --ui-sidebar-foreground: var(--ui-foreground);
+  --ui-sidebar-primary: var(--ui-primary);
+  --ui-sidebar-primary-foreground: var(--ui-primary-foreground);
+  --ui-sidebar-accent: var(--ui-accent);
+  --ui-sidebar-accent-foreground: var(--ui-accent-foreground);
+  --ui-sidebar-border: var(--ui-border);
+  --ui-sidebar-ring: var(--ui-ring);
 }
 
 :root.dark,
@@ -73,4 +96,22 @@
   --ui-border: oklch(0.32 0.02 220);
   --ui-input: oklch(0.3 0.02 220);
   --ui-ring: oklch(0.67 0.13 195);
+  /* Restated from the light block, so an earlier preset's dark mode never shows through. */
+  --ui-chart-1: oklch(0.52 0.15 205);
+  --ui-chart-2: oklch(0.62 0.14 150);
+  --ui-chart-3: oklch(0.68 0.16 85);
+  --ui-chart-4: oklch(0.58 0.17 25);
+  --ui-chart-5: oklch(0.5 0.12 285);
+  --ui-sidebar: var(--ui-card);
+  --ui-sidebar-foreground: var(--ui-foreground);
+  --ui-sidebar-primary: var(--ui-primary);
+  --ui-sidebar-primary-foreground: var(--ui-primary-foreground);
+  --ui-sidebar-accent: var(--ui-accent);
+  --ui-sidebar-accent-foreground: var(--ui-accent-foreground);
+  --ui-sidebar-border: var(--ui-border);
+  --ui-sidebar-ring: var(--ui-ring);
+  --ui-shadow-control: 0 0 #0000;
+  --ui-shadow-panel: 0 1px 0 oklch(0.16 0.015 220 / 0.16);
+  --ui-shadow-overlay: 0 4px 6px -1px oklch(0 0 0 / 0.1), 0 2px 4px -2px oklch(0 0 0 / 0.1);
+  --ui-backdrop: oklch(0 0 0 / 0.1);
 }

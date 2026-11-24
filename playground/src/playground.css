@@ -433,8 +433,15 @@
 }
 
 .theme-typography-specimen[data-role='body'] {
+  display: grid;
+  gap: 0.35rem;
   color: var(--ui-muted-foreground);
   font-size: 0.78rem;
+}
+
+.theme-typography-specimen [data-slot='theme-typography-label'] {
+  color: var(--ui-foreground);
+  font-weight: var(--ui-weight-label);
 }
 
 .theme-typography-specimen[data-role='terminal'] {

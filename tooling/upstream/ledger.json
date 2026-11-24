@@ -165,6 +165,7 @@
           "Adopt the Apache-2.0 Rivet follow-tail toggle, tab separated copy text, and stream error banner as the supporting authority for those behaviors.",
           "Name the search clear control, the level toggles, the live tail control, the service and time selects, and every icon control, and expose the row expansion state.",
           "Allow the upstream toolbar row to wrap so no control is clipped at 390px.",
+          "Give a log row narrower than 24rem a second line for its message, under the timestamp, so the fixed columns never squeeze it out.",
           "Apply repository formatting without changing layout, classes, CSS, DOM anatomy, copy, states, or interactions."
         ]
       }

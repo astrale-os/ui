@@ -21,10 +21,10 @@ const buttonVariants = cva(
       },
       size: {
         default:
-          'h-(--ui-control-height) gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2',
+          'h-(--ui-control-height) gap-1.5 px-(--ui-control-padding) has-data-[icon=inline-end]:pr-[calc(var(--ui-control-padding)-0.125rem)] has-data-[icon=inline-start]:pl-[calc(var(--ui-control-padding)-0.125rem)]',
         xs: "h-6 gap-1 rounded-[var(--ui-radius-action,min(var(--radius-md),10px))] px-2 text-xs in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3",
-        sm: "h-(--ui-control-height-sm) gap-1 rounded-[var(--ui-radius-action,min(var(--radius-md),12px))] px-2.5 text-[0.8rem] in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*='size-'])]:size-3.5",
-        lg: 'h-(--ui-control-height-lg) gap-1.5 px-2.5 has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2',
+        sm: "h-(--ui-control-height-sm) gap-1 rounded-[var(--ui-radius-action,min(var(--radius-md),12px))] px-(--ui-control-padding) text-[0.8rem] in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-[calc(var(--ui-control-padding)-0.25rem)] has-data-[icon=inline-start]:pl-[calc(var(--ui-control-padding)-0.25rem)] [&_svg:not([class*='size-'])]:size-3.5",
+        lg: 'h-(--ui-control-height-lg) gap-1.5 px-(--ui-control-padding) has-data-[icon=inline-end]:pr-[calc(var(--ui-control-padding)-0.125rem)] has-data-[icon=inline-start]:pl-[calc(var(--ui-control-padding)-0.125rem)]',
         icon: 'size-(--ui-control-height)',
         'icon-xs':
           "size-6 rounded-[var(--ui-radius-action,min(var(--radius-md),10px))] in-data-[slot=button-group]:rounded-lg [&_svg:not([class*='size-'])]:size-3",

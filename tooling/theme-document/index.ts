@@ -1,7 +1,7 @@
-export const THEME_DOCUMENT_VERSION = 7 as const
+export const THEME_DOCUMENT_VERSION = 8 as const
 export const THEME_DOCUMENT_MAX_BYTES = 131_072
 export const THEME_GENERATOR_VERSION = 1 as const
-export const THEME_GENERATOR_ENGINE_VERSION = 4 as const
+export const THEME_GENERATOR_ENGINE_VERSION = 5 as const
 export const THEME_FONT_CATALOG_VERSION = 1 as const
 
 export const themeColorTokens = [
@@ -105,6 +105,20 @@ export const effectDefaults: Readonly<Pick<ThemeEffects, 'overlayShadow' | 'back
   backdrop: 'oklch(0 0 0 / 0.1)',
 }
 
+/**
+ * Label weight and spacing of the runtime tokens, which keep the upstream component values; they
+ * fill documents written before version 8.
+ */
+export const spacingDefaults: Readonly<{
+  labelWeight: number
+  controlPadding: string
+  panelSpacing: string
+}> = {
+  labelWeight: 500,
+  controlPadding: '0.625rem',
+  panelSpacing: '1rem',
+}
+
 export const generatorBranches = ['palette', 'typography', 'geometry'] as const
 export type GeneratorBranch = (typeof generatorBranches)[number]
 export type PaletteRelation = 'tonal' | 'analogous' | 'complementary' | 'split'
@@ -154,6 +168,11 @@ export interface ThemeTypographyRole {
   readonly weight: number
 }
 
+/** Labels set in the body family: buttons, tabs, field labels, badges, menu and table headings. */
+export interface ThemeLabelTypography {
+  readonly weight: number
+}
+
 export interface ThemeDocument {
   readonly $schema: string
   readonly version: typeof THEME_DOCUMENT_VERSION
@@ -167,6 +186,7 @@ export interface ThemeDocument {
   readonly typography: {
     readonly body: ThemeTypographyRole
     readonly heading: ThemeTypographyRole
+    readonly label: ThemeLabelTypography
     readonly mono: string
   }
   readonly geometry: {
@@ -179,6 +199,10 @@ export interface ThemeDocument {
     readonly control: string
     readonly controlSmall: string
     readonly controlLarge: string
+    /** Inline padding of buttons, inputs, textareas, and select triggers. */
+    readonly controlPadding: string
+    /** Inset and gap of cards, dialogs, alert dialogs, sheets, and drawers. */
+    readonly panelSpacing: string
   }
   readonly effects: {
     readonly light: ThemeEffects
@@ -397,11 +421,29 @@ function migrateThemeDocument(input: unknown): unknown {
     const sharedEffects = { ...effects, ...effectDefaults }
     candidate = {
       ...candidate,
-      version: THEME_DOCUMENT_VERSION,
+      version: 7,
       geometry: { ...geometry, actionRadius: null },
       effects: { light: sharedEffects, dark: { ...sharedEffects } },
     }
     // Generation metadata replays engine V3, which derives one set of effects for both modes.
+    delete candidate.generation
+  }
+  if (candidate.version === 7) {
+    const typography = candidate.typography as Record<string, unknown> | undefined
+    const density = candidate.density as Record<string, unknown> | undefined
+    if (!typography || !density) return input
+    // Version 7 set labels at the upstream medium weight and spaced controls and panels upstream.
+    candidate = {
+      ...candidate,
+      version: THEME_DOCUMENT_VERSION,
+      typography: { ...typography, label: { weight: spacingDefaults.labelWeight } },
+      density: {
+        ...density,
+        controlPadding: spacingDefaults.controlPadding,
+        panelSpacing: spacingDefaults.panelSpacing,
+      },
+    }
+    // Generation metadata replays engine V4, which derives no label weight or spacing.
     delete candidate.generation
   }
   return candidate
@@ -584,14 +626,9 @@ function text(value: unknown, label: string, pattern: RegExp, minimum = 1, maxim
   return value
 }
 
+/** Any integer weight from 100 to 900: variable fonts render every step between named weights. */
 function fontWeight(value: unknown, label: string): number {
-  if (
-    typeof value !== 'number' ||
-    !Number.isInteger(value) ||
-    value < 100 ||
-    value > 900 ||
-    value % 100 !== 0
-  ) {
+  if (typeof value !== 'number' || !Number.isInteger(value) || value < 100 || value > 900) {
     throw new ThemeDocumentError(`${label} is invalid.`)
   }
   return value
@@ -730,7 +767,7 @@ export function parseThemeDocument(input: unknown): ThemeDocument {
   const appearance = record(candidate.appearance, 'theme.appearance')
   exactKeys(appearance, ['light', 'dark'], 'theme.appearance')
   const typography = record(candidate.typography, 'theme.typography')
-  exactKeys(typography, ['body', 'heading', 'mono'], 'theme.typography')
+  exactKeys(typography, ['body', 'heading', 'label', 'mono'], 'theme.typography')
   const bodyTypography = record(typography.body, 'theme.typography.body')
   exactKeys(bodyTypography, ['family', 'tracking', 'leading', 'weight'], 'theme.typography.body')
   const headingTypography = record(typography.heading, 'theme.typography.heading')
@@ -739,10 +776,16 @@ export function parseThemeDocument(input: unknown): ThemeDocument {
     ['family', 'tracking', 'leading', 'weight'],
     'theme.typography.heading',
   )
+  const labelTypography = record(typography.label, 'theme.typography.label')
+  exactKeys(labelTypography, ['weight'], 'theme.typography.label')
   const geometry = record(candidate.geometry, 'theme.geometry')
   exactKeys(geometry, ['radius', 'panelRadius', 'actionRadius'], 'theme.geometry')
   const density = record(candidate.density, 'theme.density')
-  exactKeys(density, ['control', 'controlSmall', 'controlLarge'], 'theme.density')
+  exactKeys(
+    density,
+    ['control', 'controlSmall', 'controlLarge', 'controlPadding', 'panelSpacing'],
+    'theme.density',
+  )
   const effects = record(candidate.effects, 'theme.effects')
   exactKeys(effects, ['light', 'dark'], 'theme.effects')
   const motion = record(candidate.motion, 'theme.motion')
@@ -795,6 +838,7 @@ export function parseThemeDocument(input: unknown): ThemeDocument {
         ),
         weight: fontWeight(headingTypography.weight, 'theme.typography.heading.weight'),
       },
+      label: { weight: fontWeight(labelTypography.weight, 'theme.typography.label.weight') },
       mono: text(typography.mono, 'theme.typography.mono', fontPattern),
     },
     geometry: {
@@ -809,6 +853,14 @@ export function parseThemeDocument(input: unknown): ThemeDocument {
       control: text(density.control, 'theme.density.control', lengthPattern, 1, 24),
       controlSmall: text(density.controlSmall, 'theme.density.controlSmall', lengthPattern, 1, 24),
       controlLarge: text(density.controlLarge, 'theme.density.controlLarge', lengthPattern, 1, 24),
+      controlPadding: text(
+        density.controlPadding,
+        'theme.density.controlPadding',
+        lengthPattern,
+        1,
+        24,
+      ),
+      panelSpacing: text(density.panelSpacing, 'theme.density.panelSpacing', lengthPattern, 1, 24),
     },
     effects: {
       light: modeEffects(effects.light, 'theme.effects.light'),
@@ -840,7 +892,8 @@ export function serializeThemeDocument(theme: ThemeDocument): string {
   return JSON.stringify(parseThemeDocument(theme), null, 2) + '\n'
 }
 
-function admittedThemeStyleProperties(
+/** What a theme document authors per mode: every color and every effect. */
+function modeStyleProperties(
   theme: ThemeDocument,
   selectedMode: 'light' | 'dark',
 ): Readonly<Record<string, string>> {
@@ -850,6 +903,16 @@ function admittedThemeStyleProperties(
     ...Object.fromEntries(
       themeColorTokens.map((token) => [`--ui-${cssNames[token]}`, colors[token]]),
     ),
+    '--ui-shadow-control': composableShadow(effects.controlShadow),
+    '--ui-shadow-panel': composableShadow(effects.panelShadow),
+    '--ui-shadow-overlay': composableShadow(effects.overlayShadow),
+    '--ui-backdrop': effects.backdrop,
+  }
+}
+
+/** What a theme document authors once for both modes: shape, density, type, and motion. */
+function sharedStyleProperties(theme: ThemeDocument): Readonly<Record<string, string>> {
+  return {
     '--ui-radius': theme.geometry.radius,
     '--ui-radius-panel': theme.geometry.panelRadius,
     // `initial` resets an action radius inherited from an enclosing theme, so actions fall back to
@@ -858,6 +921,8 @@ function admittedThemeStyleProperties(
     '--ui-control-height': theme.density.control,
     '--ui-control-height-sm': theme.density.controlSmall,
     '--ui-control-height-lg': theme.density.controlLarge,
+    '--ui-control-padding': theme.density.controlPadding,
+    '--ui-panel-spacing': theme.density.panelSpacing,
     '--ui-font-body': theme.typography.body.family,
     '--ui-font-heading': theme.typography.heading.family,
     '--ui-font-mono': theme.typography.mono,
@@ -867,13 +932,17 @@ function admittedThemeStyleProperties(
     '--ui-leading-heading': theme.typography.heading.leading,
     '--ui-weight-body': String(theme.typography.body.weight),
     '--ui-weight-heading': String(theme.typography.heading.weight),
-    '--ui-shadow-control': composableShadow(effects.controlShadow),
-    '--ui-shadow-panel': composableShadow(effects.panelShadow),
-    '--ui-shadow-overlay': composableShadow(effects.overlayShadow),
-    '--ui-backdrop': effects.backdrop,
+    '--ui-weight-label': String(theme.typography.label.weight),
     '--ui-motion-fast': theme.motion.fast,
     '--ui-motion-standard': theme.motion.standard,
   }
+}
+
+function admittedThemeStyleProperties(
+  theme: ThemeDocument,
+  selectedMode: 'light' | 'dark',
+): Readonly<Record<string, string>> {
+  return { ...modeStyleProperties(theme, selectedMode), ...sharedStyleProperties(theme) }
 }
 
 /**
@@ -892,38 +961,76 @@ export function themeStyleProperties(
   return admittedThemeStyleProperties(parseThemeDocument(input), selectedMode)
 }
 
-function variables(theme: ThemeDocument, selectedMode: 'light' | 'dark'): string[] {
-  return Object.entries(admittedThemeStyleProperties(theme, selectedMode)).map(([name, value]) =>
+function variables(properties: Readonly<Record<string, string>>): string[] {
+  return Object.entries(properties).map(([name, value]) =>
     name.startsWith('--ui-shadow-') && value.includes(',')
       ? `  ${name}:\n    ${value};`
       : `  ${name}: ${value};`,
   )
 }
 
-export function renderThemeCss(input: ThemeDocument): string {
-  const theme = parseThemeDocument(input)
-  const lightSelectors = [
-    ':root',
-    `[data-ui-preset='${theme.name}']`,
-    `[data-ui-theme='${theme.name}']`,
-  ]
-  const darkSelectors = [
-    ':root.dark',
-    `[data-ui-preset='${theme.name}'].dark`,
-    `[data-ui-theme='${theme.name}'].dark`,
-  ]
+/**
+ * Each mode's block declares every color and effect, even one the same in both modes, so a theme
+ * applied after this one replaces all of them in dark mode as well. Shape, density, type, and
+ * motion are declared in the light block only: every element a dark selector matches also matches
+ * a light selector, so they hold in dark mode at the light selector's specificity, where a theme
+ * applied after this one still replaces them.
+ */
+function renderModes(
+  theme: ThemeDocument,
+  lightSelectors: readonly string[],
+  darkSelectors: readonly string[],
+): string[] {
   return [
-    `/* Generated from ${theme.name}.astrale-theme.json. Consumer-owned after installation. */`,
     lightSelectors.join(',\n') + ' {',
     '  color-scheme: light;',
-    ...variables(theme, 'light'),
+    ...variables(modeStyleProperties(theme, 'light')),
+    ...variables(sharedStyleProperties(theme)),
     '}',
     '',
     darkSelectors.join(',\n') + ' {',
     '  color-scheme: dark;',
-    ...variables(theme, 'dark'),
+    ...variables(modeStyleProperties(theme, 'dark')),
     '}',
     '',
+  ]
+}
+
+export function renderThemeCss(input: ThemeDocument): string {
+  const theme = parseThemeDocument(input)
+  return [
+    `/* Generated from ${theme.name}.astrale-theme.json. Consumer-owned after installation. */`,
+    ...renderModes(
+      theme,
+      [':root', `[data-ui-preset='${theme.name}']`, `[data-ui-theme='${theme.name}']`],
+      [
+        ':root.dark',
+        `[data-ui-preset='${theme.name}'].dark`,
+        `[data-ui-theme='${theme.name}'].dark`,
+      ],
+    ),
+  ].join('\n')
+}
+
+/** The registry theme of the astrale preset, the `tokens.css` defaults, and the playground. */
+export const defaultThemeName = 'spatial'
+
+/**
+ * Projects a theme as a runtime preset of the package: the document root or any element marked
+ * `data-ui-preset='<preset>'` takes its tokens, and the element turns dark under a dark ancestor
+ * as well as with its own `.dark`. `fontFaces` holds the `@font-face` rules its families load.
+ */
+export function renderPresetCss(input: ThemeDocument, preset: string, fontFaces: string): string {
+  const theme = parseThemeDocument(input)
+  return [
+    `/* Generated by \`pnpm themes:build\` from registry/themes/${theme.name}.astrale-theme.json. */`,
+    fontFaces.trim(),
+    '',
+    ...renderModes(
+      theme,
+      [':root', `[data-ui-preset='${preset}']`],
+      [':root.dark', `.dark [data-ui-preset='${preset}']`, `[data-ui-preset='${preset}'].dark`],
+    ),
   ].join('\n')
 }
 

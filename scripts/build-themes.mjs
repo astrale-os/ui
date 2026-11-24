@@ -3,7 +3,9 @@ import { readdir, readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 
 import {
+  defaultThemeName,
   parseThemeDocumentText,
+  renderPresetCss,
   renderThemeCss,
   themeFontRegistryDependencies,
   themeCanonicalAddress,
@@ -49,6 +51,21 @@ for (const file of sources) {
       document: file,
     },
   })
+}
+
+// The astrale preset every application imports is the default theme, with the webfont it names.
+const presetPath = 'packages/ui/src/theme/presets/astrale.css'
+const preset = renderPresetCss(
+  parseThemeDocumentText(
+    await readFile(path.join(directory, `${defaultThemeName}.astrale-theme.json`), 'utf8'),
+  ),
+  'astrale',
+  await readFile('packages/ui/src/theme/fonts/hanken-grotesk.css', 'utf8'),
+)
+if (check) {
+  assert.equal(await readFile(presetPath, 'utf8'), preset, `${presetPath} is stale`)
+} else {
+  await writeFile(presetPath, preset, 'utf8')
 }
 
 const manifest = `${JSON.stringify({ items }, null, 2)}\n`
