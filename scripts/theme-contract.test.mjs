@@ -132,14 +132,6 @@ test('every starter round-trips and projects to exact consumer-owned light and d
         )
       }
     }
-    // The dark block holds what the mode changes; the rest stays at the light selector's specificity.
-    const light = themeStyleProperties(theme, 'light')
-    const dark = themeStyleProperties(theme, 'dark')
-    assert.deepEqual(
-      Object.keys(declarations(css, `[data-ui-theme='${theme.name}'].dark`)),
-      Object.keys(dark).filter((name) => dark[name] !== light[name]),
-      file,
-    )
   }
 })
 
@@ -180,26 +172,43 @@ test('the astrale preset and the token defaults are the default theme', async ()
   }
 })
 
-test('every runtime preset declares, in each mode, every token the default preset sets there', async () => {
-  // Stacked presets resolve by order in light and by order among dark blocks in dark: a token
-  // one of them leaves out shows another's value through.
+test('a theme or preset applied after another renders as it does alone, in both modes', async () => {
+  // Each sheet declares its tokens in a light block and a dark block, and every element its dark
+  // selector matches also matches its light selector. Under sheets applied in order, a dark-mode
+  // token takes the last dark declaration, else the last light one; a light-mode token takes the
+  // last light declaration.
   const presets = 'packages/ui/src/theme/presets'
-  async function modes(name) {
-    const css = await readFile(`${presets}/${name}.css`, 'utf8')
-    return {
-      light: declarations(css, `[data-ui-preset='${name}']`),
-      dark: declarations(css, `[data-ui-preset='${name}'].dark`),
-    }
+  const sheets = [
+    ...(await themes()).map(({ theme }) => ({
+      name: `theme ${theme.name}`,
+      css: renderThemeCss(theme),
+      selector: `[data-ui-theme='${theme.name}']`,
+    })),
+    ...(await readdir(presets)).map((file) => ({
+      name: `preset ${file}`,
+      file: `${presets}/${file}`,
+      selector: `[data-ui-preset='${file.replace(/\.css$/u, '')}']`,
+    })),
+  ]
+  for (const sheet of sheets) {
+    const css = sheet.css ?? (await readFile(sheet.file, 'utf8'))
+    sheet.light = declarations(css, sheet.selector)
+    sheet.dark = declarations(css, `${sheet.selector}.dark`)
   }
-  const astrale = await modes('astrale')
-  for (const file of await readdir(presets)) {
-    const preset = await modes(file.replace(/\.css$/u, ''))
-    for (const mode of ['light', 'dark']) {
-      assert.deepEqual(
-        Object.keys(astrale[mode]).filter((token) => !(token in preset[mode])),
-        [],
-        `${file} ${mode}`,
-      )
+  const resolve = (stack, mode) => {
+    const light = Object.assign({}, ...stack.map((sheet) => sheet.light))
+    return mode === 'light' ? light : Object.assign(light, ...stack.map((sheet) => sheet.dark))
+  }
+  for (const before of sheets) {
+    for (const after of sheets) {
+      if (before === after) continue
+      for (const mode of ['light', 'dark']) {
+        assert.deepEqual(
+          resolve([before, after], mode),
+          resolve([after], mode),
+          `${after.name} after ${before.name}, ${mode}`,
+        )
+      }
     }
   }
 })

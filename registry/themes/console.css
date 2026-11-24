@@ -41,6 +41,12 @@
   --ui-sidebar-accent-foreground: #121418;
   --ui-sidebar-border: rgb(17 22 40 / 0.075);
   --ui-sidebar-ring: rgb(79 98 232 / 0.55);
+  --ui-shadow-control: 0 1px 2px rgb(0 0 0 / 0.04);
+  --ui-shadow-panel:
+    0 0 0 0.5px rgb(17 22 40 / 0.08), 0 8px 24px -4px rgb(17 22 40 / 0.14), 0 30px 60px -20px rgb(17 22 40 / 0.22);
+  --ui-shadow-overlay:
+    0 0 0 0.5px rgb(17 22 40 / 0.08), 0 8px 24px -4px rgb(17 22 40 / 0.14);
+  --ui-backdrop: rgb(17 22 40 / 0.24);
   --ui-radius: 0.5rem;
   --ui-radius-panel: 0.875rem;
   --ui-radius-action: initial;
@@ -59,12 +65,6 @@
   --ui-weight-body: 400;
   --ui-weight-heading: 600;
   --ui-weight-label: 500;
-  --ui-shadow-control: 0 1px 2px rgb(0 0 0 / 0.04);
-  --ui-shadow-panel:
-    0 0 0 0.5px rgb(17 22 40 / 0.08), 0 8px 24px -4px rgb(17 22 40 / 0.14), 0 30px 60px -20px rgb(17 22 40 / 0.22);
-  --ui-shadow-overlay:
-    0 0 0 0.5px rgb(17 22 40 / 0.08), 0 8px 24px -4px rgb(17 22 40 / 0.14);
-  --ui-backdrop: rgb(17 22 40 / 0.24);
   --ui-motion-fast: 120ms;
   --ui-motion-standard: 180ms;
 }

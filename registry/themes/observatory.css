@@ -41,6 +41,11 @@
   --ui-sidebar-accent-foreground: oklch(0.27 0.04 255);
   --ui-sidebar-border: oklch(0.87 0.018 82);
   --ui-sidebar-ring: oklch(0.705 0.015 286.067);
+  --ui-shadow-control: 0 1px 2px oklch(0.19 0.02 255 / 0.08);
+  --ui-shadow-panel: 0 18px 55px oklch(0.19 0.02 255 / 0.1);
+  --ui-shadow-overlay:
+    0 4px 6px -1px oklch(0 0 0 / 0.1), 0 2px 4px -2px oklch(0 0 0 / 0.1);
+  --ui-backdrop: oklch(0 0 0 / 0.1);
   --ui-radius: 0.7rem;
   --ui-radius-panel: 1rem;
   --ui-radius-action: initial;
@@ -59,11 +64,6 @@
   --ui-weight-body: 400;
   --ui-weight-heading: 600;
   --ui-weight-label: 500;
-  --ui-shadow-control: 0 1px 2px oklch(0.19 0.02 255 / 0.08);
-  --ui-shadow-panel: 0 18px 55px oklch(0.19 0.02 255 / 0.1);
-  --ui-shadow-overlay:
-    0 4px 6px -1px oklch(0 0 0 / 0.1), 0 2px 4px -2px oklch(0 0 0 / 0.1);
-  --ui-backdrop: oklch(0 0 0 / 0.1);
   --ui-motion-fast: 120ms;
   --ui-motion-standard: 180ms;
 }
@@ -110,4 +110,9 @@
   --ui-sidebar-accent-foreground: oklch(0.96 0.008 82);
   --ui-sidebar-border: oklch(0.3 0.025 255);
   --ui-sidebar-ring: oklch(0.552 0.016 285.938);
+  --ui-shadow-control: 0 1px 2px oklch(0.19 0.02 255 / 0.08);
+  --ui-shadow-panel: 0 18px 55px oklch(0.19 0.02 255 / 0.1);
+  --ui-shadow-overlay:
+    0 4px 6px -1px oklch(0 0 0 / 0.1), 0 2px 4px -2px oklch(0 0 0 / 0.1);
+  --ui-backdrop: oklch(0 0 0 / 0.1);
 }

@@ -892,7 +892,8 @@ export function serializeThemeDocument(theme: ThemeDocument): string {
   return JSON.stringify(parseThemeDocument(theme), null, 2) + '\n'
 }
 
-function admittedThemeStyleProperties(
+/** What a theme document authors per mode: every color and every effect. */
+function modeStyleProperties(
   theme: ThemeDocument,
   selectedMode: 'light' | 'dark',
 ): Readonly<Record<string, string>> {
@@ -902,6 +903,16 @@ function admittedThemeStyleProperties(
     ...Object.fromEntries(
       themeColorTokens.map((token) => [`--ui-${cssNames[token]}`, colors[token]]),
     ),
+    '--ui-shadow-control': composableShadow(effects.controlShadow),
+    '--ui-shadow-panel': composableShadow(effects.panelShadow),
+    '--ui-shadow-overlay': composableShadow(effects.overlayShadow),
+    '--ui-backdrop': effects.backdrop,
+  }
+}
+
+/** What a theme document authors once for both modes: shape, density, type, and motion. */
+function sharedStyleProperties(theme: ThemeDocument): Readonly<Record<string, string>> {
+  return {
     '--ui-radius': theme.geometry.radius,
     '--ui-radius-panel': theme.geometry.panelRadius,
     // `initial` resets an action radius inherited from an enclosing theme, so actions fall back to
@@ -922,13 +933,16 @@ function admittedThemeStyleProperties(
     '--ui-weight-body': String(theme.typography.body.weight),
     '--ui-weight-heading': String(theme.typography.heading.weight),
     '--ui-weight-label': String(theme.typography.label.weight),
-    '--ui-shadow-control': composableShadow(effects.controlShadow),
-    '--ui-shadow-panel': composableShadow(effects.panelShadow),
-    '--ui-shadow-overlay': composableShadow(effects.overlayShadow),
-    '--ui-backdrop': effects.backdrop,
     '--ui-motion-fast': theme.motion.fast,
     '--ui-motion-standard': theme.motion.standard,
   }
+}
+
+function admittedThemeStyleProperties(
+  theme: ThemeDocument,
+  selectedMode: 'light' | 'dark',
+): Readonly<Record<string, string>> {
+  return { ...modeStyleProperties(theme, selectedMode), ...sharedStyleProperties(theme) }
 }
 
 /**
@@ -947,8 +961,8 @@ export function themeStyleProperties(
   return admittedThemeStyleProperties(parseThemeDocument(input), selectedMode)
 }
 
-function variables(theme: ThemeDocument, selectedMode: 'light' | 'dark'): string[] {
-  return Object.entries(admittedThemeStyleProperties(theme, selectedMode)).map(([name, value]) =>
+function variables(properties: Readonly<Record<string, string>>): string[] {
+  return Object.entries(properties).map(([name, value]) =>
     name.startsWith('--ui-shadow-') && value.includes(',')
       ? `  ${name}:\n    ${value};`
       : `  ${name}: ${value};`,
@@ -956,26 +970,27 @@ function variables(theme: ThemeDocument, selectedMode: 'light' | 'dark'): string
 }
 
 /**
- * Every element a dark selector matches also matches a light selector, so the dark block declares
- * only what the mode changes. A token the same in both modes keeps the light selector's
- * specificity, and a preset or theme applied after this one still overrides it in dark mode.
+ * Each mode's block declares every color and effect, even one the same in both modes, so a theme
+ * applied after this one replaces all of them in dark mode as well. Shape, density, type, and
+ * motion are declared in the light block only: every element a dark selector matches also matches
+ * a light selector, so they hold in dark mode at the light selector's specificity, where a theme
+ * applied after this one still replaces them.
  */
 function renderModes(
   theme: ThemeDocument,
   lightSelectors: readonly string[],
   darkSelectors: readonly string[],
 ): string[] {
-  const light = variables(theme, 'light')
-  const declaredInLight = new Set(light)
   return [
     lightSelectors.join(',\n') + ' {',
     '  color-scheme: light;',
-    ...light,
+    ...variables(modeStyleProperties(theme, 'light')),
+    ...variables(sharedStyleProperties(theme)),
     '}',
     '',
     darkSelectors.join(',\n') + ' {',
     '  color-scheme: dark;',
-    ...variables(theme, 'dark').filter((declaration) => !declaredInLight.has(declaration)),
+    ...variables(modeStyleProperties(theme, 'dark')),
     '}',
     '',
   ]
