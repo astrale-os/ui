@@ -8,7 +8,7 @@
   ],
   "files": [
     {
-      "path": "source/components/alert/alert-16/alert-16.tsx",
+      "path": "registry/variants/source/components/alert/alert-16/alert-16.tsx",
       "content": "import { Alert, AlertTitle } from '@astrale-os/ui/alert'\n\nconst AlertWithoutIconDemo = () => {\n  return (\n    <Alert>\n      <AlertTitle>New message!</AlertTitle>\n    </Alert>\n  )\n}\n\nexport default AlertWithoutIconDemo\n",
       "type": "registry:component",
       "target": "components/astrale/components/alert/alert-16.tsx"

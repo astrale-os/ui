@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 
-import { Rating } from '@/components/ui/rating'
+import { Rating } from '@/components/astrale/components/ui/rating'
 
 const RatingSizeDemo = () => {
   const [xs, setXs] = useState(2)

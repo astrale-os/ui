@@ -7,7 +7,7 @@ import {
   AutocompleteInput,
   AutocompleteItem,
   AutocompleteList
-} from '@/components/ui/autocomplete'
+} from '@/components/astrale/components/ui/autocomplete'
 
 const items = [
   { id: 'feature', value: 'Feature' },

@@ -1,5 +1,5 @@
 import { useId, useState } from 'react'
-import { Calendar } from '@/components/ui/calendar'
+import { Calendar } from '@/components/astrale/components/ui/calendar'
 import { Card, CardContent, CardHeader } from '@astrale-os/ui/card'
 import { Input } from '@astrale-os/ui/input'
 import { Label } from '@astrale-os/ui/label'

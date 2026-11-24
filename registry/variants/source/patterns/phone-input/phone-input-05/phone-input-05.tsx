@@ -1,4 +1,4 @@
-import { PhoneInput } from '@/components/ui/phone-input'
+import { PhoneInput } from '@/components/astrale/components/ui/phone-input'
 import { Label } from '@astrale-os/ui/label'
 
 const PhoneInputRounded = () => {

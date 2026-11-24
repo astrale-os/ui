@@ -23,7 +23,7 @@
         {
           "path": "support/components/ui/code-block.tsx",
           "type": "registry:component",
-          "target": "components/ui/code-block.tsx"
+          "target": "components/astrale/components/ui/code-block.tsx"
         }
       ],
       "css": {
@@ -62,7 +62,7 @@
         {
           "path": "support/components/ui/code-block.tsx",
           "type": "registry:component",
-          "target": "components/ui/code-block.tsx"
+          "target": "components/astrale/components/ui/code-block.tsx"
         }
       ],
       "css": {
@@ -101,7 +101,7 @@
         {
           "path": "support/components/ui/code-block.tsx",
           "type": "registry:component",
-          "target": "components/ui/code-block.tsx"
+          "target": "components/astrale/components/ui/code-block.tsx"
         }
       ],
       "css": {
@@ -140,7 +140,7 @@
         {
           "path": "support/components/ui/code-block.tsx",
           "type": "registry:component",
-          "target": "components/ui/code-block.tsx"
+          "target": "components/astrale/components/ui/code-block.tsx"
         }
       ],
       "css": {
@@ -179,7 +179,7 @@
         {
           "path": "support/components/ui/code-block.tsx",
           "type": "registry:component",
-          "target": "components/ui/code-block.tsx"
+          "target": "components/astrale/components/ui/code-block.tsx"
         }
       ],
       "css": {
@@ -218,7 +218,7 @@
         {
           "path": "support/components/ui/code-block.tsx",
           "type": "registry:component",
-          "target": "components/ui/code-block.tsx"
+          "target": "components/astrale/components/ui/code-block.tsx"
         }
       ],
       "css": {
@@ -257,7 +257,7 @@
         {
           "path": "support/components/ui/code-block.tsx",
           "type": "registry:component",
-          "target": "components/ui/code-block.tsx"
+          "target": "components/astrale/components/ui/code-block.tsx"
         }
       ],
       "css": {

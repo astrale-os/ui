@@ -8,7 +8,7 @@
   ],
   "files": [
     {
-      "path": "source/components/typography/typography-06/typography-06.tsx",
+      "path": "registry/variants/source/components/typography/typography-06/typography-06.tsx",
       "content": "const TypographyBlockQuoteDemo = () => {\n  return (\n    <blockquote className='max-w-2xl border-l-2 pl-6 italic'>\n      &quot;In the quiet after repeal, the streets filled with unexpected laughter - small rebellions of joy,&quot; she\n      recalled.\n    </blockquote>\n  )\n}\n\nexport default TypographyBlockQuoteDemo\n",
       "type": "registry:component",
       "target": "components/astrale/components/typography/typography-06.tsx"

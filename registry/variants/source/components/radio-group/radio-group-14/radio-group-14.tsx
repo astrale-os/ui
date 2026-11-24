@@ -1,5 +1,5 @@
 import { Label } from '@astrale-os/ui/label'
-import { RadioGroup, RadioGroupItem } from '@/components/ui/motion-radio-group'
+import { RadioGroup, RadioGroupItem } from '@/components/astrale/components/ui/motion-radio-group'
 
 const RadioGroupAnimatedDemo = () => {
   return (

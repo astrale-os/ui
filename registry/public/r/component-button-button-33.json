@@ -10,7 +10,7 @@
   ],
   "files": [
     {
-      "path": "source/components/button/button-33/button-33.tsx",
+      "path": "registry/variants/source/components/button/button-33/button-33.tsx",
       "content": "import { useState } from 'react'\nimport { Button } from '@astrale-os/ui/button'\nimport { XIcon, MenuIcon } from \"lucide-react\"\n\nconst IconButtonToggleDemo = () => {\n  const [isOpen, setIsOpen] = useState(false)\n\n  return (\n    <Button variant='ghost' size='icon' onClick={() => setIsOpen(!isOpen)} aria-label='Toggle menu'>\n      {isOpen ? (\n        <XIcon\n        />\n      ) : (\n        <MenuIcon\n        />\n      )}\n    </Button>\n  )\n}\n\nexport default IconButtonToggleDemo\n",
       "type": "registry:component",
       "target": "components/astrale/components/button/button-33.tsx"

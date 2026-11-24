@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { toast } from 'sonner'
 import { Badge } from '@astrale-os/ui/badge'
 import { Card, CardContent } from '@astrale-os/ui/card'
-import { Sortable, SortableItem, SortableItemHandle } from '@/components/ui/sortable'
+import { Sortable, SortableItem, SortableItemHandle } from '@/components/astrale/components/ui/sortable'
 import { ImageIcon, FileTextIcon, VideoIcon, MusicIcon, GripVerticalIcon } from "lucide-react"
 
 interface SortableItem {

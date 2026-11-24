@@ -5,7 +5,7 @@ import * as React from 'react'
 import { motion, type Transition, type HTMLMotionProps } from 'motion/react'
 
 import { cn } from '@astrale-os/ui/class-name'
-import { MotionHighlight, MotionHighlightItem } from '@/components/ui/motion-highlight'
+import { MotionHighlight, MotionHighlightItem } from '@/components/astrale/components/ui/motion-highlight'
 
 type TabsContextType<T extends string> = {
   activeValue: T

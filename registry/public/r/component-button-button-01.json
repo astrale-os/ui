@@ -8,7 +8,7 @@
   ],
   "files": [
     {
-      "path": "source/components/button/button-01/button-01.tsx",
+      "path": "registry/variants/source/components/button/button-01/button-01.tsx",
       "content": "import { Button } from '@astrale-os/ui/button'\n\nconst ButtonDemo = () => {\n  return <Button>Button</Button>\n}\n\nexport default ButtonDemo\n",
       "type": "registry:component",
       "target": "components/astrale/components/button/button-01.tsx"

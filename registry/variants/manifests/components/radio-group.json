@@ -284,7 +284,7 @@
         {
           "path": "support/components/ui/motion-radio-group.tsx",
           "type": "registry:ui",
-          "target": "components/ui/motion-radio-group.tsx"
+          "target": "components/astrale/components/ui/motion-radio-group.tsx"
         }
       ],
       "meta": {

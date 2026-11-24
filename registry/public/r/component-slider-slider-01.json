@@ -8,7 +8,7 @@
   ],
   "files": [
     {
-      "path": "source/components/slider/slider-01/slider-01.tsx",
+      "path": "registry/variants/source/components/slider/slider-01/slider-01.tsx",
       "content": "import { Slider } from '@astrale-os/ui/slider'\n\nconst SliderDemo = () => {\n  return <Slider defaultValue={75} max={100} step={1} className='mx-auto w-full max-w-xs' />\n}\n\nexport default SliderDemo\n",
       "type": "registry:component",
       "target": "components/astrale/components/slider/slider-01.tsx"

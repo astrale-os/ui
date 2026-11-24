@@ -8,7 +8,7 @@
   ],
   "files": [
     {
-      "path": "source/components/switch/switch-02/switch-02.tsx",
+      "path": "registry/variants/source/components/switch/switch-02/switch-02.tsx",
       "content": "import { Switch } from '@astrale-os/ui/switch'\n\nconst SwitchSquareDemo = () => {\n  return <Switch aria-label='Square switch' className='rounded-xs [&_span]:rounded-xs' />\n}\n\nexport default SwitchSquareDemo\n",
       "type": "registry:component",
       "target": "components/astrale/components/switch/switch-02.tsx"

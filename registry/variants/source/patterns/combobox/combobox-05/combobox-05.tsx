@@ -1,7 +1,7 @@
 import { useId } from 'react'
 
 import { Combobox as ComboboxPrimitive } from '@base-ui/react'
-import { Combobox, ComboboxContent, ComboboxEmpty, ComboboxInput, ComboboxList } from '@/components/ui/combobox'
+import { Combobox, ComboboxContent, ComboboxEmpty, ComboboxInput, ComboboxList } from '@/components/astrale/components/ui/combobox'
 import { Label } from '@astrale-os/ui/label'
 import { CircleCheckIcon } from "lucide-react"
 

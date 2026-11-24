@@ -9,7 +9,7 @@ import {
   CarouselNext,
   CarouselPrevious,
   type CarouselApi
-} from '@/components/ui/carousel'
+} from '@/components/astrale/components/ui/carousel'
 
 const Images = [
   {

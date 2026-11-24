@@ -1,4 +1,4 @@
-import { CraftButton, CraftButtonIcon, CraftButtonLabel } from '@/components/ui/craft-button'
+import { CraftButton, CraftButtonIcon, CraftButtonLabel } from '@/components/astrale/components/ui/craft-button'
 import { ArrowUpRightIcon } from "lucide-react"
 
 const CraftButtonDemo = () => {

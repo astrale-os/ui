@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 import { type DateRange } from 'react-day-picker'
 import { Button } from '@astrale-os/ui/button'
-import { Calendar } from '@/components/ui/calendar'
+import { Calendar } from '@/components/astrale/components/ui/calendar'
 import { Label } from '@astrale-os/ui/label'
 import { Popover, PopoverContent, PopoverTrigger } from '@astrale-os/ui/popover'
 import { ChevronDownIcon } from "lucide-react"

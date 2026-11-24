@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { addDays } from 'date-fns'
 
 import { Button } from '@astrale-os/ui/button'
-import { Calendar } from '@/components/ui/calendar'
+import { Calendar } from '@/components/astrale/components/ui/calendar'
 import { Card, CardContent, CardFooter } from '@astrale-os/ui/card'
 
 const CalendarWithPresetsDemo = () => {

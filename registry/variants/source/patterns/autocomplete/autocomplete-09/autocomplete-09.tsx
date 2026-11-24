@@ -11,7 +11,7 @@ import {
   AutocompleteItem,
   AutocompleteList,
   AutocompleteStatus
-} from '@/components/ui/autocomplete'
+} from '@/components/astrale/components/ui/autocomplete'
 import { Avatar, AvatarFallback, AvatarImage } from '@astrale-os/ui/avatar'
 import { Label } from '@astrale-os/ui/label'
 import { LoaderCircleIcon } from "lucide-react"

@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 
 import { Card } from '@astrale-os/ui/card'
-import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '@/components/ui/carousel'
+import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '@/components/astrale/components/ui/carousel'
 import { cn } from '@astrale-os/ui/class-name'
 
 const Images = [

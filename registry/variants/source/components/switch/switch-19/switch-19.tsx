@@ -1,5 +1,5 @@
 import { Label } from '@astrale-os/ui/label'
-import { Switch } from '@/components/ui/motion-switch'
+import { Switch } from '@/components/astrale/components/ui/motion-switch'
 
 const SwitchAnimatedDemo = () => {
   return (

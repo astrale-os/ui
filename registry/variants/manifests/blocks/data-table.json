@@ -275,7 +275,7 @@
         {
           "path": "support/hooks/use-pagination.ts",
           "type": "registry:hook",
-          "target": "hooks/use-pagination.ts"
+          "target": "components/astrale/hooks/use-pagination.ts"
         }
       ],
       "meta": {
@@ -289,14 +289,13 @@
       "name": "block-data-table-data-table-12",
       "type": "registry:block",
       "title": "Data Table 12",
-      "description": "Data table with export functionality supporting CSV, Excel, and multiple formats",
+      "description": "Data table with export functionality supporting CSV and JSON formats",
       "dependencies": [
         "@astrale-os/ui@^0.3.0-beta.0",
         "@tanstack/react-table@^8.21.3",
         "lucide-react@1.32.0",
         "papaparse@^5.6.0",
-        "react@19.2.8",
-        "xlsx@https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
+        "react@19.2.8"
       ],
       "files": [
         {

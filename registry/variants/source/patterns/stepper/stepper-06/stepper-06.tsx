@@ -5,7 +5,7 @@ import {
   StepperIndicator,
   StepperSeparator,
   StepperNav
-} from '@/components/ui/stepper'
+} from '@/components/astrale/components/ui/stepper'
 
 const steps = [
   { id: '1', description: 'This is the first step' },

@@ -9,7 +9,7 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious
-} from '@/components/ui/carousel'
+} from '@/components/astrale/components/ui/carousel'
 import { cn } from '@astrale-os/ui/class-name'
 
 const images = [

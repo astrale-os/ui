@@ -7,7 +7,7 @@ import { toast } from 'sonner'
 import * as z from 'zod'
 import { Alert, AlertTitle } from '@astrale-os/ui/alert'
 import { Button } from '@astrale-os/ui/button'
-import { Calendar } from '@/components/ui/calendar'
+import { Calendar } from '@/components/astrale/components/ui/calendar'
 import { Field, FieldDescription, FieldError, FieldLabel } from '@astrale-os/ui/field'
 import { Popover, PopoverContent, PopoverTrigger } from '@astrale-os/ui/popover'
 

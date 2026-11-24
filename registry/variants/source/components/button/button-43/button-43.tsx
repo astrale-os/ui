@@ -1,4 +1,4 @@
-import { ShimmerButton } from '@/components/ui/shimmer-button'
+import { ShimmerButton } from '@/components/astrale/components/ui/shimmer-button'
 
 const ButtonShimmerEffectDemo = () => {
   return <ShimmerButton>Shimmer Button</ShimmerButton>

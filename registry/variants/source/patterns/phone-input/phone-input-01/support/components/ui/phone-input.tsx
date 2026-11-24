@@ -14,7 +14,7 @@ import {
   ComboboxSeparator,
   ComboboxTrigger,
   ComboboxValue
-} from '@/components/ui/combobox'
+} from '@/components/astrale/components/ui/combobox'
 import { Input } from '@astrale-os/ui/input'
 import { ScrollArea } from '@astrale-os/ui/scroll-area'
 import { cn } from '@astrale-os/ui/class-name'

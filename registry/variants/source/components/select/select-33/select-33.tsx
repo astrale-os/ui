@@ -1,6 +1,6 @@
 import { Label } from '@astrale-os/ui/label'
-import type { Option } from '@/components/ui/multi-select'
-import MultipleSelector from '@/components/ui/multi-select'
+import type { Option } from '@/components/astrale/components/ui/multi-select'
+import MultipleSelector from '@/components/astrale/components/ui/multi-select'
 
 const categories: Option[] = [
   {

@@ -8,7 +8,7 @@
   ],
   "files": [
     {
-      "path": "source/components/typography/typography-11/typography-11.tsx",
+      "path": "registry/variants/source/components/typography/typography-11/typography-11.tsx",
       "content": "const TypographySmallDemo = () => {\n  return <div className='text-sm leading-none font-medium max-sm:w-full'>small - user@example.com</div>\n}\n\nexport default TypographySmallDemo\n",
       "type": "registry:component",
       "target": "components/astrale/components/typography/typography-11.tsx"

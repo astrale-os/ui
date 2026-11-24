@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { toast } from 'sonner'
 import { Avatar, AvatarFallback, AvatarImage } from '@astrale-os/ui/avatar'
 import { Card, CardContent } from '@astrale-os/ui/card'
-import { Sortable, SortableItem, SortableItemHandle } from '@/components/ui/sortable'
+import { Sortable, SortableItem, SortableItemHandle } from '@/components/astrale/components/ui/sortable'
 import { GripVerticalIcon } from "lucide-react"
 
 interface TeamMember {

@@ -366,7 +366,7 @@
         {
           "path": "support/components/ui/motion-checkbox.tsx",
           "type": "registry:ui",
-          "target": "components/ui/motion-checkbox.tsx"
+          "target": "components/astrale/components/ui/motion-checkbox.tsx"
         }
       ],
       "meta": {
@@ -397,7 +397,7 @@
         {
           "path": "support/components/ui/motion-checkbox.tsx",
           "type": "registry:ui",
-          "target": "components/ui/motion-checkbox.tsx"
+          "target": "components/astrale/components/ui/motion-checkbox.tsx"
         }
       ],
       "meta": {

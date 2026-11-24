@@ -9,7 +9,7 @@
   ],
   "files": [
     {
-      "path": "source/components/button/button-31/button-31.tsx",
+      "path": "registry/variants/source/components/button/button-31/button-31.tsx",
       "content": "import { Button } from '@astrale-os/ui/button'\nimport { BookmarkIcon } from \"lucide-react\"\n\nconst IconButtonDemo = () => {\n  return (\n    <Button variant='outline' size='icon'>\n      <BookmarkIcon\n      />\n      <span className='sr-only'>Bookmark</span>\n    </Button>\n  )\n}\n\nexport default IconButtonDemo\n",
       "type": "registry:component",
       "target": "components/astrale/components/button/button-31.tsx"

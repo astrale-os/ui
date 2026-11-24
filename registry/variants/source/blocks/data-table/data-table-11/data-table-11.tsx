@@ -15,7 +15,7 @@ import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem } fro
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@astrale-os/ui/select'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@astrale-os/ui/table'
 
-import { usePagination } from '@/hooks/use-pagination'
+import { usePagination } from '@/components/astrale/hooks/use-pagination'
 
 import { cn } from '@astrale-os/ui/class-name'
 import { ChevronUpIcon, ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon } from "lucide-react"

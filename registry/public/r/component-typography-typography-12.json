@@ -8,7 +8,7 @@
   ],
   "files": [
     {
-      "path": "source/components/typography/typography-12/typography-12.tsx",
+      "path": "registry/variants/source/components/typography/typography-12/typography-12.tsx",
       "content": "const TypographyMutedDemo = () => {\n  return (\n    <div className='text-muted-foreground text-sm max-sm:w-full'>muted - We&apos;ll only send occasional updates.</div>\n  )\n}\n\nexport default TypographyMutedDemo\n",
       "type": "registry:component",
       "target": "components/astrale/components/typography/typography-12.tsx"

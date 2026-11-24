@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Button } from '@astrale-os/ui/button'
-import { Calendar } from '@/components/ui/calendar'
+import { Calendar } from '@/components/astrale/components/ui/calendar'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@astrale-os/ui/card'
 import { ScrollArea } from '@astrale-os/ui/scroll-area'
 import { CircleCheckIcon } from "lucide-react"

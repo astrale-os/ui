@@ -1,5 +1,5 @@
 import { ButtonGroup } from '@astrale-os/ui/button-group'
-import { RippleButton } from '@/components/ui/ripple-button'
+import { RippleButton } from '@/components/astrale/components/ui/ripple-button'
 import { InboxIcon, ArchiveIcon, SendHorizonalIcon } from "lucide-react"
 
 const ButtonGroupRippleDemo = () => {

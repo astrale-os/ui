@@ -1,4 +1,4 @@
-import { CodeBlock } from '@/components/ui/code-block'
+import { CodeBlock } from '@/components/astrale/components/ui/code-block'
 
 const pnpm = `pnpm dlx shadcn@latest add @ss-components/code-block-07`
 const npm = `npx shadcn@latest add @ss-components/code-block-07`

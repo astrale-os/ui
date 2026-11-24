@@ -1,4 +1,4 @@
-import { Tabs, TabsContent, TabsContents, TabsList, TabsTrigger } from '@/components/ui/motion-tabs'
+import { Tabs, TabsContent, TabsContents, TabsList, TabsTrigger } from '@/components/astrale/components/ui/motion-tabs'
 
 const tabs = [
   {

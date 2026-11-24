@@ -17,7 +17,7 @@ import {
   KanbanItem,
   KanbanItemHandle,
   KanbanOverlay
-} from '@/components/ui/kanban'
+} from '@/components/astrale/components/ui/kanban'
 
 import { cn } from '@astrale-os/ui/class-name'
 import { CalendarClockIcon, GripVerticalIcon } from "lucide-react"

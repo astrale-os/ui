@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import { toast } from 'sonner'
 
-import { Sortable, SortableItem, SortableItemHandle } from '@/components/ui/sortable'
+import { Sortable, SortableItem, SortableItemHandle } from '@/components/astrale/components/ui/sortable'
 
 import { Card, CardContent } from '@astrale-os/ui/card'
 import { GripVerticalIcon } from "lucide-react"

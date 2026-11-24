@@ -4,7 +4,7 @@
     "jsx": "react-jsx",
     "noEmit": true,
     "paths": {
-      "@/*": ["../registry/variants/support/*"]
+      "@/components/astrale/*": ["../registry/variants/support/*"]
     },
     "types": ["vitest/globals"]
   },

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Rating } from '@/components/ui/rating'
+import { Rating } from '@/components/astrale/components/ui/rating'
 import { HeartIcon, ZapIcon, SparkleIcon } from "lucide-react"
 
 const RatingIconDemo = () => {

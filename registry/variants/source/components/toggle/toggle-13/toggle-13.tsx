@@ -1,5 +1,5 @@
-import { MotionToggle } from '@/components/ui/motion-toggle'
-import Heart from '@/assets/svg/heart'
+import { MotionToggle } from '@/components/astrale/components/ui/motion-toggle'
+import Heart from '@/components/astrale/assets/svg/heart'
 
 const ToggleAnimatedDemo = () => {
   return (

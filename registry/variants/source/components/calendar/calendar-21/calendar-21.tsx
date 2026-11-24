@@ -6,7 +6,7 @@ import { eachMonthOfInterval, eachYearOfInterval, endOfYear, format, isAfter, is
 
 import type { CaptionLabelProps, MonthGridProps } from 'react-day-picker'
 import { Button } from '@astrale-os/ui/button'
-import { Calendar } from '@/components/ui/calendar'
+import { Calendar } from '@/components/astrale/components/ui/calendar'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@astrale-os/ui/collapsible'
 import { ScrollArea } from '@astrale-os/ui/scroll-area'
 import { ChevronDownIcon } from "lucide-react"

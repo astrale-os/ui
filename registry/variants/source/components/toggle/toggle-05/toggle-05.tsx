@@ -1,6 +1,6 @@
 import { Toggle } from '@astrale-os/ui/toggle'
-import Heart from '@/assets/svg/heart'
-import ThumbsUp from '@/assets/svg/thumbs-up'
+import Heart from '@/components/astrale/assets/svg/heart'
+import ThumbsUp from '@/components/astrale/assets/svg/thumbs-up'
 import { StarIcon, ArrowBigUpIcon } from "lucide-react"
 
 const ToggleFilledIcon = () => {

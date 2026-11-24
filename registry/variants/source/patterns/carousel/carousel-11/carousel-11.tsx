@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import type { EmblaOptionsType } from 'embla-carousel'
 
-import { MotionCarousel } from '@/components/ui/motion-carousel'
+import { MotionCarousel } from '@/components/astrale/components/ui/motion-carousel'
 
 const Images = [
   {
