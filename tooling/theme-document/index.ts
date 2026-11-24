@@ -294,40 +294,6 @@ const cssNames: Record<ThemeColorToken, string> = {
   sidebarRing: 'sidebar-ring',
 }
 
-const fontRegistryByFamily = new Map([
-  ['Delius Swash Caps', 'font-delius-swash-caps'],
-  ['DM Sans', 'font-dm-sans'],
-  ['Gabriela', 'font-gabriela'],
-  ['Geist', 'font-geist'],
-  ['Geist Mono', 'font-geist-mono'],
-  ['Inter', 'font-inter'],
-  ['JetBrains Mono', 'font-jetbrains-mono'],
-  ['Lato', 'font-lato'],
-  ['Merriweather', 'font-merriweather'],
-  ['Nunito', 'font-nunito'],
-  ['Outfit', 'font-outfit'],
-  ['PT Serif', 'font-pt-serif'],
-  ['Roboto Mono', 'font-roboto-mono'],
-  ['Source Serif 4', 'font-source-serif-4'],
-  ['Space Mono', 'font-space-mono'],
-])
-
-export function themeFontRegistryDependencies(theme: ThemeDocument): string[] {
-  return [
-    ...new Set(
-      [
-        theme.typography.heading.family,
-        theme.typography.body.family,
-        theme.typography.mono,
-      ].flatMap((stack) => {
-        const family = /^'([^']+)'/u.exec(stack)?.[1]
-        const item = family ? fontRegistryByFamily.get(family) : undefined
-        return item ? [`https://shadcnstudio.com/r/fonts/${item}.json`] : []
-      }),
-    ),
-  ]
-}
-
 function migrateThemeDocument(input: unknown): unknown {
   if (!input || typeof input !== 'object' || Array.isArray(input)) return input
   let candidate = input as Record<string, unknown>

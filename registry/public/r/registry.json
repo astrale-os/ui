@@ -23090,10 +23090,6 @@
       "dependencies": [
         "@astrale-os/ui@^0.3.0-beta.0"
       ],
-      "registryDependencies": [
-        "https://shadcnstudio.com/r/fonts/font-geist.json",
-        "https://shadcnstudio.com/r/fonts/font-geist-mono.json"
-      ],
       "files": [
         {
           "path": "registry/themes/console.css",
@@ -23115,10 +23111,6 @@
       "description": "The GUI workspace: warm cream chrome, white paper, near-black ink, Astrale blue, and soft card lift.",
       "dependencies": [
         "@astrale-os/ui@^0.3.0-beta.0"
-      ],
-      "registryDependencies": [
-        "https://shadcnstudio.com/r/fonts/font-geist.json",
-        "https://shadcnstudio.com/r/fonts/font-geist-mono.json"
       ],
       "files": [
         {
@@ -23142,7 +23134,6 @@
       "dependencies": [
         "@astrale-os/ui@^0.3.0-beta.0"
       ],
-      "registryDependencies": [],
       "files": [
         {
           "path": "registry/themes/observatory.css",
@@ -23165,7 +23156,6 @@
       "dependencies": [
         "@astrale-os/ui@^0.3.0-beta.0"
       ],
-      "registryDependencies": [],
       "files": [
         {
           "path": "registry/themes/spatial.css",

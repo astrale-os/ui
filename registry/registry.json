@@ -21050,10 +21050,6 @@
       "title": "Theme · Console",
       "description": "Shell, Issues, and Admin: Geist on neutral paper, ink primary, indigo accent, and hairline elevation.",
       "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
-      "registryDependencies": [
-        "https://shadcnstudio.com/r/fonts/font-geist.json",
-        "https://shadcnstudio.com/r/fonts/font-geist-mono.json"
-      ],
       "files": [
         {
           "path": "registry/themes/console.css",
@@ -21074,10 +21070,6 @@
       "title": "Theme · Desktop",
       "description": "The GUI workspace: warm cream chrome, white paper, near-black ink, Astrale blue, and soft card lift.",
       "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
-      "registryDependencies": [
-        "https://shadcnstudio.com/r/fonts/font-geist.json",
-        "https://shadcnstudio.com/r/fonts/font-geist-mono.json"
-      ],
       "files": [
         {
           "path": "registry/themes/desktop.css",
@@ -21098,7 +21090,6 @@
       "title": "Theme · Observatory",
       "description": "Quiet mineral surfaces, deep orbital blue, and measured editorial typography.",
       "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
-      "registryDependencies": [],
       "files": [
         {
           "path": "registry/themes/observatory.css",
@@ -21119,7 +21110,6 @@
       "title": "Theme · Spatial",
       "description": "astrale.ai: cool grey sheets lit from the upper left, Hanken Grotesk, pill actions with room, panels inset by their corner radius, and soft relief.",
       "dependencies": ["@astrale-os/ui@^0.3.0-beta.0"],
-      "registryDependencies": [],
       "files": [
         {
           "path": "registry/themes/spatial.css",
