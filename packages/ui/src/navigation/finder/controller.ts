@@ -132,6 +132,7 @@ export interface FinderController {
   readonly count: FinderCountState
   readonly rules: readonly FinderRuleDraft[]
   readonly appliedRules: readonly FinderRule[]
+  /** Whether the filter bar shows: opened, and holding a rule. Collapsed, its rules still apply. */
   readonly filtersOpen: boolean
   readonly chosen: readonly FinderChoice[]
   readonly maximumReached: boolean
@@ -170,6 +171,7 @@ const DEFAULT_SHOWN_PROPERTIES = 3
 const TYPEAHEAD_MILLISECONDS = 700
 const LOAD_AHEAD_ROWS = 8
 const IDLE: FinderConfirmation = Object.freeze({ status: 'idle' })
+const NO_CLASSES: ReadonlyMap<string, FinderClass> = new Map()
 const CONFIRMING: FinderConfirmation = Object.freeze({ status: 'confirming' })
 
 function isPromiseLike(value: unknown): value is PromiseLike<void> {
@@ -180,43 +182,71 @@ function isPromiseLike(value: unknown): value is PromiseLike<void> {
   )
 }
 
+const sourceScopes = new WeakMap<FinderSource, number>()
+let sourceSequence = 0
+
+/** One number per source object: what a source answered never stands for another's answer. */
+function scopeOf(source: FinderSource): number {
+  let scope = sourceScopes.get(source)
+  if (scope === undefined) {
+    sourceSequence += 1
+    scope = sourceSequence
+    sourceScopes.set(source, scope)
+  }
+  return scope
+}
+
 interface Read<Value> {
+  readonly scope?: number
   readonly key?: string
   readonly status: FinderReadStatus
   readonly value?: Value
   readonly error?: unknown
 }
 
-/** One read per key; a new key aborts the previous read and keeps its value until it lands. */
+const LOADING: Read<never> = Object.freeze({ status: 'loading' })
+
+/**
+ * One read per source and key: a new key aborts the previous read and keeps its value until it
+ * lands; a new source reads again from nothing.
+ */
 function useRead<Value>(
+  scope: number,
   key: string | undefined,
   run: (signal: AbortSignal) => Promise<Value>,
 ): Read<Value> & { readonly retry: () => void } {
-  const [state, setState] = React.useState<Read<Value>>({ status: 'loading' })
+  const [state, setState] = React.useState<Read<Value>>(LOADING)
   const [attempt, setAttempt] = React.useState(0)
   const runRef = React.useRef(run)
   runRef.current = run
 
   React.useEffect(() => {
     if (key === undefined) {
-      setState({ status: 'loading' })
+      setState(LOADING)
       return
     }
     const controller = new AbortController()
-    setState((previous) => ({ key, status: 'loading', value: previous.value }))
+    setState((previous) => ({
+      scope,
+      key,
+      status: 'loading',
+      ...(previous.scope === scope && previous.value !== undefined
+        ? { value: previous.value }
+        : {}),
+    }))
     runRef.current(controller.signal).then(
       (value) => {
-        if (!controller.signal.aborted) setState({ key, status: 'ready', value })
+        if (!controller.signal.aborted) setState({ scope, key, status: 'ready', value })
       },
       (error: unknown) => {
-        if (!controller.signal.aborted) setState({ key, status: 'error', error })
+        if (!controller.signal.aborted) setState({ scope, key, status: 'error', error })
       },
     )
     return () => controller.abort()
-  }, [key, attempt])
+  }, [scope, key, attempt])
 
   const retry = React.useCallback(() => setAttempt((value) => value + 1), [])
-  return { ...state, retry }
+  return { ...(state.scope === scope ? state : LOADING), retry }
 }
 
 function sameList(left: readonly string[], right: readonly string[]): boolean {
@@ -239,6 +269,7 @@ function shared(classes: readonly FinderClass[]): FinderProperty[] {
 }
 
 interface NodesState {
+  readonly scope?: number
   readonly key?: string
   readonly status: 'idle' | FinderReadStatus
   readonly items: readonly FinderNode[]
@@ -290,29 +321,42 @@ export function useFinderController(options: FinderOptions): FinderController {
   const restoring = React.useRef(domain !== undefined && domain !== FINDER_ACCEPTED)
 
   // ── Class index ──────────────────────────────────────────────────────────────────────────────
-  const [classIndex, setClassIndex] = React.useState<ReadonlyMap<string, FinderClass>>(new Map())
-  const remember = React.useCallback((classes: readonly FinderClass[]) => {
-    if (classes.length === 0) return
-    setClassIndex((previous) => {
-      if (classes.every((item) => previous.get(item.key) === item)) return previous
-      const next = new Map(previous)
-      for (const item of classes) next.set(item.key, item)
-      return next
-    })
-  }, [])
+  // Every Class the source described, kept for its source only.
+  const scope = scopeOf(source)
+  const [described, setDescribed] = React.useState<{
+    readonly scope: number
+    readonly classes: ReadonlyMap<string, FinderClass>
+  }>(() => ({ scope, classes: new Map() }))
+  const classIndex = described.scope === scope ? described.classes : NO_CLASSES
+  const remember = React.useCallback(
+    (classes: readonly FinderClass[]) => {
+      if (classes.length === 0) return
+      setDescribed((previous) => {
+        const known = previous.scope === scope ? previous.classes : NO_CLASSES
+        if (known === previous.classes && classes.every((item) => known.get(item.key) === item)) {
+          return previous
+        }
+        const next = new Map(known)
+        for (const item of classes) next.set(item.key, item)
+        return { scope, classes: next }
+      })
+    },
+    [scope],
+  )
   const classOf = React.useCallback((key: string) => classIndex.get(key), [classIndex])
 
   // ── Reads ────────────────────────────────────────────────────────────────────────────────────
-  const domainsRead = useRead(`domains\n${acceptsKey ?? ''}`, (signal) =>
+  const domainsRead = useRead(scope, `domains\n${acceptsKey ?? ''}`, (signal) =>
     source.domains({ ...(accepts ? { accepts } : {}), signal }),
   )
-  const acceptedRead = useRead(acceptsKey, async (signal) => {
+  const acceptedRead = useRead(scope, acceptsKey, async (signal) => {
     const classes = await source.describe({ classes: accepts ?? [], signal })
     // Keep the request's order, whatever order the source answers in.
     return (accepts ?? []).flatMap((key) => classes.filter((item) => item.key === key))
   })
   const classDomain = domain !== undefined && domain !== FINDER_ACCEPTED ? domain : undefined
   const classesRead = useRead(
+    scope,
     classDomain === undefined ? undefined : `${classDomain}\n${acceptsKey ?? ''}`,
     (signal) =>
       source.classes({ domain: classDomain ?? '', ...(accepts ? { accepts } : {}), signal }),
@@ -402,6 +446,8 @@ export function useFinderController(options: FinderOptions): FinderController {
   const [orderChoice, setOrderChoice] = React.useState<FinderOrder | undefined>(undefined)
   const [rules, setRules] = React.useState<readonly FinderRuleDraft[]>([])
   const [filtersOpen, setFiltersOpen] = React.useState(false)
+  // With no rule left there is nothing to show: the bar hides with its last rule.
+  const filtersShown = filtersOpen && rules.length > 0
 
   const propertyByKey = React.useMemo(
     () => new Map(sharedProperties.map((property) => [property.key, property])),
@@ -491,11 +537,16 @@ export function useFinderController(options: FinderOptions): FinderController {
     selectedClasses.length === 0 || !describedAll
       ? undefined
       : JSON.stringify({ classes: selectedClasses, rules: appliedRules, order: order ?? null })
-  const [nodes, setNodes] = React.useState<NodesState>({
+  const [nodesState, setNodes] = React.useState<NodesState>({
     status: 'idle',
     items: [],
     loadingMore: false,
   })
+  // Another source's Nodes are not this source's, even for the same range.
+  const nodes: NodesState =
+    nodesState.scope === undefined || nodesState.scope === scope
+      ? nodesState
+      : { status: 'loading', items: [], loadingMore: false }
   const [nodesAttempt, setNodesAttempt] = React.useState(0)
   const moreController = React.useRef<AbortController | undefined>(undefined)
   const range = React.useRef({ classes: selectedClasses, rules: appliedRules, order })
@@ -514,9 +565,10 @@ export function useFinderController(options: FinderOptions): FinderController {
     const controller = new AbortController()
     const { classes, rules: activeRules, order: activeOrder } = range.current
     setNodes((previous) => ({
+      scope,
       key: rangeKey,
       status: 'loading',
-      items: previous.status === 'idle' ? [] : previous.items,
+      items: previous.status === 'idle' || previous.scope !== scope ? [] : previous.items,
       loadingMore: false,
     }))
     source
@@ -531,6 +583,7 @@ export function useFinderController(options: FinderOptions): FinderController {
         (page) => {
           if (controller.signal.aborted) return
           setNodes({
+            scope,
             key: rangeKey,
             status: 'ready',
             items: page.nodes,
@@ -540,13 +593,20 @@ export function useFinderController(options: FinderOptions): FinderController {
         },
         (error: unknown) => {
           if (!controller.signal.aborted) {
-            setNodes({ key: rangeKey, status: 'error', items: [], error, loadingMore: false })
+            setNodes({
+              scope,
+              key: rangeKey,
+              status: 'error',
+              items: [],
+              error,
+              loadingMore: false,
+            })
           }
         },
       )
     return () => controller.abort()
     // `range.current` is read for this key only.
-  }, [rangeKey, nodesAttempt, source, pageSize, selectedClasses.length])
+  }, [rangeKey, nodesAttempt, source, scope, pageSize, selectedClasses.length])
 
   const nodesRef = React.useRef(nodes)
   nodesRef.current = nodes
@@ -598,6 +658,7 @@ export function useFinderController(options: FinderOptions): FinderController {
   }, [source, pageSize])
 
   const countRead = useRead(
+    scope,
     rangeKey === undefined ? undefined : `${rangeKey}\n${nodesAttempt}`,
     (signal) =>
       source.count({
@@ -608,19 +669,29 @@ export function useFinderController(options: FinderOptions): FinderController {
       }),
   )
 
-  // A listed Node of a Class no column described yet: describe it, once.
-  const describing = React.useRef(new Set<string>())
+  // A listed Node of a Class no column described yet: describe it, once per source.
+  const describing = React.useRef<{ readonly keys: Set<string>; readonly signal?: AbortSignal }>({
+    keys: new Set(),
+  })
   React.useEffect(() => {
+    const controller = new AbortController()
+    describing.current = { keys: new Set(), signal: controller.signal }
+    return () => controller.abort()
+  }, [source])
+  React.useEffect(() => {
+    const { keys, signal } = describing.current
+    if (signal === undefined) return
     const missing = [
       ...new Set(nodes.items.map((node) => node.class).filter((key) => !classIndex.has(key))),
-    ].filter((key) => !describing.current.has(key))
+    ].filter((key) => !keys.has(key))
     if (missing.length === 0) return
-    for (const key of missing) describing.current.add(key)
-    const controller = new AbortController()
-    source.describe({ classes: missing, signal: controller.signal }).then(
-      (classes) => remember(classes),
+    for (const key of missing) keys.add(key)
+    source.describe({ classes: missing, signal }).then(
+      (classes) => {
+        if (!signal.aborted) remember(classes)
+      },
       () => {
-        for (const key of missing) describing.current.delete(key)
+        for (const key of missing) keys.delete(key)
       },
     )
   }, [nodes.items, classIndex, source, remember])
@@ -745,7 +816,9 @@ export function useFinderController(options: FinderOptions): FinderController {
 
   // ── Preview ──────────────────────────────────────────────────────────────────────────────────
   const [previewId, setPreviewId] = React.useState<string | undefined>(undefined)
-  const previewRead = useRead(previewId, (signal) => source.node({ id: previewId ?? '', signal }))
+  const previewRead = useRead(scope, previewId, (signal) =>
+    source.node({ id: previewId ?? '', signal }),
+  )
 
   // ── Navigation ───────────────────────────────────────────────────────────────────────────────
   const openDomain = React.useCallback(
@@ -829,9 +902,17 @@ export function useFinderController(options: FinderOptions): FinderController {
     },
     [propertyByKey],
   )
-  const removeRule = React.useCallback((id: string) => {
-    setRules((current) => current.filter((rule) => rule.id !== id))
-  }, [])
+  const removeRule = React.useCallback(
+    (id: string) => {
+      setRules((current) => current.filter((rule) => rule.id !== id))
+      if (rules.every((rule) => rule.id === id)) {
+        // The bar hides with its last rule: the keyboard goes back to the Nodes.
+        setFiltersOpen(false)
+        focusRegion('nodes')
+      }
+    },
+    [rules, focusRegion],
+  )
   const clearRules = React.useCallback(() => {
     setRules([])
     setSettledRules([])
@@ -1029,7 +1110,7 @@ export function useFinderController(options: FinderOptions): FinderController {
         setPreviewId(undefined)
         return
       }
-      if (filtersOpen) {
+      if (filtersShown) {
         // The rules keep applying; the path bar shows them and reopens the bar.
         setFiltersOpen(false)
         focusRegion('nodes')
@@ -1037,7 +1118,7 @@ export function useFinderController(options: FinderOptions): FinderController {
       }
       cancel()
     },
-    [confirm, cancel, rules.length, addRule, focusRegion, previewId, filtersOpen],
+    [confirm, cancel, rules.length, addRule, focusRegion, previewId, filtersShown],
   )
 
   // ── Result ───────────────────────────────────────────────────────────────────────────────────
@@ -1117,7 +1198,7 @@ export function useFinderController(options: FinderOptions): FinderController {
     count,
     rules,
     appliedRules,
-    filtersOpen: filtersOpen || rules.length > 0,
+    filtersOpen: filtersShown,
     chosen,
     maximumReached,
     confirmation,

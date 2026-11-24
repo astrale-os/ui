@@ -119,6 +119,8 @@ export function ruleOf(
             property: key,
             operator: 'between',
             from: new Date(end - PRESET_MILLISECONDS[draft.preset]).toISOString(),
+            // A later instant (a due date next week) is not in the last week.
+            to: new Date(end).toISOString(),
           }
         }
         const from = draft.from === '' ? undefined : dayStart(draft.from)

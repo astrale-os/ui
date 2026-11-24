@@ -20,6 +20,7 @@ import {
   FinderPreview,
   FinderRuleOperator,
   FinderRuleProperty,
+  FinderRuleRemove,
   FinderRuleValue,
   FinderRules,
   FinderRows,
@@ -133,6 +134,7 @@ function Layout() {
             <FinderRuleProperty rule={rule} />
             <FinderRuleOperator rule={rule} />
             <FinderRuleValue rule={rule} />
+            <FinderRuleRemove rule={rule}>Remove rule</FinderRuleRemove>
           </div>
         )}
       </FinderRules>
@@ -266,6 +268,61 @@ describe('Finder', () => {
     await waitFor(() => expect(rowNames()).toEqual(['Intents']))
     expect(screen.getByRole('button', { name: '1 filter' })).toBeInTheDocument()
     expect(screen.getByLabelText('Count')).toHaveTextContent('1')
+  })
+
+  test('Escape collapses the filter bar and its rules keep applying; the next Escape cancels', async () => {
+    const { user, onCancel } = renderFinder({ maximum: 8 })
+    await user.click(await within(domains()).findByRole('option', { name: 'Product' }))
+    await user.click(await within(classes()).findByRole('option', { name: 'Area' }))
+    await waitFor(() => expect(rowNames()).toHaveLength(3))
+    await user.click(screen.getByRole('button', { name: 'Add filter' }))
+    await user.type(
+      within(screen.getByRole('group', { name: 'Filters' })).getByRole('textbox'),
+      'Int',
+    )
+    await waitFor(() => expect(rowNames()).toEqual(['Intents']))
+
+    await user.keyboard('{Escape}')
+    expect(screen.queryByRole('group', { name: 'Filters' })).toBeNull()
+    expect(table()).toHaveFocus()
+    expect(rowNames()).toEqual(['Intents'])
+    expect(onCancel).not.toHaveBeenCalled()
+
+    // Reopened, the bar shows the same rule: adding comes once it is open.
+    await user.click(screen.getByRole('button', { name: 'Add filter' }))
+    const filters = screen.getByRole('group', { name: 'Filters' })
+    expect(
+      within(filters)
+        .getAllByRole('textbox')
+        .map((box) => box.getAttribute('value')),
+    ).toEqual(['Int'])
+    await user.keyboard('{Escape}')
+    expect(screen.queryByRole('group', { name: 'Filters' })).toBeNull()
+    await user.click(screen.getByRole('button', { name: '1 filter' }))
+    expect(screen.getByRole('group', { name: 'Filters' })).toBeInTheDocument()
+
+    await user.keyboard('{Escape}')
+    await user.keyboard('{Escape}')
+    expect(onCancel).toHaveBeenCalledTimes(1)
+  })
+
+  test('removing the last rule hides the bar and gives the keyboard back to the Nodes', async () => {
+    const { user, onCancel } = renderFinder({ maximum: 8 })
+    await user.click(await within(domains()).findByRole('option', { name: 'Product' }))
+    await user.click(await within(classes()).findByRole('option', { name: 'Area' }))
+    await waitFor(() => expect(rowNames()).toHaveLength(3))
+    await user.click(screen.getByRole('button', { name: 'Add filter' }))
+    await user.type(
+      within(screen.getByRole('group', { name: 'Filters' })).getByRole('textbox'),
+      'Int',
+    )
+    await waitFor(() => expect(rowNames()).toEqual(['Intents']))
+    await user.click(screen.getByRole('button', { name: 'Remove rule' }))
+    expect(screen.queryByRole('group', { name: 'Filters' })).toBeNull()
+    expect(table()).toHaveFocus()
+    await waitFor(() => expect(rowNames()).toHaveLength(3))
+    await user.keyboard('{Escape}')
+    expect(onCancel).toHaveBeenCalledTimes(1)
   })
 
   test('a choice property filters by its closed set', async () => {
@@ -450,6 +507,65 @@ describe('Finder', () => {
     )
   })
 
+  test('a new source reads everything again and keeps none of the Classes the last one described', async () => {
+    const renamed: FinderMemoryGraph = {
+      ...graph,
+      domains: graph.domains.map((item) =>
+        item.id === 'd-product' ? { ...item, name: 'Catalog' } : item,
+      ),
+      classes: {
+        ...graph.classes,
+        'd-product': graph.classes['d-product']!.map((item) =>
+          item.key === 'product:class.Area'
+            ? {
+                ...item,
+                name: 'Zone',
+                properties: [nameProperty, { ...statusProperty, label: 'State' }],
+              }
+            : item,
+        ),
+      },
+    }
+    const props = { onConfirm: vi.fn(), onCancel: vi.fn(), ruleDelay: 0, maximum: 8 }
+    const { rerender } = render(
+      <Finder source={createMemoryFinderSource(graph)} {...props}>
+        <Layout />
+      </Finder>,
+    )
+    const user = userEvent.setup()
+    await user.click(await within(domains()).findByRole('option', { name: 'Product' }))
+    await user.click(await within(classes()).findByRole('option', { name: 'Area' }))
+    await waitFor(() =>
+      expect(
+        within(table())
+          .getAllByRole('columnheader')
+          .map((cell) => cell.textContent),
+      ).toEqual(['Name', 'Status']),
+    )
+
+    rerender(
+      <Finder source={createMemoryFinderSource(renamed)} {...props}>
+        <Layout />
+      </Finder>,
+    )
+    expect(await within(domains()).findByRole('option', { name: 'Catalog' })).toHaveAttribute(
+      'aria-selected',
+      'true',
+    )
+    expect(await within(classes()).findByRole('option', { name: 'Zone' })).toHaveAttribute(
+      'aria-selected',
+      'true',
+    )
+    await waitFor(() =>
+      expect(
+        within(table())
+          .getAllByRole('columnheader')
+          .map((cell) => cell.textContent),
+      ).toEqual(['Name', 'State']),
+    )
+    expect(rowNames()).toEqual(['Access', 'Intents', 'No name'])
+  })
+
   test('a failed column shows its error with Retry while the others keep working', async () => {
     const memory = createMemoryFinderSource(graph)
     let fail = true
@@ -566,7 +682,12 @@ describe('rules', () => {
         instant,
         () => now,
       ),
-    ).toEqual({ property: 'at', operator: 'between', from: '2026-11-17T12:00:00.000Z' })
+    ).toEqual({
+      property: 'at',
+      operator: 'between',
+      from: '2026-11-17T12:00:00.000Z',
+      to: '2026-11-24T12:00:00.000Z',
+    })
   })
 
   test('counts read as bounded', () => {

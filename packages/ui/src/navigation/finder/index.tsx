@@ -505,7 +505,7 @@ function FinderCell({
 
 // ── Rules ─────────────────────────────────────────────────────────────────────────────────────
 
-/** The filter bar: one row per rule, shown once opened (⌘F) or while rules exist. */
+/** The filter bar: one row per rule, shown once opened (⌘F) until Escape collapses it. */
 function FinderRules({
   children,
   ...props
@@ -771,7 +771,10 @@ function FinderAddRule({ onClick, ...props }: React.ComponentProps<'button'>) {
       disabled={finder.sharedProperties.length === 0}
       onClick={(event) => {
         onClick?.(event)
-        if (!event.defaultPrevented) finder.addRule()
+        if (event.defaultPrevented) return
+        // A collapsed bar comes back with its rules before another is added.
+        if (!finder.filtersOpen && finder.rules.length > 0) finder.openFilters()
+        else finder.addRule()
       }}
       {...props}
     />

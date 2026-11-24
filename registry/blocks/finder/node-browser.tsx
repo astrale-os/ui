@@ -266,17 +266,17 @@ export function NodeBrowser({
 // ── Look ──────────────────────────────────────────────────────────────────────────────────────
 
 const iconSmall =
-  'grid size-4 shrink-0 place-items-center overflow-hidden rounded-[3px] text-muted-foreground [&_img]:size-full [&_img]:object-contain'
+  'grid size-4 shrink-0 place-items-center overflow-hidden rounded-[3px] text-muted-foreground group-data-selected/option:text-current group-data-active/row:text-current [&_img]:size-full [&_img]:object-contain'
 const iconDomain =
-  'grid size-5 shrink-0 place-items-center overflow-hidden rounded-[5px] [&_img]:size-full [&_img]:object-contain data-fallback:bg-muted data-fallback:text-[0.5625rem] data-fallback:font-semibold data-fallback:text-muted-foreground'
+  'grid size-5 shrink-0 place-items-center overflow-hidden rounded-[5px] [&_img]:size-full [&_img]:object-contain data-fallback:bg-muted data-fallback:ring-1 data-fallback:ring-border data-fallback:ring-inset data-fallback:text-[0.5625rem] data-fallback:font-semibold data-fallback:text-muted-foreground'
 const column =
-  'group/list flex w-40 shrink-0 flex-col gap-px overflow-y-auto border-r p-1.5 outline-none focus-visible:bg-muted/30 lg:w-52'
+  'group/list flex w-40 shrink-0 flex-col gap-px overflow-y-auto border-r p-1.5 outline-none focus-visible:bg-accent/30 lg:w-52'
 const option =
-  'flex min-h-8 cursor-default items-center gap-2 rounded-md px-2 py-1 select-none hover:bg-muted/60 data-selected:bg-muted data-selected:text-foreground group-focus-visible/list:data-active:ring-1 group-focus-visible/list:data-active:ring-ring/60 group-focus-visible/list:data-active:ring-inset'
+  'group/option flex min-h-8 cursor-default items-center gap-2 rounded-md px-2 py-1 select-none hover:bg-accent/50 data-selected:bg-accent data-selected:text-accent-foreground group-focus-visible/list:data-active:ring-1 group-focus-visible/list:data-active:ring-ring/60 group-focus-visible/list:data-active:ring-inset'
 const field =
   'h-7 min-w-0 rounded-md border border-input bg-background px-2 text-xs outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/40 dark:bg-input/30'
 const iconButton =
-  'grid size-6 shrink-0 place-items-center rounded-md text-muted-foreground outline-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50'
+  'grid size-6 shrink-0 place-items-center rounded-md text-muted-foreground outline-none hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring/50'
 
 function ClassGlyph() {
   return (
@@ -385,7 +385,7 @@ function BrowserHeader({
         <h2
           id={titleId}
           data-slot="block-finder-title"
-          className="flex min-w-0 flex-wrap items-center gap-x-1.5 text-base font-medium"
+          className="flex min-w-0 flex-wrap items-center gap-x-1.5 font-heading text-base font-medium"
         >
           {title ??
             (finder.accepts ? (
@@ -486,7 +486,10 @@ function DomainsColumn() {
               </span>
             </>
           )}
-          <Glyph path={CHEVRON} className="size-3 text-muted-foreground" />
+          <Glyph
+            path={CHEVRON}
+            className="size-3 text-muted-foreground group-data-selected/option:text-current"
+          />
         </FinderOption>
       )}
     </FinderDomains>
@@ -513,7 +516,7 @@ function ClassesColumn() {
             {item.description ? (
               <span
                 data-slot="block-finder-option-description"
-                className="truncate text-xs text-muted-foreground"
+                className="truncate text-xs text-muted-foreground group-data-selected/option:text-current"
               >
                 {item.description}
               </span>
@@ -597,7 +600,7 @@ function RulesBar() {
               labels={m.values}
               className="flex flex-wrap items-center gap-1.5"
               fieldClassName={cn(field, 'w-36')}
-              choiceClassName="flex h-7 items-center gap-1.5 rounded-md px-1.5 text-xs hover:bg-muted"
+              choiceClassName="flex h-7 items-center gap-1.5 rounded-md px-1.5 text-xs hover:bg-accent hover:text-accent-foreground"
             />
             <FinderRuleRemove rule={rule} aria-label={m.removeRule} className={iconButton}>
               <Glyph path={CLOSE} className="size-3" />
@@ -703,7 +706,7 @@ function NodeRow({ row }: { row: FinderRow }) {
   return (
     <FinderNodeRow
       row={row}
-      className="grid min-w-(--finder-min-width) cursor-default grid-cols-(--finder-columns) border-b border-border/50 select-none hover:bg-muted/50 data-active:bg-muted data-chosen:bg-primary/8 data-chosen:data-active:bg-primary/12 data-disabled:cursor-not-allowed data-disabled:text-muted-foreground group-focus-visible/table:data-active:ring-1 group-focus-visible/table:data-active:ring-ring/60 group-focus-visible/table:data-active:ring-inset"
+      className="group/row grid min-w-(--finder-min-width) cursor-default grid-cols-(--finder-columns) border-b border-border/50 select-none hover:bg-accent/50 data-active:bg-accent data-active:text-accent-foreground data-chosen:bg-primary/8 data-chosen:data-active:bg-primary/12 data-chosen:data-active:text-foreground data-disabled:cursor-not-allowed data-disabled:text-muted-foreground data-disabled:data-active:text-accent-foreground group-focus-visible/table:data-active:ring-1 group-focus-visible/table:data-active:ring-ring/60 group-focus-visible/table:data-active:ring-inset"
     >
       {table.columns.map((item) =>
         item.kind === 'name' ? (
@@ -716,7 +719,10 @@ function NodeRow({ row }: { row: FinderRow }) {
             <ClassIcon icon={row.nodeClass?.icon} />
             <span
               data-slot="block-finder-name"
-              className={cn('min-w-0 flex-1 truncate', row.unnamed && 'text-muted-foreground')}
+              className={cn(
+                'min-w-0 flex-1 truncate',
+                row.unnamed && 'text-muted-foreground group-data-active/row:text-current',
+              )}
             >
               {row.node.name ?? m.noName}
             </span>
@@ -880,7 +886,7 @@ function PathBar() {
             type="button"
             data-slot="block-finder-path-segment"
             onClick={segment.go}
-            className="flex min-w-0 shrink items-center gap-1.5 rounded px-1.5 py-0.5 outline-none hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
+            className="flex min-w-0 shrink items-center gap-1.5 rounded px-1.5 py-0.5 outline-none hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
           >
             <PathSegment segment={segment} />
           </button>
