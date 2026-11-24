@@ -1299,6 +1299,7 @@
         "papaparse@^5.6.0",
         "react@19.2.8"
       ],
+      "devDependencies": ["@types/papaparse@^5.5.2"],
       "files": [
         {
           "path": "registry/variants/source/blocks/data-table/data-table-12/data-table-12.tsx",
@@ -6774,6 +6775,7 @@
         "react-payment-inputs@^1.2.0",
         "react@19.2.8"
       ],
+      "devDependencies": ["@types/react-payment-inputs@^1.1.4"],
       "files": [
         {
           "path": "registry/variants/source/components/collapsible/collapsible-09/collapsible-09.tsx",
@@ -8189,6 +8191,7 @@
         "react-payment-inputs@^1.2.0",
         "react@19.2.8"
       ],
+      "devDependencies": ["@types/react-payment-inputs@^1.1.4"],
       "files": [
         {
           "path": "registry/variants/source/components/input-mask/input-mask-03/input-mask-03.tsx",
@@ -8213,6 +8216,7 @@
         "react-payment-inputs@^1.2.0",
         "react@19.2.8"
       ],
+      "devDependencies": ["@types/react-payment-inputs@^1.1.4"],
       "files": [
         {
           "path": "registry/variants/source/components/input-mask/input-mask-04/input-mask-04.tsx",
@@ -8237,6 +8241,7 @@
         "react-payment-inputs@^1.2.0",
         "react@19.2.8"
       ],
+      "devDependencies": ["@types/react-payment-inputs@^1.1.4"],
       "files": [
         {
           "path": "registry/variants/source/components/input-mask/input-mask-05/input-mask-05.tsx",
@@ -8262,6 +8267,7 @@
         "react-payment-inputs@^1.2.0",
         "react@19.2.8"
       ],
+      "devDependencies": ["@types/react-payment-inputs@^1.1.4"],
       "files": [
         {
           "path": "registry/variants/source/components/input-mask/input-mask-06/input-mask-06.tsx",

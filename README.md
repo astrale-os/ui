@@ -86,6 +86,10 @@ astrale ui add ./my-theme.css
 Ordinary add never overwrites local edits. The project lock records the exact npm version, Git tag,
 commit SHA, shadcn/Base UI versions, preset, and installed file hashes.
 
+An installed item type-checks in a strict TypeScript project with what it installs: the npm packages
+its source imports and, for a package that ships no declarations, the matching `@types/*` package as
+a dev dependency. React and React DOM, with their declarations, belong to the host project.
+
 ## Repository ownership
 
 ```text
