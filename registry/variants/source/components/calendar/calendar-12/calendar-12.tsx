@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Calendar } from '@/components/ui/calendar'
+import { Calendar } from '@/components/astrale/components/ui/calendar'
 
 const CalendarMultiSelectDemo = () => {
   const [dates, setDates] = useState<Date[]>([new Date(2025, 5, 12), new Date(2025, 5, 17)])

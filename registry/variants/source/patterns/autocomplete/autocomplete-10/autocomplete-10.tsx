@@ -8,7 +8,7 @@ import {
   AutocompleteInput,
   AutocompleteItem,
   AutocompleteList
-} from '@/components/ui/autocomplete'
+} from '@/components/astrale/components/ui/autocomplete'
 import { Label } from '@astrale-os/ui/label'
 import { MonitorIcon, HospitalIcon, DollarSignIcon, SchoolIcon, FilmIcon, FactoryIcon, ZapIcon, HotelIcon, ScaleIcon, TractorIcon } from "lucide-react"
 

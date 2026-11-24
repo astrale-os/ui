@@ -106,6 +106,10 @@ function importSpecifiers(source) {
   ].map((match) => match[1])
 }
 
+// A registry package requirement: an npm name and a version range, never a URL, path, or alias.
+const packageRequirement =
+  /^(?:@[a-z0-9][a-z0-9._-]*\/)?[a-z0-9][a-z0-9._-]*@[~^<>=|0-9A-Za-z.* -]+$/u
+
 function assertSafeRelative(target) {
   assert.equal(path.isAbsolute(target), false)
   assert.equal(target.includes('\\'), false)
@@ -209,12 +213,35 @@ test('every registry item is independently bounded, controlled, and safe to inst
       assert.match(
         item.files[index].target,
         isTheme
-          ? /^components\/astrale\/theme\//u
+          ? /^components\/astrale\/theme\/[a-z0-9-]+\.css$/u
           : index === 0
             ? /^components\/astrale\/components\//u
-            : /^(?:components\/(?:astrale\/components|ui)|hooks|lib|utils|assets)\//u,
+            : /^components\/astrale\/(?!theme\/)/u,
+        `${item.name} installs ${item.files[index].target} outside its consumer-owned folder`,
       )
       await stat(item.declaredPaths[index])
+    }
+    assert.equal(
+      new Set(item.files.map((file) => file.target)).size,
+      item.files.length,
+      `${item.name} declares one target twice`,
+    )
+    assert.deepEqual(item.registryDependencies ?? [], [], `${item.name} fetches another item`)
+    assert.equal(item.envVars, undefined, `${item.name} writes environment files`)
+    for (const dependency of [...(item.dependencies ?? []), ...(item.devDependencies ?? [])]) {
+      assert.match(dependency, packageRequirement, `${item.name} depends on ${dependency}`)
+    }
+    const ownedTargets = new Set(
+      item.files.map((file) => file.target.replace(/\.(?:tsx?|css)$/u, '')),
+    )
+    for (const declaredPath of item.declaredPaths) {
+      for (const specifier of importSpecifiers(await readFile(declaredPath, 'utf8'))) {
+        if (!specifier.startsWith('@/components/astrale/')) continue
+        assert.ok(
+          ownedTargets.has(specifier.slice(2)),
+          `${item.name} imports ${specifier} without installing it`,
+        )
+      }
     }
 
     const itemSource = await readFile(item.declaredPath, 'utf8')
@@ -462,6 +489,11 @@ test('every built install item is exact current source rather than stale generat
     assert.deepEqual(built.meta, item.meta, `${item.name} stale metadata`)
     assert.equal(built.files.length, item.files.length)
     for (let index = 0; index < item.files.length; index += 1) {
+      assert.equal(
+        built.files[index].path,
+        item.declaredPaths[index].split(path.sep).join('/'),
+        `${item.name} built path must repeat the release-root path its index entry declares`,
+      )
       assert.equal(built.files[index].type, item.files[index].type)
       assert.equal(built.files[index].target, item.files[index].target)
       assert.equal(built.files[index].content, await readFile(item.declaredPaths[index], 'utf8'))

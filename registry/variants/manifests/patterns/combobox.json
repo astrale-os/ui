@@ -23,7 +23,7 @@
         {
           "path": "support/components/ui/combobox.tsx",
           "type": "registry:lib",
-          "target": "components/ui/combobox.tsx"
+          "target": "components/astrale/components/ui/combobox.tsx"
         }
       ],
       "meta": {
@@ -53,7 +53,7 @@
         {
           "path": "support/components/ui/combobox.tsx",
           "type": "registry:lib",
-          "target": "components/ui/combobox.tsx"
+          "target": "components/astrale/components/ui/combobox.tsx"
         }
       ],
       "meta": {
@@ -83,7 +83,7 @@
         {
           "path": "support/components/ui/combobox.tsx",
           "type": "registry:lib",
-          "target": "components/ui/combobox.tsx"
+          "target": "components/astrale/components/ui/combobox.tsx"
         }
       ],
       "meta": {
@@ -113,7 +113,7 @@
         {
           "path": "support/components/ui/combobox.tsx",
           "type": "registry:lib",
-          "target": "components/ui/combobox.tsx"
+          "target": "components/astrale/components/ui/combobox.tsx"
         }
       ],
       "meta": {
@@ -143,7 +143,7 @@
         {
           "path": "support/components/ui/combobox.tsx",
           "type": "registry:lib",
-          "target": "components/ui/combobox.tsx"
+          "target": "components/astrale/components/ui/combobox.tsx"
         }
       ],
       "meta": {
@@ -173,7 +173,7 @@
         {
           "path": "support/components/ui/combobox.tsx",
           "type": "registry:lib",
-          "target": "components/ui/combobox.tsx"
+          "target": "components/astrale/components/ui/combobox.tsx"
         }
       ],
       "meta": {
@@ -203,7 +203,7 @@
         {
           "path": "support/components/ui/combobox.tsx",
           "type": "registry:lib",
-          "target": "components/ui/combobox.tsx"
+          "target": "components/astrale/components/ui/combobox.tsx"
         }
       ],
       "meta": {
@@ -233,7 +233,7 @@
         {
           "path": "support/components/ui/combobox.tsx",
           "type": "registry:lib",
-          "target": "components/ui/combobox.tsx"
+          "target": "components/astrale/components/ui/combobox.tsx"
         }
       ],
       "meta": {
@@ -263,7 +263,7 @@
         {
           "path": "support/components/ui/combobox.tsx",
           "type": "registry:lib",
-          "target": "components/ui/combobox.tsx"
+          "target": "components/astrale/components/ui/combobox.tsx"
         }
       ],
       "meta": {
@@ -293,7 +293,7 @@
         {
           "path": "support/components/ui/combobox.tsx",
           "type": "registry:lib",
-          "target": "components/ui/combobox.tsx"
+          "target": "components/astrale/components/ui/combobox.tsx"
         }
       ],
       "meta": {
@@ -323,7 +323,7 @@
         {
           "path": "support/components/ui/combobox.tsx",
           "type": "registry:lib",
-          "target": "components/ui/combobox.tsx"
+          "target": "components/astrale/components/ui/combobox.tsx"
         }
       ],
       "meta": {
@@ -353,7 +353,7 @@
         {
           "path": "support/components/ui/combobox.tsx",
           "type": "registry:lib",
-          "target": "components/ui/combobox.tsx"
+          "target": "components/astrale/components/ui/combobox.tsx"
         }
       ],
       "meta": {
@@ -383,7 +383,7 @@
         {
           "path": "support/components/ui/combobox.tsx",
           "type": "registry:lib",
-          "target": "components/ui/combobox.tsx"
+          "target": "components/astrale/components/ui/combobox.tsx"
         }
       ],
       "meta": {
@@ -413,7 +413,7 @@
         {
           "path": "support/components/ui/combobox.tsx",
           "type": "registry:lib",
-          "target": "components/ui/combobox.tsx"
+          "target": "components/astrale/components/ui/combobox.tsx"
         }
       ],
       "meta": {

@@ -1,4 +1,4 @@
-import { CodeBlock } from '@/components/ui/code-block'
+import { CodeBlock } from '@/components/astrale/components/ui/code-block'
 
 const AvatarCode = `import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 

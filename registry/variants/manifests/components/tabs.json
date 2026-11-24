@@ -538,12 +538,12 @@
         {
           "path": "support/components/ui/motion-highlight.tsx",
           "type": "registry:ui",
-          "target": "components/ui/motion-highlight.tsx"
+          "target": "components/astrale/components/ui/motion-highlight.tsx"
         },
         {
           "path": "support/components/ui/motion-tabs.tsx",
           "type": "registry:ui",
-          "target": "components/ui/motion-tabs.tsx"
+          "target": "components/astrale/components/ui/motion-tabs.tsx"
         }
       ],
       "meta": {

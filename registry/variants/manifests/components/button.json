@@ -783,7 +783,7 @@
         {
           "path": "support/components/ui/ripple-button.tsx",
           "type": "registry:ui",
-          "target": "components/ui/ripple-button.tsx"
+          "target": "components/astrale/components/ui/ripple-button.tsx"
         }
       ],
       "meta": {
@@ -868,7 +868,7 @@
         {
           "path": "support/components/ui/shimmer-button.tsx",
           "type": "registry:ui",
-          "target": "components/ui/shimmer-button.tsx"
+          "target": "components/astrale/components/ui/shimmer-button.tsx"
         }
       ],
       "meta": {
@@ -898,7 +898,7 @@
         {
           "path": "support/components/ui/bounce-button.tsx",
           "type": "registry:ui",
-          "target": "components/ui/bounce-button.tsx"
+          "target": "components/astrale/components/ui/bounce-button.tsx"
         }
       ],
       "meta": {
@@ -928,7 +928,7 @@
         {
           "path": "support/components/ui/magnetic-button.tsx",
           "type": "registry:ui",
-          "target": "components/ui/magnetic-button.tsx"
+          "target": "components/astrale/components/ui/magnetic-button.tsx"
         }
       ],
       "meta": {
@@ -1013,7 +1013,7 @@
         {
           "path": "support/components/ui/matter-button.tsx",
           "type": "registry:ui",
-          "target": "components/ui/matter-button.tsx"
+          "target": "components/astrale/components/ui/matter-button.tsx"
         }
       ],
       "meta": {
@@ -1043,7 +1043,7 @@
         {
           "path": "support/components/ui/craft-button.tsx",
           "type": "registry:ui",
-          "target": "components/ui/craft-button.tsx"
+          "target": "components/astrale/components/ui/craft-button.tsx"
         }
       ],
       "meta": {
@@ -1072,7 +1072,7 @@
         {
           "path": "support/components/ui/swipe-button.tsx",
           "type": "registry:ui",
-          "target": "components/ui/swipe-button.tsx"
+          "target": "components/astrale/components/ui/swipe-button.tsx"
         }
       ],
       "meta": {
@@ -1101,7 +1101,7 @@
         {
           "path": "support/components/ui/flow-button.tsx",
           "type": "registry:ui",
-          "target": "components/ui/flow-button.tsx"
+          "target": "components/astrale/components/ui/flow-button.tsx"
         }
       ],
       "meta": {
@@ -1130,7 +1130,7 @@
         {
           "path": "support/components/ui/orion-button.tsx",
           "type": "registry:ui",
-          "target": "components/ui/orion-button.tsx"
+          "target": "components/astrale/components/ui/orion-button.tsx"
         }
       ],
       "meta": {
@@ -1159,7 +1159,7 @@
         {
           "path": "support/components/ui/grow-button.tsx",
           "type": "registry:ui",
-          "target": "components/ui/grow-button.tsx"
+          "target": "components/astrale/components/ui/grow-button.tsx"
         }
       ],
       "meta": {
@@ -1189,12 +1189,12 @@
         {
           "path": "support/components/ui/border-beam.tsx",
           "type": "registry:ui",
-          "target": "components/ui/border-beam.tsx"
+          "target": "components/astrale/components/ui/border-beam.tsx"
         },
         {
           "path": "support/components/ui/neural-button.tsx",
           "type": "registry:ui",
-          "target": "components/ui/neural-button.tsx"
+          "target": "components/astrale/components/ui/neural-button.tsx"
         }
       ],
       "meta": {
@@ -1223,7 +1223,7 @@
         {
           "path": "support/components/ui/glass-button.tsx",
           "type": "registry:ui",
-          "target": "components/ui/glass-button.tsx"
+          "target": "components/astrale/components/ui/glass-button.tsx"
         }
       ],
       "css": {

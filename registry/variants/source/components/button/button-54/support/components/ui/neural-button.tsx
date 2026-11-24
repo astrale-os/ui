@@ -5,7 +5,7 @@ import * as React from 'react'
 import { Button } from '@astrale-os/ui/button'
 
 // BorderBeam is a standalone animation component
-import { BorderBeam } from '@/components/ui/border-beam'
+import { BorderBeam } from '@/components/astrale/components/ui/border-beam'
 
 import { cn } from '@astrale-os/ui/class-name'
 

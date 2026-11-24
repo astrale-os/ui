@@ -12,7 +12,7 @@ import {
   ComboboxList,
   ComboboxValue,
   useComboboxAnchor
-} from '@/components/ui/combobox'
+} from '@/components/astrale/components/ui/combobox'
 
 import { Badge } from '@astrale-os/ui/badge'
 import { Label } from '@astrale-os/ui/label'

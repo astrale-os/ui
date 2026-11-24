@@ -13,7 +13,7 @@ import {
   ComboboxSeparator,
   ComboboxTrigger,
   ComboboxValue
-} from '@/components/ui/combobox'
+} from '@/components/astrale/components/ui/combobox'
 import { Label } from '@astrale-os/ui/label'
 import { PlusIcon } from "lucide-react"
 

@@ -16,7 +16,7 @@ import {
 import type { DateRange } from 'react-day-picker'
 
 import { Button } from '@astrale-os/ui/button'
-import { Calendar } from '@/components/ui/calendar'
+import { Calendar } from '@/components/astrale/components/ui/calendar'
 import { Card, CardContent, CardFooter } from '@astrale-os/ui/card'
 
 const CalendarWithRangePresetsDemo = () => {

@@ -12,7 +12,7 @@ import {
   ComboboxInput,
   ComboboxItem,
   ComboboxList
-} from '@/components/ui/combobox'
+} from '@/components/astrale/components/ui/combobox'
 
 import { Alert, AlertTitle } from '@astrale-os/ui/alert'
 import { Button } from '@astrale-os/ui/button'

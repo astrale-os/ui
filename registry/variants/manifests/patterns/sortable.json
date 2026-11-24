@@ -28,7 +28,7 @@
         {
           "path": "support/components/ui/sortable.tsx",
           "type": "registry:ui",
-          "target": "components/ui/sortable.tsx"
+          "target": "components/astrale/components/ui/sortable.tsx"
         }
       ],
       "meta": {
@@ -63,7 +63,7 @@
         {
           "path": "support/components/ui/sortable.tsx",
           "type": "registry:ui",
-          "target": "components/ui/sortable.tsx"
+          "target": "components/astrale/components/ui/sortable.tsx"
         }
       ],
       "meta": {
@@ -98,7 +98,7 @@
         {
           "path": "support/components/ui/sortable.tsx",
           "type": "registry:ui",
-          "target": "components/ui/sortable.tsx"
+          "target": "components/astrale/components/ui/sortable.tsx"
         }
       ],
       "meta": {
@@ -132,7 +132,7 @@
         {
           "path": "support/components/ui/sortable.tsx",
           "type": "registry:ui",
-          "target": "components/ui/sortable.tsx"
+          "target": "components/astrale/components/ui/sortable.tsx"
         }
       ],
       "meta": {
@@ -167,7 +167,7 @@
         {
           "path": "support/components/ui/sortable.tsx",
           "type": "registry:ui",
-          "target": "components/ui/sortable.tsx"
+          "target": "components/astrale/components/ui/sortable.tsx"
         }
       ],
       "meta": {

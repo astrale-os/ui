@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 import { formatDateRange } from 'little-date'
 import { Button } from '@astrale-os/ui/button'
-import { Calendar } from '@/components/ui/calendar'
+import { Calendar } from '@/components/astrale/components/ui/calendar'
 import { Card, CardContent, CardFooter } from '@astrale-os/ui/card'
 import { PlusIcon } from "lucide-react"
 

@@ -9,7 +9,7 @@ import {
   StepperTitle,
   StepperDescription,
   StepperNav
-} from '@/components/ui/stepper'
+} from '@/components/astrale/components/ui/stepper'
 
 const steps = [
   { id: 'first', description: 'This is the first step' },

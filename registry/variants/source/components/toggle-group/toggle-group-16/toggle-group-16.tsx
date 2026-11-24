@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/motion-toggle-group'
+import { ToggleGroup, ToggleGroupItem } from '@/components/astrale/components/ui/motion-toggle-group'
 import { SunMediumIcon, MoonIcon, LaptopMinimalIcon } from "lucide-react"
 
 const ToggleGroupTheme = () => {

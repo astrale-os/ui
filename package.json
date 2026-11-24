@@ -51,7 +51,7 @@
     "studio:qualify": "pnpm studio:check && pnpm studio:registry:build && pnpm --filter @astrale-os/ui-playground build && node scripts/verify-playground-chunks.mjs --studio && ASTRALE_STUDIO_CATALOG=1 pnpm --filter @astrale-os/ui-playground exec playwright test tests/studio-variants.spec.ts --workers=1 && pnpm studio:hmr",
     "runtime:sync": "node scripts/sync-runtime-surface.mjs && node scripts/sync-playground-inventory.mjs",
     "catalog:check": "node scripts/check-catalog-previews.mjs",
-    "registry:build": "pnpm themes:build && pnpm registry:index && pnpm search:build && pnpm dlx shadcn@4.18.0 build registry.json -o registry/public/r && pnpm dlx shadcn@4.18.0 build registry.json -c registry/variants -o ../public/r && node scripts/build-public-registry-index.mjs",
+    "registry:build": "pnpm themes:build && pnpm registry:index && pnpm search:build && pnpm dlx shadcn@4.18.0 build registry.json -o registry/public/r && node scripts/build-public-registry-index.mjs",
     "registry:check": "pnpm themes:check && pnpm registry:index && pnpm registry:typecheck && node --test scripts/registry-contract.test.mjs",
     "registry:qualify": "node scripts/qualify-registry.mjs",
     "playground:typecheck": "pnpm --filter @astrale-os/ui-playground typecheck",

@@ -8,7 +8,7 @@
   ],
   "files": [
     {
-      "path": "source/components/typography/typography-09/typography-09.tsx",
+      "path": "registry/variants/source/components/typography/typography-09/typography-09.tsx",
       "content": "const TypographyCodeDemo = () => {\n  return (\n    <code className='bg-muted rounded-md px-1 py-0.5 font-mono text-sm font-semibold'>@radix-ui/react-tooltip</code>\n  )\n}\n\nexport default TypographyCodeDemo\n",
       "type": "registry:component",
       "target": "components/astrale/components/typography/typography-09.tsx"

@@ -1,6 +1,6 @@
 import { useId } from 'react'
 
-import { Checkbox } from '@/components/ui/motion-checkbox'
+import { Checkbox } from '@/components/astrale/components/ui/motion-checkbox'
 import { Label } from '@astrale-os/ui/label'
 
 const CheckboxAnimatedTodoListDemo = () => {

@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@astrale-os/ui/card'
-import { Sortable, SortableItem, SortableItemHandle } from '@/components/ui/sortable'
+import { Sortable, SortableItem, SortableItemHandle } from '@/components/astrale/components/ui/sortable'
 
 import { Switch } from '@astrale-os/ui/switch'
 import { GripVerticalIcon } from "lucide-react"

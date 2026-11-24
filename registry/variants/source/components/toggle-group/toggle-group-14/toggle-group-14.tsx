@@ -1,7 +1,7 @@
 import { ToggleGroup, ToggleGroupItem } from '@astrale-os/ui/toggle-group'
 
-import ThumbsUp from '@/assets/svg/thumbs-up'
-import ThumbsDown from '@/assets/svg/thumbs-down'
+import ThumbsUp from '@/components/astrale/assets/svg/thumbs-up'
+import ThumbsDown from '@/components/astrale/assets/svg/thumbs-down'
 
 const ToggleGroupReview = () => {
   return (

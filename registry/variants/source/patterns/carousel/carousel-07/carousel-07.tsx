@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import Autoplay from 'embla-carousel-autoplay'
 
-import { type CarouselApi, Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel'
+import { type CarouselApi, Carousel, CarouselContent, CarouselItem } from '@/components/astrale/components/ui/carousel'
 import { cn } from '@astrale-os/ui/class-name'
 
 const Images = [

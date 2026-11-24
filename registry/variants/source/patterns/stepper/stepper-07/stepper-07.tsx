@@ -6,7 +6,7 @@ import {
   StepperIndicator,
   StepperSeparator,
   StepperNav
-} from '@/components/ui/stepper'
+} from '@/components/astrale/components/ui/stepper'
 import { CircleCheckBigIcon } from "lucide-react"
 
 const steps = [{ id: '1' }, { id: '2' }, { id: '3' }]

@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Badge } from '@astrale-os/ui/badge'
 import { Button } from '@astrale-os/ui/button'
 import { Card, CardHeader, CardDescription, CardTitle, CardFooter, CardContent } from '@astrale-os/ui/card'
-import Heart from '@/assets/svg/heart'
+import Heart from '@/components/astrale/assets/svg/heart'
 
 const CardProductDemo = () => {
   const [liked, setLiked] = useState<boolean>(false)

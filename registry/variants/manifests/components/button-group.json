@@ -38,7 +38,7 @@
         {
           "path": "support/assets/svg/heart.tsx",
           "type": "registry:component",
-          "target": "assets/svg/heart.tsx"
+          "target": "components/astrale/assets/svg/heart.tsx"
         }
       ],
       "meta": {
@@ -103,22 +103,22 @@
         {
           "path": "support/assets/svg/dribbble-icon.tsx",
           "type": "registry:component",
-          "target": "assets/svg/dribbble-icon.tsx"
+          "target": "components/astrale/assets/svg/dribbble-icon.tsx"
         },
         {
           "path": "support/assets/svg/facebook-icon.tsx",
           "type": "registry:component",
-          "target": "assets/svg/facebook-icon.tsx"
+          "target": "components/astrale/assets/svg/facebook-icon.tsx"
         },
         {
           "path": "support/assets/svg/instagram-icon.tsx",
           "type": "registry:component",
-          "target": "assets/svg/instagram-icon.tsx"
+          "target": "components/astrale/assets/svg/instagram-icon.tsx"
         },
         {
           "path": "support/assets/svg/twitch-icon.tsx",
           "type": "registry:component",
-          "target": "assets/svg/twitch-icon.tsx"
+          "target": "components/astrale/assets/svg/twitch-icon.tsx"
         }
       ],
       "meta": {
@@ -289,7 +289,7 @@
         {
           "path": "support/components/ui/ripple-button.tsx",
           "type": "registry:ui",
-          "target": "components/ui/ripple-button.tsx"
+          "target": "components/astrale/components/ui/ripple-button.tsx"
         }
       ],
       "meta": {

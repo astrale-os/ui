@@ -23,7 +23,7 @@
         {
           "path": "support/components/ui/carousel.tsx",
           "type": "registry:lib",
-          "target": "components/ui/carousel.tsx"
+          "target": "components/astrale/components/ui/carousel.tsx"
         }
       ],
       "meta": {
@@ -53,7 +53,7 @@
         {
           "path": "support/components/ui/carousel.tsx",
           "type": "registry:lib",
-          "target": "components/ui/carousel.tsx"
+          "target": "components/astrale/components/ui/carousel.tsx"
         }
       ],
       "meta": {
@@ -83,7 +83,7 @@
         {
           "path": "support/components/ui/carousel.tsx",
           "type": "registry:lib",
-          "target": "components/ui/carousel.tsx"
+          "target": "components/astrale/components/ui/carousel.tsx"
         }
       ],
       "meta": {
@@ -113,7 +113,7 @@
         {
           "path": "support/components/ui/carousel.tsx",
           "type": "registry:lib",
-          "target": "components/ui/carousel.tsx"
+          "target": "components/astrale/components/ui/carousel.tsx"
         }
       ],
       "meta": {
@@ -144,7 +144,7 @@
         {
           "path": "support/components/ui/carousel.tsx",
           "type": "registry:lib",
-          "target": "components/ui/carousel.tsx"
+          "target": "components/astrale/components/ui/carousel.tsx"
         }
       ],
       "meta": {
@@ -174,7 +174,7 @@
         {
           "path": "support/components/ui/carousel.tsx",
           "type": "registry:lib",
-          "target": "components/ui/carousel.tsx"
+          "target": "components/astrale/components/ui/carousel.tsx"
         }
       ],
       "meta": {
@@ -205,7 +205,7 @@
         {
           "path": "support/components/ui/carousel.tsx",
           "type": "registry:lib",
-          "target": "components/ui/carousel.tsx"
+          "target": "components/astrale/components/ui/carousel.tsx"
         }
       ],
       "meta": {
@@ -235,7 +235,7 @@
         {
           "path": "support/components/ui/carousel.tsx",
           "type": "registry:lib",
-          "target": "components/ui/carousel.tsx"
+          "target": "components/astrale/components/ui/carousel.tsx"
         }
       ],
       "meta": {
@@ -265,7 +265,7 @@
         {
           "path": "support/components/ui/carousel.tsx",
           "type": "registry:lib",
-          "target": "components/ui/carousel.tsx"
+          "target": "components/astrale/components/ui/carousel.tsx"
         }
       ],
       "meta": {
@@ -295,7 +295,7 @@
         {
           "path": "support/components/ui/carousel.tsx",
           "type": "registry:lib",
-          "target": "components/ui/carousel.tsx"
+          "target": "components/astrale/components/ui/carousel.tsx"
         }
       ],
       "meta": {
@@ -327,7 +327,7 @@
         {
           "path": "support/components/ui/motion-carousel.tsx",
           "type": "registry:ui",
-          "target": "components/ui/motion-carousel.tsx"
+          "target": "components/astrale/components/ui/motion-carousel.tsx"
         }
       ],
       "meta": {
@@ -358,7 +358,7 @@
         {
           "path": "support/components/ui/carousel.tsx",
           "type": "registry:lib",
-          "target": "components/ui/carousel.tsx"
+          "target": "components/astrale/components/ui/carousel.tsx"
         }
       ],
       "meta": {

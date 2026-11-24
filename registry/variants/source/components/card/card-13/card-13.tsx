@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import { Avatar, AvatarFallback, AvatarImage } from '@astrale-os/ui/avatar'
 import { Card, CardFooter, CardContent, CardTitle, CardDescription } from '@astrale-os/ui/card'
-import { Rating } from '@/components/ui/rating'
+import { Rating } from '@/components/astrale/components/ui/rating'
 
 const CardTestimonialDemo = () => {
   const [yellow, setYellow] = useState(4)

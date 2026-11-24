@@ -218,12 +218,12 @@
         {
           "path": "support/assets/svg/heart.tsx",
           "type": "registry:component",
-          "target": "assets/svg/heart.tsx"
+          "target": "components/astrale/assets/svg/heart.tsx"
         },
         {
           "path": "support/assets/svg/badge-check.tsx",
           "type": "registry:component",
-          "target": "assets/svg/badge-check.tsx"
+          "target": "components/astrale/assets/svg/badge-check.tsx"
         }
       ],
       "meta": {
@@ -248,7 +248,7 @@
         {
           "path": "support/assets/svg/heart.tsx",
           "type": "registry:component",
-          "target": "assets/svg/heart.tsx"
+          "target": "components/astrale/assets/svg/heart.tsx"
         }
       ],
       "meta": {
@@ -278,7 +278,7 @@
         {
           "path": "support/components/ui/rating.tsx",
           "type": "registry:lib",
-          "target": "components/ui/rating.tsx"
+          "target": "components/astrale/components/ui/rating.tsx"
         }
       ],
       "meta": {

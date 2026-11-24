@@ -97,16 +97,6 @@ try {
 
   const rebuilt = path.join(temporary, 'rebuilt')
   run('pnpm', ['dlx', 'shadcn@4.18.0', 'build', 'registry.json', '-o', rebuilt])
-  run('pnpm', [
-    'dlx',
-    'shadcn@4.18.0',
-    'build',
-    'registry.json',
-    '-c',
-    'registry/variants',
-    '-o',
-    rebuilt,
-  ])
   await writeFile(path.join(rebuilt, 'registry.json'), `${JSON.stringify(registry, null, 2)}\n`)
   const builtFiles = (await readdir(publicRoot)).filter((file) => file.endsWith('.json')).toSorted()
   const rebuiltFiles = (await readdir(rebuilt)).filter((file) => file.endsWith('.json')).toSorted()

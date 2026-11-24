@@ -1,4 +1,4 @@
-import { BounceButton } from '@/components/ui/bounce-button'
+import { BounceButton } from '@/components/astrale/components/ui/bounce-button'
 
 const ButtonBounceHoverDemo = () => {
   return <BounceButton>Bounce Button</BounceButton>

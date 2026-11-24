@@ -8,7 +8,7 @@ import {
   ComboboxInput,
   ComboboxItem,
   ComboboxList
-} from '@/components/ui/combobox'
+} from '@/components/astrale/components/ui/combobox'
 import { Label } from '@astrale-os/ui/label'
 import { MonitorIcon, HospitalIcon, DollarSignIcon, SchoolIcon, FilmIcon, FactoryIcon, ZapIcon, HotelIcon, ScaleIcon, TractorIcon } from "lucide-react"
 

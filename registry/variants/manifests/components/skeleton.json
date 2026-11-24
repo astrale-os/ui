@@ -158,7 +158,7 @@
         {
           "path": "support/components/ui/shimmer-skeleton.tsx",
           "type": "registry:ui",
-          "target": "components/ui/shimmer-skeleton.tsx"
+          "target": "components/astrale/components/ui/shimmer-skeleton.tsx"
         }
       ],
       "meta": {

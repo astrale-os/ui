@@ -9,7 +9,7 @@ import {
   ComboboxInput,
   ComboboxItem,
   ComboboxList
-} from '@/components/ui/combobox'
+} from '@/components/astrale/components/ui/combobox'
 import { Label } from '@astrale-os/ui/label'
 
 const frameworks = ['Next.js', 'SvelteKit', 'Nuxt.js', 'Remix', 'Astro'] as const

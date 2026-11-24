@@ -9,7 +9,7 @@
   ],
   "files": [
     {
-      "path": "source/components/toggle/toggle-02/toggle-02.tsx",
+      "path": "registry/variants/source/components/toggle/toggle-02/toggle-02.tsx",
       "content": "import { Toggle } from '@astrale-os/ui/toggle'\nimport { ItalicIcon, BoldIcon } from \"lucide-react\"\n\nconst ToggleOutline = () => {\n  return (\n    <div className='flex flex-wrap items-center gap-2'>\n      <Toggle variant='outline' aria-label='Toggle italic'>\n        <ItalicIcon\n        />\n        Italic\n      </Toggle>\n      <Toggle variant='outline' aria-label='Toggle bold'>\n        <BoldIcon\n        />\n        Bold\n      </Toggle>\n    </div>\n  )\n}\n\nexport default ToggleOutline\n",
       "type": "registry:component",
       "target": "components/astrale/components/toggle/toggle-02.tsx"

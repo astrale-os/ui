@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { CircularProgress } from '@/components/ui/circular-progress'
+import { CircularProgress } from '@/components/astrale/components/ui/circular-progress'
 import { Slider } from '@astrale-os/ui/slider'
 import { Settings2Icon, ShieldCheckIcon, ZapIcon } from "lucide-react"
 

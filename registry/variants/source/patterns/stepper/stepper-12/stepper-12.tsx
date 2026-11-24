@@ -9,7 +9,7 @@ import {
   StepperTitle,
   StepperDescription,
   StepperContent
-} from '@/components/ui/stepper'
+} from '@/components/astrale/components/ui/stepper'
 import { Button } from '@astrale-os/ui/button'
 import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react"
 

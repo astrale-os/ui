@@ -10,7 +10,7 @@ import {
   ComboboxItem,
   ComboboxLabel,
   ComboboxList
-} from '@/components/ui/combobox'
+} from '@/components/astrale/components/ui/combobox'
 import { Label } from '@astrale-os/ui/label'
 
 const items = [

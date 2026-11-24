@@ -45,8 +45,12 @@ for (const sourceItem of registry.items) {
   for (const [index, sourceFile] of sourceItem.files.entries()) {
     const builtFile = built.files[index]
     assert.deepEqual(
-      { type: builtFile.type, target: builtFile.target },
-      { type: sourceFile.type, target: sourceFile.target },
+      { path: builtFile.path, type: builtFile.type, target: builtFile.target },
+      {
+        path: `registry/variants/${sourceFile.path}`,
+        type: sourceFile.type,
+        target: sourceFile.target,
+      },
       `${sourceItem.name}: built file contract`,
     )
     assert.equal(

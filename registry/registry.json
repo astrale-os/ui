@@ -1236,7 +1236,7 @@
         {
           "path": "registry/variants/source/blocks/data-table/data-table-11/support/hooks/use-pagination.ts",
           "type": "registry:hook",
-          "target": "hooks/use-pagination.ts"
+          "target": "components/astrale/hooks/use-pagination.ts"
         }
       ],
       "meta": {
@@ -1250,14 +1250,13 @@
       "name": "block-data-table-data-table-12",
       "type": "registry:block",
       "title": "Data Table 12",
-      "description": "Data table with export functionality supporting CSV, Excel, and multiple formats",
+      "description": "Data table with export functionality supporting CSV and JSON formats",
       "dependencies": [
         "@astrale-os/ui@^0.3.0-beta.0",
         "@tanstack/react-table@^8.21.3",
         "lucide-react@1.32.0",
         "papaparse@^5.6.0",
-        "react@19.2.8",
-        "xlsx@https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz"
+        "react@19.2.8"
       ],
       "files": [
         {
@@ -1321,7 +1320,7 @@
         {
           "path": "registry/variants/source/blocks/kanban/kanban-01/support/components/ui/kanban.tsx",
           "type": "registry:ui",
-          "target": "components/ui/kanban.tsx"
+          "target": "components/astrale/components/ui/kanban.tsx"
         }
       ],
       "meta": {
@@ -1354,7 +1353,7 @@
         {
           "path": "registry/variants/source/blocks/kanban/kanban-02/support/components/ui/kanban.tsx",
           "type": "registry:ui",
-          "target": "components/ui/kanban.tsx"
+          "target": "components/astrale/components/ui/kanban.tsx"
         }
       ],
       "meta": {
@@ -1388,7 +1387,7 @@
         {
           "path": "registry/variants/source/blocks/kanban/kanban-03/support/components/ui/kanban.tsx",
           "type": "registry:ui",
-          "target": "components/ui/kanban.tsx"
+          "target": "components/astrale/components/ui/kanban.tsx"
         }
       ],
       "meta": {
@@ -1422,7 +1421,7 @@
         {
           "path": "registry/variants/source/blocks/kanban/kanban-04/support/components/ui/kanban.tsx",
           "type": "registry:ui",
-          "target": "components/ui/kanban.tsx"
+          "target": "components/astrale/components/ui/kanban.tsx"
         }
       ],
       "meta": {
@@ -2756,7 +2755,7 @@
         {
           "path": "registry/variants/source/components/avatar/avatar-12/support/assets/svg/badge-check.tsx",
           "type": "registry:component",
-          "target": "assets/svg/badge-check.tsx"
+          "target": "components/astrale/assets/svg/badge-check.tsx"
         }
       ],
       "meta": {
@@ -3461,7 +3460,7 @@
         {
           "path": "registry/variants/source/components/button-group/button-group-02/support/assets/svg/heart.tsx",
           "type": "registry:component",
-          "target": "assets/svg/heart.tsx"
+          "target": "components/astrale/assets/svg/heart.tsx"
         }
       ],
       "meta": {
@@ -3526,22 +3525,22 @@
         {
           "path": "registry/variants/source/components/button-group/button-group-05/support/assets/svg/dribbble-icon.tsx",
           "type": "registry:component",
-          "target": "assets/svg/dribbble-icon.tsx"
+          "target": "components/astrale/assets/svg/dribbble-icon.tsx"
         },
         {
           "path": "registry/variants/source/components/button-group/button-group-05/support/assets/svg/facebook-icon.tsx",
           "type": "registry:component",
-          "target": "assets/svg/facebook-icon.tsx"
+          "target": "components/astrale/assets/svg/facebook-icon.tsx"
         },
         {
           "path": "registry/variants/source/components/button-group/button-group-05/support/assets/svg/instagram-icon.tsx",
           "type": "registry:component",
-          "target": "assets/svg/instagram-icon.tsx"
+          "target": "components/astrale/assets/svg/instagram-icon.tsx"
         },
         {
           "path": "registry/variants/source/components/button-group/button-group-05/support/assets/svg/twitch-icon.tsx",
           "type": "registry:component",
-          "target": "assets/svg/twitch-icon.tsx"
+          "target": "components/astrale/assets/svg/twitch-icon.tsx"
         }
       ],
       "meta": {
@@ -3712,7 +3711,7 @@
         {
           "path": "registry/variants/source/components/button-group/button-group-13/support/components/ui/ripple-button.tsx",
           "type": "registry:ui",
-          "target": "components/ui/ripple-button.tsx"
+          "target": "components/astrale/components/ui/ripple-button.tsx"
         }
       ],
       "meta": {
@@ -4562,7 +4561,7 @@
         {
           "path": "registry/variants/source/components/button/button-39/support/components/ui/ripple-button.tsx",
           "type": "registry:ui",
-          "target": "components/ui/ripple-button.tsx"
+          "target": "components/astrale/components/ui/ripple-button.tsx"
         }
       ],
       "meta": {
@@ -4647,7 +4646,7 @@
         {
           "path": "registry/variants/source/components/button/button-43/support/components/ui/shimmer-button.tsx",
           "type": "registry:ui",
-          "target": "components/ui/shimmer-button.tsx"
+          "target": "components/astrale/components/ui/shimmer-button.tsx"
         }
       ],
       "meta": {
@@ -4677,7 +4676,7 @@
         {
           "path": "registry/variants/source/components/button/button-44/support/components/ui/bounce-button.tsx",
           "type": "registry:ui",
-          "target": "components/ui/bounce-button.tsx"
+          "target": "components/astrale/components/ui/bounce-button.tsx"
         }
       ],
       "meta": {
@@ -4707,7 +4706,7 @@
         {
           "path": "registry/variants/source/components/button/button-45/support/components/ui/magnetic-button.tsx",
           "type": "registry:ui",
-          "target": "components/ui/magnetic-button.tsx"
+          "target": "components/astrale/components/ui/magnetic-button.tsx"
         }
       ],
       "meta": {
@@ -4792,7 +4791,7 @@
         {
           "path": "registry/variants/source/components/button/button-48/support/components/ui/matter-button.tsx",
           "type": "registry:ui",
-          "target": "components/ui/matter-button.tsx"
+          "target": "components/astrale/components/ui/matter-button.tsx"
         }
       ],
       "meta": {
@@ -4822,7 +4821,7 @@
         {
           "path": "registry/variants/source/components/button/button-49/support/components/ui/craft-button.tsx",
           "type": "registry:ui",
-          "target": "components/ui/craft-button.tsx"
+          "target": "components/astrale/components/ui/craft-button.tsx"
         }
       ],
       "meta": {
@@ -4851,7 +4850,7 @@
         {
           "path": "registry/variants/source/components/button/button-50/support/components/ui/swipe-button.tsx",
           "type": "registry:ui",
-          "target": "components/ui/swipe-button.tsx"
+          "target": "components/astrale/components/ui/swipe-button.tsx"
         }
       ],
       "meta": {
@@ -4880,7 +4879,7 @@
         {
           "path": "registry/variants/source/components/button/button-51/support/components/ui/flow-button.tsx",
           "type": "registry:ui",
-          "target": "components/ui/flow-button.tsx"
+          "target": "components/astrale/components/ui/flow-button.tsx"
         }
       ],
       "meta": {
@@ -4909,7 +4908,7 @@
         {
           "path": "registry/variants/source/components/button/button-52/support/components/ui/orion-button.tsx",
           "type": "registry:ui",
-          "target": "components/ui/orion-button.tsx"
+          "target": "components/astrale/components/ui/orion-button.tsx"
         }
       ],
       "meta": {
@@ -4938,7 +4937,7 @@
         {
           "path": "registry/variants/source/components/button/button-53/support/components/ui/grow-button.tsx",
           "type": "registry:ui",
-          "target": "components/ui/grow-button.tsx"
+          "target": "components/astrale/components/ui/grow-button.tsx"
         }
       ],
       "meta": {
@@ -4968,12 +4967,12 @@
         {
           "path": "registry/variants/source/components/button/button-54/support/components/ui/border-beam.tsx",
           "type": "registry:ui",
-          "target": "components/ui/border-beam.tsx"
+          "target": "components/astrale/components/ui/border-beam.tsx"
         },
         {
           "path": "registry/variants/source/components/button/button-54/support/components/ui/neural-button.tsx",
           "type": "registry:ui",
-          "target": "components/ui/neural-button.tsx"
+          "target": "components/astrale/components/ui/neural-button.tsx"
         }
       ],
       "meta": {
@@ -5002,7 +5001,7 @@
         {
           "path": "registry/variants/source/components/button/button-55/support/components/ui/glass-button.tsx",
           "type": "registry:ui",
-          "target": "components/ui/glass-button.tsx"
+          "target": "components/astrale/components/ui/glass-button.tsx"
         }
       ],
       "css": {
@@ -5039,7 +5038,7 @@
         {
           "path": "registry/variants/source/components/calendar/calendar-01/support/components/ui/calendar.tsx",
           "type": "registry:lib",
-          "target": "components/ui/calendar.tsx"
+          "target": "components/astrale/components/ui/calendar.tsx"
         }
       ],
       "meta": {
@@ -5069,7 +5068,7 @@
         {
           "path": "registry/variants/source/components/calendar/calendar-02/support/components/ui/calendar.tsx",
           "type": "registry:lib",
-          "target": "components/ui/calendar.tsx"
+          "target": "components/astrale/components/ui/calendar.tsx"
         }
       ],
       "meta": {
@@ -5099,7 +5098,7 @@
         {
           "path": "registry/variants/source/components/calendar/calendar-03/support/components/ui/calendar.tsx",
           "type": "registry:lib",
-          "target": "components/ui/calendar.tsx"
+          "target": "components/astrale/components/ui/calendar.tsx"
         }
       ],
       "meta": {
@@ -5129,7 +5128,7 @@
         {
           "path": "registry/variants/source/components/calendar/calendar-04/support/components/ui/calendar.tsx",
           "type": "registry:lib",
-          "target": "components/ui/calendar.tsx"
+          "target": "components/astrale/components/ui/calendar.tsx"
         }
       ],
       "meta": {
@@ -5159,7 +5158,7 @@
         {
           "path": "registry/variants/source/components/calendar/calendar-05/support/components/ui/calendar.tsx",
           "type": "registry:lib",
-          "target": "components/ui/calendar.tsx"
+          "target": "components/astrale/components/ui/calendar.tsx"
         }
       ],
       "meta": {
@@ -5189,7 +5188,7 @@
         {
           "path": "registry/variants/source/components/calendar/calendar-06/support/components/ui/calendar.tsx",
           "type": "registry:lib",
-          "target": "components/ui/calendar.tsx"
+          "target": "components/astrale/components/ui/calendar.tsx"
         }
       ],
       "meta": {
@@ -5219,7 +5218,7 @@
         {
           "path": "registry/variants/source/components/calendar/calendar-07/support/components/ui/calendar.tsx",
           "type": "registry:lib",
-          "target": "components/ui/calendar.tsx"
+          "target": "components/astrale/components/ui/calendar.tsx"
         }
       ],
       "meta": {
@@ -5249,7 +5248,7 @@
         {
           "path": "registry/variants/source/components/calendar/calendar-08/support/components/ui/calendar.tsx",
           "type": "registry:lib",
-          "target": "components/ui/calendar.tsx"
+          "target": "components/astrale/components/ui/calendar.tsx"
         }
       ],
       "meta": {
@@ -5279,7 +5278,7 @@
         {
           "path": "registry/variants/source/components/calendar/calendar-09/support/components/ui/calendar.tsx",
           "type": "registry:lib",
-          "target": "components/ui/calendar.tsx"
+          "target": "components/astrale/components/ui/calendar.tsx"
         }
       ],
       "meta": {
@@ -5309,7 +5308,7 @@
         {
           "path": "registry/variants/source/components/calendar/calendar-10/support/components/ui/calendar.tsx",
           "type": "registry:lib",
-          "target": "components/ui/calendar.tsx"
+          "target": "components/astrale/components/ui/calendar.tsx"
         }
       ],
       "meta": {
@@ -5340,7 +5339,7 @@
         {
           "path": "registry/variants/source/components/calendar/calendar-11/support/components/ui/calendar.tsx",
           "type": "registry:lib",
-          "target": "components/ui/calendar.tsx"
+          "target": "components/astrale/components/ui/calendar.tsx"
         }
       ],
       "meta": {
@@ -5370,7 +5369,7 @@
         {
           "path": "registry/variants/source/components/calendar/calendar-12/support/components/ui/calendar.tsx",
           "type": "registry:lib",
-          "target": "components/ui/calendar.tsx"
+          "target": "components/astrale/components/ui/calendar.tsx"
         }
       ],
       "meta": {
@@ -5400,7 +5399,7 @@
         {
           "path": "registry/variants/source/components/calendar/calendar-13/support/components/ui/calendar.tsx",
           "type": "registry:lib",
-          "target": "components/ui/calendar.tsx"
+          "target": "components/astrale/components/ui/calendar.tsx"
         }
       ],
       "meta": {
@@ -5430,7 +5429,7 @@
         {
           "path": "registry/variants/source/components/calendar/calendar-14/support/components/ui/calendar.tsx",
           "type": "registry:lib",
-          "target": "components/ui/calendar.tsx"
+          "target": "components/astrale/components/ui/calendar.tsx"
         }
       ],
       "meta": {
@@ -5460,7 +5459,7 @@
         {
           "path": "registry/variants/source/components/calendar/calendar-15/support/components/ui/calendar.tsx",
           "type": "registry:lib",
-          "target": "components/ui/calendar.tsx"
+          "target": "components/astrale/components/ui/calendar.tsx"
         }
       ],
       "meta": {
@@ -5490,7 +5489,7 @@
         {
           "path": "registry/variants/source/components/calendar/calendar-16/support/components/ui/calendar.tsx",
           "type": "registry:lib",
-          "target": "components/ui/calendar.tsx"
+          "target": "components/astrale/components/ui/calendar.tsx"
         }
       ],
       "meta": {
@@ -5520,7 +5519,7 @@
         {
           "path": "registry/variants/source/components/calendar/calendar-17/support/components/ui/calendar.tsx",
           "type": "registry:lib",
-          "target": "components/ui/calendar.tsx"
+          "target": "components/astrale/components/ui/calendar.tsx"
         }
       ],
       "meta": {
@@ -5550,7 +5549,7 @@
         {
           "path": "registry/variants/source/components/calendar/calendar-18/support/components/ui/calendar.tsx",
           "type": "registry:lib",
-          "target": "components/ui/calendar.tsx"
+          "target": "components/astrale/components/ui/calendar.tsx"
         }
       ],
       "meta": {
@@ -5581,7 +5580,7 @@
         {
           "path": "registry/variants/source/components/calendar/calendar-19/support/components/ui/calendar.tsx",
           "type": "registry:lib",
-          "target": "components/ui/calendar.tsx"
+          "target": "components/astrale/components/ui/calendar.tsx"
         }
       ],
       "meta": {
@@ -5611,7 +5610,7 @@
         {
           "path": "registry/variants/source/components/calendar/calendar-20/support/components/ui/calendar.tsx",
           "type": "registry:lib",
-          "target": "components/ui/calendar.tsx"
+          "target": "components/astrale/components/ui/calendar.tsx"
         }
       ],
       "meta": {
@@ -5642,7 +5641,7 @@
         {
           "path": "registry/variants/source/components/calendar/calendar-21/support/components/ui/calendar.tsx",
           "type": "registry:lib",
-          "target": "components/ui/calendar.tsx"
+          "target": "components/astrale/components/ui/calendar.tsx"
         }
       ],
       "meta": {
@@ -5673,7 +5672,7 @@
         {
           "path": "registry/variants/source/components/calendar/calendar-22/support/components/ui/calendar.tsx",
           "type": "registry:lib",
-          "target": "components/ui/calendar.tsx"
+          "target": "components/astrale/components/ui/calendar.tsx"
         }
       ],
       "meta": {
@@ -5704,7 +5703,7 @@
         {
           "path": "registry/variants/source/components/calendar/calendar-23/support/components/ui/calendar.tsx",
           "type": "registry:lib",
-          "target": "components/ui/calendar.tsx"
+          "target": "components/astrale/components/ui/calendar.tsx"
         }
       ],
       "meta": {
@@ -5734,7 +5733,7 @@
         {
           "path": "registry/variants/source/components/calendar/calendar-24/support/components/ui/calendar.tsx",
           "type": "registry:lib",
-          "target": "components/ui/calendar.tsx"
+          "target": "components/astrale/components/ui/calendar.tsx"
         }
       ],
       "meta": {
@@ -5764,7 +5763,7 @@
         {
           "path": "registry/variants/source/components/calendar/calendar-25/support/components/ui/calendar.tsx",
           "type": "registry:lib",
-          "target": "components/ui/calendar.tsx"
+          "target": "components/astrale/components/ui/calendar.tsx"
         }
       ],
       "meta": {
@@ -5989,12 +5988,12 @@
         {
           "path": "registry/variants/source/components/card/card-11/support/assets/svg/heart.tsx",
           "type": "registry:component",
-          "target": "assets/svg/heart.tsx"
+          "target": "components/astrale/assets/svg/heart.tsx"
         },
         {
           "path": "registry/variants/source/components/card/card-11/support/assets/svg/badge-check.tsx",
           "type": "registry:component",
-          "target": "assets/svg/badge-check.tsx"
+          "target": "components/astrale/assets/svg/badge-check.tsx"
         }
       ],
       "meta": {
@@ -6019,7 +6018,7 @@
         {
           "path": "registry/variants/source/components/card/card-12/support/assets/svg/heart.tsx",
           "type": "registry:component",
-          "target": "assets/svg/heart.tsx"
+          "target": "components/astrale/assets/svg/heart.tsx"
         }
       ],
       "meta": {
@@ -6049,7 +6048,7 @@
         {
           "path": "registry/variants/source/components/card/card-13/support/components/ui/rating.tsx",
           "type": "registry:lib",
-          "target": "components/ui/rating.tsx"
+          "target": "components/astrale/components/ui/rating.tsx"
         }
       ],
       "meta": {
@@ -6502,7 +6501,7 @@
         {
           "path": "registry/variants/source/components/checkbox/checkbox-17/support/components/ui/motion-checkbox.tsx",
           "type": "registry:ui",
-          "target": "components/ui/motion-checkbox.tsx"
+          "target": "components/astrale/components/ui/motion-checkbox.tsx"
         }
       ],
       "meta": {
@@ -6533,7 +6532,7 @@
         {
           "path": "registry/variants/source/components/checkbox/checkbox-18/support/components/ui/motion-checkbox.tsx",
           "type": "registry:ui",
-          "target": "components/ui/motion-checkbox.tsx"
+          "target": "components/astrale/components/ui/motion-checkbox.tsx"
         }
       ],
       "meta": {
@@ -10485,7 +10484,7 @@
         {
           "path": "registry/variants/source/components/progress/progress-15/support/components/ui/circular-progress.tsx",
           "type": "registry:component",
-          "target": "components/ui/circular-progress.tsx"
+          "target": "components/astrale/components/ui/circular-progress.tsx"
         }
       ],
       "meta": {
@@ -10510,7 +10509,7 @@
         {
           "path": "registry/variants/source/components/progress/progress-16/support/components/ui/circular-progress.tsx",
           "type": "registry:component",
-          "target": "components/ui/circular-progress.tsx"
+          "target": "components/astrale/components/ui/circular-progress.tsx"
         }
       ],
       "meta": {
@@ -10535,7 +10534,7 @@
         {
           "path": "registry/variants/source/components/progress/progress-17/support/components/ui/circular-progress.tsx",
           "type": "registry:component",
-          "target": "components/ui/circular-progress.tsx"
+          "target": "components/astrale/components/ui/circular-progress.tsx"
         }
       ],
       "meta": {
@@ -10560,7 +10559,7 @@
         {
           "path": "registry/variants/source/components/progress/progress-18/support/components/ui/circular-progress.tsx",
           "type": "registry:component",
-          "target": "components/ui/circular-progress.tsx"
+          "target": "components/astrale/components/ui/circular-progress.tsx"
         }
       ],
       "meta": {
@@ -10585,7 +10584,7 @@
         {
           "path": "registry/variants/source/components/progress/progress-19/support/components/ui/circular-progress.tsx",
           "type": "registry:component",
-          "target": "components/ui/circular-progress.tsx"
+          "target": "components/astrale/components/ui/circular-progress.tsx"
         }
       ],
       "meta": {
@@ -10660,7 +10659,7 @@
         {
           "path": "registry/variants/source/components/progress/progress-22/support/components/ui/circular-progress.tsx",
           "type": "registry:component",
-          "target": "components/ui/circular-progress.tsx"
+          "target": "components/astrale/components/ui/circular-progress.tsx"
         }
       ],
       "meta": {
@@ -10685,7 +10684,7 @@
         {
           "path": "registry/variants/source/components/progress/progress-23/support/components/ui/circular-progress.tsx",
           "type": "registry:component",
-          "target": "components/ui/circular-progress.tsx"
+          "target": "components/astrale/components/ui/circular-progress.tsx"
         }
       ],
       "meta": {
@@ -10976,7 +10975,7 @@
         {
           "path": "registry/variants/source/components/radio-group/radio-group-14/support/components/ui/motion-radio-group.tsx",
           "type": "registry:ui",
-          "target": "components/ui/motion-radio-group.tsx"
+          "target": "components/astrale/components/ui/motion-radio-group.tsx"
         }
       ],
       "meta": {
@@ -11030,7 +11029,7 @@
         {
           "path": "registry/variants/source/components/rating/rating-01/support/components/ui/rating.tsx",
           "type": "registry:ui",
-          "target": "components/ui/rating.tsx"
+          "target": "components/astrale/components/ui/rating.tsx"
         }
       ],
       "meta": {
@@ -11060,7 +11059,7 @@
         {
           "path": "registry/variants/source/components/rating/rating-02/support/components/ui/rating.tsx",
           "type": "registry:ui",
-          "target": "components/ui/rating.tsx"
+          "target": "components/astrale/components/ui/rating.tsx"
         }
       ],
       "meta": {
@@ -11090,7 +11089,7 @@
         {
           "path": "registry/variants/source/components/rating/rating-03/support/components/ui/rating.tsx",
           "type": "registry:ui",
-          "target": "components/ui/rating.tsx"
+          "target": "components/astrale/components/ui/rating.tsx"
         }
       ],
       "meta": {
@@ -11120,7 +11119,7 @@
         {
           "path": "registry/variants/source/components/rating/rating-04/support/components/ui/rating.tsx",
           "type": "registry:ui",
-          "target": "components/ui/rating.tsx"
+          "target": "components/astrale/components/ui/rating.tsx"
         }
       ],
       "meta": {
@@ -11150,7 +11149,7 @@
         {
           "path": "registry/variants/source/components/rating/rating-05/support/components/ui/rating.tsx",
           "type": "registry:ui",
-          "target": "components/ui/rating.tsx"
+          "target": "components/astrale/components/ui/rating.tsx"
         }
       ],
       "meta": {
@@ -11180,7 +11179,7 @@
         {
           "path": "registry/variants/source/components/rating/rating-06/support/components/ui/rating.tsx",
           "type": "registry:ui",
-          "target": "components/ui/rating.tsx"
+          "target": "components/astrale/components/ui/rating.tsx"
         }
       ],
       "meta": {
@@ -11210,7 +11209,7 @@
         {
           "path": "registry/variants/source/components/rating/rating-07/support/components/ui/rating.tsx",
           "type": "registry:ui",
-          "target": "components/ui/rating.tsx"
+          "target": "components/astrale/components/ui/rating.tsx"
         }
       ],
       "meta": {
@@ -11240,7 +11239,7 @@
         {
           "path": "registry/variants/source/components/rating/rating-08/support/components/ui/rating.tsx",
           "type": "registry:ui",
-          "target": "components/ui/rating.tsx"
+          "target": "components/astrale/components/ui/rating.tsx"
         }
       ],
       "meta": {
@@ -12190,7 +12189,7 @@
         {
           "path": "registry/variants/source/components/select/select-32/support/components/ui/multi-select.tsx",
           "type": "registry:ui",
-          "target": "components/ui/multi-select.tsx"
+          "target": "components/astrale/components/ui/multi-select.tsx"
         }
       ],
       "meta": {
@@ -12220,7 +12219,7 @@
         {
           "path": "registry/variants/source/components/select/select-33/support/components/ui/multi-select.tsx",
           "type": "registry:ui",
-          "target": "components/ui/multi-select.tsx"
+          "target": "components/astrale/components/ui/multi-select.tsx"
         }
       ],
       "meta": {
@@ -12921,7 +12920,7 @@
         {
           "path": "registry/variants/source/components/skeleton/skeleton-08/support/components/ui/shimmer-skeleton.tsx",
           "type": "registry:ui",
-          "target": "components/ui/shimmer-skeleton.tsx"
+          "target": "components/astrale/components/ui/shimmer-skeleton.tsx"
         }
       ],
       "meta": {
@@ -14371,7 +14370,7 @@
         {
           "path": "registry/variants/source/components/switch/switch-19/support/components/ui/motion-switch.tsx",
           "type": "registry:ui",
-          "target": "components/ui/motion-switch.tsx"
+          "target": "components/astrale/components/ui/motion-switch.tsx"
         }
       ],
       "meta": {
@@ -14401,7 +14400,7 @@
         {
           "path": "registry/variants/source/components/switch/switch-20/support/components/ui/motion-switch.tsx",
           "type": "registry:ui",
-          "target": "components/ui/motion-switch.tsx"
+          "target": "components/astrale/components/ui/motion-switch.tsx"
         }
       ],
       "meta": {
@@ -15266,12 +15265,12 @@
         {
           "path": "registry/variants/source/components/tabs/tabs-27/support/components/ui/motion-highlight.tsx",
           "type": "registry:ui",
-          "target": "components/ui/motion-highlight.tsx"
+          "target": "components/astrale/components/ui/motion-highlight.tsx"
         },
         {
           "path": "registry/variants/source/components/tabs/tabs-27/support/components/ui/motion-tabs.tsx",
           "type": "registry:ui",
-          "target": "components/ui/motion-tabs.tsx"
+          "target": "components/astrale/components/ui/motion-tabs.tsx"
         }
       ],
       "meta": {
@@ -16021,12 +16020,12 @@
         {
           "path": "registry/variants/source/components/toggle-group/toggle-group-14/support/assets/svg/thumbs-down.tsx",
           "type": "registry:component",
-          "target": "assets/svg/thumbs-down.tsx"
+          "target": "components/astrale/assets/svg/thumbs-down.tsx"
         },
         {
           "path": "registry/variants/source/components/toggle-group/toggle-group-14/support/assets/svg/thumbs-up.tsx",
           "type": "registry:component",
-          "target": "assets/svg/thumbs-up.tsx"
+          "target": "components/astrale/assets/svg/thumbs-up.tsx"
         }
       ],
       "meta": {
@@ -16051,7 +16050,7 @@
         {
           "path": "registry/variants/source/components/toggle-group/toggle-group-15/support/components/ui/motion-toggle-group.tsx",
           "type": "registry:component",
-          "target": "components/ui/motion-toggle-group.tsx"
+          "target": "components/astrale/components/ui/motion-toggle-group.tsx"
         }
       ],
       "meta": {
@@ -16081,7 +16080,7 @@
         {
           "path": "registry/variants/source/components/toggle-group/toggle-group-16/support/components/ui/motion-toggle-group.tsx",
           "type": "registry:component",
-          "target": "components/ui/motion-toggle-group.tsx"
+          "target": "components/astrale/components/ui/motion-toggle-group.tsx"
         }
       ],
       "meta": {
@@ -16186,12 +16185,12 @@
         {
           "path": "registry/variants/source/components/toggle/toggle-05/support/assets/svg/heart.tsx",
           "type": "registry:component",
-          "target": "assets/svg/heart.tsx"
+          "target": "components/astrale/assets/svg/heart.tsx"
         },
         {
           "path": "registry/variants/source/components/toggle/toggle-05/support/assets/svg/thumbs-up.tsx",
           "type": "registry:lib",
-          "target": "assets/svg/thumbs-up.tsx"
+          "target": "components/astrale/assets/svg/thumbs-up.tsx"
         }
       ],
       "meta": {
@@ -16356,12 +16355,12 @@
         {
           "path": "registry/variants/source/components/toggle/toggle-13/support/components/ui/motion-toggle.tsx",
           "type": "registry:ui",
-          "target": "components/ui/motion-toggle.tsx"
+          "target": "components/astrale/components/ui/motion-toggle.tsx"
         },
         {
           "path": "registry/variants/source/components/toggle/toggle-13/support/assets/svg/heart.tsx",
           "type": "registry:component",
-          "target": "assets/svg/heart.tsx"
+          "target": "components/astrale/assets/svg/heart.tsx"
         }
       ],
       "meta": {
@@ -16711,7 +16710,7 @@
         {
           "path": "registry/variants/source/components/tooltip/tooltip-16/support/components/ui/motion-tooltip.tsx",
           "type": "registry:ui",
-          "target": "components/ui/motion-tooltip.tsx"
+          "target": "components/astrale/components/ui/motion-tooltip.tsx"
         }
       ],
       "meta": {
@@ -16741,7 +16740,7 @@
         {
           "path": "registry/variants/source/components/tooltip/tooltip-17/support/components/ui/global-tooltip.tsx",
           "type": "registry:ui",
-          "target": "components/ui/global-tooltip.tsx"
+          "target": "components/astrale/components/ui/global-tooltip.tsx"
         }
       ],
       "meta": {
@@ -17071,7 +17070,7 @@
         {
           "path": "registry/variants/source/patterns/autocomplete/autocomplete-01/support/components/ui/autocomplete.tsx",
           "type": "registry:ui",
-          "target": "components/ui/autocomplete.tsx"
+          "target": "components/astrale/components/ui/autocomplete.tsx"
         }
       ],
       "meta": {
@@ -17101,7 +17100,7 @@
         {
           "path": "registry/variants/source/patterns/autocomplete/autocomplete-02/support/components/ui/autocomplete.tsx",
           "type": "registry:ui",
-          "target": "components/ui/autocomplete.tsx"
+          "target": "components/astrale/components/ui/autocomplete.tsx"
         }
       ],
       "meta": {
@@ -17132,7 +17131,7 @@
         {
           "path": "registry/variants/source/patterns/autocomplete/autocomplete-03/support/components/ui/autocomplete.tsx",
           "type": "registry:ui",
-          "target": "components/ui/autocomplete.tsx"
+          "target": "components/astrale/components/ui/autocomplete.tsx"
         }
       ],
       "meta": {
@@ -17163,7 +17162,7 @@
         {
           "path": "registry/variants/source/patterns/autocomplete/autocomplete-04/support/components/ui/autocomplete.tsx",
           "type": "registry:ui",
-          "target": "components/ui/autocomplete.tsx"
+          "target": "components/astrale/components/ui/autocomplete.tsx"
         }
       ],
       "meta": {
@@ -17194,7 +17193,7 @@
         {
           "path": "registry/variants/source/patterns/autocomplete/autocomplete-05/support/components/ui/autocomplete.tsx",
           "type": "registry:ui",
-          "target": "components/ui/autocomplete.tsx"
+          "target": "components/astrale/components/ui/autocomplete.tsx"
         }
       ],
       "meta": {
@@ -17225,7 +17224,7 @@
         {
           "path": "registry/variants/source/patterns/autocomplete/autocomplete-06/support/components/ui/autocomplete.tsx",
           "type": "registry:ui",
-          "target": "components/ui/autocomplete.tsx"
+          "target": "components/astrale/components/ui/autocomplete.tsx"
         }
       ],
       "meta": {
@@ -17256,7 +17255,7 @@
         {
           "path": "registry/variants/source/patterns/autocomplete/autocomplete-07/support/components/ui/autocomplete.tsx",
           "type": "registry:ui",
-          "target": "components/ui/autocomplete.tsx"
+          "target": "components/astrale/components/ui/autocomplete.tsx"
         }
       ],
       "meta": {
@@ -17287,7 +17286,7 @@
         {
           "path": "registry/variants/source/patterns/autocomplete/autocomplete-08/support/components/ui/autocomplete.tsx",
           "type": "registry:ui",
-          "target": "components/ui/autocomplete.tsx"
+          "target": "components/astrale/components/ui/autocomplete.tsx"
         }
       ],
       "meta": {
@@ -17318,7 +17317,7 @@
         {
           "path": "registry/variants/source/patterns/autocomplete/autocomplete-09/support/components/ui/autocomplete.tsx",
           "type": "registry:ui",
-          "target": "components/ui/autocomplete.tsx"
+          "target": "components/astrale/components/ui/autocomplete.tsx"
         }
       ],
       "meta": {
@@ -17349,7 +17348,7 @@
         {
           "path": "registry/variants/source/patterns/autocomplete/autocomplete-10/support/components/ui/autocomplete.tsx",
           "type": "registry:ui",
-          "target": "components/ui/autocomplete.tsx"
+          "target": "components/astrale/components/ui/autocomplete.tsx"
         }
       ],
       "meta": {
@@ -17539,7 +17538,7 @@
         {
           "path": "registry/variants/source/patterns/carousel/carousel-01/support/components/ui/carousel.tsx",
           "type": "registry:lib",
-          "target": "components/ui/carousel.tsx"
+          "target": "components/astrale/components/ui/carousel.tsx"
         }
       ],
       "meta": {
@@ -17569,7 +17568,7 @@
         {
           "path": "registry/variants/source/patterns/carousel/carousel-02/support/components/ui/carousel.tsx",
           "type": "registry:lib",
-          "target": "components/ui/carousel.tsx"
+          "target": "components/astrale/components/ui/carousel.tsx"
         }
       ],
       "meta": {
@@ -17599,7 +17598,7 @@
         {
           "path": "registry/variants/source/patterns/carousel/carousel-03/support/components/ui/carousel.tsx",
           "type": "registry:lib",
-          "target": "components/ui/carousel.tsx"
+          "target": "components/astrale/components/ui/carousel.tsx"
         }
       ],
       "meta": {
@@ -17629,7 +17628,7 @@
         {
           "path": "registry/variants/source/patterns/carousel/carousel-04/support/components/ui/carousel.tsx",
           "type": "registry:lib",
-          "target": "components/ui/carousel.tsx"
+          "target": "components/astrale/components/ui/carousel.tsx"
         }
       ],
       "meta": {
@@ -17660,7 +17659,7 @@
         {
           "path": "registry/variants/source/patterns/carousel/carousel-05/support/components/ui/carousel.tsx",
           "type": "registry:lib",
-          "target": "components/ui/carousel.tsx"
+          "target": "components/astrale/components/ui/carousel.tsx"
         }
       ],
       "meta": {
@@ -17690,7 +17689,7 @@
         {
           "path": "registry/variants/source/patterns/carousel/carousel-06/support/components/ui/carousel.tsx",
           "type": "registry:lib",
-          "target": "components/ui/carousel.tsx"
+          "target": "components/astrale/components/ui/carousel.tsx"
         }
       ],
       "meta": {
@@ -17721,7 +17720,7 @@
         {
           "path": "registry/variants/source/patterns/carousel/carousel-07/support/components/ui/carousel.tsx",
           "type": "registry:lib",
-          "target": "components/ui/carousel.tsx"
+          "target": "components/astrale/components/ui/carousel.tsx"
         }
       ],
       "meta": {
@@ -17751,7 +17750,7 @@
         {
           "path": "registry/variants/source/patterns/carousel/carousel-08/support/components/ui/carousel.tsx",
           "type": "registry:lib",
-          "target": "components/ui/carousel.tsx"
+          "target": "components/astrale/components/ui/carousel.tsx"
         }
       ],
       "meta": {
@@ -17781,7 +17780,7 @@
         {
           "path": "registry/variants/source/patterns/carousel/carousel-09/support/components/ui/carousel.tsx",
           "type": "registry:lib",
-          "target": "components/ui/carousel.tsx"
+          "target": "components/astrale/components/ui/carousel.tsx"
         }
       ],
       "meta": {
@@ -17811,7 +17810,7 @@
         {
           "path": "registry/variants/source/patterns/carousel/carousel-10/support/components/ui/carousel.tsx",
           "type": "registry:lib",
-          "target": "components/ui/carousel.tsx"
+          "target": "components/astrale/components/ui/carousel.tsx"
         }
       ],
       "meta": {
@@ -17843,7 +17842,7 @@
         {
           "path": "registry/variants/source/patterns/carousel/carousel-11/support/components/ui/motion-carousel.tsx",
           "type": "registry:ui",
-          "target": "components/ui/motion-carousel.tsx"
+          "target": "components/astrale/components/ui/motion-carousel.tsx"
         }
       ],
       "meta": {
@@ -17874,7 +17873,7 @@
         {
           "path": "registry/variants/source/patterns/carousel/carousel-12/support/components/ui/carousel.tsx",
           "type": "registry:lib",
-          "target": "components/ui/carousel.tsx"
+          "target": "components/astrale/components/ui/carousel.tsx"
         }
       ],
       "meta": {
@@ -17904,7 +17903,7 @@
         {
           "path": "registry/variants/source/patterns/code-block/code-block-01/support/components/ui/code-block.tsx",
           "type": "registry:component",
-          "target": "components/ui/code-block.tsx"
+          "target": "components/astrale/components/ui/code-block.tsx"
         }
       ],
       "css": {
@@ -17943,7 +17942,7 @@
         {
           "path": "registry/variants/source/patterns/code-block/code-block-02/support/components/ui/code-block.tsx",
           "type": "registry:component",
-          "target": "components/ui/code-block.tsx"
+          "target": "components/astrale/components/ui/code-block.tsx"
         }
       ],
       "css": {
@@ -17982,7 +17981,7 @@
         {
           "path": "registry/variants/source/patterns/code-block/code-block-03/support/components/ui/code-block.tsx",
           "type": "registry:component",
-          "target": "components/ui/code-block.tsx"
+          "target": "components/astrale/components/ui/code-block.tsx"
         }
       ],
       "css": {
@@ -18021,7 +18020,7 @@
         {
           "path": "registry/variants/source/patterns/code-block/code-block-04/support/components/ui/code-block.tsx",
           "type": "registry:component",
-          "target": "components/ui/code-block.tsx"
+          "target": "components/astrale/components/ui/code-block.tsx"
         }
       ],
       "css": {
@@ -18060,7 +18059,7 @@
         {
           "path": "registry/variants/source/patterns/code-block/code-block-05/support/components/ui/code-block.tsx",
           "type": "registry:component",
-          "target": "components/ui/code-block.tsx"
+          "target": "components/astrale/components/ui/code-block.tsx"
         }
       ],
       "css": {
@@ -18099,7 +18098,7 @@
         {
           "path": "registry/variants/source/patterns/code-block/code-block-06/support/components/ui/code-block.tsx",
           "type": "registry:component",
-          "target": "components/ui/code-block.tsx"
+          "target": "components/astrale/components/ui/code-block.tsx"
         }
       ],
       "css": {
@@ -18138,7 +18137,7 @@
         {
           "path": "registry/variants/source/patterns/code-block/code-block-07/support/components/ui/code-block.tsx",
           "type": "registry:component",
-          "target": "components/ui/code-block.tsx"
+          "target": "components/astrale/components/ui/code-block.tsx"
         }
       ],
       "css": {
@@ -18177,7 +18176,7 @@
         {
           "path": "registry/variants/source/patterns/combobox/combobox-01/support/components/ui/combobox.tsx",
           "type": "registry:lib",
-          "target": "components/ui/combobox.tsx"
+          "target": "components/astrale/components/ui/combobox.tsx"
         }
       ],
       "meta": {
@@ -18207,7 +18206,7 @@
         {
           "path": "registry/variants/source/patterns/combobox/combobox-02/support/components/ui/combobox.tsx",
           "type": "registry:lib",
-          "target": "components/ui/combobox.tsx"
+          "target": "components/astrale/components/ui/combobox.tsx"
         }
       ],
       "meta": {
@@ -18237,7 +18236,7 @@
         {
           "path": "registry/variants/source/patterns/combobox/combobox-03/support/components/ui/combobox.tsx",
           "type": "registry:lib",
-          "target": "components/ui/combobox.tsx"
+          "target": "components/astrale/components/ui/combobox.tsx"
         }
       ],
       "meta": {
@@ -18267,7 +18266,7 @@
         {
           "path": "registry/variants/source/patterns/combobox/combobox-04/support/components/ui/combobox.tsx",
           "type": "registry:lib",
-          "target": "components/ui/combobox.tsx"
+          "target": "components/astrale/components/ui/combobox.tsx"
         }
       ],
       "meta": {
@@ -18297,7 +18296,7 @@
         {
           "path": "registry/variants/source/patterns/combobox/combobox-05/support/components/ui/combobox.tsx",
           "type": "registry:lib",
-          "target": "components/ui/combobox.tsx"
+          "target": "components/astrale/components/ui/combobox.tsx"
         }
       ],
       "meta": {
@@ -18327,7 +18326,7 @@
         {
           "path": "registry/variants/source/patterns/combobox/combobox-06/support/components/ui/combobox.tsx",
           "type": "registry:lib",
-          "target": "components/ui/combobox.tsx"
+          "target": "components/astrale/components/ui/combobox.tsx"
         }
       ],
       "meta": {
@@ -18357,7 +18356,7 @@
         {
           "path": "registry/variants/source/patterns/combobox/combobox-07/support/components/ui/combobox.tsx",
           "type": "registry:lib",
-          "target": "components/ui/combobox.tsx"
+          "target": "components/astrale/components/ui/combobox.tsx"
         }
       ],
       "meta": {
@@ -18387,7 +18386,7 @@
         {
           "path": "registry/variants/source/patterns/combobox/combobox-08/support/components/ui/combobox.tsx",
           "type": "registry:lib",
-          "target": "components/ui/combobox.tsx"
+          "target": "components/astrale/components/ui/combobox.tsx"
         }
       ],
       "meta": {
@@ -18417,7 +18416,7 @@
         {
           "path": "registry/variants/source/patterns/combobox/combobox-09/support/components/ui/combobox.tsx",
           "type": "registry:lib",
-          "target": "components/ui/combobox.tsx"
+          "target": "components/astrale/components/ui/combobox.tsx"
         }
       ],
       "meta": {
@@ -18447,7 +18446,7 @@
         {
           "path": "registry/variants/source/patterns/combobox/combobox-10/support/components/ui/combobox.tsx",
           "type": "registry:lib",
-          "target": "components/ui/combobox.tsx"
+          "target": "components/astrale/components/ui/combobox.tsx"
         }
       ],
       "meta": {
@@ -18477,7 +18476,7 @@
         {
           "path": "registry/variants/source/patterns/combobox/combobox-11/support/components/ui/combobox.tsx",
           "type": "registry:lib",
-          "target": "components/ui/combobox.tsx"
+          "target": "components/astrale/components/ui/combobox.tsx"
         }
       ],
       "meta": {
@@ -18507,7 +18506,7 @@
         {
           "path": "registry/variants/source/patterns/combobox/combobox-12/support/components/ui/combobox.tsx",
           "type": "registry:lib",
-          "target": "components/ui/combobox.tsx"
+          "target": "components/astrale/components/ui/combobox.tsx"
         }
       ],
       "meta": {
@@ -18537,7 +18536,7 @@
         {
           "path": "registry/variants/source/patterns/combobox/combobox-13/support/components/ui/combobox.tsx",
           "type": "registry:lib",
-          "target": "components/ui/combobox.tsx"
+          "target": "components/astrale/components/ui/combobox.tsx"
         }
       ],
       "meta": {
@@ -18567,7 +18566,7 @@
         {
           "path": "registry/variants/source/patterns/combobox/combobox-14/support/components/ui/combobox.tsx",
           "type": "registry:lib",
-          "target": "components/ui/combobox.tsx"
+          "target": "components/astrale/components/ui/combobox.tsx"
         }
       ],
       "meta": {
@@ -18877,7 +18876,7 @@
         {
           "path": "registry/variants/source/patterns/date-and-time-picker/date-picker-01/support/components/ui/calendar.tsx",
           "type": "registry:lib",
-          "target": "components/ui/calendar.tsx"
+          "target": "components/astrale/components/ui/calendar.tsx"
         }
       ],
       "meta": {
@@ -18907,7 +18906,7 @@
         {
           "path": "registry/variants/source/patterns/date-and-time-picker/date-picker-02/support/components/ui/calendar.tsx",
           "type": "registry:lib",
-          "target": "components/ui/calendar.tsx"
+          "target": "components/astrale/components/ui/calendar.tsx"
         }
       ],
       "meta": {
@@ -18937,7 +18936,7 @@
         {
           "path": "registry/variants/source/patterns/date-and-time-picker/date-picker-03/support/components/ui/calendar.tsx",
           "type": "registry:lib",
-          "target": "components/ui/calendar.tsx"
+          "target": "components/astrale/components/ui/calendar.tsx"
         }
       ],
       "meta": {
@@ -18967,7 +18966,7 @@
         {
           "path": "registry/variants/source/patterns/date-and-time-picker/date-picker-04/support/components/ui/calendar.tsx",
           "type": "registry:lib",
-          "target": "components/ui/calendar.tsx"
+          "target": "components/astrale/components/ui/calendar.tsx"
         }
       ],
       "meta": {
@@ -18998,7 +18997,7 @@
         {
           "path": "registry/variants/source/patterns/date-and-time-picker/date-picker-05/support/components/ui/calendar.tsx",
           "type": "registry:lib",
-          "target": "components/ui/calendar.tsx"
+          "target": "components/astrale/components/ui/calendar.tsx"
         }
       ],
       "meta": {
@@ -19029,7 +19028,7 @@
         {
           "path": "registry/variants/source/patterns/date-and-time-picker/date-picker-06/support/components/ui/calendar.tsx",
           "type": "registry:lib",
-          "target": "components/ui/calendar.tsx"
+          "target": "components/astrale/components/ui/calendar.tsx"
         }
       ],
       "meta": {
@@ -19059,7 +19058,7 @@
         {
           "path": "registry/variants/source/patterns/date-and-time-picker/date-picker-07/support/components/ui/calendar.tsx",
           "type": "registry:lib",
-          "target": "components/ui/calendar.tsx"
+          "target": "components/astrale/components/ui/calendar.tsx"
         }
       ],
       "meta": {
@@ -19129,7 +19128,7 @@
         {
           "path": "registry/variants/source/patterns/date-and-time-picker/date-picker-10/support/components/ui/calendar.tsx",
           "type": "registry:lib",
-          "target": "components/ui/calendar.tsx"
+          "target": "components/astrale/components/ui/calendar.tsx"
         }
       ],
       "meta": {
@@ -19159,7 +19158,7 @@
         {
           "path": "registry/variants/source/patterns/date-and-time-picker/date-picker-11/support/components/ui/calendar.tsx",
           "type": "registry:lib",
-          "target": "components/ui/calendar.tsx"
+          "target": "components/astrale/components/ui/calendar.tsx"
         }
       ],
       "meta": {
@@ -19189,7 +19188,7 @@
         {
           "path": "registry/variants/source/patterns/date-and-time-picker/date-picker-12/support/components/ui/calendar.tsx",
           "type": "registry:lib",
-          "target": "components/ui/calendar.tsx"
+          "target": "components/astrale/components/ui/calendar.tsx"
         }
       ],
       "meta": {
@@ -19220,12 +19219,12 @@
         {
           "path": "registry/variants/source/patterns/date-and-time-picker/date-picker-13/support/components/ui/calendar.tsx",
           "type": "registry:lib",
-          "target": "components/ui/calendar.tsx"
+          "target": "components/astrale/components/ui/calendar.tsx"
         },
         {
           "path": "registry/variants/source/patterns/date-and-time-picker/date-picker-13/support/components/ui/chart.tsx",
           "type": "registry:lib",
-          "target": "components/ui/chart.tsx"
+          "target": "components/astrale/components/ui/chart.tsx"
         }
       ],
       "meta": {
@@ -19455,7 +19454,7 @@
         {
           "path": "registry/variants/source/patterns/form/form-08/support/components/ui/combobox.tsx",
           "type": "registry:lib",
-          "target": "components/ui/combobox.tsx"
+          "target": "components/astrale/components/ui/combobox.tsx"
         }
       ],
       "meta": {
@@ -19490,7 +19489,7 @@
         {
           "path": "registry/variants/source/patterns/form/form-09/support/components/ui/calendar.tsx",
           "type": "registry:lib",
-          "target": "components/ui/calendar.tsx"
+          "target": "components/astrale/components/ui/calendar.tsx"
         }
       ],
       "meta": {
@@ -20234,12 +20233,12 @@
         {
           "path": "registry/variants/source/patterns/phone-input/phone-input-01/support/components/ui/phone-input.tsx",
           "type": "registry:ui",
-          "target": "components/ui/phone-input.tsx"
+          "target": "components/astrale/components/ui/phone-input.tsx"
         },
         {
           "path": "registry/variants/source/patterns/phone-input/phone-input-01/support/components/ui/combobox.tsx",
           "type": "registry:lib",
-          "target": "components/ui/combobox.tsx"
+          "target": "components/astrale/components/ui/combobox.tsx"
         }
       ],
       "meta": {
@@ -20270,12 +20269,12 @@
         {
           "path": "registry/variants/source/patterns/phone-input/phone-input-02/support/components/ui/phone-input.tsx",
           "type": "registry:ui",
-          "target": "components/ui/phone-input.tsx"
+          "target": "components/astrale/components/ui/phone-input.tsx"
         },
         {
           "path": "registry/variants/source/patterns/phone-input/phone-input-02/support/components/ui/combobox.tsx",
           "type": "registry:lib",
-          "target": "components/ui/combobox.tsx"
+          "target": "components/astrale/components/ui/combobox.tsx"
         }
       ],
       "meta": {
@@ -20306,12 +20305,12 @@
         {
           "path": "registry/variants/source/patterns/phone-input/phone-input-03/support/components/ui/phone-input.tsx",
           "type": "registry:ui",
-          "target": "components/ui/phone-input.tsx"
+          "target": "components/astrale/components/ui/phone-input.tsx"
         },
         {
           "path": "registry/variants/source/patterns/phone-input/phone-input-03/support/components/ui/combobox.tsx",
           "type": "registry:lib",
-          "target": "components/ui/combobox.tsx"
+          "target": "components/astrale/components/ui/combobox.tsx"
         }
       ],
       "meta": {
@@ -20342,12 +20341,12 @@
         {
           "path": "registry/variants/source/patterns/phone-input/phone-input-04/support/components/ui/phone-input.tsx",
           "type": "registry:ui",
-          "target": "components/ui/phone-input.tsx"
+          "target": "components/astrale/components/ui/phone-input.tsx"
         },
         {
           "path": "registry/variants/source/patterns/phone-input/phone-input-04/support/components/ui/combobox.tsx",
           "type": "registry:lib",
-          "target": "components/ui/combobox.tsx"
+          "target": "components/astrale/components/ui/combobox.tsx"
         }
       ],
       "meta": {
@@ -20378,12 +20377,12 @@
         {
           "path": "registry/variants/source/patterns/phone-input/phone-input-05/support/components/ui/phone-input.tsx",
           "type": "registry:ui",
-          "target": "components/ui/phone-input.tsx"
+          "target": "components/astrale/components/ui/phone-input.tsx"
         },
         {
           "path": "registry/variants/source/patterns/phone-input/phone-input-05/support/components/ui/combobox.tsx",
           "type": "registry:lib",
-          "target": "components/ui/combobox.tsx"
+          "target": "components/astrale/components/ui/combobox.tsx"
         }
       ],
       "meta": {
@@ -20414,12 +20413,12 @@
         {
           "path": "registry/variants/source/patterns/phone-input/phone-input-06/support/components/ui/phone-input.tsx",
           "type": "registry:ui",
-          "target": "components/ui/phone-input.tsx"
+          "target": "components/astrale/components/ui/phone-input.tsx"
         },
         {
           "path": "registry/variants/source/patterns/phone-input/phone-input-06/support/components/ui/combobox.tsx",
           "type": "registry:lib",
-          "target": "components/ui/combobox.tsx"
+          "target": "components/astrale/components/ui/combobox.tsx"
         }
       ],
       "meta": {
@@ -20450,12 +20449,12 @@
         {
           "path": "registry/variants/source/patterns/phone-input/phone-input-07/support/components/ui/phone-input.tsx",
           "type": "registry:ui",
-          "target": "components/ui/phone-input.tsx"
+          "target": "components/astrale/components/ui/phone-input.tsx"
         },
         {
           "path": "registry/variants/source/patterns/phone-input/phone-input-07/support/components/ui/combobox.tsx",
           "type": "registry:lib",
-          "target": "components/ui/combobox.tsx"
+          "target": "components/astrale/components/ui/combobox.tsx"
         }
       ],
       "meta": {
@@ -20486,12 +20485,12 @@
         {
           "path": "registry/variants/source/patterns/phone-input/phone-input-08/support/components/ui/phone-input.tsx",
           "type": "registry:ui",
-          "target": "components/ui/phone-input.tsx"
+          "target": "components/astrale/components/ui/phone-input.tsx"
         },
         {
           "path": "registry/variants/source/patterns/phone-input/phone-input-08/support/components/ui/combobox.tsx",
           "type": "registry:lib",
-          "target": "components/ui/combobox.tsx"
+          "target": "components/astrale/components/ui/combobox.tsx"
         }
       ],
       "meta": {
@@ -20522,12 +20521,12 @@
         {
           "path": "registry/variants/source/patterns/phone-input/phone-input-09/support/components/ui/phone-input.tsx",
           "type": "registry:ui",
-          "target": "components/ui/phone-input.tsx"
+          "target": "components/astrale/components/ui/phone-input.tsx"
         },
         {
           "path": "registry/variants/source/patterns/phone-input/phone-input-09/support/components/ui/combobox.tsx",
           "type": "registry:lib",
-          "target": "components/ui/combobox.tsx"
+          "target": "components/astrale/components/ui/combobox.tsx"
         }
       ],
       "meta": {
@@ -20562,7 +20561,7 @@
         {
           "path": "registry/variants/source/patterns/sortable/sortable-01/support/components/ui/sortable.tsx",
           "type": "registry:ui",
-          "target": "components/ui/sortable.tsx"
+          "target": "components/astrale/components/ui/sortable.tsx"
         }
       ],
       "meta": {
@@ -20597,7 +20596,7 @@
         {
           "path": "registry/variants/source/patterns/sortable/sortable-02/support/components/ui/sortable.tsx",
           "type": "registry:ui",
-          "target": "components/ui/sortable.tsx"
+          "target": "components/astrale/components/ui/sortable.tsx"
         }
       ],
       "meta": {
@@ -20632,7 +20631,7 @@
         {
           "path": "registry/variants/source/patterns/sortable/sortable-03/support/components/ui/sortable.tsx",
           "type": "registry:ui",
-          "target": "components/ui/sortable.tsx"
+          "target": "components/astrale/components/ui/sortable.tsx"
         }
       ],
       "meta": {
@@ -20666,7 +20665,7 @@
         {
           "path": "registry/variants/source/patterns/sortable/sortable-04/support/components/ui/sortable.tsx",
           "type": "registry:ui",
-          "target": "components/ui/sortable.tsx"
+          "target": "components/astrale/components/ui/sortable.tsx"
         }
       ],
       "meta": {
@@ -20701,7 +20700,7 @@
         {
           "path": "registry/variants/source/patterns/sortable/sortable-05/support/components/ui/sortable.tsx",
           "type": "registry:ui",
-          "target": "components/ui/sortable.tsx"
+          "target": "components/astrale/components/ui/sortable.tsx"
         }
       ],
       "meta": {
@@ -20726,7 +20725,7 @@
         {
           "path": "registry/variants/source/patterns/stepper/stepper-01/support/components/ui/stepper.tsx",
           "type": "registry:ui",
-          "target": "components/ui/stepper.tsx"
+          "target": "components/astrale/components/ui/stepper.tsx"
         }
       ],
       "meta": {
@@ -20751,7 +20750,7 @@
         {
           "path": "registry/variants/source/patterns/stepper/stepper-02/support/components/ui/stepper.tsx",
           "type": "registry:ui",
-          "target": "components/ui/stepper.tsx"
+          "target": "components/astrale/components/ui/stepper.tsx"
         }
       ],
       "meta": {
@@ -20776,7 +20775,7 @@
         {
           "path": "registry/variants/source/patterns/stepper/stepper-03/support/components/ui/stepper.tsx",
           "type": "registry:ui",
-          "target": "components/ui/stepper.tsx"
+          "target": "components/astrale/components/ui/stepper.tsx"
         }
       ],
       "meta": {
@@ -20801,7 +20800,7 @@
         {
           "path": "registry/variants/source/patterns/stepper/stepper-04/support/components/ui/stepper.tsx",
           "type": "registry:ui",
-          "target": "components/ui/stepper.tsx"
+          "target": "components/astrale/components/ui/stepper.tsx"
         }
       ],
       "meta": {
@@ -20826,7 +20825,7 @@
         {
           "path": "registry/variants/source/patterns/stepper/stepper-05/support/components/ui/stepper.tsx",
           "type": "registry:ui",
-          "target": "components/ui/stepper.tsx"
+          "target": "components/astrale/components/ui/stepper.tsx"
         }
       ],
       "meta": {
@@ -20851,7 +20850,7 @@
         {
           "path": "registry/variants/source/patterns/stepper/stepper-06/support/components/ui/stepper.tsx",
           "type": "registry:ui",
-          "target": "components/ui/stepper.tsx"
+          "target": "components/astrale/components/ui/stepper.tsx"
         }
       ],
       "meta": {
@@ -20881,7 +20880,7 @@
         {
           "path": "registry/variants/source/patterns/stepper/stepper-07/support/components/ui/stepper.tsx",
           "type": "registry:ui",
-          "target": "components/ui/stepper.tsx"
+          "target": "components/astrale/components/ui/stepper.tsx"
         }
       ],
       "meta": {
@@ -20911,7 +20910,7 @@
         {
           "path": "registry/variants/source/patterns/stepper/stepper-08/support/components/ui/stepper.tsx",
           "type": "registry:ui",
-          "target": "components/ui/stepper.tsx"
+          "target": "components/astrale/components/ui/stepper.tsx"
         }
       ],
       "meta": {
@@ -20941,7 +20940,7 @@
         {
           "path": "registry/variants/source/patterns/stepper/stepper-09/support/components/ui/stepper.tsx",
           "type": "registry:ui",
-          "target": "components/ui/stepper.tsx"
+          "target": "components/astrale/components/ui/stepper.tsx"
         }
       ],
       "meta": {
@@ -20974,7 +20973,7 @@
         {
           "path": "registry/variants/source/patterns/stepper/stepper-10/support/components/ui/stepper.tsx",
           "type": "registry:ui",
-          "target": "components/ui/stepper.tsx"
+          "target": "components/astrale/components/ui/stepper.tsx"
         }
       ],
       "meta": {
@@ -21004,7 +21003,7 @@
         {
           "path": "registry/variants/source/patterns/stepper/stepper-11/support/components/ui/stepper.tsx",
           "type": "registry:ui",
-          "target": "components/ui/stepper.tsx"
+          "target": "components/astrale/components/ui/stepper.tsx"
         }
       ],
       "meta": {
@@ -21034,7 +21033,7 @@
         {
           "path": "registry/variants/source/patterns/stepper/stepper-12/support/components/ui/stepper.tsx",
           "type": "registry:ui",
-          "target": "components/ui/stepper.tsx"
+          "target": "components/astrale/components/ui/stepper.tsx"
         }
       ],
       "meta": {

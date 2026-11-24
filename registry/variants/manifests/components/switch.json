@@ -383,7 +383,7 @@
         {
           "path": "support/components/ui/motion-switch.tsx",
           "type": "registry:ui",
-          "target": "components/ui/motion-switch.tsx"
+          "target": "components/astrale/components/ui/motion-switch.tsx"
         }
       ],
       "meta": {
@@ -413,7 +413,7 @@
         {
           "path": "support/components/ui/motion-switch.tsx",
           "type": "registry:ui",
-          "target": "components/ui/motion-switch.tsx"
+          "target": "components/astrale/components/ui/motion-switch.tsx"
         }
       ],
       "meta": {

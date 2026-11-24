@@ -308,7 +308,7 @@
         {
           "path": "support/components/ui/circular-progress.tsx",
           "type": "registry:component",
-          "target": "components/ui/circular-progress.tsx"
+          "target": "components/astrale/components/ui/circular-progress.tsx"
         }
       ],
       "meta": {
@@ -333,7 +333,7 @@
         {
           "path": "support/components/ui/circular-progress.tsx",
           "type": "registry:component",
-          "target": "components/ui/circular-progress.tsx"
+          "target": "components/astrale/components/ui/circular-progress.tsx"
         }
       ],
       "meta": {
@@ -358,7 +358,7 @@
         {
           "path": "support/components/ui/circular-progress.tsx",
           "type": "registry:component",
-          "target": "components/ui/circular-progress.tsx"
+          "target": "components/astrale/components/ui/circular-progress.tsx"
         }
       ],
       "meta": {
@@ -383,7 +383,7 @@
         {
           "path": "support/components/ui/circular-progress.tsx",
           "type": "registry:component",
-          "target": "components/ui/circular-progress.tsx"
+          "target": "components/astrale/components/ui/circular-progress.tsx"
         }
       ],
       "meta": {
@@ -408,7 +408,7 @@
         {
           "path": "support/components/ui/circular-progress.tsx",
           "type": "registry:component",
-          "target": "components/ui/circular-progress.tsx"
+          "target": "components/astrale/components/ui/circular-progress.tsx"
         }
       ],
       "meta": {
@@ -483,7 +483,7 @@
         {
           "path": "support/components/ui/circular-progress.tsx",
           "type": "registry:component",
-          "target": "components/ui/circular-progress.tsx"
+          "target": "components/astrale/components/ui/circular-progress.tsx"
         }
       ],
       "meta": {
@@ -508,7 +508,7 @@
         {
           "path": "support/components/ui/circular-progress.tsx",
           "type": "registry:component",
-          "target": "components/ui/circular-progress.tsx"
+          "target": "components/astrale/components/ui/circular-progress.tsx"
         }
       ],
       "meta": {

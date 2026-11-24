@@ -278,12 +278,12 @@
         {
           "path": "support/assets/svg/thumbs-down.tsx",
           "type": "registry:component",
-          "target": "assets/svg/thumbs-down.tsx"
+          "target": "components/astrale/assets/svg/thumbs-down.tsx"
         },
         {
           "path": "support/assets/svg/thumbs-up.tsx",
           "type": "registry:component",
-          "target": "assets/svg/thumbs-up.tsx"
+          "target": "components/astrale/assets/svg/thumbs-up.tsx"
         }
       ],
       "meta": {
@@ -308,7 +308,7 @@
         {
           "path": "support/components/ui/motion-toggle-group.tsx",
           "type": "registry:component",
-          "target": "components/ui/motion-toggle-group.tsx"
+          "target": "components/astrale/components/ui/motion-toggle-group.tsx"
         }
       ],
       "meta": {
@@ -338,7 +338,7 @@
         {
           "path": "support/components/ui/motion-toggle-group.tsx",
           "type": "registry:component",
-          "target": "components/ui/motion-toggle-group.tsx"
+          "target": "components/astrale/components/ui/motion-toggle-group.tsx"
         }
       ],
       "meta": {

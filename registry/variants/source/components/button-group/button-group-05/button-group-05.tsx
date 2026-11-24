@@ -1,10 +1,10 @@
 import { Button } from '@astrale-os/ui/button'
 import { ButtonGroup } from '@astrale-os/ui/button-group'
 
-import DribbbleIcon from '@/assets/svg/dribbble-icon'
-import FacebookIcon from '@/assets/svg/facebook-icon'
-import InstagramIcon from '@/assets/svg/instagram-icon'
-import TwitchIcon from '@/assets/svg/twitch-icon'
+import DribbbleIcon from '@/components/astrale/assets/svg/dribbble-icon'
+import FacebookIcon from '@/components/astrale/assets/svg/facebook-icon'
+import InstagramIcon from '@/components/astrale/assets/svg/instagram-icon'
+import TwitchIcon from '@/components/astrale/assets/svg/twitch-icon'
 
 const ButtonGroupSocialDemo = () => {
   return (

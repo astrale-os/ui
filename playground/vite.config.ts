@@ -26,6 +26,8 @@ const previewRoots = [
   fileURLToPath(new URL('../registry/variants/source', import.meta.url)),
 ]
 const variantSupportRoot = fileURLToPath(new URL('../registry/variants/support', import.meta.url))
+// A variant's `support/` directory mirrors the consumer-owned folder it installs into.
+const variantSupportAlias = '@/components/astrale/'
 
 function catalogPreviewFileWatcher(): Plugin {
   return {
@@ -51,15 +53,16 @@ function variantSupportResolver(): Plugin {
     name: 'astrale-variant-support-resolver',
     enforce: 'pre',
     resolveId(source, importer) {
-      if (!source.startsWith('@/')) return
+      if (!source.startsWith(variantSupportAlias)) return
+      const supported = source.slice(variantSupportAlias.length)
       const match = importer
         ? /^(.*\/registry\/variants\/source\/(?:components|patterns|blocks)\/[^/]+\/[^/]+)\//u.exec(
             normalizePath(importer),
           )
         : undefined
       const candidates = [
-        ...(match ? [`${match[1]}/support/${source.slice(2)}`] : []),
-        `${variantSupportRoot}/${source.slice(2)}`,
+        ...(match ? [`${match[1]}/support/${supported}`] : []),
+        `${variantSupportRoot}/${supported}`,
       ]
       for (const candidate of candidates) {
         for (const extension of ['', '.tsx', '.ts', '.jsx', '.js']) {

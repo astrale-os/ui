@@ -27,7 +27,7 @@
         {
           "path": "support/components/ui/kanban.tsx",
           "type": "registry:ui",
-          "target": "components/ui/kanban.tsx"
+          "target": "components/astrale/components/ui/kanban.tsx"
         }
       ],
       "meta": {
@@ -60,7 +60,7 @@
         {
           "path": "support/components/ui/kanban.tsx",
           "type": "registry:ui",
-          "target": "components/ui/kanban.tsx"
+          "target": "components/astrale/components/ui/kanban.tsx"
         }
       ],
       "meta": {
@@ -94,7 +94,7 @@
         {
           "path": "support/components/ui/kanban.tsx",
           "type": "registry:ui",
-          "target": "components/ui/kanban.tsx"
+          "target": "components/astrale/components/ui/kanban.tsx"
         }
       ],
       "meta": {
@@ -128,7 +128,7 @@
         {
           "path": "support/components/ui/kanban.tsx",
           "type": "registry:ui",
-          "target": "components/ui/kanban.tsx"
+          "target": "components/astrale/components/ui/kanban.tsx"
         }
       ],
       "meta": {

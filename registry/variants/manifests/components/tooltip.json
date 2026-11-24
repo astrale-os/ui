@@ -318,7 +318,7 @@
         {
           "path": "support/components/ui/motion-tooltip.tsx",
           "type": "registry:ui",
-          "target": "components/ui/motion-tooltip.tsx"
+          "target": "components/astrale/components/ui/motion-tooltip.tsx"
         }
       ],
       "meta": {
@@ -348,7 +348,7 @@
         {
           "path": "support/components/ui/global-tooltip.tsx",
           "type": "registry:ui",
-          "target": "components/ui/global-tooltip.tsx"
+          "target": "components/astrale/components/ui/global-tooltip.tsx"
         }
       ],
       "meta": {

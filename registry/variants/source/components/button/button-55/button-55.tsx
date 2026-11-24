@@ -1,4 +1,4 @@
-import { GlassButton } from '@/components/ui/glass-button'
+import { GlassButton } from '@/components/astrale/components/ui/glass-button'
 
 const GlassButtonDemo = () => {
   return (

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/motion-toggle-group'
+import { ToggleGroup, ToggleGroupItem } from '@/components/astrale/components/ui/motion-toggle-group'
 
 const ToggleGroupPackage = () => {
   const [packageManager, setPackageManager] = useState<'npm' | 'yarn' | 'pnpm'>('npm')

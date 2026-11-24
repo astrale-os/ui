@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Calendar } from '@/components/ui/calendar'
+import { Calendar } from '@/components/astrale/components/ui/calendar'
 
 const CalendarDisableDayDemo = () => {
   const [date, setDate] = useState<Date | undefined>(new Date(2025, 5, 18))

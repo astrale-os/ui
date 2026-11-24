@@ -98,12 +98,12 @@
         {
           "path": "support/assets/svg/heart.tsx",
           "type": "registry:component",
-          "target": "assets/svg/heart.tsx"
+          "target": "components/astrale/assets/svg/heart.tsx"
         },
         {
           "path": "support/assets/svg/thumbs-up.tsx",
           "type": "registry:lib",
-          "target": "assets/svg/thumbs-up.tsx"
+          "target": "components/astrale/assets/svg/thumbs-up.tsx"
         }
       ],
       "meta": {
@@ -268,12 +268,12 @@
         {
           "path": "support/components/ui/motion-toggle.tsx",
           "type": "registry:ui",
-          "target": "components/ui/motion-toggle.tsx"
+          "target": "components/astrale/components/ui/motion-toggle.tsx"
         },
         {
           "path": "support/assets/svg/heart.tsx",
           "type": "registry:component",
-          "target": "assets/svg/heart.tsx"
+          "target": "components/astrale/assets/svg/heart.tsx"
         }
       ],
       "meta": {

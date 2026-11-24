@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 import { Button } from '@astrale-os/ui/button'
 import { ButtonGroup } from '@astrale-os/ui/button-group'
-import Heart from '@/assets/svg/heart'
+import Heart from '@/components/astrale/assets/svg/heart'
 
 const ButtonGroupLikeDemo = () => {
   const [isLiked, setIsLiked] = useState(true)

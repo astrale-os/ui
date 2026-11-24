@@ -1,4 +1,4 @@
-import { PrimaryGrowButton } from '@/components/ui/grow-button'
+import { PrimaryGrowButton } from '@/components/astrale/components/ui/grow-button'
 
 const PrimaryGrowButtonDemo = () => {
   return <PrimaryGrowButton>Grow Button</PrimaryGrowButton>

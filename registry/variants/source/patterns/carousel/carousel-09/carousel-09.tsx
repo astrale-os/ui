@@ -7,7 +7,7 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious
-} from '@/components/ui/carousel'
+} from '@/components/astrale/components/ui/carousel'
 import { Progress } from '@astrale-os/ui/progress'
 
 const Images = [

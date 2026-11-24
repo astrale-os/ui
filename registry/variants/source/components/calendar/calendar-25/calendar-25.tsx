@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 
-import { Calendar, CalendarDayButton } from '@/components/ui/calendar'
+import { Calendar, CalendarDayButton } from '@/components/astrale/components/ui/calendar'
 
 function getPriceForDate(date: Date) {
   const seed = date.getFullYear() * 10000 + (date.getMonth() + 1) * 100 + date.getDate()

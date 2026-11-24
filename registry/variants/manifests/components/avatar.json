@@ -238,7 +238,7 @@
         {
           "path": "support/assets/svg/badge-check.tsx",
           "type": "registry:component",
-          "target": "assets/svg/badge-check.tsx"
+          "target": "components/astrale/assets/svg/badge-check.tsx"
         }
       ],
       "meta": {

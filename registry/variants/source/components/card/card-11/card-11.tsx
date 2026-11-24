@@ -4,8 +4,8 @@ import { useState } from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from '@astrale-os/ui/avatar'
 import { Button } from '@astrale-os/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@astrale-os/ui/card'
-import BadgeCheck from '@/assets/svg/badge-check'
-import Heart from '@/assets/svg/heart'
+import BadgeCheck from '@/components/astrale/assets/svg/badge-check'
+import Heart from '@/components/astrale/assets/svg/heart'
 import { UserPlusIcon, EllipsisIcon, MessageCircleIcon, RepeatIcon, SendIcon } from "lucide-react"
 
 const CardTweetDemo = () => {

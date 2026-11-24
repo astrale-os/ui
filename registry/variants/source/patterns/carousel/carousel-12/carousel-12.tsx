@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import { motion } from 'motion/react'
 
-import { Carousel, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
+import { Carousel, CarouselNext, CarouselPrevious } from '@/components/astrale/components/ui/carousel'
 
 const Images = [
   {

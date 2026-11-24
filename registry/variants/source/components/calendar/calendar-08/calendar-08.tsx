@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { type DateRange } from 'react-day-picker'
 import { enUS, hi } from 'react-day-picker/locale'
 
-import { Calendar } from '@/components/ui/calendar'
+import { Calendar } from '@/components/astrale/components/ui/calendar'
 import { Card, CardAction, CardContent, CardDescription, CardHeader, CardTitle } from '@astrale-os/ui/card'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@astrale-os/ui/select'
 

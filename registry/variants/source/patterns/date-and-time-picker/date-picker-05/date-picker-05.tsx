@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import { parseDate } from 'chrono-node'
 import { Button } from '@astrale-os/ui/button'
-import { Calendar } from '@/components/ui/calendar'
+import { Calendar } from '@/components/astrale/components/ui/calendar'
 import { Input } from '@astrale-os/ui/input'
 import { Label } from '@astrale-os/ui/label'
 import { Popover, PopoverContent, PopoverTrigger } from '@astrale-os/ui/popover'

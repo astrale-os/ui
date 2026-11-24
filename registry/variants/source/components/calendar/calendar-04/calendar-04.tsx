@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import { type DateRange } from 'react-day-picker'
 
-import { Calendar } from '@/components/ui/calendar'
+import { Calendar } from '@/components/astrale/components/ui/calendar'
 
 const CalendarRangeCalendarMultiMonthDemo = () => {
   const [dateRange, setDateRange] = useState<DateRange | undefined>({

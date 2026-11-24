@@ -1,6 +1,6 @@
 import type { BundledLanguage } from 'shiki'
 
-import { CodeBlock } from '@/components/ui/code-block'
+import { CodeBlock } from '@/components/astrale/components/ui/code-block'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@astrale-os/ui/tabs'
 
 const tabs: { label: string; value: string; filename: string; language: BundledLanguage; code: string }[] = [

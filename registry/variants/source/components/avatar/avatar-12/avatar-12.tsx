@@ -1,5 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@astrale-os/ui/avatar'
-import BadgeCheck from '@/assets/svg/badge-check'
+import BadgeCheck from '@/components/astrale/assets/svg/badge-check'
 
 const AvatarVerifiedDemo = () => {
   return (

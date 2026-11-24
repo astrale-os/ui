@@ -12,7 +12,7 @@ import {
   ComboboxEmpty,
   ComboboxItem,
   ComboboxList
-} from '@/components/ui/combobox'
+} from '@/components/astrale/components/ui/combobox'
 import { Label } from '@astrale-os/ui/label'
 import { cn } from '@astrale-os/ui/class-name'
 import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from '@astrale-os/ui/input-group'

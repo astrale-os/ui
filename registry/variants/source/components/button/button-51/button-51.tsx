@@ -1,4 +1,4 @@
-import { PrimaryFlowButton } from '@/components/ui/flow-button'
+import { PrimaryFlowButton } from '@/components/astrale/components/ui/flow-button'
 
 const PrimaryFlowButtonDemo = () => {
   return <PrimaryFlowButton>Flow Button</PrimaryFlowButton>

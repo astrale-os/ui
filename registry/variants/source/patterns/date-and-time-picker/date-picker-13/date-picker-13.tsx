@@ -3,7 +3,7 @@ import { useState, useMemo } from 'react'
 import type { DateRange } from 'react-day-picker'
 import { Bar, BarChart, CartesianGrid, XAxis } from 'recharts'
 import { Button } from '@astrale-os/ui/button'
-import { Calendar } from '@/components/ui/calendar'
+import { Calendar } from '@/components/astrale/components/ui/calendar'
 import {
   Card,
   CardAction,
@@ -13,8 +13,8 @@ import {
   CardHeader,
   CardTitle
 } from '@astrale-os/ui/card'
-import type { ChartConfig } from '@/components/ui/chart'
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart'
+import type { ChartConfig } from '@/components/astrale/components/ui/chart'
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/astrale/components/ui/chart'
 import { Popover, PopoverContent, PopoverTrigger } from '@astrale-os/ui/popover'
 import { CalendarIcon } from "lucide-react"
 

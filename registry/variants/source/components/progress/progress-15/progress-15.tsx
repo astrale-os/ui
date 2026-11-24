@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { Slider } from '@astrale-os/ui/slider'
-import { CircularProgress } from '@/components/ui/circular-progress'
+import { CircularProgress } from '@/components/astrale/components/ui/circular-progress'
 
 const CircularProgressDemo = () => {
   const [progress, setProgress] = useState(50)

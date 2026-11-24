@@ -8,7 +8,7 @@
   ],
   "files": [
     {
-      "path": "source/components/typography/typography-10/typography-10.tsx",
+      "path": "registry/variants/source/components/typography/typography-10/typography-10.tsx",
       "content": "const TypographyLargeDemo = () => {\n  return <div className='text-lg font-semibold'>large - Proceed with careful consideration.</div>\n}\n\nexport default TypographyLargeDemo\n",
       "type": "registry:component",
       "target": "components/astrale/components/typography/typography-10.tsx"

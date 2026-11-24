@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Rating } from '@/components/ui/rating'
+import { Rating } from '@/components/astrale/components/ui/rating'
 import { Button } from '@astrale-os/ui/button'
 
 const RatingControlledDemo = () => {
