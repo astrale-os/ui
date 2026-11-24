@@ -201,6 +201,35 @@ function scopeOf(source: FinderSource): number {
   return scope
 }
 
+/**
+ * State that names Nodes of one request: another request reads it as `initial`, and a change made
+ * under the new request starts from `initial`. `initial` must keep its identity across renders.
+ */
+function useRequestState<Value>(
+  request: string,
+  initial: Value,
+): readonly [Value, (change: Value | ((current: Value) => Value)) => void] {
+  const [held, setHeld] = React.useState({ request, value: initial })
+  const value = held.request === request ? held.value : initial
+  // Like a state setter, the change keeps its identity: it applies to the request rendered last.
+  const latest = React.useRef(request)
+  latest.current = request
+  const change = React.useCallback(
+    (update: Value | ((current: Value) => Value)) =>
+      setHeld((previous) => {
+        const now = latest.current
+        const current = previous.request === now ? previous.value : initial
+        const next =
+          typeof update === 'function' ? (update as (current: Value) => Value)(current) : update
+        return next === current && previous.request === now
+          ? previous
+          : { request: now, value: next }
+      }),
+    [initial],
+  )
+  return [value, change] as const
+}
+
 interface Read<Value> {
   readonly scope?: number
   readonly key?: string
@@ -283,6 +312,13 @@ interface NodesState {
   readonly loadingMore: boolean
   readonly moreError?: unknown
 }
+
+const NO_NODES: NodesState = Object.freeze({ status: 'idle', items: [], loadingMore: false })
+const LOADING_NODES: NodesState = Object.freeze({
+  status: 'loading',
+  items: [],
+  loadingMore: false,
+})
 
 let ruleSequence = 0
 
@@ -540,8 +576,24 @@ export function useFinderController(options: FinderOptions): FinderController {
 
   // ── Nodes and count ──────────────────────────────────────────────────────────────────────────
   const describedAll = describedSelection.length === selectedClasses.length
+  // Nodes are listed only for Classes this request offers: the accepted row's once these accepted
+  // Classes arrived, a Domain's once its Classes arrived under them. Until then no row is listed,
+  // so none of another request's Nodes can be chosen.
+  const offered =
+    domain === FINDER_ACCEPTED
+      ? acceptedRead.status === 'ready' && acceptedRead.key === acceptsKey
+        ? acceptedClasses
+        : undefined
+      : classesRead.status === 'ready' &&
+          classDomain !== undefined &&
+          classesRead.key === `${classDomain}\n${acceptsKey ?? ''}`
+        ? domainClasses
+        : undefined
+  const selectionOffered =
+    offered !== undefined &&
+    selectedClasses.every((key) => offered.some((item) => item.key === key))
   const rangeKey =
-    selectedClasses.length === 0 || !describedAll
+    selectedClasses.length === 0 || !describedAll || !selectionOffered
       ? undefined
       : JSON.stringify({ classes: selectedClasses, rules: appliedRules, order: order ?? null })
   const [nodesState, setNodes] = React.useState<NodesState>({
@@ -549,11 +601,16 @@ export function useFinderController(options: FinderOptions): FinderController {
     items: [],
     loadingMore: false,
   })
-  // Another source's Nodes are not this source's, even for the same range.
+  // With no range, no Node is listed from this render on; another source's Nodes are not this
+  // source's, even for the same range.
   const nodes: NodesState =
-    nodesState.scope === undefined || nodesState.scope === scope
-      ? nodesState
-      : { status: 'loading', items: [], loadingMore: false }
+    rangeKey === undefined
+      ? selectedClasses.length === 0
+        ? NO_NODES
+        : LOADING_NODES
+      : nodesState.scope === undefined || nodesState.scope === scope
+        ? nodesState
+        : LOADING_NODES
   const [nodesAttempt, setNodesAttempt] = React.useState(0)
   const moreController = React.useRef<AbortController | undefined>(undefined)
   const range = React.useRef({ classes: selectedClasses, rules: appliedRules, order })
@@ -707,11 +764,7 @@ export function useFinderController(options: FinderOptions): FinderController {
   // Choices answer one request: its source, the Classes it accepts and its maximum. Another
   // request starts with none, so a confirm never returns a Node the current one would not offer.
   const request = `${scope}\n${maximum}\n${acceptsKey ?? ''}`
-  const [requestChoices, setRequestChoices] = React.useState<{
-    readonly request: string
-    readonly items: readonly FinderChoice[]
-  }>(() => ({ request, items: NO_CHOICES }))
-  const chosen = requestChoices.request === request ? requestChoices.items : NO_CHOICES
+  const [chosen, setChosen] = useRequestState(request, NO_CHOICES)
   const maximumReached = chosen.length >= maximum
   const confirmRef = React.useRef(onConfirm)
   confirmRef.current = onConfirm
@@ -758,15 +811,9 @@ export function useFinderController(options: FinderOptions): FinderController {
     (change: (current: readonly FinderChoice[]) => readonly FinderChoice[]) => {
       if (confirming.current) return
       setConfirmation((current) => (current.status === 'error' ? IDLE : current))
-      setRequestChoices((previous) => {
-        const current = previous.request === request ? previous.items : NO_CHOICES
-        const next = change(current)
-        return next === current && previous.request === request
-          ? previous
-          : { request, items: next }
-      })
+      setChosen(change)
     },
-    [request],
+    [setChosen],
   )
   const cancel = React.useCallback(() => cancelRef.current(), [])
 
@@ -837,7 +884,8 @@ export function useFinderController(options: FinderOptions): FinderController {
   const classEntries = domain === FINDER_ACCEPTED ? acceptedClasses : domainClasses
 
   // ── Preview ──────────────────────────────────────────────────────────────────────────────────
-  const [previewId, setPreviewId] = React.useState<string | undefined>(undefined)
+  // The previewed Node is one the request listed: another request closes the preview.
+  const [previewId, setPreviewId] = useRequestState<string | undefined>(request, undefined)
   const previewRead = useRead(scope, previewId, (signal) =>
     source.node({ id: previewId ?? '', signal }),
   )

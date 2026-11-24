@@ -596,7 +596,7 @@ describe('Finder', () => {
     expect(onConfirm).toHaveBeenCalledTimes(1)
   })
 
-  test('another request drops the choices: narrower Classes or a lower maximum', async () => {
+  test('another request drops the choices and the preview: narrower Classes or a lower maximum', async () => {
     const source = createMemoryFinderSource(graph)
     const props = { source, onConfirm: vi.fn(), onCancel: vi.fn(), ruleDelay: 0 }
     const chips = () =>
@@ -612,6 +612,8 @@ describe('Finder', () => {
     await user.click(await within(table()).findByRole('row', { name: /PRD-87/ }))
     await user.click(await within(table()).findByRole('row', { name: /Shell/ }))
     expect(chips()).toEqual(['PRD-87', 'Shell'])
+    await user.keyboard(' ')
+    expect(await screen.findByRole('region', { name: 'Preview' })).toHaveTextContent('Name: Shell')
 
     rerender(
       <Finder {...props} accepts={['product:class.Product']} maximum={2}>
@@ -619,6 +621,7 @@ describe('Finder', () => {
       </Finder>,
     )
     expect(chips()).toEqual([])
+    expect(screen.queryByRole('region', { name: 'Preview' })).toBeNull()
     expect(screen.getByRole('button', { name: 'Select' })).toBeDisabled()
     await user.click(await within(table()).findByRole('row', { name: /Shell/ }))
     await user.click(await within(table()).findByRole('row', { name: /Views/ }))
@@ -631,6 +634,28 @@ describe('Finder', () => {
     )
     expect(chips()).toEqual([])
     expect(props.onConfirm).not.toHaveBeenCalled()
+  })
+
+  test('while another request loads, none of the last one’s Nodes is listed to choose', async () => {
+    const source = createMemoryFinderSource({ ...graph, latency: 20 })
+    const props = { source, onConfirm: vi.fn(), onCancel: vi.fn(), ruleDelay: 0, maximum: 2 }
+    const { rerender } = render(
+      <Finder {...props} accepts={['kernel:class.Named']}>
+        <Layout />
+      </Finder>,
+    )
+    await within(table()).findByRole('row', { name: /PRD-87/ })
+
+    rerender(
+      <Finder {...props} accepts={['product:class.Product']}>
+        <Layout />
+      </Finder>,
+    )
+    expect(rowNames()).toEqual([])
+    await waitFor(() => expect(rowNames()).toEqual(['Shell', 'Views']))
+    expect(
+      within(screen.getByRole('list', { name: 'Chosen' })).queryAllByRole('listitem'),
+    ).toHaveLength(0)
   })
 
   test('a failed column shows its error with Retry while the others keep working', async () => {
