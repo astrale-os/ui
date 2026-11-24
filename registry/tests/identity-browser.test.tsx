@@ -43,7 +43,7 @@ function owned(parent: Element): Element[] {
 describe('block/finder/identity-browser', () => {
   test('the listbox owns groups of options only, and no option holds a control', async () => {
     browse()
-    const listbox = screen.getByRole('listbox', { name: 'People and groups' })
+    const listbox = screen.getByRole('listbox', { name: 'Identities' })
     await within(listbox).findByRole('option', { name: /Engineering/ }, { timeout: 5000 })
     const groups = owned(listbox)
     expect(groups.map((group) => group.getAttribute('role'))).toEqual(groups.map(() => 'group'))
@@ -86,7 +86,7 @@ describe('block/finder/identity-browser', () => {
     }
     browse({ source: groupsFail })
     const retry = await screen.findByRole('button', { name: 'Retry' }, { timeout: 5000 })
-    const listbox = screen.getByRole('listbox', { name: 'People and groups' })
+    const listbox = screen.getByRole('listbox', { name: 'Identities' })
     expect(listbox.contains(retry)).toBe(false)
     expect(owned(listbox).map((group) => group.getAttribute('aria-label'))).toEqual([
       'People',

@@ -49,7 +49,7 @@ const source = createMemoryIdentitySource({
 function Rows() {
   const finder = useIdentityFinder()
   return (
-    <IdentityFinderList aria-label="People and groups" className="overflow-y-auto p-1 outline-none">
+    <IdentityFinderList aria-label="Identities" className="overflow-y-auto p-1 outline-none">
       {finder.path.length > 0 ? (
         <button
           type="button"
