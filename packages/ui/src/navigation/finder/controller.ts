@@ -21,7 +21,7 @@ export type FinderRegion = 'domains' | 'classes' | 'nodes' | 'filters'
 export interface FinderOptions {
   /**
    * The graph the Finder reads. Keep one object per graph (memoize it): another object is another
-   * graph, read again from nothing, with none of the Nodes chosen in the last one.
+   * graph, read again from nothing. Another source, `accepts` or `maximum` drops the chosen Nodes.
    */
   readonly source: FinderSource
   /** Class keys the request accepts; each admits every Class that extends it. */
@@ -372,13 +372,15 @@ export function useFinderController(options: FinderOptions): FinderController {
     [acceptedRead.status, acceptedRead.value],
   )
   React.useEffect(() => remember(acceptedClasses), [acceptedClasses, remember])
-  // The accepted row selects only the accepted Classes the user can read.
+  // The accepted row selects only the accepted Classes the user can read; once they arrive, it
+  // keeps the selection still accepted, or all of them (another request accepts other Classes).
   React.useEffect(() => {
     if (domain !== FINDER_ACCEPTED || acceptedRead.status !== 'ready') return
-    const readable = new Set(acceptedClasses.map((item) => item.key))
+    const readable = acceptedClasses.map((item) => item.key)
     setSelectedClasses((previous) => {
-      const kept = previous.filter((key) => readable.has(key))
-      return sameList(kept, previous) ? previous : kept
+      const kept = previous.filter((key) => readable.includes(key))
+      const next = kept.length === 0 ? readable : kept
+      return sameList(next, previous) ? previous : next
     })
   }, [domain, acceptedRead.status, acceptedClasses])
   const domainClasses = React.useMemo(
@@ -702,12 +704,14 @@ export function useFinderController(options: FinderOptions): FinderController {
   }, [nodes.items, classIndex, source, remember])
 
   // ── Choice ───────────────────────────────────────────────────────────────────────────────────
-  // A Node chosen in one source is not a choice in another: a new source starts with none.
-  const [scopedChoices, setScopedChoices] = React.useState<{
-    readonly scope: number
+  // Choices answer one request: its source, the Classes it accepts and its maximum. Another
+  // request starts with none, so a confirm never returns a Node the current one would not offer.
+  const request = `${scope}\n${maximum}\n${acceptsKey ?? ''}`
+  const [requestChoices, setRequestChoices] = React.useState<{
+    readonly request: string
     readonly items: readonly FinderChoice[]
-  }>(() => ({ scope, items: NO_CHOICES }))
-  const chosen = scopedChoices.scope === scope ? scopedChoices.items : NO_CHOICES
+  }>(() => ({ request, items: NO_CHOICES }))
+  const chosen = requestChoices.request === request ? requestChoices.items : NO_CHOICES
   const maximumReached = chosen.length >= maximum
   const confirmRef = React.useRef(onConfirm)
   confirmRef.current = onConfirm
@@ -717,7 +721,7 @@ export function useFinderController(options: FinderOptions): FinderController {
   const chosenRef = React.useRef(chosen)
   chosenRef.current = chosen
   const [answered, setConfirmation] = React.useState<FinderConfirmation>(IDLE)
-  // A refusal answered choices, never none: with no choice (another source) it no longer stands.
+  // A refusal answered choices, never none: with no choice (another request) it no longer stands.
   const confirmation = answered.status === 'error' && chosen.length === 0 ? IDLE : answered
   const confirming = React.useRef(false)
   const submitted = React.useRef(0)
@@ -754,13 +758,15 @@ export function useFinderController(options: FinderOptions): FinderController {
     (change: (current: readonly FinderChoice[]) => readonly FinderChoice[]) => {
       if (confirming.current) return
       setConfirmation((current) => (current.status === 'error' ? IDLE : current))
-      setScopedChoices((previous) => {
-        const current = previous.scope === scope ? previous.items : NO_CHOICES
+      setRequestChoices((previous) => {
+        const current = previous.request === request ? previous.items : NO_CHOICES
         const next = change(current)
-        return next === current && previous.scope === scope ? previous : { scope, items: next }
+        return next === current && previous.request === request
+          ? previous
+          : { request, items: next }
       })
     },
-    [scope],
+    [request],
   )
   const cancel = React.useCallback(() => cancelRef.current(), [])
 

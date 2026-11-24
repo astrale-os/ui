@@ -596,6 +596,43 @@ describe('Finder', () => {
     expect(onConfirm).toHaveBeenCalledTimes(1)
   })
 
+  test('another request drops the choices: narrower Classes or a lower maximum', async () => {
+    const source = createMemoryFinderSource(graph)
+    const props = { source, onConfirm: vi.fn(), onCancel: vi.fn(), ruleDelay: 0 }
+    const chips = () =>
+      within(screen.getByRole('list', { name: 'Chosen' }))
+        .queryAllByRole('listitem')
+        .map((item) => item.title)
+    const { rerender } = render(
+      <Finder {...props} accepts={['kernel:class.Named']} maximum={2}>
+        <Layout />
+      </Finder>,
+    )
+    const user = userEvent.setup()
+    await user.click(await within(table()).findByRole('row', { name: /PRD-87/ }))
+    await user.click(await within(table()).findByRole('row', { name: /Shell/ }))
+    expect(chips()).toEqual(['PRD-87', 'Shell'])
+
+    rerender(
+      <Finder {...props} accepts={['product:class.Product']} maximum={2}>
+        <Layout />
+      </Finder>,
+    )
+    expect(chips()).toEqual([])
+    expect(screen.getByRole('button', { name: 'Select' })).toBeDisabled()
+    await user.click(await within(table()).findByRole('row', { name: /Shell/ }))
+    await user.click(await within(table()).findByRole('row', { name: /Views/ }))
+    expect(chips()).toEqual(['Shell', 'Views'])
+
+    rerender(
+      <Finder {...props} accepts={['product:class.Product']} maximum={1}>
+        <Layout />
+      </Finder>,
+    )
+    expect(chips()).toEqual([])
+    expect(props.onConfirm).not.toHaveBeenCalled()
+  })
+
   test('a failed column shows its error with Retry while the others keep working', async () => {
     const memory = createMemoryFinderSource(graph)
     let fail = true
