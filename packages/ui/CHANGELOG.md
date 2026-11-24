@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.0-beta.47](https://github.com/astrale-os/ui/compare/v1.0.0-beta.46...v1.0.0-beta.47) (2026-11-24)
+
+
+### Features
+
+* **ui:** ship the Finder and the node selector blocks ([bd04915](https://github.com/astrale-os/ui/commit/bd049150fe9d2105d0204722393ea6f91d8dda43))
+
 ## [1.0.0-beta.46](https://github.com/astrale-os/ui/compare/v1.0.0-beta.45...v1.0.0-beta.46) (2026-11-16)
 
 
