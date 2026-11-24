@@ -261,6 +261,65 @@ describe('identity finder', () => {
     expect(onCancel).toHaveBeenCalledOnce()
   })
 
+  test('Enter before the read of what was typed answers waits, then takes its first row', async () => {
+    const { user, onConfirm } = renderFinder({ accepts: [USER], searchDelay: 80 })
+    await waitFor(() => expect(options()).toContain('Ada Lovelace'))
+    await user.type(screen.getByRole('combobox', { name: 'Search' }), 'grace{Enter}')
+    await waitFor(() => expect(onConfirm).toHaveBeenCalledOnce())
+    expect(onConfirm).toHaveBeenCalledWith([{ id: 'u-grace', class: USER, name: 'Grace Hopper' }])
+  })
+
+  test('the rows a failed read kept can be neither walked nor chosen', async () => {
+    let fail = false
+    const memory = createMemoryIdentitySource(directory)
+    const source: IdentityFinderSource = {
+      kinds: memory.kinds,
+      identities: async (input) => {
+        if (fail) throw new Error('offline')
+        return memory.identities(input)
+      },
+    }
+    const { user, onConfirm } = renderFinder({ source, accepts: [USER] })
+    await waitFor(() => expect(options()).toContain('Ada Lovelace'))
+    fail = true
+    await user.type(screen.getByRole('combobox', { name: 'Search' }), 'zz')
+    await waitFor(() => expect(options()).toEqual([]))
+    await user.keyboard('{Enter}')
+    expect(onConfirm).not.toHaveBeenCalled()
+    expect(screen.getByRole('combobox').getAttribute('aria-activedescendant')).toBeNull()
+  })
+
+  test('Escape while a confirmation runs leaves its outcome to the host', async () => {
+    let settle: () => void = () => {}
+    const onConfirm = vi.fn(
+      () =>
+        new Promise<void>((resolve) => {
+          settle = resolve
+        }),
+    )
+    const { user, onCancel } = renderFinder({ accepts: [USER], onConfirm })
+    await user.type(screen.getByRole('combobox', { name: 'Search' }), 'grace{Enter}')
+    await waitFor(() => expect(onConfirm).toHaveBeenCalledOnce())
+    await user.keyboard('{Escape}')
+    expect(onCancel).not.toHaveBeenCalled()
+    settle()
+  })
+
+  test('ids that differ only in punctuation get distinct option ids', async () => {
+    const source = createMemoryIdentitySource({
+      kinds: directory.kinds,
+      identities: [
+        { id: 'a.b', class: USER, name: 'Dot' },
+        { id: 'a:b', class: USER, name: 'Colon' },
+        { id: 'a_b', class: USER, name: 'Underscore' },
+      ],
+    })
+    renderFinder({ source, accepts: [USER] })
+    await waitFor(() => expect(options()).toHaveLength(3))
+    const ids = screen.getAllByRole('option').map((option) => option.id)
+    expect(new Set(ids).size).toBe(3)
+  })
+
   test('a picture only a further read gives shows once it lands, a few reads at a time', async () => {
     const people = Array.from({ length: 9 }, (_, index) => ({
       id: `p-${index}`,

@@ -137,6 +137,11 @@ const NO_UNAVAILABLE: ReadonlyMap<string, string> = new Map()
 /** Pictures read at once: a long list does not open dozens of downloads. */
 const PICTURE_READS = 4
 
+/** A section, with the text and opened Identity its last answer was read for. */
+interface AnsweredSection extends IdentitySection {
+  readonly answered?: string
+}
+
 interface PictureReads {
   readonly source: IdentityFinderSource
   readonly controller: AbortController
@@ -232,11 +237,12 @@ export function useIdentityFinderController(
   const [attempt, setAttempt] = React.useState(0)
 
   // ── Sections: every kind, its first Identities ──
-  const [sections, setSections] = React.useState<readonly IdentitySection[]>([])
+  const [sections, setSections] = React.useState<readonly AnsweredSection[]>([])
+  const sectionsKey = `${query}\u0000${within ?? ''}`
   React.useEffect(() => {
     if (view !== 'sections' || kinds.status !== 'ready') return
     const reading = new AbortController()
-    const previous = new Map<string, IdentitySection>()
+    const previous = new Map<string, AnsweredSection>()
     setSections((current) => {
       for (const section of current) previous.set(section.kind.key, section)
       return kinds.list.map((each) => ({
@@ -246,7 +252,7 @@ export function useIdentityFinderController(
         more: previous.get(each.key)?.more ?? false,
       }))
     })
-    const settle = (key: string, next: Partial<IdentitySection>) =>
+    const settle = (key: string, next: Partial<AnsweredSection>) =>
       setSections((current) =>
         current.map((section) => (section.kind.key === key ? { ...section, ...next } : section)),
       )
@@ -266,18 +272,24 @@ export function useIdentityFinderController(
               status: 'ready',
               identities: page.identities,
               more: page.next !== undefined,
+              answered: sectionsKey,
             })
           },
           () => {
-            if (!aborted(reading.signal)) settle(each.key, { status: 'error' })
+            if (!aborted(reading.signal))
+              settle(each.key, { status: 'error', answered: sectionsKey })
           },
         )
     }
     return () => reading.abort()
-  }, [view, kinds, source, query, within, sectionSize, attempt])
+    // `sectionsKey` stands for the text and the opened Identity.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [view, kinds, source, sectionsKey, sectionSize, attempt])
 
   // ── List: one kind, page by page ──
-  const [list, setList] = React.useState<IdentityList & { readonly next?: string }>({
+  const [list, setList] = React.useState<
+    IdentityList & { readonly next?: string; readonly answered?: string }
+  >({
     status: 'loading',
     identities: [],
     more: false,
@@ -315,11 +327,12 @@ export function useIdentityFinderController(
             ...(page.next === undefined ? {} : { next: page.next }),
             loadingMore: false,
             moreFailed: false,
+            answered: listKey,
           })
         },
         () => {
           if (!aborted(controller.signal))
-            setList((current) => ({ ...current, status: 'error', more: false }))
+            setList((current) => ({ ...current, status: 'error', more: false, answered: listKey }))
         },
       )
     return () => controller.abort()
@@ -451,15 +464,21 @@ export function useIdentityFinderController(
     [chosenIds, choosable, kindByKey, maximum, maximumReached, self, unavailable],
   )
 
+  // A failed read shows its error, not the rows it kept: none of them can be walked or chosen.
   const rows = React.useMemo((): readonly IdentityRow[] => {
-    if (view === 'list') return list.identities.map(rowOf)
-    return sections.flatMap((section): IdentityRow[] => [
-      ...section.identities.map(rowOf),
-      ...(section.more
-        ? [{ type: 'kind', key: `kind:${section.kind.key}`, kind: section.kind } as const]
-        : []),
-    ])
-  }, [view, list.identities, sections, rowOf])
+    if (kinds.status === 'error') return []
+    if (view === 'list') return list.status === 'error' ? [] : list.identities.map(rowOf)
+    return sections.flatMap((section): IdentityRow[] =>
+      section.status === 'error'
+        ? []
+        : [
+            ...section.identities.map(rowOf),
+            ...(section.more
+              ? [{ type: 'kind', key: `kind:${section.kind.key}`, kind: section.kind } as const]
+              : []),
+          ],
+    )
+  }, [kinds.status, view, list.status, list.identities, sections, rowOf])
 
   // ── Pictures read on demand ──
   // Each Identity's picture is asked once per source, a few at a time, for the rows shown and the
@@ -532,10 +551,14 @@ export function useIdentityFinderController(
   )
 
   const [activeKey, setActiveKey] = React.useState<string>()
+  const [pendingEnter, setPendingEnter] = React.useState(false)
   const active = rows.some((row) => row.key === activeKey) ? activeKey : rows[0]?.key
   const scrollActive = React.useRef(false)
   const optionId = React.useCallback(
-    (key: string) => `${baseId}-option-${key.replace(/[^\w-]/gu, '_')}`,
+    // Every character but a letter, a digit or `-` is spelled by its code point: two keys never
+    // share an id.
+    (key: string) =>
+      `${baseId}-option-${key.replace(/[^a-zA-Z0-9-]/gu, (character) => `_${character.codePointAt(0)!.toString(16)}_`)}`,
     [baseId],
   )
   React.useEffect(() => {
@@ -557,10 +580,12 @@ export function useIdentityFinderController(
   const setText = React.useCallback((next: string) => {
     setTextState(next)
     setActiveKey(undefined)
+    setPendingEnter(false)
   }, [])
   const setKind = React.useCallback((key: string | undefined) => {
     setKindKey(key)
     setActiveKey(undefined)
+    setPendingEnter(false)
   }, [])
   const open = React.useCallback((identity: Identity) => {
     if (identity.members !== true) return
@@ -568,11 +593,13 @@ export function useIdentityFinderController(
     setTextState('')
     setKindKey(undefined)
     setActiveKey(undefined)
+    setPendingEnter(false)
   }, [])
   const goTo = React.useCallback((depth: number) => {
     setPath((current) => current.slice(0, Math.max(0, depth)))
     setTextState('')
     setActiveKey(undefined)
+    setPendingEnter(false)
   }, [])
 
   const activate = (row: IdentityRow) => {
@@ -592,6 +619,29 @@ export function useIdentityFinderController(
     (view === 'list'
       ? list.status === 'loading'
       : sections.some((section) => section.status === 'loading'))
+  /** The rows answer what the input holds now, and what is open: no read is still due. */
+  const fresh =
+    !searching &&
+    text.trim() === query &&
+    (view === 'list'
+      ? list.answered === listKey
+      : sections.every((section) => section.answered === sectionsKey))
+
+  // Enter on the first row before its read answered waits for the answer, then takes its first
+  // row: never the first row of what an earlier text found.
+  React.useEffect(() => {
+    if (!pendingEnter || !fresh) return
+    setPendingEnter(false)
+    const first = rows[0]
+    if (first !== undefined) activate(first)
+    // `activate` reads the rows of this render.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pendingEnter, fresh, rows])
+
+  /** Cancel, unless a confirmation runs: its outcome is the host's to take. */
+  const cancel = React.useCallback(() => {
+    if (!confirmingRef.current) onCancel()
+  }, [onCancel])
 
   const onRootKeyDown = (event: React.KeyboardEvent) => {
     if (event.key !== 'Escape') return
@@ -599,7 +649,7 @@ export function useIdentityFinderController(
     if (text !== '') setText('')
     else if (path.length > 0) goTo(path.length - 1)
     else if (kindKey !== undefined && kinds.list.length > 1) setKind(undefined)
-    else onCancel()
+    else cancel()
   }
 
   const activeRow = rows.find((row) => row.key === active)
@@ -621,7 +671,8 @@ export function useIdentityFinderController(
     },
     onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => {
       props.onKeyDown?.(event)
-      if (event.defaultPrevented) return
+      // A key that commits composed text (an input method) is the composition's, not the finder's.
+      if (event.defaultPrevented || event.nativeEvent.isComposing || event.keyCode === 229) return
       const input = event.currentTarget
       const atEnd = input.selectionStart === text.length && input.selectionEnd === text.length
       const atStart = input.selectionStart === 0 && input.selectionEnd === 0
@@ -645,7 +696,12 @@ export function useIdentityFinderController(
         case 'Enter':
           event.preventDefault()
           if (event.metaKey || event.ctrlKey) confirm()
-          else if (activeRow !== undefined) activate(activeRow)
+          // A row the user walked to is the one they see; the first row stands for the text only
+          // once its read answered.
+          else if (activeKey !== undefined && activeRow !== undefined) activate(activeRow)
+          else if (fresh) {
+            if (activeRow !== undefined) activate(activeRow)
+          } else setPendingEnter(true)
           break
         case 'ArrowRight':
           if (atEnd && activeRow?.type === 'identity' && activeRow.identity.members === true) {
@@ -731,7 +787,7 @@ export function useIdentityFinderController(
     confirming,
     ...(confirmError === undefined ? {} : { confirmError }),
     confirm,
-    cancel: onCancel,
+    cancel,
     ...(theme === undefined ? {} : { theme }),
     imageOf,
     kindOf: (classKey) => kindByKey.get(classKey),

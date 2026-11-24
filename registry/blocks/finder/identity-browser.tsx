@@ -648,15 +648,17 @@ function More() {
   const sentinel = useRef<HTMLDivElement>(null)
   const { loadMore } = finder
   const list = finder.list
+  // Reaching the end loads the next page; after a failed one, only Retry reads again.
+  const automatic = list !== undefined && !list.moreFailed
   useEffect(() => {
     const element = sentinel.current
-    if (element === null || typeof IntersectionObserver === 'undefined') return
+    if (!automatic || element === null || typeof IntersectionObserver === 'undefined') return
     const observer = new IntersectionObserver((entries) => {
       if (entries.some((entry) => entry.isIntersecting)) loadMore()
     })
     observer.observe(element)
     return () => observer.disconnect()
-  }, [loadMore])
+  }, [automatic, loadMore])
   if (list === undefined) return null
   return (
     <div
@@ -751,7 +753,7 @@ function Footer() {
   return (
     <div
       data-slot="block-finder-identity-browser-footer"
-      className="flex shrink-0 items-center gap-3 border-t px-4 py-2.5"
+      className="flex shrink-0 flex-wrap items-center gap-x-3 gap-y-1.5 border-t px-4 py-2.5"
     >
       {many ? (
         <ul
@@ -810,7 +812,8 @@ function Footer() {
         <p
           data-slot="block-finder-identity-browser-confirm-error"
           role="alert"
-          className="max-w-72 shrink truncate text-xs text-destructive"
+          // Its own line above the rest: a long message never squeezes the choices out.
+          className="order-first basis-full truncate text-xs text-destructive"
           title={finder.confirmError === true ? undefined : finder.confirmError}
         >
           {finder.confirmError === true ? m.confirmFailed : finder.confirmError}
