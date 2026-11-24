@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.0.0-beta.50](https://github.com/astrale-os/ui/compare/v1.0.0-beta.49...v1.0.0-beta.50) (2026-11-24)
+
+
+### Features
+
+* **ui:** add the identity finder and its browser and selector blocks ([#255](https://github.com/astrale-os/ui/issues/255)) ([c929cd9](https://github.com/astrale-os/ui/commit/c929cd971ab540742029295f9763fede3d681da3))
+
+
+### Bug Fixes
+
+* **ui:** keep the identity browser's listbox to options and groups ([#257](https://github.com/astrale-os/ui/issues/257)) ([d4322ba](https://github.com/astrale-os/ui/commit/d4322ba653e46982828ad0513f7b90ef8cdf87e0))
+
 ## [1.0.0-beta.49](https://github.com/astrale-os/ui/compare/v1.0.0-beta.48...v1.0.0-beta.49) (2026-11-24)
 
 
