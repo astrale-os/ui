@@ -1013,6 +1013,39 @@ test('the Finder marks its place and its active row against its own surface, in 
   }
 })
 
+test('the Finder lays its Domains, Classes and Nodes side by side, and stacks them in a narrow frame', async ({
+  page,
+}, testInfo) => {
+  await page.goto('/?family=block%2Ffinder')
+  const preview = await loadPreview(page, 'block/finder/node-browser')
+  const domains = preview.getByRole('listbox', { name: 'Domains' })
+  const classes = preview.getByRole('listbox', { name: 'Classes' })
+  const table = preview.getByRole('grid', { name: 'Nodes' })
+  await expect(table.locator('[data-slot="finder-row"]').first()).toBeVisible()
+  const [domainsBox, classesBox, tableBox, rootBox] = await Promise.all(
+    [domains, classes, table, preview.locator('[data-slot="block-finder-node-browser"]')].map(
+      async (item) => (await item.boundingBox())!,
+    ),
+  )
+  if (testInfo.project.name === 'desktop') {
+    expect(domainsBox.x + domainsBox.width).toBeLessThanOrEqual(classesBox.x + 1)
+    expect(classesBox.x + classesBox.width).toBeLessThanOrEqual(tableBox.x + 1)
+    return
+  }
+  // Narrow: two strips above a table as wide as the block.
+  expect(domainsBox.y + domainsBox.height).toBeLessThanOrEqual(classesBox.y + 1)
+  expect(classesBox.y + classesBox.height).toBeLessThanOrEqual(tableBox.y + 1)
+  expect(tableBox.width).toBeGreaterThan(rootBox.width - 4)
+  expect(domainsBox.height).toBeLessThan(64)
+  await domains.getByRole('option', { name: 'Issues' }).click()
+  await expect(classes.getByRole('option', { name: /^Issue/ })).toBeVisible()
+  await expect(domains.getByRole('option', { name: 'Issues' })).toBeInViewport()
+  const overflow = await page.evaluate(
+    () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
+  )
+  expect(overflow).toBeLessThanOrEqual(0)
+})
+
 test('log viewer follows new entries without stealing focus', async ({ page }) => {
   await page.goto('/?family=block%2Fobservability')
   const preview = await loadPreview(page, 'block/observability/log-viewer')
