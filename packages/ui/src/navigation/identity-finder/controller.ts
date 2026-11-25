@@ -51,6 +51,7 @@ export interface IdentitySection {
   readonly identities: readonly Identity[]
   /** The kind holds more than it shows: its row opens the kind. */
   readonly more: boolean
+  readonly stop?: IdentityPage['stop']
 }
 
 /** One kind, or the only one, listed page by page. */
@@ -58,6 +59,7 @@ export interface IdentityList {
   readonly status: IdentityReadStatus
   readonly identities: readonly Identity[]
   readonly more: boolean
+  readonly stop?: IdentityPage['stop']
   readonly loadingMore: boolean
   readonly moreFailed: boolean
 }
@@ -272,6 +274,7 @@ export function useIdentityFinderController(
               status: 'ready',
               identities: page.identities,
               more: page.next !== undefined,
+              stop: page.stop,
               answered: sectionsKey,
             })
           },
@@ -324,6 +327,7 @@ export function useIdentityFinderController(
             status: 'ready',
             identities: page.identities,
             more: page.next !== undefined,
+            stop: page.stop,
             ...(page.next === undefined ? {} : { next: page.next }),
             loadingMore: false,
             moreFailed: false,
@@ -367,6 +371,7 @@ export function useIdentityFinderController(
                 ...page.identities.filter((identity) => !seen.has(identity.id)),
               ],
               more: page.next !== undefined,
+              stop: page.stop,
               ...(page.next === undefined ? {} : { next: page.next }),
               loadingMore: false,
             }
@@ -770,7 +775,7 @@ export function useIdentityFinderController(
     goTo,
     view,
     sections: sections.filter(
-      (section) => section.status !== 'ready' || section.identities.length > 0,
+      (section) => section.status !== 'ready' || section.identities.length > 0 || section.more,
     ),
     ...(view === 'list' ? { list } : {}),
     searching,

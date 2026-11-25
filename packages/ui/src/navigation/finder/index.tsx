@@ -331,7 +331,10 @@ function FinderTable({ onScroll, ...props }: React.ComponentProps<'div'>) {
       onScroll={(event) => {
         onScroll?.(event)
         const element = event.currentTarget
-        if (element.scrollHeight - element.scrollTop - element.clientHeight < LOAD_AHEAD_PIXELS) {
+        if (
+          !table.stop &&
+          element.scrollHeight - element.scrollTop - element.clientHeight < LOAD_AHEAD_PIXELS
+        ) {
           table.loadMore()
         }
       }}
@@ -425,7 +428,9 @@ function FinderRows({
       {status === 'error' ? (
         <Slot slot="finder-error">{placeholder(error, table.retry)}</Slot>
       ) : null}
-      {status === 'ready' && rows.length === 0 ? <Slot slot="finder-empty">{empty}</Slot> : null}
+      {status === 'ready' && table.complete && rows.length === 0 ? (
+        <Slot slot="finder-empty">{empty}</Slot>
+      ) : null}
       {table.loadingMore ? <Slot slot="finder-more">{more}</Slot> : null}
       {table.moreError !== undefined && !table.loadingMore ? (
         <Slot slot="finder-more-error">{placeholder(moreError, table.loadMore)}</Slot>

@@ -66,6 +66,35 @@ describe('block/finder', () => {
     ])
   })
 
+  test.each([
+    ['budget', 'More results — refine the search'],
+    ['preparing', 'Preparing search'],
+  ] as const)(
+    'an empty %s page waits for an explicit continuation and suppresses the match count',
+    async (stop, message) => {
+      const count = vi.fn(source.count)
+      const nodes = vi.fn<FinderSource['nodes']>(async (input) => {
+        if (!input.text) return source.nodes(input)
+        if (!input.after) return { nodes: [], stop, next: 'sealed' }
+        return {
+          nodes: [{ id: 'elodie', class: 'people:Person', name: 'Élodie Martin', values: {} }],
+        }
+      })
+      const { user } = browse({ source: { ...source, nodes, count } })
+      await openClass(user, 'People', 'Person')
+      await screen.findByText('Ada Moreau')
+      const before = count.mock.calls.length
+      await user.type(screen.getByRole('searchbox', { name: 'Search names' }), 'elo mar')
+      expect(await screen.findByText(message)).toBeInTheDocument()
+      expect(screen.queryByRole('button', { name: 'Name' })).toBeNull()
+      expect(nodes.mock.calls.filter(([p]) => p.after === 'sealed')).toHaveLength(0)
+      await user.click(screen.getByRole('button', { name: 'Continue search' }))
+      expect(await screen.findByText('Élodie Martin')).toBeInTheDocument()
+      expect(nodes.mock.calls.at(-1)?.[0]).toMatchObject({ text: 'elo mar', after: 'sealed' })
+      expect(count.mock.calls).toHaveLength(before)
+    },
+  )
+
   test('an accepted kind names the header, offers All accepted and hides what it does not admit', async () => {
     const { user } = browse({ accepts: [NAMED] })
     const domains = screen.getByRole('listbox', { name: 'Domains' })

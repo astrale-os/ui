@@ -10,6 +10,7 @@ import {
   type FinderNode,
   type FinderNodeDetail,
   type FinderOrder,
+  type FinderPage,
   type FinderPlace,
   type FinderProperty,
   type FinderRule,
@@ -90,6 +91,7 @@ export interface FinderTable {
   readonly stale: boolean
   readonly loadingMore: boolean
   readonly complete: boolean
+  readonly stop?: FinderPage['stop']
   readonly error?: unknown
   readonly moreError?: unknown
   readonly retry: () => void
@@ -127,6 +129,7 @@ export interface FinderController {
   /** The open Domain id, or `FINDER_ACCEPTED`. */
   readonly domain?: string
   readonly classes: FinderList<FinderClass> & { readonly idle: boolean }
+  readonly search?: { readonly text: string; setText(text: string): void }
   readonly selectedClasses: readonly string[]
   /** The accepted Classes, described; empty without `accepts`. */
   readonly acceptedClasses: readonly FinderClass[]
@@ -308,6 +311,7 @@ interface NodesState {
   readonly status: 'idle' | FinderReadStatus
   readonly items: readonly FinderNode[]
   readonly next?: string
+  readonly stop?: FinderPage['stop']
   readonly error?: unknown
   readonly loadingMore: boolean
   readonly moreError?: unknown
@@ -506,6 +510,18 @@ export function useFinderController(options: FinderOptions): FinderController {
     })
   }, [propertyByKey, describedSelection.length, selectedClasses.length])
 
+  const [text, setText] = React.useState('')
+  const [settledText, setSettledText] = React.useState('')
+  React.useEffect(() => {
+    if (ruleDelay <= 0) {
+      setSettledText(text.trim())
+      return
+    }
+    const timer = setTimeout(() => setSettledText(text.trim()), ruleDelay)
+    return () => clearTimeout(timer)
+  }, [text, ruleDelay])
+  const searchText = nameProperty ? settledText : ''
+
   const columns = React.useMemo(() => {
     const several = domain === FINDER_ACCEPTED || selectedClasses.length > 1
     const nameColumn: FinderTableColumn = {
@@ -513,7 +529,7 @@ export function useFinderController(options: FinderOptions): FinderController {
       kind: 'name',
       label: nameProperty?.label ?? 'Name',
       ...(nameProperty ? { property: nameProperty } : {}),
-      sortable: nameProperty !== undefined && SORTABLE.has(nameProperty.kind),
+      sortable: !searchText && nameProperty !== undefined && SORTABLE.has(nameProperty.kind),
       hideable: false,
     }
     const classColumn: FinderTableColumn = {
@@ -530,7 +546,7 @@ export function useFinderController(options: FinderOptions): FinderController {
         kind: 'property',
         label: property.label,
         property,
-        sortable: SORTABLE.has(property.kind),
+        sortable: !searchText && SORTABLE.has(property.kind),
         hideable: true,
       }))
     const hideable = propertyColumns.map((column, index) => ({
@@ -543,7 +559,7 @@ export function useFinderController(options: FinderOptions): FinderController {
       ...hideable.filter((column) => column.shown).map(({ shown: _shown, ...column }) => column),
     ]
     return { visible, hideable }
-  }, [domain, selectedClasses.length, nameProperty, sharedProperties, columnChoice])
+  }, [domain, selectedClasses.length, nameProperty, sharedProperties, columnChoice, searchText])
 
   const order = React.useMemo((): FinderOrder | undefined => {
     if (orderChoice) {
@@ -595,7 +611,12 @@ export function useFinderController(options: FinderOptions): FinderController {
   const rangeKey =
     selectedClasses.length === 0 || !describedAll || !selectionOffered
       ? undefined
-      : JSON.stringify({ classes: selectedClasses, rules: appliedRules, order: order ?? null })
+      : JSON.stringify({
+          classes: selectedClasses,
+          rules: appliedRules,
+          order: searchText ? null : (order ?? null),
+          text: searchText,
+        })
   const [nodesState, setNodes] = React.useState<NodesState>({
     status: 'idle',
     items: [],
@@ -613,8 +634,13 @@ export function useFinderController(options: FinderOptions): FinderController {
         : LOADING_NODES
   const [nodesAttempt, setNodesAttempt] = React.useState(0)
   const moreController = React.useRef<AbortController | undefined>(undefined)
-  const range = React.useRef({ classes: selectedClasses, rules: appliedRules, order })
-  range.current = { classes: selectedClasses, rules: appliedRules, order }
+  const range = React.useRef({
+    classes: selectedClasses,
+    rules: appliedRules,
+    order,
+    text: searchText,
+  })
+  range.current = { classes: selectedClasses, rules: appliedRules, order, text: searchText }
 
   React.useEffect(() => {
     moreController.current?.abort()
@@ -627,7 +653,7 @@ export function useFinderController(options: FinderOptions): FinderController {
       return
     }
     const controller = new AbortController()
-    const { classes, rules: activeRules, order: activeOrder } = range.current
+    const { classes, rules: activeRules, order: activeOrder, text: activeText } = range.current
     setNodes((previous) => ({
       scope,
       key: rangeKey,
@@ -639,7 +665,8 @@ export function useFinderController(options: FinderOptions): FinderController {
       .nodes({
         classes,
         rules: activeRules,
-        order: activeOrder ? [activeOrder] : [],
+        order: !activeText && activeOrder ? [activeOrder] : [],
+        ...(activeText && { text: activeText }),
         size: pageSize,
         signal: controller.signal,
       })
@@ -651,7 +678,7 @@ export function useFinderController(options: FinderOptions): FinderController {
             key: rangeKey,
             status: 'ready',
             items: page.nodes,
-            ...(page.next === undefined ? {} : { next: page.next }),
+            ...(page.next === undefined ? {} : { next: page.next, stop: page.stop }),
             loadingMore: false,
           })
         },
@@ -681,7 +708,7 @@ export function useFinderController(options: FinderOptions): FinderController {
     moreController.current = controller
     const key = current.key
     const after = current.next
-    const { classes, rules: activeRules, order: activeOrder } = range.current
+    const { classes, rules: activeRules, order: activeOrder, text: activeText } = range.current
     nodesRef.current = { ...current, loadingMore: true }
     setNodes((latest) => {
       if (latest.key !== key) return latest
@@ -692,7 +719,8 @@ export function useFinderController(options: FinderOptions): FinderController {
       .nodes({
         classes,
         rules: activeRules,
-        order: activeOrder ? [activeOrder] : [],
+        order: !activeText && activeOrder ? [activeOrder] : [],
+        ...(activeText && { text: activeText }),
         after,
         size: pageSize,
         signal: controller.signal,
@@ -703,11 +731,11 @@ export function useFinderController(options: FinderOptions): FinderController {
           setNodes((latest) => {
             if (latest.key !== key) return latest
             const seen = new Set(latest.items.map((node) => node.id))
-            const { next: _next, moreError: _error, ...rest } = latest
+            const { next: _next, stop: _stop, moreError: _error, ...rest } = latest
             return {
               ...rest,
               items: [...latest.items, ...page.nodes.filter((node) => !seen.has(node.id))],
-              ...(page.next === undefined ? {} : { next: page.next }),
+              ...(page.next === undefined ? {} : { next: page.next, stop: page.stop }),
               loadingMore: false,
             }
           })
@@ -723,7 +751,7 @@ export function useFinderController(options: FinderOptions): FinderController {
 
   const countRead = useRead(
     scope,
-    rangeKey === undefined ? undefined : `${rangeKey}\n${nodesAttempt}`,
+    rangeKey === undefined || searchText ? undefined : `${rangeKey}\n${nodesAttempt}`,
     (signal) =>
       source.count({
         classes: range.current.classes,
@@ -1020,8 +1048,8 @@ export function useFinderController(options: FinderOptions): FinderController {
     const index = rows.findIndex((row) => row.active)
     if (index < 0) return
     document.getElementById(rows[index]!.elementId)?.scrollIntoView?.({ block: 'nearest' })
-    if (index >= rows.length - LOAD_AHEAD_ROWS) loadMore()
-  }, [active.nodes, rows, loadMore])
+    if (!nodes.stop && index >= rows.length - LOAD_AHEAD_ROWS) loadMore()
+  }, [active.nodes, rows, loadMore, nodes.stop])
   React.useEffect(() => {
     for (const region of ['domains', 'classes'] as const) {
       const key = active[region]
@@ -1221,17 +1249,18 @@ export function useFinderController(options: FinderOptions): FinderController {
     stale: nodes.status === 'loading' && nodes.items.length > 0,
     loadingMore: nodes.loadingMore,
     complete: nodes.status === 'ready' && nodes.next === undefined,
+    stop: nodes.stop,
     ...(nodes.error === undefined ? {} : { error: nodes.error }),
     ...(nodes.moreError === undefined ? {} : { moreError: nodes.moreError }),
     retry: () => setNodesAttempt((value) => value + 1),
     loadMore,
     columns: columns.visible,
     hideableColumns: columns.hideable,
-    ...(order ? { order } : {}),
+    ...(!searchText && order ? { order } : {}),
   }
 
   const count: FinderCountState =
-    rangeKey === undefined
+    rangeKey === undefined || searchText
       ? { status: 'idle' }
       : {
           status: countRead.status,
@@ -1264,6 +1293,7 @@ export function useFinderController(options: FinderOptions): FinderController {
     selectedClasses,
     acceptedClasses,
     sharedProperties,
+    ...(nameProperty && { search: { text, setText } }),
     table,
     count,
     rules,

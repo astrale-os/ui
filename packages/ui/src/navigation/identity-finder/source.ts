@@ -67,6 +67,7 @@ export interface IdentityPage {
   readonly identities: readonly Identity[]
   /** The cursor of the next page; absent on the last one. */
   readonly next?: string
+  readonly stop?: 'budget' | 'preparing'
 }
 
 export interface IdentityFinderSource {
