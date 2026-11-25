@@ -75,6 +75,8 @@ export interface IdentityBrowserMessages {
   readonly noMembers: string
   readonly failed: string
   readonly kindsFailed: string
+  readonly budget: string
+  readonly preparing: string
   readonly moreFailed: string
   readonly retry: string
   readonly loadMore: string
@@ -107,6 +109,8 @@ export const IDENTITY_BROWSER_MESSAGES: IdentityBrowserMessages = {
   noMembers: 'No members you can see',
   failed: 'Couldn’t load these',
   kindsFailed: 'Couldn’t load who you can see',
+  budget: 'More results — refine the search',
+  preparing: 'Preparing search',
   moreFailed: 'Couldn’t load more',
   retry: 'Retry',
   loadMore: 'Load more',
@@ -411,7 +415,7 @@ function Results() {
     if (list.status === 'error') status = <Failure retry={finder.retry}>{m.failed}</Failure>
     else if (list.status === 'loading' && list.identities.length === 0)
       status = <RowsSkeleton rows={6} />
-    else if (list.identities.length === 0) status = <Empty />
+    else if (list.identities.length === 0 && !list.more) status = <Empty />
     else {
       options = finder.rows.map((row) => <Row key={row.key} row={row} />)
       if (list.more || list.loadingMore || list.moreFailed) {
@@ -455,6 +459,12 @@ function Results() {
           )}
         </div>
       ))
+    const stopped = finder.sections.some((section) => section.stop === 'budget')
+      ? 'budget'
+      : finder.sections.some((section) => section.stop === 'preparing')
+        ? 'preparing'
+        : undefined
+    if (stopped) status = <Note>{stopped === 'budget' ? m.budget : m.preparing}</Note>
     const failed = finder.sections.filter((section) => section.status === 'error')
     if (failed.length > 0)
       status = failed.map((section) => (
@@ -679,7 +689,7 @@ function EndOfList() {
   const sentinel = useRef<HTMLDivElement>(null)
   const { loadMore } = finder
   // After a failed page, only Retry reads again.
-  const automatic = finder.list !== undefined && !finder.list.moreFailed
+  const automatic = finder.list !== undefined && !finder.list.moreFailed && !finder.list.stop
   useEffect(() => {
     const element = sentinel.current
     if (!automatic || element === null || typeof IntersectionObserver === 'undefined') return
@@ -707,6 +717,15 @@ function More() {
   if (list === undefined) return null
   return (
     <div data-slot="block-finder-identity-browser-more" className="grid place-items-center py-2">
+      {list.stop && (
+        <span
+          data-slot="block-finder-identity-browser-stop"
+          role="status"
+          className="text-xs text-muted-foreground"
+        >
+          {list.stop === 'budget' ? m.budget : m.preparing}
+        </span>
+      )}
       {list.loadingMore ? (
         <RowsSkeleton rows={2} />
       ) : list.moreFailed ? (

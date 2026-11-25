@@ -58,6 +58,31 @@ function present(value: unknown): boolean {
   return value !== undefined && value !== null
 }
 
+// Preview data stays in memory. The graph source delegates normalization and ranking to the Kernel.
+function nameSearch(nodes: readonly FinderNode[], text: string): FinderNode[] {
+  const fold = (value: string) =>
+    value.toLowerCase().replaceAll('ß', 'ss').normalize('NFKD').replace(/\p{M}/gu, '')
+  const words = (value: string) => value.match(/[\p{L}\p{Nd}]+/gu) ?? []
+  const phrase = fold(text)
+  const query = words(phrase)
+  if (query.length === 0) return []
+  const anchor = [...query].sort((a, b) => [...b].length - [...a].length || compare(a, b))[0]!
+  const ranked = nodes.flatMap((node) => {
+    const value = fold(node.name ?? '')
+    const tokens = words(value)
+    if (!query.every((q) => tokens.some((w) => w.startsWith(q)))) return []
+    const first = tokens.filter((w) => w.startsWith(anchor)).sort()[0]!
+    return [
+      {
+        node,
+        rank: value.startsWith(phrase) ? '1' + [...value].slice(0, 256).join('') : '2' + first,
+      },
+    ]
+  })
+  ranked.sort((a, b) => compare(a.rank, b.rank) || compare(a.node.id, b.node.id))
+  return ranked.map((entry) => entry.node)
+}
+
 /**
  * A `FinderSource` over a graph held in memory, with the Kernel's semantics: a Class stands for
  * itself and every Class that extends it, rules all match, absent values sort last.
@@ -147,10 +172,11 @@ export function createMemoryFinderSource(graph: FinderMemoryGraph): FinderSource
         return found ? [found] : []
       })
     },
-    async nodes({ classes, rules, order, after, size, signal }) {
+    async nodes({ classes, rules, order, text, after, size, signal }) {
       await wait(latency, signal)
       const start = after === undefined ? 0 : Number(after)
-      const list = ordered(range(classes, rules), order)
+      const candidates = range(classes, rules)
+      const list = text ? nameSearch(candidates, text) : ordered(candidates, order)
       const page = list.slice(start, start + size)
       const end = start + page.length
       return { nodes: page, ...(end < list.length ? { next: String(end) } : {}) }

@@ -117,8 +117,14 @@ export interface NodeBrowserMessages {
   readonly class: string
   readonly chooseClass: string
   readonly nodesFailed: string
+  readonly searchNames: string
+  readonly budget: string
+  readonly preparing: string
+  readonly loadMore: string
   readonly moreFailed: string
   readonly noName: string
+  readonly noNameMatch: string
+  readonly clearSearch: string
   readonly noNodes: string
   readonly noMatch: string
   readonly clearFilters: string
@@ -181,8 +187,14 @@ export const NODE_BROWSER_MESSAGES: NodeBrowserMessages = {
   class: 'Class',
   chooseClass: 'Choose a Class to list its Nodes',
   nodesFailed: 'Couldn’t load the Nodes',
+  searchNames: 'Search names',
+  budget: 'More results — refine the search',
+  preparing: 'Preparing search',
+  loadMore: 'Continue search',
   moreFailed: 'Couldn’t load more Nodes',
   noName: 'No name',
+  noNameMatch: 'No names match your search',
+  clearSearch: 'Clear search',
   noNodes: 'No Nodes you can read',
   noMatch: 'No Nodes you can read match these filters',
   clearFilters: 'Clear filters',
@@ -547,6 +559,17 @@ function Toolbar() {
       data-slot="block-finder-toolbar"
       className="flex h-9 shrink-0 items-center gap-1 border-b px-2"
     >
+      {finder.search && (
+        <input
+          data-slot="block-finder-search"
+          type="search"
+          className={cn(field, 'max-w-48 flex-1')}
+          aria-label={m.searchNames}
+          placeholder={m.searchNames}
+          value={finder.search.text}
+          onChange={(event) => finder.search?.setText(event.target.value)}
+        />
+      )}
       <FinderAddRule
         className={buttonVariants({ variant: 'ghost', size: 'xs' })}
         title={`${m.filter} (⌘F)`}
@@ -658,41 +681,61 @@ function NodesTable() {
     '--finder-min-width': `${tracks.reduce((total, item) => total + item.minimum, 0)}rem`,
   } as React.CSSProperties
   return (
-    <FinderTable
-      aria-label={m.nodes}
-      style={layout}
-      className="group/table relative min-h-0 flex-1 overflow-auto outline-none data-stale:[&_[data-slot=finder-row]]:opacity-60"
-    >
-      {finder.table.status === 'idle' ? null : (
-        <FinderHeader className="sticky top-0 z-1 grid min-w-(--finder-min-width) grid-cols-(--finder-columns) border-b bg-popover text-xs text-muted-foreground">
-          {(item) => (
-            <FinderColumnHeader
-              column={item}
-              className={cn(
-                'flex h-8 min-w-0 items-center px-3 font-medium [&>button]:flex [&>button]:min-w-0 [&>button]:items-center [&>button]:gap-1 [&>button]:rounded [&>button]:outline-none [&>button]:hover:text-foreground [&>button]:focus-visible:ring-2 [&>button]:focus-visible:ring-ring/50',
-                item.property?.kind === 'number' && 'justify-end',
-              )}
-            >
-              <span data-slot="block-finder-column-label" className="truncate">
-                {columnLabel(item, m)}
-              </span>
-              <SortMark column={item} />
-            </FinderColumnHeader>
-          )}
-        </FinderHeader>
-      )}
-      <FinderRows
-        idle={<Note>{m.chooseClass}</Note>}
-        loading={<TableSkeleton />}
-        empty={<NoNodes />}
-        error={(retry) => <Failure retry={retry}>{m.nodesFailed}</Failure>}
-        more={<TableSkeleton rows={2} />}
-        moreError={(retry) => <Failure retry={retry}>{m.moreFailed}</Failure>}
-        className="pb-1"
+    <>
+      <FinderTable
+        aria-label={m.nodes}
+        style={layout}
+        className="group/table relative min-h-0 flex-1 overflow-auto outline-none data-stale:[&_[data-slot=finder-row]]:opacity-60"
       >
-        {(row) => <NodeRow row={row} />}
-      </FinderRows>
-    </FinderTable>
+        {finder.table.status === 'idle' ? null : (
+          <FinderHeader className="sticky top-0 z-1 grid min-w-(--finder-min-width) grid-cols-(--finder-columns) border-b bg-popover text-xs text-muted-foreground">
+            {(item) => (
+              <FinderColumnHeader
+                column={item}
+                className={cn(
+                  'flex h-8 min-w-0 items-center px-3 font-medium [&>button]:flex [&>button]:min-w-0 [&>button]:items-center [&>button]:gap-1 [&>button]:rounded [&>button]:outline-none [&>button]:hover:text-foreground [&>button]:focus-visible:ring-2 [&>button]:focus-visible:ring-ring/50',
+                  item.property?.kind === 'number' && 'justify-end',
+                )}
+              >
+                <span data-slot="block-finder-column-label" className="truncate">
+                  {columnLabel(item, m)}
+                </span>
+                <SortMark column={item} />
+              </FinderColumnHeader>
+            )}
+          </FinderHeader>
+        )}
+        <FinderRows
+          idle={<Note>{m.chooseClass}</Note>}
+          loading={<TableSkeleton />}
+          empty={<NoNodes />}
+          error={(retry) => <Failure retry={retry}>{m.nodesFailed}</Failure>}
+          more={<TableSkeleton rows={2} />}
+          moreError={(retry) => <Failure retry={retry}>{m.moreFailed}</Failure>}
+          className="pb-1"
+        >
+          {(row) => <NodeRow row={row} />}
+        </FinderRows>
+      </FinderTable>
+      {finder.table.stop && (
+        <div
+          data-slot="block-finder-continuation"
+          className="flex items-center justify-center gap-2 border-t px-2 py-1 text-xs"
+        >
+          <span data-slot="block-finder-stop" role="status">
+            {finder.table.stop === 'budget' ? m.budget : m.preparing}
+          </span>
+          <Button
+            variant="ghost"
+            size="xs"
+            disabled={finder.table.loadingMore}
+            onClick={finder.table.loadMore}
+          >
+            {m.loadMore}
+          </Button>
+        </div>
+      )}
+    </>
   )
 }
 
@@ -783,6 +826,19 @@ function TableSkeleton({ rows = 8 }: { rows?: number }) {
 function NoNodes() {
   const finder = useFinder()
   const m = useContext(Messages)
+  if (finder.search?.text.trim()) {
+    return (
+      <div
+        data-slot="block-finder-no-name-match"
+        className="flex flex-col items-start gap-2 px-3 py-3 text-xs text-muted-foreground"
+      >
+        {m.noNameMatch}
+        <Button variant="outline" size="xs" onClick={() => finder.search?.setText('')}>
+          {m.clearSearch}
+        </Button>
+      </div>
+    )
+  }
   if (finder.appliedRules.length === 0) return <Note>{m.noNodes}</Note>
   return (
     <div

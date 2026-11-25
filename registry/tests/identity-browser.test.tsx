@@ -7,6 +7,7 @@ import { IdentityBrowser } from '../blocks/finder/identity-browser.js'
 import {
   failingIdentitySource,
   GROUP,
+  USER,
   identityDirectory,
 } from '../blocks/finder/identity.fixture.js'
 
@@ -74,6 +75,25 @@ describe('block/finder/identity-browser', () => {
     const path = await screen.findByRole('navigation', { name: 'Opened' })
     expect(path).toHaveTextContent('Engineering')
     expect(await screen.findByRole('option', { name: /Kernel team/ })).toBeInTheDocument()
+  })
+
+  test.each([
+    ['preparing', 'Preparing search'],
+    ['budget', 'More results — refine the search'],
+  ] as const)('an empty %s Identity page can be continued explicitly', async (stop, message) => {
+    const identities = vi.fn<typeof source.identities>(async (input) => {
+      if (!input.text) return source.identities(input)
+      if (input.after === undefined) return { identities: [], next: 'sealed', stop }
+      return { identities: [{ id: 'found', class: USER, name: 'Élodie Martin' }] }
+    })
+    const { user } = browse({ source: { ...source, identities }, accepts: [USER] })
+    await screen.findAllByRole('option')
+    await user.type(screen.getByRole('combobox', { name: 'Search by name or email' }), 'elo mar')
+    expect(await screen.findByText(message)).toBeInTheDocument()
+    expect(identities.mock.calls.some(([input]) => input.after === 'sealed')).toBe(false)
+    await user.click(screen.getByRole('button', { name: 'Load more' }))
+    expect(await screen.findByRole('option', { name: /Élodie Martin/ })).toBeInTheDocument()
+    expect(identities.mock.calls.at(-1)?.[0]).toMatchObject({ text: 'elo mar', after: 'sealed' })
   })
 
   test('a kind that fails shows under the listbox, and the others stay listed', async () => {

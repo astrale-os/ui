@@ -93,6 +93,7 @@ export interface FinderPage {
   readonly nodes: readonly FinderNode[]
   /** The cursor of the next page; absent on the last one. */
   readonly next?: string
+  readonly stop?: 'budget' | 'preparing'
 }
 
 /** A bounded count: `more` means there are more than `value`. */
@@ -145,6 +146,8 @@ export interface FinderSource {
   /** One page of the Nodes in range, in `order`, then by id. */
   nodes(
     input: FinderRange & {
+      /** Search the Names in this range in relevance order. */
+      readonly text?: string
       readonly order: readonly FinderOrder[]
       readonly after?: string
       readonly size: number
